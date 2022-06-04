@@ -1,0 +1,36 @@
+political_decisions = {
+	hnd_ultimatum_goa = {
+		potential = {
+			tag = HND
+			NOT = { owns = 1303 }
+			is_greater_power = yes
+			NOT = { has_global_flag = goa_ult_sent_1 }
+		}
+		
+		allow = { war = no }
+		
+		effect = {
+			set_global_flag = goa_ult_sent
+			set_global_flag = goa_ult_sent_1
+			prestige = 5
+		}
+		
+	}
+	hnd_ultimatum_pondi = {
+		potential = {
+			tag = HND
+			NOT = { owns = 1312 }
+			is_greater_power = yes
+			NOT = { has_global_flag = pondi_ult_sent_1 }
+		}
+		
+		allow = { war = no }
+		
+		effect = {
+			set_global_flag = pondi_ult_sent
+			set_global_flag = pondi_ult_sent_1
+			prestige = 5
+		}
+		
+	}
+}

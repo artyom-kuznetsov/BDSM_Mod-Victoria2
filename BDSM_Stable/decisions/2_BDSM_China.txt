@@ -1,0 +1,70 @@
+political_decisions = {
+	form_china = {
+		potential = {
+			#tag = HNN
+			primary_culture = manchu
+			NOT = { has_global_flag = china_westernized }
+		}	
+		allow = {
+			war = no
+			1524 = { owned_by = THIS }
+			1612 = { owned_by = THIS }
+			2221 = { owned_by = THIS }
+			1490 = { owned_by = THIS }
+			1502 = { owned_by = THIS }
+			#is_westernized = yes
+			THIS = { total_pops = 20000000 }
+		}
+		
+		effect = {
+			prestige = 50
+			any_country = {
+				limit = {
+					primary_culture = manchu
+					in_sphere = THIS
+					NOT = {
+						tag = THIS
+					}
+				}
+				annex_to = THIS
+			}
+			any_province = {
+				limit = {
+					OR = { 
+						is_core = GXI
+						is_core = HNN
+						is_core = CHI
+						is_core = XBI
+						is_core = MCK
+						is_core = FJN
+					}
+				}
+				add_core = THIS
+			}			
+			change_tag = CHU
+			set_global_flag = china_westernized
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	chi_move_capital = {
+		potential = {
+			tag = CHU
+			NOT = { has_country_flag = chi_capital_moved }
+		}
+		
+		allow = {
+			prestige = 5
+		}
+		
+		effect = {
+			country_event = 91751
+			prestige = 5
+			set_country_flag = chi_capital_moved
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

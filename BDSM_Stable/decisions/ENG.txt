@@ -1,0 +1,271 @@
+political_decisions = {
+	canals_eng = {
+		potential = {
+			tag = ENG
+			NOT = {
+				has_country_flag = bosphorus_built
+			}
+		}
+		allow = {
+			prestige = 5
+		}
+		effect = {
+			set_country_flag = bosphorus_built
+			enable_canal = 6
+			enable_canal = 7
+			enable_canal = 8
+			prestige = 5
+		}
+	}
+	eng_annex_ast = {
+		potential = {
+			tag = ENG
+			AST = { exists = yes }
+			AST = { ai = yes }
+			NOT = { year = 1840 }
+		}
+		
+		allow = { }
+		
+		effect = {
+			inherit = AST
+		}
+	}
+	eng_annex_eic = {
+		potential = {
+			tag = ENG
+			EIC = { exists = yes }
+			EIC = { ai = yes }
+			NOT = { year = 1840 }
+		}
+		
+		allow = { }
+		
+		effect = {
+			inherit = EIC
+			badboy = 15
+		}
+	}
+	citizenship_law_eng = {
+		potential = {
+			tag = ENG
+			NOT = {
+				has_country_flag = tur_cit_law
+			}
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+			functionalism = 1
+			year = 1860
+		}
+		
+		effect = {
+			add_accepted_culture = irish
+			set_country_flag = tur_cit_law
+			any_state = {
+				any_pop = {
+					limit = {
+						OR = {
+							has_pop_culture = irish
+						}
+					}
+					consciousness = 5.0
+				}
+			}
+		}
+	}
+	repeal_the_corn_laws = {
+		potential = {
+			tag = ENG
+			NOT = {
+				has_country_flag = corn_laws_repealed_flag
+			}
+		}
+		allow = {
+			average_militancy = 2
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = corn_laws_repealed
+				duration = 3650
+			}
+			any_pop = {
+				militancy = -1
+				consciousness = 1
+			}
+			set_country_flag = corn_laws_repealed_flag
+		}
+	}
+	crown_empress_of_india = {
+		news = yes
+		news_desc_long = "empress_of_india_NEWS_LONG"
+		news_desc_medium = "empress_of_india_NEWS_MEDIUM"
+		news_desc_short = "empress_of_india_NEWS_SHORT"
+		potential = {
+			tag = ENG
+			OR = {
+				government = hms_government
+				government = prussian_constitutionalism
+				government = absolute_monarchy
+			}
+			NOT = {
+				has_country_flag = empress_of_india
+			}
+		}
+		allow = {
+			nationalism_n_imperialism = 1
+			prestige = 40
+			owns = 1305
+			owns = 1311
+			owns = 1257
+			owns = 1291
+			owns = 1236
+			owns = 1297
+			owns = 1227
+		}
+		effect = {
+			prestige = 20
+			any_pop = {
+				militancy = -1
+			}
+			set_country_flag = empress_of_india
+		}
+	}
+
+	found_the_bbc = {
+		potential = {
+			tag = ENG
+			year = 1900
+			NOT = {
+				has_country_flag = we_are_live_from_london
+			}
+		}
+
+		allow = {
+			invention = national_radio_networks
+		}
+
+		effect = {
+			any_country = {
+				relation = {
+					who = THIS
+					value = 5
+				}
+			}
+			any_pop = {
+				militancy = -0.5
+			}
+			prestige = 10
+			set_country_flag = we_are_live_from_london
+		}
+	}
+	the_scotland_yard = {
+		potential = {
+			tag = ENG
+			NOT = {
+				has_country_flag = elementary_my_dear_watson # I know, he never says it in the books, yadiyadi.
+			}
+		}
+
+		allow = {
+			realism = 1
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = the_yard
+				duration = -1
+			}
+			set_country_flag = elementary_my_dear_watson
+		}
+	}
+
+	ionian_islands_question = {
+		potential = {
+			tag = ENG
+			ION = {
+				vassal_of = ENG
+			}
+			ION = { ai = yes }
+			NOT = {
+				truce_with = GRE
+			}			
+		}
+
+		allow = {
+			nationalism_n_imperialism = 1
+			war = no
+		}
+
+		effect = {
+			relation = {
+				who = GRE
+				value = 50
+			}
+			diplomatic_influence = {
+				who = GRE
+				value = 50
+			}
+			prestige = 10
+			badboy = -4
+			GRE = {
+				inherit = ION
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					AND = {
+						year = 1864 
+						month = 4
+					}
+				}
+			}
+			modifier = {
+				factor = 1			
+				relation = {
+					who = GRE
+					value = 0
+				}
+			}
+		}
+	}
+
+	rhodesia_charter = {
+		potential = {
+			tag = ENG
+			owns = 2068
+			owns = 2069
+			owns = 2070
+			owns = 2071
+			owns = 2072
+			owns = 2073
+			owns = 2635
+			NOT = {
+				has_country_flag = ian_would_be_proud
+			}
+		}
+
+		allow = {
+			invention = mission_to_civilize
+		}
+
+		effect = {
+			prestige = 10
+			2068 = {
+				change_province_name = "Солсбери"
+				state_scope = {
+					change_region_name = "Южная Родезия"
+					any_owned = {
+						add_core = RHO
+					}
+				}
+			}
+			set_country_flag = ian_would_be_proud
+		}
+	}
+}
