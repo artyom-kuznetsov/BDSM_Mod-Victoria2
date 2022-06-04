@@ -64,20 +64,33 @@ political_decisions = {
 			tag = SPA
 			POR = { exists = yes }
 			POR = { ai = yes }
+			NOT = { has_country_flag = annex_por_taken }
 		}
 		
 		allow = {
-			POR = {
-				in_sphere = THIS
-			}
-			relation = { who = POR value = 200 }
-			state_n_government = 1
+			# POR = {
+			# 	in_sphere = THIS
+			# }
+			# relation = { who = POR value = 200 }
+			# state_n_government = 1
+
+			nationalism_n_imperialism = 1
+			realism = 1
 		}
 
 		
 		effect = {
 			prestige = 8
-			inherit = POR
+			
+			# inherit = POR
+
+			set_country_flag = annex_por_taken
+			war = {
+				target = POR
+				attacker_goal = {
+					casus_belli = conquest
+				}
+		}
 		}
 		ai_will_do = {
 			factor = 1
