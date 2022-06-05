@@ -19,6 +19,10 @@ political_decisions = {
 			#}
 			remove_country_modifier = med_ref_tier_1
 		}
+
+		ai_will_do = {
+			factor = 0
+		}
 	}
 	med_reform_trinket = {
 		potential = {
@@ -40,6 +44,14 @@ political_decisions = {
 				duration = -1
 			}
 			remove_country_modifier = med_ref_tier_2
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier {
+				factor = 0
+				has_country_modifier = med_ref_tier_2
+			}
 		}
 	}
 	med_reform_low = {
@@ -65,6 +77,14 @@ political_decisions = {
 			remove_country_modifier = med_ref_tier_3
 			remove_country_modifier = med_ref_tier_1
 		}
+
+		ai_will_do = {
+			factor = 1
+			modifier {
+				factor = 0
+				has_country_modifier = med_ref_tier_3
+			}
+		}
 	}
 	med_reform_acceptable = {
 		potential = {
@@ -89,6 +109,14 @@ political_decisions = {
 			remove_country_modifier = med_ref_tier_4
 			remove_country_modifier = med_ref_tier_2
 		}
+
+		ai_will_do = {
+			factor = 1
+			modifier {
+				factor = 0
+				has_country_modifier = med_ref_tier_4
+			}
+		}
 	}
 	med_reform_good = {
 		potential = {
@@ -110,5 +138,8 @@ political_decisions = {
 			remove_country_modifier = med_ref_tier_3
 		}
 		
+		ai_will_do = {
+			factor = 1
+		}
 	}
 }
