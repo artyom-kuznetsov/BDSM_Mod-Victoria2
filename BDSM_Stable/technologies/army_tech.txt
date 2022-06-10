@@ -6,12 +6,12 @@
 
 
 
-landscape_picking_tech = {
+post_napoleonic_thought = {
 	area = army_doctrine
 	year = 1816
 	cost = 3600
 	unciv_military = yes
-	#combat_width = -2
+	combat_width = -1
 	activate_building = fort	
 	army_base = {
 		supply_consumption = 0.2
@@ -51,14 +51,14 @@ landscape_picking_tech = {
 		}
 	}
 }
-defence_positions_tech = {
+strategic_mobility = {
 	area = army_doctrine
 	year = 1836
 	cost = 8000
-	combat_width = -1
+	combat_width = -2
 	max_fort = 1
 	dig_in_cap = 1
-	
+	unciv_military = yes
 	army_base = {
 		supply_consumption = 0.2
 	}
@@ -105,7 +105,7 @@ defence_positions_tech = {
 	}
 }
 
-point_def_system_tech = {
+point_defense_system = {
 	area = army_doctrine
 	year = 1850
 	cost = 12000
@@ -159,7 +159,7 @@ point_def_system_tech = {
 	}
 }
 
-deep_def_sys_tech = {
+deep_defense_system = {
 	area = army_doctrine
 	year = 1870
 	cost = 16000
@@ -213,7 +213,7 @@ deep_def_sys_tech = {
 	}
 }
 
-trenches_tech = {
+infiltration = {
 	area = army_doctrine
 	year = 1890
 	cost = 20000
@@ -259,11 +259,11 @@ trenches_tech = {
 	}
 }
 
-infiltration_tech = {
+modern_army_doctrine = {
 	area = army_doctrine
 	year = 1910
 	cost = 24000
-	#combat_width = -5
+	combat_width = -5
 	max_fort = 1
 	dig_in_cap = 1
 	
@@ -550,7 +550,7 @@ gas_attack_tech = {
 	army_base = {
 		supply_consumption = 0.3
 	}
-	combat_width = -5
+	
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -646,7 +646,6 @@ mobile_cannons_tech = {
 		defence = 1
 		supply_consumption = 0.15
 		siege = 0.75
-		support = 0.2
 	}
 	
 	ai_chance = {
@@ -692,7 +691,6 @@ breech_l_art_tech = {
 		defence = 2
 		supply_consumption = 0.15
 		siege = 0.75
-		support = 0.2
 	}
 	
 	ai_chance = {
@@ -737,7 +735,6 @@ dense_art_fire_tech = {
 		defence = 2
 		supply_consumption = 0.15
 		siege = 0.75
-		support = 0.2
 	}
 	
 	ai_chance = {
@@ -783,7 +780,6 @@ precise_art_tech = {
 		defence = 4
 		supply_consumption = 0.15
 		siege = 0.75
-		support = 0.2
 	}
 	
 	ai_chance = {
@@ -828,7 +824,6 @@ armored_warfare_tech = {
 		defence = 4
 		supply_consumption = 0.15
 		siege = 0.75
-		support = 0.2
 	}
 	
 	ai_chance = {
@@ -1140,9 +1135,9 @@ corps_system_tech = {
 	year = 1816
 	cost = 3600
 
-	morale = 0.3
+	morale = 0.25
 	unciv_military = yes
-	military_tactics = 0.10
+	military_tactics = 0.25
 
 	army_base = {
 		supply_consumption = 0.1
@@ -1175,9 +1170,9 @@ hq_tech = {
 	year = 1840
 	cost = 7000
 
-	morale = 0.3
+	morale = 0.25
 	unciv_military = yes
-	military_tactics = 0.1
+	military_tactics = 0.25
 
 	army_base = {
 		supply_consumption = 0.1
@@ -1233,9 +1228,9 @@ army_planning_tech = {
 	year = 1860
 	cost = 10000
 
-	morale = 0.3
+	morale = 0.25
 	unciv_military = yes
-	military_tactics = 0.1
+	military_tactics = 0.25
 
 	army_base = {
 		supply_consumption = 0.1
@@ -1289,9 +1284,9 @@ army_risk_estimation_tech = {
 	year = 1880
 	cost = 16000
 
-	morale = 0.3
+	morale = 0.25
 	unciv_military = yes
-	military_tactics = 0.1
+	military_tactics = 0.25
 
 	army_base = {
 		supply_consumption = 0.1
@@ -1345,9 +1340,9 @@ unter_officer_tech = {
 	year = 1900
 	cost = 20000
 
-	morale = 0.3
+	morale = 0.25
 	unciv_military = yes
-	military_tactics = 0.1
+	military_tactics = 0.25
 
 	army_base = {
 		supply_consumption = 0.1
@@ -1401,9 +1396,9 @@ divisions_tech = {
 	year = 1920
 	cost = 24000
 
-	morale = 0.3
+	morale = 0.25
 	unciv_military = yes
-	military_tactics = 0.1
+	military_tactics = 0.25
 
 	army_base = {
 		supply_consumption = 0.1

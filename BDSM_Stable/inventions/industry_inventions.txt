@@ -334,7 +334,7 @@ mechanized_slaughtering_block = {
 }
 #interchangeable_parts
 precision_work = {
-	limit = { interchangeable_parts = 1 }
+	limit = { mechanical_production = 1 }
 	chance = {
 		base = 2
 		modifier = {
@@ -357,7 +357,7 @@ precision_work = {
 	}
 }
 machine_tools = {
-	limit = { mechanical_production = 1 }
+	limit = { interchangeable_parts = 1 }
 	chance = {
 		base = 2
 		modifier = {
@@ -375,7 +375,6 @@ machine_tools = {
 		}
 		factory_throughput = 0.05		
 		mine_RGO_eff = 0.1
-		activate_building = tools_factory
 	}
 }
 whitney_n_colts_standardized_small_arms = {

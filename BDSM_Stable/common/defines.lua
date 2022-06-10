@@ -145,7 +145,7 @@ military = {
 	POP_MIN_SIZE_FOR_REGIMENT_COLONY_MULTIPLIER = 15,
 	POP_MIN_SIZE_FOR_REGIMENT_NONCORE_MULTIPLIER = 5, -- VALUE * POP_MIN_SIZE_FOR_REGIMENT is min for noncores
 	GAS_ATTACK_MODIFIER = 3,
-	COMBATLOSS_WAR_EXHAUSTION = 1.0, -- base war exhastion in combat
+	COMBATLOSS_WAR_EXHAUSTION = 1, -- base war exhastion in combat
 	LEADER_MAX_RANDOM_PRESTIGE = 0.05, -- max percent of prestige, when randomizing stats for leaders.
 	LEADER_AGE_DEATH_FACTOR = 4, -- higher value means leaders live longer
 	LEADER_PRESTIGE_TO_MORALE_FACTOR = 0.8, -- f.ex. 100% of prestige = +10% morale
@@ -505,7 +505,7 @@ diplomacy = {
 	
 	MIN_WARSCORE_TO_INTERVENE = -1,
 	MIN_MONTHS_TO_INTERVENE = 0,
-	MAX_WARSCORE_FROM_BATTLES = 10,
+	MAX_WARSCORE_FROM_BATTLES = 20,
 	
 	GUNBOAT_DIPLOMATIC_COST = 1,
 	GUNBOAT_RELATION_ON_ACCEPT = 1,

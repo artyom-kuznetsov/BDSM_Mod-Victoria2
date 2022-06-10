@@ -14,7 +14,6 @@ political_decisions = {
 			ai = no
 			is_ideology_enabled = communist
 			NOT = { government = proletarian_dictatorship }
-			NOT = { tag = TUR }
 			
 		}
 		allow = {
@@ -25,7 +24,7 @@ political_decisions = {
 			prestige = -10
 			political_reform = none_voting
 			political_reform = party_appointed 
-			political_reform = political_parties = underground_parties
+			political_reform = underground_parties
 			government = proletarian_dictatorship
 			any_pop = {
 				militancy = -2
@@ -216,7 +215,7 @@ political_decisions = {
 				tag = SWE
 				tag = BRZ
 				tag = JAP
-				tag = CHI
+				tag = CHU
 				tag = HND
 				tag = NET
 				tag = EIC
@@ -268,7 +267,7 @@ political_decisions = {
 				tag = SWE
 				tag = BRZ
 				tag = JAP
-				tag = CHI
+				tag = CHU
 				tag = HND
 				tag = NET
 				tag = EIC		
@@ -320,7 +319,7 @@ political_decisions = {
 				tag = SWE
 				tag = BRZ
 				tag = JAP
-				tag = CHI
+				tag = CHU
 				tag = HND
 				tag = NET
 				tag = EIC	
@@ -359,9 +358,11 @@ political_decisions = {
 			num_of_vassals = 1
             ai = no
 		}
-
-		effect = {
-			country_event = { id = 91306 days = 0 }
+	effect = {
+		country_event = { id = 91306 days = 0 }
+	}
+	ai_will_do = {
+		factor = -1
 		}
 	}
 	
@@ -543,7 +544,7 @@ political_decisions = {
 			publishing_industry = 1
 			freedom_of_trade = 1
 			private_banks = 1
-			post_napoleonic_thought = 1
+			line_infantry_tech = 1
 			military_score = 50
 			prestige = 40
 		}
@@ -586,6 +587,12 @@ political_decisions = {
 				name = meiji_restoration_boost
 				duration = -1
 			}
+			KOR = {
+				all_core = {
+					add_core = THIS
+				}
+			}
+			badboy = 12
 		}
 	}
 	
@@ -619,6 +626,11 @@ political_decisions = {
 				scaled_militancy = {
 					ideology = reactionary
 					factor = 9
+				}
+			}
+			KOR = {
+				all_core = {
+					add_core = THIS
 				}
 			}
 		}
@@ -719,7 +731,7 @@ political_decisions = {
 				tag = TPG
 				tag = GXI
 				tag = FJN
-				tag = CHI
+				tag = CHU
 				tag = HNN
 			}
 			

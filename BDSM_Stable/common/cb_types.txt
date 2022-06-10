@@ -40,6 +40,7 @@
 # Order that CBs are executed in a peace treaty
 peace_order = { 
 china_cb_prewestern
+china_clique_wars
 add_to_sphere 
 take_from_sphere 
 status_quo 
@@ -112,7 +113,6 @@ china_cb_prewestern = {
 			tag = GXI
 			tag = XBI
 			tag = HNN
-			tag = TPG
 		}
 		THIS = { 
 			NOT = { 
@@ -122,12 +122,11 @@ china_cb_prewestern = {
 					tag = TPG
 					tag = GXI
 					tag = XBI
-					tag = TPG
 					tag = HNN 
 				}
 			} 
 		}
-		NOT = { NOT = { year = 1870 }  }
+		NOT = { year = 1870 } 
 		is_independant = yes
 	}
 	
@@ -171,7 +170,6 @@ china_cb_prewestern = {
 	}
 }
 
-
 china_clique_wars = {
 	sprite_index = 6
 	is_triggered_only = yes
@@ -201,7 +199,6 @@ china_clique_wars = {
 			tag = GXI
 			tag = XBI
 			tag = HNN
-			tag = TPG
 		}
 		THIS = { 
 			OR = {
@@ -211,7 +208,7 @@ china_clique_wars = {
 				tag = GXI
 				tag = XBI
 				tag = HNN 
-				tag = TPG
+				tag = CHU
 			}
 		}
 		is_independant = yes
@@ -241,6 +238,7 @@ china_clique_wars = {
 
 
 
+
 #Take Capital
 take_capital = {
 	sprite_index = 6
@@ -256,7 +254,7 @@ take_capital = {
 	break_truce_prestige_factor = 1
 	break_truce_infamy_factor = 2
 	break_truce_militancy_factor = 2
-	truce_months = 90
+	truce_months = 96
 	
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
@@ -286,14 +284,6 @@ take_capital = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 		OR = {
 			AND = {
 				civilized = yes
@@ -407,14 +397,6 @@ conquest_small = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 
 		# only one state or unciv
 		NOT = { number_of_states = 4 }
@@ -465,8 +447,7 @@ conquest_small = {
 	good_relation_infamy_factor = 1
 	good_relation_militancy_factor = 1
 	
-	construction_speed = 0.5
-	
+
 	on_add = {
 		move_issue_percentage = { 
 			from = jingoism 
@@ -570,14 +551,6 @@ conquest_tiny = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 		OR = {
 			NOT = { total_pops = 150000 }
 			AND = {
@@ -600,12 +573,12 @@ conquest_tiny = {
 		OR = {
 			AND = {
 				civilized = yes
-				NOT = { number_of_states = 2 }
+				NOT = { number_of_states = 3 }
 			}
 			AND = {
 				civilized = no
 				THIS = { civilized = no }
-				NOT = { number_of_states = 2 }
+				NOT = { number_of_states = 3 }
 			}
 			AND = {
 				civilized = no
@@ -642,8 +615,6 @@ conquest_tiny = {
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
 	good_relation_militancy_factor = 1
-	
-	construction_speed = 0.5
 	
 	on_add = {
 		move_issue_percentage = { 
@@ -699,29 +670,6 @@ demand_for_ally = {
 			NOT = {
 				OR = {
 					tag = SWI tag = WBK
-				}
-			}
-		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
-		THIS = { ai = no }
-		NOT = {
-			OR = {
-				tag = JAN
-				tag = GHO
-			}
-		}
-		THIS = {
-			NOT = {
-				OR = {
-					tag = JAN
-					tag = GHO
 				}
 			}
 		}
@@ -875,14 +823,6 @@ establish_small_protectorate_casus_belli = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 		NOT = { total_pops = 150000 }
 		THIS = {
 			ai = no
@@ -962,7 +902,7 @@ gunboat = {
 	break_truce_prestige_factor = 0
 	break_truce_infamy_factor = 0
 	break_truce_militancy_factor = 0
-	truce_months = 36
+	truce_months = 60
 	
 	badboy_factor = 1
 	prestige_factor = 5
@@ -1025,14 +965,17 @@ conquest = {
 	
 	can_use = {
 		NOT = {
-			OR = {
-				tag = SWI tag = WBK 
+			OR = { tag = SWI tag = WBK  }
+		}
+		OR = {
+			AND = {
 				AND = {
 					OR = {
 						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
 					}
-					NOT = { year = 1870 } 
+					tag = HNN
 				}
+				NOT = { year = 1870 }
 			}
 		}
 		THIS = {
@@ -1042,17 +985,8 @@ conquest = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 		NOT = { is_our_vassal = THIS }
 		# only one state or unciv
-		NOT = { number_of_states = 2 }
 		OR = {
 			AND = {
 				civilized = yes
@@ -1061,7 +995,7 @@ conquest = {
 			AND = {
 				civilized = no
 				THIS = { civilized = no }
-				NOT = { number_of_states = 2 }
+				NOT = { number_of_states = 3 }
 			}
 			AND = {
 				civilized = no
@@ -1199,8 +1133,8 @@ add_to_sphere = {
 		is_greater_power = no
 		is_independant = yes
 		part_of_sphere = no
-		NOT = { tag = SWI tag = WBK }
-		NOT = { THIS = { tag = SWI tag = WBK } }
+		NOT = { OR = { tag = SWI tag = WBK } }
+		NOT = { OR = { THIS = { tag = SWI tag = WBK } } }
 	}
 	
 	is_valid = {
@@ -1288,7 +1222,7 @@ acquire_core_state = {
 	break_truce_prestige_factor = 5
 	break_truce_infamy_factor = 2
 	break_truce_militancy_factor = 2
-	truce_months = 30
+	truce_months = 60
 	
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
@@ -1486,14 +1420,6 @@ acquire_state = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 		OR = {
 			AND = {
 				civilized = yes
@@ -1585,14 +1511,6 @@ place_in_the_sun = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 	}
 	
 	allowed_states = {
@@ -1693,14 +1611,6 @@ cut_down_to_size = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 	}
 	
 	on_add = {
@@ -1756,14 +1666,6 @@ demand_war_reparations = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 	}
 	
 	on_add = {
@@ -2172,14 +2074,6 @@ make_puppet = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 	}
 	
 	# THIS - us
@@ -2307,14 +2201,6 @@ humiliate = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 	}	
 	on_add = {
 		move_issue_percentage = { 
@@ -2374,14 +2260,6 @@ demand_concession_casus_belli = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 		OR = {
 			neighbour = THIS
 			AND = {
@@ -2992,14 +2870,6 @@ negotiated_transfer = {
 				}
 			}
 		}
-		#THIS = {
-		#	NOT = {
-		#		OR = {
-		#			tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
-		#		}
-		#		NOT = { year = 1870 } 
-		#	}
-		#}
 		OR = {
 			AND = {
 				civilized = yes

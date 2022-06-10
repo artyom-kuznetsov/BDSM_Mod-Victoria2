@@ -1,6 +1,6 @@
 #post_napoleonic_thought
 landscape_picking_inv = {
-	limit = { landscape_picking_tech = 1 }
+	limit = { post_napoleonic_thought = 1 }
 	chance = {
 		base = 2
 		modifier = {
@@ -56,7 +56,7 @@ line_infantry_inv = {
 	}
 }
 defence_positions_inv = {
-	limit = { defence_positions_tech = 1 }
+	limit = { strategic_mobility = 1 }
 	chance = {
 		base = 5
 		modifier = {
@@ -84,7 +84,7 @@ defence_positions_inv = {
 	}
 }
 point_def_system_inv = {
-	limit = { point_def_system_tech = 1 }
+	limit = { point_defense_system = 1 }
 	chance = {
 		base = 5
 		modifier = {
@@ -112,7 +112,7 @@ point_def_system_inv = {
 	}
 }
 deep_def_sys_inv = {
-	limit = { deep_def_sys_tech = 1 }
+	limit = { deep_defense_system = 1 }
 	chance = {
 		base = 5
 		modifier = {
@@ -143,7 +143,7 @@ deep_def_sys_inv = {
 	}
 }
 trenches_inv = {
-	limit = { trenches_tech = 1 }
+	limit = { infiltration = 1 }
 	chance = {
 		base = 5
 		modifier = {
@@ -168,7 +168,7 @@ trenches_inv = {
 	}
 }
 infiltration_inv = {
-	limit = { infiltration_tech = 1 }
+	limit = { modern_army_doctrine = 1 }
 	chance = {
 		base = 5
 		modifier = {
@@ -625,10 +625,10 @@ military_aviation = {
 			war = yes
 			war_countries = { invention = military_aviation }
 		}
-		#modifier = {
-		#	factor = -10
-		#	not = { invention = aeroplane_production_inv }
-		#}
+		modifier = {
+			factor = -10
+			not = { invention = aeroplane_production_inv }
+		}
 		modifier ={
 			factor = 5
 			year = 1900

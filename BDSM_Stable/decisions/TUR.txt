@@ -1,5 +1,4 @@
 political_decisions = {
-
 	tanzimat_reforms = {
 		potential = {
 			tag = TUR
@@ -134,35 +133,4 @@ political_decisions = {
 			}
 		}
 	}
-
-	establish_turkish_union = {
-		potential = {
-			tag = TUR
-			OR = {
-				ruling_party_ideology = socialist
-				ruling_party_ideology = communist
-			}
-			ai = no
-			is_ideology_enabled = communist
-			NOT = { government = proletarian_dictatorship }
-		}
-		allow = {
-			socialist = 10
-			trade_unions = all_trade_unions
-		}
-		effect = {
-			political_reform = none_voting
-			political_reform = party_appointed 
-			political_reform = political_parties = underground_parties
-			government = proletarian_dictatorship
-			any_pop = {
-				militancy = -2
-			}
-			any_pop = {
-				consciousness = -2
-			}
-		}
-	}
-
-	
 }
