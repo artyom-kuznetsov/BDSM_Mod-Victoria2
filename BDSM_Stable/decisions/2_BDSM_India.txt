@@ -1,4 +1,59 @@
 political_decisions = {
+	form_india = {
+		potential = {
+			is_culture_group = south_asian
+			
+			NOT = {
+				exists = HND
+			}
+		}
+		
+		allow = {
+			#is_greater_power = yes
+			#prestige = 30
+			#war = no
+			1256 = { owned_by = THIS }
+			1277 = { owned_by = THIS }
+			1274 = { owned_by = THIS }
+			1297 = { owned_by = THIS }
+			THIS = { total_pops = 10000000 }
+		}
+		
+		effect = {
+			prestige = 25
+			change_tag = HND
+			capital = 1297
+			add_accepted_culture = burmese
+			add_accepted_culture = bengali
+			add_accepted_culture = panjabi
+			#tech_school = benelux_tech_school
+			any_country = {
+				limit = {
+					is_culture_group = south_asian
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+				}
+				
+			}
+			any_country = {
+				limit = {
+					NOT = {
+						is_greater_power = yes
+					}
+					AND = {
+						is_culture_group = THIS
+						in_sphere = THIS
+					}
+				}
+				country_event = { id=11101 days=0 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 	hnd_ultimatum_goa = {
 		potential = {
 			tag = HND
