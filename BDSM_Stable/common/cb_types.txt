@@ -113,6 +113,10 @@ china_cb_prewestern = {
 			tag = GXI
 			tag = XBI
 			tag = HNN
+			tag = MCK
+			tag = MGL
+			tag = XIN
+			tag = TIB
 		}
 		THIS = { 
 			NOT = { 
@@ -123,30 +127,28 @@ china_cb_prewestern = {
 					tag = GXI
 					tag = XBI
 					tag = HNN 
+					tag = MCK
+					tag = MGL
+					tag = XIN
+					tag = TIB
 				}
 			} 
 		}
-		NOT = { year = 1870 } 
+		NOT = { year = 1865 } 
 		is_independant = yes
-	}
-	
-	allowed_states = {
-		is_colonial = no
-		any_owned_province = {
-			not = {	is_core = THIS }
-			is_colonial = no
-		}
-		AND = {
-			any_owned_province = { port = yes }
-			THIS = {
+		OR = {
+			neighbour = THIS
+			AND = {
 				num_of_ports = 1
-				OR = {
-					is_greater_power = yes
-					is_secondary_power = yes
-					ai = no
+				THIS = {
+					num_of_ports = 1
 				}
 			}
 		}
+	}
+	
+	allowed_states = {
+
 	}
 	
 	allowed_states_in_crisis = {
@@ -199,6 +201,10 @@ china_clique_wars = {
 			tag = GXI
 			tag = XBI
 			tag = HNN
+			tag = MCK
+			tag = MGL
+			tag = XIN
+			tag = TIB
 		}
 		THIS = { 
 			OR = {
@@ -209,17 +215,26 @@ china_clique_wars = {
 				tag = XBI
 				tag = HNN 
 				tag = CHU
+				tag = MCK
+				tag = MGL
+				tag = XIN
+				tag = TIB
 			}
 		}
 		is_independant = yes
+		OR = {
+			neighbour = THIS
+			AND = {
+				num_of_ports = 1
+				THIS = {
+					num_of_ports = 1
+				}
+			}
+		}
 	}
 	
 	allowed_states = {
-		is_colonial = no
-		any_owned_province = {
-			not = {	is_core = THIS }
-			is_colonial = no
-		}
+
 	}	
 
 	po_demand_state = yes
@@ -271,9 +286,19 @@ take_capital = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU 
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -384,9 +409,19 @@ conquest_small = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -538,9 +573,19 @@ conquest_tiny = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -660,9 +705,19 @@ demand_for_ally = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -810,9 +865,19 @@ establish_small_protectorate_casus_belli = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -971,11 +1036,21 @@ conquest = {
 			AND = {
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
 					tag = HNN
 				}
-				NOT = { year = 1870 }
+				NOT = { year = 1865 }
 			}
 		}
 		THIS = {
@@ -1135,6 +1210,20 @@ add_to_sphere = {
 		part_of_sphere = no
 		NOT = { OR = { tag = SWI tag = WBK } }
 		NOT = { OR = { THIS = { tag = SWI tag = WBK } } }
+		NOT = {
+			OR = {
+				tag = HNN 
+				tag = FJN 
+				tag = GXI 
+				tag = XBI 
+				tag = TPG 
+				tag = CHI 
+				tag = MCK
+				tag = MGL
+				tag = XIN
+				tag = TIB
+			}
+		}
 	}
 	
 	is_valid = {
@@ -1407,9 +1496,19 @@ acquire_state = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -1498,9 +1597,19 @@ place_in_the_sun = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -1598,9 +1707,19 @@ cut_down_to_size = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -1653,9 +1772,19 @@ demand_war_reparations = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -1932,7 +2061,23 @@ dismantle_forts = {
 		NOT = { is_our_vassal = THIS }
 		NOT = {
 			OR = {
-				tag = SWI tag = WBK
+				tag = SWI tag = WBK 
+				AND = {
+					OR = {
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
+					}
+					NOT = { year = 1865 } 
+				}
 			}
 		}
 		THIS = {
@@ -2061,9 +2206,19 @@ make_puppet = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -2188,9 +2343,19 @@ humiliate = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -2247,9 +2412,19 @@ demand_concession_casus_belli = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN tag = FJN tag = GXI tag = XBI tag = TPG tag = CHI tag = CHU
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
 					}
-					NOT = { year = 1870 } 
+					NOT = { year = 1865 } 
 				}
 			}
 		}
@@ -2322,7 +2497,23 @@ establish_protectorate_casus_belli = {
 		}
 		NOT = {
 			OR = {
-				tag = SWI tag = WBK
+				tag = SWI tag = WBK 
+				AND = {
+					OR = {
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
+					}
+					NOT = { year = 1865 } 
+				}
 			}
 		}
 		THIS = {
