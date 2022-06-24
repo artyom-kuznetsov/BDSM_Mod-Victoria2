@@ -87,14 +87,15 @@ political_decisions = {
 	establish_turkish_union = {
 		potential = {
 			tag = TUR
-			OR = {
-				ruling_party_ideology = socialist
-				ruling_party_ideology = communist
-			}
-			ai = no
+			#OR = {
+			#	ruling_party_ideology = socialist
+			#	ruling_party_ideology = communist
+			#}
+			#ai = no
 			is_ideology_enabled = communist
 			NOT = { government = proletarian_dictatorship }
 			NOT = { has_country_flag = TUR_union }
+			has_country_flag = tur_cit_law
 		}
 		allow = {
 			OR = { socialist = 10 communist = 10 }
@@ -132,6 +133,7 @@ political_decisions = {
 				duration = 1825 # 5 years
 			}
 			set_country_flag = TUR_education
+			money = -1000000
 		}
 	}
 }
