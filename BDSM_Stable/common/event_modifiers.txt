@@ -1,6 +1,32 @@
 ##################################################################################################
 # scriptable and usable for event-system below.
 ##################################################################################################
+eng_albion_modifier = {
+	tax_efficiency = -0.01
+	naval_organisation = 0.1
+	naval_unit_start_experience = 10
+	#navy_base = { maximum_speed = 10 }
+	#navy_base = { build_time = -10 }
+	icon = 17
+}
+
+caste_sys_education_modifier = {
+	education_efficiency_modifier = 0.1
+	icon = 5
+}
+
+caste_sys_centralized_gov_modifier = {
+	administrative_efficiency_modifier = 0.1
+	icon = 1
+}
+
+caste_sys_industry_modifier = {
+	factory_cost = -0.3
+	factory_throughput = 0.05
+	factory_owner_cost = -0.3
+	icon = 13
+}
+
 med_ref_tier_1 = {
 	tax_efficiency = -0.05
 	icon = 19
@@ -32,7 +58,7 @@ agrarianism_modifier = {
 }
 
 hnd_caste_system = {
-	icon = 9
+	icon = 18
 	education_efficiency_modifier = -0.3
 	global_population_growth = -0.002
 }
@@ -47,10 +73,10 @@ swi_trolling_regiment = {
 
 wbk_modifier = {
 	icon = 9
-	education_efficiency_modifier = -2.0
-	research_points = -10
+	research_points = 5
 	supply_consumption = -0.9
-	population_growth = 0.0003
+	population_growth = 0.003
+	prestige = -1
 	#research_points = 
 }
 
