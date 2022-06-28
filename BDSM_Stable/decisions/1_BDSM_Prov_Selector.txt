@@ -26,7 +26,7 @@ political_decisions = {
 			}
 		}
 		allow = {
-			money = 500000
+			money = 200000
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
@@ -73,7 +73,7 @@ political_decisions = {
 			}
 		}
 		allow = {
-			money = 500000
+			money = 200000
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
@@ -91,7 +91,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -500000
+			money = -200000
 			random_owned = {
 				limit = {
 					has_building = province_selector
@@ -164,6 +164,61 @@ political_decisions = {
 					}
 				}
 				province_event = { id = 91737  days = 0 }
+			}
+		}
+	}
+	
+	zstate_baby_boom = {
+		picture = family
+		potential = {
+			any_owned_province = { 
+				has_building = province_selector 
+			}
+			ai = no
+		}	
+		allow = {
+			any_owned_province = { 
+				has_building = province_selector 
+				NOT = { has_province_modifier = small_baby_boom }
+				NOT = { total_pops = 20000 }
+			}
+			money = 250000
+		}
+		effect = {
+			money = -250000
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					NOT = { total_pops = 20000 }
+					NOT = { has_province_modifier = small_baby_boom }
+				}
+				province_selector = -1
+				add_province_modifier = {
+					name = small_baby_boom
+					duration = 1460
+				}
+			}
+		}
+	}
+	zstate_build_selectors = {
+		picture = family
+		alert = no
+		potential = {
+			NOT = { 
+				any_owned_province = { 
+					has_building = province_selector 
+				}
+			}
+			ai = no
+		}	
+		allow = {
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					NOT = { has_building = province_selector }
+				}
+				province_selector = 1
 			}
 		}
 	}
