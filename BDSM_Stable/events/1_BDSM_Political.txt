@@ -59,3 +59,62 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = 8800
+	title = "the_heligoland_demand_title"
+	desc = "the_heligoland_demand_desc"
+	picture = "greatpowers"
+	
+	is_triggered_only = yes
+	
+	# Сдать Гельголанд
+	option = {
+		name = "the_heligoland_demand_option_yes"
+		prestige = -10
+		relation = {
+			who = GER
+				value = 50
+		}
+		533 = {
+			remove_core = THIS
+			secede_province = GER
+		}
+		FROM = {
+			country_event = 8801
+		}
+
+		ai_will_do = {
+			factor = 9
+		}
+	}
+	
+	# Не сдавать Гельголанд
+	option = {
+		name = "the_heligoland_demand_option_no"
+		relation = {
+			who = GER
+			value = -50
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = 8801
+	title = "the_heligoland_secession_title"
+	desc = "the_heligoland_secession_desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "the_heligoland_secession_option_hooray"
+
+		ai_will_do = {
+			factor = 9
+		}
+	}
+}
