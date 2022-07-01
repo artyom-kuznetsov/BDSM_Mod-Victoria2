@@ -1029,10 +1029,8 @@ conquest = {
 	
 	can_use = {
 		NOT = {
-			OR = { tag = SWI tag = WBK  }
-		}
-		OR = {
-			AND = {
+			OR = {
+				tag = SWI tag = WBK 
 				AND = {
 					OR = {
 						tag = HNN 
@@ -1047,9 +1045,8 @@ conquest = {
 						tag = XIN
 						tag = TIB
 					}
-					tag = HNN
+					NOT = { year = 1865 } 
 				}
-				NOT = { year = 1865 }
 			}
 		}
 		THIS = {
