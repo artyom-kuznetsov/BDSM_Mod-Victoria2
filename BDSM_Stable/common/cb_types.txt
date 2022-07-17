@@ -148,16 +148,11 @@ china_cb_prewestern = {
 	}
 	
 	allowed_states = {
-
-	}
-	
-	allowed_states_in_crisis = {
 		any_owned_province = {
-			any_neighbor_province = {
-				owner = { tag = THIS }
-			}
+			not = {	is_core = THIS }
+			is_colonial = no
 		}
-	}		
+	}	
 
 	po_demand_state = yes
 	
@@ -234,7 +229,10 @@ china_clique_wars = {
 	}
 	
 	allowed_states = {
-
+		any_owned_province = {
+			not = {	is_core = THIS }
+			is_colonial = no
+		}
 	}	
 
 	po_demand_state = yes

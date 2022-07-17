@@ -495,35 +495,20 @@ political_decisions = {
 		allow = {
 			prestige = 45
 			#war = no
-			SCA = {
-				all_core = {
-					OR = {
-						owned_by = THIS
-						owner = {
-							is_our_vassal = THIS
-						}
-						owner = {
-							in_sphere = THIS
-						}
-					}
-				}
-			}
+			322 = { owned_by = THIS }
+			313 = { owned_by = THIS }
+			372 = { owned_by = THIS }
+			252 = { owned_by = THIS }
+			366 = { owned_by = THIS }
 		}
 		
 		effect = {
 			prestige = 20
 			change_tag = SCA
 			add_accepted_culture = swedish
-			add_accepted_culture = danish
-			add_accepted_culture = norwegian
 			add_accepted_culture = finnish
-			add_accepted_culture = icelandic
-			add_accepted_culture = sami
 			any_country = {
 				limit = {
-					NOT = {
-						is_greater_power = yes
-					}
 					is_culture_group = scandinavian
 					in_sphere = THIS
 				}
