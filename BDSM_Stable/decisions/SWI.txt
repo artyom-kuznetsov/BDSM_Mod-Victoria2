@@ -18,6 +18,20 @@ political_decisions = {
 			}
 		}
 	}
+	swi_start_trolling = {
+		potential = {
+			tag = SWI
+			NOT = { has_country_flag = swi_trolling_flag }
+		}
+		allow = { }
+		effect = {
+			set_country_flag = swi_trolling_flag
+			add_country_modifier = { name = swi_trolling_regiment duration = -1 }
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 	declare_republic_of_neuchatel = {
 		potential = {
 			tag = SWI

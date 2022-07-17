@@ -94,65 +94,6 @@ country_event = {
 	}
 }
 
-#The Costs of Health
-country_event = {
-	id = 3001
-	title = "EVTNAME3001"
-	desc = "EVTDESC3001"
-	picture = "Hospital"
-	
-	trigger = {
-		civilized = yes
-		health_care = acceptable_health_care
-		conservative = 0.2
-	}
-	
-	mean_time_to_happen = {
-		months = 800 
-		modifier = {
-			factor = 0.9
-			conservative = 0.3
-		}
-		
-		modifier = {
-			factor = 1.4
-			average_militancy = 5
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA3001"
-		social_reform = low_health_care
-		poor_strata = {
-			militancy = 3
-		}
-		middle_strata = {
-			militancy = 2
-		}
-		ai_chance = {
-			factor = 0
-		}		
-	}
-	
-	option = {
-		name = "EVTOPTB3001"
-		upper_house = {
-			ideology = conservative
-			value = 0.1
-		}
-		poor_strata = {
-			militancy = 1
-		}
-	}
-	
-	option = {
-		name = "EVTOPTC3001"
-		scaled_militancy = {
-			ideology = conservative
-			factor = 2
-		}
-	}
-}
 
 #The Great Escape
 country_event = {

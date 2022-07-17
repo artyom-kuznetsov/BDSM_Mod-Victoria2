@@ -34,20 +34,6 @@ political_decisions = {
 			}
 		}
 	}
-	swi_start_trolling = {
-		potential = {
-			tag = SWI
-			NOT = { has_country_flag = regiment_troll }
-		}
-		allow = { }
-		effect = {
-			set_country_flag = regiment_troll
-			add_country_modifier = { name = swi_trolling_regiment_1 duration = -1 }
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
 	wbk_modifiers = {
 		potential = {
 			tag = WBK
@@ -697,45 +683,48 @@ political_decisions = {
 		alert = no
 		potential = {
 			part_of_sphere = yes
-			NOT = { year = 1870 }
 			OR = {
 				tag = WBK
-				tag = AWA
-				tag = BAS
-				tag = BER
-				tag = BRO
-				tag = BIK
-				tag = BUN
-				tag = GWA
-				tag = HYD
-				tag = IND
-				tag = JAI
-				tag = JAS
-				tag = JOD
-				tag = KAL
-				tag = KAS
-				tag = KUT
-				tag = LAD
-				tag = MAK
-				tag = MEW
-				tag = MYS
-				tag = NAG
-				tag = NEP
-				tag = ORI
-				tag = PAN
-				tag = SHI
-				tag = SIK
-				tag = SIN
-				tag = TRA
-				tag = CEY
-				tag = SWI
-				tag = TPG
-				tag = GXI
-				tag = FJN
-				tag = CHU
-				tag = HNN
+				AND = {
+					NOT = { year = 1870 }
+					OR = {
+						tag = AWA
+						tag = BAS
+						tag = BER
+						tag = BRO
+						tag = BIK
+						tag = BUN
+						tag = GWA
+						tag = HYD
+						tag = IND
+						tag = JAI
+						tag = JAS
+						tag = JOD
+						tag = KAL
+						tag = KAS
+						tag = KUT
+						tag = LAD
+						tag = MAK
+						tag = MEW
+						tag = MYS
+						tag = NAG
+						tag = NEP
+						tag = ORI
+						tag = PAN
+						tag = SHI
+						tag = SIK
+						tag = SIN
+						tag = TRA
+						tag = CEY
+						tag = SWI
+						tag = TPG
+						tag = GXI
+						tag = FJN
+						tag = CHU
+						tag = HNN
+					}
+				}
 			}
-			
 		}
 		allow = {
 			
