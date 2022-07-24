@@ -1064,11 +1064,13 @@ conquest = {
 			AND = {
 				civilized = no
 				THIS = { civilized = no }
-				NOT = { number_of_states = 3 }
+				NOT = { number_of_states = 2 }
 			}
 			AND = {
 				civilized = no
-				number_of_states = 2
+				NOT = {
+					number_of_states = 3
+				}
 				THIS = {
 					OR = {
 						NOT = { is_greater_power = yes }

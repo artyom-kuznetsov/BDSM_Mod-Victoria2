@@ -6,7 +6,7 @@ post_nelsonian_thought = {
 	unciv_military = yes
 	activate_building = naval_base
 	colonial_points = 100
-
+	
 
 	ai_chance = {
 		factor = 1
@@ -457,9 +457,10 @@ modern_naval_doctrine = {
 clipper_design = {
 	area = ship_construction
 	year = 1836
-	cost = 3600
+	cost = 6000
 	unciv_military = yes
-	activate_building = clipper_shipyard 
+	
+	activate_building = steamer_shipyard 
 	ai_chance = {
 		factor = 1
 		# Land-locked countries don't research this
@@ -537,10 +538,10 @@ clipper_design = {
 }
 steamers = {
 	area = ship_construction
-	year = 1836
-	cost = 7200
+	year = 1845
+	cost = 8400
 	unciv_military = yes
-	activate_building = steamer_shipyard 
+	
 	ai_chance = {
 		factor = 1
 		# Land-locked countries don't research this
@@ -928,6 +929,7 @@ naval_design_bureaus = {
 	cost = 3600
 	navy_base = { build_time = -10 }
 	unciv_military = yes
+	activate_building = clipper_shipyard 
 	ai_chance = {
 		factor = 1
 		# Land-locked countries don't research this
@@ -1874,9 +1876,10 @@ naval_professionalism = {
 }
 naval_decision_making = {
 	area = naval_leadership
-	year = 1850
-	cost = 10800
+	year = 1860
+	cost = 12000
 	unciv_military = yes
+	activate_unit = engineer
 	navy_base = {
 		default_organisation = 5
 	}
