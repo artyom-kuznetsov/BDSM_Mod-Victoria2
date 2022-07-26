@@ -1,0 +1,254 @@
+political_decisions = {
+	zzreset_province_selector = {
+		picture = province_selector
+		potential = {
+			ai = no
+		}	
+		allow = {
+			any_owned_province = { has_building = province_selector }
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					has_building = province_selector
+				}
+				province_selector = -1
+			}
+		}
+	}
+	
+	zprovince_mining_expansion = {
+		potential = {
+			ai = no
+			any_owned_province = { 
+				has_building = province_selector
+			}
+		}
+		allow = {
+			money = 200000
+			any_owned_province = {
+				has_building = province_selector
+				NOT = {
+					has_province_modifier = agriculture_expansion
+				}
+				OR = {
+					trade_goods= coal
+					trade_goods= iron
+					trade_goods= sulphur
+					trade_goods= oil
+					trade_goods= precious_metal
+				}
+			}
+		}
+		effect = {
+			money = -200000
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					OR = {
+						trade_goods= coal
+						trade_goods= iron
+						trade_goods= sulphur
+						trade_goods= oil
+						trade_goods= precious_metal
+					#	trade_goods= market_goods
+					}
+					NOT = {
+						has_province_modifier = mine_expansion
+					}
+				}
+				add_province_modifier = { name = mine_expansion duration = -1 }
+				province_selector = -1
+			}
+		}
+	}
+	zprovince_scorched_earth = {
+		potential = {
+			ai = no
+			any_owned_province = { 
+				has_building = province_selector
+			}
+		}
+		allow = {
+			any_owned_province = {
+				has_building = province_selector
+				controlled_by = THIS
+				NOT = {
+					has_province_modifier = scorched_earth
+				}
+			}
+			#war = yes
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					has_building = province_selector
+					NOT = {
+						has_province_modifier = scorched_earth
+					}
+				}
+				add_province_modifier = { name = scorched_earth duration = 730 }
+				province_selector = -1
+			}
+		}
+	}
+	zstate_agriculture_expansion = {
+		picture = rgo_expansion
+		potential = {
+			ai = no
+			any_owned_province = {
+				has_building = province_selector
+			}
+		}
+		allow = {
+			money = 200000
+			any_owned_province = {
+				has_building = province_selector
+				NOT = {
+					has_province_modifier = agriculture_expansion
+				}
+				NOT = {
+					OR = {
+						trade_goods= coal
+						trade_goods= iron
+						trade_goods= sulphur
+						trade_goods= oil
+						trade_goods= precious_metal
+					}
+				}
+			}
+		}
+		effect = {
+			money = -200000
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					NOT = {
+						OR = {
+							trade_goods= coal
+							trade_goods= iron
+							trade_goods= sulphur
+							trade_goods= oil
+							trade_goods= precious_metal
+						#	trade_goods= market_goods
+						}
+					}
+					NOT = {
+						has_province_modifier = agriculture_expansion
+					}
+				}
+				add_province_modifier = { name = agriculture_expansion duration = -1 }
+				province_selector = -1
+			}
+		}
+	}
+	
+	zprovince_rgo_change_agriculture = {
+		picture = agriculture
+		potential = {
+			ai = no
+			NOT = { has_country_flag = deciding }
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = timber
+					trade_goods = cattle
+					trade_goods = fish
+					trade_goods = fruit
+					trade_goods = grain
+					trade_goods = wool
+				}
+			}
+		}	
+		allow = {
+			money = 100000
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = timber
+					trade_goods = cattle
+					trade_goods = fish
+					trade_goods = fruit
+					trade_goods = grain
+					trade_goods = wool
+				}
+			}
+		}
+		effect = {
+			money = -100000
+			set_country_flag = deciding
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					NOT = {
+						OR = {
+							trade_goods = coal
+							trade_goods = iron
+							trade_goods = sulphur
+							trade_goods = oil
+						#	trade_goods = market_goods
+							trade_goods = precious_metal
+						}
+					}
+				}
+				province_event = { id = 91737  days = 0 }
+			}
+		}
+	}
+	
+	zstate_baby_boom = {
+		picture = family
+		potential = {
+			any_owned_province = { 
+				has_building = province_selector 
+			}
+			ai = no
+		}	
+		allow = {
+			any_owned_province = { 
+				has_building = province_selector 
+				NOT = { has_province_modifier = small_baby_boom }
+				NOT = { total_pops = 20000 }
+			}
+			money = 250000
+		}
+		effect = {
+			money = -250000
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					NOT = { total_pops = 20000 }
+					NOT = { has_province_modifier = small_baby_boom }
+				}
+				province_selector = -1
+				add_province_modifier = {
+					name = small_baby_boom
+					duration = 1460
+				}
+			}
+		}
+	}
+	zstate_build_selectors = {
+		picture = family
+		alert = no
+		potential = {
+			NOT = { 
+				any_owned_province = { 
+					has_building = province_selector 
+				}
+			}
+			ai = no
+		}	
+		allow = {
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					NOT = { has_building = province_selector }
+				}
+				province_selector = 1
+			}
+		}
+	}
+
+}

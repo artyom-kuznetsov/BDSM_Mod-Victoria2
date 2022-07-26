@@ -1,0 +1,122 @@
+country_event = {
+	id = 9540
+	title = "EVTNAME9540"
+	desc = "EVTDESC9540"
+	
+	is_triggered_only = yes
+	
+	option = { # CAVOUR'S DIPLOMACY
+		name = "EVTOPTA9540"
+		prestige = 10
+		badboy = -10
+		relation = {
+			who = FRA
+				value = 50
+		}
+		465 = {
+			remove_core = ITA
+			remove_core = SAR
+			add_core = FRA
+			secede_province = FRA
+		}
+		466 = {
+			remove_core = ITA
+			remove_core = SAR
+			add_core = FRA
+			secede_province = FRA
+		}
+		472 = {
+			remove_core = ITA
+			remove_core = SAR
+			add_core = FRA
+			secede_province = FRA
+		}
+		set_country_flag = cavour_has_done_his
+		ai_will_do = {
+			factor = 9
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB9540"
+		465 = {
+			add_core = FRA
+		}
+		466 = {
+			add_core = FRA
+		}
+		472 = {
+			add_core = FRA
+		}
+		prestige = 10
+		relation = {
+			who = FRA
+			value = -100
+		}
+		set_country_flag = cavour_has_done_his
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = 8800
+	title = "the_heligoland_demand_title"
+	desc = "the_heligoland_demand_desc"
+	picture = "greatpowers"
+	
+	is_triggered_only = yes
+	
+	# Сдать Гельголанд
+	option = {
+		name = "the_heligoland_demand_option_yes"
+		relation = {
+			who = GER
+			value = 50
+		}
+		533 = {
+			remove_core = THIS
+			secede_province = GER
+		}
+		GER = {
+			country_event = 8801
+		}
+		badboy = -1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	# Не сдавать Гельголанд
+	option = {
+		name = "the_heligoland_demand_option_no"
+		relation = {
+			who = GER
+			value = -50
+		}
+		badboy = 1
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = 8801
+	title = "the_heligoland_secession_title"
+	desc = "the_heligoland_secession_desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "the_heligoland_secession_option_hooray"
+
+		ai_will_do = {
+			factor = 9
+		}
+		prestige = 5
+	}
+}

@@ -1,2 +1,2 @@
-name = "RDS Map Mod"
+name = "![Graphics] RDS Map Mod"
 path = "mod/RDS Map Project"
