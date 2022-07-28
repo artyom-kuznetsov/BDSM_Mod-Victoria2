@@ -1,39 +1,89 @@
-#country_event = {
-#	id = 9400 # AGRARIANISM
-#	title = "EVTNAME9400"
-#	desc = "EVTDESC9400"
-#	
-#	trigger = {
-#		ruling_party_ideology = agrarianist	
-#		NOT = { has_country_flag = is_Agrarianist }
-#	}
-#	mean_time_to_happen = { days = 30 }
-#	option = {
-#		name = "EVTOPTA9400"
-#		set_country_flag = is_Agrarianist
-#		add_country_modifier = {
-#			name = agrarianism_modifier
-#			duration = -1
-#		}
-#	}
-#}
+# BADBOY
+country_event = {
+	title = "badboy_event_25_title"
+	desc = "badboy_event_25_desc"
+	id = 11602
+	trigger = {
+		badboy = 1
+		NOT = { badboy = 1.2 }
+		name = EVTOPTA11602
 
-#country_event = {
-#	id = 9401 # AGRARIANISM
-#	title = "EVTNAME9401"
-#	desc = "EVTDESC9401"
-#	
-#	trigger = {
-#		NOT = { ruling_party_ideology = agrarianist }
-#		has_country_flag = is_Agrarianist 
-#	}
-#	mean_time_to_happen = { days = 30 }
-#	option = {
-#		name = "EVTOPTA9401"
-#		clr_country_flag = is_Agrarianist
-#		remove_country_modifier = agrarianism_modifier
-#	}
-#}
+		NOT = { has_country_modifier = above_bb_limit }
+		
+	}
+	option = {
+		name = "EVTOPTA11602"
+		
+		remove_country_modifier = above_bb_limit_1
+		remove_country_modifier = above_bb_limit_2
+		
+		add_country_modifier = { name = above_bb_limit duration = -1 }
+	}
+}
+country_event = {
+	title = "badboy_event_25_title"
+	desc = "badboy_event_28_desc"
+	id = 11603
+	trigger = {
+		badboy = 1.2
+		NOT = { badboy = 1.3 }
+		name = EVTOPTA11602
+
+		NOT = { has_country_modifier = above_bb_limit_1 }
+		
+	}
+	option = {
+		name = "EVTOPTA11602"
+		
+		remove_country_modifier = above_bb_limit
+		remove_country_modifier = above_bb_limit_2
+		
+		add_country_modifier = { name = above_bb_limit_1 duration = -1 }
+	}
+}
+
+country_event = {
+	title = "badboy_event_25_title"
+	desc = "badboy_event_30_desc"
+	id = 11605
+	trigger = {
+		badboy = 1.3
+		name = EVTOPTA11602
+
+		NOT = { has_country_modifier = above_bb_limit_2 }
+		
+	}
+	option = {
+		name = "EVTOPTA11602"
+		
+		remove_country_modifier = above_bb_limit
+		remove_country_modifier = above_bb_limit_1
+		
+		add_country_modifier = { name = above_bb_limit_2 duration = -1 }
+	}
+}
+
+country_event = {
+	title = "badboy_event_l25_title"
+	desc = "badboy_event_l25_desc"
+	id = 11604
+	trigger = {
+		NOT = { badboy = 1 }
+		name = "EVTOPTA11604"
+		OR = {
+			has_country_modifier = above_bb_limit
+			has_country_modifier = above_bb_limit_1
+			has_country_modifier = above_bb_limit_2
+		}
+	}
+	option = {
+		name = "EVTOPTA11604"
+		remove_country_modifier = above_bb_limit_1
+		remove_country_modifier = above_bb_limit_2
+		remove_country_modifier = above_bb_limit
+	}
+}
+
 
 ## ALASKA AUTOCOLONY
 country_event = { 

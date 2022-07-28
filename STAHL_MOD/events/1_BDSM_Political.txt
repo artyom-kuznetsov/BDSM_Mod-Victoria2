@@ -120,3 +120,68 @@ country_event = {
 		prestige = 5
 	}
 }
+
+country_event = {
+	id = 8802
+	title = "split_sakhaklin_evtname"
+	desc = "split_sakhaklin_evtdesc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "split_sakhaklin_opta"
+
+		ai_will_do = {
+			factor = 9
+		}
+		prestige = 5
+		1086 = { secede_province = THIS }
+		1086 = { add_core = THIS }
+		1087 = { secede_province = JAP }
+		JAP = { country_event = 8803 }
+	}
+	
+	option = { 
+		name = "split_sakhaklin_optb"
+		ai_will_do = { factor = 1 }
+		1086 = { add_core = THIS }
+		1087 = { add_core = THIS }
+		JAP = { country_event = 8804 }
+	}
+}
+
+country_event = {
+	id = 8803
+	title = "split_sakhaklin_rus_agree_evtname"
+	desc = "split_sakhaklin_rus_agree_evtdesc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "split_sakhaklin_rus_agree_opta"
+
+		ai_will_do = {
+			factor = 1
+		}
+		prestige = 5
+		
+	}
+}
+
+country_event = {
+	id = 8804
+	title = "split_sakhaklin_rus_decline_evtname"
+	desc = "split_sakhaklin_rus_decline_evtdesc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "split_sakhaklin_rus_decline_opta"
+
+		ai_will_do = {
+			factor = 1
+		}
+		1086 = { add_core = THIS }
+	}
+}
+
