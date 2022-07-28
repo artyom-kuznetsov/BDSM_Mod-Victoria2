@@ -259,7 +259,11 @@ political_decisions = {
 			civilized = yes
 		}
 		effect = {
-			1569 = { secede_province = THIS }
+			casus_belli = {
+				target = CHI
+				type = take_treaty_port
+				months = 36
+			}
 			set_country_flag = wei_hai_wei_taken
 		}
 	}
