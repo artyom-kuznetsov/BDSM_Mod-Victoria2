@@ -49,7 +49,6 @@ status_quo
 gunboat 
 conquest 
 civil_war 
-acquire_all_cores
 acquire_core_state 
 annex_core_country
 acquire_state 
@@ -915,67 +914,6 @@ demand_for_ally = {
 	}
 }
 
-
-
-acquire_all_cores = {
-	sprite_index = 5
-	is_triggered_only = yes
-	months = 12
-	constructing_cb = no
-	crisis = no
-
-	badboy_factor = 0
-	prestige_factor = 1
-	peace_cost_factor = 1
-	penalty_factor = 1
-	always = yes
-
-	break_truce_prestige_factor = 5
-	break_truce_infamy_factor = 2
-	break_truce_militancy_factor = 2
-	truce_months = 60
-	
-	good_relation_prestige_factor = 1
-	good_relation_infamy_factor = 1
-	good_relation_militancy_factor = 1
-
-	can_use = {
-		OR = {
-			NOT = { has_country_flag = chinese }
-			has_global_flag = taiping_civil_war
-		}
-		NOT = { relation = { who = THIS value = 100 } }
-
-		any_owned_province = { is_core = THIS }
-		any_owned_province = { NOT = { is_core = THIS } }
-
-
-		NOT = { is_our_vassal = THIS }
-		NOT = { vassal_of = THIS }
-	}
-	
-	allowed_countries = {
-		FROM = { tag = THIS }
-	}
-
-	allowed_states = {
-		any_owned_province = { is_core = THIS }
-	}
-
-	all_allowed_states = yes
-	po_transfer_provinces = yes
-	
-	war_name = WAR_LIBERATE_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-
-}
 
 
 establish_small_protectorate_casus_belli = {
