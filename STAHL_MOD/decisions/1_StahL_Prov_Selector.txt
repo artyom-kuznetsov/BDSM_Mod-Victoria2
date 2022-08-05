@@ -30,7 +30,7 @@ political_decisions = {
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
-					has_province_modifier = agriculture_expansion
+					has_province_modifier = mining_expansion
 				}
 				OR = {
 					trade_goods= coal
@@ -183,7 +183,6 @@ political_decisions = {
 			any_owned_province = {
 				has_building = province_selector
 				OR = {
-					trade_goods = timber
 					trade_goods = cattle
 					trade_goods = fish
 					trade_goods = fruit
@@ -193,11 +192,10 @@ political_decisions = {
 			}
 		}	
 		allow = {
-			money = 100000
+			money = 50000
 			any_owned_province = {
 				has_building = province_selector
 				OR = {
-					trade_goods = timber
 					trade_goods = cattle
 					trade_goods = fish
 					trade_goods = fruit
@@ -207,20 +205,17 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -100000
+			money = -50000
 			set_country_flag = deciding
 			random_owned = {
 				limit = {
 					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-						#	trade_goods = market_goods
-							trade_goods = precious_metal
-						}
+					OR = {
+						trade_goods = cattle
+						trade_goods = fish
+						trade_goods = fruit
+						trade_goods = grain
+						trade_goods = wool
 					}
 				}
 				province_event = { id = 91737  days = 0 }

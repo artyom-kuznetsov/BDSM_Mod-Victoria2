@@ -91,46 +91,14 @@ political_decisions = {
 	diplomaty_mp = {
 		alert = no
 		potential = {
-			OR = {
-				tag = ENG
-				tag = FRA
-				tag = RUS
-				tag = SPA
-				tag = TUR
-				tag = PRU
-				tag = NGF
-				tag = GER
-				tag = USA
-				tag = AUS
-				tag = KUK
-				tag = ITA
-				tag = SCA
-				tag = SWE
-				tag = BRZ
-				tag = JAP
-				tag = CHU
-				tag = HND
-				tag = NET
-				tag = EIC
-				tag = BLX
-			}
-			#prestige = 10
-			#freedom_of_trade = 1
-			#civilized = yes
-			NOT = {
-				has_country_flag = diplomaty_mp
-			}
-			
+			ai = no
 		}
 		
 		allow = {
-			#prestige = 50
-			#market_structure = 1
-			money = 110000			
+			money = 100000			
 		}
 		
-		effect = {
-			#set_country_flag = diplomaty_mp			
+		effect = {		
 			THIS = {
 				country_event = { id=3470333 days=0 }
 			}
@@ -142,47 +110,13 @@ political_decisions = {
 	}
 	diplomaty_mp_m = {
 		alert = no
-		potential = {
-			OR = {
-				tag = ENG
-				tag = FRA
-				tag = RUS
-				tag = SPA
-				tag = TUR
-				tag = PRU
-				tag = NGF
-				tag = GER
-				tag = USA
-				tag = AUS
-				tag = KUK
-				tag = ITA
-				tag = SCA
-				tag = SWE
-				tag = BRZ
-				tag = JAP
-				tag = CHU
-				tag = HND
-				tag = NET
-				tag = EIC		
-				tag = BLX					
-			}
-			#prestige = 10
-			#business_regulations = 1
-			#civilized = yes
-			NOT = {
-				has_country_flag = diplomaty_mp
-			}
-			
-		}
+		potential = { ai = no }
 		
 		allow = {
-			#prestige = 150
-			#market_structure = 1
-			money = 1100000	
+			money = 1000000	
 		}
 		
-		effect = {
-			#set_country_flag = diplomaty_mp			
+		effect = {	
 			THIS = {
 				country_event = { id=3471333 days=0 }
 			}
@@ -194,43 +128,12 @@ political_decisions = {
 	}
 	diplomaty_mp_sm = {
 		alert = no
-		potential = {
-			OR = {
-				tag = ENG
-				tag = FRA
-				tag = RUS
-				tag = SPA
-				tag = TUR
-				tag = PRU
-				tag = NGF
-				tag = GER
-				tag = USA
-				tag = AUS
-				tag = KUK
-				tag = ITA
-				tag = SCA
-				tag = SWE
-				tag = BRZ
-				tag = JAP
-				tag = CHU
-				tag = HND
-				tag = NET
-				tag = EIC	
-				tag = BLX				
-			}
-			#prestige = 100
-			#market_structure = 1
-			civilized = yes
-			NOT = {
-				has_country_flag = diplomaty_mp
-			}
-			
-		}
+		ai = no
 		
 		allow = {
 			#prestige = 1
 			#market_structure = 1
-			money = 2100000		
+			money = 2000000		
 		}
 		
 		effect = {
@@ -258,40 +161,6 @@ political_decisions = {
 		factor = -1
 		}
 	}
-	
-	#dip_med = {
-	#
-	#	potential = {
-	#		civilized = yes
-	#		prestige = 10
-	#		#medicine = 1
-	#
-	#		NOT = {
-	#			has_country_flag = dip_med
-	#		}
-	#		
-	#	}
-	#	
-	#	allow = {
-	#		medicine = 1
-	#		prestige = 20
-	#		literacy = 0.25			
-	#	}
-	#	
-	#	effect = {
-	#		set_country_flag = dip_med
-	#		add_country_modifier = {
-	#			name = med_ref_mp
-	#			duration = 1825
-	#		}
-	#		prestige = 5
-	#		money = -10000
-	#	}
-	#	ai_will_do = {
-	#		factor = 1
-	#	}
-	#}
-
 
 	enact_liquor_prohibition = {
 		potential = {

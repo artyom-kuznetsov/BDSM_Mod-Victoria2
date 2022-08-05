@@ -176,6 +176,7 @@ political_decisions = {
 		
 		effect = {
 			prestige = 10
+			BAV = { change_tag = SGF }
 			any_country = {
 				limit = {
 					primary_culture = south_german
@@ -184,7 +185,7 @@ political_decisions = {
 						tag = THIS
 					}
 				}
-				annex_to = THIS
+				annex_to = SGF
 			}
 			any_owned = {
 				limit = {
@@ -199,11 +200,11 @@ political_decisions = {
 				}
 				add_core = SGF
 			}
-			release_vassal = SGF
 			diplomatic_influence = {
 				who = SGF
 				value = 300
 			}
+			594 = { secede_province = SGF }
 		}
 		ai_will_do = {
 			factor = 1
@@ -409,83 +410,7 @@ political_decisions = {
 			factor = 1
 		}
 	}
-	form_italy = {
-		news = yes
-		news_desc_long = "form_italy_NEWS_LONG"
-		news_desc_medium = "form_italy_NEWS_MEDIUM"
-		news_desc_short = "form_italy_NEWS_SHORT"
-		potential = {
-			is_culture_group = italian
-			
-			NOT = {
-				exists = ITA
-			}
-		}
-		
-		allow = {
-			prestige = 20
-			720 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						OR = {
-							in_sphere = THIS
-							vassal_of = THIS
-						}
-					}
-				}
-			}			
-			744 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						OR = {
-							in_sphere = THIS
-							vassal_of = THIS
-						}
-					}
-				}
-			}
-			726 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						OR = {
-							in_sphere = THIS
-							vassal_of = THIS
-						}
-					}
-				}
-			}
-		}
-
-		
-		effect = {
-			prestige = 15
-			change_tag = ITA
-			capital = 749
-			add_accepted_culture = north_italian
-			add_accepted_culture = south_italian
-			any_country = {
-				limit = {
-					is_culture_group = italian
-					OR = {
-						in_sphere = THIS
-						alliance_with = THIS
-					}
-				}
-				country_event = { id=11101 days=0 }
-
-			}
-			tech_school = italian_school
-			726 = {	add_core = ITA	}
-			727 = {	add_core = ITA	}
-			728 = {	add_core = ITA	}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
+	
 	form_scandinavia = {
 		news = yes
 		news_desc_long = "form_scandinavia_NEWS_LONG"

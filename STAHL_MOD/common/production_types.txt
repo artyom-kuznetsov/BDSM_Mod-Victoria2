@@ -248,7 +248,7 @@ electric_gear_factory = {
 		value = 0.15
 	}
 	bonus = {
-		trigger = { OR = { trade_goods_in_state = coal has_building = charcoal } }
+		trigger = { OR = { trade_goods_in_state = coal has_building = charcoal_facility } }
 		value = 0.05
 	}
 	bonus = {
@@ -338,7 +338,6 @@ steamer_shipyard = {
 	bonus = {
 		trigger = { 
 			has_building = steel_factory 
-			has_building = iron_factory
 		}
 		value = 0.125
 	}
@@ -563,15 +562,15 @@ ammunition_factory = {
 canned_food_factory = {       
 	template = cheap_factory_template
 	input_goods = { 
-		iron = 0.5 		#1.75
+		steel = 0.5 		#1.75
 		cattle = 4 		#8
-		grain = 4 		#8.8
+		glass = 1 		#8.8
 		fish = 4 		#6	total input+maint = 28.some
 	}
 	output_goods = canned_food 
 	value = 3			#32
 	bonus = {
-		trigger = { trade_goods_in_state = grain }
+		trigger = { has_building = glass_factory }
 		value = 0.1
 	}
 	bonus = {
@@ -584,11 +583,11 @@ canned_food_factory = {
 		value = 0.1
 	}
 	bonus = {
-		trigger = { OR = { trade_goods_in_state = iron has_building = iron_factory } }
+		trigger = { has_building = steel_factory } 
 		value = 0.05
 	}
 }
-       
+
 dye_factory = {       
 	template = cheap_factory_template
 	input_goods = {     
@@ -602,8 +601,6 @@ dye_factory = {
 		value = 0.25
 	}
 }
-     
-
 liquor_distillery = {       
 	template = cheap_factory_template
 	input_goods = {        

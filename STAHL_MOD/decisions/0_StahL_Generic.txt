@@ -13,7 +13,6 @@ political_decisions = {
 			enable_canal = 6
 			enable_canal = 7
 			enable_canal = 8
-			517 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
 			enable_canal = 5
 			enable_canal = 4
 			enable_canal = 9
@@ -33,23 +32,6 @@ political_decisions = {
 			enable_canal = 23
 			enable_canal = 24
 			enable_canal = 25
-			860 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			865 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			367 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			372 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			254 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			966 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			353 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			348 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1412 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1875 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			274 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1168 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1087 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1086 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1642 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1089 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
-			1088 = { add_province_modifier = { name = strait_control_tile duration = -1 } }
 			TKG = {
 				relation = {
 					who = AIN
@@ -106,6 +88,7 @@ political_decisions = {
         allow = {
             NOT = { has_country_modifier = fort_constructions }
             war = no
+			money = 500000
         }
         effect = {
             set_country_flag = naval_1
@@ -159,6 +142,7 @@ political_decisions = {
         allow = {
             NOT = { has_country_modifier = fort_constructions }
             war = no
+			money = 1000000
         }
         effect = {
             set_country_flag = naval_2
@@ -220,6 +204,7 @@ political_decisions = {
         allow = {
             NOT = { has_country_modifier = fort_constructions }
             war = no
+			money = 1500000
         }
         effect = {
             set_country_flag = naval_3
@@ -281,6 +266,7 @@ political_decisions = {
         allow = {
             NOT = { has_country_modifier = fort_constructions }
             war = no
+			money = 2000000
         }
         effect = {
             set_country_flag = naval_4
@@ -343,6 +329,7 @@ political_decisions = {
         allow = {
             NOT = { has_country_modifier = fort_constructions }
             war = no
+			money = 2500000
         }
         effect = {
             set_country_flag = naval_5
@@ -426,10 +413,12 @@ political_decisions = {
         allow = {
             NOT = { has_country_modifier = fort_constructions }
             war = no
+			money = 2500000
         }
         effect = {
             set_country_flag = naval_6
 			add_tax_relative_income = -100
+			money = -2500000
             add_country_modifier = {
                 name = fort_constructions
                 duration = 1825
@@ -517,4 +506,44 @@ political_decisions = {
             factor = 0
         }
     }
+	
+	## AGRA CONSC
+	propaganda_campaign_open = {
+		potential = {
+			NOT = { has_country_flag = propaganda_is_open }
+			ai = no
+		}
+		allow = {
+			state_n_government = 1
+			associationism = 1
+		}
+		alert = no
+		effect = {
+			set_country_flag = propaganda_is_open
+		}
+	}
+	propaganda_campaign_close = {
+		potential = {
+
+			has_country_flag = propaganda_is_open
+		}
+		allow = {
+		}
+		
+		effect = {
+			clr_country_flag = propaganda_is_open
+		}
+	}
+	propaganda_campaign_appeasement = {
+		potential = {
+			has_country_flag = propaganda_is_open
+		}
+		allow = {
+		}
+		
+		effect = {
+			country_event = 11606
+		}
+	}
+	
 }

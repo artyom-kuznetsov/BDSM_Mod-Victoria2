@@ -27,20 +27,13 @@ political_decisions = {
 					}
 				}
 				annex_to = THIS
-			}
-			any_province = {
-				limit = {
-					OR = { 
-						is_core = GXI
-						is_core = HNN
-						is_core = CHI
-						is_core = XBI
-						is_core = MCK
-						is_core = FJN
-					}
-				}
-				add_core = THIS
 			}			
+			GXI = { all_core = { add_core = THIS } }
+			HNN = { all_core = { add_core = THIS } }
+			CHI = { all_core = { add_core = THIS } }
+			XBI = { all_core = { add_core = THIS } }
+			MCK = { all_core = { add_core = THIS } }
+			FJN = { all_core = { add_core = THIS } }
 			change_tag = CHU
 			set_global_flag = china_westernized
 			years_of_research = 5
