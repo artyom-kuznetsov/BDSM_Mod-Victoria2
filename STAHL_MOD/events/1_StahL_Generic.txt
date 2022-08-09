@@ -100,34 +100,12 @@ country_event = {
 			}
 		}
 		year = 1850
+		tag = CHL
 	}
 	option = {
 		name = "chile_get_coast_evtopta"
 		2305 = { secede_province = THIS }
 		2307 = { secede_province = THIS }
-	}
-}
-# PROPAGANDA
-country_event = {
-	title = "appeasement_evt_title"
-	desc = "appeasement_evt_desc"
-	is_triggered_only = yes
-	id = 11606
-	option = {
-		name = "appeasement_evt_opta"
-		add_tax_relative_income = -20
-		any_owned = {
-			limit = {
-				is_colonial = no
-			}
-			any_pop = {
-				militancy = -1
-				consciousness = -2
-			}
-		}
-	}
-	option = {
-		name = "appeasement_evt_optb"
 	}
 }
 # BADBOY

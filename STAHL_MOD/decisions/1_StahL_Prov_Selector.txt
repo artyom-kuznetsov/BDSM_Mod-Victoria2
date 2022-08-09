@@ -30,7 +30,7 @@ political_decisions = {
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
-					has_province_modifier = mining_expansion
+					has_province_modifier = mine_expansion
 				}
 				OR = {
 					trade_goods= coal
@@ -52,7 +52,6 @@ political_decisions = {
 						trade_goods= sulphur
 						trade_goods= oil
 						trade_goods= precious_metal
-					#	trade_goods= market_goods
 					}
 					NOT = {
 						has_province_modifier = mine_expansion
@@ -272,6 +271,38 @@ political_decisions = {
 			any_owned = {
 				limit = {
 					NOT = { has_building = province_selector }
+				}
+				province_selector = 1
+			}
+		}
+	}
+	zstate_build_selectors_where_rgo_unemployment = {
+		picture = family
+		alert = no
+		potential = {
+			NOT = { 
+				any_owned_province = { 
+					has_building = province_selector 
+				}
+			}
+			ai = no
+		}	
+		allow = {
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					NOT = { has_building = province_selector }
+					OR = {
+						unemployment_by_type = {
+							type = farmers
+							value = 0.02 
+						}
+						unemployment_by_type = {
+							type = labourers
+							value = 0.02
+						}
+					}
 				}
 				province_selector = 1
 			}

@@ -113,12 +113,38 @@ country_event = {
 		tag = PRU
 		NOT = { has_country_flag = ger_railroad_1_flag }
 		NOT = { HAN = { in_sphere = ENG } }
+		ai = yes
 	}
 	option = {
 		name = "gerrailroad1_evtopta"
 		inherit = HAN
 		inherit = SAX
 		inherit = HOL
+	}
+}
+# AUTOGER
+country_event = {
+	title = "gerrailroad2_evtname"
+	desc = "gerrailroad2_evtdesc"
+	id = 21105
+	trigger = {
+		year = 1855
+		tag = NGF
+		ai = yes
+		NOT = { has_global_flag = ger_railroad_2_flag }
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = "gerrailroad2_evtopta"
+		change_tag = GER
+		inherit  = BAD
+		inherit  = SGF
+		inherit  = WUR
+		inherit  = BAV
+		prestige = 20
+		set_global_flag = ger_railroad_2_flag
 	}
 }
 ### CHINA UNIFICATION RAILROAD
