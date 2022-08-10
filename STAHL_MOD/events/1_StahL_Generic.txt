@@ -1,3 +1,22 @@
+# CANCEL SUPPORT SCIENCE IF ABOVE BB LIMIT
+country_event = {
+	title = "abbl_css_name"
+	desc = "abbl_css_desc"
+	id = 11613
+	trigger = {
+		has_country_modifier = { supporting_science_modifier }
+		OR = {
+			has_country_modifier = above_bb_limit
+			has_country_modifier = above_bb_limit_1
+			has_country_modifier = above_bb_limit_2
+		}
+	}
+	option = {
+		name = "abbl_css_opta"
+		remove_country_modifier = supporting_science_modifier
+	}
+}
+
 #AI MEDS
 country_event = {
 	title = "aimedref1name"
@@ -415,7 +434,7 @@ province_event = {
 		trade_goods = grain
 	}
 	option = {
-		name = "	" #FISH
+		name = "EVT91737OPTF" #FISH
 		owner = { clr_country_flag = deciding }
 		province_selector = -1
 		trade_goods = fish

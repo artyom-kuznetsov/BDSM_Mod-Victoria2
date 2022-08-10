@@ -40,6 +40,41 @@ political_decisions = {
 			}
 		}
 	}
+	support_science_dec = {
+		potential = {
+			ai = no
+			NOT = { has_country_modifier = supporting_science_modifier }
+			NOT = {
+				OR = { 
+					has_country_modifier = above_bb_limit
+					has_country_modifier = above_bb_limit_1
+					has_country_modifier = above_bb_limit_2
+				}
+			}
+			civilized = yes
+		}
+		allow = {
+			functionalism = 1
+			market_structure = 1
+			scientific_management = 1
+			school_reforms = good_schools
+			money = 250000
+		}
+		effect = {
+			add_country_modifier = { name = supporting_science_modifier duration = -1 }
+			money = -250000
+		}
+	}
+	cancel_support_science_dec = {
+		potential = {
+			has_country_modifier = supporting_science_modifier
+		}
+		allow = {
+		}
+		effect = {
+			remove_country_modifier = supporting_science_modifier
+		}
+	}
 	switch_to_communist = {
 		potential = {
 			OR = {
@@ -100,10 +135,10 @@ political_decisions = {
 		alert = no
 		potential = {
 			ai = no
+			civilized = yes
 		}
 			
 		allow = {
-			civilized = yes
 			NOT = {
 				OR = {
 					has_country_modifier = reform_passed
@@ -233,6 +268,23 @@ political_decisions = {
         }
     }
 	
+	destroy_naval_base_dec = {
+        potential = {
+			ai = no
+            has_country_flag = show_the_build_decisions
+        }
+        allow = {
+        }
+        effect = {
+			any_owned_province = {
+				limit = {
+					has_building = province_selector
+				}
+				naval_base = -6
+				province_selector = -1
+			}
+        }
+    }
 	build_port_upto_level_1 = {
         #picture = beiyang_fleet
         potential = {
@@ -678,6 +730,7 @@ political_decisions = {
 	propaganda_build_mop = {
 		potential = {
 			NOT = { has_country_flag = mop_built_flag }
+			civilized = yes
 		}
 		allow = {
 			state_n_government = 1
