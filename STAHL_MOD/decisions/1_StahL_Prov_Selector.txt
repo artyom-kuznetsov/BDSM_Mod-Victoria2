@@ -92,6 +92,27 @@ political_decisions = {
 			}
 		}
 	}
+	zprovince_revokecores = {
+		potential = {
+			ai = no
+			any_owned_province = { 
+				is_core = THIS
+				has_building = province_selector
+			}
+		}
+		allow = {
+		}
+		effect = {
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					is_core = THIS
+				}
+				remove_core = THIS
+				province_selector = -1
+			}
+		}
+	}
 	zprovince_removebureaucrats = {
 		potential = {
 			ai = no

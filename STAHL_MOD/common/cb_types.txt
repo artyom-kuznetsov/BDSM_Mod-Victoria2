@@ -52,7 +52,6 @@ civil_war
 acquire_core_state 
 annex_core_country
 acquire_state 
-acquire_state_late
 acquire_substate_region
 place_in_the_sun
 colonial_competition
@@ -1613,111 +1612,6 @@ acquire_state = {
 			}
 		}
 		is_independant = yes
-		NOT = { year = 1885 }
-	}
-	
-	allowed_states = {
-		is_colonial = no
-		any_owned_province = {
-			not = {	is_core = THIS }
-			is_colonial = no
-		}
-		not = { any_owned_province = { is_capital = yes } }
-	}
-	
-	allowed_states_in_crisis = {
-		any_owned_province = {
-			any_neighbor_province = {
-				owner = { tag = THIS }
-			}
-		}
-	}		
-
-	po_demand_state = yes
-	
-	war_name = WAR_TAKE_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-}
-
-
-acquire_state_late = {
-	sprite_index = 6
-	is_triggered_only = yes
-	months = 12
-	construction_speed = 0.5
-	
-	badboy_factor = 1.3
-	prestige_factor = 2
-	peace_cost_factor = 1
-	penalty_factor = 1
-
-	break_truce_prestige_factor = 1
-	break_truce_infamy_factor = 2
-	break_truce_militancy_factor = 2
-	truce_months = 60
-	
-	good_relation_prestige_factor = 1
-	good_relation_infamy_factor = 1
-	good_relation_militancy_factor = 1
-
-	can_use = {
-		NOT = { is_our_vassal = THIS }
-		number_of_states = 2 # annex if you want their last state
-		any_owned_province = {
-			not = { is_core = THIS }
-			is_colonial = no
-		}
-		NOT = {
-			OR = {
-				tag = SWI tag = WBK 
-				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
-					NOT = { year = 1865 } 
-				}
-			}
-		}
-		THIS = {
-			NOT = {
-				OR = {
-					tag = SWI tag = WBK
-				}
-			}
-		}
-		OR = {
-			AND = {
-				civilized = yes
-				THIS = {
-					civilized = yes
-				}
-			}
-			AND = {
-				civilized = no
-				THIS = {
-					civilized = no
-				}
-			}
-		}
-		is_independant = yes
-		year = 1880
 	}
 	
 	allowed_states = {

@@ -38,6 +38,23 @@ political_decisions = {
 					value = 400
 				}
 			}
+			SWI = {
+				set_country_flag = neutrality_flag
+			}
+		}
+	}
+	capitultate_dec = {
+		alert = no
+		potential = {
+			ai = no
+		#	war_countries = { ai = no }
+			NOT = { has_country_modifier = recently_capitulated_modifier }
+		}
+		allow = {
+		}
+		effect = {
+			country_event = 39950
+			add_country_modifier = { name = recently_capitulated_modifier duration = 90 }
 		}
 	}
 	support_science_dec = {

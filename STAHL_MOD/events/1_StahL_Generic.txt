@@ -1,3 +1,18 @@
+# LATE GAME MODIFIER
+country_event = {
+	title = "lategamemod_evtname"
+	desc = "lategamemod_evtdesc"
+	id = 11615
+	trigger = {
+		year = 1890
+		NOT = { has_country_modifier = lategame_modifier }
+	}
+	option = {
+		name = "lategamemod_evtopta"
+		add_country_modifier = { name = lategame_modifier duration = -1 }
+	}
+}
+
 # ALFBORG GIVE BACK
 country_event = {
 	title = "alfborg_giveback_evtname"
@@ -113,12 +128,12 @@ country_event = {
 	desc = "swi_breakall_evtdesc"
 	id = 11608
 	trigger = {
-		alliance_with = SWI
+		has_country_flag = neutrality_flag
+		num_of_allies = 1
 	}
 	option = {
 		name = "swi_breakall_evtopta"
-		relation = { who = SWI value = -400 }
-		leave_alliance = SWI
+		neutrality = yes
 	}
 }
 # CHILE REGIONS
