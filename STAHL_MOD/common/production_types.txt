@@ -239,7 +239,7 @@ electric_gear_factory = {
 	input_goods = { 
 		rubber = 4		#28
 		coal = 5		#11.5
-		iron = 5		#17.5	total input+maint = 67
+		steel = 4		#17.5	total input+maint = 67
 	}
 	output_goods = electric_gear 
 	value = 5			#80
@@ -252,7 +252,7 @@ electric_gear_factory = {
 		value = 0.05
 	}
 	bonus = {
-		trigger = { OR = { trade_goods_in_state = iron has_building = iron_factory } }
+		trigger = { has_building = steel_factory } 
 		value = 0.05
 	}
 }
@@ -554,7 +554,7 @@ ammunition_factory = {
 		value = 0.15
 	}
 	bonus = {
-		trigger = { OR = { trade_goods_in_state = iron has_building = iron_factory } }
+		trigger = { has_building = steel_factory }
 		value = 0.1
 	}
 }
@@ -1040,7 +1040,7 @@ artisan_electric_gear = {
 	input_goods = { 
 		rubber = 4		#28
 		coal = 5		#11.5
-		iron = 5		#17.5	total input+maint = 67
+		steel = 5		#17.5	total input+maint = 67
 	}
 	output_goods = electric_gear 
 	value = 5			#80
@@ -1293,7 +1293,7 @@ artisan_ammunition = {
 	input_goods = {      
 		sulphur = 2		#12
 		coal = 2		#4.6
-		iron = 5		#17.5	total input+maint = 44
+		steel = 5		#17.5	total input+maint = 44
 	}
 	output_goods = ammunition 
 	value = 3			#52.5
@@ -1310,13 +1310,13 @@ artisan_ammunition = {
 
 artisan_canned_food = {       
 	input_goods = { 
-		iron = 2 		#7
-		cattle = 12 		#24
-		grain = 12 		#26.4
-		fish = 12 		#18	total input+maint = 85
+		steel = 0.5 		#1.75
+		cattle = 4 		#8
+		glass = 1 		#8.8
+		fish = 4 		#6	total input+maint = 28.some
 	}
 	output_goods = canned_food 
-	value = 6			#96
+	value = 3			#96
 	
 	owner = {
 		poptype = artisan 
@@ -1369,11 +1369,11 @@ artisan_winery = {
 
 artisan_lumber = {       
 	input_goods = {       
-		timber = 100		#90	total input+maint = 100
+		timber = 95		#90	total input+maint = 100
 	}
 	output_goods = lumber 
 	
-	value = 110			#110
+	value = 115			#110
 	
 	owner = {
 		poptype = artisan 

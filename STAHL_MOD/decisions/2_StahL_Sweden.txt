@@ -1,0 +1,34 @@
+political_decisions = {
+	swe_economic_boom_dec = {
+		potential = {
+			OR = { tag = SWE tag = SCA }
+			NOT = { has_country_flag = swe_economic_boom_flag }
+		}
+		allow = {
+			money = 1000000
+			scientific_management = 1
+			late_classical_theory = 1
+			cheap_iron = 1
+			rgo_upgrade_2 = 1
+		}
+		effect = {
+			set_country_flag = swe_economic_boom_flag
+			add_country_modifier = { name = swe_economic_boom_modifier duration = 1825 }
+			money = -1000000
+		}
+	}
+	give_alfborg_to_germany_dec = {
+		potential = {
+			ai = no
+			owns = 367
+			GER = { exists = yes }
+		}
+		allow = {
+		}
+		effect = {
+			367 = { secede_province = GER }
+			add_country_modifier = { name = alfborg_given_modifier duration = 730 }
+			set_country_flag = alfborg_given_flag
+		}
+	}
+}
