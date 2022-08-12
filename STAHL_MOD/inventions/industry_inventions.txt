@@ -84,7 +84,7 @@ tractors = {
 		}
 	}
 	effect = {
-		farm_rgo_eff = 0.5
+		farm_rgo_eff = 0.2
 	}
 }
 #electrical_power_generation
@@ -103,8 +103,8 @@ direct_current = {
 	}
 	effect = {
 		rgo_output = 0.05
-		factory_throughput = 0.05
-		mine_rgo_eff = 0.25
+		factory_throughput = 0.02
+		mine_rgo_eff = 0.05
 	}
 }
 alternating_current = {
@@ -191,34 +191,6 @@ jacquard_power_loom = {
 		}
 	}
 }
-northrop_power_loom = {
-	limit = { mechanical_production = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = jacquard_power_loom
-		}
-		modifier = {
-			factor = 2
-			invention = insurance_companies
-		}
-	}
-	effect = {
-		rgo_goods_output = {
-			cotton = 0.2
-		}
-		rgo_goods_output = {
-			wool = 0.2
-		}
-		rgo_goods_output = {
-			silk = 0.2
-		}
-		factory_goods_throughput = {
-			fabric = 0.05 
-		}
-	}
-}
 mechanical_saw = {
 	limit = { mechanical_production = 1 }
 	chance = {
@@ -271,31 +243,6 @@ hussey_n_mccormicks_reaping_machine = {
 		modifier = {
 			factor = 2
 			invention = work_specialization
-		}
-	}
-	effect = {
-		rgo_goods_output = {
-			grain = 0.2
-		}
-		rgo_goods_output = {
-			fruit = 0.2
-		}
-		rgo_goods_output = {
-			tea = 0.2
-		}
-	}
-}
-pitts_threshing_machine = {
-	limit = { mechanical_production = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = hussey_n_mccormicks_reaping_machine
-		}
-		modifier = {
-			factor = 2
-			practical_steam_engine = 1
 		}
 	}
 	effect = {
@@ -373,7 +320,7 @@ machine_tools = {
 		factory_goods_output = {
 			machine_parts = 0.02 
 		}
-		factory_throughput = 0.05		
+		factory_throughput = 0.02		
 		mine_RGO_eff = 0.1
 	}
 }
@@ -1176,7 +1123,7 @@ gaslights = {
 		}
 	}
 	effect = {
-		factory_throughput = 0.05
+		factory_throughput = 0.02
 	}
 }
 carbon_soil_enrichment = {
@@ -1228,7 +1175,7 @@ x_rays = {
 		}
 	}
 	effect = {
-		pop_growth = 0.0002
+		pop_growth = 0.0001
 		land_attrition = -0.02 
 	}
 }

@@ -41,6 +41,9 @@ political_decisions = {
 			SWI = {
 				set_country_flag = neutrality_flag
 			}
+			220 = { state_scope = { is_slave = no } }
+			185 = { state_scope = { is_slave = no } }
+			149 = { state_scope = { is_slave = no } }
 		}
 	}
 	capitultate_dec = {
@@ -48,6 +51,7 @@ political_decisions = {
 		potential = {
 			ai = no
 		#	war_countries = { ai = no }
+			war = yes
 			NOT = { has_country_modifier = recently_capitulated_modifier }
 		}
 		allow = {
@@ -753,7 +757,7 @@ political_decisions = {
 			state_n_government = 1
 			associationism = 1
 			positivism = 1
-			treasury = 500000
+			money = 500000
 		}
 		effect = {
 			treasury = -500000

@@ -106,8 +106,8 @@ distribution_channels = {
 	}
 	effect = {
 		factory_cost = -0.01
-		farm_RGO_eff = 0.4
-		mine_RGO_eff = 0.1
+		farm_RGO_eff = 0.2
+		mine_RGO_eff = 0.05
 	}
 }
 #investment_banks
@@ -516,6 +516,31 @@ john_stuart_mill = {
 	}
 	effect = {
 		permanent_prestige = 1 
+	}
+}
+pitts_threshing_machine = {
+	limit = { late_classical_theory = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			invention = hussey_n_mccormicks_reaping_machine
+		}
+		modifier = {
+			factor = 2
+			practical_steam_engine = 1
+		}
+	}
+	effect = {
+		rgo_goods_output = {
+			grain = 0.2
+		}
+		rgo_goods_output = {
+			fruit = 0.2
+		}
+		rgo_goods_output = {
+			tea = 0.2
+		}
 	}
 }
 #collectivist_theory
@@ -1490,6 +1515,34 @@ work_control_and_hierarchy = {
 	}
 	effect = {
 		factory_output = 0.01
+	}
+}
+northrop_power_loom = {
+	limit = { organized_factories = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			invention = jacquard_power_loom
+		}
+		modifier = {
+			factor = 2
+			invention = insurance_companies
+		}
+	}
+	effect = {
+		rgo_goods_output = {
+			cotton = 0.2
+		}
+		rgo_goods_output = {
+			wool = 0.2
+		}
+		rgo_goods_output = {
+			silk = 0.2
+		}
+		factory_goods_throughput = {
+			fabric = 0.05 
+		}
 	}
 }
 #scientific_management
