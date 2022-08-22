@@ -61,6 +61,37 @@ political_decisions = {
 			tech_school = naval_tech_school
 		}
 	}
+	switch_to_japanese_tech = {
+		alert = no
+		potential = {
+			civilized = yes
+			tag = JAP
+			tech_school = traditional_academic
+			#OR = {
+			#	ruling_party_ideology = conservative
+			#	ruling_party_ideology = liberal
+			#	ruling_party_ideology = anarcho_liberal
+			#}
+			#pro_military = 5
+		#	laissez_faire = 5
+			NOT = {
+				has_country_modifier = academic_confusion
+			}
+		}
+		allow = {
+			prestige = 45
+			military_score = 100
+			total_amount_of_ships = 40
+		}
+		effect = {
+			#prestige = -15
+			add_country_modifier = {
+				name = academic_confusion
+				duration = 1825
+			}
+			tech_school = japanese_tech_school
+		}
+	}
 	switch_to_culture_tech = {
 		alert = no
 		potential = {

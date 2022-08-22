@@ -59,11 +59,6 @@ promotion_focus =
 		clergymen = 0.20 #20% more likeley to become this type
 		icon = 9
 		outliner_show_as_percent = yes
-		#limit = {
-		#	NOT = {
-       #         state_scope = { clergymen = 0.041 }
-           # }
-		#}
 	}
 
 	support_industry =
@@ -91,17 +86,25 @@ promotion_focus =
 		soldiers = 0.20 #20% more likeley to become this type
 		icon = 15
 		outliner_show_as_percent = yes
-	#	limit = {
-	#		is_colonial = no
-	#		NOT = {
-    #            state_scope = { soldiers = 0.05 }
-    #        }
-	#	}
 	}
 	promote_officers =
 	{
 		officers = 0.20 #20% more likeley to become this type
 		icon = 14
+		outliner_show_as_percent = yes
+	}
+	
+	promote_farmers =
+	{
+		farmers = 0.20 #20% more likeley to become this type
+		icon = 12
+		outliner_show_as_percent = yes
+	}
+	
+	promote_labourers =
+	{
+		labourers = 0.20 #20% more likeley to become this type
+		icon = 13
 		outliner_show_as_percent = yes
 	}
 	promote_capitalists =
