@@ -9,12 +9,12 @@ post_napoleonic_army_doctrine = {
 		}
 	}
 	effect = {
-		infantry = {
-			defence = 1
-		}
-		dragoon = {
-			defence = 1
-		}
+		#infantry = {
+		#	defence = 1
+		#}
+		#dragoon = {
+		#	defence = 1
+		#}
 	}
 }
 #strategic_mobility
@@ -79,10 +79,10 @@ flexible_firepower = {
 	}
 	effect = {
 		infantry = {
-			defence = 3
+			defence = 1
 		}
 		dragoon = {
-			defence = 2.5
+			defence = 1
 		}
 	}
 }
@@ -127,9 +127,7 @@ trench_systems = {
 		guard = {
 			defence = 2
 		}
-		engineer = {
-			defence = 1.5
-		}
+		
 		dragoon = {
 			defence = 1.5
 		}
@@ -199,21 +197,21 @@ flexible_counterattacks = {
 		}
 	}
 	effect = {
-		infantry = {
-			attack = 1.5
-		}
-		guard = {
-			attack = 2
-		}
-		engineer = {
-			attack = 1.5
-		}
-		dragoon = {
-			attack = 2.5
-		}
-		army_base = {
-			supply_consumption = 0.05
-		} 
+	#	infantry = {
+	#		attack = 1.5
+	#	}
+		#guard = {
+	#		attack = 2
+	#	}
+	#	engineer = {
+	#		attack = 1.5
+	#	}
+	#	dragoon = {
+	#		attack = 2.5
+	#	}
+	#	army_base = {
+	#		supply_consumption = 0.05
+	#	} 
 	}
 }
 #infiltration
@@ -240,16 +238,13 @@ low_echelon_fire_support = {
 	}
 	effect = {
 		infantry = {
-			defence = 2
+			defence = 1
 		}
 		guard = {
 			defence = 3
 		}
-		engineer = {
-			defence = 3
-		}
 		dragoon = {
-			defence = 3
+			defence = 2
 		}
 		army_base = {
 			supply_consumption = 0.05
@@ -314,12 +309,12 @@ tank_exploits = {
 		}
 	}
 	effect = {
-		tank = {
-			attack = 2
-			defence = 4
-			supply_consumption = 1
-			siege = 1				
-		}	
+	#	tank = {
+	#		attack = 2
+	#		defence = 4
+	#		supply_consumption = 1
+	#		siege = 1				
+	#	}	
 	}
 }
 #modern_army_doctrine
@@ -346,16 +341,6 @@ firepower_vs_mobility = {
 		}
 		guard = {
 			defence = 3
-		}
-		engineer = {
-			defence = 2
-		}
-		tank = {
-			attack = 2
-			defence = 1
-		}
-		dragoon = {
-			defence = 1
 		}
 		army_base = {
 			maximum_speed = 0.5
@@ -423,11 +408,11 @@ flintlock_rifle_armament = {
 	}
 	effect = {
 		infantry = {
-			attack = 1
+		#	attack = 1
 			supply_consumption = 0.10
 		}
 		dragoon = {
-			attack = 1
+		#	attack = 1
 			supply_consumption = 0.10
 		}
 	}
@@ -450,7 +435,7 @@ muzzle_loaded_rifle_armament = {
 			supply_consumption = 0.10
 		}
 		dragoon = {
-			attack = 1.5
+			attack = 1
 			supply_consumption = 0.10
 		}
 	}
@@ -469,11 +454,11 @@ breech_loaded_rifle_armament = {
 	}
 	effect = {
 		infantry = {
-			attack = 1.5
+			attack = 1
 			supply_consumption = 0.20
 		}
 		dragoon = {
-			attack = 2
+			attack = 1
 			supply_consumption = 0.20
 		}
 	}
@@ -492,19 +477,15 @@ machine_gun_armament = {
 	}
 	effect = {
 		infantry = {
-			defence = 3
+			attack = 1
 			supply_consumption = 0.20
 		}
 		guard = {
-			defence = 3
-			supply_consumption = 0.20
-		}
-		engineer = {
-			defence = 3.5
+			attack = 2
 			supply_consumption = 0.20
 		}
 		dragoon = {
-			defence = 3
+			attack = 1
 			supply_consumption = 0.20
 		}
 	}
@@ -559,19 +540,15 @@ bolt_action_rifle_armament = {
 	}
 	effect = {
 		infantry = {
-			attack = 3
+			attack = 1
 			supply_consumption = 0.20
 		}
 		guard = {
-			attack = 6
-			supply_consumption = 0.20
-		}
-		engineer = {
-			attack = 4.5
+			attack = 3
 			supply_consumption = 0.20
 		}
 		dragoon = {
-			attack = 5
+			attack = 2
 			supply_consumption = 0.20
 		}
 	}
@@ -592,21 +569,17 @@ interwar_infantry = {
 	}
 	effect = {
 		infantry = {
-			attack = 3
+			attack = 1
 			supply_consumption = 0.20
 		}
 		guard = {
-			attack = 4
-			supply_consumption = 0.20
-		}
-		engineer = {
-			attack = 3.5
+			attack = 3
 			supply_consumption = 0.20
 		}
 	}
 }
 interwar_cavalry = {
-	limit = { modern_divisional_structure = 1 }
+	limit = { modern_army_doctrine = 1 }
 	chance = {
 		base = 2
 		modifier = {
@@ -620,9 +593,9 @@ interwar_cavalry = {
 	}
 	effect = {
 		dragoon = {
-			attack = 3
-			defence = 1
-			reconnaissance = 1
+			attack = 2
+			defence = 2
+			reconnaissance = 0.5
 			supply_consumption = 0.20
 		}
 	}
@@ -663,11 +636,11 @@ tankette = {
 		}
 	}
 	effect = {
-		tank = {
-			attack = 3
-			defence = 2
-			supply_consumption = 0.5
-		}
+	#	tank = {
+	#		attack = 3
+	#		defence = 2
+	#		supply_consumption = 0.5
+	#	}
 	}
 }
 light_tank = {
@@ -684,11 +657,11 @@ light_tank = {
 		}
 	}
 	effect = {
-		tank = {
-			attack = 2
-			defence = 1
-			supply_consumption = 0.5
-		}
+	#	tank = {
+	#		attack = 2
+	#		defence = 1
+	#		supply_consumption = 0.5
+	#	}
 	}
 }
 armoured_cars = {
@@ -1003,9 +976,7 @@ early_interwar_bombers = {
 	}
 	effect = {
 		plane = {
-			attack = 3
-			support = 2
-			defence = 2
+			support = 1
 		}
 	}
 }
@@ -1059,8 +1030,6 @@ t_air_superiority = {
 	}
 	effect = {
 		plane = {
-			defence = 1
-			attack = 3
 			support = 1
 		}
 	}
@@ -1326,9 +1295,6 @@ army_alternative_plans = {
 			maximum_speed = 1
 		}
 		dragoon = {
-			maximum_speed = 1
-		}
-		engineer = {
 			maximum_speed = 1
 		}
 	}
