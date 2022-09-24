@@ -156,6 +156,22 @@ country_event = {
 		year = 1860
 		tag = CHI
 		NOT = { has_country_flag = chi_railroad_1_flag }
+		NOT = { CHU = { exists = no } }
+		NOT = {
+			OR = {
+				HNN = { ai = yes }
+				FJN = { ai = yes }
+				MGL = { ai = yes }
+				WIA = { ai = yes }
+				MCK = { ai = yes }
+				GXI = { ai = yes }
+				YNN = { ai = yes }
+				SXI = { ai = yes }
+				XBI = { ai = yes }
+				TPG = { ai = yes }
+				XIN = { ai = yes }
+			}
+		}
 	}
 	option = {
 		name = "chi_railroad1_evtopta"
@@ -168,6 +184,7 @@ country_event = {
 		inherit = SXI
 		inherit = XBI
 		inherit = TPG
+		inherit = YNN
 		inherit = XIN
 		change_tag = CHU
 	}

@@ -10,13 +10,41 @@ eng_albion_modifier = {
 	icon = 17
 }
 
+local_autonomy_modifier = {
+	pop_consciousness_modifier = 0.1
+	pop_militancy_modifier = 0.1
+	local_RGO_output = -0.2
+	local_factory_throughput = -0.2
+	icon = 2
+}
+
+yucatan_preparing_modifier = {
+	icon = 17
+}
+
 lategame_modifier = {
 	icon = 1
 	badboy = -0.05
 }
 
+yuc_fra_support_modifier = {
+	mobilisation_size = 0.04
+	tax_efficiency = 0.05
+	land_organisation = 0.1
+	land_unit_start_experience = 1
+}
+
 recently_capitulated_modifier = {
 	icon = 1
+}
+
+mex_texas_crisis_modifier = {
+	icon = 6
+	tax_efficiency = -0.01
+	war_exhaustion = -0.01
+	pop_consciousness_modifier = 0.02
+	land_organisation = 0.05
+	land_unit_start_experience = 0.5
 }
 
 low_pop_modifier = {
@@ -108,8 +136,8 @@ scorched_earth = {
 	attrition = 2
 	max_attrition = 2
 	movement_cost = 0.5
-	rgo_output = -0.5
-	factory_throughput = -0.5
+	local_RGO_output = -0.5
+	local_factory_throughput = -0.5
 	icon = 25
 }
 
@@ -185,7 +213,7 @@ wbk_modifier = {
 	supply_consumption = -0.9
 	global_population_growth = 0.004
 	prestige = -1
-	#research_points = 
+	land_unit_start_experience = 3
 }
 
 caste_system = {
@@ -578,6 +606,7 @@ knights_of_the_golden_circle = {
 	icon = 18
 }
 
+
 american_anti_slavery_society = {
 	pop_consciousness_modifier = 0.1
 	icon = 8
@@ -736,7 +765,7 @@ germania_werft = {
 
 ruhr_boom = {
 	factory_owner_cost = -0.5
-	global_population_growth = 0.008
+	global_population_growth = 0.002
 	factory_throughput = 0.05
 	icon = 11
 }

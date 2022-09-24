@@ -773,13 +773,14 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			factor = -10
+			state_scope = {
+				has_factories = yes
 			}
+		}
+		modifier = {
+			factor = -40
+			craftsmen = 0.2
 		}
 		modifier = {
 			factor = -100

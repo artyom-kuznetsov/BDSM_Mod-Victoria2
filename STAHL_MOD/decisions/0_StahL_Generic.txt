@@ -46,6 +46,106 @@ political_decisions = {
 			149 = { state_scope = { is_slave = no } }
 		}
 	}
+	global_setup_1870 = {
+		potential = {
+			tag = WBK
+			NOT = { has_country_flag = global_setup_1870_complete }
+			year = 1870
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_country_flag = global_setup_1870_complete
+			574 = { life_rating = -5 }
+			572 = { life_rating = -5 }
+			573 = { life_rating = -5 }
+			576 = { life_rating = -5 }
+			577 = { life_rating = -5 }
+			575 = { life_rating = -5 }
+			3264 = { life_rating = -5 }
+			578 = { life_rating = -5 }
+			2561 = { life_rating = -5 }
+			579 = { life_rating = -5 }
+			583 = { life_rating = -5 }
+			584 = { life_rating = -5 }
+			582 = { life_rating = -5 }
+			580 = { life_rating = -5 }
+			581 = { life_rating = -5 }
+			585 = { life_rating = -5 }
+			538 = { life_rating = -5 }
+			542 = { life_rating = -5 }
+			543 = { life_rating = -5 }
+			540 = { life_rating = -5 }
+			539 = { life_rating = -5 }
+			531 = { life_rating = -5 }
+			532 = { life_rating = -5 }
+			528 = { life_rating = -5 }
+			534 = { life_rating = -5 }
+			535 = { life_rating = -5 }
+			529 = { life_rating = -5 }
+			530 = { life_rating = -5 }
+			369 = { life_rating = -5 }
+			370 = { life_rating = -3 }
+			371 = { life_rating = -3 }
+			544 = { life_rating = -5 }
+			545 = { life_rating = -5 }
+			548 = { life_rating = -5 }
+			547 = { life_rating = -5 }
+			568 = { life_rating = -5 }
+			566 = { life_rating = -5 }
+			537 = { life_rating = -5 }
+			536 = { life_rating = -5 }
+			546 = { life_rating = -5 }
+			679 = { life_rating = -5 }
+			680 = { life_rating = -5 }
+			692 = { life_rating = -5 }
+			551 = { life_rating = -5 }
+			550 = { life_rating = -5 }
+			552 = { life_rating = -5 }
+			681 = { life_rating = -5 }
+			699 = { life_rating = -5 }
+			700 = { life_rating = -5 }
+			701 = { life_rating = -5 }
+			694 = { life_rating = -5 }
+			693 = { life_rating = -5 }
+			690 = { life_rating = -5 }
+			691 = { life_rating = -5 }
+			696 = { life_rating = -5 }
+			695 = { life_rating = -5 }
+			698 = { life_rating = -5 }
+			697 = { life_rating = -5 }
+			685 = { life_rating = -5 }
+			684 = { life_rating = -5 }
+			682 = { life_rating = -5 }
+			683 = { life_rating = -5 }
+			687 = { life_rating = -5 }
+			558 = { life_rating = -5 }
+			559 = { life_rating = -5 }
+			560 = { life_rating = -5 }
+			561 = { life_rating = -5 }
+			562 = { life_rating = -5 }
+			563 = { life_rating = -5 }
+			588 = { life_rating = -5 }
+			587 = { life_rating = -5 }
+			586 = { life_rating = -5 }
+			589 = { life_rating = -5 }
+			593 = { life_rating = -5 }
+			594 = { life_rating = -5 }
+			591 = { life_rating = -5 }
+			590 = { life_rating = -5 }
+			592 = { life_rating = -5 }
+			599 = { life_rating = -5 }
+			600 = { life_rating = -5 }
+			601 = { life_rating = -5 }
+			602 = { life_rating = -5 }
+			595 = { life_rating = -5 }
+			598 = { life_rating = -5 }
+			597 = { life_rating = -5 }
+			596 = { life_rating = -5 }
+		}
+	}
 	capitultate_dec = {
 		alert = no
 		potential = {
@@ -61,41 +161,41 @@ political_decisions = {
 			add_country_modifier = { name = recently_capitulated_modifier duration = 90 }
 		}
 	}
-	support_science_dec = {
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = supporting_science_modifier }
-			NOT = {
-				OR = { 
-					has_country_modifier = above_bb_limit
-					has_country_modifier = above_bb_limit_1
-					has_country_modifier = above_bb_limit_2
-				}
-			}
-			civilized = yes
-		}
-		allow = {
-			functionalism = 1
-			market_structure = 1
-			scientific_management = 1
-			school_reforms = good_schools
-			money = 250000
-		}
-		effect = {
-			add_country_modifier = { name = supporting_science_modifier duration = -1 }
-			money = -250000
-		}
-	}
-	cancel_support_science_dec = {
-		potential = {
-			has_country_modifier = supporting_science_modifier
-		}
-		allow = {
-		}
-		effect = {
-			remove_country_modifier = supporting_science_modifier
-		}
-	}
+	#support_science_dec = {
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = supporting_science_modifier }
+	#		NOT = {
+	#			OR = { 
+	#				has_country_modifier = above_bb_limit
+	#				has_country_modifier = above_bb_limit_1
+	#				has_country_modifier = above_bb_limit_2
+	#			}
+	#		}
+	#		civilized = yes
+	#	}
+	#	allow = {
+	#		functionalism = 1
+	#		market_structure = 1
+	#		scientific_management = 1
+	#		school_reforms = good_schools
+	#		money = 250000
+	#	}
+	#	effect = {
+	#		add_country_modifier = { name = supporting_science_modifier duration = -1 }
+	#		money = -250000
+	#	}
+	#}
+	#cancel_support_science_dec = {
+	#	potential = {
+	#		has_country_modifier = supporting_science_modifier
+	#	}
+	#	allow = {
+	#	}
+	#	effect = {
+	#		remove_country_modifier = supporting_science_modifier
+	#	}
+	#}
 	switch_to_communist = {
 		potential = {
 			OR = {

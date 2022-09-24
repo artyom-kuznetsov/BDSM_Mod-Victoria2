@@ -137,6 +137,8 @@ take_treaty_port = {
 					province_id = 1312
 					province_id = 1481
 					province_id = 1393
+					province_id = 77
+					province_id = 203
 				}
 			}
 			#any_owned_province = 1566
@@ -204,6 +206,7 @@ war_for_mil_access = {
 						tag = MGL
 						tag = XIN
 						tag = TIB
+						tag = YNN
 					}
 					NOT = { year = 1865 } 
 				}
@@ -254,6 +257,7 @@ china_cb_prewestern = {
 			tag = FJN
 			tag = TPG
 			tag = GXI
+			tag = YNN
 			tag = XBI
 			tag = HNN
 			tag = MCK
@@ -268,6 +272,7 @@ china_cb_prewestern = {
 					tag = FJN
 					tag = TPG
 					tag = GXI
+					tag = YNN
 					tag = XBI
 					tag = HNN 
 					tag = MCK
@@ -335,6 +340,7 @@ china_clique_wars = {
 		OR = {
 			tag = CHI
 			tag = FJN
+			tag = YNN
 			tag = TPG
 			tag = GXI
 			tag = XBI
@@ -346,6 +352,7 @@ china_clique_wars = {
 		}
 		THIS = { 
 			OR = {
+				tag = YNN
 				tag = CHI
 				tag = FJN
 				tag = TPG
@@ -429,6 +436,7 @@ take_capital = {
 					OR = {
 						tag = HNN 
 						tag = FJN 
+						tag = YNN
 						tag = GXI 
 						tag = XBI 
 						tag = TPG 
@@ -551,6 +559,7 @@ conquest_small = {
 				AND = {
 					OR = {
 						tag = HNN 
+						tag = YNN 
 						tag = FJN 
 						tag = GXI 
 						tag = XBI 
@@ -670,7 +679,7 @@ challenge_swi = {
 		}
 	}
 
-	badboy_factor = 1.5
+	badboy_factor = 2.0
 	prestige_factor = 5
 	peace_cost_factor = 1
 	penalty_factor = 1
@@ -715,6 +724,7 @@ conquest_tiny = {
 				AND = {
 					OR = {
 						tag = HNN 
+						tag = YNN 
 						tag = FJN 
 						tag = GXI 
 						tag = XBI 
@@ -847,6 +857,7 @@ demand_for_ally = {
 				AND = {
 					OR = {
 						tag = HNN 
+						tag = YNN 
 						tag = FJN 
 						tag = GXI 
 						tag = XBI 
@@ -914,6 +925,61 @@ demand_for_ally = {
 }
 
 
+acquire_all_cores = {
+	sprite_index = 5
+	is_triggered_only = yes
+	months = 12
+	constructing_cb = no
+	crisis = no
+
+	badboy_factor = 0
+	prestige_factor = 3
+	peace_cost_factor = 1
+	penalty_factor = 1
+	always = yes
+
+	break_truce_prestige_factor = 5
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 60
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	can_use = {
+
+		any_owned_province = { is_core = THIS }
+		any_owned_province = { NOT = { is_core = THIS } }
+
+		ai = yes 
+		NOT = { is_our_vassal = THIS }
+		NOT = { vassal_of = THIS }
+	}
+	
+	allowed_countries = {
+		FROM = { tag = THIS }
+	}
+
+	allowed_states = {
+		any_owned_province = { is_core = THIS }
+	}
+
+	all_allowed_states = yes
+	po_transfer_provinces = yes
+	
+	war_name = WAR_LIBERATE_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+
+}
+
 
 establish_small_protectorate_casus_belli = {
 	sprite_index = 7
@@ -946,6 +1012,7 @@ establish_small_protectorate_casus_belli = {
 					OR = {
 						tag = HNN 
 						tag = FJN 
+						tag = YNN 
 						tag = GXI 
 						tag = XBI 
 						tag = TPG 
@@ -1115,6 +1182,7 @@ conquest = {
 					OR = {
 						tag = HNN 
 						tag = FJN 
+						tag = YNN 
 						tag = GXI 
 						tag = XBI 
 						tag = TPG 
@@ -1294,6 +1362,7 @@ add_to_sphere = {
 				tag = FJN 
 				tag = GXI 
 				tag = XBI 
+				tag = YNN 
 				tag = TPG 
 				tag = CHI 
 				tag = MCK
@@ -1576,6 +1645,7 @@ acquire_state = {
 					OR = {
 						tag = HNN 
 						tag = FJN 
+						tag = YNN 
 						tag = GXI 
 						tag = XBI 
 						tag = TPG 
@@ -1678,6 +1748,7 @@ place_in_the_sun = {
 						tag = HNN 
 						tag = FJN 
 						tag = GXI 
+						tag = YNN 
 						tag = XBI 
 						tag = TPG 
 						tag = CHI 
@@ -1766,7 +1837,7 @@ cut_down_to_size = {
 	break_truce_prestige_factor = 1
 	break_truce_infamy_factor = 1
 	break_truce_militancy_factor = 1
-	truce_months = 60
+	truce_months = 72
 	
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
@@ -1788,6 +1859,7 @@ cut_down_to_size = {
 						tag = HNN 
 						tag = FJN 
 						tag = GXI 
+						tag = YNN 
 						tag = XBI 
 						tag = TPG 
 						tag = CHI 
@@ -1852,6 +1924,7 @@ demand_war_reparations = {
 					OR = {
 						tag = HNN 
 						tag = FJN 
+						tag = YNN 
 						tag = GXI 
 						tag = XBI 
 						tag = TPG 
@@ -2145,6 +2218,7 @@ dismantle_forts = {
 						tag = HNN 
 						tag = FJN 
 						tag = GXI 
+						tag = YNN 
 						tag = XBI 
 						tag = TPG 
 						tag = CHI 
@@ -2288,6 +2362,7 @@ make_puppet = {
 						tag = FJN 
 						tag = GXI 
 						tag = XBI 
+						tag = YNN 
 						tag = TPG 
 						tag = CHI 
 						tag = CHU
@@ -2424,6 +2499,7 @@ humiliate = {
 						tag = HNN 
 						tag = FJN 
 						tag = GXI 
+						tag = YNN 
 						tag = XBI 
 						tag = TPG 
 						tag = CHI 
@@ -2493,6 +2569,7 @@ demand_concession_casus_belli = {
 						tag = HNN 
 						tag = FJN 
 						tag = GXI 
+						tag = YNN 
 						tag = XBI 
 						tag = TPG 
 						tag = CHI 
@@ -2579,6 +2656,7 @@ establish_protectorate_casus_belli = {
 				AND = {
 					OR = {
 						tag = HNN 
+						tag = YNN 
 						tag = FJN 
 						tag = GXI 
 						tag = XBI 
@@ -3114,34 +3192,11 @@ negotiated_transfer = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
-		NOT = { has_country_modifier = ruhr_boom }
 		ai = no
 		THIS = { ai = no } 
-		number_of_states = 2 # annex if you want their last state
 		any_owned_province = {
 			not = { is_core = THIS }
 			is_colonial = no
-		}
-		THIS = {
-			NOT = {
-				OR = {
-					tag = SWI tag = WBK
-				}
-			}
-		}
-		OR = {
-			AND = {
-				civilized = yes
-				THIS = {
-					civilized = yes
-				}
-			}
-			AND = {
-				civilized = no
-				THIS = {
-					civilized = no
-				}
-			}
 		}
 		is_independent = yes
 	}

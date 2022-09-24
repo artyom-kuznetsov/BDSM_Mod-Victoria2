@@ -281,20 +281,20 @@ synthetic_oil_factory = {
 		coal = 12		#27.6	total input+maint = 39
 	}
 	output_goods = oil 
-	value = 2.5			#30
+	value = 2.2			#30
 	bonus = {
-		trigger = { trade_goods_in_state = coal }
-		value = 0.25
+		trigger = { OR = { trade_goods_in_state = coal has_building = charcoal_facility } }
+		value = 0.15
 	}
 }
 
 synthetic_rubber_factory = {       
 	template = factory_template
 	input_goods = { 
-		oil = 8		#  // 
+		oil = 6		#  // 
 	}
 	output_goods = rubber 
-	value = 20		#30 
+	value = 12		#30 
 	bonus = {
 		trigger = {
 			OR = {
@@ -302,7 +302,7 @@ synthetic_rubber_factory = {
 				has_building = synthetic_oil_factory
 			}
 		}
-		value = 0.25
+		value = 0.15
 	}
 }
 
@@ -707,12 +707,13 @@ silk_factory = {
 		fabric = 10		# 67,5 input, 100 output
 		wool = 5
 		coal = 2
+		dye = 0.2
 	}
 	output_goods = silk 
 	value = 5			#81
 	bonus = {
 		trigger = { trade_goods_in_state = wool }
-		value = 0.125
+		value = 0.025
 	}
 	bonus = {
 		trigger = {
@@ -721,13 +722,19 @@ silk_factory = {
 				has_building = charcoal_facility
 			}
 		}
-		value = 0.075
+		value = 0.025
 	}
 	bonus = {
 		trigger = {
 				has_building = fabric_factory 
 			}
-		value = 0.125
+		value = 0.05
+	}
+	bonus = {
+		trigger = {
+				OR = { has_building = dye_factory trade_goods_in_state = dye }
+			}
+		value = 0.05
 	}
 }
 

@@ -17,7 +17,7 @@ province_event = {
 			province_id = 1390			# Kuantan
 			province_id = 1422			# Muraleve
 			province_id = 1440			# Sumbawa
-			province_id = 1564			# Caozhou
+			province_id = 1513			# Nan'an
 			province_id = 1884			# Freetown
 			province_id = 2501			# Kimberley
 			province_id = 2153			# Durango
@@ -2344,6 +2344,90 @@ province_event = {
 	trigger = {
 		year = 1927
 		province_id = 923		# Mosul
+		not = { trade_goods = oil }
+		OR = {
+			owner = {
+				part_of_sphere = yes
+				sphere_owner = {
+					or = {
+						invention = daimlers_automobile
+						invention = cracking
+						invention = protected_cruisers
+					}
+				}
+			}
+			owner = {
+				or = {
+					invention = daimlers_automobile
+					invention = cracking
+					invention = protected_cruisers
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 8
+	}
+
+	title = "EVTNAME1109"
+	desc = "EVTDESC1109"
+
+	option = {
+		name = "EVTOPTA1109"
+		trade_goods = oil
+		# life_rate = 5
+	}
+}
+
+province_event = {
+
+	id = 1139
+
+	trigger = {
+		province_id = 1165		# Doxa
+		not = { trade_goods = oil }
+		OR = {
+			owner = {
+				part_of_sphere = yes
+				sphere_owner = {
+					or = {
+						invention = daimlers_automobile
+						invention = cracking
+						invention = protected_cruisers
+					}
+				}
+			}
+			owner = {
+				or = {
+					invention = daimlers_automobile
+					invention = cracking
+					invention = protected_cruisers
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 8
+	}
+
+	title = "EVTNAME1109"
+	desc = "EVTDESC1109"
+
+	option = {
+		name = "EVTOPTA1109"
+		trade_goods = oil
+		# life_rate = 5
+	}
+}
+
+province_event = {
+
+	id = 1140
+
+	trigger = {
+		province_id = 1162		# Bahrain
 		not = { trade_goods = oil }
 		OR = {
 			owner = {
