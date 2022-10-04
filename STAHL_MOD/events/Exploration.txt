@@ -41,13 +41,6 @@ country_event = {
 	
 
 	option = {
-		name = "EVTOPTA23200" # Support the mission
-		ai_chance = { factor = 25 }
-		add_tax_relative_income = -100
-		money = -1000000
-		set_country_flag = YesGoToNile
-	}
-	option = {
 		name = "EVTOPTB23200" # Consider the idea later
 		ai_chance = { factor = 45 }
 		prestige = -5
@@ -57,6 +50,13 @@ country_event = {
 		ai_chance = { factor = 30 }
 		set_country_flag = NoGoToNile
 		prestige = -10
+	}
+	option = {
+		name = "EVTOPTA23200" # Support the mission
+		ai_chance = { factor = 25 }
+		add_tax_relative_income = -100
+		money = -1000000
+		set_country_flag = YesGoToNile
 	}
 }
 
@@ -92,6 +92,14 @@ country_event = {
 	desc = "EVTDESC23201"
 	picture = "Nile"
 
+	
+	option = {
+		name = "EVTOPTB23201" # Reject second attempt
+		ai_chance = { factor = 40 }
+		clr_country_flag = YesGoToNile
+		set_country_flag = NoGoToNile
+		prestige = -5
+	}
 	option = {
 		name = "EVTOPTA23201" # Fund second attempt
 		ai_chance = { factor = 60 }
@@ -99,13 +107,6 @@ country_event = {
 		money = -1000000
 		set_country_flag = YesGoToNileAgain
 		clr_country_flag = YesGoToNile
-	}
-	option = {
-		name = "EVTOPTB23201" # Reject second attempt
-		ai_chance = { factor = 40 }
-		clr_country_flag = YesGoToNile
-		set_country_flag = NoGoToNile
-		prestige = -5
 	}
 }
 
@@ -141,6 +142,14 @@ country_event = {
 	desc = "EVTDESC23202"
 	picture = "Nile"
 
+	
+	option = {
+		name = "EVTOPTB23201" # Reject second attempt
+		ai_chance = { factor = 40 }
+		clr_country_flag = YesGoToNileAgain
+		set_country_flag = NoGoToNile
+		prestige = -5
+	}
 	option = {
 		name = "EVTOPTA23201" # Fund third attempt
 		ai_chance = { factor = 60 }
@@ -148,13 +157,6 @@ country_event = {
 		money = -250000
 		set_country_flag = YesGoToNileThird
 		clr_country_flag = YesGoToNileAgain
-	}
-	option = {
-		name = "EVTOPTB23201" # Reject second attempt
-		ai_chance = { factor = 40 }
-		clr_country_flag = YesGoToNileAgain
-		set_country_flag = NoGoToNile
-		prestige = -5
 	}
 }
 
@@ -243,13 +245,7 @@ country_event = {
 	desc = "EVTDESC23204"
 	picture = "NorthPole1"
 
-	option = {
-		name = "EVTOPTA23200" # Support the mission
-		ai_chance = { factor = 25 }
-		add_tax_relative_income = -100
-		money = -100000
-		set_country_flag = YesGoToNorthPole
-	}
+	
 	option = {
 		name = "EVTOPTB23200" # Consider the idea later
 		ai_chance = { factor = 45 }
@@ -260,6 +256,13 @@ country_event = {
 		ai_chance = { factor = 30 }
 		set_country_flag = NoGoToNorthPole
 		prestige = -10
+	}
+	option = {
+		name = "EVTOPTA23200" # Support the mission
+		ai_chance = { factor = 25 }
+		add_tax_relative_income = -100
+		money = -100000
+		set_country_flag = YesGoToNorthPole
 	}
 }
 
@@ -294,6 +297,14 @@ country_event = {
 	desc = "EVTDESC23205"
 	picture = "NorthPole2"
 
+	
+	option = {
+		name = "EVTOPTB23201" # Reject second attempt
+		ai_chance = { factor = 40 }
+		clr_country_flag = YesGoToNorthPole
+		set_country_flag = NoGoToNorthPole
+		prestige = -25
+	}
 	option = {
 		name = "EVTOPTA23201" # Fund second attempt
 		ai_chance = { factor = 60 }
@@ -301,13 +312,6 @@ country_event = {
 		money = -200000
 		set_country_flag = YesGoToNorthPoleAgain
 		clr_country_flag = YesGoToNorthPole
-	}
-	option = {
-		name = "EVTOPTB23201" # Reject second attempt
-		ai_chance = { factor = 40 }
-		clr_country_flag = YesGoToNorthPole
-		set_country_flag = NoGoToNorthPole
-		prestige = -25
 	}
 }
 
@@ -343,6 +347,14 @@ country_event = {
 	desc = "EVTDESC23206"
 	picture = "NorthPole2"
 
+	
+	option = {
+		name = "EVTOPTB23201" # Reject second attempt
+		ai_chance = { factor = 40 }
+		clr_country_flag = YesGoToNorthPoleAgain
+		set_country_flag = NoGoToNorthPole
+		prestige = -25
+	}
 	option = {
 		name = "EVTOPTA23201" # Fund third attempt
 		ai_chance = { factor = 60 }
@@ -350,13 +362,6 @@ country_event = {
 		money = -200000
 		set_country_flag = YesGoToNorthPoleThird
 		clr_country_flag = YesGoToNorthPoleAgain
-	}
-	option = {
-		name = "EVTOPTB23201" # Reject second attempt
-		ai_chance = { factor = 40 }
-		clr_country_flag = YesGoToNorthPoleAgain
-		set_country_flag = NoGoToNorthPole
-		prestige = -25
 	}
 }
 
@@ -444,13 +449,7 @@ country_event = {
 	desc = "EVTDESC23208"
 	picture = "SouthPole1"
 
-	option = {
-		name = "EVTOPTA23200" # Support the mission
-		ai_chance = { factor = 25 }
-		add_tax_relative_income = -100
-		money = -200000
-		set_country_flag = YesGoToSouthPole
-	}
+	
 	option = {
 		name = "EVTOPTB23200" # Consider the idea later
 		ai_chance = { factor = 45 }
@@ -461,6 +460,13 @@ country_event = {
 		ai_chance = { factor = 30 }
 		set_country_flag = NoGoToSouthPole
 		prestige = -10
+	}
+	option = {
+		name = "EVTOPTA23200" # Support the mission
+		ai_chance = { factor = 25 }
+		add_tax_relative_income = -50
+		money = -200000
+		set_country_flag = YesGoToSouthPole
 	}
 }
 
@@ -496,6 +502,14 @@ country_event = {
 	desc = "EVTDESC23209"
 	picture = "SouthPole2"
 
+	
+	option = {
+		name = "EVTOPTB23201" # Reject second attempt
+		ai_chance = { factor = 40 }
+		clr_country_flag = YesGoToSouthPole
+		set_country_flag = NoGoToSouthPole
+		prestige = -25
+	}
 	option = {
 		name = "EVTOPTA23201" # Fund second attempt
 		ai_chance = { factor = 60 }
@@ -503,13 +517,6 @@ country_event = {
 		money = -200000
 		set_country_flag = YesGoToSouthPoleAgain
 		clr_country_flag = YesGoToSouthPole
-	}
-	option = {
-		name = "EVTOPTB23201" # Reject second attempt
-		ai_chance = { factor = 40 }
-		clr_country_flag = YesGoToSouthPole
-		set_country_flag = NoGoToSouthPole
-		prestige = -25
 	}
 }
 
@@ -545,6 +552,14 @@ country_event = {
 	desc = "EVTDESC23210"
 	picture = "SouthPole2"
 
+	
+	option = {
+		name = "EVTOPTB23201" # Reject second attempt
+		ai_chance = { factor = 40 }
+		clr_country_flag = YesGoToSouthPoleAgain
+		set_country_flag = NoGoToSouthPole
+		prestige = -25
+	}
 	option = {
 		name = "EVTOPTA23201" # Fund third attempt
 		ai_chance = { factor = 60 }
@@ -552,13 +567,6 @@ country_event = {
 		money = -200000
 		set_country_flag = YesGoToSouthPoleThird
 		clr_country_flag = YesGoToSouthPoleAgain
-	}
-	option = {
-		name = "EVTOPTB23201" # Reject second attempt
-		ai_chance = { factor = 40 }
-		clr_country_flag = YesGoToSouthPoleAgain
-		set_country_flag = NoGoToSouthPole
-		prestige = -25
 	}
 }
 

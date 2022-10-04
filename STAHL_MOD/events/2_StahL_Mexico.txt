@@ -30,10 +30,11 @@ country_event = {
 		YUC = { all_core = { remove_core = MEX } }
 	}
 	option = {
-		name = "Yucatan_Uprising_EVTOPTA" # СДЕЛАТЬ ИВЕНТ ДЛЯ ФРА ЧТОБЫ ПОДДЕРЖАТЬ ВОССТАНИЕ
+		name = "Yucatan_Uprising_EVTOPTA"
 		FRA = { country_event = 24201 }
 		prestige = 5
 		any_pop = { militancy = 1 }
+		relation = { who = YUC value = -400 }
 	}
 	option = {
 		name = "Yucatan_Uprising_EVTOPTB"
@@ -55,12 +56,12 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = "FRA_Yucatan_OPTA"
-		MEX = { add_country_modifier = { name = yucatan_preparing_modifier duration = 120 } }
+		MEX = { add_country_modifier = { name = yucatan_preparing_modifier duration = 120 } set_country_flag = yucatan_uprose_1_flag }
 		prestige = -5
 	}
 	option = {
 		name = "FRA_Yucatan_OPTB"
-		MEX = { add_country_modifier = { name = yucatan_preparing_modifier duration = 120 } add_country_flag = yucatan_uprose_1_flag }
+		MEX = { add_country_modifier = { name = yucatan_preparing_modifier duration = 120 } set_country_flag = yucatan_uprose_1_flag }
 		money = -300000
 		YUC = {
 			money = 200000 
@@ -92,7 +93,7 @@ country_event = {
 	trigger = {
 		tag = MEX
 		has_country_flag = yucatan_uprose_1_flag
-		NOT = { yucatan_preparing_modifier = 120 }
+		NOT = { has_country_modifier = yucatan_preparing_modifier has_country_flag = yucatan_war_happened_flag }
 	}
 	option = { 
 		name = "YUC_Uprising_WarDec_OPTA"
@@ -107,5 +108,6 @@ country_event = {
 				}
 			}
 		}
+		set_country_flag = yucatan_war_happened_flag
 	}
 }

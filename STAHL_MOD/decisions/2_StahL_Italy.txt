@@ -263,6 +263,23 @@ political_decisions = {
 			factor = 1
 		}
 	}
-
 	
+	italian_corsica_dec = {
+		potential = {
+			NOT = { has_country_flag = corsica_buffed_flag }
+			tag = ITA
+			year = 1870
+		}
+		allow = {
+			owns = 473
+			management_strategy = 1
+			steel_railroad = 1
+			imperssionism = 1
+		}
+		effect = {
+			473 = { remove_core = FRA }
+			set_country_flag = corsica_buffed_flag
+			473 = { trade_goods = sulphur add_province_modifier = { name = corsica_buff_modifier duration = 1730 } }
+		}
+	}	
 }

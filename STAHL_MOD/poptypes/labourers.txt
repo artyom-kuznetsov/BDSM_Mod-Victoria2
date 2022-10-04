@@ -766,6 +766,16 @@ promote_to =
 				literacy = 1
 			}
 		}
+		
+		modifier = {
+			factor = -3
+			NOT = {
+				OR = { 
+					unemployment_by_type = { type = farmers value = 0.1  }
+					unemployment_by_type = { type = labourers value = 0.1  }
+				}
+			}
+		}
 		modifier = {
 			factor = 10
 			state_scope = {
@@ -773,13 +783,13 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -10
+			factor = -5
 			state_scope = {
 				has_factories = yes
 			}
 		}
 		modifier = {
-			factor = -40
+			factor = -15
 			craftsmen = 0.2
 		}
 		modifier = {
@@ -790,6 +800,12 @@ promote_to =
 						worker = craftsmen
 					}
 				}
+			}
+		}
+		modifier = {
+			factor = -10
+			state_scope = {
+				NOT = { labourers = 0.36 }
 			}
 		}
 	}

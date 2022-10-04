@@ -59,21 +59,16 @@ guiTypes = {
 			Orientation = "UPPER_LEFT"
 		}
 		
-		#textBoxType = { 
-		#	name = "headline_military"
-		#	position = { x = 770 y = -42 }
-		#	font = "vic_title"
-		#	text = "MILITARY"	
-		#	maxWidth = 200
-		#	maxHeight = 48	
-		#	format = right
-		#}
-		iconType = {
-			name ="military_text"
-			spriteType = "GFX_military_text"
-			position = { x= 810 y = -72 }
-			#format = right
+		textBoxType = { 
+			name = "headline_military"
+			position = { x = 770 y = -42 }
+			font = "vic_title"
+			text = "MILITARY"	
+			maxWidth = 200
+			maxHeight = 48	
+			format = right
 		}
+		
 		guiButtonType = {
 			name = "close_button"
 			position = { x= -31 y = -7}
@@ -106,7 +101,8 @@ guiTypes = {
 			buttonText = "MOBILISE"
 			Orientation = "UPPER_LEFT"
 			clicksound = click
-			position = { x= 403 y = 575 }
+			position = { x= 403 y = 555 }
+			shortcut = "m"
 		}
 		guiButtonType = {
 			name = "demobilize"
@@ -115,23 +111,23 @@ guiTypes = {
 			buttonText = "DEMOBILISE"
 			Orientation = "UPPER_LEFT"
 			clicksound = click
-			position = { x= 403 y = 575 }
+			position = { x= 403 y = 555 }
 		}
 		iconType = {
 			name = "mobilize_progress"
 			spriteType = "GFX_mobilize_progress"
-			position = { x = 408 y = 561 }
+			position = { x = 408 y = 591 }
 		}
 
 		iconType = {
 			name = "mobilize_progress_frame"
 			spriteType = "GFX_mobilization_progress_frame"
-			position = { x = 406 y = 559 }
+			position = { x = 406 y = 589 }
 		}
 		
 		instantTextBoxType = { 
 			name = "mobilize_progress_text"
-			position = { x = 393 y = 560 }
+			position = { x = 393 y = 590 }
 			font = "vic_18_black"
 			maxWidth = 218
 			maxHeight = 20	
@@ -245,6 +241,7 @@ guiTypes = {
 				quadTextureSprite ="GFX_sortbutton_34"
 				buttonText = "MILITARY_SORT_TYPE"
 				buttonFont = "vic_18_black"
+				shortcut = "s"
 			}
 			guiButtonType = {
 				name = "sort_leader_name"
@@ -264,23 +261,23 @@ guiTypes = {
 		
 			guiButtonType = {
 				name = "new_general"
-				quadTextureSprite = "GFX_button_newgen"
+				quadTextureSprite = "GFX_button_standard_144"
 				buttonFont = "vic_18_black"
-				buttonText = " "
+				buttonText = "MILITARY_CREATE_GENERAL"
 				Orientation = "UPPER_LEFT"
 				clicksound = click
-				position = { x= 81 y = 327 }
+				position = { x= 11 y = 355 }
 				shortcut = "g"
 			}	
 			
 			guiButtonType = {
 				name = "new_admiral"
-				quadTextureSprite = "GFX_button_newadm"
+				quadTextureSprite = "GFX_button_standard_144"
 				buttonFont = "vic_18_black"
-				buttonText = " "
+				buttonText = "MILITARY_CREATE_ADMIRAL"
 				Orientation = "UPPER_LEFT"
 				clicksound = click
-				position = { x= 155 y = 327 }
+				position = { x= 11 y = 380 }
 				shortcut = "a"
 			}
 			
@@ -288,11 +285,12 @@ guiTypes = {
 				name = "auto_create"
 				quadTextureSprite = "GFX_checkbox_default"
 				Orientation = "UPPER_LEFT"
-				position = { x= 80 y = 366 }
+				position = { x= 160 y = 366 }
+				shortcut = "r"
 			}
 			instantTextBoxType = { 
 				name = "auto_create_text"
-				position = { x = 103 y = 369 }
+				position = { x = 183 y = 369 }
 				font = "vic_18_black"
 				text = "MILITARY_AUTOCREATE"	
 				maxWidth = 200
@@ -304,11 +302,12 @@ guiTypes = {
 				name = "auto_assign"
 				quadTextureSprite = "GFX_checkbox_default"
 				Orientation = "UPPER_LEFT"
-				position = { x= 80 y = 386 }
+				position = { x= 160 y = 386 }
+				shortcut = "f"
 			}
 			instantTextBoxType = { 
 				name = "auto_assign_text"
-				position = { x = 103 y = 389 }
+				position = { x = 183 y = 389 }
 				font = "vic_18_black"
 				text = "MILITARY_AUTOASSIGN"	
 				maxWidth = 200
@@ -320,9 +319,9 @@ guiTypes = {
 				name ="leader_listbox"
 				position = { x = 7 y = 60 }
 				backGround=""
-				size = { x=277 y = 264 }
+				size = { x=277 y = 312 }
 				Orientation = "UPPER_LEFT"
-				spacing = 2
+				spacing = 0
 				scrollbartype = "standardlistbox_slider"
 				borderSize = {x = 1 y = 1}
 			}
@@ -806,7 +805,7 @@ guiTypes = {
 		name = "milview_leader_entry"
 		backGround =""
 		position = { x=10 y=100 }	
-		size = { x=250 y=44 }
+		size = { x=250 y=60 }
 		moveable = 0
 		dontRender = ""
 		horizontalBorder = "0"
@@ -820,16 +819,31 @@ guiTypes = {
 			Orientation = "UPPER_LEFT"
 		}
 		
+		checkboxType = {
+			name = "use_leader"
+			quadTextureSprite = "GFX_checkbox_small"
+			Orientation = "UPPER_LEFT"
+			position = { x = 4 y = 1 }
+		}
+		instantTextBoxType = { 
+			name = "name"
+			position = { x = 22 y = 1 }
+			font = "vic_18_black"
+			text = " "	
+			maxWidth = 280
+			maxHeight = 10
+			fixedsize = yes
+		}
 		iconType = {
 			name ="prestige_bar_frame"
 			spriteType = "GFX_prestige_bar_frame"
-			position = { x = 4 y = 3 }
+			position = { x = 2 y = 17 }
 			#allwaystransparent = yes
 		}
 		iconType = {
 			name ="leader_prestige_bar"
 			spriteType = "GFX_leader_prestige_progress_bar"
-			position = { x = 14 y = 33 }
+			position = { x = 12 y = 47 }
 			Orientation = "UPPER_LEFT"
 			rotation = 1.5708
 			#allwaystransparent = yes
@@ -837,61 +851,43 @@ guiTypes = {
 		
 		iconType = {
 			name = "leader"
-			position = { x = 16 y = 1 }
+			position = { x = 14 y = 15 }
 			spriteType = "GFX_leader_generic0"
 		}	
 		
 		instantTextBoxType = { 
-			name = "name"
-			position = { x = 53 y = 1 }
-			font = "vic_18_black"
-			text = " "	
-			maxWidth = 126
-			maxHeight = 10
-			fixedsize = yes
-		}
-		
-		instantTextBoxType = { 
 			name = "background"
-			position = { x = 53 y = 17 }
+			position = { x = 49 y = 17 }
 			font = "Arial12_black"
 			text = " "	
-			maxWidth = 125
+			maxWidth = 250
 			maxHeight = 20
 			fixedsize = yes
 		}			
 		
 		instantTextBoxType = { 
 			name = "personality"
-			position = { x = 53 y = 29 }
+			position = { x = 49 y = 29 }
 			font = "Arial12_black"
 			text = " "	
-			maxWidth = 125
+			maxWidth = 250
 			maxHeight = 20
 			fixedsize = yes
-		}
-		
-		checkboxType = {
-			name = "use_leader"
-			quadTextureSprite = "GFX_checkbox_default"
-			Orientation = "UPPER_LEFT"
-			position = { x= 160 y = 17 }
 		}
 			
 		instantTextBoxType = { 
 			name = "army"
-			position = { x = 187 y = 1 }
-			font = "vic_18_black"
+			position = { x = 49 y = 41 }
+			font = "Arial12_black"
 			text = " "	
-			maxWidth = 87
+			maxWidth = 250
 			maxHeight = 10
-			format = right
 			fixedsize = yes
 		}
 		
 		instantTextBoxType = { 
 			name = "location"
-			position = { x = 187 y = 17 }
+			position = { x = 187 y = 41 }
 			font = "Arial12_black"
 			text = " "	
 			maxWidth = 87
