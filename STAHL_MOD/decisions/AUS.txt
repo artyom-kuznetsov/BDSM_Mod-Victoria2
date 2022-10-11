@@ -18,8 +18,13 @@ political_decisions = {
 		}
 	
 		allow = {
-			exists = ITA
-			exists = GER
+			OR = {
+				year = 1855
+				AND = {
+					exists = ITA
+					exists = GER
+				}
+			}
 			NOT = {
 				OR = {
 					exists = HUN

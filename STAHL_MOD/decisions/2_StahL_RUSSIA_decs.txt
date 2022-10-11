@@ -1,0 +1,29 @@
+political_decisions = {
+	russification_of_baltics_dec = {
+		potential = {
+			owns = 349
+			owns = 354
+			owns = 360
+			empiricism = 1
+			tag = RUS
+			NOT = { has_country_flag = baltics_russificated_flag }
+		}
+		allow = {
+			biologism = 1
+			phenomenalism = 1
+			money = 1000000
+		}
+		effect = {
+			add_accepted_culture = estonian
+			any_pop = {
+				limit = {
+					has_pop_culture = estonian
+				}
+				consciousness = 10
+				militancy = 10
+			}
+			set_country_flag = baltics_russificated_flag
+			money = -1000000
+		}
+	}
+}

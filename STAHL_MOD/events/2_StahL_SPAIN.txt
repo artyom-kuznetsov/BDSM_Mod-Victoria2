@@ -1,0 +1,56 @@
+country_event = { 
+	id = 24300
+	title = "SPA_Starting_Event_For_Player_Title"
+	desc = "SPA_Starting_Event_For_Player_desc"
+	trigger = {
+		OR = {
+			tag = SPC
+			tag = SPA
+		}
+		ai = no
+	}
+	fire_only_once = yes
+	option = {
+		name = "SPA_Starting_Event_For_Player_OPTA"
+		add_country_modifier = { name = SPA_civil_war_modifier duration = -1 }
+		prestige = 10
+		define_general = {
+			name = "DJ Arbuz"
+			personality = defence_2.14
+			background = attack_3.3
+		}
+	}
+}
+country_event = { 
+	id = 24301
+	title = "SPA_CW_End_Carlist_title"
+	desc = "SPA_CW_End_Carlist_desc"
+	trigger = {
+		tag = SPC
+		SPA = { exists = no }
+	}
+	fire_only_once = yes
+	option = {
+		name = "SPA_CW_End_Carlist_OPTA"
+		remove_country_modifier = SPA_civil_war_modifier
+		prestige = 10
+		SPC = { all_core = { remove_core = SPC } }
+		change_tag = SPA
+	}
+}
+country_event = { 
+	id = 24302
+	title = "SPA_CW_End_Classic_title"
+	desc = "SPA_CW_End_Classic_desc"
+	trigger = {
+		tag = SPA
+		SPC = { exists = no }
+	}
+	fire_only_once = yes
+	option = {
+		name = "SPA_CW_End_Classic_OPTA"
+		remove_country_modifier = SPA_civil_war_modifier
+		prestige = 10
+		SPC = { all_core = { remove_core = SPC } }
+	}
+}
