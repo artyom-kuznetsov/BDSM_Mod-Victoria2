@@ -1,0 +1,70 @@
+political_decisions = {
+	form_china = {
+		potential = {
+			#tag = HNN
+			primary_culture = manchu
+			NOT = { has_global_flag = china_westernized }
+		}	
+		allow = {
+			war = no
+			#1524 = { owned_by = THIS }
+			#1612 = { owned_by = THIS }
+			#2221 = { owned_by = THIS }
+			#1490 = { owned_by = THIS }
+			#1502 = { owned_by = THIS }
+			#is_westernized = yes
+			THIS = { total_pops = 18000000 }
+		}
+		
+		effect = {
+			prestige = 50
+			any_country = {
+				limit = {
+					primary_culture = manchu
+					in_sphere = THIS
+					NOT = {
+						tag = THIS
+					}
+				}
+				annex_to = THIS
+			}			
+			GXI = { all_core = { add_core = THIS } }
+			HNN = { all_core = { add_core = THIS } }
+			CHI = { all_core = { add_core = THIS } }
+			XBI = { all_core = { add_core = THIS } }
+			MCK = { all_core = { add_core = THIS } }
+			FJN = { all_core = { add_core = THIS } }
+			YNN = { all_core = { add_core = THIS } }
+			SXI = { all_core = { add_core = THIS } }
+			MGL = { all_core = { add_core = THIS } }
+			TPG	 = { all_core = { add_core = THIS } }
+			change_tag = CHU
+			set_global_flag = china_westernized
+			years_of_research = 5
+			add_country_modifier = { name = brz_edu_program duration = 3650 }
+			add_country_modifier = { name = investments_in_research_modifier duration = 3650 }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	chi_move_capital = {
+		potential = {
+			tag = CHU
+			NOT = { has_country_flag = chi_capital_moved }
+		}
+		
+		allow = {
+			prestige = 5
+		}
+		
+		effect = {
+			country_event = 91751
+			prestige = 5
+			set_country_flag = chi_capital_moved
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

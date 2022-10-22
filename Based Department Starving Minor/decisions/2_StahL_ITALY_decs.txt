@@ -1,0 +1,250 @@
+political_decisions = {
+	recover_greece = {
+		potential = {
+			
+			NOT = { has_country_flag = ita_greece_recovered }
+			OR = {
+				tag = SAR
+				tag = SIC
+				tag = ITA
+			}
+		}
+		allow = { 
+			year = 1850
+			realism = 1
+			nationalism_n_imperialism = 1
+			any_owned_province = {
+				is_core = GRE
+			}
+			
+		}
+		
+		effect = {
+			#GRE = { 
+			#	all_core = {
+			#		add_core = THIS
+			#	} 
+			#}
+			add_accepted_culture = greek
+			set_country_flag = ita_greece_recovered
+			badboy = 8
+			prestige = -10
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	recover_albania = {
+		potential = {
+			NOT = { has_country_flag = ita_albania_recovered }
+			has_country_flag = ita_greece_recovered
+		}
+		allow = { 
+			owns = 834
+			owns = 842
+			owns = 847
+			phenomenalism = 1
+			biologism = 1
+		}
+		
+		effect = {
+			ALB = { 
+				all_core = {
+					add_core = THIS
+				} 
+			}
+			add_accepted_culture = albanian
+			set_country_flag = ita_albania_recovered
+			badboy = 5
+			prestige = -5
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	italia_irredenta = {
+		potential = {
+			tag = ITA
+			NOT = {
+				has_country_flag = italia_ulterior
+			}
+		}
+		
+		allow = {
+			OR = {
+				invention = national_fraternity
+				is_greater_power = yes
+			}
+		}
+		
+		effect = {
+			set_country_flag = italia_ulterior
+			729 = {
+				add_core = ITA
+			}
+			730 = {
+				add_core = ITA
+			}
+			731 = {
+				add_core = ITA
+			}
+			732 = {
+				add_core = ITA
+			}
+			733 = {
+				add_core = ITA
+			}
+			734 = {
+				add_core = ITA
+			}
+			736 = {
+				add_core = ITA
+			}
+			737 = {
+				add_core = ITA
+			}
+			473 = {
+				add_core = ITA
+			}
+			735 = {
+				add_core = ITA
+			}
+		}
+	}
+	form_italy = {
+		potential = {
+			is_culture_group = italian
+			
+			NOT = {
+				exists = ITA
+			}
+		}
+		
+		allow = {
+			762 = { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			754 = { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			749 = { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			744 = { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			724 = { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			726	= { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			741 = { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			720 = { 
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+				}
+			}
+			nationalism_n_imperialism = 1
+		}
+
+		
+		effect = {
+			prestige = 10
+			change_tag = ITA
+			add_accepted_culture = north_italian
+			add_accepted_culture = south_italian
+			any_country = {
+				limit = {
+					is_culture_group = italian
+					OR = {
+						in_sphere = THIS
+						alliance_with = THIS
+					}
+				}
+				country_event = { id=11101 days=0 }
+			}
+			tech_school = italian_school
+			726 = {	add_core = ITA	}
+			727 = {	add_core = ITA	}
+			728 = {	add_core = ITA	}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	italian_corsica_dec = {
+		potential = {
+			NOT = { has_country_flag = corsica_buffed_flag }
+			tag = ITA
+			year = 1870
+		}
+		allow = {
+			owns = 473
+			management_strategy = 1
+			steel_railroad = 1
+			imperssionism = 1
+		}
+		effect = {
+			473 = { remove_core = FRA }
+			set_country_flag = corsica_buffed_flag
+			473 = { trade_goods = sulphur add_province_modifier = { name = corsica_buff_modifier duration = 1730 } }
+		}
+	}
+	
+	form_two_sicilies_nation_dec = {
+		potential = {
+			OR = {
+				tag = SCY
+				tag = NAP
+			}
+			NOT = { exists = SIC }
+		}
+		allow = {
+			state_n_government = 1
+			owns = 762
+			owns = 754
+			owns = 757
+			owns = 761
+		}
+		effect = {
+			prestige = 5
+			change_tag = SIC
+			NAP = { all_core = { add_core = THIS } }
+			SCY = { all_core = { add_core = THIS } }
+		}
+	}
+}

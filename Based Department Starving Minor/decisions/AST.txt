@@ -1,0 +1,25 @@
+political_decisions = {
+	ast_immigration = {
+		potential = {
+			tag = AST
+			NOT = {
+				has_country_flag = ast_immigration_passed
+			}
+		}
+		allow = {
+			money = 500000
+			romanticism = 1
+			stock_exchange = 1
+		}
+		effect = {
+			any_owned = {
+				add_province_modifier = {
+					name = ast_attract_immigrants
+					duration = 1400
+				}
+			}
+			money = -500000
+			set_country_flag = ast_immigration_passed
+		}
+	}
+}

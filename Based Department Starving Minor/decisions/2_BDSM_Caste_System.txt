@@ -1,0 +1,75 @@
+political_decisions = {
+	public_education_caste_system = {
+		potential = {
+			civilized = yes
+			NOT = { has_country_modifier = caste_sys_education_modifier }
+			has_country_modifier = hnd_caste_system
+		}
+		
+		allow = {
+			OR = {
+				school_reforms = acceptable_schools
+				school_reforms = good_schools
+			}
+			money = 1500000
+		}
+		
+		effect = {
+			treasury = -1500000
+			add_country_modifier = { name = caste_sys_education_modifier duration = -1 }
+		}
+	}
+	centralized_government_caste_system = {
+		potential = {
+			civilized = yes
+			NOT = { has_country_modifier = caste_sys_centralized_gov_modifier }
+			has_country_modifier = hnd_caste_system
+		}
+		allow = {
+			ad_hoc_money_bill_printing = 1
+			treasury = 1000000
+			money = 1000000
+		}
+		effect = {
+			treasury = -1000000
+			add_country_modifier = { name = caste_sys_centralized_gov_modifier duration = -1 }
+		}
+	}
+	industrialization_caste_system = {
+		potential = {
+			civilized = yes
+			NOT = { has_country_modifier = caste_sys_industry_modifier }
+			has_country_modifier = hnd_caste_system
+		}
+		allow = {
+			organized_factories = 1
+			early_railroad = 1
+			money = 2000000
+		}
+		effect = {
+			treasury = -2000000
+			add_country_modifier = { name = caste_sys_industry_modifier duration = -1 }
+		}
+	}
+	reform_caste_system = {
+		potential = {
+			has_country_modifier = hnd_caste_system
+		}
+		allow = {
+			has_country_modifier = caste_sys_industry_modifier
+			has_country_modifier = caste_sys_centralized_gov_modifier
+			has_country_modifier = caste_sys_education_modifier
+			state_n_government = 1
+			phenomenalism = 1
+			romanticism = 1
+			money = 2000000
+		}
+		effect = {
+			treasury = -2000000
+			remove_country_modifier = hnd_caste_system
+			remove_country_modifier = caste_sys_industry_modifier
+			remove_country_modifier = caste_sys_centralized_gov_modifier
+			remove_country_modifier = caste_sys_education_modifier
+		}
+	}
+}

@@ -1,0 +1,90 @@
+country_event = {
+	id = 8400
+	trigger = {
+		has_global_flag = pru_superiority_installed
+		tag = PRU
+	}
+	fire_only_once = yes
+	
+	#mean_time_to_happen = { }
+	
+	title = "EVTNAME8400"
+	title = "EVTDESC8400"
+	option = {
+		prestige = 15
+		AUS = { prestige = -15 }
+		name = "EVTOPTA8400"
+		diplomatic_influence = {
+			who = WUR
+			value = 400
+		}
+		diplomatic_influence = {
+			who = BAV
+			value = 400
+		}
+		diplomatic_influence = {
+			who = WUR
+			value = 400
+		}
+		AUS = {
+			diplomatic_influence = {
+			who = WUR
+			value = -200
+			}
+			diplomatic_influence = {
+				who = BAV
+				value = -200
+			}
+			diplomatic_influence = {
+				who = WUR
+				value = -200
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 8401
+	trigger = {
+		has_global_flag = aus_superiority_installed
+		tag = AUS
+	}
+	fire_only_once = yes
+	
+	#mean_time_to_happen = { }
+	
+	title = "EVTNAME8401"
+	title = "EVTDESC8401"
+	option = {
+		prestige = 15
+		PRU = { prestige = -15 }
+		name = "EVTOPTA8401"
+		diplomatic_influence = {
+			who = WUR
+			value = 400
+		}
+		diplomatic_influence = {
+			who = BAV
+			value = 400
+		}
+		diplomatic_influence = {
+			who = WUR
+			value = 400
+		}
+		PRU = {
+			diplomatic_influence = {
+			who = WUR
+			value = -200
+			}
+			diplomatic_influence = {
+				who = BAV
+				value = -200
+			}
+			diplomatic_influence = {
+				who = WUR
+				value = -200
+			}
+		}
+		594 = { secede_province = AUS }
+	}
+}

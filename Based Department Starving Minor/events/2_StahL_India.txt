@@ -1,0 +1,133 @@
+country_event = {
+	id = 9541
+	title = "EVTNAME9541"
+	desc = "EVTDESC9541"
+	
+	trigger = {
+		tag = EIC
+		NOT = { has_country_flag = eic_started }
+	}
+	option = {
+		name = "EVTOPTA9541"
+		set_country_flag = eic_started
+		add_country_modifier = { name = hnd_caste_system duration = -1 }
+		add_country_modifier = { name = conservatism_modifier duration = 3650 }
+	}
+}
+country_event = {
+	id = 9541
+	title = "EVTNAME9541"
+	desc = "EVTDESC9541"
+	
+	trigger = {
+		tag = HNN
+		NOT = { has_country_flag = eic_started }
+	}
+	option = {
+		name = "EVTOPTB9541"
+		set_country_flag = eic_started
+		add_country_modifier = { name = hnd_caste_system duration = 17900 }
+	}
+}
+country_event = {
+	id = 9536
+	title = "EVTNAME9536"
+	desc = "EVTDESC9536"
+	
+	trigger = {
+		has_global_flag = goa_ult_sent
+		NOT = { tag = HND }
+		owns = 1303
+	}
+	immediate = {
+		clr_global_flag = goa_ult_sent
+	}
+	option = {
+		name = "EVTOPTA9536" # Отдать Гоа
+		1303 = { secede_province = HND }
+		prestige = 1
+		set_global_flag = goa_ult_accepted
+	}
+	
+	option = {
+		name = "EVTOPTAB9536" # Не отдавать Гоа
+		badboy = 2
+		war_exhaustion = 15
+		any_pop = {
+			limit = {
+				has_pop_culture = marathi
+			}
+			consciousness = 20
+			militancy = 20
+		}
+		set_global_flag = goa_ult_rejected
+	}
+}
+country_event = {
+	id = 9537
+	title = "EVTNAME9537"
+	desc = "EVTDESC9537"
+	
+	trigger = {
+		owns = 1312
+		NOT = { tag = HND }
+		has_global_flag = pondi_ult_sent
+	}
+	immediate = {
+		clr_global_flag = pondi_ult_sent
+	}
+	
+	option = {
+		name = "EVTOPTA9536" # Отдать Пондичерри
+		1312 = { secede_province = HND }
+		prestige = 1
+	}
+	
+	option = {
+		name = "EVTOPTAB9536" # Не отдавать Пондичерри
+		badboy = 2
+		war_exhaustion = 15
+		any_pop = {
+			limit = {
+				has_pop_culture = tamil
+			}
+			consciousness = 20
+			militancy = 20
+		}
+	}
+}
+
+country_event = {
+	id = 9538
+	title = "EVTNAME9538"
+	desc = "EVTDESC9538"
+	
+	trigger = {
+		owns = 1312
+		tag = HND
+		has_global_flag = pondi_ult_sent
+	}
+	
+	option = {
+		name = "EVTOPTA9538" 
+		prestige = 1
+	}
+
+}
+country_event = {
+	id = 9539
+	title = "EVTNAME9538"
+	desc = "EVTDESC9539"
+	
+	trigger = {
+		owns = 1303
+		tag = HND
+		has_global_flag = goa_ult_sent
+	}
+	
+	option = {
+		name = "EVTOPTA9538" 
+		prestige = 1
+	}
+
+}
