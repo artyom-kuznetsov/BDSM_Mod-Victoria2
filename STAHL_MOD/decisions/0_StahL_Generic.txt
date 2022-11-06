@@ -249,43 +249,6 @@ political_decisions = {
 			remove_country_modifier = proletarian_dec_taken
 		}
 	}
-	zcountry_pass_reform = {
-		picture = pass_reform
-		alert = no
-		potential = {
-			ai = no
-			civilized = yes
-		}
-			
-		allow = {
-			NOT = {
-				OR = {
-					has_country_modifier = reform_passed
-					has_country_modifier = cannot_pass_reform
-				}
-			}
-			money = 100000
-		}
-
-		effect = {
-			set_country_flag = force_reform
-			add_country_modifier = {
-				name = force_reform
-				duration = 120
-			}
-			add_country_modifier = {
-				name = reform_passed
-				duration = 1825
-			}
-			any_owned_province = {
-				any_pop = {
-					militancy = 1
-					consciousness = 2
-				}
-			}
-			money = -100000
-		}		
-	}
 	
 	diplomaty_mp = {
 		alert = no
