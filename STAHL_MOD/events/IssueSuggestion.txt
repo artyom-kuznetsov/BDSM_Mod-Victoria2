@@ -334,63 +334,6 @@ country_event = {
 }
 
 #Dental Care Bill
-country_event = {
-	id = 3006
-	title = "EVTNAME3006"
-	desc = "EVTDESC3006"
-	picture = "Dental"
-	
-	trigger = {
-		health_care = good_health_care
-		civilized = yes
-		NOT = {
-			ruling_party_ideology = conservative
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 800 # Common
-		
-		modifier = {
-			factor = 0.9
-			social_reform_want = 0.1
-		}
-		
-		modifier = {
-			factor = 1.5
-			NOT = {
-				upper_house = {
-					ideology = conservative
-					value = 0.4
-				}
-			}
-		} 
-	}
-
-	option = {
-		name = "EVTOPTA3006"
-		social_reform = acceptable_health_care
-		poor_strata = {
-			consciousness = 1
-			militancy = 1
-		}
-		rich_strata = {
-			militancy = -2
-			consciousness = 1
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB3006"
-		any_pop = {
-			scaled_consciousness = {
-				ideology = conservative
-				factor = 3
-			}
-		}
-	}
-}
-
 ##### PENSIONS #####
 #Pension Plan
 country_event = {

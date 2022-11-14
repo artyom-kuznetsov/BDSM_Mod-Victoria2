@@ -1,11 +1,15 @@
 political_decisions = {
 	russification_of_baltics_dec = {
 		potential = {
-			owns = 349
-			owns = 354
-			owns = 360
+			OR = {
+				owns = 349
+				owns = 354
+				owns = 360
+			}
 			empiricism = 1
 			tag = RUS
+			tag = SWE
+			tag = SCA
 			NOT = { has_country_flag = baltics_russificated_flag }
 		}
 		allow = {
