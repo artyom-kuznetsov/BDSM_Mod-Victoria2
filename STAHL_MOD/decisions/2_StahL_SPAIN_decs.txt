@@ -64,7 +64,7 @@ political_decisions = {
 		potential = {
 			tag = SPA
 			NOT = { has_country_flag = reconquista_declared_flag }
-			nationalism_n_imperialism = 1
+			state_n_government = 1
 		}
 		
 		allow = {
@@ -76,10 +76,15 @@ political_decisions = {
 		effect = {
 			prestige = 5
 			set_country_flag = reconquista_declared_flag
-			casus_belli = {
-				target = HAI
-				type = conquest_small
-				months = 36
+			THIS = {
+				limit = {
+					HAI = { exists = yes }
+				}
+				casus_belli = {
+					target = HAI
+					type = conquest_small
+					months = 96
+				}
 			}
 		}
 		ai_will_do = {

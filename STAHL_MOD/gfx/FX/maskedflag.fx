@@ -8,7 +8,7 @@ sampler BaseTexture  =
 sampler_state
 {
     Texture = <tex0>;
-    MinFilter = Point;
+    MinFilter = Linear;
     MagFilter = Linear;
     MipFilter = None;
     AddressU = Wrap;
