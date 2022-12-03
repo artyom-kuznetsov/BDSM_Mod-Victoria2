@@ -1,4 +1,4 @@
-name = "Based Mod v2.2.0 (CSDX)"
+name = "Based Mod v3 - BDSHFM (XXXX)"
 path = "mod/STAHL_MOD"
 user_dir = "STAHL"
 replace_path = history/pops/
