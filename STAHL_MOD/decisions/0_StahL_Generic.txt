@@ -41,10 +41,14 @@ political_decisions = {
 			SWI = {
 				set_country_flag = neutrality_flag
 			}
-			any_country = { money = 50000 }
+			any_country = { 
+				money = 50000 
+				any_owned = { any_pop = { reduce_pop = 0.5 } }
+			}
 			#220 = { state_scope = { is_slave = no } }
 			#185 = { state_scope = { is_slave = no } }
 			#149 = { state_scope = { is_slave = no } }
+			
 		}
 	}
 	global_setup_1870 = {
