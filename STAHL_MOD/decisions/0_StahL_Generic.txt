@@ -41,6 +41,7 @@ political_decisions = {
 			SWI = {
 				set_country_flag = neutrality_flag
 			}
+			any_country = { money = 50000 }
 			#220 = { state_scope = { is_slave = no } }
 			#185 = { state_scope = { is_slave = no } }
 			#149 = { state_scope = { is_slave = no } }
@@ -145,6 +146,43 @@ political_decisions = {
 			597 = { life_rating = -5 }
 			596 = { life_rating = -5 }
 		}
+	}	
+	zcountry_pass_reform = {
+		picture = pass_reform
+		alert = no
+		potential = {
+			ai = no
+			civilized = yes
+		}
+			
+		allow = {
+			NOT = {
+				OR = {
+					has_country_modifier = reform_passed
+					has_country_modifier = cannot_pass_reform
+				}
+			}
+			money = 100000
+		}
+
+		effect = {
+			set_country_flag = force_reform
+			add_country_modifier = {
+				name = force_reform
+				duration = 120
+			}
+			add_country_modifier = {
+				name = reform_passed
+				duration = 1825
+			}
+			any_owned_province = {
+				any_pop = {
+					militancy = 1
+					consciousness = 2
+				}
+			}
+			money = -100000
+		}		
 	}
 	capitultate_dec = {
 		alert = no
