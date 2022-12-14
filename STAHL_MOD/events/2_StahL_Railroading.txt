@@ -273,3 +273,21 @@ country_event = {
 		change_tag = CHU
 	}
 }
+
+### SPANISH CIVIL WAR RAILROAD
+country_event = {
+	title = "spain civilwar railroad"
+	desc = "spcwrr"
+	id = 21105
+	trigger = {
+		year = 1844
+		tag = SPA
+		SPC = { exists = yes }
+		ai = yes
+		SPC = { ai = yes }
+	}
+	option = {
+		inherit = SPC
+	}
+}
+
