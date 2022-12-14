@@ -1,3 +1,80 @@
+country_event = { # MONTHLY CLEANUP BDSM
+	title = "Monthly cleanup"
+	desc = "mcl"
+	id = 150530
+	is_triggered_only = yes
+	
+	option = {
+		country_event = { id = 150530 days = 30 }
+		name = "CleanUp!"
+		any_country = { # ткюц йнллсмхярнб
+			random_owned = {
+				limit = {
+					owner = {
+						government = proletarian_dictatorship
+						NOT = { has_country_flag = communist_gov_flag }
+					}
+				}
+				owner = { set_country_flag = communist_gov_flag }
+			}
+		}
+		any_country = { # ткюц йнллсмхярнб сапюрэ
+			limit = {
+				exists = yes
+				NOT = { government = proletarian_dictatorship }
+				has_country_flag = communist_gov_flag
+			}
+			clr_country_flag = communist_gov
+		}
+		any_country = { # сахрэ бяел нрмньемхъ я лхпаюмйнл
+			limit = {
+				exists = yes
+			}
+			relation = { who = THIS value = -400 }
+		}
+		any_country = { # сапюрэ аюцнбюммше пюа яреирш еякх пюаярбю мер
+			limit = {
+				any_state = { is_slave = yes }
+				slavery = no_slavery
+			}
+			any_state = {
+				limit = {
+					is_slave = yes
+				}
+				is_slave = no
+			}
+		}
+		any_country = { # сапюрэ бюяяюкнб меясыеярбсчыху ярпюм
+			limit = {
+				is_vassal = yes
+				exists = yes
+				overlord = { exists = no }
+			}
+			country_event = 477877788
+		}
+		any_country = { # сапюрэ цняр чмхрш
+			limit = {
+				exists = no
+                #has_country_flag = existing_country
+                capital_scope = { NOT = { province_control_days = 120 } }
+                OR = {
+                    is_mobilised = yes
+                    total_amount_of_ships = 1
+                }
+			}
+			annex_to = FROM
+		}
+		any_country = { # ткюц ахнкнцхглю
+			limit = {
+				biologism = 1
+				exists = yes
+				NOT = { has_country_flag = biologism }
+			}
+			set_country_flag = biologism_invented_flag
+		}
+	}
+}
+
 country_event = { # INDIA
 	title = "EVTNAME9535"
 	desc = "EVTDESC9535"
@@ -174,5 +251,21 @@ country_event = {
 		inherit = SAR
 		inherit = TUS
 		inherit = SIC
+	}
+}
+
+country_event = { # BECOME COMMUNIST
+	title = "Comm"
+	desc = "comm"
+	id = 9554
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "hura"
+		political_reform = none_voting
+		political_reform = party_appointed 
+		political_reform = underground_parties
+		government = proletarian_dictatorship
 	}
 }

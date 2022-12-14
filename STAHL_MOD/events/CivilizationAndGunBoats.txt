@@ -45,6 +45,151 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 90959
+	title = "EVTNAME90959"
+	desc = "EVTDESC90959"
+		
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						is_culture_group = east_asian
+						has_country_modifier = uncivilized_isolationism
+						has_country_modifier = sakoku
+						vassal_of = QNG
+						substate_of = QNG
+					}
+					civilized = no
+					naval_schools = yes_naval_schools
+					NOT = { has_country_modifier = isolationist_foreign_naval_schools  }
+				}
+			}
+			owner = { add_country_modifier = { name = isolationist_foreign_naval_schools duration = -1 } }
+		}
+		
+		random_owned = {
+			limit = { 
+				owner = {
+					OR = {
+						is_culture_group = east_asian
+						has_country_modifier = uncivilized_isolationism
+						has_country_modifier = sakoku
+						vassal_of = QNG
+						substate_of = QNG
+					}
+					civilized = no
+					foreign_officers = yes_foreign_officers
+					NOT = { has_country_modifier = isolationist_foreign_officers }
+				}
+			}
+			owner = { add_country_modifier = { name = isolationist_foreign_officers duration = -1 } }
+		}
+
+		
+		random_owned = {
+			limit = { 
+				owner = {
+					OR = {
+						is_culture_group = east_asian
+						has_country_modifier = uncivilized_isolationism
+						has_country_modifier = sakoku
+						vassal_of = QNG
+						substate_of = QNG
+					}
+					civilized = no
+					foreign_naval_officers = yes_foreign_naval_officers
+					NOT = { has_country_modifier = isolationist_foreign_naval_officers }
+				}
+			}
+			owner = { add_country_modifier = { name = isolationist_foreign_naval_officers duration = -1 } }
+		}
+		
+		random_owned = {
+			limit = { 
+				owner = {
+					OR = {
+						is_culture_group = east_asian
+						has_country_modifier = uncivilized_isolationism
+						has_country_modifier = sakoku
+						vassal_of = QNG
+						substate_of = QNG
+					}
+					civilized = no
+					foreign_training = yes_foreign_training
+					NOT = { has_country_modifier = isolationist_foreign_training }
+				}
+			}
+			owner = { add_country_modifier = { name = isolationist_foreign_training duration = -1 } }
+		}
+		
+		random_owned = {
+			limit = { 
+				owner = {
+					has_country_modifier = corrupt_army
+					OR = {
+						foreign_officers = yes_foreign_officers
+						foreign_training = yes_foreign_training						
+					} 
+				}
+			}
+			owner = { remove_country_modifier = corrupt_army }
+		}
+		
+		random_owned = {
+			limit = { 
+				owner = {
+					has_country_modifier = assegai
+					OR = {
+						foreign_officers = yes_foreign_officers
+						foreign_training = yes_foreign_training	
+						foreign_artillery = yes_foreign_artillery
+						foreign_weapons = yes_foreign_weapons
+					} 
+				}
+			}
+			owner = { remove_country_modifier = assegai }
+		}
+		random_owned = {
+			limit = { owner = { civilized = yes } }
+			owner = {
+				remove_country_modifier = educational_reform
+				remove_country_modifier = military_reform
+				remove_country_modifier = western_influences
+				remove_country_modifier = uncivilized_isolationism
+				remove_country_modifier = trade_restrictions
+				remove_country_modifier = sayings_of_the_dutch
+				remove_country_modifier = rangaku
+				remove_country_modifier = sakoku
+				remove_country_modifier = western_presence
+				remove_country_modifier = isolationist_foreign_naval_officers
+				remove_country_modifier = isolationist_foreign_naval_schools
+				remove_country_modifier = isolationist_foreign_officers
+				remove_country_modifier = isolationist_foreign_training
+				any_owned = {
+					remove_province_modifier = western_presence
+					remove_province_modifier = foreign_smugglers
+					remove_province_modifier = foreign_trading_post
+					remove_province_modifier = local_opium_habit
+					remove_province_modifier = european_military_mission
+					remove_province_modifier = legation_quarter
+					remove_province_modifier = kettler_denkmal
+					remove_province_modifier = extraterritoriality_granted
+					remove_province_modifier = boxer_presence
+					remove_province_modifier = boxer_agitation
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA90959"
+	}
+}
+
 #Western Approaches
 province_event = {
 	id = 13010
