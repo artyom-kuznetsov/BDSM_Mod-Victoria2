@@ -1210,19 +1210,18 @@ province_event = {
 	}
 
 	option = {
-		name = "EVTOPTA10200"
-		any_pop = {
-			militancy = 2
-			consciousness = 1
-		}
-		random_pop = {
-			reduce_pop = 0.90
-		}
-	}
-	option = {
 		name = "EVTOPTB10200"
 		any_pop = {
 			consciousness = 3
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA10200"
+		any_pop = {
+			militancy = -2
+			consciousness = -1
+			reduce_pop = 0.99
 		}
 	}
 }

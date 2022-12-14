@@ -681,23 +681,23 @@ promote_to =
 	craftsmen = {
 		factor = 0.01
 			modifier = {
-				factor = -5
+				factor = -4
 				not = { literacy = 0.1 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				not = { literacy = 0.15 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				not = { literacy = 0.2 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				not = { literacy = 0.25 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				not = { literacy = 0.3 }
 			}
 		group = {
@@ -735,7 +735,11 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = 10
+			factor = 1
+			has_country_flag = industrial_revolution_1860_flag
+		}
+		modifier = {
+			factor = 8
 			state_scope = {
 				has_factories = yes
 			}
@@ -743,7 +747,7 @@ promote_to =
 		modifier = {
 			factor = -10
 			state_scope = {
-				NOT = { farmers = 0.36 }
+				NOT = { farmers = 0.44 }
 			}
 		}
 		modifier = {
@@ -765,7 +769,7 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -100
+			factor = -5
 			NOT = {
 				location = {
 					work_available = {
