@@ -13,6 +13,7 @@ everyday_needs = {
 	liquor = 3
 	regular_clothes = 1.5
 	furniture = 3
+	wine = 0.3
 }
 
 life_needs = {
@@ -1035,6 +1036,14 @@ promote_to =
 					work_available = {
 						worker = craftsmen
 					}
+				}
+			}
+		}
+		modifier = {
+			factor = 5.0
+			NOT = {
+				state_scope = {
+					has_factories = no
 				}
 			}
 		}

@@ -8,7 +8,6 @@ strata = middle
 rebel =
 {
 	infantry = 0.5
-	irregular = 0.5
 }
 
 
@@ -707,39 +706,39 @@ promote_to =
 		}
 		group = {		
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.004
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.008
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.012
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.016
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.02
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.024
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.028
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.032
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.036
 			}			
 			modifier = {
@@ -883,19 +882,19 @@ promote_to =
 		factor = 0.01
 		group = {
 			modifier = {
-				factor =  2
+				factor =  1
 				literacy = 0.10
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.20
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.3
 			}
 			modifier = {
-				factor =  2
+				factor =  1
 				literacy = 0.4
 			}
 			modifier = {
@@ -923,8 +922,27 @@ promote_to =
 				literacy = 1
 			}
 		}
+		
 		modifier = {
-				factor = 10
+			factor = 2
+			NOT = {
+				life_needs = 1.0
+			}
+		}
+		modifier = {
+			factor = 2
+			has_country_flag = industrial_revolution_1860_flag
+		}
+		modifier = {
+			factor = 2
+			NOT = { everyday_needs = 0.25 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { everyday_needs = 0.5 }
+		}
+		modifier = {
+				factor = 8
 				state_scope = {
 					has_factories = yes
 				}
@@ -939,7 +957,7 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -100
+			factor = -10
 			NOT = {
 				location = {
 					work_available = {

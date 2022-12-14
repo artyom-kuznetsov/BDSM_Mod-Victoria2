@@ -1,0 +1,53 @@
+country_event = {
+	id = 160120
+	title = "EVTNAME60120"
+	desc = "EVTDESC60120"
+	picture = "greatpowers"
+	
+	trigger = {
+		ai = yes
+		war = no
+		part_of_sphere = yes
+		sphere_owner = {
+			is_greater_power = yes
+			is_culture_group = THIS
+			war = no
+			OR = { 
+				tag = NGF
+				tag = PRU
+			}
+			OR = { 
+				neighbour = PRU
+				neighbour = NGF
+			}
+		}
+		NOT = {
+			AND = {
+				OR = {
+					tag = AUS
+					tag = KUK
+				}
+				sphere_owner = {
+					OR = { tag = PRU tag = NGF }
+				}
+				NOT = {
+					exists = HUN
+				}
+			}
+		}
+		NOT = {	
+			tag = ISR 
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = "EVTOPTA60120"
+		sphere_owner = {
+			country_event = { id=60130 days=0 }
+		}
+	}
+}
