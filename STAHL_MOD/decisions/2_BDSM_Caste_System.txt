@@ -11,6 +11,8 @@ political_decisions = {
 				school_reforms = acceptable_schools
 				school_reforms = good_schools
 			}
+			NOT = { child_labor = child_labor_legal }
+			NOT = { debt_law = serfdom }
 			money = 750000
 		}
 		
@@ -28,6 +30,7 @@ political_decisions = {
 		allow = {
 			ad_hoc_money_bill_printing = 1
 			money = 500000
+			NOT = { centralization = regionalism }
 		}
 		effect = {
 			treasury = -500000
@@ -69,6 +72,7 @@ political_decisions = {
 			remove_country_modifier = caste_sys_industry_modifier
 			remove_country_modifier = caste_sys_centralized_gov_modifier
 			remove_country_modifier = caste_sys_education_modifier
+			political_reform = open_borders
 		}
 	}
 }

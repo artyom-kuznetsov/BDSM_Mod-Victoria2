@@ -83,9 +83,11 @@ political_decisions = {
 		potential = {
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = ainu_expedition_flag }
+			civilized = yes
 		}
 		allow = {
 			1643 = { owned_by = AIN }
+			NOT = { colonial_policy = no_colonies }
 		}
 		effect = {
 			1643 = { secede_province = THIS }
@@ -128,7 +130,6 @@ political_decisions = {
 			owns = 1643
 		}
 		allow = {
-
 		}
 		effect = {
 			1643 = { life_rating = 20 }
@@ -144,11 +145,13 @@ political_decisions = {
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = split_sakhalin_dec_flag }
 			NOT = { owns = 1087 }
+			civilized = yes
 		}
 		allow = {
 			war = no
 			technology = medicine
 			owns = 1643
+			NOT = { colonial_policy = no_colonies }
 		}
 		effect = {
 			RUS = { country_event = 8802 }
@@ -261,6 +264,7 @@ political_decisions = {
 		}
 		allow = {
 			civilized = yes
+			NOT = { colonial_policy = no_colonies }
 		}
 		effect = {
 			casus_belli = {
