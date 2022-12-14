@@ -251,8 +251,8 @@ promote_to =
 	farmers = { #and labourers
 		factor = 0.01
 		modifier = {
-			factor = 5.0
-			soldiers = 0.05
+			factor = 100.0
+			soldiers = 0.051
 		}
 		modifier = {
 			factor = 5.0
@@ -338,11 +338,8 @@ promote_to =
 		}
 		modifier = {
 			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
 		}
 		modifier = {
