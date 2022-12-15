@@ -1,0 +1,76 @@
+political_decisions = {
+	
+	med_reform_trinket = {
+		potential = {
+			health_care = no_health_care
+		}
+		
+		allow = {
+			medicine = 1
+			literacy = 0.25
+		}
+		
+		effect = {
+			social_reform = trinket_health_care
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	med_reform_low = {
+		potential = {
+			health_care = trinket_health_care
+		}
+		
+		allow = {
+			literacy = 0.5
+			year = 1860
+		}
+		
+		effect = {
+			social_reform = low_health_care
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	med_reform_acceptable = {
+		potential = {
+			health_care = low_health_care
+		}
+		
+		allow = {
+			literacy = 0.7
+			year = 1875
+		}
+		
+		effect = {
+			social_reform = acceptable_health_care
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	med_reform_good = {
+		potential = {
+			health_care = acceptable_health_care
+		}
+		
+		allow = {
+			#medicine = 1
+			literacy = 0.85
+			year = 1890
+		}
+		
+		effect = {
+			social_reform = good_health_care
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}
