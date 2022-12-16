@@ -18,15 +18,16 @@ political_decisions = {
 		}
 		allow = {
 			prestige = 45
-			military_score = 75
+			military_score = 100
+			money = 500000
 		}
 		effect = {
-		#	prestige = -15
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = army_tech_school
+			money = -500000
 		}
 	}
 	switch_to_navy_tech = {
@@ -34,30 +35,21 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			tech_school = traditional_academic
-			#OR = {
-			#	ruling_party_ideology = conservative
-			#	ruling_party_ideology = liberal
-			#	ruling_party_ideology = anarcho_liberal
-			#}
-			#pro_military = 5
-		#	laissez_faire = 5
 			NOT = {
-				tech_school = prussian_tech_school
 				has_country_modifier = academic_confusion
 			}
 		}
 		allow = {
-			prestige = 45
-			military_score = 100
 			total_amount_of_ships = 40
+			money = 500000
 		}
 		effect = {
-			#prestige = -15
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = naval_tech_school
+			money = -500000
 		}
 	}
 	switch_to_japanese_tech = {
@@ -66,29 +58,20 @@ political_decisions = {
 			civilized = yes
 			tag = JAP
 			tech_school = traditional_academic
-			#OR = {
-			#	ruling_party_ideology = conservative
-			#	ruling_party_ideology = liberal
-			#	ruling_party_ideology = anarcho_liberal
-			#}
-			#pro_military = 5
-		#	laissez_faire = 5
 			NOT = {
 				has_country_modifier = academic_confusion
 			}
 		}
 		allow = {
-			prestige = 45
-			military_score = 100
-			total_amount_of_ships = 40
+			money = 500000
 		}
 		effect = {
-			#prestige = -15
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = japanese_tech_school
+			money = -500000
 		}
 	}
 	switch_to_culture_tech = {
@@ -96,31 +79,21 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			tech_school = traditional_academic
-			#OR = {
-			#	ruling_party_ideology = liberal
-			#	ruling_party_ideology = fascist
-			#	ruling_party_ideology = communist
-			#	ruling_party_ideology = conservative
-			#	ruling_party_ideology = socialist
-			#}
-			#pacifism = 5
-			#secularized = 5
 			NOT = {
-				tech_school = prussian_tech_school
 				has_country_modifier = academic_confusion
 			}
 		}
 		allow = {
 			prestige = 90
-			average_consciousness = 1
+			money = 500000
 		}
 		effect = {
-			#prestige = -15
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = culture_tech_school
+			money = -500000
 		}
 	}
 	switch_to_trade_tech = {
@@ -128,28 +101,22 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			tech_school = traditional_academic
-			#OR = {
-			#	ruling_party_ideology = liberal
-			#	ruling_party_ideology = anarcho_liberal
-			#}
-			#laissez_faire = 5
-			#free_trade = 5
 			NOT = {
-				tech_school = prussian_tech_school
 				has_country_modifier = academic_confusion
 			}
 		}
 		allow = {
 			prestige = 45
 			industrial_score = 50
+			money = 500000
 		}
 		effect = {
-			#prestige = -15
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = commerce_tech_school
+			money = -500000
 		}
 	}
 	switch_to_industry_tech = {
@@ -157,29 +124,22 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			tech_school = traditional_academic
-			#OR = {
-			#	ruling_party_ideology = reactionary
-			#	ruling_party_ideology = socialist
-			#	ruling_party_ideology = communist
-			#}
-			#interventionism = 5
-			#protectionism = 5
 			NOT = {
-				tech_school = prussian_tech_school
 				has_country_modifier = academic_confusion
 			}
 		}
 		allow = {
-			prestige = 45
 			industrial_score = 50
+			money = 500000
 		}
 		effect = {
 			#prestige = -15
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = industrial_tech_school
+			money = -500000
 		}
 	}
 	switch_to_benelux_tech = {
@@ -188,21 +148,20 @@ political_decisions = {
 			tag = BLX
 			tech_school = traditional_academic
 			NOT = {
-				tech_school = prussian_tech_school
 				has_country_modifier = academic_confusion
 			}
 		}
 		allow = {
-			prestige = 45
-			industrial_score = 50
+			money = 500000
 			
 		}
 		effect = {
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = benelux_tech_school
+			money = -500000
 		}
 	}
 	switch_to_italian_tech = {
@@ -211,21 +170,20 @@ political_decisions = {
 			tag = ITA
 			tech_school = traditional_academic
 			NOT = {
-				tech_school = prussian_tech_school
 				has_country_modifier = academic_confusion
 			}
 		}
 		allow = {
-			prestige = 75
-			industrial_score = 50
+			money = 500000
 			
 		}
 		effect = {
 			add_country_modifier = {
 				name = academic_confusion
-				duration = 1825
+				duration = 7300
 			}
 			tech_school = italian_school
+			money = -500000
 		}
 	}
 	switch_to_traditional_academic = {
@@ -233,20 +191,15 @@ political_decisions = {
 		potential = {
 			NOT = {
 				tech_school = traditional_academic
+				tech_school = prussian_tech_school
 				has_country_modifier = academic_confusion
 			}
 			civilized = yes
 		}
 		
 		allow = {
-			prestige = 45
 		}
 		effect = {
-			#prestige = -15
-			add_country_modifier = {
-				name = academic_confusion
-				duration = 1825
-			}
 			tech_school = traditional_academic
 		}
 		ai_will_do = {
@@ -259,17 +212,17 @@ political_decisions = {
 		#news_desc_medium = "SOME_TEXT_MEDIUM"
 		#news_desc_short = "SOME_TEXT_SHORT"
 	}
-	get_rid_of_academic_confusion = {
-		alert = yes
-		potential = {
-			has_country_modifier = academic_confusion
-		}
-		allow = {
-			money = 500000
-		}
-		effect = {
-			money = -500000
-			remove_country_modifier = academic_confusion
-		}
-	}
+	#get_rid_of_academic_confusion = {
+	#	alert = yes
+	#	potential = {
+	#		has_country_modifier = academic_confusion
+	#	}
+	#	allow = {
+	#		money = 500000
+	#	}
+	#	effect = {
+	#		money = -500000
+	#		remove_country_modifier = academic_confusion
+	#	}
+	#}
 }
