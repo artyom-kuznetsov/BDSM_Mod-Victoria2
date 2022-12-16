@@ -1,0 +1,37 @@
+#Treaty of Narva
+country_event = {
+	id = 32515
+	title = "EVTNAME32515" #the Treaty of Narva
+	desc = "EVTDESC32515"
+	picture = "treaty"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVT32515OPTA"
+		prestige = 10
+		money = 100000
+		relation = { who = RUS value = 100 }
+		RUS = { diplomatic_influence = { who = FIN value = 100 } }
+		339 = { remove_core = FIN }
+		982 = {
+			remove_core = FIN
+			secede_province = RUS
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+	option = {
+		name = "EVT32515OPTB"
+		RUS = { money = 100000 }
+		FROM = { country_event = 32516 }
+		ai_chance = {
+			factor = 0
+		}
+		relation = { who = RUS value = -100 }
+		RUS = { diplomatic_influence = { who = FIN value = -100 } }
+		RUS = { set_country_flag = treaty_of_narva_flag }
+	}
+}
