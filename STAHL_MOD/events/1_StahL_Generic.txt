@@ -121,6 +121,68 @@ country_event = { # DUTCH EIC MODIFIER GIVEBACK
 		add_country_modifier = { name = dutch_east_india_modifier duration = -1 }
 	}
 }
+country_event = {
+	title = "education_trmod_notif_evtname"
+	desc = "education_trmod_notif_evtdesc"
+	id = 150533
+	picture = "Nobel_Literature"
+	trigger = {
+		has_country_modifier = neglected_education_trmod
+		NOT = { has_country_flag = hide_education_notif_flag }
+	}
+	mean_time_to_happen = { 
+		months = 8
+		#modifier = {
+		#	factor = -1
+		#	NOT = { money = 100000 }
+		#}
+		#modifier = {
+		#	factor = -10
+		#	war = yes
+		#}
+	}
+	option = {
+		name = "education_trmod_notif_opta"
+	}
+	option = {
+		name = "education_trmod_notif_optb"
+		set_country_flag = hide_education_notif_flag
+	}
+}
+
+country_event = {
+	title = "militarism_defunded_trmod_notif_evtname"
+	desc = "militarism_defunded_trmod_notif_evtdesc"
+	id = 150533
+	picture = "Military_reform"
+	trigger = {
+		OR = {
+			has_country_modifier = army_with_a_state_militarization_not_funded_trmod
+			has_country_modifier = paramilitarism_militarization_not_funded_trmod
+			has_country_modifier = mandatory_militarization_not_funded_trmod
+			has_country_modifier = basic_militarization_not_funded_trmod
+		}
+		NOT = { has_country_flag = hide_mil_def_notif_flag }
+	}
+	mean_time_to_happen = { 
+		months = 8
+		#modifier = {
+		#	factor = -1
+		#	NOT = { money = 100000 }
+		#}
+		#modifier = {
+		#	factor = -10
+		#	war = yes
+		#}
+	}
+	option = {
+		name = "education_trmod_notif_opta"
+	}
+	option = {
+		name = "education_trmod_notif_optb"
+		set_country_flag = hide_mil_def_notif_flag
+	}
+}
 
 # LATE GAME MODIFIER
 country_event = {
