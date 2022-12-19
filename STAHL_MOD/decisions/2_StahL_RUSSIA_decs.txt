@@ -34,9 +34,15 @@ political_decisions = {
 	integrate_finland_dec = {
 		potential = {
 			OR = { 
-				AND = {
-					tag = RUS
-					has_country_flag = treaty_of_narva_flag
+				OR = {
+					AND = {
+						tag = RUS
+						has_country_flag = treaty_of_narva_flag
+					}
+					AND = {
+						tag = RUS
+						NOT = { 339 = { owned_by = FIN } }
+					}
 				}
 				tag = SWE
 				tag = SCA
