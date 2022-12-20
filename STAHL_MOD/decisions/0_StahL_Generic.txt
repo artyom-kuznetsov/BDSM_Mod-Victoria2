@@ -334,9 +334,7 @@ political_decisions = {
 			NOT = { has_country_modifier = militarization_law_changed }
 		}
 		allow = {
-			OR = { 
-				war_policy = jingoism
-			}
+			war_policy = jingoism
 		}
 		effect = {
 			political_reform = paramilitarism
@@ -355,9 +353,7 @@ political_decisions = {
 			NOT = { has_country_modifier = militarization_law_changed }
 		}
 		allow = {
-			OR = { 
-				war_policy = jingoism
-			}
+			war_policy = jingoism
 		}
 		effect = {
 			political_reform = army_with_a_state
@@ -476,7 +472,7 @@ political_decisions = {
 			political_reform = no_slavery
 			political_reform = civilizing
 			political_reform = bankruptcy
-			political_reform = child_labor_illegal
+			social_reform = child_labor_illegal
 			government = proletarian_dictatorship
 			any_pop = {
 				militancy = -2
@@ -554,7 +550,9 @@ political_decisions = {
 	diplomaty_mp_sm = {
 		alert = no
 		ai = no
-		
+		potential = {
+			ai = no
+		}
 		allow = {
 			#prestige = 1
 			#market_structure = 1
@@ -573,17 +571,22 @@ political_decisions = {
 		}
 	}
 	release_vassal = {
-        alert = no
-
-		potential = {
-			num_of_vassals = 1
-            ai = no
-		}
+    alert = no
+	
+	potential = {
+		num_of_vassals = 1
+           ai = no
+	}
+	
+	allow = {
+	}
+	
 	effect = {
 		country_event = { id = 91306 days = 0 }
 	}
+	
 	ai_will_do = {
-		factor = -1
+		factor = 0
 		}
 	}
 
