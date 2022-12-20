@@ -72,7 +72,31 @@ country_event = { # MONTHLY CLEANUP BDSM
 			}
 			set_country_flag = biologism_invented_flag
 		}
-		any_country = {
+		any_country = { # ÔËÀÃ ĞÅÂ È ÊÎÍÒĞĞÅÂ
+			limit = {
+				exists = yes
+				revolution_n_counterrevolution = 1
+				NOT = { has_country_flag = revolution_n_counter_researched }
+			}
+			set_country_flag = revolution_n_counter_researched
+		}
+		any_country = { # ÔËÀÃ ÒÎÒÀËÈÒÀĞÈÑÒÎÂ
+			limit = {
+				exists = yes
+				centralization = totalitarianism
+				NOT = { has_country_flag = totalitarian_flag }
+			}
+			set_country_flag = totalitarian_flag
+		}
+		any_country = { # ÔËÀÃ ÒÎÒÀËÈÒÀĞÈÑÒÎÂ ÓÁĞÀÒÜ
+			limit = {
+				exists = yes
+				NOT = { centralization = totalitarianism }
+				has_country_flag = totalitarian_flag
+			}
+			clr_country_flag = totalitarian_flag
+		}
+		any_country = { # ÍÎÂÛÉ ÑÂÅÒ ÄËß ÀÌÅĞÈÊÀÍÖÅÂ
 			limit = {
 				capital_scope = {
 					OR = {
