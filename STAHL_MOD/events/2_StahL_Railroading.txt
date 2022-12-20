@@ -241,20 +241,22 @@ country_event = {
 		year = 1860
 		tag = CHI
 		NOT = { has_country_flag = chi_railroad_1_flag }
-		NOT = { CHU = { exists = no } }
-		OR = {
-			HNN = { ai = yes }
-			FJN = { ai = yes }
-			MGL = { ai = yes }
-			WIA = { ai = yes }
-			MCK = { ai = yes }
-			GXI = { ai = yes }
-			YNN = { ai = yes }
-			SXI = { ai = yes }
-			XBI = { ai = yes }
-			TPG = { ai = yes }
-			XIN = { ai = yes }
-			CHU = { ai = yes }
+		NOT = { CHU = { exists = yes } }
+		NOT = {
+			OR = {
+				HNN = { ai = no }
+				FJN = { ai = no }
+				MGL = { ai = no }
+				WIA = { ai = no }
+				MCK = { ai = no }
+				GXI = { ai = no }
+				YNN = { ai = no }
+				SXI = { ai = no }
+				XBI = { ai = no }
+				TPG = { ai = no }
+				XIN = { ai = no }
+				CHU = { ai = no }
+			}
 		}
 	}
 	option = {

@@ -111,12 +111,40 @@ promotion_chance = {
 	}
 	
 	modifier = {
-		factor = -0.1
-		country = { 
-			OR = {
-				slavery = yes_slavery 
-				slavery = freedom_of_womb
-				debt_law = serfdom
+		factor = -0.08
+		country = {
+			slavery = yes_slavery 
+			}
+		}
+	}
+	modifier = {
+		factor = -0.05
+		country = {
+			slavery = freedom_of_womb 
+			}
+		}
+	}
+	
+	modifier = {
+		factor = -0.08
+		country = {
+			debt_law = serfdom
+			}
+		}
+	}
+	
+	modifier = {
+		factor = -0.05
+		country = {
+			debt_law = peonage
+			}
+		}
+	}
+	
+	modifier = {
+		factor = -0.03
+		country = {
+			debt_law = debtors_prisons
 			}
 		}
 	}

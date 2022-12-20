@@ -47,6 +47,10 @@ political_decisions = {
 					name = reform_passed
 					duration = 3650
 				}
+				add_country_modifier = {
+					name = militarization_law_changed
+					duration = 1460
+				}
 				ammunition = 100
 				small_arms = 100
 				artillery = 100
@@ -207,9 +211,148 @@ political_decisions = {
 			589 = { life_rating = -5 }
 			590 = { life_rating = -5 }
 		}
-	}	
+	}
+	militarization_fromBasic_toDisarmed_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = basic_training
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			war_policy = pacifism
+		}
+		effect = {
+			political_reform = no_training
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
+	militarization_fromMandatory_toBasic_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = mandatory_training
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			OR = { 
+				war_policy = pacifism
+				war_policy = anti_military
+			}
+		}
+		effect = {
+			political_reform = basic_training
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
+	militarization_fromParamilitarism_toMandatory_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = paramilitarism
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			OR = { 
+				war_policy = pacifism
+				war_policy = anti_military
+			}
+		}
+		effect = {
+			political_reform = mandatory_training
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
+	militarization_fromArmyState_toParamilitarism_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = army_with_a_state
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			OR = { 
+				war_policy = pacifism
+				war_policy = anti_military
+			}
+		}
+		effect = {
+			political_reform = paramilitarism
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
+	militarization_fromNoTrain_toBasicTrain_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = no_training
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			OR = { 
+				war_policy = jingoism
+				war_policy = pro_military
+				war_policy = anti_military
+			}
+		}
+		effect = {
+			political_reform = basic_training
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
+	militarization_fromBasicTrain_toMandatoryTrain_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = basic_training
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			OR = { 
+				war_policy = jingoism
+				war_policy = pro_military
+			}
+		}
+		effect = {
+			political_reform = mandatory_training
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
+	militarization_fromMandatory_toParamilitarism_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = mandatory_training
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			OR = { 
+				war_policy = jingoism
+			}
+		}
+		effect = {
+			political_reform = paramilitarism
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
+	militarization_fromParamilitarism_toArmyState_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = paramilitarism
+			NOT = { has_country_modifier = militarization_law_changed }
+		}
+		allow = {
+			OR = { 
+				war_policy = jingoism
+			}
+		}
+		effect = {
+			political_reform = army_with_a_state
+			add_country_modifier = { name = militarization_law_changed days = 2190 }
+		}
+	}
 	zcountry_pass_reform = {
-		picture = pass_reform
 		alert = no
 		potential = {
 			ai = no

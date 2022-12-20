@@ -419,31 +419,18 @@ political_reforms = {
 	
 	conscription = {
 		next_step_only = yes
-		demilitarized_state = {
-			global_immigrant_attract = 0.04
-			education_efficiency_modifier = 0.05
-			land_unit_start_experience = -5
-			leadership_modifier = -0.05
+		administrative = yes
+		army_with_a_state = {
+			administrative_multiplier = 5
+			land_unit_start_experience = 10
+			global_immigrant_attract = -0.02
+			rgo_output = -0.1
+			education_efficiency_modifier = -0.1
+			leadership_modifier = 0.2
+			min_social_spending = 0.2
+			non_accepted_pop_militancy_modifier = 0.05
 			allow = {
-				OR = {
-					NOT = { war_policy = jingoism }
-					NOT = { war_policy = pro_military}
-				}
-			}
-		}
-		basic_training = {
-			administrative_multiplier = 1
-			global_immigrant_attract = 0.02
-		}
-		mandatory_training = {
-			administrative_multiplier = 2
-			land_unit_start_experience = 2.5
-			leadership_modifier = 0.05
-			allow = {
-				OR = {
-					war_policy = pro_military
-					war_policy = jingoism
-				}
+				war_policy = jingoism
 			}
 		}
 		paramilitarism = {
@@ -458,17 +445,31 @@ political_reforms = {
 				war_policy = jingoism
 			}
 		}
-		army_with_a_state = {
-			administrative_multiplier = 5
-			land_unit_start_experience = 10
-			global_immigrant_attract = -0.02
-			rgo_output = -0.1
-			education_efficiency_modifier = -0.1
-			leadership_modifier = 0.2
-			min_social_spending = 0.2
-			non_accepted_pop_militancy_modifier = 0.05
+		mandatory_training = {
+			administrative_multiplier = 2
+			land_unit_start_experience = 2.5
+			leadership_modifier = 0.05
 			allow = {
-				war_policy = jingoism
+				OR = {
+					war_policy = pro_military
+					war_policy = jingoism
+				}
+			}
+		}
+		basic_training = {
+			administrative_multiplier = 1
+			global_immigrant_attract = 0.02
+		}
+		demilitarized_state = {
+			global_immigrant_attract = 0.04
+			education_efficiency_modifier = 0.05
+			land_unit_start_experience = -5
+			leadership_modifier = -0.05
+			allow = {
+				OR = {
+					NOT = { war_policy = jingoism }
+					NOT = { war_policy = pro_military}
+				}
 			}
 		}
 	}
@@ -502,13 +503,6 @@ political_reforms = {
 			education_efficiency_modifier = -0.15
 			poor_savings_modifier = -0.5
 			global_immigrant_attract = -0.1
-			allow = {
-				OR = {
-					has_country_flag = clean_up_colonial_government
-					has_country_flag = absolute_monarchy_gov
-					has_country_flag = semi_constitutional_monarchy_gov
-				}
-			}
 		}
 		peonage = {
 			education_efficiency_modifier = -0.05
@@ -518,7 +512,11 @@ political_reforms = {
 			poor_everyday_needs = 0.1
 			poor_savings_modifier = -0.25
 			#on_execute = { effect = { country_event = 6016804 } }
-			allow = { OR = { NOT = { has_country_flag = serfdom_not_abolished } year = 1870 } }
+			allow = { 
+				NOT = {
+					has_country_flag = serfdom_not_abolished 
+				} 
+			}
 		}
 		
 		debtors_prisons = {
@@ -787,32 +785,27 @@ social_reforms = {
 		}
 	}
 	safety_regulations = {
-		administrative = yes
 		next_step_only = yes
 		no_safety = {
 		}
 		trinket_safety = {
 			factory_cost = 0.20
 			factory_maintenance = 0.05
-			administrative_multiplier = 1
 			global_immigrant_attract = 0.02
 		}
-		low_safety = 
+		low_safety = {
 			factory_cost = 0.40
 			factory_maintenance = 0.1
-			administrative_multiplier = 2
 			global_immigrant_attract = 0.04
 		}
 		acceptable_safety = {
 			factory_cost = 0.60
 			factory_maintenance = 0.15
-			administrative_multiplier = 3
 			global_immigrant_attract = 0.06
 		}
 		good_safety = {
 			factory_cost = 0.80
 			factory_maintenance = 0.2
-			administrative_multiplier = 4
 			global_immigrant_attract = 0.08
 		}
 	}

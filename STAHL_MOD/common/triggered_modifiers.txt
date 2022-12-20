@@ -24,6 +24,7 @@ basic_militarization_not_funded_trmod = {
 		NOT = { 
 			administration_spending = 0.5 
 			military_spending = 0.5
+			ai = yes
 		}
 	}
 	core_pop_consciousness_modifier = 0.01
@@ -35,9 +36,10 @@ mandatory_militarization_not_funded_trmod = {
 	trigger = {
 		exists = yes
 		conscription = mandatory_training
-		NOT = { 
+		NOT = {
 			administration_spending = 0.7
 			military_spending = 0.7
+			ai = yes
 		}
 	}
 	core_pop_consciousness_modifier = 0.02
@@ -53,6 +55,7 @@ paramilitarism_militarization_not_funded_trmod = {
 		NOT = { 
 			administration_spending = 0.8
 			military_spending = 0.9
+			ai = yes
 		}
 	}
 	core_pop_consciousness_modifier = 0.03
@@ -68,6 +71,7 @@ army_with_a_state_militarization_not_funded_trmod = {
 		NOT = { 
 			administration_spending = 0.9
 			military_spending = 0.99
+			ai = yes
 		}
 	}
 	core_pop_consciousness_modifier = 0.04
@@ -91,7 +95,10 @@ trinket_health_care_fully_funded_trmod = {
 	trigger = {
 		exists = yes
 		health_care = trinket_health_care
-		administration_spending = 0.5
+		OR = {
+			administration_spending = 0.5
+			ai = yes
+		}
 	}
 	global_population_growth = 0.001
 	icon = 19
@@ -101,15 +108,10 @@ low_health_care_fully_funded_trmod = {
 	trigger = {
 		exists = yes
 		health_care = low_health_care
+		
 		OR = {
-			AND = {
-				ai = yes
-				administration_spending = 0.25
-			}
-			AND = {
-				ai = no
-				administration_spending = 0.6
-			}
+			ai = yes
+			administration_spending = 0.6
 		}
 	}
 	global_population_growth = 0.001
@@ -120,15 +122,10 @@ acceptable_health_care_fully_funded_trmod = {
 	trigger = {
 		exists = yes
 		health_care = acceptable_health_care
+		
 		OR = {
-			AND = {
-				ai = yes
-				administration_spending = 0.3
-			}
-			AND = {
-				ai = no
-				administration_spending = 0.7
-			}
+			ai = yes
+			administration_spending = 0.7
 		}
 	}
 	global_population_growth = 0.002
@@ -140,14 +137,8 @@ good_health_care_fully_funded_trmod = {
 		exists = yes
 		health_care = good_health_care
 		OR = {
-			AND = {
-				ai = yes
-				administration_spending = 0.3
-			}
-			AND = {
-				ai = no
-				administration_spending = 0.8
-			}
+			ai = yes
+			administration_spending = 0.8
 		}
 	}
 	global_population_growth = 0.002
@@ -159,7 +150,10 @@ low_schools_fully_funded_trmod = {
 	trigger = {
 		exists = yes
 		school_reforms = low_schools
-		education_spending = 0.6
+		OR = {
+			education_spending = 0.6
+			ai = yes
+		}
 	}
 	education_efficiency_modifier = 0.025
 	icon = 19
@@ -169,9 +163,12 @@ acceptable_schools_fully_funded = {
 	trigger = {
 		exists = yes
 		school_reforms = acceptable_schools
-		education_spending = 0.75
+		OR = {
+			education_spending = 0.75
+			ai = yes
+		}
 	}
-	education_efficiency_modifier = 0.15
+	education_efficiency_modifier = 0.05
 	icon = 19
 }
 
@@ -249,7 +246,10 @@ good_schools_fully_funded_trmod = {
 	trigger = {
 		exists = yes
 		school_reforms = good_schools
-		education_spending = 0.9
+		OR = {
+			education_spending = 0.9
+			ai = yes
+		}
 	}
 	education_efficiency_modifier = 0.075
 	icon = 19
