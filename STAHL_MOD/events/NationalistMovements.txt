@@ -1694,6 +1694,17 @@ province_event = {
 	}
 
 	option = {
+		name = "EVTOPTB15150"
+		state_scope = {
+			any_pop = {
+				limit = {
+					is_primary_culture = yes
+				}
+				consciousness = 1
+			}
+		}
+	}
+	option = {
 		name = "EVTOPTA15150"
 		state_scope = {
 			any_pop = {
@@ -1708,17 +1719,6 @@ province_event = {
 		}
 	}
 	
-	option = {
-		name = "EVTOPTB15150"
-		state_scope = {
-			any_pop = {
-				limit = {
-					is_primary_culture = yes
-				}
-				consciousness = 1
-			}
-		}
-	}
 }
 
 #Partisans raid weapons-cache
@@ -2292,6 +2292,21 @@ province_event = {
 		}
 	}
 	
+	
+	option = {
+		name = "EVTOPTB15200"
+		state_scope = {
+			any_pop = {
+				limit = {
+					type = officers
+					consciousness = 6
+					is_primary_culture = no
+					is_accepted_culture = no
+				}
+				militancy = 1
+			}
+		}
+	}
 	option = {
 		name = "EVTOPTA15200"
 		state_scope = {
@@ -2305,21 +2320,6 @@ province_event = {
 				reduce_pop = 0.5
 				consciousness = -2
 				militancy = 2
-			}
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB15200"
-		state_scope = {
-			any_pop = {
-				limit = {
-					type = officers
-					consciousness = 6
-					is_primary_culture = no
-					is_accepted_culture = no
-				}
-				militancy = 1
 			}
 		}
 	}

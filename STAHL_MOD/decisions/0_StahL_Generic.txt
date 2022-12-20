@@ -224,7 +224,7 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = demilitarized_state
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
 		}
 	}
 	militarization_fromMandatory_toBasic_dec = {
@@ -242,7 +242,7 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = basic_training
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
 		}
 	}
 	militarization_fromParamilitarism_toMandatory_dec = {
@@ -260,7 +260,7 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = mandatory_training
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
 		}
 	}
 	militarization_fromArmyState_toParamilitarism_dec = {
@@ -278,7 +278,7 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = paramilitarism
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
 		}
 	}
 	militarization_fromNoTrain_toBasicTrain_dec = {
@@ -297,7 +297,11 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = basic_training
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
 		}
 	}
 	militarization_fromBasicTrain_toMandatoryTrain_dec = {
@@ -315,7 +319,11 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = mandatory_training
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
 		}
 	}
 	militarization_fromMandatory_toParamilitarism_dec = {
@@ -332,7 +340,11 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = paramilitarism
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
 		}
 	}
 	militarization_fromParamilitarism_toArmyState_dec = {
@@ -349,7 +361,11 @@ political_decisions = {
 		}
 		effect = {
 			political_reform = army_with_a_state
-			add_country_modifier = { name = militarization_law_changed days = 2190 }
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
 		}
 	}
 	zcountry_pass_reform = {
@@ -381,8 +397,8 @@ political_decisions = {
 			}
 			any_owned_province = {
 				any_pop = {
-					militancy = 1
-					consciousness = 2
+					militancy = 2
+					consciousness = 3
 				}
 			}
 			money = -50000
