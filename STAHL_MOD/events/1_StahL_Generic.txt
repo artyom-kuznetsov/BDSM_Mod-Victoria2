@@ -72,6 +72,22 @@ country_event = { # MONTHLY CLEANUP BDSM
 			}
 			set_country_flag = biologism_invented_flag
 		}
+		any_country = {
+			limit = {
+				capital_scope = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+				}
+				NOT = { year = 1870 }
+			}
+			
+			add_country_modifier = {
+				name = new_world_modifier
+				duration = 365
+			}
+		}
 	}
 }
 country_event = { # DUTCH EIC MODIFIER REMOVE

@@ -523,11 +523,7 @@ political_reforms = {
 		}
 		
 		bankruptcy = {
-			administrative_efficiency_modifier = 0.05
-			tariff_efficiency_modifier = 0.05
-			administrative_multiplier = 2
 			goods_demand = 0.05
-			allow = { has_country_flag = modern_central_bank_system_invented }
 		}
 	}
 	
@@ -559,52 +555,37 @@ political_reforms = {
 	
 	colonial_policy = {
 		next_step_only = yes
-		settlement = {
-			global_assimilation_rate = 0.075
-			global_immigrant_attract = 0.015
-			supply_consumption = 0.05
-			tax_efficiency = -0.03
-			non_accepted_pop_consciousness_modifier = 0.05
-			non_accepted_pop_militancy_modifier = 0.05
-			core_pop_militancy_modifier = -0.03
-			core_pop_consciousness_modifier = -0.03
+		exploitation = {
+			tax_efficiency = 0.02
+			non_accepted_pop_consciousness_modifier = 0.03
+			non_accepted_pop_militancy_modifier = 0.03
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
+			suppression_points_modifier = 0.1
 			administrative_multiplier = 1
-			#on_execute = { effect = { country_event = 6016804 } }
 			allow = { colonial_nation = yes }
 		}
 		
-		exploitation = {
-			prestige = 0.1
-			tax_efficiency = 0.03
-			supply_consumption = 0.05
-			non_accepted_pop_militancy_modifier = -0.05
-			navy_tech_research_bonus = 0.05
-			suppression_points_modifier = 0.25
+		settlement = {
+			global_assimilation_rate = 0.1
+			non_accepted_pop_consciousness_modifier = 0.01
+			non_accepted_pop_militancy_modifier = 0.01
+			tax_efficiency = -0.02
 			administrative_multiplier = 1
 			allow = { colonial_nation = yes }
 		}
-				
+		
 		civilizing = {
-			prestige = 0.1
-			global_assimilation_rate = 0.1
-			education_efficiency_modifier = 0.1
-			culture_tech_research_bonus = 0.05
+			global_assimilation_rate = 0.05
 			administrative_multiplier = 1
+			non_accepted_pop_consciousness_modifier = -0.01
+			non_accepted_pop_militancy_modifier = -0.01
 			allow = {
-				colonial_nation = yes 
-				OR = {
-					has_global_flag = berlin_conference
-					has_country_flag = theocratic_government
-				}
-				NOT = { has_country_flag = islamic_law }
+				colonial_nation = yes
 			}
 		}
 		
 		no_colonies = {
-			allow = { colonial_nation = no }
-			supply_consumption = -0.05
-			navy_tech_research_bonus = -0.05
-			army_tech_research_bonus = 0.05
 		}
 	}
 	
@@ -862,6 +843,7 @@ social_reforms = {
 		administrative = yes
 		next_step_only = yes
 		no_health_care = {
+			allow = { always = no } 
 		}
 		trinket_health_care = {
 			administrative_multiplier = 2
@@ -895,19 +877,19 @@ social_reforms = {
 			global_assimilation_rate = -0.005
 		}
 		low_schools = {
-			education_efficiency_modifier = 0.025
+			education_efficiency_modifier = 0.05
 			global_assimilation_rate = 0.01
 			global_immigrant_attract = 0.02
 			administrative_multiplier = 1
 		}
 		acceptable_schools = {
-			education_efficiency_modifier = 0.05
+			education_efficiency_modifier = 0.1
 			global_assimilation_rate = 0.05
 			global_immigrant_attract = 0.05
 			administrative_multiplier = 3
 		}
 		good_schools = {
-			education_efficiency_modifier = 0.1
+			education_efficiency_modifier = 0.15
 			global_assimilation_rate = 0.1
 			global_immigrant_attract = 0.1
 			administrative_multiplier = 4
