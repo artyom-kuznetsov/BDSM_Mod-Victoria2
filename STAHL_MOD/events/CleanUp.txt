@@ -29,8 +29,43 @@ country_event = {
 		name = "EVTOPTA60000"
 		government = proletarian_dictatorship
 		social_reform = child_labor_illegal
-		slavery = no_slavery
+		political_reform = no_slavery
 		centralization = totalitarianism
+	}
+	
+}
+country_event = {
+	id = 60001
+	title = "EVTNAME60000"
+	desc = "EVTDESC60001"
+	picture = "Unite"
+	
+	trigger = {
+		NOT = {
+			government = social_republic
+		}
+		OR = {
+			ruling_party_ideology = socialist
+		}
+		vote_franschise = none_voting
+		trade_unions = all_trade_unions
+		upper_house_composition = party_appointed
+		OR = {
+			debt_law = debtors_prisons
+			debt_law = bankruptcy
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = {
+		name = "EVTOPTA60000"
+		government = social_republic
+		social_reform = child_labor_illegal
+		political_reform = no_slavery
+		political_reform = all_voting_pops
 	}
 }
 
@@ -337,8 +372,33 @@ country_event = {
 		
 		centralization = totalitarianism
 		social_reform = child_labor_illegal
-		slavery = no_slavery
+		political_reform = no_slavery
 		government = proletarian_dictatorship
+	}
+}
+
+country_event = {
+	id = 60101
+	title = "EVTNAME60080"
+	desc = "EVTDESC60080"
+	picture = "Administration"
+	
+	trigger = {
+		government = democracy
+		vote_franschise = none_voting
+		ruling_party_ideology = socialist
+		civilized = yes
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = {
+		name = "EVTOPTA60080"
+		social_reform = child_labor_illegal
+		political_reform = no_slavery
+		government = social_republic
 	}
 }
 
