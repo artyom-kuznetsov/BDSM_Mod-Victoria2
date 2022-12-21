@@ -26,6 +26,44 @@ country_event = { # MONTHLY CLEANUP BDSM
 			}
 			clr_country_flag = communist_gov
 		}
+		any_country = { # ÔËÀÃ ÔÀØÈÑÒÎÂ
+			random_owned = {
+				limit = {
+					owner = {
+						government = fascist_dictatorship
+						NOT = { has_country_flag = fascist_gov_flag }
+					}
+				}
+				owner = { set_country_flag = fascist_gov_flag }
+			}
+		}
+		any_country = { # ÔËÀÃ ÔÀØÈÑÒÎÂ ÓÁĞÀÒÜ
+			limit = {
+				exists = yes
+				NOT = { government = fascist_dictatorship }
+				has_country_flag = fascist_gov_flag
+			}
+			clr_country_flag = fascist_gov_flag
+		}
+		any_country = { # ÔËÀÃ ÀÁÑÎËŞÒÌÎÍÀĞÕÈÈ
+			random_owned = {
+				limit = {
+					owner = {
+						government = absolute_monarchy
+						NOT = { has_country_flag = absolute_gov_flag }
+					}
+				}
+				owner = { set_country_flag = absolute_gov_flag }
+			}
+		}
+		any_country = { # ÔËÀÃ ÔÀØÈÑÒÎÂ ÓÁĞÀÒÜ
+			limit = {
+				exists = yes
+				NOT = { government = absolute_monarchy }
+				has_country_flag = absolute_gov_flag
+			}
+			clr_country_flag = absolute_gov_flag
+		}
 		any_country = { # ÓÁÈÒÜ ÂÑÅÌ ÎÒÍÎØÅÍÈß Ñ ÌÈĞÁÀÍÊÎÌ
 			limit = {
 				exists = yes

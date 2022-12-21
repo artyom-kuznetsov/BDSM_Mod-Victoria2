@@ -7,16 +7,18 @@ country_event = {
 	trigger = {
 		NOT = {
 			government = proletarian_dictatorship
-			government = presidential_dictatorship
-			government = bourgeois_dictatorship
-			government = fascist_dictatorship
-			government = absolute_monarchy
 		}
-		civilized = yes
-		political_parties = underground_parties
+		OR = {
+			ruling_party_ideology = communist
+		}
 		vote_franschise = none_voting
+		trade_unions = all_trade_unions
 		upper_house_composition = party_appointed
-		ruling_party_ideology = communist
+		OR = {
+			debt_law = debtors_prisons
+			debt_law = bankruptcy
+		}
+		revolution_n_counterrevolution = 1
 	}
 	
 	mean_time_to_happen = {
@@ -26,6 +28,9 @@ country_event = {
 	option = {
 		name = "EVTOPTA60000"
 		government = proletarian_dictatorship
+		social_reform = child_labor_illegal
+		slavery = no_slavery
+		centralization = totalitarianism
 	}
 }
 
@@ -79,6 +84,7 @@ country_event = {
 		vote_franschise = none_voting
 		upper_house_composition = party_appointed
 		ruling_party_ideology = liberal
+		public_meetings = no_meeting
 	}
 	
 	mean_time_to_happen = {
@@ -110,6 +116,11 @@ country_event = {
 		vote_franschise = none_voting
 		upper_house_composition = party_appointed
 		ruling_party_ideology = fascist
+		citizens_rights = primary_culture_only
+		OR = {
+			conscription = paramilitarism
+			conscription = army_with_a_state
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -118,6 +129,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA60030"
+		centralization = totalitarianism
 		government = fascist_dictatorship
 	}
 }
@@ -129,18 +141,25 @@ country_event = {
 	picture = "Unite"
 	
 	trigger = {
-		OR = {
-			government = proletarian_dictatorship
-			government = presidential_dictatorship
-			government = bourgeois_dictatorship
-			government = fascist_dictatorship
-		}
-		civilized = yes
+		NOT = { government = democracy }
 		NOT = {
-			political_parties = underground_parties
-			vote_franschise = none_voting
-			upper_house_composition = party_appointed
+			ruling_party_ideology = reactionary
+			ruling_party_ideology = traditionalist
 		}
+		vote_franschise = universal_voting
+		citizens_rights = all_voting_pops
+		civilized = yes
+		OR = {
+			debt_law = debtors_prisons
+			debt_law = bankruptcy
+		}
+		NOT = { border_policy = closed_borders }
+		NOT = { press_rights = state_press }
+		OR = {
+			political_parties = { non_secret_ballots }
+			political_parties = { secret_ballots }
+		}
+		public_meetings = yes_meeting
 	}
 	
 	mean_time_to_happen = {
@@ -150,6 +169,16 @@ country_event = {
 	option = {
 		name = "EVTOPTA60050"
 		government = democracy
+		
+	}
+	option = {
+		name = "EVTOPTB60050"
+		political_reform = universal_weighted_voting
+		any_pop = {
+			money = -100000
+			militancy = 5
+			consciousness = 3
+		}
 	}
 }
 
@@ -160,16 +189,20 @@ country_event = {
 	picture = "Monarchy"
 	
 	trigger = {
+		NOT = { 
+			government = absolute_monarchy
+		}
 		OR = {
 			government = hms_government
 			government = prussian_constitutionalism
 		}
-		civilized = yes
-		NOT = { ruling_party_ideology = fascist }
-		#NOT = { ruling_party_ideology = anarcho_liberal }
-		NOT = { ruling_party_ideology = communist }
+		OR = {
+			ruling_party_ideology = reactionary
+			ruling_party_ideology = conservative
+			ruling_party_ideology = traditionalist
+		}
 		vote_franschise = none_voting
-		upper_house_composition = party_appointed
+		political_parties = underground_parties
 	}
 	
 	mean_time_to_happen = {
@@ -191,7 +224,7 @@ country_event = {
 	trigger = {
 		government = absolute_monarchy
 		NOT = {
-				vote_franschise = none_voting
+			vote_franschise = none_voting
 		}	
 		civilized = yes	
 	}
@@ -219,6 +252,7 @@ country_event = {
 			political_parties = non_secret_ballots
 		}
 		civilized = yes
+		NOT = { citizens_rights = primary_culture_only }
 	}
 	
 	mean_time_to_happen = {
@@ -243,6 +277,7 @@ country_event = {
 		OR = {
 			ruling_party_ideology = conservative
 			ruling_party_ideology = reactionary
+			ruling_party_ideology = traditionalist
 		}
 		civilized = yes
 	}
@@ -287,16 +322,9 @@ country_event = {
 	picture = "Administration"
 	
 	trigger = {
-		OR = {
-			government = democracy
-			government = absolute_monarchy
-			government = hms_government
-		}
+		government = democracy
 		vote_franschise = none_voting
-		OR = {
-			ruling_party_ideology = socialist
-			ruling_party_ideology = communist
-		}
+		ruling_party_ideology = communist
 		civilized = yes
 	}
 	
@@ -306,6 +334,10 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA60080"
+		
+		centralization = totalitarianism
+		social_reform = child_labor_illegal
+		slavery = no_slavery
 		government = proletarian_dictatorship
 	}
 }
@@ -329,6 +361,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA60080"
+		centralization = totalitarianism
 		government = fascist_dictatorship
 	}
 }

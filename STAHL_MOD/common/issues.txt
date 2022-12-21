@@ -153,14 +153,11 @@ party_issues = {
 	}
 	citizenship_policy = {
 		residency = {
-			rules = { primary_culture_voting = yes }
 		}
 		limited_citizenship = {
-			rules = { culture_voting = yes }
 			global_assimilation_rate = 0.05
 		}
 		full_citizenship = {
-			rules = { all_voting = yes }
 			global_assimilation_rate = 0.1
 			global_immigrant_attract = 0.05
 		}
@@ -220,14 +217,14 @@ political_reforms = {
 		yes_slavery = {
 			rules = { slavery_allowed = yes }
 			allow = {
-				NOT = { has_country_flag = communist_gov }
+				NOT = { has_country_flag = communist_gov_flag }
 			}
 		}
 		
 		freedom_of_womb = {
 			rules = { slavery_allowed = yes }
 			allow = {
-				NOT = { has_country_flag = communist_gov }
+				NOT = { has_country_flag = communist_gov_flag }
 				NOT = { has_country_flag = fascist_gov }
 				NOT = { has_country_flag = slave_revolution }
 				OR = {
@@ -475,7 +472,6 @@ political_reforms = {
 			education_efficiency_modifier = -0.05
 			allow = {
 				citizenship_policy = residency 
-				NOT = { has_country_flag = theocratic_government }
 			}
 		}
 		culture_voting_only = {
@@ -485,8 +481,8 @@ political_reforms = {
 		all_voting_pops = {
 			rules = { all_voting = yes }
 			non_accepted_pop_militancy_modifier = -0.01
-			global_assimilation_rate = 0.2
-			global_immigrant_attract = 0.1
+			global_assimilation_rate = 0.12
+			global_immigrant_attract = 0.02
 		}
 	}
 	
@@ -585,6 +581,11 @@ political_reforms = {
 			suppression_points_modifier = 0.2
 			allow = {
 				has_country_flag = revolution_n_counter_researched
+				OR = {
+					has_country_flag = communist_gov_flag
+					has_country_flag = fascist_gov_flag
+					has_country_flag = absolute_gov_flag
+				}
 			}
 		}
 		unitary = {

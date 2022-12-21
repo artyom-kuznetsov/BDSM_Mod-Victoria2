@@ -364,6 +364,17 @@ political_decisions = {
 			}
 		}
 	}
+	change_government_guide_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+		}
+		allow = {
+		}
+		effect = {
+			country_event = 140536
+		}
+	}
 	zcountry_pass_reform = {
 		alert = no
 		potential = {
@@ -448,66 +459,66 @@ political_decisions = {
 	#		remove_country_modifier = supporting_science_modifier
 	#	}
 	#}
-	switch_to_communist = {
-		potential = {
-			OR = {
-				ruling_party_ideology = socialist
-				ruling_party_ideology = communist
-			}
-			ai = no
-			is_ideology_enabled = communist
-			NOT = { government = proletarian_dictatorship }
-			#NOT = { tag = TUR } 
-		}
-		allow = {
-			socialist = 10
-			trade_unions = all_trade_unions
-		}
-		effect = {
-			prestige = -10
-			political_reform = none_voting
-			political_reform = party_appointed 
-			political_reform = underground_parties
-			political_reform = all_voting_pops
-			political_reform = no_slavery
-			political_reform = civilizing
-			political_reform = bankruptcy
-			social_reform = child_labor_illegal
-			government = proletarian_dictatorship
-			any_pop = {
-				militancy = -2
-			}
-			any_pop = {
-				consciousness = 2
-			}
-			add_country_modifier = { name = proletarian_dec_taken duration = -1 }
-		}
-	}
-	revert_from_communist = {
-		potential = {
-			ai = no
-			is_ideology_enabled = communist
-			government = proletarian_dictatorship
-			NOT = { has_country_modifier = proletarian_dec_taken } 
-		}
-		allow = {
-			
-		}
-		effect = {
-			prestige = -10
-			political_reform = universal_voting
-			political_reform = appointed 
-			political_reform = secret_ballots
-			government = hms_government
-			any_pop = {
-				militancy = 2
-			}
-			any_pop = {
-				consciousness = 2
-			}
-			remove_country_modifier = proletarian_dec_taken
-		}
-	}
+	#switch_to_communist = {
+	#	potential = {
+	#		OR = {
+	#			ruling_party_ideology = socialist
+	#			ruling_party_ideology = communist
+	#		}
+	#		ai = no
+	#		is_ideology_enabled = communist
+	#		NOT = { government = proletarian_dictatorship }
+	#		#NOT = { tag = TUR } 
+	#	}
+	#	allow = {
+	#		socialist = 10
+	#		trade_unions = all_trade_unions
+	#	}
+	#	effect = {
+	#		prestige = -10
+	#		political_reform = none_voting
+	#		political_reform = party_appointed 
+	#		political_reform = underground_parties
+	#		political_reform = all_voting_pops
+	#		political_reform = no_slavery
+	#		political_reform = civilizing
+	#		political_reform = bankruptcy
+	#		social_reform = child_labor_illegal
+	#		government = proletarian_dictatorship
+	#		any_pop = {
+	#			militancy = -2
+	#		}
+	#		any_pop = {
+	#			consciousness = 2
+	#		}
+	#		add_country_modifier = { name = proletarian_dec_taken duration = -1 }
+	#	}
+	#}
+	#revert_from_communist = {
+	#	potential = {
+	#		ai = no
+	#		is_ideology_enabled = communist
+	#		government = proletarian_dictatorship
+	#		NOT = { has_country_modifier = proletarian_dec_taken } 
+	#	}
+	#	allow = {
+	#		
+	#	}
+	#	effect = {
+	#		prestige = -10
+	#		political_reform = universal_voting
+	#		political_reform = appointed 
+	#		political_reform = secret_ballots
+	#		government = hms_government
+	#		any_pop = {
+	#			militancy = 2
+	#		}
+	#		any_pop = {
+	#			consciousness = 2
+	#		}
+	#		remove_country_modifier = proletarian_dec_taken
+	#	}
+	#}
 	
 	diplomaty_mp = {
 		alert = no
