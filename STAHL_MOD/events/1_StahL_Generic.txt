@@ -224,6 +224,26 @@ country_event = {
 	}
 }
 
+country_event = {
+	title = "revoke_academy_confirm_evtname"
+	desc = "revoke_academy_confirm_evtdesc"
+	id = 150535
+	picture = "School"
+	is_triggered_only = yes
+	
+	option = {
+		name = "revoke_academy_confirm_opta"
+	}
+	option = {
+		name = "revoke_academy_confirm_optb"
+		tech_school = traditional_academic
+		add_country_modifier = {
+			name = academic_confusion
+			duration = 7300
+		}
+	}
+}
+
 # LATE GAME MODIFIER
 country_event = {
 	title = "lategamemod_evtname"
