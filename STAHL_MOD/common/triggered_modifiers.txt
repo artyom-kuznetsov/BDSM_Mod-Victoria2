@@ -22,9 +22,11 @@ basic_militarization_not_funded_trmod = {
 		exists = yes
 		conscription = basic_training
 		NOT = { 
-			administration_spending = 0.5 
-			military_spending = 0.5
 			ai = yes
+		}
+		OR = {
+			NOT = { administration_spending = 0.5 }
+			NOT = { military_spending = 0.5 }
 		}
 	}
 	core_pop_consciousness_modifier = 0.01
@@ -37,9 +39,11 @@ mandatory_militarization_not_funded_trmod = {
 		exists = yes
 		conscription = mandatory_training
 		NOT = {
-			administration_spending = 0.7
-			military_spending = 0.7
 			ai = yes
+		}
+		OR = {
+			NOT = { administration_spending = 0.7 }
+			NOT = { military_spending = 0.7 }
 		}
 	}
 	core_pop_consciousness_modifier = 0.02
@@ -53,9 +57,11 @@ paramilitarism_militarization_not_funded_trmod = {
 		exists = yes
 		conscription = paramilitarism
 		NOT = { 
-			administration_spending = 0.8
-			military_spending = 0.9
 			ai = yes
+		}
+		OR = {
+			NOT = { administration_spending = 0.8 }
+			NOT = { military_spending = 0.9 }
 		}
 	}
 	core_pop_consciousness_modifier = 0.03
@@ -69,9 +75,11 @@ army_with_a_state_militarization_not_funded_trmod = {
 		exists = yes
 		conscription = army_with_a_state
 		NOT = { 
-			administration_spending = 0.9
-			military_spending = 0.99
 			ai = yes
+		}
+		OR = {
+			NOT = { administration_spending = 0.9 }
+			NOT = { military_spending = 0.99 }
 		}
 	}
 	core_pop_consciousness_modifier = 0.04
