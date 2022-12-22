@@ -14,3 +14,20 @@ country_event = {
 		capital = 2221
 	}
 }
+
+country_event = {
+	id = 91752 # CHINA OPIUM SOLD
+	title = "EVTNAME91752" 
+	desc = "EVTDESC91752" #
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA91752" #
+		add_country_modifier = { name = opium_sold_to_this_modifier duration = 365 }
+	}
+	option = {
+		name = "EVTOPTB91752" 
+		money = -100000
+		add_country_modifier = { name = opium_sold_to_this_light_modifier duration = 365 }
+	}
+}

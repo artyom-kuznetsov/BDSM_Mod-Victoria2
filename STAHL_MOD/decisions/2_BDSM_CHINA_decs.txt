@@ -1,4 +1,131 @@
 political_decisions = {
+	exploit_tradeport_dec = {
+		potential = {
+			OR = {
+				2632 = {
+					owned_by = THIS
+					controlled_by = THIS
+					1495 = {
+						owner = {
+							has_country_flag = chinese_country_flag
+						}
+					}
+				}
+				1498 = {
+					owned_by = THIS
+					controlled_by = THIS
+					1493 = {
+						owner = {
+							has_country_flag = chinese_country_flag
+						}
+					}
+				}
+				1496 = {
+					owned_by = THIS
+					controlled_by = THIS
+					1493 = {
+						owner = {
+							has_country_flag = chinese_country_flag
+						}
+					}
+				}
+				1498 = {
+					owned_by = THIS
+					controlled_by = THIS
+					OR = {
+						1539 = {
+							owner = {
+								has_country_flag = chinese_country_flag
+							}
+						}
+						1606 = {
+							owner = {
+								has_country_flag = chinese_country_flag
+							}
+						}
+					}
+				}
+				1566 = {
+					owned_by = THIS
+					controlled_by = THIS
+					OR = {
+						1565 = {
+							owner = {
+								has_country_flag = chinese_country_flag
+							}
+						}
+						1571 = {
+							owner = {
+								has_country_flag = chinese_country_flag
+							}
+						}
+					}
+				}
+				3249 = {
+					owned_by = THIS
+					controlled_by = THIS
+					OR = {
+						1617 = {
+							owner = {
+								has_country_flag = chinese_country_flag
+							}
+						}
+						1570 = {
+							owner = {
+								has_country_flag = chinese_country_flag
+							}
+						}
+					}
+				}
+				1569 = {
+					owned_by = THIS
+					controlled_by = THIS
+					1565 = {
+						owner = {
+							has_country_flag = chinese_country_flag
+						}
+					}
+				}
+				1481 = {
+					owned_by = THIS
+					controlled_by = THIS
+					1479 = {
+						owner = {
+							has_country_flag = chinese_country_flag
+						}
+					}
+				}
+			}
+			NOT = { 
+				has_country_modifier = treatyport_exploited_modifier
+			}
+		}
+		allow = {
+			associationism = 1
+			opium = 1000
+			NOT = {
+				CHU = {
+					exists = yes
+					border_policy = closed_borders
+				}
+			}
+		}
+		effect = {
+			money = 80000
+			opium = -1000
+			any_country = {
+				limit = { 
+					has_country_flag = chinese_country_flag 
+				}
+				country_event = 91752
+				relation = {
+					who = THIS
+					value = -50
+				}
+			}
+			add_country_modifier = { name = treatyport_exploited_modifier duration = 730 }
+		}
+	}
 	form_china = {
 		potential = {
 			#tag = HNN
@@ -42,6 +169,7 @@ political_decisions = {
 			set_global_flag = china_westernized
 			years_of_research = 5
 			add_country_modifier = { name = brz_edu_program duration = 3650 }
+			set_country_flag = chinese_country_flag
 		}
 		ai_will_do = {
 			factor = 1

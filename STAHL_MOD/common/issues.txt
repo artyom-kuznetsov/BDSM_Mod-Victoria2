@@ -418,6 +418,7 @@ political_reforms = {
 			leadership_modifier = 0.2
 			min_social_spending = 0.2
 			non_accepted_pop_militancy_modifier = 0.05
+			global_pop_militancy_modifier = 0.02
 			allow = {
 				war_policy = jingoism
 			}
@@ -429,7 +430,7 @@ political_reforms = {
 			rgo_output = -0.05
 			leadership_modifier = 0.1
 			min_social_spending = 0.1
-			non_accepted_pop_militancy_modifier = 0.02
+			non_accepted_pop_militancy_modifier = 0.04
 			allow = {
 				war_policy = jingoism
 			}
@@ -576,7 +577,6 @@ political_reforms = {
 		totalitarianism = {
 			global_immigrant_attract = -0.04
 			global_pop_militancy_modifier = 0.01
-			tax_efficiency = 0.05
 			cb_generation_speed_modifier = 0.1
 			suppression_points_modifier = 0.2
 			allow = {
@@ -597,6 +597,10 @@ political_reforms = {
 			allow = {
 				has_country_flag = revolution_n_counter_researched
 				NOT = { num_of_substates = 1 }
+				NOT = {
+					has_country_flag = communist_gov_flag
+					has_country_flag = fascist_gov_flag
+				}
 			}
 		}
 		federalism = {
@@ -608,6 +612,10 @@ political_reforms = {
 				is_vassal = no
 				NOT = { has_country_flag = the_slavery_debate }
 				has_country_flag = revolution_n_counter_researched
+				NOT = {
+					has_country_flag = communist_gov_flag
+					has_country_flag = fascist_gov_flag
+				}
 			}
 		}
 		regionalism = {
@@ -617,6 +625,10 @@ political_reforms = {
 			allow = {
 				number_of_states = 2
 				debt_law = serfdom
+				NOT = {
+					has_country_flag = communist_gov_flag
+					has_country_flag = fascist_gov_flag
+				}
 			}
 		}
 		confederalism = {
@@ -637,6 +649,10 @@ political_reforms = {
 						average_militancy = 7
 					}
 					has_country_flag = is_swiss
+				}
+				NOT = {
+					has_country_flag = communist_gov_flag
+					has_country_flag = fascist_gov_flag
 				}
 			}
 		}

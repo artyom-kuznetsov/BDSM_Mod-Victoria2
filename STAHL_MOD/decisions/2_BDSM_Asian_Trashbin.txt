@@ -72,7 +72,81 @@ political_decisions = {
 			remove_country_modifier = caste_sys_industry_modifier
 			remove_country_modifier = caste_sys_centralized_gov_modifier
 			remove_country_modifier = caste_sys_education_modifier
-			political_reform = open_borders
+		}
+	}
+	asian_education_boost_1_dec = {
+		potential = {
+			capital_scope = {
+				OR = {
+					continent = asia
+					continent = indochina
+					continent = east_indies
+				}
+			}
+			civilized = yes
+			NOT = { has_country_flag = asian_education_1_flag }
+			NOT = { tag = JAP }
+		}
+		allow = {
+			money = 300000
+			positivism = 1
+		}
+		effect = {
+			money = -300000
+			set_country_flag = asian_education_1_flag
+			add_country_modifier = { name = brz_edu_program duration = 1825 }
+		}
+	}
+	asian_education_boost_2_dec = {
+		potential = {
+			capital_scope = {
+				OR = {
+					continent = asia
+					continent = indochina
+					continent = east_indies
+				}
+			}
+			civilized = yes
+			has_country_flag = asian_education_1_flag
+			NOT = {
+				has_country_flag =asian_education_2_flag
+				has_country_modifier = brz_edu_program
+			}
+		}
+		allow = {
+			money = 500000
+			functionalism = 1
+		}
+		effect = {
+			money = -500000
+			set_country_flag = asian_education_1_flag
+			add_country_modifier = { name = brz_edu_program duration = 1825 }
+		}
+	}
+	asian_education_boost_3_dec = {
+		potential = {
+			capital_scope = {
+				OR = {
+					continent = asia
+					continent = indochina
+					continent = east_indies
+				}
+			}
+			civilized = yes
+			has_country_flag = asian_education_2_flag
+			NOT = {
+				has_country_flag = asian_education_3_flag
+				has_country_modifier = brz_edu_program
+			}
+		}
+		allow = {
+			money = 1000000
+			biologism = 1
+		}
+		effect = {
+			money = -1000000
+			set_country_flag = asian_education_1_flag
+			add_country_modifier = { name = brz_edu_program duration = 1825 }
 		}
 	}
 }

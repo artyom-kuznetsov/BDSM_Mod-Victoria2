@@ -130,7 +130,10 @@ political_decisions = {
 	fight_illiteracy = {
 		potential = {
 			tag = TUR
-			government = proletarian_dictatorship
+			OR = {
+				government = proletarian_dictatorship
+				government = social_republic
+			}
 			has_country_flag = TUR_union
 			NOT = { has_country_flag = TUR_education }
 		}
