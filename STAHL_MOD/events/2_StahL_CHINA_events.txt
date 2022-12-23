@@ -88,6 +88,7 @@ country_event = {
 	trigger = {
 		has_country_flag = collaborates_china_flag
 		NOT = { has_country_modifier = china_coll_tick }
+		NOT = { has_country_modifier = china_cartography_buff }
 		NOT = {
 			CHU = {
 				civilized = yes
@@ -95,12 +96,12 @@ country_event = {
 		}
 	}
 	mean_time_to_happen = {
-		months = 12
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA91756" #
-		prestige = -3
+		prestige = -5
 		add_country_modifier = { name = china_coll_tick duration = 185 }
 		any_country = {
 			limit = {
@@ -112,8 +113,9 @@ country_event = {
 	}
 	option = {
 		name = "EVTOPTB91756" #
-		prestige = 5
-		money = -30000
+		prestige = 8
+		money = -50000
+		add_country_modifier = { name = china_coll_tick duration = 185 }
 		any_country = {
 			limit = {
 				ai = no
@@ -127,6 +129,14 @@ country_event = {
 		name = "EVTOPTC91756" #
 		clr_global_flag = china_collaborates
 		clr_country_flag = collaborates_china_flag
+		
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			add_country_modifier = { name = country_declined_collaboration duration = 365 }
+		}
 	}
 }
 
@@ -148,7 +158,7 @@ country_event = {
 		}
 	}
 	mean_time_to_happen = {
-		months = 12
+		months = 6
 	}
 	
 	option = {
@@ -169,6 +179,7 @@ country_event = {
 		name = "EVTOPTB91757" #
 		money = -50000
 		add_country_modifier = { name = china_accepted_research duration = 365 }
+		add_country_modifier = { name = china_coll_tick duration = 185 }
 		any_country = {
 			limit = {
 				ai = no
@@ -182,6 +193,13 @@ country_event = {
 		name = "EVTOPTC91757" #
 		clr_global_flag = china_collaborates
 		clr_country_flag = collaborates_china_flag
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			add_country_modifier = { name = country_declined_collaboration duration = 365 }
+		}
 	}
 }
 
@@ -207,14 +225,78 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
-		name = "EVTOPTA91758" #
+		name = "EVTOPTA91759" #
 		prestige = -3
 	}
 	option = {
-		name = "EVTOPTB91758" #
+		name = "EVTOPTB91759" #
 		clr_global_flag = china_collaborates
 		any_country = {
 			clr_country_flag = collaborates_china_flag
+		}
+		add_country_modifier = { name = country_declined_collaboration duration = 365 }
+
+	}
+}
+
+country_event = {
+	id = 91760 # CHINA COLLABORATION BENEFIT TAX EFF
+	title = "EVTNAME91760" 
+	desc = "EVTDESC91760" #
+	trigger = {
+		has_country_flag = collaborates_china_flag
+		NOT = { 
+			has_country_modifier = china_coll_tick
+			has_country_modifier = china_declined_taxeff
+			has_country_modifier = china_accepted_taxeff
+		}
+		NOT = {
+			CHU = {
+				civilized = yes
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = {
+		name = "EVTOPTA91760" #
+		add_country_modifier = { name = china_coll_tick duration = 185 }
+		add_country_modifier = { name = china_declined_taxeff duration = 365 }
+		
+		money = 50000
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			country_event = 91759
+		}
+	}
+	option = {
+		name = "EVTOPTB91757" #
+		add_country_modifier = { name = china_accepted_taxeff duration = 365 }
+		add_country_modifier = { name = china_coll_tick duration = 185 }
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			add_country_modifier = { name = china_taxeff_buff duration = 365 }
+			country_event = 91758
+		}
+	}
+	option = {
+		name = "EVTOPTC91757" #
+		clr_global_flag = china_collaborates
+		clr_country_flag = collaborates_china_flag
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			add_country_modifier = { name = country_declined_collaboration duration = 365 }
 		}
 	}
 }
