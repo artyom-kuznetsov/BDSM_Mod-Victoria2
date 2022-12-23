@@ -489,12 +489,12 @@ migration_chance = {
 	}
 	
 	modifier = {
-		factor = 0.08
+		factor = 0.1
 		country = { colonial_policy = settlement }
 	}
 	
 	modifier = {
-		factor = 0.025
+		factor = 0.1
 		country = { administration_spending = 0.75 colonial_policy = settlement }
 	}
 	
@@ -592,10 +592,14 @@ colonialmigration_chance = {
 	}
 	
 	modifier = {
-		factor = -0.25 #was -100
+		factor = 0.05 #was -100
 		OR = {
-			state_scope = { is_colonial = yes }
 			not = { location = { total_pops = 1000 } }
+		}
+	}
+	modifier = {
+		factor = -100 #was -100
+		OR = {
 			not = { location = { controlled_by = owner } }
 		}
 	}
