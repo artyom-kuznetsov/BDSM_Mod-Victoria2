@@ -1,20 +1,14 @@
 political_decisions = {
 	exploit_tradeport_dec = {
 		potential = {
+			NOT = {
+				has_country_flag = collaborates_china_flag
+			}
 			OR = {
 				2632 = {
 					owned_by = THIS
 					controlled_by = THIS
 					1495 = {
-						owner = {
-							has_country_flag = chinese_country_flag
-						}
-					}
-				}
-				1498 = {
-					owned_by = THIS
-					controlled_by = THIS
-					1493 = {
 						owner = {
 							has_country_flag = chinese_country_flag
 						}
@@ -176,6 +170,7 @@ political_decisions = {
 		}
 	}
 	chi_move_capital = {
+		alert = yes
 		potential = {
 			tag = CHU
 			NOT = { has_country_flag = chi_capital_moved }
@@ -192,6 +187,366 @@ political_decisions = {
 		}
 		ai_will_do = {
 			factor = 1
+		}
+	}
+	chi_collaborate_eng = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			ENG = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			ENG = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_fra = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			FRA = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			FRA = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_ger = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			GER = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			GER = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_ITA = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			ITA = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			ITA = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_USA = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			USA = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			USA = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_RUS = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			RUS = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			RUS = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_KUK = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			KUK = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			KUK = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_JAP = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			JAP = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			JAP = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_TUR = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			TUR = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			TUR = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	chi_collaborate_SCA = {
+		alert = yes
+		potential = {
+			ai = no
+			has_country_flag = chinese_country_flag
+			AUS = {
+				OR = {
+					owns = 1495
+					owns = 1498
+					owns = 1496
+					owns = 1566
+					owns = 3249
+					owns = 1569
+					owns = 1481
+				}
+			}
+			NOT = { has_global_flag = china_collaborates }
+			NOT = { has_country_modifier = ENG_declined_collaboration }
+			NOT = { has_country_flag = pending_collaboration }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			#prestige = 5
+			set_country_flag = chi_capital_moved
+			SCA = {
+				country_event = 91753
+			}
+			set_country_flag = pending_collaboration
+		}
+		ai_will_do = {
+			factor = 0
 		}
 	}
 }
