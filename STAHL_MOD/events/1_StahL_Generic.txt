@@ -443,34 +443,6 @@ country_event = {
 		neutrality = yes
 	}
 }
-# CHILE REGIONS
-country_event = {
-	title = "chile_get_coast_evtname"
-	desc = "chile_get_coast_evtdesc"
-	id = 11607
-	fire_only_once = yes
-	trigger = {
-		2305 = {
-			NOT = {
-				owned_by = THIS
-				owned_by = BRZ
-			}
-		}
-		2307 = {
-			NOT = {
-				owned_by = THIS
-				owned_by = BRZ
-			}
-		}
-		year = 1850
-		tag = CHL
-	}
-	option = {
-		name = "chile_get_coast_evtopta"
-		2305 = { secede_province = THIS }
-		2307 = { secede_province = THIS }
-	}
-}
 # BADBOY
 country_event = {
 	title = "badboy_event_25_title"

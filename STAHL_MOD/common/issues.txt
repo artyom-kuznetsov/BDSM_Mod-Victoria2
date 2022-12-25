@@ -926,11 +926,11 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_land_reform = {
-			technology_cost = 8000
+			technology_cost = 5000
 			farm_rgo_eff = 0.25
 			mine_rgo_eff = 0.25
-			civilization_progress_modifier = 0.1
-			allow = { NOT = { has_country_flag = lacking_writing_system } }
+			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			
 			on_execute = {
 				effect = {
@@ -962,10 +962,10 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_admin_reform = {
-			technology_cost = 8000
+			technology_cost = 5000
 			administrative_efficiency_modifier = 0.1
-			civilization_progress_modifier = 0.1
-			allow = { NOT = { has_country_flag = lacking_writing_system } }
+			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			
 			on_execute = {
 				effect = {
@@ -999,12 +999,12 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_finance_reform = {
-			technology_cost = 12000
+			technology_cost = 8000
 			tax_efficiency = 0.1
-			civilization_progress_modifier = 0.15
+			civilization_progress_modifier = 0.1
 			max_loan_modifier = -1.0 # no loan 4 u
+			research_points_modifier = 0.2
 			allow = {
-				NOT = { has_country_flag = lacking_writing_system }
 				is_substate = no
 			}
 			
@@ -1032,9 +1032,10 @@ economic_reforms = {
 			}
 		}
 		finance_reform_two = {
-			technology_cost = 16000
+			technology_cost = 4000
 			tax_efficiency = 0.1
-			civilization_progress_modifier = 0.35
+			civilization_progress_modifier = 0.15
+			research_points_modifier = 0.3
 			
 			max_loan_modifier = -0.2 # 80% loans
 			
@@ -1064,10 +1065,11 @@ economic_reforms = {
 		no_monetary_reform = {
 		}
 		yes_monetary_reform = {
-			technology_cost = 12000
+			technology_cost = 8000
 			tax_efficiency = 0.05
-			civilization_progress_modifier = 0.15
+			civilization_progress_modifier = 0.08
 			allow = { NOT = { has_country_flag = lacking_writing_system } }
+			research_points_modifier = 0.16
 			
 			on_execute = {
 				effect = {
@@ -1089,9 +1091,10 @@ economic_reforms = {
 			}
 		}
 		monetary_reform_two = {
-			technology_cost = 8000
+			technology_cost = 4000
 			tax_efficiency = 0.05
-			civilization_progress_modifier = 0.25
+			civilization_progress_modifier = 0.12
+			research_points_modifier = 0.24
 			
 			on_execute = {
 				effect = {
@@ -1123,9 +1126,10 @@ economic_reforms = {
 		}
 		yes_education_reform = {
 			education_efficiency_modifier = 0.1
-			technology_cost = 12000
-			civilization_progress_modifier = 0.15
+			technology_cost = 10000
+			civilization_progress_modifier = 0.1
 			allow = { NOT = { has_country_flag = lacking_writing_system } }
+			research_points_modifier = 0.25
 			
 			on_execute = {
 				effect = {
@@ -1156,10 +1160,11 @@ economic_reforms = {
 		}
 		
 		yes_research_reform = {
-			technology_cost = 24000
+			technology_cost = 10000
 			education_efficiency_modifier = 0.1
-			civilization_progress_modifier = 0.25
+			civilization_progress_modifier = 0.1
 			allow = { NOT = { has_country_flag = lacking_writing_system } }
+			research_points_modifier = 0.25
 			
 			on_execute = {
 				effect = {
@@ -1191,11 +1196,12 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_transport_improv = {
-			technology_cost = 8000
+			technology_cost = 5000
 			farm_rgo_eff = 0.25
 			mine_rgo_eff = 0.25
-			civilization_progress_modifier = 0.1
+			civilization_progress_modifier = 0.05
 			allow = { NOT = { has_country_flag = lacking_writing_system } money = 2000 }
+			research_points_modifier = 0.1
 			
 			on_execute = {
 				trigger = {
@@ -1238,9 +1244,10 @@ economic_reforms = {
 	
 		}
 		yes_firearms_production = {
-			technology_cost = 16000
-			civilization_progress_modifier = 0.15
+			technology_cost = 10000
+			civilization_progress_modifier = 0.1
 			allow = { NOT = { has_country_flag = lacking_writing_system } money = 10000 }
+			research_points_modifier = 0.25
 			
 			on_execute = {
 				effect = {
@@ -1277,9 +1284,10 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_pre_indust = {
-			technology_cost = 18000
-			civilization_progress_modifier = 0.2
+			technology_cost = 10000
+			civilization_progress_modifier = 0.1
 			allow = { NOT = { has_country_flag = lacking_writing_system } money = 2000 }
+			research_points_modifier = 0.25
 			
 			on_execute = {
 				trigger = { can_build_factory_in_capital_state = cement_factory # example, no trigger needed here
@@ -1317,9 +1325,10 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_industrial_construction = {
-			technology_cost = 20000
-			civilization_progress_modifier = 0.25
+			technology_cost = 10000
+			civilization_progress_modifier = 0.2
 			allow = { NOT = { has_country_flag = lacking_writing_system } money = 7000 }
+			research_points_modifier = 0.4
 			
 			on_execute = {
 				effect = {
@@ -1364,9 +1373,9 @@ military_reforms = {
 			#unit stats improve	
 			land_organisation = 0.1
 			min_military_spending = 0.05
-			technology_cost = 8500
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
-			research_points_on_conquer = 0.25
+			research_points_modifier = 0.1
 			
 			allow = {
 				OR = {
@@ -1412,8 +1421,9 @@ military_reforms = {
 		}
 		yes_foreign_weapons = {
 			land_defense_modifier = 0.1
-			technology_cost = 8500
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 
 			on_execute = {
 				effect = {
@@ -1449,8 +1459,9 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_military_constructions = {
-			technology_cost = 8500
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			allow = {
 				NOT = { has_country_flag = lacking_writing_system }
 				money = 2000 
@@ -1506,9 +1517,9 @@ military_reforms = {
 		}
 		yes_foreign_officers = {
 			leadership_modifier = 0.1
-			technology_cost = 8500
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
-			research_points_on_conquer = 0.25
+			research_points_modifier = 0.1
 			allow = {
 				OR = {
 					ai = no
@@ -1554,8 +1565,9 @@ military_reforms = {
 		yes_army_schools = {
 			land_unit_start_experience = 10
 			min_military_spending = 0.05
-			technology_cost = 8500
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			allow = {
 				NOT = { has_country_flag = lacking_writing_system }
 				OR = {
@@ -1605,9 +1617,10 @@ military_reforms = {
 		}
 		yes_foreign_naval_officers = {
 			tariff_efficiency_modifier = 0.2
-			technology_cost = 10000
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
-			research_points_on_conquer = 0.25
+			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			
 			allow = {
 				any_owned_province = { port = yes }
@@ -1653,9 +1666,9 @@ military_reforms = {
 		}
 		yes_naval_schools = {
 			naval_unit_start_experience = 10
-			technology_cost = 10000
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
-			research_points_on_conquer = 0.25
+			research_points_modifier = 0.1
 			
 			allow = {
 				NOT = { has_country_flag = lacking_writing_system }
@@ -1703,8 +1716,9 @@ military_reforms = {
 		yes_foreign_navies = {
 			naval_attack_modifier = 0.2
 			naval_defense_modifier = 0.2
-			technology_cost = 12000
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			
 			allow = {
 				any_owned_province = { has_building = naval_base }
@@ -1747,8 +1761,9 @@ military_reforms = {
 		}
 		
 		yes_western_shipyards = {
-			technology_cost = 12000
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			
 			allow = {
 				any_owned_province = { port = yes }
@@ -1794,8 +1809,9 @@ military_reforms = {
 			supply_consumption = -0.1
 		}
 		yes_foreign_artillery = {
-			technology_cost = 8500
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			
 			on_execute = {
 				effect = {
