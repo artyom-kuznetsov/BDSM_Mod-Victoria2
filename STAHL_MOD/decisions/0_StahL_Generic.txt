@@ -721,6 +721,22 @@ political_decisions = {
 			country_event = 11606
 		}
 	}
+	propaganda_campaign_agitation = {
+		potential = {
+			has_country_flag = propaganda_is_open
+		}
+		allow = {
+			money = 100000
+		}
+		
+		effect = {
+			treasury = -100000
+			any_pop = {
+				militancy = 3
+				consciousness = 4
+			}
+		}
+	}
 	propaganda_campaign_ideology = {
 		potential = {
 			has_country_flag = propaganda_is_open
@@ -732,6 +748,24 @@ political_decisions = {
 		effect = {
 			treasury = -200000
 			country_event = 198402
+		}
+	}
+	propaganda_campaign_greener_grass = {
+		potential = {
+			has_country_flag = propaganda_is_open
+			NOT = {
+				has_country_modifier = greener_grass_campaign_modifier
+			}
+		}
+		allow = {
+			money = 400000
+		}
+		
+		effect = {
+			treasury = -400000
+			add_country_modifier = {
+				name = greener_grass_campaign_modifier duration = 1825
+			}
 		}
 	}
 	
