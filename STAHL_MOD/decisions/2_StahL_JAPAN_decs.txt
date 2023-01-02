@@ -105,6 +105,7 @@ political_decisions = {
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = ainu_claimed_flag }
 			NOT = { has_country_flag = ainu_expedition_flag }
+			civilized = yes
 		}
 		allow = {
 			NOT = {
@@ -159,7 +160,7 @@ political_decisions = {
 			set_country_flag = split_sakhalin_dec_flag
 		}
 	}
-	support_satsu_independence = {
+	support_satsu_independence = { # FIRST DECISION
 		potential = {
 			is_independant = no
 			tag = KYO
@@ -181,7 +182,7 @@ political_decisions = {
 				leave_alliance = SAT
 				relation = { 
 					who = KYO
-					value = -50
+					value = -200
 				}
 				relation = { 
 					who = SAT
@@ -202,7 +203,7 @@ political_decisions = {
 			prestige = 5
 		}
 	}
-	unite_west_japan = {
+	unite_west_japan = {	# SECOND DEC (+PUPPET)
 		potential = {
 			has_country_flag = satsu_independence_flag
 			NOT = { has_country_flag = west_japan_united }
@@ -219,7 +220,7 @@ political_decisions = {
 			1666 = { add_core = THIS }
 			release_vassal = KAG
 			set_country_flag = west_japan_united
-			KAG = { 
+			any_country = { 
 				leave_alliance = TKG 
 				relation = {
 					who = TKG
@@ -229,7 +230,7 @@ political_decisions = {
 			badboy = 3
 		}
 	}
-	control_sikoku = {
+	control_sikoku = {	# THIRD DEC (SHOGUNATE PREWAR)
 		potential = {
 			has_country_flag = west_japan_united
 			NOT = { has_country_flag = controls_sikoku }

@@ -109,8 +109,10 @@ political_decisions = {
 			civilized = yes
 			has_country_flag = asian_education_1_flag
 			NOT = {
-				has_country_flag =asian_education_2_flag
-				has_country_modifier = brz_edu_program
+				OR = {
+					has_country_flag = asian_education_2_flag
+					has_country_modifier = brz_edu_program
+				}
 			}
 		}
 		allow = {
@@ -135,8 +137,10 @@ political_decisions = {
 			civilized = yes
 			has_country_flag = asian_education_2_flag
 			NOT = {
-				has_country_flag = asian_education_3_flag
-				has_country_modifier = brz_edu_program
+				OR = {
+					has_country_flag = asian_education_3_flag
+					has_country_modifier = brz_edu_program
+				}
 			}
 		}
 		allow = {

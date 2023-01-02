@@ -3,8 +3,8 @@
 
 factory_template = {
 	efficiency = {
-		cement = 0.5 #if no cement, work at 75% efficiency #cost = 16.0
-		machine_parts = 0.05 # was 0.01 cost = 36.5		# 9.825/day/level for both
+		cement = 0.5 #	8
+		machine_parts = 0.05 #	1.825	# 9.825
 	}
 	
 	owner =
@@ -431,12 +431,12 @@ iron_factory = {
 artillery_factory = {       
 	template = factory_template
 	input_goods = { 
-		fertilizer = 0.8		#20
-		ammunition = 0.23
-		steel = 6.4		#37.6   total input+maint = 67.6
+		fertilizer = 0.8		# 8
+		machine_parts = 0.3	# 10.95
+		steel = 5			# 22.5	# 41.45 + 9.83
 	}
 	output_goods = artillery 
-	value = 1			#78
+	value = 1			# 60
 	bonus = {
 		trigger = { has_building = steel_factory }
 		value = 0.08
@@ -446,7 +446,7 @@ artillery_factory = {
 		value = 0.08
 	}
 	bonus = {
-		trigger = { has_building = ammunition_factory }
+		trigger = { has_building = machine_parts_factory }
 		value = 0.08
 	}
 }
