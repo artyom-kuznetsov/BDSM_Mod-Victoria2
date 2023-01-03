@@ -4,6 +4,7 @@ political_decisions = {
 			civilized = yes
 			NOT = { has_country_modifier = caste_sys_education_modifier }
 			has_country_modifier = hnd_caste_system
+			NOT = { tag = TUR }
 		}
 		
 		allow = {
@@ -26,6 +27,7 @@ political_decisions = {
 			civilized = yes
 			NOT = { has_country_modifier = caste_sys_centralized_gov_modifier }
 			has_country_modifier = hnd_caste_system
+			NOT = { tag = TUR }
 		}
 		allow = {
 			ad_hoc_money_bill_printing = 1
@@ -42,6 +44,7 @@ political_decisions = {
 			civilized = yes
 			NOT = { has_country_modifier = caste_sys_industry_modifier }
 			has_country_modifier = hnd_caste_system
+			NOT = { tag = TUR }
 		}
 		allow = {
 			organized_factories = 1
@@ -56,6 +59,7 @@ political_decisions = {
 	reform_caste_system = {
 		potential = {
 			has_country_modifier = hnd_caste_system
+			NOT = { tag = TUR }
 		}
 		allow = {
 			has_country_modifier = caste_sys_industry_modifier
@@ -72,6 +76,26 @@ political_decisions = {
 			remove_country_modifier = caste_sys_industry_modifier
 			remove_country_modifier = caste_sys_centralized_gov_modifier
 			remove_country_modifier = caste_sys_education_modifier
+		}
+	}
+	reform_caste_system_turkey = {
+		potential = {
+			has_country_modifier = hnd_caste_system
+			tag = TUR
+		}
+		allow = {
+			nationalism_n_imperialism = 1
+			phenomenalism = 1
+			romanticism = 1
+			biologism = 1
+			inorganic_chemistry = 1
+			money = 1000000
+			NOT = { citizens_rights = primary_culture_only }
+			public_meetings = yes_meeting
+		}
+		effect = {
+			treasury = -1000000
+			remove_country_modifier = hnd_caste_system
 		}
 	}
 	asian_education_boost_1_dec = {

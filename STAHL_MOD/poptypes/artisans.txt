@@ -384,8 +384,7 @@ promote_to =
 				}
 			}
 		}
-	}
-	bureaucrats =
+	}bureaucrats =
 	{
 		factor = 0.01
 		modifier = {
@@ -487,80 +486,103 @@ promote_to =
 		}
 		
 		modifier = {
-			factor = 4
+			factor = -0.5
+			health_care = no_health_care
+		}
+		modifier = {
+			factor = -0.5
+			penal_system = capital_punishment
+		}
+		modifier = {
+			factor = -1
+			conscription = demilitarized_state
+		}
+		modifier = {
+			factor = -0.5
+			conscription = basic_training
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				penal_system = incarceration
+				penal_system = rehabilitation
+			}
+		}
+		modifier = {
+			factor = 2
 			health_care = trinket_health_care
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			health_care = low_health_care
 		}
 		modifier = {
-			factor = 12
+			factor = 4
 			health_care = acceptable_health_care
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			health_care = good_health_care  
 		}
 		modifier = {
-			factor = 4
+			factor = 2
 			school_reforms = low_schools  
 		}		
 		modifier = {
-			factor = 8
+			factor = 3
 			school_reforms = acceptable_schools
 		}	
 		modifier = {
-			factor = 12
+			factor = 4
 			school_reforms = good_schools 
 		}	
 		modifier = {
-			factor = 4
+			factor = 2
 			safety_regulations = trinket_safety
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			safety_regulations = low_safety
 		}		
 		modifier = {
-			factor = 12
+			factor = 4
 			safety_regulations = acceptable_safety
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			safety_regulations = good_safety
 		}
 		
 		modifier = {
-			factor = 4
+			factor = 2
 			work_hours = fourteen_hours
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			work_hours = twelve_hours
 		}		
 		modifier = {
-			factor = 12
+			factor = 4
 			work_hours  = ten_hours
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			work_hours = eight_hours
 		}
 		modifier = {
-			factor = 4
+			factor = 2
 			wage_reform = trinket_wage
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			wage_reform = low_minimum_wage
 		}		
 		modifier = {
-			factor = 12
+			factor = 4
 			wage_reform  = acceptable_minimum_wage
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			wage_reform = good_minimum_wage
 		}
 		
