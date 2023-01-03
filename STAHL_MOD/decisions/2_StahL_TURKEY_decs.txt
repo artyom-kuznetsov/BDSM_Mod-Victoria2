@@ -1,8 +1,10 @@
 political_decisions = {
 	macedonian_chrome_dec = {
+		alert = yes
 		potential = {
 			NOT = { 806 = { trade_goods = iron } }
 			owns = 806
+			year = 1855
 			owns = 805
 		}
 		allow = {
@@ -19,6 +21,7 @@ political_decisions = {
 		}
 	}
 	turkey_citizenship_law = {
+		alert = yes
 		potential = {
 			tag = TUR
 			NOT = {
@@ -54,6 +57,7 @@ political_decisions = {
 	}
 	
 	mashriqi_integration = {
+		alert = yes
 		potential = {
 			tag = TUR
 			NOT = {
@@ -93,6 +97,7 @@ political_decisions = {
 		}
 	}
 	establish_turkish_union = {
+		alert = yes
 		potential = {
 			tag = TUR
 			is_ideology_enabled = communist
@@ -127,6 +132,7 @@ political_decisions = {
 	}
 
 	fight_illiteracy = {
+		alert = yes
 		potential = {
 			tag = TUR
 			OR = {
@@ -150,6 +156,28 @@ political_decisions = {
 			}
 			set_country_flag = TUR_education
 			money = -250000
+		}
+	}
+	
+	mechanize_mines_dec = {
+		alert = yes
+		potential = {
+			tag = TUR
+			NOT = {
+				mechanized_mining = 1
+				has_country_flag = proposed_mechanization_flag
+			}
+			year = 1837
+		}
+		allow = {
+			NOT = { has_country_modifier = proposed_mechanization_modifier }
+		}
+		effect = {
+			country_event = 25100
+			set_country_flag = proposed_mechanization_flag
+			add_country_modifier = {
+				name = proposed_mechanization_modifier duration = 180
+			}
 		}
 	}
 }
