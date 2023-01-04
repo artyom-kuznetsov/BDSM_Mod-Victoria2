@@ -1,4 +1,5 @@
 political_decisions = {
+	# MACEDONIAN CHROME
 	macedonian_chrome_dec = {
 		alert = yes
 		potential = {
@@ -56,6 +57,7 @@ political_decisions = {
 		}
 	}
 	
+	# ARABIA INTEGRATION
 	mashriqi_integration = {
 		alert = yes
 		potential = {
@@ -96,6 +98,7 @@ political_decisions = {
 			HDJ = { all_core = { add_core = THIS } }
 		}
 	}
+	# TURKISH UNION
 	establish_turkish_union = {
 		alert = yes
 		potential = {
@@ -103,6 +106,10 @@ political_decisions = {
 			is_ideology_enabled = communist
 			NOT = { government = proletarian_dictatorship }
 			NOT = { has_country_flag = TUR_union }
+			OR = {
+				ruling_party_ideology = socialist
+				ruling_party_ideology = communist
+			}
 		}
 		allow = {
 			OR = { socialist = 10 communist = 10 }
@@ -131,6 +138,35 @@ political_decisions = {
 		}
 	}
 
+	# PROCLAIM TURKISH NATION
+	establish_turkish_federation = {
+		alert = yes
+		potential = {
+			tag = TUR
+			is_ideology_enabled = communist
+			NOT = { government = proletarian_dictatorship }
+			NOT = { has_country_flag = TUR_union }
+			NOT = {
+				ruling_party_ideology = socialist
+				ruling_party_ideology = communist
+			}
+		}
+		allow = {
+			revolution_n_counterrevolution = 1
+			citizens_rights = all_voting_pops
+		}
+		effect = {
+			capital = 876
+			set_country_flag = TUR_union
+			prestige = 5
+			add_country_modifier = {
+				name = federalization_modifier duration = 1430
+			}
+			political_reform = federalism
+		}
+	}
+
+	# TURKISH UNION LITERACY PROGRAM
 	fight_illiteracy = {
 		alert = yes
 		potential = {
@@ -159,6 +195,7 @@ political_decisions = {
 		}
 	}
 	
+	# MECHANIZE MINES
 	mechanize_mines_dec = {
 		alert = yes
 		potential = {
