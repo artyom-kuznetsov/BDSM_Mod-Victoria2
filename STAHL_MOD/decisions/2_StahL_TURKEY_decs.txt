@@ -3,6 +3,7 @@ political_decisions = {
 	macedonian_chrome_dec = {
 		alert = yes
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = { 806 = { trade_goods = iron } }
 			owns = 806
 			year = 1855
@@ -16,7 +17,6 @@ political_decisions = {
 		effect = {
 			806 = { trade_goods = iron }
 			807 = { trade_goods = iron }
-			830 = { trade_goods = iron }
 			808 = { trade_goods = iron }
 			money = -100000
 		}
@@ -24,6 +24,7 @@ political_decisions = {
 	turkey_citizenship_law = {
 		alert = yes
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = TUR
 			NOT = {
 				has_country_flag = tur_cit_law
@@ -61,6 +62,7 @@ political_decisions = {
 	mashriqi_integration = {
 		alert = yes
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = TUR
 			NOT = {
 				has_country_flag = mashriqi_integrated
@@ -102,6 +104,7 @@ political_decisions = {
 	establish_turkish_union = {
 		alert = yes
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = TUR
 			is_ideology_enabled = communist
 			NOT = { government = proletarian_dictatorship }
@@ -125,7 +128,7 @@ political_decisions = {
 			political_reform = no_slavery
 			political_reform = civilizing
 			political_reform = bankruptcy
-			political_reform = child_labor_illegal
+			political_reform = totalitarianism
 			government = proletarian_dictatorship
 			any_pop = {
 				militancy = -2
@@ -142,9 +145,13 @@ political_decisions = {
 	establish_turkish_federation = {
 		alert = yes
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = TUR
 			is_ideology_enabled = communist
-			NOT = { government = proletarian_dictatorship }
+			NOT = { 
+				government = proletarian_dictatorship 
+				government = absolute_monarchy
+			}
 			NOT = { has_country_flag = TUR_union }
 			NOT = {
 				ruling_party_ideology = socialist
@@ -170,6 +177,7 @@ political_decisions = {
 	fight_illiteracy = {
 		alert = yes
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = TUR
 			OR = {
 				government = proletarian_dictatorship
@@ -199,6 +207,7 @@ political_decisions = {
 	mechanize_mines_dec = {
 		alert = yes
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = TUR
 			NOT = {
 				mechanized_mining = 1

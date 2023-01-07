@@ -1,6 +1,7 @@
 political_decisions = {
 	establish_la_guardia_civil = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SPA
 			OR = {
 				government = absolute_monarchy
@@ -31,6 +32,7 @@ political_decisions = {
 
 	confiscations_of_mendizabal = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SPA
 			NOT = {
 				has_country_flag = mendizabal_confiscated

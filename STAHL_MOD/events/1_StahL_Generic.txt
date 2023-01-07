@@ -26,6 +26,30 @@ country_event = { # MONTHLY CLEANUP BDSM
 			}
 			clr_country_flag = communist_gov
 		}
+		any_country = { # ‘À¿√ —Œ÷»¿À»—“»◊≈— Œ…/ ŒÃ œ¿–“»»
+			limit = {
+				exists = yes
+				OR = {
+					ruling_party_ideology = communist
+					ruling_party_ideology = socialist
+				}
+				NOT = { has_country_flag = is_socialist_flag }
+			}
+			set_country_flag = is_socialist_flag
+		}
+		any_country = { # ‘À¿√ —Œ÷»¿À»—“»◊≈— Œ…/ ŒÃ œ¿–“»» ”¡–¿“‹
+			limit = {
+				exists = yes
+				NOT = {
+					OR = {
+						ruling_party_ideology = communist
+						ruling_party_ideology = socialist
+					}
+				}
+				has_country_flag = is_socialist_flag
+			}
+			clr_country_flag = is_socialist_flag
+		}
 		any_country = { # ‘À¿√ ‘¿ÿ»—“Œ¬
 			random_owned = {
 				limit = {
@@ -529,28 +553,6 @@ country_event = {
 	}
 }
 
-
-## ALASKA AUTOCOLONY
-country_event = { 
-	title = "event_alaska_title"
-	desc = "event_alaska_desc"
-	id = 11600
-	trigger = {
-		invention = colonial_negotiations
-		owns = 5
-	}
-	
-	fire_only_once = yes
-	option = {
-		name = "event_alaska_opta"
-		2630 = { secede_province = THIS }
-		2599 = { secede_province = THIS }
-		2631 = { secede_province = THIS }
-		ai_chance = {
-			factor = 1
-		}
-	}
-}
 
 province_event = {
 	id = 91737 #Agriculture Decision Change

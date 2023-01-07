@@ -1,6 +1,7 @@
 political_decisions = {
 	form_north_german_confederation = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = { year = 1845 }
 			is_greater_power = yes
 			primary_culture = north_german
@@ -57,6 +58,7 @@ political_decisions = {
 	}
 	form_ngf_late_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			year = 1845
 			tag = PRU
 			NOT = { 
@@ -91,6 +93,101 @@ political_decisions = {
 				}
 			}
 			change_tag = NGF
+		}
+	}
+	form_germany = {
+		news = yes
+		news_desc_long = "form_germany_NEWS_LONG"
+		news_desc_medium = "form_germany_NEWS_MEDIUM"
+		news_desc_short = "form_germany_NEWS_SHORT"
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			is_culture_group = germanic
+			NOT = {
+				exists = GER
+				tag = ISR
+			}
+		}
+		
+		allow = {
+			is_greater_power = yes
+			OR = {
+				AND = {
+					prestige = 45
+					#war = no
+					GER = {
+						all_core = {
+							limit = {
+								NOT = {
+									province_id = 397
+								}
+							}
+							OR = {
+								owned_by = THIS
+								owner = {
+									in_sphere = THIS
+								}
+							}
+						}
+					}
+					nationalism_n_imperialism = 1
+					NOT = { year = 1855 }
+				}
+				AND = { 
+					year = 1855
+					#war = no
+					549 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+					371 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+					534 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+					599 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+					589 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+					586 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+					558 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+					544 = { OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS } }
+					}
+				}
+			}
+		}
+		
+		effect = {
+			prestige = 20
+			change_tag = GER
+			add_accepted_culture = north_german
+			add_accepted_culture = south_german
+			any_country = {
+				limit = {
+					is_culture_group = germanic
+					in_sphere = THIS
+					NOT = { OR = { tag = AUS tag = KUK } }
+				}
+				country_event = { id=11101 days=0 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
 		}
 	}
 }

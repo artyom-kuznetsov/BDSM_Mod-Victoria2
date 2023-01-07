@@ -1,6 +1,7 @@
 political_decisions = {
 	russification_of_baltics_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				owns = 349
 				owns = 354
@@ -35,6 +36,7 @@ political_decisions = {
 	}
 	integrate_finland_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = { 
 				OR = {
 					AND = {
@@ -78,6 +80,7 @@ political_decisions = {
 	
 	treaty_of_narva_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = RUS
 			FIN = { exists = yes }
 			NOT = { has_country_flag = treaty_of_narva_flag }
@@ -101,6 +104,7 @@ political_decisions = {
 	
 	move_capital_to_moscow = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = RUS
 			owns = 1008 # Moscow
 			capital = 994

@@ -478,11 +478,11 @@ clipper_shipyard = {
 small_arms_factory = {       
 	template = factory_template
 	input_goods = {        
-		ammunition = 1.6	#35
-		steel = 2.4		#14.1		total input+maint = 60
+		lumber = 30	#
+		steel = 3		#43.5
 	}
 	output_goods = small_arms 
-	value = 1.6			#74
+	value = 1.7			#59.6
 
 	bonus = {
 		trigger = { has_building = steel_factory }
@@ -657,12 +657,12 @@ lumber_mill = {
 fabric_factory = {       
 	template = factory_template
 	input_goods = {     
-		cotton = 1.44		
+		cotton = 14		
 		dye = 1.12	
-		fertilizer = 0.8
+		fertilizer = 0.8 # 36.56
 	}
 	output_goods = fabric 
-	value = 25.6			#81
+	value = 25.6			#46.08
 	bonus = {
 		trigger = { trade_goods_in_state = cotton }
 		value = 0.05

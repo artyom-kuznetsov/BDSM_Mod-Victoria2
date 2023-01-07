@@ -1,6 +1,7 @@
 political_decisions = {
 	swe_economic_boom_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = { tag = SWE tag = SCA }
 			NOT = { has_country_flag = swe_economic_boom_flag }
 		}
@@ -19,6 +20,7 @@ political_decisions = {
 	}
 	give_alfborg_to_germany_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			ai = no
 			owns = 367
 			GER = { exists = yes }
@@ -39,6 +41,7 @@ political_decisions = {
 		news_desc_medium = "form_scandinavia_NEWS_MEDIUM"
 		news_desc_short = "form_scandinavia_NEWS_SHORT"
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				is_culture_group = scandinavian
 				is_culture_group = bears
@@ -104,6 +107,7 @@ political_decisions = {
 	
 	concede_finland = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = { tag = SWE tag = SCA }
 			NOT = {
 				has_country_flag = Conceded_Finland
@@ -142,6 +146,7 @@ political_decisions = {
 	}
 	swe_railroad_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SWE
 			NOT = {
 				has_country_flag = swe_railroad_flag

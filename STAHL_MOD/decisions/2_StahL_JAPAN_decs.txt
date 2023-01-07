@@ -1,6 +1,7 @@
 political_decisions = {
 	the_meiji_restoration = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = KYO
 			NOT = { has_country_flag = japan_formed }
 		}
@@ -64,7 +65,7 @@ political_decisions = {
 					add_core = THIS
 				}
 			}
-			badboy = 12
+			badboy = 6
 			1649 = {
 				change_province_name = "Токио"
 			}
@@ -81,6 +82,7 @@ political_decisions = {
 	# HOKKAIDO
 	ainu_expedition = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = ainu_expedition_flag }
 			civilized = yes
@@ -102,6 +104,7 @@ political_decisions = {
 	}
 	ainu_claim = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = ainu_claimed_flag }
 			NOT = { has_country_flag = ainu_expedition_flag }
@@ -126,6 +129,7 @@ political_decisions = {
 	}
 	ainu_annexed = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = ainu_expedition_flag }
 			owns = 1643
@@ -143,6 +147,7 @@ political_decisions = {
 	}
 	split_sakhalin = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = split_sakhalin_dec_flag }
 			NOT = { owns = 1087 }
@@ -162,6 +167,7 @@ political_decisions = {
 	}
 	support_satsu_independence = { # FIRST DECISION
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			is_independant = no
 			tag = KYO
 			NOT = { has_country_flag = satsu_independence_flag }
@@ -205,6 +211,7 @@ political_decisions = {
 	}
 	unite_west_japan = {	# SECOND DEC (+PUPPET)
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = satsu_independence_flag
 			NOT = { has_country_flag = west_japan_united }
 		}
@@ -232,6 +239,7 @@ political_decisions = {
 	}
 	control_sikoku = {	# THIRD DEC (SHOGUNATE PREWAR)
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = west_japan_united
 			NOT = { has_country_flag = controls_sikoku }
 		}
@@ -258,6 +266,7 @@ political_decisions = {
 	}
 	wei_hai_wei_treaty_port = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = japan_formed
 			owns = 1624
 			NOT = { has_country_flag = wei_hai_wei_taken }
