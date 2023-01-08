@@ -408,6 +408,27 @@ political_decisions = {
 			country_event = 140536
 		}
 	}
+	revoke_voting_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			ai = no
+			NOT = {
+				vote_franschise = none_voting
+				vote_franschise = landed_voting
+			}
+		}
+		allow = {
+			NOT = { election = yes }
+		}
+		effect = {
+			political_reform = none_voting
+			badboy = 1
+			any_pop = {
+				militancy = 10
+			}
+		}
+	}
 	zcountry_pass_reform = {
 		alert = no
 		potential = {

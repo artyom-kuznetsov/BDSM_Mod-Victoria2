@@ -182,6 +182,55 @@ political_decisions = {
 			money = -1000000
 		}
 	}
+	# CONFEDERATES
+	give_money_CSA_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			CSA = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			CSA = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_CSA_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			CSA = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			CSA = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_CSA_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			CSA = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			CSA = { money = 1000000 }
+			money = -1000000
+		}
+	}
 	# NGF
 	give_money_NGF_100k_dec = {
 		alert = no

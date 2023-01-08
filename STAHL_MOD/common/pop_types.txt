@@ -475,7 +475,7 @@ migration_chance = {
 	}
 	
 	modifier = {
-		factor = -0.2 #-2.2
+		factor = -1.0 #-2.2
 		state_scope = { is_colonial = yes }
 	}
 	
@@ -529,7 +529,7 @@ migration_chance = {
 
 	group = {
 		modifier = {
-			factor = 0.1
+			factor = 0.15
 			unemployment = 0.05
 			NOT = { unemployment = 1 }
 		}
@@ -542,21 +542,21 @@ migration_chance = {
 		}
 		
 		modifier = {
-			factor = 0.2
+			factor = 0.15
 			location = { controlled_by = owner }
 			unemployment = 0.3
 			NOT = { unemployment = 1 }
 		}
 		
 		modifier = {
-			factor = 0.25
+			factor = 0.15
 			location = { controlled_by = owner }
 			unemployment = 0.2
 			NOT = { unemployment = 1 }
 		}
 		
 		modifier = {
-			factor = 0.3
+			factor = 0.15
 			location = { controlled_by = owner }
 			unemployment = 0.25
 			NOT = { unemployment = 1 }
@@ -569,7 +569,7 @@ colonialmigration_chance = {
 	factor = 0.125
 
 	modifier = {
-		factor = -0.125
+		factor = -0.25
 		AND = { 
 			is_primary_culture = no
 			is_accepted_culture  = no
@@ -604,6 +604,11 @@ colonialmigration_chance = {
 		}
 	}
 	
+	modifier = {
+		factor = -2.0
+		state_scope = { is_colonial = yes }
+	}
+	
 	group = {
 		modifier = {
 			factor = 0.05
@@ -633,6 +638,13 @@ colonialmigration_chance = {
 	modifier = {
 		factor = 0.05
 		country = { administration_spending = 0.75 colonial_policy = settlement }
+	}
+	
+	modifier = {
+		factor = -0.15
+		state_scope = {
+			has_factories = yes
+			}
 	}
 	
 	group = {
