@@ -451,6 +451,29 @@ artillery_factory = {
 	}
 }
 
+military_packs_factory = {       
+	template = factory_template
+	input_goods = { 
+		small_arms = 1.7	# 62.9
+		ammunition = 1.7	# 29.75
+		canned_food = 2.4	# 38.4	# 131,05
+	}
+	output_goods = military_packs 
+	value = 1			# 150
+	bonus = {
+		trigger = { has_building = small_arms_factory }
+		value = 0.02
+	}
+	bonus = {
+		trigger = { has_building = ammunition_factory }
+		value = 0.02
+	}
+	bonus = {
+		trigger = { has_building = canned_food_factory }
+		value = 0.02
+	}
+}
+
 clipper_shipyard = {       
 	template = factory_template
 	input_goods = {         
@@ -657,7 +680,7 @@ lumber_mill = {
 fabric_factory = {       
 	template = factory_template
 	input_goods = {     
-		cotton = 14		
+		cotton = 14.4	
 		dye = 1.12	
 		fertilizer = 0.8 # 36.56
 	}
