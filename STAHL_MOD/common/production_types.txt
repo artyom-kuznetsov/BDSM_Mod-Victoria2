@@ -512,7 +512,7 @@ small_arms_factory = {
 		value = 0.05
 	}
 	bonus = {
-		trigger = { has_building = ammunition_factory }
+		trigger = { has_building = lumber_mill }
 		value = 0.05
 	}
 }
@@ -691,6 +691,10 @@ fabric_factory = {
 		value = 0.05
 	}
 	bonus = {
+		trigger = { has_building = fertilizer_factory }
+		value = 0.02
+	}
+	bonus = {
 		trigger = {
 			OR = {
 				has_building = dye_factory 
@@ -713,6 +717,10 @@ wool_fabric_factory = {
 	bonus = {
 		trigger = { trade_goods_in_state = wool }
 		value = 0.05
+	}
+	bonus = {
+		trigger = { has_building = fertilizer_factory }
+		value = 0.02
 	}
 	bonus = {
 		trigger = {
