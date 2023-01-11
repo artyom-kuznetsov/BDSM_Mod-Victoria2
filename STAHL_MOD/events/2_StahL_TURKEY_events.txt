@@ -1,0 +1,94 @@
+country_event = { 
+	id = 25100
+	title = "mechmines_choose_event_title"
+	desc = "mechmines_choose_event_desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "mechmines_choose_opta"
+		ENG = {
+			country_event = 25101
+		}
+	}
+	option = {
+		name = "mechmines_choose_optb"
+		RUS = {
+			country_event = 25101
+		}
+	}
+	option = {
+		name = "mechmines_choose_optc"
+		PRU = {
+			country_event = 25101
+		}
+	}
+	option = {
+		name = "mechmines_choose_opte"
+		clr_country_flag = proposed_mechanization_flag
+	}
+}
+
+country_event = {
+	id = 25101
+	title = "mechmines_choose_event_title"
+	desc = "mechmines_igetevent_desc"
+	is_triggered_only = yes
+	
+	option = {
+		name = "mechmines_igetevent_opta"
+		FROM = { country_event = 25102 }
+	}
+	option = {
+		name = "mechmines_igetevent_optb"
+		FROM = { country_event = 25103 }
+		money = -50000
+	}
+	option = {
+		name = "mechmines_igetevent_optc"
+		FROM = { country_event = 25104 }
+		money = -150000
+		add_country_modifier = {
+			name = turkey_investments_modifier duration = 1430
+		}
+	}
+}
+
+country_event = {
+	id = 25102
+	title = "mechmines_choose_event_title"
+	desc = "mechmines_declined_desc"
+	is_triggered_only = yes
+	
+	option = {
+		name = "mechmines_declined_opta"
+		clr_country_flag = proposed_mechanization_flag
+	}
+}
+
+country_event = {
+	id = 25103
+	title = "mechmines_choose_event_title"
+	desc = "mechmines_accepted_desc"
+	is_triggered_only = yes
+	
+	option = {
+		name = "mechmines_accepted_opta"
+		activate_technology = mechanized_mining
+		prestige = 5
+	}
+}
+
+country_event = {
+	id = 25104
+	title = "mechmines_choose_event_title"
+	desc = "mechmines_invested_desc"
+	is_triggered_only = yes
+	
+	option = {
+		name = "mechmines_accepted_opta"
+		activate_technology = mechanized_mining
+		prestige = 10
+		money = 100000
+	}
+}

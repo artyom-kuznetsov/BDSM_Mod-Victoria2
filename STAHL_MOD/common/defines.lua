@@ -44,7 +44,7 @@ country = {
 	SUPPRESS_BUREAUCRAT_FACTOR = 0.5,
 	WRONG_REFORM_MILITANCY_IMPACT = 1,
 	SUPPRESSION_RADICALISATION_HIT = 10, -- % base added to a movements radicalness
-	INVESTMENT_SCORE_FACTOR = 0.005, -- how much foreign investment money counts towards your industry score
+	INVESTMENT_SCORE_FACTOR = 0.006, -- how much foreign investment money counts towards your industry score
 	UNCIV_TECH_SPREAD_MAX = 0.60,
 	UNCIV_TECH_SPREAD_MIN = 0.15,
 	MIN_DELAY_BETWEEN_REFORMS = 6, -- months
@@ -104,7 +104,7 @@ economy = {
 	GUNBOAT_HIGH_TAX_CAP = 1.0,
 	GUNBOAT_FLEET_SIZE_FACTOR = 100,
 	PROVINCE_SIZE_DIVIDER = 50,
-	CAPITALIST_BUILD_FACTORY_STATE_EMPLOYMENT_PERCENT = 0.7, -- Capis don't build factories if less than this percent is employed in existing factories
+	CAPITALIST_BUILD_FACTORY_STATE_EMPLOYMENT_PERCENT = 0.9, -- Capis don't build factories if less than this percent is employed in existing factories
 	GOODS_FOCUS_SWAP_CHANCE = 0, -- Percent increased chance that artisan wants to change goods independantly of how well he is doing presently
 	NUM_CLOSED_FACTORIES_PER_STATE_LASSIEZ_FAIRE = 1, -- Number of closed factories allowed per state under Lassiez Faire
 	MIN_NUM_FACTORIES_PER_STATE_BEFORE_DELETING_LASSIEZ_FAIRE = 2, -- Min number of factories per state before starting to delete under Lassiez Faire
@@ -122,24 +122,24 @@ economy = {
 	EMPLOYMENT_HIRE_LOWEST = 0.001,				-- we Hire pops no slower then x% of total required per day
 	EMPLOYMENT_FIRE_LOWEST = 0.001,				-- we Fire pops no slower then x% of total required per day
 	TRADE_CAP_LOW_LIMIT_LAND = 0.1, 				-- the lowest % the slider can go for land units
-	TRADE_CAP_LOW_LIMIT_NAVAL = 0.1, 			-- the lowest % the slider can go for naval units
+	TRADE_CAP_LOW_LIMIT_NAVAL = 0.5, 			-- the lowest % the slider can go for naval units
 	TRADE_CAP_LOW_LIMIT_CONSTRUCTIONS = 0, 		-- the lowest % the slider can go for constructions
-	FACTORY_PURCHASE_MIN_FACTOR = 1.0,			-- the lowest % of its daily needs a factory will purchase
-	FACTORY_PURCHASE_DRAWDOWN_FACTOR = 0.025		-- the % a factory will reduce its input purchases each day if it did not sell all its goods (also used for scaling up production if all goods are sold)
+	FACTORY_PURCHASE_MIN_FACTOR = 0.7,			-- the lowest % of its daily needs a factory will purchase
+	FACTORY_PURCHASE_DRAWDOWN_FACTOR = 0.005		-- the % a factory will reduce its input purchases each day if it did not sell all its goods (also used for scaling up production if all goods are sold)
 },
 
 military = {
 	DIG_IN_INCREASE_EACH_DAYS = 5,
 	REINFORCE_SPEED = 0.2,
 	COMBAT_DIFFICULTY_IMPACT = 0.2,
-	BASE_COMBAT_WIDTH = 30,
-	POP_MIN_SIZE_FOR_REGIMENT = 1600,
-	POP_SIZE_PER_REGIMENT = 3500,
-	SOLDIER_TO_POP_DAMAGE = 0.15,
+	BASE_COMBAT_WIDTH = 20,
+	POP_MIN_SIZE_FOR_REGIMENT = 800,
+	POP_SIZE_PER_REGIMENT = 1750,
+	SOLDIER_TO_POP_DAMAGE = 0.1,
 	LAND_SPEED_MODIFIER = 1,
 	NAVAL_SPEED_MODIFIER = 2,
 	EXP_GAIN_DIV = 0.05,
-	LEADER_RECRUIT_COST = 40,
+	LEADER_RECRUIT_COST = 30,
 	SUPPLY_RANGE = 250,
 	POP_MIN_SIZE_FOR_REGIMENT_PROTECTORATE_MULTIPLIER = 24,
 	POP_MIN_SIZE_FOR_REGIMENT_COLONY_MULTIPLIER = 15,
@@ -321,7 +321,7 @@ diplomacy = {
 	BREAKTRUCE_MILITANCY_CONCEDE = 2,
 	BREAKTRUCE_MILITANCY_STATUS_QUO = 2,
 	BREAKTRUCE_MILITANCY_ANNEX = 2,
-	BREAKTRUCE_MILITANCY_DEMAND_STATE = 2,
+	BREAKTRUCE_MILITANCY_DEMAND_STATE = 1,
 	BREAKTRUCE_MILITANCY_INSTALL_COMMUNIST_GOV_TYPE = 2,
 	BREAKTRUCE_MILITANCY_UNINSTALL_COMMUNIST_GOV_TYPE = 2,
 	BREAKTRUCE_MILITANCY_COLONY = 2,
@@ -389,7 +389,7 @@ diplomacy = {
 	WAR_PRESTIGE_COST_UNCIVILIZED = -50,
 	WAR_PRESTIGE_COST_CORE = -50,	
 	
-	WAR_FAILED_GOAL_MILITANCY = 2,
+	WAR_FAILED_GOAL_MILITANCY = 0.5,
 	WAR_FAILED_GOAL_PRESTIGE_BASE = -10,
 	WAR_FAILED_GOAL_PRESTIGE = -0.1,
 	
@@ -565,7 +565,7 @@ diplomacy = {
 	GW_WARSCORE_COST_MOD_2 = 0.3, -- cost reduction factor on warscore needed to fulfill goal if late game great war
 	GW_WARSCORE_2_THRESHOLD = 50, -- warscore threshold where a GW turns into a world war for winner side
 	TENSION_DECAY = -1.0,
-	TENSION_FROM_CB = 0.04,
+	TENSION_FROM_CB = 0.03,
 	TENSION_FROM_MOVEMENT = 0.00, -- tension per 1000 in nationalist movement
 	TENSION_FROM_MOVEMENT_MAX = 0.0, -- max total value no matter the size of the movement
 	AT_WAR_TENSION_DECAY = -0.12, -- for each potentially interested GP at war (value is if all possible GPs are at war) 
@@ -620,7 +620,7 @@ diplomacy = {
 pops = {
 	BASE_CLERGY_FOR_LITERACY = 0.005, 
 	MAX_CLERGY_FOR_LITERACY = 0.04, 
-	LITERACY_CHANGE_SPEED = 0.09,
+	LITERACY_CHANGE_SPEED = 0.1,
 
 
 	ASSIMILATION_SCALE = 0.003,
@@ -658,7 +658,7 @@ pops = {
 
 	PDEF_BASE_CON = 20.0,			-- so half'ed effect.
 	
-	NATIONAL_FOCUS_DIVIDER = 200000.0,
+	NATIONAL_FOCUS_DIVIDER = 100000.0,
 	
 	POP_SAVINGS = 0.018,
 	
@@ -681,13 +681,13 @@ pops = {
 	ISSUE_MOVEMENT_JOIN_LIMIT = 8,
 	ISSUE_MOVEMENT_LEAVE_LIMIT = 7,
 	MOVEMENT_CON_FACTOR = 0.05,
-	MOVEMENT_LIT_FACTOR = 0.2,
+	MOVEMENT_LIT_FACTOR = 0.3,
 	MIL_ON_REB_MOVE = 8,
 	POPULATION_SUPPRESSION_FACTOR = 0.0, -- controls base pop size for factor of supression/radicalness cost. zero  disables the feature and jsut uses radicalness
 	POPULATION_MOVEMENT_RADICAL_FACTOR = 300,
 	NATIONALIST_MOVEMENT_MIL_CAP = 3.0,
 	MOVEMENT_SUPPORT_UH_FACTOR = 3, --  3x means 30% country support equals full UH support
-	REBEL_OCCUPATION_STRENGTH_BONUS = 0.01, -- the amount of strength given to rebel movements when they occupy a province
+	REBEL_OCCUPATION_STRENGTH_BONUS = 0.02, -- the amount of strength given to rebel movements when they occupy a province
 	LARGE_POPULATION_LIMIT = 9000000,
 	LARGE_POPULATION_INFLUENCE_PENALTY_CHUNK = 250000,
 },

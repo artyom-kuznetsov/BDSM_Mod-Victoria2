@@ -14,6 +14,7 @@ everyday_needs = {
 	furniture = 1.1
 	fertilizer = 0.25
 	ammunition = 0.07
+	wine = 0.1
 }
 
 life_needs = {
@@ -41,7 +42,10 @@ luxury_needs = {
 country_migration_target =
 {
 	factor = 1
-
+	modifier = {
+		factor = -100
+		country = { tag = WBK }
+	}
 	modifier = {
 		factor = 0.9
 		unemployment = 0.05
@@ -99,12 +103,12 @@ country_migration_target =
 		OR = { 
 			continent = north_america
 			continent = south_america
-			continent = oceania
+			continent = polynesia
 		}
 	}
 	modifier = {
 		factor = 1.5
-		continent = oceania
+		continent = polynesia
 	}
 	modifier = {
 		factor = 0.1
@@ -135,7 +139,7 @@ migration_target =
 	factor = 0.01
 	modifier = {
 		factor = 1.2
-		total_pops = 150000
+		total_pops = 75000
 	}	
 	modifier = {
 		factor = 0.1
@@ -147,25 +151,22 @@ migration_target =
 
 	modifier = {
 		factor = 1.2
+		total_pops = 125000
+	}
+	modifier = {
+		factor = 1.2
 		total_pops = 250000
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 500000
-	}
-	modifier = {
-		factor = 1.2
-		total_pops = 750000
+		total_pops = 375000
 	}	
 	
 	modifier = {
 		factor = 0
-					AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
-			}
+		state_scope = {
+			has_factories = no
+		}
 		OR = { 
 			unemployment_by_type = { type = farmers value = 0.1  }
 			unemployment_by_type = { type = labourers value = 0.1  }
@@ -347,8 +348,7 @@ promote_to =
 				can_build_factory = no
 			}
 		}
-	}
-	bureaucrats =
+	}bureaucrats =
 	{
 		factor = 0.01
 		modifier = {
@@ -416,134 +416,137 @@ promote_to =
 				state_scope = { bureaucrats = 0.014 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				state_scope = { bureaucrats = 0.016 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				state_scope = { bureaucrats = 0.018 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				state_scope = { bureaucrats = 0.020 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				state_scope = { bureaucrats = 0.022 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				state_scope = { bureaucrats = 0.024 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				state_scope = { bureaucrats = 0.026 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				state_scope = { bureaucrats = 0.028 }
 			}
 			modifier = {
-				factor = -2
-				state_scope = { bureaucrats = 0.030 }
-			}
-			modifier = {
-				factor = -2
-				state_scope = { bureaucrats = 0.032 }
-			}
-			modifier = {
-				factor = -2
-				state_scope = { bureaucrats = 0.034 }
-			}
-			modifier = {
-				factor = -2
-				state_scope = { bureaucrats = 0.036 }
-			}
-			modifier = {
-				factor = -2
-				state_scope = { bureaucrats = 0.038 }
-			}
-			modifier = {
 				factor = -100
-				state_scope = { bureaucrats = 0.040 }
+				state_scope = { bureaucrats = 0.030 }
 			}
 		}
 		
 		modifier = {
-			factor = 4
+			factor = -0.5
+			health_care = no_health_care
+		}
+		modifier = {
+			factor = -0.5
+			penal_system = capital_punishment
+		}
+		modifier = {
+			factor = -1
+			conscription = demilitarized_state
+		}
+		modifier = {
+			factor = -0.5
+			conscription = basic_training
+		}
+		modifier = {
+			factor = 0.5
+			OR = {
+				penal_system = incarceration
+				penal_system = rehabilitation
+			}
+		}
+		modifier = {
+			factor = 2
 			health_care = trinket_health_care
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			health_care = low_health_care
 		}
 		modifier = {
-			factor = 12
+			factor = 4
 			health_care = acceptable_health_care
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			health_care = good_health_care  
 		}
 		modifier = {
-			factor = 4
+			factor = 2
 			school_reforms = low_schools  
 		}		
 		modifier = {
-			factor = 8
+			factor = 3
 			school_reforms = acceptable_schools
 		}	
 		modifier = {
-			factor = 12
+			factor = 4
 			school_reforms = good_schools 
 		}	
 		modifier = {
-			factor = 4
+			factor = 2
 			safety_regulations = trinket_safety
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			safety_regulations = low_safety
 		}		
 		modifier = {
-			factor = 12
+			factor = 4
 			safety_regulations = acceptable_safety
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			safety_regulations = good_safety
 		}
 		
 		modifier = {
-			factor = 4
+			factor = 2
 			work_hours = fourteen_hours
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			work_hours = twelve_hours
 		}		
 		modifier = {
-			factor = 12
+			factor = 4
 			work_hours  = ten_hours
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			work_hours = eight_hours
 		}
 		modifier = {
-			factor = 4
+			factor = 2
 			wage_reform = trinket_wage
 		}
 		modifier = {
-			factor = 8
+			factor = 3
 			wage_reform = low_minimum_wage
 		}		
 		modifier = {
-			factor = 12
+			factor = 4
 			wage_reform  = acceptable_minimum_wage
 		}
 		modifier = {
-			factor = 16
+			factor = 5
 			wage_reform = good_minimum_wage
 		}
 		
@@ -624,47 +627,68 @@ promote_to =
 			}
 		}
 	
+		
 		group = {
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.10
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.20
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.30
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.40
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.5
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.6
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.7
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.8
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.9
 			}
 			modifier = {
-				factor = 2
+				factor = 1.8
 				military_spending = 0.99
 			}
+		}
+		modifier = {
+			factor = -2
+			conscription = demilitarized_state
+		}
+		modifier = {
+			factor = 1
+			conscription = basic_training
+		}
+		modifier = {
+			factor = 2
+			conscription = mandatory_training
+		}
+		modifier = {
+			factor = 3
+			conscription = paramilitarism
+		}
+		modifier = {
+			factor = 5
+			conscription = army_with_a_state
 		}
 		group = {
 			modifier = {
@@ -713,59 +737,60 @@ promote_to =
 	craftsmen = {
 		factor = 0.01
 			modifier = {
-				factor = -5
+				factor = -4
 				not = { literacy = 0.1 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				not = { literacy = 0.15 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				not = { literacy = 0.2 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				not = { literacy = 0.25 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				not = { literacy = 0.3 }
 			}
 		group = {
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 0.3
 			}
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 0.4
 			}
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 0.5
 			}
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 0.6
 			}
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 0.7
 			}
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 0.8
 			}
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 0.9
 			}
 			modifier = {
-				factor = 1
+				factor = 0.5
 				literacy = 1
 			}
 		}
+		
 		
 		modifier = {
 			factor = -3
@@ -777,7 +802,7 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = 10
+			factor = 8
 			state_scope = {
 				has_factories = yes
 			}
@@ -785,15 +810,15 @@ promote_to =
 		modifier = {
 			factor = -5
 			state_scope = {
-				has_factories = yes
+				NOT = { has_factories = yes }
 			}
 		}
 		modifier = {
-			factor = -15
+			factor = -10
 			craftsmen = 0.2
 		}
 		modifier = {
-			factor = -100
+			factor = -5
 			NOT = {
 				location = {
 					work_available = {
@@ -802,11 +827,34 @@ promote_to =
 				}
 			}
 		}
+		
 		modifier = {
-			factor = -10
-			state_scope = {
-				NOT = { labourers = 0.36 }
-			}
+			factor = -2
+			craftsmen = 0.18
+		}
+		modifier = {
+			factor = -2
+			craftsmen = 0.2
+		}
+		modifier = {
+			factor = -1
+			craftsmen = 0.22
+		}
+		modifier = {
+			factor = -1
+			craftsmen = 0.24
+		}
+		modifier = {
+			factor = -1
+			craftsmen = 0.26
+		}
+		modifier = {
+			factor = -2
+			craftsmen = 0.28
+		}
+		modifier = {
+			factor = -2
+			craftsmen = 0.3
 		}
 	}
 

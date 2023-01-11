@@ -30,6 +30,21 @@ country_event = {
 	}
 }
 country_event = {
+	id = 9542
+	title = "EVTNAME9541"
+	desc = "EVTDESC9541"
+	
+	trigger = {
+		tag = TUR
+		NOT = { has_country_flag = eic_started }
+	}
+	option = {
+		name = "EVTOPTC9541"
+		set_country_flag = eic_started
+		add_country_modifier = { name = hnd_caste_system duration = 17900 }
+	}
+}
+country_event = {
 	id = 9536
 	title = "EVTNAME9536"
 	desc = "EVTDESC9536"

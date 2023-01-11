@@ -22,6 +22,7 @@ political_decisions = {
 
 	enact_liquor_prohibition = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			social_science = 1
 			has_country_modifier = temperance_league
 			NOT = {
@@ -62,6 +63,7 @@ political_decisions = {
 	}
 	abolish_prohibition = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_modifier = liquor_prohibition
 		}
 		allow = {
@@ -86,6 +88,7 @@ political_decisions = {
 	}
 	institute_central_bank = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = {
 				has_country_modifier = central_bank_established
 			}
@@ -108,6 +111,7 @@ political_decisions = {
 	
 	enact_female_suffrage = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			year = 1870
 			civilized = yes
 			NOT = { has_country_modifier = female_suffrage }
@@ -152,6 +156,7 @@ political_decisions = {
 	}
 	westernize_nation = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			civilized = no
 			civilized = yes #impossible trigger so it does not show
 			NOT = {
@@ -195,6 +200,7 @@ political_decisions = {
 	leave_soi = {
 		alert = no
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			part_of_sphere = yes
 			
 		}
@@ -237,6 +243,7 @@ political_decisions = {
 	leave_soi_ind = {
 		alert = no
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			part_of_sphere = yes
 			OR = {
 				tag = WBK
@@ -305,6 +312,7 @@ political_decisions = {
 		alert = no
 			
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			can_nationalize = yes 
 		}
 		allow = {

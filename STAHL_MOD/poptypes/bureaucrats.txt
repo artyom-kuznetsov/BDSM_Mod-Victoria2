@@ -8,7 +8,6 @@ demote_migrant = yes
 rebel =
 {
 	infantry = 0.5
-	irregular = 0.5
 }
 
 administrative_efficiency = yes
@@ -125,12 +124,12 @@ country_migration_target =
 		OR = { 
 			continent = north_america
 			continent = south_america
-			continent = oceania
+			continent = polynesia
 		}
 	}
 	modifier = {
 		factor = 1.5
-		continent = oceania
+		continent = polynesia
 	}
 	modifier = {
 		factor = 0.1
@@ -169,29 +168,26 @@ migration_target =
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 150000
+		total_pops = 75000
 	}	
+	modifier = {
+		factor = 1.2
+		total_pops = 125000
+	}
 	modifier = {
 		factor = 1.2
 		total_pops = 250000
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 500000
-	}
-	modifier = {
-		factor = 1.2
-		total_pops = 750000
+		total_pops = 375000
 	}
 	
 	modifier = {
 		factor = 0
-					AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
-			}
+		state_scope = {
+			has_factories = no
+		}
 		OR = { 
 			unemployment_by_type = { type = farmers value = 0.1  }
 			unemployment_by_type = { type = labourers value = 0.1  }
@@ -279,7 +275,7 @@ promote_to =
 			state_scope = {
 				has_factories = no
 			}
-			NOT = { total_pops = 200000 }
+			NOT = { total_pops = 100000 }
 		}	
 		modifier = {
 			factor = -1 
@@ -289,12 +285,6 @@ promote_to =
 		modifier = {
 			factor = -10
 			NOT = { literacy = 0.30 }
-		}
-		modifier = {
-			factor = -2
-			country = {
-				has_country_flag = serfdom_not_abolished
-			}
 		}
 		group = {
 			modifier = {
@@ -317,20 +307,14 @@ promote_to =
 
 		modifier = {
 			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
 		}
 		modifier = {
 			factor = 5
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = yes
+			state_scope = {
+				has_factories = no
 			}
 		}
 
@@ -535,11 +519,8 @@ promote_to =
 		}
 		modifier = {
 			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
 		}
 		modifier = {
@@ -585,81 +566,81 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.1
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.2
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.3
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.4
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.5
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.6
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.7
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.8
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending = 0.9
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
 				education_spending =0.99
 			}
 		}
 		group = {		
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.004
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.008
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.012
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.016
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.02
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.024
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.028
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.032
 			}			
 			modifier = {
-				factor = -2
+				factor = -1
 				clergymen = 0.036
 			}			
 			modifier = {
@@ -772,11 +753,8 @@ promote_to =
 		}
 		modifier = {
 			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
 		}
 		modifier = {
@@ -804,8 +782,16 @@ promote_to =
 	farmers = { #and labourers
 		factor = 0.01
 		modifier = {
-			factor = 5.0
-			soldiers = 0.03
+			factor = 2.0
+			bureaucrats = 0.011
+		}
+		modifier = {
+			factor = 2.0
+			bureaucrats = 0.013
+		}
+		modifier = {
+			factor = 2.0
+			bureaucrats = 0.015
 		}
 		modifier = {
 			factor = 5.0

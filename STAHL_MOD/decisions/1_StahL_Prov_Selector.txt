@@ -4,6 +4,7 @@ political_decisions = {
 		potential = {
 			ai = no
 			any_owned_province = { has_building = province_selector }
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}	
 		allow = {
 			
@@ -24,9 +25,10 @@ political_decisions = {
 			any_owned_province = { 
 				has_building = province_selector
 			}
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
-			money = 100000
+			money = 50000
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
@@ -42,7 +44,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -100000
+			money = -50000
 			random_owned = {
 				limit = {
 					has_building = province_selector
@@ -64,6 +66,7 @@ political_decisions = {
 	}
 	zprovince_scorched_earth = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			ai = no
 			any_owned_province = { 
 				has_building = province_selector
@@ -94,6 +97,7 @@ political_decisions = {
 	}
 	zprovince_revokecores = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			ai = no
 			any_owned_province = { 
 				is_core = THIS
@@ -115,6 +119,7 @@ political_decisions = {
 	}
 	zprovince_removebureaucrats = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			ai = no
 			any_owned_province = { 
 				has_building = province_selector
@@ -126,10 +131,10 @@ political_decisions = {
 				controlled_by = THIS
 			}
 			#war = yes
-			money = 50000
+			money = 25000
 		}
 		effect = {
-			money = -50000
+			money = -25000
 			any_owned = {
 				limit = {
 					has_building = province_selector
@@ -148,13 +153,14 @@ political_decisions = {
 	zstate_agriculture_expansion = {
 		picture = rgo_expansion
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			ai = no
 			any_owned_province = {
 				has_building = province_selector
 			}
 		}
 		allow = {
-			money = 100000
+			money = 50000
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
@@ -172,7 +178,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -100000
+			money = -50000
 			random_owned = {
 				limit = {
 					has_building = province_selector
@@ -199,6 +205,7 @@ political_decisions = {
 	zprovince_rgo_change_agriculture = {
 		picture = agriculture
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			ai = no
 			NOT = { has_country_flag = deciding }
 			any_owned_province = {
@@ -213,7 +220,7 @@ political_decisions = {
 			}
 		}	
 		allow = {
-			money = 50000
+			money = 25000
 			any_owned_province = {
 				has_building = province_selector
 				OR = {
@@ -226,7 +233,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -50000
+			money = -25000
 			set_country_flag = deciding
 			random_owned = {
 				limit = {
@@ -244,9 +251,90 @@ political_decisions = {
 		}
 	}
 	
+	zprovince_rgo_change_agriculture_improved = {
+		picture = agriculture
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			ai = no
+			NOT = { has_country_flag = deciding }
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}	
+		allow = {
+			money = 25000
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}
+		effect = {
+			money = -25000
+			set_country_flag = deciding
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					OR = {
+						trade_goods = tea
+						trade_goods = cotton
+					}
+				}
+				province_event = { id = 91738  days = 0 }
+			}
+		}
+	}
+	
+	zprovince_rgo_change_agriculture_advanced = {
+		picture = agriculture
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			ai = no
+			NOT = { has_country_flag = deciding }
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}	
+		allow = {
+			money = 25000
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}
+		effect = {
+			money = -25000
+			set_country_flag = deciding
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					OR = {
+						trade_goods = tea
+						trade_goods = cotton
+					}
+				}
+				province_event = { id = 91739  days = 0 }
+			}
+		}
+	}
+	
 	zstate_baby_boom = {
 		picture = family
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			any_owned_province = { 
 				has_building = province_selector 
 			}
@@ -256,16 +344,16 @@ political_decisions = {
 			any_owned_province = { 
 				has_building = province_selector 
 				NOT = { has_province_modifier = small_baby_boom }
-				NOT = { total_pops = 20000 }
+				NOT = { total_pops = 10000 }
 			}
-			money = 175000
+			money = 60000
 		}
 		effect = {
-			money = -175000
+			money = -60000
 			random_owned = {
 				limit = {
 					has_building = province_selector
-					NOT = { total_pops = 20000 }
+					NOT = { total_pops = 10000 }
 					NOT = { has_province_modifier = small_baby_boom }
 				}
 				province_selector = -1
@@ -280,6 +368,7 @@ political_decisions = {
 		picture = family
 		alert = no
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = { 
 				any_owned_province = { 
 					has_building = province_selector 
@@ -302,6 +391,7 @@ political_decisions = {
 		picture = family
 		alert = no
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = { 
 				any_owned_province = { 
 					has_building = province_selector 

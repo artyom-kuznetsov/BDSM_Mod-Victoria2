@@ -10,18 +10,18 @@ political_decisions = {
 		
 		effect = {
 			set_country_flag = global_setup_complete
-			#enable_canal = 6
-			#enable_canal = 7
-			#enable_canal = 8
-			#enable_canal = 5
-			#enable_canal = 4
-			#enable_canal = 9
-			#enable_canal = 10
-			#enable_canal = 11
-			#enable_canal = 12
-			#enable_canal = 13
-			#enable_canal = 14
-			#enable_canal = 15
+			enable_canal = 6 # ENGLISH CHANNEL
+			enable_canal = 7 # GIBRALTAR 1
+			enable_canal = 8 # DOBEGOL
+			enable_canal = 5 # BOSPHORUS
+			enable_canal = 4 # DARDANNEL
+			enable_canal = 9 # WEXFORD
+			enable_canal = 10 # OLFBORG
+			enable_canal = 11 # COPENHAGEN
+			enable_canal = 12 # GIBRALTAR 2
+			enable_canal = 13 # KERCH
+			enable_canal = 14 # ADEN
+			enable_canal = 15 # DJIBOUTI
 			#enable_canal = 16
 			#enable_canal = 17
 			#enable_canal = 18
@@ -41,9 +41,78 @@ political_decisions = {
 			SWI = {
 				set_country_flag = neutrality_flag
 			}
-			#220 = { state_scope = { is_slave = no } }
-			#185 = { state_scope = { is_slave = no } }
-			#149 = { state_scope = { is_slave = no } }
+			any_country = {
+				limit = {
+					OR = {
+						tag = HNN 
+						tag = FJN 
+						tag = GXI 
+						tag = XBI 
+						tag = TPG 
+						tag = CHI 
+						tag = CHU
+						tag = MCK
+						tag = MGL
+						tag = XIN
+						tag = TIB
+						tag = YNN
+						tag = SXI
+						tag = CHU
+					}
+				}
+				set_country_flag = chinese_country_flag
+			}
+			any_country = { 
+				money = 100000 
+				add_country_modifier = {
+					name = reform_passed
+					duration = 3650
+				}
+				add_country_modifier = {
+					name = militarization_law_changed
+					duration = 1460
+				}
+				ammunition = 100
+				small_arms = 100
+				artillery = 100
+				canned_food = 100
+				cotton = 100
+				dye = 100
+				wool = 100
+				silk = 100
+				coal = 100
+				sulphur = 100
+				iron = 100
+				timber = 100
+				tropical_wood = 100
+				precious_metal = 100
+				steel = 100
+				cement = 100
+				machine_parts = 100
+				glass = 100
+				clipper_convoy = 100
+				fertilizer = 100
+				steamer_convoy = 100
+				fabric = 100
+				lumber = 100
+				paper = 100
+				cattle = 100
+				fish = 100
+				fruit = 100
+				grain = 100
+				tea = 100
+				opium = 100
+				wine = 100
+				liquor = 100
+				regular_clothes = 100
+				luxury_clothes = 100
+				furniture = 100
+				luxury_furniture = 100
+			}
+			NET = { 
+				add_country_modifier = { name = dutch_east_india_modifier duration = -1 }
+			}
+			country_event = 150530
 		}
 	}
 	global_setup_1870 = {
@@ -58,99 +127,352 @@ political_decisions = {
 		
 		effect = {
 			set_country_flag = global_setup_1870_complete
-			574 = { life_rating = -5 }
-			572 = { life_rating = -5 }
-			573 = { life_rating = -5 }
-			576 = { life_rating = -5 }
-			577 = { life_rating = -5 }
-			575 = { life_rating = -5 }
-			3264 = { life_rating = -5 }
-			578 = { life_rating = -5 }
-			2561 = { life_rating = -5 }
-			579 = { life_rating = -5 }
-			583 = { life_rating = -5 }
-			584 = { life_rating = -5 }
-			582 = { life_rating = -5 }
-			580 = { life_rating = -5 }
-			581 = { life_rating = -5 }
-			585 = { life_rating = -5 }
-			538 = { life_rating = -5 }
-			542 = { life_rating = -5 }
-			543 = { life_rating = -5 }
-			540 = { life_rating = -5 }
-			539 = { life_rating = -5 }
-			531 = { life_rating = -5 }
-			532 = { life_rating = -5 }
-			528 = { life_rating = -5 }
-			534 = { life_rating = -5 }
-			535 = { life_rating = -5 }
-			529 = { life_rating = -5 }
-			530 = { life_rating = -5 }
-			369 = { life_rating = -5 }
-			370 = { life_rating = -3 }
-			371 = { life_rating = -3 }
-			544 = { life_rating = -5 }
-			545 = { life_rating = -5 }
-			548 = { life_rating = -5 }
-			547 = { life_rating = -5 }
-			568 = { life_rating = -5 }
-			566 = { life_rating = -5 }
-			537 = { life_rating = -5 }
-			536 = { life_rating = -5 }
-			546 = { life_rating = -5 }
-			679 = { life_rating = -5 }
-			680 = { life_rating = -5 }
-			692 = { life_rating = -5 }
-			551 = { life_rating = -5 }
-			550 = { life_rating = -5 }
-			552 = { life_rating = -5 }
-			681 = { life_rating = -5 }
-			699 = { life_rating = -5 }
-			700 = { life_rating = -5 }
-			701 = { life_rating = -5 }
+			698 = { life_rating = -5 }
+			697 = { life_rating = -5 }
+			695 = { life_rating = -5 }
+			3251 = { life_rating = -5 }
+			696 = { life_rating = -5 }
 			694 = { life_rating = -5 }
 			693 = { life_rating = -5 }
 			690 = { life_rating = -5 }
 			691 = { life_rating = -5 }
-			696 = { life_rating = -5 }
-			695 = { life_rating = -5 }
-			698 = { life_rating = -5 }
-			697 = { life_rating = -5 }
+			700 = { life_rating = -5 }
+			701 = { life_rating = -5 }
+			699 = { life_rating = -5 }
+			692 = { life_rating = -5 }
+			679 = { life_rating = -5 }
+			680 = { life_rating = -5 }
+			546 = { life_rating = -5 }
+			547 = { life_rating = -5 }
+			548 = { life_rating = -5 }
+			544 = { life_rating = -5 }
+			545 = { life_rating = -5 }
 			685 = { life_rating = -5 }
 			684 = { life_rating = -5 }
-			682 = { life_rating = -5 }
 			683 = { life_rating = -5 }
+			681 = { life_rating = -5 }
+			552 = { life_rating = -5 }
+			550 = { life_rating = -5 }
+			551 = { life_rating = -5 }
 			687 = { life_rating = -5 }
 			558 = { life_rating = -5 }
 			559 = { life_rating = -5 }
 			560 = { life_rating = -5 }
+			529 = { life_rating = -5 }
+			530 = { life_rating = -5 }
+			369 = { life_rating = -5 }
+			3258 = { life_rating = -5 }
+			370 = { life_rating = -5 }
+			371 = { life_rating = -5 }
+			532 = { life_rating = -5 }
+			528 = { life_rating = -5 }
+			531 = { life_rating = -5 }
+			539 = { life_rating = -5 }
+			541 = { life_rating = -5 }
+			540 = { life_rating = -5 }
+			538 = { life_rating = -5 }
+			542 = { life_rating = -5 }
+			1743 = { life_rating = -5 }
+			539 = { life_rating = -5 }
+			543 = { life_rating = -5 }
+			535 = { life_rating = -5 }
+			3254 = { life_rating = -5 }
+			534 = { life_rating = -5 }
+			536 = { life_rating = -5 }
+			537 = { life_rating = -5 }
+			554 = { life_rating = -5 }
+			3256 = { life_rating = -5 }
 			561 = { life_rating = -5 }
+			3255 = { life_rating = -5 }
 			562 = { life_rating = -5 }
 			563 = { life_rating = -5 }
-			588 = { life_rating = -5 }
-			587 = { life_rating = -5 }
-			586 = { life_rating = -5 }
-			589 = { life_rating = -5 }
-			593 = { life_rating = -5 }
-			594 = { life_rating = -5 }
-			591 = { life_rating = -5 }
-			590 = { life_rating = -5 }
-			592 = { life_rating = -5 }
-			599 = { life_rating = -5 }
-			600 = { life_rating = -5 }
-			601 = { life_rating = -5 }
+			585 = { life_rating = -5 }
+			584 = { life_rating = -5 }
+			3267 = { life_rating = -5 }
+			583 = { life_rating = -5 }
+			580 = { life_rating = -5 }
+			581 = { life_rating = -5 }
+			3265 = { life_rating = -5 }
+			578 = { life_rating = -5 }
+			2561 = { life_rating = -5 }
+			579 = { life_rating = -5 }
+			577 = { life_rating = -5 }
+			575 = { life_rating = -5 }
+			576 = { life_rating = -5 }
+			572 = { life_rating = -5 }
+			396 = { life_rating = -5 }
+			3257 = { life_rating = -5 }
+			566 = { life_rating = -5 }
+			568 = { life_rating = -5 }
+			567 = { life_rating = -5 }
+			3270 = { life_rating = -5 }
+			565 = { life_rating = -5 }
+			564 = { life_rating = -5 }
+			2560 = { life_rating = -5 }
+			574 = { life_rating = -5 }
+			573 = { life_rating = -5 }
+			570 = { life_rating = -5 }
+			571 = { life_rating = -5 }
+			596 = { life_rating = -5 }
+			597 = { life_rating = -5 }
+			598 = { life_rating = -5 }
 			602 = { life_rating = -5 }
 			595 = { life_rating = -5 }
-			598 = { life_rating = -5 }
-			597 = { life_rating = -5 }
-			596 = { life_rating = -5 }
+			600 = { life_rating = -5 }
+			599 = { life_rating = -5 }
+			601 = { life_rating = -5 }
+			569 = { life_rating = -5 }
+			586 = { life_rating = -5 }
+			587 = { life_rating = -5 }
+			588 = { life_rating = -5 }
+			586 = { life_rating = -5 }
+			594 = { life_rating = -5 }
+			591 = { life_rating = -5 }
+			593 = { life_rating = -5 }
+			589 = { life_rating = -5 }
+			590 = { life_rating = -5 }
 		}
+	}
+	militarization_fromBasic_toDisarmed_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = basic_training
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			war_policy = pacifism
+		}
+		effect = {
+			political_reform = demilitarized_state
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+		}
+	}
+	militarization_fromMandatory_toBasic_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = mandatory_training
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			OR = { 
+				war_policy = pacifism
+				war_policy = anti_military
+			}
+		}
+		effect = {
+			political_reform = basic_training
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+		}
+	}
+	militarization_fromParamilitarism_toMandatory_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = paramilitarism
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			OR = { 
+				war_policy = pacifism
+				war_policy = anti_military
+				war_policy = pro_military
+			}
+		}
+		effect = {
+			political_reform = mandatory_training
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+		}
+	}
+	militarization_fromArmyState_toParamilitarism_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = army_with_a_state
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			OR = { 
+				war_policy = pacifism
+				war_policy = anti_military
+				war_policy = pro_military
+			}
+		}
+		effect = {
+			political_reform = paramilitarism
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+		}
+	}
+	militarization_fromNoTrain_toBasicTrain_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = demilitarized_state
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			OR = { 
+				war_policy = jingoism
+				war_policy = pro_military
+				war_policy = anti_military
+			}
+		}
+		effect = {
+			political_reform = basic_training
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
+		}
+	}
+	militarization_fromBasicTrain_toMandatoryTrain_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = basic_training
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			OR = { 
+				war_policy = jingoism
+				war_policy = pro_military
+			}
+		}
+		effect = {
+			political_reform = mandatory_training
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
+		}
+	}
+	militarization_fromMandatory_toParamilitarism_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = mandatory_training
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			war_policy = jingoism
+		}
+		effect = {
+			political_reform = paramilitarism
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
+		}
+	}
+	militarization_fromParamilitarism_toArmyState_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			conscription = paramilitarism
+			NOT = { has_country_modifier = militarization_law_changed }
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			war_policy = jingoism
+		}
+		effect = {
+			political_reform = army_with_a_state
+			add_country_modifier = { name = militarization_law_changed duration = 2190 }
+			any_pop = {
+				militancy = 2
+				consciousness = 1
+			}
+		}
+	}
+	change_government_guide_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			ai = no
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+		}
+		effect = {
+			country_event = 140536
+		}
+	}
+	revoke_voting_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			ai = no
+			NOT = {
+				vote_franschise = none_voting
+				vote_franschise = landed_voting
+			}
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			NOT = { election = yes }
+		}
+		effect = {
+			political_reform = none_voting
+			badboy = 1
+			any_pop = {
+				militancy = 10
+			}
+		}
+	}
+	zcountry_pass_reform = {
+		alert = no
+		potential = {
+			ai = no
+			civilized = yes
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+			
+		allow = {
+			NOT = {
+				OR = {
+					has_country_modifier = reform_passed
+					has_country_modifier = cannot_pass_reform
+				}
+			}
+			money = 50000
+		}
+
+		effect = {
+			set_country_flag = force_reform
+			add_country_modifier = {
+				name = force_reform
+				duration = 120
+			}
+			add_country_modifier = {
+				name = reform_passed
+				duration = 1825
+			}
+			any_owned_province = {
+				any_pop = {
+					militancy = 2
+					consciousness = 3
+				}
+			}
+			money = -50000
+		}		
 	}
 	capitultate_dec = {
 		alert = no
 		potential = {
 			ai = no
 		#	war_countries = { ai = no }
+			NOT = { has_country_flag = open_money_transfers_flag }
 			war = yes
 		}
 		allow = {
@@ -159,176 +481,35 @@ political_decisions = {
 			country_event = 39950
 		}
 	}
-	#support_science_dec = {
-	#	potential = {
-	#		ai = no
-	#		NOT = { has_country_modifier = supporting_science_modifier }
-	#		NOT = {
-	#			OR = { 
-	#				has_country_modifier = above_bb_limit
-	#				has_country_modifier = above_bb_limit_1
-	#				has_country_modifier = above_bb_limit_2
-	#			}
-	#		}
-	#		civilized = yes
-	#	}
-	#	allow = {
-	#		functionalism = 1
-	#		market_structure = 1
-	#		scientific_management = 1
-	#		school_reforms = good_schools
-	#		money = 250000
-	#	}
-	#	effect = {
-	#		add_country_modifier = { name = supporting_science_modifier duration = -1 }
-	#		money = -250000
-	#	}
-	#}
-	#cancel_support_science_dec = {
-	#	potential = {
-	#		has_country_modifier = supporting_science_modifier
-	#	}
-	#	allow = {
-	#	}
-	#	effect = {
-	#		remove_country_modifier = supporting_science_modifier
-	#	}
-	#}
-	switch_to_communist = {
-		potential = {
-			OR = {
-				ruling_party_ideology = socialist
-				ruling_party_ideology = communist
-			}
-			ai = no
-			is_ideology_enabled = communist
-			NOT = { government = proletarian_dictatorship }
-			#NOT = { tag = TUR } 
-		}
-		allow = {
-			socialist = 10
-			trade_unions = all_trade_unions
-		}
-		effect = {
-			prestige = -10
-			political_reform = none_voting
-			political_reform = party_appointed 
-			political_reform = underground_parties
-			government = proletarian_dictatorship
-			any_pop = {
-				militancy = -2
-			}
-			any_pop = {
-				consciousness = -2
-			}
-			add_country_modifier = { name = proletarian_dec_taken duration = -1 }
-		}
-	}
-	revert_from_communist = {
-		potential = {
-			ai = no
-			is_ideology_enabled = communist
-			government = proletarian_dictatorship
-			NOT = { has_country_modifier = proletarian_dec_taken } 
-		}
-		allow = {
-			
-		}
-		effect = {
-			prestige = -10
-			political_reform = universal_voting
-			political_reform = appointed 
-			political_reform = secret_ballots
-			government = hms_government
-			any_pop = {
-				militancy = 2
-			}
-			any_pop = {
-				consciousness = 2
-			}
-			remove_country_modifier = proletarian_dec_taken
-		}
-	}
 	
-	diplomaty_mp = {
-		alert = no
-		potential = {
-			ai = no
-		}
-		
-		allow = {
-			money = 100000			
-		}
-		
-		effect = {		
-			THIS = {
-				country_event = { id=3470333 days=0 }
-			}
-			money = -100000
-		}
-		ai_will_do = {
-			factor = 0
-		}
-	}
-	diplomaty_mp_m = {
-		alert = no
-		potential = { ai = no }
-		
-		allow = {
-			money = 1000000	
-		}
-		
-		effect = {	
-			THIS = {
-				country_event = { id=3471333 days=0 }
-			}
-			money = -1000000
-		}
-		ai_will_do = {
-			factor = 0
-		}
-	}
-	diplomaty_mp_sm = {
-		alert = no
-		ai = no
-		
-		allow = {
-			#prestige = 1
-			#market_structure = 1
-			money = 2000000		
-		}
-		
-		effect = {
-			#set_country_flag = diplomaty_mp			
-			THIS = {
-				country_event = { id=3472333 days=0 }
-			}
-			money = -2000000
-		}
-		ai_will_do = {
-			factor = 0
-		}
-	}
 	release_vassal = {
-        alert = no
-
+		alert = no
+		
 		potential = {
 			num_of_vassals = 1
-            ai = no
+			  ai = no
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}
-	effect = {
-		country_event = { id = 91306 days = 0 }
-	}
-	ai_will_do = {
-		factor = -1
+		
+		allow = {
+		}
+		
+		effect = {
+			country_event = { id = 91306 days = 0 }
+		}
+		
+		ai_will_do = {
+			factor = 0
 		}
 	}
+		
 
 	show_naval_fort_upgrade = {
         alert = no
         potential = {
             ai = no
             NOT = { has_country_flag = show_the_build_decisions }
+			NOT = { has_country_flag = open_money_transfers_flag }
         }
         allow = {
         }
@@ -342,6 +523,7 @@ political_decisions = {
         potential = {
             ai = no
             has_country_flag = show_the_build_decisions
+			NOT = { has_country_flag = open_money_transfers_flag }
         }
         allow = {
         }
@@ -354,6 +536,7 @@ political_decisions = {
         potential = {
 			ai = no
             has_country_flag = show_the_build_decisions
+			NOT = { has_country_flag = open_money_transfers_flag }
         }
         allow = {
         }
@@ -367,452 +550,12 @@ political_decisions = {
 			}
         }
     }
-	build_port_upto_level_1 = {
-        #picture = beiyang_fleet
-        potential = {
-			ai = no
-            has_country_flag = show_the_build_decisions
-            post_nelsonian_thought = 1
-            NOT = { battleship_column_doctrine = 1 }
-            any_state = {
-                any_owned_province = {
-                    is_coastal = yes
-                }
-                NOT = {
-                    any_owned_province = {
-                        has_building = naval_base
-                    }
-                }
-            }
-            NOT = { has_country_flag = naval_1 }
-        }
-        allow = {
-            NOT = { has_country_modifier = fort_constructions }
-            war = no
-			money = 500000
-        }
-        effect = {
-            set_country_flag = naval_1
-            money = -500000
-			add_country_modifier = { name = fort_constructions duration = 1795}
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        NOT = {
-                            OR = {
-                                terrain = arctic                #-4
-                                terrain = jungle                 #-4
-                                terrain = mountain         #-4
-                                #
-                                #
-                                #
-                            }
-                        }
-                    }
-                    naval_base = 1
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 0
-        }
-    }
-	build_port_upto_level_2 = {
-      #  picture = beiyang_fleet
-        potential = {
-			ai = no
-            has_country_flag = show_the_build_decisions
-            battleship_column_doctrine = 1
-
-            NOT = { raider_group_doctrine = 1 }
-            any_state = {
-                any_owned_province = {
-                    is_coastal = yes
-                }
-            }
-            NOT = { has_country_flag = naval_2 }
-        }
-        allow = {
-            NOT = { has_country_modifier = fort_constructions }
-            war = no
-			money = 1000000
-        }
-        effect = {
-            set_country_flag = naval_2
-            add_country_modifier = {
-			money = -1000000
-                name = fort_constructions
-                duration = 1825
-            }
-            any_owned = {
-                limit = {
-                    has_building = naval_base
-                }
-                naval_base = 3 #actually makes it lvl 2, idk y
-            }
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        NOT = {
-                            OR = {
-                                terrain = arctic                #-4
-                                terrain = jungle                 #-4
-                                terrain = mountain         #-4
-                                #
-                                #
-                                #
-                            }
-                        }
-                    }
-                    naval_base = 2 #makes it lvl 2 if jumping from 0, others seem to be fine
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 0
-        }
-    }
-    build_port_upto_level_3 = {
-       # picture = beiyang_fleet
-        potential = {
-			ai = no
-            has_country_flag = show_the_build_decisions
-            raider_group_doctrine = 1
-            NOT = { blue_and_brown_water_schools = 1 }
-            any_state = {
-                any_owned_province = {
-                    is_coastal = yes
-                }
-            }
-            NOT = { has_country_flag = naval_3 }
-        }
-        allow = {
-            NOT = { has_country_modifier = fort_constructions }
-            war = no
-			money = 1500000
-        }
-        effect = {
-            set_country_flag = naval_3
-			money = -1500000
-            add_country_modifier = {
-                name = fort_constructions
-                duration = 1825
-            }
-            any_owned = {
-                limit = {
-                    has_building = naval_base
-                }
-                naval_base = 4
-            }
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        NOT = {
-                            OR = {
-                                terrain = arctic                #-4
-                                terrain = jungle                 #-4
-                                terrain = mountain         #-4
-                                #
-                                #
-                                #
-                            }
-                        }
-                    }
-                    naval_base = 4
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 0
-        }
-    }
-    build_port_upto_level_4 = {
-      #  picture = beiyang_fleet
-        potential = {
-			ai = no
-            has_country_flag = show_the_build_decisions
-            blue_and_brown_water_schools = 1
-            NOT = { high_sea_battle_fleet = 1 }
-            any_state = {
-                any_owned_province = {
-                    is_coastal = yes
-                }
-            }
-            NOT = { has_country_flag = naval_4 }
-        }
-        allow = {
-            NOT = { has_country_modifier = fort_constructions }
-            war = no
-			money = 2000000
-        }
-        effect = {
-            set_country_flag = naval_4
-			money = -2000000
-            add_country_modifier = {
-                name = fort_constructions
-                duration = 1825
-            }
-            any_owned = {
-                limit = {
-                    has_building = naval_base
-                }
-                naval_base = 5
-            }
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        NOT = {
-                            OR = {
-                                terrain = arctic                #-4
-                                terrain = jungle                 #-4
-                                terrain = mountain         #-4
-                                #
-                                #
-                                #
-                            }
-                        }
-                    }
-                    naval_base = 5
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 0
-        }
-    }
-    build_port_upto_level_5 = {
-        #picture = beiyang_fleet
-
-        potential = {
-			ai = no
-            has_country_flag = show_the_build_decisions
-            high_sea_battle_fleet = 1
-            NOT = { modern_naval_doctrine = 1 }
-            any_state = {
-                any_owned_province = {
-                    is_coastal = yes
-                }
-            }
-            NOT = { has_country_flag = naval_5 }
-        }
-        allow = {
-            NOT = { has_country_modifier = fort_constructions }
-            war = no
-			money = 2500000
-        }
-        effect = {
-            set_country_flag = naval_5
-			money = -2500000
-            add_country_modifier = {
-                name = fort_constructions
-                duration = 1825
-            }
-            any_owned = {
-                limit = {
-                    has_building = naval_base
-                }
-                naval_base = 6
-            }
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        NOT = {
-                            OR = {
-                                terrain = arctic                #-4
-                                terrain = jungle                 #-4
-                                terrain = mountain         #-4
-                                #
-                                #
-                                #
-                            }
-                        }
-                    }
-                    naval_base = 6
-                }
-            }
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        OR = {
-                            terrain = arctic                #-4
-                            terrain = jungle                 #-4
-                            terrain = mountain         #-4
-                            #
-                            #
-                            #
-                        }
-                    }
-                    naval_base = 1
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 0
-        }
-    }
-    build_port_upto_level_6 = {
-        picture = beiyang_fleet
-        potential = {
-			ai = no
-            has_country_flag = show_the_build_decisions
-            modern_naval_doctrine = 1
-            any_state = {
-                any_owned_province = {
-                    is_coastal = yes
-                }
-            }
-            NOT = { has_country_flag = naval_6 }
-        }
-        allow = {
-            NOT = { has_country_modifier = fort_constructions }
-            war = no
-			money = 2500000
-        }
-        effect = {
-            set_country_flag = naval_6
-			add_tax_relative_income = -100
-			money = -2500000
-            add_country_modifier = {
-                name = fort_constructions
-                duration = 1825
-            }
-            any_owned = {
-                limit = {
-                    has_building = naval_base
-                    NOT = {
-                        OR = {
-                            terrain = arctic                #-4
-                            terrain = jungle                 #-4
-                            terrain = mountain         #-4
-                            #
-                            #
-                            #
-                        }
-                    }
-                }
-                naval_base = 7
-            }
-            any_owned = {
-                limit = {
-                    has_building = naval_base
-                    OR = {
-                        terrain = arctic                #-4
-                        terrain = jungle                 #-4
-                        terrain = mountain         #-4
-                        #
-                        #
-                        #
-                    }
-                }
-                naval_base = 3
-            }
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        NOT = {
-                            OR = {
-                                terrain = arctic                #-4
-                                terrain = jungle                 #-4
-                                terrain = mountain         #-4
-                                #
-                                #
-                                #
-                            }
-                        }
-                    }
-                    naval_base = 7
-                }
-            }
-            any_state = {
-                limit = {
-                    NOT = {
-                        any_owned_province = {
-                            has_building = naval_base
-                        }
-                    }
-                }
-                random_owned = {
-                    limit = {
-                        is_coastal = yes
-                        OR = {
-                            terrain = arctic                #-4
-                            terrain = jungle                 #-4
-                            terrain = mountain         #-4
-                            #
-                            #
-                            #
-                        }
-                    }
-                    naval_base = 3
-                }
-            }
-        }
-        ai_will_do = {
-            factor = 0
-        }
-    }
-	
 	## PROPAGANDA
 	propaganda_build_mop = {
 		potential = {
 			NOT = { has_country_flag = mop_built_flag }
 			civilized = yes
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
 			state_n_government = 1
@@ -830,6 +573,7 @@ political_decisions = {
 			NOT = { has_country_flag = propaganda_is_open }
 			ai = no
 			has_country_flag = mop_built_flag
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
 		}
@@ -842,6 +586,7 @@ political_decisions = {
 		potential = {
 
 			has_country_flag = propaganda_is_open
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
 		}
@@ -853,27 +598,65 @@ political_decisions = {
 	propaganda_campaign_appeasement = {
 		potential = {
 			has_country_flag = propaganda_is_open
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
-			treasury = 200000
+			money = 200000
 		}
 		
 		effect = {
 			treasury = -200000
-			country_event = 11606
+			add_country_modifier = { name = appeasement_campaign_modifier duration = 730 }
+		}
+	}
+	propaganda_campaign_agitation = {
+		potential = {
+			has_country_flag = propaganda_is_open
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			money = 100000
+		}
+		
+		effect = {
+			treasury = -100000
+			any_pop = {
+				militancy = 3
+				consciousness = 4
+			}
 		}
 	}
 	propaganda_campaign_ideology = {
 		potential = {
 			has_country_flag = propaganda_is_open
+			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
-			treasury = 200000
+			money = 200000
 		}
 		
 		effect = {
 			treasury = -200000
 			country_event = 198402
+		}
+	}
+	propaganda_campaign_greener_grass = {
+		potential = {
+			has_country_flag = propaganda_is_open
+			NOT = {
+				has_country_modifier = greener_grass_campaign_modifier
+			}
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			money = 400000
+		}
+		
+		effect = {
+			treasury = -400000
+			add_country_modifier = {
+				name = greener_grass_campaign_modifier duration = 1825
+			}
 		}
 	}
 	

@@ -8,10 +8,8 @@ rebel =
 {
 	cavalry = 0.2
 	artillery = 0.01
-	cuirassier = 0.05
 	dragoon = 0.05
 	guard = 0.15
-	hussar = 0.05
 	infantry = 0.3
 	irregular = 0
 }
@@ -41,6 +39,7 @@ everyday_needs = {
 	furniture = 1
 	ammunition = 0.5 #0
 	small_arms = 0.35 #0
+	wine = 0.1
 }
 
 life_needs = {
@@ -91,12 +90,12 @@ country_migration_target =
 		OR = { 
 			continent = north_america
 			continent = south_america
-			continent = oceania
+			continent = polynesia
 		}
 	}
 	modifier = {
 		factor = 1.5
-		continent = oceania
+		continent = polynesia
 	}
 	modifier = {
 		factor = 0.1
@@ -128,19 +127,19 @@ migration_target =
 	
 	modifier = {
 		factor = 1.2
-		total_pops = 150000
+		total_pops = 75000
 	}
 		modifier = {
+		factor = 1.2
+		total_pops = 125000
+	}
+	modifier = {
 		factor = 1.2
 		total_pops = 250000
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 500000
-	}
-	modifier = {
-		factor = 1.2
-		total_pops = 750000
+		total_pops = 375000
 	}
 	
 	modifier = {
@@ -227,7 +226,23 @@ promote_to =
 		modifier = {
 			factor = -100
 			officers = 0.002
-		}		
+		}
+		modifier = {
+			factor = -4
+			NOT = { soldiers = 0.01 }
+		}
+		modifier = {
+			factor = -4
+			NOT = { soldiers = 0.02 }
+		}
+		modifier = {
+			factor = -4
+			NOT = { soldiers = 0.03 }
+		}
+		modifier = {
+			factor = -4
+			NOT = { soldiers = 0.04 }
+		}
 
 		modifier = {
 			factor = 5
@@ -235,15 +250,15 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = 5
+				factor = 4
 				military_spending = 0.3
 			}
 			modifier = {
-				factor = 10
+				factor = 5
 				military_spending = 0.5
 			}
 			modifier = {
-				factor = 15
+				factor = 5
 				military_spending = 0.7
 			}
 		}
@@ -252,8 +267,8 @@ promote_to =
 	farmers = { #and labourers
 		factor = 0.01
 		modifier = {
-			factor = 5.0
-			soldiers = 0.05
+			factor = 100.0
+			soldiers = 0.051
 		}
 		modifier = {
 			factor = 5.0
@@ -272,6 +287,22 @@ promote_to =
 					}
 				}
 			}
+		}
+		modifier = {
+			factor = -2
+			NOT = { soldiers = 0.01 }
+		}
+		modifier = {
+			factor = -2
+			NOT = { soldiers = 0.02 }
+		}
+		modifier = {
+			factor = -2
+			NOT = { soldiers = 0.03 }
+		}
+		modifier = {
+			factor = -2
+			NOT = { soldiers = 0.04 }
 		}
 	}
 #	labourers = 
@@ -339,11 +370,8 @@ promote_to =
 		}
 		modifier = {
 			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
 		}
 		modifier = {
@@ -356,8 +384,41 @@ promote_to =
 				}
 			}
 		}
+	
+		modifier = {
+			factor = -2
+			craftsmen = 0.18
+		}
+		modifier = {
+			factor = -2
+			craftsmen = 0.2
+		}
+		modifier = {
+			factor = -1
+			craftsmen = 0.22
+		}
+		modifier = {
+			factor = -1
+			craftsmen = 0.24
+		}
+		modifier = {
+			factor = -1
+			craftsmen = 0.26
+		}
+		modifier = {
+			factor = -2
+			craftsmen = 0.28
+		}
+		modifier = {
+			factor = -2
+			craftsmen = 0.3
+		}
+		
+		modifier = {
+			factor = -10
+			NOT = { soldiers = 0.05 }
+		}
 	}
-
 }
 
 

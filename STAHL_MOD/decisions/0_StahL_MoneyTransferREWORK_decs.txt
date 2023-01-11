@@ -1,0 +1,1301 @@
+political_decisions = {
+
+	### TECHNICAL
+	give_money_dec = {
+		alert = no
+		potential = {
+			ai = no
+			NOT = { has_country_flag = open_money_transfers_flag }
+		}
+		allow = {
+			
+		}
+		effect = {
+			set_country_flag = give_money_100k_flag
+			set_country_flag = open_money_transfers_flag
+		}
+	}
+	no_give_money_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+		}
+		allow = {
+			
+		}
+		effect = {
+			clr_country_flag = open_money_transfers_flag
+			clr_country_flag = give_money_100k_flag
+		}
+	}
+	give_money_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+		}
+		allow = {
+			
+		}
+		effect = {
+			clr_country_flag = give_money_100k_flag
+			set_country_flag = give_money_250k_flag
+		}
+	}
+	give_money_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+		}
+		allow = {
+			
+		}
+		effect = {
+			clr_country_flag = give_money_250k_flag
+			set_country_flag = give_money_1000k_flag
+		}
+	}
+	give_money_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+		}
+		allow = {
+			
+		}
+		effect = {
+			clr_country_flag = give_money_1000k_flag
+			set_country_flag = give_money_100k_flag
+		}
+	}
+	
+	### COUNTRIES
+	
+	# FRANCE
+	give_money_fra_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			FRA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			FRA = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_fra_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			FRA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			FRA = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_fra_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			FRA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			FRA = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	
+	# PRUSSIA
+	give_money_PRU_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			PRU = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			PRU = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_PRU_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			PRU = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			PRU = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_PRU_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			PRU = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			PRU = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# CONFEDERATES
+	give_money_CSA_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			CSA = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			CSA = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_CSA_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			CSA = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			CSA = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_CSA_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			CSA = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			CSA = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# NGF
+	give_money_NGF_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			NGF = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			NGF = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_NGF_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			NGF = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			NGF = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_NGF_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			NGF = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			NGF = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# INDIA
+	give_money_HND_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			HND = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			HND = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_HND_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			HND = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			HND = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_HND_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			HND = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			HND = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# HUNAN
+	give_money_HNN_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			HNN = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			HNN = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_HNN_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			HNN = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			HNN = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_HNN_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			HNN = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			HNN = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# NETHERLANDS
+	give_money_NET_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			NET = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			NET = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_NET_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			NET = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			NET = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_NET_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			NET = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			NET = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# BENELUX
+	give_money_BLX_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			BLX = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			BLX = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_BLX_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			BLX = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			BLX = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_BLX_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			BLX = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			BLX = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# BRAZIL
+	give_money_BRZ_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			BRZ = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			BRZ = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_BRZ_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			BRZ = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			BRZ = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_BRZ_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			BRZ = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			BRZ = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# SCANDINAVIA
+	give_money_SCA_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			SCA = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			SCA = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_SCA_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			SCA = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			SCA = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_SCA_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			SCA = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			SCA = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# SWEDEN
+	give_money_SWE_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			SWE = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			SWE = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_SWE_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			SWE = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			SWE = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_SWE_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			SWE = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			SWE = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# MEXICO
+	give_money_MEX_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			MEX = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			MEX = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_MEX_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			MEX = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			MEX = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_MEX_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			MEX = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			MEX = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# EAST INDIA COMPANY
+	give_money_EIC_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			EIC = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			EIC = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_EIC_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			EIC = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			EIC = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_EIC_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			EIC = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			EIC = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# GERMANY
+	give_money_GER_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			GER = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			GER = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_GER_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			GER = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			GER = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_GER_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			GER = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			GER = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# AUSTRIA
+	give_money_AUS_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			AUS = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			AUS = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_AUS_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			AUS = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			AUS = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_AUS_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			AUS = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			AUS = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# AUSTRIA-HUNGARY
+	give_money_AUS_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			KUK = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			KUK = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_KUK_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			KUK = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			KUK = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_KUK_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			KUK = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			KUK = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# SARDINIA
+	give_money_SAR_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			SAR = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			SAR = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_SAR_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			SAR = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			SAR = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_SAR_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			SAR = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			SAR = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# ITALY
+	give_money_ITA_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			ITA = { ai = no	}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			ITA = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_ITA_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			ITA = { ai = no	}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			ITA = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_ITA_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			ITA = { ai = no	}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			ITA = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# RUSSIA
+	give_money_RUS_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			RUS = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			RUS = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_RUS_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			RUS = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			RUS = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_RUS_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			RUS = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			RUS = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	
+	# GREAT BRITAIN
+	give_money_ENG_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			ENG = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			ENG = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_ENG_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			ENG = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			ENG = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_ENG_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			ENG = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			ENG = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# TURKEY
+	give_money_TUR_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			TUR = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			TUR = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_TUR_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			TUR = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			TUR = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_TUR_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			TUR = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			TUR = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# SPAIN
+	give_money_SPA_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			SPA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			SPA = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_SPA_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			SPA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			SPA = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_SPA_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			SPA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			SPA = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# USA
+	give_money_USA_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			USA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			USA = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_USA_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			USA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			USA = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_USA_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			USA = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			USA = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	# JAPAN
+	give_money_JAP_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			JAP = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			JAP = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_JAP_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			JAP = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			JAP = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_JAP_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			JAP = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			JAP = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	
+}

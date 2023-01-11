@@ -1,3 +1,4 @@
+
 country_event = { # INDIA
 	title = "EVTNAME9535"
 	desc = "EVTDESC9535"
@@ -37,6 +38,9 @@ country_event = { # INDIA
 		inherit =  SIK
 		inherit =  MUG
 		inherit =  JOD
+		add_accepted_culture = panjabi
+		add_accepted_culture = marathi
+		add_accepted_culture = burmese
 	}
 }
 
@@ -96,6 +100,9 @@ country_event = { # GERMANY
 		inherit =  SCH
 		inherit =  SGF
 		inherit =  WEI
+		inherit =  REU
+		inherit =  SCL
+		inherit =  SWG
 		inherit =  WUR
 		412 = { secede_province = THIS }
 		410 = { secede_province = THIS }
@@ -122,7 +129,7 @@ country_event = { # JAPAN
 		inherit =  KAG
 	}
 }
-country_event = {
+country_event = { # MILITANCY CONSC
 	title = "EVTNAME9551"
 	desc = "EVTDESC9551"
 	id = 9551
@@ -136,6 +143,7 @@ country_event = {
 	}
 }
 
+# ANNEX FRANCE
 country_event = {
 	title = "EVTNAME9552"
 	desc = "EVTDESC9552"
@@ -147,8 +155,7 @@ country_event = {
 	}
 }
 
-#SCANDINAVIA
-country_event = {
+country_event = { #SCANDINAVIA
 	title = "EVTNAME9552"
 	desc = "EVTDESC9552"
 	id = 9553
@@ -157,5 +164,56 @@ country_event = {
 		name = "EVTOPTA9552"
 		inherit = DEN
 		inherit = NOR
+	}
+}
+
+country_event = { #ITALY
+	title = "EVTNAME9552"
+	desc = "EVTDESC9552"
+	id = 9553
+	is_triggered_only = yes
+	option = {
+		name = "EVTOPTA9552"
+		inherit = PAR
+		inherit = PAP
+		inherit = LUC
+		inherit = SAR
+		inherit = TUS
+		inherit = SIC
+		inherit = MOD
+	}
+}
+
+country_event = { # BECOME COMMUNIST
+	title = "Comm"
+	desc = "comm"
+	id = 9554
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "hura"
+		political_reform = none_voting
+		political_reform = party_appointed 
+		political_reform = underground_parties
+		government = proletarian_dictatorship
+	}
+}
+
+country_event = { # FAST CIVILIZE REFORMS
+	title = "Fastciv"
+	desc = "glory"
+	id = 9555
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Westernizing.."
+		economic_reform = yes_land_reform
+		economic_reform = yes_admin_reform
+		economic_reform = finance_reform_two
+		economic_reform = monetary_reform_two
+		economic_reform = yes_education_reform
+		economic_reform = yes_transport_improv
 	}
 }

@@ -1,6 +1,7 @@
 political_decisions = {
 	citizenship_law_spa = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SPA
 			NOT = {
 				has_country_flag = tur_cit_law
@@ -12,6 +13,7 @@ political_decisions = {
 			functionalism = 1
 			year = 1860
 			owns = 521
+			NOT = { citizens_rights = primary_culture_only }
 		}
 		
 		effect = {
@@ -32,6 +34,7 @@ political_decisions = {
 	
 	annex_por = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SPA
 			POR = { exists = yes ai = yes }
 			NOT = { has_country_flag = annex_por_taken }
@@ -62,6 +65,7 @@ political_decisions = {
 	
 	declare_reconquista_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SPA
 			NOT = { has_country_flag = reconquista_declared_flag }
 			state_n_government = 1
@@ -71,6 +75,7 @@ political_decisions = {
 			biologism = 1
 			muzzle_loaded_rifles = 1
 			steamers = 1
+			NOT = { colonial_policy = no_colonies }
 		}
 	
 		effect = {
@@ -94,6 +99,7 @@ political_decisions = {
 	
 	continue_reconquista_dec = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = reconquista_declared_flag
 			NOT = { has_country_flag = reconquista_successful_flag }
 		}
@@ -135,6 +141,7 @@ political_decisions = {
 					}
 				}
 			}
+			NOT = { colonial_policy = no_colonies }
 		}
 		effect = {
 			prestige = 5

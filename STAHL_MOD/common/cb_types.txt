@@ -90,7 +90,7 @@ take_treaty_port = {
 	months = 36
 	construction_speed = 1
 	
-	badboy_factor = 1
+	badboy_factor = 0.6
 	prestige_factor = 1
 	peace_cost_factor = 1
 	penalty_factor = 1
@@ -122,29 +122,25 @@ take_treaty_port = {
 		OR = {
 			any_owned_province = { 
 				OR = {
-					province_id = 1569 
-					province_id = 1498
-					province_id = 1496
-					province_id = 1637
-					province_id = 1566
-					province_id = 1536
-					province_id = 1538
-					province_id = 1384
-					province_id = 1303
+					province_id = 1875
+					province_id = 2640
+					province_id = 935
 					province_id = 1165
 					province_id = 1412
-					province_id = 1875
-					province_id = 1312
-					province_id = 1481
-					province_id = 1393
-					province_id = 77
-					province_id = 203
+					province_id = 517
+					province_id = 502
+					province_id = 854
+					province_id = 1637
+					province_id = 2589
+					province_id = 1566
+					province_id = 2632
+					province_id = 3249
+					province_id = 1569
+					province_id = 1496
+					province_id = 1538
+					province_id = 1384
 				}
 			}
-			#any_owned_province = 1566
-			#any_owned_province = 1498
-			#any_owned_province = 1496
-			#any_owned_province = 1637
 		}
 	}	
 
@@ -194,20 +190,7 @@ war_for_mil_access = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-						tag = YNN
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -253,33 +236,11 @@ china_cb_prewestern = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		OR = {
-			tag = CHI
-			tag = FJN
-			tag = TPG
-			tag = GXI
-			tag = YNN
-			tag = XBI
-			tag = HNN
-			tag = MCK
-			tag = MGL
-			tag = XIN
-			tag = TIB
+			has_country_flag = chinese_country_flag
 		}
 		THIS = { 
-			NOT = { 
-				OR = {
-					tag = CHI
-					tag = FJN
-					tag = TPG
-					tag = GXI
-					tag = YNN
-					tag = XBI
-					tag = HNN 
-					tag = MCK
-					tag = MGL
-					tag = XIN
-					tag = TIB
-				}
+			NOT = {
+				has_country_flag = chinese_country_flag
 			} 
 		}
 		NOT = { year = 1865 } 
@@ -338,32 +299,11 @@ china_clique_wars = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		OR = {
-			tag = CHI
-			tag = FJN
-			tag = YNN
-			tag = TPG
-			tag = GXI
-			tag = XBI
-			tag = HNN
-			tag = MCK
-			tag = MGL
-			tag = XIN
-			tag = TIB
+			has_country_flag = chinese_country_flag
 		}
 		THIS = { 
 			OR = {
-				tag = YNN
-				tag = CHI
-				tag = FJN
-				tag = TPG
-				tag = GXI
-				tag = XBI
-				tag = HNN 
-				tag = CHU
-				tag = MCK
-				tag = MGL
-				tag = XIN
-				tag = TIB
+				has_country_flag = chinese_country_flag
 			}
 		}
 		is_independant = yes
@@ -434,18 +374,7 @@ take_capital = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = YNN
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU 
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
+						has_country_flag = chinese_country_flag
 					}
 					NOT = { year = 1865 } 
 				}
@@ -539,17 +468,17 @@ conquest_small = {
 	
 	can_use = {
 		OR = {
-			NOT = { total_pops = 400000 }
+			NOT = { total_pops = 200000 }
 			AND = {
-				NOT = { total_pops = 450000 }
+				NOT = { total_pops = 225000 }
 				year = 1860
 			}
 			AND = {
-				NOT = { total_pops = 600000 }
+				NOT = { total_pops = 300000 }
 				year = 1885
 			}
 			AND = {
-				NOT = { total_pops = 900000 }
+				NOT = { total_pops = 450000 }
 				year = 1910
 			}
 		}
@@ -558,18 +487,7 @@ conquest_small = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN 
-						tag = YNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
+						has_country_flag = chinese_country_flag
 					}
 					NOT = { year = 1865 } 
 				}
@@ -679,7 +597,7 @@ challenge_swi = {
 		}
 	}
 
-	badboy_factor = 2.0
+	badboy_factor = 3
 	prestige_factor = 5
 	peace_cost_factor = 1
 	penalty_factor = 1
@@ -723,18 +641,7 @@ conquest_tiny = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN 
-						tag = YNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
+						has_country_flag = chinese_country_flag
 					}
 					NOT = { year = 1865 } 
 				}
@@ -748,17 +655,17 @@ conquest_tiny = {
 			}
 		}
 		OR = {
-			NOT = { total_pops = 150000 }
+			NOT = { total_pops = 75000 }
 			AND = {
-				NOT = { total_pops = 200000 }
+				NOT = { total_pops = 100000 }
 				year = 1860
 			}
 			AND = {
-				NOT = { total_pops = 300000 }
+				NOT = { total_pops = 150000 }
 				year = 1885
 			}
 			AND = {
-				NOT = { total_pops = 450000 }
+				NOT = { total_pops = 275000 }
 				year = 1910
 			}
 		}
@@ -856,18 +763,7 @@ demand_for_ally = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN 
-						tag = YNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
+						has_country_flag = chinese_country_flag
 					}
 					NOT = { year = 1865 } 
 				}
@@ -1010,18 +906,7 @@ establish_small_protectorate_casus_belli = {
 				tag = SWI tag = WBK 
 				AND = {
 					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = YNN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
+						has_country_flag = chinese_country_flag
 					}
 					NOT = { year = 1865 } 
 				}
@@ -1034,7 +919,7 @@ establish_small_protectorate_casus_belli = {
 				}
 			}
 		}
-		NOT = { total_pops = 150000 }
+		NOT = { total_pops = 75000 }
 		THIS = {
 			ai = no
 		}
@@ -1179,20 +1064,7 @@ conquest = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = YNN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -1231,17 +1103,17 @@ conquest = {
 			
 		}
 		OR = {
-			total_pops = 400000
+			total_pops = 200000
 			AND = {
-				total_pops = 550000
+				total_pops = 275000
 				year = 1860
 			}
 			AND = {
-				total_pops = 800000
+				total_pops = 400000
 				year = 1885
 			}
 			AND = {
-				total_pops = 1200000
+				total_pops = 600000
 				year = 1910
 			}
 		}
@@ -1357,19 +1229,7 @@ add_to_sphere = {
 		NOT = { OR = { tag = SWI tag = WBK } }
 		NOT = { OR = { THIS = { tag = SWI tag = WBK } } }
 		NOT = {
-			OR = {
-				tag = HNN 
-				tag = FJN 
-				tag = GXI 
-				tag = XBI 
-				tag = YNN 
-				tag = TPG 
-				tag = CHI 
-				tag = MCK
-				tag = MGL
-				tag = XIN
-				tag = TIB
-			}
+			has_country_flag = chinese_country_flag
 		}
 	}
 	
@@ -1642,20 +1502,7 @@ acquire_state = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = YNN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -1744,20 +1591,7 @@ place_in_the_sun = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = YNN 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -1855,20 +1689,7 @@ cut_down_to_size = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = YNN 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -1876,7 +1697,11 @@ cut_down_to_size = {
 		THIS = {
 			NOT = {
 				OR = {
-					tag = SWI tag = WBK
+					tag = WBK
+					AND = {
+						tag = SWI
+						war = no
+					}
 				}
 			}
 		}
@@ -1921,20 +1746,7 @@ demand_war_reparations = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = YNN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -2114,6 +1926,7 @@ liberate_country = {
 	
 	
 	can_use = {
+		ai = yes
 		NOT = { is_our_vassal = THIS }
 		NOT = {
 			OR = {
@@ -2214,20 +2027,7 @@ dismantle_forts = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = YNN 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -2357,20 +2157,7 @@ make_puppet = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = YNN 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -2495,20 +2282,7 @@ humiliate = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = YNN 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -2516,7 +2290,11 @@ humiliate = {
 		THIS = {
 			NOT = {
 				OR = {
-					tag = SWI tag = WBK
+					tag = WBK
+					AND = {
+						tag = SWI
+						war = no
+					}
 				}
 			}
 		}
@@ -2565,20 +2343,7 @@ demand_concession_casus_belli = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = YNN 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -2654,20 +2419,7 @@ establish_protectorate_casus_belli = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = YNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -2679,7 +2431,7 @@ establish_protectorate_casus_belli = {
 				}
 			}
 		}
-		total_pops = 150000
+		total_pops = 75000
 		OR = {
 			NOT = {
 				number_of_states = 2 
@@ -3036,20 +2788,7 @@ install_communist_gov_cb = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-						tag = YNN
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}
@@ -3141,20 +2880,7 @@ uninstall_communist_gov_cb = {
 			OR = {
 				tag = SWI tag = WBK 
 				AND = {
-					OR = {
-						tag = HNN 
-						tag = FJN 
-						tag = GXI 
-						tag = XBI 
-						tag = TPG 
-						tag = CHI 
-						tag = CHU
-						tag = MCK
-						tag = MGL
-						tag = XIN
-						tag = TIB
-						tag = YNN
-					}
+					has_country_flag = chinese_country_flag
 					NOT = { year = 1865 } 
 				}
 			}

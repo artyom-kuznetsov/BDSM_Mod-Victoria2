@@ -106,7 +106,7 @@ point_defense_system = {
 	unciv_military = yes
 	combat_width = -2
 	army_base = {
-		supply_consumption = 0.150
+		supply_consumption = 0.1
 	} 
 	max_fort = 1
 	dig_in_cap = 1
@@ -157,11 +157,11 @@ deep_defense_system = {
 	year = 1870
 	cost = 16000
 	unciv_military = yes
-	combat_width = -3
+	combat_width = -2
 	max_fort = 1
 	dig_in_cap = 1
 	army_base = { 
-		supply_consumption = 0.2
+		supply_consumption = 0.15
 	}
 	ai_chance = {
 		factor = 1.01
@@ -209,7 +209,7 @@ infiltration = {
 	year = 1890
 	cost = 24000
 	unciv_military = yes
-	combat_width = -3
+	combat_width = -2
 	army_base = {
 		supply_consumption = 0.2
 	} 
@@ -256,7 +256,7 @@ modern_army_doctrine = {
 	year = 1910
 	cost = 30000
 	unciv_military = yes
-	combat_width = -5
+	combat_width = -3
 	army_base = {
 		supply_consumption = 0.2
 	} 
@@ -305,6 +305,7 @@ flintlock_rifles = {
 	year = 1836
 	cost = 3600
 	unciv_military = yes
+	activate_building = military_packs_factory
 	
 	activate_unit = infantry
 	army_base = {
@@ -402,7 +403,7 @@ breech_loaded_rifles = {
 	unciv_military = yes
 
 	army_base = {
-		supply_consumption = 0.15
+		supply_consumption = 0.1
 	}
 	
 	ai_chance = {
@@ -450,7 +451,7 @@ machine_guns = {
 	unciv_military = yes
 	
 	army_base = {
-		supply_consumption = 0.2
+		supply_consumption = 0.15
 	}
 	activate_unit = guard
 	#colonial_life_rating = -10 
@@ -547,9 +548,8 @@ modern_divisional_structure = {
 	}
 	
 	unit = 2
-	combat_width = -5
 	
-		ai_chance = {
+	ai_chance = {
 		factor = 1.1
 		modifier = {
 			factor = 1.5
@@ -633,8 +633,8 @@ iron_muzzle_loaded_artillery = {
 	artillery = {
 		attack = 0.5
 		defence = 0.5
-		support = 1
-		supply_consumption = 0.3
+		support = 0.5
+		supply_consumption = 0.2
 		siege = 0.5
 	}
 	
@@ -679,8 +679,8 @@ iron_breech_loaded_artillery = {
 	artillery = {
 		attack = 0.5
 		defence = 0.5
-		support = 1
-		supply_consumption = 0.3
+		support = 0.5
+		supply_consumption = 0.2
 		siege = 0.5
 	}
 	ai_chance = {
@@ -724,8 +724,8 @@ steel_breech_loaded_artillery = {
 	artillery = {
 		attack = 0.5
 		defence = 0.5
-		support = 1
-		supply_consumption = 0.4
+		support = 0.5
+		supply_consumption = 0.2
 		siege = 0.5
 	}
 	
@@ -770,8 +770,8 @@ indirect_artillery_fire = {
 	artillery = {
 		attack = 0.5
 		defence = 0.5
-		support = 1
-		supply_consumption = 0.4
+		support = 0.5
+		supply_consumption = 0.25
 		siege = 0.5
 	}
 	
@@ -817,7 +817,7 @@ heavy_armament_dunno = {
 		attack = 0.5
 		defence = 0.5
 		support = 1
-		supply_consumption = 0.4
+		supply_consumption = 0.25
 		siege = 0.5
 	}
 	
@@ -868,6 +868,8 @@ military_staff_system = {
 		supply_consumption = 0.050
 	}
 	
+	activate_unit = dragoon
+	
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -907,6 +909,7 @@ military_plans = {
 	cost = 7000
 	unciv_military = yes
 	
+	supply_limit = 0.1
 	army_base = {
 		default_organisation = 5
 		supply_consumption = 0.050
@@ -957,6 +960,7 @@ military_statistics = {
 		supply_consumption = 0.050
 	}
 	
+	supply_limit = 0.1
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -1002,6 +1006,7 @@ military_logistics = {
 	}
 	#mobilisation_size = 0.05
 	
+	supply_limit = 0.20
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -1045,6 +1050,7 @@ military_directionism = {
 		default_organisation = 5
 		supply_consumption = 0.10
 	}
+	supply_limit = 0.15
 	ai_chance = {
 		factor = 1.5
 		modifier = {
@@ -1091,6 +1097,14 @@ aeronautics = {
 		supply_consumption = 0.10
 	}
 	
+	plane = {
+		attack = 1.5
+		defence = 1.5
+		support = 1
+		supply_consumption = 0.4
+	}
+	
+	supply_limit = 0.15
 	unciv_military = yes
 	
 	ai_chance = {
@@ -1169,6 +1183,7 @@ army_professionalism = {
 	cost = 7000
 	unciv_military = yes
 
+	supply_limit = 0.05
 	military_tactics = 0.1
 	morale = 0.3
 	
@@ -1226,6 +1241,7 @@ army_decision_making = {
 
 	military_tactics = 0.15
 
+	supply_limit = 0.05
 	army_base = {
 		supply_consumption = 0.05
 	}
@@ -1281,6 +1297,7 @@ army_risk_management = {
 
 	military_tactics = 0.15
 
+	supply_limit = 0.05
 	army_base = {
 		supply_consumption = 0.055
 	}
@@ -1335,6 +1352,7 @@ army_nco_training = {
 	morale = 0.3
 	
 
+	supply_limit = 0.05
 	military_tactics = 0.15
 
 	army_base = {
@@ -1392,6 +1410,7 @@ great_war_experience = {
 
 	military_tactics = 0.15
 
+	supply_limit = 0.05
 	army_base = {
 		supply_consumption = 0.10
 	}

@@ -1,9 +1,11 @@
 political_decisions = {
 	abolish_serfdom = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = RUS
 			has_country_flag = serfdom_not_abolished
 			#government = absolute_monarchy
+			debt_law = serfdom
 		}
 		allow = {
 			OR = {
@@ -20,6 +22,7 @@ political_decisions = {
 				}
 				average_militancy = 2
 			}
+			money = 500000
 		}
 		effect = {
 			farmers = {
@@ -33,11 +36,13 @@ political_decisions = {
 			badboy = -4
 			years_of_research = 0.05
 			clr_country_flag = serfdom_not_abolished
-			money = -1000000
+			money = -500000
+			political_reform = debtors_prisons
 		}
 	}
 	establish_the_sovnarkom = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = RUS
 			NOT = {
 				has_country_flag = big_brother_is_watching
@@ -64,6 +69,7 @@ political_decisions = {
 	
 	manifesto_on_unshakable_autocracy = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = RUS
 			government = absolute_monarchy
 			NOT = {
@@ -89,6 +95,7 @@ political_decisions = {
 	
 	promulgate_the_ems_ukaz = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = RUS
 			NOT = {
 				has_country_flag = ems_ukaz_dispatched
@@ -120,6 +127,7 @@ political_decisions = {
 
 	protect_eastern_christians = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = RUS
 			is_greater_power = yes
 			government = absolute_monarchy
@@ -167,6 +175,7 @@ political_decisions = {
 	
 	peking_convention = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			owns = 2641
 			MCK = { owns = 1082 }
 			NOT = {
@@ -201,6 +210,7 @@ political_decisions = {
 
 	russian_vladivostok = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 		tag = RUS
 		owns = 1085
 		owns = 1084
@@ -240,25 +250,5 @@ political_decisions = {
 		}
 	}
 	
-	move_capital_to_moscow = {
-		potential = {
-			tag = RUS
-			NOT = { owns = 339 } # Viipuri
-			owns = 1008 # Moscow
-			capital = 994
-		}
-		
-		allow = {
-			owns = 1008 # Moscow
-		}
-		
-		effect = {
-			capital = 1008
-			prestige = 5
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	
 }
