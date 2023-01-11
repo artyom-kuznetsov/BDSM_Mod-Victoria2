@@ -168,12 +168,16 @@ political_decisions = {
 	enact_the_homestead_act = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = USA
-			government = democracy
 			NOT = {
 				has_country_modifier = the_homestead_act
 			}
 			year = 1862
+			capital_scope = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
 		}
 		
 		allow = {

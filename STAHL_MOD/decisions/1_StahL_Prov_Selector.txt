@@ -251,6 +251,86 @@ political_decisions = {
 		}
 	}
 	
+	zprovince_rgo_change_agriculture_improved = {
+		picture = agriculture
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			ai = no
+			NOT = { has_country_flag = deciding }
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}	
+		allow = {
+			money = 25000
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}
+		effect = {
+			money = -25000
+			set_country_flag = deciding
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					OR = {
+						trade_goods = tea
+						trade_goods = cotton
+					}
+				}
+				province_event = { id = 91738  days = 0 }
+			}
+		}
+	}
+	
+	zprovince_rgo_change_agriculture_advanced = {
+		picture = agriculture
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			ai = no
+			NOT = { has_country_flag = deciding }
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}	
+		allow = {
+			money = 25000
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = tea
+					trade_goods = cotton
+				}
+			}
+		}
+		effect = {
+			money = -25000
+			set_country_flag = deciding
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					OR = {
+						trade_goods = tea
+						trade_goods = cotton
+					}
+				}
+				province_event = { id = 91739  days = 0 }
+			}
+		}
+	}
+	
 	zstate_baby_boom = {
 		picture = family
 		potential = {
