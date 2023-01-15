@@ -84,7 +84,10 @@ political_decisions = {
 			year = 1860
 			NOT = { has_country_flag = integrated_java_blx }
 			owns = 1413
-			tag = BLX
+			OR = {
+				tag = BLX
+				tag = NET
+			}
 		}
 		allow = {
 			experimental_psychology = 1
@@ -109,7 +112,11 @@ political_decisions = {
 			year = 1870
 			NOT = { has_country_flag = integrated_malaya_blx }
 			owns = 1403
-			tag = BLX
+			
+			OR = {
+				tag = BLX
+				tag = NET
+			}
 		}
 		allow = {
 			experimental_psychology = 1
@@ -139,7 +146,10 @@ political_decisions = {
 			year = 1860
 			owns = 1430
 			NOT = { has_country_flag = integrated_molucca_blx }
-			tag = BLX
+			OR = {
+				tag = BLX
+				tag = NET
+			}
 		}
 		allow = {
 			experimental_psychology = 1
@@ -153,7 +163,12 @@ political_decisions = {
 			add_accepted_culture = moluccan
 			1430 = {
 				state_scope = {
-					change_region_name = "Молуккские острова (35)"
+					change_region_name = "Целебские острова (35)"
+				}
+			}
+			1450 = {
+				state_scope = {
+					change_region_name = "Молуккские острова (20)"
 				}
 			}
 		}
