@@ -81,14 +81,9 @@ political_decisions = {
 		effect = {
 			prestige = 5
 			set_country_flag = reconquista_declared_flag
-			THIS = {
-				limit = {
-					HAI = { exists = yes }
-				}
-				casus_belli = {
-					target = HAI
-					type = conquest_small
-					months = 96
+			HAI = {
+				all_core = {
+					add_core = THIS
 				}
 			}
 		}
@@ -147,6 +142,10 @@ political_decisions = {
 			prestige = 5
 			set_country_flag = reconquista_successful_flag
 			add_accepted_culture = caribeno
+			VNZ_2234 = { add_core = THIS }
+			CLM_2251 = { add_core = THIS }
+			CLM_1723 = { add_core = THIS }
+			SPA_2209 = { add_core = THIS }
 		}
 	}
 }
