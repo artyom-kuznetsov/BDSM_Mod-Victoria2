@@ -454,22 +454,22 @@ artillery_factory = {
 military_packs_factory = {       
 	template = factory_template
 	input_goods = { 
-		small_arms = 3.4	# 62.9
-		ammunition = 3.4	# 29.75
-		canned_food = 4.8	# 38.4	# 131,05
+		steel = 2.7	# 62.9
+		lumber = 1.5
+		sulphur = 0.8	# 29.75
 	}
 	output_goods = military_packs 
-	value = 2			# 150
+	value = 0.5			# 150
 	bonus = {
-		trigger = { has_building = small_arms_factory }
+		trigger = { has_building = steel_factory }
 		value = 0.02
 	}
 	bonus = {
-		trigger = { has_building = ammunition_factory }
+		trigger = { has_building = lumber_mill }
 		value = 0.02
 	}
 	bonus = {
-		trigger = { has_building = canned_food_factory }
+		trigger = { trade_goods_in_state = sulphur }
 		value = 0.02
 	}
 }
@@ -498,24 +498,24 @@ clipper_shipyard = {
 	}
 }
 
-small_arms_factory = {       
-	template = factory_template
-	input_goods = {        
-		lumber = 30	#
-		steel = 3		#43.5
-	}
-	output_goods = small_arms 
-	value = 1.7			#59.6
-
-	bonus = {
-		trigger = { has_building = steel_factory }
-		value = 0.05
-	}
-	bonus = {
-		trigger = { has_building = lumber_mill }
-		value = 0.05
-	}
-}
+#small_arms_factory = {       
+#	template = factory_template
+#	input_goods = {        
+#		lumber = 30	#
+#		steel = 3		#43.5
+#	}
+#	output_goods = small_arms 
+#	value = 1.7			#59.6
+#
+#	bonus = {
+#		trigger = { has_building = steel_factory }
+#		value = 0.05
+#	}
+#	bonus = {
+#		trigger = { has_building = lumber_mill }
+#		value = 0.05
+#	}
+#}
 
 ############# COMMON FACTORIES
 
@@ -565,23 +565,23 @@ regular_clothes_factory = {
 
 ############# CHEAP FACTORIES
 
-ammunition_factory = {       
-	template = cheap_factory_template
-	input_goods = {      
-		sulphur = 1.6		#12
-		steel = 2.4		#10.5	total input+maint = 30
-	}
-	output_goods = ammunition 
-	value = 1.6			#35
-	bonus = {
-		trigger = { trade_goods_in_state = sulphur }
-		value = 0.05
-	}
-	bonus = {
-		trigger = { has_building = steel_factory }
-		value = 0.05
-	}
-}
+#ammunition_factory = {       
+#	template = cheap_factory_template
+#	input_goods = {      
+#		sulphur = 1.6		#12
+#		steel = 2.4		#10.5	total input+maint = 30
+#	}
+#	output_goods = ammunition 
+#	value = 1.6			#35
+#	bonus = {
+#		trigger = { trade_goods_in_state = sulphur }
+#		value = 0.05
+#	}
+#	bonus = {
+#		trigger = { has_building = steel_factory }
+#		value = 0.05
+#	}
+#}
 
 canned_food_factory = {       
 	template = cheap_factory_template
