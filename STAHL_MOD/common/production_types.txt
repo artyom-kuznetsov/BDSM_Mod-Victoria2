@@ -1055,6 +1055,21 @@ artisan_radio = {
 	workforce = 10000
 }
 
+military_packs_factory = {       
+	template = factory_template
+	input_goods = { 
+		steel = 2.7	# 62.9
+		lumber = 1.5
+		sulphur = 0.8	# 29.75
+	}
+	output_goods = military_packs 
+	value = 0.5			# 150
+	
+	type = artisan
+	
+	workforce = 8000
+}
+
 artisan_telephone = {       
 	input_goods = {       
 		glass = 15 		#43.5
@@ -1215,7 +1230,7 @@ artisan_steel = {
 artisan_artillery = {       
 	input_goods = { 
 		fertilizer = 1	
-		ammunition = 0.28
+		machine_parts = 0.28
 		steel = 8		#37.6   total input+maint = 67.6
 	}
 	output_goods = artillery 
@@ -1252,23 +1267,23 @@ artisan_clipper = {
 	workforce = 10000
 }
 
-artisan_small_arms = {       
-	input_goods = {        
-		ammunition = 2.0	#35
-		steel = 3.0		#14.1		total input+maint = 60
-	}
-	output_goods = small_arms 
-	value = 2			#74
-
-	owner = {
-		poptype = artisan 
-		effect = output
-	}
-	
-	type = artisan
-	
-	workforce = 10000
-}
+#artisan_small_arms = {       
+#	input_goods = {        
+#		lumber = 15.0	#35
+#		steel = 3.0		#14.1		total input+maint = 60
+#	}
+#	output_goods = small_arms 
+#	value = 2			#74
+#
+#	owner = {
+#		poptype = artisan 
+#		effect = output
+#	}
+#	
+#	type = artisan
+#	
+#	workforce = 10000
+#}
 
 ############# COMMON FACTORIES
        
@@ -1328,24 +1343,24 @@ artisan_regular_clothes = {
 
 ############# CHEAP FACTORIES
 
-artisan_ammunition = {       
-	input_goods = {      
-		sulphur = 2		#12
-		coal = 2		#4.6
-		steel = 5		#17.5	total input+maint = 44
-	}
-	output_goods = ammunition 
-	value = 3			#52.5
-	
-	owner = {
-		poptype = artisan 
-		effect = output
-	}
-	
-	type = artisan
-	
-	workforce = 10000
-}
+#artisan_ammunition = {       
+#	input_goods = {      
+#		sulphur = 2		#12
+#		coal = 2		#4.6
+#		steel = 5		#17.5	total input+maint = 44
+#	}
+#	output_goods = ammunition 
+#	value = 3			#52.5
+#	
+#	owner = {
+#		poptype = artisan 
+#		effect = output
+#	}
+#	
+#	type = artisan
+#	
+#	workforce = 10000
+#}
 
 artisan_canned_food = {       
 	input_goods = { 
