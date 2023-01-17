@@ -1,55 +1,12 @@
 political_decisions = {
 
-	### TECHNICAL
-	give_money_dec = {
-		alert = no
-		potential = {
-			ai = no
-			NOT = { has_country_flag = open_money_transfers_flag }
-		}
-		allow = {
-			
-		}
-		effect = {
-			set_country_flag = give_money_100k_flag
-			set_country_flag = open_money_transfers_flag
-		}
-	}
-	no_give_money_dec = {
-		alert = no
-		potential = {
-			ai = no
-			has_country_flag = open_money_transfers_flag
-		}
-		allow = {
-			
-		}
-		effect = {
-			clr_country_flag = open_money_transfers_flag
-			clr_country_flag = give_money_100k_flag
-		}
-	}
-	give_money_100k_dec = {
-		alert = no
-		potential = {
-			ai = no
-			has_country_flag = open_money_transfers_flag
-			has_country_flag = give_money_100k_flag
-		}
-		allow = {
-			
-		}
-		effect = {
-			clr_country_flag = give_money_100k_flag
-			set_country_flag = give_money_250k_flag
-		}
-	}
 	give_money_250k_dec = {
 		alert = no
 		potential = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 		}
 		allow = {
 			
@@ -65,6 +22,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 		}
 		allow = {
 			
@@ -84,6 +42,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			FRA = {
 				ai = no
 			}
@@ -102,6 +61,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			FRA = {
 				ai = no
 			}
@@ -120,6 +80,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			FRA = {
 				ai = no
 			}
@@ -140,6 +101,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			PRU = { ai = no	}
 		}
 		allow = {
@@ -156,6 +118,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			PRU = { ai = no	}
 		}
 		allow = {
@@ -172,6 +135,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			PRU = { ai = no	}
 		}
 		allow = {
@@ -189,6 +153,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			CSA = { ai = no	}
 		}
 		allow = {
@@ -205,6 +170,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			CSA = { ai = no	}
 		}
 		allow = {
@@ -221,6 +187,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			CSA = { ai = no	}
 		}
 		allow = {
@@ -238,6 +205,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			NGF = { ai = no	}
 		}
 		allow = {
@@ -254,6 +222,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			NGF = { ai = no	}
 		}
 		allow = {
@@ -270,6 +239,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			NGF = { ai = no	}
 		}
 		allow = {
@@ -287,6 +257,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			HND = { ai = no	}
 		}
 		allow = {
@@ -303,6 +274,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			HND = { ai = no	}
 		}
 		allow = {
@@ -319,6 +291,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			HND = { ai = no	}
 		}
 		allow = {
@@ -336,6 +309,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			HNN = { ai = no	}
 		}
 		allow = {
@@ -352,6 +326,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			HNN = { ai = no	}
 		}
 		allow = {
@@ -368,6 +343,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			HNN = { ai = no	}
 		}
 		allow = {
@@ -385,6 +361,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			NET = { ai = no	}
 		}
 		allow = {
@@ -401,6 +378,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			NET = { ai = no	}
 		}
 		allow = {
@@ -417,6 +395,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			NET = { ai = no	}
 		}
 		allow = {
@@ -434,6 +413,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			BLX = { ai = no	}
 		}
 		allow = {
@@ -450,6 +430,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			BLX = { ai = no	}
 		}
 		allow = {
@@ -466,6 +447,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			BLX = { ai = no	}
 		}
 		allow = {
@@ -483,6 +465,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			BRZ = { ai = no	}
 		}
 		allow = {
@@ -515,6 +498,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			BRZ = { ai = no	}
 		}
 		allow = {
@@ -532,6 +516,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SCA = { ai = no	}
 		}
 		allow = {
@@ -548,6 +533,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SCA = { ai = no	}
 		}
 		allow = {
@@ -564,6 +550,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SCA = { ai = no	}
 		}
 		allow = {
@@ -581,6 +568,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SWE = { ai = no	}
 		}
 		allow = {
@@ -597,6 +585,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SWE = { ai = no	}
 		}
 		allow = {
@@ -613,6 +602,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SWE = { ai = no	}
 		}
 		allow = {
@@ -630,6 +620,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			MEX = { ai = no	}
 		}
 		allow = {
@@ -646,6 +637,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			MEX = { ai = no	}
 		}
 		allow = {
@@ -662,6 +654,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			MEX = { ai = no	}
 		}
 		allow = {
@@ -679,6 +672,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			EIC = { ai = no	}
 		}
 		allow = {
@@ -695,6 +689,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			EIC = { ai = no	}
 		}
 		allow = {
@@ -711,6 +706,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			EIC = { ai = no	}
 		}
 		allow = {
@@ -728,6 +724,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			GER = { ai = no	}
 		}
 		allow = {
@@ -744,6 +741,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			GER = { ai = no	}
 		}
 		allow = {
@@ -760,6 +758,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			GER = { ai = no	}
 		}
 		allow = {
@@ -777,6 +776,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			AUS = { ai = no	}
 		}
 		allow = {
@@ -793,6 +793,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			AUS = { ai = no	}
 		}
 		allow = {
@@ -809,6 +810,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			AUS = { ai = no	}
 		}
 		allow = {
@@ -826,6 +828,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			KUK = { ai = no	}
 		}
 		allow = {
@@ -842,6 +845,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			KUK = { ai = no	}
 		}
 		allow = {
@@ -858,6 +862,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			KUK = { ai = no	}
 		}
 		allow = {
@@ -875,6 +880,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SAR = { ai = no	}
 		}
 		allow = {
@@ -891,6 +897,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SAR = { ai = no	}
 		}
 		allow = {
@@ -907,6 +914,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SAR = { ai = no	}
 		}
 		allow = {
@@ -924,6 +932,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			ITA = { ai = no	}
 		}
 		allow = {
@@ -940,6 +949,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			ITA = { ai = no	}
 		}
 		allow = {
@@ -956,6 +966,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			ITA = { ai = no	}
 		}
 		allow = {
@@ -973,6 +984,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			RUS = {
 				ai = no
 			}
@@ -991,6 +1003,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			RUS = {
 				ai = no
 			}
@@ -1009,6 +1022,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			RUS = {
 				ai = no
 			}
@@ -1029,6 +1043,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			ENG = {
 				ai = no
 			}
@@ -1047,6 +1062,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			ENG = {
 				ai = no
 			}
@@ -1065,6 +1081,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			ENG = {
 				ai = no
 			}
@@ -1084,6 +1101,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			TUR = {
 				ai = no
 			}
@@ -1102,6 +1120,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			TUR = {
 				ai = no
 			}
@@ -1120,6 +1139,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			TUR = {
 				ai = no
 			}
@@ -1139,6 +1159,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SPA = {
 				ai = no
 			}
@@ -1157,6 +1178,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SPA = {
 				ai = no
 			}
@@ -1175,6 +1197,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			SPA = {
 				ai = no
 			}
@@ -1194,6 +1217,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			USA = {
 				ai = no
 			}
@@ -1212,6 +1236,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			USA = {
 				ai = no
 			}
@@ -1230,6 +1255,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			USA = {
 				ai = no
 			}
@@ -1249,6 +1275,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			JAP = {
 				ai = no
 			}
@@ -1267,6 +1294,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			JAP = {
 				ai = no
 			}
@@ -1285,6 +1313,7 @@ political_decisions = {
 			ai = no
 			has_country_flag = open_money_transfers_flag
 			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
 			JAP = {
 				ai = no
 			}
