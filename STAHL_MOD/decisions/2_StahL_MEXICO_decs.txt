@@ -15,6 +15,26 @@ political_decisions = {
 			badboy = 1
 		}
 	}
+	mex_usca_cores_dec = {
+		potential = {
+			NOT = { has_country_flag = usca_dec_flag }
+			tag = MEX
+			owns = 2182
+			war = no
+		}
+		allow = {
+		}
+		effect = {
+			set_country_flag = usca_dec_flag
+			badboy = 10
+			UCA_2186 = {
+				add_core = THIS
+			}
+			UCA_2193 = {
+				add_core = THIS
+			}
+		}
+	}
 	mex_santa_anna_dec = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }

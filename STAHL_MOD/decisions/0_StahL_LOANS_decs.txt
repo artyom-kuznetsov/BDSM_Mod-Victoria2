@@ -1,0 +1,126 @@
+political_decisions = {
+	take_first_loan_dec = {
+		potential = {
+			private_banks = 1
+			NOT = { has_country_flag = taken_first_loan_flag }
+			NOT = { has_country_modifier = loan_bankruptcy_modifier }
+			has_country_flag = open_money_transfers_flag
+		}
+		allow = {
+			stock_exchange = 1
+		}
+		effect = {
+			money = 200000
+			set_country_flag = taken_first_loan_flag
+			add_country_modifier = { name = first_loan_ticker_modifier duration = 1825 }
+		}
+	}
+	return_first_loan_dec = {
+		potential = {
+			private_banks = 1
+			has_country_flag = taken_first_loan_flag
+			has_country_flag = open_money_transfers_flag
+			NOT = { has_country_flag = pending_loan_event_flag }
+		}
+		allow = {
+		}
+		effect = {
+			money = -220000
+			clr_country_flag = taken_first_loan_flag
+			remove_country_modifier = first_loan_ticker_modifier
+		}
+	}
+	take_second_loan_dec = {
+		potential = {
+			stock_exchange = 1
+			NOT = { has_country_flag = taken_second_loan_flag }
+			NOT = { has_country_modifier = loan_bankruptcy_modifier }
+			has_country_flag = open_money_transfers_flag
+		}
+		allow = {
+			business_banks = 1
+		}
+		effect = {
+			money = 1000000
+			set_country_flag = taken_second_loan_flag
+			add_country_modifier = { name = second_loan_ticker_modifier duration = 1825 }
+		}
+	}
+	return_second_loan_dec = {
+		potential = {
+			private_banks = 1
+			has_country_flag = taken_second_loan_flag
+			has_country_flag = open_money_transfers_flag
+			NOT = { has_country_flag = pending_loan_event_flag }
+		}
+		allow = {
+		}
+		effect = {
+			money = -1100000
+			clr_country_flag = taken_second_loan_flag
+			remove_country_modifier = second_loan_ticker_modifier
+		}
+	}
+	take_third_loan_dec = {
+		potential = {
+			stock_exchange = 1
+			NOT = { has_country_flag = taken_third_loan_flag }
+			NOT = { has_country_modifier = loan_bankruptcy_modifier }
+			has_country_flag = open_money_transfers_flag
+		}
+		allow = {
+			business_banks = 1
+		}
+		effect = {
+			money = 2000000
+			set_country_flag = taken_third_loan_flag
+			add_country_modifier = { name = third_loan_ticker_modifier duration = 1825 }
+		}
+	}
+	return_third_loan_dec = {
+		potential = {
+			private_banks = 1
+			has_country_flag = taken_third_loan_flag
+			has_country_flag = open_money_transfers_flag
+			NOT = { has_country_flag = pending_loan_event_flag }
+		}
+		allow = {
+		}
+		effect = {
+			money = -2200000
+			clr_country_flag = taken_third_loan_flag
+			remove_country_modifier = third_loan_ticker_modifier
+		}
+	}
+	take_fourth_loan_dec = {
+		potential = {
+			stock_exchange = 1
+			NOT = { has_country_flag = taken_fourth_loan_flag }
+			NOT = { has_country_modifier = loan_bankruptcy_modifier }
+			has_country_flag = open_money_transfers_flag
+		}
+		allow = {
+			business_banks = 1
+		}
+		effect = {
+			money = 3000000
+			set_country_flag = taken_fourth_loan_flag
+			add_country_modifier = { name = fourth_loan_ticker_modifier duration = 1825 }
+		}
+	}
+	return_fourth_loan_dec = {
+		potential = {
+			private_banks = 1
+			has_country_flag = taken_fourth_loan_flag
+			has_country_flag = open_money_transfers_flag
+			NOT = { has_country_flag = pending_loan_event_flag }
+		}
+		allow = {
+		}
+		effect = {
+			money = -3300000
+			clr_country_flag = taken_fourth_loan_flag
+			remove_country_modifier = fourth_loan_ticker_modifier
+		}
+	}
+}
