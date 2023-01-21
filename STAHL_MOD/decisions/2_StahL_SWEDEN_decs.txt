@@ -4,6 +4,7 @@ political_decisions = {
 			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = { tag = SWE tag = SCA }
 			NOT = { has_country_flag = swe_economic_boom_flag }
+			year = 1845
 		}
 		allow = {
 			money = 250000
@@ -16,6 +17,25 @@ political_decisions = {
 			set_country_flag = swe_economic_boom_flag
 			add_country_modifier = { name = swe_economic_boom_modifier duration = 1825 }
 			money = -250000
+		}
+	}
+	swe_army_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			NOT = { has_country_flag = swe_army_dec_flag }
+			OR = { tag = SWE tag = SCA }
+		}
+		allow = {
+			money = 300000
+			point_defense_system = 1
+			breech_loaded_rifles = 1
+			iron_breech_loaded_artillery = 1
+			cheap_iron = 1
+		}
+		effect = {
+			set_country_flag = swe_army_dec_flag
+			add_country_modifier = { name = swe_army_modifier duration = -1 }
+			money = -300000
 		}
 	}
 	give_alfborg_to_germany_dec = {

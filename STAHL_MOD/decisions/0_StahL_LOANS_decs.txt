@@ -23,6 +23,7 @@ political_decisions = {
 			NOT = { has_country_flag = pending_loan_event_flag }
 		}
 		allow = {
+			money = 220000
 		}
 		effect = {
 			money = -220000
@@ -54,6 +55,7 @@ political_decisions = {
 			NOT = { has_country_flag = pending_loan_event_flag }
 		}
 		allow = {
+			money = 1100000
 		}
 		effect = {
 			money = -1100000
@@ -63,13 +65,13 @@ political_decisions = {
 	}
 	take_third_loan_dec = {
 		potential = {
-			stock_exchange = 1
+			business_banks = 1
 			NOT = { has_country_flag = taken_third_loan_flag }
 			NOT = { has_country_modifier = loan_bankruptcy_modifier }
 			has_country_flag = open_money_transfers_flag
 		}
 		allow = {
-			business_banks = 1
+			investment_banks = 1
 		}
 		effect = {
 			money = 2000000
@@ -85,6 +87,7 @@ political_decisions = {
 			NOT = { has_country_flag = pending_loan_event_flag }
 		}
 		allow = {
+			money = 2200000
 		}
 		effect = {
 			money = -2200000
@@ -94,16 +97,17 @@ political_decisions = {
 	}
 	take_fourth_loan_dec = {
 		potential = {
-			stock_exchange = 1
+			investment_banks = 1
 			NOT = { has_country_flag = taken_fourth_loan_flag }
 			NOT = { has_country_modifier = loan_bankruptcy_modifier }
 			has_country_flag = open_money_transfers_flag
 		}
 		allow = {
-			business_banks = 1
+			bank_inspection_board = 1
 		}
 		effect = {
-			money = 3000000
+			money = 2000000
+			money = 1000000
 			set_country_flag = taken_fourth_loan_flag
 			add_country_modifier = { name = fourth_loan_ticker_modifier duration = 1825 }
 		}
@@ -116,9 +120,11 @@ political_decisions = {
 			NOT = { has_country_flag = pending_loan_event_flag }
 		}
 		allow = {
+			money = 3300000
 		}
 		effect = {
-			money = -3300000
+			money = -2000000
+			money = -1300000
 			clr_country_flag = taken_fourth_loan_flag
 			remove_country_modifier = fourth_loan_ticker_modifier
 		}

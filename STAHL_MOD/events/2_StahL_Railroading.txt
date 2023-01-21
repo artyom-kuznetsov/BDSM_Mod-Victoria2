@@ -195,7 +195,10 @@ country_event = {
 	id = 21103
 	trigger = {
 		year = 1845
-		tag = PRU
+		OR = {
+			tag = PRU
+			tag = NGF
+		}
 		NOT = { has_country_flag = ger_railroad_1_flag }
 		NOT = { HAN = { in_sphere = ENG } }
 		ai = yes

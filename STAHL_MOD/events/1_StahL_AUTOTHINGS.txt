@@ -62,3 +62,22 @@ country_event = {
 		2564 = { secede_province = THIS }
 	}
 }
+
+## INHERIT NORWAY
+country_event = {
+	title = "colonization_evtname"
+	desc = "colonization_evtdesc"
+	id = 11803
+	trigger = {
+		tag = NOR
+		ai = yes
+		year = 1845
+		vassal_of = SWE
+		NOT = { has_global_flag = NOR_inherited_flag }
+	}
+	option = {
+		name = "colonization_evtopta"
+		SWE = { inherit = THIS }
+		set_global_flag = NOR_inherited_flag
+	}
+}
