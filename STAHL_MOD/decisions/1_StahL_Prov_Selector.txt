@@ -28,7 +28,7 @@ political_decisions = {
 			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
-			money = 50000
+			money = 100000
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
@@ -44,7 +44,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -50000
+			money = -100000
 			random_owned = {
 				limit = {
 					has_building = province_selector
@@ -131,10 +131,10 @@ political_decisions = {
 				controlled_by = THIS
 			}
 			#war = yes
-			money = 25000
+			money = 50000
 		}
 		effect = {
-			money = -25000
+			money = -50000
 			any_owned = {
 				limit = {
 					has_building = province_selector
@@ -160,7 +160,7 @@ political_decisions = {
 			}
 		}
 		allow = {
-			money = 50000
+			money = 100000
 			any_owned_province = {
 				has_building = province_selector
 				NOT = {
@@ -178,7 +178,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -50000
+			money = -100000
 			random_owned = {
 				limit = {
 					has_building = province_selector
@@ -220,7 +220,7 @@ political_decisions = {
 			}
 		}	
 		allow = {
-			money = 25000
+			money = 50000
 			any_owned_province = {
 				has_building = province_selector
 				OR = {
@@ -233,7 +233,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -25000
+			money = -50000
 			set_country_flag = deciding
 			random_owned = {
 				limit = {
@@ -266,7 +266,7 @@ political_decisions = {
 			}
 		}	
 		allow = {
-			money = 25000
+			money = 50000
 			any_owned_province = {
 				has_building = province_selector
 				OR = {
@@ -276,7 +276,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -25000
+			money = -50000
 			set_country_flag = deciding
 			random_owned = {
 				limit = {
@@ -306,7 +306,7 @@ political_decisions = {
 			}
 		}	
 		allow = {
-			money = 25000
+			money = 50000
 			any_owned_province = {
 				has_building = province_selector
 				OR = {
@@ -316,7 +316,7 @@ political_decisions = {
 			}
 		}
 		effect = {
-			money = -25000
+			money = -50000
 			set_country_flag = deciding
 			random_owned = {
 				limit = {
@@ -344,16 +344,16 @@ political_decisions = {
 			any_owned_province = { 
 				has_building = province_selector 
 				NOT = { has_province_modifier = small_baby_boom }
-				NOT = { total_pops = 10000 }
+				NOT = { total_pops = 20000 }
 			}
-			money = 60000
+			money = 120000
 		}
 		effect = {
-			money = -60000
+			money = -120000
 			random_owned = {
 				limit = {
 					has_building = province_selector
-					NOT = { total_pops = 10000 }
+					NOT = { total_pops = 20000 }
 					NOT = { has_province_modifier = small_baby_boom }
 				}
 				province_selector = -1
