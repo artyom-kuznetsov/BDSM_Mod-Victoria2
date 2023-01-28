@@ -94,6 +94,65 @@ political_decisions = {
 		}
 	}
 	
+	# CARLISTS
+	give_money_SPC_100k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_100k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
+			SPC = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 100000
+		}
+		effect = {
+			SPC = { money = 100000 }
+			money = -100000
+		}
+	}
+	give_money_SPC_250k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_250k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
+			SPC = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 250000
+		}
+		effect = {
+			SPC = { money = 250000 }
+			money = -250000
+		}
+	}
+	give_money_SPC_1000k_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = open_money_transfers_flag
+			has_country_flag = give_money_1000k_flag
+			NOT = { has_country_flag = lendlease_open_flag }
+			SPC = {
+				ai = no
+			}
+		}
+		allow = {
+			money = 1000000
+		}
+		effect = {
+			SPC = { money = 1000000 }
+			money = -1000000
+		}
+	}
+	
 	# PRUSSIA
 	give_money_PRU_100k_dec = {
 		alert = no

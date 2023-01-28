@@ -56,6 +56,61 @@ political_decisions = {
 			military_packs = -300
 		}
 	}
+	# CARLISTS
+	give_cans_SPC_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = lendlease_open_flag
+			has_country_flag = lendlease_give_cans_flag
+			SPC = {
+				ai = no
+			}
+		}
+		allow = {
+			canned_food = 300
+		}
+		effect = {
+			SPC = { canned_food = 300 }
+			canned_food = -300
+		}
+	}
+	give_arty_SPC_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = lendlease_open_flag
+			has_country_flag = lendlease_give_arty_flag
+			SPC = {
+				ai = no
+			}
+		}
+		allow = {
+			artillery = 300
+		}
+		effect = {
+			SPC = { artillery = 300 }
+			artillery = -300
+		}
+	}
+	give_packs_SPC_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = lendlease_open_flag
+			has_country_flag = lendlease_give_packs_flag
+			SPC = {
+				ai = no
+			}
+		}
+		allow = {
+			military_packs = 300
+		}
+		effect = {
+			SPC = { military_packs = 300 }
+			military_packs = -300
+		}
+	}
 	# PRUSSIA
 	give_cans_PRU_dec = {
 		alert = no
