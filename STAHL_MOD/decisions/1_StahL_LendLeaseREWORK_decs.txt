@@ -331,6 +331,61 @@ political_decisions = {
 			military_packs = -300
 		}
 	}
+	# CHINA
+	give_cans_CHU_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = lendlease_open_flag
+			has_country_flag = lendlease_give_cans_flag
+			CHU = {
+				ai = no
+			}
+		}
+		allow = {
+			canned_food = 300
+		}
+		effect = {
+			CHU = { canned_food = 300 }
+			canned_food = -300
+		}
+	}
+	give_arty_CHU_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = lendlease_open_flag
+			has_country_flag = lendlease_give_arty_flag
+			CHU = {
+				ai = no
+			}
+		}
+		allow = {
+			artillery = 300
+		}
+		effect = {
+			CHU = { artillery = 300 }
+			artillery = -300
+		}
+	}
+	give_packs_CHU_dec = {
+		alert = no
+		potential = {
+			ai = no
+			has_country_flag = lendlease_open_flag
+			has_country_flag = lendlease_give_packs_flag
+			CHU = {
+				ai = no
+			}
+		}
+		allow = {
+			military_packs = 300
+		}
+		effect = {
+			CHU = { military_packs = 300 }
+			military_packs = -300
+		}
+	}
 	# HUNAN
 	give_cans_HNN_dec = {
 		alert = no

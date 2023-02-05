@@ -130,4 +130,24 @@ political_decisions = {
 			factor = 1
 		}
 	}
+	settle_siberia_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = RUS
+			NOT = { has_country_flag = colonize_siberia_flag }
+			year = 1840
+		}
+		
+		allow = {
+			owns = 1008 # Moscow
+			colonial_policy = settlement
+		}
+		
+		effect = {
+			set_country_flag = colonize_siberia_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }

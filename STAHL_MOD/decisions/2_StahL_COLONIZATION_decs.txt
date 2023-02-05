@@ -1,0 +1,20 @@
+political_decisions = {
+	chad_expedition_dec = {
+		alert = yes
+		potential = {
+			civilized = yes
+			clipper_design = 1
+			rank = 16
+			NOT = { has_country_flag = chad_expedition_flag }
+			year = 1860
+		}
+		allow = {
+			NOT = { colonial_policy = no_colonies }
+		}
+		effect = {
+			set_country_flag = chad_expedition_flag
+			prestige = 10
+			money = -40000
+		}
+	}
+}

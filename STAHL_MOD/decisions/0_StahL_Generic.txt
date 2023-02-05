@@ -112,6 +112,14 @@ political_decisions = {
 				add_country_modifier = { name = dutch_east_india_modifier duration = -1 }
 			}
 			country_event = 150530
+			#RUS = {
+			#	any_owned = {
+			#		limit = {
+			#			continent = siberia
+			#		}
+			#		add_province_modifier = { name = siberian_frontier_modifier duration = -1 }
+			#	}
+			#}
 		}
 	}
 	global_setup_1870 = {
@@ -598,6 +606,7 @@ political_decisions = {
 		potential = {
 			has_country_flag = propaganda_is_open
 			NOT = { has_country_flag = open_money_transfers_flag }
+			NOT = { has_country_modifier = appeasement_campaign_modifier }
 		}
 		allow = {
 			money = 400000

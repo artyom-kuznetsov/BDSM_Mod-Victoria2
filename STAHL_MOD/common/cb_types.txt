@@ -469,18 +469,6 @@ conquest_small = {
 	can_use = {
 		OR = {
 			NOT = { total_pops = 400000 }
-			AND = {
-				NOT = { total_pops = 450000 }
-				year = 1860
-			}
-			AND = {
-				NOT = { total_pops = 600000 }
-				year = 1885
-			}
-			AND = {
-				NOT = { total_pops = 900000 }
-				year = 1910
-			}
 		}
 		NOT = {
 			OR = {
@@ -502,7 +490,7 @@ conquest_small = {
 		}
 
 		# only one state or unciv
-		NOT = { number_of_states = 4 }
+		NOT = { number_of_states = 2 }
 		OR = {
 			AND = {
 				civilized = yes
@@ -2840,6 +2828,7 @@ install_communist_gov_cb = {
 		political_reform = underground_parties
 	}
 }
+
 
 # Revert from Communist Government
 uninstall_communist_gov_cb = {

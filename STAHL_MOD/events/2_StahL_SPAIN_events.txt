@@ -39,6 +39,14 @@ country_event = {
 		change_tag = SPA
 		capital = 487
 		set_global_flag = spanish_civilwar_over_flag
+		POR = {
+			any_owned = {
+				limit = {
+					NOT = { continent = europe }
+				}
+				secede_province = THIS
+			}
+		}
 	}
 }
 country_event = { 
@@ -57,6 +65,14 @@ country_event = {
 		prestige = 10
 		SPC = { all_core = { add_core = SPA remove_core = SPC } }
 		set_global_flag = spanish_civilwar_over_flag
+		POR = {
+			any_owned = {
+				limit = {
+					NOT = { continent = europe }
+				}
+				secede_province = THIS
+			}
+		}
 	}
 }
 country_event = { # EVENT FOR CARLIST - END CIVIL WAR ON OCCUPATION OF METROPOLY

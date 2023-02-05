@@ -51,7 +51,7 @@ country = {
 	ECONOMIC_REFORM_UH_FACTOR = -0.40,
 	MILITARY_REFORM_UH_FACTOR = -0.40,
 	WRONG_REFORM_RADICAL_IMPACT = 15,
-	TECH_YEAR_SPAN = 140,
+	TECH_YEAR_SPAN = 95,
 	TECH_FACTOR_VASSAL = 0.5, -- cost reduction factor if overlord has research the tech
 	MAX_SUPPRESSION = 100,
 	PRESTIGE_HIT_ON_BREAK_COUNTRY = -0.20, -- percentage reduction when country gets taken by rebels
@@ -390,7 +390,7 @@ diplomacy = {
 	WAR_PRESTIGE_COST_CORE = -50,	
 	
 	WAR_FAILED_GOAL_MILITANCY = 0.5,
-	WAR_FAILED_GOAL_PRESTIGE_BASE = -10,
+	WAR_FAILED_GOAL_PRESTIGE_BASE = -5,
 	WAR_FAILED_GOAL_PRESTIGE = -0.1,
 	
 	DISCREDIT_DAYS = 180,
@@ -667,7 +667,7 @@ pops = {
 	MIL_TO_JOIN_RISING = 8, -- Rebels over this will join a general rising
 	MIL_TO_AUTORISE = 9, -- Rebels over this rise no matter what
 	REDUCTION_AFTER_RISEING = -0.5, -- After a pop spawns a rebellion, its militancy will be reduced this much
-	REDUCTION_AFTER_DEFEAT = 3.0, -- After a rebellion is being defeated in combat, its pop militancy will be divided by this number.
+	REDUCTION_AFTER_DEFEAT = 1.0, -- After a rebellion is being defeated in combat, its pop militancy will be divided by this number.
 																-- (if value < 1.0, the MIL will be increased) (Beware! value must be > 0)
 	
 	POP_TO_LEADERSHIP = 0.0001, -- how much leadership every 1000 officers gives each day.
