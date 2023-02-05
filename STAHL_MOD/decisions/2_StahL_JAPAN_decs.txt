@@ -150,7 +150,16 @@ political_decisions = {
 			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_flag = japan_formed
 			NOT = { has_country_flag = split_sakhalin_dec_flag }
-			NOT = { owns = 1087 }
+			NOT = { 
+				OR = { 
+					owns = 1087
+					1087 = { owned_by = RUS }
+					1087 = { owned_by = ENG }
+					1087 = { owned_by = USA }
+					1087 = { owned_by = CHU }
+					1087 = { owned_by = FRA }
+				}
+			}
 			civilized = yes
 		}
 		allow = {

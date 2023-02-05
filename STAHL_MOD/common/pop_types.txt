@@ -721,13 +721,29 @@ emigration_chance = {
 	factor = 0.5
 	
 	modifier = {
-		factor = -0.4 #was-1
-		unemployment = 1
-		OR = {
-			is_accepted_culture = no
-			is_primary_culture = no
+		factor = -0.05
+		country = {
+			OR = {
+				vote_franschise = universal_weighted_voting
+				vote_franschise = universal_voting
+			}
 		}
 	}
+	modifier = {
+		factor = 0.05
+		country = {
+			has_country_flag = totalitarian_flag
+		}
+	}
+	
+	#modifier = {
+	#	factor = 0.05 #was-1
+	#	unemployment = 1
+	#	OR = {
+	#		is_accepted_culture = no
+	#		is_primary_culture = no
+	#	}
+	#}
 	
 	modifier = {
 		factor = -0.4 #was-100
@@ -741,90 +757,98 @@ emigration_chance = {
 	
 	group = {
 		modifier = {
-			factor = -0.075
+			factor = -0.03
+			country = { administration_spending = 0.1 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.2 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.3 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.4 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.5 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.6 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.7 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.8 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.9 border_policy = quota_immigration }
+		}
+		modifier = {
+			factor = -0.03
+			country = { administration_spending = 0.99 border_policy = quota_immigration }
+		}
+	}
+	group = {
+		modifier = {
+			factor = -0.1
 			country = { administration_spending = 0.1 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.2 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.3 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.4 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.5 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.6 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.7 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.8 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.9 border_policy = closed_borders }
 		}
 		modifier = {
-			factor = -0.075
+			factor = -0.1
 			country = { administration_spending = 0.99 border_policy = closed_borders }
 		}
 	}
 	
 	group = {
 		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.1 border_policy = closed_borders }
+			factor = 0.1
+			militancy = 3
 		}
 		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.2 border_policy = closed_borders }
+			factor = 0.1
+			militancy = 4
 		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.3 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.4 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.5 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.6 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.7 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.8 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.9 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.075
-			country = { military_spending = 0.99 border_policy = closed_borders }
-		}
-	}
-	group = {
 		modifier = {
 			factor = 0.1
 			militancy = 5
@@ -848,6 +872,10 @@ emigration_chance = {
 	}
 
 	group = {
+		modifier = {
+			factor = -0.1
+			not = { consciousness = 5 }
+		}
 		modifier = {
 			factor = -0.1
 			not = { consciousness = 6 }
@@ -935,17 +963,49 @@ emigration_chance = {
 	}
 
 	modifier = {
-		factor = -1.0
-		OR = { 
-			continent = north_america
-			continent = south_america
-		}
-		government = democracy
+		factor = -0.3
+		state_scope = { has_factories = yes }
+		not = { unemployment = 0.2 }
 	}
+	
+	modifier = {
+		factor = 0.1
+		country = { citizens_rights = primary_culture_only }
+		not = { culture = this }
+	}
+	
+	modifier = {
+		factor = -0.1
+		country = { debt_law = serfdom }
+	}
+	
+	modifier = {
+		factor = -0.06
+		country = { debt_law = peonage }
+	}
+	
 	modifier = {
 		factor = -1.0
 		state_scope = { is_colonial = yes }
 	}
+	
+	modifier = {
+		factor = 0.1
+		country = { religious_policy = moralism }
+		not = { is_accepted_culture = yes }
+	}
+
+	modifier = {
+		factor = 0.15
+		country = { citizenship_policy = residency }
+		not = { culture = this }
+	}
+	modifier = {
+		factor = 0.1
+		country = { citizenship_policy = limited_citizenship }
+		not = { culture = this }
+	}
+
 }
 
 #general assimilation mtth, same for all pops

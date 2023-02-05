@@ -65,12 +65,48 @@ country_migration_target =
 {
 	factor = 1
 	modifier = {
-		factor = 2.0
-		has_pop_culture = THIS
+		factor = -100
+		country = { tag = WBK }
+	}
+	modifier = {
+		factor = 0.9
+		unemployment = 0.05
+	}
+	modifier = {
+		factor = 0.9
+		unemployment = 0.1
+	}
+	modifier = {
+		factor = 0.9
+		unemployment = 0.15
+	}
+	modifier = {
+		factor = 0.9
+		unemployment = 0.2
+	}
+	modifier = {
+		factor = 0.9
+		unemployment = 0.25
+	}
+	modifier = {
+		factor = 0.9
+		unemployment = 0.3
+	}
+	modifier = {
+		factor = 0.9
+		unemployment = 0.35
+	}
+	modifier = {
+		factor = 0.1
+		unemployment = 0.5
 	}
 	modifier = {
 		factor = 1.2
 		is_greater_power = yes
+	}
+	modifier = {
+		factor = 2.0
+		has_pop_culture = THIS
 	}
 	modifier = {
 		factor = 1.05
@@ -85,16 +121,48 @@ country_migration_target =
 		vote_franschise = universal_voting
 	}
 	modifier = {
-		factor = 4.0
+		factor = 1.5
+		OR = {
+			is_primary_culture = THIS
+			is_accepted_culture = THIS
+		}
+	}
+	
+	modifier = {
+		factor = 1.5
 		OR = { 
 			continent = north_america
 			continent = south_america
 			continent = polynesia
 		}
+		NOT = { year = 1855 }
 	}
 	modifier = {
 		factor = 1.5
-		continent = polynesia
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1870 }
+	}
+	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1885 }
+	}
+	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1900 }
 	}
 	modifier = {
 		factor = 0.1
@@ -118,29 +186,66 @@ country_migration_target =
 			}
 		}
 	}	
+	modifier = {
+		factor = 1.5
+		OR = {
+			government = democracy
+			government = hms_government
+			government = social_republic
+			government = prussian_constitutionalism
+		}
+	}
+	modifier = {
+		factor = 1.5
+		OR = {
+			government = democracy
+		}
+	}
 }
 
 migration_target =
 {
 	factor = 0.01
-	
 	modifier = {
 		factor = 1.2
 		total_pops = 150000
+	}	
+	modifier = {
+		factor = 0.1
+		unemployment = 0.1
+		state_scope = {
+			has_factories = no
+			}
 	}
-		modifier = {
+
+	modifier = {
 		factor = 1.2
-		total_pops = 250000
+		NOT = { total_pops = 100000 }
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 500000
+		NOT = { total_pops = 200000 }
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 750000
+		NOT = { total_pops = 30000 }
+	}	
+	
+	modifier = {
+		factor = 5.0
+		NOT = { total_pops = 500 }
 	}
 	
+	modifier = {
+		factor = 0
+		state_scope = {
+			has_factories = no
+		}
+		OR = { 
+			unemployment_by_type = { type = farmers value = 0.1  }
+			unemployment_by_type = { type = labourers value = 0.1  }
+		}
+	}
 	modifier = {
 		factor = 1.2
 		has_pop_culture = THIS
@@ -152,12 +257,8 @@ migration_target =
 	modifier = {
 		factor = 2
 		state_scope = {
-			has_factories = yes
-		}
-	}
-	modifier = {
-		factor = 1.2
-		has_pop_religion = THIS
+					has_factories = yes
+				}
 	}
 	modifier = {
 		factor = 1.5
@@ -170,7 +271,7 @@ migration_target =
 		}
 	}
 	modifier = {
-		factor = 20000
+		factor = 2
 		is_state_capital = yes
 	}		
 	modifier = {
@@ -207,6 +308,7 @@ migration_target =
 		life_rating = 50
 	}
 }
+
 
 promote_to =
 {

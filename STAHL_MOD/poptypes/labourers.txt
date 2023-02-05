@@ -6,6 +6,14 @@ equivalent = farmers
 
 
 
+life_needs = {
+	cattle = 0.75
+	wool =  1
+	fish =  1
+	fruit =  1
+	grain =  2
+}
+
 everyday_needs = {
 	tea = 4.5
 	coal = 1
@@ -15,15 +23,6 @@ everyday_needs = {
 	fertilizer = 0.25
 	wine = 0.1
 }
-
-life_needs = {
-	cattle = 0.75
-	wool =  1
-	fish =  1
-	fruit =  1
-	grain =  2
-}
-
 
 luxury_needs = {	
 	regular_clothes = 1.5
@@ -98,16 +97,48 @@ country_migration_target =
 		vote_franschise = universal_voting
 	}
 	modifier = {
-		factor = 4.0
+		factor = 1.5
+		OR = {
+			is_primary_culture = THIS
+			is_accepted_culture = THIS
+		}
+	}
+	
+	modifier = {
+		factor = 1.5
 		OR = { 
 			continent = north_america
 			continent = south_america
 			continent = polynesia
 		}
+		NOT = { year = 1855 }
 	}
 	modifier = {
 		factor = 1.5
-		continent = polynesia
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1870 }
+	}
+	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1885 }
+	}
+	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1900 }
 	}
 	modifier = {
 		factor = 0.1
@@ -131,6 +162,21 @@ country_migration_target =
 			}
 		}
 	}	
+	modifier = {
+		factor = 1.5
+		OR = {
+			government = democracy
+			government = hms_government
+			government = social_republic
+			government = prussian_constitutionalism
+		}
+	}
+	modifier = {
+		factor = 1.5
+		OR = {
+			government = democracy
+		}
+	}
 }
 
 migration_target =
@@ -150,16 +196,21 @@ migration_target =
 
 	modifier = {
 		factor = 1.2
-		total_pops = 250000
+		NOT = { total_pops = 100000 }
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 500000
+		NOT = { total_pops = 200000 }
 	}
 	modifier = {
 		factor = 1.2
-		total_pops = 750000
+		NOT = { total_pops = 30000 }
 	}	
+	
+	modifier = {
+		factor = 5.0
+		NOT = { total_pops = 500 }
+	}
 	
 	modifier = {
 		factor = 0
@@ -184,10 +235,6 @@ migration_target =
 		state_scope = {
 					has_factories = yes
 				}
-	}
-	modifier = {
-		factor = 1.2
-		has_pop_religion = THIS
 	}
 	modifier = {
 		factor = 1.5
