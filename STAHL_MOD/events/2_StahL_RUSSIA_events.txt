@@ -38,19 +38,96 @@ country_event = {
 		RUS = { set_country_flag = treaty_of_narva_flag }
 	}
 }
-# Siberia Settlement Event
-#province_event = {
-#	id = 32516
-#	title = "SIBCOLEVTNAME"
-#	desc = "SIBCOLEVTDESC"
-#	picture = "colonial_factory"
-#	
-#	trigger = {
-#	}
-#	
-#	option = {
-#		name = "SIBCOLEVTOPTA"
-#	}
-#}
-#
+#Siberia Settlement Event
+province_event = {
+	id = 32516
+	title = "SIBCOLEVTNAME"
+	desc = "SIBCOLEVTDESC"
+	picture = "colonial_factory"
+	
+	trigger = {
+		owner = { has_country_flag = colonize_siberia_flag }
+		NOT = { has_province_modifier = siberia_prov_settlement_modifier }
+		continent = siberia
+		NOT = { total_pops = 50000 }
+		total_pops = 5000
+		NOT = { year = 1890 }
+	}
+	
+	allow_multiple_instances = yes
+	
+	mean_time_to_happen = {
+		months = 100
+	}
+	
+	immediate = {
+		add_province_modifier = {
+			name = siberia_prov_settlement_modifier duration = 1745
+		}
+		add_province_modifier = {
+			name = siberia_prov_migration_single_modifier duration = 15
+		}
+		owner = {
+			random_owned = {
+				limit = {
+					total_pops = 100000
+					NOT = { continent = siberia }
+					has_core = THIS
+				}
+				any_pop = {
+					reduce_pop = 0.98
+				}
+			}
+		}
+	}
+	option = {
+		name = "SIBCOLEVTOPTA"
+	}
+}
+
+
+
+province_event = {
+	id = 32517
+	title = "SIBCOLEVTNAME"
+	desc = "SIBCOLEVTDESC"
+	picture = "colonial_factory"
+	
+	trigger = {
+		owner = { has_country_flag = colonize_siberia_flag }
+		NOT = { has_province_modifier = siberia_prov_settlement_modifier }
+		continent = siberia
+		NOT = { total_pops = 5000 }
+	}
+	
+	allow_multiple_instances = yes
+	
+	mean_time_to_happen = {
+		months = 100
+	}
+	immediate = {
+		add_province_modifier = {
+			name = siberia_prov_settlement_modifier duration = 1745
+		}
+		add_province_modifier = {
+			name = siberia_prov_migration_single_modifier duration = 180
+		}
+		owner = {
+			random_owned = {
+				limit = {
+					total_pops = 100000
+					NOT = { continent = siberia }
+					has_core = THIS
+				}
+				any_pop = {
+					reduce_pop = 0.98
+				}
+			}
+		}
+	}
+	option = {
+		name = "SIBCOLEVTOPTA"
+	}
+}
+
 

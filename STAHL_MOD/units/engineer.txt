@@ -2,43 +2,44 @@ engineer = {
 	icon = 16
 	
 	type = land
-	sprite = Guard
+	sprite = Artillery
 	active = no
-	unit_type = infantry
+	unit_type = support
+	floating_flag = no
+	
 	#Core Abilities
 	priority = 15
 	max_strength = 3
-	default_organisation = 30
+	default_organisation = 10
 	maximum_speed = 6.00
 	weighted_value = 3.0
-	floating_flag = no
-	primary_culture = yes
 
 
 	#Building Costs
-	build_time = 75
+	build_time = 55
 	build_cost = {
-		steel = 50
+		artillery = 10
 		canned_food = 10
-		luxury_clothes = 5
-		money = 5000
+		liquor = 20
+		#money = 4000
 	}
 	
 	supply_consumption = 1.0
 	
 	supply_cost = {
-		military_packs = 0.1
-		luxury_clothes = 0.1
-		canned_food = 0.2
+		money = 0.3	# 6
+		artillery = 0.064		# 2.4
+		canned_food = 0.16
 	}
 	
 
 	#Land Abilties
-	reconnaissance = 0
-	attack = 9
-	defence = 9
+	reconnaissance = 0.1
+	attack = 2
+	defence = 2
 	discipline = 1.0
+	support = 1
 	maneuver = 2
-	siege = 1
+	
 
 }

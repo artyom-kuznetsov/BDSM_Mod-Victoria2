@@ -98,6 +98,7 @@ political_decisions = {
 		effect = {
 			FIN = { country_event = 32515 }
 			money = -200000
+			set_country_flag = treaty_of_narva_flag
 		}
 		
 	}
@@ -141,10 +142,11 @@ political_decisions = {
 		allow = {
 			owns = 1008 # Moscow
 			colonial_policy = settlement
+			money = 500000
 		}
-		
 		effect = {
 			set_country_flag = colonize_siberia_flag
+			money = -500000
 		}
 		ai_will_do = {
 			factor = 1

@@ -35,6 +35,9 @@ field_fortifications = {
 		infantry = {
 			defence = 1
 		}
+		guard = {
+			defence = 1
+		}
 		dragoon = {
 			defence = 1
 		}
@@ -81,6 +84,9 @@ flexible_firepower = {
 		infantry = {
 			defence = 1
 		}
+		guard = {
+			defence = 0.5
+		}
 		dragoon = {
 			defence = 1
 		}
@@ -125,7 +131,7 @@ trench_systems = {
 			defence = 1
 		}
 		guard = {
-			defence = 2
+			defence = 0.75
 		}
 		
 		dragoon = {
@@ -241,7 +247,7 @@ low_echelon_fire_support = {
 			defence = 1
 		}
 		guard = {
-			defence = 3
+			defence = 0.75
 		}
 		dragoon = {
 			defence = 2
@@ -265,6 +271,23 @@ stormtrooper_training = {
 		army_base = {
 			supply_consumption = 0.05
 		}
+	}
+}
+engineer_inv = {
+	limit = { iron_muzzle_loaded_artillery = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = 3
+			medicine = 1
+		}
+		modifier = {
+			factor = 3
+			year = 1842
+		}
+	}
+	effect = {
+		activate_unit = engineer
 	}
 }
 tank_experiments = {
@@ -340,7 +363,7 @@ firepower_vs_mobility = {
 			defence = 1
 		}
 		guard = {
-			defence = 3
+			defence = 0.75
 		}
 		army_base = {
 			maximum_speed = 0.5
@@ -408,7 +431,9 @@ flintlock_rifle_armament = {
 	}
 	effect = {
 		infantry = {
-		#	attack = 1
+			supply_consumption = 0.10
+		}
+		guard = {
 			supply_consumption = 0.10
 		}
 		dragoon = {
@@ -431,6 +456,10 @@ muzzle_loaded_rifle_armament = {
 	}
 	effect = {
 		infantry = {
+			attack = 1
+			supply_consumption = 0.10
+		}
+		guard = {
 			attack = 1
 			supply_consumption = 0.10
 		}
@@ -457,6 +486,10 @@ breech_loaded_rifle_armament = {
 			attack = 1
 			supply_consumption = 0.20
 		}
+		guard = {
+			attack = 0.5
+			supply_consumption = 0.20
+		}
 		dragoon = {
 			attack = 1
 			supply_consumption = 0.20
@@ -481,7 +514,7 @@ machine_gun_armament = {
 			supply_consumption = 0.20
 		}
 		guard = {
-			attack = 2
+			attack = 0.75
 			supply_consumption = 0.20
 		}
 		dragoon = {
@@ -544,7 +577,7 @@ bolt_action_rifle_armament = {
 			supply_consumption = 0.20
 		}
 		guard = {
-			attack = 3
+			attack = 0.75
 			supply_consumption = 0.20
 		}
 		dragoon = {
@@ -573,7 +606,7 @@ interwar_infantry = {
 			supply_consumption = 0.20
 		}
 		guard = {
-			attack = 3
+			attack = 0.75
 			supply_consumption = 0.20
 		}
 	}

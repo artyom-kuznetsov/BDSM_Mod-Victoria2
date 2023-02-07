@@ -736,14 +736,14 @@ emigration_chance = {
 		}
 	}
 	
-	#modifier = {
-	#	factor = 0.05 #was-1
-	#	unemployment = 1
-	#	OR = {
-	#		is_accepted_culture = no
-	#		is_primary_culture = no
-	#	}
-	#}
+	modifier = {
+		factor = -0.05 #was-1
+		unemployment = 1
+		OR = {
+			is_accepted_culture = no
+			is_primary_culture = no
+		}
+	}
 	
 	modifier = {
 		factor = -0.4 #was-100
@@ -1018,6 +1018,13 @@ assimilation_chance = {
 			location = { continent = north_america }
 			location = { continent = south_america }
 			location = { continent = australia_new_zealand }
+		}
+	}
+	modifier = {
+		factor = 1.0
+		OR = {
+			location = { continent = siberia }
+			country = { primary_culture = russian }
 		}
 	}
 
