@@ -1,0 +1,128 @@
+# IDIOT DEFUNDED DEFENCE
+country_event = {
+	title = "militarism_defunded_trmod_notif_evtname"
+	desc = "militarism_defunded_trmod_notif_evtdesc"
+	id = 150534
+	picture = "Military_reform"
+	trigger = {
+		OR = {
+			has_country_modifier = army_with_a_state_militarization_not_funded_trmod
+			has_country_modifier = paramilitarism_militarization_not_funded_trmod
+			has_country_modifier = mandatory_militarization_not_funded_trmod
+			has_country_modifier = basic_militarization_not_funded_trmod
+		}
+		NOT = { has_country_flag = hide_mil_def_notif_flag }
+	}
+	mean_time_to_happen = { 
+		months = 12
+		#modifier = {
+		#	factor = -1
+		#	NOT = { money = 100000 }
+		#}
+		#modifier = {
+		#	factor = -10
+		#	war = yes
+		#}
+	}
+	option = {
+		name = "education_trmod_notif_opta"
+	}
+	option = {
+		name = "education_trmod_notif_optb"
+		set_country_flag = hide_mil_def_notif_flag
+	}
+}
+# IDIOT MISSCLICK RESET ACADEMY
+country_event = {
+	title = "revoke_academy_confirm_evtname"
+	desc = "revoke_academy_confirm_evtdesc"
+	id = 150535
+	picture = "School"
+	is_triggered_only = yes
+	
+	option = {
+		name = "revoke_academy_confirm_opta"
+	}
+	option = {
+		name = "revoke_academy_confirm_optb"
+		tech_school = traditional_academic
+		add_country_modifier = {
+			name = academic_confusion
+			duration = 7300
+		}
+	}
+}
+# IDIOT DEFUNDED EDUCATION
+country_event = {
+	title = "education_trmod_notif_evtname"
+	desc = "education_trmod_notif_evtdesc"
+	id = 150533
+	picture = "Nobel_Literature"
+	trigger = {
+		has_country_modifier = neglected_education_trmod
+		NOT = { has_country_flag = hide_education_notif_flag }
+	}
+	mean_time_to_happen = { 
+		months = 12
+		#modifier = {
+		#	factor = -1
+		#	NOT = { money = 100000 }
+		#}
+		#modifier = {
+		#	factor = -10
+		#	war = yes
+		#}
+	}
+	option = {
+		name = "education_trmod_notif_opta"
+	}
+	option = {
+		name = "education_trmod_notif_optb"
+		set_country_flag = hide_education_notif_flag
+	}
+}
+# IDIOT DID NOT READ PREV EVENT AND LOSE LITERACY
+country_event = {
+	title = "LOSELIT_EVTNAME"
+	desc = "LOSELIT_EVTDESC"
+	id = 150536
+	mean_time_to_happen = { months = 6 }
+	trigger = {
+		has_country_modifier = neglected_education_trmod
+	}
+	
+	option = {
+		name = "LOSELIT_EVTOPTA"
+		any_owned = {
+			limit = {
+				is_colonial = no
+			}
+			any_pop = {
+				literacy = -0.01
+			}
+		}
+	}
+}
+
+# IDIOT NO MED BUFFS?
+country_event = {
+	title = "MEDS_DEFUNDED_EVTNAME"
+	desc = "MEDS_DEFUNDED_EVTDESC"
+	id = 150537
+	mean_time_to_happen = { months = 9 }
+	trigger = {
+		NOT = {
+			health_care = no_health_care
+			OR = {
+				has_country_modifier = trinket_health_care_fully_funded_trmod 
+				has_country_modifier = low_health_care_fully_funded_trmod 
+				has_country_modifier = acceptable_health_care_fully_funded_trmod 
+				has_country_modifier = good_health_care_fully_funded_trmod 
+			}
+		}
+	}
+	
+	option = {
+		name = "MEDS_DEFUNDED_EVTOPTA"
+	}
+}
