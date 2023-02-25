@@ -718,7 +718,7 @@ colonialmigration_chance = {
 
 #general emigration chance
 emigration_chance = {
-	factor = 0.5
+	factor = 0.4
 	
 	modifier = {
 		factor = -0.05
@@ -726,6 +726,17 @@ emigration_chance = {
 			OR = {
 				vote_franschise = universal_weighted_voting
 				vote_franschise = universal_voting
+			}
+		}
+	}
+	modifier = {
+		factor = -0.03
+		country = {
+			OR = {
+				vote_franschise = universal_weighted_voting
+				vote_franschise = universal_voting
+				vote_franschise = wealth_voting
+				vote_franschise = wealth_weighted_voting
 			}
 		}
 	}
