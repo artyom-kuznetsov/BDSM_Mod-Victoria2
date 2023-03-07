@@ -152,4 +152,85 @@ political_decisions = {
 			factor = 1
 		}
 	}
+	abolish_serfdom = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = RUS
+			has_country_flag = serfdom_not_abolished
+			#government = absolute_monarchy
+			debt_law = serfdom
+		}
+		allow = {
+			OR = {
+				AND = {
+					upper_house = {
+						ideology = liberal
+						value = 0.3
+					}
+					average_consciousness = 1.5
+				}	
+				AND = {
+					ruling_party_ideology = liberal
+					average_consciousness = 2
+				}
+				average_militancy = 3
+			}
+			money = 1000000
+		}
+		effect = {
+			farmers = {
+				militancy = -2
+				consciousness = 1
+			}
+			labourers = {
+				militancy = -2
+				consciousness = 1
+			}
+			badboy = -4
+			years_of_research = 0.05
+			clr_country_flag = serfdom_not_abolished
+			money = -1000000
+			political_reform = debtors_prisons
+		}
+	}
+	peking_convention = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			owns = 1080
+			MCK = { owns = 1082 }
+			NOT = {
+				has_country_flag = peking_convention
+				war_with = MCK
+			}
+
+			#has_global_flag = summer_palace_torched
+			state_n_government = 1
+			#owns = 1087
+		}
+		
+		allow = {
+			is_greater_power = yes
+			is_sphere_leader_of = MCK
+		}
+		
+		effect = {
+			CHI_1082 = {
+				add_core = THIS
+			}
+			1469 = {
+				add_core = THIS
+			}
+			set_country_flag = peking_convention			
+			CHI = {
+				country_event = { id=80000 days=0 }
+			}
+			prestige = 2
+			1082 = { secede_province = THIS }
+			1083 = { secede_province = THIS }
+			1084 = { secede_province = THIS }
+			1085 = { secede_province = THIS }
+			2617 = { secede_province = THIS }
+		}
+	}
+
 }

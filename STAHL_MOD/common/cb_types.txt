@@ -490,7 +490,10 @@ conquest_small = {
 		}
 
 		# only one state or unciv
-		NOT = { number_of_states = 2 }
+		OR = {
+			NOT = { number_of_states = 4 tag = DND tag = SOK }
+			AND = { OR = { tag = DND tag = SOK } NOT = { number_of_states = 2 } }
+		}
 		OR = {
 			AND = {
 				civilized = yes
@@ -643,18 +646,10 @@ conquest_tiny = {
 			}
 		}
 		OR = {
-			NOT = { total_pops = 150000 }
+			NOT = { total_pops = 160000 }
 			AND = {
-				NOT = { total_pops = 200000 }
-				year = 1860
-			}
-			AND = {
-				NOT = { total_pops = 300000 }
+				NOT = { total_pops = 400000 }
 				year = 1885
-			}
-			AND = {
-				NOT = { total_pops = 550000 }
-				year = 1910
 			}
 		}
 
@@ -907,7 +902,7 @@ establish_small_protectorate_casus_belli = {
 				}
 			}
 		}
-		NOT = { total_pops = 150000 }
+		NOT = { total_pops = 160000 }
 		THIS = {
 			ai = no
 		}
@@ -921,13 +916,19 @@ establish_small_protectorate_casus_belli = {
 				}
 			}
 		}
-		NOT = { has_country_flag = sub_saharan_africa }
 		THIS = {
 			civilized = yes
 		}
 		OR = {
 			NOT = {
 				number_of_states = 2 
+				tag = DND
+				tag = SOK
+			}
+			NOT = {
+				number_of_states = 3
+				tag = DND
+				tag = SOK
 			}
 			AND = {
 				THIS = {
@@ -2419,7 +2420,7 @@ establish_protectorate_casus_belli = {
 				}
 			}
 		}
-		total_pops = 150000
+		total_pops = 140000
 		OR = {
 			NOT = {
 				number_of_states = 2 
