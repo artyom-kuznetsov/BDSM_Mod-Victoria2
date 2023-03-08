@@ -39,6 +39,30 @@ political_decisions = {
 			money = -500000
 		}
 	}
+	switch_to_spaniard_tech = {
+		alert = no
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			civilized = yes
+			tech_school = traditional_academic
+			NOT = {
+				has_country_modifier = academic_confusion
+			}
+			OR = {
+				tag = SPA
+				tag = IBE
+				tag = ANL
+			}
+			has_country_flag = industrial_revolution_happened_flag
+		}
+		allow = {
+			money = 500000
+		}
+		effect = {
+			tech_school = spaniard_tech_school
+			money = -500000
+		}
+	}
 	switch_to_japanese_tech = {
 		alert = no
 		potential = {

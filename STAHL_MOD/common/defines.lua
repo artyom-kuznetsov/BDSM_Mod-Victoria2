@@ -85,7 +85,7 @@ country = {
 	COLONIZATION_CREATE_STATE_COST = 100,
 	COLONIZATION_CREATE_PROTECTORATE_COST = 5,
 	COLONIZATION_CREATE_COLONY_COST = 4, -- per province
-	COLONIZATION_COLONY_STATE_DISTANCE = 300,
+	COLONIZATION_COLONY_STATE_DISTANCE = 200,
 	COLONIZATION_INFLUENCE_TEMPERATURE_PER_DAY = 0.08,
 	COLONIZATION_INFLUENCE_TEMPERATURE_PER_LEVEL = 0.005,
 	PARTY_LOYALTY_HIT_ON_WAR_LOSS = 0.95, -- Drops the ruling party loyalty if war is lost.
@@ -191,7 +191,7 @@ military = {
 	BASE_MILITARY_TACTICS = 1.5, -- base mil tactics before tech
 	NAVAL_LOW_SUPPLY_DAMAGE_SUPPLY_STATUS = 0.99, -- how little supply is acceptable before getting damage to STR
 	NAVAL_LOW_SUPPLY_DAMAGE_DAYS_DELAY = 30, -- delay in days before the STR will get damage due to no supplies. Sometimes supply status may jump bcoz of the market.
-	NAVAL_LOW_SUPPLY_DAMAGE_MIN_STR = 50.0, -- when low supply, the navy will supply STR damage but no less then X% to avoid destruction (value from 0 to 100.0)
+	NAVAL_LOW_SUPPLY_DAMAGE_MIN_STR = 30.0, -- when low supply, the navy will supply STR damage but no less then X% to avoid destruction (value from 0 to 100.0)
 	NAVAL_LOW_SUPPLY_DAMAGE_PER_DAY = 0.25, -- damage to navies STR per day if totally 0% supplies (value from 0 to 100.0)
 },
 
@@ -246,7 +246,7 @@ diplomacy = {
 	PRESTIGE_STATUS_QUO_BASE = 5,
 	PRESTIGE_ANNEX_BASE = 2,
 	PRESTIGE_DEMAND_STATE_BASE = 2,
-	PRESTIGE_CLEAR_UNION_SPHERE_BASE = 15, -- Prestige for asserting hegemony
+	PRESTIGE_CLEAR_UNION_SPHERE_BASE = 8, -- Prestige for asserting hegemony
 	PRESTIGE_GUNBOAT_BASE = 1, -- Prestige for debt collection
 	PRESTIGE_INSTALL_COMMUNIST_GOV_TYPE_BASE = 2,
 	PRESTIGE_UNINSTALL_COMMUNIST_GOV_TYPE_BASE = 2,
