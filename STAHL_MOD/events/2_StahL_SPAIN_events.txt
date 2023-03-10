@@ -148,3 +148,209 @@ country_event = { # EVENT FOR REPUBLICAN - END CIVIL WAR ON OCCUPATION OF METROP
 		}
 	}
 }
+country_event = {
+	id = 24305
+	title = "SPA_ANL_Title"
+	desc = "SPA_ANL_Desc"
+	
+	trigger = {
+		tag = SPA
+		owns = 1708
+		owns = 1702
+		owns = 1707
+		owns = 1683
+		owns = 1688
+		has_global_flag = spanish_civilwar_over_flag
+	}
+	fire_only_once = yes
+	
+	option = {
+		name = "SPA_ANL_OptA"
+		prestige = 10
+		add_accepted_culture = maghrebi
+		change_tag = ANL
+		badboy = 10
+		add_country_modifier = { name = arabian_fatherland_modifier duration = 3650 }
+	}
+	option = {
+		name = "SPA_ANL_OptB"
+		prestige = 2
+	}
+	
+}
+
+
+country_event = {
+	id = 24306
+	title = "SPA_ANL_Nomore_Title"
+	desc = "SPA_ANL_Nomore_Desc"
+	
+	trigger = {
+		tag = ANL
+		NOT = {
+			owns = 1708
+		}
+		NOT = { has_country_modifier = arabian_fatherland_modifier }
+	}
+	fire_only_once = yes
+	
+	option = {
+		name = "SPA_ANL_Nomore_OptA"
+		prestige = -10
+		remove_accepted_culture = maghrebi
+		change_tag = SPA
+	}
+	
+}
+
+
+country_event = {
+	id = 24307
+	title = "SPA_Catalans_Unrest1_Title"
+	desc = "SPA_Catalans_Unrest1_Desc"
+	
+	trigger = {
+		is_culture_group = iberian
+		has_global_flag = spanish_civilwar_over_flag
+		any_owned_province = {
+			is_core = CAT
+		}
+	}
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			factor = 0.5
+			average_consciousness = 3
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 4
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 5
+		}
+	}
+	
+	option = {
+		name = "SPA_Catalans_Unrest1_OptA"
+		prestige = 5
+		any_pop = {
+			limit = { culture = catalan }
+			consciousness = 3
+			militancy = 3
+		}
+		set_country_flag = catalan_ignored_1_flag
+		set_country_flag = catalan_happened1_flag
+	}
+	option = {
+		name = "SPA_Catalans_Unrest1_OptB"
+		prestige = -5
+		any_pop = {
+			limit = { culture = spanish }
+			consciousness = 5
+		}
+		set_country_flag = catalan_supported_1_flag
+		any_pop = {
+			dominant_issue = {
+				factor = 0.2
+				value = culture_voting_only_l
+			}
+		}
+		set_country_flag = catalan_supported_1_flag
+		set_country_flag = catalan_happened1_flag
+	}
+}
+
+
+country_event = {
+	id = 24308
+	title = "SPA_Catalans_Unrest_Supported_Title"
+	desc = "SPA_Catalans_Unrest_Supported_Desc"
+	
+	trigger = {
+		is_culture_group = iberian
+		has_country_flag = catalan_happened1_flag
+		NOT = { citizens_rights = primary_culture_only }
+		NOT = { has_country_flag = catalan_evt2_happened_flag }
+	}
+	fire_only_once = yes
+	
+	immediate = {
+		set_country_flag = catalan_evt2_happened_flag
+	}
+	
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			factor = 2
+			has_country_flag = catalan_supported_1_flag
+		}
+	}
+	
+	option = {
+		name = "SPA_Catalans_Supported_OptA"
+		badboy = 3
+		add_accepted_culture = catalan
+		any_pop = {
+			limit = {
+				culture = catalan
+			}
+			consciousness = 5
+		}
+	}
+	
+}
+
+country_event = {
+	id = 24309
+	title = "SPA_Catalans_Secede_Title"
+	desc = "SPA_Catalans_Secede_Desc"
+	
+	trigger = {
+		is_culture_group = iberian
+		has_country_flag = catalan_happened1_flag
+		NOT = { has_country_flag = catalan_evt2_happened_flag }
+		war = no
+	}
+	fire_only_once = yes
+	
+	immediate = {
+		set_country_flag = catalan_evt2_happened_flag
+		any_owned = {
+			limit = {
+				is_core = CAT
+			}
+			secede_province = CAT
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			factor = 2
+			has_country_flag = catalan_ignored_1_flag
+		}
+	}
+	
+	option = {
+		name = "SPA_Catalans_Secede_OptA"
+		badboy = 3
+		add_accepted_culture = catalan
+		CAT = { add_country_modifier = { name = mobilization_buff_modifier duration = -1 } }
+		
+		war = {
+			target = CAT
+			attacker_goal = {
+				casus_belli = civil_war
+			}
+			defender_goal = {
+				status_quo
+			}
+		}
+	}
+}
+
+# TODO AMERICA GOLD EVENTS

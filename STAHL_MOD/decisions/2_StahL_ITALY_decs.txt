@@ -69,6 +69,29 @@ political_decisions = {
 			factor = 1
 		}
 	}
+	italian_catalonia = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			OR = {
+				owns = 473
+				owns = 502
+			}
+			NOT = { has_country_flag = ita_catalonia_flag }
+		}
+		allow = { 
+			NOT = { centralization = regionalism }
+			citizens_rights = all_voting_pops
+		}
+		
+		effect = {
+			add_accepted_culture = catalan
+			set_country_flag = ita_catalonia_flag
+			badboy = 10
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 	annex_ita_minor = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
