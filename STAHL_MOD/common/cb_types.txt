@@ -2058,6 +2058,66 @@ dismantle_forts = {
 	}
 }
 
+revoke_cores = {
+	sprite_index = 16
+	is_triggered_only = yes
+	months = 12
+
+	badboy_factor = 1
+	prestige_factor = 1
+	peace_cost_factor = 5
+	penalty_factor = 1
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 1
+	break_truce_militancy_factor = 1
+	truce_months = 60
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+	
+	
+	can_use = {
+		NOT = { is_our_vassal = THIS }
+		NOT = {
+			OR = {
+				tag = SWI tag = WBK 
+				AND = {
+					has_country_flag = chinese_country_flag
+					NOT = { year = 1865 } 
+				}
+			}
+		}
+		THIS = {
+			NOT = {
+				OR = {
+					tag = SWI tag = WBK
+				}
+			}
+		}
+	}
+
+	# THIS - us
+	# FROM - country scope is possible match?
+	# war target country of goal's state
+	allowed_states = {
+		is_colonial = no
+	}
+
+	po_remove_cores = yes
+
+	war_name = WAR_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
+	}
+}
+
 
 # Release Puppet
 release_puppet = {
