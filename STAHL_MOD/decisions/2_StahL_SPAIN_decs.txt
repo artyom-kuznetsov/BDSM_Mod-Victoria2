@@ -186,4 +186,23 @@ political_decisions = {
 			set_country_flag = espanola_colonial_clm_vnz_flag
 		}
 	}
+	spanish_caracca_dec = {
+		potential = {
+			OR = {
+				tag = SPA
+				tag = ANL
+				tag = IBE
+			}
+			has_country_flag = espanola_colonial_flag
+			NOT = { has_country_flag = spanish_caracca_flag }
+			year = 1870
+		}
+		allow = {
+			main_armament = 1
+		}
+		effect = {
+			country_event = 24312
+			set_country_flag = spanish_caracca_flag
+		}
+	}
 }

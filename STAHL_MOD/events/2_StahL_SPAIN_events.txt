@@ -402,4 +402,47 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 24312
+	title = "SPA_Caracca_Send_Name"
+	desc = "SPA_Caracca_Send_Desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SPA_Caracca_Send_OptA"
+		clr_country_flag = spanish_caracca_flag
+	}
+	option = {
+		name = "SPA_Caracca_Send_OptFRA"
+		FRA = { country_event = 24313 }
+		prestige = 20
+	}
+	option = {
+		name = "SPA_Caracca_Send_OptAUS"
+		FRA = { country_event = 24313 }
+		prestige = 20
+	}
+	option = {
+		name = "SPA_Caracca_Send_OptTUR"
+		FRA = { country_event = 24313 }
+		prestige = 20
+	}
+}
+
+country_event = {
+	id = 24313
+	title = "SPA_Caracca_Received_Name"
+	desc = "SPA_Caracca_Received_Desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SPA_Caracca_Received_OptA"
+		add_country_modifier = {
+			name = spa_carrack_modifier duration = -1
+		}
+	}
+}
+
 # TODO AMERICA GOLD EVENTS
