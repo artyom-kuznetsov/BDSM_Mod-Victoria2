@@ -353,4 +353,53 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 24310
+	title = "SPA_lose_colempire_Name"
+	desc = "SPA_lose_colempire_Desc"
+	
+	trigger = {
+		has_country_flag = espanola_colonial_clm_vnz_flag
+		NOT = {
+			owns = 2251
+			owns = 2247
+			owns = 2204
+			owns = 2264
+			owns = 2270
+		}
+		has_country_modifier = spa_colonial_empire_modifier
+	}
+	
+	immediate = {
+		remove_country_modifier = spa_colonial_empire_modifier
+	}
+	
+	
+	option = {
+		name = "SPA_lose_colempire_OptA"
+	}
+}
+
+country_event = {
+	id = 24311
+	title = "SPA_regain_colempire_Name"
+	desc = "SPA_regain_colempire_Desc"
+	
+	trigger = {
+		has_country_flag = espanola_colonial_clm_vnz_flag
+		NOT = { has_country_modifier = spa_colonial_empire_modifier }
+		
+		owns = 2251
+		owns = 2247
+		owns = 2204
+		owns = 2264
+		owns = 2270
+	}
+	
+	option = {
+		name = "SPA_regain_colempire_OptA"
+		add_country_modifier = { name = spa_colonial_empire_modifier duration = -1 }
+	}
+}
+
 # TODO AMERICA GOLD EVENTS

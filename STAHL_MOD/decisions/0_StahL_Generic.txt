@@ -434,13 +434,16 @@ political_decisions = {
 		}
 		allow = {
 			NOT = { election = yes }
+			NOT = { has_country_modifier = usurp_cooldown_modifier }
 		}
 		effect = {
 			political_reform = none_voting
-			badboy = 1
+			badboy = 2
 			any_pop = {
-				militancy = 10
+				militancy = 5
+				consciousness = 5
 			}
+			add_country_modifier = { name = usurp_cooldown_modifier duration = 1825 }
 		}
 	}
 	zcountry_pass_reform = {
