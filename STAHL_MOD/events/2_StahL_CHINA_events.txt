@@ -300,3 +300,65 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = 91761 # CHINA COLLABORATION BENEFIT CON MIL
+	title = "EVTNAME91761" 
+	desc = "EVTDESC91761" #
+	trigger = {
+		has_country_flag = collaborates_china_flag
+		NOT = { 
+			has_country_modifier = china_coll_tick
+			has_country_modifier = china_accepted_con_mil_modifier
+		}
+		NOT = {
+			CHU = {
+				civilized = yes
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = {
+		name = "EVTOPTA91761" #
+		add_country_modifier = { name = china_coll_tick duration = 185 }
+		
+		prestige = -5
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			country_event = 91759
+		}
+	}
+	option = {
+		name = "EVTOPTB91761" #
+		add_country_modifier = { name = china_coll_tick duration = 185 }
+		add_country_modifier = { name = china_accepted_con_mil_modifier duration = 365 }
+		
+		money = -50000
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			country_event = 91758
+			add_country_modifier = { name = china_con_mil_modifier duration = 365 }
+		}
+	}
+	option = {
+		name = "EVTOPTC91761" #
+		clr_global_flag = china_collaborates
+		clr_country_flag = collaborates_china_flag
+		any_country = {
+			limit = {
+				ai = no
+				has_country_flag = chinese_country_flag
+			}
+			add_country_modifier = { name = country_declined_collaboration duration = 365 }
+		}
+	}
+}

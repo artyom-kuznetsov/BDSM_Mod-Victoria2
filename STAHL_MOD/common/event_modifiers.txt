@@ -140,8 +140,8 @@ integrating_sgf_modifier = {
 }
 
 appeasement_campaign_modifier = {
-	pop_militancy_modifier = -0.08
-	pop_consciousness_modifier = -0.08
+	pop_militancy_modifier = -0.1
+	pop_consciousness_modifier = -0.1
 	icon = 9
 }
 
@@ -203,6 +203,17 @@ china_taxeff_buff = {
 	tax_efficiency = 0.1
 }
 
+china_con_mil_modifier = {
+	icon = 6
+	global_pop_militancy_modifier = -0.1
+	global_pop_consciousness_modifier = -0.1
+}
+
+china_accepted_con_mil_modifier = {
+	global_pop_consciousness_modifier = -0.1
+	icon = 6
+}
+
 china_coll_tick = {
 	icon = 8
 }
@@ -221,7 +232,7 @@ opium_sold_to_this_modifier = {
 	prestige = -0.02
 	tax_efficiency = -0.03
 	administrative_efficiency_modifier = -0.1
-	pop_consciousness_modifier = 0.02
+	global_pop_consciousness_modifier = 0.02
 	research_points_modifier = -0.1
 	icon = 18
 }
