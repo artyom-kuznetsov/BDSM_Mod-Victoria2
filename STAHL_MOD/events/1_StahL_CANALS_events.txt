@@ -3,7 +3,7 @@ country_event = { # SUEZ MODIFIER
 	desc = "SUEZMODEVT_DESC"
 	id = 140700
 	trigger = {
-		owns = { 1755 }
+		owns = 1755
 		has_global_flag = suez_canal_built
 	}
 	
@@ -20,7 +20,7 @@ country_event = { # PANAMA MODIFIER
 	desc = "PANAMAMODEVT_DESC"
 	id = 140701
 	trigger = {
-		owns = { 1723 }
+		owns = 1723
 		has_global_flag = panama_canal_built
 	}
 	
@@ -37,7 +37,7 @@ country_event = { # SUEZ MODIFIER REVOKE
 	desc = "SUEZMODLOSEEVT_DESC"
 	id = 140702
 	trigger = {
-		NOT = { owns = { 1755 } }
+		NOT = { owns = 1755 }
 		has_country_modifier = suez_canal_modifier
 	}
 	
@@ -52,7 +52,7 @@ country_event = { # PANAMA MODIFIER REVOKE
 	desc = "PANAMAMODLOSEEVT_DESC"
 	id = 140703
 	trigger = {
-		NOT = { owns = { 1723 } }
+		NOT = { owns = 1723 }
 		has_country_modifier = panama_canal_modifier
 	}
 	
