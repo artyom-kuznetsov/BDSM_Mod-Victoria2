@@ -118,7 +118,7 @@ country_event = {
 				all_core = { limit = { owned_by = EGY } secede_province = THIS }
 			}
 			release_vassal = SUD
-			1758 = { add_core = THIS }
+			1758 = { add_core = EGY }
 			SUD = { 
 				all_core = { 
 					remove_core = EGY 
@@ -137,7 +137,7 @@ country_event = {
 				all_core = { limit = { owned_by = EGY } secede_province = THIS }
 			}
 			release_vassal = SUD
-			1758 = { add_core = THIS }
+			1758 = { add_core = EGY }
 			SUD = { 
 				all_core = { 
 					remove_core = EGY 
@@ -197,6 +197,7 @@ country_event = {
 		tag = EGT
 		NOT = { vassal_of = TUR }
 		TUR = { has_country_flag = tur_egy_vassalized_flag }
+		war = no
 	}
 	
 	option = {
@@ -217,5 +218,74 @@ country_event = {
 	option = {
 		name = "EGY_To_EGT_OptA"
 		change_tag = EGT
+	}
+}
+
+country_event = { 
+	id = 25110
+	title = "EGT_GivesMoney_Title"
+	desc = "EGT_GivesMoney_Desc"
+	trigger = {
+		tag = TUR
+		EGT = { vassal_of = THIS }
+		1745 = { owned_by = EGT }
+		1751 = { owned_by = EGT }
+		1764 = { owned_by = EGT }
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	option = {
+		name = "EGT_GivesMoney_OptA"
+		money = 100000
+		EGT = {
+			any_pop = {
+				consciousness = 3
+				militancy = 2
+			}
+		}
+	}
+	option = {
+		name = "EGT_GivesMoney_OptB"
+		money = 20000
+		EGT = {
+			any_pop = {
+				consciousness = 1
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = 25111
+	title = "EGT_Rebel_Title"
+	desc = "EGT_Rebel_Desc"
+	trigger = {
+		tag = EGT
+		vassal_of = TUR
+		consciousness = 5
+		militancy = 5
+		war = no
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = "EGT_Rebel_OptA"
+		TUR = { release_vassal = THIS }
+		
+		war = {
+			target = TUR
+			attacker_goal = {
+				casus_belli = status_quo
+			}
+			defender_goal = {
+				casus_belli = conquest
+			}
+		}
 	}
 }

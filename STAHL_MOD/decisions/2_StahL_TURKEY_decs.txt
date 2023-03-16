@@ -228,4 +228,26 @@ political_decisions = {
 			}
 		}
 	}
+	egypt_annexation_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = TUR
+			EGT = { vassal_of = THIS }
+			NOT = { has_country_flag = egt_annexed_flag }
+		}
+		
+		allow = {
+			experimental_psychology = 1
+			revolution_n_counterrevolution = 1
+			impressionism = 1
+			literacy = 0.75
+			citizens_rights = all_voting_pops
+		}
+		
+		effect = {
+			set_country_flag = egt_annexed_flag
+			inherit = EGT
+		}
+	}
 }
