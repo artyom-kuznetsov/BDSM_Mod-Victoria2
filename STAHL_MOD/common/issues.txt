@@ -940,8 +940,6 @@ economic_reforms = {
 		no_land_reform = {
 			farm_rgo_size = 0.25
 			mine_rgo_size = 0.25
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_land_reform = {
 			technology_cost = 5000
@@ -949,6 +947,7 @@ economic_reforms = {
 			mine_rgo_eff = 0.25
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
 			
 			on_execute = {
 				effect = {
@@ -976,14 +975,13 @@ economic_reforms = {
 	}
 	admin_reform = {
 		no_admin_reform = {
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_admin_reform = {
 			technology_cost = 5000
 			administrative_efficiency_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_consciousness_modifier = -0.01
 			
 			on_execute = {
 				effect = {
@@ -1013,8 +1011,6 @@ economic_reforms = {
 		next_step_only = yes
 		no_finance_reform = {
 			max_loan_modifier = -1.0 # no loan 4 u
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_finance_reform = {
 			technology_cost = 9600
@@ -1022,6 +1018,7 @@ economic_reforms = {
 			civilization_progress_modifier = 0.1
 			max_loan_modifier = -1.0 # no loan 4 u
 			research_points_modifier = 0.2
+			core_pop_militancy_modifier = -0.01
 			allow = {
 				is_substate = no
 			}
@@ -1054,6 +1051,8 @@ economic_reforms = {
 			tax_efficiency = 0.1
 			civilization_progress_modifier = 0.15
 			research_points_modifier = 0.3
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			max_loan_modifier = -0.2 # 80% loans
 			
@@ -1088,6 +1087,7 @@ economic_reforms = {
 			civilization_progress_modifier = 0.1
 			allow = { NOT = { has_country_flag = lacking_writing_system } }
 			research_points_modifier = 0.2
+			core_pop_consciousness_modifier = -0.01
 			
 			on_execute = {
 				effect = {
@@ -1113,6 +1113,8 @@ economic_reforms = {
 			tax_efficiency = 0.05
 			civilization_progress_modifier = 0.15
 			research_points_modifier = 0.3
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			on_execute = {
 				effect = {
@@ -1139,8 +1141,6 @@ economic_reforms = {
 	
 	education_reform = {
 		no_education_reform = {
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_education_reform = {
 			education_efficiency_modifier = 0.1
@@ -1173,8 +1173,6 @@ economic_reforms = {
 	
 	research_reform = {
 		no_research_reform = {
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		
 		yes_research_reform = {
@@ -1183,6 +1181,8 @@ economic_reforms = {
 			civilization_progress_modifier = 0.1
 			allow = { NOT = { has_country_flag = lacking_writing_system } }
 			research_points_modifier = 0.2
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			on_execute = {
 				effect = {
@@ -1210,8 +1210,6 @@ economic_reforms = {
 	
 	transport_improv = {
 		no_transport_improv = {
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_transport_improv = {
 			technology_cost = 5000
@@ -1298,8 +1296,6 @@ economic_reforms = {
 	
 	pre_indust = {
 		no_pre_indust = {
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_pre_indust = {
 			technology_cost = 9600
@@ -1339,8 +1335,6 @@ economic_reforms = {
 	}	
 	industrial_construction = {
 		no_industrial_construction = {
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_industrial_construction = {
 			technology_cost = 16400
