@@ -444,4 +444,32 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 24314
+	title = "SPA_First_Railroad_Name"
+	desc = "SPA_First_Railroad_Desc"
+	
+	trigger = {
+		any_owned_province = {
+			has_building = railroad
+		}
+		OR = {
+			tag = IBE
+			tag = ANL
+			tag = SPA
+			tag = SPC
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "SPA_First_Railroad_OptA"
+		add_country_modifier = {
+			name = spa_first_railroad_modifier
+			duration = 730
+		}
+	}
+}
+
 # TODO AMERICA GOLD EVENTS
