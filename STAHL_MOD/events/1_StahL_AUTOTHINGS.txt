@@ -81,3 +81,21 @@ country_event = {
 		set_global_flag = NOR_inherited_flag
 	}
 }
+
+## INHERIT TRN for SAF
+country_event = {
+	title = "colonization_evtname"
+	desc = "colonization_evtdesc"
+	id = 11804
+	trigger = {
+		tag = TRN
+		ai = yes
+		2107 = { owned_by = SAF }
+		NOT = { has_global_flag = TRN_inherited_flag }
+	}
+	option = {
+		name = "colonization_evtopta"
+		SAF = { inherit = THIS }
+		set_global_flag = TRN_inherited_flag
+	}
+}
