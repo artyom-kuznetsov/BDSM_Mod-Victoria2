@@ -753,31 +753,23 @@ promote_to =
 			}
 		}
 	}
+	
 	capitalists = 
 	{
-		factor = 0.01
+		factor = 1.00
 		modifier = {
-			factor = -1
-			terrain = desert
-		}
-		modifier = {
-			factor = -1
-			terrain = arctic
-		}
-		modifier = {
-			factor = -1
+			factor = -100
 			state_scope = {
 				has_factories = no
 			}
-			NOT = { total_pops = 200000 }
 		}	
 		modifier = {
 			factor = -1 
 			is_accepted_culture = no
 		}
-				
+		
 		modifier = {
-			factor = -20
+			factor = -10
 			NOT = { literacy = 0.30 }
 		}
 		group = {
@@ -786,32 +778,50 @@ promote_to =
 				state_scope = { capitalists = 0.001 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				state_scope = { capitalists = 0.003 }
 			}
 			modifier = {
-				factor = -2
+				factor = -1
 				state_scope = { capitalists = 0.005 }
 			}
 			modifier = {
 				factor = -100
-				state_scope = { capitalists = 0.007 }
+				state_scope = { capitalists = 0.01 }
 			}
 		}
 
 		modifier = {
 			factor = -40
-			state_scope = {
-				has_factories = no
-			}
-		}
-		modifier = {
-			factor = 5
 			AND = {
 				state_scope = {
 					has_factories = no
 				}
-				can_build_factory = yes
+				can_build_factory = no
+			}
+		}
+		modifier = {
+			factor = 5
+			state_scope = {
+				has_factories = yes
+			}
+		}
+		modifier = {
+			factor = 1
+			state_scope = {
+				state_scope = { craftsmen = 0.05 }
+			}
+		}
+		modifier = {
+			factor = 1
+			state_scope = {
+				state_scope = { craftsmen = 0.08 }
+			}
+		}
+		modifier = {
+			factor = 1
+			state_scope = {
+				state_scope = { craftsmen = 0.1 }
 			}
 		}
 
@@ -835,26 +845,6 @@ promote_to =
 			modifier = {
 				factor = 1
 				luxury_needs = 0.5
-			}
-			modifier = {
-				factor = 1
-				luxury_needs = 0.6
-			}
-			modifier = {
-				factor = 1
-				luxury_needs = 0.7
-			}
-			modifier = {
-				factor = 1
-				luxury_needs = 0.8
-			}
-			modifier = {
-				factor = 1
-				luxury_needs = 0.9
-			}
-			modifier = {
-				factor = 1
-				luxury_needs = 1
 			}
 		}
 		modifier = {
