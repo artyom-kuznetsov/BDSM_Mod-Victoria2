@@ -96,7 +96,6 @@ political_decisions = {
 	}
 
 	hawaiian_purchase = {
-		picture = annex_hawaii
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
 			658 = {
@@ -129,6 +128,33 @@ political_decisions = {
 		
 		ai_will_do = {
 			factor = 1
+		}
+	}
+	
+	pacific_expedition_dec = {
+		potential = {
+			NOT = { 
+				has_country_flag = pacific_expedition_flag
+			}
+			OR = {
+				79 = { owned_by = THIS }
+				81 = { owned_by = THIS }
+				85 = { owned_by = THIS }
+			}
+			tag = USA
+			NOT = { year = 1855 }
+		}
+		
+		allow = {
+			total_amount_of_ships = 50
+			clipper_design = 1
+			money = 25000
+		}
+		
+		effect = {
+			prestige = 5
+			money = -25000
+			set_country_flag = pacific_expedition_flag
 		}
 	}
 }

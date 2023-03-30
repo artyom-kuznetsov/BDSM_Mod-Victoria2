@@ -91,3 +91,147 @@ country_event = {
 		}
 	}
 }
+
+# USA: JAPAN DISCOVERED
+country_event = { 
+	id = 44148
+	title = "usa_japan_found_event_name"
+	desc = "usa_japan_found_event_desc"
+	
+	picture = "ssgreatbritan"
+	
+	trigger = {
+		has_country_flag = pacific_expedition_flag
+		OR = {
+			JAP = { exists = yes }
+		}
+		NOT = {
+			year = 1855
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+		modifier = {
+			factor = 100
+			OR = {
+				alliance_with = JAP
+				JAP = { in_sphere = THIS }
+			}
+		}
+		modifier = {
+			factor = 5
+			year = 1842
+		}
+		modifier = {
+			factor = 5
+			year = 1847
+		}
+		modifier = {
+			factor = 100
+			year = 1852
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "usa_japan_found_event_OptA"
+		prestige = 5
+		relation = { who = JAP value = 25 }
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = "usa_japan_found_event_OptB"
+		prestige = 15
+		relation = { who = JAP value = -25 }
+		JAP = { country_event = 44202 }
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+country_event = { # USA: JAPAN REFUSED
+	id = 44150
+	title = "USA_Open_Market_Refused_Event_Name"
+	desc = "USA_Open_Market_Refused_Event_Desc"
+	
+	picture = "ssgreatbritan"
+	
+	is_triggered_only = yes
+	
+	option = { # WAR
+		name = "USA_Open_Market_Refused_Event_OptA"
+		war = {
+			target = JAP
+			attacker_goal = {
+				casus_belli = open_market_cb
+			}
+			defender_goal = {
+				casus_belli = protect_independence_cb
+			}
+		}
+		diplomatic_influence = {
+			who = JAP
+			value = -200
+		}
+		JAP = {
+			any_owned = {
+				add_province_modifier = {
+					name = jap_desperate_province_modifier
+					duration = 3650
+				}
+			}
+			add_country_modifier = {
+				name = jap_desperate_times_modifier duration = 3650
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = { # OKAY :(
+		name = "USA_Open_Market_Refused_Event_OptB"
+		prestige = -30
+		JAP = { country_event = 44203 }
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = { # USA WIN JAPAN MARKET WAR
+	id = 44151
+	title = "USA_Market_War_Won_Event_Name"
+	desc = "USA_Market_War_Won_Event_Desc"
+	
+	picture = "ssgreatbritan"
+	
+	is_triggered_only = yes
+	
+	option = { # WAR
+		name = "USA_Market_War_Won_Event_OptA"
+		prestige = 10
+		add_country_modifier = {
+			name = american_colonies_modifier duration = 3650
+		}
+		USA = {
+			add_country_modifier = {
+				name = usa_american_colonies_modifier duration = 3650
+			}
+		}
+		JAP_1654 = { 
+			limit = {
+				1654 = { owned_by = THIS }
+			}
+			secede_province = USA 
+		}
+		JAP = { remove_country_modifier = jap_desperate_times_modifier }
+		JAP = { any_owned = { remove_province_modifier = jap_desperate_province_modifier } }
+	}
+}
+
+

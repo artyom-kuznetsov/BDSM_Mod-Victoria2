@@ -1,3 +1,4 @@
+# MINOR AUTOANNEX
 country_event = {
 	id = 160120
 	title = "EVTNAME60120"
@@ -34,5 +35,23 @@ country_event = {
 		sphere_owner = {
 			country_event = { id=60130 days=0 }
 		}
+	}
+}
+
+# ENG GIVES HELIGOLAND
+country_event = {
+	id = 8801
+	title = "the_heligoland_secession_title"
+	desc = "the_heligoland_secession_desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "the_heligoland_secession_option_hooray"
+
+		ai_will_do = {
+			factor = 9
+		}
+		prestige = 5
 	}
 }
