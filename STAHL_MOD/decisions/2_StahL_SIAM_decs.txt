@@ -207,4 +207,32 @@ political_decisions = {
 			1352 = { add_province_modifier = { name = sia_navy_construction_modifier duration = -1 } }
 		}
 	}
+	form_indochina_nation = {
+		potential = {
+			is_culture_group = indochinese_cg
+			NOT = { IDA = { exists = yes } }
+			civilized = yes
+		}
+		allow = {
+			NOT = { citizens_rights = primary_culture_only }
+		}
+		effect = {
+			add_accepted_culture = union
+			change_tag = IDA
+			prestige = 10
+			any_country = {
+				limit = {
+					is_culture_group = indochinese_cg
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+					NOT = {
+						tag = THIS
+					}
+				}
+				annex_to = THIS
+			}
+		}
+	}
 }
