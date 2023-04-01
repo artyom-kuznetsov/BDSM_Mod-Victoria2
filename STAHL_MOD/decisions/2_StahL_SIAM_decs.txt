@@ -1,0 +1,210 @@
+political_decisions = {
+	SIA_chiangmai_dec = {
+		potential = {
+			tag = SIA
+			NOT = { has_country_flag = chiangmai_dec_flag }
+		}
+		allow = {
+			SHA = { all_core = { owned_by = THIS } }
+		}
+		effect = {
+			prestige = 5
+			years_of_research = 2 
+			set_country_flag = chiangmai_dec_flag
+		}
+	}
+	SIA_centralization_dec = {
+		potential = {
+			OR = {
+				tag = SIA
+				tag = IDA
+			}
+			NOT = { has_country_flag = sia_centralized_flag }
+			civilized = yes
+		}
+		allow = {
+			
+		}
+		effect = {
+			prestige = 5
+			years_of_research = 1
+			LUA = {
+				limit = { LUA = { vassal_of = THIS } }
+				inherit = LUA
+				all_core = { add_core = THIS }
+			}
+			CAM = {
+				limit = { CAM = { vassal_of = THIS } }
+				inherit = CAM
+				all_core = { add_core = THIS }
+			}
+			BUR = {
+				limit = { BUR = { vassal_of = THIS } }
+				inherit = BUR
+				all_core = { add_core = THIS }
+			}
+			DAI = {
+				limit = { DAI = { vassal_of = THIS } }
+				inherit = DAI
+				all_core = { add_core = THIS }
+			}
+			set_country_flag = sia_centralized_flag
+		}
+	}
+	SIA_reformation_dec = {
+		potential = {
+			OR = {
+				tag = SIA
+				tag = IDA
+			}
+			NOT = { has_country_flag = sia_reformed_flag }
+			civilized = yes
+		}
+		allow = {
+			NOT = { citizens_rights = primary_culture_only }
+		}
+		effect = {
+			years_of_research = 1
+			
+			add_accepted_culture = lao
+			add_accepted_culture = vietnamese
+			add_accepted_culture = burmese
+			
+			any_state = {
+				any_pop = {
+					limit = {
+						OR = {
+							has_pop_culture = lao
+							has_pop_culture = vietnamese
+							has_pop_culture = burmese
+						}
+					}
+					consciousness = 5.0
+				}
+			}
+			set_country_flag = sia_reformed_flag
+		}
+	}
+	SIA_control_johore_dec = {
+		potential = {
+			OR = {
+				tag = SIA
+				tag = IDA
+			}
+			NOT = { has_country_flag = sia_johore_flag }
+			year = 1837
+		}
+		allow = {
+			owns = 1385
+		}
+		effect = {
+			years_of_research = 1
+			
+			JOH = { all_core = { add_core = THIS } }
+			NET_1398 = { add_core = THIS }
+			ATJ_1405 = { add_core = THIS }
+			set_country_flag = sia_johore_flag
+		}
+	}
+	SIA_citizenship_law_dec = {
+		potential = {
+			OR = {
+				tag = SIA
+				tag = IDA
+			}
+			NOT = { has_country_flag = sia_citizenship_law_flag }
+			civilized = yes
+		}
+		allow = {
+			owns = 1385
+			citizens_rights = all_voting_pops
+		}
+		effect = {
+			add_accepted_culture = malay
+			add_accepted_culture = yue
+			
+			any_state = {
+				any_pop = {
+					limit = {
+						OR = {
+							has_pop_culture = malay
+							has_pop_culture = yue
+						}
+					}
+					consciousness = 5.0
+				}
+			}
+			set_country_flag = sia_citizenship_law_flag
+		}
+	}
+	SIA_industrialization_dec = {
+		potential = {
+			OR = {
+				tag = SIA
+				tag = IDA
+			}
+			NOT = { has_country_flag = sia_industrialization_flag }
+			civilized = yes
+		}
+		allow = {
+			early_railroad = 1
+			interchangeable_parts = 1
+			money = 250000
+			literacy = 0.4
+		}
+		effect = {
+			money = -250000
+			set_country_flag = sia_industrialization_flag
+			tech_school = naval_tech_school
+		}
+	}
+	SIA_chinese_dec = {
+		potential = {
+			OR = {
+				tag = SIA
+				tag = IDA
+			}
+			civilized = yes
+			OR = {
+				CHU = { ai = yes }
+				CHU = { exists = no }
+			}
+			OR = {
+				HNN = { ai = yes }
+				HNN = { exists = no }
+			}
+			NOT = { has_country_flag = sia_chinese_flag }
+		}
+		allow = {
+		}
+		effect = {
+			set_country_flag = sia_chinese_flag
+			add_accepted_culture = yue
+		}
+	}
+	SIA_navy_dec = {
+		potential = {
+			OR = {
+				tag = SIA
+				tag = IDA
+			}
+			civilized = yes
+			NOT = { has_country_flag = sia_navy_flag }
+		}
+		allow = {
+			raider_group_doctrine = 1
+			iron_steamers = 1
+			owns = 1365
+			owns = 1346
+		}
+		effect = {
+			set_country_flag = sia_navy_flag
+			1365 = { add_province_modifier = { name = sia_navy_construction_modifier duration = -1 } }
+			1351 = { add_province_modifier = { name = sia_navy_construction_modifier duration = -1 } }
+			1346 = { add_province_modifier = { name = sia_navy_construction_modifier duration = -1 } }
+			1353 = { add_province_modifier = { name = sia_navy_construction_modifier duration = -1 } }
+			1354 = { add_province_modifier = { name = sia_navy_construction_modifier duration = -1 } }
+			1352 = { add_province_modifier = { name = sia_navy_construction_modifier duration = -1 } }
+		}
+	}
+}

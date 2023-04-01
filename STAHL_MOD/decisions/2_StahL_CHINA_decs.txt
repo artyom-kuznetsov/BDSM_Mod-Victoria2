@@ -575,4 +575,27 @@ political_decisions = {
 			factor = 0
 		}
 	}
+	CHI_citizenship_law_dec = {
+		potential = {
+			civilized = yes
+			tag = CHU
+		}
+		allow = {
+			owns = 1385
+			NOT = { citizens_rights = primary_culture_only }
+		}
+		effect = {
+			add_accepted_culture = yue
+			
+			any_state = {
+				any_pop = {
+					limit = {
+						has_pop_culture = yue
+					}
+					consciousness = 5.0
+				}
+			}
+			set_country_flag = chi_citizenship_law_flag
+		}
+	}
 }

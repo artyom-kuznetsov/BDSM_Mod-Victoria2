@@ -1087,7 +1087,6 @@ economic_reforms = {
 			technology_cost = 9600
 			tax_efficiency = 0.05
 			civilization_progress_modifier = 0.1
-			allow = { NOT = { has_country_flag = lacking_writing_system } }
 			research_points_modifier = 0.2
 			core_pop_consciousness_modifier = -0.01
 			
@@ -1148,7 +1147,6 @@ economic_reforms = {
 			education_efficiency_modifier = 0.1
 			technology_cost = 9600
 			civilization_progress_modifier = 0.1
-			allow = { NOT = { has_country_flag = lacking_writing_system } }
 			research_points_modifier = 0.2
 			
 			on_execute = {
@@ -1181,7 +1179,6 @@ economic_reforms = {
 			technology_cost = 9600
 			education_efficiency_modifier = 0.1
 			civilization_progress_modifier = 0.1
-			allow = { NOT = { has_country_flag = lacking_writing_system } }
 			research_points_modifier = 0.2
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
@@ -1218,7 +1215,6 @@ economic_reforms = {
 			farm_rgo_eff = 0.25
 			mine_rgo_eff = 0.25
 			civilization_progress_modifier = 0.05
-			allow = { NOT = { has_country_flag = lacking_writing_system } money = 2000 }
 			research_points_modifier = 0.1
 			
 			on_execute = {
@@ -1264,7 +1260,7 @@ economic_reforms = {
 		yes_firearms_production = {
 			technology_cost = 9600
 			civilization_progress_modifier = 0.1
-			allow = { NOT = { has_country_flag = lacking_writing_system } money = 10000 }
+			allow = { money = 10000 }
 			research_points_modifier = 0.2
 			
 			on_execute = {
@@ -1302,7 +1298,7 @@ economic_reforms = {
 		yes_pre_indust = {
 			technology_cost = 9600
 			civilization_progress_modifier = 0.1
-			allow = { NOT = { has_country_flag = lacking_writing_system } money = 2000 }
+			allow = { money = 2000 }
 			research_points_modifier = 0.2
 			
 			on_execute = {
@@ -1341,7 +1337,7 @@ economic_reforms = {
 		yes_industrial_construction = {
 			technology_cost = 16400
 			civilization_progress_modifier = 0.2
-			allow = { NOT = { has_country_flag = lacking_writing_system } money = 7000 }
+			allow = { money = 7000 }
 			research_points_modifier = 0.4
 			
 			on_execute = {
@@ -1476,7 +1472,6 @@ military_reforms = {
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
 			allow = {
-				NOT = { has_country_flag = lacking_writing_system }
 				money = 2000 
 				OR = {
 					ai = no
@@ -1582,7 +1577,6 @@ military_reforms = {
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
 			allow = {
-				NOT = { has_country_flag = lacking_writing_system }
 				OR = {
 					ai = no
 					AND = {
@@ -1684,7 +1678,6 @@ military_reforms = {
 			research_points_modifier = 0.1
 			
 			allow = {
-				NOT = { has_country_flag = lacking_writing_system }
 				any_owned_province = { port = yes }
 				OR = {
 					ai = no
