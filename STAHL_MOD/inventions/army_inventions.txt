@@ -127,18 +127,10 @@ trench_systems = {
 		}
 	}
 	effect = {
-		infantry = {
-			defence = 1
-		}
-		guard = {
-			defence = 0.75
-		}
 		
 		dragoon = {
 			defence = 1.5
-		}
-		army_base = {
-			supply_consumption = 0.05
+			supply_consumption = 0.3
 		}
 	}
 }
@@ -183,8 +175,13 @@ elastic_defense_system = {
 		base = 4
 	}
 	effect = {
-		army_base = {
-			supply_consumption = 0.05
+		infantry = {
+			defence = 1
+			supply_consumption = 0.25
+		}
+		guard = {
+			defence = 0.75
+			supply_consumption = 0.25
 		}
 	}
 }
@@ -203,21 +200,10 @@ flexible_counterattacks = {
 		}
 	}
 	effect = {
-	#	infantry = {
-	#		attack = 1.5
-	#	}
-		#guard = {
-	#		attack = 2
-	#	}
-	#	engineer = {
-	#		attack = 1.5
-	#	}
-	#	dragoon = {
-	#		attack = 2.5
-	#	}
-	#	army_base = {
-	#		supply_consumption = 0.05
-	#	} 
+		dragoon = {
+			attack = 0.5
+			supply_consumption = 0.05
+		}
 	}
 }
 #infiltration
@@ -243,17 +229,11 @@ low_echelon_fire_support = {
 		}
 	}
 	effect = {
-		infantry = {
-			defence = 1
-		}
-		guard = {
-			defence = 0.75
-		}
 		dragoon = {
-			defence = 2
+			attack = 2
 		}
 		army_base = {
-			supply_consumption = 0.05
+			supply_consumption = 0.3
 		}
 	}
 }
@@ -267,9 +247,13 @@ stormtrooper_training = {
 		}
 	}
 	effect = {
-
-		army_base = {
-			supply_consumption = 0.05
+		infantry = {
+			attack = 2.25
+			supply_consumption = 0.3
+		}
+		guard = {
+			attack = 1.75
+			supply_consumption = 0.3
 		}
 	}
 }
@@ -360,13 +344,16 @@ firepower_vs_mobility = {
 	}
 	effect = {
 		infantry = {
-			defence = 1
+			defence = 2
+			supply_consumption = 0.2
 		}
 		guard = {
-			defence = 0.75
+			defence = 1.75
+			supply_consumption = 0.2
 		}
 		army_base = {
 			maximum_speed = 0.5
+			supply_consumption = 0.05
 		}
 	}
 }
@@ -510,24 +497,24 @@ machine_gun_armament = {
 	}
 	effect = {
 		infantry = {
-			attack = 1
-			supply_consumption = 0.1
+			defence = 3.75
+			supply_consumption = 0.25
 		}
 		guard = {
-			attack = 0.75
-			supply_consumption = 0.1
+			defence = 3.25
+			supply_consumption = 0.25
 		}
 		dragoon = {
-			attack = 1
-			supply_consumption = 0.1
+			defence = 3
+			supply_consumption = 0.25
 		}
 	}
 }
 colonial_negotiations = {
 	limit = { 
-			year = 1870 
-			breech_loaded_rifles = 1
-			}
+		year = 1870 
+		breech_loaded_rifles = 1
+	}
 	news = no
 	chance = {
 		base = 0
@@ -573,16 +560,16 @@ bolt_action_rifle_armament = {
 	}
 	effect = {
 		infantry = {
-			attack = 1
-			supply_consumption = 0.1
+			attack = 2.25
+			supply_consumption = 0.25
 		}
 		guard = {
-			attack = 0.75
-			supply_consumption = 0.1
+			attack = 1.75
+			supply_consumption = 0.25
 		}
 		dragoon = {
 			attack = 2
-			supply_consumption = 0.15
+			supply_consumption = 0.3
 		}
 	}
 }
@@ -602,12 +589,12 @@ interwar_infantry = {
 	}
 	effect = {
 		infantry = {
-			attack = 1
-			supply_consumption = 0.1
+			attack = 2
+			supply_consumption = 0.25
 		}
 		guard = {
-			attack = 0.75
-			supply_consumption = 0.1
+			attack = 1.5
+			supply_consumption = 0.25
 		}
 	}
 }
@@ -629,7 +616,7 @@ interwar_cavalry = {
 			attack = 2
 			defence = 2
 			reconnaissance = 0.5
-			supply_consumption = 0.1
+			supply_consumption = 0.2
 		}
 	}
 }
