@@ -194,7 +194,7 @@ reactionary_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 365
 		}
 	}
 	
@@ -396,7 +396,7 @@ fascist_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 365
 		}
 	}
 	demands_enforced_effect = {
@@ -606,7 +606,7 @@ communist_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 365
 		}
 	}
 	demands_enforced_effect = {
@@ -782,7 +782,7 @@ nationalist_rebels = {
 		}
 		modifier = {
 			factor = 0.001
-			controlled_by = REB
+			controlled_by = 365
 		}
 		modifier = {
 			factor = 1.5
@@ -944,6 +944,11 @@ pan_nationalist_rebels = {
 		modifier = {
 			factor = 0
 			war = yes
+		}
+		
+		modifier = {
+			factor = 0
+			is_cultural_group = germanic
 		}
 		
 		modifier = {

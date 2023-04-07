@@ -5,8 +5,8 @@ country_event = { # MONTHLY CLEANUP BDSM
 	is_triggered_only = yes
 	
 	option = {
-		country_event = { id = 140400 days = 30 }
 		name = "CleanUp!"
+		add_country_modifier = { name = mcl_happened_modifier duration = 31 }
 		any_country = { # ‘À¿√  ŒÃÃ”Õ»—“Œ¬
 			random_owned = {
 				limit = {
@@ -203,5 +203,35 @@ country_event = {
 			factor = 1
 			year = 1870
 		}
+	}
+}
+
+# RESTORE WBK
+country_event = {
+	title = "wbk_restore"
+	desc = "wbk_restore"
+	id = 140402
+	trigger = {
+		owns = 3246
+		NOT = { tag = WBK }
+	}
+	option = {
+		name = "wbk_restogre!!"
+		3246 = { secede_province = WBK }
+	}
+}
+
+# RELAUNCH MCL
+country_event = {
+	title = "mcl relaunch"
+	desc = "mcl relaunmch"
+	id = 140403
+	trigger = {
+		NOT = { has_country_modifier = mcl_happened_modifier }
+		tag = WBK
+	}
+	option = {
+		name = "mcl!!"
+		country_event = 140400
 	}
 }
