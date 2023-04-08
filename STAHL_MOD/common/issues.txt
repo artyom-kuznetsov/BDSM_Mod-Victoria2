@@ -419,7 +419,7 @@ political_reforms = {
 			non_accepted_pop_consciousness_modifier = 0.05
 			global_pop_consciousness_modifier = 0.02
 			allow = {
-				war_policy = jingoism
+				always = no
 			}
 		}
 		paramilitarism = {
@@ -431,7 +431,7 @@ political_reforms = {
 			min_social_spending = 0.1
 			non_accepted_pop_consciousness_modifier = 0.04
 			allow = {
-				war_policy = jingoism
+				always = no
 			}
 		}
 		mandatory_training = {
@@ -439,10 +439,7 @@ political_reforms = {
 			land_unit_start_experience = 2.5
 			leadership_modifier = 0.05
 			allow = {
-				OR = {
-					war_policy = pro_military
-					war_policy = jingoism
-				}
+				always = no
 			}
 		}
 		basic_training = {
@@ -455,10 +452,7 @@ political_reforms = {
 			land_unit_start_experience = -5
 			leadership_modifier = -0.05
 			allow = {
-				OR = {
-					NOT = { war_policy = jingoism }
-					NOT = { war_policy = pro_military}
-				}
+				always = no
 			}
 			global_pop_consciousness_modifier = -0.01
 		}
@@ -942,6 +936,7 @@ economic_reforms = {
 		no_land_reform = {
 			farm_rgo_size = 0.25
 			mine_rgo_size = 0.25
+			core_pop_militancy_modifier = -0.01
 		}
 		yes_land_reform = {
 			technology_cost = 5000
@@ -949,7 +944,7 @@ economic_reforms = {
 			mine_rgo_eff = 0.25
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
-			core_pop_militancy_modifier = -0.01
+			core_pop_militancy_modifier = -0.02
 			
 			on_execute = {
 				effect = {
@@ -977,13 +972,14 @@ economic_reforms = {
 	}
 	admin_reform = {
 		no_admin_reform = {
+			core_pop_consciousness_modifier = -0.01
 		}
 		yes_admin_reform = {
 			technology_cost = 5000
 			administrative_efficiency_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
-			core_pop_consciousness_modifier = -0.01
+			core_pop_consciousness_modifier = -0.02
 			
 			on_execute = {
 				effect = {
@@ -1013,6 +1009,7 @@ economic_reforms = {
 		next_step_only = yes
 		no_finance_reform = {
 			max_loan_modifier = -1.0 # no loan 4 u
+			core_pop_militancy_modifier = -0.01
 		}
 		yes_finance_reform = {
 			technology_cost = 9600
@@ -1020,7 +1017,7 @@ economic_reforms = {
 			civilization_progress_modifier = 0.1
 			max_loan_modifier = -1.0 # no loan 4 u
 			research_points_modifier = 0.2
-			core_pop_militancy_modifier = -0.01
+			core_pop_militancy_modifier = -0.02
 			allow = {
 				is_substate = no
 			}
@@ -1054,7 +1051,7 @@ economic_reforms = {
 			civilization_progress_modifier = 0.15
 			research_points_modifier = 0.3
 			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
+			core_pop_consciousness_modifier = -0.02
 			
 			max_loan_modifier = -0.2 # 80% loans
 			
@@ -1082,13 +1079,14 @@ economic_reforms = {
 	monetary_reform = {
 		next_step_only = yes
 		no_monetary_reform = {
+			core_pop_consciousness_modifier = -0.01
 		}
 		yes_monetary_reform = {
 			technology_cost = 9600
 			tax_efficiency = 0.05
 			civilization_progress_modifier = 0.1
 			research_points_modifier = 0.2
-			core_pop_consciousness_modifier = -0.01
+			core_pop_consciousness_modifier = -0.02
 			
 			on_execute = {
 				effect = {
@@ -1115,7 +1113,7 @@ economic_reforms = {
 			civilization_progress_modifier = 0.15
 			research_points_modifier = 0.3
 			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
+			core_pop_consciousness_modifier = -0.02
 			
 			on_execute = {
 				effect = {
@@ -1173,6 +1171,7 @@ economic_reforms = {
 	
 	research_reform = {
 		no_research_reform = {
+			core_pop_consciousness_modifier = -0.01
 		}
 		
 		yes_research_reform = {
@@ -1386,6 +1385,8 @@ military_reforms = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			allow = {
 				OR = {
@@ -1433,6 +1434,8 @@ military_reforms = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 
 			on_execute = {
 				effect = {
@@ -1471,6 +1474,8 @@ military_reforms = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 				money = 2000 
 				OR = {
@@ -1528,6 +1533,8 @@ military_reforms = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 				OR = {
 					ai = no
@@ -1576,6 +1583,8 @@ military_reforms = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 				OR = {
 					ai = no
@@ -1628,6 +1637,8 @@ military_reforms = {
 			civilization_progress_modifier = 0.05
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			allow = {
 				any_owned_province = { port = yes }
@@ -1676,6 +1687,8 @@ military_reforms = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			allow = {
 				any_owned_province = { port = yes }
@@ -1723,6 +1736,8 @@ military_reforms = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			allow = {
 				any_owned_province = { has_building = naval_base }

@@ -172,18 +172,42 @@ political_decisions = {
 			}
 			has_country_flag = espanola_colonial_flag
 			NOT = { has_country_flag = espanola_colonial_clm_vnz_flag }
+		}
+		allow = {
+			revolution_n_counterrevolution = 1
+			iron_steamers = 1
 			owns = 2251
 			owns = 2247
 			owns = 2204
 			owns = 2264
 			owns = 2270
 		}
-		allow = {
-			revolution_n_counterrevolution = 1
-			iron_steamers = 1
-		}
 		effect = {
 			add_country_modifier = { name = spa_colonial_empire_modifier duration = -1 }
+			set_country_flag = espanola_colonial_clm_vnz_flag
+		}
+	}
+	spanish_economic_boom = {
+		potential = {
+			OR = {
+				tag = SPA
+				tag = ANL
+				tag = IBE
+			}
+			NOT = { has_country_flag = espanola_colonial_clm_vnz_flag }
+		}
+		allow = {
+			steam_turbine = 1
+			NOT = { 
+				owns = 2251
+				owns = 2247
+				owns = 2204
+				owns = 2264
+				owns = 2270
+			}
+		}
+		effect = {
+			add_country_modifier = { name = spa_economic_boom_modifier duration = -1730 }
 			set_country_flag = espanola_colonial_clm_vnz_flag
 		}
 	}
