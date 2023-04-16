@@ -190,7 +190,7 @@ country_event = {
 	id = 140401
 	trigger = {
 		year = 1860
-		nationalvalue = nv_equality
+		FRA = { nationalvalue = nv_equality }
 		tag = WBK
 	}
 	option = {
@@ -233,5 +233,20 @@ country_event = {
 	option = {
 		name = "mcl!!"
 		country_event = 140400
+	}
+}
+
+# INDIAN COUNTRY FLAG
+country_event = {
+	title = "indian_cf_evtname"
+	desc = "indian_cf_evtdesc"
+	id = 140404
+	trigger = {
+		is_culture_group = south_asian
+		NOT = { has_country_flag = indian_country_flag }
+	}
+	option = {
+		name = "indian_cf_evtopta"
+		set_country_flag = indian_country_flag
 	}
 }

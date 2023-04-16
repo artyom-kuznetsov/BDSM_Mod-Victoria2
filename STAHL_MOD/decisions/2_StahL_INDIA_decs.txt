@@ -1,9 +1,10 @@
 political_decisions = {
 	form_india = {
 		potential = {
+			NOT = { tag = PAN }
+			
 			NOT = { has_country_flag = open_money_transfers_flag }
 			is_culture_group = south_asian
-			
 			NOT = {
 				exists = HND
 			}
@@ -217,7 +218,10 @@ political_decisions = {
 	hnd_ultimatum_goa = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = HND
+			OR = {
+				owns = 1301
+				owns = 1302
+			}
 			NOT = { owns = 1303 }
 			is_greater_power = yes
 			NOT = { has_global_flag = goa_ult_sent_1 }
@@ -235,7 +239,7 @@ political_decisions = {
 	hnd_ultimatum_pondi = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = HND
+			owns = 1304
 			NOT = { owns = 1312 }
 			is_greater_power = yes
 			NOT = { has_global_flag = pondi_ult_sent_1 }
@@ -247,6 +251,27 @@ political_decisions = {
 			set_global_flag = pondi_ult_sent
 			set_global_flag = pondi_ult_sent_1
 			prestige = 5
+		}
+		
+	}
+	pan_consolidation_of_power_dec = {
+		potential = {
+			tag = PAN
+			NOT = { has_country_flag = pan_consolidation_of_power_flag }
+		}
+		
+		allow = {
+			owns = 1235
+		}
+		
+		effect = {
+			set_country_flag = pan_consolidation_of_power_flag
+			prestige = 5
+			add_country_modifier = { 
+				name = consolidation_of_power_modifier
+				duration = 1430
+			}
+			country_event = 9540
 		}
 		
 	}
