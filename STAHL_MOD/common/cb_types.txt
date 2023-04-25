@@ -1255,7 +1255,7 @@ add_to_sphere = {
 	months = 12
 	crisis = no
 
-	badboy_factor = 2
+	badboy_factor = 1.5
 	prestige_factor = 2
 	peace_cost_factor = 50
 	penalty_factor = 1
@@ -1274,7 +1274,7 @@ add_to_sphere = {
 		this = { is_greater_power = yes }
 		is_greater_power = no
 		is_independant = yes
-		part_of_sphere = no
+		#part_of_sphere = no
 		NOT = { OR = { tag = SWI tag = WBK } }
 		NOT = { OR = { THIS = { tag = SWI tag = WBK } } }
 		NOT = {
@@ -1437,6 +1437,10 @@ annex_core_country = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
+		OR = {
+			ai = yes
+			NOT = { number_of_states = 3 }
+		}
 		any_owned_province = {
 			is_core = THIS
 		}

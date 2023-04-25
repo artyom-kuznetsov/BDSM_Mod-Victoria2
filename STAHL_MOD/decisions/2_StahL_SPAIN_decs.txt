@@ -152,11 +152,9 @@ political_decisions = {
 			NOT = { has_country_flag = espanola_colonial_flag }
 		}
 		allow = {
-			revolution_n_counterrevolution = 1
-			raider_group_doctrine = 1
+			has_country_flag = industrial_revolution_happened_flag
 		}
 		effect = {
-			add_accepted_culture = central_american
 			badboy = 8
 			CLM = { all_core = { add_core = THIS } }
 			VNZ = { all_core = { add_core = THIS } }
@@ -185,6 +183,7 @@ political_decisions = {
 		effect = {
 			add_country_modifier = { name = spa_colonial_empire_modifier duration = -1 }
 			set_country_flag = espanola_colonial_clm_vnz_flag
+			add_accepted_culture = central_american
 		}
 	}
 	spanish_economic_boom = {

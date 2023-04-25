@@ -56,6 +56,7 @@ political_decisions = {
 					add_core = THIS
 				}
 			}
+			set_country_flag = hnd_control_decs_access_flag
 		}
 		ai_will_do = {
 			factor = 1
@@ -64,7 +65,7 @@ political_decisions = {
 	control_centre_hnd_dec = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = HND
+			has_country_flag = hnd_control_decs_access_flag
 			NOT = {
 				has_country_flag = controls_centre_flag
 			}
@@ -136,7 +137,7 @@ political_decisions = {
 	control_west_hnd_dec = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = HND
+			has_country_flag = hnd_control_decs_access_flag
 			NOT = {
 				has_country_flag = controls_west_flag
 			}
@@ -187,7 +188,7 @@ political_decisions = {
 	control_burma_hnd_dec = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = HND
+			has_country_flag = hnd_control_decs_access_flag
 			NOT = {
 				has_country_flag = controls_burma_flag
 			}
@@ -243,6 +244,9 @@ political_decisions = {
 			NOT = { owns = 1312 }
 			is_greater_power = yes
 			NOT = { has_global_flag = pondi_ult_sent_1 }
+			OR = { 
+				tag = PAN tag = HND tag = MGE
+			}
 		}
 		
 		allow = { war = no }
@@ -271,7 +275,51 @@ political_decisions = {
 				name = consolidation_of_power_modifier
 				duration = 1430
 			}
-			country_event = 9540
+			#country_event = 9540
+		}
+		
+	}
+	pan_form_mughal_dec = {
+		potential = {
+			primary_culture = panjabi
+			NOT = { MGE = { exists = yes } }
+		}
+		
+		allow = {
+			1227 = { OR = {
+				owned_by = THIS
+				owner = { is_vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1221 = { OR = {
+				owned_by = THIS
+				owner = { is_vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1266 = { OR = {
+				owned_by = THIS
+				owner = { is_vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1269 = { OR = {
+				owned_by = THIS
+				owner = { is_vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1236 = { OR = {
+				owned_by = THIS
+				owner = { is_vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			civilization_progress = 0.5
+		}
+		
+		effect = {
+			prestige = 15
+			change_tag = MGE
+			years_of_research = 1
+			#country_event = 9540 # TODO ALL COUNTRIES RECEIVE NOTIFICATION
+			set_country_flag = hnd_control_decs_access_flag
 		}
 		
 	}
