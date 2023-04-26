@@ -134,6 +134,18 @@ political_decisions = {
 			#}
 		}
 	}
+	global_setup_hist = {
+		potential = {
+			tag = SAF
+			NOT = { has_global_flag = hist_scenario_flag }
+		}
+		allow = {
+		}
+		effect = {
+			set_global_flag = hist_scenario_flag
+			ENG = { inherit = THIS }
+		}
+	}
 	global_setup_1870 = {
 		potential = {
 			tag = WBK
