@@ -775,7 +775,7 @@ aeroplane_factory = {
 
 barrel_factory = {       
 	template = factory_template
-	input_goods = {   
+	input_goods = {  
 		artillery = 1	#21
 		machine_parts = 3	#29.2
 		electric_gear = 6	#16
@@ -795,8 +795,8 @@ barrel_factory = {
 		trigger = { has_building = electric_gear_factory }
 		value = 0.025
 	}
-	bonus = steel_factory
-		trigger = { has_building = electric_gear_factory }
+	bonus = {
+		trigger = { has_building = steel_factory }
 		value = 0.025
 	}
 }

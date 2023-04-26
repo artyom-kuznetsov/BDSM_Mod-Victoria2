@@ -1,23 +1,30 @@
-capital = 533
-primary_culture = north_german
-religion = protestant
-government = colonial_company
-plurality = 0.0
-nationalvalue = nv_order
-literacy = 0.5
+capital = 487
+primary_culture = spanish
+culture = portuguese
+culture = catalan
+culture = maghrebi
+religion = blank
+government = democracy
+plurality = 25.0
+nationalvalue = nv_equality
+literacy = 0.20
 civilized = yes
-prestige = 0
-is_releaseable_vassal = no
+schools = culture_tech_school
+
+ruling_party = SPA_gen_conservative
+
+#GreaterPowers = prestige
+prestige = 20
 
 # Political reforms
-slavery = no_slavery
-upper_house_composition = appointed
-vote_franschise = none_voting
+slavery = yes_slavery
+upper_house_composition = state_equal_weight
+vote_franschise = wealth_voting
 public_meetings = yes_meeting
-press_rights = state_press
+press_rights = censored_press
 trade_unions = no_trade_unions
-voting_system = first_past_the_post
-political_parties = underground_parties
+voting_system = jefferson_method
+political_parties = non_secret_ballots
 
 # Social Reforms
 wage_reform = no_minimum_wage
@@ -29,36 +36,35 @@ pensions = no_pensions
 school_reforms = no_schools
 
 # New Reforms
-conscription = paramilitarism
+conscription = basic_training
 debt_law = debtors_prisons
 penal_system = capital_punishment
 child_labor = child_labor_legal
-citizens_rights = culture_voting_only
+citizens_rights = primary_culture_only
 border_policy = open_borders
 centralization = regionalism
-colonial_policy = no_colonies 
+colonial_policy = civilizing
 
-set_country_flag = protestant_country
-
-ruling_party = HAN_conservative_2
+last_election = 1834.1.1
 upper_house = {
 	fascist = 0
-	liberal = 37
-	conservative = 58
+	liberal = 35
+	conservative = 60
 	reactionary = 5
-	anarcho_liberal = 0
+	#anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
 
-
 # Technologies
 post_napoleonic_thought = 1
 flintlock_rifles = 1
+bronze_muzzle_loaded_artillery = 1
 
 military_staff_system = 1
 army_command_principle = 1
-clipper_design = 1
+post_nelsonian_thought = 1
+naval_design_bureaus = 1
 alphabetic_flag_signaling = 1
 the_command_principle = 1
 classicism_n_early_romanticism = 1
@@ -71,13 +77,20 @@ no_standard = 1
 early_classical_theory_and_critique = 1
 freedom_of_trade = 1
 guild_based_production = 1
-piston_steam_engine = 1
-mechanical_production = 1
+water_wheel_power = 1
+publishing_industry = 1
 mechanized_mining = 1
 basic_chemistry = 1
-
 #Inventions
+#corvettes = yes
 
 # Starting Consciousness
 consciousness = 3
 nonstate_consciousness = 1
+
+govt_flag = {
+	government = hms_government
+	flag = democracy
+}
+
+oob = "SPA_oob.txt"
