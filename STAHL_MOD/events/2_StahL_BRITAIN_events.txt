@@ -51,13 +51,71 @@ country_event = {
 	desc = "Irish_Famine_Evt_Desc"
 	picture = "disease"
 	
-	fire_only_once = yes
-	
 	trigger = {
+		NOT = { tag = IRE }
+		OR = {
+			owns = 254
+			owns = 263
+			owns = 257
+			owns = 260
+		}
+		NOT = { has_global_flag = irish_famine_flag }
+	}
+	
+	mean_time_to_happen = {
+		months = 180
+		modifier = {
+			factor = 0.25
+			year = 1844
+		}
+		modifier = {
+			factor = 0.25
+			year = 1848
+		}
 	}
 	
 	option = {
 		name = "Irish_Famine_Evt_OptA"
-		set_country_flag = irish_famine_flag
+		set_global_flag = irish_famine_flag
+		set_country_flag = irish_famine_country_flag
+		IRE = {
+			all_core = {
+				add_province_modifier = {
+					name = great_famine_modifier
+					duration = 1460
+				}
+			}
+		}
+	}
+}
+# IRISH FAMINE RECOVERY
+country_event = {
+	id = 12801
+	title = "Irish_Famine_Rec_Evt_Name"
+	desc = "Irish_Famine_Rec_Evt_Desc"
+	picture = "disease"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		has_global_flag = irish_famine_flag
+		has_country_flag = irish_famine_country_flag
+		NOT = { has_global_flag = hist_scenario_flag }
+		NOT = { 254 = {has_province_modifier = great_famine_modifier } }
+		NOT = { 263 = {has_province_modifier = great_famine_modifier } }
+		NOT = { 257 = {has_province_modifier = great_famine_modifier } }
+		NOT = { 260 = {has_province_modifier = great_famine_modifier } }
+	}
+	
+	option = {
+		name = "Irish_Famine_Rec_Evt_OptA"
+		IRE = {
+			all_core = {
+				add_province_modifier = {
+					name = great_famine_recovery_modifier
+					duration = 730
+				}
+			}
+		}
 	}
 }
