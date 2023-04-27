@@ -116,6 +116,13 @@ take_treaty_port = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	allowed_states = {
@@ -461,6 +468,13 @@ take_capital = {
 			NOT = { has_country_flag = conquerable_1865 }
 			year = 1865
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	allowed_states = {
@@ -580,6 +594,13 @@ conquest_small = {
 					num_of_ports = 1
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 
@@ -742,6 +763,13 @@ conquest_tiny = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 
 	badboy_factor = 0.5
@@ -814,6 +842,13 @@ demand_for_ally = {
 					tag = SWI tag = WBK
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -892,6 +927,13 @@ acquire_all_cores = {
 		ai = yes 
 		NOT = { is_our_vassal = THIS }
 		NOT = { vassal_of = THIS }
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	allowed_countries = {
@@ -1008,6 +1050,13 @@ establish_small_protectorate_casus_belli = {
 					num_of_ports = 1
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -1174,6 +1223,13 @@ conquest = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 
 	badboy_factor = 1.2
@@ -1278,6 +1334,13 @@ add_to_sphere = {
 		NOT = {
 			has_country_flag = chinese_country_flag
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	is_valid = {
@@ -1321,6 +1384,13 @@ take_from_sphere = {
 		NOT = { is_our_vassal = THIS }
 		this = { is_greater_power = yes }
 		is_greater_power = yes
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 
 	
@@ -1389,6 +1459,13 @@ acquire_core_state = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	allowed_states = {
@@ -1449,6 +1526,13 @@ annex_core_country = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 
 	po_annex = yes
@@ -1495,6 +1579,13 @@ acquire_substate_region = {
 				not = { is_core = THIS }
 				is_colonial = no
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -1580,6 +1671,13 @@ acquire_state = {
 			}
 		}
 		is_independant = yes
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	allowed_states = {
@@ -1653,6 +1751,13 @@ place_in_the_sun = {
 					tag = SWI tag = WBK
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -1756,6 +1861,13 @@ cut_down_to_size = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	on_add = {
@@ -1808,6 +1920,13 @@ demand_war_reparations = {
 					tag = SWI tag = WBK
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -1895,6 +2014,13 @@ free_peoples = {
 					tag = SWI tag = WBK
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 
@@ -1990,6 +2116,13 @@ liberate_country = {
 					tag = SWI tag = WBK
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 
@@ -2090,6 +2223,13 @@ dismantle_forts = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 
 	# THIS - us
@@ -2158,6 +2298,13 @@ revoke_cores = {
 			}
 			ai = no
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 
 	# THIS - us
@@ -2213,6 +2360,13 @@ release_puppet = {
 					tag = SWI tag = WBK
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -2280,6 +2434,13 @@ make_puppet = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	# THIS - us
@@ -2328,6 +2489,13 @@ become_independent = {
 
 	can_use = {
 		is_our_vassal = THIS
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	# THIS - us
@@ -2409,6 +2577,13 @@ humiliate = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}	
 	on_add = {
 		move_issue_percentage = { 
@@ -2474,6 +2649,13 @@ demand_concession_casus_belli = {
 					num_of_ports = 1
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -2566,6 +2748,13 @@ establish_protectorate_casus_belli = {
 					num_of_ports = 1
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 	
@@ -2928,6 +3117,13 @@ install_communist_gov_cb = {
 			# If reciever is not a great power
 			is_greater_power = no
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	po_install_communist_gov_type = yes
@@ -3005,6 +3201,13 @@ uninstall_communist_gov_cb = {
 				}
 			}
 		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
+		}
 	}
 	
 	po_uninstall_communist_gov_type = yes
@@ -3074,6 +3277,13 @@ uninstall_fascist_gov_cb = {
 					tag = SWI tag = WBK
 				}
 			}
+		}
+		OR = {
+			AND = {
+				has_global_flag = 1910_scenario_flag
+				year = 1914
+			}
+			NOT = { has_global_flag = 1910_scenario_flag }
 		}
 	}
 

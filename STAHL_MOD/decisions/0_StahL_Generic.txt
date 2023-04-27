@@ -144,6 +144,29 @@ political_decisions = {
 		effect = {
 			set_global_flag = hist_scenario_flag
 			ENG = { inherit = THIS }
+			TUR = {
+				diplomatic_influence = {
+					who = SER
+					value = -200
+				}
+				diplomatic_influence = {
+					who = MOL
+					value = -200
+				}
+			}
+		}
+	}
+	global_setup_1910 = {
+		potential = {
+			tag = ROM
+			NOT = { has_global_flag = 1910_scenario_flag }
+			owns = 1824
+		}
+		allow = {
+		}
+		effect = {
+			set_global_flag = 1910_scenario_flag
+			1824 = { secede_province = FRA }
 		}
 	}
 	global_setup_1870 = {
