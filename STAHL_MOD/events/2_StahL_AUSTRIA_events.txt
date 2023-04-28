@@ -1,0 +1,283 @@
+country_event = { 
+	id = 24600
+	title = "Austria_Starting_Evt_Name"
+	desc = "Austria_Starting_Evt_Desc"
+	#major = yes
+	trigger = {
+		tag = AUS
+		NOT = { year = 1837 }
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		add_country_modifier = { name = inefficient_bureaucracy_modifier duration = -1 }
+		set_country_flag = inefficient_bureaucracy_flag
+	}
+	
+	option = {
+		name = "Austria_Starting_Evt_OptA"
+	}
+}
+country_event = {
+	id = 24601
+	title = "Austria_Hungarian_Separatism_Evt_Name"
+	desc = "Austria_Hungarian_Separatism_Evt_Desc"
+	trigger = {
+		tag = AUS
+		owns = 641
+		OR = {
+			average_militancy = 3
+			has_country_modifier = springtime_of_nations
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			average_militancy = 4
+			factor = 0.5
+		}
+		modifier = {
+			average_militancy = 5
+			factor = 0.5
+		}
+		modifier = {
+			average_consciousness = 4
+			factor = 0.5
+		}
+		modifier = {
+			average_consciousness = 5
+			factor = 0.5
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "Austria_Hungarian_Separatism_Evt_OptA"
+		any_owned = {
+			limit = {
+				is_core = HUN
+				NOT = { is_core = YUG }
+			}
+			add_province_modifier = {
+				name = separatism_modifier
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = hungarian_separatism_modifier
+			duration = -1
+		}
+	}
+}
+country_event = {
+	id = 24602
+	title = "Austria_Slavic_Separatism_Evt_Name"
+	desc = "Austria_Slavic_Separatism_Evt_Desc"
+	trigger = {
+		tag = AUS
+		OR = {
+			owns = 771
+			owns = 2538
+		}
+		OR = {
+			average_militancy = 3
+			has_country_modifier = springtime_of_nations
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			average_militancy = 4
+			factor = 0.5
+		}
+		modifier = {
+			average_militancy = 5
+			factor = 0.5
+		}
+		modifier = {
+			average_consciousness = 4
+			factor = 0.5
+		}
+		modifier = {
+			average_consciousness = 5
+			factor = 0.5
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "Austria_Slavic_Separatism_Evt_OptA"
+		any_owned = {
+			limit = {
+				OR = {
+					is_core = YUG
+				}
+			}
+			add_province_modifier = {
+				name = separatism_modifier
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = slavic_separatism_modifier
+			duration = -1
+		}
+		set_country_flag = slavic_separatism_flag
+	}
+}
+province_event = {
+	id = 24603
+	title = "Austria_Slavic_Separatism_Evt_Name"
+	desc = "Austria_Slavic_Separatism_Spread_Evt_Desc"
+	
+	trigger = {
+		owner = {
+			has_country_flag = slavic_separatism_flag
+		}
+		NOT = { 
+			has_province_modifier = separatism_modifier
+		}
+		is_core = YUG
+	}
+	
+	option = {
+		name = "Austria_Slavic_Separatism_Evt_OptA"
+		state_scope = {
+			any_owned = {
+				add_province_modifier = {
+					name = slavic_separatism_modifier
+					duration = -1
+				}
+			}
+		}
+	}
+	
+}
+
+province_event = {
+	id = 24604
+	title = "Austria_Slavic_Separatism_Evt_Name"
+	desc = "Austria_Slavic_Separatism_End_Evt_Desc"
+	
+	trigger = {
+		owner = {
+			NOT = { has_country_flag = slavic_separatism_flag }
+		} 
+		has_province_modifier = separatism_modifier
+		is_core = YUG
+	}
+	
+	option = {
+		name = "Austria_Slavic_Separatism_End_Evt_OptA"
+		state_scope = {
+			any_owned = {
+				remove_province_modifier = slavic_separatism_modifier
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 24605
+	title = "Austria_Slavic_Separatism_Evt_Name"
+	desc = "Austria_Slavic_Separatism_Ends_Evt_Desc"
+	trigger = {
+		tag = KUK
+		has_country_flag = slavic_separatism_flag
+		citizens_rights = all_voting_pops
+		debt_law = bankruptcy
+		public_meetings = yes_meeting
+	}
+	
+	mean_time_to_happen = {
+		months = 36
+		modifier = {
+			average_militancy = 4
+			factor = 1.5
+		}
+		modifier = {
+			average_militancy = 5
+			factor = 1.5
+		}
+		modifier = {
+			average_consciousness = 4
+			factor = 1.5
+		}
+		modifier = {
+			average_consciousness = 5
+			factor = 1.5
+		}
+	}
+	
+	fire_only_once = yes
+	
+	immediate = {
+		clr_country_flag = slavic_separatism_flag
+	}
+	
+	option = {
+		name = "Austria_Separatism_Ends_Evt_OptA"
+		any_owned = {
+			limit = {
+				OR = {
+					is_core = YUG
+				}
+			}
+			remove_province_modifier = separatism_modifier
+		}
+		remove_country_modifier = slavic_separatism_modifier
+	}
+}
+country_event = {
+	id = 24606
+	title = "Austria_Hungarian_Separatism_Evt_Name"
+	desc = "Austria_Hungarian_Separatism_Ends_Evt_Desc"
+	trigger = {
+		tag = KUK
+		has_country_modifier = hungarian_separatism_modifier
+		citizens_rights = all_voting_pops
+		debt_law = bankruptcy
+		public_meetings = yes_meeting
+	}
+	
+	mean_time_to_happen = {
+		months = 36
+		modifier = {
+			average_militancy = 4
+			factor = 1.5
+		}
+		modifier = {
+			average_militancy = 5
+			factor = 1.5
+		}
+		modifier = {
+			average_consciousness = 4
+			factor = 1.5
+		}
+		modifier = {
+			average_consciousness = 5
+			factor = 1.5
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "Austria_Separatism_Ends_Evt_OptA"
+		any_owned = {
+			limit = {
+				OR = {
+					is_core = HUN
+					NOT = { is_core = YUG }
+				}
+			}
+			remove_province_modifier = separatism_modifier
+		}
+		remove_country_modifier = hungarian_separatism_modifier
+	}
+}

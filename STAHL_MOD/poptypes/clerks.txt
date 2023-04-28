@@ -337,6 +337,7 @@ migration_target =
 
 promote_to =
 {
+	
 	bureaucrats =
 	{
 		factor = 0.01
@@ -507,36 +508,41 @@ promote_to =
 		}
 		
 		modifier = {
-			factor = 2
+			factor = 1
 			work_hours = fourteen_hours
 		}
 		modifier = {
-			factor = 3
+			factor = 2
 			work_hours = twelve_hours
 		}		
 		modifier = {
-			factor = 4
+			factor = 3
 			work_hours  = ten_hours
 		}
 		modifier = {
-			factor = 5
+			factor = 4
 			work_hours = eight_hours
 		}
 		modifier = {
-			factor = 2
+			factor = 1
 			wage_reform = trinket_wage
 		}
 		modifier = {
-			factor = 3
+			factor = 2
 			wage_reform = low_minimum_wage
 		}		
 		modifier = {
-			factor = 4
+			factor = 3
 			wage_reform  = acceptable_minimum_wage
 		}
 		modifier = {
-			factor = 5
+			factor = 4
 			wage_reform = good_minimum_wage
+		}
+		
+		modifier = {
+			factor = -10
+			country = { has_country_flag = inefficient_bureaucracy_flag }
 		}
 		
 		group = {
