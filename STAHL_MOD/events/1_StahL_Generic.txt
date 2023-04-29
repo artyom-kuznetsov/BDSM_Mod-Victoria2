@@ -15,8 +15,8 @@ country_event = {
 
 #AI MEDS
 country_event = {
-	title = "aimedref1name"
-	desc = "aimedref1desc"
+	title = "aimedref"
+	desc = "aimedref"
 	id = 11609
 	trigger = {
 		ai = yes
@@ -25,14 +25,13 @@ country_event = {
 		literacy = 0.25
 	}
 	option = {
-		name = "aimedref1opta"
-		add_country_modifier = { name = med_ref_tier_1 duration = -1 }
+		name = "aimedref"
 		social_reform = trinket_health_care
 	}
 }
 country_event = {
-	title = "aimedref2name"
-	desc = "aimedref2desc"
+	title = "aimedref"
+	desc = "aimedref"
 	id = 11610
 	trigger = {
 		ai = yes
@@ -41,15 +40,13 @@ country_event = {
 		year = 1860
 	}
 	option = {
-		name = "aimedref2opta"
-		add_country_modifier = { name = med_ref_tier_2 duration = -1 }
-		remove_country_modifier = med_ref_tier_1
+		name = "aimedref"
 		social_reform = low_health_care
 	}
 }
 country_event = {
-	title = "aimedref3name"
-	desc = "aimedref3desc"
+	title = "aimedref"
+	desc = "aimedref"
 	id = 11611
 	trigger = {
 		ai = yes
@@ -58,15 +55,13 @@ country_event = {
 		year = 1875
 	}
 	option = {
-		name = "aimedref3opta"
-		add_country_modifier = { name = med_ref_tier_3 duration = -1 }
-		remove_country_modifier = med_ref_tier_2
+		name = "aimedref"
 		social_reform = acceptable_health_care
 	}
 }
 country_event = {
-	title = "aimedref4name"
-	desc = "aimedref4desc"
+	title = "aimedref"
+	desc = "aimedref"
 	id = 11612
 	trigger = {
 		ai = yes
@@ -75,9 +70,7 @@ country_event = {
 		year = 1890
 	}
 	option = {
-		name = "aimedref4opta"
-		add_country_modifier = { name = med_ref_tier_4 duration = -1 }
-		remove_country_modifier = med_ref_tier_3
+		name = "aimedref"
 		social_reform = good_health_care
 	}
 }
@@ -103,7 +96,6 @@ country_event = {
 	trigger = {
 		badboy = 1
 		NOT = { badboy = 1.2 }
-		name = EVTOPTA11602
 
 		NOT = { has_country_modifier = above_bb_limit }
 		
@@ -124,7 +116,6 @@ country_event = {
 	trigger = {
 		badboy = 1.2
 		NOT = { badboy = 1.3 }
-		name = EVTOPTA11602
 
 		NOT = { has_country_modifier = above_bb_limit_1 }
 		
@@ -145,7 +136,6 @@ country_event = {
 	id = 11605
 	trigger = {
 		badboy = 1.3
-		name = EVTOPTA11602
 
 		NOT = { has_country_modifier = above_bb_limit_2 }
 		
@@ -166,7 +156,6 @@ country_event = {
 	id = 11604
 	trigger = {
 		NOT = { badboy = 1 }
-		name = "EVTOPTA11604"
 		OR = {
 			has_country_modifier = above_bb_limit
 			has_country_modifier = above_bb_limit_1
@@ -349,7 +338,7 @@ country_event = { # RELEASE VASSALS
 country_event = {
 	id = 91307
 	title = "EVTNAME91307"
-	desc = "EVTDESC91307"
+	desc = "EVTNAME91307"
 	picture = "upper_house"
 
 

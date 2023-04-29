@@ -23,17 +23,6 @@ political_decisions = {
 						is_greater_power = yes
 					}
 				}
-				OR = {
-					owns = 2302
-					2302 = {
-						OR = {
-							owner = { in_sphere = THIS }
-						}
-						OR = {
-							owner = { vassal_of = THIS }
-						}
-					}
-				}
 			}
 			NOT = {
 				year = 1911

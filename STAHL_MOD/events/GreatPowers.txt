@@ -52,7 +52,7 @@ country_event = {
 			limit = {
 				diplomatic_influence = {
 					who = THIS
-					value = 5
+					value = 25
 					}
 				NOT = {
 					diplomatic_influence = {
@@ -67,6 +67,33 @@ country_event = {
 }
 
 # Reply to Above
+
+country_event = {
+	id = 19005
+	title = "EVTNAME19005"
+	desc = "EVTDESC19005"
+	picture = "greatpowers"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA19005"
+		diplomatic_influence = {
+			who = FROM
+			value = 5
+		}
+		money = -1000
+	}
+
+	option = {
+		name = "EVTOPTB19005"
+		diplomatic_influence = {
+			who = FROM
+			value = -5
+		}
+		prestige = -5
+	}
+}
 
 # Parade
 country_event = {

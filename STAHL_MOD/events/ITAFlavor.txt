@@ -1,41 +1,4 @@
 country_event = {
-	id = 5922
-	
-	is_triggered_only = yes
-	title = "EVTNAME5922"
-	desc = "EVTDESC5922"
-	option = {
-		name = "EVTOPTA5922" 
-		casus_belli = {
-			target = AUS
-			type = acquire_all_cores
-			months = 12
-		}
-		add_casus_belli = {
-			target = AUS
-			type = acquire_state 
-			months = 12
-		}
-		
-		war = {
-			target = AUS
-			call_ally = yes
-			attacker_goal = {
-				casus_belli = acquire_all_cores country = SAR
-			}
-			defender_goal = { casus_belli = cut_down_to_size }
-		}
-		726 = {
-			add_core = SAR
-			secede_province = SAR
-		}
-	}
-	option = {
-		name = "EVTOPTA5922_2"
-	}
-}
-
-country_event = {
 
 	id = 35300
 

@@ -15,7 +15,7 @@ country_event = {
 	option = {
 		name = "Burma_Intervenes_After_Chiangmai_Evt_OptA"
 
-		ai_will_do = {
+		ai_chance = {
 			factor = 1
 		}
 		
@@ -58,13 +58,13 @@ country_event = {
 	
 	option = {
 		name = "Cambodian_War_Evt_OptA"
-		ai_will_do = {
+		ai_chance = {
 			factor = 0
 		}
 	}
 	option = {
 		name = "Cambodian_War_Evt_OptB"
-		ai_will_do = {
+		ai_chance = {
 			factor = 10
 		}
 		badboy = 6
@@ -96,7 +96,7 @@ country_event = {
 	
 	option = {
 		name = "Cambodian_War_Success_Evt_OptA"
-		ai_will_do = {
+		ai_chance = {
 			factor = 1
 		}
 		THIS = { 
@@ -195,7 +195,7 @@ province_event = {
 
 # INDUSTRIALIZATION COAL
 province_event = {
-	id = 44405
+	id = 44406
 
 	trigger = {
 		has_country_flag = sia_industrialization_flag
@@ -222,7 +222,7 @@ province_event = {
 
 # INDUSTRIALIZATION SULPHUR
 province_event = {
-	id = 44406
+	id = 44407
 
 	trigger = {
 		has_country_flag = sia_industrialization_flag
@@ -248,9 +248,9 @@ province_event = {
 
 # CAMBODIA VASSALIZED BY SIAM IF NOT DAINAM VASSAL
 country_event = { 
-	id = 44407
-	title = "Notext"
-	desc = "Notext"
+	id = 44408
+	title = "Cambodia_AutoVassal_Evt_Name"
+	desc = "Cambodia_AutoVassal_Evt_Desc"
 	
 	trigger = {
 		tag = CAM
@@ -264,7 +264,7 @@ country_event = {
 	
 	option = {
 		name = "Notext"
-		ai_will_do = {
+		ai_chance = {
 			factor = 1
 		}
 		SIA = { 
@@ -274,7 +274,7 @@ country_event = {
 }
 
 country_event = { 
-	id = 44408
+	id = 44409
 	title = "SIA_Rpoints_Unciv_Evt_Name"
 	desc = "SIA_Rpoints_Unciv_Evt_Desc"
 	
@@ -291,7 +291,7 @@ country_event = {
 	
 	option = {
 		name = "SIA_Rpoints_Unciv_Evt_OptA"
-		ai_will_do = {
+		ai_chance = {
 			factor = 1
 		}
 		years_of_research = 1
@@ -302,7 +302,7 @@ country_event = {
 }
 
 country_event = { 
-	id = 44409
+	id = 44410
 	title = "SIA_School_Evt_Name"
 	desc = "SIA_School_Evt_Desc"
 	
@@ -325,7 +325,7 @@ country_event = {
 	
 	option = {
 		name = "SIA_School_Evt_OptA"
-		ai_will_do = {
+		ai_chance = {
 			factor = 1
 		}
 		social_reform = low_schools

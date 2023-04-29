@@ -2,7 +2,7 @@
 #country_event = { # ITA AUTOUNIFICATION
 #	title = "EVTNAME11550"
 #	desc = "EVTDESC111550"
-#	picture = "Celebration"
+#	#picture = "Celebration"
 #
 #	id = 11551
 #
@@ -46,7 +46,7 @@
 #country_event = { # CHU AUTOUNIFICATION
 #	title = "EVTNAME11552"
 #	desc = "EVTDESC111552"
-#	picture = "Celebration"
+#	#picture = "Celebration"
 #
 #	id = 11552
 #
@@ -147,7 +147,7 @@ country_event = {
 country_event = { 
 	title = "EVTNAME11550"
 	desc = "EVTDESC111550"
-	picture = "Celebration"
+	#picture = "Celebration"
 
 	id = 11550
 
@@ -210,32 +210,6 @@ country_event = {
 		inherit = HOL
 	}
 }
-# AUTOGER
-country_event = {
-	title = "gerrailroad2_evtname"
-	desc = "gerrailroad2_evtdesc"
-	id = 21105
-	trigger = {
-		year = 1855
-		tag = NGF
-		ai = yes
-		NOT = { has_global_flag = ger_railroad_2_flag }
-		NOT = { GER = { exists = yes } }
-	}
-	mean_time_to_happen = {
-		months = 1
-	}
-	option = {
-		name = "gerrailroad2_evtopta"
-		change_tag = GER
-		inherit  = BAD
-		inherit  = SGF
-		inherit  = WUR
-		inherit  = BAV
-		prestige = 20
-		set_global_flag = ger_railroad_2_flag
-	}
-}
 ### CHINA UNIFICATION RAILROAD
 country_event = {
 	title = "chi_railroad1_evtname"
@@ -296,4 +270,29 @@ country_event = {
 		inherit = SPC
 	}
 }
-
+# AUTOGER
+country_event = {
+	title = "gerrailroad2_evtname"
+	desc = "gerrailroad2_evtdesc"
+	id = 21106
+	trigger = {
+		year = 1855
+		tag = NGF
+		ai = yes
+		NOT = { has_global_flag = ger_railroad_2_flag }
+		NOT = { GER = { exists = yes } }
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = "gerrailroad2_evtopta"
+		change_tag = GER
+		inherit  = BAD
+		inherit  = SGF
+		inherit  = WUR
+		inherit  = BAV
+		prestige = 20
+		set_global_flag = ger_railroad_2_flag
+	}
+}

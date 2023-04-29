@@ -264,7 +264,7 @@ country_event = {
 		OR = {
 			ruling_party_ideology = reactionary
 			ruling_party_ideology = conservative
-			ruling_party_ideology = traditionalist
+			ruling_party_ideology = agrarianist
 		}
 		vote_franschise = none_voting
 		political_parties = underground_parties
@@ -492,8 +492,10 @@ country_event = {
 		}
 		NOT = { 
 			sphere_owner = { 
-				tag = NGF
-				tag = PRU
+				OR = {
+					tag = NGF
+					tag = PRU
+				}
 			}
 		}
 		NOT = {

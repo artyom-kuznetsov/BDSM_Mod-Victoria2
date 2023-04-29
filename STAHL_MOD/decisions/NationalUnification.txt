@@ -311,13 +311,11 @@ unite_moldavia_wallachia = {
 
 		allow = {
 			THIS = {
-				AND = {
-					exists = yes
-					OR = {
-						part_of_sphere = no
-						in_sphere = THIS
-						sphere_owner = { is_sphere_leader_of = THIS }
-					}
+				exists = yes
+				OR = {
+					part_of_sphere = no
+					in_sphere = THIS
+					sphere_owner = { is_sphere_leader_of = THIS }
 				}
 			}
 			794 = { owned_by = THIS }

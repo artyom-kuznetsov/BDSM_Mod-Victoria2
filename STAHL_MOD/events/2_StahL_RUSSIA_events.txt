@@ -72,7 +72,7 @@ province_event = {
 				limit = {
 					total_pops = 100000
 					NOT = { continent = siberia }
-					has_core = THIS
+					is_core = THIS
 				}
 				any_pop = {
 					reduce_pop = 0.98
@@ -116,7 +116,7 @@ province_event = {
 				limit = {
 					total_pops = 100000
 					NOT = { continent = siberia }
-					has_core = THIS
+					is_core = THIS
 				}
 				any_pop = {
 					reduce_pop = 0.98
@@ -140,7 +140,7 @@ country_event = {
 	option = {
 		name = "split_sakhaklin_opta"
 
-		ai_will_do = {
+		ai_chance = {
 			factor = 9
 		}
 		prestige = 5
@@ -151,7 +151,7 @@ country_event = {
 	
 	option = { 
 		name = "split_sakhaklin_optb"
-		ai_will_do = { factor = 1 }
+		ai_chance = { factor = 1 }
 		1086 = { add_core = THIS }
 		1087 = { add_core = THIS }
 		JAP = { country_event = 44201 }

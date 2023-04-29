@@ -21,8 +21,6 @@ country_event = { # INDIA
 		inherit =  KAL 
 		inherit =  KAS 
 		inherit =  KUT 
-		inherit =  KAL 
-		inherit =  KUT 
 		inherit =  LAD 
 		inherit =  MAK 
 		inherit =  MEW 
@@ -45,13 +43,13 @@ country_event = { # INDIA
 }
 
 country_event = { # CHINA
-	title = "EVTNAME9542"
-	desc = "EVTDESC9542"
+	title = "unitechina"
+	desc = "unitechina"
 	id = 9642
 	is_triggered_only = yes
 	
 	option = {
-		name = "EVTOPTA9535"
+		name = "unitechina"
 		inherit = CHI
 		inherit =  HNN
 		inherit =  FJN
@@ -67,13 +65,13 @@ country_event = { # CHINA
 	}
 }
 country_event = { # GERMANY
-	title = "EVTNAME9549"
-	desc = "EVTDESC9549"
+	title = "unitegermany"
+	desc = "unitegermany"
 	id = 9549
 	is_triggered_only = yes
 	
 	option = {
-		name = "EVTOPTA9535"
+		name = "unitegermany"
 		inherit = ANH
 		inherit =  BAD
 		inherit =  BAV
@@ -83,7 +81,6 @@ country_event = { # GERMANY
 		inherit =  HAM
 		inherit =  DZG
 		inherit =  FRM
-		inherit =  HAM
 		inherit =  HAN
 		inherit =  HES
 		inherit =  HEK
@@ -146,12 +143,12 @@ country_event = { # MILITANCY CONSC
 
 # ANNEX FRANCE
 country_event = {
-	title = "EVTNAME9552"
-	desc = "EVTDESC9552"
+	title = "annexfrance"
+	desc = "annexfrance"
 	id = 9552
 	is_triggered_only = yes
 	option = {
-		name = "EVTOPTA9552"
+		name = "annexfrance"
 		inherit = FRA
 	}
 }
@@ -168,26 +165,8 @@ country_event = { #SCANDINAVIA
 	}
 }
 
-country_event = { #ITALY
-	title = "EVTNAME9552"
-	desc = "EVTDESC9552"
-	id = 9553
-	is_triggered_only = yes
-	option = {
-		name = "EVTOPTA9552"
-		inherit = PAR
-		inherit = PAP
-		inherit = LUC
-		inherit = SAR
-		inherit = TUS
-		inherit = SIC
-		inherit = MOD
-		prestige = 15
-	}
-}
-
 country_event = { # BECOME COMMUNIST
-	title = "Comm"
+	title = "comm"
 	desc = "comm"
 	id = 9554
 	
@@ -290,5 +269,23 @@ country_event = { # WAR EXHAUST
 	option = {
 		name = "Mod"
 		add_country_modifier = { name = china_cartography_buff duration = -1 }
+	}
+}
+
+country_event = { #ITALY
+	title = "EVTNAME9552"
+	desc = "EVTDESC9552"
+	id = 9559
+	is_triggered_only = yes
+	option = {
+		name = "EVTOPTA9552"
+		inherit = PAR
+		inherit = PAP
+		inherit = LUC
+		inherit = SAR
+		inherit = TUS
+		inherit = SIC
+		inherit = MOD
+		prestige = 15
 	}
 }

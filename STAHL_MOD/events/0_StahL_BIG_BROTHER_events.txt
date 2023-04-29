@@ -1,11 +1,11 @@
 country_event = { # MONTHLY CLEANUP BDSM
-	title = "Monthly cleanup"
-	desc = "mcl"
+	title = "Monthly_cleanup"
+	desc = "Monthly_cleanup"
 	id = 140400
 	is_triggered_only = yes
 	
 	option = {
-		name = "CleanUp!"
+		name = "CleanUp"
 		add_country_modifier = { name = mcl_happened_modifier duration = 31 }
 		any_country = { # ‘À¿√  ŒÃÃ”Õ»—“Œ¬
 			random_owned = {
@@ -200,7 +200,7 @@ country_event = {
 	mean_time_to_happen = {
 		months = 120
 		modifier = {
-			factor = 1
+			factor = 0.2
 			year = 1870
 		}
 	}
@@ -216,22 +216,22 @@ country_event = {
 		NOT = { tag = WBK }
 	}
 	option = {
-		name = "wbk_restogre!!"
+		name = "wbk_restore"
 		3246 = { secede_province = WBK }
 	}
 }
 
 # RELAUNCH MCL
 country_event = {
-	title = "mcl relaunch"
-	desc = "mcl relaunmch"
+	title = "mcl_relaunch"
+	desc = "mcl_relaunmch"
 	id = 140403
 	trigger = {
 		NOT = { has_country_modifier = mcl_happened_modifier }
 		tag = WBK
 	}
 	option = {
-		name = "mcl!!"
+		name = "mcl_relaunch"
 		country_event = 140400
 	}
 }
@@ -239,7 +239,7 @@ country_event = {
 # INDIAN COUNTRY FLAG
 country_event = {
 	title = "indian_cf_evtname"
-	desc = "indian_cf_evtdesc"
+	desc = "indian_cf_evtname"
 	id = 140404
 	trigger = {
 		is_culture_group = south_asian
