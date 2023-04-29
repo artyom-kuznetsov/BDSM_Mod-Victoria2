@@ -72,16 +72,11 @@ political_decisions = {
 	form_byzantine_empire = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = GRE
-			OR = {
-				government = absolute_monarchy
-				government = prussian_constitutionalism
-				government = hms_government
-			}
-			is_greater_power = yes			
+			tag = GRE	
 		}
 		
 		allow = {
+			nationalism_n_imperialism = 1
 			owns = 825
 			owns = 828
 			owns = 829
@@ -127,9 +122,6 @@ political_decisions = {
 		effect = {
 			change_tag = BYZ
 			capital = 860
-			860 = {
-				change_province_name = "Константинополь"
-			}
 			any_owned = {
 				limit = {
 					is_colonial = no
@@ -142,6 +134,9 @@ political_decisions = {
 			}
 			prestige = 40
 			badboy = -10
+			add_accepted_culture = bulgarian
+			add_accepted_culture = albanian
+			add_accepted_culture = turkish
 		}
 	}
 }
