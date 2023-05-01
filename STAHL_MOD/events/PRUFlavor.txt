@@ -1,3 +1,6 @@
+# Audax Validator "!" Ignore_1004
+# Audax Validator "!" Ignore_1009
+
 country_event = {
 
 	id = 34600
@@ -41,7 +44,7 @@ country_event = {
 	option = {
 		name = "EVTOPTA34600" 
 		prestige = 3
-		years_of_research = 0.05
+		#years_of_research = 0.05
 	}
 }
 
@@ -520,6 +523,26 @@ country_event = {
 		}
 		labourers = {
 			consciousness = 1 
+		}
+	}
+}
+
+country_event = {
+	id = 34610
+	title = "End of Prussia"
+
+	fire_only_once = yes
+	
+	trigger = {
+		tag = JAN
+		NOT = { exists = PRU }
+	}
+	
+ 
+	
+	option = {
+		any_country = {
+			clr_country_flag = prussia
 		}
 	}
 }

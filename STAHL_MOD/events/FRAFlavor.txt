@@ -1,3 +1,6 @@
+# Audax Validator "!" Ignore_1004
+# Audax Validator "!" Ignore_1009
+
 country_event = {
 
 	id = 37200
@@ -1114,3 +1117,234 @@ country_event = {
 			}
 		}
 }
+
+#French Revanchism
+country_event = {
+	id = 37226
+
+	trigger = {
+		ai = yes
+		tag = FRA
+		NOT = {
+			conscription = mandatory_service
+			owns = 412
+		}
+		NOT = { has_country_flag = french_revanchism }
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		set_country_flag = french_revanchism
+		political_reform = mandatory_service
+	}
+}
+
+country_event = {
+	id = 37227
+	title = "EVTNAME37227"
+	desc = "EVTDESC37227"
+	picture = "french_revanchism"
+
+	trigger = {
+		ai = no
+		tag = FRA
+		NOT = { owns = 412 }
+		NOT = { has_country_flag = french_revanchism }
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = "EVTOPTA37227"
+		set_country_flag = french_revanchism
+		random_owned = {
+			limit = {
+				owner = { conscription = four_year_draft }
+			}	
+			owner = { political_reform = mandatory_service }
+		}
+		random_owned = {
+			limit = {
+				owner = { conscription = two_year_draft }
+			}	
+			owner = { political_reform = four_year_draft }
+		}				
+		random_owned = {
+			limit = {
+				owner = { conscription = one_year_draft }
+			}	
+			owner = { political_reform = two_year_draft }
+		}
+		random_owned = {
+			limit = {
+				owner = { conscription = no_draft }
+			}	
+			owner = { political_reform = one_year_draft }
+		}
+	}
+}
+
+country_event = {
+	id = 37228
+	title = "EVTNAME37228"
+	desc = "EVTDESC37228"
+	picture = "paris_commune"
+
+	trigger = {
+		has_country_flag = napoleon_iii
+		OR = {
+			government = absolute_monarchy
+			government = prussian_constitutionalism
+		}
+		revanchism = 0.01
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = "EVTOPTA37228"
+		government = democracy
+		political_reform = universal_voting
+		political_reform = state_equal_weight
+		political_reform = yes_meeting
+		political_reform = free_press
+		political_reform = non_secret_ballots
+	}
+}
+
+
+#The Treaty of Tafna
+country_event = {
+    id = 37230
+    title = "EVTNAME37230"
+    desc = "EVTDESC37230"
+    picture = "abd_al_qadir"
+
+    trigger = {
+		NOT = { has_country_flag = treaty_of_tafna }
+        is_greater_power = yes
+        capital = 425
+        owns = 1700
+        NOT = { year = 1870 }
+        ALD = {
+            exists = yes
+            war_with = THIS
+        }
+    }
+
+    mean_time_to_happen = { days = 15 }
+
+    option = {
+        name = "EVTOPTA37230"
+        prestige = -5
+        end_war = ALD
+        set_country_flag = treaty_of_tafna
+        ai_chance = { factor = 0.9 }
+    }
+
+    option = {
+        name = "EVTOPTB37230"
+        badboy = 8
+        war_exhaustion = 10
+        set_country_flag = treaty_of_tafna
+        ai_chance = { factor = 0.1 }
+    }
+}
+
+#Iron Gates Expedition
+country_event = {
+    id = 37231
+    title = "EVTNAME37231"
+    desc = "EVTDESC37231"
+    picture = "battle_of_mazagran"
+
+	is_triggered_only = yes
+
+    option = {
+        name = "EVTOPTA37231"
+    }
+}
+
+#Franco Moroccan War
+country_event = {
+    id = 37232
+    title = "EVTNAME37232"
+    desc = "EVTDESC37232"
+    picture = "battle_of_mazagran"
+
+	is_triggered_only = yes
+
+    option = {
+        name = "EVTOPTA37232"
+    }
+}
+
+#Conquest of Morocco
+country_event = {
+    id = 37233
+    title = "EVTNAME37233"
+    desc = "EVTDESC37233"
+    picture = "battle_of_mazagran"
+
+	is_triggered_only = yes
+
+    option = {
+        name = "EVTOPTA37233"
+    }
+}
+
+#Treaty of Bardo
+country_event = {
+    id = 37234
+    title = "EVTNAME37234"
+    desc = "EVTDESC37234"
+    picture = "sidi_bil_hasan"
+
+	is_triggered_only = yes
+
+    option = {
+        name = "EVTOPTA37234"
+		annex_to = FROM
+		ai_chance = { factor = 0.9 }
+    }
+
+    option = {
+        name = "EVTOPTB37234"
+		FROM = {
+			country_event = { id = 37235 days = 0 }
+		}
+		ai_chance = { factor = 0.1 }
+    }
+}
+
+country_event = {
+    id = 37235
+    title = "EVTNAME37235"
+    desc = "EVTDESC37235"
+    picture = "sidi_bil_hasan"
+
+	is_triggered_only = yes
+
+    option = {
+        name = "EVTOPTA37235"
+		diplomatic_influence = {
+			who = FROM
+			value = -200
+		}
+		leave_alliance = FROM
+		war = {
+			target = FROM
+			attacker_goal = { casus_belli = conquest_free }
+		}
+		ai_chance = { factor = 1 }
+    }
+
+    option = {
+        name = "EVTOPTB37235"
+		prestige_factor = -0.1
+		ai_chance = { factor = 0 }
+    }
+}
+
+

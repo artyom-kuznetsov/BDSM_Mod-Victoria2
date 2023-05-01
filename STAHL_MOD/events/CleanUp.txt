@@ -7,98 +7,63 @@ country_event = {
 	trigger = {
 		NOT = {
 			government = proletarian_dictatorship
-			government = social_republic
 		}
-		ruling_party_ideology = communist
-		vote_franschise = none_voting
-		trade_unions = all_trade_unions
-		upper_house_composition = party_appointed
-		revolution_n_counterrevolution = 1
+		civilized = yes
+		OR = {
+			AND = {
+				ruling_party_ideology = communist
+				average_militancy = 2
+			}
+			average_militancy = 5
+		}
+		communist = 25
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60000"
 		government = proletarian_dictatorship
-		social_reform = child_labor_illegal
-		political_reform = no_slavery
-		political_reform = bankruptcy
-		political_reform = totalitarianism
-		set_country_flag = communist_gov_flag
-		clr_country_flag = fascist_dictatorship
-	}
-	
-}
-country_event = {
-	id = 60001
-	title = "EVTNAME60000"
-	desc = "EVTDESC60001"
-	picture = "Unite"
-	
-	trigger = {
-		NOT = {
-			government = social_republic
-		}
-		OR = {
-			ruling_party_ideology = socialist
-		}
-		vote_franschise = none_voting
-		trade_unions = all_trade_unions
-		upper_house_composition = party_appointed
-		OR = {
-			debt_law = debtors_prisons
-			debt_law = bankruptcy
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 1
-	}
-	
-	option = {
-		name = "EVTOPTA60000"
-		government = social_republic
-		social_reform = child_labor_illegal
-		political_reform = no_slavery
-		political_reform = all_voting_pops
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
+		political_reform = none_voting
+		political_reform = party_appointed
+		political_reform = state_press
+		political_reform = underground_parties
 	}
 }
 
 country_event = {
 	id = 60010
-	title = "EVTNAME60010"
-	desc = "EVTDESC60010"
+	title = "EVTNAME60030"
+	desc = "EVTDESC60030"
 	picture = "Unite"
 	
 	trigger = {
-		NOT = {
-			government = proletarian_dictatorship
-			government = presidential_dictatorship
-			government = bourgeois_dictatorship
-			government = fascist_dictatorship
-			government = absolute_monarchy
-		}
+		is_vassal = no
 		civilized = yes
-		political_parties = underground_parties
-		vote_franschise = none_voting
-		upper_house_composition = party_appointed
-		ruling_party_ideology = reactionary
+		NOT = { government = fascist_dictatorship }
+		OR = {
+			AND = {
+				ruling_party_ideology = fascist
+				average_militancy = 2
+			}
+			average_militancy = 5
+		}
+		fascist = 25
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
-		name = "EVTOPTA60010"
-		government = presidential_dictatorship
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
+		name = "EVTOPTA60030"
+		government = fascist_dictatorship
+		political_reform = none_voting
+		political_reform = party_appointed
+		political_reform = state_press
+		political_reform = underground_parties
 	}
 }
 
@@ -120,19 +85,16 @@ country_event = {
 		political_parties = underground_parties
 		vote_franschise = none_voting
 		upper_house_composition = party_appointed
-		ruling_party_ideology = liberal
-		public_meetings = no_meeting
+		ruling_party_ideology = anarcho_liberal
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60020"
 		government = bourgeois_dictatorship
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
@@ -155,95 +117,15 @@ country_event = {
 		vote_franschise = none_voting
 		upper_house_composition = party_appointed
 		ruling_party_ideology = fascist
-		citizens_rights = primary_culture_only
-		OR = {
-			conscription = paramilitarism
-			conscription = army_with_a_state
-		}
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60030"
-		centralization = totalitarianism
 		government = fascist_dictatorship
-		set_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
-	}
-}
-
-country_event = {
-	id = 60050
-	title = "EVTNAME60050"
-	desc = "EVTDESC60050"
-	picture = "Unite"
-	
-	trigger = {
-		NOT = { government = democracy }
-		NOT = {
-			ruling_party_ideology = reactionary
-			ruling_party_ideology = traditionalist
-		}
-		vote_franschise = universal_voting
-		citizens_rights = all_voting_pops
-		civilized = yes
-		OR = {
-			debt_law = debtors_prisons
-			debt_law = bankruptcy
-		}
-		NOT = { border_policy = closed_borders }
-		NOT = { press_rights = state_press }
-		NOT = { centralization = totalitarianism }
-		OR = {
-			political_parties = non_secret_ballots
-			political_parties = secret_ballots
-		}
-		public_meetings = yes_meeting
-	}
-	
-	mean_time_to_happen = {
-		months = 1
-	}
-	
-	option = {
-		name = "EVTOPTA60050"
-		government = democracy
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
-	}
-	option = {
-		name = "EVTOPTB60050"
-		political_reform = universal_weighted_voting
-		any_pop = {
-			militancy = 5
-			consciousness = 3
-		}
-	}
-}
-
-country_event = {
-	id = 61250
-	title = "EVTNAME60050"
-	desc = "EVTDESC60050"
-	picture = "Unite"
-	
-	is_triggered_only = yes
-	
-	mean_time_to_happen = {
-		months = 1
-	}
-	immediate = {
-		government = democracy
-		political_reform = universal_voting
-		political_reform = population_equal_weight
-	}
-	option = {
-		name = "EVTOPTA60050"
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
@@ -254,32 +136,55 @@ country_event = {
 	picture = "Monarchy"
 	
 	trigger = {
-		NOT = { 
-			government = absolute_monarchy
-		}
 		OR = {
 			government = hms_government
 			government = prussian_constitutionalism
 		}
-		OR = {
-			ruling_party_ideology = reactionary
-			ruling_party_ideology = conservative
-			ruling_party_ideology = agrarianist
-		}
+		civilized = yes
+		NOT = { ruling_party_ideology = fascist }
+		NOT = { ruling_party_ideology = anarcho_liberal }
+		NOT = { ruling_party_ideology = communist }
 		vote_franschise = none_voting
-		political_parties = underground_parties
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60040"
 		government = absolute_monarchy
-		set_country_flag = absolute_gov_flag
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
+	}
+}
+
+country_event = {
+	id = 60050
+	title = "EVTNAME60050"
+	desc = "EVTDESC60050"
+	picture = "Unite"
+	
+	trigger = {
+		OR = {
+			government = proletarian_dictatorship
+			government = presidential_dictatorship
+			government = bourgeois_dictatorship
+			government = fascist_dictatorship
+		}
+		civilized = yes
+		NOT = {
+			political_parties = underground_parties
+			vote_franschise = none_voting
+			upper_house_composition = party_appointed
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = {
+		name = "EVTOPTA60050"
+		government = democracy
 	}
 }
 
@@ -292,20 +197,18 @@ country_event = {
 	trigger = {
 		government = absolute_monarchy
 		NOT = {
-			vote_franschise = none_voting
+				vote_franschise = none_voting
 		}	
 		civilized = yes	
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTNAME60060"
 		government = prussian_constitutionalism
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
@@ -322,25 +225,22 @@ country_event = {
 			political_parties = non_secret_ballots
 		}
 		civilized = yes
-		NOT = { citizens_rights = primary_culture_only }
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60070"
 		government = hms_government
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
 country_event = {
 	id = 60080
-	title = "EVTNAME60080"
-	desc = "EVTDESC60080"
+	title = "EVTNAME60010"
+	desc = "EVTDESC60010"
 	picture = "Administration"
 	
 	trigger = {
@@ -349,20 +249,17 @@ country_event = {
 		OR = {
 			ruling_party_ideology = conservative
 			ruling_party_ideology = reactionary
-			ruling_party_ideology = traditionalist
 		}
 		civilized = yes
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
-		name = "EVTOPTA60080"
+		name = "EVTOPTA60010"
 		government = presidential_dictatorship
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
@@ -375,19 +272,20 @@ country_event = {
 	trigger = {
 		government = democracy
 		vote_franschise = none_voting
-		ruling_party_ideology = liberal
+		OR = {
+			ruling_party_ideology = liberal
+			ruling_party_ideology = anarcho_liberal
+		}
 		civilized = yes
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60080"
 		government = bourgeois_dictatorship
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
@@ -400,50 +298,20 @@ country_event = {
 	trigger = {
 		government = democracy
 		vote_franschise = none_voting
-		ruling_party_ideology = communist
+		OR = {
+			ruling_party_ideology = socialist
+			ruling_party_ideology = communist
+		}
 		civilized = yes
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60080"
-		
-		centralization = totalitarianism
-		social_reform = child_labor_illegal
-		political_reform = no_slavery
 		government = proletarian_dictatorship
-		set_country_flag = communist_gov_flag
-		clr_country_flag = fascist_dictatorship
-	}
-}
-
-country_event = {
-	id = 60101
-	title = "EVTNAME60080"
-	desc = "EVTDESC60080"
-	picture = "Administration"
-	
-	trigger = {
-		government = democracy
-		vote_franschise = none_voting
-		ruling_party_ideology = socialist
-		civilized = yes
-	}
-	
-	mean_time_to_happen = {
-		months = 1
-	}
-	
-	option = {
-		name = "EVTOPTA60080"
-		social_reform = child_labor_illegal
-		political_reform = no_slavery
-		government = social_republic
-		clr_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
@@ -461,15 +329,12 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60080"
-		centralization = totalitarianism
 		government = fascist_dictatorship
-		set_country_flag = fascist_dictatorship
-		clr_country_flag = communist_gov_flag
 	}
 }
 
@@ -490,14 +355,6 @@ country_event = {
 			is_cultural_union = yes
 			war = no
 		}
-		NOT = { 
-			sphere_owner = { 
-				OR = {
-					tag = NGF
-					tag = PRU
-				}
-			}
-		}
 		NOT = {
 			AND = {
 				OR = {
@@ -514,7 +371,7 @@ country_event = {
 		}
 		NOT = {	
 			tag = ISR 
-		}
+			}
 	}
 	
 	mean_time_to_happen = {
@@ -540,6 +397,10 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA60130"
+		prestige = 5
+		FROM = {
+			all_core = { add_core = THIS }
+		}
 		inherit = FROM
 	}
 	
@@ -563,7 +424,7 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
@@ -589,11 +450,29 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 6
 	}
 	
 	option = {
 		name = "EVTOPTA60150"
 		remove_country_modifier = female_suffrage
+	}
+}
+
+country_event = {
+	id = 60160
+	title = "EVTNAME60160"
+	desc = "EVTDESC60160"
+	picture = "Unite"
+	
+	trigger = {
+		government = colonial_company
+		is_vassal = no
+		war = no
+	}
+
+	option = {
+		name = "EVTOPTA60160"
+		government = absolute_monarchy
 	}
 }

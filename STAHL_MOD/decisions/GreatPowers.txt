@@ -1,7 +1,6 @@
 political_decisions = {
 	egyptological_excavations = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			civilized = yes
 			is_greater_power = yes
 			nationalism_n_imperialism = 1
@@ -34,7 +33,6 @@ political_decisions = {
 
 	forced_egyptological_excavations = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			civilized = yes
 			nationalism_n_imperialism = 1
 			OR = {
@@ -64,70 +62,221 @@ political_decisions = {
 		}
 	}
 
-	the_congo_conference = {
+	establish_cambodian_protectorate = {
+		picture = map_indochina
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
-			is_greater_power = yes
-			#invention = mission_to_civilize
-			#invention = expansionism
-			tag = ENG
-			year = 1880
-			NOT = {
-				has_global_flag = congo_conference_held
+			civilized = yes
+			CAM = {
+				ai = yes
+				civilized = no
 			}
+			neighbour = CAM
+			OR = {
+				is_greater_power = yes
+				is_secondary_power = yes
+			}
+			NOT = { has_global_flag = cambodian_protectorate }
 		}
+
 		allow = {
-			1982 = { empty = yes }
-			1986 = { empty = yes }
-			1987 = { empty = yes }
-			1993 = { empty = yes }
-			1996 = { empty = yes }			
+			invention = manifest_destiny
+			invention = mission_to_civilize
+			war = no
 		}
 
 		effect = {
-			prestige = 25
-			BEL_1977 = {
-				add_core = CNG
-			}
-			BEL_1984 = {
-				add_core = CNG
-			}
-			BEL_1987 = {
-				add_core = CNG
-			}
-			BEL_1990 = {
-				add_core = CNG
-			}
-			BEL_1992 = {
-				add_core = CNG
-			}
-			set_country_flag = hosting_the_congo_conference
-			set_global_flag = congo_conference_held
+			set_global_flag = cambodian_protectorate
+			prestige = 10
+			inherit = CAM
+			badboy = 5
 		}
 	}
-	annex_the_congo = {
+
+	establish_vietnamese_protectorate = {
+		picture = map_indochina
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
-			CNG = {
-				vassal_of = THIS
+			civilized = yes
+			DAI = { civilized = no }
+			neighbour = DAI
+			OR = {
+				is_greater_power = yes
+				is_secondary_power = yes
 			}
-			has_global_flag = congo_reform_association_active
-			CNG = { ai = yes }
+			NOT = { has_global_flag = invaded_vietnam }
 		}
 
 		allow = {
-			CNG = {
-				badboy = 0.24
-			}
+			invention = colonial_negotiations
+			war = no
 		}
 
 		effect = {
-			CNG = {
-				government = hms_government
+			set_global_flag = invaded_vietnam
+			war = {
+				target = DAI
+				attacker_goal = { casus_belli = conquest_free }
 			}
-			inherit = CNG
-			prestige = -40
-			remove_country_modifier = the_congo_reform_association
+			badboy = 5
+		}
+	}
+
+	secure_laos = {
+		picture = map_indochina
+		potential = {
+			civilized = yes
+			1357 = {
+				owner = {
+					neighbour = THIS
+					civilized = no
+					ai = yes
+				}
+				any_neighbor_province = { owned_by = THIS }
+			}
+			NOT = { has_global_flag = laos_secured }
+		}
+
+		allow = {
+			invention = colonial_negotiations
+			war = no
+		}
+
+		effect = {
+			prestige = 5
+			set_global_flag = laos_secured
+			LUA_1356 = { secede_province = THIS }
+		}
+	}
+
+	secure_cambodia = {
+		picture = map_indochina
+		potential = {
+			civilized = yes
+			owns = 1364
+			1366 = {
+				owner = {
+					neighbour = THIS
+					civilized = no
+					ai = yes
+				}
+				any_neighbor_province = { owned_by = THIS }
+			}
+			NOT = { has_global_flag = cambodia_secured }
+		}
+
+		allow = {
+			invention = colonial_negotiations
+			war = no
+		}
+
+		effect = {
+			set_global_flag = cambodia_secured
+			prestige = 5
+			1366 = { secede_province = THIS }
+		}
+	}
+
+	secure_malaya = {
+		picture = map_malaysia
+		potential = {
+			civilized = yes
+			owns = 2575
+			1389 = {
+				owner = {
+					neighbour = THIS
+					civilized = no
+					ai = yes
+				}
+				any_neighbor_province = { owned_by = THIS }
+			}
+			NOT = { has_global_flag = malaya_secured }
+		}
+
+		allow = {
+			revolution_n_counterrevolution = 1
+			war = no
+		}
+
+		effect = {
+			set_global_flag = malaya_secured
+			prestige = 5
+			1389 = { secede_province = THIS }
+			1391 = { secede_province = THIS }
+		}
+	}
+
+	subjugation_of_sulawesi = {
+		picture = map_celebes
+		potential = {
+			civilized = yes
+			owns = 1430
+			1431 = {
+				owner = { civilized = no }
+				any_neighbor_province = { owned_by = THIS }
+			}
+			NOT = { has_global_flag = sulawesi_subjugated }
+		}
+
+		allow = {
+			invention = colonial_negotiations
+			war = no
+		}
+
+		effect = {
+			set_global_flag = sulawesi_subjugated
+			1431 = {
+				owner = {
+					war = {
+						target = THIS
+						attacker_goal = { casus_belli = demand_concession_casus_belli_free state_province_id = 1430 }
+						defender_goal = { casus_belli = demand_concession_casus_belli_free state_province_id = 1431 }
+					}
+					badboy = 3
+				}
+			}
+		}
+	}
+
+	end_lanfang = {
+		picture = lanfang_republic
+		potential = {
+			civilized = yes
+			2626 = {
+				owner = {
+					civilized = no
+					tag = LAN
+				}
+				any_neighbor_province = { owned_by = THIS }
+			}
+			NOT = { has_global_flag = lanfang_ended }
+		}
+
+		allow = {
+			OR = {
+				invention = colonial_negotiations
+				AND = {
+					tag = NET
+					year = 1870
+				}
+			}
+			war = no
+		}
+
+		effect = {
+			set_global_flag = lanfang_ended
+			LAN = {
+				any_greater_power = {
+					diplomatic_influence = {
+						who = LAN
+						value = -200
+					}
+					leave_alliance = LAN
+				}
+			}
+			war = {
+				target = LAN
+				attacker_goal = { casus_belli = demand_concession_casus_belli_free state_province_id = 2626 }
+			}
+			badboy = 2
 		}
 	}
 }

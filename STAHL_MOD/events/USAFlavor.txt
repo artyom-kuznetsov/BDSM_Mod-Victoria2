@@ -982,8 +982,11 @@ country_event = {
 	option = {
 		name = "EVTOPTA44119" 
 		any_pop = { 
+			limit = {
+				has_pop_religion = catholic
+				}
 			consciousness = 1
-		}		
+			}		
 	}
 }
 
@@ -1092,4 +1095,32 @@ country_event = {
 			consciousness = 1
 				}
 		}
+}
+
+country_event = {
+	id = 44122
+	title = "EVTNAME44122"
+	desc = "EVTDESC44122"
+	picture = "manifest_destiny"
+
+	trigger = {
+		tag = USA   
+		has_country_flag = hasmanifestdestiny
+		MEX = {
+			NOT = {
+				any_owned_province = { is_core = USA }
+				has_country_flag = mex_destiny_manifested
+			}
+		}
+		NOT = { has_country_flag = usa_destiny_manifested }
+	}
+
+	option = {
+		name = "EVTOPTA44122" 
+		set_country_flag = usa_destiny_manifested
+		any_owned = {
+			limit = { is_core = THIS }
+			remove_core = MEX
+		}
+	}
 }

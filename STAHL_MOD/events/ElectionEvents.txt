@@ -25,6 +25,10 @@ country_event = {
 				factor = 0.2
 				value = protectionism
 			}
+			scaled_militancy = {
+				issue = free_trade
+				factor = 4
+			}
 		}
 	}
 	
@@ -32,18 +36,62 @@ country_event = {
 		name = "EVTOPTB14000"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
-				value = free_trade
+				factor = 0.1
+				value = protectionism
+			}
+			scaled_militancy = {
+				issue = free_trade
+				factor = 3
 			}
 		}
 	}
 	
 	option = {
 		name = "EVTOPTC14000"
+		random_list = {
+			10 = {
+				any_pop = {
+					dominant_issue = {
+						factor = 0.25
+						value = free_trade
+					}
+				}
+			}
+			10 = {
+				any_pop = {
+					dominant_issue = {
+						factor = 0.25
+						value = protectionism
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTD14000"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.1
+				value = free_trade
+			}
+			scaled_militancy = {
+				issue = protectionism
+				factor = 3
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTE14000"
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = mercantilism
+				value = free_trade
+			}
+			scaled_militancy = {
+				issue = protectionism
+				factor = 4
 			}
 		}
 	}
@@ -63,12 +111,12 @@ country_event = {
 		name = "EVTOPTA14010"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = laissez_faire
 			}
 			scaled_militancy = {
 				issue = planned_economy
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -77,12 +125,12 @@ country_event = {
 		name = "EVTOPTB14010"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = interventionism
 			}
 			scaled_militancy = {
 				issue = state_capitalism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -91,12 +139,12 @@ country_event = {
 		name = "EVTOPTC14010"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = state_capitalism
 			}
 			scaled_militancy = {
 				issue = interventionism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -105,22 +153,8 @@ country_event = {
 		name = "EVTOPTD14010"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = planned_economy
-			}
-			scaled_militancy = {
-				issue = laissez_faire
-				factor = 0.5
-			}
-		}
-	}
-	
-	option = {
-		name = "EVTOPTAGR"
-		any_pop = {
-			dominant_issue = {
-				factor = 0.5
-				value = agrarianism_ep
 			}
 			scaled_militancy = {
 				issue = laissez_faire
@@ -144,12 +178,12 @@ country_event = {
 		name = "EVTOPTA14020"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = pro_atheism
 			}
 			scaled_militancy = {
 				issue = moralism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -158,12 +192,12 @@ country_event = {
 		name = "EVTOPTB14020"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = secularized
 			}
 			scaled_militancy = {
 				issue = pluralism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -172,12 +206,12 @@ country_event = {
 		name = "EVTOPTC14020"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = pluralism
 			}
 			scaled_militancy = {
 				issue = secularized
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -186,12 +220,12 @@ country_event = {
 		name = "EVTOPTD14020"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = moralism
 			}
 			scaled_militancy = {
 				issue = pro_atheism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -211,12 +245,12 @@ country_event = {
 		name = "EVTOPTA14030"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = residency
 			}
 			scaled_militancy = {
 				issue = limited_citizenship
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -225,12 +259,12 @@ country_event = {
 		name = "EVTOPTB14030"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = limited_citizenship
 			}
 			scaled_militancy = {
 				issue = full_citizenship
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -239,12 +273,12 @@ country_event = {
 		name = "EVTOPTC14030"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.1
 				value = full_citizenship
 			}
 			scaled_militancy = {
 				issue = residency
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -264,12 +298,12 @@ country_event = {
 		name = "EVTOPTA14040"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.25
+				factor = 0.1
 				value = jingoism
 			}
 			scaled_militancy = {
 				issue = pacifism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -278,12 +312,12 @@ country_event = {
 		name = "EVTOPTB14040"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.25
+				factor = 0.1
 				value = pro_military
 			}
 			scaled_militancy = {
 				issue = anti_military
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -292,12 +326,12 @@ country_event = {
 		name = "EVTOPTC14040"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.25
+				factor = 0.1
 				value = anti_military
 			}
 			scaled_militancy = {
 				issue = pro_military
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -306,12 +340,219 @@ country_event = {
 		name = "EVTOPTD14040"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.25
+				factor = 0.1
 				value = pacifism
 			}
 			scaled_militancy = {
 				issue = jingoism
-				factor = 0.5
+				factor = 0.2
+			}
+		}
+	}
+}
+
+#High Tariffs
+country_event = {
+	id = 14050
+	title = "EVTNAME14050"
+	desc = "EVTDESC14050"
+	
+	election = yes
+	issue_group = trade_policy
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA14050"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.3
+				value = protectionism
+			}
+			scaled_militancy = {
+				issue = free_trade
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB14050"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.25
+				value = protectionism
+			}
+			scaled_militancy = {
+				issue = free_trade
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTC14050"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.15
+				value = protectionism
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTD14050"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.10
+				value = protectionism
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTE14050"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.05
+				value = protectionism
+			}
+		}
+	}
+}
+
+#Export and Import
+country_event = {
+	id = 14060
+	title = "EVTNAME14060"
+	desc = "EVTDESC14060"
+	
+	election = yes
+	issue_group = trade_policy
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA14060"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.30
+				value = free_trade
+			}
+			scaled_militancy = {
+				issue = protectionism
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB14060"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.25
+				value = free_trade
+			}
+			scaled_militancy = {
+				issue = protectionism
+				factor = 0.2
+			}
+		}
+	}
+		
+	option = {
+		name = "EVTOPTC14060"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.15
+				value = free_trade
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTD14060"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.10
+				value = free_trade
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTE14060"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.05
+				value = free_trade
+			}
+		}
+	}
+}
+	
+#Monopoly
+country_event = {
+	id = 14070
+	title = "EVTNAME14070"
+	desc = "EVTDESC14070"
+	
+	election = yes
+	issue_group = economic_policy
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA14070"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.30
+				value = laissez_faire
+			}
+			scaled_militancy = {
+				issue = planned_economy
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB14070"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.25
+				value = laissez_faire
+			}
+			scaled_militancy = {
+				issue = planned_economy
+				factor = 0.2
+			}
+		}
+	}
+		
+	option = {
+		name = "EVTOPTC14070"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.15
+				value = laissez_faire
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTD14070"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.10
+				value = laissez_faire
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTE14070"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.05
+				value = laissez_faire
 			}
 		}
 	}
@@ -331,12 +572,12 @@ country_event = {
 		name = "EVTOPTA14080"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = interventionism
 			}
 			scaled_militancy = {
 				issue = state_capitalism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -345,12 +586,12 @@ country_event = {
 		name = "EVTOPTB14080"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = interventionism
 			}
 			scaled_militancy = {
 				issue = state_capitalism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -359,12 +600,8 @@ country_event = {
 		name = "EVTOPTC14080"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = interventionism
-			}
-			scaled_militancy = {
-				issue = state_capitalism
-				factor = 0.2
 			}
 		}
 	}
@@ -373,7 +610,7 @@ country_event = {
 		name = "EVTOPTD14080"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = interventionism
 			}
 		}
@@ -383,7 +620,7 @@ country_event = {
 		name = "EVTOPTE14080"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = interventionism
 			}
 		}
@@ -404,12 +641,12 @@ country_event = {
 		name = "EVTOPTA14090"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = state_capitalism
 			}
 			scaled_militancy = {
 				issue = interventionism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -418,7 +655,7 @@ country_event = {
 		name = "EVTOPTB14090"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = state_capitalism
 			}
 			scaled_militancy = {
@@ -432,7 +669,7 @@ country_event = {
 		name = "EVTOPTC14090"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = state_capitalism
 			}
 		}
@@ -442,7 +679,7 @@ country_event = {
 		name = "EVTOPTD14090"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = state_capitalism
 			}
 		}
@@ -452,17 +689,8 @@ country_event = {
 		name = "EVTOPTE14090"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = state_capitalism
-			}
-		}
-	}
-	option = {
-		name = "EVTOPTAGR"
-		any_pop = {
-			dominant_issue = {
-				factor = 0.2
-				value = agrarianism_ep
 			}
 		}
 	}
@@ -482,12 +710,12 @@ country_event = {
 		name = "EVTOPTA14100"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = planned_economy
 			}
 			scaled_militancy = {
 				issue = laissez_faire
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -496,12 +724,12 @@ country_event = {
 		name = "EVTOPTB14100"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = planned_economy
 			}
 			scaled_militancy = {
 				issue = laissez_faire
-				factor = 0.4
+				factor = 0.2
 			}
 		}
 	}
@@ -510,7 +738,7 @@ country_event = {
 		name = "EVTOPTC14100"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = planned_economy
 			}
 		}
@@ -520,7 +748,7 @@ country_event = {
 		name = "EVTOPTD14100"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = planned_economy
 			}
 		}
@@ -530,7 +758,7 @@ country_event = {
 		name = "EVTOPTE14100"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = planned_economy
 			}
 		}
@@ -551,12 +779,12 @@ country_event = {
 		name = "EVTOPTA14110"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = pro_atheism
 			}
 			scaled_militancy = {
 				issue = moralism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -565,12 +793,12 @@ country_event = {
 		name = "EVTOPTB14110"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = pro_atheism
 			}
 			scaled_militancy = {
 				issue = moralism
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -579,7 +807,7 @@ country_event = {
 		name = "EVTOPTC14110"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = pro_atheism
 			}
 		}
@@ -589,7 +817,7 @@ country_event = {
 		name = "EVTOPTD14110"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = pro_atheism
 			}
 		}
@@ -599,7 +827,7 @@ country_event = {
 		name = "EVTOPTE14110"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = pro_atheism
 			}
 		}
@@ -620,12 +848,12 @@ country_event = {
 		name = "EVTOPTA14120"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = secularized
 			}
 			scaled_militancy = {
 				issue = pluralism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -634,12 +862,12 @@ country_event = {
 		name = "EVTOPTB14120"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = secularized
 			}
 			scaled_militancy = {
 				issue = pluralism
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -648,7 +876,7 @@ country_event = {
 		name = "EVTOPTC14120"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = secularized
 			}
 		}
@@ -658,7 +886,7 @@ country_event = {
 		name = "EVTOPTD14120"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = secularized
 			}
 		}
@@ -668,7 +896,7 @@ country_event = {
 		name = "EVTOPTE14120"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = secularized
 			}
 		}
@@ -689,12 +917,12 @@ country_event = {
 		name = "EVTOPTA14130"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = pluralism
 			}
 			scaled_militancy = {
 				issue = secularized
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -703,12 +931,12 @@ country_event = {
 		name = "EVTOPTB14130"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = pluralism
 			}
 			scaled_militancy = {
 				issue = secularized
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -717,7 +945,7 @@ country_event = {
 		name = "EVTOPTC14130"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = pluralism
 			}
 		}
@@ -727,7 +955,7 @@ country_event = {
 		name = "EVTOPTD14130"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = pluralism
 			}
 		}
@@ -737,7 +965,7 @@ country_event = {
 		name = "EVTOPTE14130"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = pluralism
 			}
 		}
@@ -758,12 +986,12 @@ country_event = {
 		name = "EVTOPTA14140"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = moralism
 			}
 			scaled_militancy = {
 				issue = pro_atheism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -772,12 +1000,12 @@ country_event = {
 		name = "EVTOPTB14140"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = moralism
 			}
 			scaled_militancy = {
 				issue = pro_atheism
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -786,7 +1014,7 @@ country_event = {
 		name = "EVTOPTC14140"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = moralism
 			}
 		}
@@ -796,7 +1024,7 @@ country_event = {
 		name = "EVTOPTD14140"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = moralism
 			}
 		}
@@ -806,7 +1034,7 @@ country_event = {
 		name = "EVTOPTE14140"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = moralism
 			}
 		}
@@ -827,12 +1055,12 @@ country_event = {
 		name = "EVTOPTA14150"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = residency
 			}
 			scaled_militancy = {
 				issue = limited_citizenship
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -841,12 +1069,12 @@ country_event = {
 		name = "EVTOPTB14150"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = residency
 			}
 			scaled_militancy = {
 				issue = limited_citizenship
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -855,7 +1083,7 @@ country_event = {
 		name = "EVTOPTC14150"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = residency
 			}
 		}
@@ -865,7 +1093,7 @@ country_event = {
 		name = "EVTOPTD14150"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = residency
 			}
 		}
@@ -875,7 +1103,7 @@ country_event = {
 		name = "EVTOPTE14150"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = residency
 			}
 		}
@@ -896,12 +1124,12 @@ country_event = {
 		name = "EVTOPTA14160"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = limited_citizenship
 			}
 			scaled_militancy = {
 				issue = full_citizenship
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -910,12 +1138,12 @@ country_event = {
 		name = "EVTOPTB14160"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = limited_citizenship
 			}
 			scaled_militancy = {
 				issue = full_citizenship
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -924,7 +1152,7 @@ country_event = {
 		name = "EVTOPTC14160"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = limited_citizenship
 			}
 		}
@@ -934,7 +1162,7 @@ country_event = {
 		name = "EVTOPTD14160"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = limited_citizenship
 			}
 		}
@@ -944,7 +1172,7 @@ country_event = {
 		name = "EVTOPTE14160"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = limited_citizenship
 			}
 		}
@@ -965,12 +1193,12 @@ country_event = {
 		name = "EVTOPTA14170"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = full_citizenship
 			}
 			scaled_militancy = {
 				issue = residency
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -979,12 +1207,12 @@ country_event = {
 		name = "EVTOPTB14170"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = full_citizenship
 			}
 			scaled_militancy = {
 				issue = residency
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -993,7 +1221,7 @@ country_event = {
 		name = "EVTOPTC14170"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = full_citizenship
 			}
 		}
@@ -1003,7 +1231,7 @@ country_event = {
 		name = "EVTOPTD14170"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = full_citizenship
 			}
 		}
@@ -1013,7 +1241,7 @@ country_event = {
 		name = "EVTOPTE14170"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = full_citizenship
 			}
 		}
@@ -1034,12 +1262,12 @@ country_event = {
 		name = "EVTOPTA14180"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = jingoism
 			}
 			scaled_militancy = {
 				issue = pacifism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -1048,12 +1276,12 @@ country_event = {
 		name = "EVTOPTB14180"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = jingoism
 			}
 			scaled_militancy = {
 				issue = pacifism
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -1062,7 +1290,7 @@ country_event = {
 		name = "EVTOPTC14180"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = jingoism
 			}
 		}
@@ -1072,7 +1300,7 @@ country_event = {
 		name = "EVTOPTD14180"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = jingoism
 			}
 		}
@@ -1082,7 +1310,7 @@ country_event = {
 		name = "EVTOPTE14180"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = jingoism
 			}
 		}
@@ -1103,12 +1331,12 @@ country_event = {
 		name = "EVTOPTA14190"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = pro_military
 			}
 			scaled_militancy = {
 				issue = anti_military
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -1117,12 +1345,12 @@ country_event = {
 		name = "EVTOPTB14190"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = pro_military
 			}
 			scaled_militancy = {
 				issue = anti_military
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -1131,7 +1359,7 @@ country_event = {
 		name = "EVTOPTC14190"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = pro_military
 			}
 		}
@@ -1141,7 +1369,7 @@ country_event = {
 		name = "EVTOPTD14190"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = pro_military
 			}
 		}
@@ -1151,7 +1379,7 @@ country_event = {
 		name = "EVTOPTE14190"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = pro_military
 			}
 		}
@@ -1172,12 +1400,12 @@ country_event = {
 		name = "EVTOPTA14200"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = anti_military
 			}
 			scaled_militancy = {
 				issue = pro_military
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -1186,12 +1414,12 @@ country_event = {
 		name = "EVTOPTB14200"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = anti_military
 			}
 			scaled_militancy = {
 				issue = pro_military
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -1200,7 +1428,7 @@ country_event = {
 		name = "EVTOPTC14200"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = anti_military
 			}
 		}
@@ -1210,7 +1438,7 @@ country_event = {
 		name = "EVTOPTD14200"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = anti_military
 			}
 		}
@@ -1220,7 +1448,7 @@ country_event = {
 		name = "EVTOPTE14200"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = anti_military
 			}
 		}
@@ -1241,12 +1469,12 @@ country_event = {
 		name = "EVTOPTA14210"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.6
+				factor = 0.30
 				value = pacifism
 			}
 			scaled_militancy = {
 				issue = jingoism
-				factor = 0.5
+				factor = 0.2
 			}
 		}
 	}
@@ -1255,12 +1483,12 @@ country_event = {
 		name = "EVTOPTB14210"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.5
+				factor = 0.25
 				value = pacifism
 			}
 			scaled_militancy = {
 				issue = jingoism
-				factor = 0.3
+				factor = 0.2
 			}
 		}
 	}
@@ -1269,7 +1497,7 @@ country_event = {
 		name = "EVTOPTC14210"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.3
+				factor = 0.15
 				value = pacifism
 			}
 		}
@@ -1279,7 +1507,7 @@ country_event = {
 		name = "EVTOPTD14210"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.10
 				value = pacifism
 			}
 		}
@@ -1289,7 +1517,7 @@ country_event = {
 		name = "EVTOPTE14210"
 		any_pop = {
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = pacifism
 			}
 		}

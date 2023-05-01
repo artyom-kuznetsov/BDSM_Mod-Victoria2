@@ -255,12 +255,12 @@ guiTypes = {
 			iconType = {
 				name = "diff_icon"
 				spriteType = "GFX_topbar_researchpoints"
-				position = { x = 308 y = 17 }
+				position = { x = 318 y = 17 }
 				Orientation = "UPPER_LEFT"
 			}
 			instantTextBoxType = { 
 				name = "diff_label"
-				position = { x = 330 y = 21 }
+				position = { x = 340 y = 21 }
 				font = "vic_18"
 				text = "TECHNOLOGY_RESEARCH_POINTS"	
 				maxWidth = 120
@@ -316,7 +316,6 @@ guiTypes = {
 				buttonFont = "vic_22_black"
 				Orientation = "UPPER_LEFT"
 				clicksound = click
-				shortcut = "ENTER"
 			}
 		
 		}
@@ -326,18 +325,17 @@ guiTypes = {
 	# FOLDER WINDOW          #
 	##########################
 	
-		
 	windowType = {
 		name = "folder_window"
-		backGround = ""
-		position = { x=0 y=-10 }
-		size = { x=162 y=35 }
+		backGround =""
+		size = { x=192 y=30 }
 		moveable = 0
 		dontRender = ""
 		horizontalBorder = "0"
 		verticalBorder = ""
 		fullScreen = no
 		orientation="UPPER_LEFT"
+		
 		guiButtonType = {
 			name = "folder_button"
 			quadTextureSprite = "GFX_tech_folder_army"		
@@ -345,42 +343,49 @@ guiTypes = {
 			Orientation = "UPPER_LEFT"
 			clicksound = click
 		}
+
 		iconType = {
 			name = "folder_icon"
 			spriteType = "GFX_tech_folder_strip"
-			position = { x = 0 y = -3 }
+			position = { x = 4 y = 7 }
 			Orientation = "UPPER_LEFT"
 		}		
+		
 		instantTextBoxType = { 
 			name = "folder_category"
-			position = { x = 28 y = 1 }
+			position = { x = 28 y = 6 }
 			font = "vic_22_black"
-			text = "folder_category"
-			maxWidth = 100
+			text = "folder_category"	
+			maxWidth = 150
 			maxHeight = 20
 			format = centre
 		}
+		
 		iconType = {
 			name = "folder_progress"
 			spriteType = "GFX_folder_progress"
-			position = { x = 5 y = 24 }
+			position = { x = 40 y = 29 }
 		}
+		
 		iconType = {
 			name = "tech_folder_progress_overlay"
 			spriteType = "GFX_tech_folder_progress_overlay"
-			position = { x = 5 y = 20 }
+			position = { x = 39 y = 25 }
 			Orientation = "UPPER_LEFT"
 		}
-		instantTextBoxType = {
+		
+		instantTextBoxType = { 
 			name = "folder_number_discovered"
-			position = { x = 32 y = 22 }
+			position = { x = 57 y = 27 }
 			font = "Arial12_black"
 			text = "folder_number_discovered"	
 			maxWidth = 100
 			maxHeight = 20
 			format = centre
 		}
+		
 	}
+	
 	##########################
 	# GROUP WINDOW           #
 	##########################

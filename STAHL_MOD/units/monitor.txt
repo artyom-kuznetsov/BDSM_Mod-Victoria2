@@ -3,53 +3,48 @@ monitor = {
 	naval_icon = 7
 	
 	type = naval
-	sprite = Monitor
-	unit_type = big_ship
-	floating_flag = yes
+	sprite = Raider
 	active = no
+	unit_type = light_ship
+	capital = yes
 	move_sound = steam_move
 	select_sound = steam_selected
-	colonial_points = 32
-
-
+	floating_flag = yes
+	colonial_points = 1
+	
 	#Core Abilities
-	priority = 30
+	priority = 15
 	max_strength = 100
-	default_organisation = 30
-	maximum_speed = 8
-	weighted_value = 10.0
+	default_organisation = 50
+	maximum_speed = 14
+	weighted_value = 5.0
+	can_build_overseas = yes
+
 
 	#Building Costs
-	build_time = 280
+	build_time = 360
 	build_cost = {
-		steamer_convoy = 80
-		artillery = 20
+		steamer_convoy = 30
+		artillery = 12
+		canned_food = 8
+		fuel = 10
 	}
-	min_port_level = 2
+	min_port_level = 3
 	limit_per_port = -1
 	supply_consumption_score = 1
 	
 	supply_consumption = 1.0
-	#supply_cost = {
-	#	steamer_convoy = 1 # 65
-	#	artillery = 0.48 # 28.8
-	#	coal = 1 # 2.3
-	#	fertilizer = 0.2 # 2
-	#	money = 2.4 # 19.2 # 115.45
-	#}
 	supply_cost = {
-		steamer_convoy = 1.3 # 42.25
-		artillery = 0.64 # 22.4
-		coal = 1 # 4.6 
-		fertilizer = 0.4 # 2
-		money = 2.9 # 40 # ~115
-	}
+		steamer_convoy = 0.4	#26
+		artillery = 0.4			#12
+		fuel = 0.3				#7.5
+	}							#45.5
 	
 	#Naval Abilties
-	hull = 15
-	gun_power = 20
-	fire_range = 0.6
-	evasion = 0
-	#torpedo_attack = 0
+	hull = 7
+	gun_power = 1.5
+	fire_range = 0.65
+	torpedo_attack = 18
+	evasion = 0.4
 }
 

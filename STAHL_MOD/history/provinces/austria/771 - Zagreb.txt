@@ -1,23 +1,29 @@
 owner = AUS
-controller =AUS
+controller = AUS
 add_core = AUS
 add_core = CRO
 add_core = HUN
 add_core = YUG
 trade_goods = timber
-life_rating = 35# 35
-terrain = urban
-
-1910.1.1 = {
+life_rating = 35
+1913.1.1 = {
 	owner = KUK
 	controller = KUK
-	add_core = KUK
 	remove_core = AUS
-	railroad = 2
+	add_core = KUK
 	state_building = {
-		level = 1
+		level = 5
+		building = steamer_shipyard
+		upgrade = yes
+	}
+	state_building = {
+		level = 5
 		building = furniture_factory
 		upgrade = yes
 	}
+	state_building = {
+		level = 5
+		building = cigarette_factory
+		upgrade = yes
+	}
 }
-

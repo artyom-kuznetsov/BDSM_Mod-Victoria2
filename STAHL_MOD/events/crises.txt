@@ -18,6 +18,8 @@ country_event = {
 	}
 	option = {
 		name = "EVTOPTB20000" # decline
+
+		prestige_factor = -0.2
 	}
 }
 
@@ -27,12 +29,15 @@ province_event = {
 	desc = "EVTDESC20100"
 	picture = "crisis"
 	trigger = {
-		owner = { is_greater_power = yes }
+		owner = {
+			is_greater_power = yes
+			NOT = { has_global_flag = crisis_disabled }
+		}
 		state_scope = {
 			has_flashpoint = yes
 			flashpoint_tension = 5
 			NOT = { flashpoint_tension = 90 }
-			}
+		}
 	}
 	
 	mean_time_to_happen =  {
@@ -71,6 +76,7 @@ province_event = {
 			factor = 5
 		}
 
+		owner = { prestige_factor = -0.15 }
 	}
 }
 
@@ -80,12 +86,15 @@ province_event = {
 	desc = "EVTDESC20101"
 	picture = "crisis"
 	trigger = {
-		owner = { is_greater_power = no }
+		owner = {
+			is_greater_power = no
+			NOT = { has_global_flag = crisis_disabled }
+		}
 		state_scope = {
 			has_flashpoint = yes
-				flashpoint_tension = 5
-				NOT = { flashpoint_tension = 90 }
-			}
+			flashpoint_tension = 5
+			NOT = { flashpoint_tension = 90 }
+		}
 	}
 	
 	mean_time_to_happen =  {
@@ -124,6 +133,7 @@ province_event = {
 			factor = 30
 		}
 
+		owner = { prestige_factor = -0.1 }
 	}
 }
 
@@ -137,6 +147,7 @@ country_event = {
 		involved_in_crisis = yes
 		is_greater_power = yes
 		is_claim_crisis = yes
+		NOT = { has_global_flag = crisis_disabled }
 	}
 	
 	mean_time_to_happen =  {
@@ -173,6 +184,7 @@ country_event = {
 			factor = 5
 		}
 
+		prestige_factor = -0.15
 	}
 }
 
@@ -186,6 +198,7 @@ country_event = {
 		involved_in_crisis = yes
 		is_greater_power = yes
 		is_liberation_crisis = yes
+		NOT = { has_global_flag = crisis_disabled }
 	}
 	
 	mean_time_to_happen =  {
@@ -222,6 +235,7 @@ country_event = {
 			factor = 5
 		}
 
+		prestige_factor = -0.15
 	}
 }
 
@@ -235,6 +249,7 @@ country_event = {
 		involved_in_crisis = yes
 		is_greater_power = no
 		is_claim_crisis = yes
+		NOT = { has_global_flag = crisis_disabled }
 	}
 	
 	mean_time_to_happen =  {
@@ -285,6 +300,7 @@ country_event = {
 		involved_in_crisis = yes
 		is_greater_power = no
 		is_liberation_crisis = yes
+		NOT = { has_global_flag = crisis_disabled }
 	}
 	
 	mean_time_to_happen =  {

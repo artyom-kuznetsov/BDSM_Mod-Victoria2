@@ -1,3 +1,13 @@
+JAN = {
+	value = -200
+	truce_until="1937.1.1"
+}
+
+GHO = {
+	value = -200
+	truce_until="1937.1.1"
+}
+
 ##Starting NFs
 #	national_focus=
 #	{
@@ -12,15 +22,15 @@
 
 #Sphere of Influence
 TEX = {
-	value = 125		#relation
+	value = 100		#relation
 	level = 4		#3=cordial, 4 = friendly, 5 sphere
 	influence_value = 25
 }
 
 MEX = {
 	value = 75		#relation
-	level = 2		#3=cordial, 4 = friendly, 5 sphere
-	influence_value = 25
+	level = 1		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 0
 }
 UCA = {
 	value = 100		#relation
@@ -59,85 +69,185 @@ COL = {				#Columbia if released
 	influence_value = 5
 }
 
-#
+leader = {
+	name = "Winfield Scott"
+	date = 1836.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_3.1
+	prestige = 0.3
+}
+
+leader = {
+	name = "Zachary Taylor"
+	date = 1836.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_2.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Thomas Jesup"
+	date = 1836.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_2.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Edmund P. Gaines"
+	date = 1828.1.1
+	type = land
+	personality = defence_1.1
+	background = attack_2.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Alexander Macomb"
+	date = 1812.1.1
+	type = land
+	personality = defence_2.1
+	background = attack_1.1
+	prestige = 0.3
+}
+
+leader = {
+	name = "Isaac Hull"
+	date = 1810.1.1
+	type = sea
+	personality = defence_1.1
+	background = attack_2.1
+	prestige = 0.2
+}
+
+leader = {
+	name = "William B. Shubrick"
+	date = 1836.1.1
+	type = sea
+	personality = defence_2.1
+	background = attack_3.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "James Biddle"
+	date = 1830.1.1
+	type = sea
+	personality = defence_1.1
+	background = attack_1.1
+	prestige = 0.1
+}
+
+leader = {
+	name = "Matthew C. Perry"
+	date = 1836.1.1
+	type = sea
+	personality = defence_2.1
+	background = attack_2.1
+	prestige = 0.1
+}
 
 army = {
-	name = "Королевская гвардия"
-	location = 219
+	name = "US Dragoons"
+	location = 199
 	regiment = {
-		name= "1-я бригада"
-		type = artillery
+		name= "1st Cavalry Regiment"
+		type = dragoon
 		home = 223
 	}
 
 	regiment = {
-		name= "2-я бригада"
-		type = artillery
-		home = 226
+		name= "2nd Cavalry Regiment"
+		type = dragoon
+		home = 241
 	}
 
 	regiment = {
-		name= "3-я бригада"
+		name= "3rd Cavalry Regiment"
+		type = dragoon
+		home = 205
+	}
+
+}
+
+army = {
+	name = "Army of the South"
+	location = 200
+	regiment = {
+		name= "1st Regiment of Infantry"
+		type = infantry
+		home = 211
+	}
+
+	regiment = {
+		name= "2nd Regiment of Infantry"
+		type = infantry
+		home = 206
+	}
+
+	regiment = {
+		name= "3rd Regiment of Infantry"
+		type = infantry
+		home = 188
+	}
+
+	regiment = {
+		name= "1st Regiment of Artillery"
 		type = artillery
+		home = 195
+	}
+
+}
+
+army = {
+	name = "US Army"
+	location = 220
+	regiment = {
+		name= "4th Regiment of Infantry"
+		type = infantry
+		home = 243
+	}
+
+	regiment = {
+		name= "5th Regiment of Infantry"
+		type = infantry
+		home = 232
+	}
+
+	regiment = {
+		name= "6th Regiment of Infantry"
+		type = infantry
 		home = 235
 	}
 
 	regiment = {
-		name= "4-я бригада"
+		name= "2nd Regiment of Artillery"
 		type = artillery
 		home = 234
 	}
-	
-	regiment = {
-		name= "5-я бригада"
-		type = dragoon
-		home = 247
-	}
-	
-	regiment = {
-		name= "6-я бригада"
-		type = infantry
-		home = 243
-	}
-	regiment = {
-		name= "7-я бригада"
-		type = infantry
-		home = 241
-	}
-	regiment = {
-		name= "8-я бригада"
-		type = infantry
-		home = 206
-	}
-	regiment = {
-		name= "9-я бригада"
-		type = infantry
-		home = 205
-	}
-	regiment = {
-		name= "10-я бригада"
-		type = infantry
-		home = 195
-	}
+
 }
 
 army = {
-	name = "Обсервационная армия"
-	location = 212
+	name = "Army of Observation"
+	location = 144
 	regiment = {
-		name= "7-й пехотный полк"
+		name= "7th Regiment of Infantry"
 		type = infantry
 		home = 238
 	}
 
 	regiment = {
-		name= "8-й пехотный полк"
+		name= "8th Regiment of Infantry"
 		type = infantry
 		home = 226
 	}
 
 	regiment = {
-		name= "9-й пехотный полк"
+		name= "9th Regiment of Infantry"
 		type = infantry
 		home = 247
 	}
@@ -145,145 +255,145 @@ army = {
 }
 
 navy = {
-	name = "1-я эскадра"
+	name = "1st Squadron"
 	location = 222
 	ship = {
-		name= "Франклин"
+		name= "Franklin"
 		type = manowar
 	}
 
 	ship = {
-		name= "Пенсильвания"
+		name= "Pennsylvania"
 		type = manowar
 	}
 
 	ship = {
-		name= "Вашингтон"
+		name= "Washington"
 		type = manowar
 	}
 
 	ship = {
-		name= "Колумбия"
+		name= "Columbia"
 		type = frigate
 	}
 
 	ship = {
-		name= "Констелейшн"
+		name= "Constellation"
 		type = frigate
 	}
 
 }
 
 navy = {
-	name = "2-я эскадра"
+	name = "2nd Squadron"
 	location = 248
 	ship = {
-		name= "Огайо"
+		name= "Ohio"
 		type = manowar
 	}
 
 	ship = {
-		name= "Гудзон"
+		name= "Hudson"
 		type = frigate
 	}
 
 }
 
 navy = {
-	name = "3-я эскадра"
+	name = "3rd Squadron"
 	location = 214
 	ship = {
-		name= "Джон Адамс"
+		name= "John Adams"
 		type = frigate
 	}
 
 	ship = {
-		name= "Юнайтед Стэйтс"
+		name= "United States"
 		type = frigate
 	}
 
 }
 
 navy = {
-	name = "4-я эскадра"
+	name = "4th Squadron"
 	location = 219
 	ship = {
-		name= "Индепенденс"
+		name= "Independance"
 		type = frigate
 	}
 
 	ship = {
-		name= "Брэндиуайн"
+		name= "Brandywine"
 		type = frigate
 	}
 
 	ship = {
-		name= "Конститьюшн"
+		name= "Constitution"
 		type = frigate
 	}
 
 	ship = {
-		name= "Потомак"
+		name= "Potomac"
 		type = frigate
 	}
 
 	ship = {
-		name= "Флотилия 'Джеймс Маккей'"
+		name= "'James McKay' Flotilla"
 		type = clipper_transport
 	}
 
 }
 
 navy = {
-	name = "1-я резервная эскадра"
+	name = "1st Reserve Squadron"
 	location = 247
 	ship = {
-		name= "Алабама"
+		name= "Alabama"
 		type = manowar
 	}
 
 	ship = {
-		name= "Вермонт"
+		name= "Vermont"
 		type = manowar
 	}
 
 	ship = {
-		name= "Вирджиния"
+		name= "Virginia"
 		type = manowar
 	}
 
 	ship = {
-		name= "1-я транспортная флотилия"
+		name= "1st Reserve Transport"
 		type = clipper_transport
 	}
 
 }
 
 navy = {
-	name = "2-я резервная эскадра"
+	name = "2nd Reserve Squadron"
 	location = 214
 	ship = {
-		name= "Коламбус"
+		name= "Columbus"
 		type = manowar
 	}
 
 	ship = {
-		name= "Дэлавер"
+		name= "Delaware"
 		type = manowar
 	}
 
 	ship = {
-		name= "Нью-Йорк"
+		name= "New York"
 		type = manowar
 	}
 
 	ship = {
-		name= "Северная Каролина"
+		name= "North Carolina"
 		type = manowar
 	}
 
 	ship = {
-		name= "2-я транспортная флотилия"
+		name= "2nd Reserve Transport"
 		type = clipper_transport
 	}
 

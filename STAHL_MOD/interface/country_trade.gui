@@ -75,7 +75,7 @@ guiTypes = {
 		
 		instantTextBoxType = { 
 			name = "headline_raw_materials"
-			position = { x = 37 y = 24 }
+			position = { x = 37 y = 22 }
 			font = "vic_18"
 			text = "TRADE_RAW_MATERIALS"	
 			maxWidth = 200
@@ -84,20 +84,10 @@ guiTypes = {
 		}
 		
 		instantTextBoxType = { 
-			name = "headline_industrial_goods"
-			position = { x = 37 y = 111 }
+			name = "headline_industrial_and_consumer_goods"
+			position = { x = 37 y = 109 }
 			font = "vic_18"
-			text = "TRADE_INDUSTRIAL_GOODS"	
-			maxWidth = 200
-			maxHeight = 48	
-			format = left
-		}
-		
-		instantTextBoxType = { 
-			name = "headline_consumer_goods"
-			position = { x = 37 y =198 }
-			font = "vic_18"
-			text = "TRADE_CONSUMER_GOODS"	
+			text = "TRADE_INDUSTRIAL_AND_CONSUMER_GOODS"	
 			maxWidth = 200
 			maxHeight = 48	
 			format = left
@@ -105,7 +95,7 @@ guiTypes = {
 		
 		instantTextBoxType = { 
 			name = "headline_military_goods"
-			position = { x = 37 y = 318 }
+			position = { x = 37 y = 328 }
 			font = "vic_18"
 			text = "TRADE_MILITARY_GOODS"	
 			maxWidth = 200
@@ -116,28 +106,21 @@ guiTypes = {
 		## groups
 		windowType = {
 			name = "group_raw_material_goods"
-			position = { x = 30 y = 42 }	
+			position = { x = 30 y = 40 }	
 			size = { x=600 y=540 }
 			orientation="UPPER_LEFT"		
 		}
 		
 		windowType = {
-			name = "group_industrial_goods"
-			position = { x = 30 y = 129 }	
-			size = { x=600 y=540 }
-			orientation="UPPER_LEFT"		
-		}
-		
-		windowType = {
-			name = "group_consumer_goods"
-			position = { x = 30 y = 216 }	
+			name = "group_industrial_and_consumer_goods"
+			position = { x = 30 y = 127 }	
 			size = { x=600 y=540 }
 			orientation="UPPER_LEFT"		
 		}
 		
 		windowType = {
 			name = "group_military_goods"
-			position = { x = 30 y = 336 }	
+			position = { x = 30 y = 346 }	
 			size = { x=600 y=540 }
 			orientation="UPPER_LEFT"		
 		}
@@ -525,7 +508,6 @@ guiTypes = {
 				tooltip = ""
 				tooltipText =""
 				delayedTooltipText = ""
-				shortcut = "a"
 			}
 
 			
@@ -533,7 +515,7 @@ guiTypes = {
 			
 			checkboxType = {
 				name = "sell_stockpile"
-				position = {x= 90 y = -5290}
+				position = {x= 90 y = 290}
 				quadTextureSprite = "GFX_toggle_default"
 				tooltip = ""
 				tooltipText =""
@@ -541,7 +523,7 @@ guiTypes = {
 			}
 			
 			instantTextBoxType = {
-				position = {x= 49 y = -5312}
+				position = {x= 49 y = 312}
 				name = "sell_stockpile_label"
 				font = "vic_18_black"
 				text = "TRADE_SELL"	
@@ -569,8 +551,8 @@ guiTypes = {
 				position = {x= 135 y =290}
 				size = {x = 220 y = 20 }
 				priority = 100			
-				minValue = 1636
-				maxValue = 2424
+				minValue = 0
+				maxValue = 2000
 				stepSize = 2
 				startValue = 0
 				horizontal = 1
@@ -613,7 +595,6 @@ guiTypes = {
 				quadTextureSprite ="GFX_button_standard_200"
 				buttonText = "TRADE_CONFIRM_TRADE"
 				buttonFont = "vic_18_black"
-				shortcut = "c"
 			}
 			
 			guiButtonType = {
@@ -692,7 +673,7 @@ guiTypes = {
 			position = { x = 37 y = 1 }
 			name = "price"
 			font = "vic_18_black"
-			text = "99?"	
+			text = "99¤"	
 			maxWidth = 50
 			maxHeight = 24
 			format = right

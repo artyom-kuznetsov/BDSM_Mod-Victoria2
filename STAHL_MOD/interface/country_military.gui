@@ -59,21 +59,16 @@ guiTypes = {
 			Orientation = "UPPER_LEFT"
 		}
 		
-		#textBoxType = { 
-		#	name = "headline_military"
-		#	position = { x = 770 y = -42 }
-		#	font = "vic_title"
-		#	text = "MILITARY"	
-		#	maxWidth = 200
-		#	maxHeight = 48	
-		#	format = right
-		#}
-		iconType = {
-			name ="military_text"
-			spriteType = "GFX_military_text"
-			position = { x= 810 y = -72 }
-			#format = right
+		textBoxType = { 
+			name = "headline_military"
+			position = { x = 770 y = -42 }
+			font = "vic_title"
+			text = "MILITARY"	
+			maxWidth = 200
+			maxHeight = 48	
+			format = right
 		}
+		
 		guiButtonType = {
 			name = "close_button"
 			position = { x= -31 y = -7}
@@ -106,7 +101,7 @@ guiTypes = {
 			buttonText = "MOBILISE"
 			Orientation = "UPPER_LEFT"
 			clicksound = click
-			position = { x= 403 y = 575 }
+			position = { x= 403 y = 555 }
 		}
 		guiButtonType = {
 			name = "demobilize"
@@ -115,23 +110,23 @@ guiTypes = {
 			buttonText = "DEMOBILISE"
 			Orientation = "UPPER_LEFT"
 			clicksound = click
-			position = { x= 403 y = 575 }
+			position = { x= 403 y = 555 }
 		}
 		iconType = {
 			name = "mobilize_progress"
 			spriteType = "GFX_mobilize_progress"
-			position = { x = 408 y = 561 }
+			position = { x = 408 y = 591 }
 		}
 
 		iconType = {
 			name = "mobilize_progress_frame"
 			spriteType = "GFX_mobilization_progress_frame"
-			position = { x = 406 y = 559 }
+			position = { x = 406 y = 589 }
 		}
 		
 		instantTextBoxType = { 
 			name = "mobilize_progress_text"
-			position = { x = 393 y = 560 }
+			position = { x = 393 y = 590 }
 			font = "vic_18_black"
 			maxWidth = 218
 			maxHeight = 20	
@@ -264,24 +259,22 @@ guiTypes = {
 		
 			guiButtonType = {
 				name = "new_general"
-				quadTextureSprite = "GFX_button_newgen"
+				quadTextureSprite = "GFX_button_standard_144"
 				buttonFont = "vic_18_black"
-				buttonText = " "
+				buttonText = "MILITARY_CREATE_GENERAL"
 				Orientation = "UPPER_LEFT"
 				clicksound = click
-				position = { x= 81 y = 327 }
-				shortcut = "g"
+				position = { x= 11 y = 327 }
 			}	
 			
 			guiButtonType = {
 				name = "new_admiral"
-				quadTextureSprite = "GFX_button_newadm"
+				quadTextureSprite = "GFX_button_standard_144"
 				buttonFont = "vic_18_black"
-				buttonText = " "
+				buttonText = "MILITARY_CREATE_ADMIRAL"
 				Orientation = "UPPER_LEFT"
 				clicksound = click
 				position = { x= 155 y = 327 }
-				shortcut = "a"
 			}
 			
 			checkboxType = {

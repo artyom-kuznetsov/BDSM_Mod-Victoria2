@@ -4,14 +4,15 @@ plane = {
 	type = land
 	sprite = Plane
 	active = no
-	unit_type = cavalry
+	unit_type = support
+	#primary_culture = yes
 	floating_flag = no
 	
 	#Core Abilities
 	priority = 45
 	max_strength = 3
 	default_organisation = 30
-	maximum_speed = 6.00
+	maximum_speed = 5.00
 	weighted_value = 10.0
 
 
@@ -19,25 +20,26 @@ plane = {
 	build_time = 120
 	build_cost = {
 		aeroplanes = 10
-		steel = 35
-		canned_food = 10
+		small_arms = 20
+		canned_food = 20
 		fuel = 5
-		#money = 10000
 	}
 	
 	supply_consumption = 1.0
 	supply_cost = {
-		aeroplanes = 0.1	# 7.7
-		money = 1			# 24
-		fuel = 0.2
-	}
+		aeroplanes = 0.3		#33
+		small_arms = 0.2		#3.6
+		ammunition = 0.125		#1.75
+		canned_food = 0.1		#0.8
+		fuel = 0.8				#20
+	}							#59.15
 	
 
 	#Land Abilties
 	reconnaissance = 4
-	attack = 4.5
-	defence = 4.5
-	discipline = 1.0
-	support = 3
-	maneuver = 3
+	attack = 5
+	defence = 4
+	discipline = 1
+	support = 2
+	maneuver = 20
 }
