@@ -155,7 +155,7 @@ guiTypes = {
 			
 			guiButtonType = {
 				name = "join"
-				position = { x = 173 y = 295 }
+				position = { x = 173 y = -8295 }
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -166,18 +166,18 @@ guiTypes = {
 			
 			guiButtonType = {
 				name = "join_direct"
-				position = { x = 173 y = 330 }
+				position = { x = 173 y = 295 }
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
 				delayedTooltipText = ""
-				buttonText = "FE_JOIN_INTERNET_GAME"
+				buttonText = "FE_JOIN_LAN_GAME"
 				buttonFont = "vic_22_black"
 			}
 			
 			guiButtonType = {
 				name = "scan"
-				position = { x = 298 y = 219 }
+				position = { x = 298 y = -6219 }
 				quadTextureSprite ="GFX_button_standard_111"	
 				tooltip = ""
 				tooltipText =""
@@ -188,7 +188,7 @@ guiTypes = {
 			
 			guiButtonType = {
 				name = "metaserver"
-				position = { x = 173 y = 365 }
+				position = { x = 173 y = -6365 }
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -286,6 +286,8 @@ guiTypes = {
 		}
 		
 		
+		
+		
 
 		
 		#############     NORMAL   MAIN  MENU 
@@ -295,7 +297,7 @@ guiTypes = {
 		windowType = {
 			name ="mainmenu_panel"
 			backGround=""
-			position = { x=-276 y =-202}	
+			position = { x= -110 y = -144 }	
 			size = { x=420 y =500}
 			moveable = 0
 			dontRender = ""
@@ -309,7 +311,7 @@ guiTypes = {
 			
 			guiButtonType = {
 				name = "single_player_button"
-				position = { x = -205 y = 487 }
+				position = { x = 0 y = 130 }
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -320,7 +322,7 @@ guiTypes = {
 			
 			guiButtonType = {
 				name = "multi_player_button"
-				position = { x = 37 y = 487 }
+				position = { x = 0 y = 170 }
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -331,8 +333,8 @@ guiTypes = {
 
 			guiButtonType = {
 				name = "tutorial_button"
-				position = { x = 400 y = 5429 }
-				quadTextureSprite ="GFX_frontend_button_236"	
+				position = { x = 400 y = -5429 }
+				quadTextureSprite ="GFX_frontend_button_red_236"	
 				tooltip = ""
 				tooltipText =""
 				delayedTooltipText = ""
@@ -342,7 +344,7 @@ guiTypes = {
 
 			guiButtonType = {
 				name = "settings_button"
-				position = { x = 521 y = 487 }
+				position = { x = 0 y = 210 }
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -353,8 +355,8 @@ guiTypes = {
 			
 			guiButtonType = {
 				name = "credits_button"
-				position = { x = 158 y = 5472	 }
-				quadTextureSprite ="GFX_frontend_button_236"	
+				position = { x = 128 y = -5472	 }
+				quadTextureSprite ="GFX_frontend_button_red_236"	
 				tooltip = ""
 				tooltipText =""
 				delayedTooltipText = ""
@@ -363,7 +365,7 @@ guiTypes = {
 			}
 			guiButtonType = {
 				name = "exit_button"
-				position = { x = 279 y = 487 }
+				position = { x = 0 y = 250 }
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -372,25 +374,35 @@ guiTypes = {
 				buttonFont = "vic_22_black"
 			}
 			
+			instantTextBoxType = {
+				name ="checksum_text"
+				position = { x = -100 y = 60 }
+				font = "vic_22"
+				borderSize = {x = 0 y = 0}
+				text = "FE_CHECKSUMBDSM"	
+				format = left
+				maxWidth = 330
+				maxHeight = 50	
+			}
 			
 			guiButtonType = {
 				name = "homepage_button"
-				position = { x = 172 y = 5538 }
+				position = { x = 172 y = -5538 }
 				quadTextureSprite ="homepage"	
 			}
 			guiButtonType = {
 				name = "forum_button"
-				position = { x = 224 y = 5538 }
+				position = { x = 224 y = -5538 }
 				quadTextureSprite ="forum"	
 			}
 			guiButtonType = {
 				name = "facebook_button"
-				position = { x = 276 y = 5538 }
+				position = { x = 276 y = -5538 }
 				quadTextureSprite ="facebook"	
 			}			
 			guiButtonType = {
 				name = "twitter_button"
-				position = { x = 328 y = 5538 }
+				position = { x = 328 y = -5538 }
 				quadTextureSprite ="twitter"	
 			}		
 
@@ -405,7 +417,9 @@ guiTypes = {
 				buttonFont = "vic_22_black"
 			}	
 			
+
 		}
+		
 
 		
 		####   TUTORIAL
