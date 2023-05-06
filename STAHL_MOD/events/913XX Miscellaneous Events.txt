@@ -3481,35 +3481,35 @@ country_event = {
 #########################################################################
 # 							REMINDERS									#
 #########################################################################
-country_event = {
-	id = 91310
-	title = "Baby Boom Reminder"
-	desc = "Your baby boom cooldown timer has expired. You can now use another baby boom decision."
-	picture = assimilation
-
-
-	trigger = {
-		ai = no
-		year = 1837
-		NOT = {
-			year = 1913
-			has_global_flag = 1913_bookmark
-		}
-		NOT = { has_country_modifier = baby_booming }
-		NOT = { has_country_flag = baby_boom_reminder }
-		any_owned_province = {
-			state_scope = {
-				## Audax Validator "." Ignore_NEXT
-				NOT = { total_pops = 1000000 }
-			}
-		}
-	}
-
-	option = {
-		name = "OK."
-		set_country_flag = baby_boom_reminder
-	}
-}
+#country_event = {
+#	id = 91310
+#	title = "Baby Boom Reminder"
+#	desc = "Your baby boom cooldown timer has expired. You can now use another baby boom decision."
+#	picture = assimilation
+#
+#
+#	trigger = {
+#		ai = no
+#		year = 1837
+#		NOT = {
+#			year = 1913
+#			has_global_flag = 1913_bookmark
+#		}
+#		NOT = { has_country_modifier = baby_booming }
+#		NOT = { has_country_flag = baby_boom_reminder }
+#		any_owned_province = {
+#			state_scope = {
+#				## Audax Validator "." Ignore_NEXT
+#				NOT = { total_pops = 1000000 }
+#			}
+#		}
+#	}
+#
+#	option = {
+#		name = "OK."
+#		set_country_flag = baby_boom_reminder
+#	}
+#}
 
 #########################################################################
 # 				AI MINE EXPANSION AND SMALL STATE CB					#

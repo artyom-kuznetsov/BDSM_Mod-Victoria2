@@ -647,78 +647,78 @@ release_vassals = {
 # 							IDEOLOGY									#
 #########################################################################
 
-	zcountry_liberal_change_ideology = {
-		picture = ideology
-		alert = no
-		potential = {
-			ai = no
-			NOT = { is_ideology_enabled = anarcho_liberal }
-		}	
-		allow = {
-		}
-		effect = {
-			country_event = { id = 91699 days = 0 }
-		}
-	}
-		
-	zcountry_anarcho_liberal_change_ideology = {
-		picture = ideology
-		alert = no
-		potential = {
-			ai = no
-			is_ideology_enabled = anarcho_liberal
-			NOT = { is_ideology_enabled = socialist }
-		}	
-		allow = {
-		}
-		effect = {
-			country_event = { id = 91700 days = 0 }
-		}
-	}
-		
-	zcountry_socialist_change_ideology = {
-		picture = ideology
-		alert = no
-		potential = {
-			ai = no
-			is_ideology_enabled = socialist
-			NOT = { is_ideology_enabled = communist }
-		}	
-		allow = {
-		}
-		effect = {
-			country_event = { id = 91701 days = 0 }
-		}
-	}
-		
-	zcountry_communist_change_ideology = {
-		picture = ideology
-		alert = no
-		potential = {
-			ai = no
-			is_ideology_enabled = communist
-			NOT = { is_ideology_enabled = fascist }
-		}	
-		allow = {
-		}
-		effect = {
-			country_event = { id = 91702 days = 0 }
-		}
-	}
-
-	zcountry_fascist_change_ideology = {
-		picture = ideology
-		alert = no
-		potential = {
-			ai = no
-			is_ideology_enabled = fascist
-		}	
-		allow = {
-		}
-		effect = {
-			country_event = { id = 91703 days = 0 }
-		}
-	}
+	#zcountry_liberal_change_ideology = {
+	#	picture = ideology
+	#	alert = no
+	#	potential = {
+	#		ai = no
+	#		NOT = { is_ideology_enabled = anarcho_liberal }
+	#	}	
+	#	allow = {
+	#	}
+	#	effect = {
+	#		country_event = { id = 91699 days = 0 }
+	#	}
+	#}
+	#	
+	#zcountry_anarcho_liberal_change_ideology = {
+	#	picture = ideology
+	#	alert = no
+	#	potential = {
+	#		ai = no
+	#		is_ideology_enabled = anarcho_liberal
+	#		NOT = { is_ideology_enabled = socialist }
+	#	}	
+	#	allow = {
+	#	}
+	#	effect = {
+	#		country_event = { id = 91700 days = 0 }
+	#	}
+	#}
+	#	
+	#zcountry_socialist_change_ideology = {
+	#	picture = ideology
+	#	alert = no
+	#	potential = {
+	#		ai = no
+	#		is_ideology_enabled = socialist
+	#		NOT = { is_ideology_enabled = communist }
+	#	}	
+	#	allow = {
+	#	}
+	#	effect = {
+	#		country_event = { id = 91701 days = 0 }
+	#	}
+	#}
+	#	
+	#zcountry_communist_change_ideology = {
+	#	picture = ideology
+	#	alert = no
+	#	potential = {
+	#		ai = no
+	#		is_ideology_enabled = communist
+	#		NOT = { is_ideology_enabled = fascist }
+	#	}	
+	#	allow = {
+	#	}
+	#	effect = {
+	#		country_event = { id = 91702 days = 0 }
+	#	}
+	#}
+	#
+	#zcountry_fascist_change_ideology = {
+	#	picture = ideology
+	#	alert = no
+	#	potential = {
+	#		ai = no
+	#		is_ideology_enabled = fascist
+	#	}	
+	#	allow = {
+	#	}
+	#	effect = {
+	#		country_event = { id = 91703 days = 0 }
+	#	}
+	#}
 	
 #########################################################################
 # 							PASS REFORM									#
@@ -776,7 +776,7 @@ release_vassals = {
 #########################################################################
 # 								FAKE WAR								#
 #########################################################################
-	fake_war = {
+	fake_war = { # Control puppet armies
 		picture = fake_war
 		alert = no
 		potential = {
@@ -983,6 +983,10 @@ zcreate_supply_depot = {
 	potential = {
 		ai = no
 		NOT = { any_owned_province = { has_province_modifier = supply_depot } }
+		
+		any_owned_province = {
+			has_building = province_selector
+		}
 	}
 	allow = {
 		money = 500000
@@ -1004,6 +1008,10 @@ zdismantle_supply_depot = {
 	potential = {
 		ai = no
 		any_owned_province = { has_province_modifier = supply_depot }
+		
+		any_owned_province = {
+			has_building = province_selector
+		}
 	}
 	allow = {
 	}
@@ -1040,7 +1048,7 @@ zscorch_earth = {
 	}
 	effect = {
 		prestige_factor = -0.05
-		add_country_modifier = { name = earth_scorched duration = 365 }
+		#add_country_modifier = { name = earth_scorched duration = 365 }
 		random_owned = {
 			limit = { has_building = province_selector }
 			state_scope = {
@@ -1054,7 +1062,7 @@ zscorch_earth = {
 					}
 					add_province_modifier = {
 						name = scorched_earth_10
-						duration = 365
+						duration = 730
 					}
 					province_selector = -1
 					railroad = -7
@@ -1065,7 +1073,7 @@ zscorch_earth = {
 					}
 					add_province_modifier = {
 						name = scorched_earth_8
-						duration = 365
+						duration = 730
 					}
 					province_selector = -1
 					railroad = -7
@@ -1094,7 +1102,7 @@ zscorch_earth = {
 					}
 					add_province_modifier = {
 						name = scorched_earth_2
-						duration = 365
+						duration = 730
 					}
 					province_selector = -1
 					railroad = -7
@@ -1108,7 +1116,7 @@ zscorch_earth = {
 					}
 					add_province_modifier = {
 						name = scorched_earth_1
-						duration = 365
+						duration = 730
 					}
 					province_selector = -1
 					railroad = -7
@@ -1122,7 +1130,7 @@ zscorch_earth = {
 					}
 					add_province_modifier = {
 						name = scorched_earth_0
-						duration = 365
+						duration = 730
 					}
 					province_selector = -1
 					railroad = -7
@@ -1136,1440 +1144,1440 @@ zscorch_earth = {
 # 							BABY BOOMS									#
 #########################################################################
 
-	zstate_baby_boom = {
-		picture = family
-		potential = {
-			NOT = {
-				OR = {
-					any_owned_province = { 
-						has_building = province_selector 
-					}
-					has_country_modifier = baby_booming
-				}
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				NOT = { has_province_modifier = small_baby_boom }
-			}
-		}
-		effect = {
-			random_owned = {
-				limit = {
-					has_building = province_selector
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = -1
-						}
-					}
-				}
-			}
-		}
-	}
-
-	zstate_baby_boom_100k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				NOT = { state_scope = { total_pops = 100000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				NOT = { state_scope = { total_pops = 100000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					NOT = { state_scope = { total_pops = 100000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 3000
-						}
-					}
-				}
-			}
-		}
-	}
-
-	zstate_baby_boom_200k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 100000 }
-				NOT = { state_scope = { total_pops = 200000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 100000 }
-				NOT = { state_scope = { total_pops = 200000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 100000 }
-					NOT = { state_scope = { total_pops = 200000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 2700
-						}
-					}
-				}
-			}
-		}
-	}
-
-	zstate_baby_boom_300k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 200000 }
-				NOT = { state_scope = { total_pops = 300000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 200000 }
-				NOT = { state_scope = { total_pops = 300000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 200000 }
-					NOT = { state_scope = { total_pops = 300000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 2400
-						}
-					}
-				}
-			}
-		}
-	}
-
-	zstate_baby_boom_400k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 300000 }
-				NOT = { state_scope = { total_pops = 400000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 300000 }
-				NOT = { state_scope = { total_pops = 400000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 300000 }
-					NOT = { state_scope = { total_pops = 400000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 2100
-						}
-					}
-				}
-			}
-		}
-	}
-
-	zstate_baby_boom_500k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 400000 }
-				NOT = { state_scope = { total_pops = 500000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 400000 }
-				NOT = { state_scope = { total_pops = 500000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 400000 }
-					NOT = { state_scope = { total_pops = 500000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 1800
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_baby_boom_600k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 500000 }
-				NOT = { state_scope = { total_pops = 600000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 500000 }
-				NOT = { state_scope = { total_pops = 600000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 500000 }
-					NOT = { state_scope = { total_pops = 600000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 1500
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_baby_boom_700k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 600000 }
-				NOT = { state_scope = { total_pops = 700000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 600000 }
-				NOT = { state_scope = { total_pops = 700000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 600000 }
-					NOT = { state_scope = { total_pops = 700000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 1200
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_baby_boom_800k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 700000 }
-				NOT = { state_scope = { total_pops = 800000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 700000 }
-				NOT = { state_scope = { total_pops = 800000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 700000 }
-					NOT = { state_scope = { total_pops = 800000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 900
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_baby_boom_900k = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 800000 }
-				NOT = { state_scope = { total_pops = 900000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 800000 }
-				NOT = { state_scope = { total_pops = 900000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 800000 }
-					NOT = { state_scope = { total_pops = 900000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 600
-						}
-					}
-				}
-			}
-		}
-	}
-
-	zstate_baby_boom_1M = {
-		picture = family
-		potential = {
-			ai = no
-			NOT = { has_country_modifier = baby_booming }
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 900000 }
-				NOT = { state_scope = { total_pops = 1000000 } }
-			}
-		}	
-		allow = {
-			any_owned_province = { 
-				has_building = province_selector 
-				state_scope = { total_pops = 900000 }
-				NOT = { state_scope = { total_pops = 1000000 } }
-			}
-		}
-		effect = {
-			clr_country_flag = baby_boom_reminder
-			add_country_modifier = { name = baby_booming duration = 7300 }
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 900000 }
-					NOT = { state_scope = { total_pops = 1000000 } }
-				}
-				state_scope = {
-					any_owned = {
-						province_selector = -1
-						add_province_modifier = {
-							name = small_baby_boom
-							duration = 300
-						}
-					}
-				}
-			}
-		}
-	}
-
+	#zstate_baby_boom = {
+	#	picture = family
+	#	potential = {
+	#		NOT = {
+	#			OR = {
+	#				any_owned_province = { 
+	#					has_building = province_selector 
+	#				}
+	#				has_country_modifier = baby_booming
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			NOT = { has_province_modifier = small_baby_boom }
+	#		}
+	#	}
+	#	effect = {
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = -1
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_100k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			NOT = { state_scope = { total_pops = 100000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			NOT = { state_scope = { total_pops = 100000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				NOT = { state_scope = { total_pops = 100000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 3000
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_200k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 100000 }
+	#			NOT = { state_scope = { total_pops = 200000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 100000 }
+	#			NOT = { state_scope = { total_pops = 200000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 100000 }
+	#				NOT = { state_scope = { total_pops = 200000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 2700
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_300k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 200000 }
+	#			NOT = { state_scope = { total_pops = 300000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 200000 }
+	#			NOT = { state_scope = { total_pops = 300000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 200000 }
+	#				NOT = { state_scope = { total_pops = 300000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 2400
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_400k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 300000 }
+	#			NOT = { state_scope = { total_pops = 400000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 300000 }
+	#			NOT = { state_scope = { total_pops = 400000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 300000 }
+	#				NOT = { state_scope = { total_pops = 400000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 2100
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_500k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 400000 }
+	#			NOT = { state_scope = { total_pops = 500000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 400000 }
+	#			NOT = { state_scope = { total_pops = 500000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 400000 }
+	#				NOT = { state_scope = { total_pops = 500000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 1800
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_600k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 500000 }
+	#			NOT = { state_scope = { total_pops = 600000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 500000 }
+	#			NOT = { state_scope = { total_pops = 600000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 500000 }
+	#				NOT = { state_scope = { total_pops = 600000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 1500
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_700k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 600000 }
+	#			NOT = { state_scope = { total_pops = 700000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 600000 }
+	#			NOT = { state_scope = { total_pops = 700000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 600000 }
+	#				NOT = { state_scope = { total_pops = 700000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 1200
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_800k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 700000 }
+	#			NOT = { state_scope = { total_pops = 800000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 700000 }
+	#			NOT = { state_scope = { total_pops = 800000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 700000 }
+	#				NOT = { state_scope = { total_pops = 800000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 900
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_900k = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 800000 }
+	#			NOT = { state_scope = { total_pops = 900000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 800000 }
+	#			NOT = { state_scope = { total_pops = 900000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 800000 }
+	#				NOT = { state_scope = { total_pops = 900000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 600
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_baby_boom_1M = {
+	#	picture = family
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_modifier = baby_booming }
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 900000 }
+	#			NOT = { state_scope = { total_pops = 1000000 } }
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = { 
+	#			has_building = province_selector 
+	#			state_scope = { total_pops = 900000 }
+	#			NOT = { state_scope = { total_pops = 1000000 } }
+	#		}
+	#	}
+	#	effect = {
+	#		clr_country_flag = baby_boom_reminder
+	#		add_country_modifier = { name = baby_booming duration = 7300 }
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 900000 }
+	#				NOT = { state_scope = { total_pops = 1000000 } }
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					province_selector = -1
+	#					add_province_modifier = {
+	#						name = small_baby_boom
+	#						duration = 300
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
 
 #########################################################################
 # 							LITERACY									#
 #########################################################################
 
-	zstate_literacy_campaign = {
-		picture = literacy
-		potential = {
-			ai = no
-			NOT = {
-				any_owned_province = { 
-					has_building = province_selector 
-				}
-			}
-		}	
-		allow = {
-			any_owned_province = {
-				has_building = province_selector
-				NOT = {
-					state_scope = { 
-						any_owned_province = {
-							has_province_modifier = literacy_campaign
-						}
-					}
-				}
-			}
-		}
-		effect = {
-			random_owned = {
-				limit = {
-					has_building = province_selector
-				}
-				state_scope = {
-					any_pop = {
-						literacy = 0.10
-					}
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_100k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				NOT = { state_scope = { total_pops = 100000 } }
-			}
-		}
-		allow = {
-			money = 50000
-			any_owned_province = {
-				has_building = province_selector
-				NOT = { state_scope = { total_pops = 100000 } }
-				NOT = {
-					state_scope = {
-						any_owned_province = {
-							has_province_modifier = literacy_campaign
-						}
-					}
-				}
-			}
-		}
-		effect = {
-			money = -50000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					NOT = { state_scope = { total_pops = 100000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_200k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 100000 }
-				NOT = { state_scope = { total_pops = 200000 } }
-			}
-		}
-		allow = {
-			money = 100000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 100000 }
-				NOT = { state_scope = { total_pops = 200000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -100000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 100000 }
-					NOT = { state_scope = { total_pops = 200000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-
-	zstate_literacy_campaign_300k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 200000 }
-				NOT = { state_scope = { total_pops = 300000 } }
-			}
-		}
-		allow = {
-			money = 150000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 200000 }
-				NOT = { state_scope = { total_pops = 300000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -150000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 200000 }
-					NOT = { state_scope = { total_pops = 300000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-
-	zstate_literacy_campaign_400k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 300000 }
-				NOT = { state_scope = { total_pops = 400000 } }
-			}
-		}
-		allow = {
-			money = 200000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 300000 }
-				NOT = { state_scope = { total_pops = 400000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -200000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 300000 }
-					NOT = { state_scope = { total_pops = 400000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-
-	zstate_literacy_campaign_500k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 400000 }
-				NOT = { state_scope = { total_pops = 500000 } }
-			}
-		}
-		allow = {
-			money = 250000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 400000 }
-				NOT = { state_scope = { total_pops = 500000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -250000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 400000 }
-					NOT = { state_scope = { total_pops = 500000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_600k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 500000 }
-				NOT = { state_scope = { total_pops = 600000 } }
-			}
-		}
-		allow = {
-			money = 300000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 500000 }
-				NOT = { state_scope = { total_pops = 600000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -300000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 500000 }
-					NOT = { state_scope = { total_pops = 600000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-
-	zstate_literacy_campaign_700k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 600000 }
-				NOT = { state_scope = { total_pops = 700000 } }
-			}
-		}
-		allow = {
-			money = 350000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 600000 }
-				NOT = { state_scope = { total_pops = 700000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -350000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 600000 }
-					NOT = { state_scope = { total_pops = 700000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-
-	zstate_literacy_campaign_800k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 700000 }
-				NOT = { state_scope = { total_pops = 800000 } }
-			}
-		}
-		allow = {
-			money = 400000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 700000 }
-				NOT = { state_scope = { total_pops = 800000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -400000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 700000 }
-					NOT = { state_scope = { total_pops = 800000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_900k = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 800000 }
-				NOT = { state_scope = { total_pops = 900000 } }
-			}
-		}
-		allow = {
-			money = 450000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 800000 }
-				NOT = { state_scope = { total_pops = 900000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -450000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 800000 }
-					NOT = { state_scope = { total_pops = 900000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_1M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 900000 }
-				NOT = { state_scope = { total_pops = 1000000 } }
-			}
-		}
-		allow = {
-			money = 500000
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 900000 }
-				NOT = { state_scope = { total_pops = 1000000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -500000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 900000 }
-					NOT = { state_scope = { total_pops = 1000000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_1.2M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1000000 }
-				NOT = { state_scope = { total_pops = 1200000 } }
-			}
-		}
-		allow = {
-			money = 600000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1000000 }
-				NOT = { state_scope = { total_pops = 1200000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -600000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 1000000 }
-					NOT = { state_scope = { total_pops = 1200000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-
-	zstate_literacy_campaign_1.4M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1200000 }
-				NOT = { state_scope = { total_pops = 1400000 } }
-			}
-		}
-		allow = {
-			money = 700000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1200000 }
-				NOT = { state_scope = { total_pops = 1400000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -700000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 1200000 }
-					NOT = { state_scope = { total_pops = 1400000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_1.6M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1400000 }
-				NOT = { state_scope = { total_pops = 1600000 } }
-			}
-		}
-		allow = {
-			money = 800000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1400000 }
-				NOT = { state_scope = { total_pops = 1600000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -800000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 1400000 }
-					NOT = { state_scope = { total_pops = 1600000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_1.8M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 1600000 }
-				NOT = { state_scope = { total_pops = 1800000 } }
-			}
-		}
-		allow = {
-			money = 900000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1600000 }
-				NOT = { state_scope = { total_pops = 1800000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -900000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 1600000 }
-					NOT = { state_scope = { total_pops = 1800000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_2M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 1800000 }
-				NOT = { state_scope = { total_pops = 2000000 } }
-			}
-		}
-		allow = {
-			money = 1000000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 1800000 }
-				NOT = { state_scope = { total_pops = 2000000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		effect = {
-			money = -1000000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 1800000 }
-					NOT = { state_scope = { total_pops = 2000000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_2.5M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 2000000 }
-				NOT = { state_scope = { total_pops = 2500000 } }
-			}
-		}
-		allow = {
-			money = 2500000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 2000000 }
-				NOT = { state_scope = { total_pops = 2500000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -1250000
-			money = -1250000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 2000000 }
-					NOT = { state_scope = { total_pops = 2500000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_3M = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 2500000 }
-				NOT = { state_scope = { total_pops = 3000000 } }
-			}
-		}
-		allow = {
-			money = 3000000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 2500000 }
-				NOT = { state_scope = { total_pops = 3000000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -1500000
-			money = -1500000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 2500000 }
-					NOT = { state_scope = { total_pops = 3000000 } }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
-	
-	zstate_literacy_campaign_3M+ = {
-		picture = literacy
-		potential = {
-			ai = no
-			any_owned_province = {
-				has_building = province_selector
-				state_scope = { total_pops = 3000000 }
-			}
-		}
-		allow = {
-			money = 4000000
-			any_owned_province = { 
-				has_building = province_selector
-				state_scope = { total_pops = 3000000 }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -2000000
-			money = -2000000
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					state_scope = { total_pops = 3000000 }
-					NOT = {
-						state_scope = {
-							any_owned_province = {
-								has_province_modifier = literacy_campaign
-							}
-						}
-					}
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = literacy_campaign
-							duration = 3650
-						}
-						province_selector = -1
-					}
-				}
-			}
-		}
-	}
+	#zstate_literacy_campaign = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		NOT = {
+	#			any_owned_province = { 
+	#				has_building = province_selector 
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			NOT = {
+	#				state_scope = { 
+	#					any_owned_province = {
+	#						has_province_modifier = literacy_campaign
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#			}
+	#			state_scope = {
+	#				any_pop = {
+	#					literacy = 0.10
+	#				}
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_100k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			NOT = { state_scope = { total_pops = 100000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 50000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			NOT = { state_scope = { total_pops = 100000 } }
+	#			NOT = {
+	#				state_scope = {
+	#					any_owned_province = {
+	#						has_province_modifier = literacy_campaign
+	#					}
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -50000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				NOT = { state_scope = { total_pops = 100000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_200k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 100000 }
+	#			NOT = { state_scope = { total_pops = 200000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 100000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 100000 }
+	#			NOT = { state_scope = { total_pops = 200000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -100000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 100000 }
+	#				NOT = { state_scope = { total_pops = 200000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_300k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 200000 }
+	#			NOT = { state_scope = { total_pops = 300000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 150000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 200000 }
+	#			NOT = { state_scope = { total_pops = 300000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -150000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 200000 }
+	#				NOT = { state_scope = { total_pops = 300000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_400k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 300000 }
+	#			NOT = { state_scope = { total_pops = 400000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 200000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 300000 }
+	#			NOT = { state_scope = { total_pops = 400000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -200000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 300000 }
+	#				NOT = { state_scope = { total_pops = 400000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_500k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 400000 }
+	#			NOT = { state_scope = { total_pops = 500000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 250000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 400000 }
+	#			NOT = { state_scope = { total_pops = 500000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -250000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 400000 }
+	#				NOT = { state_scope = { total_pops = 500000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_600k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 500000 }
+	#			NOT = { state_scope = { total_pops = 600000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 300000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 500000 }
+	#			NOT = { state_scope = { total_pops = 600000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -300000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 500000 }
+	#				NOT = { state_scope = { total_pops = 600000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_700k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 600000 }
+	#			NOT = { state_scope = { total_pops = 700000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 350000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 600000 }
+	#			NOT = { state_scope = { total_pops = 700000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -350000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 600000 }
+	#				NOT = { state_scope = { total_pops = 700000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_800k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 700000 }
+	#			NOT = { state_scope = { total_pops = 800000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 400000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 700000 }
+	#			NOT = { state_scope = { total_pops = 800000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -400000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 700000 }
+	#				NOT = { state_scope = { total_pops = 800000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_900k = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 800000 }
+	#			NOT = { state_scope = { total_pops = 900000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 450000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 800000 }
+	#			NOT = { state_scope = { total_pops = 900000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -450000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 800000 }
+	#				NOT = { state_scope = { total_pops = 900000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_1M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 900000 }
+	#			NOT = { state_scope = { total_pops = 1000000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 500000
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 900000 }
+	#			NOT = { state_scope = { total_pops = 1000000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -500000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 900000 }
+	#				NOT = { state_scope = { total_pops = 1000000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_1.2M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1000000 }
+	#			NOT = { state_scope = { total_pops = 1200000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 600000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1000000 }
+	#			NOT = { state_scope = { total_pops = 1200000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -600000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 1000000 }
+	#				NOT = { state_scope = { total_pops = 1200000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_1.4M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1200000 }
+	#			NOT = { state_scope = { total_pops = 1400000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 700000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1200000 }
+	#			NOT = { state_scope = { total_pops = 1400000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -700000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 1200000 }
+	#				NOT = { state_scope = { total_pops = 1400000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_1.6M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1400000 }
+	#			NOT = { state_scope = { total_pops = 1600000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 800000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1400000 }
+	#			NOT = { state_scope = { total_pops = 1600000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -800000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 1400000 }
+	#				NOT = { state_scope = { total_pops = 1600000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_1.8M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1600000 }
+	#			NOT = { state_scope = { total_pops = 1800000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 900000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1600000 }
+	#			NOT = { state_scope = { total_pops = 1800000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -900000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 1600000 }
+	#				NOT = { state_scope = { total_pops = 1800000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_2M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1800000 }
+	#			NOT = { state_scope = { total_pops = 2000000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 1000000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 1800000 }
+	#			NOT = { state_scope = { total_pops = 2000000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -1000000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 1800000 }
+	#				NOT = { state_scope = { total_pops = 2000000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_2.5M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 2000000 }
+	#			NOT = { state_scope = { total_pops = 2500000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 2500000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 2000000 }
+	#			NOT = { state_scope = { total_pops = 2500000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -1250000
+	#		money = -1250000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 2000000 }
+	#				NOT = { state_scope = { total_pops = 2500000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_3M = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 2500000 }
+	#			NOT = { state_scope = { total_pops = 3000000 } }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 3000000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 2500000 }
+	#			NOT = { state_scope = { total_pops = 3000000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -1500000
+	#		money = -1500000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 2500000 }
+	#				NOT = { state_scope = { total_pops = 3000000 } }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zstate_literacy_campaign_3M+ = {
+	#	picture = literacy
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 3000000 }
+	#		}
+	#	}
+	#	allow = {
+	#		money = 4000000
+	#		any_owned_province = { 
+	#			has_building = province_selector
+	#			state_scope = { total_pops = 3000000 }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -2000000
+	#		money = -2000000
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				state_scope = { total_pops = 3000000 }
+	#				NOT = {
+	#					state_scope = {
+	#						any_owned_province = {
+	#							has_province_modifier = literacy_campaign
+	#						}
+	#					}
+	#				}
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = literacy_campaign
+	#						duration = 3650
+	#					}
+	#					province_selector = -1
+	#				}
+	#			}
+	#		}
+	#	}
+	#}
 
 #########################################################################
 # 							ARTISAN CONVERSION							#
@@ -2579,6 +2587,9 @@ zscorch_earth = {
 		picture = coal_miners
 		potential = {
 			ai = no
+			any_owned_province = {
+				has_building = province_selector
+			}
 		}
 		
 		allow = {
@@ -2632,2503 +2643,2503 @@ zscorch_earth = {
 #########################################################################
 # 						CHANGE AGRICULTURE RGO							#
 #########################################################################
-	
-	zprovince_rgo_change_agriculture = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { any_owned_province = { has_building = province_selector	} }
-			NOT = { has_country_flag = deciding }
-		}	
-		allow = {
-			any_owned_province = {
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_100k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				NOT = { total_pops = 100000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 200000
-			any_owned_province = {
-				NOT = { total_pops = 100000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -200000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 100000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 100000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 100000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 100000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_200k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 100000
-				NOT = { total_pops = 200000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 400000
-			any_owned_province = {
-				total_pops = 100000
-				NOT = { total_pops = 200000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -400000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 100000
-					NOT = { total_pops = 200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 100000
-					NOT = { total_pops = 200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 100000
-					NOT = { total_pops = 200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 100000
-					NOT = { total_pops = 200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_300k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 200000
-				NOT = { total_pops = 300000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 600000
-			any_owned_province = {
-				total_pops = 200000
-				NOT = { total_pops = 300000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -600000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 200000
-					NOT = { total_pops = 300000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 200000
-					NOT = { total_pops = 300000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 200000
-					NOT = { total_pops = 300000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 200000
-					NOT = { total_pops = 300000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-
-	zprovince_rgo_change_agriculture_400k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 300000
-				NOT = { total_pops = 400000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 800000
-			any_owned_province = {
-				total_pops = 300000
-				NOT = { total_pops = 400000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -800000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 300000
-					NOT = { total_pops = 400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 300000
-					NOT = { total_pops = 400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 300000
-					NOT = { total_pops = 400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 300000
-					NOT = { total_pops = 400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_500k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 400000
-				NOT = { total_pops = 500000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 1000000
-			any_owned_province = {
-				total_pops = 400000
-				NOT = { total_pops = 500000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -1000000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 400000
-					NOT = { total_pops = 500000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 400000
-					NOT = { total_pops = 500000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 400000
-					NOT = { total_pops = 500000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 400000
-					NOT = { total_pops = 500000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_600k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 500000
-				NOT = { total_pops = 600000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 1200000
-			any_owned_province = {
-				total_pops = 500000
-				NOT = { total_pops = 600000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -1200000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 500000
-					NOT = { total_pops = 600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 500000
-					NOT = { total_pops = 600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 500000
-					NOT = { total_pops = 600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 500000
-					NOT = { total_pops = 600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_700k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 600000
-				NOT = { total_pops = 700000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 1400000
-			any_owned_province = {
-				total_pops = 600000
-				NOT = { total_pops = 700000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -1400000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 600000
-					NOT = { total_pops = 700000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 600000
-					NOT = { total_pops = 700000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 600000
-					NOT = { total_pops = 700000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 600000
-					NOT = { total_pops = 700000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_800k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 700000
-				NOT = { total_pops = 800000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 1600000
-			any_owned_province = {
-				total_pops = 700000
-				NOT = { total_pops = 800000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -1600000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 700000
-					NOT = { total_pops = 800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 700000
-					NOT = { total_pops = 800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 700000
-					NOT = { total_pops = 800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 700000
-					NOT = { total_pops = 800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_900k = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 800000
-				NOT = { total_pops = 900000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 1800000
-			any_owned_province = {
-				total_pops = 800000
-				NOT = { total_pops = 900000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -1800000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 800000
-					NOT = { total_pops = 900000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 800000
-					NOT = { total_pops = 900000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 800000
-					NOT = { total_pops = 900000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 800000
-					NOT = { total_pops = 900000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_1M = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 900000
-				NOT = { total_pops = 1000000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 2000000
-			any_owned_province = {
-				total_pops = 900000
-				NOT = { total_pops = 1000000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		effect = {
-			money = -2000000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 900000
-					NOT = { total_pops = 1000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 900000
-					NOT = { total_pops = 1000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 900000
-					NOT = { total_pops = 1000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 900000
-					NOT = { total_pops = 1000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_1.2M = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 1000000
-				NOT = { total_pops = 1200000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 2400000
-			any_owned_province = {
-				total_pops = 1000000
-				NOT = { total_pops = 1200000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -1200000
-			money = -1200000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 1000000
-					NOT = { total_pops = 1200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1000000
-					NOT = { total_pops = 1200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1000000
-					NOT = { total_pops = 1200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1000000
-					NOT = { total_pops = 1200000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_1.4M = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 1200000
-				NOT = { total_pops = 1400000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 2800000
-			any_owned_province = {
-				total_pops = 1200000
-				NOT = { total_pops = 1400000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -1400000
-			money = -1400000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 1200000
-					NOT = { total_pops = 1400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1200000
-					NOT = { total_pops = 1400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1200000
-					NOT = { total_pops = 1400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1200000
-					NOT = { total_pops = 1400000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_1.6M = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 1400000
-				NOT = { total_pops = 1600000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 3200000
-			any_owned_province = {
-				total_pops = 1400000
-				NOT = { total_pops = 1600000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -1600000
-			money = -1600000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 1400000
-					NOT = { total_pops = 1600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1400000
-					NOT = { total_pops = 1600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1400000
-					NOT = { total_pops = 1600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1400000
-					NOT = { total_pops = 1600000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_1.8M = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 1600000
-				NOT = { total_pops = 1800000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 3600000
-			any_owned_province = {
-				total_pops = 1600000
-				NOT = { total_pops = 1800000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -1800000
-			money = -1800000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 1600000
-					NOT = { total_pops = 1800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1600000
-					NOT = { total_pops = 1800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1600000
-					NOT = { total_pops = 1800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1600000
-					NOT = { total_pops = 1800000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_2M = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 1800000
-				NOT = { total_pops = 2000000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 4000000
-			any_owned_province = {
-				total_pops = 1800000
-				NOT = { total_pops = 2000000 }
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -2000000
-			money = -2000000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 1800000
-					NOT = { total_pops = 2000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1800000
-					NOT = { total_pops = 2000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-				## Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1800000
-					NOT = { total_pops = 2000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 1800000
-					NOT = { total_pops = 2000000 }
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-					## Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
-	
-	zprovince_rgo_change_agriculture_2M+ = {
-		picture = agriculture
-		potential = {
-			ai = no
-			NOT = { has_country_flag = deciding }
-			any_owned_province = {
-				total_pops = 2000000
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}	
-		allow = {
-			money = 5000000
-			any_owned_province = {
-				total_pops = 2000000
-				has_building = province_selector
-				NOT = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = oil
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = tropical_wood
-					}
-				}
-			}
-		}
-		## Audax Validator "." Ignore_NEXT
-		effect = {
-			money = -2000000
-			money = -2000000
-			money = -1000000
-			set_country_flag = deciding
-			random_owned = {
-				limit = {
-					total_pops = 2000000
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-				}
-				add_province_modifier = { name = changing_agriculture duration = -1 }
-			}
-			random_owned = {
-				limit = {
-					total_pops = 2000000
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					OR = {
-						terrain = forest
-						terrain = woods
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-				# Audax Validator "." Ignore_NEXT
-					id = 91739
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 2000000
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					is_coastal = yes
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-				# Audax Validator "." Ignore_NEXT
-					id = 91738
-					days = 0
-				}
-			}
-			random_owned = {
-				limit = {
-					total_pops = 2000000
-					has_building = province_selector
-					NOT = {
-						OR = {
-							trade_goods = coal
-							trade_goods = iron
-							trade_goods = sulphur
-							trade_goods = oil
-							trade_goods = market_goods
-							trade_goods = precious_metal
-							trade_goods = tropical_wood
-						}
-					}
-					NOT = {
-						OR = {
-							is_coastal = yes
-							terrain = forest
-							terrain = woods
-						}
-					}
-					has_province_modifier = changing_agriculture
-				}
-				remove_province_modifier = changing_agriculture
-				province_event = {
-				# Audax Validator "." Ignore_NEXT
-					id = 91737
-					days = 0
-				}
-			}
-		}
-	}
+	#
+	#zprovince_rgo_change_agriculture = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { any_owned_province = { has_building = province_selector	} }
+	#		NOT = { has_country_flag = deciding }
+	#	}	
+	#	allow = {
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_100k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			NOT = { total_pops = 100000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 200000
+	#		any_owned_province = {
+	#			NOT = { total_pops = 100000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -200000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				NOT = { total_pops = 100000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				NOT = { total_pops = 100000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				NOT = { total_pops = 100000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				NOT = { total_pops = 100000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_200k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 100000
+	#			NOT = { total_pops = 200000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 400000
+	#		any_owned_province = {
+	#			total_pops = 100000
+	#			NOT = { total_pops = 200000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -400000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 100000
+	#				NOT = { total_pops = 200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 100000
+	#				NOT = { total_pops = 200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 100000
+	#				NOT = { total_pops = 200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 100000
+	#				NOT = { total_pops = 200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_300k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 200000
+	#			NOT = { total_pops = 300000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 600000
+	#		any_owned_province = {
+	#			total_pops = 200000
+	#			NOT = { total_pops = 300000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -600000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 200000
+	#				NOT = { total_pops = 300000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 200000
+	#				NOT = { total_pops = 300000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 200000
+	#				NOT = { total_pops = 300000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 200000
+	#				NOT = { total_pops = 300000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_400k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 300000
+	#			NOT = { total_pops = 400000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 800000
+	#		any_owned_province = {
+	#			total_pops = 300000
+	#			NOT = { total_pops = 400000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -800000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 300000
+	#				NOT = { total_pops = 400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 300000
+	#				NOT = { total_pops = 400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 300000
+	#				NOT = { total_pops = 400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 300000
+	#				NOT = { total_pops = 400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_500k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 400000
+	#			NOT = { total_pops = 500000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 1000000
+	#		any_owned_province = {
+	#			total_pops = 400000
+	#			NOT = { total_pops = 500000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -1000000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 400000
+	#				NOT = { total_pops = 500000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 400000
+	#				NOT = { total_pops = 500000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 400000
+	#				NOT = { total_pops = 500000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 400000
+	#				NOT = { total_pops = 500000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_600k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 500000
+	#			NOT = { total_pops = 600000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 1200000
+	#		any_owned_province = {
+	#			total_pops = 500000
+	#			NOT = { total_pops = 600000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -1200000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 500000
+	#				NOT = { total_pops = 600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 500000
+	#				NOT = { total_pops = 600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 500000
+	#				NOT = { total_pops = 600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 500000
+	#				NOT = { total_pops = 600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_700k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 600000
+	#			NOT = { total_pops = 700000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 1400000
+	#		any_owned_province = {
+	#			total_pops = 600000
+	#			NOT = { total_pops = 700000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -1400000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 600000
+	#				NOT = { total_pops = 700000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 600000
+	#				NOT = { total_pops = 700000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 600000
+	#				NOT = { total_pops = 700000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 600000
+	#				NOT = { total_pops = 700000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_800k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 700000
+	#			NOT = { total_pops = 800000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 1600000
+	#		any_owned_province = {
+	#			total_pops = 700000
+	#			NOT = { total_pops = 800000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -1600000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 700000
+	#				NOT = { total_pops = 800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 700000
+	#				NOT = { total_pops = 800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 700000
+	#				NOT = { total_pops = 800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 700000
+	#				NOT = { total_pops = 800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_900k = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 800000
+	#			NOT = { total_pops = 900000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 1800000
+	#		any_owned_province = {
+	#			total_pops = 800000
+	#			NOT = { total_pops = 900000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -1800000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 800000
+	#				NOT = { total_pops = 900000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 800000
+	#				NOT = { total_pops = 900000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 800000
+	#				NOT = { total_pops = 900000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 800000
+	#				NOT = { total_pops = 900000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_1M = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 900000
+	#			NOT = { total_pops = 1000000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 2000000
+	#		any_owned_province = {
+	#			total_pops = 900000
+	#			NOT = { total_pops = 1000000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	effect = {
+	#		money = -2000000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 900000
+	#				NOT = { total_pops = 1000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 900000
+	#				NOT = { total_pops = 1000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 900000
+	#				NOT = { total_pops = 1000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 900000
+	#				NOT = { total_pops = 1000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_1.2M = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 1000000
+	#			NOT = { total_pops = 1200000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 2400000
+	#		any_owned_province = {
+	#			total_pops = 1000000
+	#			NOT = { total_pops = 1200000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -1200000
+	#		money = -1200000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1000000
+	#				NOT = { total_pops = 1200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1000000
+	#				NOT = { total_pops = 1200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1000000
+	#				NOT = { total_pops = 1200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1000000
+	#				NOT = { total_pops = 1200000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_1.4M = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 1200000
+	#			NOT = { total_pops = 1400000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 2800000
+	#		any_owned_province = {
+	#			total_pops = 1200000
+	#			NOT = { total_pops = 1400000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -1400000
+	#		money = -1400000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1200000
+	#				NOT = { total_pops = 1400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1200000
+	#				NOT = { total_pops = 1400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1200000
+	#				NOT = { total_pops = 1400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1200000
+	#				NOT = { total_pops = 1400000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_1.6M = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 1400000
+	#			NOT = { total_pops = 1600000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 3200000
+	#		any_owned_province = {
+	#			total_pops = 1400000
+	#			NOT = { total_pops = 1600000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -1600000
+	#		money = -1600000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1400000
+	#				NOT = { total_pops = 1600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1400000
+	#				NOT = { total_pops = 1600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1400000
+	#				NOT = { total_pops = 1600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1400000
+	#				NOT = { total_pops = 1600000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_1.8M = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 1600000
+	#			NOT = { total_pops = 1800000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 3600000
+	#		any_owned_province = {
+	#			total_pops = 1600000
+	#			NOT = { total_pops = 1800000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -1800000
+	#		money = -1800000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1600000
+	#				NOT = { total_pops = 1800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1600000
+	#				NOT = { total_pops = 1800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1600000
+	#				NOT = { total_pops = 1800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1600000
+	#				NOT = { total_pops = 1800000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_2M = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 1800000
+	#			NOT = { total_pops = 2000000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 4000000
+	#		any_owned_province = {
+	#			total_pops = 1800000
+	#			NOT = { total_pops = 2000000 }
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -2000000
+	#		money = -2000000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1800000
+	#				NOT = { total_pops = 2000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1800000
+	#				NOT = { total_pops = 2000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#			## Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1800000
+	#				NOT = { total_pops = 2000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 1800000
+	#				NOT = { total_pops = 2000000 }
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#				## Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
+	#
+	#zprovince_rgo_change_agriculture_2M+ = {
+	#	picture = agriculture
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = deciding }
+	#		any_owned_province = {
+	#			total_pops = 2000000
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		money = 5000000
+	#		any_owned_province = {
+	#			total_pops = 2000000
+	#			has_building = province_selector
+	#			NOT = {
+	#				OR = {
+	#					trade_goods = coal
+	#					trade_goods = iron
+	#					trade_goods = sulphur
+	#					trade_goods = oil
+	#					trade_goods = market_goods
+	#					trade_goods = precious_metal
+	#					trade_goods = tropical_wood
+	#				}
+	#			}
+	#		}
+	#	}
+	#	## Audax Validator "." Ignore_NEXT
+	#	effect = {
+	#		money = -2000000
+	#		money = -2000000
+	#		money = -1000000
+	#		set_country_flag = deciding
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 2000000
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#			}
+	#			add_province_modifier = { name = changing_agriculture duration = -1 }
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 2000000
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				OR = {
+	#					terrain = forest
+	#					terrain = woods
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#			# Audax Validator "." Ignore_NEXT
+	#				id = 91739
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 2000000
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				is_coastal = yes
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#			# Audax Validator "." Ignore_NEXT
+	#				id = 91738
+	#				days = 0
+	#			}
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				total_pops = 2000000
+	#				has_building = province_selector
+	#				NOT = {
+	#					OR = {
+	#						trade_goods = coal
+	#						trade_goods = iron
+	#						trade_goods = sulphur
+	#						trade_goods = oil
+	#						trade_goods = market_goods
+	#						trade_goods = precious_metal
+	#						trade_goods = tropical_wood
+	#					}
+	#				}
+	#				NOT = {
+	#					OR = {
+	#						is_coastal = yes
+	#						terrain = forest
+	#						terrain = woods
+	#					}
+	#				}
+	#				has_province_modifier = changing_agriculture
+	#			}
+	#			remove_province_modifier = changing_agriculture
+	#			province_event = {
+	#			# Audax Validator "." Ignore_NEXT
+	#				id = 91737
+	#				days = 0
+	#			}
+	#		}
+	#	}
+	#}
 #########################################################################
 # 								CORES									#
 #########################################################################
@@ -5180,6 +5191,9 @@ zadd_cores = {
 					}
 				}
 			}
+			any_owned_province = {
+				has_building = province_selector
+			}
 		}	
 		allow = {
 			any_owned_province = { 
@@ -5225,6 +5239,9 @@ zadd_cores = {
 					continent = south_america
 					continent = oceania
 				}
+			}
+			any_owned_province = {
+				has_building = province_selector
 			}
 		}	
 		allow = {
@@ -5312,9 +5329,9 @@ zadd_cores = {
 		picture = province_selector
 		potential = {
 			ai = no
+			any_owned_province = { has_building = province_selector }
 		}	
 		allow = {
-			any_owned_province = { has_building = province_selector }
 		}
 		effect = {
 			any_owned = {
