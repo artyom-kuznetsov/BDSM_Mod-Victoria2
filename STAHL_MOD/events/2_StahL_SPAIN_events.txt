@@ -1,0 +1,474 @@
+country_event = { 
+	id = 24300
+	title = "SPA_Starting_Event_For_Player_Title"
+	desc = "SPA_Starting_Event_For_Player_desc"
+	trigger = {
+		OR = {
+			tag = SPC
+			tag = SPA
+		}
+		ai = no
+	}
+	fire_only_once = yes
+	option = {
+		name = "SPA_Starting_Event_For_Player_OPTA"
+		add_country_modifier = { name = SPA_civil_war_modifier duration = -1 }
+		prestige = 10
+		define_general = {
+			name = "DJ Arbuz"
+			personality = defence_2.14
+			background = attack_3.3
+		}
+	}
+}
+country_event = { 
+	id = 24301
+	title = "SPA_CW_End_Carlist_title"
+	desc = "SPA_CW_End_Carlist_desc"
+	trigger = {
+		tag = SPC
+		SPA = { exists = no }
+		NOT = { has_global_flag = spanish_civilwar_over_flag }
+	}
+	fire_only_once = yes
+	option = {
+		name = "SPA_CW_End_Carlist_OPTA"
+		remove_country_modifier = SPA_civil_war_modifier
+		prestige = 10
+		SPC = { all_core = { add_core = SPA remove_core = SPC } }
+		change_tag = SPA
+		capital = 487
+		set_global_flag = spanish_civilwar_over_flag
+		POR = {
+			any_owned = {
+				limit = {
+					NOT = { continent = europe }
+				}
+				secede_province = THIS
+			}
+		}
+	}
+}
+country_event = { 
+	id = 24302
+	title = "SPA_CW_End_Classic_title"
+	desc = "SPA_CW_End_Classic_desc"
+	trigger = {
+		tag = SPA
+		SPC = { exists = no }
+		NOT = { has_global_flag = spanish_civilwar_over_flag }
+	}
+	fire_only_once = yes
+	option = {
+		name = "SPA_CW_End_Classic_OPTA"
+		remove_country_modifier = SPA_civil_war_modifier
+		prestige = 10
+		SPC = { all_core = { add_core = SPA remove_core = SPC } }
+		set_global_flag = spanish_civilwar_over_flag
+		POR = {
+			any_owned = {
+				limit = {
+					NOT = { continent = europe }
+				}
+				secede_province = THIS
+			}
+		}
+	}
+}
+country_event = { # EVENT FOR CARLIST - END CIVIL WAR ON OCCUPATION OF METROPOLY
+	id = 24303
+	title = "SPA_CW_End_Carlist_title"
+	desc = "SPA_CW_End_Carlist_desc"
+	trigger = {
+		tag = SPC
+		SPA = { exists = yes }
+		487 = { controlled_by = THIS }
+		474 = { controlled_by = THIS }
+		498 = { controlled_by = THIS }
+		503 = { controlled_by = THIS }
+		515 = { controlled_by = THIS }
+		509 = { controlled_by = THIS }
+		482 = { controlled_by = THIS }
+		NOT = { has_global_flag = spanish_civilwar_over_flag }
+	}
+	fire_only_once = yes
+	option = {
+		name = "SPA_CW_End_Carlist_OPTA"
+		inherit = SPA
+		remove_country_modifier = SPA_civil_war_modifier
+		prestige = 10
+		SPC = { all_core = { add_core = SPA remove_core = SPC } }
+		change_tag = SPA
+		capital = 487
+		set_global_flag = spanish_civilwar_over_flag
+		
+		POR = {
+			any_owned = {
+				limit = {
+					NOT = { continent = europe }
+				}
+				secede_province = THIS
+			}
+		}
+	}
+}
+country_event = { # EVENT FOR REPUBLICAN - END CIVIL WAR ON OCCUPATION OF METROPOLY
+	id = 24304
+	title = "SPA_CW_End_Classic_title"
+	desc = "SPA_CW_End_Classic_desc"
+	trigger = {
+		tag = SPA
+		SPC = { exists = yes }
+		487 = { controlled_by = THIS }
+		474 = { controlled_by = THIS }
+		498 = { controlled_by = THIS }
+		503 = { controlled_by = THIS }
+		515 = { controlled_by = THIS }
+		509 = { controlled_by = THIS }
+		482 = { controlled_by = THIS }
+		NOT = { has_global_flag = spanish_civilwar_over_flag }
+	}
+	fire_only_once = yes
+	
+	option = {
+		name = "SPA_CW_End_Classic_OPTA"
+		inherit = SPC
+		remove_country_modifier = SPA_civil_war_modifier
+		prestige = 10
+		SPC = { all_core = { add_core = SPA remove_core = SPC } }
+		set_global_flag = spanish_civilwar_over_flag
+		
+		POR = {
+			any_owned = {
+				limit = {
+					NOT = { continent = europe }
+				}
+				secede_province = THIS
+			}
+		}
+	}
+}
+country_event = {
+	id = 24305
+	title = "SPA_ANL_Title"
+	desc = "SPA_ANL_Desc"
+	
+	trigger = {
+		tag = SPA
+		owns = 1708
+		owns = 1702
+		owns = 1707
+		owns = 1683
+		owns = 1688
+		has_global_flag = spanish_civilwar_over_flag
+	}
+	fire_only_once = yes
+	
+	option = {
+		name = "SPA_ANL_OptA"
+		prestige = 10
+		add_accepted_culture = maghrebi
+		change_tag = ANL
+		badboy = 10
+		add_country_modifier = { name = arabian_fatherland_modifier duration = 3650 }
+	}
+	option = {
+		name = "SPA_ANL_OptB"
+		prestige = 2
+	}
+	
+}
+
+
+country_event = {
+	id = 24306
+	title = "SPA_ANL_Nomore_Title"
+	desc = "SPA_ANL_Nomore_Desc"
+	
+	trigger = {
+		tag = ANL
+		NOT = {
+			owns = 1708
+		}
+		NOT = { has_country_modifier = arabian_fatherland_modifier }
+	}
+	
+	option = {
+		name = "SPA_ANL_Nomore_OptA"
+		prestige = -10
+		remove_accepted_culture = maghrebi
+		change_tag = SPA
+	}
+	
+}
+
+
+country_event = {
+	id = 24307
+	title = "SPA_Catalans_Unrest1_Title"
+	desc = "SPA_Catalans_Unrest1_Desc"
+	
+	trigger = {
+		is_culture_group = iberian
+		has_global_flag = spanish_civilwar_over_flag
+		any_owned_province = {
+			is_core = CAT
+		}
+	}
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		months = 40
+		modifier = {
+			factor = 0.5
+			average_consciousness = 3
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 4
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 5
+		}
+	}
+	
+	option = {
+		name = "SPA_Catalans_Unrest1_OptA"
+		prestige = 5
+		any_pop = {
+			limit = { culture = catalan }
+			consciousness = 3
+			militancy = 3
+		}
+		set_country_flag = catalan_ignored_1_flag
+		set_country_flag = catalan_happened1_flag
+	}
+	option = {
+		name = "SPA_Catalans_Unrest1_OptB"
+		prestige = -5
+		any_pop = {
+			limit = { culture = spanish }
+			consciousness = 5
+		}
+		any_pop = {
+			dominant_issue = {
+				factor = 0.2
+				value = culture_voting_only
+			}
+		}
+		set_country_flag = catalan_supported_1_flag
+		set_country_flag = catalan_happened1_flag
+	}
+}
+
+
+country_event = {
+	id = 24308
+	title = "SPA_Catalans_Unrest_Supported_Title"
+	desc = "SPA_Catalans_Unrest_Supported_Desc"
+	
+	trigger = {
+		is_culture_group = iberian
+		has_country_flag = catalan_happened1_flag
+		NOT = { citizens_rights = primary_culture_only }
+		NOT = { has_country_flag = catalan_evt2_happened_flag }
+	}
+	fire_only_once = yes
+	
+	immediate = {
+		set_country_flag = catalan_evt2_happened_flag
+	}
+	
+	mean_time_to_happen = {
+		months = 40
+		modifier = {
+			factor = 2
+			has_country_flag = catalan_supported_1_flag
+		}
+	}
+	
+	option = {
+		name = "SPA_Catalans_Supported_OptA"
+		badboy = 3
+		add_accepted_culture = catalan
+		any_pop = {
+			limit = {
+				culture = catalan
+			}
+			consciousness = 5
+		}
+	}
+	
+}
+
+country_event = {
+	id = 24309
+	title = "SPA_Catalans_Secede_Title"
+	desc = "SPA_Catalans_Secede_Desc"
+	
+	trigger = {
+		is_culture_group = iberian
+		has_country_flag = catalan_happened1_flag
+		NOT = { has_country_flag = catalan_evt2_happened_flag }
+		war = no
+	}
+	fire_only_once = yes
+	
+	immediate = {
+		set_country_flag = catalan_evt2_happened_flag
+		any_owned = {
+			limit = {
+				is_core = CAT
+			}
+			secede_province = CAT
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 40
+		modifier = {
+			factor = 2
+			has_country_flag = catalan_ignored_1_flag
+		}
+	}
+	
+	option = {
+		name = "SPA_Catalans_Secede_OptA"
+		badboy = 3
+		add_accepted_culture = catalan
+		CAT = { add_country_modifier = { name = mobilization_buff_modifier duration = -1 } }
+		
+		war = {
+			target = CAT
+			attacker_goal = {
+				casus_belli = civil_war
+			}
+			defender_goal = {
+				casus_belli = status_quo
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 24310
+	title = "SPA_lose_colempire_Name"
+	desc = "SPA_lose_colempire_Desc"
+	
+	trigger = {
+		has_country_flag = espanola_colonial_clm_vnz_flag
+		NOT = {
+			owns = 2251
+			owns = 2247
+			owns = 2204
+			owns = 2264
+			owns = 2270
+		}
+		has_country_modifier = spa_colonial_empire_modifier
+	}
+	
+	immediate = {
+		remove_country_modifier = spa_colonial_empire_modifier
+	}
+	
+	
+	option = {
+		name = "SPA_lose_colempire_OptA"
+	}
+}
+
+country_event = {
+	id = 24311
+	title = "SPA_regain_colempire_Name"
+	desc = "SPA_regain_colempire_Desc"
+	
+	trigger = {
+		has_country_flag = espanola_colonial_clm_vnz_flag
+		NOT = { has_country_modifier = spa_colonial_empire_modifier }
+		
+		owns = 2251
+		owns = 2247
+		owns = 2204
+		owns = 2264
+		owns = 2270
+	}
+	
+	option = {
+		name = "SPA_regain_colempire_OptA"
+		add_country_modifier = { name = spa_colonial_empire_modifier duration = -1 }
+	}
+}
+
+country_event = {
+	id = 24312
+	title = "SPA_Caracca_Send_Name"
+	desc = "SPA_Caracca_Send_Desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SPA_Caracca_Send_OptA"
+		clr_country_flag = spanish_caracca_flag
+	}
+	option = {
+		name = "SPA_Caracca_Send_OptFRA"
+		FRA = { country_event = 24313 }
+		prestige = 20
+	}
+	option = {
+		name = "SPA_Caracca_Send_OptAUS"
+		FRA = { country_event = 24313 }
+		prestige = 20
+	}
+	option = {
+		name = "SPA_Caracca_Send_OptTUR"
+		FRA = { country_event = 24313 }
+		prestige = 20
+	}
+}
+
+country_event = {
+	id = 24313
+	title = "SPA_Caracca_Received_Name"
+	desc = "SPA_Caracca_Received_Desc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SPA_Caracca_Received_OptA"
+		add_country_modifier = {
+			name = spa_carrack_modifier duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = 24314
+	title = "SPA_First_Railroad_Name"
+	desc = "SPA_First_Railroad_Desc"
+	
+	trigger = {
+		any_owned_province = {
+			has_building = railroad
+		}
+		OR = {
+			tag = IBE
+			tag = ANL
+			tag = SPA
+			tag = SPC
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "SPA_First_Railroad_OptA"
+		add_country_modifier = {
+			name = spa_first_railroad_modifier
+			duration = 730
+		}
+	}
+}
+
+# TODO AMERICA GOLD EVENTS

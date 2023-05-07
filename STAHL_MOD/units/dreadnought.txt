@@ -10,23 +10,22 @@ dreadnought = {
 	move_sound = steam_move
 	select_sound = steam_selected
 	floating_flag = yes
-	colonial_points = 30
+	can_build_overseas = no
+	colonial_points = 88
 	
 	#Core Abilities
 	priority = 60
-	max_strength = 150
-	default_organisation = 200
+	max_strength = 100
+	default_organisation = 30
 	maximum_speed = 10
 	weighted_value = 100.0
 
 
 	#Building Costs
-	build_time = 1080
+	build_time = 730
 	build_cost = {
 		steamer_convoy = 1000
-		artillery = 500
-		canned_food = 240
-		steel = 1200
+		artillery = 200
 	}
 	min_port_level = 5
 	limit_per_port = -1
@@ -34,15 +33,15 @@ dreadnought = {
 	
 	supply_consumption = 1.0
 	supply_cost = {
-		steamer_convoy = 3.5	#113.75
-		artillery = 3.2			#48
-		radio = 0.2				#1.6
-		fuel = 2.4				#30
-	}							#193.35
+		steamer_convoy = 6.4 # 260
+		artillery = 6.4 # 280
+		fuel = 12 # 200
+		fertilizer = 4 # 20
+	}
 	
 	#Naval Abilties
-	hull = 350
-	gun_power = 350
-	fire_range = 0.80
+	hull = 84
+	gun_power = 90
+	fire_range = 0.75
 	evasion = 0
 }

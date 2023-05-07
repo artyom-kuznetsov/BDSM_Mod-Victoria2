@@ -1,0 +1,189 @@
+political_decisions = {
+	form_benelux = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			is_culture_group = beneluxian
+			
+			NOT = {
+				exists = BLX
+			}
+		}
+		
+		allow = {
+			#is_greater_power = yes
+			prestige = 30
+			#war = no
+			NET = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							OR = {
+							in_sphere = THIS
+							vassal_of = THIS
+							}
+						}
+						
+					}
+				}
+			}
+			387 = { owned_by = THIS }
+		}
+		
+		effect = {
+			prestige = 10
+			change_tag = BLX
+			capital = 375
+			tech_school = benelux_tech_school
+			any_country = {
+				limit = {
+					is_culture_group = beneluxian
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+				}
+				country_event = { id=11101 days=0 }
+				
+			}
+			inherit = BEL
+			inherit = NET
+			any_country = {
+				limit = {
+					NOT = {
+						is_greater_power = yes
+					}
+					OR = {
+						AND = {
+							is_culture_group = THIS
+							in_sphere = THIS
+						}
+						AND = {
+							tag = LUX
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+							}
+						}
+					}
+					
+				}
+				country_event = { id=11101 days=0 }
+			}
+			397 = {
+				add_core = BLX
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	blx_integrate_java = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			year = 1860
+			NOT = { has_country_flag = integrated_java_blx }
+			owns = 1413
+			OR = {
+				tag = BLX
+				tag = NET
+			}
+		}
+		allow = {
+			experimental_psychology = 1
+			blue_and_brown_water_schools = 1
+			money = 4000000
+			citizens_rights = all_voting_pops
+		}
+		effect = {
+			set_country_flag = integrated_java_blx
+			treasury = -2000000
+			treasury = -2000000
+			add_accepted_culture = javan
+			1413 = {
+				state_scope = {
+					change_region_name = "Западная Ява (30)"
+				}
+			}
+			1420 = {
+				state_scope = {
+					change_region_name = "Восточная Ява (30)"
+				}
+			}
+		}
+	}
+	blx_integrate_malaya = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			year = 1870
+			NOT = { has_country_flag = integrated_malaya_blx }
+			owns = 1403
+			
+			OR = {
+				tag = BLX
+				tag = NET
+			}
+		}
+		allow = {
+			experimental_psychology = 1
+			blue_and_brown_water_schools = 1
+			money = 4000000
+			citizens_rights = all_voting_pops
+		}
+		effect = {
+			set_country_flag = integrated_malaya_blx
+			treasury = -2000000
+			treasury = -2000000
+			add_accepted_culture = malay
+			1403 = {
+				state_scope = {
+					change_region_name = "Суматра (35)"
+				}
+			}
+			1423 = {
+				state_scope = {
+					change_region_name = "Восточное Борнео (20)"
+				}
+			}
+			1428 = {
+				state_scope = {
+					change_region_name = "Западное Борнео (18)"
+				}
+			}
+		}
+	}
+	blx_integrate_molucca = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			year = 1860
+			owns = 1430
+			NOT = { has_country_flag = integrated_molucca_blx }
+			OR = {
+				tag = BLX
+				tag = NET
+			}
+		}
+		allow = {
+			experimental_psychology = 1
+			blue_and_brown_water_schools = 1
+			money = 1500000
+			citizens_rights = all_voting_pops
+		}
+		effect = {
+			set_country_flag = integrated_molucca_blx
+			treasury = -2000000
+			treasury = -1000000
+			add_accepted_culture = moluccan
+			1430 = {
+				state_scope = {
+					change_region_name = "Целебские острова (35)"
+				}
+			}
+			1450 = {
+				state_scope = {
+					change_region_name = "Молуккские острова (20)"
+				}
+			}
+		}
+	}
+}

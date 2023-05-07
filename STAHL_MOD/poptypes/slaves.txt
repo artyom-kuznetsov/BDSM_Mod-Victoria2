@@ -1,9 +1,9 @@
 sprite = 10
 strata = poor
 allowed_to_vote = no
-unemployment = yes
 is_slave = yes
 color = { 17 17 17 }
+unemployment = yes
 
 rebel =
 {
@@ -23,17 +23,7 @@ everyday_needs = {
 }
 
 luxury_needs = {
-	#pharmaceuticals = 1
-}
-
-country_migration_target =
-{
-	factor = 0
-}
-
-migration_target =
-{
-	factor = 0
+	opium = 1
 }
 
 ideologies = {
@@ -44,6 +34,18 @@ ideologies = {
 		factor = 1
 	}
 }
+
+promote_to = {
+	
+	farmers = { #and labourers
+		factor = 0.01
+		modifier = {
+			factor = 5.0
+			not = { luxury_needs = 0.1 }
+		}
+	}
+}
+
 issues = {
 	full_citizenship =  {
 		factor = 3

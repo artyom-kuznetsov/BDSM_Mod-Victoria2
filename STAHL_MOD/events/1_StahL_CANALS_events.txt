@@ -1,0 +1,73 @@
+country_event = { # SUEZ MODIFIER
+	title = "SUEZMODEVT_TITLE"
+	desc = "SUEZMODEVT_DESC"
+	id = 140700
+	trigger = {
+		owns = 1755
+		has_global_flag = suez_canal_built
+		NOT = { 
+			has_country_modifier = suez_canal_modifier
+		}
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		add_country_modifier = {
+			name = suez_canal_modifier duration = -1
+		}
+	}
+}
+
+country_event = { # PANAMA MODIFIER
+	title = "PANAMAMODEVT_TITLE"
+	desc = "PANAMAMODEVT_DESC"
+	id = 140701
+	trigger = {
+		owns = 1723
+		has_global_flag = panama_canal_built
+		NOT = { 
+			has_country_modifier = panama_canal_modifier
+		}
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		add_country_modifier = {
+			name = panama_canal_modifier duration = -1
+		}
+	}
+}
+
+country_event = { # SUEZ MODIFIER REVOKE
+	title = "SUEZMODEVT_TITLE"
+	desc = "SUEZMODLOSEEVT_DESC"
+	id = 140702
+	trigger = {
+		NOT = { owns = 1755 }
+		has_country_modifier = suez_canal_modifier
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		remove_country_modifier = suez_canal_modifier
+	}
+}
+
+country_event = { # PANAMA MODIFIER REVOKE
+	title = "PANAMAMODEVT_TITLE"
+	desc = "PANAMAMODLOSEEVT_DESC"
+	id = 140703
+	trigger = {
+		NOT = { owns = 1723 }
+		has_country_modifier = panama_canal_modifier
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		remove_country_modifier = panama_canal_modifier
+	}
+}
+
+
+
+

@@ -1,0 +1,333 @@
+country_event = {
+	id = 44400
+	title = "Burma_Intervenes_After_Chiangmai_Evt_Name"
+	desc = "Burma_Intervenes_After_Chiangmai_Evt_Desc"
+	
+	trigger = {
+		tag = SIA
+		owns = 1355
+	}
+	
+	picture = "asian_ruler"
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "Burma_Intervenes_After_Chiangmai_Evt_OptA"
+
+		ai_chance = {
+			factor = 1
+		}
+		
+		1355 = { add_core = BUR }
+		2572 = { add_core = BUR }
+		1338 = { add_core = THIS }
+		1340 = { add_core = THIS }
+		
+		BUR = {
+			war = {
+				target = THIS
+				attacker_goal = {
+					casus_belli = acquire_all_cores country = BUR
+				}
+				defender_goal = {
+					casus_belli = acquire_all_cores country = SIA
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 44401
+	title = "Cambodian_War_Evt_Name"
+	desc = "Cambodian_War_Evt_Desc"
+	
+	trigger = {
+		tag = SIA
+		CAM = { vassal_of = DAI }
+		NOT = { has_country_flag = cambodian_war_flag }
+		NOT = { war_with = DAI }
+	}
+	
+	picture = "asian_ruler"
+	
+	mean_time_to_happen = {
+		months = 9
+	}
+	
+	option = {
+		name = "Cambodian_War_Evt_OptA"
+		ai_chance = {
+			factor = 0
+		}
+	}
+	option = {
+		name = "Cambodian_War_Evt_OptB"
+		ai_chance = {
+			factor = 10
+		}
+		badboy = 6
+		
+		war = {
+			target = DAI
+			attacker_goal = { casus_belli = release_puppet country = CAM }
+			defender_goal = { casus_belli = demand_war_reparations }
+		}
+		set_country_flag = cambodian_war_flag
+		years_of_research = 1
+	}
+}
+
+country_event = {
+	id = 44402
+	title = "Cambodian_War_Success_Evt_Name"
+	desc = "Cambodian_War_Success_Evt_Desc"
+	
+	trigger = {
+		tag = SIA
+		has_country_flag = cambodian_war_flag
+		CAM = { vassal_of = THIS }
+	}
+	
+	picture = "asian_ruler"
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "Cambodian_War_Success_Evt_OptA"
+		ai_chance = {
+			factor = 1
+		}
+		THIS = { 
+			limit = { NOT = { LUA = { vassal_of = THIS } } }
+			create_vassal = LUA 
+		}
+		
+		THIS = { 
+			limit = { NOT = { CAM = { vassal_of = THIS } } }
+			create_vassal = CAM 
+		}
+		badboy = 3
+		years_of_research = 1
+	}
+}
+
+country_event = {
+	title = "Laos_Vassalize_Evt_Name"
+	desc = "Laos_Vassalize_Evt_Desc"
+	id = 44403
+	trigger = {
+		OR = {
+			tag = SIA
+			tag = IDA
+		}
+		alliance_with = LUA
+		NOT = { LUA = { vassal_of = THIS } }
+	}
+	fire_only_once = yes
+	#
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "Laos_Vassalize_Evt_OptA"
+		create_vassal = LUA
+		relation = {
+			who = LUA
+			value = 100
+		}
+		prestige = 3
+	}
+}
+
+# INDUSTRIALIZATION LIFE RATE INCREASE
+province_event = {
+	id = 44404
+
+	trigger = {
+		has_country_flag = sia_industrialization_flag
+		NOT = { life_rating = 40 }
+		OR = {
+			continent = indochina
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	title = "SIA_Urbanization_Evt_Name"
+	desc = "SIA_Urbanization_Evt_Desc"
+
+	option = {
+		name = "SIA_Urbanization_Evt_OptA"
+		life_rating = 5
+	}
+}
+
+# INDUSTRIALIZATION IRON
+province_event = {
+	id = 44405
+
+	trigger = {
+		has_country_flag = sia_industrialization_flag
+		NOT = { trade_goods = iron }
+		OR = {
+			province_id = 1368
+			province_id = 1375
+			province_id = 1342
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 9
+	}
+
+	title = "SIA_Iron_Evt_Name"
+	desc = "SIA_Iron_Evt_Desc"
+
+	option = {
+		name = "SIA_Iron_Evt_OptA"
+		trade_goods = iron
+	}
+}
+
+# INDUSTRIALIZATION COAL
+province_event = {
+	id = 44406
+
+	trigger = {
+		has_country_flag = sia_industrialization_flag
+		NOT = { trade_goods = coal }
+		OR = {
+			province_id = 1376
+			province_id = 1551
+			province_id = 1380
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 9
+	}
+
+	title = "SIA_Coal_Evt_Name"
+	desc = "SIA_Coal_Evt_Desc"
+
+	option = {
+		name = "SIA_Coal_Evt_OptA"
+		trade_goods = coal
+	}
+}
+
+# INDUSTRIALIZATION SULPHUR
+province_event = {
+	id = 44407
+
+	trigger = {
+		has_country_flag = sia_industrialization_flag
+		NOT = { trade_goods = sulphur }
+		OR = {
+			province_id = 2572
+			province_id = 1355
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 15
+	}
+
+	title = "SIA_Sulphur_Evt_Name"
+	desc = "SIA_Sulphur_Evt_Desc"
+
+	option = {
+		name = "SIA_Sulphur_Evt_OptA"
+		trade_goods = sulphur
+	}
+}
+
+# CAMBODIA VASSALIZED BY SIAM IF NOT DAINAM VASSAL
+country_event = { 
+	id = 44408
+	title = "Cambodia_AutoVassal_Evt_Name"
+	desc = "Cambodia_AutoVassal_Evt_Desc"
+	
+	trigger = {
+		tag = CAM
+		is_independant = yes
+		ai = yes
+	}
+	
+	picture = "asian_ruler"
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "Notext"
+		ai_chance = {
+			factor = 1
+		}
+		SIA = { 
+			create_vassal = CAM
+		}
+	}
+}
+
+country_event = { 
+	id = 44409
+	title = "SIA_Rpoints_Unciv_Evt_Name"
+	desc = "SIA_Rpoints_Unciv_Evt_Desc"
+	
+	trigger = {
+		tag = SIA
+		civilized = no
+	}
+	
+	picture = "americascup"
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = "SIA_Rpoints_Unciv_Evt_OptA"
+		ai_chance = {
+			factor = 1
+		}
+		years_of_research = 1
+		any_pop = {
+			consciousness = 1
+		}
+	}
+}
+
+country_event = { 
+	id = 44410
+	title = "SIA_School_Evt_Name"
+	desc = "SIA_School_Evt_Desc"
+	
+	trigger = {
+		OR = {
+			tag = SIA
+			tag = IDA
+		}
+		school_reforms = no_schools
+		positivism = 1
+	}
+	
+	picture = "School"
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "SIA_School_Evt_OptA"
+		ai_chance = {
+			factor = 1
+		}
+		social_reform = low_schools
+	}
+}

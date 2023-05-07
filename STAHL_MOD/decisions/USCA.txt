@@ -1,9 +1,12 @@
 political_decisions = {
-	reform_usca = {
+	become_guatemala = {
 		potential = {
-			primary_culture = central_american
-			NOT = { exists = UCA }
-		}
+			tag = UCA
+			NOT = {
+				exists = GUA
+			}
+			NOT = { has_country_flag = open_money_transfers_flag }
+		} 
 
 		allow = {
 			GUA = {
@@ -11,32 +14,22 @@ political_decisions = {
 					owned_by = THIS
 				}
 			}
-			ELS = {
-				all_core = {
-					owned_by = THIS
-				}
-			}
-			HON = {
-				all_core = {
-					owned_by = THIS
-				}
-			}
-			NIC = {
-				all_core = {
-					owned_by = THIS
-				}
-			}
-			COS = {
-				all_core = {
-					owned_by = THIS
+			NOT = {
+				any_owned_province = {
+					NOT = {
+						is_core = GUA
+					}
 				}
 			}
 		}
 
 		effect = {
-			prestige = 20
-			change_tag = UCA
+			prestige = 30
+			change_tag = GUA
+		}
+		ai_will_do = {
+			factor = 1
 		}
 	}
-}
+}	
 
