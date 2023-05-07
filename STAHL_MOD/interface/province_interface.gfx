@@ -62,7 +62,7 @@ spriteTypes = {
 	spriteType = {
 		name = "GFX_crime_strip"
 		textureFile = "gfx\\interface\\crime_strip.dds"
-		noOfFrames = 12
+		noOfFrames = 9
 	}
 	spriteType = {
 		name = "GFX_party_loyalty_strip"
@@ -98,6 +98,38 @@ spriteTypes = {
 		name = "GFX_province_infra_strip"
 		textureFile = "gfx\\interface\\province_infra_strip.dds"
 		noOfFrames = 8
+	}
+	
+	spriteType = {
+		name = "GFX_immigrator_strip"
+		texturefile = "gfx\\interface\\immigrator_strip.dds"
+		noOfFrames = 2
+	}
+
+	spriteType = {
+		name = "GFX_immigrator_strip_selector"
+		texturefile = "gfx\\interface\\immigrator_strip_selector.dds"
+		noOfFrames = 2
+	}
+	spriteType = {
+		name = "GFX_province_farmland_strip"
+		textureFile = "gfx\\interface\\province_farmland_strip.dds"
+		noOfFrames = 51
+	}
+	spriteType = {
+		name = "GFX_province_bank_strip"
+		textureFile = "gfx\\interface\\province_bank_strip.dds"
+		noOfFrames = 8
+	}
+	spriteType = {
+		name = "GFX_province_university_strip"
+		textureFile = "gfx\\interface\\province_university_strip.dds"
+		noOfFrames = 7
+	}
+	spriteType = {
+		name = "GFX_province_mine_strip"
+		textureFile = "gfx\\interface\\province_mine_strip.dds"
+		noOfFrames = 7
 	}
 	spriteType = {
 		name = "GFX_province_expanding"
@@ -193,7 +225,14 @@ spriteTypes = {
 		name = "GFX_province_other_bg"
 		texturefile = "gfx\\interface\\province_other_bg.tga"
 	}
-
+	spriteType = {
+		name = "GFX_cover_up"
+		texturefile = "gfx\\interface\\cover_up.tga"
+	}
+	spriteType = {
+		name = "GFX_cover_up2"
+		texturefile = "gfx\\interface\\cover_up2.tga"
+	}
 	spriteType = {
 		name = "GFX_province_colony_bg"
 		texturefile = "gfx\\interface\\province_colony_bg.tga"
@@ -257,8 +296,20 @@ spriteTypes = {
 	}
 	
 	spriteType = {
+		name = "GFX_terrainimg_mountain_mine"
+		texturefile = "gfx\\interface\\terrain_mountains_mine.tga"
+		norefcount = yes
+	}
+	
+	spriteType = {
 		name = "GFX_terrainimg_steppe"
 		texturefile = "gfx\\interface\\terrain_steppe.tga"
+		norefcount = yes
+	}
+	
+	spriteType = {
+		name = "GFX_terrainimg_steppe_mine"
+		texturefile = "gfx\\interface\\terrain_steppe_mine.tga"
 		norefcount = yes
 	}
 	
@@ -269,26 +320,56 @@ spriteTypes = {
 	}
 	
 	spriteType = {
+		name = "GFX_terrainimg_farmlands_mine"
+		texturefile = "gfx\\interface\\terrain_farmlands_mine.tga"
+		norefcount = yes
+	}
+	
+	spriteType = {
 		name = "GFX_terrainimg_forest"
 		texturefile = "gfx\\interface\\terrain_forest.tga"
 		norefcount = yes
 	}
-
+	
+	spriteType = {
+		name = "GFX_terrainimg_forest_mine"
+		texturefile = "gfx\\interface\\terrain_forest_mine.tga"
+		norefcount = yes
+	}
+	
 	spriteType = {
 		name = "GFX_terrainimg_woods"
 		texturefile = "gfx\\interface\\terrain_woods.tga"
 		norefcount = yes
 	}
-		
+	
+	spriteType = {
+		name = "GFX_terrainimg_woods_mine"
+		texturefile = "gfx\\interface\\terrain_woods_mine.tga"
+		norefcount = yes
+	}
+	
 	spriteType = {
 		name = "GFX_terrainimg_marsh"
 		texturefile = "gfx\\interface\\terrain_marsh.tga"
 		norefcount = yes
 	}
-		
+	
+	spriteType = {
+		name = "GFX_terrainimg_marsh_mine"
+		texturefile = "gfx\\interface\\terrain_marsh_mine.tga"
+		norefcount = yes
+	}
+	
 	spriteType = {
 		name = "GFX_terrainimg_plains"
 		texturefile = "gfx\\interface\\terrain_plains.tga"
+		norefcount = yes
+	}
+	
+	spriteType = {
+		name = "GFX_terrainimg_plains_mine"
+		texturefile = "gfx\\interface\\terrain_plains_mine.tga"
 		norefcount = yes
 	}
 	
@@ -297,42 +378,40 @@ spriteTypes = {
 		texturefile = "gfx\\interface\\terrain_farmlands.tga"
 		norefcount = yes
 	}
-	spriteType = {
-		name = "GFX_terrainimg_strait_control_tile_plains"
-		texturefile = "gfx\\interface\\terrain_strait_control_tile_plains.tga"
-		norefcount = yes
-	}
-	spriteType = {
-		name = "GFX_terrainimg_strait_control_tile_hills"
-		texturefile = "gfx\\interface\\terrain_strait_control_tile_hills.tga"
-		norefcount = yes
-	}
-	spriteType = {
-		name = "GFX_terrainimg_strait_control_tile_mountain"
-		texturefile = "gfx\\interface\\terrain_strait_control_tile_mountain.tga"
-		norefcount = yes
-	}
-	spriteType = {
-		name = "GFX_terrainimg_strait_control_tile_urban"
-		texturefile = "gfx\\interface\\terrain_strait_control_tile_urban.tga"
-		norefcount = yes
-	}
 	
 	spriteType = {
 		name = "GFX_terrainimg_hills"
 		texturefile = "gfx\\interface\\terrain_hills.tga"
 		norefcount = yes
 	}
-		
+	
+	spriteType = {
+		name = "GFX_terrainimg_hills_mine"
+		texturefile = "gfx\\interface\\terrain_hills_mine.tga"
+		norefcount = yes
+	}
+	
 	spriteType = {
 		name = "GFX_terrainimg_jungle"
 		texturefile = "gfx\\interface\\terrain_jungle.tga"
 		norefcount = yes
 	}
-
+	
+	spriteType = {
+		name = "GFX_terrainimg_jungle_mine"
+		texturefile = "gfx\\interface\\terrain_jungle_mine.tga"
+		norefcount = yes
+	}
+	
 	spriteType = {
 		name = "GFX_terrainimg_desert"
 		texturefile = "gfx\\interface\\terrain_desert.tga"
+		norefcount = yes
+	}
+	
+	spriteType = {
+		name = "GFX_terrainimg_desert_mine"
+		texturefile = "gfx\\interface\\terrain_desert_mine.tga"
 		norefcount = yes
 	}
 	
@@ -343,14 +422,32 @@ spriteTypes = {
 	}
 	
 	spriteType = {
+		name = "GFX_terrainimg_coastal_desert_mine"
+		texturefile = "gfx\\interface\\terrain_coastal_desert_mine.tga"
+		norefcount = yes
+	}
+	
+	spriteType = {
 		name = "GFX_terrainimg_arctic"
 		texturefile = "gfx\\interface\\terrain_arctic.tga"
 		norefcount = yes
 	}
-
+	
+	spriteType = {
+		name = "GFX_terrainimg_arctic_mine"
+		texturefile = "gfx\\interface\\terrain_arctic_mine.tga"
+		norefcount = yes
+	}
+	
 	spriteType = {
 		name = "GFX_terrainimg_urban"
 		texturefile = "gfx\\interface\\terrain_urban.tga"
+		norefcount = yes
+	}
+	
+	spriteType = {
+		name = "GFX_terrainimg_urban_mine"
+		texturefile = "gfx\\interface\\terrain_urban_mine.tga"
 		norefcount = yes
 	}
 	

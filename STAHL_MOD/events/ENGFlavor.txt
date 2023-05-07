@@ -1,3 +1,6 @@
+# Audax Validator "!" Ignore_1004
+# Audax Validator "!" Ignore_1009
+
 # Coronation of Queen Victoria
 country_event = {
 	id = 36898
@@ -34,13 +37,6 @@ country_event = {
 		diplomatic_influence = {
 			who = HAN
 			value = -200
-		}
-		
-		PRU = {
-			diplomatic_influence = {
-				who = HAN
-				value = 100
-			}
 		}
 		prestige = 5
 	}
@@ -1602,7 +1598,7 @@ province_event = {
 		name = "EVTOPTA36938" 
 		any_pop = {
 			limit = {
-				has_pop_culture = bengali
+				has_pop_religion = hindu 
 				}
 			militancy = 1
 			consciousness = 2
@@ -1655,7 +1651,13 @@ country_event = {
 		name = "EVTOPTA36939"
 		any_pop = {
 			limit = {
-				has_pop_culture = bengali
+				has_pop_religion = hindu
+			}
+			militancy = 2
+		}
+		any_pop = {
+			limit = {
+				has_pop_religion = sunni
 			}
 			militancy = 2
 		}
@@ -1671,7 +1673,13 @@ country_event = {
 			}
 		any_pop = {
 			limit = {
-				has_pop_culture = bengali
+				has_pop_religion = hindu
+			}
+			militancy = -1
+		}
+		any_pop = {
+			limit = {
+				has_pop_religion = sunni
 			}
 			militancy = -1
 		}	
@@ -1788,4 +1796,509 @@ country_event = {
 				consciousness = -1
 			}
 		}
+}
+
+#AI tech buffs
+country_event = {
+	id = 36943
+	title = "AI UK Breech Loaded Rifle Tech"
+	
+	trigger = {
+		tag = ENG
+		ai = yes
+		year = 1860
+		NOT = { breech_loaded_rifles = 1 }
+	}
+	
+	fire_only_once = yes
+ 
+	
+	option = {
+		activate_technology = breech_loaded_rifles
+	}
+}
+
+country_event = {
+	id = 36944
+	title = "AI UK Machine Gun Tech"
+	
+	trigger = {
+		tag = ENG
+		ai = yes
+		year = 1870
+		NOT = { machine_guns = 1 }
+	}
+	
+	fire_only_once = yes
+ 
+	
+	option = {
+		activate_technology = machine_guns
+	}
+}
+
+#Release Dominions
+country_event = {
+	id = 36945
+	title = "Release Canada"
+
+	trigger = {
+		ai = yes
+		any_owned_province = { is_core = CAN }
+		is_our_vassal = CAN
+	}
+
+
+	option = {
+		any_owned = {
+			limit = { is_core = CAN }
+			secede_province = CAN
+		}
+	}
+}
+
+country_event = {
+	id = 36946
+	title = "Release Australia"
+	
+	trigger = {
+		ai = yes
+		any_owned_province = { is_core = AST }
+		is_our_vassal = AST
+	}
+
+
+	option = {
+		any_owned = {
+			limit = { is_core = AST }
+			secede_province = AST
+		}	
+	}
+}
+
+country_event = {
+	id = 36947
+	title = "Release New Zealand"
+	
+	trigger = {
+		ai = yes
+		any_owned_province = { is_core = NZL }
+		is_our_vassal = NZL
+	}
+
+
+	option = {
+		any_owned = {
+			limit = { is_core = NZL }
+			secede_province = NZL
+		}	
+	}
+}
+
+country_event = {
+	id = 36948
+	title = "Release South Africa"
+	
+	trigger = {
+		ai = yes
+		any_owned_province = { is_core = SAF }
+		is_our_vassal = SAF
+	}
+
+
+	option = {
+		any_owned = {
+			limit = { is_core = SAF }
+			secede_province = SAF
+		}	
+	}
+}
+
+country_event = {
+	id = 36949
+	title = "EVTNAME36949"
+	desc = "EVTDESC36949"
+	picture = "bismarck_reforms"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA36949"
+		533 = { secede_province = GER }
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = "EVTOPTB36949"
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Irish Potato Blight
+country_event = {
+	id = 36950
+	title = "EVTNAME36950" #The Great Irish Famine
+	desc = "EVTDESC36950"
+	picture = "famine"
+	major = yes
+	
+	trigger = {
+		tag = ENG
+		year = 1845
+		any_owned_province = {
+			is_core = IRE
+			NOT = { has_province_modifier = potato_blight }
+		}
+		NOT = {
+			has_country_flag = great_irish_famine
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA36950"
+		set_country_flag = great_irish_famine
+		ENG_258 = {
+			add_province_modifier = {
+				name = irish_potato_blight
+				duration = 2190
+			}
+			remove_province_modifier = province_attract_immigrants
+		}
+		ENG_260 = {
+			add_province_modifier = {
+				name = irish_potato_blight
+				duration = 2190
+			}
+			remove_province_modifier = province_attract_immigrants
+		}
+		ENG_263 = {
+			add_province_modifier = {
+				name = irish_potato_blight
+				duration = 2190
+			}
+			remove_province_modifier = province_attract_immigrants
+		}
+		any_pop = {
+			limit = {
+				has_pop_culture = irish
+				location = { is_core = IRE }
+			}
+			consciousness = 4
+			militancy = 4
+		}
+	}
+}
+
+#Indian Events
+country_event = {
+	id = 36960
+	title = "EVTNAME36960" #EIC at war
+	desc = "EVTDESC36960"
+	picture = "british_india"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36960"
+	}
+}
+
+country_event = {
+	id = 36961
+	title = "EVTNAME36962"
+	desc = "EVTDESC36962"
+	picture = "british_india"
+
+	is_triggered_only = yes
+
+	immediate = {
+		EIC = { clr_country_flag = dismantling_eic }
+	}
+
+	option = {
+		name = "EVTOPTA36962"
+		prestige_factor = -0.25
+		inherit = EIC
+		remove_country_modifier = crown_rule
+	}
+}
+
+country_event = {
+	id = 36962
+	title = "EVTNAME36962"
+	desc = "EVTDESC36962"
+	picture = "british_india"
+
+	trigger = {
+		tag = ENG
+		EIC = {
+			is_greater_power = yes
+			NOT = { has_country_flag = dismantling_eic }
+		}
+		NOT = { is_our_vassal = EIC }
+		has_country_modifier = crown_rule
+	}
+
+	option = {
+		name = "EVTOPTA36962"
+		remove_country_modifier = crown_rule
+		EIC = { set_country_flag = became_gp }
+	}
+}
+
+country_event = {
+	id = 36973
+	title = "EVTNAME36973"
+	desc = "EVTDESC36973"
+	picture = "treaty_of_labuan"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36973"
+		any_owned = {
+			limit = {
+				OR = {
+					province_id = 1393
+					province_id = 1394
+					province_id = 1395
+					province_id = 1396
+				}
+			}
+			secede_province = ENG
+		}
+	}
+
+	option = {
+		name = "EVTOPTB36973"
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = {
+	id = 36974
+	title = "EVTNAME36974"
+	desc = "EVTDESC36974"
+	picture = "treaty_of_labuan"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36974"
+		any_owned = {
+			limit = {
+				OR = {
+					province_id = 2575
+					province_id = 1390
+					province_id = 1387
+					province_id = 1385
+				}
+			}
+			secede_province = ENG
+		}
+	}
+
+	option = {
+		name = "EVTOPTB36974"
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = {
+	id = 36975
+	title = "EVTNAME36975"
+	desc = "EVTDESC36975"
+	picture = "british_india"
+
+	trigger = {
+		tag = ENG
+		is_our_vassal = EIC
+		NOT = { alliance_with = EIC }
+	}
+
+	option = {
+		name = "EVTOPTA36975"
+		create_alliance = EIC
+		relation = {
+			who = EIC
+			value = 200
+		}
+		EIC = {
+			relation = {
+				who = THIS
+				value = 200
+			}
+		}
+	}
+}
+
+#Herat Events
+country_event = {
+	id = 36980 #Iran invades Herat
+	title = "EVTNAME36980"
+	desc = "EVTDESC36980"
+	picture = "herat"
+
+	trigger = {
+		tag = ENG
+		PER = {
+			has_country_flag = invaded_herat
+			owns = 1214
+		}
+		NOT = { has_country_flag = anglo_persian_war }
+	}
+
+	option = {
+		name = "EVTOPTA36980"
+		set_country_flag = anglo_persian_war
+		war = {
+			target = PER
+			attacker_goal = { casus_belli = liberate_country_free country = HRT }
+			attacker_goal = { casus_belli = status_quo }
+		}
+		PER = { country_event = { id = 36981 days = 0 } }
+		ai_chance = {
+			factor = 0.95
+		}
+	}
+
+	option = {
+		name = "EVTOPTB36980"
+		set_country_flag = anglo_persian_war
+		prestige = -25
+		PER = { country_event = { id = 36982 days = 0 } }
+		ai_chance = {
+			factor = 0.05
+		}
+	}
+}
+
+country_event = {
+	id = 36981
+	title = "EVTNAME36981"
+	desc = "EVTDESC36981"
+	picture = "council_of_paris"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36981"
+	}
+}
+
+country_event = {
+	id = 36982
+	title = "EVTNAME36982"
+	desc = "EVTDESC36982"
+	picture = "council_of_paris"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36982"
+	}
+}
+
+country_event = {
+	id = 36983 #Afghanistan invades Herat
+	title = "EVTNAME36983"
+	desc = "EVTDESC36983"
+	picture = "herat"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36983"
+		diplomatic_influence = {
+			who = HRT
+			value = -200
+		}
+		leave_alliance = HRT
+		relation = {
+			who = AFG
+			value = 200
+		}
+		diplomatic_influence = {
+			who = AFG
+			value = 200
+		}
+		AFG = { country_event = { id = 36984 days = 0 } }
+		ai_chance = {
+			factor = 0.95
+		}
+	}
+
+	option = {
+		name = "EVTOPTB36983"
+		diplomatic_influence = {
+			who = HRT
+			value = 400
+		}
+		create_alliance = HRT
+		relation = {
+			who = AFG
+			value = -200
+		}
+		diplomatic_influence = {
+			who = AFG
+			value = -200
+		}
+		leave_alliance = AFG
+		AFG = { country_event = { id = 36985 days = 0 } }
+		ai_chance = {
+			factor = 0.05
+		}
+	}
+}
+
+country_event = {
+	id = 36984
+	title = "EVTNAME36984"
+	desc = "EVTDESC36984"
+	picture = "council_of_paris"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36984"
+		war = {
+			target = HRT
+			attacker_goal = { casus_belli = conquest_free }
+		}
+	}
+}
+
+country_event = {
+	id = 36985
+	title = "EVTNAME36985"
+	desc = "EVTDESC36985"
+	picture = "council_of_paris"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA36985"
+		war = {
+			target = HRT
+			attacker_goal = { casus_belli = conquest_free }
+		}
+		ai_chance = {
+			factor = 0.05
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB36985"
+		ai_chance = {
+			factor = 0.95
+		}
+	}
 }

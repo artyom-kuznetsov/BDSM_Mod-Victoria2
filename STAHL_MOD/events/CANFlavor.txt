@@ -200,3 +200,76 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = 44310
+	title = "EVTNAME44310"
+	desc = "EVTDESC44310"
+	picture = "ruperts_land"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA44310"
+		RPL = { country_event = { id = 44311 days = 0 } }
+	}
+
+	option = {
+		name = "EVTOPTB44310"
+		CAN = {
+			country_event = { id = 44313 days = 0 }
+			treasury = 300000
+		}
+		ai_chance = { factor = 0 }
+	}
+}
+
+country_event = {
+	id = 44311
+	title = "EVTNAME44311"
+	desc = "EVTDESC44311"
+	picture = "ruperts_land"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA44311"
+		CAN = { country_event = { id = 44312 days = 0 } }
+	}
+
+	option = {
+		name = "EVTOPTB44311"
+		CAN = {
+			country_event = { id = 44313 days = 0 }
+			treasury = 300000
+		}
+		ai_chance = { factor = 0 }
+	}
+}
+
+country_event = {
+	id = 44312
+	title = "EVTNAME44312"
+	desc = "EVTDESC44312"
+	picture = "ruperts_land"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA44312"
+		inherit = RPL
+	}
+}
+
+country_event = {
+	id = 44313
+	title = "EVTNAME44313"
+	desc = "EVTDESC44313"
+	picture = "ruperts_land"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA44313"
+	}
+}

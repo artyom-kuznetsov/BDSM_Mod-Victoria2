@@ -31,7 +31,7 @@ guiTypes = {
 	iconType = {
 		name = "bg_main_menus"
 		spriteType = "GFX_bg_main_menus"
-		position = { x= 0 y = 0 }
+		position = { x= 2000 y = 2000 }
 		Orientation = "UPPER_LEFT"
 	}
 
@@ -386,7 +386,17 @@ guiTypes = {
 				Orientation = "UPPER_LEFT"
 			}
 			
-
+			instantTextBoxType={
+				position = {x = 124 y = 131 }
+				name = "savegame_label"
+				font = "vic_22_black"
+				borderSize = {x = 0 y = 0}	
+				maxWidth = 256
+				maxHeight = 18
+				text = "MENU_BAR_SAVE_GAME"	
+				orientation = "UPPER_LEFT"
+				format = centre
+			}
 			
 			guiButtonType = {
 				name = "save"
@@ -706,6 +716,7 @@ guiTypes = {
 				delayedTooltipText = ""
 				buttonText = "MESSAGE_BUTTON_CLEAR"
 				buttonFont = "vic_18_black"
+				shortcut = "ESCAPE"
 			}		
 		}
 		

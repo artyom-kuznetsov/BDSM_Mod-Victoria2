@@ -1,3 +1,6 @@
+# Audax Validator "!" Ignore_1004
+# Audax Validator "!" Ignore_1009
+
 country_event = {
 
 	id = 37700
@@ -454,5 +457,295 @@ country_event = {
 			militancy = 1
 			consciousness = 1
 		}
+	}
+}
+
+#Abolition of Slavery
+country_event = {
+
+	id = 37709
+	title = "EVTNAME37709"
+
+	trigger = {
+		tag = SPA
+		year = 1873
+		ai = yes
+		OR = {
+			slavery = yes_slavery
+			slavery = freedom_of_womb
+		}
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		political_reform = no_slavery
+	}
+}
+
+country_event = {
+
+	id = 37710
+	title = "EVTNAME37710"
+
+	trigger = {
+		tag = POR
+		year = 1869
+		ai = yes
+		OR = {
+			slavery = yes_slavery
+			slavery = freedom_of_womb
+		}
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		political_reform = no_slavery
+	}
+}
+
+#Chincha Islands War
+country_event = {
+	id = 37711
+	title = "EVTNAME37711"
+	desc = "EVTDESC37711"
+	picture = battle_of_papudo
+
+	trigger = {
+		tag = SPA
+		raider_group_doctrine = 1
+		NOT = { has_country_flag = chincha_islands_war }
+		PEU = {
+			exists = yes
+			owns = 2619
+			is_vassal = no
+		}
+	}
+
+	mean_time_to_happen =  {
+		months = 6
+	}
+
+	option = {
+		name = "EVTOPTA37711"
+		set_country_flag = chincha_islands_war
+		any_country = {
+			limit = {
+				NOT = { war_with = PEU }
+				is_vassal = no
+				OR = {
+					tag = CHL
+					tag = BOL
+					tag = ECU
+				}
+			}
+			create_alliance = PEU
+		}
+		war = {
+			target = PEU
+			attacker_goal = { casus_belli = chincha_war }
+		}
+		PEU = {
+			country_event = { id = 37712 days = 0 }
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+
+	option = {
+		name = "EVTOPTB37711"
+		set_country_flag = chincha_islands_war
+		war = {
+			target = PEU
+			attacker_goal = { casus_belli = demand_reparations }
+		}
+		PEU = {
+			country_event = { id = 37712 days = 0 }
+		}
+	}
+
+	option = {
+		name = "EVTOPTC37711"
+		set_country_flag = chincha_islands_war
+	}
+}
+
+country_event = {
+	id = 37712
+	title = "EVTNAME37712"
+	desc = "EVTDESC37712"
+	picture = battle_of_papudo
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA37712"
+	}
+}
+
+#Reconquista Events
+country_event = {
+	id = 37713
+	title = "EVTNAME37713"
+	desc = "EVTDESC37713"
+	picture = celebration
+
+	trigger = {
+		primary_culture = spanish
+		OR = {
+			AND = {
+				is_our_vassal = GCO
+				GCO = { government = colonial_company }
+			}
+			AND = {
+				is_our_vassal = LPL
+				LPL = { government = colonial_company }
+			}
+			AND = {
+				is_our_vassal = MEX
+				MEX = { government = colonial_company }
+			}
+			AND = {
+				is_our_vassal = PBC
+				PBC = { government = colonial_company }
+			}
+		}
+		NOT = { has_country_flag = spanish_reconquista }
+	}
+
+	option = {
+		name = "EVTOPTA37713"
+		set_country_flag = spanish_reconquista
+	}
+}
+
+country_event = {
+	id = 37714
+	title = "EVTNAME37714"
+	desc = "EVTDESC37714"
+	picture = treaty
+
+	trigger = {
+		primary_culture = spanish
+		NOT = {
+			OR = {
+				AND = {
+					is_our_vassal = GCO
+					GCO = { government = colonial_company }
+				}
+				AND = {
+					is_our_vassal = LPL
+					LPL = { government = colonial_company }
+				}
+				AND = {
+					is_our_vassal = MEX
+					MEX = { government = colonial_company }
+				}
+				AND = {
+					is_our_vassal = PBC
+					PBC = { government = colonial_company }
+				}
+			}
+		}
+		has_country_flag = spanish_reconquista
+	}
+
+	option = {
+		name = "EVTOPTA37714"
+		clr_country_flag = spanish_reconquista
+	}
+}
+
+country_event = {
+	id = 37715
+	title = "EVTNAME37715"
+	desc = "EVTDESC37715"
+	picture = celebration
+
+	trigger = {
+		has_country_flag = spanish_vassal
+		NOT = {
+			OR = {
+				vassal_of = SPA
+				vassal_of = SPC
+			}
+		}
+	}
+
+	option = {
+		name = "EVTOPTA37715"
+		clr_country_flag = spanish_vassal
+		random_owned = {
+			limit = {
+				owner = { government = colonial_company }
+			}	
+			owner = { government = democracy }
+		}
+	}
+	option = {
+		name = "EVTOPTB37715"
+		clr_country_flag = spanish_vassal
+		random_owned = {
+			limit = {
+				owner = { government = colonial_company }
+			}	
+			owner = { government = presidential_dictatorship }
+		}
+	}
+}
+
+
+#Madrid Protocol
+country_event = {
+	id = 37720
+	title = "EVTNAME37720"
+	desc = "EVTDESC37720"
+	picture = sultan_of_sulu
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA37720"
+		1397 = {
+			secede_province = THIS
+		}
+	}
+
+	option = {
+		name = "EVTOPTB37720"
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Tetuán War
+country_event = {
+	id = 37721
+	title = "EVTNAME37721"
+	desc = "EVTDESC37721"
+	picture = battle_of_mazagran
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA37721"
+	}
+}
+
+#Rif War
+country_event = {
+	id = 37722
+	title = "EVTNAME37722"
+	desc = "EVTDESC37722"
+	picture = battle_of_mazagran
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA37722"
+		add_country_modifier = { name = full_mobilization duration = 365 }
 	}
 }

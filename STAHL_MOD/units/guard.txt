@@ -5,36 +5,38 @@ guard = {
 	sprite = Guard
 	active = no
 	unit_type = infantry
+	#primary_culture = yes
 	floating_flag = no
-	
+
 	#Core Abilities
 	priority = 18
 	max_strength = 3
 	default_organisation = 30
-	maximum_speed = 5
-	weighted_value = 5.0
+	maximum_speed = 4.00
+	weighted_value = 9.0
 
 
 	#Building Costs
-	build_time = 75
+	build_time = 90
 	build_cost = {
-		steel = 50
-		canned_food = 10
-		regular_clothes = 10
-		#money = 5000
+		small_arms = 20
+		canned_food = 20
+		luxury_clothes = 5
 	}
 	
 	supply_consumption = 1.0
 	supply_cost = {
-		military_packs = 0.04	# 3.75
-		money = 0.06			# 
-		canned_food = 0.16
-	}
+		small_arms = 0.25		#4.5
+		ammunition = 0.25		#3.5
+		canned_food = 0.25		#2
+	}							#10
 	
 
 	#Land Abilties
-	attack = 3.5
-	defence = 3.5
-	discipline = 1.0
+	reconnaissance = 0
+	attack = 9
+	defence = 6
+	discipline = 1.5
+	support = 0.0
 	maneuver = 2
 }

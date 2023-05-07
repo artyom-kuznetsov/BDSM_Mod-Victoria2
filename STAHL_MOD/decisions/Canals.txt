@@ -1,3 +1,5 @@
+## Audax Validator "!" Ignore_1004
+## Audax Validator "!" Ignore_1009
 political_decisions = {
 	build_kiel_canal = {
 		news = yes
@@ -8,21 +10,23 @@ political_decisions = {
 		potential = {
 			NOT = { is_canal_enabled = 1 }
 			owns = 369
-			is_greater_power = yes
+			#is_greater_power = yes
 			mechanical_production = 1
-			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
 			invention = machine_tools
 			invention = nitroglycerin
 			iron_steamers = 1
-			money = 500000
+			money = 2000000
 		}
 		effect = {
 			enable_canal = 1
-			369 = { set_province_flag = kiel_canal }
-			prestige = 30
-			money = -500000
+			treasury = -2000000
+			369 = {
+				set_province_flag = kiel_canal
+				trade_goods = market_goods
+			}
+			prestige = 5
 		}
 		ai_will_do = {
 			factor = 1
@@ -39,12 +43,11 @@ political_decisions = {
 		news_desc_medium = "suez_canal_NEWS_MEDIUM"
 		news_desc_short = "suez_canal_NEWS_SHORT"
 		
-		#picture = suezcanal
+		picture = suezcanal
 		potential = {
 			NOT = { is_canal_enabled = 2 }
-			is_greater_power = yes
+			#is_greater_power = yes
 			mechanical_production = 1
-			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
 			OR = {
@@ -54,15 +57,19 @@ political_decisions = {
 			invention = machine_tools
 			invention = nitroglycerin		
 			iron_steamers = 1
-			money = 1000000
+			money = 2000000
 		}
 		effect = {
 			1755 = { secede_province = THIS }
 			enable_canal = 2
-			1755 = { set_province_flag = suez_canal }
-			prestige = 60
+			treasury = -2000000
+			1755 = {
+				set_province_flag = suez_canal
+				trade_goods = market_goods
+				life_rating = 5
+			}
+			prestige = 10
 			set_global_flag = suez_canal_built
-			money = -1000000
 		}
 		ai_will_do = {
 			factor = 1
@@ -80,28 +87,24 @@ political_decisions = {
 		news_desc_short = "panama_canal_NEWS_SHORT"
 		potential = {
 			NOT = { is_canal_enabled = 3 }
-			is_greater_power = yes
+			#is_greater_power = yes
 			mechanical_production = 1
-			NOT = { has_country_flag = open_money_transfers_flag }
+			NOT = { owns = 1723 }
+			NOT = { has_global_flag = panama_revolt }
 		}
 		allow = {
-			OR = {
-				1723 = { owner = { in_sphere = THIS } }
-				owns = 1723
-			}
+			1723 = { owner = { in_sphere = THIS } }
 			invention = machine_tools
 			invention = nitroglycerin
 			iron_steamers = 1
 			invention = prophylaxis_against_malaria
-			money = 1500000
+			money = 2000000
 		}
 		effect = {
-			1723 = { secede_province = THIS }
-			enable_canal = 3
-			1723 = { set_province_flag = panama_canal }
-			prestige = 60
-			money = -1500000
-			set_global_flag = panama_canal_built
+			treasury = -2000000
+			1723 = {
+				owner = { country_event = { id = 44650 days = 0 } }
+			}
 		}
 		ai_will_do = {
 			factor = 1
@@ -110,5 +113,74 @@ political_decisions = {
 				war = yes
 			}
 		}
-	}	
+	}
+
+	build_panama_canal_2 = {
+		picture = build_panama_canal
+		news = yes
+		news_desc_long = "panama_canal_NEWS_LONG"
+		news_desc_medium = "panama_canal_NEWS_MEDIUM"
+		news_desc_short = "panama_canal_NEWS_SHORT"
+		potential = {
+			NOT = { is_canal_enabled = 3 }
+			#is_greater_power = yes
+			mechanical_production = 1
+			OR = {
+				1723 = { owner = { vassal_of = THIS in_sphere = THIS } }
+				owns = 1723
+			}
+			NOT = { has_global_flag = panama_revolt }
+		}
+		allow = {
+			OR = {
+				1723 = { owner = { vassal_of = THIS in_sphere = THIS } }
+				owns = 1723
+			}
+			invention = machine_tools
+			invention = nitroglycerin
+			iron_steamers = 1
+			invention = prophylaxis_against_malaria
+			money = 2000000
+		}
+		effect = {
+			1723 = { secede_province = THIS }
+			treasury = -2000000
+			enable_canal = 3
+			1723 = {
+				set_province_flag = panama_canal
+				trade_goods = market_goods
+				life_rating = 5
+			}
+			prestige = 10
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war = yes
+			}
+		}
+	}
+
+	build_strait_canals = {
+		potential = {
+			NOT = { is_canal_enabled = 4 }
+			NOT = { is_canal_enabled = 5 }
+			NOT = { is_canal_enabled = 6 }
+			NOT = { is_canal_enabled = 7 }
+			NOT = { is_canal_enabled = 8 }
+			NOT = { is_canal_enabled = 10 }
+		}
+		allow = {
+		}
+		effect = {
+			enable_canal = 4
+			enable_canal = 5
+			enable_canal = 6
+			enable_canal = 7
+			enable_canal = 8
+			enable_canal = 9
+			enable_canal = 10
+		}
+	}
 }

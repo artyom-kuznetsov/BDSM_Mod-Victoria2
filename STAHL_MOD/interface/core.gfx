@@ -43,7 +43,7 @@ spriteTypes = {
 	spriteType = {
 		name = "GFX_pops_small"
 		texturefile = "gfx\\interface\\pops_small.tga"
-		noOfFrames = 12
+		noOfFrames = 13
 		effectFile = "gfx\\FX\\buttonstate.fx"
 		norefcount = yes
 	}
@@ -51,7 +51,7 @@ spriteTypes = {
 	spriteType = {
 		name = "GFX_pops_small2"
 		texturefile = "gfx\\interface\\pops_small.tga"
-		noOfFrames = 12
+		noOfFrames = 13
 		effectFile = "gfx\\FX\\buttonstate2.fx"
 		norefcount = yes
 	}
@@ -59,7 +59,7 @@ spriteTypes = {
 	spriteType = {
 		name = "GFX_pops_mini"
 		texturefile = "gfx\\interface\\pops_mini.tga"
-		noOfFrames = 12
+		noOfFrames = 13
 		effectFile = "gfx\\FX\\buttonstate.fx"
 		norefcount = yes
 	}
@@ -67,33 +67,33 @@ spriteTypes = {
 	spriteType = {
 		name = "GFX_resources_big"
 		texturefile = "gfx\\interface\\resources_big.dds"
-		noOfFrames = 48
+		noOfFrames = 57
 		norefcount = yes
 	}
 	spriteType = {
 		name = "GFX_resources"
 		texturefile = "gfx\\interface\\resources.dds"
-		noOfFrames = 48
+		noOfFrames = 57
 		norefcount = yes
 	}
 	spriteType = {
 		name = "GFX_resources_transparent"
 		texturefile = "gfx\\interface\\resources.dds"
-		noOfFrames = 48
+		noOfFrames = 57
 		norefcount = yes
 		allwaystransparent = yes
 	}
 	spriteType = {
 		name = "GFX_resources_small"
 		texturefile = "gfx\\interface\\resources_small.dds"
-		noOfFrames = 48
+		noOfFrames = 57
 		norefcount = yes
 		allwaystransparent = no
 	}
 	spriteType = {
 		name = "GFX_resources_small_transparent"
 		texturefile = "gfx\\interface\\resources_small.dds"
-		noOfFrames = 48
+		noOfFrames = 57
 		norefcount = yes
 		transparencecheck = yes
 	}
@@ -142,20 +142,6 @@ spriteTypes = {
 	
 	spriteType = {
 		name = "GFX_button_arrow_right"
-		texturefile = "gfx\\interface\\button_arrow_right.tga"
-		loadType = "INGAME"
-		norefcount = yes
-	}
-	
-	spriteType = {
-		name = "GFX_button_arrow_left_1"
-		texturefile = "gfx\\interface\\button_arrow_left.tga"
-		loadType = "INGAME"
-		norefcount = yes
-	}
-	
-	spriteType = {
-		name = "GFX_button_arrow_right_1"
 		texturefile = "gfx\\interface\\button_arrow_right.tga"
 		loadType = "INGAME"
 		norefcount = yes
@@ -433,52 +419,52 @@ lightTypes= {
 		name = "CityLight"
 		light = "DirectionalLight"
 
-		diffuse  = { 1.0 1.0 1.0 1.0 }
+		diffuse = { 1.0 1.0 1.0 1.0 }
 		specular = { 1.0 1.0 1.0 1.0 }
 		ambient	 = { 0.3 0.3 0.3 1.0 }
 
-		direction   = { 0.8 -0.6 0.5 }
+		direction = { 0.8 -0.6 0.5 }
 		attenuation = { 1.0 1.0 1.0 }
 
 		falloff = 0
-		range   = 500
+		range = 500
 	}
 
 #######################################################################
-################## 3 city-lights.. for randomization.   ###############
+################## 3 city-lights.. for randomization. ###############
 #######################################################################
 	lightType = {
 		name = "CityLight0"
 		light = "DirectionalLight"
-		diffuse  = { 0.8 0.8 0.5 1.0 }
+		diffuse = { 0.8 0.8 0.5 1.0 }
 		specular = { 1.0 1.0 1.0 1.0 }
 		ambient	 = { 0.3 0.3 0.3 1.0 }
-		direction   = { -0.5 -1.0 1.0 }
+		direction = { -0.5 -1.0 1.0 }
 		attenuation = { 1.0 1.0 1.0 }
 		falloff = 0
-		range   = 500
+		range = 500
 	}
 	lightType = {
 		name = "CityLight1"
 		light = "DirectionalLight"
-		diffuse  = { 1.0 0.0 0.0 1.0 }
+		diffuse = { 1.0 0.0 0.0 1.0 }
 		specular = { 1.0 1.0 1.0 1.0 }
 		ambient	 = { 0.5 0.5 0.5 1.0 }
-		direction   = { 0.5 -1.0 1.0 }
+		direction = { 0.5 -1.0 1.0 }
 		attenuation = { 1.0 1.0 1.0 }
 		falloff = 0
-		range   = 500
+		range = 500
 	}
 	lightType = {
 		name = "CityLight2"
 		light = "DirectionalLight"
-		diffuse  = { 0.5 0.5 0.0 1.0 }
+		diffuse = { 0.5 0.5 0.0 1.0 }
 		specular = { 1.0 1.0 1.0 1.0 }
 		ambient	 = { 0.4 0.4 0.5 1.0 }
-		direction   = { 0.0 -0.4 1.0 }
+		direction = { 0.0 -0.4 1.0 }
 		attenuation = { 1.0 1.0 1.0 }
 		falloff = 0
-		range   = 500
+		range = 500
 	}
 #######################################################################
 }
@@ -504,7 +490,7 @@ objectTypes = {
 			color = { 1.0 1.0 0.0 }
 			font = "MaptextFont"
 			position = { x=0 y=40 }
-			size = { x=256 y = 64  }
+			size = { x=256 y = 64 }
 			format = centre
 		}
 	}
@@ -517,7 +503,7 @@ objectTypes = {
 			color = { 1.0 1.0 0.0 }
 			font = "MaptextFont"
 			position = { x=0 y=40 }
-			size = { x=256 y = 64  }
+			size = { x=256 y = 64 }
 			format = centre
 		}
 	}
@@ -530,7 +516,7 @@ objectTypes = {
 			color = { 0.8 0.8 0.0 }
 			font = "MaptextFont"
 			position = { x=0 y=40 }
-			size = { x=256 y = 64  }
+			size = { x=256 y = 64 }
 			format = centre
 		}
 	}
@@ -542,8 +528,8 @@ objectTypes = {
 			color = { 1.0 0.0 0.0 }
 			font = "MaptextFont"
 			position = { x=0 y=40 }
-#			size = { x=512 y = 128  }
-			size = { x=256 y = 64  }
+#			size = { x=512 y = 128 }
+			size = { x=256 y = 64 }
 			format = centre
 		}
 	}
@@ -587,7 +573,7 @@ objectTypes = {
 			color = { 0.9 0.9 0.0 }
 			font = "MaptextFont"
 			position = { x=0 y=40 }
-			size = { x=256 y = 64  }
+			size = { x=256 y = 64 }
 			format = centre
 		}
 	}	
@@ -633,7 +619,7 @@ objectTypes = {
 }
 
 
-####  SETS COLORS ON _ALL_ FONTS (dont remove) #####
+#### SETS COLORS ON _ALL_ FONTS (dont remove) #####
 bitmapfonts = {
 	bitmapfont = {
 		name = "ToolTip_Font"
@@ -648,6 +634,7 @@ bitmapfonts = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 	############################
@@ -665,6 +652,7 @@ bitmapfonts = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 
@@ -760,6 +748,7 @@ bitmapfonts = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 	
@@ -799,6 +788,7 @@ bitmapfonts = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 	
@@ -970,7 +960,7 @@ bitmapfonts = {
 	}
 	
 
-	####       VICKY 2 FONTS BELOW         ############
+	#### VICKY 2 FONTS BELOW ############
 	
 	bitmapfont = {
 		name = "old_english"
@@ -1011,6 +1001,7 @@ bitmapfonts = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 	
@@ -1033,6 +1024,7 @@ bitmapfonts = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}		
 	}
 	
@@ -1048,6 +1040,7 @@ bitmapfonts = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}		
 	}
 	
@@ -1077,6 +1070,7 @@ bitmapfont = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 	
@@ -1099,6 +1093,7 @@ bitmapfont = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 	bitmapfont = {
@@ -1130,6 +1125,7 @@ bitmapfont = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 bitmapfont = {
@@ -1151,6 +1147,7 @@ bitmapfont = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 	bitmapfont = {
@@ -1178,6 +1175,7 @@ bitmapfont = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 bitmapfont = {
@@ -1199,6 +1197,7 @@ bitmapfont = {
 			b = { 0 0 0 }
 			g = { 176 176 176 }
 			Y = { 255 189 0 }
+			h = { 0 130 255 }
 		}
 	}
 bitmapfont = {
@@ -1226,17 +1225,25 @@ bitmapfont = {
 		fontname = "mapfont_56"
 		color = 0xffffffff	
 	}
-
-	bitmapfont = {
-		name = "mapfont_56_small"
-		fontname = "vic_22_bl"
-		color = 0xff000000	
+bitmapfont = {
+	name = "mapfont_56_small"
+	fontname = "vic_22_bl"
+	color = 0xff000000	
 	}
-
+bitmapfont = {
+		name = "kart_font"
+		fontname = "kart_font"
+		color = 0xffffffff	
+	}
+bitmapfont = {
+	name = "true_mapfont_56_small"
+	fontname = "mapfont_56_small"
+	color = 0xff000000	
+	}
 
 }
 
-###########      NORMAL FONTS.
+########### NORMAL FONTS.
 
 fonts = {
 
