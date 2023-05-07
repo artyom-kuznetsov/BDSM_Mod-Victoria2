@@ -689,59 +689,59 @@ province_event = {
 
 ########## UNOCCUPY PROVINCES ##########
 
-country_event = {
-	id = 91711
-	title = "EVTNAME91711"
-	desc = "EVTDESC91711"
-	picture = cease_fire
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA91711"
-		FROM = {
-			country_event = { id = 91712 days = 0 }
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB91711"
-		FROM = {
-			country_event = { id = 91713 days = 0 }
-		}
-	}
-}
-
-country_event = {
-	id = 91712
-	title = "EVTNAME91712"
-	desc = "EVTDESC91712"
-	picture = cease_fire
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA91712"
-		any_owned = {
-			limit = { controlled_by = FROM }
-			change_controller = THIS
-		}
-	}
-}
-
-country_event = {
-	id = 91713
-	title = "EVTNAME91713"
-	desc = "EVTDESC91713"
-	picture = cease_fire
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA91713"
-	}
-}
-
+#country_event = {
+#	id = 91711
+#	title = "EVTNAME91711"
+#	desc = "EVTDESC91711"
+#	picture = cease_fire
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = "EVTOPTA91711"
+#		FROM = {
+#			country_event = { id = 91712 days = 0 }
+#		}
+#	}
+#	
+#	option = {
+#		name = "EVTOPTB91711"
+#		FROM = {
+#			country_event = { id = 91713 days = 0 }
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = 91712
+#	title = "EVTNAME91712"
+#	desc = "EVTDESC91712"
+#	picture = cease_fire
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = "EVTOPTA91712"
+#		any_owned = {
+#			limit = { controlled_by = FROM }
+#			change_controller = THIS
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = 91713
+#	title = "EVTNAME91713"
+#	desc = "EVTDESC91713"
+#	picture = cease_fire
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = "EVTOPTA91713"
+#	}
+#}
+#
 ########## RGO CHANGE EVENTS ##########
 
 province_event = {

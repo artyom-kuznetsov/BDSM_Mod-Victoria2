@@ -1,0 +1,122 @@
+country_event = {
+	id = 25400
+	title = "Faketitle"
+	desc = "Faketitle"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Faketitle"
+		ai_chance = {
+			factor = 5
+		}
+	}
+	
+	option = {
+		name = "Faketitle"
+		ai_chance = {
+			factor = 5
+		}
+		any_owned = {
+			province_selector = -1
+		}
+		FROM = {
+			prestige = 5
+			inherit = THIS
+		}
+	}
+	
+}
+country_event = { # MINOR GOOD RELATION ANNEX
+	id = 25401
+	title = "Faketitle"
+	desc = "Faketitle"
+	
+	trigger = {
+		is_culture_group = italian
+		ai = yes
+		OR = {
+			SAR = {
+				ai = no
+				OR = {
+					is_sphere_leader_of = THIS
+					AND = {
+						relation = {
+							who = THIS
+							value = 149
+						}
+						alliance_with = THIS
+					}
+				}
+			}
+			SIC = {
+				ai = no
+				OR = {
+					is_sphere_leader_of = THIS
+					AND = {
+						relation = {
+							who = THIS
+							value = 149
+						}
+						alliance_with = THIS
+					}
+				}
+			}
+			PAP = {
+				ai = no
+				OR = {
+					is_sphere_leader_of = THIS
+					AND = {
+						relation = {
+							who = THIS
+							value = 149
+						}
+						alliance_with = THIS
+					}
+				}
+			}
+			ITA = {
+				ai = no
+				OR = {
+					is_sphere_leader_of = THIS
+					AND = {
+						relation = {
+							who = THIS
+							value = 149
+						}
+						alliance_with = THIS
+					}
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = {
+		name = "Faketitle"
+		any_owned = {
+			province_selector = -1
+		}
+		any_country = {
+			limit = {
+				ai = no 
+				is_culture_group = italian
+				OR = {
+					AND = {
+						relation = {
+							who = THIS
+							value = 149
+						}
+						alliance_with = THIS
+					}
+					is_sphere_leader_of = THIS
+				}
+			}
+			inherit = THIS
+			prestige = 5
+		}
+	}
+}
