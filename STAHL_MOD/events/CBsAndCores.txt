@@ -1,3 +1,565 @@
+# Ship Explodes!
+country_event = {
+	id = 2510
+	title = "EVTNAME2510"
+	desc = "EVTDESC2510"
+	news = yes
+	news_desc_long = "EVTDESC2510_NEWS_LONG"
+	news_desc_medium = "EVTDESC2510_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC2510_NEWS_SHORT"
+	picture = "ship_attacked"
+	
+	trigger = {
+		war = no
+		is_greater_power = yes
+		steel_steamers = 1
+		steamer_convoy = 1
+		any_greater_power = {
+			num_of_ports = 5
+			NOT = {
+				alliance_with = THIS
+			}
+		}
+		press_rights = free_press
+		NOT = {
+			OR = {
+				government = democracy
+				government = hms_government
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 150
+		modifier = {
+			factor = 0.9
+			prestige = 20
+		}
+		modifier = {
+			factor = 0.9
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 5
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 10
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 5
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 10
+		}
+		modifier = {
+			factor = 0.8
+			war_policy = jingoism
+		}
+		modifier = {
+			factor = 0.9
+			war_policy = pro_military
+		}
+		modifier = {
+			factor = 1.1
+			war_policy = anti_military
+		}
+		modifier = {
+			factor = 1.2
+			war_policy = pacifism
+		}
+		modifier = {
+			factor = 0.9
+			nationalism_n_imperialism = 1
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA2510"
+		steamer_convoy = -1
+		random_country = {
+			limit = {
+				is_greater_power = yes
+				num_of_ports = 5
+				NOT = {
+					alliance_with = THIS
+					tag = THIS
+				}
+			}
+			add_casus_belli = {
+				target = THIS
+				type = cut_down_to_size
+				months = 12
+			}
+			relation = {
+				who = THIS
+				value = -50
+			}
+		}
+		any_pop = {
+			dominant_issue = {
+				value = jingoism
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB2510"
+		steamer_convoy = -1
+		random_country = {
+			limit = {
+				is_greater_power = yes
+				num_of_ports = 5
+				NOT = {
+					alliance_with = THIS
+					tag = THIS
+				}
+			}
+			relation = {
+				who = THIS
+				value = 30
+			}
+		}
+		any_pop = {
+			dominant_issue = {
+				value = jingoism
+				factor = 0.2
+			}
+			militancy = 2
+		}
+		prestige = -10
+	}
+}
+
+# Ambassador Insulted
+country_event = {
+	id = 2520
+	title = "EVTNAME2520"
+	desc = "EVTDESC2520"
+	picture = "Administration"
+	
+	trigger = {
+		is_greater_power = yes
+		prestige = 30
+		any_greater_power = {
+			NOT = {
+				relation = {
+					who = THIS
+					value = 40
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 95
+		modifier = {
+			factor = 0.5
+			OR = {
+				government = proletarian_dictatorship
+				government = fascist_dictatorship
+			}
+		}
+
+		modifier = {
+			factor = 0.9
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 5
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 10
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 5
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 10
+		}
+		modifier = {
+			factor = 0.8
+			war_policy = jingoism
+		}
+		modifier = {
+			factor = 0.9
+			war_policy = pro_military
+		}
+		modifier = {
+			factor = 1.1
+			war_policy = anti_military
+		}
+		modifier = {
+			factor = 1.2
+			war_policy = pacifism
+		}
+		modifier = {
+			factor = 0.9
+			nationalism_n_imperialism = 1
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA2520"
+		random_country = {
+			limit = {
+				is_greater_power = yes
+				NOT = {
+					tag = THIS
+					relation = {
+						who = THIS
+						value = 40
+					}
+				}
+			}
+			add_casus_belli = {
+				target = THIS
+				type = humiliate
+				months = 3
+			}
+			relation = {
+				who = THIS
+				value = -20
+			}
+		}
+		prestige = -5
+	}
+	
+	option = {
+		name = "EVTOPTB2520"
+		ai_chance = {
+			factor = 55
+			modifier = {
+				factor = 20
+				government = democracy
+			}
+			modifier = {
+				factor = 10
+				government = hms_government
+			}
+		}
+		random_country = {
+			limit = {
+				is_greater_power = yes
+				NOT = {
+					tag = THIS
+					relation = {
+						who = THIS
+						value = 40
+					}
+				}
+			}
+			relation = {
+				who = THIS
+				value = 20
+			}
+		}
+		prestige = 1
+	}
+}
+
+# The Incident
+country_event = {
+	id = 2530
+	title = "EVTNAME2530"
+	desc = "EVTDESC2530"
+	picture = "patrol"
+	
+	trigger = {
+		war = no
+		colonial_nation = yes
+		any_greater_power = {
+			colonial_nation = yes
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 150
+		modifier = {
+			factor = 0.5
+			OR = {
+				government = proletarian_dictatorship
+				government = fascist_dictatorship
+			}
+		}
+		modifier = {
+			factor = 0.9
+			prestige = 20
+		}
+		modifier = {
+			factor = 0.9
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 5
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 10
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 5
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 10
+		}
+		modifier = {
+			factor = 0.8
+			war_policy = jingoism
+		}
+		modifier = {
+			factor = 0.9
+			war_policy = pro_military
+		}
+		modifier = {
+			factor = 1.1
+			war_policy = anti_military
+		}
+		modifier = {
+			factor = 1.2
+			war_policy = pacifism
+		}
+		modifier = {
+			factor = 0.9
+			nationalism_n_imperialism = 1
+		}
+		modifier = {
+			factor = 0.9
+			is_greater_power = yes
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA2530"
+		random_country = {
+			limit = {
+				colonial_nation = yes
+				NOT = {
+					tag = THIS
+				}
+			}
+			add_casus_belli = {
+				target = THIS
+				type = place_in_the_sun
+				months = 6
+			}
+			relation = {
+				who = THIS
+				value = -20
+			}
+		}
+	}
+	option = {
+		name = "EVTOPTB2530"
+		any_pop = {
+			dominant_issue = {
+				value = jingoism
+				factor = 0.05
+			}
+			militancy = 0.5
+		}
+	}
+}
+
+# Merchant Conflict
+country_event = {
+	id = 2540
+	title = "EVTNAME2540"
+	desc = "EVTDESC2540"
+	picture = "Thermopylae"
+	
+	trigger = {
+		is_greater_power = yes
+		economic_policy = laissez_faire
+		OR = {
+			war_policy = jingoism
+			war_policy = pro_military
+		}
+		any_neighbor_country = {
+			NOT = {
+				economic_policy = laissez_faire
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 125
+		modifier = {
+			factor = 0.5
+			OR = {
+				government = democracy
+				government = hms_government
+			}
+		}
+		modifier = {
+			factor = 0.9
+			prestige = 20
+		}
+		modifier = {
+			factor = 0.9
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 5
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 10
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 5
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 10
+		}
+		modifier = {
+			factor = 0.8
+			war_policy = jingoism
+		}
+		modifier = {
+			factor = 0.9
+			war_policy = pro_military
+		}
+		modifier = {
+			factor = 1.1
+			war_policy = anti_military
+		}
+		modifier = {
+			factor = 1.2
+			war_policy = pacifism
+		}
+		modifier = {
+			factor = 0.9
+			nationalism_n_imperialism = 1
+		}
+		modifier = {
+			factor = 0.9
+			is_greater_power = yes
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA2540"
+		random_country = {
+			limit = {
+				NOT = {
+					tag = THIS
+					economic_policy = laissez_faire
+				}
+			}
+			add_casus_belli = {
+				target = THIS
+				type = cut_down_to_size
+				months = 6
+			}
+		}
+	}
+}
+
+#Anti Colonial
+country_event = {
+	id = 2550
+	title = "EVTNAME2550"
+	desc = "EVTDESC2550"
+	picture = "Waitangi"
+	
+	trigger = {
+		civilized = no
+		military_score = 5
+		colonial_nation = no
+		any_neighbor_country = {
+			colonial_nation = yes
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 125
+		modifier = {
+			factor = 0.5
+			OR = {
+				government = proletarian_dictatorship
+				government = fascist_dictatorship
+			}
+		}
+		modifier = {
+			factor = 0.9
+			prestige = 20
+		}
+		modifier = {
+			factor = 0.9
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 5
+		}
+		modifier = {
+			factor = 0.9
+			jingoism = 10
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 5
+		}
+		modifier = {
+			factor = 1.1
+			pacifism = 10
+		}
+		modifier = {
+			factor = 0.8
+			war_policy = jingoism
+		}
+		modifier = {
+			factor = 0.9
+			war_policy = pro_military
+		}
+		modifier = {
+			factor = 1.1
+			war_policy = anti_military
+		}
+		modifier = {
+			factor = 1.2
+			war_policy = pacifism
+		}
+		modifier = {
+			factor = 0.9
+			nationalism_n_imperialism = 1
+		}
+		modifier = {
+			factor = 0.9
+			is_greater_power = yes
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA2550"
+		random_country = {
+			limit = {
+				neighbour = THIS
+				colonial_nation = yes
+			}
+			add_casus_belli = {
+				target = THIS
+				type = humiliate
+				months = 4
+			}
+		}
+	}
+}
+
 # Gain Core event
 province_event = {
 	id = 2560
@@ -5,61 +567,56 @@ province_event = {
 	desc = "EVTDESC2560"
 	
 	trigger = {
-		NOT = { has_global_flag = coring_enabled }
-		owner = { nationalism_n_imperialism = 1 }
 		NOT = { is_core = THIS }
 		controlled_by = THIS
 		is_colonial = no
 		OR = {
-			AND = {
-				is_coastal = yes
-				OR = {
-					is_primary_culture = yes
-					is_accepted_culture = yes
-				}
-			}
+			is_primary_culture = yes
+			is_accepted_culture = yes
 			any_neighbor_province = {
 				is_core = THIS
 				controlled_by = THIS
 			}
 		}
-		owner = { tag = THIS }
+		owner = {
+			tag = THIS
+			nationalism_n_imperialism = 1
+		}
 	}
 	
 	mean_time_to_happen = {
-		months = 480
+		months = 150
 		modifier = {
-			factor = 0.3
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
-			OR = {
-				NOT = {
-					OR = {
-						is_core = KUK
-						is_core = AUS
-						is_core = DNB
-					}
-				}
-				owner = {
-					NOT = {
-						primary_culture = north_german
-					}
-				}
+			factor = 0.5
+			is_primary_culture = yes
+		}
+		modifier = {
+			factor = 0.8
+			is_coastal = yes
+		}
+		modifier = {
+			factor = 0.9
+			NOT = {
+				average_militancy = 1
 			}
 		}
 		modifier = {
-			factor = 2
-			average_militancy = 3
+			factor = 0.9
+			NOT = {
+				average_militancy = 2
+			}
 		}
 		modifier = {
-			factor = 2
-			average_militancy = 5
+			factor = 0.95
+			NOT = {
+				average_militancy = 3
+			}
 		}
 		modifier = {
-			factor = 10
-			average_militancy = 9
+			factor = 0.9
+			NOT = {
+				average_consciousness = 4
+			}
 		}
 	}
 	
@@ -69,215 +626,58 @@ province_event = {
 	}
 }
 
+# Fascist Aggression
 country_event = {
-	id = 2561
-	title = "EVTNAME2561"
-	desc = "EVTDESC2561"
-	picture = great_war_surrender
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA2561"
-		FROM = {
-			any_owned = {
-				remove_core = THIS
-			}
-		}
-	}
-}
-
-# Dismantle Nation
-country_event = {
-	id = 2580
-	title = "EVTNAME2580"
-	desc = "EVTDESC2580"
-	major = yes
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA2580"
-		any_country = {
-			limit = {
-				exists = yes
-				civilized = yes
-				NOT = { tag = FROM }
-				NOT = { OR = { tag = CHI tag = KMT } }
-				any_core = {
-					owned_by = THIS
-				}
-			}
-			country_event = { id = 2582 days = 0 }
-		}
-		any_country = {
-			limit = {
-				vassal_of = THIS
-			}
-			country_event = { id = 2583 days = 0 }
-		}
-		country_event = { id = 2581 days = 0 }
-	}
-}
-
-country_event = {
-	id = 2581
-	title = "EVTNAME2581"
-	desc = "EVTDESC2581"
-	picture = central_victory
+	id = 2570
+	title = "EVTNAME2570"
+	desc = "EVTDESC2570"
+	picture = "Parade"
 	
-	is_triggered_only = yes
+	trigger = {
+		government = fascist_dictatorship
+		average_consciousness = 4
+	}
 
-	option = {
-		name = "EVTOPTA2581"
-		any_country = {
-			limit = {
-				is_cultural_union = no
-				civilized = yes
-				NOT = { capital_scope = { continent = africa } }
-				NOT = { tag = FROM }
-				any_core = {
-					owned_by = THIS
-				}
-				NOT = { this_culture_union = FROM }
-			}
-			country_event = { id = 2582 days = 0 }
+	mean_time_to_happen = {
+		months = 90
+		modifier = {
+			factor = 0.9
+			average_consciousness = 5
 		}
-		any_country = {
-			limit = { has_country_flag = dismantling_nation }
-			country_event = { id = 2584 days = 1 }
+		modifier = {
+			factor = 0.9
+			average_consciousness = 6
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				military_score = 75
+			}
+		}
+		modifier = {
+			factor = 1.5
+			NOT = {
+				prestige = 20
+			}
+		}
+		modifier = {
+			factor = 1.5
+			average_militancy = 2
 		}
 	}
-}
-
-country_event = {
-	id = 2582
-	title = "EVTNAME2582"
-	desc = "EVTDESC2582"
-	picture = central_victory
 	
-	is_triggered_only = yes
-
 	option = {
-		name = "EVTOPTA2582"
-		FROM = {
-			any_owned = {
-				limit = { is_core = THIS }
-				secede_province = THIS
+		name = "EVTOPTA2570"
+		random_country = {
+			limit = {
+				neighbour = THIS
+			}
+			add_casus_belli = {
+				target = THIS
+				type = conquest
+				months = 6
 			}
 		}
 	}
 }
 
-country_event = {
-	id = 2583
-	title = "EVTNAME2583"
-	desc = "EVTDESC2583"
-	picture = central_victory
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA2583"
-		release_vassal = THIS
-		leave_alliance = FROM
-		FROM = {
-			diplomatic_influence = {
-				who = THIS
-				value = -200
-			}
-		}
-	}
-}
-
-country_event = {
-	id = 2584
-	title = "EVTNAME2584"
-	desc = "EVTDESC2584"
-	picture = central_victory
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA2584"
-		clr_country_flag = dismantling_nation
-		FROM = {
-			any_owned = {
-				limit = {
-					is_overseas = yes
-				}
-				secede_province = THIS
-			}
-		}
-	}
-}
-
-#country_event = {
-#	id = 2585
-#	title = "EVTNAME2580"
-#	desc = "EVTDESC2580"
-#
-#	is_triggered_only = yes
-#
-#	option = {
-#		name = "EVTOPTA2580"
-#		any_country = {
-#			limit = {
-#				civilized = yes
-#				any_core = {
-#					owned_by = THIS
-#				}
-#			}
-#			country_event = { id = 2582 days = 0 }
-#		}
-#		any_country = {
-#			limit = {
-#				vassal_of = THIS
-#			}
-#			country_event = { id = 2583 days = 0 }
-#		}
-#		country_event = { id = 2586 days = 0 }
-#	}
-#}
-
-#country_event = {
-#	id = 2586
-#	title = "EVTNAME2581"
-#	desc = "EVTDESC2581"
-#	picture = central_victory
-#	
-#	is_triggered_only = yes
-#
-#	option = {
-#		name = "EVTOPTA2581"
-#		any_country = {
-#			limit = { has_country_flag = dismantling_nation }
-#			country_event = { id = 2587 days = 1 }
-#		}
-#	}
-#}
-
-#country_event = {
-#	id = 2587
-#	title = "EVTNAME2584"
-#	desc = "EVTDESC2584"
-#	picture = central_victory
-#
-#	is_triggered_only = yes
-#
-#	option = {
-#		name = "EVTOPTA2584"
-#		clr_country_flag = dismantling_nation
-#		FROM = {
-#			any_owned = {
-#				limit = {
-#					NOT = {
-#						is_core = FROM
-#						is_core = SUD
-#					}
-#				}
-#				secede_province = THIS
-#			}
-#		}
-#	}
-#}

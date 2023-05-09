@@ -16,18 +16,27 @@ infantry = {
 
 
 	#Building Costs
-	build_time = 90
+	build_time = 75
 	build_cost = {
-		small_arms = 20
-		canned_food = 20
+		steel = 50
+		canned_food = 10
+		regular_clothes = 10
+		#money = 1000
 	}
 	
 	supply_consumption = 1.0
+	#supply_cost = {
+	#	small_arms = 0.04 # 1.48
+	#	ammunition = 0.06 # 1.05
+	#	canned_food = 0.05 # 0.8
+	#	regular_clothes = 0.05 # 0.29
+	#	money = 0.2 # 1.6 # 5.22
+	#}
 	supply_cost = {
-		small_arms = 0.08		#1.44
-		ammunition = 0.09		#1.26
-		canned_food = 0.08		#0.64
-	}							#3.35
+		military_packs = 0.05	# 3.75
+		money = 0.06			# 
+		canned_food = 0.16
+	}
 	
 
 	#Land Abilties
@@ -35,6 +44,5 @@ infantry = {
 	attack = 4
 	defence = 4
 	discipline = 1.0
-	support = 0.0
 	maneuver = 1
 }

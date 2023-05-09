@@ -1,0 +1,236 @@
+political_decisions = {
+	russification_of_baltics_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			OR = {
+				owns = 349
+				owns = 354
+				owns = 360
+			}
+			empiricism = 1
+			OR = {
+				tag = RUS
+				tag = SWE
+				tag = SCA
+			}
+			NOT = { has_country_flag = baltics_russificated_flag }
+		}
+		allow = {
+			biologism = 1
+			phenomenalism = 1
+			money = 1000000
+			NOT = { citizens_rights = primary_culture_only }
+		}
+		effect = {
+			add_accepted_culture = estonian
+			any_pop = {
+				limit = {
+					has_pop_culture = estonian
+				}
+				consciousness = 10
+				militancy = 10
+			}
+			set_country_flag = baltics_russificated_flag
+			money = -1000000
+		}
+	}
+	integrate_finland_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			OR = { 
+				OR = {
+					AND = {
+						tag = RUS
+						has_country_flag = treaty_of_narva_flag
+					}
+					AND = {
+						tag = RUS
+						NOT = { 339 = { owned_by = FIN } }
+					}
+				}
+				tag = SWE
+				tag = SCA
+			}
+			FIN = { vassal_of = THIS }
+			NOT = { has_global_flag = finland_integrated_flag }
+		}
+		allow = {
+			OR = {
+				AND = {
+					revolution_n_counterrevolution = 1
+					tag = RUS
+				}
+				tag = SWE
+				tag = SCA
+			}
+			nationalism_n_imperialism = 1
+			iron_railroad = 1
+			scientific_management = 1
+			NOT = { citizens_rights = primary_culture_only }
+			NOT = { centralization = regionalism }
+		}
+		effect = {
+			inherit = FIN
+			badboy = 2
+			prestige = 5
+			money = -500000
+			set_global_flag = finland_integrated_flag
+		}
+	}
+	
+	treaty_of_narva_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = RUS
+			FIN = { exists = yes }
+			NOT = { has_country_flag = treaty_of_narva_flag }
+			NOT = { truce_with = FIN }
+		}
+		allow = {
+			nationalism_n_imperialism = 1
+			private_bank_money_bill_printing = 1
+			OR = {
+				is_sphere_leader_of = FIN
+				FIN = { vassal_of = THIS }
+			}
+			money = 200000
+		}
+		effect = {
+			FIN = { country_event = 32515 }
+			money = -200000
+			set_country_flag = treaty_of_narva_flag
+		}
+		
+	}
+	
+	move_capital_to_moscow = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = RUS
+			owns = 1008 # Moscow
+			capital = 994
+		}
+		
+		allow = {
+			owns = 1008 # Moscow
+			NOT = {
+				OR = {
+					339 = { owned_by = THIS }
+					339 = {
+						owner = { vassal_of = THIS } 
+					}
+				}
+			}
+		}
+		
+		effect = {
+			capital = 1008
+			prestige = 5
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	settle_siberia_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = RUS
+			NOT = { has_country_flag = colonize_siberia_flag }
+			year = 1840
+		}
+		
+		allow = {
+			owns = 1008 # Moscow
+			colonial_policy = settlement
+			money = 500000
+		}
+		effect = {
+			set_country_flag = colonize_siberia_flag
+			money = -500000
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	abolish_serfdom = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = RUS
+			has_country_flag = serfdom_not_abolished
+			#government = absolute_monarchy
+			debt_law = serfdom
+		}
+		allow = {
+			OR = {
+				AND = {
+					upper_house = {
+						ideology = liberal
+						value = 0.3
+					}
+					average_consciousness = 1.5
+				}	
+				AND = {
+					ruling_party_ideology = liberal
+					average_consciousness = 2
+				}
+				average_militancy = 3
+			}
+			money = 1000000
+		}
+		effect = {
+			farmers = {
+				militancy = -2
+				consciousness = 1
+			}
+			labourers = {
+				militancy = -2
+				consciousness = 1
+			}
+			badboy = -4
+			years_of_research = 0.05
+			clr_country_flag = serfdom_not_abolished
+			money = -1000000
+			political_reform = debtors_prisons
+		}
+	}
+	peking_convention = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			owns = 1080
+			MCK = { owns = 1082 }
+			NOT = {
+				has_country_flag = peking_convention
+				war_with = MCK
+			}
+
+			#has_global_flag = summer_palace_torched
+			state_n_government = 1
+			#owns = 1087
+		}
+		
+		allow = {
+			is_greater_power = yes
+			is_sphere_leader_of = MCK
+		}
+		
+		effect = {
+			CHI_1082 = {
+				add_core = THIS
+			}
+			1469 = {
+				add_core = THIS
+			}
+			set_country_flag = peking_convention			
+			CHI = {
+				country_event = { id=80000 days=0 }
+			}
+			prestige = 2
+			1082 = { secede_province = THIS }
+			1083 = { secede_province = THIS }
+			1084 = { secede_province = THIS }
+			1085 = { secede_province = THIS }
+			2617 = { secede_province = THIS }
+		}
+	}
+
+}

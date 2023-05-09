@@ -1,84 +1,48 @@
 political_decisions = {
-	form_sweden_norway = {
-		picture = sweden_norway
+	svenska_pansarbats_foreningen = {
 		potential = {
-			tag = SWE
-			NOT = { has_country_flag = sweden_norway_formed }
-			SWE_329 = { owned_by = THIS }
-			SWE_318 = { owned_by = THIS }
-			SWE_322 = { owned_by = THIS }
-			NOT = { has_country_flag = norwegian_independence }
-			NOR = {
-				ai = yes
-				all_core = {
-					OR = {
-						owned_by = THIS
-						owner = {
-							vassal_of = THIS
-						}
-					}
+			NOT = { has_country_flag = open_money_transfers_flag }
+			OR = {
+				tag = SWE
+				AND = {
+					tag = SCA
+					primary_culture = swedish
 				}
+			}
+			owns = 329
+			NOT = {
+				has_country_flag = hms_sverige_built
+			}
+			any_neighbor_country = {
+				invention = protected_cruisers
 			}
 		}
 		
 		allow = {
-			OR = {
-				is_greater_power = yes
-				AND = {
-					OR = {
-						vote_franschise = wealth_voting
-						vote_franschise = universal_weighted_voting
-						vote_franschise = universal_voting
-					}
-					OR = {
-						upper_house_composition = state_equal_weight
-						upper_house_composition = population_equal_weight
-					}
-					public_meetings = yes_meeting
-					OR = {
-						press_rights = censored_press
-						press_rights = free_press
-					}
-					NOT = {
-						OR = {
-							political_parties = underground_parties
-							political_parties = harassment
-						}
-					}
-					NOT = { citizens_rights = primary_culture_only }
-				}
-				AND = {
-					SWE = {
-						all_core = {
-							OR = {
-								owned_by = THIS
-								is_core = FIN
-							}
-						}
-					}
-					NOR = {
-						all_core = { owned_by = THIS }
-					}
-				}
+			NOT = {
+				average_militancy = 3
 			}
+			steel_steamers = 1
 		}
 		
 		effect = {
-			prestige = 20
-			set_country_flag = sweden_norway_formed
-			change_tag = KSN
-			NOR = {
-				all_core = { add_core = THIS }
+			any_pop = {
+				money = -0.1
 			}
-			inherit = NOR
-			
+			329 = {
+				sub_unit = {
+					type = cruiser
+					value = current
+				}
+			}
+			set_country_flag = hms_sverige_built
 		}
 	}
 	pass_folkskolereformen = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = SWE
-				tag = KSN
 				AND = {
 					tag = SCA
 					primary_culture = swedish
@@ -90,7 +54,8 @@ political_decisions = {
 		}
 		
 		allow = {
-			ideological_thought = 1
+			state_n_government = 1
+			positivism = 1
 		}
 		
 		effect = {
@@ -100,11 +65,12 @@ political_decisions = {
 			}
 		}
 	}
+	
 	the_vega_expedition = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = SWE
-				tag = KSN
 				AND = {
 					tag = SCA
 					primary_culture = swedish
@@ -128,11 +94,12 @@ political_decisions = {
 			set_country_flag = the_vega_expedition_went
 		}
 	}
+	
 	expand_motala_verkstad = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = SWE
-				tag = KSN
 				AND = {
 					tag = SCA
 					primary_culture = swedish
@@ -164,31 +131,45 @@ political_decisions = {
 			set_global_flag = motala_verkstad_expanded
 		}
 	}
-	embrace_estonians = {
-		picture = nordic_estonia
+	
+	court_yard_speech = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = SWE
-				tag = KSN
-				tag = FIN
+				AND = {
+					tag = SCA
+					primary_culture = swedish
+				}
+			}
+			government = hms_government
+			OR = {
+				vote_franschise = wealth_weighted_voting
+				vote_franschise = wealth_voting
 			}
 			NOT = {
-				has_global_flag = estonians_embraced
+				has_country_flag = court_yard_speech_held
 			}
 		}
 		
 		allow = {
-			EST = {
-				all_core = {
-					owned_by = THIS
-				}
+			OR = {
+				war_policy = pacifism
+				war_policy = anti_military
 			}
-			citizens_rights = all_voting_pops
+			OR = {
+				pro_military = 10
+				jingoism = 10
+			}
 		}
 		
 		effect = {
-			add_accepted_culture = estonian
-			set_global_flag = estonians_embraced
+			ruling_party_ideology = conservative
+			any_pop = {
+				militancy = -0.5
+				
+			}
+			set_country_flag = court_yard_speech_held
 		}
 	}
 }

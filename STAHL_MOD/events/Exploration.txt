@@ -16,7 +16,6 @@ country_event = {
 		not = { owns = 2019 } # Entebbe, where direct source of Nile is located
 		is_greater_power = yes # Nation is a great power
 		year = 1866 # Will happen sometime after 1866
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
@@ -42,12 +41,6 @@ country_event = {
 	
 
 	option = {
-		name = "EVTOPTA23200" # Support the mission
-		ai_chance = { factor = 25 }
-		money = -1000
-		set_country_flag = YesGoToNile
-	}
-	option = {
 		name = "EVTOPTB23200" # Consider the idea later
 		ai_chance = { factor = 45 }
 		prestige = -5
@@ -57,6 +50,12 @@ country_event = {
 		ai_chance = { factor = 30 }
 		set_country_flag = NoGoToNile
 		prestige = -10
+	}
+	option = {
+		name = "EVTOPTA23200" # Support the mission
+		ai_chance = { factor = 25 }
+		money = -600000
+		set_country_flag = YesGoToNile
 	}
 }
 
@@ -69,7 +68,6 @@ country_event = {
 		not = { has_global_flag = NileDiscovered }
 		not = { has_country_flag = NoGoToNile }
 		year = 1868 # Will happen sometime after 1868
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 	
 	mean_time_to_happen =  {
@@ -93,19 +91,20 @@ country_event = {
 	desc = "EVTDESC23201"
 	picture = "Nile"
 
-	option = {
-		name = "EVTOPTA23201" # Fund second attempt
-		ai_chance = { factor = 60 }
-		money = -2000
-		set_country_flag = YesGoToNileAgain
-		clr_country_flag = YesGoToNile
-	}
+	
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
 		ai_chance = { factor = 40 }
 		clr_country_flag = YesGoToNile
 		set_country_flag = NoGoToNile
-		prestige = -25
+		prestige = -5
+	}
+	option = {
+		name = "EVTOPTA23201" # Fund second attempt
+		ai_chance = { factor = 60 }
+		money = -500000
+		set_country_flag = YesGoToNileAgain
+		clr_country_flag = YesGoToNile
 	}
 }
 
@@ -118,22 +117,21 @@ country_event = {
 		not = { has_global_flag = NileDiscovered }
 		not = { has_country_flag = NoGoToNile }
 		year = 1869 # Will happen sometime after 1869
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
 		months = 24
 
 		modifier = {
-			factor = 0.3
+			factor = 0.15
 			year = 1873
 		}
 		modifier = {
-			factor = 0.6
+			factor = 0.3
 			year = 1874
 		}
 		modifier = {
-			factor = 0.8
+			factor = 0.4
 			year = 1877
 		}
 	}
@@ -142,19 +140,20 @@ country_event = {
 	desc = "EVTDESC23202"
 	picture = "Nile"
 
-	option = {
-		name = "EVTOPTA23201" # Fund third attempt
-		ai_chance = { factor = 60 }
-		money = -2000
-		set_country_flag = YesGoToNileThird
-		clr_country_flag = YesGoToNileAgain
-	}
+	
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
 		ai_chance = { factor = 40 }
 		clr_country_flag = YesGoToNileAgain
 		set_country_flag = NoGoToNile
-		prestige = -25
+		prestige = -5
+	}
+	option = {
+		name = "EVTOPTA23201" # Fund third attempt
+		ai_chance = { factor = 60 }
+		money = -400000
+		set_country_flag = YesGoToNileThird
+		clr_country_flag = YesGoToNileAgain
 	}
 }
 
@@ -174,7 +173,6 @@ country_event = {
 		not = { has_global_flag = NileDiscovered }
 		not = { has_country_flag = NoGoToNile }
 		year = 1870 # Will happen sometime after 1870
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
@@ -221,7 +219,6 @@ country_event = {
 		not = { has_country_flag = YesGoToNorthPoleThird }
 		is_greater_power = yes # Nation is a great power
 		year = 1895 # Will happen sometime after 1895
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
@@ -245,12 +242,7 @@ country_event = {
 	desc = "EVTDESC23204"
 	picture = "NorthPole1"
 
-	option = {
-		name = "EVTOPTA23200" # Support the mission
-		ai_chance = { factor = 25 }
-		money = -1000
-		set_country_flag = YesGoToNorthPole
-	}
+	
 	option = {
 		name = "EVTOPTB23200" # Consider the idea later
 		ai_chance = { factor = 45 }
@@ -261,6 +253,12 @@ country_event = {
 		ai_chance = { factor = 30 }
 		set_country_flag = NoGoToNorthPole
 		prestige = -10
+	}
+	option = {
+		name = "EVTOPTA23200" # Support the mission
+		ai_chance = { factor = 25 }
+		money = -600000
+		set_country_flag = YesGoToNorthPole
 	}
 }
 
@@ -273,21 +271,20 @@ country_event = {
 		not = { has_global_flag = NorthPoleDiscovered }
 		not = { has_country_flag = NoGoToNorthPole }
 		year = 1897 # Will happen sometime after 1897
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen = {
 		months = 12
 		modifier = {
-			factor = 0.6
+			factor = 0.2
 			year = 1898
 		}
 		modifier = {
-			factor = 0.6
+			factor = 0.3
 			year = 1900
 		}
 		modifier = {
-			factor = 0.6
+			factor = 0.4
 			year = 1904
 		}
 	}
@@ -296,19 +293,20 @@ country_event = {
 	desc = "EVTDESC23205"
 	picture = "NorthPole2"
 
-	option = {
-		name = "EVTOPTA23201" # Fund second attempt
-		ai_chance = { factor = 60 }
-		money = -2000
-		set_country_flag = YesGoToNorthPoleAgain
-		clr_country_flag = YesGoToNorthPole
-	}
+	
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
 		ai_chance = { factor = 40 }
 		clr_country_flag = YesGoToNorthPole
 		set_country_flag = NoGoToNorthPole
 		prestige = -25
+	}
+	option = {
+		name = "EVTOPTA23201" # Fund second attempt
+		ai_chance = { factor = 60 }
+		money = -400000
+		set_country_flag = YesGoToNorthPoleAgain
+		clr_country_flag = YesGoToNorthPole
 	}
 }
 
@@ -321,22 +319,21 @@ country_event = {
 		not = { has_global_flag = NorthPoleDiscovered }
 		not = { has_country_flag = NoGoToNorthPole }
 		year = 1899 # Will happen sometime after 1899
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen = {
 		months = 24
 
 		modifier = {
-			factor = 0.3
+			factor = 0.2
 			year = 1900
 		}
 		modifier = {
-			factor = 0.6
+			factor = 0.3
 			year = 1902
 		}
 		modifier = {
-			factor = 0.8
+			factor = 0.4
 			year = 1905
 		}
 	}
@@ -345,19 +342,20 @@ country_event = {
 	desc = "EVTDESC23206"
 	picture = "NorthPole2"
 
-	option = {
-		name = "EVTOPTA23201" # Fund third attempt
-		ai_chance = { factor = 60 }
-		money = -2000
-		set_country_flag = YesGoToNorthPoleThird
-		clr_country_flag = YesGoToNorthPoleAgain
-	}
+	
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
 		ai_chance = { factor = 40 }
 		clr_country_flag = YesGoToNorthPoleAgain
 		set_country_flag = NoGoToNorthPole
 		prestige = -25
+	}
+	option = {
+		name = "EVTOPTA23201" # Fund third attempt
+		ai_chance = { factor = 60 }
+		money = -400000
+		set_country_flag = YesGoToNorthPoleThird
+		clr_country_flag = YesGoToNorthPoleAgain
 	}
 }
 
@@ -377,7 +375,6 @@ country_event = {
 		not = { has_global_flag = NorthPoleDiscovered }
 		not = { has_country_flag = NoGoToNorthPole }
 		year = 1900 # Will happen sometime after 1900
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
@@ -423,7 +420,6 @@ country_event = {
 		not = { has_country_flag = YesGoToSouthPoleThird }
 		is_greater_power = yes # Nation is a great power
 		year = 1906 # Will happen sometime after 1906
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
@@ -447,12 +443,7 @@ country_event = {
 	desc = "EVTDESC23208"
 	picture = "SouthPole1"
 
-	option = {
-		name = "EVTOPTA23200" # Support the mission
-		ai_chance = { factor = 25 }
-		money = -1000
-		set_country_flag = YesGoToSouthPole
-	}
+	
 	option = {
 		name = "EVTOPTB23200" # Consider the idea later
 		ai_chance = { factor = 45 }
@@ -463,6 +454,12 @@ country_event = {
 		ai_chance = { factor = 30 }
 		set_country_flag = NoGoToSouthPole
 		prestige = -10
+	}
+	option = {
+		name = "EVTOPTA23200" # Support the mission
+		ai_chance = { factor = 25 }
+		money = -600000
+		set_country_flag = YesGoToSouthPole
 	}
 }
 
@@ -475,22 +472,21 @@ country_event = {
 		not = { has_global_flag = SouthPoleDiscovered }
 		not = { has_country_flag = NoGoToSouthPole }
 		year = 1908 # Will happen sometime after 1908
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
 		months = 12
 
 		modifier = {
-			factor = 0.6
+			factor = 0.3
 			year = 1909
 		}
 		modifier = {
-			factor = 0.6
+			factor = 0.4
 			year = 1910
 		}
 		modifier = {
-			factor = 0.6
+			factor = 0.5
 			year = 1911
 		}
 	}
@@ -499,19 +495,20 @@ country_event = {
 	desc = "EVTDESC23209"
 	picture = "SouthPole2"
 
-	option = {
-		name = "EVTOPTA23201" # Fund second attempt
-		ai_chance = { factor = 60 }
-		money = -2000
-		set_country_flag = YesGoToSouthPoleAgain
-		clr_country_flag = YesGoToSouthPole
-	}
+	
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
 		ai_chance = { factor = 40 }
 		clr_country_flag = YesGoToSouthPole
 		set_country_flag = NoGoToSouthPole
 		prestige = -25
+	}
+	option = {
+		name = "EVTOPTA23201" # Fund second attempt
+		ai_chance = { factor = 60 }
+		money = -500000
+		set_country_flag = YesGoToSouthPoleAgain
+		clr_country_flag = YesGoToSouthPole
 	}
 }
 
@@ -524,7 +521,6 @@ country_event = {
 		not = { has_global_flag = SouthPoleDiscovered }
 		not = { has_country_flag = NoGoToSouthPole }
 		year = 1910 # Will happen sometime after 1910
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
@@ -535,11 +531,11 @@ country_event = {
 			year = 1911
 		}
 		modifier = {
-			factor = 0.6
+			factor = 0.4
 			year = 1912
 		}
 		modifier = {
-			factor = 0.8
+			factor = 0.5
 			year = 1913
 		}
 	}
@@ -548,19 +544,20 @@ country_event = {
 	desc = "EVTDESC23210"
 	picture = "SouthPole2"
 
-	option = {
-		name = "EVTOPTA23201" # Fund third attempt
-		ai_chance = { factor = 60 }
-		money = -2000
-		set_country_flag = YesGoToSouthPoleThird
-		clr_country_flag = YesGoToSouthPoleAgain
-	}
+	
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
 		ai_chance = { factor = 40 }
 		clr_country_flag = YesGoToSouthPoleAgain
 		set_country_flag = NoGoToSouthPole
 		prestige = -25
+	}
+	option = {
+		name = "EVTOPTA23201" # Fund third attempt
+		ai_chance = { factor = 60 }
+		money = -400000
+		set_country_flag = YesGoToSouthPoleThird
+		clr_country_flag = YesGoToSouthPoleAgain
 	}
 }
 
@@ -580,7 +577,6 @@ country_event = {
 		not = { has_global_flag = SouthPoleDiscovered }
 		not = { has_country_flag = NoGoToSouthPole }
 		year = 1910 # Will happen sometime after 1910
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {
@@ -620,7 +616,6 @@ country_event = {
 
 	trigger = { 
 		civilized = yes
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen = {
@@ -658,7 +653,6 @@ country_event = {
 		not = { has_global_flag = SouthPoleDiscovered }
 		not = { has_country_flag = NoGoToSouthPole }
 		year = 1908 # Will happen sometime after 1908
-		NOT = { has_global_flag = 1913_bookmark }
 	}
 
 	mean_time_to_happen =  {

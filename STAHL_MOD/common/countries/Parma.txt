@@ -37,7 +37,7 @@ party = {
 	ideology = liberal
 
 	economic_policy = laissez_faire
-	trade_policy = free_trade
+	trade_policy = protectionism
 	religious_policy = pluralism
 	citizenship_policy = limited_citizenship
 	war_policy = anti_military
@@ -51,7 +51,7 @@ party = {
 	ideology = liberal
 
 	economic_policy = interventionism
-	trade_policy = free_trade
+	trade_policy = protectionism
 	religious_policy = secularized
 	citizenship_policy = full_citizenship
 	war_policy = anti_military
@@ -86,20 +86,6 @@ party = {
 }
 
 party = {
-	name = "PAR_anarcho_liberal"
-	start_date = 1830.1.1
-	end_date = 2000.1.1
-
-	ideology = anarcho_liberal
-
-	economic_policy = laissez_faire
-	trade_policy = free_trade
-	religious_policy = pro_atheism
-	citizenship_policy = full_citizenship
-	war_policy = pro_military
-}
-
-party = {
 	name = "PAR_communist"
 	start_date = 1848.1.1
 	end_date = 2000.1.1
@@ -115,7 +101,7 @@ party = {
 
 party = {
 	name = "PAR_fascist"
-	start_date = 1905.1.1
+	start_date = 1900.1.1
 	end_date = 2000.1.1
 
 	ideology = fascist
@@ -128,49 +114,209 @@ party = {
 }
 
 unit_names = {
-	dreadnought = { 
-		"Alessandro Farnese" "Maria Luisa" "d'Asburgo" Parma Piacenza Borbone Aquila Aurora Azzardoso Beroldo Condottiero Carloforte 		
+	dreadnought = {
+	"Алессандро Фарнезе"
+	"Мария-Луиза"
+	"д'Асбурго"
+	"Парма"
+	"Пьяченца"
+	"Борбоне"
+	"Аквила"
+	"Аврора"
+	"Адзардозо"
+	"Берольдо"
+	"Кондоттьеро"
+	"Карлофорте"
+	"Коломбо"
+	"Даино"
+	"Эридано"
+	"Эвридика"
+	"Фалько"
+	"Фаворита"
+	"Нереида"
+	"Патрона"
+	"Серпенте"
+	"Тритоне"
+	"Велоче"
+	"Вихиланте"
+	"Дзеффиро"
+}
 
-		Colombo Daino Eridano Euridice Falco Favorita Nereide  Patrona Serpente Tritone Veloce Vigilante Zeffiro 
-		
-	}
+
 	ironclad = {
-		"Alessandro Farnese" "Maria Luisa" "d'Asburgo" Parma Piacenza Borbone Aquila Aurora Azzardoso Beroldo Condottiero Carloforte 		
+	"Алессандро Фарнезе"
+	"Мария-Луиза"
+	"д'Асбурго"
+	"Парма"
+	"Пьяченца"
+	"Борбоне"
+	"Аквила"
+	"Аврора"
+	"Адзардозо"
+	"Берольдо"
+	"Кондоттьеро"
+	"Карлофорте"
+	"Коломбо"
+	"Даино"
+	"Эридано"
+	"Эвридика"
+	"Фалько"
+	"Фаворита"
+	"Нереида"
+	"Патрона"
+	"Серпенте"
+	"Тритоне"
+	"Велоче"
+	"Вихиланте"
+	"Дзеффиро"
+}
 
-		Colombo Daino Eridano Euridice Falco Favorita Nereide  Patrona Serpente Tritone Veloce Vigilante Zeffiro 
-		
-	}
+
 	manowar = {
-		"Alessandro Farnese" "Maria Luisa" "d'Asburgo" Parma Piacenza Borbone Aquila Aurora Azzardoso Beroldo Condottiero Carloforte 		
+	"Алессандро Фарнезе"
+	"Мария-Луиза"
+	"д'Асбурго"
+	"Парма"
+	"Пьяченца"
+	"Борбоне"
+	"Аквила"
+	"Аврора"
+	"Адзардозо"
+	"Берольдо"
+	"Кондоттьеро"
+	"Карлофорте"
+	"Коломбо"
+	"Даино"
+	"Эридано"
+	"Эвридика"
+	"Фалько"
+	"Фаворита"
+	"Нереида"
+	"Патрона"
+	"Серпенте"
+	"Тритоне"
+	"Велоче"
+	"Вихиланте"
+	"Дзеффиро"
+}
 
-		Colombo Daino Eridano Euridice Falco Favorita Nereide  Patrona Serpente Tritone Veloce Vigilante Zeffiro 
-	}
+
 	cruiser = {
-		"Alessandro Farnese" "Maria Luisa" "d'Asburgo" Parma Piacenza Borbone Aquila Aurora Azzardoso Beroldo Condottiero Carloforte 		
+	"Алессандро Фарнезе"
+	"Мария-Луиза"
+	"д'Асбурго"
+	"Парма"
+	"Пьяченца"
+	"Борбоне"
+	"Аквила"
+	"Аврора"
+	"Адзардозо"
+	"Берольдо"
+	"Кондоттьеро"
+	"Карлофорте"
+	"Коломбо"
+	"Даино"
+	"Эридано"
+	"Эвридика"
+	"Фалько"
+	"Фаворита"
+	"Нереида"
+	"Патрона"
+	"Серпенте"
+	"Тритоне"
+	"Велоче"
+	"Вихиланте"
+	"Дзеффиро"
+}
 
-		Colombo Daino Eridano Euridice Falco Favorita Nereide  Patrona Serpente Tritone Veloce Vigilante Zeffiro 
-	}
+
 	frigate = {
-		"Alessandro Farnese" "Maria Luisa" "d'Asburgo" Parma Piacenza Borbone Aquila Aurora Azzardoso Beroldo Condottiero Carloforte 		
+	"Алессандро Фарнезе"
+	"Мария-Луиза"
+	"д'Асбурго"
+	"Парма"
+	"Пьяченца"
+	"Борбоне"
+	"Аквила"
+	"Аврора"
+	"Адзардозо"
+	"Берольдо"
+	"Кондоттьеро"
+	"Карлофорте"
+	"Коломбо"
+	"Даино"
+	"Эридано"
+	"Эвридика"
+	"Фалько"
+	"Фаворита"
+	"Нереида"
+	"Патрона"
+	"Серпенте"
+	"Тритоне"
+	"Велоче"
+	"Вихиланте"
+	"Дзеффиро"
+}
 
-		Colombo Daino Eridano Euridice Falco Favorita Nereide  Patrona Serpente Tritone Veloce Vigilante Zeffiro 
-	}
+
 	monitor = {
-		"Alessandro Farnese" "Maria Luisa" "d'Asburgo" Parma Piacenza Borbone Aquila Aurora Azzardoso Beroldo Condottiero Carloforte 		
+	"Алессандро Фарнезе"
+	"Мария-Луиза"
+	"д'Асбурго"
+	"Парма"
+	"Пьяченца"
+	"Борбоне"
+	"Аквила"
+	"Аврора"
+	"Адзардозо"
+	"Берольдо"
+	"Кондоттьеро"
+	"Карлофорте"
+	"Коломбо"
+	"Даино"
+	"Эридано"
+	"Эвридика"
+	"Фалько"
+	"Фаворита"
+	"Нереида"
+	"Патрона"
+	"Серпенте"
+	"Тритоне"
+	"Велоче"
+	"Вихиланте"
+	"Дзеффиро"
+}
 
-		Colombo Daino Eridano Euridice Falco Favorita Nereide  Patrona Serpente Tritone Veloce Vigilante Zeffiro 
-		
-	}
-	clipper_transport = {
-		
-	}
-	steam_transport = {
-		
-	}
+
+	
+	
 	commerce_raider = {
-		"Alessandro Farnese" "Maria Luisa" "d'Asburgo" Parma Piacenza Borbone Aquila Aurora Azzardoso Beroldo Condottiero Carloforte 		
+	"Алессандро Фарнезе"
+	"Мария-Луиза"
+	"д'Асбурго"
+	"Парма"
+	"Пьяченца"
+	"Борбоне"
+	"Аквила"
+	"Аврора"
+	"Адзардозо"
+	"Берольдо"
+	"Кондоттьеро"
+	"Карлофорте"
+	"Коломбо"
+	"Даино"
+	"Эридано"
+	"Эвридика"
+	"Фалько"
+	"Фаворита"
+	"Нереида"
+	"Патрона"
+	"Серпенте"
+	"Тритоне"
+	"Велоче"
+	"Вихиланте"
+	"Дзеффиро"
+}
 
-		Colombo Daino Eridano Euridice Falco Favorita Nereide  Patrona Serpente Tritone Veloce Vigilante Zeffiro 
-		
-	}
+
 }

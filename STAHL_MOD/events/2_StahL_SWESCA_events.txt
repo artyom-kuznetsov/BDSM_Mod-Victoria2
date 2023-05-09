@@ -1,0 +1,22 @@
+# ALFBORG GIVE BACK
+country_event = {
+	title = "alfborg_giveback_evtname"
+	desc = "alfborg_giveback_evtdesc"
+	id = 140500
+	immediate = { 
+		clr_country_flag = alfborg_given_flag 
+	}
+	trigger = { 
+		has_country_flag = alfborg_given_flag
+		NOT = { has_country_modifier = alfborg_given_modifier }
+	}
+	option = {
+		name = "alfborg_giveback_opt_take"
+		367 = { secede_province = THIS }
+	}
+	option = {
+		name = "alfborg_giveback_opt_extend"
+		add_country_modifier = { name = alfborg_given_modifier duration = 365 }
+		set_country_flag = alfborg_given_flag
+	}
+}

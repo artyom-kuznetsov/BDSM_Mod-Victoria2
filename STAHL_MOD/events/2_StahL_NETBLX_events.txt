@@ -1,0 +1,47 @@
+country_event = { # DUTCH EIC MODIFIER REMOVE
+	title = "DUTCHEICGIVEEVT_TITLE"
+	desc = "DUTCHEICEVT_DESC"
+	id = 140600
+	mean_time_to_happen = { months = 1 }
+	trigger = {
+		OR = {
+			tag = NET
+			tag = BLX
+		}
+		OR = {
+			NOT = { owns = 1413 }
+			NOT = { owns = 1399 }
+			NOT = { owns = 1424 }
+		}
+		has_country_modifier = dutch_east_india_modifier
+	}
+	
+	option = {
+		name = "DUTCHEICEVT_OPTA"
+		remove_country_modifier = dutch_east_india_modifier
+	}
+}
+
+country_event = { # DUTCH EIC MODIFIER GIVEBACK
+	title = "DUTCHEICGIVEEVT_TITLE"
+	desc = "DUTCHEICGIVEEVT_DESC"
+	id = 140601
+	mean_time_to_happen = { months = 1 }
+	trigger = {
+		OR = {
+			tag = NET
+			tag = BLX
+		}
+		NOT = {
+			has_country_modifier = dutch_east_india_modifier
+		}
+		owns = 1413
+		owns = 1399
+		owns = 1424
+	}
+	
+	option = {
+		name = "DUTCHEICGIVEEVT_OPTA"
+		add_country_modifier = { name = dutch_east_india_modifier duration = -1 }
+	}
+}

@@ -1,9 +1,8 @@
-## Audax Validator "!" Ignore_1004
-## Audax Validator "!" Ignore_1009
 political_decisions = {
 # North-American Minors
 	apply_for_USA_statehood = {
 		potential = {	
+			NOT = { has_country_flag = open_money_transfers_flag }
 			exists = USA
 			OR = {
 				tag = TEX
@@ -21,23 +20,22 @@ political_decisions = {
 			}
 			relation = {
 				who = USA
-				value = 50
+				value = 175
 			}
-			in_sphere = USA
-#			OR = {
-#				AND = {
-#					USA = {
-#						slavery = yes_slavery
-#					}
-#					slavery = yes_slavery
-#				}
-#				AND = {
-#					USA = {
-#						slavery = no_slavery
-#					}
-#					slavery = no_slavery
-#				}
-#			}
+			OR = {
+				AND = {
+					USA = {
+						slavery = yes_slavery
+					}
+					slavery = yes_slavery
+				}
+				AND = {
+					USA = {
+						slavery = no_slavery
+					}
+					slavery = no_slavery
+				}
+			}
 		}
 		effect = {
 		set_country_flag = usstatehood_we_have_applied
@@ -53,6 +51,7 @@ political_decisions = {
 # CSA
 	king_cotton = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = CSA
 			war_with = USA
 			not = {
@@ -86,6 +85,7 @@ political_decisions = {
 # USA	
 	trail_of_tears = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_global_flag = marching_on_the_trail_of_tears
@@ -144,6 +144,7 @@ political_decisions = {
 	
 	custers_expedition = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_country_flag = custers_expedition_sent
@@ -166,209 +167,34 @@ political_decisions = {
 	
 	enact_the_homestead_act = {
 		potential = {
-			tag = USA
-			government = democracy
+			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = {
-				has_country_flag = homestead_enacted
+				has_country_modifier = the_homestead_act
+			}
+			year = 1862
+			capital_scope = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
 			}
 		}
 		
 		allow = {
 			prestige = 40
-			nationalism_n_imperialism = 1
 		}
 		
 		effect = {
-			set_country_flag = homestead_enacted
 			add_country_modifier = {
 				name = the_homestead_act
 				duration = -1
-			}
-			any_owned = {
-				limit = {
-					owned_by = THIS
-					OR = {
-						province_id = 78
-						province_id = 79
-						province_id = 80
-						province_id = 81
-						province_id = 82
-						province_id = 83
-						province_id = 84
-						province_id = 85
-						province_id = 86
-						province_id = 87
-						province_id = 88
-						province_id = 89
-						province_id = 90
-						province_id = 91
-						province_id = 92
-						province_id = 93
-						province_id = 94
-						province_id = 95
-						province_id = 96
-						province_id = 97
-						province_id = 98
-						province_id = 99
-						province_id = 100
-						province_id = 101
-						province_id = 102
-						province_id = 103
-						province_id = 104
-						province_id = 105
-						province_id = 106
-						province_id = 107
-						province_id = 108
-						province_id = 109
-						province_id = 110
-						province_id = 111
-						province_id = 112
-						province_id = 113
-						province_id = 114
-						province_id = 115
-						province_id = 116
-						province_id = 117
-						province_id = 118
-						province_id = 119
-						province_id = 120
-						province_id = 121
-						province_id = 122
-						province_id = 123
-						province_id = 124
-						province_id = 125
-						province_id = 126
-						province_id = 127
-						province_id = 128
-						province_id = 129
-						province_id = 130
-						province_id = 131
-						province_id = 132
-						province_id = 133
-						province_id = 134
-						province_id = 135
-						province_id = 136
-						province_id = 137
-						province_id = 138
-						province_id = 143
-						province_id = 144
-						province_id = 145
-						province_id = 151
-						province_id = 152
-						province_id = 153
-						province_id = 154
-						province_id = 155
-						province_id = 156
-						province_id = 157
-						province_id = 158
-						province_id = 173
-						province_id = 174
-						province_id = 175
-						province_id = 176
-						province_id = 177
-						province_id = 198
-						province_id = 199
-						province_id = 200
-					}
-				}
-				add_province_modifier = { name = homestead duration = -1 }
-			}
-			any_owned = {
-				limit = {
-					owned_by = THIS
-					OR = {
-						province_id = 139
-						province_id = 140
-						province_id = 141
-						province_id = 142
-						province_id = 146
-						province_id = 147
-						province_id = 148
-						province_id = 149
-						province_id = 150
-						province_id = 169
-						province_id = 170
-						province_id = 171
-						province_id = 172
-						province_id = 178
-						province_id = 179
-						province_id = 180
-						province_id = 181
-						province_id = 182
-						province_id = 183
-						province_id = 184
-						province_id = 185
-						province_id = 186
-						province_id = 187
-						province_id = 188
-						province_id = 189
-						province_id = 190
-						province_id = 191
-						province_id = 192
-						province_id = 193
-						province_id = 194
-						province_id = 195
-						province_id = 196
-						province_id = 197
-						province_id = 201
-						province_id = 202
-						province_id = 204
-						province_id = 205
-						province_id = 206
-						province_id = 2555
-						province_id = 2556
-						province_id = 207
-						province_id = 208
-						province_id = 209
-						province_id = 210
-						province_id = 211
-						province_id = 212
-						province_id = 213
-						province_id = 214
-						province_id = 215
-						province_id = 216
-						province_id = 217
-						province_id = 218
-						province_id = 219
-						province_id = 220
-						province_id = 221
-						province_id = 222
-						province_id = 223
-						province_id = 224
-						province_id = 225
-						province_id = 226
-						province_id = 227
-						province_id = 228
-						province_id = 229
-						province_id = 230
-						province_id = 231
-						province_id = 232
-						province_id = 233
-						province_id = 234
-						province_id = 235
-						province_id = 236
-						province_id = 237
-						province_id = 238
-						province_id = 239
-						province_id = 240
-						province_id = 241
-						province_id = 242
-						province_id = 243
-						province_id = 244
-						province_id = 245
-						province_id = 246
-						province_id = 247
-						province_id = 248
-						province_id = 249
-						province_id = 250
-					}
-				}
-				add_province_modifier = { name = westward_migration duration = -1 }
 			}
 		}
 	}
 			
 	bixby_letter = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			not = {
 				has_country_flag = bixby_letter_sent
@@ -388,6 +214,7 @@ political_decisions = {
 	
 	enact_anaconda_plan = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			war_with = CSA
 			NOT = {
@@ -411,221 +238,10 @@ political_decisions = {
 			set_global_flag = anaconda_plan_active
 		}
 	}
-
-	revoke_the_homestead_act = {
-		alert = no
-		picture = enact_the_homestead_act
-		potential = {
-			has_country_modifier = the_homestead_act
-			NOT = { has_country_flag = homestead_revoked }
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			set_country_flag = homestead_revoked
-			remove_country_modifier = the_homestead_act
-			any_owned = {
-				limit = {
-					owned_by = THIS
-					OR = {
-						province_id = 78
-						province_id = 79
-						province_id = 80
-						province_id = 81
-						province_id = 82
-						province_id = 83
-						province_id = 84
-						province_id = 85
-						province_id = 86
-						province_id = 87
-						province_id = 88
-						province_id = 89
-						province_id = 90
-						province_id = 91
-						province_id = 92
-						province_id = 93
-						province_id = 94
-						province_id = 95
-						province_id = 96
-						province_id = 97
-						province_id = 98
-						province_id = 99
-						province_id = 100
-						province_id = 101
-						province_id = 102
-						province_id = 103
-						province_id = 104
-						province_id = 105
-						province_id = 106
-						province_id = 107
-						province_id = 108
-						province_id = 109
-						province_id = 110
-						province_id = 111
-						province_id = 112
-						province_id = 113
-						province_id = 114
-						province_id = 115
-						province_id = 116
-						province_id = 117
-						province_id = 118
-						province_id = 119
-						province_id = 120
-						province_id = 121
-						province_id = 122
-						province_id = 123
-						province_id = 124
-						province_id = 125
-						province_id = 126
-						province_id = 127
-						province_id = 128
-						province_id = 129
-						province_id = 130
-						province_id = 131
-						province_id = 132
-						province_id = 133
-						province_id = 134
-						province_id = 135
-						province_id = 136
-						province_id = 137
-						province_id = 138
-						province_id = 143
-						province_id = 144
-						province_id = 145
-						province_id = 151
-						province_id = 152
-						province_id = 153
-						province_id = 154
-						province_id = 155
-						province_id = 156
-						province_id = 157
-						province_id = 158
-						province_id = 173
-						province_id = 174
-						province_id = 175
-						province_id = 176
-						province_id = 177
-						province_id = 198
-						province_id = 199
-						province_id = 200
-					}
-				}
-				remove_province_modifier = homestead
-			}
-			any_owned = {
-				limit = {
-					owned_by = THIS
-					OR = {
-						province_id = 139
-						province_id = 140
-						province_id = 141
-						province_id = 142
-						province_id = 146
-						province_id = 147
-						province_id = 148
-						province_id = 149
-						province_id = 150
-						province_id = 159
-						province_id = 160
-						province_id = 161
-						province_id = 162
-						province_id = 169
-						province_id = 170
-						province_id = 171
-						province_id = 172
-						province_id = 178
-						province_id = 179
-						province_id = 180
-						province_id = 181
-						province_id = 182
-						province_id = 183
-						province_id = 184
-						province_id = 185
-						province_id = 186
-						province_id = 187
-						province_id = 188
-						province_id = 189
-						province_id = 190
-						province_id = 191
-						province_id = 192
-						province_id = 193
-						province_id = 194
-						province_id = 195
-						province_id = 196
-						province_id = 197
-						province_id = 201
-						province_id = 202
-						province_id = 204
-						province_id = 205
-						province_id = 206
-						province_id = 2555
-						province_id = 2556
-						province_id = 207
-						province_id = 208
-						province_id = 209
-						province_id = 210
-						province_id = 211
-						province_id = 212
-						province_id = 213
-						province_id = 214
-						province_id = 215
-						province_id = 216
-						province_id = 217
-						province_id = 218
-						province_id = 219
-						province_id = 220
-						province_id = 221
-						province_id = 222
-						province_id = 223
-						province_id = 224
-						province_id = 225
-						province_id = 226
-						province_id = 227
-						province_id = 228
-						province_id = 229
-						province_id = 230
-						province_id = 231
-						province_id = 232
-						province_id = 233
-						province_id = 234
-						province_id = 235
-						province_id = 236
-						province_id = 237
-						province_id = 238
-						province_id = 239
-						province_id = 240
-						province_id = 241
-						province_id = 242
-						province_id = 243
-						province_id = 244
-						province_id = 245
-						province_id = 246
-						province_id = 247
-						province_id = 248
-						province_id = 249
-						province_id = 250
-					}
-				}
-				remove_province_modifier = westward_migration
-			}
-		}
-		ai_will_do = {
-			factor = 1
-			modifier = {
-				factor = 0
-				OR = {
-					owns = 84
-					owns = 132
-					owns = 123
-				}
-			}
-		}
-	}
 	
 	shermans_march_to_the_sea = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			war_with = CSA
 			NOT = {
@@ -663,6 +279,7 @@ political_decisions = {
 
 	emancipation_proclamation = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_country_flag = emancipation
@@ -710,6 +327,7 @@ political_decisions = {
 	}		
 	manifest_destiny = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_country_flag = hasmanifestdestiny
@@ -718,7 +336,9 @@ political_decisions = {
 		allow = {
 			romanticism = 1
 			prestige = 50
-			NOT = { exists = TEX }
+			NOT = {
+				exists = TEX
+			}
 		}
 		effect = {
 			set_country_flag = hasmanifestdestiny
@@ -736,22 +356,7 @@ political_decisions = {
 			TEX_132 = {
 				add_core = USA
 			}
-			MEX_103 = {
-				add_core = USA
-			}
-			USA_129 = {
-				add_core = USA
-			}
 			USA_106 = {
-				add_core = USA
-			}
-			USA_81 = {
-				add_core = USA
-			}
-			USA_78 = {
-				add_core = USA
-			}
-			MEX_94 = {
 				add_core = USA
 			}
 			MEX_97 = {
@@ -760,108 +365,21 @@ political_decisions = {
 			MEX_85 = {
 				add_core = USA
 			}
-			MEX_100 = {
+			USA_81 = {
 				add_core = USA
 			}
-			set_country_flag = mex_usa_war
-		}
-	}
-	texan_manifest_destiny = {
-		picture = manifest_destiny
-		potential = {
-			tag = TEX
-			NOT = {
-				has_country_flag = hasmanifestdestiny
-			}
-		}
-		allow = {
-			romanticism = 1
-			prestige = 50
-			war = no
-			rank = 16
-		}
-		effect = {
-			set_country_flag = hasmanifestdestiny
-			any_greater_power = {
-				limit = {
-					OR = {
-						tag = MEX
-						tag = USA
-					}
-				}
-				diplomatic_influence = {
-					who = TEX
-					value = -400
-				}
-			}
-			diplomatic_influence = {
-				who = MEX
-				value = -400
-			}
-			diplomatic_influence = {
-				who = USA
-				value = -400
-			}
-			relation = {
-				who = MEX
-				value = -200
-			}
-			relation = {
-				who = USA
-				value = -105
-			}
-			any_pop = {
-				consciousness = 2
-			}
-			TEX_132 = {
-				add_core = TEX
-			}
-			MEX_103 = {
-				add_core = TEX
-			}
 			USA_129 = {
-				add_core = TEX
-			}
-			USA_106 = {
-				add_core = TEX
-			}
-			USA_81 = {
-				add_core = TEX
-			}
-			USA_78 = {
-				add_core = TEX
-			}
-			USA_91 = {
-				add_core = TEX
-			}
-			USA_111 = {
-				add_core = TEX
+				add_core = USA
 			}
 			USA_116 = {
-				add_core = TEX
-			}
-			MEX_94 = {
-				add_core = TEX
-			}
-			MEX_97 = {
-				add_core = TEX
-			}
-			MEX_85 = {
-				add_core = TEX
-			}
-			MEX_100 = {
-				add_core = TEX
-			}
-			MEX_2138 = {
-				add_core = TEX
-			}
-			MEX_2142 = {
-				add_core = TEX
-			}
+				add_core = USA
+			}	
+	
 		}
 	}
 	gag_rule = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 1
 			slavery = yes_slavery
@@ -886,6 +404,7 @@ political_decisions = {
 	clay_and_douglas_draft = {
 		
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 3
 			slavery = yes_slavery
@@ -910,6 +429,7 @@ political_decisions = {
 	corwin_amendment = {
 		
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 4
 			slavery = yes_slavery
@@ -933,6 +453,7 @@ political_decisions = {
 	
 	fugitive_slave_act = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 4
 			slavery = yes_slavery
@@ -961,6 +482,7 @@ political_decisions = {
 	
 	nashville_convention = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 5
 			slavery = yes_slavery
@@ -989,6 +511,7 @@ political_decisions = {
 	
 	ostend_manifesto = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 4
 			slavery = yes_slavery
@@ -1037,6 +560,7 @@ political_decisions = {
 	
 	kansas_nebraska_act = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 1
 			slavery = yes_slavery
@@ -1069,6 +593,7 @@ political_decisions = {
 	
 	wilmot_proviso = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 1
 			slavery = yes_slavery
@@ -1113,61 +638,25 @@ political_decisions = {
 	
 	form_kellys_irish_brigade = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = CSA
+			war_with = USA
 			NOT = {
 				has_country_flag = kellys_irish_brigade
 			}
 		}
 		
 		allow = {
-			war_with = USA
+			war_exhaustion = 4
 		}
 		
 		effect = {
-			random_owned = {
-				any_pop = {
-					limit = {
-						type = farmers
-						has_pop_culture = irish
-					}
-					pop_type = soldiers
+			random_pop = {
+				limit = {
+					pop_type = farmers
+					has_pop_culture = dixie
 				}
-			}
-			random_owned = {
-				any_pop = {
-					limit = {
-						type = farmers
-						has_pop_culture = irish
-					}
-					pop_type = soldiers
-				}
-			}
-			random_owned = {
-				any_pop = {
-					limit = {
-						type = farmers
-						has_pop_culture = irish
-					}
-					pop_type = soldiers
-				}
-			}
-			random_owned = {
-				any_pop = {
-					limit = {
-						type = farmers
-						has_pop_culture = irish
-					}
-					pop_type = soldiers
-				}
-			}
-			random_owned = {
-				any_pop = {
-					limit = {
-						type = farmers
-						has_pop_culture = irish
-					}
-					pop_type = soldiers
-				}
+				pop_type = soldiers
 			}
 			war_exhaustion = -1
 			set_country_flag = kellys_irish_brigade
@@ -1176,6 +665,7 @@ political_decisions = {
 	
 	raise_the_bonnie_blue_flag = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = CSA
 			NOT = {
 				OR = {
@@ -1186,76 +676,23 @@ political_decisions = {
 		}
 		
 		allow = {
+			war_with = USA
 		}
 		
 		effect = {
 
 			define_general = {
 				name = "Robert E.Lee"
-				personality = defence_4.1
-				background = attack_4.1
+				personality = attack_2.1
+				background = defense_3.1
 			}
 
 			define_general = {
-				name = "Stonewall Jackson"
-				personality = defence_5.1
-				background = attack_4.1
+				name = "Thomas Jackson"
+				personality = attack_3.1
+				background = defense_2.1
 			}
 			
-			define_general = {
-				name = "James Longstreet"
-				personality = defence_3.1
-				background = attack_3.1
-			}
-			
-			define_general = {
-				name = "P. G. T. Beauregard"
-				personality = defence_2.1
-				background = attack_2.1
-			}
-
-			define_general = {
-				name = "John Bell Hood"
-				personality = defence_2.1
-				background = attack_2.1
-			}
-
-			define_general = {
-				name = "Braxton Bragg"
-				personality = defence_1.1
-				background = attack_1.1
-			}
-
-			define_general = {
-				name = "Joseph E. Johnston"
-				personality = defence_2.1
-				background = attack_1.1
-			}
-
-			define_general = {
-				name = "Leonidas Polk"
-				personality = defence_2.1
-				background = attack_1.1
-			}
-
-			define_general = {
-				name = "D. H. Hill"
-				personality = defence_2.1
-				background = attack_3.1
-			}
-
-			define_general = {
-				name = "A. P. Hill"
-				personality = defence_2.1
-				background = attack_2.1
-			}
-
-			define_general = {
-				name = "Nathan Bedford Forrest"
-				personality = defence_2.1
-				background = attack_5.1
-			}
-
 			add_country_modifier = {
 				name = the_bonnie_blue_flag
 				duration = 365
@@ -1267,6 +704,7 @@ political_decisions = {
 
 	enact_radical_reconstruction = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			war = no
 			has_global_flag = american_civil_war_has_happened
@@ -1296,72 +734,10 @@ political_decisions = {
 			set_country_flag = has_used_radical_reconstruction
 		}
 	}
-
-	csa_manifest_destiny = {
-		picture = manifest_destiny
-		potential = {
-			tag = CSA
-			NOT = { has_country_flag = csa_destiny_manifested }
-			has_country_flag = acw_happened
-		}
-
-		allow = {
-			nationalism_n_imperialism = 1
-			realism = 1
-			war = no
-		}
-
-		effect = {
-			MEX_2138 = { add_core = THIS }
-			MEX_2142 = { add_core = THIS }
-			set_country_flag = csa_destiny_manifested
-		}
-	}
-
-	the_golden_circle = {
-		picture = golden_circle
-		potential = {
-			tag = CSA
-			war = no
-			NOT = { has_country_flag = the_golden_circle }
-			has_country_flag = csa_destiny_manifested
-		}
-
-		allow = {
-			MEX_2138 = { owned_by = THIS }
-			MEX_2142 = { owned_by = THIS }
-			MEX_2146 = { owned_by = THIS }
-			MEX_2151 = { owned_by = THIS }
-			MEX_2161 = { owned_by = THIS }
-			MEX_2162 = { owned_by = THIS }
-			MEX_2170 = { owned_by = THIS }
-			MEX_2173 = { owned_by = THIS }
-			MEX_2183 = { owned_by = THIS }
-		}
-
-		effect = {
-			any_owned = {
-				limit = { is_core = MEX }
-				add_core = THIS
-			}
-			UCA_2186 = { add_core = THIS }
-			UCA_2191 = { add_core = THIS }
-			UCA_2197 = { add_core = THIS }
-			UCA_2201 = { add_core = THIS }
-			CLM_1723 = { add_core = THIS }
-			CLM_2251 = { add_core = THIS }
-			VNZ_2234 = { add_core = THIS }
-			ENG_203 = { add_core = THIS }
-			SPA_2209 = { add_core = THIS }
-			HAI_2213 = { add_core = THIS }
-			ENG_2224 = { add_core = THIS }
-			ENG_2228 = { add_core = THIS }
-			set_country_flag = the_golden_circle
-		}
-	}
-
+	
 	annex_hawaii = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = {
 				has_country_flag = hawaii_annexed
 			}
@@ -1388,6 +764,7 @@ political_decisions = {
 	
 	alaskan_purchase = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			war = no
 			OR = {
 				has_global_flag = american_civil_war_has_happened
@@ -1433,15 +810,9 @@ political_decisions = {
 	
 	webster_ashburton_treaty = {
 		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ENG
-			250 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						vassal_of = THIS
-					}
-				}
-			}
+			owns = 250
 			NOT = {
 				has_country_flag = webster_ashburton_signed
 			}
@@ -1449,12 +820,12 @@ political_decisions = {
 		}
 		
 		allow = {
-			OR = {
-				relation = { who = USA value = 50 }
-				ai = yes
-			}
 			NOT = {
 				war_with = USA
+			}
+			relation = {
+				who = USA
+				value = 125
 			}
 		}
 		
@@ -1463,9 +834,7 @@ political_decisions = {
 				who = USA
 				value = 100
 			}
-			## Audax Validator "." Ignore_NEXT
 			250 = {
-				secede_province = THIS
 				secede_province = USA
 			}
 			badboy = -2
@@ -1484,7 +853,7 @@ political_decisions = {
 			modifier = {
 				factor = 0
 				NOT = {
-					badboy = 0.1
+					badboy = 0.2
 				}
 			}
 		}

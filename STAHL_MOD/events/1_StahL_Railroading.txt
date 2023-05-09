@@ -1,0 +1,298 @@
+#
+#country_event = { # ITA AUTOUNIFICATION
+#	title = "EVTNAME11550"
+#	desc = "EVTDESC111550"
+#	#picture = "Celebration"
+#
+#	id = 11551
+#
+#	trigger = {
+#		year = 1860
+#		NOT = {
+#			exists = ITA
+#			has_global_flag = ita_autounified
+#			exists = SAR
+#		}
+#		tag = SIC
+#		#TAG = { total_pops =  }
+#	}
+#	fire_only_once = yes
+#
+#	option = {				# Accept inheritance
+#		name = "EVTOPTA11550"
+#		change_tag = culture
+#		add_accepted_culture = north_italian
+#		set_global_flag = ita_autounified
+#		add_accepted_culture = south_italian
+#		any_country = {
+#			limit = {
+#				NOT = {
+#					tag = THIS
+#				}
+#				is_culture_group = THIS
+#				is_greater_power = no
+#				num_of_cities = 1
+#			}
+#			country_event = { id=11101 days=0 }
+#		}
+#		prestige = 10
+#		ai_chance = {
+#			factor = 95
+#		}
+#	}
+#
+#}
+#
+#country_event = { # CHU AUTOUNIFICATION
+#	title = "EVTNAME11552"
+#	desc = "EVTDESC111552"
+#	#picture = "Celebration"
+#
+#	id = 11552
+#
+#	trigger = {
+#		year = 1865
+#		NOT = {
+#			exists = ITA
+#			has_global_flag = ita_autounified
+#		}
+#		tag = HNN
+#		#TAG = { total_pops =  }
+#	}
+#	fire_only_once = yes
+#
+#	option = {				# Accept inheritance
+#		name = "EVTOPTA11552"
+#		change_tag = CHU
+#		set_global_flag = chu_autounified
+#		any_country = {
+#			limit = {
+#				NOT = {
+#					tag = THIS
+#				}
+#				is_culture_group = THIS
+#				is_greater_power = no
+#				num_of_cities = 1
+#			}
+#			country_event = { id=11101 days=0 }
+#		}
+#		ai_chance = {
+#			factor = 95
+#		}
+#	}
+#
+#}
+
+# JAPAN UNIFICATION RAILROAD
+country_event = {
+	title = "jprailroad1_evtname"
+	desc = "jprailroad1_evtdesc"
+	id = 21100
+	trigger = {
+		ai = yes
+		year = 1840
+		tag = KYO
+		NOT = { has_country_flag = japan_railroad_1_flag }
+	}
+	option = {
+		name = "jprailroad1_evtopta"
+		inherit = CHO
+		CHO = { all_core = { add_core = THIS } }
+		set_country_flag = japan_railroad_1_flag
+		release_vassal = THIS
+	}
+}
+country_event = {
+	title = "jprailroad2_evtname"
+	desc = "jprailroad2_evtdesc"
+	id = 21101
+	trigger = {
+		ai = yes
+		year = 1845
+		tag = KYO
+		NOT = { has_country_flag = japan_railroad_2_flag }
+	}
+	option = {
+		name = "jprailroad2_evtopta"
+		inherit = SAT
+		inherit = KAG
+		SAT = { all_core = { add_core = THIS } }
+		KAG = { all_core = { add_core = THIS } }
+		set_country_flag = japan_railroad_2_flag
+	}
+}
+country_event = {
+	title = "jprailroad3_evtname"
+	desc = "jprailroad3_evtdesc"
+	id = 21102
+	trigger = {
+		ai = yes
+		year = 1850
+		tag = KYO
+		NOT = { has_country_flag = japan_railroad_3_flag }
+	}
+	option = {
+		name = "jprailroad3_evtopta"
+		inherit = TKG
+		inherit = YNZ
+		inherit = SEN
+		TKG = { all_core = { add_core = THIS } }
+		YNZ = { all_core = { add_core = THIS } }
+		SEN = { all_core = { add_core = THIS } }
+		set_country_flag = japan_railroad_3_flag
+	}
+}
+
+# ITALY UNIFICATION RAILROAD
+country_event = { 
+	title = "EVTNAME11550"
+	desc = "EVTDESC111550"
+	#picture = "Celebration"
+
+	id = 11550
+
+	trigger = {
+		year = 1860
+		NOT = {
+			exists = ITA
+		}
+		OR = {
+			tag = SIC
+			tag = SAR
+		}
+		#TAG = { total_pops =  }
+	}
+	fire_only_once = yes
+
+	option = {				# Accept inheritance
+		name = "EVTOPTA11550"
+		change_tag = culture
+		add_accepted_culture = north_italian
+		add_accepted_culture = south_italian
+		any_country = {
+			limit = {
+				NOT = {
+					tag = THIS
+				}
+				is_culture_group = THIS
+				is_greater_power = no
+				num_of_cities = 1
+			}
+			country_event = { id=11101 days=0 }
+		}
+		prestige = 10
+		ai_chance = {
+			factor = 95
+		}
+	}
+}
+
+### GERMANY UNIFICATION RAILROAD
+# AUTO NGF
+country_event = { 
+	title = "gerrailroad1_evtname"
+	desc = "gerrailroad1_evtdesc"
+	id = 21103
+	trigger = {
+		year = 1845
+		OR = {
+			tag = PRU
+			tag = NGF
+		}
+		NOT = { has_country_flag = ger_railroad_1_flag }
+		NOT = { HAN = { in_sphere = ENG } }
+		ai = yes
+	}
+	option = {
+		name = "gerrailroad1_evtopta"
+		inherit = HAN
+		inherit = SAX
+		inherit = HOL
+	}
+}
+### CHINA UNIFICATION RAILROAD
+country_event = {
+	title = "chi_railroad1_evtname"
+	desc = "chi_railroad1_evtdesc"
+	id = 21104
+	trigger = {
+		year = 1860
+		tag = CHI
+		NOT = { has_country_flag = chi_railroad_1_flag }
+		NOT = { CHU = { exists = yes } }
+		NOT = {
+			OR = {
+				HNN = { ai = no }
+				FJN = { ai = no }
+				MGL = { ai = no }
+				WIA = { ai = no }
+				MCK = { ai = no }
+				GXI = { ai = no }
+				YNN = { ai = no }
+				SXI = { ai = no }
+				XBI = { ai = no }
+				TPG = { ai = no }
+				XIN = { ai = no }
+				CHU = { ai = no }
+			}
+		}
+	}
+	option = {
+		name = "chi_railroad1_evtopta"
+		inherit = HNN
+		inherit = FJN
+		inherit = MGL
+		inherit = WIA
+		inherit = MCK
+		inherit = GXI
+		inherit = SXI
+		inherit = XBI
+		inherit = TPG
+		inherit = YNN
+		inherit = XIN
+		change_tag = CHU
+	}
+}
+
+### SPANISH CIVIL WAR RAILROAD
+country_event = {
+	title = "spain civilwar railroad"
+	desc = "spcwrr"
+	id = 21105
+	trigger = {
+		year = 1844
+		tag = SPA
+		SPC = { exists = yes }
+		ai = yes
+		SPC = { ai = yes }
+	}
+	option = {
+		inherit = SPC
+	}
+}
+# AUTOGER
+country_event = {
+	title = "gerrailroad2_evtname"
+	desc = "gerrailroad2_evtdesc"
+	id = 21106
+	trigger = {
+		year = 1855
+		tag = NGF
+		ai = yes
+		NOT = { has_global_flag = ger_railroad_2_flag }
+		NOT = { GER = { exists = yes } }
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = "gerrailroad2_evtopta"
+		change_tag = GER
+		inherit  = BAD
+		inherit  = SGF
+		inherit  = WUR
+		inherit  = BAV
+		prestige = 20
+		set_global_flag = ger_railroad_2_flag
+	}
+}

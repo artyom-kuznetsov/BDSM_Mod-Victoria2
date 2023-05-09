@@ -1,13 +1,3 @@
-JAN = {
-	value = -200
-	truce_until="1937.1.1"
-}
-
-GHO = {
-	value = -200
-	truce_until="1937.1.1"
-}
-
 #Sphere of Influence
 PER = {
 	value = 75		#relation
@@ -17,7 +7,7 @@ PER = {
 
 EGY = {
 	value = 0		#relation
-	level = 5		#3=cordial, 4 = friendly, 5 sphere
+	level = 1		#3=cordial, 4 = friendly, 5 sphere
 	influence_value = 25
 }
 
@@ -27,9 +17,15 @@ GRE = {
 	influence_value = 25
 }
 
+TUN = {
+	value = 70		#relation
+	level = 4		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 25
+}
+
 SER = {
 	value = 75		#relation
-	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	level = 5		#3=cordial, 4 = friendly, 5 sphere
 	influence_value = 25
 }
 
@@ -40,520 +36,241 @@ HDJ = {
 }
 
 MOL = {
-	value = 125		#relation
+	value = 125
 	level = 5
 	influence_value = 25
 }
 
 WAL = {
-	value = 125		#relation
+	value = 125
 	level = 5
 	influence_value = 25
 }
 
-TUN = {
-	value = 125		#relation
-	level = 5		#3=cordial, 4 = friendly, 5 sphere
-	influence_value = 25
-}
-
-BHT = {
-	value = 100		#relation
-	level = 5		#3=cordial, 4 = friendly, 5 sphere
-	influence_value = 25
-}
-
-leader = {
-	name = "Resid Mehmed Pasha"
-	date = 1809.1.1
-	type = land
-	personality = defence_1.1
-	background = attack_1.1
-	prestige = 0.2
-}
-
-leader = {
-	name = "Wojciech Chrzanowski"
-	date = 1836.1.1
-	type = land
-	personality = defence_1.1
-	background = attack_2.1
-	prestige = 0.1
-}
-
-leader = {
-	name = "Helmuth von Moltke"
-	date = 1833.1.1
-	type = land
-	personality = defence_2.1
-	background = attack_2.1
-	prestige = 0.0
-}
-
-leader = {
-	name = "Abdi Pasha"
-	date = 1836.1.1
-	type = land
-	personality = defence_1.1
-	background = attack_3.1
-	prestige = 0.0
-}
-
-leader = {
-	name = "Hafiz Osman Pasha"
-	date = 1836.1.1
-	type = land
-	personality = defence_1.1
-	background = attack_1.1
-	prestige = 0.0
-}
-
-leader = {
-	name = "Namik Pasha"
-	date = 1836.1.1
-	type = land
-	personality = defence_1.1
-	background = attack_1.1
-	prestige = 0.0
-}
-
-leader = {
-	name = "Abdьlkerim Pasha"
-	date = 1836.1.1
-	type = land
-	personality = defence_1.1
-	background = attack_1.1
-	prestige = 0.0
-}
-
-leader = {
-	name = "Yaver Pasha"
-	date = 1836.1.1
-	type = sea
-	personality = defence_1.1
-	background = attack_1.1
-	prestige = 0.1
-}
+#
 
 army = {
-	name = "Imperial Guards"
-	location = 860
+	name = "Королевская гвардия"
+	location = 858
 	regiment = {
-		name= "1. Bostancy-yy Hassa"
-		type = guard
+		name= "1-я бригада"
+		type = artillery
 		home = 860
 	}
 
 	regiment = {
-		name= "2. Bostancy-yy Hassa"
-		type = guard
-		home = 828
+		name= "2-я бригада"
+		type = artillery
+		home = 858
 	}
 
 	regiment = {
-		name= "3. Bostancy-yy Hassa"
-		type = guard
+		name= "3-я бригада"
+		type = artillery
 		home = 859
 	}
 
 	regiment = {
-		name= "4. Bostancy-yy Hassa"
+		name= "4-я бригада"
 		type = artillery
-		home = 861
+		home = 868
 	}
-
+	
+	regiment = {
+		name= "5-я бригада"
+		type = cavalry
+		home = 868
+	}
+	
+	regiment = {
+		name= "6-я бригада"
+		type = infantry
+		home = 878
+	}
+	regiment = {
+		name= "7-я бригада"
+		type = infantry
+		home = 849
+	}
+	regiment = {
+		name= "8-я бригада"
+		type = infantry
+		home = 899
+	}
+	regiment = {
+		name= "9-я бригада"
+		type = infantry
+		home = 890
+	}
+	regiment = {
+		name= "10-я бригада"
+		type = infantry
+		home = 836
+	}
 }
 
 army = {
-	name = "Army of the Danube"
-	location = 810
+	name = "Королевская гвардия"
+	location = 859
 	regiment = {
-		name= "1. Sipahis"
-		type = hussar
-		home = 798
-	}
-
-	regiment = {
-		name= "2. Sipahis"
-		type = hussar
-		home = 799
-	}
-
-	regiment = {
-		name= "3. Sipahis"
-		type = hussar
-		home = 802
-	}
-
-	regiment = {
-		name= "1. Piyade Tьmeni"
-		type = infantry
-		home = 896
-	}
-
-	regiment = {
-		name= "2. Piyade Tьmeni"
-		type = infantry
-		home = 803
-	}
-
-	regiment = {
-		name= "3. Piyade Tьmeni"
-		type = infantry
-		home = 803
-	}
-
-	regiment = {
-		name= "4. Piyade Tьmeni"
+		name= "1-я бригада"
 		type = artillery
-		home = 804
+		home = 864
 	}
 
 	regiment = {
-		name= "1. Redif Izmir"
-		type = irregular
-		home = 806
+		name= "2-я бригада"
+		type = artillery
+		home = 867
 	}
 
 	regiment = {
-		name= "2. Redif Izmir"
-		type = irregular
-		home = 807
+		name= "3-я бригада"
+		type = artillery
+		home = 870
 	}
 
 	regiment = {
-		name= "3. Redif Izmir"
-		type = irregular
-		home = 807
+		name= "4-я бригада"
+		type = artillery
+		home = 871
 	}
-}
 	
-army = {
-	name = "Redif Bursa"
-	location = 1731
+	regiment = {
+		name= "5-я бригада"
+		type = cavalry
+		home = 872
+	}
 	
-
 	regiment = {
-		name= "1. Redif Bursa"
-		type = irregular
-		home = 805
+		name= "6-я бригада"
+		type = infantry
+		home = 875
 	}
-
 	regiment = {
-		name= "2. Redif Bursa"
-		type = irregular
-		home = 806
+		name= "7-я бригада"
+		type = infantry
+		home = 874
 	}
-
 	regiment = {
-		name= "3. Redif Bursa"
-		type = irregular
-		home = 863
-	}
-
-	regiment = {
-		name= "1. Askдris"
-		type = cavalry
-		home = 824
-	}
-
-	regiment = {
-		name= "2. Askдris"
-		type = cavalry
+		name= "8-я бригада"
+		type = infantry
 		home = 873
 	}
+	regiment = {
+		name= "9-я бригада"
+		type = infantry
+		home = 877
+	}
+	regiment = {
+		name= "10-я бригада"
+		type = infantry
+		home = 883
+	}
 }
-
 army = {
-	name = "Army of Anatolia"
-	location = 909
+	name = "Королевская гвардия"
+	location = 1735
 	regiment = {
-		name= "5. Piyade Tьmeni"
-		type = infantry
-		home = 882
-	}
-
-	regiment = {
-		name= "6. Piyade Tьmeni"
-		type = infantry
-		home = 884
-	}
-
-	regiment = {
-		name= "7. Piyade Tьmeni"
-		type = infantry
-		home = 879
-	}
-
-	regiment = {
-		name= "8. Piyade Tьmeni"
+		name= "1-я бригада"
 		type = artillery
-		home = 888
-	}
-
-	regiment = {
-		name= "1. Redif Kars"
-		type = irregular
-		home = 893
-	}
-
-	regiment = {
-		name= "2. Redif Kars"
-		type = irregular
-		home = 887
-	}
-
-	regiment = {
-		name= "3. Redif Kars"
-		type = irregular
-		home = 887
-	}
-
-	regiment = {
-		name= "1. Redif Trabzon"
-		type = irregular
-		home = 876
-	}
-
-	regiment = {
-		name= "2. Redif Trabzon"
-		type = irregular
-		home = 860
-	}
-
-	regiment = {
-		name= "3. Redif Trabzon"
-		type = irregular
-		home = 909
-	}
-
-}
-
-army = {
-	name = "Army of Silistria"
-	location = 818
-	regiment = {
-		name= "4. Sipahis"
-		type = hussar
-		home = 675
-	}
-
-	regiment = {
-		name= "5. Sipahis"
-		type = hussar
-		home = 674
-	}
-
-	regiment = {
-		name= "6. Sipahis"
-		type = hussar
 		home = 812
 	}
 
 	regiment = {
-		name= "9. Piyade Tьmeni"
+		name= "2-я бригада"
+		type = artillery
+		home = 880
+	}
+
+	regiment = {
+		name= "5-я бригада"
+		type = cavalry
+		home = 887
+	}
+	
+	regiment = {
+		name= "6-я бригада"
 		type = infantry
-		home = 813
+		home = 875
 	}
-
 	regiment = {
-		name= "10. Piyade Tьmeni"
+		name= "7-я бригада"
 		type = infantry
-		home = 818
+		home = 886
 	}
-
 	regiment = {
-		name= "11. Piyade Tьmeni"
+		name= "8-я бригада"
 		type = infantry
-		home = 824
+		home = 882
 	}
-
-	regiment = {
-		name= "1. Redif Diyarbakir"
-		type = irregular
-		home = 805
-	}
-
-	regiment = {
-		name= "2. Redif Diyarbakir"
-		type = irregular
-		home = 809
-	}
-
-	regiment = {
-		name= "3. Redif Diyarbakir"
-		type = irregular
-		home = 814
-	}
-
 }
-
-army = {
-	name = "Army of Arabia"
-	location = 923
-	regiment = {
-		name= "12. Piyade Tьmeni"
-		type = infantry
-		home = 825
-	}
-
-	regiment = {
-		name= "13. Piyade Tьmeni"
-		type = infantry
-		home = 825
-	}
-
-	regiment = {
-		name= "14. Piyade Tьmeni"
-		type = infantry
-		home = 926
-	}
-
-	regiment = {
-		name= "1. Redif Halab"
-		type = irregular
-		home = 923
-	}
-
-	regiment = {
-		name= "2. Redif Halab"
-		type = irregular
-		home = 923
-	}
-
-	regiment = {
-		name= "3. Redif Halab"
-		type = irregular
-		home = 930
-	}
-
-}
-
 navy = {
-	name = "Ottoman Navy"
+	name = "Османский флот"
 	location = 860
+
 	ship = {
-		name= "Masudiya"
+		name= "Мелек-Бахри"
 		type = manowar
 	}
 
 	ship = {
-		name= "Sadd al Bahri"
+		name= "Сайад-Бахри"
 		type = manowar
 	}
 
 	ship = {
-		name= "Ankay i Barhi"
+		name= "Галбанк-Нусрет"
 		type = manowar
 	}
 
 	ship = {
-		name= "Taus i Barhi"
+		name= "Джебель-Андаз"
 		type = manowar
 	}
 
 	ship = {
-		name= "Tevfik Nyuma"
-		type = manowar
+		name= "Искандерия"
+		type = frigate
 	}
-
+	
 	ship = {
-		name= "Bisharet Nyuma"
-		type = manowar
-	}
-
-	ship = {
-		name= "Killid i Barhi"
-		type = manowar
-	}
-
-	ship = {
-		name= "Heybetendaz"
-		type = manowar
-	}
-
-	ship = {
-		name= "Melek i Barhi"
-		type = manowar
-	}
-
-	ship = {
-		name= "Sayyad i Barhi"
-		type = manowar
-	}
-
-	ship = {
-		name= "Gulbang i Nusret"
-		type = manowar
-	}
-
-	ship = {
-		name= "Jebel Andaz"
-		type = manowar
-	}
-
-	ship = {
-		name= "Iskenderiya"
+		name= "Рехбер-Алим"
 		type = frigate
 	}
 
 	ship = {
-		name= "Badere i Zaffar"
+		name= "Малбаик-Несурет"
 		type = frigate
 	}
 
 	ship = {
-		name= "Mahubey Subham"
+		name= "Бедр-Зафар"
 		type = frigate
 	}
 
 	ship = {
-		name= "Metelin"
+		name= "Мескени Гази"
 		type = frigate
 	}
 
 	ship = {
-		name= "Denyuvet"
+		name= "Факим-Зафар"
 		type = frigate
 	}
 
 	ship = {
-		name= "Rahbar i Alam"
-		type = frigate
-	}
-
-	ship = {
-		name= "Malbaik Nesuret"
-		type = frigate
-	}
-
-	ship = {
-		name= "Bedr i Zafar"
-		type = frigate
-	}
-
-	ship = {
-		name= "Meskeni Ghazi"
-		type = frigate
-	}
-
-	ship = {
-		name= "Fakim i Zafar"
-		type = frigate
-	}
-
-	ship = {
-		name= "1st Transport Flotilla"
+		name= "1-я транспортная флотилия"
 		type = clipper_transport
 	}
 
 	ship = {
-		name= "2nd Transport Flotilla"
+		name= "2-я транспортная флотилия"
 		type = clipper_transport
 	}
 
 	ship = {
-		name= "3rd Transport Flotilla"
+		name= "3-я транспортная флотилия"
 		type = clipper_transport
 	}
 

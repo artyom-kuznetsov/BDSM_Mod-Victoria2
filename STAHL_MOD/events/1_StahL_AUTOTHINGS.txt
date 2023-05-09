@@ -1,0 +1,101 @@
+## ALASKA AUTOCOLONY
+country_event = { 
+	title = "event_alaska_title"
+	desc = "event_alaska_desc"
+	id = 11800
+	trigger = {
+		invention = colonial_negotiations
+		owns = 5
+	}
+	
+	fire_only_once = yes
+	option = {
+		name = "event_alaska_opta"
+		2630 = { secede_province = THIS }
+		2599 = { secede_province = THIS }
+		2631 = { secede_province = THIS }
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+## EGYPT BORDER FIX EGYPTIAN DESERT
+country_event = {
+	title = "colonization_evtname"
+	desc = "colonization_evtdesc"
+	id = 11801
+	trigger = {
+		tag = EGY
+		1759 = {
+			owned_by = THIS
+		}
+		year = 1860
+		NOT = {
+			1758 = { owned_by = THIS }
+		}
+	}
+	
+	option = {
+		name = "colonization_evtopta"
+		1758 = { secede_province = THIS }
+	}
+}
+
+## EGYPT BORDER FIX DONGOLA
+country_event = {
+	title = "colonization_evtname"
+	desc = "colonization_evtdesc"
+	id = 11802
+	trigger = {
+		tag = EGY
+		1835 = {
+			owned_by = THIS
+		}
+		year = 1860
+		NOT = {
+			2564 = { owned_by = THIS }
+		}
+	}
+	option = {
+		name = "colonization_evtopta"
+		2564 = { secede_province = THIS }
+	}
+}
+
+## INHERIT NORWAY
+country_event = {
+	title = "colonization_evtname"
+	desc = "colonization_evtdesc"
+	id = 11803
+	trigger = {
+		tag = NOR
+		ai = yes
+		year = 1845
+		vassal_of = SWE
+		NOT = { has_global_flag = NOR_inherited_flag }
+	}
+	option = {
+		name = "colonization_evtopta"
+		SWE = { inherit = THIS }
+		set_global_flag = NOR_inherited_flag
+	}
+}
+
+## INHERIT TRN for SAF
+country_event = {
+	title = "colonization_evtname"
+	desc = "colonization_evtdesc"
+	id = 11804
+	trigger = {
+		tag = TRN
+		ai = yes
+		2107 = { owned_by = SAF }
+		NOT = { has_global_flag = TRN_inherited_flag }
+	}
+	option = {
+		name = "colonization_evtopta"
+		SAF = { inherit = THIS }
+		set_global_flag = TRN_inherited_flag
+	}
+}

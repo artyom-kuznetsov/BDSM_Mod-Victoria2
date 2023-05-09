@@ -1,0 +1,331 @@
+country_event = {
+	title = "italy_guide_evtname"
+	desc = "italy_guide_evtdesc"
+	id = 9567
+	trigger = {
+		ai = no
+		is_culture_group = italian
+		NOT = { has_global_flag = hist_scenario_flag }
+		NOT = { tag = ITA }
+	}
+	fire_only_once = yes
+	option = {
+		name = "italy_guide_evtoptb"
+		prestige = -3
+	}
+	option = {
+		name = "italy_guide_evtopta"
+	}
+}
+country_event = {
+	title = "cu_parma_evtname"
+	desc = "cu_parma_evtdesc"
+	id = 9560
+	trigger = {
+		is_culture_group = italian
+		alliance_with = PAR
+		relation = { who = PAR value = 100 }
+		ai = no
+		NOT = { PAR = { vassal_of = THIS } }
+		PAR = { NOT = { has_country_flag = rejected_confederation } }
+	}
+	fire_only_once = yes
+	#
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "cu_parma_evtopta"
+		random_list = {
+			1 = {
+				create_vassal = PAR
+				relation = {
+					who = PAR
+					value = 100
+				}
+				PAR = { 
+					add_country_modifier = {
+						name = recently_subjugated duration = 365
+					}
+				}
+				prestige = 3
+			}
+			1 = {
+				inherit = PAR
+				PAR = { all_core = { add_core = THIS } }
+				prestige = 5
+			}
+			1 = {
+				PAR = { all_core = { add_core = THIS } }
+				PAR = { set_country_flag = rejected_confederation }
+			}
+		}
+	}
+}
+country_event = {
+	title = "cu_parma_evtname"
+	desc = "cu_sar_evtdesc"
+	id = 9561
+	trigger = {
+		is_culture_group = italian
+		alliance_with = SAR
+		relation = { who = SAR value = 100 }
+		ai = no
+		NOT = { SAR = { vassal_of = THIS } }
+		SAR = { NOT = { has_country_flag = rejected_confederation } }
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "cu_parma_evtopta"
+		random_list = {
+			1 = {
+				create_vassal = SAR
+				relation = {
+					who = SAR
+					value = 100
+				}
+				SAR = { 
+					add_country_modifier = {
+						name = recently_subjugated duration = 365
+					}
+				}
+				prestige = 3
+			}
+			1 = {
+				inherit = SAR
+				SAR = { all_core = { add_core = THIS } }
+				prestige = 5
+			}
+			1 = {
+				SAR = { all_core = { add_core = THIS } }
+				SAR = { set_country_flag = rejected_confederation }
+			}
+		}
+	}
+}
+country_event = {
+	title = "cu_parma_evtname"
+	desc = "cu_lucca_evtdesc"
+	id = 9562
+	trigger = {
+		is_culture_group = italian
+		alliance_with = LUC
+		relation = { who = LUC value = 100 }
+		ai = no
+		NOT = { LUC = { vassal_of = THIS } }
+		LUC = { NOT = { has_country_flag = rejected_confederation } }
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "cu_parma_evtopta"
+		random_list = {
+			1 = {
+				create_vassal = LUC
+				relation = {
+					who = LUC
+					value = 100
+				}
+				LUC = { 
+					add_country_modifier = {
+						name = recently_subjugated duration = 365
+					}
+				}
+				prestige = 3
+			}
+			1 = {
+				inherit = LUC
+				LUC = { all_core = { add_core = THIS } }
+				prestige = 5
+			}
+			1 = {
+				LUC = { all_core = { add_core = THIS } }
+				LUC = { set_country_flag = rejected_confederation }
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "cu_parma_evtname"
+	desc = "cu_tus_evtdesc"
+	id = 9563
+	trigger = {
+		is_culture_group = italian
+		alliance_with = TUS
+		relation = { who = TUS value = 100 }
+		ai = no
+		NOT = { TUS = { vassal_of = THIS } }
+		TUS = { NOT = { has_country_flag = rejected_confederation } }
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "cu_parma_evtopta"
+		random_list = {
+			1 = {
+				create_vassal = TUS
+				relation = {
+					who = TUS
+					value = 100
+				}
+				TUS = { 
+					add_country_modifier = {
+						name = recently_subjugated duration = 365
+					}
+				}
+				prestige = 3
+			}
+			1 = {
+				inherit = TUS
+				TUS = { all_core = { add_core = THIS } }
+				prestige = 5
+			}
+			1 = {
+				TUS = { all_core = { add_core = THIS } }
+				TUS = { set_country_flag = rejected_confederation }
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "cu_parma_evtname"
+	desc = "cu_sic_evtdesc"
+	id = 9564
+	trigger = {
+		is_culture_group = italian
+		alliance_with = SIC
+		relation = { who = SIC value = 100 }
+		ai = no
+		NOT = { SIC = { vassal_of = THIS } }
+		SIC = { NOT = { has_country_flag = rejected_confederation } }
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "cu_parma_evtopta"
+		random_list = {
+			1 = {
+				create_vassal = SIC
+				relation = {
+					who = SIC
+					value = 100
+				}
+				SIC = { 
+					add_country_modifier = {
+						name = recently_subjugated duration = 365
+					}
+				}
+				prestige = 3
+			}
+			1 = {
+				inherit = SIC
+				SIC = { all_core = { add_core = THIS } }
+				prestige = 5
+			}
+			1 = {
+				SIC = { all_core = { add_core = THIS } }
+				SIC = { set_country_flag = rejected_confederation }
+			}
+		}
+	}
+}
+country_event = {
+	title = "cu_parma_evtname"
+	desc = "cu_mod_evtdesc"
+	id = 9565
+	trigger = {
+		is_culture_group = italian
+		alliance_with = MOD
+		relation = { who = MOD value = 100 }
+		ai = no
+		NOT = { MOD = { vassal_of = THIS } }
+		MOD = { NOT = { has_country_flag = rejected_confederation } }
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "cu_parma_evtopta"
+		random_list = {
+			1 = {
+				create_vassal = MOD
+				relation = {
+					who = MOD
+					value = 100
+				}
+				MOD = { 
+					add_country_modifier = {
+						name = recently_subjugated duration = 365
+					}
+				}
+				prestige = 3
+			}
+			1 = {
+				inherit = MOD
+				MOD = { all_core = { add_core = THIS } }
+				prestige = 5
+			}
+			1 = {
+				MOD = { all_core = { add_core = THIS } }
+				MOD = { set_country_flag = rejected_confederation }
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "cu_parma_evtname"
+	desc = "cu_pap_evtdesc"
+	id = 9566
+	trigger = {
+		is_culture_group = italian
+		alliance_with = PAP
+		relation = { who = PAP value = 100 }
+		ai = no
+		NOT = { PAP = { vassal_of = THIS } }
+		PAP = { NOT = { has_country_flag = rejected_confederation } }
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = "cu_parma_evtopta"
+		random_list = {
+			2 = {
+				create_vassal = PAP
+				relation = {
+					who = PAP
+					value = 100
+				}
+				PAP = { 
+					add_country_modifier = {
+						name = recently_subjugated duration = 365
+					}
+				}
+				prestige = 3
+			}
+			1 = {
+				inherit = PAP
+				PAP = { all_core = { add_core = THIS } }
+				prestige = 5
+			}
+			4 = {
+				PAP = { all_core = { add_core = THIS } }
+				PAP = { set_country_flag = rejected_confederation }
+			}
+		}
+	}
+}

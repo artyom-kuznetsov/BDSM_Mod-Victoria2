@@ -31,3 +31,44 @@ country_event = {
 		set_country_flag = zul_cb_taken
 	}
 }
+
+# Witwatersrand Goldrush
+country_event = {
+	id = 19501
+	title = "EVTNAME19501"
+	desc = "EVTDESC19501"
+	news = yes
+	news_desc_long = "EVTDESC19501_NEWS_LONG"
+	news_desc_medium = "EVTDESC19501_NEWS_MEDIUM"
+	news_desc_short = "EVTDESC19501_NEWS_SHORT"
+	picture = "goldrush"
+	
+	trigger = {
+		is_greater_power = yes
+		any_neighbor_country = {
+			has_country_modifier = witwatersrand_gold_rush
+			is_greater_power = no
+			NOT = {
+				num_of_cities = 10
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = "EVTOPTA19501"
+		any_country = {
+			limit = {
+				has_country_modifier = witwatersrand_gold_rush
+			}
+			add_casus_belli = {
+				target = THIS
+				type = conquest
+			}
+			remove_country_modifier = witwatersrand_gold_rush
+		}
+	}
+}
