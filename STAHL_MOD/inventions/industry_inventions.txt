@@ -233,16 +233,16 @@ mechanical_precision_saw = {
 	}
 }
 hussey_n_mccormicks_reaping_machine = {
-	limit = { mechanical_production = 1 }
+	limit = { steam_turbine = 1 }
 	chance = {
 		base = 2
 		modifier = {
 			factor = 2
-			early_railroad = 1
+			iron_railroad = 1
 		}
 		modifier = {
 			factor = 2
-			invention = work_specialization
+			interchangeable_parts = 1
 		}
 	}
 	effect = {
@@ -1003,6 +1003,9 @@ artificial_fertilizers = {
 	}
 	effect = {
 		farm_rgo_eff = 0.02
+		rgo_goods_output = {
+			opium = 0.2
+		}
 		factory_goods_output = {
 			fertilizer = 0.05
 		}
@@ -1328,9 +1331,26 @@ rotherham_plough = {
 			grain = 0.1
 		}
 	}
-	
-	
-	
+}
+
+watertube_boiler = {
+	limit = { high_n_low_pressure_steam_engines = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			invention = coke
+		}
+		modifier = {
+			factor = 2
+			invention = mechanical_production
+		}
+	}
+	effect = {
+		rgo_goods_output = {
+			coal = 0.2
+		}
+	}
 }
 
 telephone_switchboard = {

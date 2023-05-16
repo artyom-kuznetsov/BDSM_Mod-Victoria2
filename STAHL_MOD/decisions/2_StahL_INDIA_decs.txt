@@ -216,6 +216,42 @@ political_decisions = {
 			set_country_flag = controls_burma_flag
 		}
 	}
+	control_east_hnd_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			has_country_flag = hnd_control_decs_access_flag
+			NOT = {
+				has_country_flag = controls_east_flag
+			}
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = india_control_cooldown_modifier
+			}
+			owns = 1250
+			owns = 1251
+			money = 600000
+		}
+		effect = {
+			money = -600000
+			prestige = -15
+			BNG = {
+				all_core = {
+					add_core = THIS
+				}
+			}
+			BUN = {
+				all_core = {
+					add_core = THIS
+				}
+			}
+			add_accepted_culture = bengali
+			add_country_modifier = {
+				name = india_control_cooldown_modifier duration = 1825
+			}
+			set_country_flag = controls_east_flag
+		}
+	}
 	hnd_ultimatum_goa = {
 		potential = {
 			NOT = { has_country_flag = open_money_transfers_flag }
@@ -311,7 +347,7 @@ political_decisions = {
 				owner = { vassal_of = THIS }
 				owner = { in_sphere = THIS } }
 			}
-			civilization_progress = 0.5
+			civilized = yes
 		}
 		
 		effect = {
