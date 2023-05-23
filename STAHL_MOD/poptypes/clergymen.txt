@@ -181,12 +181,10 @@ migration_target =
 	
 	modifier = {
 		factor = 0
-					AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
+			can_build_factory = no
 		OR = { 
 			unemployment_by_type = { type = farmers value = 0.1  }
 			unemployment_by_type = { type = labourers value = 0.1  }
@@ -691,12 +689,10 @@ promote_to =
 		}
 		modifier = {
 			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
+			can_build_factory = no
 		}
 		modifier = {
 			factor = -100
@@ -763,12 +759,10 @@ promote_to =
 		}
 		modifier = {
 			factor = -40
-			AND = {
-				state_scope = {
-					has_factories = no
-				}
-				can_build_factory = no
+			state_scope = {
+				has_factories = no
 			}
+			can_build_factory = no
 		}
 		modifier = {
 			factor = -100
@@ -1240,14 +1234,17 @@ ideologies = {
 		}
 		modifier = {
 			factor = 1.1
+			# Audax Validator "." Ignore_NEXT
 			NOT = { is_ideology_enabled = socialist }
 		}
 		modifier = {
 			factor = 1.1
+			# Audax Validator "." Ignore_NEXT
 			NOT = { is_ideology_enabled = communist }
 		}
 		modifier = {
 			factor = 1.1
+			# Audax Validator "." Ignore_NEXT
 			NOT = { is_ideology_enabled = anarcho_liberal }
 		}
 		modifier = {
@@ -2657,7 +2654,7 @@ issues =
 		}
 		modifier = {
 			factor = 0.25
-			NOT = { literacy = 50 }
+			NOT = { literacy = 0.5 }
 		}
 		modifier = {
 			factor = 1.25
@@ -2702,7 +2699,7 @@ issues =
 		}
 		modifier = {
 			factor = 0.25
-			NOT = { literacy = 50 }
+			NOT = { literacy = 0.5 }
 		}
 		modifier = {
 			factor = 1.25
@@ -3215,6 +3212,7 @@ issues =
 				NOT = {
 					is_next_reform = trinket_wage
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3311,6 +3309,7 @@ issues =
 				NOT = {
 					is_next_reform = low_minimum_wage
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3407,6 +3406,7 @@ issues =
 				NOT = {
 					is_next_reform = acceptable_minimum_wage
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3503,6 +3503,7 @@ issues =
 				NOT = {
 					is_next_reform = good_minimum_wage
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3600,6 +3601,7 @@ issues =
 				NOT = {
 					is_next_reform = trinket_safety
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3668,6 +3670,7 @@ issues =
 				NOT = {
 					is_next_reform = low_safety
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3736,6 +3739,7 @@ issues =
 				NOT = {
 					is_next_reform = acceptable_safety
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3805,6 +3809,7 @@ issues =
 				NOT = {
 					is_next_reform = good_safety 
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3876,6 +3881,7 @@ issues =
 				NOT = {
 					is_next_reform = trinket_subsidies
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -3965,6 +3971,7 @@ issues =
 				NOT = {
 					is_next_reform = low_subsidies
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4054,6 +4061,7 @@ issues =
 				NOT = {
 					is_next_reform = acceptable_subsidies
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4143,6 +4151,7 @@ issues =
 				NOT = {
 					is_next_reform = good_subsidies
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4228,6 +4237,7 @@ issues =
 				NOT = {
 					is_next_reform = trinket_pensions
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4307,6 +4317,7 @@ issues =
 				NOT = {
 					is_next_reform = low_pensions
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4386,6 +4397,7 @@ issues =
 				NOT = {
 					is_next_reform = acceptable_pensions
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4465,6 +4477,7 @@ issues =
 				NOT = {
 					is_next_reform = good_pensions
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4544,6 +4557,7 @@ issues =
 				NOT = {
 					is_next_reform = trinket_health_care
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4616,6 +4630,7 @@ issues =
 				NOT = {
 					is_next_reform = low_health_care
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4688,6 +4703,7 @@ issues =
 				NOT = {
 					is_next_reform = acceptable_health_care
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4760,6 +4776,7 @@ issues =
 				NOT = {
 					is_next_reform = good_health_care
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4832,6 +4849,7 @@ issues =
 				NOT = {
 					is_next_reform = fourteen_hours
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -4916,6 +4934,7 @@ issues =
 				NOT = {
 					is_next_reform = twelve_hours
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -5000,6 +5019,7 @@ issues =
 				NOT = {
 					is_next_reform = ten_hours
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -5086,6 +5106,7 @@ issues =
 				NOT = {
 					is_next_reform = eight_hours
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -5170,6 +5191,7 @@ issues =
 				NOT = {
 					is_next_reform = low_schools
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -5225,6 +5247,7 @@ issues =
 				NOT = {
 					is_next_reform = acceptable_schools
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
@@ -5280,6 +5303,7 @@ issues =
 				NOT = {
 					is_next_reform = good_schools
 				}
+				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 			}	
 		}
