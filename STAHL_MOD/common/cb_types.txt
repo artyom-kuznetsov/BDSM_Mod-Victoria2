@@ -1249,10 +1249,8 @@ establish_protectorate_casus_belli = {
 			}
 			AND = {
 				THIS = {
-					AND = {
-						is_greater_power = yes
-						nationalism_n_imperialism = 1
-					}
+					is_greater_power = yes
+					nationalism_n_imperialism = 1
 				}
 				NOT = { number_of_states = 5 }
 			}
@@ -1587,23 +1585,21 @@ install_communist_gov_cb = {
 			ruling_party_ideology = communist
 		}
 		
-		AND = {
-			# If reciever ruling party is not a communist
-			#NOT = {
-			#	ruling_party_ideology = communist
-			#}
+		# If reciever ruling party is not a communist
+		#NOT = {
+		#	ruling_party_ideology = communist
+		#}
+		
+		# There are some amount of communist already in the country
+		communist = 0.1
 			
-			# There are some amount of communist already in the country
-			communist = 0.1
-				
-			# If reciever current gov is not proletarian_dictatorship
-			NOT = {
-				government = proletarian_dictatorship
-			}
-			
-			# If reciever is not a great power
-			is_greater_power = no
+		# If reciever current gov is not proletarian_dictatorship
+		NOT = {
+			government = proletarian_dictatorship
 		}
+		
+		# If reciever is not a great power
+		is_greater_power = no
 	}
 	
 	po_install_communist_gov_type = yes

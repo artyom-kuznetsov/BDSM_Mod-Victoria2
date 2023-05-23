@@ -19,11 +19,11 @@ country_event = {
 		}
 	}
 	
-	immediate = { clr_country_flag = the_slavery_debate }
 	immediate = {
 		CSA = {
 			set_country_flag = the_slavery_debate
 		}
+		clr_country_flag = the_slavery_debate
 	}
 	
 	mean_time_to_happen = {
@@ -2263,7 +2263,7 @@ country_event = {
 
 country_event = {
 	id = 16425
-	title = "Little Bighorn"
+	title = "LittleBighorn"
 	desc = "EVTDESC16430"
 	picture = "sittingbull"
 	fire_only_once = yes
@@ -2368,8 +2368,8 @@ country_event = {
 
 province_event = {
 	id = 16445
-	title = "Apache Raiders"
-	desc = "Local native groups are raiding our settlements in $PROVINCENAME$"
+	title = "EVT16445NAME"
+	desc = "EVT16445DESC"
 	picture = "Sioux"
 	
 	trigger = {
@@ -2384,7 +2384,7 @@ province_event = {
 	}
 	
 	option = {
-		name = "Blast them!"
+		name = "EVT16445OPTA"
 		state_scope = {
 			any_pop = {
 				limit = {
