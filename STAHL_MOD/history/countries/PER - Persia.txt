@@ -1,7 +1,8 @@
 capital = 1121
 primary_culture = persian
-culture = panjabi
-religion = blank
+culture = azerbaijani
+culture = baluchi
+religion = shiite
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
@@ -13,12 +14,12 @@ upper_house = {
 	liberal = 12
 	conservative = 60
 	reactionary = 28
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
 
-slavery = yes_slavery
+slavery = no_slavery
 upper_house_composition = appointed
 vote_franschise = none_voting
 public_meetings = no_meeting
@@ -36,15 +37,9 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-# New Reforms
-conscription = paramilitarism
-debt_law = peonage
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+# Starting Consciousness
+consciousness = 0
+nonstate_consciousness = 0
 
 land_reform = yes_land_reform
 foreign_weapons = yes_foreign_weapons
@@ -54,3 +49,21 @@ flintlock_rifles = 1
 
 oob = "PER_oob.txt"
 
+1851.1.1 = {
+	decision = establish_the_dar_al_funun
+}
+
+1861.1.1 = {
+	oob = "/1861/PER_oob.txt"
+	literacy = 0.12
+	non_state_culture_literacy = 0.12
+
+	#Economic Reforms
+	land_reform = yes_land_reform
+	finance_reform = yes_finance_reform
+	education_reform = yes_education_reform
+
+	#Military Reforms
+	foreign_weapons = yes_foreign_weapons
+	foreign_training = yes_foreign_training
+}

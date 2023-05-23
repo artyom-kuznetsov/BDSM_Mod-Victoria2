@@ -3,7 +3,7 @@ primary_culture = hausa
 culture = tiv
 culture = fulbe
 culture = african_minor
-religion = blank
+religion = sunni
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
@@ -16,7 +16,7 @@ upper_house = {
 	liberal = 16
 	conservative = 63
 	reactionary = 21
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
@@ -44,13 +44,14 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-# New Reforms
-conscription = demilitarized_state
-debt_law = peonage
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+1861.1.1 = {
+	oob = "/1861/SOK_oob.txt"
 
+	#Military Reforms
+	foreign_weapons = yes_foreign_weapons
+	literacy = 0.05
+	non_state_culture_literacy = 0.04
+	
+	#Technologies
+	flintlock_rifles = 1
+}

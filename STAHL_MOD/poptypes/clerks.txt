@@ -5,6 +5,7 @@ research_optimum = 0.04
 rebel =
 {
 	infantry = 0.5
+	irregular = 0.5
 }
 
 
@@ -27,16 +28,18 @@ luxury_needs = {
 	aeroplanes = 0.4
 	radio = 1.0
 	fuel = 0.2
+	coffee = 2
 }
 
 everyday_needs = {
 	coal = 1
 	liquor = 5
-	regular_clothes = 2.5
+	regular_clothes = 5
 	furniture = 4
 	paper = 5
 	glass = 1
-	tea = 8
+	tobacco = 3
+	tea = 5
 }
 
 life_needs = {
@@ -44,16 +47,14 @@ life_needs = {
 	wool =  1
 	fish =  1
 	fruit =  1
-	grain =  2
+	grain =  2.5
 }
+
 
 country_migration_target =
 {
 	factor = 1
-	modifier = {
-		factor = -100
-		country = { tag = WBK }
-	}
+
 	modifier = {
 		factor = 0.9
 		unemployment = 0.05
@@ -87,12 +88,12 @@ country_migration_target =
 		unemployment = 0.5
 	}
 	modifier = {
-		factor = 1.2
-		is_greater_power = yes
-	}
-	modifier = {
 		factor = 2.0
 		has_pop_culture = THIS
+	}
+	modifier = {
+		factor = 1.2
+		is_greater_power = yes
 	}
 	modifier = {
 		factor = 1.05
@@ -107,48 +108,12 @@ country_migration_target =
 		vote_franschise = universal_voting
 	}
 	modifier = {
-		factor = 1.5
-		OR = {
-			is_primary_culture = THIS
-			is_accepted_culture = THIS
-		}
-	}
-	
-	modifier = {
-		factor = 1.5
+		factor = 4.0
 		OR = { 
 			continent = north_america
 			continent = south_america
-			continent = polynesia
+			continent = oceania
 		}
-		NOT = { year = 1855 }
-	}
-	modifier = {
-		factor = 1.5
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = polynesia
-		}
-		NOT = { year = 1870 }
-	}
-	modifier = {
-		factor = 1.5
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = polynesia
-		}
-		NOT = { year = 1885 }
-	}
-	modifier = {
-		factor = 1.5
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = polynesia
-		}
-		NOT = { year = 1900 }
 	}
 	modifier = {
 		factor = 0.1
@@ -172,69 +137,12 @@ country_migration_target =
 			}
 		}
 	}	
-	modifier = {
-		factor = 1.5
-		OR = {
-			government = democracy
-			government = hms_government
-			government = social_republic
-			government = prussian_constitutionalism
-		}
-	}
-	modifier = {
-		factor = 1.1
-		government = democracy
-	}
-	modifier = {
-		factor = 0.9
-		consciousness = 5
-	}
-	modifier = {
-		factor = 0.8
-		consciousness = 6
-	}
-	modifier = {
-		factor = 0.7
-		consciousness = 7
-	}
-	modifier = {
-		factor = 0.5
-		consciousness = 8 
-	}
-	modifier = {
-		factor = 0.3
-		consciousness = 9
-	}
-	modifier = {
-		factor = 0.8
-		militancy = 5
-	}
-	modifier = {
-		factor = 0.7
-		militancy = 6
-	}
-	modifier = {
-		factor = 0.5
-		militancy = 7
-	}
-	modifier = {
-		factor = 0.3
-		militancy = 8
-	}
-	modifier = {
-		factor = 0.1
-		militancy = 9
-	}
 }
-
 
 migration_target =
 {
 	factor = 0.01
-	modifier = {
-		factor = 1.2
-		total_pops = 150000
-	}	
+	
 	modifier = {
 		factor = 0.1
 		unemployment = 0.1
@@ -242,30 +150,30 @@ migration_target =
 			has_factories = no
 			}
 	}
-
 	modifier = {
 		factor = 1.2
-		NOT = { total_pops = 100000 }
+		total_pops = 250000
 	}
 	modifier = {
 		factor = 1.2
-		NOT = { total_pops = 200000 }
+		total_pops = 500000
 	}
 	modifier = {
 		factor = 1.2
-		NOT = { total_pops = 30000 }
+		total_pops = 750000
 	}	
-	
 	modifier = {
-		factor = 5.0
-		NOT = { total_pops = 500 }
-	}
-	
+		factor = 1.2
+		total_pops = 150000
+	}	
 	modifier = {
 		factor = 0
-		state_scope = {
-			has_factories = no
-		}
+					AND = {
+				state_scope = {
+					has_factories = no
+				}
+				can_build_factory = no
+			}
 		OR = { 
 			unemployment_by_type = { type = farmers value = 0.1  }
 			unemployment_by_type = { type = labourers value = 0.1  }
@@ -276,14 +184,14 @@ migration_target =
 		has_pop_culture = THIS
 	}
 	modifier = {
-    	factor = 0.25
-    	has_culture_core = no
-	}
-	modifier = {
 		factor = 2
 		state_scope = {
 					has_factories = yes
 				}
+	}
+	modifier = {
+		factor = 1.2
+		has_pop_religion = THIS
 	}
 	modifier = {
 		factor = 1.5
@@ -334,10 +242,8 @@ migration_target =
 	}
 }
 
-
 promote_to =
 {
-	
 	bureaucrats =
 	{
 		factor = 0.01
@@ -394,7 +300,7 @@ promote_to =
 				state_scope = { bureaucrats = 0.008 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.010 }
 			}
 			modifier = {
@@ -406,143 +312,135 @@ promote_to =
 				state_scope = { bureaucrats = 0.014 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.016 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.018 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.020 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.022 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.024 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.026 }
 			}
 			modifier = {
-				factor = -3
+				factor = -2
 				state_scope = { bureaucrats = 0.028 }
 			}
 			modifier = {
-				factor = -100
+				factor = -2
 				state_scope = { bureaucrats = 0.030 }
+			}
+			modifier = {
+				factor = -2
+				state_scope = { bureaucrats = 0.032 }
+			}
+			modifier = {
+				factor = -2
+				state_scope = { bureaucrats = 0.034 }
+			}
+			modifier = {
+				factor = -2
+				state_scope = { bureaucrats = 0.036 }
+			}
+			modifier = {
+				factor = -2
+				state_scope = { bureaucrats = 0.038 }
+			}
+			modifier = {
+				factor = -100
+				state_scope = { bureaucrats = 0.040 }
 			}
 		}
 		
 		modifier = {
-			factor = -0.5
-			health_care = no_health_care
-		}
-		modifier = {
-			factor = -0.5
-			penal_system = capital_punishment
-		}
-		modifier = {
-			factor = -1
-			conscription = demilitarized_state
-		}
-		modifier = {
-			factor = -0.5
-			conscription = basic_training
-		}
-		modifier = {
-			factor = 0.5
-			OR = {
-				penal_system = incarceration
-				penal_system = rehabilitation
-			}
-		}
-		modifier = {
-			factor = 1
+			factor = 4
 			health_care = trinket_health_care
 		}
 		modifier = {
-			factor = 2
+			factor = 8
 			health_care = low_health_care
 		}
 		modifier = {
-			factor = 3
+			factor = 12
 			health_care = acceptable_health_care
 		}
 		modifier = {
-			factor = 4
+			factor = 16
 			health_care = good_health_care  
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			school_reforms = low_schools  
 		}		
 		modifier = {
-			factor = 3
+			factor = 8
 			school_reforms = acceptable_schools
 		}	
 		modifier = {
-			factor = 4
+			factor = 12
 			school_reforms = good_schools 
 		}	
 		modifier = {
-			factor = 2
+			factor = 4
 			safety_regulations = trinket_safety
 		}
 		modifier = {
-			factor = 3
+			factor = 8
 			safety_regulations = low_safety
 		}		
 		modifier = {
-			factor = 4
+			factor = 12
 			safety_regulations = acceptable_safety
 		}
 		modifier = {
-			factor = 5
+			factor = 16
 			safety_regulations = good_safety
 		}
 		
 		modifier = {
-			factor = 1
+			factor = 4
 			work_hours = fourteen_hours
 		}
 		modifier = {
-			factor = 2
+			factor = 8
 			work_hours = twelve_hours
 		}		
 		modifier = {
-			factor = 3
+			factor = 12
 			work_hours  = ten_hours
 		}
 		modifier = {
-			factor = 4
+			factor = 16
 			work_hours = eight_hours
 		}
 		modifier = {
-			factor = 1
+			factor = 4
 			wage_reform = trinket_wage
 		}
 		modifier = {
-			factor = 2
+			factor = 8
 			wage_reform = low_minimum_wage
 		}		
 		modifier = {
-			factor = 3
+			factor = 12
 			wage_reform  = acceptable_minimum_wage
 		}
 		modifier = {
-			factor = 4
+			factor = 16
 			wage_reform = good_minimum_wage
-		}
-		
-		modifier = {
-			factor = -10
-			country = { has_country_flag = inefficient_bureaucracy_flag }
 		}
 		
 		group = {
@@ -650,81 +548,81 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.1
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.2
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.3
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.4
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.5
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.6
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.7
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.8
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending = 0.9
 			}
 			modifier = {
-				factor = 1.5
+				factor = 2
 				education_spending =0.99
 			}
 		}
 		group = {		
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.004
 			}
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.008
 			}
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.012
 			}			
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.016
 			}			
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.02
 			}			
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.024
 			}			
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.028
 			}			
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.032
 			}			
 			modifier = {
-				factor = -1
+				factor = -2
 				clergymen = 0.036
 			}			
 			modifier = {
@@ -759,24 +657,38 @@ promote_to =
 			}
 		}
 	}
-	
 	capitalists = 
 	{
 		factor = 0.01
 		modifier = {
-			factor = -100
+			factor = -1
+			terrain = desert
+		}
+		modifier = {
+			factor = -1
+			terrain = arctic
+		}
+		modifier = {
+			factor = -1
 			state_scope = {
 				has_factories = no
 			}
+			NOT = { total_pops = 200000 }
 		}	
 		modifier = {
 			factor = -1 
 			is_accepted_culture = no
 		}
-		
+				
 		modifier = {
-			factor = -10
+			factor = -20
 			NOT = { literacy = 0.30 }
+		}
+		modifier = {
+			factor = -2
+			country = {
+				has_country_flag = serfdom_not_abolished
+			}
 		}
 		group = {
 			modifier = {
@@ -784,16 +696,16 @@ promote_to =
 				state_scope = { capitalists = 0.001 }
 			}
 			modifier = {
-				factor = -1
+				factor = -2
 				state_scope = { capitalists = 0.003 }
 			}
 			modifier = {
-				factor = -1
+				factor = -2
 				state_scope = { capitalists = 0.005 }
 			}
 			modifier = {
 				factor = -100
-				state_scope = { capitalists = 0.01 }
+				state_scope = { capitalists = 0.007 }
 			}
 		}
 
@@ -808,26 +720,11 @@ promote_to =
 		}
 		modifier = {
 			factor = 5
-			state_scope = {
-				has_factories = yes
-			}
-		}
-		modifier = {
-			factor = 1
-			state_scope = {
-				state_scope = { craftsmen = 0.05 }
-			}
-		}
-		modifier = {
-			factor = 1
-			state_scope = {
-				state_scope = { craftsmen = 0.08 }
-			}
-		}
-		modifier = {
-			factor = 1
-			state_scope = {
-				state_scope = { craftsmen = 0.1 }
+			AND = {
+				state_scope = {
+					has_factories = no
+				}
+				can_build_factory = yes
 			}
 		}
 
@@ -851,6 +748,26 @@ promote_to =
 			modifier = {
 				factor = 1
 				luxury_needs = 0.5
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.6
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.7
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.8
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.9
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 1
 			}
 		}
 		modifier = {
@@ -918,8 +835,11 @@ promote_to =
 		}
 		modifier = {
 			factor = -40
-			state_scope = {
-				has_factories = no
+			AND = {
+				state_scope = {
+					has_factories = no
+				}
+				can_build_factory = no
 			}
 		}
 		modifier = {

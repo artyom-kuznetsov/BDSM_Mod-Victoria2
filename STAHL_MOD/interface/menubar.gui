@@ -303,7 +303,7 @@ guiTypes = {
 
 			guiButtonType = {
 				name = "menu_resign_button"
-				position = { x = 86 y = 269}
+				position = { x = 86 y = 226}
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -314,7 +314,7 @@ guiTypes = {
 
 			guiButtonType = {
 				name = "menu_message_button"
-				position = { x = 86 y = 226}
+				position = { x = 86 y = 269}
 				quadTextureSprite ="GFX_frontend_button_236"	
 				tooltip = ""
 				tooltipText =""
@@ -386,7 +386,17 @@ guiTypes = {
 				Orientation = "UPPER_LEFT"
 			}
 			
-
+			instantTextBoxType={
+				position = {x = 124 y = 131 }
+				name = "savegame_label"
+				font = "vic_22_black"
+				borderSize = {x = 0 y = 0}	
+				maxWidth = 256
+				maxHeight = 18
+				text = "MENU_BAR_SAVE_GAME"	
+				orientation = "UPPER_LEFT"
+				format = centre
+			}
 			
 			guiButtonType = {
 				name = "save"
@@ -1339,7 +1349,6 @@ guiTypes = {
 
 			Orientation = "LOWER_RIGHT"
 			clicksound = click
-			shortcut = "f"
 		}
 		
 		guiButtonType = {
@@ -1417,7 +1426,7 @@ guiTypes = {
 			quadTextureSprite ="GFX_mapmode_soi"
 			Orientation = "LOWER_RIGHT"
 			clicksound = click
-			shortcut = "x"
+			shortcut = "f"
 		}
 
 		guiButtonType = {
@@ -1524,6 +1533,7 @@ guiTypes = {
 			quadTextureSprite ="GFX_mapmode_natfocus"
 			Orientation = "LOWER_RIGHT"
 			clicksound = click
+			shortcut = "p"
 		}
 		
 		guiButtonType = {
@@ -1548,7 +1558,6 @@ guiTypes = {
 			quadTextureSprite ="GFX_mapmode_naval"
 			Orientation = "LOWER_RIGHT"
 			clicksound = click
-			shortcut = "p"
 		}
 }
 

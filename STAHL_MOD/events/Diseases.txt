@@ -78,14 +78,15 @@ country_event = {
 				reduce_pop = 0.96
 			}
 		}
-		treasury = -50000
+		add_tax_relative_income	= -5
+		#treasury = -1500
 	}
 	
 	option = {
 		name = "EVTOPTB21010"
 		random_state = {
 			poor_strata = {
-				reduce_pop = 0.94
+				reduce_pop = 0.9
 				militancy = 1
 			}
 		}
@@ -180,7 +181,6 @@ country_event = {
 		NOT = {
 			has_country_modifier = pandemic_influenza
 		}
-		ai = no
 	}
 	
 	mean_time_to_happen = {
@@ -218,7 +218,7 @@ country_event = {
 			name = pandemic_influenza
 			duration = 365
 		}
-		money = -60000
+		add_tax_relative_income	= -5
 	}
 	
 	option = {
@@ -267,18 +267,17 @@ country_event = {
 		name = "EVTOPTA21040"
 		random_state = {
 			any_pop = {
-				reduce_pop = 0.95
+				reduce_pop = 0.9
 				consciousness = 2
 			}
 		}
-		money = -25000
 	}
 	
 	option = {
 		name = "EVTOPTB21040"
 		random_state = {
 			any_pop = {
-				reduce_pop = 0.9
+				reduce_pop = 0.85
 				militancy = -1
 			}
 		}

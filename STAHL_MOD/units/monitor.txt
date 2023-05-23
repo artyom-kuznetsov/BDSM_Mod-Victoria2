@@ -9,47 +9,39 @@ monitor = {
 	active = no
 	move_sound = steam_move
 	select_sound = steam_selected
-	colonial_points = 32
+	colonial_points = 10
 
 
 	#Core Abilities
 	priority = 30
 	max_strength = 100
 	default_organisation = 30
-	maximum_speed = 8
+	maximum_speed = 3
 	weighted_value = 10.0
 
 	#Building Costs
-	build_time = 280
+	build_time = 360
 	build_cost = {
-		steamer_convoy = 80
-		artillery = 20
+		steamer_convoy = 20
+		artillery = 6
+		canned_food = 10
 	}
-	min_port_level = 2
+	min_port_level = 3
 	limit_per_port = -1
-	supply_consumption_score = 1
+	supply_consumption_score = 3
 	
 	supply_consumption = 1.0
-	#supply_cost = {
-	#	steamer_convoy = 1 # 65
-	#	artillery = 0.48 # 28.8
-	#	coal = 1 # 2.3
-	#	fertilizer = 0.2 # 2
-	#	money = 2.4 # 19.2 # 115.45
-	#}
 	supply_cost = {
-		steamer_convoy = 1.3 # 42.25
-		artillery = 0.64 # 22.4
-		coal = 1 # 4.6 
-		fertilizer = 0.4 # 2
-		money = 2.9 # 40 # ~115
+		steamer_convoy = 0.32
+		artillery = 0.096
+		canned_food = 0.8
 	}
 	
 	#Naval Abilties
-	hull = 15
-	gun_power = 20
-	fire_range = 0.6
+	hull = 20
+	gun_power = 10
+	fire_range = 0.5
 	evasion = 0
-	#torpedo_attack = 0
+	torpedo_attack = 0
 }
 

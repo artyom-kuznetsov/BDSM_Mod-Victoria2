@@ -33,7 +33,7 @@ reactionary_rebels = {
 	
 	defection = none					# Will defect to the "best" alternative.
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = reactionary
 	
@@ -194,7 +194,7 @@ reactionary_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 365
+			province_control_days = 30
 		}
 	}
 	
@@ -232,7 +232,7 @@ fascist_rebels = {
 	
 	defection = none					# Will defect to the "best" alternative.
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = fascist
 	
@@ -396,7 +396,7 @@ fascist_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 365
+			province_control_days = 30
 		}
 	}
 	demands_enforced_effect = {
@@ -433,7 +433,7 @@ communist_rebels = {
 	
 	defection = ideology				# Will defect to countries with proletarian dictatorships
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = communist
 	
@@ -606,7 +606,7 @@ communist_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 365
+			province_control_days = 30
 		}
 	}
 	demands_enforced_effect = {
@@ -624,6 +624,198 @@ communist_rebels = {
 ###################################
 # Anarcho-Liberal Rebels
 ###################################
+anarcho_liberal_rebels = {
+	icon = 4
+	
+	area = nation 					# Stays within the nation
+	break_alliance_on_win = yes
+	
+	# <this is the governement in the country> = <this is what the rebels want>
+	government = {
+		proletarian_dictatorship = bourgeois_dictatorship
+		presidential_dictatorship = bourgeois_dictatorship
+		bourgeois_dictatorship = bourgeois_dictatorship
+		fascist_dictatorship = bourgeois_dictatorship
+		absolute_monarchy = bourgeois_dictatorship
+		prussian_constitutionalism = bourgeois_dictatorship
+		hms_government = bourgeois_dictatorship
+		democracy = bourgeois_dictatorship
+	}
+	
+	
+	defection = none					# Will defect to the "best" alternative.
+	independence = none				# Does not strive for independence
+	defect_delay = 18
+	
+	ideology = anarcho_liberal
+	
+	allow_all_cultures = yes
+	allow_all_religions = yes
+	allow_all_ideologies = yes
+	
+	resilient = yes					# Disbands on retreat
+	reinforcing = yes				# Does not receive reinforcements
+	general = yes					# Does use generals
+	smart = yes						# Does not assault forts, tactically withdraw from battle, etc.
+	unit_transfer = no				# Units do not remain after enforcing demands.
+	
+	occupation_mult = 1.0			# The amount of strength this rebel gains from taking provinces	
+
+	# triggers a general rising, modifier will be multiplied with the countrys army strength and compared to the factions strenght
+	will_rise = 
+	{
+		factor = 0.5
+		
+		modifier = {
+			war = yes
+			factor = 0.8
+		}
+		
+		modifier = {
+			war_exhaustion = 4
+			factor = 0.95
+		}
+		
+		modifier = {
+			war_exhaustion = 6
+			factor = 0.95
+		}
+		
+		modifier = {
+			war_exhaustion = 8
+			factor = 0.95
+		}
+		modifier = {
+			factor = 0.1
+			country = {
+				has_country_modifier = springtime_of_nations
+			}
+		}
+		modifier = {
+			factor = 3
+			country = {
+				has_country_modifier = global_liberal_agitation
+			}
+		}
+	}
+	
+	# The rebel type with the highest modifier for this pop gets picked
+	spawn_chance = {
+		factor = 1.02
+		modifier = {
+			factor = 0.01
+			NOT = {
+				OR = {
+					pop_majority_ideology = anarcho_liberal
+					pop_majority_ideology = liberal
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+				OR = {
+					political_movement = yes
+					social_movement = yes
+				}	
+		}
+		modifier = {
+			factor = 0
+			country = { civilized = no }
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				is_ideology_enabled = anarcho_liberal
+			}
+		}
+		
+		modifier = {
+			factor = 1.15
+			pop_majority_ideology = anarcho_liberal
+		}
+		
+		modifier = {
+			factor = 1.05
+			pop_majority_ideology = liberal
+		}
+
+		modifier = {
+			factor = 1.15
+			political_reform_want = 0.15
+			NOT = { social_reform_want = 0.05 
+			}
+		}
+		
+		modifier = {
+			factor = 0.5
+			NOT = { is_culture_group = THIS }
+		}
+		
+		modifier = {
+			factor = 0.5
+			is_accepted_culture = no
+			is_primary_culture = no
+		}
+		modifier = {
+			factor = 0
+			country = { government = bourgeois_dictatorship }
+		}
+	}
+ 
+ 	#This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 1.5
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 1.5
+			average_militancy = 6
+		}
+		modifier = {
+			factor = 1.5
+			average_militancy = 8
+		}
+		modifier = {
+			factor = 2.0
+			is_capital = yes
+		}
+	}
+	
+ 	# Province Scope
+ 	#siege_won_trigger = {
+ 	#}
+	
+	#siege_won_effect = {
+	#}
+	
+
+	# Country scope
+	demands_enforced_trigger = {
+		capital_scope = {
+			controlled_by = REB
+			province_control_days = 30
+		}
+	}
+	demands_enforced_effect = {
+		political_reform = none_voting
+		political_reform = party_appointed
+		political_reform = no_meeting
+		political_reform = state_press
+		political_reform = no_trade_unions
+		political_reform = underground_parties
+	}
+}
+
 ###################################
 # Nationalist Rebels
 ###################################
@@ -648,7 +840,7 @@ nationalist_rebels = {
 	
 	defection = culture		# If the country seeks independence, defection specifies what type of provinces it wants.
 	independence = culture 		# Seeks independence for spawn province culture. Will not spawn at all if there is no suitable tag.
-	defect_delay = 365# 100# 12		# Can spontaneously declare independence after X months (earliest)
+	defect_delay = 12		# Can spontaneously declare independence after X months (earliest)
 	
 	allow_all_cultures = no
 	allow_all_religions = yes
@@ -734,6 +926,10 @@ nationalist_rebels = {
 			pop_majority_ideology = socialist
 		}
 		modifier = {
+			factor = 1.03
+			pop_majority_ideology = anarcho_liberal
+		}
+		modifier = {
 			factor = 1.05
 			pop_majority_ideology = liberal
 		}
@@ -782,7 +978,7 @@ nationalist_rebels = {
 		}
 		modifier = {
 			factor = 0.001
-			controlled_by = 365
+			controlled_by = REB
 		}
 		modifier = {
 			factor = 1.5
@@ -823,7 +1019,7 @@ nationalist_rebels = {
 					controlled_by_rebels = yes
 					NOT = { owned_by = THIS }
 				}
-				province_control_days = 120
+				province_control_days = 30
 			}
 		}
 	}
@@ -859,7 +1055,7 @@ pan_nationalist_rebels = {
 
 	defection = pan_nationalist		# If the country seeks independence, defection specifies what type of provinces it wants.
 	independence = none
-	defect_delay = 365# 100# 12			# Can spontaneously declare independence after 12 months (earliest)
+	defect_delay = 12			# Can spontaneously declare independence after 12 months (earliest)
 	
 	ideology = liberal
 	allow_all_cultures = yes
@@ -948,11 +1144,6 @@ pan_nationalist_rebels = {
 		
 		modifier = {
 			factor = 0
-			is_cultural_group = germanic
-		}
-		
-		modifier = {
-			factor = 0
 			country = {
 				is_greater_power = yes
 			}
@@ -980,7 +1171,11 @@ pan_nationalist_rebels = {
 			factor = 1.2
 			pop_majority_ideology = liberal
 		}
-
+		
+		modifier = {
+			factor = 1.1
+			pop_majority_ideology = anarcho_liberal
+		}
 
 		modifier = {
 			factor = 1.015
@@ -1037,7 +1232,7 @@ pan_nationalist_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 30
 		}
 	}
 	
@@ -1095,7 +1290,7 @@ carlist_rebels = {
 	
 	defection = none				
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = reactionary
 	
@@ -1226,7 +1421,7 @@ carlist_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 30
 		}
 	}
 	
@@ -1267,7 +1462,7 @@ boxer_rebels = {
 	
 	defection = none				
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = reactionary
 	
@@ -1457,7 +1652,7 @@ boxer_rebels = {
 	demands_enforced_trigger = {
 		any_owned_province = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 30
 		}
 	}
 	
@@ -1490,7 +1685,7 @@ red_shirts = {
 
 	defection = pan_nationalist		# If the country seeks independence, defection specifies what type of provinces it wants.
 	independence = none
-	defect_delay = 120# 100# 12			# Can spontaneously declare independence after 12 months (earliest)
+	defect_delay = 12			# Can spontaneously declare independence after 12 months (earliest)
 	
 	ideology = liberal
 	allow_all_cultures = yes
@@ -1617,7 +1812,10 @@ red_shirts = {
 			pop_majority_ideology = liberal
 		}
 		
-
+		modifier = {
+			factor = 1.1
+			pop_majority_ideology = anarcho_liberal
+		}
 		
 		modifier = {
 			factor = 1.1
@@ -1730,7 +1928,7 @@ indian_sepoys = {
 
 	defection = pan_nationalist		# If the country seeks independence, defection specifies what type of provinces it wants.
 	independence = culture
-	defect_delay = 365# 100# 12			# Can spontaneously declare independence after 12 months (earliest)
+	defect_delay = 12			# Can spontaneously declare independence after 12 months (earliest)
 	
 	ideology = liberal
 	allow_all_cultures = yes
@@ -1849,7 +2047,10 @@ indian_sepoys = {
 			pop_majority_ideology = conservative
 		}
 		
-
+		modifier = {
+			factor = 1.1
+			pop_majority_ideology = anarcho_liberal
+		}
 
 		modifier = {
 			factor = 1.015
@@ -1910,7 +2111,7 @@ indian_sepoys = {
 					controlled_by = REB
 					NOT = { owned_by = THIS }
 				}
-				province_control_days = 180
+				province_control_days = 60
 			}
 		}
 	}
@@ -1944,7 +2145,7 @@ liberal_rebels = {
 	
 	defection = none					# Will defect to the "best" alternative.
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = liberal
 	
@@ -2025,8 +2226,10 @@ liberal_rebels = {
 		modifier = {
 			factor = 0.01
 			NOT = {
-				
-				pop_majority_ideology = liberal
+				OR = {
+					pop_majority_ideology = anarcho_liberal
+					pop_majority_ideology = liberal
+				}
 			}
 		}
 		modifier = {
@@ -2057,6 +2260,10 @@ liberal_rebels = {
 			}
 		}
 		
+		modifier = {
+			factor = 1.05
+			pop_majority_ideology = anarcho_liberal
+		}
 		
 		modifier = {
 			factor = 1.15
@@ -2106,7 +2313,7 @@ liberal_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 30
 		}
 	}
 	demands_enforced_effect = {
@@ -2143,7 +2350,7 @@ unciv_reactionary_rebels = {
 	
 	defection = none					# Will defect to the "best" alternative.
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = reactionary
 	
@@ -2293,7 +2500,7 @@ unciv_reactionary_rebels = {
 	demands_enforced_trigger = {
 		capital_scope = {
 			controlled_by = REB
-			province_control_days = 120
+			province_control_days = 30
 		}
 	}
 	
@@ -2328,7 +2535,7 @@ sioux_nation = {
 
 	defection = none					# Will defect to the "best" alternative.
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = reactionary
 	
@@ -2449,7 +2656,7 @@ apache = {
 
 	defection = none					# Will defect to the "best" alternative.
 	independence = none				# Does not strive for independence
-	defect_delay = 365# 100# 18
+	defect_delay = 18
 	
 	ideology = reactionary
 	

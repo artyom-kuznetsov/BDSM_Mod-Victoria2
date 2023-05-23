@@ -2,7 +2,6 @@ political_decisions = {
 # North-American Minors
 	apply_for_USA_statehood = {
 		potential = {	
-			NOT = { has_country_flag = open_money_transfers_flag }
 			exists = USA
 			OR = {
 				tag = TEX
@@ -51,7 +50,6 @@ political_decisions = {
 # CSA
 	king_cotton = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = CSA
 			war_with = USA
 			not = {
@@ -85,7 +83,6 @@ political_decisions = {
 # USA	
 	trail_of_tears = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_global_flag = marching_on_the_trail_of_tears
@@ -144,7 +141,6 @@ political_decisions = {
 	
 	custers_expedition = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_country_flag = custers_expedition_sent
@@ -167,17 +163,12 @@ political_decisions = {
 	
 	enact_the_homestead_act = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
+			tag = USA
+			government = democracy
 			NOT = {
 				has_country_modifier = the_homestead_act
 			}
 			year = 1862
-			capital_scope = {
-				OR = {
-					continent = north_america
-					continent = south_america
-				}
-			}
 		}
 		
 		allow = {
@@ -194,7 +185,6 @@ political_decisions = {
 			
 	bixby_letter = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			not = {
 				has_country_flag = bixby_letter_sent
@@ -214,7 +204,6 @@ political_decisions = {
 	
 	enact_anaconda_plan = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			war_with = CSA
 			NOT = {
@@ -241,7 +230,6 @@ political_decisions = {
 	
 	shermans_march_to_the_sea = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			war_with = CSA
 			NOT = {
@@ -279,7 +267,6 @@ political_decisions = {
 
 	emancipation_proclamation = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_country_flag = emancipation
@@ -327,7 +314,6 @@ political_decisions = {
 	}		
 	manifest_destiny = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			NOT = {
 				has_country_flag = hasmanifestdestiny
@@ -338,6 +324,9 @@ political_decisions = {
 			prestige = 50
 			NOT = {
 				exists = TEX
+				133 = {
+					owned_by = MEX # Austin
+					}
 			}
 		}
 		effect = {
@@ -356,30 +345,32 @@ political_decisions = {
 			TEX_132 = {
 				add_core = USA
 			}
-			USA_106 = {
-				add_core = USA
-			}
-			MEX_97 = {
-				add_core = USA
-			}
-			MEX_85 = {
-				add_core = USA
-			}
-			USA_81 = {
+			MEX_103 = {
 				add_core = USA
 			}
 			USA_129 = {
 				add_core = USA
 			}
-			USA_116 = {
+			USA_106 = {
 				add_core = USA
-			}	
+			}
+			USA_81 = {
+				add_core = USA
+			}
+			MEX_94 = {
+				add_core = USA
+			}
+			MEX_85 = {
+				add_core = USA
+			}
+			MEX_100 = {
+				add_core = USA
+			}
 	
 		}
 	}
 	gag_rule = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 1
 			slavery = yes_slavery
@@ -404,7 +395,6 @@ political_decisions = {
 	clay_and_douglas_draft = {
 		
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 3
 			slavery = yes_slavery
@@ -429,7 +419,6 @@ political_decisions = {
 	corwin_amendment = {
 		
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 4
 			slavery = yes_slavery
@@ -453,7 +442,6 @@ political_decisions = {
 	
 	fugitive_slave_act = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 4
 			slavery = yes_slavery
@@ -482,7 +470,6 @@ political_decisions = {
 	
 	nashville_convention = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 5
 			slavery = yes_slavery
@@ -511,7 +498,6 @@ political_decisions = {
 	
 	ostend_manifesto = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 4
 			slavery = yes_slavery
@@ -560,7 +546,6 @@ political_decisions = {
 	
 	kansas_nebraska_act = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 1
 			slavery = yes_slavery
@@ -593,7 +578,6 @@ political_decisions = {
 	
 	wilmot_proviso = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			average_consciousness = 1
 			slavery = yes_slavery
@@ -638,7 +622,6 @@ political_decisions = {
 	
 	form_kellys_irish_brigade = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = CSA
 			war_with = USA
 			NOT = {
@@ -665,7 +648,6 @@ political_decisions = {
 	
 	raise_the_bonnie_blue_flag = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = CSA
 			NOT = {
 				OR = {
@@ -683,14 +665,14 @@ political_decisions = {
 
 			define_general = {
 				name = "Robert E.Lee"
-				personality = attack_2.1
-				background = defense_3.1
+				personality = audacious
+				background = war_college
 			}
 
 			define_general = {
 				name = "Thomas Jackson"
-				personality = attack_3.1
-				background = defense_2.1
+				personality = coolminded
+				background = school_of_defense
 			}
 			
 			add_country_modifier = {
@@ -704,7 +686,6 @@ political_decisions = {
 
 	enact_radical_reconstruction = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = USA
 			war = no
 			has_global_flag = american_civil_war_has_happened
@@ -737,7 +718,6 @@ political_decisions = {
 	
 	annex_hawaii = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = {
 				has_country_flag = hawaii_annexed
 			}
@@ -764,7 +744,6 @@ political_decisions = {
 	
 	alaskan_purchase = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			war = no
 			OR = {
 				has_global_flag = american_civil_war_has_happened
@@ -810,7 +789,6 @@ political_decisions = {
 	
 	webster_ashburton_treaty = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ENG
 			owns = 250
 			NOT = {
@@ -822,10 +800,6 @@ political_decisions = {
 		allow = {
 			NOT = {
 				war_with = USA
-			}
-			relation = {
-				who = USA
-				value = 125
 			}
 		}
 		

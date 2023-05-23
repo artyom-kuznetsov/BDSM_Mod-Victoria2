@@ -1,6 +1,6 @@
 capital = 1157
-primary_culture = mashriqi
-religion = blank
+primary_culture = bedouin
+religion = sunni
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
@@ -12,7 +12,7 @@ upper_house = {
 	liberal = 10
 	conservative = 78
 	reactionary = 12
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
@@ -23,7 +23,7 @@ nonstate_consciousness = 0
 
 oob = "NEJ_oob.txt"
 
-slavery = yes_slavery
+slavery = no_slavery
 upper_house_composition = appointed
 vote_franschise = none_voting
 public_meetings = no_meeting
@@ -40,13 +40,14 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-# New Reforms
-conscription = mandatory_training
-debt_law = peonage
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+1861.1.1 = {
+	oob = "/1861/NEJ_oob.txt"
+	literacy = 0.04
+	non_state_culture_literacy = 0.11
 
+	#Military Reforms
+	foreign_weapons = yes_foreign_weapons
+	
+	#Technologies
+	flintlock_rifles = 1
+}

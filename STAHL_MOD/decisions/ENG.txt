@@ -5,7 +5,6 @@ political_decisions = {
 			NOT = {
 				has_country_flag = corn_laws_repealed_flag
 			}
-			NOT = { has_country_flag = open_money_transfers_flag }
 		}
 		allow = {
 			average_militancy = 2
@@ -29,7 +28,6 @@ political_decisions = {
 		news_desc_medium = "empress_of_india_NEWS_MEDIUM"
 		news_desc_short = "empress_of_india_NEWS_SHORT"
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ENG
 			OR = {
 				government = hms_government
@@ -62,7 +60,6 @@ political_decisions = {
 
 	found_the_bbc = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ENG
 			year = 1900
 			NOT = {
@@ -90,7 +87,6 @@ political_decisions = {
 	}
 	the_scotland_yard = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ENG
 			NOT = {
 				has_country_flag = elementary_my_dear_watson # I know, he never says it in the books, yadiyadi.
@@ -112,7 +108,6 @@ political_decisions = {
 
 	ionian_islands_question = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ENG
 			ION = {
 				vassal_of = ENG
@@ -144,7 +139,7 @@ political_decisions = {
 			}
 		}
 		ai_will_do = {
-			factor = 2
+			factor = 1
 			modifier = {
 				factor = 0
 				NOT = {
@@ -155,7 +150,7 @@ political_decisions = {
 				}
 			}
 			modifier = {
-				factor = 1.5		
+				factor = 1			
 				relation = {
 					who = GRE
 					value = 0
@@ -166,7 +161,6 @@ political_decisions = {
 
 	rhodesia_charter = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ENG
 			owns = 2068
 			owns = 2069

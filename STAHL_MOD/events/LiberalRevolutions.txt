@@ -7,6 +7,7 @@ country_event = {
 
 	trigger = {
 		civilized = yes
+		literacy = 0.3
 		NOT = {
 			OR = {
 				has_country_flag = liberal_revolution_in_progress
@@ -23,14 +24,10 @@ country_event = {
 	}
 
 	mean_time_to_happen = {
-		months = 64
+		months = 48
 		modifier = {
 			factor = 0.1
 			has_global_flag = liberal_revolution_somewhere
-		}
-		modifier = {
-			factor = 0.5
-			tag = AUS
 		}
 	}
 
@@ -75,7 +72,7 @@ country_event = {
 	}
 
 	mean_time_to_happen = {
-		months = 240
+		months = 1000
 		modifier = {
 			factor = 0.04
 			has_global_flag = liberal_revolutions_should_now_fire
@@ -131,10 +128,6 @@ country_event = {
 		modifier = {
 			factor = 0.4
 			num_of_revolts = 15
-		}
-		modifier = {
-			factor = 0.1
-			tag = AUS
 		}
 		modifier = {
 			factor = 1.1
@@ -211,7 +204,7 @@ country_event = {
 	}
 
 	mean_time_to_happen = {
-		months = 4
+		months = 2
 	}
 
 	option = {
@@ -278,7 +271,7 @@ country_event = {
 	}
 
 	mean_time_to_happen = {
-		months = 4
+		months = 2
 	}
 
 	option = {
@@ -1217,18 +1210,19 @@ province_event = {
 	}
 
 	option = {
+		name = "EVTOPTA10200"
+		any_pop = {
+			militancy = 2
+			consciousness = 1
+		}
+		random_pop = {
+			reduce_pop = 0.90
+		}
+	}
+	option = {
 		name = "EVTOPTB10200"
 		any_pop = {
 			consciousness = 3
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA10200"
-		any_pop = {
-			militancy = -2
-			consciousness = -1
-			reduce_pop = 0.99
 		}
 	}
 }
@@ -1324,7 +1318,6 @@ country_event = {
 		NOT = {
 			poor_strata_everyday_needs = 0.95
 		}
-		ai = no
 	}
 
 	mean_time_to_happen = {

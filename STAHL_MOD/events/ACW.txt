@@ -11,7 +11,12 @@ country_event = {
 		NOT = {
 			has_global_flag = american_civil_war_has_happened
 		}
-		year = 1860
+		has_country_flag = john_browns_raid
+		has_country_flag = dred_scott_decision
+		upper_house = {
+			ideology = liberal
+			value = 0.4
+		}
 	}
 	
 	immediate = { clr_country_flag = the_slavery_debate }
@@ -22,7 +27,27 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 6
+		months = 1
+		modifier = {
+			factor = 20
+			NOT = {
+				year = 1845
+			}
+		}
+		modifier = {
+			factor = 10
+			year = 1845
+			NOT = {
+				year = 1855
+			}
+		}
+		modifier = {
+			factor = 5
+			year = 1855
+			NOT = {
+				year = 1860
+			}
+		}
 	}
 	
 	option = {
@@ -89,7 +114,6 @@ country_event = {
 					province_id = 219
 					province_id = 220
 					province_id = 221
-					province_id = 2146
 					province_id = 222
 				}
 			}
@@ -291,6 +315,87 @@ country_event = {
 	}
 }
 
+#A Southern Belle
+province_event = {
+	id = 16030
+	title = "EVTNAME16030"
+	desc = "EVTDESC16030"
+	
+	trigger = {
+		owner = {
+			tag = USA
+			slavery = yes_slavery
+		}
+		state_scope = {
+			is_slave = yes
+			is_colonial = no
+		}
+		NOT = {
+			has_global_flag = american_civil_war_has_happened
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 100 #600
+		modifier = {
+			factor = 0.9
+			average_consciousness = 5
+		}
+		modifier = {
+			factor = 0.9
+			average_consciousness = 6
+		}
+		modifier = {
+			factor = 1.1
+			NOT = {
+				average_consciousness = 5
+			}
+		}
+		modifier = {
+			factor = 20
+			NOT = {
+				year = 1845
+			}
+		}
+		modifier = {
+			factor = 10
+			year = 1845
+			NOT = {
+				year = 1855
+			}
+		}
+		modifier = {
+			factor = 5
+			year = 1855
+			NOT = {
+				year = 1860
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA16030"
+		state_scope = {
+			aristocrats = {
+				consciousness = 0.25 #1
+			}
+			capitalists = {
+				consciousness = 0.25 #1
+			}
+		}
+	}
+	
+	option = {
+		name  = "EVTOPTB16030"
+		craftsmen = {
+			consciousness = 0.25 #1
+		}
+		labourers = {
+			consciousness = 0.25 #1
+		}
+	}
+}
+
 #Southern Manorialism
 country_event = {
 	id = 16040
@@ -310,6 +415,40 @@ country_event = {
 	
 	mean_time_to_happen = {
 		months = 100 #600
+		modifier = {
+			factor = 0.9
+			average_consciousness = 5
+		}
+		modifier = {
+			factor = 0.9
+			average_consciousness = 6
+		}
+		modifier = {
+			factor = 1.1
+			NOT = {
+				average_consciousness = 5
+			}
+		}
+		modifier = {
+			factor = 20
+			NOT = {
+				year = 1845
+			}
+		}
+		modifier = {
+			factor = 10
+			year = 1845
+			NOT = {
+				year = 1855
+			}
+		}
+		modifier = {
+			factor = 5
+			year = 1855
+			NOT = {
+				year = 1860
+			}
+		}
 	}
 	
 	option = {
@@ -320,10 +459,10 @@ country_event = {
 				is_colonial = no
 			}
 			aristocrats = {
-				consciousness = 2 #1
+				consciousness = 0.25 #1
 			}
 			capitalists = {
-				consciousness = 2 #1
+				consciousness = 0.25 #1
 			}
 		}
 	}
@@ -336,13 +475,13 @@ country_event = {
 				is_colonial = no
 			}
 			farmers = {
-				consciousness = 0.6 #0.5
+				consciousness = 0.15 #0.5
 			}
 			labourers = {
-				consciousness = 0.6 #0.5
+				consciousness = 0.15 #0.5
 			}
 			slaves = {
-				consciousness = 0.9 #1
+				consciousness = 0.25 #1
 			}
 		}
 	}
@@ -683,29 +822,25 @@ country_event = {
 }
 
 #Knights of The Golden Circle
-country_event = {
+province_event = {
 	id = 16090
 	title = "EVTNAME16090"
 	desc = "EVTDESC16090"
-	fire_only_once = yes
 	
 	
 	trigger = {
-		any_owned = {
-			owner = {
-				tag = USA
-				slavery = yes_slavery
-			}
+		owner = {
+			tag = USA
+			slavery = yes_slavery
+		}
+		state_scope = {
+			is_colonial = no
+		}
+		any_neighbor_province = {
 			state_scope = {
-				is_colonial = no
-			}
-			any_neighbor_province = {
-				state_scope = {
-					is_slave = yes
-				}
+				is_slave = yes
 			}
 		}
-		
 		NOT = {
 			has_global_flag = american_civil_war_has_happened
 		}
@@ -751,18 +886,16 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA16090"
-		random_owned = {
-			add_province_modifier = {
-				name = knights_of_the_golden_circle
-				duration = 1000
-			}
+		add_province_modifier = {
+			name = knights_of_the_golden_circle
+			duration = 365
 		}
 	}
 	
 	option = {
 		name = "EVTOPTB16090"
 		any_pop = {
-			consciousness = 3
+			consciousness = 1.5
 		}
 	}
 }
@@ -792,7 +925,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 200 #1000
+		months = 100 #1000
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -833,17 +966,17 @@ province_event = {
 		name = "EVTOPTA16100"
 		add_province_modifier = {
 			name = american_anti_slavery_society
-			duration = 730
+			duration = 365
 		}
 		any_pop = {
-			militancy = 0.4 #2
+			militancy = 0.2 #2
 		}
 	}
 
 	option = {
 		name = "EVTOPTB16100"
 		any_pop = {
-			consciousness = 1.0 #1.5
+			consciousness = 0.5 #1.5
 		}
 	}
 }
@@ -868,7 +1001,7 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 200 #600
+		months = 100 #600
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -913,7 +1046,7 @@ country_event = {
 				is_colonial = no
 			}
 			slaves = {
-				consciousness = 0.3 #1.5
+				consciousness = 0.15 #1.5
 			}
 		}
 	}
@@ -926,7 +1059,7 @@ country_event = {
 				is_colonial = no
 			}
 			any_pop = {
-				consciousness = 0.2 #0.5
+				consciousness = 0.1 #0.5
 			}
 		}
 	}
@@ -953,7 +1086,7 @@ province_event = {
 	}
 
 	mean_time_to_happen = {
-		months = 200 #600
+		months = 100 #600
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -993,17 +1126,17 @@ province_event = {
 	option = {
 		name = "EVTOPTA16120"
 		poor_strata = {
-			consciousness = 0.4 #2
+			consciousness = 0.2 #2
 		}
 	}
 	
 	option = {
 		name = "EVTOPTB16120"
 		rich_strata = {
-			consciousness = 0.3 #1.5
+			consciousness = 0.15 #1.5
 		}
 		middle_strata = {
-			consciousness = 0.3 #1.5
+			consciousness = 0.15 #1.5
 		}
 	}
 }
@@ -1034,7 +1167,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 400 #600
+		months = 200 #600
 		modifier = {
 			factor = 0.5
 			has_country_flag = fugitive_slave_act_enacted
@@ -1078,7 +1211,7 @@ province_event = {
 	option = {
 		name = "EVTOPTA16130"
 		any_pop = {
-			consciousness = 0.4 #2
+			consciousness = 0.2 #2
 		}
 	}
 	
@@ -1090,7 +1223,7 @@ province_event = {
 					is_slave = yes
 				}
 				any_pop = {
-					consciousness = 0.2 #0.5
+					consciousness = 0.1 #0.5
 				}
 			}
 		}
@@ -1118,7 +1251,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 200 #600
+		months = 100 #600
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -1159,7 +1292,7 @@ province_event = {
 		name = "EVTOPTA16140"
 		add_province_modifier = {
 			name = underground_railroad
-			duration = 730
+			duration = 365
 		}
 	}
 	
@@ -1171,7 +1304,7 @@ province_event = {
 					is_slave = no
 				}
 				any_pop = {
-					consciousness = 0.2
+					consciousness = 0.1
 				}
 			}
 		}
@@ -1199,7 +1332,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 200 #800
+		months = 100 #800
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -1240,7 +1373,7 @@ province_event = {
 		name = "EVTOPTA16150"
 		add_province_modifier = {
 			name = copperhead_democrats
-			duration = 730
+			duration = 365
 		}
 	}
 	
@@ -1252,7 +1385,7 @@ province_event = {
 					is_slave = yes
 				}
 				any_pop = {
-					consciousness = 0.4 #2
+					consciousness = 0.2 #2
 				}
 			}
 		}
@@ -1431,7 +1564,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 200 #750
+		months = 100 #750
 		modifier = {
 			factor = 0.3
 			has_province_modifier = border_ruffians
@@ -1468,7 +1601,7 @@ province_event = {
 		name = "EVTOPTA16180"
 		add_province_modifier = {
 			name = free_staters
-			duration = 730
+			duration = 365
 		}
 	}
 	
@@ -1481,7 +1614,7 @@ province_event = {
 					is_colonial = no
 				}
 				any_pop = {
-					consciousness = 0.3 #0.5
+					consciousness = 0.15 #0.5
 				}
 			}
 		}
@@ -1511,7 +1644,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 200 #750
+		months = 100 #750
 		modifier = {
 			factor = 0.3
 			has_province_modifier = free_staters
@@ -1555,7 +1688,7 @@ province_event = {
 					is_slave = no
 				}
 				any_pop = {
-					consciousness = 0.3 #0.5
+					consciousness = 0.15 #0.5
 				}
 			}
 		}
@@ -1581,7 +1714,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 36
+		months = 12
 		modifier = {
 			factor = 20
 			NOT = {
@@ -1616,7 +1749,7 @@ province_event = {
 		owner = {
 			set_country_flag = bleeding_kansas
 			any_pop = {
-				consciousness = 1.5
+				consciousness = 0.5
 			}
 		}
 	}
@@ -1640,7 +1773,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 30
+		months = 15
 		modifier = {
 			factor = 20
 			NOT = {
@@ -1755,7 +1888,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 200 #400
+		months = 100 #400
 		
 		modifier = {
 			factor = 0.9
@@ -1797,7 +1930,7 @@ province_event = {
 		name = "EVTOPTA16230"
 		remove_province_modifier = free_staters
 		any_pop = {
-			reduce_pop = 0.96 #0.95
+			reduce_pop = 0.98 #0.95
 		}
 	}
 }
@@ -1820,7 +1953,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 300 #450
+		months = 150 #450
 		modifier = {
 			factor = 0.9
 			average_consciousness = 4
@@ -1861,7 +1994,7 @@ province_event = {
 		name = "EVTOPTA16240"
 		remove_province_modifier = border_ruffians
 		any_pop = {
-			reduce_pop = 0.96 #0.98
+			reduce_pop = 0.98 #0.98
 		}
 	}
 }
@@ -1886,12 +2019,25 @@ province_event = {
 		state_scope = {
 			is_slave = yes
 		}
+		yes_slavery = 10
+		average_consciousness = 5
 		continent = north_america
-		year = 1845
 	}
 	
 	mean_time_to_happen = {
-		months = 4
+		months = 3
+		modifier = {
+			factor = 0.5
+			yes_slavery = 15
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 4
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 5
+		}
 	}
 	
 	option = {
@@ -1931,15 +2077,15 @@ country_event = {
 	fire_only_once = yes
 	
 	mean_time_to_happen = {
-		months = 16
+		months = 4
 	}
 	
 	option = {
 		name = "EVTOPTA16300"
 		any_pop = {
-			consciousness = 4
+			consciousness = 2
 			dominant_issue = {
-				factor = 0.2
+				factor = 0.1
 				value = no_slavery
 			}
 		}
@@ -1965,15 +2111,15 @@ country_event = {
 	fire_only_once = yes
 	
 	mean_time_to_happen = {
-		months = 16
+		months = 4
 	}
 	
 	option = {
 		name = "EVTOPTA16310"
 		any_pop = {
-			consciousness = 4
+			consciousness = 2
 			dominant_issue = {
-				factor = 0.1
+				factor = 0.05
 				value = no_slavery
 			}
 		}
@@ -2100,7 +2246,7 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 24
+		months = 12
 	}
 	
 	option = {
@@ -2171,15 +2317,7 @@ country_event = {
 			consciousness = -10
 			reduce_pop = 0.5
 		}
-		any_country = {
-			limit = {
-				OR = {
-					capital_scope = { continent = south_america }
-					capital_scope = { continent = north_america }
-				}
-			}
-			add_accepted_culture = dakota
-		}
+		add_accepted_culture = dakota
 		set_country_flag = sioux_wars_over
 	}
 }
@@ -2312,12 +2450,13 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA1206" #Ok
+			small_arms = 100
 			canned_food = 200
 			artillery = 50
 			luxury_clothes = 50
 			wine = 50
 			liquor = 50
-			military_packs = 100
+			ammunition = 100
 			money = 1000
 	}
 }

@@ -1,124 +1,4 @@
 
-navy_tax_eff_2_inv = {
-	limit = { battleship_column_doctrine = 1 }
-	chance = {
-		base = -4
-		modifier = {
-			factor = 2
-			raider_group_doctrine = 1
-		}
-		modifier = {
-			factor = 2
-			iron_steamers = 1
-		}
-		modifier = {
-			factor = 2
-			weapon_platforms = 1
-		}
-		modifier = {
-			factor = 2
-			naval_statistics = 1
-		}
-		modifier = {
-			factor = 2
-			naval_decision_making = 1
-		}
-	}
-	effect = {
-		tax_eff = 0.5
-	}
-}
-
-navy_tax_eff_3_inv = {
-	limit = { raider_group_doctrine = 1 }
-	chance = {
-		base = -4
-		modifier = {
-			factor = 2
-			blue_and_brown_water_schools = 1
-		}
-		modifier = {
-			factor = 2
-			steel_steamers = 1
-		}
-		modifier = {
-			factor = 2
-			main_armament = 1
-		}
-		modifier = {
-			factor = 2
-			naval_logistics = 1
-		}
-		modifier = {
-			factor = 2
-			naval_risk_management = 1
-		}
-	}
-	effect = {
-		tax_eff = 0.5
-	}
-}
-
-navy_tax_eff_4_inv = {
-	limit = { blue_and_brown_water_schools = 1 }
-	chance = {
-		base = -4
-		modifier = {
-			factor = 2
-			high_sea_battle_fleet = 1
-		}
-		modifier = {
-			factor = 2
-			oil_driven_ships = 1
-		}
-		modifier = {
-			factor = 2
-			advanced_naval_design = 1
-		}
-		modifier = {
-			factor = 2
-			naval_directionism = 1
-		}
-		modifier = {
-			factor = 2
-			naval_nco_training = 1
-		}
-	}
-	effect = {
-		tax_eff = 0.5
-	}
-}
-
-navy_tax_eff_5_inv = {
-	limit = { high_sea_battle_fleet = 1 }
-	chance = {
-		base = -4
-		modifier = {
-			factor = 2
-			modern_naval_doctrine = 1
-		}
-		modifier = {
-			factor = 2
-			naval_design_bureaus = 1
-		}
-		modifier = {
-			factor = 2
-			modern_naval_design = 1
-		}
-		modifier = {
-			factor = 2
-			naval_integration = 1
-		}
-		modifier = {
-			factor = 2
-			modern_naval_training = 1
-		}
-	}
-	effect = {
-		tax_eff = 0.5
-	}
-}
-
 #torpedo attacks
 torpedo_attacks = {
 	limit = { main_armament = 1 }
@@ -130,7 +10,7 @@ torpedo_attacks = {
 		}
 	}
 	effect = {
-		cruiser = { gun_power = 2 }
+		cruiser = { torpedo_attack = 8 }
 	}
 }
 
@@ -495,7 +375,7 @@ mechanized_fishing_vessels = {
 	}
 	effect = {
 		rgo_goods_output = {
-			fish = 0.2
+			fish = 0.5
 		}
 	}
 }
@@ -519,7 +399,7 @@ steamer_automatic_construction_plants = {
 	}
 }
 steamer_transports = {
-	limit = { clipper_design = 1 }
+	limit = { steamers = 1 }
 	chance = {
 		base = 5
 		modifier = {
@@ -536,15 +416,15 @@ steamer_transports = {
 	}
 }
 commerce_raiders = {
-	limit = { clipper_design = 1 }
+	limit = { steamers = 1 }
 	chance = {
-		base = 6
+		base = 5
 		modifier = {
-			factor = 5
+			factor = 1
 			fire_control_systems = 1
 		}
 		modifier = {
-			factor = 5
+			factor = 3
 			raider_group_doctrine = 1
 		}
 	}
@@ -556,13 +436,13 @@ commerce_raiders = {
 ironclads = {
 	limit = { iron_steamers = 1 }
 	chance = {
-		base = 6
+		base = 5
 		modifier = {
-			factor = 5
+			factor = 2
 			invention = monitors
 		}
 		modifier = {
-			factor = 5
+			factor = 2
 			invention = torpedo_boats
 		}
 	}
@@ -571,11 +451,15 @@ ironclads = {
 	}
 }
 monitors = {
-	limit = { steamers = 1 }
+	limit = { iron_steamers = 1 }
 	chance = {
-		base = 8
+		base = 5
 		modifier = {
-			factor = 5
+			factor = 2
+			invention = ironclads
+		}
+		modifier = {
+			factor = 2
 			invention = torpedo_boats
 		}
 	}
@@ -584,22 +468,22 @@ monitors = {
 	}
 }
 torpedo_boats = {
-	limit = { steamers = 1 }
+	limit = { iron_steamers = 1 }
 	chance = {
-		base = 6
+		base = 4
 		modifier = {
-			factor = 4
-			invention = commerce_raiders
+			factor = 2
+			invention = ironclads
 		}
 		modifier = {
-			factor = 4
+			factor = 2
 			invention = monitors
 		}		
 	}
 	effect = {
 		commerce_raider = {
-			hull = 2
-			gun_power = 1
+			hull = 4
+			torpedo_attack = 2
 		}
 	}
 }
@@ -607,13 +491,13 @@ torpedo_boats = {
 protected_cruisers = {
 	limit = { steel_steamers = 1 }
 	chance = {
-		base = 5
+		base = 3
 		modifier = {
-			factor = 3
+			factor = 2
 			invention = ironclads
 		}
 		modifier = {
-			factor = 3
+			factor = 2
 			cheap_steel = 1
 		}
 	}
@@ -646,19 +530,19 @@ protected_cruisers = {
 #	}
 #}
 pre_dreadnought = {
-	limit = { steam_turbine_ships = 1 }
+	limit = { steel_steamers = 1 }
 	chance = {
 		base = 5
 		modifier = {
-			factor = 3
+			factor = 2
 			invention = ironclads
 		}
 		modifier = {
-			factor = 2
+			factor = 1
 			cheap_steel = 1
 		}
 		modifier = {
-			factor = 2
+			factor = 1
 			main_armament = 1
 		}
 	}
@@ -673,15 +557,15 @@ pre_dreadnought = {
 }
 #steam_turbine_ships
 dreadnoughts = {
-	limit = { oil_driven_ships = 1 }
+	limit = { steam_turbine_ships = 1 }
 	chance = {
 		base = 5
 		modifier = {
-			factor = 3
+			factor = 2
 			invention = pre_dreadnought
 		}
 		modifier = {
-			factor = 3
+			factor = 2
 			naval_logistics = 1
 		}
 	}
@@ -1308,7 +1192,8 @@ advanced_fire_control = {
 			gun_power = 2
 		}
 		cruiser = {
-			gun_power = 3
+			gun_power = 2
+			torpedo_attack = 4
 		}
 	}
 }

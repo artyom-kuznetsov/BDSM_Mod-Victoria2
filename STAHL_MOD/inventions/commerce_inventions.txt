@@ -106,8 +106,7 @@ distribution_channels = {
 	}
 	effect = {
 		factory_cost = -0.01
-		farm_RGO_eff = 0.2
-		mine_RGO_eff = 0.1
+		farm_RGO_eff = 0.5
 	}
 }
 #investment_banks
@@ -241,7 +240,7 @@ silver_standard = {
 		}
 	}
 	effect = {
-		tax_eff = 2
+		tax_eff = 3 
 	}
 }
 decimal_monetary_system = {
@@ -259,7 +258,7 @@ decimal_monetary_system = {
 		}
 	}
 	effect = {
-		tax_eff = 2
+		tax_eff = 3 
 	}
 }
 #private_bank_money_bill_printing
@@ -278,10 +277,7 @@ double_standard = {
 		}
 	}
 	effect = {
-		tax_eff = 1
-		rgo_goods_output = {
-			iron = 0.2
-		}
+		tax_eff = 2 
 	}
 }
 fixed_intramonetary_exchange_rates = {
@@ -322,7 +318,7 @@ gold_standard = {
 		}
 	}
 	effect = {
-		tax_eff = 2
+		tax_eff = 3 
 	}
 }
 international_monetary_exchange_rates = {
@@ -403,6 +399,7 @@ hyperinflation = {
 			war_exhaustion = 4
 		}
 	}
+	core_pop_consciousness_modifier = 0.01
 	effect = {
 		factory_cost = 0.1
 	}
@@ -515,31 +512,6 @@ john_stuart_mill = {
 	}
 	effect = {
 		permanent_prestige = 1 
-	}
-}
-pitts_threshing_machine = {
-	limit = { the_historical_theory = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			iron_railroad = 1
-		}
-		modifier = {
-			factor = 2
-			high_n_low_pressure_steam_engines = 1
-		}
-	}
-	effect = {
-		rgo_goods_output = {
-			grain = 0.2
-		}
-		rgo_goods_output = {
-			fruit = 0.2
-		}
-		rgo_goods_output = {
-			tea = 0.2
-		}
 	}
 }
 #collectivist_theory
@@ -1212,7 +1184,24 @@ monopoly_structure = {
 	}
 }
 #business_regulations
-
+limited_partnership_company = {
+	limit = { business_regulations = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			economic_policy = laissez_faire
+		}
+		modifier = {
+			factor = 2
+			is_greater_power = yes
+		}
+	}
+	effect = {
+		tax_eff = 1 
+	}
+}
 joint_stock_company = {
 	limit = { business_regulations = 1 }
 	news = no
@@ -1276,7 +1265,46 @@ trademark = {
 	}
 }
 #market_regulations
-
+anti_trust_laws = {
+	limit = { market_regulations = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			economic_policy = state_capitalism
+		}
+		modifier = {
+			factor = 2
+			ruling_party_ideology = socialist
+		}
+		modifier = {
+			factor = 2
+			nationalvalue = nv_equality
+		}
+	}
+	effect = {
+		tax_eff = 1 
+	}
+}
+financial_regulations = {
+	limit = { market_regulations = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			economic_policy = interventionism
+		}
+		modifier = {
+			factor = 2
+			trade_policy = protectionism
+		}
+	}
+	effect = {
+		tax_eff = 1 
+	}
+}
 banking_regulations = {
 	limit = { market_regulations = 1 }
 	news = no
@@ -1514,34 +1542,6 @@ work_control_and_hierarchy = {
 	}
 	effect = {
 		factory_output = 0.01
-	}
-}
-northrop_power_loom = {
-	limit = { organized_factories = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = jacquard_power_loom
-		}
-		modifier = {
-			factor = 2
-			invention = insurance_companies
-		}
-	}
-	effect = {
-		rgo_goods_output = {
-			cotton = 0.2
-		}
-		rgo_goods_output = {
-			wool = 0.2
-		}
-		rgo_goods_output = {
-			silk = 0.2
-		}
-		factory_goods_throughput = {
-			fabric = 0.05 
-		}
 	}
 }
 #scientific_management

@@ -1,33 +1,6 @@
 #### Press Rights ####
 # Newspaper Publishes Slander
 country_event = {
-	title = "EVTNAME3471003"
-	desc = "EVTDESC3471003"
-	picture = "Celebration"
-
-	id = 180180
-
-	is_triggered_only = yes
-
-	option = {
-		name = "EVTOPTA3471003"    
-        FROM = {
-			release_vassal = THIS
-        }
-
-		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = "EVTOPTB3471003"
-		prestige = -10
-		ai_chance = {
-			factor = 0
-		}
-	}
-}
-country_event = {
 	id = 3100
 	title = "EVTNAME3100"
 	desc = "EVTDESC3100"
@@ -37,7 +10,6 @@ country_event = {
 		civilized = yes
 		press_rights = state_press
 		average_consciousness = 3
-
 	}
 	
 	mean_time_to_happen = {
@@ -2426,7 +2398,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB4405"
-		military_packs = -10
+		ammunition = -10
+		small_arms = -10
 		artillery = -5
 		canned_food = -15
 	}

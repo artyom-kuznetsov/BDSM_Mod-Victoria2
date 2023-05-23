@@ -3,65 +3,150 @@
 SWI = { 
 	value = 125
 }
-#
+
+leader = {
+	name = "Carlo Alberto"
+	date = 1831.1.1
+	type = land
+	personality = openminded
+	background = aristocrat
+	prestige = 0.5
+}
+
+leader = {
+	name = "Emanuele Pes"
+	date = 1820.1.1
+	type = land
+	personality = diplomatic
+	background = politician
+	prestige = 0.2
+}
+
+leader = {
+	name = "Eusebio Bava"
+	date = 1832.1.1
+	type = land
+	personality = cautious
+	background = war_college
+	prestige = 0.1
+}
+
+leader = {
+	name = "Ettore Gerbaix"
+	date = 1834.1.1
+	type = land
+	personality = scared
+	background = aristocrat
+	prestige = 0.0
+}
+
+leader = {
+	name = "Giuseppe Albini"
+	date = 1836.1.1
+	type = sea
+	personality = indifferent
+	background = war_college
+	prestige = 0.0
+}
+
+leader = {
+	name = "La Marmora-Masserano"
+	date = 1836.1.1
+	type = land
+	personality = mediocre
+	background = cavalry_school
+	prestige = 0.0
+}
+
+leader = {
+	name = "Agostino Chiodo"
+	date = 1836.1.1
+	type = land
+	personality = careful
+	background = engineer
+	prestige = 0.0
+}
 
 army = {
-	name = "Королевская гвардия"
-	location = 723
+	name = "Армия Сардинии"
+	location = 724
 	regiment = {
-		name= "1-я бригада"
-		type = artillery
+		name= "1-я пехотная бригада"
+		type = infantry
+		home = 724
+	}
+
+	regiment = {
+		name= "2-я пехотная бригада"
+		type = infantry
+		home = 723
+	}
+
+	regiment = {
+		name= "3-я пехотная бригада"
+		type = infantry
+		home = 725
+	}
+
+}
+
+army = {
+	name = "Армия карабинеров"
+	location = 720
+	regiment = {
+		name= "1-я бригада карабинеров"
+		type = infantry
 		home = 720
 	}
 
 	regiment = {
-		name= "2-я бригада"
-		type = artillery
-		home = 766
+		name= "2-я бригада карабинеров"
+		type = infantry
+		home = 722
 	}
 
 	regiment = {
-		name= "3-я бригада"
-		type = artillery
+		name= "3-я бригада карабинеров"
+		type = cuirassier
+		home = 720
+	}
+
+	regiment = {
+		name= "4-я бригада карабинеров"
+		type = cuirassier
+		home = 472
+	}
+}
+
+army = {
+	name = "Армия гренадеров"
+	location = 765
+	regiment = {
+		name= "1-я гренадерская бригада"
+		type = infantry
 		home = 765
 	}
 
 	regiment = {
-		name= "4-я бригада"
-		type = artillery
-		home = 724
-	}
-	
-	regiment = {
-		name= "5-я бригада"
-		type = dragoon
-		home = 725
-	}
-	
-	regiment = {
-		name= "6-я бригада"
+		name= "2-я гренадерская бригада"
 		type = infantry
-		home = 723
+		home = 766
 	}
+}
+
+army = {
+	name = "Армия берсальеров"
+	location = 721
 	regiment = {
-		name= "7-я бригада"
-		type = infantry
-		home = 726
-	}
-	regiment = {
-		name= "8-я бригада"
-		type = infantry
-		home = 722
-	}
-	regiment = {
-		name= "9-я бригада"
+		name= "1-я бригада берсальеров"
 		type = guard
-		home = 721
+		home = 466
 	}
+
 	regiment = {
-		name= "10-я бригада"
+		name= "2-я бригада берсальеров"
 		type = guard
-		home = 720
+		home = 465
 	}
 }
 

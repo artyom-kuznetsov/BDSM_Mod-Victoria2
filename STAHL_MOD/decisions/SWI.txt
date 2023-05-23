@@ -1,42 +1,6 @@
 political_decisions = {
-	swi_add_general = {
-		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
-			tag = SWI
-		}
-		allow = {
-			NOT = { has_country_modifier = picked_general }
-		}
-		effect = {
-			add_country_modifier = {
-				name = picked_general
-				duration = 1000
-			}
-			define_general = {
-				name = General_5_5
-				personality = defence_4.1
-				background = attack_4.1
-			}
-			money = 1000000
-		}
-	}
-	swi_start_trolling = {
-		potential = {
-			tag = SWI
-			NOT = { has_country_modifier = swi_trolling_regiment }
-		}
-		allow = { }
-		effect = {
-			set_country_flag = swi_trolling_flag
-			add_country_modifier = { name = swi_trolling_regiment duration = -1 }
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
 	declare_republic_of_neuchatel = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SWI
 			owns = 608
 			608 = {
@@ -62,7 +26,6 @@ political_decisions = {
 	}
 	call_geneva_convention = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SWI
 			owns = 607
 			NOT = {
@@ -89,7 +52,6 @@ political_decisions = {
 	
 	sign_the_geneva_convention = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			civilized = yes
 			has_global_flag = geneva_convention_held
 			NOT = {
@@ -114,7 +76,6 @@ political_decisions = {
 	
 	build_gotthard_tunnel = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SWI
 			owns = 606
 			NOT = {

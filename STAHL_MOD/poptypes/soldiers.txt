@@ -8,20 +8,22 @@ rebel =
 {
 	cavalry = 0.2
 	artillery = 0.01
+	cuirassier = 0.05
 	dragoon = 0.05
 	guard = 0.15
+	hussar = 0.05
 	infantry = 0.3
 	irregular = 0
 }
 
 life_needs_income = {
 	type = military
-	weight = 1.125
+	weight = 1.5
 }
 
 everyday_needs_income = {
 	type = military
-	weight = 1.125
+	weight = 1.5
 }
 
 luxury_needs_income =
@@ -31,85 +33,49 @@ luxury_needs_income =
 }
 
 
+everyday_needs = {
+	tea = 4
+	coal = 1
+	liquor = 2
+	regular_clothes = 1
+	furniture = 1
+	ammunition = 0.5 #0
+	small_arms = 0.35 #0
+}
+
 life_needs = {
 	cattle = 0.75
 	wool =  1
 	fish =  1
 	fruit =  1
-	grain =  2
-}
-
-everyday_needs = {
-	coal = 1
-	glass = 0.25
-	tea = 4.25
-	regular_clothes = 1.25
-	furniture = 1.25
-	fabric = 0.25
-	liquor = 3.25
-	wine = 0.75
-	canned_food = 0.75
-	paper = 0.25
+	grain =  2.5
 }
 
 luxury_needs = {	
-	regular_clothes = 2.25
-	furniture = 3.5
-	liquor = 1.75
-	paper = 1.75
-	radio = 1.1
-	telephones = 1.1
-	automobiles = 0.55
-	aeroplanes = 0.1
-	fuel = 0.25
+	regular_clothes = 3
+	furniture = 3
+	liquor = 1.5
+	paper = 1.0
+	telephones = 1.0
+	automobiles = 0.5
+	radio = 1.0
+	fuel = 0.1
+	coffee = 0.45
+	tobacco = 0.95
+	#dye = 0.5
 }
+
 
 country_migration_target =
 {
 	factor = 1
 	modifier = {
-		factor = -100
-		country = { tag = WBK }
-	}
-	modifier = {
-		factor = 0.9
-		unemployment = 0.05
-	}
-	modifier = {
-		factor = 0.9
-		unemployment = 0.1
-	}
-	modifier = {
-		factor = 0.9
-		unemployment = 0.15
-	}
-	modifier = {
-		factor = 0.9
-		unemployment = 0.2
-	}
-	modifier = {
-		factor = 0.9
-		unemployment = 0.25
-	}
-	modifier = {
-		factor = 0.9
-		unemployment = 0.3
-	}
-	modifier = {
-		factor = 0.9
-		unemployment = 0.35
-	}
-	modifier = {
-		factor = 0.1
-		unemployment = 0.5
+		factor = 2.0
+		has_pop_culture = THIS
 	}
 	modifier = {
 		factor = 1.2
 		is_greater_power = yes
-	}
-	modifier = {
-		factor = 2.0
-		has_pop_culture = THIS
 	}
 	modifier = {
 		factor = 1.05
@@ -124,48 +90,12 @@ country_migration_target =
 		vote_franschise = universal_voting
 	}
 	modifier = {
-		factor = 1.5
-		OR = {
-			is_primary_culture = THIS
-			is_accepted_culture = THIS
-		}
-	}
-	
-	modifier = {
-		factor = 1.5
+		factor = 4.0
 		OR = { 
 			continent = north_america
 			continent = south_america
-			continent = polynesia
+			continent = oceania
 		}
-		NOT = { year = 1855 }
-	}
-	modifier = {
-		factor = 1.5
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = polynesia
-		}
-		NOT = { year = 1870 }
-	}
-	modifier = {
-		factor = 1.5
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = polynesia
-		}
-		NOT = { year = 1885 }
-	}
-	modifier = {
-		factor = 1.5
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = polynesia
-		}
-		NOT = { year = 1900 }
 	}
 	modifier = {
 		factor = 0.1
@@ -189,105 +119,29 @@ country_migration_target =
 			}
 		}
 	}	
-	modifier = {
-		factor = 1.5
-		OR = {
-			government = democracy
-			government = hms_government
-			government = social_republic
-			government = prussian_constitutionalism
-		}
-	}
-	modifier = {
-		factor = 1.1
-		government = democracy
-	}
-	modifier = {
-		factor = 0.9
-		consciousness = 5
-	}
-	modifier = {
-		factor = 0.8
-		consciousness = 6
-	}
-	modifier = {
-		factor = 0.7
-		consciousness = 7
-	}
-	modifier = {
-		factor = 0.5
-		consciousness = 8 
-	}
-	modifier = {
-		factor = 0.3
-		consciousness = 9
-	}
-	modifier = {
-		factor = 0.8
-		militancy = 5
-	}
-	modifier = {
-		factor = 0.7
-		militancy = 6
-	}
-	modifier = {
-		factor = 0.5
-		militancy = 7
-	}
-	modifier = {
-		factor = 0.3
-		militancy = 8
-	}
-	modifier = {
-		factor = 0.1
-		militancy = 9
-	}
 }
-
 
 migration_target =
 {
 	factor = 0.01
+	
 	modifier = {
 		factor = 1.2
 		total_pops = 150000
-	}	
-	modifier = {
-		factor = 0.1
-		unemployment = 0.1
-		state_scope = {
-			has_factories = no
-			}
 	}
-
-	modifier = {
+		modifier = {
 		factor = 1.2
-		NOT = { total_pops = 100000 }
+		total_pops = 250000
 	}
 	modifier = {
 		factor = 1.2
-		NOT = { total_pops = 200000 }
+		total_pops = 500000
 	}
 	modifier = {
 		factor = 1.2
-		NOT = { total_pops = 30000 }
-	}	
-	
-	modifier = {
-		factor = 5.0
-		NOT = { total_pops = 500 }
+		total_pops = 750000
 	}
 	
-	modifier = {
-		factor = 0
-		state_scope = {
-			has_factories = no
-		}
-		OR = { 
-			unemployment_by_type = { type = farmers value = 0.1  }
-			unemployment_by_type = { type = labourers value = 0.1  }
-		}
-	}
 	modifier = {
 		factor = 1.2
 		has_pop_culture = THIS
@@ -299,8 +153,12 @@ migration_target =
 	modifier = {
 		factor = 2
 		state_scope = {
-					has_factories = yes
-				}
+			has_factories = yes
+		}
+	}
+	modifier = {
+		factor = 1.2
+		has_pop_religion = THIS
 	}
 	modifier = {
 		factor = 1.5
@@ -313,7 +171,7 @@ migration_target =
 		}
 	}
 	modifier = {
-		factor = 2
+		factor = 20000
 		is_state_capital = yes
 	}		
 	modifier = {
@@ -351,16 +209,11 @@ migration_target =
 	}
 }
 
-
 promote_to =
 {
 
 	officers =
 	{
-		modifier = {
-			factor = -10000.0
-			location = { is_colonial = yes }
-		}
 		factor = 0.01
 		modifier = {
 			factor = -1
@@ -369,23 +222,7 @@ promote_to =
 		modifier = {
 			factor = -100
 			officers = 0.002
-		}
-		modifier = {
-			factor = -4
-			NOT = { soldiers = 0.01 }
-		}
-		modifier = {
-			factor = -4
-			NOT = { soldiers = 0.02 }
-		}
-		modifier = {
-			factor = -4
-			NOT = { soldiers = 0.03 }
-		}
-		modifier = {
-			factor = -4
-			NOT = { soldiers = 0.04 }
-		}
+		}		
 
 		modifier = {
 			factor = 5
@@ -393,15 +230,15 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = 4
+				factor = 5
 				military_spending = 0.3
 			}
 			modifier = {
-				factor = 5
+				factor = 10
 				military_spending = 0.5
 			}
 			modifier = {
-				factor = 5
+				factor = 15
 				military_spending = 0.7
 			}
 		}
@@ -410,16 +247,12 @@ promote_to =
 	farmers = { #and labourers
 		factor = 0.01
 		modifier = {
-			factor = 100.0
-			soldiers = 0.051
+			factor = 5.0
+			soldiers = 0.03
 		}
 		modifier = {
 			factor = 5.0
 			not = { luxury_needs = 0.1 }
-		}
-		modifier = {
-			factor = 100.0
-			location = { is_colonial = yes }
 		}
 		modifier = {
 			factor = 5.0
@@ -430,22 +263,6 @@ promote_to =
 					}
 				}
 			}
-		}
-		modifier = {
-			factor = -2
-			NOT = { soldiers = 0.01 }
-		}
-		modifier = {
-			factor = -2
-			NOT = { soldiers = 0.02 }
-		}
-		modifier = {
-			factor = -2
-			NOT = { soldiers = 0.03 }
-		}
-		modifier = {
-			factor = -2
-			NOT = { soldiers = 0.04 }
 		}
 	}
 #	labourers = 
@@ -460,36 +277,28 @@ promote_to =
 	craftsmen = {
 		factor = 0.01
 			modifier = {
-				factor = -4
+				factor = -5
 				not = { literacy = 0.1 }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				not = { literacy = 0.15 }
 			}
 			modifier = {
-				factor = -1
+				factor = -2
 				not = { literacy = 0.2 }
-			}
-			modifier = {
-				factor = -1
-				not = { literacy = 0.25 }
-			}
-			modifier = {
-				factor = -1
-				not = { literacy = 0.3 }
 			}
 		group = {
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.3
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.4
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.5
 			}
 			modifier = {
@@ -501,41 +310,35 @@ promote_to =
 				literacy = 0.7
 			}
 			modifier = {
-				factor = 0.5
+				factor = 1
 				literacy = 0.8
 			}
 			modifier = {
-				factor = 0.5
+				factor = 1
 				literacy = 0.9
 			}
 			modifier = {
-				factor = 0.5
+				factor = 1
 				literacy = 1
 			}
 		}
 		modifier = {
-			factor = 8
+			factor = 10
 			state_scope = {
 				has_factories = yes
 			}
 		}
 		modifier = {
-			factor = -3
-			NOT = {
-				OR = { 
-					unemployment_by_type = { type = farmers value = 0.1  }
-					unemployment_by_type = { type = labourers value = 0.1  }
+			factor = -40
+			AND = {
+				state_scope = {
+					has_factories = no
 				}
+				can_build_factory = no
 			}
 		}
 		modifier = {
-			factor = -50
-			state_scope = {
-				has_factories = no
-			}
-		}
-		modifier = {
-			factor = -5
+			factor = -100
 			NOT = {
 				location = {
 					work_available = {
@@ -544,51 +347,9 @@ promote_to =
 				}
 			}
 		}
-		modifier = {
-			factor = -100
-				location = {
-					is_colonial = yes
-				}
-		}
-		
-		modifier = {
-			factor = -2
-			craftsmen = 0.18
-		}
-		modifier = {
-			factor = -2
-			craftsmen = 0.2
-		}
-		modifier = {
-			factor = -2
-			craftsmen = 0.22
-		}
-		modifier = {
-			factor = -2
-			craftsmen = 0.24
-		}
-		modifier = {
-			factor = -1
-			craftsmen = 0.26
-		}
-		modifier = {
-			factor = -2
-			craftsmen = 0.28
-		}
-		modifier = {
-			factor = -2
-			craftsmen = 0.3
-		}
-		modifier = {
-			factor = -5
-			country = { has_country_flag = agrarian_society_has_flag }
-		}
-		modifier = {
-			factor = 10
-			country = { has_country_flag = industrial_revolution_flag } 
-		}
 	}
 
+}
 
 
 ideologies = {

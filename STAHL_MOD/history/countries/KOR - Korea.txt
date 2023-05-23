@@ -1,19 +1,19 @@
 capital = 1624
 primary_culture = korean
-religion = blank
+religion = mahayana
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
 literacy = 0.06
 
 
-ruling_party = FRA_gen_reactionary
+ruling_party = KOR_reactionary
 upper_house = {
 	fascist = 0
 	liberal = 18
 	conservative = 21
 	reactionary = 61
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
@@ -41,13 +41,12 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-# New Reforms
-conscription = demilitarized_state
-debt_law = serfdom
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+1861.1.1 = {
+	oob = "/1861/KOR_oob.txt"
+	literacy = 0.09
 
+	#Economic Reforms
+	land_reform = yes_land_reform
+	
+	#Technologies
+}

@@ -1,7 +1,7 @@
 capital = 1385
 primary_culture = malay
 culture = yue
-religion = blank
+religion = sunni
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
@@ -13,7 +13,7 @@ upper_house = {
 	liberal = 15
 	conservative = 75
 	reactionary = 10
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
@@ -41,14 +41,13 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-# New Reforms
-conscription = demilitarized_state
-debt_law = peonage
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+1861.1.1 = {
+	oob = "/1861/JOH_oob.txt"
+	literacy = 0.05
 
-
+	#Military Reforms
+	foreign_weapons = yes_foreign_weapons
+	
+	#Technologies
+	flintlock_rifles = 1
+}

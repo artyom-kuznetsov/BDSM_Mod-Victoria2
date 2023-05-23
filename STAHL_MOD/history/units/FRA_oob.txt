@@ -1,13 +1,3 @@
-
-leader = {
-	name = "Антуан Жерар де Донут"
-	date = 1836.1.1
-	type = land
-	personality = defence_3.1
-	background = attack_3.1
-	prestige = 0.4
-}
-
 #Sphere of Influence
 BEL = {
 	value = 125		#relation
@@ -29,7 +19,7 @@ NET = {
 }
 PAP = {
 	value = 125		#relation
-	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	level = 5		#3=cordial, 4 = friendly, 5 sphere
 	influence_value = 25
 }
 SIC = {
@@ -44,8 +34,13 @@ SWI = {
 }
 SAR = {
 	value = 125		#relation
-	level = 3		#3=cordial, 4 = friendly, 5 sphere
+	level = 4		#3=cordial, 4 = friendly, 5 sphere
 	influence_value = 25
+}
+GRE = {
+	value = 75	#relation
+	level = 4		#3=cordial, 4 = friendly, 5 sphere
+	influence_value = 10
 }
 ENG = {
 	value = 0
@@ -69,61 +64,615 @@ SPA = {
 	value = 55
 }
 
-#
+leader = {
+	name = "de la Piconnerie"
+	date = 1836.1.1
+	type = land
+	personality = confident
+	background = professor
+	prestige = 0.1
+}
+
+leader = {
+	name = "Jean-Isidore Harispe"
+	date = 1830.1.1
+	type = land
+	personality = heroic
+	background = natural_born_leader
+	prestige = 0.3
+}
+
+leader = {
+	name = "Guy-Victor Duperrй"
+	date = 1811.1.1
+	type = sea
+	personality = au_fait
+	background = natural_born_leader
+	prestige = 0.3
+}
+
+leader = {
+	name = "Comte de Castelanne"
+	date = 1823.1.1
+	type = land
+	personality = incapable
+	background = aristocrat
+	prestige = 0.2
+}
+
+leader = {
+	name = "Jacques Achard"
+	date = 1823.1.1
+	type = land
+	personality = relentless
+	background = elderly
+	prestige = 0.2
+}
+
+leader = {
+	name = "Jean-Baptiste Vaillant"
+	date = 1832.1.1
+	type = land
+	personality = lackluster
+	background = engineer
+	prestige = 0.1
+}
+
+leader = {
+	name = "Bernand Pierre Magnan"
+	date = 1835.1.1
+	type = land
+	personality = disorderly
+	background = bootlicker
+	prestige = 0.1
+}
+
+leader = {
+	name = "Baraguey d'Hilliers"
+	date = 1836.1.1
+	type = land
+	personality = active_p
+	background = drillmaster
+	prestige = 0.1
+}
+
+leader = {
+	name = "Comte de Randon"
+	date = 1835.1.1
+	type = land
+	personality = indifferent
+	background = old_school
+	prestige = 0.1
+}
+
+leader = {
+	name = "Charles Baudin"
+	date = 1836.1.1
+	type = sea
+	personality = stouthearted
+	background = unfit
+	prestige = 0.1
+}
+
+leader = {
+	name = "Reille"
+	date = 1836.1.1
+	type = land
+	personality = gallant
+	background = generals_aide
+	prestige = 0.0
+}
+
+leader = {
+	name = "de la Brunerie"
+	date = 1836.1.1
+	type = land
+	personality = stouthearted
+	background = unfit
+	prestige = 0.0
+}
 
 army = {
-	name = "1-я Армия"
-	location = 432
+	name = "Королевская гвардия"
+	location = 425
 	regiment = {
-		name= "1-я бригада"
+		name= "1-я гвардейская бригада"
 		type = guard
+		home = 425
+	}
+
+	regiment = {
+		name= "2-я гвардейская бригада"
+		type = guard
+		home = 426
+	}
+
+	regiment = {
+		name= "3-я гвардейская бригада"
+		type = guard
+		home = 427
+	}
+
+	regiment = {
+		name= "4-я гвардейская бригада"
+		type = guard
+		home = 440
+	}
+}
+army = {
+	name = "1-я армия"
+	location = 438
+	regiment = {
+		name= "1-я пехотная бригада"
+		type = infantry
+		home = 438
+	}
+
+	regiment = {
+		name= "2-я пехотная бригада"
+		type = infantry
+		home = 400
+	}
+
+	regiment = {
+		name= "3-я пехотная бригада"
+		type = infantry
+		home = 401
+	}
+
+	regiment = {
+		name= "4-я пехотная бригада"
+		type = infantry
+		home = 441
+	}
+
+	regiment = {
+		name= "5-я пехотная бригада"
+		type = infantry
+		home = 2570
+	}
+
+	regiment = {
+		name= "6-я пехотная бригада"
+		type = infantry
+		home = 404
+	}
+
+	regiment = {
+		name= "7-я пехотная бригада"
+		type = infantry
+		home = 402
+	}
+
+	regiment = {
+		name= "8-я пехотная бригада"
+		type = infantry
+		home = 403
+	}
+
+	regiment = {
+		name= "9-я пехотная бригада"
+		type = artillery
+		home = 399
+	}
+}
+	
+army = {
+	name = "Гвардейская кавалерия"
+	location = 468
+
+
+	regiment = {
+		name= "1-я кавалерийская бригада"
+		type = hussar
+		home = 458
+	}
+
+	regiment = {
+		name= "2-я кавалерийская бригада"
+		type = hussar
 		home = 420
 	}
+
 	regiment = {
-		name= "2-я бригада"
-		type = guard
-		home = 420
+		name= "3-я кавалерийская бригада"
+		type = cuirassier
+		home = 418
 	}
+
 	regiment = {
-		name= "3-я бригада"
-		type = guard
-		home = 420
+		name= "4-я кавалерийская бригада"
+		type = cuirassier
+		home = 406
 	}
-	regiment = {
-		name= "4-я бригада"
-		type = guard
-		home = 421
+
+}
+
+army = {
+	name = "Алжирская армия"
+	
+	leader = {
+		name = "Bertrand Clauzel"
+		date = 1803.1.1
+		type = land
+		personality = inefficient
+		background = elderly
+		prestige = 0.1
 	}
+
+	location = 1700
 	regiment = {
-		name= "5-я бригада"
-		type = guard
-		home = 421
+		name= "10-я пехотная бригада"
+		type = infantry
+		home = 425
 	}
+
 	regiment = {
-		name= "6-я бригада"
+		name= "11-я пехотная бригада"
+		type = infantry
+		home = 423
+	}
+
+	regiment = {
+		name= "12-я пехотная бригада"
+		type = infantry
+		home = 432
+	}
+
+	regiment = {
+		name= "13-я пехотная бригада"
+		type = infantry
+		home = 439
+	}
+
+	regiment = {
+		name= "14-я пехотная бригада"
+		type = infantry
+		home = 433
+	}
+
+	regiment = {
+		name= "15-я пехотная бригада"
+		type = infantry
+		home = 431
+	}
+
+	regiment = {
+		name= "16-я пехотная бригада"
+		type = infantry
+		home = 429
+	}
+
+	regiment = {
+		name= "17-я пехотная бригада"
+		type = infantry
+		home = 442
+	}
+
+	regiment = {
+		name= "18-я пехотная бригада"
+		type = infantry
+		home = 459
+	}
+}
+army = {
+	name = "7-я пехотная дивизия"
+	location = 1701
+	regiment = {
+		name= "19-я пехотная бригада"
+		type = infantry
+		home = 415
+	}
+
+	regiment = {
+		name= "20-я пехотная бригада"
+		type = infantry
+		home = 416
+	}
+
+	regiment = {
+		name= "21-я пехотная бригада"
+		type = infantry
+		home = 417
+	}
+}
+
+army = {
+	name = "1-я кавалерийская дивизия"
+	location = 1704
+	regiment = {
+		name= "5-я кавалерийская бригада"
+		type = dragoon
+		home = 422
+	}
+
+	regiment = {
+		name= "6-я кавалерийская бригада"
+		type = dragoon
+		home = 436
+	}
+
+	regiment = {
+		name= "7-я кавалерийская бригада"
 		type = dragoon
 		home = 421
 	}
+
+}
+
+army = {
+	name = "Армия вторжения"
+	location = 458
 	regiment = {
-		name= "7-я бригада"
-		type = artillery
-		home = 422
+		name= "22-я пехотная бригада"
+		type = infantry
+		home = 455
 	}
+
 	regiment = {
-		name= "8-я бригада"
-		type = artillery
-		home = 422
+		name= "23-я пехотная бригада"
+		type = infantry
+		home = 457
 	}
+
 	regiment = {
-		name= "9-я бригада"
-		type = artillery
-		home = 424
+		name= "24-я пехотная бригада"
+		type = infantry
+		home = 473
 	}
+
 	regiment = {
-		name= "10-я бригада"
-		type = artillery
-		home = 424
+		name= "25-я пехотная бригада"
+		type = infantry
+		home = 456
 	}
+
+	regiment = {
+		name= "26-я пехотная бригада"
+		type = artillery
+		home = 470
+	}
+
+	regiment = {
+		name= "27-я пехотная бригада"
+		type = infantry
+		home = 434
+	}
+
+	regiment = {
+		name= "8-я кавалерийская бригада"
+		type = cuirassier
+		home = 462
+	}
+
+	regiment = {
+		name= "9-я кавалерийская бригада"
+		type = cuirassier
+		home = 463
+	}
+
+	regiment = {
+		name= "10-я кавалерийская бригада"
+		type = cuirassier
+		home = 460
+	}
+
+}
+
+army = {
+	name = "Гарнизон Сенегала"
+	location = 1784
+	regiment = {
+		name= "31-я пехотная бригада"
+		type = infantry
+		home = 411
+	}
+
+	regiment = {
+		name= "32-я пехотная бригада"
+		type = infantry
+		home = 407
+	}
+
+	regiment = {
+		name= "33-я пехотная бригада"
+		type = infantry
+		home = 444
+	}
+
+}
+
+army = {
+	name = "Гарнизон Кот-д'Ивуара"
+	location = 1894
+	regiment = {
+		name= "34-я пехотная бригада"
+		type = infantry
+		home = 467
+	}
+
+	regiment = {
+		name= "35-я пехотная бригада"
+		type = infantry
+		home = 454
+	}
+
+	regiment = {
+		name= "36-я пехотная бригада"
+		type = infantry
+		home = 428
+	}
+
+}
+
+navy = {
+	name = "Северная эскадра"
+	location = 420
+	ship = {
+		name= "Куронн"
+		type = manowar
+	}
+
+	ship = {
+		name= "Сюперб"
+		type = manowar
+	}
+
+	ship = {
+		name= "Жан Бар"
+		type = manowar
+	}
+
+	ship = {
+		name= "18 фрюктидора"
+		type = manowar
+	}
+
+	ship = {
+		name= "Ваграм"
+		type = manowar
+	}
+
+	ship = {
+		name= "Трокадеро"
+		type = manowar
+	}
+
+	ship = {
+		name= "Зеландец"
+		type = manowar
+	}
+
+	ship = {
+		name= "Сюперб"
+		type = manowar
+	}
+
+	ship = {
+		name= "Аустерлиц"
+		type = manowar
+	}
+
+	ship = {
+		name= "Магнифик"
+		type = manowar
+	}
+
+	ship = {
+		name= "Репаблик Франсез"
+		type = manowar
+	}
+
+	ship = {
+		name= "Конкеран"
+		type = manowar
+	}
+
+	ship = {
+		name= "Нептюн"
+		type = manowar
+	}
+
+	ship = {
+		name= "Альжериса"
+		type = manowar
+	}
+
+	ship = {
+		name= "Нестор"
+		type = manowar
+	}
+
+	ship = {
+		name= "Дюшес де Берри"
+		type = frigate
+	}
+
+	ship = {
+		name= "Фетида"
+		type = frigate
+	}
+
+	ship = {
+		name= "Астрея"
+		type = frigate
+	}
+
+	ship = {
+		name= "Амазон"
+		type = frigate
+	}
+
+	ship = {
+		name= "Клоринда"
+		type = frigate
+	}
+
+	ship = {
+		name= "Мавр"
+		type = frigate
+	}
+
+	ship = {
+		name= "Весталь"
+		type = frigate
+	}
+
+	ship = {
+		name= "Магисьен"
+		type = frigate
+	}
+
+	ship = {
+		name= "Мария Терезия"
+		type = frigate
+	}
+
+	ship = {
+		name= "Венюс"
+		type = frigate
+	}
+
+	ship = {
+		name= "Сирен"
+		type = frigate
+	}
+
+	ship = {
+		name= "Аталант"
+		type = frigate
+	}
+
+	ship = {
+		name= "Сюрвейлан"
+		type = frigate
+	}
+
+	ship = {
+		name= "Ифигения"
+		type = frigate
+	}
+
+	ship = {
+		name= "Сюлтан"
+		type = frigate
+	}
+
+	ship = {
+		name= "1-я транспортная флотилия"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "2-я транспортная флотилия"
+		type = clipper_transport
+	}
+
+	ship = {
+		name= "3-я транспортная флотилия"
+		type = clipper_transport
+	}
+
 }
 
 navy = {
@@ -145,7 +694,112 @@ navy = {
 	}
 
 	ship = {
+		name= "Маренго"
+		type = manowar
+	}
+
+	ship = {
+		name= "Виль де Марсель"
+		type = manowar
+	}
+
+	ship = {
+		name= "Эркюль"
+		type = manowar
+	}
+
+	ship = {
+		name= "Монтебелло"
+		type = manowar
+	}
+
+	ship = {
+		name= "Центавр"
+		type = manowar
+	}
+
+	ship = {
+		name= "Юпитер"
+		type = manowar
+	}
+
+	ship = {
+		name= "Дюк д'Ангулем"
+		type = manowar
+	}
+
+	ship = {
+		name= "Эркюлес"
+		type = manowar
+	}
+
+	ship = {
+		name= "Женеро"
+		type = manowar
+	}
+
+	ship = {
+		name= "Диадема"
+		type = manowar
+	}
+
+	ship = {
+		name= "Куронн"
+		type = manowar
+	}
+
+	ship = {
+		name= "Сюффрен"
+		type = manowar
+	}
+
+	ship = {
+		name= "Триден"
+		type = manowar
+	}
+
+	ship = {
+		name= "Руаяль Луи"
+		type = manowar
+	}
+
+	ship = {
+		name= "Коммерс де Пари"
+		type = manowar
+	}
+
+	ship = {
+		name= "Терпсихора"
+		type = frigate
+	}
+
+	ship = {
+		name= "Артемида"
+		type = frigate
+	}
+
+	ship = {
+		name= "Бель Габриэль"
+		type = frigate
+	}
+
+	ship = {
 		name= "Дидон"
+		type = frigate
+	}
+
+	ship = {
+		name= "Каролина"
+		type = frigate
+	}
+
+	ship = {
+		name= "Эрминия"
+		type = frigate
+	}
+
+	ship = {
+		name= "Мельпомена"
 		type = frigate
 	}
 

@@ -162,9 +162,9 @@ province_event = {
 	desc = "EVTDESC12030"
 	
 	trigger = {
-		produces = military_packs
+		produces = ammunition
 		owner = {
-			military_packs = 50
+			ammunition = 50
 		}
 		NOT = {
 			owner = {
@@ -202,7 +202,7 @@ province_event = {
 	option = {
 		name = "EVTOPTA12030"
 		owner = {
-			military_packs = -50
+			ammunition = -50
 		}
 	}
 	
@@ -1306,6 +1306,64 @@ province_event = {
 	}
 }
 
+# Explosives Explode
+province_event = {
+	id = 12250
+	title = "EVTNAME12250"
+	desc = "EVTDESC12250"
+	
+	trigger = {
+		produces = explosives
+		is_capital = no
+	}
+	
+	mean_time_to_happen = {
+		months = 1500
+		modifier = {
+			factor = 0.9
+			middle_strata_everyday_needs = 0.9
+		}
+		modifier = {
+			factor = 0.9
+			average_militancy = 5
+		}
+		modifier = {
+			factor = 1.3
+			OR = {
+				safety_regulations = low_safety
+				safety_regulations = good_safety
+				safety_regulations = acceptable_safety
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTA12250"
+		poor_strata = {
+			reduce_pop = 0.98
+			militancy = 1
+		}
+		
+	}
+	
+	option = {
+		name = "EVTOPTB12250"
+		rich_strata = {
+			reduce_pop = 0.99
+		}
+		poor_strata = {
+			reduce_pop = 0.99
+		}
+	}
+	
+	option = {
+		name = "EVTOPTC12250"
+		rich_strata = {
+			reduce_pop = 0.98
+			militancy = 1
+		}
+	}
+}
 
 #Elegant furniture
 province_event = {

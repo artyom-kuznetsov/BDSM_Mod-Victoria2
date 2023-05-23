@@ -1,10 +1,10 @@
 capital = 1369
 primary_culture = vietnamese
-religion = blank
+religion = mahayana
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
-literacy = 0.2
+literacy = 0.04
 non_state_culture_literacy = 0.03
 
 ruling_party = DAI_conservative
@@ -13,7 +13,7 @@ upper_house = {
 	liberal = 15
 	conservative = 72
 	reactionary = 13
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
@@ -23,7 +23,9 @@ consciousness = 0
 nonstate_consciousness = 0
 
 oob = "DAI_oob.txt"
-
+1861.1.1 = {
+	oob = "/1861/DAI_oob.txt"
+}
 
 slavery = yes_slavery
 upper_house_composition = appointed
@@ -42,13 +44,13 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-#New Reforms
-conscription = mandatory_training
-debt_law = serfdom
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+1861.1.1 = {
+	oob = "/1861/DAI_oob.txt"
+	literacy = 0.08
+	non_state_culture_literacy = 0.05
 
+	#Military Reforms
+	foreign_training = yes_foreign_training
+	
+	#Technologies
+}

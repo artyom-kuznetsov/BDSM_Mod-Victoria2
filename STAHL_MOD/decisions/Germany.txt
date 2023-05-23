@@ -1,7 +1,6 @@
 political_decisions = {
 	ems_dispatch = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = {
 				has_country_flag = ems_dispatch_sent
 			}
@@ -16,7 +15,7 @@ political_decisions = {
 		
 		allow = {
 			prestige = 30
-			breech_loaded_rifles = 1
+			steel_breech_loaded_artillery = 1
 			NOT = {
 				relation = {
 					who = FRA
@@ -46,7 +45,6 @@ political_decisions = {
 	
 	construct_germania_werft = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = {
 				has_global_flag = germania_werft_has_been_built
 			}
@@ -76,7 +74,6 @@ political_decisions = {
 	
 	support_ruhr_industrialism = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			has_global_flag = ruhr_boom_has_happened
 			OR = {
 				tag = PRU
@@ -90,14 +87,19 @@ political_decisions = {
 		
 		allow = {
 			cheap_steel = 1
-			iron_muzzle_loaded_artillery = 1
+			iron_breech_loaded_artillery = 1
 			state_n_government = 1
-			industrial_score = 250
-			is_greater_power = yes
+			industrial_score = 500
 			owns = 577
 			owns = 578
+			owns = 2561
 			owns = 576
 			owns = 575
+			575 = {
+				state_scope = {
+					has_building = steel_factory
+				}
+			}
 		}
 		
 		effect = {
@@ -108,7 +110,6 @@ political_decisions = {
 	
 	die_wacht_am_rhein = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = GER
 				tag = NGF
@@ -139,7 +140,6 @@ political_decisions = {
 	
 	niederwald_denkmal = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = GER
 			has_country_flag = watching_the_rhine
 			war = no
@@ -164,7 +164,6 @@ political_decisions = {
 	
 	schwabing_circles = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = BAV
 				tag = SGF
@@ -186,7 +185,6 @@ political_decisions = {
 	
 	support_biesterfelds = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = LIP
 			year = 1880
 			NOT = {
@@ -207,7 +205,6 @@ political_decisions = {
 	
 	support_schaumburgs = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = LIP
 			year = 1880
 			NOT = {
@@ -232,7 +229,6 @@ political_decisions = {
 	
 	das_zivilgesetzbuch = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = HES
 			NOT = {
 				has_country_flag = code_of_laws
@@ -255,7 +251,6 @@ political_decisions = {
 	
 	kaiser_wilhelms_land = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = GER
 			owns = 1531
 			owns = 2530
@@ -285,12 +280,10 @@ political_decisions = {
 	
 	the_heligoland_question = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = GER
 			NOT = {
 				has_country_flag = has_questioned_heligoland
 			}
-			NOT = { war_countries = { tag = ENG } }
 		}
 		
 		allow = {
@@ -305,13 +298,11 @@ political_decisions = {
 				add_core = GER # Heligoland is my last territorial demand!
 			}
 			set_country_flag = has_questioned_heligoland
-			ENG = { country_event = 8800 }
 		}
 	}
 	
 	construct_the_walhalla = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = BAV
 				tag = SGF
@@ -340,7 +331,6 @@ political_decisions = {
 	
 	introduce_the_presbyteries = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = HAN
 			NOT = {
 				has_country_flag = presbyteries_introduced
@@ -356,7 +346,7 @@ political_decisions = {
 		effect = {
 			any_pop = {
 				limit = {
-					has_pop_religion = blank
+					has_pop_religion = protestant
 				}
 				militancy = -1
 			}
@@ -366,7 +356,6 @@ political_decisions = {
 	
 	von_moltkes_staff_reforms = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = PRU
 				tag = GER
@@ -377,7 +366,7 @@ political_decisions = {
 			}
 		}
 		allow = {
-			military_plans = 1
+			army_decision_making = 1
 		}
 		effect = {
 			add_country_modifier = {
@@ -386,7 +375,6 @@ political_decisions = {
 			}
 			prestige = 5
 			set_country_flag = von_moltke
-			conscription = army_with_a_state
 		}
 		ai_will_do = {
 			factor = 1
@@ -399,13 +387,13 @@ political_decisions = {
 	
 	the_ruhr_boom = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			OR = {
 				tag = PRU
 				tag = GER
 				tag = NGF
 			}
 			owns = 578
+			owns = 2561
 			owns = 575
 			NOT = {
 				has_global_flag = ruhr_boom_has_happened
@@ -416,16 +404,14 @@ political_decisions = {
 			market_structure = 1
 			organized_factories = 1
 			early_railroad = 1
-			money = 2000000
 		}
 		
 		effect = {
 			add_country_modifier = {
 				name = ruhr_boom
-				duration = 7300
+				duration = 3650
 			}
 			set_global_flag = ruhr_boom_has_happened
-			money = -2000000
 		}
 	}
 }

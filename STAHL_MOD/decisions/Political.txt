@@ -1,28 +1,6 @@
 political_decisions = {
-	#request_grant = {
-	#	potential = {
-	#		ai = no
-	#		NOT = { has_country_modifier = asked_for_money }
-	#	}
-	#}
-	wbk_modifiers = {
-		potential = {
-			tag = WBK
-			NOT = { has_country_flag = regiment_troll }
-		}
-		allow = { }
-		effect = {
-			set_country_flag = regiment_troll
-			add_country_modifier = { name = wbk_modifier duration = -1 }
-		}
-		ai_will_do = {
-			factor = 100
-		}
-	}
-
 	enact_liquor_prohibition = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			social_science = 1
 			has_country_modifier = temperance_league
 			NOT = {
@@ -63,7 +41,6 @@ political_decisions = {
 	}
 	abolish_prohibition = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			has_country_modifier = liquor_prohibition
 		}
 		allow = {
@@ -88,7 +65,6 @@ political_decisions = {
 	}
 	institute_central_bank = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			NOT = {
 				has_country_modifier = central_bank_established
 			}
@@ -96,12 +72,12 @@ political_decisions = {
 		}
 		
 		allow = {
-			money = 1000
+			treasury = 1000
 			modern_central_bank_system = 1
 		}
 		
 		effect = {
-			money = -1000
+			treasury = -1000
 			add_country_modifier = {
 				name = central_bank_established
 				duration = -1
@@ -111,7 +87,6 @@ political_decisions = {
 	
 	enact_female_suffrage = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			year = 1870
 			civilized = yes
 			NOT = { has_country_modifier = female_suffrage }
@@ -154,52 +129,119 @@ political_decisions = {
 			}
 		}
 	}
-	#westernize_nation = {
-	#	potential = {
-	#		NOT = { has_country_flag = open_money_transfers_flag }
-	#		civilized = no
-	#		NOT = {
-	#			tag = JAP
-	#		}
-	#	}
-	#	allow = {
-	#		war = no
-	#		enlightenment_thought = 1
-	#		publishing_industry = 1
-	#		freedom_of_trade = 1
-	#		private_banks = 1
-	#		flintlock_rifles = 1
-	#		military_score = 50
-	#		prestige = 40
-	#	}
-	#	effect = {
-	#		civilized = yes
-	#		prestige = 5
-	#		remove_country_modifier = educational_reform
-	#		remove_country_modifier = military_reform
-	#		remove_country_modifier = western_influences
-	#		remove_country_modifier = uncivilized_isolationism
-	#		remove_country_modifier = trade_restrictions
-	#		remove_country_modifier = sayings_of_the_dutch
-	#		remove_country_modifier = extraterritoriality_granted
-	#		remove_country_modifier = liberian_research_boost
-	#		any_owned = {
-	#			remove_province_modifier = western_presence
-	#			remove_province_modifier = foreign_smugglers
-	#			remove_province_modifier = foreign_trading_post
-	#			remove_province_modifier = local_opium_habit
-	#			remove_province_modifier = european_military_mission
-	#			remove_province_modifier = legation_quarter
-	#			remove_province_modifier = kettler_denkmal
-	#		}
-	#	}
-	#}
-	#
+	westernize_nation = {
+		potential = {
+			civilized = no
+			civilized = yes #impossible trigger so it does not show
+			NOT = {
+				tag = JAP
+			}
+		}
+		allow = {
+			war = no
+			enlightenment_thought = 1
+			publishing_industry = 1
+			freedom_of_trade = 1
+			private_banks = 1
+			post_napoleonic_thought = 1
+			military_score = 50
+			prestige = 40
+		}
+		effect = {
+			civilized = yes
+			prestige = 5
+			remove_country_modifier = educational_reform
+			remove_country_modifier = military_reform
+			remove_country_modifier = western_influences
+			remove_country_modifier = uncivilized_isolationism
+			remove_country_modifier = trade_restrictions
+			remove_country_modifier = sayings_of_the_dutch
+			remove_country_modifier = extraterritoriality_granted
+			remove_country_modifier = liberian_research_boost
+			any_owned = {
+				remove_province_modifier = western_presence
+				remove_province_modifier = foreign_smugglers
+				remove_province_modifier = foreign_trading_post
+				remove_province_modifier = local_opium_habit
+				remove_province_modifier = european_military_mission
+				remove_province_modifier = legation_quarter
+				remove_province_modifier = kettler_denkmal
+			}
+		}
+	}
+	the_meiji_restoration = {
+		potential = {
+			civilized = no
+			tag = JAP
+			not = { has_country_modifier = meiji_restoration_boost }
+		}
+		allow = {
+			war = no
+			part_of_sphere = yes
+		}
+		effect = {
+			years_of_research = 5
+			prestige = 10
+			add_country_modifier = {
+				name = meiji_restoration_boost
+				duration = -1
+			}
+		}
+	}
+	
+	the_meiji_restoration2 = {
+		potential = {
+			civilized = no
+			tag = JAP
+			not = { has_country_modifier = meiji_restoration_boost }
+		}
+		allow = {
+			war = no
+			part_of_sphere = no
+		}
+		effect = {
+			years_of_research = 5
+			prestige = 10
+			add_country_modifier = {
+				name = meiji_restoration_boost
+				duration = -1
+			}
+			economic_reform = yes_land_reform
+			any_pop = {
+				scaled_militancy = {
+					ideology = liberal
+					factor = 0.5
+				}
+				scaled_militancy = {
+					ideology = conservative
+					factor = 7
+				}
+				scaled_militancy = {
+					ideology = reactionary
+					factor = 9
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					OR = {
+						AND = {
+							pop_majority_ideology = liberal 
+							year = 1855
+						}
+					year = 1875		
+					}
+				}
+			}
+		}
+	}
 	
 	leave_soi = {
 		alert = no
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			part_of_sphere = yes
 			
 		}
@@ -239,78 +281,11 @@ political_decisions = {
 			}
 		}
 	}
-	leave_soi_ind = {
-		alert = no
-		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
-			part_of_sphere = yes
-			OR = {
-				tag = WBK
-				AND = {
-					NOT = { year = 1870 }
-					OR = {
-						tag = AWA
-						tag = BAS
-						tag = BER
-						tag = BIK
-						tag = BUN
-						tag = GWA
-						tag = HYD
-						tag = IND
-						tag = JAI
-						tag = JAS
-						tag = JOD
-						tag = KAL
-						tag = KAS
-						tag = KUT
-						tag = LAD
-						tag = MAK
-						tag = MEW
-						tag = MYS
-						tag = NAG
-						tag = NEP
-						tag = ORI
-						tag = PAN
-						tag = SHI
-						tag = SIK
-						tag = SIN
-						tag = TRA
-						tag = CEY
-						tag = SWI
-						tag = TPG
-						tag = GXI
-						tag = FJN
-						tag = CHU
-						tag = HNN
-					}
-				}
-			}
-		}
-		allow = {
-			
-		}
-		effect = {
-			sphere_owner = {
-				diplomatic_influence = {
-				who = THIS
-				value = -400
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 100
-			
-			# Ai will do, if sphere owner has LESS than thrice our brigades.
-
-		}
-	}
 	
 	nationalize = {
 		alert = no
 			
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			can_nationalize = yes 
 		}
 		allow = {

@@ -1,19 +1,19 @@
 capital = 2062
-primary_culture = manchu
-religion = blank
+primary_culture = beifaren
+religion = sunni
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
 literacy = 0.04
 non_state_culture_literacy = 0.02
 
-ruling_party = CHU_gen_reactionary
+ruling_party = XBI_reactionary
 upper_house = {
 	fascist = 0
 	liberal = 10
 	conservative = 0
 	reactionary = 100
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
@@ -39,13 +39,11 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-# New Reforms
-conscription = demilitarized_state
-debt_law = serfdom
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+1861.1.1 = {
+	oob = "/1861/XBI_oob.txt"
+	literacy = 0.07
+	non_state_culture_literacy = 0.04
 
+	#Military Reforms
+	foreign_training = yes_foreign_training
+}

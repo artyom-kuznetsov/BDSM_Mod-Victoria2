@@ -1,11 +1,77 @@
 political_decisions = {
-	
-	
-	
+	cavours_diplomacy = {
+		potential = {
+			OR = {
+				AND = { 
+					tag = ITA
+					NOT = { exists = SAR }
+				}
+				AND = { 
+					tag = SAR
+					NOT = { exists = ITA }
+				}
+			}
+			NOT = {
+				has_country_flag = cavour_has_done_his
+			}
+			owns = 465
+			owns = 466
+			owns = 472
+			FRA = {
+				exists = yes
+				is_greater_power = yes
+			}
+		}
+		allow = {
+			relation = {
+				who = FRA
+				value = 150
+			}
+			owns = 726
+			owns = 727
+			owns = 728
+		}
+		
+		effect = {
+			prestige = 20
+			badboy = -10
+			relation = {
+				who = FRA
+				value = 50
+			}
+			726 = {
+				add_core = SAR
+			}
+			727 = {
+				add_core = SAR
+			}
+			728 = {
+				add_core = SAR
+			}
+			465 = {
+				remove_core = ITA
+				remove_core = SAR
+				add_core = FRA
+				secede_province = FRA
+			}
+			466 = {
+				remove_core = ITA
+				remove_core = SAR
+				add_core = FRA
+				secede_province = FRA
+			}
+			472 = {
+				remove_core = ITA
+				remove_core = SAR
+				add_core = FRA
+				secede_province = FRA
+			}
+			set_country_flag = cavour_has_done_his
+		}
+	}
 	
 	award_order_of_st_francis = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SIC
 			government = absolute_monarchy
 			NOT = {
@@ -26,7 +92,6 @@ political_decisions = {
 	
 	statuto_albertino = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = SAR
 			government = absolute_monarchy
 			NOT = {
@@ -48,7 +113,6 @@ political_decisions = {
 	}
 	build_vittoriano = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ITA
 			government = absolute_monarchy
 			NOT = {
@@ -70,7 +134,6 @@ political_decisions = {
 	}
 	the_case_of_edgardo_mortara = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = PAP
 			government = absolute_monarchy
 			NOT = {
@@ -97,7 +160,6 @@ political_decisions = {
 	
 	the_first_vatican_council = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = PAP
 			government = absolute_monarchy
 			NOT = {
@@ -114,7 +176,7 @@ political_decisions = {
 			badboy = 1
 			any_country = {
 				limit = {
-					religion = blank
+					religion = catholic
 				}
 				relation = {
 					who = THIS
@@ -127,7 +189,6 @@ political_decisions = {
 	
 	law_of_guarantees = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
 			tag = ITA
 			NOT = {
 				capital = 749
@@ -145,5 +206,71 @@ political_decisions = {
 		}
 	}
 	
-	
+	italia_irredenta = {
+		potential = {
+			tag = ITA
+			NOT = {
+				has_country_flag = italia_ulterior
+			}
+		}
+		
+		allow = {
+			OR = {
+				invention = national_fraternity
+				is_greater_power = yes
+			}
+		}
+		
+		effect = {
+			set_country_flag = italia_ulterior
+			729 = {
+				add_core = ITA
+			}
+			730 = {
+				add_core = ITA
+			}
+			731 = {
+				add_core = ITA
+			}
+			732 = {
+				add_core = ITA
+			}
+			733 = {
+				add_core = ITA
+			}
+			734 = {
+				add_core = ITA
+			}
+			735 = {
+				add_core = ITA
+			}
+			736 = {
+				add_core = ITA
+			}
+			737 = {
+				add_core = ITA
+			}
+			769 = {
+				add_core = ITA
+			}
+			770 = {
+				add_core = ITA
+			}
+			778 = {
+				add_core = ITA
+			}
+			780 = {
+				add_core = ITA
+			}
+			781 = {
+				add_core = ITA
+			}
+			782 = {
+				add_core = ITA
+			}
+			2582 = {
+				add_core = ITA
+			}
+		}
+	}
 }

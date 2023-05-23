@@ -1,6 +1,6 @@
 capital = 658
 primary_culture = polynesian
-religion = blank
+religion = protestant
 government = absolute_monarchy
 plurality = 0.0
 nationalvalue = nv_order
@@ -12,7 +12,7 @@ upper_house = {
 	liberal = 28
 	conservative = 59
 	reactionary = 13
-	##anarcho_liberal = 0
+	anarcho_liberal = 0
 	socialist = 0
 	communist = 0
 }
@@ -40,13 +40,18 @@ unemployment_subsidies = no_subsidies
 pensions = no_pensions 
 school_reforms = no_schools
 
-# New Reforms
-conscription = demilitarized_state
-debt_law = peonage
-penal_system = capital_punishment
-child_labor = child_labor_legal
-citizens_rights = primary_culture_only
-border_policy = open_borders
-centralization = regionalism
-colonial_policy = no_colonies 
+1861.1.1 = {
+	oob = "/1861/HAW_oob.txt"
+	literacy = 0.83
 
+	#Economic Reforms
+	land_reform = yes_land_reform
+	admin_reform = yes_admin_reform
+	
+	#Military Reforms
+	foreign_weapons = yes_foreign_weapons
+
+	#Technologies
+	water_wheel_power = 1
+	flintlock_rifles = 1
+}

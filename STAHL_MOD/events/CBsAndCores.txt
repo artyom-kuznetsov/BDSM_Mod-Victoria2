@@ -574,18 +574,21 @@ province_event = {
 			is_primary_culture = yes
 			is_accepted_culture = yes
 			any_neighbor_province = {
-				is_core = THIS
-				controlled_by = THIS
+				AND = {
+					is_core = THIS
+					controlled_by = THIS
+				}
 			}
 		}
 		owner = {
 			tag = THIS
+			is_greater_power = yes
 			nationalism_n_imperialism = 1
 		}
 	}
 	
 	mean_time_to_happen = {
-		months = 150
+		months = 180
 		modifier = {
 			factor = 0.5
 			is_primary_culture = yes

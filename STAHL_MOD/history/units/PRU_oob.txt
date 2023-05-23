@@ -6,30 +6,6 @@ ANH = {
 	military_access = yes
 }
 
-REU = {
-
-	value = 125
-	level = 5
-	influence_value = 25
-	military_access = yes
-}
-
-SWG = {
-
-	value = 125
-	level = 5
-	influence_value = 25
-	military_access = yes
-}
-
-SCL = {
-
-	value = 125
-	level = 5
-	influence_value = 25
-	military_access = yes
-}
-
 BRA = {
 	value = 125
 	level = 5
@@ -44,15 +20,6 @@ BRE = {
 	influence_value = 25
 
 	military_access = yes
-
-}
-
-HOL = {
-
-	value = 50
-	level = 4
-	influence_value = 25
-
 
 }
 
@@ -283,132 +250,454 @@ DEN = {
 
 }
 
-#
+leader = {
+	name = "von Zieten"
+	date = 1813.1.1
+	type = land
+	personality = soldierly
+	background = cavalry_school
+	prestige = 0.2
+}
 
-#
+leader = {
+	name = "Hermann von Boyen"
+	date = 1814.1.1
+	type = land
+	personality = intelligent
+	background = old_school
+	prestige = 0.2
+}
+
+leader = {
+	name = "Wilhelm von Krauseneck"
+	date = 1814.1.1
+	type = land
+	personality = reserved
+	background = engineer
+	prestige = 0.2
+}
+
+leader = {
+	name = "Baron von Mьffling"
+	date = 1813.1.1
+	type = land
+	personality = diplomatic
+	background = generals_aide
+	prestige = 0.2
+}
+
+leader = {
+	name = "August von Colomb"
+	date = 1829.1.1
+	type = land
+	personality = active_p
+	background = cavalry_school
+	prestige = 0.1
+}
+
+leader = {
+	name = "von Grolman"
+	date = 1816.1.1
+	type = land
+	personality = openminded
+	background = warmonger
+	prestige = 0.2
+}
+
+leader = {
+	name = "Rьhle von Lilienstern"
+	date = 1819.1.1
+	type = land
+	personality = intelligent
+	background = professor
+	prestige = 0.2
+}
+
+leader = {
+	name = "zu Dohna-Schlobitten"
+	date = 1820.1.1
+	type = land
+	personality = tactful
+	background = old_school
+	prestige = 0.2
+}
+
+leader = {
+	name = "Heinrich von Wrangel"
+	date = 1823.1.1
+	type = land
+	personality = efficient
+	background = elderly
+	prestige = 0.2
+}
+
+leader = {
+	name = "Wilhelm von Neumann-Cosel"
+	date = 1836.1.1
+	type = land
+	personality = gallant
+	background = old_school
+	prestige = 0.1
+}
+
+leader = {
+	name = "Karl von Prittwitz"
+	date = 1836.1.1
+	type = land
+	personality = harsh
+	background = powerful_friends
+	prestige = 0.0
+}
+
+leader = {
+	name = "von Reyher"
+	date = 1836.1.1
+	type = land
+	personality = careful
+	background = exranker
+	prestige = 0.0
+}
 
 #Army
 
 army = {
-	name = "Королевская гвардия"
-	location = 551
+	name = "1-й корпус"
+	location = 553
 	regiment = {
-		name= "1-я бригада"
-		type = artillery
-		home = 695
+		name= "1-€ пехотна€ бригада"
+		type = infantry
+		home = 553
 	}
 
 	regiment = {
-		name= "2-я бригада"
+		name= "2-€ пехотна€ бригада"
+		type = infantry
+		home = 557
+	}
+
+	regiment = {
+		name= "3-€ пехотна€ бригада"
+		type = infantry
+		home = 554
+	}
+
+	regiment = {
+		name= "1-€ инженерна€ бригада"
+		type = engineer
+		home = 577
+	}
+
+	regiment = {
+		name= "4-€ пехотна€ бригада"
+		type = infantry
+		home = 2561
+	}
+
+	regiment = {
+		name= "5-€ пехотна€ бригада"
+		type = infantry
+		home = 582
+	}
+
+	regiment = {
+		name= "6-€ пехотна€ бригада"
+		type = infantry
+		home = 582
+	}
+
+	regiment = {
+		name= "1-€ артиллерийска€ бригада"
 		type = artillery
+		home = 584
+	}
+
+}
+
+army = {
+	name = "2-й корпус"
+	location = 682
+	regiment = {
+		name= "7-€ пехотна€ бригада"
+		type = infantry
+		home = 682
+	}
+
+	regiment = {
+		name= "8-€ пехотна€ бригада"
+		type = infantry
+		home = 682
+	}
+
+	regiment = {
+		name= "9-€ пехотна€ бригада"
+		type = infantry
+		home = 682
+	}
+
+	regiment = {
+		name= "2-€ инженерна€ бригада"
+		type = engineer
+		home = 684
+	}
+
+	regiment = {
+		name= "10-€ пехотна€ бригада"
+		type = infantry
+		home = 684
+	}
+
+	regiment = {
+		name= "11-€ пехотна€ бригада"
+		type = infantry
+		home = 684
+	}
+
+	regiment = {
+		name= "12-€ пехотна€ бригада"
+		type = infantry
+		home = 685
+	}
+
+	regiment = {
+		name= "2-€ артиллерийска€ бригада"
+		type = artillery
+		home = 685
+	}
+
+}
+
+army = {
+	name = "3-й корпус"
+	location = 695
+	regiment = {
+		name= "13-€ пехотна€ бригада"
+		type = infantry
 		home = 696
 	}
 
 	regiment = {
-		name= "3-я бригада"
+		name= "14-€ пехотна€ бригада"
+		type = infantry
+		home = 696
+	}
+
+	regiment = {
+		name= "15-€ пехотна€ бригада"
+		type = infantry
+		home = 693
+	}
+
+	regiment = {
+		name= "3-€ инженерна€ бригада"
+		type = engineer
+		home = 693
+	}
+
+	regiment = {
+		name= "16-€ пехотна€ бригада"
+		type = infantry
+		home = 695
+	}
+
+	regiment = {
+		name= "17-€ пехотна€ бригада"
+		type = infantry
+		home = 695
+	}
+
+	regiment = {
+		name= "18-€ пехотна€ бригада"
+		type = infantry
+		home = 698
+	}
+
+	regiment = {
+		name= "3-€ артиллерийска€ бригада"
 		type = artillery
+		home = 698
+	}
+
+}
+
+army = {
+	name = "4-й корпус"
+	location = 548
+	regiment = {
+		name= "19-€ пехотна€ бригада"
+		type = infantry
+		home = 547
+	}
+
+	regiment = {
+		name= "20-€ пехотна€ бригада"
+		type = infantry
 		home = 546
 	}
 
 	regiment = {
-		name= "4-я бригада"
+		name= "21-€ пехотна€ бригада"
+		type = infantry
+		home = 679
+	}
+
+	regiment = {
+		name= "4-€ инженерна€ бригада"
+		type = engineer
+		home = 680
+	}
+
+	regiment = {
+		name= "22-€ пехотна€ бригада"
+		type = infantry
+		home = 548
+	}
+
+	regiment = {
+		name= "23-€ пехотна€ бригада"
+		type = infantry
+		home = 548
+	}
+
+	regiment = {
+		name= "4-€ артиллерийска€ бригада"
 		type = artillery
-		home = 550
+		home = 578
 	}
-	
-	regiment = {
-		name= "5-я бригада"
-		type = dragoon
-		home = 681
-	}
-	
-	regiment = {
-		name= "6-я бригада"
-		type = infantry
-		home = 699
-	}
-	regiment = {
-		name= "7-я бригада"
-		type = infantry
-		home = 701
-	}
-	regiment = {
-		name= "8-я бригада"
-		type = infantry
-		home = 684
-	}
-	regiment = {
-		name= "9-я бригада"
-		type = infantry
-		home = 685
-	}
-	regiment = {
-		name= "10-я бригада"
-		type = infantry
-		home = 682
-	}
+
 }
 
 army = {
-	name = "Королевская гвардия"
-	location = 550
+	name = "5-й корпус"
+	location = 580
 	regiment = {
-		name= "1-я бригада"
-		type = artillery
-		home = 682
+		name= "25-€ пехотна€ бригада"
+		type = infantry
+		home = 580
 	}
 
 	regiment = {
-		name= "2-я бригада"
-		type = artillery
+		name= "26-€ пехотна€ бригада"
+		type = infantry
+		home = 580
+	}
+
+	regiment = {
+		name= "27-€ пехотна€ бригада"
+		type = infantry
+		home = 581
+	}
+
+}
+
+army = {
+	name = "6-й корпус"
+	location = 575
+	regiment = {
+		name= "28-€ пехотна€ бригада"
+		type = infantry
+		home = 575
+	}
+
+	regiment = {
+		name= "29-€ пехотна€ бригада"
+		type = infantry
+		home = 576
+	}
+
+	regiment = {
+		name= "30-€ пехотна€ бригада"
+		type = infantry
+		home = 578
+	}
+
+}
+
+army = {
+	name = "7-й корпус"
+	location = 546
+	regiment = {
+		name= "1-€ кавалерийска€ бригада"
+		type = cuirassier
 		home = 552
 	}
 
 	regiment = {
-		name= "3-я бригада"
-		type = artillery
+		name= "2-€ кавалерийска€ бригада"
+		type = cuirassier
+		home = 549
+	}
+
+	regiment = {
+		name= "3-€ кавалерийска€ бригада"
+		type = cuirassier
+		home = 687
+	}
+
+	regiment = {
+		name= "4-€ кавалерийска€ бригада"
+		type = cuirassier
+		home = 681
+	}
+
+	regiment = {
+		name= "5-€ кавалерийска€ бригада"
+		type = cuirassier
 		home = 550
 	}
 
 	regiment = {
-		name= "4-я бригада"
-		type = artillery
-		home = 549
-	}
-	
-	regiment = {
-		name= "5-я бригада"
+		name= "6-€ кавалерийска€ бригада"
 		type = dragoon
-		home = 549
-	}
-	
-	regiment = {
-		name= "6-я бригада"
-		type = infantry
 		home = 551
 	}
+
 	regiment = {
-		name= "7-я бригада"
-		type = infantry
-		home = 553
+		name= "7-€ кавалерийска€ бригада"
+		type = dragoon
+		home = 699
 	}
+
 	regiment = {
-		name= "8-я бригада"
-		type = infantry
-		home = 581
+		name= "8-€ кавалерийска€ бригада"
+		type = dragoon
+		home = 699
 	}
+
 	regiment = {
-		name= "9-я бригада"
-		type = infantry
-		home = 580
+		name= "9-€ кавалерийска€ бригада"
+		type = dragoon
+		home = 700
 	}
+
 	regiment = {
-		name= "10-я бригада"
-		type = infantry
-		home = 578
+		name= "10-€ кавалерийска€ бригада"
+		type = dragoon
+		home = 692
 	}
 }
 
+army = {
+	name = "8-й корпус"
+	location = 594
+	
+	regiment = {
+		name = "31-€ пехотна€ бригада"
+		type = infantry
+		home = 594
+	}
+	
+	regiment = {
+		name= "11-€ кавалерийска€ бригада"
+		type = dragoon
+		home = 701
+	}
+
+	regiment = {
+		name = "5-€ артиллерийска€ бригада"
+		type = artillery
+		home = 701
+	}
+}
 
 navy = {
 	name = " оролевский флот"

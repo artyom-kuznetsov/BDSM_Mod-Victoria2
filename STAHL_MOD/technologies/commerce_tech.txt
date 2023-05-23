@@ -5,7 +5,7 @@ private_banks = {
 	cost = 3600
 
 	activate_building = cement_factory 
-	tax_eff = 5
+	tax_eff = 3
 	
 	ai_chance = {
 		factor = 1.1
@@ -36,7 +36,7 @@ stock_exchange = {
 	year = 1836
 	cost = 7200
 
-	tax_eff = 2
+	tax_eff = 5
 	
 	ai_chance = {
 		factor = 1.1
@@ -67,7 +67,7 @@ business_banks = {
 	year = 1850
 	cost = 10800
 
-	tax_eff = 2
+	tax_eff = 5
 	
 	ai_chance = {
 		factor = 1.1
@@ -98,7 +98,7 @@ investment_banks = {
 	year = 1870
 	cost = 14400
 
-	tax_eff = 2
+	tax_eff = 5
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -128,7 +128,7 @@ bank_inspection_board = {
 	year = 1900
 	cost = 18000
 
-	tax_eff = 1
+	tax_eff = 5
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -158,7 +158,7 @@ mutual_funds = {
 	year = 1919
 	cost = 21600
 
-	tax_eff = 2
+	tax_eff = 5
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -228,7 +228,7 @@ ad_hoc_money_bill_printing = {
 }  
 private_bank_money_bill_printing = {
 	area = monetary_system
-	year = 1845
+	year = 1836
 	cost = 10800
 
 	administrative_efficiency = 0.05
@@ -250,8 +250,8 @@ private_bank_money_bill_printing = {
 }
 central_bank_money_bill_printing = {
 	area = monetary_system
-	year = 1860
-	cost = 16000
+	year = 1850
+	cost = 14400
 
 	administrative_efficiency = 0.05
 	ai_chance = {
@@ -272,8 +272,8 @@ central_bank_money_bill_printing = {
 }
 modern_central_bank_system = {
 	area = monetary_system
-	year = 1875
-	cost = 21000
+	year = 1870
+	cost = 18000
 
 	administrative_efficiency = 0.05
 	ai_chance = {
@@ -352,12 +352,9 @@ early_classical_theory_and_critique = {
 late_classical_theory = {
 	area = economic_thought_and_critique
 	year = 1836
-	cost = 6400
+	cost = 7200
 
 	factory_input = -0.01
-
-	rgo_goods_output = { precious_metal = 0.075 }
-    rgo_size = { precious_metal = 0.05 }
 	ai_chance = {
 		factor = 1.01
 		modifier = {
@@ -384,12 +381,10 @@ late_classical_theory = {
 }
 collectivist_theory = {
 	area = economic_thought_and_critique
-	year = 1850
-	cost = 8800
+	year = 1836
+	cost = 10800
 
 	factory_input = -0.01
-	rgo_goods_output = { precious_metal = 0.075 }
-    rgo_size = { precious_metal = 0.05 }
 	ai_chance = {
 		factor = 1.01
 		modifier = {
@@ -416,12 +411,10 @@ collectivist_theory = {
 }
 the_historical_theory = {
 	area = economic_thought_and_critique
-	year = 1860
-	cost = 11000
+	year = 1850
+	cost = 14400
 
 	factory_input = -0.01
-	rgo_goods_output = { precious_metal = 0.075 }
-    rgo_size = { precious_metal = 0.05 }
 	ai_chance = {
 		factor = 1.01
 		modifier = {
@@ -448,12 +441,10 @@ the_historical_theory = {
 }
 neoclassical_theory = {
 	area = economic_thought_and_critique
-	year = 1880
-	cost = 14000
+	year = 1870
+	cost = 18000
 
 	factory_input = -0.01
-	rgo_goods_output = { precious_metal = 0.075 }
-    rgo_size = { precious_metal = 0.05 }
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -481,11 +472,9 @@ neoclassical_theory = {
 keynesian_economics = {
 	area = economic_thought_and_critique
 	year = 1900
-	cost = 18000
+	cost = 21600
 
 	factory_input = -0.01
-	rgo_goods_output = { precious_metal = 0.075 }
-    rgo_size = { precious_metal = 0.05 }
 	ai_chance = {
 		factor = 1.01
 		modifier = {
@@ -519,13 +508,12 @@ freedom_of_trade = {
 	cost = 3600
 
 
-	activate_building = luxury_clothes_factory
-	
-	#activate_building = province_selector
+	activate_building = luxury_clothes_factory  
+
 	influence = 0.1
 	farm_rgo_eff = 0.1
 	mine_rgo_eff = 0.1
-
+	
 	ai_chance = {
 		factor = 11
 		modifier = {
@@ -582,7 +570,7 @@ market_structure = {
 }
 business_regulations = {
 	area = market_functionality
-	year = 1845
+	year = 1836
 	cost = 10800
 
 	influence = 0.2
@@ -611,13 +599,9 @@ business_regulations = {
 }
 market_regulations = {
 	area = market_functionality
-	year = 1865
+	year = 1850
 	cost = 14400
-	farm_rgo_eff = 0.1
-	mine_rgo_eff = 0.1
-	rgo_goods_output = {
-		precious_metal = 0.075
-	}
+
 	influence = 0.2
 	ai_chance = {
 		factor = 1.05
@@ -642,10 +626,9 @@ market_regulations = {
 }
 economic_responsibility = {
 	area = market_functionality
-	year = 1885
+	year = 1870
 	cost = 18000
-	farm_rgo_eff = 0.1
-	mine_rgo_eff = 0.1
+
 	influence = 0.2
 	ai_chance = {
 		factor = 1.05
@@ -672,8 +655,7 @@ government_interventionism = {
 	area = market_functionality
 	year = 1900
 	cost = 21600
-	farm_rgo_eff = 0.1
-	mine_rgo_eff = 0.1
+
 	influence = 0.2
 	ai_chance = {
 		factor = 1.01
@@ -705,7 +687,6 @@ guild_based_production = {
 	cost = 3600
 	activate_building = canned_food_factory 
 	factory_output = 0.01
-	org_regain = 0.04
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -737,11 +718,9 @@ guild_based_production = {
 organized_factories = {
 	area = tech_organization
 	year = 1836
-	cost = 6400
+	cost = 7200
 
 	factory_output = 0.01
-	education_efficiency = 0.05
-	org_regain = 0.04
 		ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -776,11 +755,10 @@ organized_factories = {
 }
 scientific_management = {
 	area = tech_organization
-	year = 1850
-	cost = 8000
+	year = 1836
+	cost = 10800
 
 	factory_output = 0.01
-	education_efficiency = 0.05
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -815,11 +793,10 @@ scientific_management = {
 }
 time_saving_measures = {
 	area = tech_organization
-	year = 1860
-	cost = 10800
+	year = 1850
+	cost = 14400
 
 	factory_output = 0.01
-	education_efficiency = 0.05
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -842,11 +819,10 @@ time_saving_measures = {
 }
 management_strategy = {
 	area = tech_organization
-	year = 1880
-	cost = 15000
+	year = 1870
+	cost = 18000
 
 	factory_output = 0.01
-	education_efficiency = 0.05
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -870,10 +846,9 @@ management_strategy = {
 organizational_development = {
 	area = tech_organization
 	year = 1900
-	cost = 18000
+	cost = 21600
 
 	factory_output = 0.01
-	education_efficiency = 0.05
 	ai_chance = {
 		factor = 1.05
 		modifier = {

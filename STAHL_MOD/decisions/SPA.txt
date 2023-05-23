@@ -1,13 +1,7 @@
 political_decisions = {
 	establish_la_guardia_civil = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
-			
-			OR = {
-				tag = SPA
-				tag = IBE
-				tag = ANL
-			}
+			tag = SPA
 			OR = {
 				government = absolute_monarchy
 				government = prussian_constitutionalism
@@ -37,12 +31,7 @@ political_decisions = {
 
 	confiscations_of_mendizabal = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
-			OR = {
-				tag = SPA
-				tag = IBE
-				tag = ANL
-			}
+			tag = SPA
 			NOT = {
 				has_country_flag = mendizabal_confiscated
 			}
@@ -53,7 +42,7 @@ political_decisions = {
 		}
 
 		effect = {
-			treasury = 50000
+			treasury = 25000
 			prestige = 10
 			relation = {
 				who = PAP
