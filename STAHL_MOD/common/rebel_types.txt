@@ -120,13 +120,11 @@ reactionary_rebels = {
 		}
 		modifier = {
 			factor = 1.0105
-			AND = {
-				pop_majority_ideology = conservative
-				NOT = {
-					country = {
-						has_country_modifier = global_liberal_agitation
-						has_country_modifier = springtime_of_nations	
-					}
+			pop_majority_ideology = conservative
+			NOT = {
+				country = {
+					has_country_modifier = global_liberal_agitation
+					has_country_modifier = springtime_of_nations	
 				}
 			}
 		}
@@ -265,7 +263,7 @@ fascist_rebels = {
 		
 		modifier = {
 			factor = 0.5
-			country = {
+			THIS = {
 				has_unclaimed_cores = yes
 			}
 		}
@@ -687,12 +685,14 @@ anarcho_liberal_rebels = {
 		}
 		modifier = {
 			factor = 0.1
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				has_country_modifier = springtime_of_nations
 			}
 		}
 		modifier = {
 			factor = 3
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				has_country_modifier = global_liberal_agitation
 			}
@@ -1025,9 +1025,9 @@ nationalist_rebels = {
 	}
 	demands_enforced_effect = {
 		release_vassal = REB
-		modify_relation = {
-			tag = REB
-			relation = -150
+		relation = {
+			who = REB
+			value = -150
 		}
 	}
 }
@@ -1102,12 +1102,14 @@ pan_nationalist_rebels = {
 		}
 		modifier = {
 			factor = 0.4
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				has_country_modifier = springtime_of_nations
 			}
 		}
 		modifier = {
 			factor = 1.5
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				has_country_modifier = global_liberal_agitation
 			}
@@ -1139,7 +1141,9 @@ pan_nationalist_rebels = {
 		
 		modifier = {
 			factor = 0
-			war = yes
+			country = {
+				war = yes
+			}
 		}
 		
 		modifier = {
@@ -1159,8 +1163,8 @@ pan_nationalist_rebels = {
 
 		modifier = {
 			factor = 1.3
-			OR = {
-				country = {
+			country = {
+				OR = {
 					has_country_modifier = global_liberal_agitation
 					has_country_modifier = springtime_of_nations
 				}
@@ -1732,14 +1736,14 @@ red_shirts = {
 		}
 		modifier = {
 			factor = 0.4
-			OR = {
-				country = {
-					has_country_modifier = springtime_of_nations
-				}
+			# Audax Validator "." Ignore_NEXT
+			country = {
+				has_country_modifier = springtime_of_nations
 			}
 		}
 		modifier = {
 			factor = 1.5
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				has_country_modifier = global_liberal_agitation
 			}
@@ -1790,8 +1794,9 @@ red_shirts = {
 
 		modifier = {
 			factor = 1.3
-			OR = {
-				country = {
+			# Audax Validator "." Ignore_NEXT
+			country = {
+				OR = {
 					has_country_modifier = global_liberal_agitation
 					has_country_modifier = springtime_of_nations
 				}
@@ -1989,7 +1994,9 @@ indian_sepoys = {
 			OR = {
 				is_cultural_union = THIS
 				location = { NOT = { is_core = HND } }
-				tag = HND
+				country = {
+					tag = HND
+				}
 				exists = HND
 			}
 		}
@@ -2016,10 +2023,8 @@ indian_sepoys = {
 		modifier = {
 			factor = 0
 			country = {
-				AND = {
-					is_greater_power = no
-					part_of_sphere = no
-				}
+				is_greater_power = no
+				part_of_sphere = no
 			}
 		}
 		
@@ -2187,12 +2192,14 @@ liberal_rebels = {
 		}
 		modifier = {
 			factor = 0.4
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				has_country_modifier = springtime_of_nations
 			}
 		}
 		modifier = {
 			factor = 1.5
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				has_country_modifier = global_liberal_agitation
 			}
@@ -2234,6 +2241,7 @@ liberal_rebels = {
 		}
 		modifier = {
 			factor = 1.3
+			# Audax Validator "." Ignore_NEXT
 			country = {
 				OR = {
 					has_country_modifier = global_liberal_agitation
@@ -2249,13 +2257,12 @@ liberal_rebels = {
 		
 		modifier = {
 			factor = 1.15
-			AND = {
-				pop_majority_ideology = conservative
-				country = {
-					OR = {
-						has_country_modifier = global_liberal_agitation
-						has_country_modifier = springtime_of_nations
-					}
+			pop_majority_ideology = conservative
+			# Audax Validator "." Ignore_NEXT
+			country = {
+				OR = {
+					has_country_modifier = global_liberal_agitation
+					has_country_modifier = springtime_of_nations
 				}
 			}
 		}
@@ -2416,13 +2423,11 @@ unciv_reactionary_rebels = {
 		}
 		modifier = {
 			factor = 1.05
-			AND = {
-				pop_majority_ideology = conservative
-				NOT = {
-					country = {
-						has_country_modifier = global_liberal_agitation
-						has_country_modifier = springtime_of_nations	
-					}
+			pop_majority_ideology = conservative
+			NOT = {
+				country = {
+					has_country_modifier = global_liberal_agitation
+					has_country_modifier = springtime_of_nations	
 				}
 			}
 		}
@@ -2451,10 +2456,8 @@ unciv_reactionary_rebels = {
 		modifier = {
 			factor = 1.02
 			country = { 
-				AND = {
-					civilization_progress = 0.1
-					part_of_sphere = yes
-				}
+				civilization_progress = 0.1
+				part_of_sphere = yes
 			}
 		}
 	}
@@ -2629,11 +2632,11 @@ sioux_nation = {
 	
 
 	# Country scope
-	#demands_enforced_trigger = {
-	#}
+	demands_enforced_trigger = {
+	}
 	
-	#demands_enforced_effect = {
-	#}
+	demands_enforced_effect = {
+	}
 }
 
 apache = {
@@ -2755,9 +2758,9 @@ apache = {
 	
 
 	# Country scope
-	#demands_enforced_trigger = {
-	#}
+	demands_enforced_trigger = {
+	}
 	
-	#demands_enforced_effect = {
-	#}
+	demands_enforced_effect = {
+	}
 }
