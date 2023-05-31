@@ -2,3 +2,72 @@
 # these are checked for each countries once/month and then applied.
 #
 # Effects are fully scriptable here.
+
+tiny_nation = {
+	trigger = {
+		NOT = {
+			total_pops = 1000000 #1 million POPs
+		}
+	}
+	leadership_modifier = -0.4
+	administrative_efficiency_modifier = 0.2
+	mobilisation_economy_impact = -0.5
+	mobilisation_size = 0.03
+	tax_efficiency = 0.05
+	icon = 9
+}
+
+small_nation = {
+	trigger = {
+		total_pops = 1000000 #1 million POPs
+		NOT = {
+			total_pops = 3500000 #3.5 million POPs
+		}
+	}
+	leadership_modifier = -0.25
+	administrative_efficiency_modifier = 0.1
+	mobilisation_economy_impact = -0.2
+	mobilisation_size = 0.02
+	tax_efficiency = 0.02
+	icon = 9
+}
+
+medium_nation = {
+	trigger = {
+		total_pops = 3500000
+		NOT = {
+			total_pops = 7500000 #7.5 million POPs
+		}
+	}
+	leadership_modifier = -0.1
+	mobilisation_size = 0.01
+	icon = 9
+}
+
+large_nation = {
+	trigger = {
+		total_pops = 7500000
+		NOT = { total_pops = 30000000 } #30 million POPs
+		NOT = { civilized = no }		
+	}
+	icon = 9
+}
+
+empire = {
+	trigger = {
+		total_pops = 30000000
+		NOT = { total_pops = 60000000 } #60 million POPs
+		NOT = { civilized = no }			
+	}
+	leadership_modifier = 0.2
+	icon = 9
+}
+
+superpower = {
+	trigger = {
+		total_pops = 60000000
+		NOT = { civilized = no }		
+	}
+	leadership_modifier = 0.4
+	icon = 9
+}
