@@ -765,22 +765,20 @@ clipper_shipyard = {
 }
 
 
-fort = {      
-	type = fort
+province_selector = {
+	# Audax Validator "." Ignore_NEXT
+	type = province_selector
+	# Audax Validator "." Ignore_NEXT
 	goods_cost =
 	{
-		lumber = 100
-		cement = 100
-		explosives = 50
-		small_arms = 50
-		artillery = 40
 	}
-	time = 1080 
-	visibility = yes
-	onmap = yes
-	max_level = 6
+	time = 1
+	visibility = no
+	onmap = no
+	max_level = 2
 	province = yes
-	fort_level = 1
+	#one_per_state = yes
+	
 }
 
 naval_base = {    
@@ -790,12 +788,12 @@ naval_base = {
 	goods_cost =
 	{
 		timber = 50
-		lumber = 50
-		cement = 100
-		steel = 100
+		lumber = 500
+		cement = 200
+		steel = 300
 		machine_parts = 1
 	}
-	time = 1080
+	time = 720
 	naval_capacity = 1
 	capital = yes
 	onmap = yes
@@ -815,14 +813,14 @@ railroad = {
 	type = infrastructure
 	goods_cost =
 	{
-		timber = 100
-		cement = 100
-		steel = 100
+		timber = 400
+		cement = 50
+		steel = 150
 	}
-	time = 720
+	time = 365
 	visibility = yes
 	onmap = yes
-	max_level = 6
+	max_level = 7
 	province = yes
 	
 	infrastructure = 0.16
@@ -833,3 +831,99 @@ railroad = {
 	pop_build_factory = yes
 	spawn_railway_track = yes
 }
+
+fort = {      
+	type = fort
+	goods_cost =
+	{
+		lumber = 100
+		cement = 100
+		explosives = 50
+		small_arms = 50
+		artillery = 40
+		explosives = 100
+		small_arms = 100
+		artillery = 100
+	}
+	time = 365
+	visibility = yes
+	onmap = yes
+	max_level = 7
+	province = yes
+	fort_level = 1
+}
+
+	## University
+	university = {
+		# Audax Validator "." Ignore_NEXT
+		type = university
+		# Audax Validator "." Ignore_NEXT
+		cost = 30000
+		goods_cost =
+		{
+			paper = 1500		#5100
+			lumber = 1000		#2000
+			cement = 400		#6400
+			steel = 1000		#4700
+		}
+
+		time = 365
+		visibility = yes
+		onmap = no
+		max_level = 6
+		province = yes
+		one_per_state = yes
+		# Audax Validator "." Ignore_NEXT
+
+		research_points_modifier = 0.005
+	}
+
+	## Farmland
+	farmland = {
+		# Audax Validator "." Ignore_NEXT
+		type = farmland
+		# Audax Validator "." Ignore_NEXT
+		goods_cost =
+		{
+			market_goods = 800	#12000
+			fertilizer = 800	#8000
+			grain = 2000		#4600
+			fruit = 1000		#1800
+			cattle = 500		#1200
+			timber = 500		#1600
+		}
+
+		time = 365
+		visibility = yes
+		onmap = no
+		max_level = 50
+		province = yes
+		# Audax Validator "." Ignore_NEXT
+
+		farm_rgo_size = 1
+	}
+
+	## Mine
+	mines = {
+		# Audax Validator "." Ignore_NEXT
+		type = mines
+		# Audax Validator "." Ignore_NEXT
+		cost = 5000
+		goods_cost =
+		{
+			cement = 200		#3200
+			steel = 400			#1880
+			explosives = 100	#2000
+			lumber = 500		#1000
+			machine_parts = 100	#1460
+		}
+
+		time = 365
+		visibility = yes
+		onmap = no
+		max_level = 6
+		province = yes
+		# Audax Validator "." Ignore_NEXT
+
+		mine_rgo_size = 1
+	}
