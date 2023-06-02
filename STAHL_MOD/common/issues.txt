@@ -807,9 +807,6 @@ social_reforms = {
 			pension_level	= 2
 			global_immigrant_attract = 0.01
 			allow = { 
-				year = 1855
-				has_country_flag = medicine_invented
-				# Audax Validator "." Ignore_NEXT
 				always = no
 			}
 		}
@@ -820,9 +817,6 @@ social_reforms = {
 			pension_level	= 2
 			global_immigrant_attract = 0.02
 			allow = { 
-				year = 1870
-				has_country_flag = inorganic_chemistry_invented
-				# Audax Validator "." Ignore_NEXT
 				always = no
 			}
 		}
@@ -833,9 +827,6 @@ social_reforms = {
 			pension_level	= 2.5
 			global_immigrant_attract = 0.03
 			allow = {
-				year = 1885
-				has_country_flag = organic_chemistry_invented
-				# Audax Validator "." Ignore_NEXT
 				always = no
 			}
 		}
@@ -846,9 +837,6 @@ social_reforms = {
 			pension_level	= 3.5
 			global_immigrant_attract = 0.04
 			allow = { 
-				year = 1900
-				has_country_flag = electricity_invented
-				# Audax Validator "." Ignore_NEXT
 				always = no
 			}
 		}
@@ -859,9 +847,6 @@ social_reforms = {
 			pension_level	= 5
 			global_immigrant_attract = 0.05
 			allow = { 
-				year = 1915
-				has_country_flag = synthetic_polymers_invented
-				# Audax Validator "." Ignore_NEXT
 				always = no
 			}
 		}
@@ -983,6 +968,8 @@ economic_reforms = {
 		yes_admin_reform = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = { }
 			
 			on_execute = {
@@ -1015,6 +1002,8 @@ economic_reforms = {
 		yes_finance_reform = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 				NOT = { }
 				is_substate = no
@@ -1049,6 +1038,8 @@ economic_reforms = {
 		yes_monetary_reform = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = { }
 			
 			on_execute = {
@@ -1082,6 +1073,8 @@ economic_reforms = {
 		yes_education_reform = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = { }
 			
 			on_execute = {
@@ -1141,6 +1134,8 @@ economic_reforms = {
 		yes_research_reform = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = { }
 			
 			on_execute = {
@@ -1174,6 +1169,8 @@ economic_reforms = {
 		yes_transport_improv = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = { money = 2000 }
 			
 			on_execute = {
@@ -1249,6 +1246,8 @@ economic_reforms = {
 		yes_pre_indust = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = { money = 2000 }
 			
 			on_execute = {
@@ -1276,6 +1275,8 @@ economic_reforms = {
 		yes_pre_indust2 = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.2
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = { money = 4000 }
 			
 			on_execute = {
@@ -1311,6 +1312,8 @@ economic_reforms = {
 		yes_industrial_construction = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 				pre_indust = yes_pre_indust2
 				money = 7000 
@@ -1342,6 +1345,8 @@ economic_reforms = {
 		yes_industrial_construction2 = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.2
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 				money = 14000
 			}
@@ -1383,6 +1388,8 @@ military_reforms = {
 			min_military_spending = 0.05
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			allow = {
 			}
@@ -1416,6 +1423,8 @@ military_reforms = {
 		yes_foreign_weapons = {
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 
 			on_execute = {
 				effect = {
@@ -1447,6 +1456,8 @@ military_reforms = {
 		yes_military_constructions = {
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 			}
 			
@@ -1485,6 +1496,8 @@ military_reforms = {
 			leadership_modifier = 0.1
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 			}
 			
@@ -1518,6 +1531,8 @@ military_reforms = {
 			min_military_spending = 0.05
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			allow = {
 			}
 			
@@ -1550,6 +1565,8 @@ military_reforms = {
 		yes_foreign_naval_officers = {
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			allow = {
 			}
@@ -1583,6 +1600,8 @@ military_reforms = {
 		yes_naval_schools = {
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			allow = {
 			}
@@ -1684,6 +1703,8 @@ military_reforms = {
 		yes_foreign_artillery = {
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
+			core_pop_militancy_modifier = -0.01
+			core_pop_consciousness_modifier = -0.01
 			
 			on_execute = {
 				effect = {

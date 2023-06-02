@@ -9,6 +9,8 @@ country_event = {
 	
 	option = {
 		name = "noloc"
+		country_event = { id = 140400 days = 30 }
+		add_country_modifier = { name = mcl_happened_modifier duration = 33 }
 		
 		any_pop = {
 			money = 2000000
@@ -153,6 +155,134 @@ country_event = {
 				border_policy = closed_borders
 			}
 			political_reform = open_borders
+		}
+	}
+}
+
+# RELAUNCH MCL
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 140401
+	trigger = {
+		NOT = { has_country_modifier = mcl_happened_modifier }
+		tag = WBK
+	}
+	option = {
+		name = "noloc"
+		country_event = 140400
+	}
+}
+
+# RESTORE WBK
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 140402
+	trigger = {
+		owns = 3246
+		NOT = { tag = WBK }
+	}
+	option = {
+		name = "noloc"
+		3246 = { secede_province = WBK }
+	}
+}
+
+country_event = { # POPS LOSE LITERACY 
+	id = 140403
+	title = "noloc"
+	desc = "noloc"
+
+
+	trigger = {
+		tag = WBK
+		NOT = { has_country_modifier = ycl_happened_modifier }
+	}
+
+	
+	immediate = {
+		add_country_modifier = {
+			name = ycl_happened_modifier
+			duration = 362
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+				ai = no
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.1
+					NOT = { literacy = 0.2 }
+				}
+				literacy = -0.001
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.2
+					NOT = { literacy = 0.3 }
+				}
+				literacy = -0.002
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.3
+					NOT = { literacy = 0.4 }
+				}
+				literacy = -0.003
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.4
+					NOT = { literacy = 0.5 }
+				}
+				literacy = -0.004
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.5
+					NOT = { literacy = 0.6 }
+				}
+				literacy = -0.005
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.6
+					NOT = { literacy = 0.7 }
+				}
+				literacy = -0.006
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.7
+					NOT = { literacy = 0.8 }
+				}
+				literacy = -0.007
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.8
+					NOT = { literacy = 0.9 }
+				}
+				literacy = -0.008
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.9
+					NOT = { literacy = 0.9 }
+				}
+				literacy = -0.009
+			}
+			any_pop = {
+				limit = {
+					literacy = 0.99
+				}
+				literacy = -0.01
+			}
 		}
 	}
 }
