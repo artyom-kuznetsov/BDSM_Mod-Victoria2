@@ -1,0 +1,158 @@
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 140400
+	
+	trigger = {
+		tag = WBK
+	}
+	
+	option = {
+		name = "noloc"
+		
+		any_pop = {
+			money = 2000000
+		}
+		prestige = -100
+		
+		any_country = { # ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
+			limit = {
+				exists = yes
+				government = proletarian_dictatorship
+				NOT = { has_country_flag = is_communist_flag }
+			}
+			set_country_flag = is_communist_flag
+		}
+		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
+			limit = {
+				exists = yes
+				NOT = { government = proletarian_dictatorship }
+				has_country_flag = is_communist_flag
+			}
+			clr_country_flag = is_communist_flag
+		}
+		
+		any_country = { # ÔËÀÃ ÔÀØÈÑÒÎÂ
+			limit = {
+				exists = yes
+				government = fascist_dictatorship
+				NOT = { has_country_flag = is_fascist_flag }
+			}
+			set_country_flag = is_fascist_flag
+		}
+		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÔÀØÈÑÒÎÂ
+			limit = {
+				exists = yes
+				NOT = { government = fascist_dictatorship }
+				has_country_flag = is_fascist_flag
+			}
+			clr_country_flag = is_fascist_flag
+		}
+		
+		any_country = { # ÔËÀÃ ÒÎÒÀËÈÒÀĞÍÎÑÒÈ
+			limit = {
+				exists = yes
+				OR = {
+					AND = {
+						government = absolute_monarchy
+						revolution_n_counterrevolution = 1
+					}
+					government = proletarian_dictatorship
+					government = fascist_dictatorship
+				}
+				NOT = { has_country_flag = is_totalitarian_flag }
+			}
+			set_country_flag = is_totalitarian_flag
+		}
+		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÒÎÒÀËÈÒÀĞÍÎÑÒÈ
+			limit = {
+				exists = yes
+				NOT = { government = absolute_monarchy }
+				NOT = { government = proletarian_dictatorship }
+				NOT = { government = fascist_dictatorship }
+				
+				has_country_flag = is_totalitarian_flag
+			}
+			clr_country_flag = is_totalitarian_flag
+		}
+		
+		any_country = { # ÓÁÈÒÜ ÂÑÅÌ ÎÒÍÎØÅÍÈß Ñ ÌÈĞÁÀÍÊÎÌ
+			limit = {
+				exists = yes
+			}
+			relation = { who = THIS value = -400 }
+			
+			diplomatic_influence = {
+				who = WBK
+				value = -400
+			}
+		}
+		
+		any_country = { # ÓÁĞÀÒÜ ÁÀÃÎÂÀÍÍÛÅ ĞÀÁ ÑÒÅÉÒÛ ÅÑËÈ ĞÀÁÑÒÂÀ ÍÅÒ
+			limit = {
+				any_state = { is_slave = yes }
+				slavery = no_slavery
+			}
+			any_state = {
+				limit = {
+					is_slave = yes
+				}
+				is_slave = no
+			}
+		}
+		
+		any_country = { # ÓÁĞÀÒÜ ÃÎÑÒ ŞÍÈÒÛ
+			limit = {
+				exists = no
+                capital_scope = { NOT = { province_control_days = 120 } }
+                OR = {
+                    is_mobilised = yes
+                    total_amount_of_ships = 1
+                }
+			}
+			## Audax Validator "." Ignore_NEXT
+			annex_to = FROM
+		}
+		
+		any_country = { # ÔËÀÃ ÏÎÇÈÒÈÂÈÇÌÀ
+			limit = {
+				positivism = 1
+				exists = yes
+				NOT = { has_country_flag = has_positivism_flag }
+			}
+			set_country_flag = has_positivism_flag
+		}
+		any_country = { # ÔËÀÃ ÔÓÍÊÖÈÎÍÀËÈÇÌÀ
+			limit = {
+				functionalism = 1
+				exists = yes
+				NOT = { has_country_flag = has_functionalism_flag }
+			}
+			set_country_flag = has_functionalism_flag
+		}
+		any_country = { # ÔËÀÃ ÁÈÎËÎÃÈÇÌÀ
+			limit = {
+				biologism = 1
+				exists = yes
+				NOT = { has_country_flag = has_biologism_flag }
+			}
+			set_country_flag = has_biologism_flag
+		}
+		any_country = { # ÔËÀÃ ĞÅÂ È ÊÎÍÒĞĞÅÂ
+			limit = {
+				exists = yes
+				revolution_n_counterrevolution = 1
+				NOT = { has_country_flag = has_rev_n_counterrev_flag }
+			}
+			set_country_flag = has_rev_n_counterrev_flag
+		}
+		
+		any_country = { # ÎÒÊĞÛÒÜ ÃĞÀÍÈÖÛ Ó ÍÅ ÒÎÒÀËÈÒÀĞÍÛÕ
+			limit = {
+				NOT = { centralization = totalitarianism }
+				border_policy = closed_borders
+			}
+			political_reform = open_borders
+		}
+	}
+}

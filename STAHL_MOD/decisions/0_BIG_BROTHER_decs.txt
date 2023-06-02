@@ -1,0 +1,871 @@
+political_decisions = {
+	1836_setup_dec = {
+		potential = {
+			tag = WBK
+			NOT = { has_global_flag = 1836_setup_complete_flag }
+		}
+		allow = { }
+		effect = {
+			set_global_flag = 1836_setup_complete_flag
+			META_1 = {
+				limit = {
+					OR = {
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = grain
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = fruit
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = cattle
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = fish
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = wool
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = cotton
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = dye
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = tea_leaves
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = coffee_beans
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = silk
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = timber
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = tropical_wood
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = rubber
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = opium
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = tobacco
+					}
+				}
+				zbankers = {
+					pop_type = farmers
+				}
+			}
+			META_1 = {
+				limit = {
+					OR = {
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = coal
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = iron
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = sulphur
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = market_goods
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = precious_metal
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = oil
+					}
+				}
+				zbankers = {
+					pop_type = labourers
+				}
+			}
+			any_country = {
+				farmers = {
+					ideology = {
+						factor = 0.1
+						value = conservative
+					}
+				}
+				farmers = {
+					ideology = {
+						factor = 0.2
+						value = reactionary
+					}
+				}
+				farmers = {
+					ideology = {
+						factor = 0.2
+						value = liberal
+					}
+				}
+				labourers = {
+					ideology = {
+						factor = 0.2
+						value = conservative
+					}
+				}
+				labourers = {
+					ideology = {
+						factor = 0.2
+						value = reactionary
+					}
+				}
+				labourers = {
+					ideology = {
+						factor = 0.2
+						value = liberal
+					}
+				}
+			}
+			any_country = {
+				limit = {
+					OR = {
+						civilized = yes
+						civilization_progress = 0.05
+					}
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 300000
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 7
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 260000
+						NOT = { total_pops = 300000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 6
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 220000
+						NOT = { total_pops = 260000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 5
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 180000
+						NOT = { total_pops = 220000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 4
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 140000
+						NOT = { total_pops = 180000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 3
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 100000
+						NOT = { total_pops = 140000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 2
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 60000
+						NOT = { total_pops = 100000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 1
+				}
+			}
+			any_country = {
+				limit = {
+					civilized = no
+					NOT = { civilization_progress = 0.05 }
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1600000
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 20
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1520000
+						NOT = { total_pops = 1600000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 19
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1440000
+						NOT = { total_pops = 1520000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 18
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1360000
+						NOT = { total_pops = 1440000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 17
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1280000
+						NOT = { total_pops = 1360000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 16
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1200000
+						NOT = { total_pops = 1280000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 15
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1120000
+						NOT = { total_pops = 1200000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 14
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 1040000
+						NOT = { total_pops = 1120000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 13
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 960000
+						NOT = { total_pops = 1040000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 12
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 880000
+						NOT = { total_pops = 960000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 11
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 800000
+						NOT = { total_pops = 880000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 10
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 720000
+						NOT = { total_pops = 800000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 9
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 640000
+						NOT = { total_pops = 720000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 8
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 560000
+						NOT = { total_pops = 640000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 7
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 480000
+						NOT = { total_pops = 560000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 6
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 400000
+						NOT = { total_pops = 480000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 5
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 320000
+						NOT = { total_pops = 400000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 4
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 240000
+						NOT = { total_pops = 320000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 3
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 160000
+						NOT = { total_pops = 240000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 2
+				}
+				any_owned = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = fruit
+							trade_goods = cattle
+							trade_goods = fish
+							trade_goods = wool
+							trade_goods = cotton
+							trade_goods = dye
+							trade_goods = tea_leaves
+							trade_goods = coffee_beans
+							trade_goods = silk
+							trade_goods = timber
+							trade_goods = tropical_wood
+							trade_goods = rubber
+							trade_goods = opium
+							trade_goods = tobacco
+						}
+						total_pops = 80000
+						NOT = { total_pops = 160000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 1
+				}
+			}
+			any_pop = {
+				money = 2000000
+			}
+			any_country = {
+				treasury = 200000
+			}
+			any_country = {
+				limit = {
+					literacy = 0.1
+					NOT = { literacy = 0.2 }
+				}
+				political_reform = rudimentary_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.2
+					NOT = { literacy = 0.3 }
+				}
+				political_reform = very_low_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.3
+					NOT = { literacy = 0.4 }
+				}
+				political_reform = low_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.4
+					NOT = { literacy = 0.5 }
+				}
+				political_reform = basic_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.5
+					NOT = { literacy = 0.6 }
+				}
+				political_reform = moderate_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.6
+					NOT = { literacy = 0.7 }
+				}
+				political_reform = acceptable_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.7
+					NOT = { literacy = 0.8 }
+				}
+				political_reform = good_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.8
+					NOT = { literacy = 0.9 }
+				}
+				political_reform = very_good_rnd
+			}
+			any_country = {
+				limit = {
+					literacy = 0.9
+					NOT = { literacy = 0.99 }
+				}
+				political_reform = advanced_rnd
+			}
+			any_country = {
+				limit = { literacy = 0.99 }
+				political_reform = futuristic_rnd
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+}

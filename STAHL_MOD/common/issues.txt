@@ -522,6 +522,9 @@ political_reforms = {
 			administrative_efficiency_modifier = -0.05
 			diplomatic_points_modifier = -0.1
 			cb_generation_speed_modifier = -0.05
+			allow = {
+				NOT = { has_country_flag = is_totalitarian_flag }
+			}
 		}
 		confederalism = {
 			global_pop_consciousness_modifier = -0.02
@@ -531,6 +534,7 @@ political_reforms = {
 				NOT = {
 					number_of_states = 8
 				}
+				NOT = { has_country_flag = is_totalitarian_flag }
 			}
 		}
 		federalism = {
@@ -538,8 +542,9 @@ political_reforms = {
 			suppression_points_modifier = -0.1
 			global_assimilation_rate = 0.05
 			allow = {
-				has_country_flag = revolution_n_counterrevolution_invented
+				has_country_flag = has_rev_n_counterrev_flag
 				NOT = { has_country_flag = the_slavery_debate }
+				NOT = { has_country_flag = is_totalitarian_flag }
 			}
 		}
 		unitary = {
@@ -549,7 +554,8 @@ political_reforms = {
 			leadership_modifier = 0.1
 			cb_generation_speed_modifier = 0.1
 			allow = {
-				has_country_flag = revolution_n_counterrevolution_invented
+				has_country_flag = has_rev_n_counterrev_flag
+				NOT = { has_country_flag = is_totalitarian_flag }
 			}
 		}
 		totalitarianism = {
@@ -559,12 +565,7 @@ political_reforms = {
 			global_pop_consciousness_modifier = 0.02
 			global_pop_militancy_modifier = 0.01
 			allow = {
-				has_country_flag = revolution_n_counterrevolution_invented
-				OR = {
-					has_country_flag = absolute_monarchy_flag
-					has_country_flag = communist_dictatorship_flag
-					has_country_flag = fascist_dictatorship_flag
-				}
+				always = no
 			}
 		}
 	}
