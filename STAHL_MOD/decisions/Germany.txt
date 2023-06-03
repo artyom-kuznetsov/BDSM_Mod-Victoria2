@@ -11,6 +11,7 @@ political_decisions = {
 			exists = FRA
 			government = absolute_monarchy
 			owns = 570
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -54,6 +55,7 @@ political_decisions = {
 				tag = NGF
 			}
 			owns = 369
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -83,6 +85,8 @@ political_decisions = {
 			NOT = {
 				tech_school = prussian_tech_school
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = prussian_tech_school_access_flag }
 		}
 		
 		allow = {
@@ -104,6 +108,7 @@ political_decisions = {
 		
 		effect = {
 			tech_school = prussian_tech_school
+			set_country_flag = prussian_tech_school_access_flag
 			prestige = 5
 		}
 	}	
@@ -122,6 +127,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = watching_the_rhine
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			NOT = {
@@ -146,6 +152,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = niederwald_denkmal
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -173,6 +180,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = schwabing_encircled
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			expressionism = 1
@@ -191,6 +199,7 @@ political_decisions = {
 				has_country_flag = lippe_dispute_solved
 			}
 			exists = PRU
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -211,6 +220,7 @@ political_decisions = {
 				has_country_flag = lippe_dispute_solved
 			}
 			exists = PRU
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -233,6 +243,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = code_of_laws
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -260,6 +271,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = wir_wollen_unseren_alten_kaiser_wilhelm_wiederhaben
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -284,13 +296,11 @@ political_decisions = {
 			NOT = {
 				has_country_flag = has_questioned_heligoland
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
-			OR = {
-				is_greater_power = yes
-				invention = national_fraternity
-			}
+			is_greater_power = yes
 		}
 		
 		effect = {
@@ -312,6 +322,7 @@ political_decisions = {
 			NOT = {
 				has_global_flag = the_walhalla_is_built
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -341,6 +352,7 @@ political_decisions = {
 			NOT = {
 				vassal_of = ENG
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		effect = {
@@ -364,6 +376,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = von_moltke
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			army_decision_making = 1
@@ -398,6 +411,7 @@ political_decisions = {
 			NOT = {
 				has_global_flag = ruhr_boom_has_happened
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {

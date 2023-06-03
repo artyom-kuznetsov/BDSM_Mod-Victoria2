@@ -1,6 +1,7 @@
 political_decisions = {
 	abolish_serfdom = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = RUS
 			has_country_flag = serfdom_not_abolished
 			#government = absolute_monarchy
@@ -37,6 +38,7 @@ political_decisions = {
 	}
 	establish_the_sovnarkom = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = RUS
 			NOT = {
 				has_country_flag = big_brother_is_watching
@@ -63,6 +65,7 @@ political_decisions = {
 	
 	manifesto_on_unshakable_autocracy = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = RUS
 			government = absolute_monarchy
 			NOT = {
@@ -88,6 +91,7 @@ political_decisions = {
 	
 	promulgate_the_ems_ukaz = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = RUS
 			NOT = {
 				has_country_flag = ems_ukaz_dispatched
@@ -119,6 +123,7 @@ political_decisions = {
 
 	protect_eastern_christians = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = RUS
 			is_greater_power = yes
 			government = absolute_monarchy
@@ -166,6 +171,7 @@ political_decisions = {
 	
 	peking_convention = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = RUS
 			MCK = {
 					owns = 1082 }
@@ -200,13 +206,14 @@ political_decisions = {
 
 	russian_vladivostok = {
 		potential = {
-		tag = RUS
-		owns = 1085
-		owns = 1084
-		owns = 2617
-		owns = 1083
-        owns = 1082
-		NOT = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = RUS
+			owns = 1085
+			owns = 1084
+			owns = 2617
+			owns = 1083
+			owns = 1082
+			NOT = {
 				has_global_flag = russian_vladivostok
 			}
 		}

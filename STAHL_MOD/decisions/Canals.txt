@@ -1,15 +1,12 @@
 political_decisions = {
 	build_kiel_canal = {
-		news = yes
-		news_desc_long = "kiel_canal_NEWS_LONG"
-		news_desc_medium = "kiel_canal_NEWS_MEDIUM"
-		news_desc_short = "kiel_canal_NEWS_SHORT"
 		
 		potential = {
 			NOT = { is_canal_enabled = 1 }
 			owns = 369
 			is_greater_power = yes
 			mechanical_production = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			invention = machine_tools
@@ -31,16 +28,13 @@ political_decisions = {
 	}
 	
 	build_suez_canal = {
-		news = yes
-		news_desc_long = "suez_canal_NEWS_LONG"
-		news_desc_medium = "suez_canal_NEWS_MEDIUM"
-		news_desc_short = "suez_canal_NEWS_SHORT"
 		
 		picture = suezcanal
 		potential = {
 			NOT = { is_canal_enabled = 2 }
 			is_greater_power = yes
 			mechanical_production = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			OR = {
@@ -68,14 +62,11 @@ political_decisions = {
 	}
 
 	build_panama_canal = {
-		news = yes
-		news_desc_long = "panama_canal_NEWS_LONG"
-		news_desc_medium = "panama_canal_NEWS_MEDIUM"
-		news_desc_short = "panama_canal_NEWS_SHORT"
 		potential = {
 			NOT = { is_canal_enabled = 3 }
 			is_greater_power = yes
 			mechanical_production = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			OR = {

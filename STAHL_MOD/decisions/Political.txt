@@ -9,6 +9,7 @@ political_decisions = {
 					has_country_flag = prohibition_repealed
 				}
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			OR = {
@@ -41,6 +42,7 @@ political_decisions = {
 	}
 	abolish_prohibition = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			has_country_modifier = liquor_prohibition
 		}
 		allow = {
@@ -89,6 +91,7 @@ political_decisions = {
 	
 	enact_female_suffrage = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			year = 1870
 			civilized = yes
 			NOT = { has_country_modifier = female_suffrage }
@@ -133,6 +136,7 @@ political_decisions = {
 	}
 	the_meiji_restoration = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			civilized = no
 			tag = JAP
 			not = { has_country_modifier = meiji_restoration_boost }
@@ -153,6 +157,7 @@ political_decisions = {
 	
 	the_meiji_restoration2 = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			civilized = no
 			tag = JAP
 			not = { has_country_modifier = meiji_restoration_boost }
@@ -204,6 +209,7 @@ political_decisions = {
 	leave_soi = {
 		alert = no
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			part_of_sphere = yes
 			
 		}
@@ -248,12 +254,13 @@ political_decisions = {
 		alert = no
 			
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			can_nationalize = yes 
 		}
 		allow = {
 			NOT = { part_of_sphere = yes }
 		}
-		effect = {
+		effect = { # TODO EVENT TO CONFIRM NATIONALIZATION
 			nationalize = yes
 		}
 		

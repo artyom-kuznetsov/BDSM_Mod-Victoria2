@@ -1,6 +1,7 @@
 political_decisions = {
 	form_south_german_confederation = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			is_greater_power = yes
 			primary_culture = south_german
 			NOT = {
@@ -61,6 +62,7 @@ political_decisions = {
 	
 	austrian_form_south_german_confederation = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = AUS
 				tag = KUK
@@ -134,6 +136,7 @@ political_decisions = {
 	
 	form_north_german_confederation = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			is_greater_power = yes
 			primary_culture = north_german
 			NOT = {
@@ -190,6 +193,7 @@ political_decisions = {
 	
 	form_union_nation = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			culture_has_union_tag = yes
 			NOT = {
 				OR = {
@@ -242,11 +246,8 @@ political_decisions = {
 	}	
 		
 	form_germany = {
-		news = yes
-		news_desc_long = "form_germany_NEWS_LONG"
-		news_desc_medium = "form_germany_NEWS_MEDIUM"
-		news_desc_short = "form_germany_NEWS_SHORT"
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			is_culture_group = germanic
 			NOT = {
 				exists = GER
@@ -288,11 +289,8 @@ political_decisions = {
 		}
 	}
 	form_italy = {
-		news = yes
-		news_desc_long = "form_italy_NEWS_LONG"
-		news_desc_medium = "form_italy_NEWS_MEDIUM"
-		news_desc_short = "form_italy_NEWS_SHORT"
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			is_culture_group = italian
 			
 			NOT = {
@@ -335,11 +333,8 @@ political_decisions = {
 		}
 	}
 	form_scandinavia = {
-		news = yes
-		news_desc_long = "form_scandinavia_NEWS_LONG"
-		news_desc_medium = "form_scandinavia_NEWS_MEDIUM"
-		news_desc_short = "form_scandinavia_NEWS_SHORT"
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				is_culture_group = scandinavian
 				is_culture_group = bears
@@ -392,6 +387,7 @@ political_decisions = {
 	
 	concede_finland = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = SWE
 			NOT = {
 				has_country_flag = Conceded_Finland
@@ -431,6 +427,7 @@ political_decisions = {
 	
 	reichsland_elsass = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = PRU
 				tag = GER
@@ -465,6 +462,7 @@ political_decisions = {
 	
 	restore_alsace = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = FRA
 			has_global_flag = germany_has_renamed_elsass
 			owns = 410
@@ -493,6 +491,7 @@ political_decisions = {
 	
 	form_gran_colombia = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = ECU
 				tag = CLM
@@ -558,6 +557,7 @@ political_decisions = {
 
 unite_moldavia_wallachia = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = WAL
 				tag = MOL
@@ -609,6 +609,7 @@ unite_moldavia_wallachia = {
 
 	form_yugoslavia = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			is_culture_group = south_slavic
 			NOT = { exists = YUG }
 			NOT = { has_global_flag = yugoslavia_formed }
