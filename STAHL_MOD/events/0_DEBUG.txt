@@ -1,0 +1,42 @@
+
+country_event = { # MILITANCY CONSC
+	title = "noloc"
+	desc = "noloc"
+	id = 9550
+	is_triggered_only = yes
+	option = {
+		name = "noloc"
+		any_pop = {
+			militancy = 5
+			consciousness = 5
+		}
+	}
+}
+
+country_event = { # WAR EXHAUST
+	title = "noloc"
+	desc = "noloc"
+	id = 9551
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		war_exhaustion = 10
+	}
+}
+
+country_event = { # «¿√À”ÿ ¿
+	title = "noloc"
+	desc = "noloc"
+	id = 9552
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		country_event = 9550
+		country_event = 9551
+		country_event = 9552
+	}
+}
