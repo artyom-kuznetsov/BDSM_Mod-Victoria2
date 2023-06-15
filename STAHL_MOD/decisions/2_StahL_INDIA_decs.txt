@@ -1,7 +1,12 @@
 political_decisions = {
 	form_india = {
 		potential = {
-			NOT = { tag = PAN }
+			NOT = { 
+				OR = {
+					tag = PAN
+					tag = MGE
+				}
+			}
 			
 			NOT = { has_country_flag = open_money_transfers_flag }
 			is_culture_group = south_asian
