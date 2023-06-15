@@ -39,6 +39,8 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9551
 		country_event = 9552
 		country_event = 9553
+		country_event = 9554
+		country_event = 9555
 	}
 }
 
@@ -53,5 +55,43 @@ country_event = { # GERMANY
 		name = "noloc"
 		GER = { all_core = { secede_province = THIS } }
 		activate_technology = nationalism_n_imperialism
+		FRA_412 = {
+			secede_province = THIS
+		}
+		change_tag = GER
+	}
+}
+
+country_event = { # ITALY
+	title = "noloc"
+	desc = "noloc"
+	id = 9554
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		ITA = { all_core = { secede_province = THIS } }
+		activate_technology = nationalism_n_imperialism
+		activate_technology = state_n_government
+		AUS_729 = {
+			secede_province = THIS
+		}
+		change_tag = ITA
+	}
+}
+
+country_event = { # AUSTRIA-HUNGARY
+	title = "noloc"
+	desc = "noloc"
+	id = 9555
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		TUR_788 = { secede_province = THIS }
+		activate_technology = nationalism_n_imperialism
+		change_tag = KUK
 	}
 }
