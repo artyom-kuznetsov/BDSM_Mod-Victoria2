@@ -39,38 +39,38 @@
 
 # Order that CBs are executed in a peace treaty
 peace_order = { 
-add_to_sphere 
-take_from_sphere 
-status_quo 
-gunboat 
-conquest 
-civil_war 
-acquire_core_state 
-annex_core_country
-acquire_state 
-acquire_substate_region
-place_in_the_sun
-colonial_competition
-cut_down_to_size_boxer
-cut_down_to_size 
-free_peoples
-liberate_country
-release_puppet
-become_independent
-make_puppet
-dismantle_forts
-humiliate
-demand_concession_casus_belli
-establish_protectorate_casus_belli
-unification_humiliate_cb
-unification_release_puppet_cb
-unification_casus_belli
-unification_annex_casus_belli
-rude_boy
-annex
-install_communist_gov_cb
-uninstall_communist_gov_cb
-great_war_penalty_cb 
+	add_to_sphere 
+	take_from_sphere 
+	status_quo 
+	gunboat 
+	conquest 
+	civil_war 
+	acquire_core_state 
+	annex_core_country
+	acquire_state 
+	acquire_substate_region
+	place_in_the_sun
+	colonial_competition
+	cut_down_to_size_boxer
+	cut_down_to_size 
+	free_peoples
+	liberate_country
+	release_puppet
+	become_independent
+	make_puppet
+	dismantle_forts
+	humiliate
+	demand_concession_casus_belli
+	establish_protectorate_casus_belli
+	unification_humiliate_cb
+	unification_release_puppet_cb
+	unification_casus_belli
+	unification_annex_casus_belli
+	rude_boy
+	annex
+	install_communist_gov_cb
+	uninstall_communist_gov_cb
+	great_war_penalty_cb 
 }
 
 gunboat = {
@@ -400,6 +400,63 @@ acquire_core_state = {
 		}
 	}
 }
+
+
+acquire_all_cores = {
+	sprite_index = 5
+	is_triggered_only = yes
+	months = 12
+	constructing_cb = no
+	crisis = no
+
+	badboy_factor = 0
+	prestige_factor = 3
+	peace_cost_factor = 1
+	penalty_factor = 1
+	always = yes
+
+	break_truce_prestige_factor = 5
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 60
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	can_use = {
+
+		any_owned_province = { is_core = THIS }
+		any_owned_province = { NOT = { is_core = THIS } }
+
+		ai = yes 
+		NOT = { is_our_vassal = THIS }
+		NOT = { vassal_of = THIS }
+	}
+	
+	allowed_countries = {
+		FROM = { tag = THIS }
+	}
+
+	allowed_states = {
+		any_owned_province = { is_core = THIS }
+	}
+
+	all_allowed_states = yes
+	po_transfer_provinces = yes
+	
+	war_name = WAR_LIBERATE_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+
+}
+
 
 # Annex Core Country
 annex_core_country = {
