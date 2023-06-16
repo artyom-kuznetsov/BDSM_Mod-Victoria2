@@ -1040,12 +1040,19 @@ political_decisions = {
 		effect = {
 			any_country = {
 				limit = {
-					average_militancy = 4
+					OR = {
+						tag = AUS
+						tag = FRA
+						tag = PRU
+						tag = ENG
+					}
 				}
 				add_country_modifier = {
 					name = springtime_of_nations
-					duration = 365
+					duration = 1035
 				}
+				any_pop = { militancy = 5 }
+				any_pop = { consciousness = 5 }
 			}
 		}
 		
