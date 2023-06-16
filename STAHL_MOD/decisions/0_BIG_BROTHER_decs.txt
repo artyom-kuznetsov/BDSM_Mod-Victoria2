@@ -1024,4 +1024,30 @@ political_decisions = {
 		}
 		
 	}
+	1848_setup = {
+		potential = {
+			tag = WBK
+			MEX = { owns = 101 }
+			HON = { owns = 2195 }
+			POR = { owns = 2001 }
+			SAR = { exists = yes }
+			AUS = { exists = yes }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			any_country = {
+				limit = {
+					average_militancy = 4
+				}
+				add_country_modifier = {
+					name = springtime_of_nations
+					duration = 365
+				}
+			}
+		}
+		
+	}
 }
