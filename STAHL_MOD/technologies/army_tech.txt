@@ -407,7 +407,7 @@ muzzle_loaded_rifles = {
 	year = 1836
 	cost = 7200
 	unciv_military = yes
-	activate_unit = engineer
+	activate_unit = guard
 	
 	combat_width = -2
 
@@ -455,7 +455,6 @@ breech_loaded_rifles = {
 	cost = 10800
 
 	unciv_military = yes
-	activate_unit = guard
 
 	combat_width = -2
 	
@@ -685,13 +684,16 @@ bronze_muzzle_loaded_artillery = {
 	year = 1836
 	cost = 3600
 	unciv_military = yes
-	activate_unit = cuirassier
+	activate_unit = artillery
 	artillery = {
 		defence = 0.5
 	}
-	cuirassier = {
-		defence = 0.33
+	engineer = {
+		defence = 0.35
 	}
+	#cuirassier = {
+	#	defence = 0.33
+	#}
 	
 	ai_chance = {
 		factor = 1.05
@@ -731,14 +733,18 @@ iron_muzzle_loaded_artillery = {
 	year = 1836
 	cost = 7200
 	unciv_military = yes
+	activate_unit = engineer
 	artillery = {
 		defence = 0.5
 		supply_consumption = 0.05
 	}
-	cuirassier = {
-		defence = 0.33
-		supply_consumption = 0.05
+	engineer = {
+		defence = 0.35
 	}
+	#cuirassier = {
+	#	defence = 0.33
+	#	supply_consumption = 0.05
+	#}
 	
 	ai_chance = {
 		factor = 1.05
@@ -783,10 +789,13 @@ iron_breech_loaded_artillery = {
 		defence = 0.5
 		supply_consumption = 0.1
 	}
-	cuirassier = {
-		defence = 0.33
-		supply_consumption = 0.1
+	engineer = {
+		defence = 0.35
 	}
+	#cuirassier = {
+	#	defence = 0.33
+	#	supply_consumption = 0.1
+	#}
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -829,10 +838,13 @@ steel_breech_loaded_artillery = {
 		defence = 1
 		supply_consumption = 0.1
 	}
-	cuirassier = {
-		defence = 0.67
-		supply_consumption = 0.1
+	engineer = {
+		defence = 0.35
 	}
+	#cuirassier = {
+	#	defence = 0.67
+	#	supply_consumption = 0.1
+	#}
 
 	ai_chance = {
 		factor = 1.05
@@ -876,10 +888,13 @@ indirect_artillery_fire = {
 		defence = 1.5
 		supply_consumption = 0.15
 	}
-	cuirassier = {
-		defence = 1
-		supply_consumption = 0.15
+	engineer = {
+		defence = 0.35
 	}
+	#cuirassier = {
+	#	defence = 1
+	#	supply_consumption = 0.15
+	#}
 	
 	ai_chance = {
 		factor = 1.05
@@ -927,10 +942,13 @@ creeping_barrage = {
 		defence = 1.5
 		supply_consumption = 0.15
 	}
-	cuirassier = {
-		defence = 1
-		supply_consumption = 0.15
+	engineer = {
+		defence = 0.35
 	}
+	#cuirassier = {
+	#	defence = 1
+	#	supply_consumption = 0.15
+	#}
 	
 	ai_chance = {
 		factor = 1.05
@@ -975,11 +993,14 @@ railway_gun = {
 		defence = 1
 		supply_consumption = 0.5
 	}
-	cuirassier = {
-		attack = 0.67
-		defence = 0.67
-		supply_consumption = 0.25
+	engineer = {
+		defence = 0.35
 	}
+	#cuirassier = {
+	#	attack = 0.67
+	#	defence = 0.67
+	#	supply_consumption = 0.25
+	#}
 
 	ai_chance = {
 		factor = 1.05

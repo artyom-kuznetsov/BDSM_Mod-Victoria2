@@ -25,19 +25,19 @@ post_napoleonic_army_doctrine = {
 		}
 	}
 }
-dragoon_activation = {
-	limit = { post_napoleonic_thought = 1 }
-	chance = {
-		base = 100
-		modifier = {
-			factor = -2
-			not = { civilized = yes }
-		}
-	}
-	effect = {
-		activate_unit = dragoon
-	}
-}
+#dragoon_activation = {
+#	limit = { post_napoleonic_thought = 1 }
+#	chance = {
+#		base = 100
+#		modifier = {
+#			factor = -2
+#			not = { civilized = yes }
+#		}
+#	}
+#	effect = {
+#		activate_unit = dragoon
+#	}
+#}
 hussar_activation = {
 	limit = { post_napoleonic_thought = 1 }
 	chance = {
@@ -267,7 +267,7 @@ stormtrooper_training = {
 	}
 	effect = {
 		guard = {
-			attack = 4
+			attack = 3
 			defence = 1
 		}
 		engineer = {
@@ -276,7 +276,7 @@ stormtrooper_training = {
 			siege = 1				
 		}
 		infantry = {
-			attack = 3
+			attack = 2.5
 			defence = 1
 		}
 		dragoon = {
@@ -316,8 +316,8 @@ firepower_vs_mobility = {
 	}
 	effect = {
 		infantry = {
-			attack = 2
-			defence = 2
+			attack = 1.5
+			defence = 1.5
 		}
 		guard = {
 			attack = 2
@@ -417,7 +417,7 @@ flintlock_rifle_armament = {
 			supply_consumption = 0.10
 		}
 		dragoon = {
-			attack = 1
+			attack = 1.25
 			supply_consumption = 0.10
 		}
 		hussar = {
@@ -456,7 +456,7 @@ muzzle_loaded_rifle_armament = {
 			supply_consumption = 0.10
 		}
 		dragoon = {
-			attack = 1
+			attack = 1.25
 			supply_consumption = 0.10
 		}
 		hussar = {
@@ -487,7 +487,7 @@ breech_loaded_rifle_armament = {
 	}
 	effect = {
 		infantry = {
-			attack = 2
+			attack = 1.75
 			supply_consumption = 0.15
 		}
 		guard = {
@@ -530,7 +530,7 @@ machine_gun_armament = {
 	}
 	effect = {
 		infantry = {
-			defence = 4
+			defence = 3.5
 			supply_consumption = 0.20
 		}
 		guard = {
@@ -615,7 +615,7 @@ bolt_action_rifle_armament = {
 	}
 	effect = {
 		infantry = {
-			attack = 4
+			attack = 3.75
 			supply_consumption = 0.25
 		}
 		guard = {
@@ -627,7 +627,7 @@ bolt_action_rifle_armament = {
 			supply_consumption = 0.25
 		}
 		dragoon = {
-			attack = 3
+			attack = 3.5
 			supply_consumption = 0.25
 		}
 		hussar = {
@@ -774,6 +774,10 @@ synchronized_heavy_support = {
 			attack = 0.5
 			supply_consumption = 0.1
 		}
+		engineer = {
+			attack = 0.35
+			supply_consumption = 0.1
+		}
 		cuirassier = {
 			attack = 0.33
 			supply_consumption = 0.1
@@ -799,6 +803,10 @@ flexible_firepower = {
 			attack = 0.5
 			supply_consumption = 0.05
 		}
+		engineer = {
+			attack = 0.35
+			supply_consumption = 0.1
+		}
 		cuirassier = {
 			attack = 0.33
 			supply_consumption = 0.05
@@ -815,6 +823,10 @@ ammunition_area_effect_calculations = {
 		artillery = {
 			attack = 0.5
 			supply_consumption = 0.05
+		}
+		engineer = {
+			attack = 0.35
+			supply_consumption = 0.1
 		}
 		cuirassier = {
 			attack = 0.33
@@ -845,6 +857,10 @@ low_echelon_fire_support = {
 			attack = 1
 			supply_consumption = 0.10
 		}
+		engineer = {
+			attack = 0.65
+			supply_consumption = 0.1
+		}
 		cuirassier = {
 			attack = 0.67
 			supply_consumption = 0.10
@@ -866,6 +882,10 @@ counter_battery_fire = {
 			attack = 1.5
 			supply_consumption = 0.10
 		}
+		engineer = {
+			attack = 1
+			supply_consumption = 0.1
+		}
 		cuirassier = {
 			attack = 1
 			supply_consumption = 0.10
@@ -885,6 +905,10 @@ creeping_barrage = {
 	effect = {
 		artillery = {
 			attack = 1.5
+			supply_consumption = 0.15
+		}
+		engineer = {
+			attack = 1
 			supply_consumption = 0.15
 		}
 		cuirassier = {
@@ -911,6 +935,11 @@ grand_battle_plan_vs_superior_firepower = {
 		artillery = {
 			attack = 1
 			defence = 1
+			supply_consumption = 0.5
+		}
+		engineer = {
+			attack = 0.65
+			defence = 0.65
 			supply_consumption = 0.5
 		}
 		cuirassier = {
@@ -947,6 +976,7 @@ telegraph_coordination = {
 		}
 	}
 	effect = {
+		activate_unit = dragoon
 		army_base = {
 			default_organisation = 2.5
 			supply_consumption = 0.05
