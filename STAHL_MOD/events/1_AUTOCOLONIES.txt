@@ -15,7 +15,10 @@ country_event = {
 
     option = {
         name = "EVTOPTA57000"
-        ALD_1714 = { secede_province = THIS }
+        ALD_1714 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
     }
 }
 # TRIPOLI
@@ -35,7 +38,10 @@ country_event = {
 
     option = {
         name = "EVTOPTA57000"
-        TRI_1743 = { secede_province = THIS }
+        TRI_1743 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
     }
 }
 # CYRENAICA
@@ -55,7 +61,10 @@ country_event = {
 
     option = {
         name = "EVTOPTA57000"
-        TRI_1739 = { secede_province = THIS }
+        TRI_1739 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
     }
 }
 
@@ -76,7 +85,10 @@ country_event = {
 
     option = {
         name = "EVTOPTA57000"
-        EGY_1758 = { secede_province = THIS }
+        EGY_1758 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
     }
 }
 # DONGOLA
@@ -96,6 +108,81 @@ country_event = {
 
     option = {
         name = "EVTOPTA57000"
-        EGY_1834 = { secede_province = THIS }
+        EGY_1834 = {
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
+# NORTH BORNEO
+country_event = {
+    id = 57005
+    title = "EVTNAME57000"
+    desc = "EVTDESC57005"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        has_invention = colonial_negotiations
+        1397 = { empty = yes }
+        owns = 1396
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        BRU_1394 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
+# EAST BORNEO
+country_event = {
+    id = 57006
+    title = "EVTNAME57000"
+    desc = "EVTDESC57006"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        has_invention = colonial_negotiations
+        1425 = { empty = yes }
+        owns = 14
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        NET_1424 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
+# WEST BORNEO
+country_event = {
+    id = 57007
+    title = "EVTNAME57000"
+    desc = "EVTDESC57007"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        has_invention = colonial_negotiations
+        18 = { empty = yes }
+        owns = 1426
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        NET_1426 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
     }
 }
