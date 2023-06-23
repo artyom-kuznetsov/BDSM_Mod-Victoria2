@@ -186,3 +186,100 @@ country_event = {
         }
     }
 }
+
+# CHACO
+country_event = {
+    id = 57008
+    title = "EVTNAME57000"
+    desc = "EVTDESC57008"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        year = 1845
+        2377 = { empty = yes }
+        owns = 2371
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        ARG_2362 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
+# PATAGONIA
+country_event = {
+    id = 57009
+    title = "EVTNAME57000"
+    desc = "EVTDESC57009"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        has_invention = colonial_negotiations
+        2382 = { empty = yes }
+        owns = 2381
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        ARG_2363 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
+# BUENOS AIRES
+country_event = {
+    id = 57010
+    title = "EVTNAME57000"
+    desc = "EVTDESC57010"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        has_invention = colonial_negotiations
+        2353 = { empty = yes }
+        owns = 2350
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        ARG_2355 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
+# CHILE
+country_event = {
+    id = 57011
+    title = "EVTNAME57000"
+    desc = "EVTDESC57011"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        has_invention = colonial_negotiations
+        2333 = { empty = yes }
+        owns = 2332
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        CHL_2322 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
