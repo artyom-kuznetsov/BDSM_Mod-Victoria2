@@ -3,6 +3,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			NOT = { has_country_flag = hide_all_decs_flag }
+			year = 1837
 		}
 		allow = {
 			NOT = { has_country_modifier = force_reform_cooldown_modifier }
@@ -19,6 +20,43 @@ political_decisions = {
 				duration = 1825
 			}
 			money = -100000
+		}
+	}
+	
+	martial_law_activate_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = martial_law_flag }
+		}
+		allow = {
+			OR = {
+				war = yes
+				average_militancy = 3
+			}
+			NOT = { has_country_modifier = martial_law_cooldown_modifier }
+		}
+		effect = {
+			add_country_modifier = {
+				name = martial_law_modifier
+				duration = -1
+			}
+			set_country_flag = martial_law_flag
+		}
+	}
+	martial_law_deactivate_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			has_country_flag = martial_law_flag
+		}
+		allow = {
+		}
+		effect = {
+			add_country_modifier = {
+				name = martial_law_cooldown_modifier
+				duration = 1825
+			}
+			remove_country_modifier = martial_law_modifier
+			clr_country_flag = martial_law_flag
 		}
 	}
 

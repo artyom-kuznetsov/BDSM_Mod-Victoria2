@@ -90,7 +90,7 @@ ironclads = {
 	}
 }
 torpedo_boats = {
-	limit = { iron_steamers = 1 }
+	limit = { steamers = 1 }
 	chance = {
 		base = 10
 	}
@@ -121,16 +121,20 @@ submarines = {
 }
 #steel_steamers
 pre_dreadnought = {
-	limit = { steel_steamers = 1 }
+	limit = { steam_turbine_ships = 1 }
 	chance = {
 		base = 1
 		modifier = {
 			factor = 3
-			invention = ironclads
+			invention = protected_cruisers
 		}
 		modifier = {
-			factor = 2
+			factor = 1
 			cheap_steel = 1
+		}
+		modifier = {
+			factor = 3
+			advanced_metallurgy = 1
 		}
 	}
 	effect = {
@@ -156,7 +160,7 @@ protected_cruisers = {
 }
 #steam_turbine_ships
 dreadnoughts = {
-	limit = { steam_turbine_ships = 1 }
+	limit = { oil_driven_ships = 1 }
 	chance = {
 		base = 1
 		modifier = {
