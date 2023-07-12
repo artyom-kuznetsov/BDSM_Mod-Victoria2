@@ -1,0 +1,228 @@
+### MAIN MENU ###
+
+song = {
+	name = "thecoronation_titletheme.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+		}
+	}
+}
+
+### WAR / MOB ###
+song = {
+	name = "Paint it Black.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = no
+		}
+		modifier = {
+			factor = -1
+			is_mobilised  = no
+		}
+	}
+}
+song = {
+	name = "At Eternals Gate Jacob.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			is_mobilised  = no
+		}
+	}
+}
+song = {
+	name = "Plamenev - Noch pered boem.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			is_mobilised  = no
+		}
+		modifier = {
+			factor = 1
+			OR = {
+				is_culture_group = south_slavic
+				is_culture_group = east_slavic
+			}
+			is_mobilised  = yes
+		}
+	}
+}
+song = {
+	name = "was wollen wir trinken.mp3"
+	
+	chance = {
+		modifier = {
+			# Audax Validator "." Ignore_NEXT
+			factor = -1
+			is_mobilised  = no
+		}
+		modifier = {
+			factor = -1
+			NOT = {	primary_culture = north_german }
+		}
+	}
+}
+### WAR ###
+song = {
+	name = "kapitan_zalupa.mp3"
+	
+	chance = {
+		modifier = {
+			# Audax Validator "." Ignore_NEXT
+			factor = -1
+			NOT = {
+				war = yes
+				OR = {
+					tag = USA
+					tag = ENG
+					tag = JAP
+					total_amount_of_ships = 100
+				}
+			}
+		}
+	}
+}
+song = {
+	name = "Fun Mode - Ekho Voiny.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = no
+		}
+	}
+}
+song = {
+	name = "Arktida - Imperia.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = no
+		}
+		modifier = {
+			factor = -1
+			NOT = {
+				OR = {
+					government = absolute_monarchy
+					government = prussian_constitutionalism
+					government = hms_government
+				}
+			}
+		}
+	}
+}
+song = {
+	name = "Letov - Soldatami ne Rozhdayutsa.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = no
+		}
+	}
+}
+song = {
+	name = "America F Yeah.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = no
+		}
+		modifier = {
+			factor = -1
+			NOT = { tag = USA }
+		}
+		modifier = {
+			factor = 1
+			tag = USA
+			war = yes
+		}
+	}
+}
+## PEACE ###
+song = {
+	name = "Emigrate-Rainbow.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			NOT = {
+				year = 1890
+			}
+		}
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+song = {
+	name = "After Dark.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+song = {
+	name = "Durnoi Vkus - Plastinki.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+song = {
+	name = "Dima Bamberg - Feyerverk.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+song = {
+	name = "Mir Prognetsa Pod Nas.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+song = {
+	name = "Kino - Hochu Peremen.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+		modifier = {
+			factor = -1
+			OR = {
+				government = absolute_monarchy
+				government = prussian_constitutionalism
+				government = hms_government
+				government = fascist_dictatorship
+				government = presidential_dictatorship
+				government = bourgeois_dictatorship
+				government = colonial_company
+			}
+		}
+	}
+}
