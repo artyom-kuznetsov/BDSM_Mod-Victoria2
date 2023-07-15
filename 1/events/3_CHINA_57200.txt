@@ -1,0 +1,46 @@
+### BDSM v4.0 ###
+# China Breakup
+country_event = {
+	id = 57200
+	title = "ChinaBreakup_EvtName"
+	desc = "ChinaBreakup_EvtDesc"
+	picture = "opium_war"
+
+	trigger = {
+		tag = CHI
+		NOT = { 
+			has_global_flag = China_Breakup_flag
+		}
+		NOT = {
+			year = 1850
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+		modifier = {
+			factor = 0.5
+			year = 1840
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 2
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 3
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 2
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 3
+		}
+	}
+	
+	option = {
+		name = "ChinaBreakup_EvtOptA"
+	}
+}
