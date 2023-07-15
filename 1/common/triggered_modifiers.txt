@@ -293,7 +293,48 @@ adaptive_war_exhaust_6 = {
 
 # v4.0 Taxes
 very_low_taxes_poor_trmod = {
-	poor_tax = 0
-	NOT = { poor_tax = 0.01 }
+	trigger = {
+		poor_tax = 0
+		NOT = { poor_tax = 0.01 }
+	}
+	global_pop_militancy_modifier = -0.06
+	global_pop_consciousness_modifier = -0.1
+	rgo_throughput = 0.15
+	icon = 1
+}
+low_taxes_poor_trmod = {
+	trigger = {
+		poor_tax = 0.24
+		NOT = { poor_tax = 0.26 }
+	}
+	global_pop_militancy_modifier = -0.03
+	global_pop_consciousness_modifier = -0.04
+	rgo_throughput = 0.1
+	icon = 1
+}
+medium_taxes_poor_trmod = {
+	trigger = {
+		poor_tax = 0.49
+		NOT = { poor_tax = 0.51 }
+	}
+	global_pop_militancy_modifier = -0.01
+	global_pop_consciousness_modifier = -0.02
+	rgo_throughput = 0.05
+	icon = 1
+}
+high_taxes_poor_trmod = {
+	trigger = {
+		poor_tax = 0.74
+		NOT = { poor_tax = 0.76 }
+	}
+	icon = 1
+}
+very_high_taxes_poor_trmod = {
+	trigger = {
+		poor_tax = 0.74
+		NOT = { poor_tax = 0.76 }
+	}
+	global_pop_militancy_modifier = 0.01
+	global_pop_consciousness_modifier = 0.02
 	icon = 1
 }
