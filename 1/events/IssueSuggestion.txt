@@ -94,66 +94,6 @@ country_event = {
 	}
 }
 
-#The Costs of Health
-country_event = {
-	id = 3001
-	title = "EVTNAME3001"
-	desc = "EVTDESC3001"
-	picture = "Hospital"
-	
-	trigger = {
-		civilized = yes
-		health_care = acceptable_health_care
-		conservative = 0.2
-	}
-	
-	mean_time_to_happen = {
-		months = 800 
-		modifier = {
-			factor = 0.9
-			conservative = 0.3
-		}
-		
-		modifier = {
-			factor = 1.4
-			average_militancy = 5
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA3001"
-		social_reform = low_health_care
-		poor_strata = {
-			militancy = 3
-		}
-		middle_strata = {
-			militancy = 2
-		}
-		ai_chance = {
-			factor = 0
-		}		
-	}
-	
-	option = {
-		name = "EVTOPTB3001"
-		upper_house = {
-			ideology = conservative
-			value = 0.1
-		}
-		poor_strata = {
-			militancy = 1
-		}
-	}
-	
-	option = {
-		name = "EVTOPTC3001"
-		scaled_militancy = {
-			ideology = conservative
-			factor = 2
-		}
-	}
-}
-
 #The Great Escape
 country_event = {
 	id = 3002
@@ -387,64 +327,6 @@ country_event = {
 					name = government_sanitarium
 					duration = 3650
 				}
-			}
-		}
-	}
-}
-
-#Dental Care Bill
-country_event = {
-	id = 3006
-	title = "EVTNAME3006"
-	desc = "EVTDESC3006"
-	picture = "Dental"
-	
-	trigger = {
-		health_care = good_health_care
-		civilized = yes
-		NOT = {
-			ruling_party_ideology = conservative
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 800 # Common
-		
-		modifier = {
-			factor = 0.9
-			social_reform_want = 0.1
-		}
-		
-		modifier = {
-			factor = 1.5
-			NOT = {
-				upper_house = {
-					ideology = conservative
-					value = 0.4
-				}
-			}
-		} 
-	}
-
-	option = {
-		name = "EVTOPTA3006"
-		social_reform = acceptable_health_care
-		poor_strata = {
-			consciousness = 1
-			militancy = 1
-		}
-		rich_strata = {
-			militancy = -2
-			consciousness = 1
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB3006"
-		any_pop = {
-			scaled_consciousness = {
-				ideology = conservative
-				factor = 3
 			}
 		}
 	}

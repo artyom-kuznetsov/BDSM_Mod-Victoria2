@@ -401,50 +401,6 @@ country_event = {
 	}
 }
 
-country_event = {
-	id = 18100
-	title = "EVTNAME18100"
-	desc = "EVTDESC18100"
-	picture = "Upperhouse"
-	
-	trigger = {
-		is_greater_power = yes
-		social_reform_want = 0.15
-		health_care = no_health_care
-		upper_house = {
-			ideology = liberal
-			value = 0.3
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 200
-	}
-	
-	option = {
-		name = "EVTOPTA18100"
-		any_pop = {
-			dominant_issue = {
-				value = trinket_health_care 
-				factor = 0.2
-			}
-			militancy = 1
-		}
-	}
-	option = {
-		name = "EVTOPTB18100"
-		social_reform = trinket_health_care
-		scaled_militancy = {
-			ideology = conservative
-			factor = 4
-		}
-		scaled_militancy = {
-			ideology = liberal
-			factor = 3
-		}
-			
-	}
-}
 
 country_event = {
 	id = 18110
