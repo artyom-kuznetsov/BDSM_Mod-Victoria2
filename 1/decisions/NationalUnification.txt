@@ -134,62 +134,6 @@ political_decisions = {
 		}
 	}	
 	
-	form_north_german_confederation = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			is_greater_power = yes
-			primary_culture = north_german
-			NOT = {
-				exists = GER
-				exists = NGF
-			}
-		}	
-		allow = {
-			war = no
-			GER = {
-				all_core = {
-					OR = {
-						OR = {
-							owned_by = THIS
-							owner = {
-								in_sphere = THIS
-							}
-						}
-						NOT = {
-							culture = north_german
-						}
-					}
-				}
-			}
-		}
-		
-		effect = {
-			prestige = 15
-			any_country = {
-				limit = {
-					OR = {
-						primary_culture = north_german
-						tag = SCH 
-					}
-					in_sphere = THIS
-					NOT = {
-						tag = THIS
-					}
-				}
-				annex_to = THIS
-			}
-			any_owned = {
-				limit = {
-					is_core = GER
-				}
-				add_core = NGF
-			}			
-			change_tag = NGF
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	
 	form_union_nation = {
 		potential = {
@@ -244,50 +188,6 @@ political_decisions = {
 			factor = 1
 		}
 	}	
-		
-	form_germany = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			is_culture_group = germanic
-			NOT = {
-				exists = GER
-				tag = ISR
-			}
-		}
-		
-		allow = {
-			is_greater_power = yes
-			prestige = 45
-			war = no
-			GER = {
-				all_core = {
-					OR = {
-						owned_by = THIS
-						owner = {
-							in_sphere = THIS
-						}
-					}
-				}
-			}
-		}
-		
-		effect = {
-			prestige = 20
-			change_tag = GER
-			add_accepted_culture = north_german
-			add_accepted_culture = south_german
-			any_country = {
-				limit = {
-					is_culture_group = germanic
-					in_sphere = THIS
-				}
-				country_event = { id=11101 days=0 }
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	form_italy = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }

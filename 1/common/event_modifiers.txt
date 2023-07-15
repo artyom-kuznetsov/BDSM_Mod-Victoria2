@@ -2,20 +2,46 @@
 # scriptable and usable for event-system below.
 ##################################################################################################
 
+#####	CANALS   #####
+	kiel_canal_in_progress_modifier = {
+		icon = 19
+	}
+	suez_canal_in_progress_modifier = {
+		icon = 19
+	}
+	panama_canal_in_progress_modifier = {
+		icon = 19
+	}
+	controls_suez_canal = {
+		tax_efficiency = 0.01
+		prestige = 0.1
+		icon = 27
+	}
+	controls_panama_canal = {
+		tax_efficiency = 0.01
+		prestige = 0.1
+		icon = 27
+	}
+	controls_kiel_canal = {
+		naval_organisation = 0.1
+		prestige = 0.05
+		icon = 27
+	}
+
 
 #####	CHINA TREATY PORTS EXPLOITED   #####
 # MACAU #
 	macau_exploitation_modifier = {
 		tax_efficiency = 0.01
 		research_points = 0.05
-		prestige = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
 	macau_exploitation_modifier_china = {
 		global_pop_militancy_modifier = 0.01
 		global_pop_consciousness_modifier = 0.01
-		prestige = -0.05
+		prestige = -0.02
 		icon = 24
 	}
 	
@@ -23,13 +49,13 @@
 	hongkong_exploitation_modifier = {
 		tax_efficiency = 0.01
 		factory_output = 0.04
-		prestige = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
 	hongkong_exploitation_modifier_china = {
 		tax_efficiency = -0.01
-		prestige = -0.05
+		prestige = -0.02
 		icon = 24
 	}
 	
@@ -37,7 +63,7 @@
 	shanghai_exploitation_modifier = {
 		tax_efficiency = 0.01
 		research_points = 0.05
-		prestige = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
@@ -52,7 +78,7 @@
 	tsindao_exploitation_modifier = {
 		tax_efficiency = 0.01
 		factory_output = 0.04
-		prestige = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
@@ -65,84 +91,92 @@
 # WEI HAI WEI #
 	weihaiwei_exploitation_modifier = {
 		tax_efficiency = 0.01
-		RGO_output = 0.05
-		prestige = 0.05
+		rgo_output = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
 	weihaiwei_exploitation_modifier_china = {
-		RGO_output = -0.05
-		prestige = -0.05
+		rgo_output = -0.05
+		prestige = -0.02
 		icon = 24
 	}
 	
 # PORT ARTHUR #
 	arthur_exploitation_modifier = {
 		tax_efficiency = 0.01
-		RGO_output = 0.05
-		prestige = 0.05
+		rgo_output = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
 	arthur_exploitation_modifier_china = {
-		RGO_output = -0.05
-		prestige = -0.05
+		rgo_output = -0.05
+		prestige = -0.02
 		icon = 24
 	}
 	
 # TIENTSIN #
 	tientsin_exploitation_modifier = {
 		badboy = -0.02
-		prestige = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
 	tientsin_exploitation_modifier_china = {
 		badboy = 0.02
-		prestige = -0.05
+		prestige = -0.02
 		icon = 24
 	}
 	
 # GUANJOUWAN #
 	guangjou_exploitation_modifier = {
 		unit_start_experience = 3
-		prestige = 0.05
+		prestige = 0.02
 		icon = 23
 	}
 	
 	guangjou_exploitation_modifier_china = {
 		unit_start_experience = -3
-		prestige = -0.05
+		prestige = -0.02
 		icon = 24
 	}
 	
 
 ### ^^^ CHINA TREATY PORTS EXPLOITED ^^^ ###
 
-mobilization_cooldown = {
-	mobilisation_size = -0.2
-	icon = 17
-}
+#####	   # GENERIC #		#####
 
-martial_law_modifier = {
-	global_pop_consciousness_modifier = -0.1
-	global_pop_militancy_modifier = -0.2
-	tax_efficiency = -0.04
-	max_tariff = -0.1
-	icon = 15
-}
+	mobilization_cooldown = {
+		mobilisation_size = -0.2
+		icon = 20
+	}
+	
+	military_budget_change_cooldown = {
+		icon = 20
+	}
+	
+	force_reform_cooldown_modifier = {
+		icon = 20
+	}
+	
+	martial_law_cooldown_modifier = {
+		icon = 20
+	}
+	
+	force_reform_modifier = {
+		icon = 19
+		global_pop_consciousness_modifier = 0.5
+	}
 
-force_reform_modifier = {
-	icon = 19
-	global_pop_consciousness_modifier = 0.5
-}
-
-force_reform_cooldown_modifier = {
-	icon = 20
-}
-martial_law_cooldown_modifier = {
-	icon = 20
-}
+	martial_law_modifier = {
+		global_pop_consciousness_modifier = -0.1
+		global_pop_militancy_modifier = -0.2
+		tax_efficiency = -0.04
+		max_tariff = -0.1
+		icon = 15
+	}
+##### ^^^ GENERIC ^^^ #####
 
 mcl_happened_modifier = {
 	icon = 19
@@ -191,7 +225,7 @@ global_liberal_agitation = {
 }
 
 potato_blight = {
-	population_growth = -0.02
+	population_growth = -0.01
 	pop_militancy_modifier = 0.01
 	icon = 20
 }
@@ -202,12 +236,12 @@ anti_jacobin_tract = {
 }
 
 cholera_epidemic_small = {
-	population_growth = -0.01
+	population_growth = -0.005
 	icon = 20
 }
 
 cholera_epidemic_big = {
-	population_growth = -0.02
+	population_growth = -0.01
 	icon = 20
 }
 

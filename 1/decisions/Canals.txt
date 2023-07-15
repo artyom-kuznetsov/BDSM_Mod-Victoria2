@@ -7,16 +7,21 @@ political_decisions = {
 			is_greater_power = yes
 			mechanical_production = 1
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = kiel_canal_in_progress_modifier }
 		}
 		allow = {
 			invention = machine_tools
 			invention = nitroglycerin
 			iron_steamers = 1
+			money = 500000
 		}
 		effect = {
-			enable_canal = 1
-			369 = { set_province_flag = kiel_canal }
-			prestige = 5
+			add_country_modifier = {
+				name = kiel_canal_in_progress_modifier
+				duration = 3650
+			}
+			set_country_flag = kiel_canal_flag
+			money = -500000
 		}
 		ai_will_do = {
 			factor = 1
@@ -32,25 +37,28 @@ political_decisions = {
 		picture = suezcanal
 		potential = {
 			NOT = { is_canal_enabled = 2 }
-			is_greater_power = yes
 			mechanical_production = 1
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			OR = {
-				1755 = { owner = { in_sphere = THIS } }
+				1755 = { owner = { in_sphere = THIS is_vassal_of = THIS } }
 				owns = 1755
 			}
 			invention = machine_tools
 			invention = nitroglycerin		
 			iron_steamers = 1
+			money = 1500000
 		}
 		effect = {
 			1755 = { secede_province = THIS }
-			enable_canal = 2
-			1755 = { set_province_flag = suez_canal }
-			prestige = 10
 			set_global_flag = suez_canal_built
+			money = -1500000
+			set_country_flag = suez_canal_flag
+			add_country_modifier = {
+				name = suez_canal_in_progress_modifier
+				duration = 3650
+			}
 		}
 		ai_will_do = {
 			factor = 1
@@ -64,25 +72,23 @@ political_decisions = {
 	build_panama_canal = {
 		potential = {
 			NOT = { is_canal_enabled = 3 }
-			is_greater_power = yes
 			mechanical_production = 1
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			OR = {
-				1723 = { owner = { in_sphere = THIS } }
+				1723 = { owner = { in_sphere = THIS is_vassal_of = THIS } }
 				owns = 1723
 			}
 			invention = machine_tools
 			invention = nitroglycerin
 			iron_steamers = 1
 			invention = prophylaxis_against_malaria
+			money = 2000000
 		}
 		effect = {
 			1723 = { secede_province = THIS }
-			enable_canal = 3
-			1723 = { set_province_flag = panama_canal }
-			prestige = 10
+			money = -2000000
 		}
 		ai_will_do = {
 			factor = 1

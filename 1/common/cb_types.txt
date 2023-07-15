@@ -61,6 +61,7 @@ peace_order = {
 	make_puppet
 	dismantle_forts
 	humiliate
+	demand_reparations
 	demand_concession_casus_belli
 	establish_protectorate_casus_belli
 	unification_humiliate_cb
@@ -72,6 +73,7 @@ peace_order = {
 	install_communist_gov_cb
 	uninstall_communist_gov_cb
 	great_war_penalty_cb 
+	negotiated_transfer
 }
 
 gunboat = {
@@ -148,6 +150,46 @@ status_quo = {
 	
 	war_name = WAR_NAME
 }
+
+war_for_mil_access = {
+	sprite_index = 17
+	is_triggered_only = yes
+	months = 12
+
+	badboy_factor = 0.3
+	prestige_factor = 0
+	peace_cost_factor = 1
+	penalty_factor = 1
+	construction_speed = 4
+	
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 1
+	break_truce_militancy_factor = 1
+	truce_months = 24
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+	
+	po_add_to_sphere
+
+	#tws_battle_factor = 2.0
+	
+	war_name = WAR_FOR_MIL_ACCESS
+
+	can_use = {
+		NOT = { is_our_vassal = THIS }
+		THIS = { war = yes ai = no }
+	}	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+}
+
 
 # Conquest
 conquest = {
@@ -654,7 +696,7 @@ acquire_state = {
 	months = 12
 	construction_speed = 0.5
 	
-	badboy_factor = 2.2
+	badboy_factor = 2
 	prestige_factor = 2
 	peace_cost_factor = 1
 	penalty_factor = 1
@@ -729,7 +771,7 @@ acquire_capital = {
 	months = 12
 	construction_speed = 0.5
 	
-	badboy_factor = 2.5
+	badboy_factor = 3
 	prestige_factor = 2
 	peace_cost_factor = 1
 	penalty_factor = 1
@@ -1385,6 +1427,42 @@ humiliate = {
 	}
 }
 
+demand_reparations = {
+	sprite_index = 8
+	is_triggered_only = yes
+	months = 12
+	
+	badboy_factor = 0.5
+	prestige_factor = 1
+	peace_cost_factor = 15
+	penalty_factor = 1
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 1
+	break_truce_militancy_factor = 1
+	truce_months = 0
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	po_reparations = yes
+
+	war_name = WAR_NAME
+	
+	can_use = {
+		NOT = { is_our_vassal = THIS }
+		is_disarmed = no
+	}
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+}
 # Demand Concession
 demand_concession_casus_belli = {
 	sprite_index = 7
@@ -1908,7 +1986,6 @@ great_war_penalty_cb = {
 	
 	constructing_cb = no
 	
-	great_war_obligatory = yes
 	
 	badboy_factor = 1.3
 	prestige_factor = 1.8
@@ -1943,3 +2020,52 @@ great_war_penalty_cb = {
 	}
 }
 
+negotiated_transfer = {
+	sprite_index = 13
+	is_triggered_only = yes
+	months = 1
+	construction_speed = 2.0
+	crisis = no
+	
+	badboy_factor = 0.2
+	prestige_factor = 0
+	peace_cost_factor = 0
+	penalty_factor = 0
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 0
+	
+	good_relation_prestige_factor = 0
+	good_relation_infamy_factor = 0
+	good_relation_militancy_factor = 0
+
+	can_use = {
+		NOT = { is_our_vassal = THIS }
+		ai = no
+		THIS = { ai = no } 
+		any_owned_province = {
+			not = { is_core = THIS }
+			is_colonial = no
+		}
+		is_independent = yes
+	}
+	
+	allowed_states = {
+		not = { any_owned_province = { is_capital = yes } }
+	}
+
+
+	po_demand_state = yes
+	
+	war_name = WAR_TAKE_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+}
