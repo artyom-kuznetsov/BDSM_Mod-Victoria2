@@ -1,0 +1,741 @@
+### BDSM v4.0 ###
+# China Breakup
+country_event = {
+	id = 57100
+	title = "ChinaBreakup_EvtName"
+	desc = "ChinaBreakup_EvtDesc"
+	picture = "opium_war"
+
+	trigger = {
+		tag = CHI
+		NOT = { 
+			has_global_flag = China_Breakup_flag
+		}
+		NOT = {
+			year = 1850
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 36
+		modifier = {
+			factor = 0.5
+			year = 1840
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 3
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 3
+		}
+		modifier = {
+			factor = 0.5
+			average_consciousness = 4
+		}
+	}
+	
+	option = {
+		name = "ChinaBreakup_EvtName"
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ Ã¿ ¿Œ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57101
+	title = "TreatyPort_macau_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		1498 = { # MACAU
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = macau_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = macau_exploitation_modifier
+			duration = -1
+		}
+		1493 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57103
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ Ã¿ ¿Œ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57102
+	title = "TreatyPort_macau_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = macau_exploitation_modifier
+		OR = {
+			NOT = { 
+				1498 = { controlled_by = THIS }
+			}
+			1493 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = macau_exploitation_modifier
+		any_country = {
+			remove_country_modifier = macau_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ Ã¿ ¿Œ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57103
+	title = "TreatyPort_macau_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = macau_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ √ŒÕ ŒÕ√¿ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57104
+	title = "TreatyPort_hongkong_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		1496 = { # MACAU
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = hongkong_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = hongkong_exploitation_modifier
+			duration = -1
+		}
+		1493 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57106
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ √ŒÕ ŒÕ√¿ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57105
+	title = "TreatyPort_hongkong_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = hongkong_exploitation_modifier
+		OR = {
+			NOT = { 
+				1496 = { controlled_by = THIS }
+			}
+			1493 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = hongkong_exploitation_modifier
+		any_country = {
+			remove_country_modifier = hongkong_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ √ŒÕ ŒÕ√¿ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57106
+	title = "TreatyPort_hongkong_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = hongkong_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ÿ¿Õ’¿ﬂ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57107
+	title = "TreatyPort_shanghai_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		1538 = { # MACAU
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = shanghai_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = shanghai_exploitation_modifier
+			duration = -1
+		}
+		1539 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57109
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ÿ¿Õ’¿ﬂ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57108
+	title = "TreatyPort_shanghai_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = shanghai_exploitation_modifier
+		OR = {
+			NOT = { 
+				1538 = { controlled_by = THIS }
+			}
+			1539 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = shanghai_exploitation_modifier
+		any_country = {
+			remove_country_modifier = shanghai_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ÿ¿Õ’¿ﬂ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57109
+	title = "TreatyPort_shanghai_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = shanghai_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
+# › —œÀ”¿“¿÷»ﬂ ÷»Õƒ¿Œ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57110
+	title = "TreatyPort_tsindao_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		1566 = { # MACAU
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = tsindao_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = tsindao_exploitation_modifier
+			duration = -1
+		}
+		1565 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57112
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ÷»Õƒ¿Œ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57111
+	title = "TreatyPort_tsindao_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = tsindao_exploitation_modifier
+		OR = {
+			NOT = { 
+				1566 = { controlled_by = THIS }
+			}
+			1565 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = tsindao_exploitation_modifier
+		any_country = {
+			remove_country_modifier = tsindao_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ÷»Õƒ¿Œ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57112
+	title = "TreatyPort_tsindao_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = tsindao_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ¬›…-’¿…-¬›ﬂ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57113
+	title = "TreatyPort_weihaiwei_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		1569 = { # MACAU
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = weihaiwei_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = weihaiwei_exploitation_modifier
+			duration = -1
+		}
+		1565 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57115
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ¬›…-’¿…-¬›ﬂ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57114
+	title = "TreatyPort_weihaiwei_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = weihaiwei_exploitation_modifier
+		OR = {
+			NOT = { 
+				1569 = { controlled_by = THIS }
+			}
+			1565 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = weihaiwei_exploitation_modifier
+		any_country = {
+			remove_country_modifier = weihaiwei_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ ¬›…-’¿…-¬›ﬂ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57115
+	title = "TreatyPort_weihaiwei_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = weihaiwei_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ œŒ–“-¿–“”–¿ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57116
+	title = "TreatyPort_arthur_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		1481 = { # PORT ARTHUR
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = arthur_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = arthur_exploitation_modifier
+			duration = -1
+		}
+		1479 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57118
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ œŒ–“-¿–“”–¿ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57117
+	title = "TreatyPort_arthur_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = arthur_exploitation_modifier
+		OR = {
+			NOT = { 
+				1481 = { controlled_by = THIS }
+			}
+			1479 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = arthur_exploitation_modifier
+		any_country = {
+			remove_country_modifier = arthur_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ œŒ–“-¿–“”–¿ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57118
+	title = "TreatyPort_arthur_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = arthur_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ “≈Õ÷»Õ¿ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57119
+	title = "TreatyPort_tientsin_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		2659 = { # PORT ARTHUR
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = tientsin_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = tientsin_exploitation_modifier
+			duration = -1
+		}
+		1617 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57121
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ “≈Õ÷»Õ¿ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57120
+	title = "TreatyPort_tientsin_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = tientsin_exploitation_modifier
+		OR = {
+			NOT = { 
+				2659 = { controlled_by = THIS }
+			}
+			1617 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = tientsin_exploitation_modifier
+		any_country = {
+			remove_country_modifier = tientsin_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ “≈Õ÷»Õ¿ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57121
+	title = "TreatyPort_tientsin_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = tientsin_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ √”¿Õ◊∆Œ”¬¿Õﬂ Õ¿◊¿À¿—‹
+country_event = { 
+	id = 57122
+	title = "TreatyPort_guangjou_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		NOT = { 
+			is_culture_group = east_asian
+		}
+		2615 = { # PORT ARTHUR
+			controlled_by = THIS
+		}
+		NOT = { 
+			has_country_modifier = guangjou_exploitation_modifier
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_EvtOptA"
+		add_country_modifier = {
+			name = guangjou_exploitation_modifier
+			duration = -1
+		}
+		1495 = {
+			owner = {
+				limit = {
+					is_culture_group = east_asian
+				}
+				country_event = 57124
+			}
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ √”¿Õ◊∆Œ”¬¿Õﬂ œ–≈ –¿Ÿ≈Õ¿
+country_event = { 
+	id = 57123
+	title = "TreatyPort_guangjou_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
+	picture = "opium_war"
+	
+	trigger = {
+		has_country_modifier = guangjou_exploitation_modifier
+		OR = {
+			NOT = { 
+				2615 = { controlled_by = THIS }
+			}
+			1495 = { 
+				owner = {
+					war_with = THIS
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_nomore_EvtOptA"
+		remove_country_modifier = guangjou_exploitation_modifier
+		any_country = {
+			remove_country_modifier = guangjou_exploitation_modifier_china
+		}
+	}
+}
+
+# › —œÀ”¿“¿÷»ﬂ √”¿Õ◊∆Œ”¬¿Õﬂ ”¬≈ƒŒÃÀ≈Õ»≈  »“¿ﬂ
+country_event = {
+	id = 57124
+	title = "TreatyPort_guangjou_exploited_EvtName"
+	desc = "TreatyPort_macau_exploited_china_EvtName"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		add_country_modifier = {
+			name = guangjou_exploitation_modifier_china
+			duration = -1
+		}
+	}
+	
+	option = {
+		name = "TreatyPort_macau_exploited_china_EvtOptA"
+	}
+}
