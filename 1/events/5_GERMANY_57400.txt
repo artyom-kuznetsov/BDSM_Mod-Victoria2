@@ -1,0 +1,25 @@
+country_event = { # SOUTH GERMANS ANNEX TO GER
+	title = "noloc"
+	desc = "noloc"
+	id = 57400
+	
+	trigger = {
+		GER = {
+			exists = yes
+		}
+		primary_culture = south_german
+		NOT = { tag = SGF tag = KUK tag = AUS }
+		part_of_sphere = no
+		is_greater_power = no
+		is_secondary_power = no
+		ai = yes
+	}
+	
+	option = {
+		name = "noloc"
+		THIS = {
+			annex_to = GER
+		}
+	}
+	
+}

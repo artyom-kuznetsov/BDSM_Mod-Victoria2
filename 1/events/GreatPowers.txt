@@ -76,21 +76,16 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
-		name = "EVTOPTA19005"
-		diplomatic_influence = {
-			who = FROM
-			value = 5
-		}
-		badboy = 1
+		name = "EVTOPTB19005"
 	}
 
 	option = {
-		name = "EVTOPTB19005"
+		name = "EVTOPTA19005"
 		diplomatic_influence = {
 			who = FROM
-			value = -5
+			value = 20
 		}
-		prestige = -5
+		badboy = 1
 	}
 }
 
@@ -200,7 +195,7 @@ province_event = {
 
 		owner = {
 			prestige = 5
-			treasury = -100
+			treasury = -200000
 		}
 		any_country = {
 			limit = {
@@ -265,7 +260,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTB19023"
-		treasury = -100
+		treasury = -100000
 	}
 }
 
