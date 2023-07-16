@@ -170,17 +170,14 @@ war_for_mil_access = {
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
 	good_relation_militancy_factor = 1
-	
-	po_add_to_sphere
 
 	#tws_battle_factor = 2.0
 	
-	war_name = WAR_FOR_MIL_ACCESS
-
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		THIS = { war = yes ai = no }
-	}	
+	}
+	
 	on_add = {
 		move_issue_percentage = { 
 			from = jingoism 
@@ -188,6 +185,8 @@ war_for_mil_access = {
 			value = 0.25
 		}
 	}
+	
+	war_name = WAR_MIL_ACCESS_NAME
 }
 
 
@@ -2049,7 +2048,7 @@ negotiated_transfer = {
 			not = { is_core = THIS }
 			is_colonial = no
 		}
-		is_independent = yes
+		is_independant = yes
 	}
 	
 	allowed_states = {
