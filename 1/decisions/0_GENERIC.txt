@@ -1,4 +1,20 @@
 political_decisions = {
+	exchange_settings_dec = {
+		alert = no
+		potential = {
+			ai = no
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = grant_request_cooldown_modifier
+			}
+		}
+		effect = {
+			country_event = 57052
+			CUSTOM_TOOLTIP_57052 = { }
+		}
+	}
+	
 	force_reform_dec = {
 		potential = {
 			civilized = yes

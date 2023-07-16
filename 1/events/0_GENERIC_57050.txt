@@ -35,3 +35,295 @@ country_event = {
 		nationalize = yes
 	}
 }
+
+country_event = {
+	title = "Exchange_EvtName"
+	desc = "Exchange_EvtDesc"
+	id = 57052
+	picture = player_grants
+	
+	is_triggered_only = yes
+	
+	option = { # ENABLE GRANTS
+		name = "Exchange_EvtOptEnable"
+		clr_country_flag = exchange_disallow_flag
+		CUSTOM_TOOLTIP_A_57052 = { }
+	}
+	option = { # DISABLE GRANTS
+		name = "Exchange_EvtOptDisable"
+		set_country_flag = exchange_disallow_flag
+		CUSTOM_TOOLTIP_B_57052 = { }
+	}
+	option = {
+		name = "Exchange_EvtOptRequest"
+		any_country = {
+			limit = {
+				ai = no
+				NOT = { 
+					has_country_flag = exchange_disallow_flag
+				}
+			}
+			country_event = 57053 # GRANT MONEY EVENT
+		}
+		add_country_modifier = { 
+			name = grant_request_cooldown_modifier 
+			duration = 30 
+		}
+		CUSTOM_TOOLTIP_C_57052 = { }
+	}
+}
+
+country_event = {
+	title = "Something_Requested_EvtName"
+	desc = "Grant_Requested_EvtDesc"
+	id = 57053
+	picture = player_grants
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Something_Requested_EvtOptDecline"
+	}
+	
+	option = {
+		name = "Grant_Requested_EvtOpt50" # 50K
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { money = 50000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					money = 50000
+				}
+			}
+			owner = {
+				money = -50000
+				FROM = {
+					money = 50000
+					country_event = 57055
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOpt100" # 100K
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { money = 100000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					money = 100000
+				}
+			}
+			owner = {
+				money = -100000
+				FROM = {
+					money = 100000
+					country_event = 57056
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOpt250" # 250K
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { money = 250000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					money = 250000
+				}
+			}
+			owner = {
+				money = -250000
+				FROM = {
+					money = 250000
+					country_event = 57057
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOpt500" # 500K
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { money = 500000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					money = 500000
+				}
+			}
+			owner = {
+				money = -500000
+				FROM = {
+					money = 500000
+					country_event = 57058
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOpt1M" # 1M
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { money = 1000000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					money = 1000000
+				}
+			}
+			owner = {
+				money = -1000000
+				FROM = {
+					money = 1000000
+					country_event = 57059
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOpt2M" # 2M
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { money = 2000000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					money = 2000000
+				}
+			}
+			owner = {
+				money = -2000000
+				FROM = {
+					money = 2000000
+					country_event = 57060
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "Insufficient_Stuff_EvtName"
+	desc = "Insufficient_Stuff_EvtDesc"
+	id = 57054
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Insufficient_Stuff_EvtOptA"
+	}
+}
+
+country_event = {
+	title = "aid_came_EvtName"
+	desc = "50K_came_EvtDesc"
+	id = 57055
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "money_came_EvtOptA"
+	}
+}
+country_event = {
+	title = "aid_came_EvtName"
+	desc = "100K_came_EvtDesc"
+	id = 57056
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "money_came_EvtOptA"
+	}
+}
+country_event = {
+	title = "aid_came_EvtName"
+	desc = "250K_came_EvtDesc"
+	id = 57057
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "money_came_EvtOptA"
+	}
+}
+country_event = {
+	title = "aid_came_EvtName"
+	desc = "500K_came_EvtDesc"
+	id = 57058
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "money_came_EvtOptA"
+	}
+}
+country_event = {
+	title = "aid_came_EvtName"
+	desc = "1M_came_EvtDesc"
+	id = 57059
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "money_came_EvtOptA"
+	}
+}
+country_event = {
+	title = "aid_came_EvtName"
+	desc = "2M_came_EvtDesc"
+	id = 57060
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "money_came_EvtOptA"
+	}
+}
