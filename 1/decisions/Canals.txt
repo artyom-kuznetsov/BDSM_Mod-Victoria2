@@ -8,6 +8,8 @@ political_decisions = {
 			mechanical_production = 1
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_modifier = kiel_canal_in_progress_modifier }
+			NOT = { has_global_flag = kiel_canal_flag }
+			year = 1855
 		}
 		allow = {
 			invention = machine_tools
@@ -21,6 +23,7 @@ political_decisions = {
 				duration = 3650
 			}
 			set_country_flag = kiel_canal_flag
+			set_global_flag = kiel_canal_flag
 			money = -500000
 		}
 		ai_will_do = {
@@ -39,6 +42,9 @@ political_decisions = {
 			NOT = { is_canal_enabled = 2 }
 			mechanical_production = 1
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = suez_canal_in_progress_modifier }
+			NOT = { has_global_flag = suez_canal_flag }
+			year = 1855
 		}
 		allow = {
 			OR = {
@@ -55,10 +61,12 @@ political_decisions = {
 			set_global_flag = suez_canal_built
 			money = -1500000
 			set_country_flag = suez_canal_flag
+			set_global_flag = suez_canal_flag
 			add_country_modifier = {
 				name = suez_canal_in_progress_modifier
 				duration = 3650
 			}
+			CANAL_DIVIDENDS_1 = { }
 		}
 		ai_will_do = {
 			factor = 1
@@ -74,6 +82,9 @@ political_decisions = {
 			NOT = { is_canal_enabled = 3 }
 			mechanical_production = 1
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = panama_canal_in_progress_modifier }
+			NOT = { has_global_flag = panama_canal_flag }
+			year = 1855
 		}
 		allow = {
 			OR = {
@@ -89,6 +100,13 @@ political_decisions = {
 		effect = {
 			1723 = { secede_province = THIS }
 			money = -2000000
+			set_country_flag = panama_canal_flag
+			set_global_flag = panama_canal_flag
+			add_country_modifier = {
+				name = panama_canal_in_progress_modifier
+				duration = 3650
+			}
+			CANAL_DIVIDENDS_1 = { }
 		}
 		ai_will_do = {
 			factor = 1

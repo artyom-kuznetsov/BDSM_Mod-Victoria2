@@ -1,0 +1,611 @@
+#### BDSM v4.0 ####
+#  »À‹ œŒ—“–Œ≈Õ
+country_event = { 
+	id = 57300
+	title = "Construction_Kiel_EvtName"
+	desc = "Construction_Kiel_EvtDesc"
+	picture = "churchmexico"
+	
+	trigger = {
+		has_country_flag = kiel_canal_flag
+		NOT = {
+			has_country_flag = kiel_canal_done_flag
+		}
+		NOT = {
+			has_country_modifier = kiel_canal_in_progress_modifier
+		}
+		369 = { 
+			controlled_by = THIS 
+			owned_by = THIS 
+		}
+	}
+	
+	immediate = {
+		enable_canal = 1
+	}
+	
+	option = {
+		name = "Construction_Kiel_EvtOptA"
+		prestige = 25
+		set_country_flag = kiel_canal_done_flag
+		add_country_modifier = {
+			name = controls_kiel_canal
+			duration = -1
+		}
+	}
+}
+#  »À‹ Œ“Ã≈Õ®Õ
+country_event = { 
+	id = 57301
+	title = "Construction_Kiel_EvtName"
+	desc = "Construction_Kiel_Cancelled_EvtDesc"
+	picture = "churchmexico"
+	
+	trigger = {
+		has_country_flag = kiel_canal_flag
+		NOT = {
+			has_country_flag = kiel_canal_done_flag
+		}
+		has_country_modifier = kiel_canal_in_progress_modifier
+		369 = { 
+			NOT = { owned_by = THIS }
+		}
+	}
+	
+	immediate = {
+		clr_country_flag = kiel_canal_flag
+		clr_global_flag = kiel_canal_flag
+		remove_country_modifier = kiel_canal_in_progress_modifier
+	}
+	
+	option = {
+		name = "Construction_Kiel_Cancelled_EvtOptA"
+	}
+}
+
+# —”›÷ œŒ—“–Œ≈Õ
+country_event = { 
+	id = 57302
+	title = "Construction_Suez_EvtName"
+	desc = "Construction_Suez_EvtDesc"
+	picture = "churchmexico"
+	
+	trigger = {
+		has_country_flag = suez_canal_flag
+		NOT = {
+			has_country_flag = suez_canal_done_flag
+		}
+		NOT = {
+			has_country_modifier = suez_canal_in_progress_modifier
+		}
+		1755 = { 
+			controlled_by = THIS 
+			owned_by = THIS 
+		}
+	}
+	
+	immediate = {
+		enable_canal = 2
+	}
+	
+	option = {
+		name = "Construction_Suez_EvtOptA"
+		prestige = 50
+		set_global_flag = suez_canal_done_flag
+		1755 = { set_province_flag = suez_canal }
+		add_country_modifier = {
+			name = controls_suez_canal
+			duration = -1
+		}
+	}
+}
+# —”›÷ Œ“Ã≈Õ®Õ
+country_event = { 
+	id = 57303
+	title = "Construction_Suez_EvtName"
+	desc = "Construction_Suez_Cancelled_EvtDesc"
+	picture = "churchmexico"
+	
+	trigger = {
+		has_country_flag = suez_canal_flag
+		NOT = {
+			has_global_flag = suez_canal_done_flag
+		}
+		has_country_modifier = suez_canal_in_progress_modifier
+		1755 = { 
+			NOT = { owned_by = THIS }
+		}
+	}
+	
+	immediate = {
+		clr_country_flag = suez_canal_flag
+		clr_global_flag = suez_canal_flag
+		remove_country_modifier = suez_canal_in_progress_modifier
+	}
+	
+	option = {
+		name = "Construction_Suez_Cancelled_EvtOptA"
+	}
+}
+
+# œ¿Õ¿Ã¿ œŒ—“–Œ≈Õ¿
+country_event = { 
+	id = 57304
+	title = "Construction_panama_EvtName"
+	desc = "Construction_panama_EvtDesc"
+	picture = "churchmexico"
+	
+	trigger = {
+		has_country_flag = panama_canal_flag
+		NOT = {
+			has_country_flag = panama_canal_done_flag
+		}
+		NOT = {
+			has_country_modifier = panama_canal_in_progress_modifier
+		}
+		1723 = { 
+			controlled_by = THIS 
+			owned_by = THIS 
+		}
+	}
+	
+	immediate = {
+		enable_canal = 3
+	}
+	
+	option = {
+		name = "Construction_panama_EvtOptA"
+		prestige = 50
+		set_global_flag = panama_canal_done_flag
+		1723 = { set_province_flag = panama_canal }
+		add_country_modifier = {
+			name = controls_panama_canal
+			duration = -1
+		}
+	}
+}
+# œ¿Õ¿Ã¿ Œ“Ã≈Õ≈Õ¿
+country_event = { 
+	id = 57305
+	title = "Construction_panama_EvtName"
+	desc = "Construction_panama_Cancelled_EvtDesc"
+	picture = "churchmexico"
+	
+	trigger = {
+		has_country_flag = panama_canal_flag
+		NOT = {
+			has_global_flag = panama_canal_done_flag
+		}
+		has_country_modifier = panama_canal_in_progress_modifier
+		1723 = { 
+			NOT = { owned_by = THIS }
+		}
+	}
+	
+	immediate = {
+		clr_country_flag = panama_canal_flag
+		clr_global_flag = panama_canal_flag
+		remove_country_modifier = panama_canal_in_progress_modifier
+	}
+	
+	option = {
+		name = "Construction_panama_Cancelled_EvtOptA"
+	}
+}
+
+
+
+###  ŒÕ“–ŒÀ‹  ¿Õ¿ÀŒ¬ ÃŒƒ»‘» ¿“Œ–€ » ƒ»¬»ƒ≈Õƒ€ ###
+	# —”›÷
+country_event = {
+	title = "SUEZMODEVT_TITLE"
+	desc = "SUEZMODEVT_DESC"
+	id = 57306
+	trigger = {
+		1755 = { 
+			OR = { 
+				controlled_by = THIS 
+				controlled_by = REB 
+			}
+		}
+		has_global_flag = suez_canal_done_flag
+		NOT = { 
+			has_country_modifier = controls_suez_canal
+		}
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		add_country_modifier = {
+			name = controls_suez_canal duration = -1
+		}
+	}
+}
+
+
+country_event = {
+	title = "SUEZMODEVT_TITLE"
+	desc = "SUEZMODLOSEEVT_DESC"
+	id = 57307
+	trigger = {
+		NOT = { 
+			1755 = { 
+				controlled_by = THIS 
+			}
+		}
+		has_country_modifier = controls_suez_canal
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTB"
+		remove_country_modifier = controls_suez_canal
+	}
+}
+
+	# œ¿Õ¿Ã¿
+country_event = {
+	title = "panama_modifier_EvtName"
+	desc = "panama_modifier_EvtDesc"
+	id = 57308
+	trigger = {
+		1723 = { 
+			OR = { 
+				controlled_by = THIS 
+				controlled_by = REB 
+			}
+		}
+		has_global_flag = suez_canal_done_flag
+		NOT = { 
+			has_country_modifier = controls_suez_canal
+		}
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		add_country_modifier = {
+			name = controls_suez_canal duration = -1
+		}
+	}
+}
+
+
+country_event = {
+	title = "panama_modifier_EvtName"
+	desc = "panama_modifier_lose_EvtName"
+	id = 57309
+	trigger = {
+		NOT = { 
+			1723 = { 
+				controlled_by = THIS 
+			}
+		}
+		has_country_modifier = controls_suez_canal
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTB"
+		remove_country_modifier = controls_suez_canal
+	}
+}
+
+	#  »À‹
+country_event = {
+	title = "kiel_modifier_EvtName"
+	desc = "kiel_modifier_EvtDesc"
+	id = 57310
+	trigger = {
+		369 = { 
+			OR = { 
+				controlled_by = THIS 
+				controlled_by = REB 
+			}
+		}
+		has_global_flag = suez_canal_done_flag
+		NOT = { 
+			has_country_modifier = controls_suez_canal
+		}
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		add_country_modifier = {
+			name = controls_suez_canal duration = -1
+		}
+	}
+}
+
+
+country_event = {
+	title = "kiel_modifier_EvtName"
+	desc = "kiel_modifier_lose_EvtName"
+	id = 57311
+	trigger = {
+		NOT = { 
+			369 = { 
+				controlled_by = THIS 
+			}
+		}
+		has_country_modifier = controls_suez_canal
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTB"
+		remove_country_modifier = controls_suez_canal
+	}
+}
+
+	# Õ¿◊¿ÀŒ ƒ»¬»ƒ≈ÕƒŒ¬ Œ“ —”›÷¿
+country_event = {
+	title = "suez_canal_dividends_EvtName"
+	desc = "monument_dividends_start_EvtDesc"
+	id = 57312
+	
+	trigger = {
+		has_global_flag = suez_canal_done_flag
+		has_country_modifier = controls_suez_canal
+		NOT = { has_country_flag = receiving_dividends_suez_flag }
+	}
+	
+	immediate = {
+		set_country_flag = receiving_dividends_suez_flag
+		add_country_modifier = {
+			name = suez_dividends_cooldown_modifier
+			duration = 365
+		}
+	}
+	
+	option = {
+		name = "monument_dividends_start_EvtOptA"
+	}
+}
+	#  ŒÕ≈÷ ƒ»¬»ƒ≈ÕƒŒ¬ Œ“ —”›÷¿
+country_event = {
+	title = "suez_canal_dividends_EvtName"
+	desc = "monument_dividends_end_EvtDesc"
+	id = 57313
+	
+	trigger = {
+		has_global_flag = suez_canal_done_flag
+		NOT = { has_country_modifier = controls_suez_canal }
+		has_country_flag = receiving_dividends_suez_flag
+	}
+	
+	immediate = {
+		clr_country_flag = receiving_dividends_suez_flag
+		remove_country_modifier = suez_dividends_cooldown_modifier
+	}
+	
+	option = {
+		name = "monument_dividends_end_EvtOptA"
+	}
+}
+
+	# ƒ»¬»ƒ≈Õƒ€ Œ“ —”›÷¿
+country_event = {
+	title = "suez_canal_dividends_EvtName"
+	desc = "monument_dividends_yearly_EvtDesc"
+	id = 57314
+	
+	trigger = {
+		has_country_flag = receiving_dividends_suez_flag
+		NOT = {
+			has_country_modifier = suez_dividends_cooldown_modifier
+		}
+	}
+	
+	immediate = {
+		add_country_modifier = {
+			name = suez_dividends_cooldown_modifier
+			duration = 365
+		}
+	}
+	option = {
+		name = "monument_dividends_yearly_EvtOptA"
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						year = 1900
+					}
+				}
+			}
+			owner = {
+				money = 100000
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					year = 1900
+				}
+			}
+			owner = {
+				money = 200000
+			}
+		}
+	}
+}
+
+	# Õ¿◊¿ÀŒ ƒ»¬»ƒ≈ÕƒŒ¬ Œ“ œ¿Õ¿Ã€
+country_event = {
+	title = "panama_canal_dividends_EvtName"
+	desc = "monument_dividends_start_EvtDesc"
+	id = 57315
+	
+	trigger = {
+		has_global_flag = panama_canal_done_flag
+		has_country_modifier = controls_panama_canal
+		NOT = { has_country_flag = receiving_dividends_panama_flag }
+	}
+	
+	immediate = {
+		set_country_flag = receiving_dividends_panama_flag
+		add_country_modifier = {
+			name = panama_dividends_cooldown_modifier
+			duration = 365
+		}
+	}
+	
+	option = {
+		name = "monument_dividends_start_EvtOptA"
+	}
+}
+	#  ŒÕ≈÷ ƒ»¬»ƒ≈ÕƒŒ¬ Œ“ œ¿Õ¿Ã€
+country_event = {
+	title = "panama_canal_dividends_EvtName"
+	desc = "monument_dividends_end_EvtDesc"
+	id = 57316
+	
+	trigger = {
+		has_global_flag = panama_canal_done_flag
+		NOT = { has_country_modifier = controls_panama_canal }
+		has_country_flag = receiving_dividends_panama_flag
+	}
+	
+	immediate = {
+		clr_country_flag = receiving_dividends_panama_flag
+		remove_country_modifier = panama_dividends_cooldown_modifier
+	}
+	
+	option = {
+		name = "monument_dividends_end_EvtOptA"
+	}
+}
+
+	# ƒ»¬»ƒ≈Õƒ€ Œ“ œ¿Õ¿Ã€
+country_event = {
+	title = "panama_canal_dividends_EvtName"
+	desc = "monument_dividends_yearly_EvtDesc"
+	id = 57317
+	
+	trigger = {
+		has_country_flag = receiving_dividends_panama_flag
+		NOT = {
+			has_country_modifier = panama_dividends_cooldown_modifier
+		}
+	}
+	
+	immediate = {
+		add_country_modifier = {
+			name = panama_dividends_cooldown_modifier
+			duration = 365
+		}
+	}
+	option = {
+		name = "monument_dividends_yearly_EvtOptA"
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						year = 1900
+					}
+				}
+			}
+			owner = {
+				money = 100000
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					year = 1900
+				}
+			}
+			owner = {
+				money = 200000
+			}
+		}
+	}
+}
+
+	# Õ¿◊¿ÀŒ ƒ»¬»ƒ≈ÕƒŒ¬ Œ“  »Àﬂ
+country_event = {
+	title = "kiel_canal_dividends_EvtName"
+	desc = "monument_dividends_start_EvtDesc"
+	id = 57318
+	
+	trigger = {
+		has_global_flag = kiel_canal_done_flag
+		has_country_modifier = controls_kiel_canal
+		NOT = { has_country_flag = receiving_dividends_kiel_flag }
+	}
+	
+	immediate = {
+		set_country_flag = receiving_dividends_kiel_flag
+		add_country_modifier = {
+			name = kiel_dividends_cooldown_modifier
+			duration = 365
+		}
+	}
+	
+	option = {
+		name = "monument_dividends_start_EvtOptA"
+	}
+}
+	#  ŒÕ≈÷ ƒ»¬»ƒ≈ÕƒŒ¬ Œ“  »Àﬂ
+country_event = {
+	title = "kiel_canal_dividends_EvtName"
+	desc = "monument_dividends_end_EvtDesc"
+	id = 57319
+	
+	trigger = {
+		has_global_flag = kiel_canal_done_flag
+		NOT = { has_country_modifier = controls_kiel_canal }
+		has_country_flag = receiving_dividends_kiel_flag
+	}
+	
+	immediate = {
+		clr_country_flag = receiving_dividends_kiel_flag
+		remove_country_modifier = kiel_dividends_cooldown_modifier
+	}
+	
+	option = {
+		name = "monument_dividends_end_EvtOptA"
+	}
+}
+
+	# ƒ»¬»ƒ≈Õƒ€ Œ“  »Àﬂ
+country_event = {
+	title = "kiel_canal_dividends_EvtName"
+	desc = "monument_dividends_yearly_EvtDesc"
+	id = 57320
+	
+	trigger = {
+		has_country_flag = receiving_dividends_kiel_flag
+		NOT = {
+			has_country_modifier = kiel_dividends_cooldown_modifier
+		}
+	}
+	
+	immediate = {
+		add_country_modifier = {
+			name = kiel_dividends_cooldown_modifier
+			duration = 365
+		}
+	}
+	option = {
+		name = "monument_dividends_yearly_EvtOptA"
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						year = 1900
+					}
+				}
+			}
+			owner = {
+				money = 50000
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					year = 1900
+				}
+			}
+			owner = {
+				money = 75000
+			}
+		}
+	}
+}
