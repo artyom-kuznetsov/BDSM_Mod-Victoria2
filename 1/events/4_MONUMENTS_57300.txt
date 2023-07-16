@@ -9,7 +9,7 @@ country_event = {
 	trigger = {
 		has_country_flag = kiel_canal_flag
 		NOT = {
-			has_country_flag = kiel_canal_done_flag
+			has_global_flag = kiel_canal_done_flag
 		}
 		NOT = {
 			has_country_modifier = kiel_canal_in_progress_modifier
@@ -44,7 +44,7 @@ country_event = {
 	trigger = {
 		has_country_flag = kiel_canal_flag
 		NOT = {
-			has_country_flag = kiel_canal_done_flag
+			has_global_flag = kiel_canal_done_flag
 		}
 		has_country_modifier = kiel_canal_in_progress_modifier
 		369 = { 
@@ -73,7 +73,7 @@ country_event = {
 	trigger = {
 		has_country_flag = suez_canal_flag
 		NOT = {
-			has_country_flag = suez_canal_done_flag
+			has_global_flag = suez_canal_done_flag
 		}
 		NOT = {
 			has_country_modifier = suez_canal_in_progress_modifier
@@ -138,7 +138,7 @@ country_event = {
 	trigger = {
 		has_country_flag = panama_canal_flag
 		NOT = {
-			has_country_flag = panama_canal_done_flag
+			has_global_flag = panama_canal_done_flag
 		}
 		NOT = {
 			has_country_modifier = panama_canal_in_progress_modifier
@@ -254,16 +254,16 @@ country_event = {
 				controlled_by = REB 
 			}
 		}
-		has_global_flag = suez_canal_done_flag
+		has_global_flag = panama_canal_done_flag
 		NOT = { 
-			has_country_modifier = controls_suez_canal
+			has_country_modifier = controls_panama_canal
 		}
 	}
 	
 	option = {
 		name = "SUEZMODEVT_OPTA"
 		add_country_modifier = {
-			name = controls_suez_canal duration = -1
+			name = controls_panama_canal duration = -1
 		}
 	}
 }
@@ -279,12 +279,12 @@ country_event = {
 				controlled_by = THIS 
 			}
 		}
-		has_country_modifier = controls_suez_canal
+		has_country_modifier = controls_panama_canal
 	}
 	
 	option = {
 		name = "SUEZMODEVT_OPTB"
-		remove_country_modifier = controls_suez_canal
+		remove_country_modifier = controls_panama_canal
 	}
 }
 
@@ -300,16 +300,16 @@ country_event = {
 				controlled_by = REB 
 			}
 		}
-		has_global_flag = suez_canal_done_flag
+		has_global_flag = kiel_canal_done_flag
 		NOT = { 
-			has_country_modifier = controls_suez_canal
+			has_country_modifier = controls_kiel_canal
 		}
 	}
 	
 	option = {
 		name = "SUEZMODEVT_OPTA"
 		add_country_modifier = {
-			name = controls_suez_canal duration = -1
+			name = controls_kiel_canal duration = -1
 		}
 	}
 }
@@ -325,12 +325,12 @@ country_event = {
 				controlled_by = THIS 
 			}
 		}
-		has_country_modifier = controls_suez_canal
+		has_country_modifier = controls_kiel_canal
 	}
 	
 	option = {
 		name = "SUEZMODEVT_OPTB"
-		remove_country_modifier = controls_suez_canal
+		remove_country_modifier = controls_kiel_canal
 	}
 }
 

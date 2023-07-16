@@ -48,7 +48,14 @@ political_decisions = {
 		}
 		allow = {
 			OR = {
-				1755 = { owner = { in_sphere = THIS vassal_of = THIS } }
+				1755 = { 
+					owner = { 
+						OR = {
+							in_sphere = THIS 
+							vassal_of = THIS 
+						}
+					} 
+				}
 				owns = 1755
 			}
 			invention = machine_tools
@@ -88,7 +95,14 @@ political_decisions = {
 		}
 		allow = {
 			OR = {
-				1723 = { owner = { in_sphere = THIS vassal_of = THIS } }
+				1723 = {
+					owner = { 
+						OR = {
+							in_sphere = THIS 
+							vassal_of = THIS 
+						}
+					} 
+				}
 				owns = 1723
 			}
 			invention = machine_tools
