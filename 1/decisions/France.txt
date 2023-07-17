@@ -67,33 +67,6 @@ political_decisions = {
 			set_country_flag = french_foreign_legion_supported
 		}
 	}
-	inegrate_algeria_dec = {
-	    potential = {
-			tag = FRA
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = inegrate_algeria_flag }
-		}
-		allow = {
-			ALD = {	
-				all_core = {
-					OR = {
-						in_sphere = FRA
-						owner = { vassal_of = THIS }
-						owned_by = THIS
-					}
-				}
-			}
-		
-		}
-		effect = {
-			ALD = {
-				all_core = {
-					secede_province = THIS
-				}
-			}
-			set_country_flag = inegrate_algeria_flag
-		}
-	 }
 	
 	french_military_mission_to_japan = {
 		potential = {
