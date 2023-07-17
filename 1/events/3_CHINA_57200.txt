@@ -4,7 +4,7 @@ country_event = {
 	id = 57200
 	title = "ChinaBreakup_EvtName"
 	desc = "ChinaBreakup_EvtDesc"
-	picture = "Rebellion"
+	picture = "opium_war"
 
 	trigger = {
 		tag = CHI
@@ -42,117 +42,5 @@ country_event = {
 	
 	option = {
 		name = "ChinaBreakup_EvtOptA"
-		set_global_flag = China_Breakup_flag
-		
-		primary_culture = beifaren
-		remove_accepted_culture = manchu
-		any_owned = {
-			limit = {
-				is_core = TPG
-			}
-			secede_province = TPG
-		}
-		release_vassal = TPG
-		any_owned = {
-			limit = {
-				is_core = MCK
-			}
-			secede_province = MCK
-		}
-		release_vassal = MCK
-		any_owned = {
-			limit = {
-				is_core = XIN
-			}
-			secede_province = XIN
-		}
-		release_vassal = XIN
-		any_owned = {
-			limit = {
-				is_core = TIB
-			}
-			secede_province = TIB
-		}
-		release_vassal = TIB
-		any_owned = {
-			limit = {
-				is_core = MGL
-			}
-			secede_province = MGL
-		}
-		release_vassal = MGL
-		any_owned = {
-			limit = {
-				is_core = IMG
-			}
-			secede_province = IMG
-		}
-		release_vassal = IMG
-		any_owned = {
-			limit = {
-				is_core = XBI
-			}
-			secede_province = XBI
-		}
-		release_vassal = XBI
-		any_owned = {
-			limit = {
-				is_core = YNN
-			}
-			secede_province = YNN
-		}
-		release_vassal = YNN
-		any_owned = {
-			limit = {
-				is_core = GXI
-			}
-			secede_province = GXI
-		}
-		release_vassal = GXI
-		any_owned = {
-			limit = {
-				is_core = HNN
-			}
-			secede_province = HNN
-		}
-		release_vassal = HNN
-		any_owned = {
-			limit = {
-				is_core = HUI
-			}
-			secede_province = HUI
-		}
-		release_vassal = HUI
-		any_owned = {
-			limit = {
-				is_core = HBI
-			}
-			secede_province = HBI
-		}
-		release_vassal = HBI
-		any_owned = {
-			limit = {
-				is_core = SXI
-			}
-			secede_province = SXI
-		}
-		release_vassal = SXI
-		any_owned = {
-			limit = {
-				is_core = HEN
-			}
-			secede_province = HEN
-		}
-		release_vassal = HEN
-		any_owned = {
-			limit = {
-				is_core = PKG
-			}
-			secede_province = PKG
-		}
-		release_vassal = PKG
-		MCK = { add_accepted_culture = beifaren }
-		IMG = { add_accepted_culture = beifaren }
-		change_tag_no_core_switch = HBI
 	}
 }
