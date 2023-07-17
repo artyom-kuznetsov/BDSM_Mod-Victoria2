@@ -419,40 +419,40 @@ country_event = {
 	}
 }
 
-# Convention of Peking
-country_event = {
-	id = 80000
-	title = "EVTNAME80000"
-	desc = "EVTDESC80000"
-	picture = "expansion"
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "EVTOPTA80000"
-		CHI_1082 = {
-			secede_province = RUS
-		}
-		ai_chance = {
-			factor = 90
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB80000"
-		RUS = {
-			country_event = { id=80001 days=0 }
-		}
-		add_casus_belli = {
-				target = RUS
-				type = acquire_core_state
-				months = 60
-		}		
-		ai_chance = {
-			factor = 10
-		}
-	}
-}
+## Convention of Peking
+#country_event = {
+#	id = 80000
+#	title = "EVTNAME80000"
+#	desc = "EVTDESC80000"
+#	picture = "expansion"
+#	
+#	is_triggered_only = yes
+#	
+#	option = {
+#		name = "EVTOPTA80000"
+#		CHI_1082 = {
+#			secede_province = RUS
+#		}
+#		ai_chance = {
+#			factor = 90
+#		}
+#	}
+#	
+#	option = {
+#		name = "EVTOPTB80000"
+#		RUS = {
+#			country_event = { id=80001 days=0 }
+#		}
+#		add_casus_belli = {
+#				target = RUS
+#				type = acquire_core_state
+#				months = 60
+#		}		
+#		ai_chance = {
+#			factor = 10
+#		}
+#	}
+#}
 
 # China refuses
 country_event = {
