@@ -1,7 +1,40 @@
-country_event = { # SOUTH GERMANS ANNEX TO GER
+country_event = { # SOUTH GERMANS ANNEX TO NGF
 	title = "noloc"
 	desc = "noloc"
 	id = 57400
+	
+	trigger = {
+		NGF = {
+			exists = yes
+		}
+		GER = {
+			exists = no
+		}
+		primary_culture = south_german
+		NOT = { tag = SGF tag = KUK tag = AUS }
+		OR = {
+			part_of_sphere = no
+			in_sphere = NGF
+		}
+		is_greater_power = no
+		is_secondary_power = no
+		ai = yes
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = {
+		name = "noloc"
+		annex_to = NGF
+	}
+	
+}
+country_event = { # SOUTH GERMANS ANNEX TO GER
+	title = "noloc"
+	desc = "noloc"
+	id = 57401
 	
 	trigger = {
 		GER = {
@@ -9,17 +42,22 @@ country_event = { # SOUTH GERMANS ANNEX TO GER
 		}
 		primary_culture = south_german
 		NOT = { tag = SGF tag = KUK tag = AUS }
-		part_of_sphere = no
+		OR = {
+			part_of_sphere = no
+			in_sphere = GER
+		}
 		is_greater_power = no
 		is_secondary_power = no
 		ai = yes
 	}
 	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
 	option = {
 		name = "noloc"
-		THIS = {
-			annex_to = GER
-		}
+		annex_to = GER
 	}
 	
 }
