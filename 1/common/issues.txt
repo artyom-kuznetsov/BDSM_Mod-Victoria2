@@ -380,7 +380,6 @@ political_reforms = {
 	}
 	
 	conscription = {
-		next_step_only = no
 		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
 			max_military_spending = -0.5
 			supply_consumption = -0.2
@@ -398,18 +397,14 @@ political_reforms = {
 			
 			allow = {
 				NOT = {
-					debt_law = debtors_prisons
-					debt_law = bankruptcy
+					has_country_flag = ref_serfdom_abolished_flag
 				}
 			}
 		}
 		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
 			supply_consumption = -0.1
 			allow = {
-				NOT = {
-					debt_law = serfdom
-					debt_law = peonage
-				}
+				has_country_flag = ref_serfdom_abolished_flag
 			}
 		}
 		ref_minimal_military_budget = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
@@ -418,11 +413,8 @@ political_reforms = {
 			reinforce_speed = 0.05
 			supply_consumption = 0.1
 			allow = {
-				NOT = {
-					debt_law = serfdom
-					debt_law = peonage
-				}
 				has_country_flag = army_professionalism_flag
+				has_country_flag = ref_serfdom_abolished_flag
 			}
 		}
 		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
@@ -430,6 +422,7 @@ political_reforms = {
 			#tax_efficiency = -0.05 DURING MOBILIZATION
 			allow = {
 				has_country_flag = aeronautics_researched_flag
+				has_country_flag = ref_serfdom_abolished_flag
 			}
 		}
 	}
