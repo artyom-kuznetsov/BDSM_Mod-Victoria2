@@ -420,3 +420,23 @@ very_high_taxes_rich_trmod = {
 	prestige = -0.1
 	icon = 1
 }
+
+
+# v4.0 Levies
+mobilisation_levies_trmod = {
+	trigger = {
+		is_mobilised = yes
+		conscription = ref_disarmed_nation
+	}
+	tax_efficiency = -0.02
+	icon = 1
+}
+# v4.0 Mass Conscription
+mass_conscription_trmod = {
+	trigger = {
+		is_mobilised = yes
+		conscription = ref_sizeable_military_budget
+	}
+	tax_efficiency = -0.05
+	icon = 1
+}

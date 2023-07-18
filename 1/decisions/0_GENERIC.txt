@@ -237,198 +237,199 @@ political_decisions = {
 		}
 	}
 	
-	military_budget_1_to_2_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_disarmed_nation
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-		}
-		
-		allow = {
-			
-		}
-		
-		effect = {
-			political_reform = ref_minimal_military_budget
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
-	military_budget_2_to_1_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_minimal_military_budget
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-			ai = no
-		}
-		
-		allow = {
-			war_policy = pacifism
-		}
-		
-		effect = {
-			political_reform = ref_disarmed_nation
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
+	#military_budget_1_to_2_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_disarmed_nation
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_minimal_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_2_to_1_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_minimal_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		war_policy = pacifism
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_disarmed_nation
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#
+	#military_budget_2_to_3_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_minimal_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		NOT = { war_policy = pacifism }
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_limited_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_3_to_2_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_limited_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pacifism
+	#			war_policy = anti_military
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_minimal_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#
+	#military_budget_3_to_4_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_limited_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pro_military
+	#			war_policy = jingoism
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_sizeable_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_4_to_3_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_sizeable_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pacifism
+	#			war_policy = anti_military
+	#			war_policy = pro_military
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_limited_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#
+	#military_budget_4_to_5_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_sizeable_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pro_military
+	#			war_policy = jingoism
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_huge_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_5_to_4_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_huge_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pacifism
+	#			war_policy = anti_military
+	#			war_policy = pro_military
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_sizeable_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
 	
-	military_budget_2_to_3_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_minimal_military_budget
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-		}
-		
-		allow = {
-			NOT = { war_policy = pacifism }
-		}
-		
-		effect = {
-			political_reform = ref_limited_military_budget
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
-	military_budget_3_to_2_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_limited_military_budget
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-			ai = no
-		}
-		
-		allow = {
-			OR = {
-				war_policy = pacifism
-				war_policy = anti_military
-			}
-		}
-		
-		effect = {
-			political_reform = ref_minimal_military_budget
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
-	
-	military_budget_3_to_4_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_limited_military_budget
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-		}
-		
-		allow = {
-			OR = {
-				war_policy = pro_military
-				war_policy = jingoism
-			}
-		}
-		
-		effect = {
-			political_reform = ref_sizeable_military_budget
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
-	military_budget_4_to_3_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_sizeable_military_budget
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-			ai = no
-		}
-		
-		allow = {
-			OR = {
-				war_policy = pacifism
-				war_policy = anti_military
-				war_policy = pro_military
-			}
-		}
-		
-		effect = {
-			political_reform = ref_limited_military_budget
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
-	
-	military_budget_4_to_5_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_sizeable_military_budget
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-		}
-		
-		allow = {
-			OR = {
-				war_policy = pro_military
-				war_policy = jingoism
-			}
-		}
-		
-		effect = {
-			political_reform = ref_huge_military_budget
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
-	military_budget_5_to_4_dec = {
-		potential = {
-			civilized = yes
-			conscription = ref_huge_military_budget
-			NOT = {
-				has_country_modifier = military_budget_change_cooldown
-			}
-			ai = no
-		}
-		
-		allow = {
-			OR = {
-				war_policy = pacifism
-				war_policy = anti_military
-				war_policy = pro_military
-			}
-		}
-		
-		effect = {
-			political_reform = ref_sizeable_military_budget
-			add_country_modifier = {
-				name = military_budget_change_cooldown
-				duration = 1825
-			}
-		}
-	}
 	
 	decrease_rnd_dec = {
 		alert = no

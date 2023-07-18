@@ -28,6 +28,24 @@ country_event = {
 			}
 		}
 		
+		## мер йпеонярмнцн опюбю
+		#any_country = {
+		#	limit = {
+		#		debt_law = bankruptcy
+		#		NOT = { has_country_flag = ref_serfdom_abolished_flag }
+		#	}
+		#	set_country_flag = ref_serfdom_abolished_flag
+		#}
+		#
+		#any_country = {
+		#	limit = {
+		#		NOT = { debt_law = bankruptcy }
+		#		has_country_flag = ref_serfdom_abolished_flag
+		#	}
+		#	clr_country_flag = ref_serfdom_abolished_flag
+		#}
+		
+		# йнпюакеярпнемхе бнеммнцн бпелемх
 		any_country = {
 			limit = {
 				war = yes
@@ -180,6 +198,22 @@ country_event = {
 				NOT = { has_country_flag = has_biologism_flag }
 			}
 			set_country_flag = has_biologism_flag
+		}
+		any_country = { # ткюц опнт юплхх
+			limit = {
+				army_professionalism = 1
+				exists = yes
+				NOT = { has_country_flag = army_professionalism_flag }
+			}
+			set_country_flag = army_professionalism_flag
+		}
+		any_country = { # ткюц бнгдсунокюбюмэъ
+			limit = {
+				aeronautics = 1
+				exists = yes
+				NOT = { has_country_flag = aeronautics_researched_flag }
+			}
+			set_country_flag = aeronautics_researched_flag
 		}
 		any_country = { # ткюц пеб х йнмрппеб
 			limit = {

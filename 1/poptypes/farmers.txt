@@ -768,61 +768,100 @@ promote_to =
                 factor = 100
                 soldiers = 0.050
                 revanchism = 0.05
-				location = { is_core = THIS }
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }
             modifier = {
                 factor = 100
                 soldiers = 0.055
                 revanchism = 0.10
-				location = { is_core = THIS }				
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}			
             }
             modifier = {
                 factor = 100
                 soldiers = 0.060
                 revanchism = 0.15
-				location = { is_core = THIS }
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }
             modifier = {
                 factor = 100
                 soldiers = 0.065
                 revanchism = 0.20
-				location = { is_core = THIS }
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }
             modifier = {
                 factor = 100
                 soldiers = 0.070
                 revanchism = 0.25
-				location = { is_core = THIS }
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }
 			modifier = {
                 factor = 100
                 soldiers = 0.075
                 revanchism = 0.30
-				location = { is_core = THIS }
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }
             modifier = {
                 factor = 100
                 soldiers = 0.080
                 revanchism = 0.35
-				location = { is_core = THIS }				
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}			
             }
             modifier = {
                 factor = 100
                 soldiers = 0.085
                 revanchism = 0.40
-				location = { is_core = THIS }
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }
             modifier = {
                 factor = 100
                 soldiers = 0.090
                 revanchism = 0.45
-				location = { is_core = THIS }
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }
             modifier = {
                 factor = 100
                 soldiers = 0.095
                 revanchism = 0.50
-				location = { is_core = THIS }
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
             }			
 		}
 		group = {
@@ -950,27 +989,10 @@ promote_to =
 			}			
 		}
 		modifier = {
-			factor = -100
-			total_pops = 1000000
-			NOT = { total_pops = 2000000 }
-			soldiers = 0.045
-		}		
-		modifier = {
-			factor = -100
-			total_pops = 2000000
-			NOT = { total_pops = 4000000 }
-			soldiers = 0.04
-		}
-		modifier = {
-			factor = -100
-			total_pops = 4000000
-			soldiers = 0.03
-		}
-		modifier = {
-			factor = -100
-			soldiers = 0.01
-			location = { is_colonial = yes }
-			country = { has_global_flag = 1913_bookmark }
+			factor = 5
+			country = {
+				conscription = ref_minimal_military_budget
+			}
 		}
 	}
 	craftsmen = {
