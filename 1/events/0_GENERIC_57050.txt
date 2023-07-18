@@ -375,6 +375,29 @@ country_event = {
 #	}
 #}
 
+###  ¿œ»“”Àﬂ÷»ﬂ
+country_event = {
+	title = "Capitulation_EvtName"
+	desc = "Capitulation_EvtDesc"
+	id = 57062
+	
+	is_triggered_only = yes
+	
+	option = {
+		FROM = {
+			any_owned = {
+				change_controller = THIS
+			}
+		}
+		any_owned = {
+			limit = {
+				controlled_by = FROM
+			}
+			change_controller = THIS
+		}
+	}
+}
+
 province_event = {
 	title = "War_Shipbuilding_EvtName"
 	desc = "War_Shipbuilding_EvtDesc"
@@ -393,5 +416,21 @@ province_event = {
 			name = war_shipbuilding_modifier
 			duration = -1
 		}
+	}
+}
+
+country_event = {
+	title = "disarmed_EvtName"
+	desc = "disarmed_EvtDesc"
+	id = 57064
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		political_reform = ref_huge_military_budget # DEMILITARIZE
+	}
+	
+	option = {
+		name = "disarmed_EvtOptA"
 	}
 }

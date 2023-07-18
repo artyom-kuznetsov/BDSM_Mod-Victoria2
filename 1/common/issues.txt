@@ -381,9 +381,10 @@ political_reforms = {
 	
 	conscription = {
 		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
-			max_military_spending = -0.5
+			max_military_spending = -1
 			supply_consumption = -0.2
 			tax_efficiency = 0.03
+			mobilisation_size = -0.02
 			global_immigrant_attract = 0.03
 			allow = {
 				war_policy = pacifism
@@ -391,6 +392,7 @@ political_reforms = {
 			}
 		}
 		ref_disarmed_nation = {		#  –≈—“‹ﬂÕ— Œ≈
+			max_military_spending = -0.5
 			mobilisation_size = 0.02
 			land_unit_start_experience = -5
 			# -2% tax eff when mobilized
@@ -402,12 +404,14 @@ political_reforms = {
 			}
 		}
 		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
+			max_military_spending = -0.5
 			supply_consumption = -0.1
 			allow = {
 				has_country_flag = ref_serfdom_abolished_flag
 			}
 		}
 		ref_minimal_military_budget = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
+			max_military_spending = -0.5
 			mobilisation_size = -0.01
 			land_unit_start_experience = 5
 			reinforce_speed = 0.05
@@ -418,6 +422,7 @@ political_reforms = {
 			}
 		}
 		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
+			max_military_spending = -0.5
 			mobilisation_size = 0.04
 			#tax_efficiency = -0.05 DURING MOBILIZATION
 			allow = {

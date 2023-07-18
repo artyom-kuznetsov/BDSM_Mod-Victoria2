@@ -643,4 +643,33 @@ political_decisions = {
 			}
 		}		
 	}
+	capitulate_dec = {
+		alert = no
+		potential = {
+			war = yes
+			NOT = {
+				has_country_modifier = recently_capitulated_modifier
+			}
+		}
+		
+		allow = {
+			capital_scope = {
+				NOT = {
+					controlled_by = THIS
+				}
+			}
+		}
+		
+		effect = {
+			capital_scope = {
+				controller = {
+					country_event = 57062
+				}
+			}
+			add_country_modifier = {
+				name = recently_capitulated_modifier
+				duration = 60
+			}
+		}
+	}
 }
