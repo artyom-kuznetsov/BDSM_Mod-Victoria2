@@ -329,51 +329,51 @@ country_event = {
 }
 
 # деаютт мю ярпнийс йнпюакеи б бниме
-country_event = {
-	title = "War_Shipbuilding_EvtName"
-	desc = "War_Shipbuilding_EvtDesc"
-	id = 57061
-	
-	trigger = {
-		war = yes
-		NOT = {
-			has_country_flag = country_at_war_flag
-		}
-	}
-	
-	option = {
-		name = "War_Shipbuilding_EvtOptA"
-		set_country_flag = country_at_war_flag
-		any_owned = {
-			limit = {
-				is_coastal = yes
-			}
-			add_province_modifier = {
-				name = war_shipbuilding_modifier
-				duration = -1
-			}
-		}
-	}
-}
+#country_event = {
+#	title = "War_Shipbuilding_EvtName"
+#	desc = "War_Shipbuilding_EvtDesc"
+#	id = 57061
+#	
+#	trigger = {
+#		war = yes
+#		NOT = {
+#			has_country_flag = country_at_war_flag
+#		}
+#	}
+#	
+#	option = {
+#		name = "War_Shipbuilding_EvtOptA"
+#		set_country_flag = country_at_war_flag
+#		any_owned = {
+#			limit = {
+#				is_coastal = yes
+#			}
+#			add_province_modifier = {
+#				name = war_shipbuilding_modifier
+#				duration = -1
+#			}
+#		}
+#	}
+#}
 # йнпюакеярпнмхе бнеммнцн бпелемх сапюрэ
-country_event = {
-	title = "War_Shipbuilding_EvtName"
-	desc = "War_Shipbuilding_End_EvtDesc"
-	id = 57062
-	
-	trigger = {
-		war = no
-		has_country_flag = country_at_war_flag
-	}
-	
-	option = {
-		name = "War_Shipbuilding_End_EvtOptA"
-		clr_country_flag = country_at_war_flag
-		any_owned = {
-			remove_province_modifier = war_shipbuilding_modifier
-		}
-	}
-}
+#country_event = {
+#	title = "War_Shipbuilding_EvtName"
+#	desc = "War_Shipbuilding_End_EvtDesc"
+#	id = 57062
+#	
+#	trigger = {
+#		war = no
+#		has_country_flag = country_at_war_flag
+#	}
+#	
+#	option = {
+#		name = "War_Shipbuilding_End_EvtOptA"
+#		clr_country_flag = country_at_war_flag
+#		any_owned = {
+#			remove_province_modifier = war_shipbuilding_modifier
+#		}
+#	}
+#}
 
 province_event = {
 	title = "War_Shipbuilding_EvtName"

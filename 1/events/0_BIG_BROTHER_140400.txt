@@ -27,7 +27,35 @@ country_event = {
 				duration = 3650
 			}
 		}
-
+		
+		any_country = {
+			limit = {
+				war = yes
+				NOT = {
+					has_country_flag = country_at_war_flag
+				}
+			}
+			any_owned = {
+				limit = {
+					is_coastal = yes
+				}
+				add_province_modifier = {
+					name = war_shipbuilding_modifier
+					duration = -1
+				}
+			}
+			set_country_flag = country_at_war_flag
+		}
+		any_country = {
+			limit = {
+				war = no
+				has_country_flag = country_at_war_flag
+			}
+			clr_country_flag = country_at_war_flag
+			any_owned = {
+				remove_province_modifier = war_shipbuilding_modifier
+			}
+		}
 
 
 		any_country = { # ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
