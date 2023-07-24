@@ -40,8 +40,7 @@ country_event = {
 		}
 	}
 	
-	option = {
-		name = "ChinaBreakup_EvtOptA"
+	immediate = {
 		set_global_flag = China_Breakup_flag
 		
 		primary_culture = beifaren
@@ -151,8 +150,165 @@ country_event = {
 			secede_province = PKG
 		}
 		release_vassal = PKG
+		any_owned = {
+			limit = {
+				is_core = KAZ
+			}
+			secede_province = KAZ
+		}
+		release_vassal = KAZ
 		MCK = { add_accepted_culture = beifaren }
 		IMG = { add_accepted_culture = beifaren }
 		change_tag_no_core_switch = HBI
 	}
+	option = {
+		name = "ChinaBreakup_EvtOptA"
+		any_country = {
+			limit = {
+				is_culture_group = east_asian
+			}
+			set_country_flag = chinese_warlord_flag
+		}
+	}
 }
+
+country_event = { # LEAVE SPHERE CHINESE
+	title = "noloc"
+	desc = "noloc"
+	id = 57201
+	
+	trigger = {
+		has_country_flag = chinese_warlord_flag
+		ai = yes
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			diplomatic_influence = {
+				who = THIS
+				value = -400
+			}
+		}
+	}
+}
+
+country_event = { # MOVE CAPITAL
+	title = "china_move_capital_EvtName"
+	desc = "china_move_capital_EvtDesc"
+	id = 57202
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "china_move_capital_EvtOptA"
+		random_owned = {
+			limit = {
+				owner = {
+					owns = 1516
+				}
+			}
+			owner = {
+				capital = 1516
+				prestige = 10
+				set_country_flag = chi_capital_moved_flag
+				set_country_flag = chi_capital_hanian
+			}
+		}
+	}
+	option = {
+		name = "china_move_capital_EvtOptB"
+		
+		random_owned = {
+			limit = {
+				owner = {
+					owns = 1616
+				}
+			}
+			owner = {
+				capital = 1616
+				prestige = 10
+				set_country_flag = chi_capital_moved_flag
+				set_country_flag = chi_capital_peking
+			}
+		}
+	}
+	option = {
+		name = "china_move_capital_EvtOptC"
+		
+		random_owned = {
+			limit = {
+				owner = {
+					owns = 2221
+				}
+			}
+			owner = {
+				capital = 2221
+				prestige = 10
+				set_country_flag = chi_capital_moved_flag
+				set_country_flag = chi_capital_nanking
+			}
+		}
+	}
+}
+
+country_event = { # CAPITAL RETURNED HANIAN
+	title = "chi_capital_returned_EvtName"
+	desc = "chi_capital_returned_EvtDesc"
+	id = 57203
+	
+	trigger = {
+		has_country_flag = chi_capital_hanian
+		NOT = {
+			capital = 1516
+		}
+	}
+	
+	option = {
+		name = "chi_capital_returned_EvtOptA"
+		capital = 1516
+	}
+}
+
+
+country_event = { # CAPITAL RETURNED PEKING
+	title = "chi_capital_returned_EvtName"
+	desc = "chi_capital_returned_EvtDesc"
+	id = 57204
+	
+	trigger = {
+		has_country_flag = chi_capital_peking
+		NOT = {
+			capital = 1616
+		}
+	}
+	
+	option = {
+		name = "chi_capital_returned_EvtOptA"
+		capital = 1616
+	}
+}
+
+
+country_event = { # CAPITAL RETURNED NANKING
+	title = "chi_capital_returned_EvtName"
+	desc = "chi_capital_returned_EvtDesc"
+	id = 57204
+	
+	trigger = {
+		has_country_flag = chi_capital_nanking
+		NOT = {
+			capital = 2221
+		}
+	}
+	
+	option = {
+		name = "chi_capital_returned_EvtOptA"
+		capital = 2221
+	}
+}
+

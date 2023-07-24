@@ -1,4 +1,19 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.0 Preview\nОжидаемая контрольная сумма: XXXX;X
+chi_capital_returned_EvtName;Возвращение столицы;X
+chi_capital_returned_EvtDesc;Мы освободили нашу столицу от иноземных захватчиков;X
+chi_capital_returned_EvtOptA;Слава роду! Слава подвигу предков.;X
+chi_used_movecapital_dec_modifier;Использовано решение переноса столицы;X
+chi_used_movecapital_dec_modifier_desc;Не обращайте внимания, это костыль.;X
+china_move_capital_EvtName;Вопрос о столице;X
+china_move_capital_EvtDesc;Пора решить, какой великий город будет столицей нашей державы.;X
+china_move_capital_EvtOptA;Сердце страны - Ханьян;X
+china_move_capital_EvtOptB;Северная столица - Пекин;X
+china_move_capital_EvtOptC;Древняя столица - Нанкин;X
+form_china_dec_title;@CHIКитайский Дракон;X
+form_china_dec_desc;Пора положить конец периоду раздора. Единый Китай, раз и навсегда!;X
+chi_move_capital_dec_title;§B#§Y#§B#§! Вопрос о столице;X
+chi_move_capital_dec_desc;После объединения Китая, возник вопрос столицы державы.;X
+chinese_warlord_flag;Китайский варлорд;X
 Capitulation_EvtName;Капитуляция $FROMCOUNTRY$;X
 Capitulation_EvtDesc;$MONARCHTITLE$, дураки из державы $FROMCOUNTRY$ наконец сдались и приняли капитуляцию!;X
 Capitulation_EvtOptA;Ооп ооп ооп ооооп;X
@@ -283,10 +298,6 @@ EVTDESC57011;Новые исследования в области медицины, помогающие бороться с болезн
 supply_focus;Склад снабжения;X
 1848_setup_title;1848 Setup;X
 1848_setup_desc; ;X
-acquire_all_cores_short;Освобождение всех нац. территорий;X
-acquire_all_cores_setup;Освобождение всех нац. территорий;X
-acquire_all_cores;Захват всех нац. территорий;X
-acquire_all_cores_desc;Цель войны, присоединяющая все национальные территории.;X
 RISORGIMENTO_NAME;Весна народов;X
 RISORGIMENTO_DESC; ;X
 mountain_mine;Горы (Шахта);X
@@ -751,7 +762,7 @@ PROV1396;Маруди;X
 PROV1428;Капуас;X
 PROV1443;Гифу;X
 PROV1452;Мие;X
-PROV1612;Пекин;X
+PROV1612;Баодин;X
 PROV1613;Чэндэ;X
 PROV1616;Пекин;X
 PROV1641;Тоттори;X
@@ -2559,7 +2570,7 @@ SAF;Южная Африка;X
 MAD;Мадагаскар;X
 CHI;Китай;X
 JAP;Япония;X
-KOR;Корея;X
+KOR;Чосон;X
 TIB;Тибет;X
 SIA;Сиам;X
 CAM;Камбоджа;X
@@ -3693,11 +3704,31 @@ take_from_sphere_setup;Исключить державу $THIRD$ из сферы влияния державы $RECIP
 acquire_core_state;Захват нац. территории;X
 acquire_core_state_short;Присоединение региона $STATE$;X
 acquire_core_state_setup;Отобрать у державы $RECIPIENT$ наш национальный регион $STATE$.;X
+;;X# TAKE ALL CORES CB
+acquire_all_cores_short;Освобождение всех нац. территорий;X
+acquire_all_cores_setup;Освобождение всех нац. территорий;X
+acquire_all_cores;Захват всех нац. территорий;X
+acquire_all_cores_desc;Цель войны, присоединяющая все национальные территории.;X
 ;;X#TAKE STATE CB
 acquire_state;Захват региона;X
 acquire_state_short;Присоединение региона $STATE$;X
 acquire_state_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
 acquire_state_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
+;;X#TAKE TREATY PORT
+take_treaty_port;Захват порта в Китае;X
+take_treaty_port_short;Присоединение порта $STATE$;X
+take_treaty_port_setup;Захватить порт $STATE$ у державы $RECIPIENT$.;X
+take_treaty_port_desc;Захват §Yкитайского порта§W, принадлежащего врагу.;X
+;;X#TAKE STATE CHINA WARLORD CB
+acquire_state_warlord;Объединение Китая;X
+acquire_state_warlord_short;Присоединение региона $STATE$;X
+acquire_state_warlord_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state_warlord_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
+;;X#TAKE STATE CHINA INVASION CB
+acquire_state_invasion;Вторжение в Китай;X
+acquire_state_invasion_short;Присоединение региона $STATE$;X
+acquire_state_invasion_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state_invasion_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
 ;;X# TAKE CAPITAL CB
 acquire_capital;Захват столицы;X
 acquire_capital_short;Присоединение столичного региона $STATE$;X

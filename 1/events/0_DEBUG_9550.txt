@@ -41,6 +41,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9553
 		country_event = 9554
 		country_event = 9555
+		country_event = 9556
 	}
 }
 
@@ -93,5 +94,27 @@ country_event = { # AUSTRIA-HUNGARY
 		TUR_788 = { secede_province = THIS }
 		activate_technology = nationalism_n_imperialism
 		change_tag = KUK
+	}
+}
+
+country_event = { # CHINA
+	title = "noloc"
+	desc = "noloc"
+	id = 9556
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+				OR = {
+					is_culture_group = east_asian
+					primary_culture = mongol
+				}
+			}
+			annex_to = THIS
+		}
+		activate_technology = nationalism_n_imperialism
 	}
 }
