@@ -42,6 +42,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9554
 		country_event = 9555
 		country_event = 9556
+		country_event = 9557
 	}
 }
 
@@ -114,6 +115,24 @@ country_event = { # CHINA
 				}
 			}
 			annex_to = THIS
+		}
+		activate_technology = nationalism_n_imperialism
+	}
+}
+
+country_event = { # INDIA
+	title = "noloc"
+	desc = "noloc"
+	id = 9557
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		HND = {
+			all_core = {
+				secede_province = THIS
+			}
 		}
 		activate_technology = nationalism_n_imperialism
 	}

@@ -354,8 +354,7 @@ conquest = {
 	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
-		# only one state or unciv
-		NOT = { number_of_states = 5 }
+		NOT = { number_of_states = 3 }
 		OR = {
 			AND = {
 				civilized = yes
@@ -1063,6 +1062,10 @@ place_in_the_sun = {
 	good_relation_militancy_factor = 1
 
 	can_use = {
+		civilized = yes
+		THIS = {
+			civilized = yes
+		}
 		NOT = { is_our_vassal = THIS }
 		any_owned_province = {
 			is_colonial = yes
@@ -1818,7 +1821,6 @@ demand_concession_casus_belli = {
 		any_owned_province = {
 			is_colonial = no
 		}
-		not = { any_owned_province = { is_capital = yes } }
 	}
 	
 	po_demand_state = yes
