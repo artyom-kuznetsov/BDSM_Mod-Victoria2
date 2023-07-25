@@ -23,6 +23,12 @@ political_decisions = {
 			years_of_research = 0.5
 			add_accepted_culture = panjabi
 			set_country_flag = conquer_panjab_flag
+			PAN_1227 = {
+				add_core = THIS
+			}
+			ENG_1264 = {
+				add_core = THIS
+			}
 		}
 	}
 	mge_conquer_bhopal_dec = {
@@ -44,6 +50,12 @@ political_decisions = {
 			years_of_research = 0.5
 			add_accepted_culture = marathi
 			set_country_flag = conquer_bhopal_flag
+			BHOPAL_STATE = {
+				add_core = THIS
+			}
+			ENG_1275 = {
+				add_core = THIS
+			}
 		}
 	}
 	mge_conquer_bengal_dec = {
@@ -70,6 +82,8 @@ political_decisions = {
 			years_of_research = 0.5
 			add_accepted_culture = bengali
 			set_country_flag = conquer_bengal_flag
+			ENG_1251 = { add_core = THIS }
+			ENG_1254 = { add_core = THIS }
 		}
 	}
 	mge_conquer_madras_dec = {
@@ -95,6 +109,31 @@ political_decisions = {
 			years_of_research = 0.5
 			add_accepted_culture = telegu
 			set_country_flag = conquer_madras_flag
+			ENG_1304 = { add_core = THIS }
+			ENG_1305 = { add_core = THIS }
+		}
+	}
+	mge_form_dec = {
+		potential = {
+			primary_culture = avadhi
+		}
+		
+		allow = {
+			civilized = yes
+			has_country_flag = conquer_bengal_flag
+			has_country_flag = conquer_madras_flag
+			has_country_flag = conquer_bhopal_flag
+			has_country_flag = conquer_panjab_flag
+		}
+		
+		effect = {
+			prestige = 20
+			change_tag = MGE
+			HND = {
+				all_core = {
+					add_core = THIS
+				}
+			}
 		}
 	}
 }
