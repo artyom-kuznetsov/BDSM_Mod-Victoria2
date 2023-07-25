@@ -1,0 +1,675 @@
+political_decisions = {
+	exchange_settings_dec = {
+		alert = no
+		potential = {
+			ai = no
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = grant_request_cooldown_modifier
+			}
+		}
+		effect = {
+			country_event = 57052
+			CUSTOM_TOOLTIP_57052 = { }
+		}
+	}
+	
+	force_reform_dec = {
+		potential = {
+			civilized = yes
+			NOT = { has_country_flag = hide_all_decs_flag }
+			year = 1837
+		}
+		allow = {
+			NOT = { has_country_modifier = force_reform_cooldown_modifier }
+			money = 100000
+		}
+		effect = {
+			set_country_flag = force_reform
+			add_country_modifier = {
+				name = force_reform_modifier
+				duration = 150
+			}
+			add_country_modifier = {
+				name = force_reform_cooldown_modifier
+				duration = 1825
+			}
+			money = -100000
+		}
+	}
+	
+	martial_law_activate_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = martial_law_flag }
+			ai = no
+		}
+		allow = {
+			OR = {
+				war = yes
+				average_militancy = 3
+			}
+			NOT = { has_country_modifier = martial_law_cooldown_modifier }
+		}
+		effect = {
+			add_country_modifier = {
+				name = martial_law_modifier
+				duration = -1
+			}
+			set_country_flag = martial_law_flag
+		}
+	}
+	martial_law_deactivate_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			has_country_flag = martial_law_flag
+		}
+		allow = {
+		}
+		effect = {
+			add_country_modifier = {
+				name = martial_law_cooldown_modifier
+				duration = 1825
+			}
+			remove_country_modifier = martial_law_modifier
+			clr_country_flag = martial_law_flag
+		}
+	}
+
+	med_reform_0_to_1_dec = {
+		potential = {
+			civilized = yes
+			health_care = no_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			medicine = 1
+			literacy = 0.25
+		}
+		
+		effect = {
+			social_reform = trinket_health_care
+		}
+	}
+	med_reform_1_to_0_dec = {
+		potential = {
+			civilized = yes
+			health_care = trinket_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			social_reform = no_health_care
+		}
+	}
+	
+	med_reform_1_to_2_dec = {
+		potential = {
+			civilized = yes
+			health_care = trinket_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			inorganic_chemistry = 1
+			literacy = 0.4
+		}
+		
+		effect = {
+			social_reform = low_health_care
+		}
+	}
+	med_reform_2_to_1_dec = {
+		potential = {
+			civilized = yes
+			health_care = low_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			social_reform = trinket_health_care
+		}
+	}
+	
+	med_reform_2_to_3_dec = {
+		potential = {
+			civilized = yes
+			health_care = low_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			organic_chemistry = 1
+			literacy = 0.6
+		}
+		
+		effect = {
+			social_reform = acceptable_health_care
+		}
+	}
+	med_reform_3_to_2_dec = {
+		potential = {
+			civilized = yes
+			health_care = acceptable_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			social_reform = low_health_care
+		}
+	}
+	
+	med_reform_3_to_4_dec = {
+		potential = {
+			civilized = yes
+			health_care = acceptable_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			electricity = 1
+			literacy = 0.75
+		}
+		
+		effect = {
+			social_reform = good_health_care
+		}
+	}
+	med_reform_4_to_3_dec = {
+		potential = {
+			civilized = yes
+			health_care = good_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			social_reform = acceptable_health_care
+		}
+	}
+	
+	med_reform_4_to_5_dec = {
+		potential = {
+			civilized = yes
+			health_care = good_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			synthetic_polymers = 1
+			literacy = 0.95
+		}
+		
+		effect = {
+			social_reform = universal_health_care
+		}
+	}
+	med_reform_5_to_4_dec = {
+		potential = {
+			civilized = yes
+			health_care = universal_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			social_reform = good_health_care
+		}
+	}
+	
+	#military_budget_1_to_2_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_disarmed_nation
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_minimal_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_2_to_1_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_minimal_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		war_policy = pacifism
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_disarmed_nation
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#
+	#military_budget_2_to_3_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_minimal_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		NOT = { war_policy = pacifism }
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_limited_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_3_to_2_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_limited_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pacifism
+	#			war_policy = anti_military
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_minimal_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#
+	#military_budget_3_to_4_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_limited_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pro_military
+	#			war_policy = jingoism
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_sizeable_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_4_to_3_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_sizeable_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pacifism
+	#			war_policy = anti_military
+	#			war_policy = pro_military
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_limited_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#
+	#military_budget_4_to_5_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_sizeable_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pro_military
+	#			war_policy = jingoism
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_huge_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	#military_budget_5_to_4_dec = {
+	#	potential = {
+	#		civilized = yes
+	#		conscription = ref_huge_military_budget
+	#		NOT = {
+	#			has_country_modifier = military_budget_change_cooldown
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#		OR = {
+	#			war_policy = pacifism
+	#			war_policy = anti_military
+	#			war_policy = pro_military
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		political_reform = ref_sizeable_military_budget
+	#		add_country_modifier = {
+	#			name = military_budget_change_cooldown
+	#			duration = 1825
+	#		}
+	#	}
+	#}
+	
+	
+	decrease_rnd_dec = {
+		alert = no
+		potential = {
+			ai = no
+			NOT = { research_and_development = no_rnd }
+			civilized = yes
+		}
+
+		allow = {
+			NOT = { research_and_development = no_rnd }
+		}
+
+		effect = {
+			political_reform = no_rnd
+		}
+	}
+
+	increase_rnd_dec = {
+		alert = yes
+		potential = {
+			NOT = { research_and_development = futuristic_rnd }
+			civilized = yes
+		}
+
+		allow = {
+			OR = {
+				AND = {
+					research_and_development = no_rnd
+					literacy = 0.1
+					NOT = { literacy = 0.2 }
+				}
+				AND = {
+					OR = {
+						research_and_development = no_rnd
+						research_and_development = rudimentary_rnd
+					}
+					literacy = 0.2
+					NOT = { literacy = 0.3 }
+				}
+				AND = {
+					OR = {
+						research_and_development = no_rnd
+						research_and_development = rudimentary_rnd
+						research_and_development = very_low_rnd
+					}
+					literacy = 0.3
+					NOT = { literacy = 0.4 }
+				}
+				AND = {
+					OR = {
+						research_and_development = no_rnd
+						research_and_development = rudimentary_rnd
+						research_and_development = very_low_rnd
+						research_and_development = low_rnd
+					}
+					literacy = 0.4
+					NOT = { literacy = 0.5 }
+				}
+				AND = {
+					OR = {
+						research_and_development = no_rnd
+						research_and_development = rudimentary_rnd
+						research_and_development = very_low_rnd
+						research_and_development = low_rnd
+						research_and_development = basic_rnd
+					}
+					literacy = 0.5
+					NOT = { literacy = 0.6 }
+				}
+				AND = {
+					NOT = {
+						OR = {
+							research_and_development = acceptable_rnd
+							research_and_development = good_rnd
+							research_and_development = very_good_rnd
+							research_and_development = advanced_rnd
+							research_and_development = futuristic_rnd
+						}
+					}
+					literacy = 0.6
+					NOT = { literacy = 0.7 }
+				}
+				AND = {
+					NOT = {
+						OR = {
+							research_and_development = good_rnd
+							research_and_development = very_good_rnd
+							research_and_development = advanced_rnd
+							research_and_development = futuristic_rnd
+						}
+					}
+					literacy = 0.7
+					NOT = { literacy = 0.8 }
+				}
+				AND = {
+					NOT = {
+						OR = {
+							research_and_development = very_good_rnd
+							research_and_development = advanced_rnd
+							research_and_development = futuristic_rnd
+						}
+					}
+					literacy = 0.8
+					NOT = { literacy = 0.9 }
+				}
+				AND = {
+					NOT = {
+						OR = {
+							research_and_development = advanced_rnd
+							research_and_development = futuristic_rnd
+						}
+					}
+					literacy = 0.9
+					NOT = { literacy = 0.99 }
+				}
+				AND = {
+					NOT = { research_and_development = futuristic_rnd }
+					literacy = 0.99
+				}
+			}
+		}
+
+		effect = {
+			random_owned = {
+				limit = {
+					owner = { literacy = 0.99 }
+				}
+				owner = { political_reform = futuristic_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.99 }
+						literacy = 0.9
+					}
+				}
+				owner = { political_reform = advanced_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.9 }
+						literacy = 0.8
+					}
+				}
+				owner = { political_reform = very_good_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.8 }
+						literacy = 0.7
+					}
+				}
+				owner = { political_reform = good_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.7 }
+						literacy = 0.6
+					}
+				}
+				owner = { political_reform = acceptable_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.6 }
+						literacy = 0.5
+					}
+				}
+				owner = { political_reform = moderate_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.5 }
+						literacy = 0.4
+					}
+				}
+				owner = { political_reform = basic_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.4 }
+						literacy = 0.3
+					}
+				}
+				owner = { political_reform = low_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.3 }
+						literacy = 0.2
+					}
+				}
+				owner = { political_reform = very_low_rnd }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { literacy = 0.2 }
+						literacy = 0.1
+					}
+				}
+				owner = { political_reform = rudimentary_rnd }
+			}
+		}		
+	}
+	capitulate_dec = {
+		alert = no
+		potential = {
+			war = yes
+			NOT = {
+				has_country_modifier = recently_capitulated_modifier
+			}
+		}
+		
+		allow = {
+			capital_scope = {
+				NOT = {
+					controlled_by = THIS
+				}
+			}
+		}
+		
+		effect = {
+			capital_scope = {
+				controller = {
+					country_event = 57062
+				}
+			}
+			add_country_modifier = {
+				name = recently_capitulated_modifier
+				duration = 60
+			}
+		}
+	}
+}

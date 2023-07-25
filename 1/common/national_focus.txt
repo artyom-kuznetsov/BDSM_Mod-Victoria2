@@ -1,0 +1,326 @@
+rail_focus =
+{
+	encourage_rail = 
+	{
+		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
+		
+		local_RGO_output = 0.4
+		local_factory_output = 0.1
+		
+		icon = 2
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+	
+	supply_focus = {
+		movement_cost = -0.2
+		supply_limit = 3
+		own_provinces = yes
+		icon = 33
+	}
+	
+	increase_tension =
+	{
+		icon = 4
+		has_flashpoint = yes
+		own_provinces = no
+		flashpoint_tension = 0.15
+
+		limit = {
+			is_core = THIS
+			THIS = {
+				is_greater_power = no
+				# Audax Validator "." Ignore_NEXT
+				ai = no
+			}
+		}
+	}
+}
+
+promotion_focus =
+{
+	promote_aristocrats =
+	{
+		aristocrats = 0.2 #30% more likeley to become this type
+		icon = 5
+		outliner_show_as_percent = yes
+	}
+
+	promote_bureaucrats =
+	{
+		bureaucrats = 0.3 #30% more likeley to become this type
+		icon = 7
+		outliner_show_as_percent = yes
+	}
+
+	promote_capitalists =
+	{
+		capitalists = 0.2 #30% more likeley to become this type
+		icon = 8
+		outliner_show_as_percent = yes
+	}
+	
+	promote_clergymen =
+	{
+		clergymen = 0.2 #30% more likeley to become this type
+		icon = 9
+		outliner_show_as_percent = yes
+	}
+
+	promote_clerks =
+	{
+		clerks = 0.2 #30% more likeley to become this type
+		icon = 10
+		outliner_show_as_percent = yes
+	}
+
+	promote_craftsmen =
+	{
+		craftsmen = 0.15 #15% more likeley to become this type
+		icon = 11
+		outliner_show_as_percent = yes
+	}
+
+	promote_farmers =
+	{
+		farmers = 0.2 #30% more likeley to become this type
+		icon = 12
+		outliner_show_as_percent = yes
+	}
+
+	promote_labourers =
+	{
+		labourers = 0.2 #30% more likeley to become this type
+		icon = 13
+		outliner_show_as_percent = yes
+	}
+
+	promote_officers =
+	{
+		officers = 0.2 #30% more likeley to become this type
+		icon = 14
+		outliner_show_as_percent = yes
+	}
+
+	promote_soldiers =
+	{
+		soldiers = 0.2 #30% more likeley to become this type
+		icon = 15
+		outliner_show_as_percent = yes
+	}
+}
+
+production_focus =
+{
+	automation_focus =
+	{
+		aeroplanes = 100
+		barrels = 100
+		automobiles = 100
+		icon = 16
+		limit = {
+			year = 1880
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	electrical_focus =
+	{
+		radio = 100
+		telephones = 80
+		electric_gear = 100
+		icon = 17
+		limit = {
+			year = 1880
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	chemical_focus =
+	{
+		fuel = 100
+		oil = 100
+		fertilizer = 100
+		sulphur = 100
+		rubber = 100
+		icon = 18
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	shipping_focus =
+	{
+		steamer_convoy = 100
+		clipper_convoy = 100
+		icon = 19
+		limit = { 
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+			state_scope = { any_owned_province = { port = yes } }
+		}
+	}
+
+	textile_focus =
+	{
+		luxury_clothes = 50
+		regular_clothes = 100
+		fabric = 100
+		dye = 100
+		icon = 20
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	wood_focus = 
+	{
+		paper = 75
+		luxury_furniture = 50
+		furniture = 100
+		lumber = 75
+		icon = 21
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	basic_industry_focus =
+	{
+		steel = 100
+		machine_parts = 100
+		cement = 75
+		icon = 22
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	armaments_focus = 
+	{
+		artillery = 100
+		small_arms = 100
+		ammunition = 100
+		explosives = 100
+		icon = 23
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	consumer_focus = 
+	{
+		glass = 75
+		canned_food = 100
+		cigarettes = 75
+		pharmaceuticals = 75
+		icon = 32
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+
+	beverages_focus = 
+	{
+		liquor = 100
+		wine = 100
+		tea = 75
+		coffee = 75
+		icon = 24
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+}
+
+party_loyalty_focus =
+{
+	fascist_focus =
+	{
+		ideology = fascist
+		loyalty_value = 0.001 # By that much pops will be more loyal
+		icon = 25
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+	
+	reactionary_focus =
+	{
+		ideology = reactionary
+		loyalty_value = 0.001 # By that much pops will be more loyal
+		icon = 26
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+	
+	conservative_focus =
+	{
+		ideology = conservative
+		loyalty_value = 0.001 # By that much pops will be more loyal
+		icon = 27
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+	
+	socialist_focus =
+	{
+		ideology = socialist
+		loyalty_value = 0.001 # By that much pops will be more loyal
+		icon = 28
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+	
+	communist_focus =
+	{
+		ideology = communist
+		loyalty_value = 0.001 # By that much pops will be more loyal
+		icon = 29
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+	
+	liberal_focus =
+	{
+		ideology = liberal
+		loyalty_value = 0.001 # By that much pops will be more loyal
+		icon = 30
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+	
+	anarcho_liberal_focus =
+	{
+		ideology = anarcho_liberal
+		loyalty_value = 0.001 # By that much pops will be more loyal
+		icon = 31
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			ai = no
+		}
+	}
+}
+

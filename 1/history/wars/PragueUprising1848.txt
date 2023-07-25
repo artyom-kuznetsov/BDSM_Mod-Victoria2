@@ -1,0 +1,27 @@
+name = "Пражское восстание"
+
+1848.1.1 = {
+	add_attacker = BOH
+	add_defender = AUS
+	
+	# actor
+	# receiver
+	# casus_belli - cb type
+	# country - 3rd party
+	# state_province_id - target state capital
+	war_goal = {
+		casus_belli = acquire_all_cores
+		actor = BOH
+		receiver = AUS
+	}
+	war_goal = {
+		casus_belli = annex_core_country
+		actor = AUS
+		receiver = BOH
+	}
+
+}
+1849.1.1 = {
+	rem_attacker = BOH
+	rem_defender = AUS
+}
