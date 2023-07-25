@@ -102,10 +102,10 @@ acquire_state_warlord = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		THIS = { has_country_flag = chinese_warlord_flag }
-		AND = {
-			has_country_flag = chinese_warlord_flag
-			NOT = { year = 1870 } 
-		}
+		
+		has_country_flag = chinese_warlord_flag
+		NOT = { year = 1870 } 
+		
 		is_independant = yes
 		any_owned_province = {
 			OR = {
@@ -178,10 +178,10 @@ acquire_state_invasion = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		NOT = { THIS = { has_country_flag = chinese_warlord_flag } }
-		AND = {
-			has_country_flag = chinese_warlord_flag
-			NOT = { year = 1870 } 
-		}
+		
+		has_country_flag = chinese_warlord_flag
+		NOT = { year = 1870 } 
+		
 		is_independant = yes
 		any_owned_province = {
 			OR = {
@@ -1141,18 +1141,16 @@ take_treaty_port = {
 	}
 	
 	allowed_states = {
-		OR = {
-			any_owned_province = { 
-				OR = {
-					province_id = 1481
-					province_id = 2659
-					province_id = 1569
-					province_id = 1566
-					province_id = 1538
-					province_id = 1496
-					province_id = 1498
-					province_id = 2615
-				}
+		any_owned_province = { 
+			OR = {
+				province_id = 1481
+				province_id = 2659
+				province_id = 1569
+				province_id = 1566
+				province_id = 1538
+				province_id = 1496
+				province_id = 1498
+				province_id = 2615
 			}
 		}
 	}	
@@ -2249,7 +2247,7 @@ install_communist_gov_cb = {
 		political_reform = state_press
 		political_reform = state_controlled
 		political_reform = underground_parties
-		political_reform = child_labor_illegal
+		social_reform = child_labor_illegal
 	}
 }
 
