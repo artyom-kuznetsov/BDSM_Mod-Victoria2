@@ -650,6 +650,7 @@ political_decisions = {
 			NOT = {
 				has_country_modifier = recently_capitulated_modifier
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -670,6 +671,32 @@ political_decisions = {
 				name = recently_capitulated_modifier
 				duration = 60
 			}
+		}
+	}
+	
+	revoke_voting_dec = {
+		alert = no
+		potential = {
+			civilized = yes
+			ai = no
+			NOT = {
+				vote_franschise = none_voting
+				vote_franschise = landed_voting
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		allow = {
+			NOT = { election = yes }
+			NOT = { has_country_modifier = usurp_cooldown_modifier }
+		}
+		effect = {
+			political_reform = none_voting
+			badboy = 2
+			any_pop = {
+				militancy = 5
+				consciousness = 5
+			}
+			add_country_modifier = { name = usurp_cooldown_modifier duration = 1825 }
 		}
 	}
 }

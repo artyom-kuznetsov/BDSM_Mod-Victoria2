@@ -146,6 +146,17 @@ acquire_state_warlord = {
 	
 	war_name = WAR_TAKE_NAME
 	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
+	
 	on_add = {
 		move_issue_percentage = { 
 			from = jingoism 
@@ -221,6 +232,17 @@ acquire_state_invasion = {
 	po_demand_state = yes
 	
 	war_name = WAR_TAKE_NAME
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
 	
 	on_add = {
 		move_issue_percentage = { 
@@ -414,6 +436,17 @@ conquest = {
 	
 	construction_speed = 0.5
 	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
+	
 	on_add = {
 		move_issue_percentage = { 
 			from = jingoism 
@@ -503,6 +536,17 @@ conquest_small = {
 		}
 	}
 	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
+	
 	po_annex = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -545,6 +589,17 @@ civil_war = {
 			from = jingoism 
 			to = pro_military
 			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
@@ -701,6 +756,17 @@ acquire_core_state = {
 			to = pro_military
 			value = 0.25
 		}
+	
+	}
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
 	}
 }
 
@@ -758,6 +824,16 @@ acquire_all_cores = {
 		}
 	}
 
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
 }
 
 
@@ -807,6 +883,17 @@ annex_core_country = {
 			from = jingoism 
 			to = pro_military
 			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
@@ -869,6 +956,17 @@ acquire_substate_region = {
 			from = jingoism 
 			to = pro_military
 			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
@@ -951,6 +1049,17 @@ acquire_state = {
 			from = jingoism 
 			to = pro_military
 			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
@@ -1045,6 +1154,17 @@ acquire_capital = {
 			value = 0.25
 		}
 	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
 }
 
 # Place in the Sun
@@ -1110,6 +1230,17 @@ place_in_the_sun = {
 			value = 0.25
 		}
 	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
 }
 
 take_treaty_port = {
@@ -1172,6 +1303,17 @@ take_treaty_port = {
 			value = 0.25
 		}
 	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
 }
 
 # Colonial competition
@@ -1205,6 +1347,17 @@ colonial_competition = {
 			from = jingoism 
 			to = pro_military
 			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
@@ -1838,6 +1991,17 @@ demand_concession_casus_belli = {
 			value = 0.1
 		}
 	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
 }
 
 # Establish Protectorate
@@ -1875,10 +2039,9 @@ establish_protectorate_casus_belli = {
 			}
 			AND = {
 				THIS = {
-					is_greater_power = yes
 					nationalism_n_imperialism = 1
 				}
-				NOT = { number_of_states = 5 }
+				NOT = { number_of_states = 3 }
 			}
 		}
 		civilized = no
@@ -1899,6 +2062,17 @@ establish_protectorate_casus_belli = {
 			from = jingoism 
 			to = pro_military
 			value = 0.1
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
@@ -2080,6 +2254,17 @@ unification_casus_belli = {
 			value = 0.1
 		}
 	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
+		}
+	}
 }
 
 #Unification Annex
@@ -2136,6 +2321,17 @@ unification_annex_casus_belli = {
 			from = jingoism 
 			to = pro_military
 			value = 0.1
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
@@ -2212,15 +2408,8 @@ install_communist_gov_cb = {
 			
 			# If actor gov truly communist
 			government = proletarian_dictatorship
-			
-			# If actor ruling party is communist
-			ruling_party_ideology = communist
 		}
 		
-		# If reciever ruling party is not a communist
-		#NOT = {
-		#	ruling_party_ideology = communist
-		#}
 		
 		# There are some amount of communist already in the country
 		communist = 0.1
@@ -2286,7 +2475,7 @@ uninstall_communist_gov_cb = {
 		THIS = {
 			# If actor ruling party is not communist
 			NOT = {
-				ruling_party_ideology = communist
+				government = proletarian_dictatorship
 			}
 		}
 		
@@ -2397,6 +2586,17 @@ negotiated_transfer = {
 			from = jingoism 
 			to = pro_military
 			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					province_selector = 1
+				}
+				province_selector = -1
+			}
 		}
 	}
 }
