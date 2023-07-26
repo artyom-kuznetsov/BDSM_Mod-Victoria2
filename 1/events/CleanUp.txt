@@ -57,6 +57,16 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA60130"
+		FROM = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = 1
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
 		inherit = FROM
 	}
 	

@@ -2,9 +2,6 @@
 country_event = {
 	id = 36898
 	
-	#news_desc_long = "EVTDESC36898_NEWS_LONG"
-	#news_desc_medium = "EVTDESC36898_NEWS_MEDIUM"
-	#news_desc_short = "EVTDESC36898_NEWS_SHORT"
 	title = "EVTNAME36898"
 	desc = "EVTDESC36898"
 	picture = "queenvictoria"
@@ -36,6 +33,16 @@ country_event = {
 			value = -200
 		}
 		prestige = 5
+		any_country = {
+			limit = {
+				primary_culture = north_german
+				is_greater_power = yes
+				NOT = {
+					tag = THIS
+				}
+			}
+			country_event = 57600
+		}
 	}
 }
 
