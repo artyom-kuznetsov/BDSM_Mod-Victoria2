@@ -939,11 +939,15 @@ economic_reforms = {
 	land_reform = {
 		no_land_reform = {
 			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_land_reform = {
 			technology_cost = 5000
 			civilization_progress_modifier = 0.1
+			farm_rgo_eff = 0.25
+			mine_rgo_eff = 0.25
+			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
+			core_pop_militancy_modifier = -0.02
 			allow = { }
 			
 			on_execute = {
@@ -969,14 +973,14 @@ economic_reforms = {
 	}
 	admin_reform = {
 		no_admin_reform = {
-			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_admin_reform = {
 			technology_cost = 5000
-			civilization_progress_modifier = 0.1
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
+			administrative_efficiency_modifier = 0.1
+			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
+			core_pop_consciousness_modifier = -0.02
 			allow = { }
 			
 			on_execute = {
@@ -1004,13 +1008,14 @@ economic_reforms = {
 		next_step_only = yes
 		no_finance_reform = {
 			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_finance_reform = {
-			technology_cost = 5000
+			technology_cost = 9600
+			tax_efficiency = 0.1
 			civilization_progress_modifier = 0.1
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
+			max_loan_modifier = -1.0 # no loan 4 u
+			research_points_modifier = 0.2
+			core_pop_militancy_modifier = -0.02
 			allow = {
 				NOT = { }
 				is_substate = no
@@ -1043,10 +1048,11 @@ economic_reforms = {
 		no_monetary_reform = {
 		}
 		yes_monetary_reform = {
-			technology_cost = 5000
+			technology_cost = 9600
+			tax_efficiency = 0.05
 			civilization_progress_modifier = 0.1
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
+			research_points_modifier = 0.2
+			core_pop_consciousness_modifier = -0.02
 			allow = { }
 			
 			on_execute = {
@@ -1074,14 +1080,12 @@ economic_reforms = {
 	
 	education_reform = {
 		no_education_reform = {
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
 		}
 		yes_education_reform = {
-			technology_cost = 5000
+			technology_cost = 9600
+			education_efficiency_modifier = 0.1
 			civilization_progress_modifier = 0.1
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
+			research_points_modifier = 0.2
 			allow = { }
 			
 			on_execute = {
@@ -1139,8 +1143,10 @@ economic_reforms = {
 		}
 		
 		yes_research_reform = {
-			technology_cost = 5000
+			technology_cost = 9600
+			education_efficiency_modifier = 0.1
 			civilization_progress_modifier = 0.1
+			research_points_modifier = 0.2
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
 			allow = { }
@@ -1175,10 +1181,10 @@ economic_reforms = {
 		}
 		yes_transport_improv = {
 			technology_cost = 5000
-			civilization_progress_modifier = 0.1
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
-			allow = { money = 2000 }
+			farm_rgo_eff = 0.25
+			mine_rgo_eff = 0.25
+			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			
 			on_execute = {
 				effect = {
@@ -1215,8 +1221,9 @@ economic_reforms = {
 	
 		}
 		yes_firearms_production = {
-			technology_cost = 5000
+			technology_cost = 9600
 			civilization_progress_modifier = 0.1
+			research_points_modifier = 0.2
 			allow = { money = 10000 }
 			
 			on_execute = {
@@ -1251,10 +1258,11 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_pre_indust = {
-			technology_cost = 5000
+			technology_cost = 9600
 			civilization_progress_modifier = 0.1
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
+			research_points_modifier = 0.2
 			allow = { money = 2000 }
 			
 			on_execute = {
@@ -1280,10 +1288,11 @@ economic_reforms = {
 			}
 		}
 		yes_pre_indust2 = {
-			technology_cost = 5000
+			technology_cost = 9600
 			civilization_progress_modifier = 0.2
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
+			research_points_modifier = 0.4
 			allow = { money = 4000 }
 			
 			on_execute = {
@@ -1317,10 +1326,11 @@ economic_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_industrial_construction = {
-			technology_cost = 5000
-			civilization_progress_modifier = 0.1
+			technology_cost = 9600
+			civilization_progress_modifier = 0.2
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
+			research_points_modifier = 0.2
 			allow = {
 				pre_indust = yes_pre_indust2
 				money = 7000 
@@ -1350,10 +1360,11 @@ economic_reforms = {
 			}
 		}
 		yes_industrial_construction2 = {
-			technology_cost = 5000
+			technology_cost = 9600
 			civilization_progress_modifier = 0.2
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
+			research_points_modifier = 0.4
 			allow = {
 				money = 14000
 			}
@@ -1390,11 +1401,13 @@ military_reforms = {
 		no_foreign_training = {
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
+			supply_consumption = -0.05
 		}
 		yes_foreign_training = {
 			min_military_spending = 0.05
-			technology_cost = 3000
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
 			
@@ -1428,8 +1441,9 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_foreign_weapons = {
-			technology_cost = 3000
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
 
@@ -1461,8 +1475,9 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_military_constructions = {
-			technology_cost = 3000
+			technology_cost = 5000
 			civilization_progress_modifier = 0.05
+			research_points_modifier = 0.1
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
 			allow = {
@@ -1501,7 +1516,8 @@ military_reforms = {
 		}
 		yes_foreign_officers = {
 			leadership_modifier = 0.1
-			technology_cost = 3000
+			technology_cost = 5000
+			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
@@ -1536,7 +1552,8 @@ military_reforms = {
 		}
 		yes_army_schools = {
 			min_military_spending = 0.05
-			technology_cost = 3000
+			technology_cost = 5000
+			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
@@ -1570,7 +1587,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_foreign_naval_officers = {
-			technology_cost = 3000
+			technology_cost = 5000
+			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
@@ -1605,7 +1623,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_naval_schools = {
-			technology_cost = 3000
+			technology_cost = 5000
+			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
@@ -1640,7 +1659,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_foreign_navies = {
-			technology_cost = 3000
+			technology_cost = 5000
+			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			
 			allow = {
@@ -1674,7 +1694,8 @@ military_reforms = {
 		}
 		
 		yes_western_shipyards = {
-			technology_cost = 3000
+			technology_cost = 5000
+			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			
 			allow = {
@@ -1708,7 +1729,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_foreign_artillery = {
-			technology_cost = 3000
+			technology_cost = 5000
+			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
