@@ -87,7 +87,7 @@ acquire_state_warlord = {
 	
 	badboy_factor = 1
 	prestige_factor = 1
-	peace_cost_factor = 1
+	peace_cost_factor = 0.7
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -123,6 +123,7 @@ acquire_state_warlord = {
 	allowed_states = {
 		any_owned_province = {
 			OR = {
+				owner = { war_with = THIS }
 				any_neighbor_province = { 
 					owned_by = THIS 
 				}
@@ -150,8 +151,10 @@ acquire_state_warlord = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -174,7 +177,7 @@ acquire_state_invasion = {
 	
 	badboy_factor = 2.5
 	prestige_factor = 1
-	peace_cost_factor = 1
+	peace_cost_factor = 0.75
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -237,8 +240,10 @@ acquire_state_invasion = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -440,8 +445,10 @@ conquest = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -540,8 +547,10 @@ conquest_small = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -596,8 +605,10 @@ civil_war = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -762,8 +773,10 @@ acquire_core_state = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -828,8 +841,10 @@ acquire_all_cores = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -890,8 +905,10 @@ annex_core_country = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -963,8 +980,10 @@ acquire_substate_region = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -1056,8 +1075,10 @@ acquire_state = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -1159,8 +1180,10 @@ acquire_capital = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -1235,8 +1258,10 @@ place_in_the_sun = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -1308,8 +1333,10 @@ take_treaty_port = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -1354,8 +1381,10 @@ colonial_competition = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -1996,8 +2025,10 @@ demand_concession_casus_belli = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -2069,8 +2100,10 @@ establish_protectorate_casus_belli = {
 		THIS = {
 			any_owned = {
 				limit = {
+				# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -2259,8 +2292,10 @@ unification_casus_belli = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -2328,8 +2363,10 @@ unification_annex_casus_belli = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -2593,8 +2630,10 @@ negotiated_transfer = {
 		THIS = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					province_selector = 1
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}

@@ -5,6 +5,7 @@ political_decisions = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { 
 				any_owned_province = { 
+					# Audax Validator "." Ignore_NEXT
 					has_building = province_selector 
 				}
 			}
@@ -17,8 +18,12 @@ political_decisions = {
 		effect = {
 			any_owned = {
 				limit = {
-					NOT = { has_building = province_selector }
+					NOT = { 
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					}
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = 1
 			}
 		}
@@ -27,7 +32,10 @@ political_decisions = {
 		alert = yes
 		potential = {
 			ai = no
-			any_owned_province = { has_building = province_selector }
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector 
+			}
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}	
 		allow = {
@@ -38,6 +46,7 @@ political_decisions = {
 				limit = {
 					has_building = province_selector
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -48,11 +57,13 @@ political_decisions = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			ai = no
 			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector
 			}
 		}
 		allow = {
 			any_owned_province = {
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector
 				controlled_by = THIS
 				NOT = {
@@ -64,6 +75,7 @@ political_decisions = {
 		effect = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					has_building = province_selector
 					NOT = {
 						has_province_modifier = scorched_earth_modifier
@@ -73,6 +85,7 @@ political_decisions = {
 				state_scope = {
 					add_province_modifier = { name = scorched_earth_modifier duration = 730 }
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -84,6 +97,7 @@ political_decisions = {
 			ai = no
 			any_owned_province = { 
 				is_core = THIS
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector
 			}
 		}
@@ -92,10 +106,12 @@ political_decisions = {
 		effect = {
 			any_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					has_building = province_selector
 					is_core = THIS
 				}
 				remove_core = THIS
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -106,11 +122,13 @@ political_decisions = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			ai = no
 			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector
 			}
 		}
 		allow = {
 			any_owned_province = {
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector
 				controlled_by = THIS
 			}
@@ -120,6 +138,7 @@ political_decisions = {
 			money = -50000
 			random_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					has_building = province_selector
 				}
 				state_scope = {
@@ -131,6 +150,7 @@ political_decisions = {
 						reduce_pop = 0.01
 					}
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
 		}
@@ -140,12 +160,14 @@ political_decisions = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector 
 			}
 			ai = no
 		}	
 		allow = {
 			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector 
 				NOT = { has_province_modifier = selector_pop_boost_modifier }
 				NOT = { total_pops = 20000 }
@@ -156,10 +178,12 @@ political_decisions = {
 			money = -100000
 			random_owned = {
 				limit = {
+					# Audax Validator "." Ignore_NEXT
 					has_building = province_selector
 					NOT = { total_pops = 20000 }
 					NOT = { has_province_modifier = selector_pop_boost_modifier }
 				}
+				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 				add_province_modifier = {
 					name = selector_pop_boost_modifier
@@ -174,6 +198,7 @@ political_decisions = {
 			ai = no
 			NOT = { has_country_flag = hide_all_decs_flag }
 			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
 				has_building = province_selector
 				is_colonial = no
 			}
