@@ -985,6 +985,10 @@ country_event = {
 			factor = 0.8
 			literacy = 0.9
 		}
+		modifier = {
+			factor = 0.5
+			industrial_score = 100
+		}
 	}
 	
 	option = {
@@ -1036,7 +1040,7 @@ country_event = {
 				NOT = {
 					is_core = THIS
 				}
-				colonial = no
+				is_colonial = no
 			}
 			add_province_modifier = {
 				name = non_core_non_colonial_province_modifier
