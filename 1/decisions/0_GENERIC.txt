@@ -709,4 +709,25 @@ political_decisions = {
 			add_country_modifier = { name = usurp_cooldown_modifier duration = 1825 }
 		}
 	}
+	
+	vassal_interaction_dec = {
+		alert = no
+		
+		potential = {
+			num_of_vassals = 1
+			ai = no
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			country_event = 57076
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+	}
 }
