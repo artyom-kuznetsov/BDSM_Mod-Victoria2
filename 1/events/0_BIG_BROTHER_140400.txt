@@ -5,28 +5,22 @@ country_event = {
 	
 	trigger = {
 		tag = WBK
+		NOT = {
+			has_country_modifier = mcl_happened_modifier
+		}
+		has_global_flag = 1836_setup_complete_flag
 	}
+	
 	
 	option = {
 		name = "noloc"
-		country_event = { id=140400 days=30 }
-		add_country_modifier = { name = mcl_happened_modifier duration = 33 }
+		add_country_modifier = { name = mcl_happened_modifier duration = 30 }
 		
 		any_pop = {
 			money = 2000000
 		}
 		prestige = -100
 		
-		# ¬—≈Ã —“–¿Õ¿Ã
-		any_country = {
-			limit = {
-				exists = yes
-			}
-			add_country_modifier = {
-				name = force_reform_cooldown_modifier
-				duration = 3650
-			}
-		}
 		
 		# Õ≈“  –≈œŒ—“ÕŒ√Œ œ–¿¬¿
 		any_country = {
@@ -242,21 +236,6 @@ country_event = {
 	}
 }
 
-# RELAUNCH MCL
-country_event = {
-	title = "noloc"
-	desc = "noloc"
-	id = 140401
-	trigger = {
-		NOT = { has_country_modifier = mcl_happened_modifier }
-		tag = WBK
-	}
-	option = {
-		name = "noloc"
-		country_event = 140400
-	}
-}
-
 # RESTORE WBK
 country_event = {
 	title = "noloc"
@@ -281,6 +260,7 @@ country_event = { # POPS LOSE LITERACY
 	trigger = {
 		tag = WBK
 		NOT = { has_country_modifier = ycl_happened_modifier }
+		has_global_flag = 1836_setup_complete_flag
 	}
 
 	

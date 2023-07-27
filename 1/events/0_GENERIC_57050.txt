@@ -1089,15 +1089,16 @@ province_event = {
 	id = 57075
 	
 	trigger = {
-		OR = {
-			is_core = THIS
-			has_province_modifier = non_core_non_colonial_province_modifier
-		}
-		is_colonial = yes
+		is_core = THIS
+		has_province_modifier = non_core_non_colonial_province_modifier
 	}
 	
 	option = {
 		name = "noncores_rem_EvtOptA"
-		state_scope = { any_owned = { remove_province_modifier = non_core_non_colonial_province_modifier } }
+		state_scope = { 
+			any_owned = { 
+				remove_province_modifier = non_core_non_colonial_province_modifier 
+			} 
+		}
 	}
 }
