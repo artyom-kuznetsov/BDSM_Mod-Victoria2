@@ -73,6 +73,14 @@ promote_to =
 			NOT = { is_primary_culture = yes }
 		}
 		modifier = {
+			factor = -100
+			NOT = { 
+				state_scope = {
+					capitalists = 0.07
+				}
+			}
+		}
+		modifier = {
 			factor = 30
 			OR = {
 				is_accepted_culture = yes
@@ -250,9 +258,11 @@ promote_to =
 		factor = 0.01
 		modifier = {
 			factor = -100
-			is_primary_culture = no
-			is_accepted_culture = no
-			country = { has_country_flag = disable_non_accepted_craftsmen }
+			NOT = { 
+				state_scope = {
+					capitalists = 0.07
+				}
+			}
 		}
 		group = {
 			modifier = {
@@ -319,6 +329,14 @@ promote_to =
 		}
 		modifier = {
 			factor = -100
+			NOT = { 
+				state_scope = {
+					capitalists = 0.07
+				}
+			}
+		}
+		modifier = {
+			factor = -100
 			officers = 0.002
 		}		
 
@@ -344,6 +362,14 @@ promote_to =
 	clergymen =
 	{
 		factor = 0.01		
+		modifier = {
+			factor = -100
+			NOT = { 
+				state_scope = {
+					capitalists = 0.07
+				}
+			}
+		}
 		group = {
 			modifier = {
 				factor = 1

@@ -2116,6 +2116,7 @@ unification_humiliate_cb = {
 	is_triggered_only = no
 	months = 12
 	crisis = no
+	construction_speed = 1.5
 
 	badboy_factor = 1
 	prestige_factor = 1
@@ -2131,7 +2132,7 @@ unification_humiliate_cb = {
 	good_relation_infamy_factor = 1
 	good_relation_militancy_factor = 1
 	
-	always = yes
+	always = no
 	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
@@ -2167,6 +2168,7 @@ unification_release_puppet_cb = {
 	is_triggered_only = yes
 	months = 12
 	crisis = no
+	construction_speed = 1.5
 
 	badboy_factor = 0
 	prestige_factor = 1
@@ -2182,7 +2184,6 @@ unification_release_puppet_cb = {
 	good_relation_infamy_factor = 1
 	good_relation_militancy_factor = 1
 	
-	always = yes
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
@@ -2225,7 +2226,7 @@ unification_casus_belli = {
 	sprite_index = 5
 	is_triggered_only = no
 	months = 12
-	construction_speed = 1
+	construction_speed = 1.5
 	crisis = no
 	
 	badboy_factor = 0
@@ -2241,8 +2242,6 @@ unification_casus_belli = {
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
 	good_relation_militancy_factor = 1
-	
-	always = yes
 	
 	can_use = {
 		NOT = { is_our_vassal = THIS }

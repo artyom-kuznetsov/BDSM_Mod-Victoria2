@@ -12,12 +12,18 @@ country_event = { # SOUTH GERMANS ANNEX TO NGF
 		}
 		primary_culture = south_german
 		NOT = { tag = SGF tag = KUK tag = AUS }
+		NGF = {
+			owns = 43
+		}
 		OR = {
 			part_of_sphere = no
 			in_sphere = NGF
 		}
 		is_greater_power = no
-		is_secondary_power = no
+		OR = {
+			is_secondary_power = no
+			in_sphere = NGF
+		}
 		ai = yes
 	}
 	

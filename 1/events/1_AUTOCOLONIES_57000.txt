@@ -283,3 +283,53 @@ country_event = {
     }
 }
 
+
+# EAST BORNEO
+country_event = {
+    id = 57012
+    title = "EVTNAME57000"
+    desc = "EVTDESC57012"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        invention = colonial_negotiations
+        1422 = { empty = yes }
+        owns = 1424
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        NET_1424 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
+
+# NORTH BORNEO
+country_event = {
+    id = 57012
+    title = "EVTNAME57000"
+    desc = "EVTDESC57013"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        invention = colonial_negotiations
+        1397 = { empty = yes }
+        owns = 1396
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        BRU_1394 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
+
