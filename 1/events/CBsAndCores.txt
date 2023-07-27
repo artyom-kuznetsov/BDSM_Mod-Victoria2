@@ -573,15 +573,17 @@ province_event = {
 		OR = {
 			is_primary_culture = yes
 			is_accepted_culture = yes
-			any_neighbor_province = {
-				is_core = THIS
-				controlled_by = THIS
-			}
+		}
+		any_neighbor_province = {
+			is_core = THIS
+			controlled_by = THIS
 		}
 		owner = {
 			tag = THIS
-			is_greater_power = yes
 			nationalism_n_imperialism = 1
+		}
+		NOT = {
+			has_country_modifier = received_core_modifier
 		}
 	}
 	
@@ -623,7 +625,16 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA2560"
-		add_core = THIS
+		state_scope = {
+			any_owned = {
+				add_core = THIS
+			}
+		}
+		remove_province_modifier = non_core_non_colonial_province_modifier
+		add_country_modifier = {
+			name = received_core_modifier
+			duration = 3650
+		}
 	}
 }
 

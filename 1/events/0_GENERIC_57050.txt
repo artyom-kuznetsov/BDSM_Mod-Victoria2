@@ -1001,3 +1001,99 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	title = "expansionism_inv_EvtName"
+	desc = "expansionism_inv_EvtDesc"
+	id = 57072
+	
+	trigger = {
+		invention = expansionism
+		NOT = {
+			has_country_modifier = expansionism_modifier
+		}
+	}
+	
+	option = {
+		name = "expansionism_inv_EvtOptA"
+		add_country_modifier = {
+			name = expansionism_modifier
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	title = "noncores_start_EvtName"
+	desc = "noncores_start_EvtDesc"
+	id = 57073
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		any_owned = {
+			limit = {
+				NOT = {
+					is_core = THIS
+				}
+				colonial = no
+			}
+			add_province_modifier = {
+				name = non_core_non_colonial_province_modifier
+				duration = -1
+			}
+		}
+	}
+	
+	option = {
+		name = "noncores_EvtOptA"
+	}
+}
+
+province_event = {
+	title = "noncores_EvtName"
+	desc = "noncores_EvtDesc"
+	id = 57074
+	
+	trigger = {
+		NOT = {
+			is_core = THIS
+			has_province_modifier = non_core_non_colonial_province_modifier
+		}
+		is_colonial = no
+	}
+	
+	immediate = {
+		state_scope = {
+			any_owned = {
+				add_province_modifier = {
+					name = non_core_non_colonial_province_modifier
+					duration = -1
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "noncores_EvtOptA"
+	}
+}
+
+province_event = {
+	title = "noncores_EvtName"
+	desc = "noncores_rem_EvtDesc"
+	id = 57075
+	
+	trigger = {
+		OR = {
+			is_core = THIS
+			has_province_modifier = non_core_non_colonial_province_modifier
+		}
+		is_colonial = yes
+	}
+	
+	option = {
+		name = "noncores_rem_EvtOptA"
+		state_scope = { any_owned = { remove_province_modifier = non_core_non_colonial_province_modifier } }
+	}
+}
