@@ -313,13 +313,22 @@ political_decisions = {
 	move_capital_to_moscow = {
 		potential = {
 			tag = RUS
-			NOT = { owns = 339 } # Viipuri
 			owns = 1008 # Moscow
 			capital = 994
 		}
 		
 		allow = {
 			owns = 1008 # Moscow
+			NOT = {
+				339 = {
+					owner = { 
+						OR = {
+							tag = THIS
+							vassal_of = THIS
+						}
+					}
+				}
+			}
 		}
 		
 		effect = {
