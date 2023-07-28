@@ -419,24 +419,62 @@ very_high_taxes_rich_trmod = {
 }
 
 
-# v4.0 Levies
-mobilisation_levies_trmod = {
-	trigger = {
-		is_mobilised = yes
-		conscription = ref_disarmed_nation
+# v4.0 MOBILIZATION
+	# LEVIES
+	mobilisation_levies_trmod = {
+		trigger = {
+			is_mobilised = yes
+			conscription = ref_disarmed_nation
+		}
+		
+		factory_throughput = -0.3
+		rgo_throughput = -0.3
+		icon = 1
 	}
-	tax_efficiency = -0.02
-	icon = 1
-}
-# v4.0 Mass Conscription
-mass_conscription_trmod = {
-	trigger = {
-		is_mobilised = yes
-		conscription = ref_sizeable_military_budget
+	# MASS CONSCRIPT
+	mass_conscription_trmod = {
+		trigger = {
+			is_mobilised = yes
+			conscription = ref_sizeable_military_budget
+		}
+		icon = 1
+		factory_throughput = -0.4
+		rgo_throughput = -0.4
 	}
-	tax_efficiency = -0.05
-	icon = 1
-}
+	# NATGUARD
+	natguard_trmod = {
+		trigger = {
+			is_mobilised = yes
+			conscription = ref_limited_military_budget
+		}
+		
+		factory_throughput = -0.2
+		rgo_throughput = -0.2
+		icon = 1
+	}
+	# PROF ARMY
+	prof_army_trmod = {
+		trigger = {
+			is_mobilised = yes
+			conscription = ref_minimal_military_budget
+		}
+		
+		factory_throughput = -0.15
+		rgo_throughput = -0.15
+		icon = 1
+	}
+	# DISARMED
+	disarmed_nation_trmod = {
+		trigger = {
+			is_mobilised = yes
+			conscription = ref_minimal_military_budget
+		}
+		
+		factory_throughput = -0.1
+		rgo_throughput = -0.1
+		icon = 1
+	}
+
 
 # v4.0 Badboy
 badboy_25_275_trmod = {
@@ -478,4 +516,3 @@ badboy_above_30_trmod = {
 	naval_organisation = -0.9
 	icon = 1
 }
-
