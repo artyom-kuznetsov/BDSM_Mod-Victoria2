@@ -894,13 +894,20 @@ country_event = {
 	picture = "iron"
 	id = 57071
 	
-	fire_only_once = yes
-	
 	trigger = {
 		civilized = yes
-		literacy = 0.4
+		OR = {
+			literacy = 0.4
+			AND = {
+				literacy = 0.3
+				year = 1870
+			}
+		}
 		experimental_railroad = 1
 		freedom_of_trade = 1
+		NOT = {
+			has_country_flag = industrial_revolution_flag
+		}
 	}
 	
 	immediate = {
@@ -908,7 +915,7 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 60
+		months = 120
 		modifier = {
 			factor = 0.5
 			year = 1860
