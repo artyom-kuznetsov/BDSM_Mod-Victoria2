@@ -1001,7 +1001,11 @@ country_event = {
 	option = {
 		name = "industrial_revolution_EvtOptA"
 		prestige = 5
+<<<<<<< HEAD
 		years_of_research = 0.5
+=======
+		years_of_research = 0.2
+>>>>>>> 6e71c28f2cdd33e9c3688547cfc7c475e803574a
 		any_country = {
 			limit = {
 				NOT = {
@@ -1054,11 +1058,42 @@ country_event = {
 				duration = -1
 			}
 		}
+<<<<<<< HEAD
 		any_owned = {
 			limit = {
 				is_core = THIS
 			}
 			remove_province_modifier = non_core_non_colonial_province_modifier
+=======
+	}
+	
+	option = {
+		name = "noncores_EvtOptA"
+	}
+}
+
+province_event = {
+	title = "noncores_EvtName"
+	desc = "noncores_EvtDesc"
+	id = 57074
+	
+	trigger = {
+		NOT = {
+			is_core = THIS
+			has_province_modifier = non_core_non_colonial_province_modifier
+		}
+		is_colonial = no
+	}
+	
+	immediate = {
+		state_scope = {
+			any_owned = {
+				add_province_modifier = {
+					name = non_core_non_colonial_province_modifier
+					duration = -1
+				}
+			}
+>>>>>>> 6e71c28f2cdd33e9c3688547cfc7c475e803574a
 		}
 	}
 	
@@ -1067,6 +1102,7 @@ country_event = {
 	}
 }
 
+<<<<<<< HEAD
 #province_event = {
 #	title = "noncores_EvtName"
 #	desc = "noncores_EvtDesc"
@@ -1116,6 +1152,27 @@ country_event = {
 #		}
 #	}
 #}
+=======
+province_event = {
+	title = "noncores_EvtName"
+	desc = "noncores_rem_EvtDesc"
+	id = 57075
+	
+	trigger = {
+		is_core = THIS
+		has_province_modifier = non_core_non_colonial_province_modifier
+	}
+	
+	option = {
+		name = "noncores_rem_EvtOptA"
+		state_scope = { 
+			any_owned = { 
+				remove_province_modifier = non_core_non_colonial_province_modifier 
+			} 
+		}
+	}
+}
+>>>>>>> 6e71c28f2cdd33e9c3688547cfc7c475e803574a
 
 country_event = {
 	title = "vassal_interaction_EvtName"
