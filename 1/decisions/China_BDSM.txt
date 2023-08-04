@@ -1,0 +1,63 @@
+political_decisions = {
+	form_china_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			CHI = { exists = no }
+			is_culture_group = east_asian
+		}
+		
+		allow = {
+			total_pops = 18000000
+		}
+		
+		effect = {
+			change_tag = CHI
+			prestige = 20
+			set_country_flag = formed_china_flag
+			add_accepted_culture = beifaren
+			any_country = {
+				limit = {
+					is_culture_group = east_asian
+					ai = no
+					in_sphere = THIS
+					vassal_of = THIS
+					NOT = {
+						tag = THIS
+					}
+				}
+				annex_to = THIS
+			}	
+		}
+	}
+	chi_move_capital_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			has_country_flag = formed_china_flag
+			NOT = {
+				has_country_flag = chi_capital_moved_flag
+			}
+			NOT = {
+				has_country_modifier = chi_used_movecapital_dec_modifier
+			}
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+			OR = {
+				owns = 1616
+				owns = 2221
+			}
+		}
+		
+		effect = {
+			country_event = 57202
+			add_country_modifier = {
+				name = chi_used_movecapital_dec_modifier duration = 120
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

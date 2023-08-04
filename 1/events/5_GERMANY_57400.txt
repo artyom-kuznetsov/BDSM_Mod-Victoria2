@@ -1,0 +1,86 @@
+country_event = { # SOUTH GERMANS ANNEX TO NGF
+	title = "noloc"
+	desc = "noloc"
+	id = 57400
+	
+	trigger = {
+		NGF = {
+			exists = yes
+		}
+		GER = {
+			exists = no
+		}
+		primary_culture = south_german
+		NOT = { tag = SGF tag = KUK tag = AUS }
+		NGF = {
+			owns = 43
+		}
+		OR = {
+			part_of_sphere = no
+			in_sphere = NGF
+		}
+		is_greater_power = no
+		OR = {
+			is_secondary_power = no
+			in_sphere = NGF
+		}
+		ai = yes
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = {
+		name = "noloc"
+		annex_to = NGF
+		
+		any_owned = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				province_selector = 1
+			}
+			# Audax Validator "." Ignore_NEXT
+			province_selector = -1
+		}
+	}
+	
+}
+country_event = { # SOUTH GERMANS ANNEX TO GER
+	title = "noloc"
+	desc = "noloc"
+	id = 57401
+	
+	trigger = {
+		GER = {
+			exists = yes
+		}
+		primary_culture = south_german
+		NOT = { tag = SGF tag = KUK tag = AUS }
+		OR = {
+			part_of_sphere = no
+			in_sphere = GER
+		}
+		is_greater_power = no
+		is_secondary_power = no
+		ai = yes
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "noloc"
+		annex_to = GER
+		any_owned = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				province_selector = 1
+			}
+			# Audax Validator "." Ignore_NEXT
+			province_selector = -1
+		}
+	}
+	
+}

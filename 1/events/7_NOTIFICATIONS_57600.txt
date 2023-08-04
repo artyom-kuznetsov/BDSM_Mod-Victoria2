@@ -1,0 +1,81 @@
+
+country_event = {
+	title = "victoria_coronation_notification_EvtName"
+	desc = "victoria_coronation_notification_EvtDesc"
+	picture = "queenvictoria"
+	
+	id = 57600
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "victoria_coronation_notification_EvtOptA"
+	}
+}
+
+country_event = {
+	title = "industrial_revolution_notification_EvtName"
+	desc = "industrial_revolution_notification_EvtDesc"
+	picture = "iron"
+	
+	id = 57601
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "industrial_revolution_notification_OptA"
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = industrial_revolution_more_likely_flag }
+				}
+			}
+			owner = {
+				set_country_flag = industrial_revolution_more_likely_flag
+				CUSTOM_TOOLTIP_57601 = { }
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "north_german_federation_notification_EvtName"
+	desc = "north_german_federation_notification_EvtDesc"
+	picture = "bismarck"
+	
+	id = 57602
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "north_german_federation_notification_OptA"
+	}
+}
+
+country_event = {
+	title = "germany_notification_EvtName"
+	desc = "germany_notification_EvtDesc"
+	picture = "bismarck"
+	
+	id = 57603
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "germany_notification_OptA"
+	}
+}
+
+country_event = {
+	title = "chi_breakup_notification_EvtName"
+	desc = "chi_breakup_notification_EvtDesc"
+	picture = "Rebellion"
+	
+	id = 57604
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "chi_breakup_notification_OptA"
+	}
+}

@@ -1,0 +1,134 @@
+political_decisions = {
+	build_kiel_canal = {
+		
+		potential = {
+			NOT = { is_canal_enabled = 1 }
+			owns = 369
+			is_greater_power = yes
+			mechanical_production = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = kiel_canal_in_progress_modifier }
+			NOT = { has_global_flag = kiel_canal_flag }
+			year = 1855
+		}
+		allow = {
+			invention = machine_tools
+			invention = nitroglycerin
+			iron_steamers = 1
+			money = 500000
+		}
+		effect = {
+			add_country_modifier = {
+				name = kiel_canal_in_progress_modifier
+				duration = 3650
+			}
+			set_country_flag = kiel_canal_flag
+			set_global_flag = kiel_canal_flag
+			money = -500000
+			CANAL_DIVIDENDS_2 = { }
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war = yes
+			}
+		}
+	}
+	
+	build_suez_canal = {
+		
+		picture = suezcanal
+		potential = {
+			NOT = { is_canal_enabled = 2 }
+			mechanical_production = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = suez_canal_in_progress_modifier }
+			NOT = { has_global_flag = suez_canal_flag }
+			year = 1855
+		}
+		allow = {
+			OR = {
+				1755 = { 
+					owner = { 
+						OR = {
+							in_sphere = THIS 
+							vassal_of = THIS 
+						}
+					} 
+				}
+				owns = 1755
+			}
+			invention = machine_tools
+			invention = nitroglycerin		
+			iron_steamers = 1
+			money = 1500000
+		}
+		effect = {
+			1755 = { secede_province = THIS }
+			set_global_flag = suez_canal_built
+			money = -1500000
+			set_country_flag = suez_canal_flag
+			set_global_flag = suez_canal_flag
+			add_country_modifier = {
+				name = suez_canal_in_progress_modifier
+				duration = 3650
+			}
+			CANAL_DIVIDENDS_1 = { }
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war = yes
+			}
+		}
+	}
+
+	build_panama_canal = {
+		potential = {
+			NOT = { is_canal_enabled = 3 }
+			mechanical_production = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = panama_canal_in_progress_modifier }
+			NOT = { has_global_flag = panama_canal_flag }
+			year = 1855
+		}
+		allow = {
+			OR = {
+				1723 = {
+					owner = { 
+						OR = {
+							in_sphere = THIS 
+							vassal_of = THIS 
+						}
+					} 
+				}
+				owns = 1723
+			}
+			invention = machine_tools
+			invention = nitroglycerin
+			iron_steamers = 1
+			invention = prophylaxis_against_malaria
+			money = 2000000
+		}
+		effect = {
+			1723 = { secede_province = THIS }
+			money = -2000000
+			set_country_flag = panama_canal_flag
+			set_global_flag = panama_canal_flag
+			add_country_modifier = {
+				name = panama_canal_in_progress_modifier
+				duration = 3650
+			}
+			CANAL_DIVIDENDS_1 = { }
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war = yes
+			}
+		}
+	}	
+}

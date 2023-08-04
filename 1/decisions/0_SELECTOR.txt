@@ -1,0 +1,233 @@
+political_decisions = {
+	selector_select_all_dec = {
+		alert = no
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { 
+				any_owned_province = { 
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector 
+				}
+			}
+			ai = no
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			any_owned = {
+				limit = {
+					NOT = { 
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = 1
+			}
+		}
+	}
+	reset_province_selector_dec = {
+		alert = yes
+		potential = {
+			ai = no
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector 
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}	
+		allow = {
+			
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+	selector_scorched_earth_dec = {
+		alert = no
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+			}
+		}
+		allow = {
+			any_owned_province = {
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+				controlled_by = THIS
+				NOT = {
+					has_province_modifier = scorched_earth_modifier
+				}
+			}
+			#war = yes
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					NOT = {
+						has_province_modifier = scorched_earth_modifier
+					}
+					controlled_by = THIS
+				}
+				state_scope = {
+					add_province_modifier = { name = scorched_earth_modifier duration = 730 }
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+	selector_revokecores_dec = {
+		alert = no
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+			any_owned_province = { 
+				is_core = THIS
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+			}
+		}
+		allow = {
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					is_core = THIS
+				}
+				remove_core = THIS
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+	selector_removebureaucrats_dec = {
+		alert = no
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+			}
+		}
+		allow = {
+			any_owned_province = {
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+				controlled_by = THIS
+			}
+			money = 50000
+		}
+		effect = {
+			money = -50000
+			random_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				state_scope = {
+					any_pop = {
+						limit = {
+							NOT = { is_accepted_culture = yes }
+							type = bureaucrats
+						}
+						reduce_pop = 0.01
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+	selector_pop_boost_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector 
+			}
+			ai = no
+		}	
+		allow = {
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector 
+				NOT = { has_province_modifier = selector_pop_boost_modifier }
+				NOT = { total_pops = 20000 }
+			}
+			money = 100000
+		}
+		effect = {
+			money = -100000
+			random_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					NOT = { total_pops = 20000 }
+					NOT = { has_province_modifier = selector_pop_boost_modifier }
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+				add_province_modifier = {
+					name = selector_pop_boost_modifier
+					duration = 1460
+				}
+			}
+		}
+	}
+	selector_target_immigration_dec = {
+		alert = yes
+		potential = {
+			ai = no
+			NOT = { has_country_flag = hide_all_decs_flag }
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+				is_colonial = no
+			}
+		}
+		
+		allow = {
+			NOT = {
+				any_owned_province = { 
+					has_province_modifier = immigrator_modifier
+				}
+			}
+		}
+		
+		effect = {
+			random_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					NOT = { has_province_modifier = immigrator_modifier }
+					is_colonial = no
+				}
+				state_scope = {
+					any_owned = {
+						add_province_modifier = { name = immigrator_modifier duration = -1 }
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+}
