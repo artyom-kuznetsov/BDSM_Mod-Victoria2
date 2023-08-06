@@ -191,50 +191,6 @@ political_decisions = {
 			factor = 1
 		}
 	}	
-	form_italy = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			is_culture_group = italian
-			
-			NOT = {
-				exists = ITA
-			}
-		}
-		
-		allow = {
-			is_greater_power = yes
-			prestige = 45
-			war = no
-			ITA = {
-				all_core = {
-					OR = {
-						owned_by = THIS
-						owner = {
-							in_sphere = THIS
-						}
-					}
-				}
-			}
-		}
-		
-		effect = {
-			prestige = 20
-			change_tag = ITA
-			capital = 749
-			add_accepted_culture = north_italian
-			add_accepted_culture = south_italian
-			any_country = {
-				limit = {
-					is_culture_group = italian
-					in_sphere = THIS
-				}
-				country_event = { id=11101 days=0 }
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	form_scandinavia = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }

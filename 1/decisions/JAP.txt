@@ -55,18 +55,14 @@ political_decisions = {
 		}
 		
 		allow = {
-			OR = {
-				AND = {
-					AIN = {
-						OR = {
-							in_sphere = JAP
-							alliance_with = JAP
-							vassal_of = JAP
-						}
-					}
-					state_n_government = 1
+			AIN = {
+				OR = {
+					in_sphere = THIS
+					alliance_with = THIS
+					vassal_of = THIS
 				}
 			}
+			state_n_government = 1
 		}
 		
 		effect = {

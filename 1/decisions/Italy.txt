@@ -1,4 +1,136 @@
 political_decisions = {
+	expedition_to_sicily = {
+		potential = {
+			OR = {
+				tag = SAR
+				tag = LOM
+				tag = VEN
+				tag = PAR
+				tag = MOD
+				tag = LUC
+				tag = TUS
+			}
+			NOT = { exists = ITA }
+			NOT = { has_global_flag = expedition_to_sicily }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+
+		allow = {
+			ideological_thought = 1
+		}
+
+		effect = {
+			set_global_flag = expedition_to_sicily
+			define_general = {
+				name = "§RДжузеппе Гарибальди§W"
+				personality = org05mor40
+				background = 5a4d_1
+			}
+			any_country = {
+				limit = {
+					NOT = { tag = THIS }
+					owns = 754
+				}
+				country_event = { id = 35305 days = 0 }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			random_owned = {
+				limit = {
+					owner = { ai = yes }
+					has_building = naval_base
+					is_core = THIS
+				}
+				sub_unit = { type = clipper_transport value = current }
+			}
+			
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					war_exhaustion = 1
+					war = yes
+					754 = {
+						owner = {
+							brigades_compare = 1.2
+						}
+					}
+				}
+			}
+		}
+	}
 	cavours_diplomacy = {
 		potential = {
 			OR = {
@@ -14,6 +146,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = cavour_has_done_his
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 			owns = 465
 			owns = 466
 			owns = 472
@@ -21,7 +154,6 @@ political_decisions = {
 				exists = yes
 				is_greater_power = yes
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		allow = {
 			relation = {
@@ -39,15 +171,6 @@ political_decisions = {
 			relation = {
 				who = FRA
 				value = 50
-			}
-			726 = {
-				add_core = SAR
-			}
-			727 = {
-				add_core = SAR
-			}
-			728 = {
-				add_core = SAR
 			}
 			465 = {
 				remove_core = ITA
@@ -196,20 +319,37 @@ political_decisions = {
 	law_of_guarantees = {
 		potential = {
 			tag = ITA
-			NOT = {
-				capital = 749
-			}
+			NOT = { has_country_flag = law_of_guarantees }
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
-			owns = 749
+			SAR_720 = { owned_by = THIS }
+			SAR_765 = { owned_by = THIS }
+			#AUS_726 = { owned_by = THIS }
+			MOD_739 = { owned_by = THIS }
+			TUS_744 = { owned_by = THIS }
+			PAP_749 = { owned_by = THIS }
+			SIC_754 = { owned_by = THIS }
+			SIC_753 = { owned_by = THIS }
+			SIC_755 = { owned_by = THIS }
+			SIC_763 = { owned_by = THIS }
 		}
 		
 		effect = {
+			set_country_flag = law_of_guarantees
 			capital = 749
-			prestige = 5
-			badboy = -2
+			prestige = 15
+			any_owned = {
+				remove_core = SAR
+				remove_core = PAR
+				remove_core = LUC
+				remove_core = MOD
+				remove_core = TUS
+				remove_core = PAP
+				remove_core = SIC
+				remove_core = LOM
+			}
 		}
 	}
 	
@@ -219,39 +359,25 @@ political_decisions = {
 			NOT = {
 				has_country_flag = italia_ulterior
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
 			OR = {
-				state_n_government = 1
+				nationalism_n_imperialism = 1
 				is_greater_power = yes
 			}
+			owns = 726
+			owns = 729
 		}
 		
 		effect = {
 			set_country_flag = italia_ulterior
-			729 = {
-				add_core = ITA
-			}
-			730 = {
-				add_core = ITA
-			}
-			731 = {
-				add_core = ITA
-			}
-			732 = {
-				add_core = ITA
-			}
-			733 = {
-				add_core = ITA
-			}
 			734 = {
 				add_core = ITA
 			}
 			735 = {
 				add_core = ITA
-			}
+			}			
 			736 = {
 				add_core = ITA
 			}
@@ -267,18 +393,276 @@ political_decisions = {
 			778 = {
 				add_core = ITA
 			}
-			780 = {
-				add_core = ITA
+		}
+	}
+
+	embrace_south_italians = {
+		potential = {
+			OR = {
+				tag = SAR
+				tag = TUS
+				tag = LOM
+				tag = VEN
+				tag = PAR
+				tag = LUC
+				tag = MOD
 			}
-			781 = {
-				add_core = ITA
+			NOT = { has_country_flag = embraced_south_italians }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			state_n_government = 1
+			OR = {
+				765 = { owned_by = THIS }
+				749 = { owned_by = THIS }
 			}
-			782 = {
-				add_core = ITA
+		}
+		
+		effect = {
+			SIC = { all_core = { add_core = THIS } }
+			PAP = { all_core = { add_core = THIS } }
+			set_country_flag = embraced_south_italians
+			any_country = {
+				limit = {
+					ai = yes
+					OR = {
+						tag = PAP
+						tag = SIC
+					}
+					relation = {
+						who = THIS
+						value = 149
+					}
+				}
+				country_event = 57900
 			}
-			2582 = {
-				add_core = ITA
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+
+	annex_lucca_dec = {
+		potential = {
+			tag = TUS
+			exists = LUC
+			NOT = { has_country_flag = lucca_annexed }
+		}
+
+		allow = {
+			year = 1847
+			neighbour = LUC
+			LUC = { ai = yes }
+		}
+
+		effect = {
+			prestige = 5
+			LUC = { all_core = { add_core = THIS } }
+			inherit = LUC
+		}
+	}
+	
+	form_italy_dec = {
+		potential = {
+			is_culture_group = italian
+			NOT = { exists = ITA }
+		}
+		
+		allow = {
+			prestige = 20
+			720 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
 			}
+			738 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			739 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			741 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			744 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			746 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			749 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			754 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			757 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			758 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			762 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+			765 = {
+				OR = { 
+					owned_by = THIS
+					owner = { in_sphere = THIS }
+					owner = { vassal_of = THIS }
+					owner = { 
+						alliance_with = THIS 
+						is_culture_group = italian
+					}
+				}
+			}
+		}
+		
+		effect = {
+			prestige = 15
+			change_tag = ITA
+			any_country = {
+				limit = {
+					is_culture_group = italian
+					OR = {
+						in_sphere = THIS
+						alliance_with = THIS
+						relation = {
+							who = THIS
+							value = 149
+						}
+					}
+				}
+				country_event = 11101
+			}
+		}
+	}
+	
+	recover_greece_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			
+			NOT = { has_country_flag = ita_greece_recovered }
+			OR = {	
+				tag = SIC
+				tag = ITA
+			}
+		}
+		allow = { 
+			realism = 1
+			nationalism_n_imperialism = 1
+			any_owned_province = {
+				is_core = GRE
+			}
+			NOT = { citizens_rights = primary_culture_only }
+			
+		}
+		
+		effect = {
+			add_accepted_culture = greek
+			set_country_flag = ita_greece_recovered
+			badboy = 8
+			prestige = -10
+			EGY_843 = { 
+				state_scope = {
+					add_core = THIS
+				}			
+			}
+			any_pop = {
+				limit = {
+					culture = greek
+				}
+				consciousness = 5
+			}
+		}
+		ai_will_do = {
+			factor = 1
 		}
 	}
 }
