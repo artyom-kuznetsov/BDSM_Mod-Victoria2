@@ -1,0 +1,1776 @@
+(Validator OnActions) = {
+	Type = GroupValidator
+	FriendlyName = "On Actions"
+	Description = "On actions and hardcoded scripted effects"
+
+	Validator = {
+		Type = Default
+		(FileGroup "common\on_actions" "*.txt")
+		ValidatorName = OnActionsFile
+	}
+
+	Validator = {
+		Type = Default
+		(FileGroup "common\scripted_effects" "*.txt")
+		ValidatorName = ScriptedEffectsFile
+	}
+}
+
+(Type ScriptedEffectsFile) = {
+	
+	(Ch N N) = { Left = "pledge_crusade_effect" Right = CharCommand }
+	
+	(Ch N N) = { Left = "unpledge_crusade_effect" Right = CharCommand }
+	
+	(Ch N N) = { Left = "defender_pledge_crusade_effect" Right = CharCommand }
+	
+	(Ch N N) = { Left = "defender_unpledge_crusade_effect" Right = CharCommand }
+	
+	(Ch N N) = { Left = "contribute_to_crusade_pot_effect" Right = CharCommand }
+	
+	(Ch N N) = { Left = "select_crusade_receiver_stance_effect" Right = CharCommand }
+	
+	(Ch N N) = { Left = "crusade_give_artifact_effect" Right = CharCommand }
+	
+	(Ch N N) = { Left = "rename_character_effect" Right = CharCommandFromChar }
+	
+	# All these are checked during processing of scripted effects when called from events/etc
+	(Ch N N) = { Left = { Type = String } Right = Untyped }
+}
+
+(Type OnActionsFile) = {
+
+	Optional = { Left = "on_law_vote_passed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_law_vote_failed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_society_bi_yearly_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_marriage" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_betrothal" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_divorce" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_feud_started" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_feud_ended" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_battle_won_owner" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_battle_lost_owner" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_become_imprisoned_any_reason" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_tyranny_gained" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_absorb_clan_attempted_started_war" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_split_clan_attempted_started_war" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_war_ended_defeat" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_war_ended_whitepeace" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_war_ended_victory" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_war_ended_invalid" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_war_started" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_failed_assassination" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_failed_assassination_disc" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_assassination" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_assassination_disc" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_bastard_birth" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_pregnancy" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_bastard_pregnancy" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_avoided_imprison_started_war" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_became_imprisoned" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_avoided_imprison_fled_country" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_released_from_prison" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_executed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_exiled" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_prepared_invasion_monthly" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_prepared_invasion_expires" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_prepared_invasion_aborts" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_forced_consort" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_chronicle_owner_change" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_elective_gavelkind_succession" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_rel_elector_chosen" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_rel_head_chosen" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_monthly" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_failure" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_success" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_invalid" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "councilor_on_approve_law" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_over" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_approve_de_jure_law" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_approve_law" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_over_winner" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_over_loc_chars" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_won_leader" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_lost_leader" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_settlement_construction_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_settlement_construction_completed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_holding_building_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_creation" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_create_title" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_settlement_looted" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_loot_settlement" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_switch_society_interest" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_society_rank_up" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_society_rank_down" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_join_society" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_leave_society" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_ask_to_join_society" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_kicked_from_society" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_stop_showing_interest" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_society_created" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_society_destroyed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_society_progress_zero" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_society_progress_full" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromSociety }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "GRANT_LANDED_TITLE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "REVOKE_TITLE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "REVOKE_TITLE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SPLIT_CLAN_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SPLIT_CLAN_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "GRANT_VICE_ROYALTY_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "DEMAND_RELIGIOUS_CONVERSION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "DEMAND_RELIGIOUS_CONVERSION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_PEACE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_PEACE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SEND_GIFT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SEND_GIFT_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_MONEY_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_MONEY_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_CLAIM_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_CLAIM_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "NOMINATE_BISHOP_TO_POPE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "NOMINATE_BISHOP_TO_POPE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_VASSALIZATION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_VASSALIZATION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ARRANGE_BETROTHAL_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ARRANGE_BETROTHAL_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ARRANGE_SUCC_BETROTHAL_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ARRANGE_SUCC_BETROTHAL_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_SUCCESSION_MARRIGE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_SUCCESSION_MARRIGE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_MARRIGE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_MARRIGE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RANSOM_CHARACTER_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RANSOM_CHARACTER_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "EDUCATE_CHARACTER_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "EDUCATE_CHARACTER_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ABANDON_AMBITION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ABANDON_AMBITION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "STOP_BACKING_AMBITION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "STOP_BACKING_AMBITION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "JOIN_AMBITION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "JOIN_AMBITION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "GRANT_LANDED_TITLE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "APPOINT_TO_OFFICE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "APPOINT_TO_OFFICE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_INVASION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_INVASION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_DIVORCE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_DIVORCE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_EXCOMMUNICATION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_EXCOMMUNICATION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "CALL_ALLY_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "CALL_ALLY_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "DECLARE_WAR_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RETRACT_VASSAL_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RETRACT_VASSAL_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "INVITE_TO_COURT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "INVITE_TO_COURT_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_VASSALIZATION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_VASSALIZATION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_LIFT_EXCOMMUNICATION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_LIFT_EXCOMMUNICATION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_RANSOM_CHARACTER_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_RANSOM_CHARACTER_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SETTLE_ADVENTURER_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SETTLE_ADVENTURER_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_JOIN_WAR_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_JOIN_WAR_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_EMBARGO_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_EMBARGO_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "MAKE_CONSORT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "MAKE_CONSORT_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ABSORB_CLAN_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ABSORB_CLAN_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORM_BLOOD_OATH_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORM_BLOOD_OATH_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SETTLE_FEUD_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SETTLE_FEUD_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORM_ALLIANCE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORM_ALLIANCE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "DISSOLVE_ALLIANCE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "DISSOLVE_ALLIANCE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "BUY_FAVOR_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "BUY_FAVOR_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "REQUEST_SUPPORT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "REQUEST_SUPPORT_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORM_NON_AGGRESSION_PACT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORM_NON_AGGRESSION_PACT_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_COUNCIL_POSITION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_COUNCIL_POSITION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_REALM_PEACE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_REALM_PEACE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORCE_JOIN_FACTION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "FORCE_JOIN_FACTION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_JOIN_AMBITION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_JOIN_AMBITION_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "OFFER_CONSORT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "GIVE_ARTIFACT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_CRUSADE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_FOR_CRUSADE_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_DECLARE_WAR_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASK_TO_DECLARE_WAR_INTERACTION_DECLINE_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "APPOINT_COMMANDER_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "ASSIGN_VOTER_TITLE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "AWARD_HONORARY_TITLE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "BREAK_BETROTHAL_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "CALL_IN_FAVOR_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "CALL_IN_FAVOR_SUCCESSION_VOTE_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "CHANGE_CRUSADE_TARGET_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "DISMISS_CONSORT_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "DIVORCE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "EXECUTE_IMPRISONED_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "EXILE_IMPRISONED_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "IMPRISON_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "LEAVE_COALITION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "PREPARE_INVASION_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RELEASE_FROM_PRISON_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RELEASE_VASSAL_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "REPLACE_MERCENARY_CAPTAIN_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RESIGN_AS_COMMANDER_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RESIGN_COMMANDER_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "RESIGN_FROM_OFFICE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "REVOKE_HONORARY_TITLE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "REVOKE_VOTER_TITLE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "SEND_ASSASSIN_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "START_COALITION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "STOP_ENFORCE_PEACE_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "TRANSFER_VASSAL_INTERACTION_ACCEPT_EVENT" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_battle_lost_leader" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_major_battle_lost_leader" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_battle_won_leader" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_major_battle_won_leader" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_battle_lost" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_major_battle_lost" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_battle_won" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_major_battle_won" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_combat_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_vassal_accepts_religious_conversion" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_mercenary_captain_replacement" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_host_change" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_employer_change" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_combat_starting" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_excommunicate_interaction" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_rebel_revolt" Right = {
+		Optional = { Left = "effect" Right = ProvCommand }
+		Inherits = ProvPulse
+	} }
+
+	Optional = { Left = "on_province_major_modifier" Right = {
+		Optional = { Left = "effect" Right = ProvCommand }
+		Inherits = ProvPulse
+	} }
+
+	Optional = { Left = "on_outbreak" Right = {
+		Optional = { Left = "effect" Right = ProvCommand }
+		Inherits = ProvPulse
+	} }
+
+	Optional = { Left = "on_offmap_governor_changed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromOffmapPower }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_offmap_ruler_changed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromOffmapPower }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_offmap_monthly_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromOffmapPower }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_offmap_yearly_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromOffmapPower }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_offmap_policy_changed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromOffmapPower }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_offmap_status_changed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromOffmapPower }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_navy_returns_with_loot" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_defect_from_rebels" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_loot_province" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_over_winner_fort" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_over_winner_trade_post" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_won_leader_fort" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_won_leader_trade_post" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_lost_leader_fort" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_lost_leader_trade_post" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_over_loc_chars_fort" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_siege_over_loc_chars_trade_post" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_defect_to_rebels" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_trade_post_construction_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_fort_construction_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_hospital_construction_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_trade_post_construction_completed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_fort_construction_completed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_hospital_construction_completed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_new_holder" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitleFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_new_holder_inheritance" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitleFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_new_holder_usurpation" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromTitleFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_childhood_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_adolescence_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_startup" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_yearly_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_bi_yearly_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_five_year_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_decade_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_yearly_childhood_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_focus_pulse" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_birth" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_adulthood" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_adolescence" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_post_birth" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_death" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_merc_rampage" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_merc_leave" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_merc_turn_coat_to" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_merc_turn_coat_from" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_holy_order_leave" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_letter_event_message" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_event_message" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_warleader_death" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_reform_religion" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_become_doge" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_unlanded" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_create_chronicle_if_empty" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_chronicle_start" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_acquire_nickname" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_over_vassal_limit_succession" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_blood_brother_death" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_ai_end_raid" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_mercenary_hired" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_mercenary_dismissed" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_enforce_peace" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_enforce_peace_start" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_enforce_peace_six_vassals" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_player_mercenary_income" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_focus_selected" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_quest_success" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_quest_failure" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_eu4_conversion_start" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_eu4_conversion_done" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_tyranny_gained_tyrant_only" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_alternate_start" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_bloodline_renamed" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_artifact_renamed" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_province_renamed" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_title_renamed" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_renamed" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_unpledge_crusade_defense" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_unpledge_crusade_participation" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_pledge_crusade_defense" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_pledge_crusade_participation" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_canceled" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_launches" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_preparation_starts" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_command_sub_unit" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_command_unit" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_unit_entering_province" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_post_birth_stillbirth" Right = {
+		Optional = { Left = "effect" Right = CharCommand }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_loot_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_stage_loot_finish" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_stage_loot_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_restore_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_restore_finish" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_destroyed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_stage_finish" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_construction_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_upgrade_destroyed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_upgrade_finish" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_upgrade_start" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_renamed" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_crusade_target_changes" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromTitleFromFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_entering_port" Right = {
+		Optional = { Left = "effect" Right = UnitCommandFromChar }
+		Inherits = UnitPulse
+	} }
+
+	Optional = { Left = "on_county_religion_change" Right = {
+		Optional = { Left = "effect" Right = ProvCommandFromReligion }
+		Inherits = ProvPulse
+	} }
+
+	Optional = { Left = "on_character_convert_culture" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromCulture }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_convert_religion" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromReligion }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_artifact_inheritance" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromArtifactFromFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_revoke_attempted_started_war" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_retract_vassal_attempted_started_war" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromCharFromFromTitle }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_character_convert_secret_religion" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromReligion }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_society_failed_to_find_new_leader" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromChar }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_wonder_owner_change" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromWonderBuildingFromFromCharFromFromFromProv }
+		Inherits = CharPulse
+	} }
+
+	Optional = { Left = "on_heresy_takeover" Right = {
+		Optional = { Left = "effect" Right = CharCommandFromReligionFromFromReligion }
+		Inherits = CharPulse
+	} }
+
+}
+
+
+
+(Type CharPulse) = {
+	Optional = { Left = "random_events" Right = CharRandomEventGroup }
+	Optional = { Left = "events" Right = CharEventGroup }
+}
+
+(Type CharRandomEventGroupList) = {
+	(Ch N Y) = { Left = { Type = PInt } Right = { CharEventId LetterEventId DiploRespEventId NarrativeEventId LongCharEventId 0 } }
+}
+
+(Type CharNamedRandomEventGroupList) = {
+	Inherits = CharRandomEventGroupList
+	Optional = { Left = "delay" Right = NnInt }
+}
+
+(Type CharRandomEventGroup) = {
+	Inherits = CharRandomEventGroupList
+	(Ch Y N) = { Left = { Type = String } Right = CharNamedRandomEventGroupList }
+}
+
+(Type CharEventGroup) = {
+	(PdoList Y) = { Type = { CharEventId LetterEventId DiploRespEventId NarrativeEventId LongCharEventId } }
+}
+
+
+
+(Type ProvPulse) = {
+	Optional = { Left = "random_events" Right = ProvRandomEventGroup }
+	Optional = { Left = "events" Right = ProvEventGroup }
+}
+
+(Type ProvRandomEventGroupList) = {
+	(Ch N Y) = { Left = { Type = PInt } Right = { ProvEventId 0 } }
+}
+
+(Type ProvNamedRandomEventGroupList) = {
+	Inherits = ProvRandomEventGroupList
+	Optional = { Left = "delay" Right = NnInt }
+}
+
+(Type ProvRandomEventGroup) = {
+	Inherits = ProvRandomEventGroupList
+	(Ch Y N) = { Left = { Type = String } Right = ProvNamedRandomEventGroupList }
+}
+
+(Type ProvEventGroup) = {
+	(PdoList Y) = { Type = { ProvEventId } }
+}
+
+
+
+(Type UnitPulse) = {
+	Optional = { Left = "random_events" Right = UnitRandomEventGroup }
+	Optional = { Left = "events" Right = UnitEventGroup }
+}
+
+(Type UnitRandomEventGroupList) = {
+	(Ch N Y) = { Left = { Type = PInt } Right = { UnitEventId 0 } }
+}
+
+(Type UnitNamedRandomEventGroupList) = {
+	Inherits = UnitRandomEventGroupList
+	Optional = { Left = "delay" Right = NnInt }
+}
+
+(Type UnitRandomEventGroup) = {
+	Inherits = UnitRandomEventGroupList
+	(Ch Y N) = { Left = { Type = String } Right = UnitNamedRandomEventGroupList }
+}
+
+(Type UnitEventGroup) = {
+	(PdoList Y) = { Type = { UnitEventId } }
+}
+
+
+
+(Type TitlePulse) = {
+	Optional = { Left = "random_events" Right = TitleRandomEventGroup }
+	Optional = { Left = "events" Right = TitleEventGroup }
+}
+
+(Type TitleRandomEventGroupList) = {
+	(Ch N Y) = { Left = { Type = PInt } Right = { CharEventId NarrativeEventId 0 } }
+}
+
+(Type TitleNamedRandomEventGroupList) = {
+	Inherits = TitleRandomEventGroupList
+	Optional = { Left = "delay" Right = NnInt }
+}
+
+(Type TitleRandomEventGroup) = {
+	Inherits = TitleRandomEventGroupList
+	(Ch Y N) = { Left = { Type = String } Right = TitleNamedRandomEventGroupList }
+}
+
+(Type TitleEventGroup) = {
+	(PdoList Y) = { Type = { CharEventId NarrativeEventId } }
+}
+
+
+
+
+
+
+
+

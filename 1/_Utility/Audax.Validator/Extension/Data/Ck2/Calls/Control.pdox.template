@@ -1,0 +1,478 @@
+
+{% set AllScopes = ctx.calls.AllScopes %}
+
+# This file contains flags, if statements,
+# limits, random, THIS-stuff, variables, etc
+
+(ContextValidator Trigger) = { Members = {
+	(N N) = { Left = "check_variable" Right = CheckVar }
+	(N Y) = { Left = "is_variable_equal" Right = CheckVar }
+
+	{% for scope in AllScopes %}
+	{% if scope != 'Global' %}
+	(N N) = { Left = { Type = This{{scope}} } Right = {{scope}}Trigger }
+	{% endif %}
+	{% endfor %}
+
+	(Y  ) = { Left = "always" Right = Bool }
+	(N Y) = { Left = "difficulty" Right = NnInt } # comp operators
+
+	(N Y) = { Left = "year" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "month" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "real_month_of_year" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "real_day_of_year" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "random" Right = { Double VariableName } }
+
+	# Event targets
+	(N N) = { Left = { Type = TriggerEventTargetName } Right = Untyped } # Event target code will check at end once target has been resolved
+	
+	(Y N) = { Left = { Type = ScriptedTrigger } Right = Bool ScriptedTriggerCheck }
+} }
+
+{% for scope in AllScopes %}
+(ContextValidator {{scope}}Trigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = {{scope}}Trigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+{% endfor %}
+
+{% for scope in ['Char', 'Prov', 'Title', 'Artifact', 'Offmap', 'WonderBuilding'] %}
+(ContextValidator {{scope}}Command) = { Members = {
+	(N Y) = { Left = "clear_flags_with_prefix" Right = String }
+} }
+{% endfor %}
+
+{% set flagScopes = [
+	('Prov', 'province', 'Prov'),
+	('Char', 'dynasty', 'Dynasty'),
+	('Char', 'character', 'Char'),
+	('Title', 'title', 'Title'),
+	('Artifact', 'artifact', 'Artifact'),
+	('', 'global', 'Global'),
+	('OffmapPower', 'offmap_tmp', 'OffmapTmp'),
+	('OffmapPower', 'offmap', 'Offmap'),
+	('Char', 'offmap_tmp', 'OffmapTmp'),
+	('Char', 'offmap', 'Offmap'),
+	('Title', 'offmap_tmp', 'OffmapTmp'),
+	('Title', 'offmap', 'Offmap'),
+	('Bloodline', 'bloodline', 'Bloodline'),
+	('WonderBuilding', 'wonder', 'Wonder'),
+	('WonderUpgrade', 'wonder_upgrade', 'WonderUpgrade'),
+] %}
+
+{% set namelessFlagScopes = [
+	('Prov', 'Prov'),
+	('Char', 'Char'),
+	('Title', 'Title'),
+	('Artifact', 'Artifact'),
+	('OffmapPower', 'Offmap'),
+	('Bloodline', 'Bloodline'),
+	('Culture', 'Culture'),
+	('Religion', 'Religion'),
+	('Society', 'Society'),
+	('WonderBuilding', 'Wonder'),
+	('WonderUpgrade', 'WonderUpgrade'),
+] %}
+
+{% for scope, flag_name in namelessFlagScopes %}
+(ContextValidator {{scope}}Trigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker {{flag_name}}Flag) }
+	(N Y) = { Left = "had_flag" Right = {{flag_name}}FlagClause }
+} }
+
+(ContextValidator {{scope}}Command) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter {{flag_name}}Flag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter {{flag_name}}Flag) }
+} }
+
+{% endfor %}
+
+{% for scope, name, flag_name in flagScopes %}
+(ContextValidator {{scope}}Trigger) = { Members = {
+	(N Y) = { Left = "has_{{name}}_flag" Right = String (LocalOp "chk" "[R]" AddChecker {{flag_name}}Flag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_{{name}}_flag" Right = {{flag_name}}FlagClause }
+} }
+
+(ContextValidator {{scope}}Command) = { Members = {
+	(N Y) = { Left = "set_{{name}}_flag" Right = String (LocalOp "set" "[R]" AddSetter {{flag_name}}Flag) }
+	(N Y) = { Left = "clr_{{name}}_flag" Right = String (LocalOp "clr" "[R]" AddSetter {{flag_name}}Flag) }
+} }
+
+{% endfor %}
+
+{% for flag_name in ((flagScopes | map(attribute=2) | list) + (namelessFlagScopes | map(attribute=1) | list)) | unique %}
+(Type {{flag_name}}FlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker {{flag_name}}Flag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+{% endfor %}
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_quest" Right = String (LocalOp "chk" "[R]" AddChecker CharQuest) }
+} }
+
+(ContextValidator Command) = { Members = {
+	(N N) = { Left = "set_variable" Right = SetVar }
+	(N N) = { Left = "change_variable" Right = ChangeVar }
+	(N N) = { Left = "multiply_variable" Right = ChangeVar }
+	(N N) = { Left = "subtract_variable" Right = ChangeVar }
+	(N N) = { Left = "divide_variable" Right = ChangeVar }
+	(N N) = { Left = "modulo_variable" Right = ChangeVar }
+
+	{% for scope in AllScopes %}
+	{% if scope != 'Global' %}
+	(N N) = { Left = { Type = This{{scope}} } Right = {{scope}}Command }
+	{% endif %}
+	{% endfor %}
+	
+	# Event targets
+	(Y  ) = { Left = "clear_global_event_targets" Right = Yes }
+	# May set target between clears hence not checking dups
+	(N N) = { Left = "clear_global_event_target" Right = String EventTargetClearGlobal }
+	# May set target between clears hence not checking dups
+	(N N) = { Left = "clear_event_target" Right = String EventTargetClear }
+	(N Y) = { Left = "save_event_target_as" Right = String EventTargetSet }
+	(N Y) = { Left = "save_persistent_event_target" Right = PersistentEventTargetSetClause }
+	(N Y) = { Left = "clear_persistent_event_target" Right = String EventTargetClearPersistent }
+	(N Y) = { Left = "save_global_event_target_as" Right = String EventTargetSetGlobal }
+	(N N) = { Left = { Type = CommandEventTargetName } Right = Untyped } # Event target code will check at end once target has been resolved
+	(N N) = { Left = "repeat_event" Right = {
+		Single = { Left = "id" Right = String }
+		AtMostOne = { "days" "months" "years" }
+		Optional = { Left = "days" Right = PInt }
+		Optional = { Left = "months" Right = PInt }
+		Optional = { Left = "years" Right = PInt }
+		Optional = { Left = "random" Right = NnDbl }
+		Optional = { Left = "tooltip" Right = Key }
+	} }
+
+	(N N) = { Left = { Type = ScriptedCommand } Right = Yes ScriptedCommandCheck }
+	
+	# RHS need not be unique if setting a variable multiple times after doing calculation in between
+	(N N) = { Left = "export_to_variable" Right = ExportToVariable }
+} }
+
+(Type ExportToVariable) = {
+	(LocalOp "cng" "which\[R]" 0 AddSetter Variable)
+	Single = { Left = "which" Right = String }
+	Single = { Left = "value" Right = String }
+
+	NodeSwitcher = {
+		Node = "value"
+		MarkChecked = False
+		Default = ExportToVariableNormal
+		
+		Switch = {
+			"alternate_start_value" = ExportToVariableAlternateStart
+			"alternate_start_min_value" = ExportToVariableAlternateStart
+			"alternate_start_max_value" = ExportToVariableAlternateStart
+		}
+		
+	}
+}
+
+(Type ExportToVariableNormal) = {
+	Optional = { Left = "who" Right = { MaybeEventTargetCharProvTitle RhsFancyScopeOptionToChar RhsFancyScopeOptionToProv RhsFancyScopeOptionToTitle } }
+	CheckExportToVariableValue
+}
+
+(Type ExportToVariableAlternateStart) = {
+	Single = { Left = "key" Right = AlternateStartSelection }
+}
+
+(Type PersistentEventTargetSetClause) = {
+	Single = { Left = "name" Right = String EventTargetSetPersistent }
+	Single = { Left = "scope" Right = {
+		MaybeEventTargetArtifactCharCultureOffmapPowerProvReligionSocietyTitle
+		AnyTitle
+		PrefixedCharId
+		JobTitle
+		Religion
+		Culture
+		RhsFancyScopeOptionToReligion
+		RhsFancyScopeOptionToSociety
+		RhsFancyScopeOptionToCulture
+		RhsFancyScopeOptionToTitle
+		RhsFancyScopeOptionToProv
+		RhsFancyScopeOptionToChar
+	} }
+}
+
+{% for scope in AllScopes %}
+(Type {{scope}}RandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = {{scope}}Trigger
+}
+(Type {{scope}}RandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = {{scope}}Trigger
+}
+{% endfor %}
+
+{% for scope in ctx.calls_control.FromScopePairs %}
+Global = {
+
+{% if scope.from_scope %}
+
+{% for scope_type in ['Command', 'Trigger'] %}
+{% set full_name = scope.root_scope + scope_type + scope.suffix %}
+(Type {{ full_name }}) = { ContextValidator = {{ full_name }} }
+(ContextValidator {{ full_name }}) = {
+	Inherits = {{ scope.root_scope }}{{ scope_type }}
+	{% if scope.this_scope %}
+	ThisTarget = {{ scope.this_scope }}
+	{% endif %}
+	{% if scope.from_scope %}
+	FromTarget = {{ scope.from_scope }}
+	{% endif %}
+	{% if scope.from_from_scope %}
+	FromFromTarget = {{ scope.from_from_scope }}
+	{% endif %}
+	{% if scope.from_from_from_scope %}
+	FromFromFromTarget = {{ scope.from_from_from_scope }}
+	{% endif %}
+	{% if scope.from_from_from_from_scope %}
+	FromFromFromFromTarget = {{ scope.from_from_from_from_scope }}
+	{% endif %}
+}
+{% endfor %}
+
+{% endif %}
+
+(Type {{ scope.root_scope }}{{ scope.suffix }}MultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = {{ scope.root_scope }}Trigger{{ scope.suffix }}
+	Inherits = FactorModifier
+}
+
+(Type {{ scope.root_scope }}{{ scope.suffix }}AdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = {{ scope.root_scope }}Trigger{{ scope.suffix }}
+	Inherits = AdditiveModifier
+}
+
+(Type {{ scope.root_scope }}{{ scope.suffix }}AdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = {{ scope.root_scope }}Trigger{{ scope.suffix }} }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+{% if scope.root_scope == 'Char' %}
+(Type {{ scope.root_scope }}{{ scope.suffix }}AdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = {{ scope.root_scope }}Trigger{{ scope.suffix }}
+}
+{% endif %}
+
+(Type {{ scope.root_scope }}{{ scope.suffix }}WeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = {{ scope.root_scope }}{{ scope.suffix }}WeightBase }
+	Optional = { Left = "trigger" Right = {{ scope.root_scope }}Trigger{{ scope.suffix }} }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = {{ scope.root_scope }}{{ scope.suffix }}MultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = {{ scope.root_scope }}{{ scope.suffix }}AdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = {{ scope.root_scope }}{{ scope.suffix }}AdditiveExportedValueModifier }
+	
+	{% if scope.root_scope == 'Char' %}
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = {{ scope.root_scope }}{{ scope.suffix }}AdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = {{ scope.root_scope }}{{ scope.suffix }}AdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = {{ scope.root_scope }}{{ scope.suffix }}AdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = {{ scope.root_scope }}{{ scope.suffix }}AdditiveOpinionModifier
+	} }
+	{% endif %}
+}
+
+
+{% for named, named_upper in [
+	('value', 'Value'),
+	('factor', 'Factor'),
+] %}
+
+(Type {{ scope.root_scope }}{{ scope.suffix }}{{named_upper}}Weight) = {
+	Single = { Left = "{{named}}" Right = Double }
+	Inherits = {{ scope.root_scope }}{{ scope.suffix }}WeightBase
+}
+{% endfor %}
+}
+
+{% endfor %}
+
+{% for scope in AllScopes %}
+(ContextValidator {{scope}}Command) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = {{scope}}IfClause }
+	(N N) = { Left = { "else_if" } Right = {{scope}}IfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = {{scope}}Command CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = {{scope}}WhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = {{scope}}Command
+		Single = { Left = "chance" Right = Int }
+		Inherits = {{scope}}WeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = {{scope}}Command
+			Inherits = {{scope}}WeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = {{scope}}Command
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = {{scope}}Trigger Command = {{scope}}Command } } }
+} }
+
+(Type {{scope}}IfClause) = {
+	Single = { Left = "limit" Right = {{scope}}Trigger }
+	Inherits = {{scope}}Command
+}
+
+(Type {{scope}}WhileClause) = {
+	Optional = { Left = "limit" Right = {{scope}}Trigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = {{scope}}Command
+}
+
+Global = {
+(Type {{scope}}TriggerWithCount) = {
+	Inherits = {{scope}}Trigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type {{scope}}MaybeLimitCommand) = {
+	Inherits = {{scope}}Command
+	Inherits = {{scope}}Limit # Needs to be outside so that the AddStackFrame doesn't interfere with {{scope}}Command
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = {{scope}}ValueWeight }
+}
+
+(Type {{scope}}RandomCommand) = {
+	Inherits = {{scope}}Command
+	Inherits = {{scope}}Limit # Needs to be outside so that the AddStackFrame doesn't interfere with {{scope}}Command
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = {{scope}}Trigger }
+}
+}
+
+(Type {{scope}}Limit) = {
+	AddContextValidatorStackFrame = {{scope}}
+	Optional = { Left = "limit" Right = {{scope}}Trigger }
+}
+{% endfor %}
+
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "clr_quest" Right = String (LocalOp "clr" "[R]" AddSetter CharQuest) }
+	(N Y) = { Left = "clr_quest" Right = {
+		Single = { Left = "id" Right = String (LocalOp "clr" "[R]" AddSetter CharQuest) }
+		Optional = { Left = "failure" Right = Bool }
+	} }
+} }
+
+
+
+(ContextValidator ArtifactCommand) = { Members = {
+	(Y  ) = { Left = { "set_original_owner" } Right = MaybeEventTargetChar }
+	# Per https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27225338 this doesn't work and set_original_owner is the correct thing
+	# (Y  ) = { Left = { "set_artifact_original_owner" } Right = MaybeEventTargetChar }
+} }
+
+
+
+
+
+
+
+
+
+
+(Type Var) = {
+	Single = { Left = "which" Right = String }
+	Single = { Left = "value" Right = Double }
+}
+
+(Type CheckVar) = {
+	FancilyPickCorrectBecauseParadoxDoesntMakeThingsWithDifferentNames = { TwoWhich = CheckVar0 Else = CheckVar1 }
+}
+
+(Type CheckVar0) = {
+	# A third which is something like ROOT to specify the variable scope
+	# No dedup RHS because can have things like
+	#check_variable = {
+	#	which = some_variable # variable to use in current scope
+	#	which < some_variable # variable to use in second scope
+	#	which = catholic      # scope to pull second variable from
+	#}
+	(Ch N N 2 3) = { Left = "which" Right = String }
+	(LocalOp "chk" "which\[R]" AddChecker Variable)
+}
+
+(Type CheckVar1) = {
+	Inherits = Var
+	(LocalOp "chk" "which\[R]" AddChecker Variable)
+}
+
+(Type SetVar) = {
+	FancilyPickCorrectBecauseParadoxDoesntMakeThingsWithDifferentNames = { TwoWhich = SetVar0 Else = SetVar1 }
+}
+
+(Type SetVar0) = {
+	# A third which is something like ROOT to specify the variable scope
+	(Ch N Y 2 3) = { Left = "which" Right = String }
+	(LocalOp "set" "which\[R]" 0 AddSetter Variable)
+	(LocalOp "set" "which\[R]" 1 AddChecker Variable)
+}
+
+(Type SetVar1) = {
+	Inherits = Var
+	(LocalOp "set" "which\[R]" AddSetter Variable)
+}
+
+(Type ChangeVar) = {
+	FancilyPickCorrectBecauseParadoxDoesntMakeThingsWithDifferentNames = { TwoWhich = ChangeVar0 Else = ChangeVar1 }
+}
+
+(Type ChangeVar0) = {
+	# A third which is something like ROOT to specify the variable scope
+	(Ch N N 2 3) = { Left = "which" Right = String }
+	#Optional = { Left = "who" Right = String }
+	(LocalOp "cng" "which\[R]" 0 AddSetter Variable)
+	(LocalOp "cng" "which\[R]" 1 AddChecker Variable)
+}
+
+(Type ChangeVar1) = {
+	Inherits = Var
+	(LocalOp "cng" "which\[R]" AddSetter Variable)
+}
+
+
+
+

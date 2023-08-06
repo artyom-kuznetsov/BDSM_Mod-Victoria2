@@ -1,0 +1,44 @@
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "any_rival" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_friend" Right = CharTriggerWithCount }
+
+	(N Y) = { Left = "num_of_friends" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_rivals" Right =  { NnInt VariableName } } # Can have comparison operators
+	
+	(N Y) = { Left = "is_friend" Right = { OnlyCharTarget Liege } }
+	(N Y) = { Left = "is_rival" Right = { OnlyCharTarget Liege } }
+	
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "random_friend" Right = CharRandomCommand }
+	(N N) = { Left = "random_rival" Right = CharRandomCommand }
+	(N N) = { Left = "any_rival" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "any_friend" Right = CharMaybeLimitCommand }
+	
+	(N Y) = { Left = "add_friend" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "remove_friend" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "add_rival" Right = { OnlyCharTarget RhsFancyScopeOptionToChar } }
+	(N Y) = { Left = "remove_rival" Right = { OnlyCharTarget } }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

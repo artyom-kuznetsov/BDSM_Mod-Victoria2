@@ -1,0 +1,92 @@
+(ContextValidator ProvTrigger) = { Scopes = {
+	TitleTrigger = "duchy"
+	TitleTrigger = "county"
+	TitleTrigger = "kingdom"
+	TitleTrigger = "empire"
+
+} }
+
+(ContextValidator TitleTrigger) = { Scopes = {
+	TitleTrigger = "duchy"
+	TitleTrigger = "county"
+	TitleTrigger = "kingdom"
+	TitleTrigger = "empire"
+
+} }
+
+(ContextValidator ProvCommand) = { Scopes = {
+	TitleCommand = "county"
+	TitleCommand = "duchy"
+	TitleCommand = "kingdom"
+	TitleCommand = "empire"
+
+} }
+
+(ContextValidator TitleCommand) = { Scopes = {
+	TitleCommand = "county"
+	TitleCommand = "duchy"
+	TitleCommand = "kingdom"
+	TitleCommand = "empire"
+
+} }
+
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(A Y) = { Left = "tier" Right = { MaybeEventTargetCharTitle Tier CharTargetExcludingMaybeEventTarget } }
+
+} }
+
+
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(A Y) = { Left = "tier" Right = { MaybeEventTargetCharTitle Tier CharTargetExcludingMaybeEventTarget } }
+
+} }
+
+
+
+(ContextValidator TitleTrigger) = { Members = {
+	(A Y) = { Left = "tier" Right = { MaybeEventTargetCharTitle Tier CharTargetExcludingMaybeEventTarget } }
+
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(A Y) = { Left = "real_tier" Right = { MaybeEventTargetCharTitle Tier CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "higher_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "higher_real_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "lower_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "lower_real_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(A Y) = { Left = "real_tier" Right = { MaybeEventTargetCharTitle Tier CharTargetExcludingMaybeEventTarget } }
+	(Y  ) = { Left = "higher_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "higher_real_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(Y  ) = { Left = "lower_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "lower_real_tier_than" Right = { Tier MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

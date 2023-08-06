@@ -1,0 +1,562 @@
+(Validator Religions) = {
+	Type = GroupValidator
+	FriendlyName = "Religions"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\religion_features" "*.txt")
+		ValidatorName = ReligionFeatureFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\religions" "*.txt")
+		ValidatorName = ReligionFile
+	}
+}
+
+(Type ReligionFeatureFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = ReligionFeatureCategoryDef
+	}
+}
+
+(Type ReligionFeatureCategoryDef) = {
+	Single = { Left = "buttons" Right = { (PdoList Y) = { Type = String } } }
+	
+	(Ch N N) = {
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+		Left = { Type = String }
+		Right = ReligionFeatureDef
+		UniqueId = Left
+	}
+}
+
+(Type ReligionFeatureDef) = {
+	Single = { Left = "picture" Right = GfxElement }
+	
+	Optional = { Left = "potential" Right = ReligionFeatureReligionTrigger }
+	Optional = { Left = "trigger" Right = ReligionFeatureReligionTrigger }
+	Optional = { Left = "effect" Right = ReligionFeatureReligionCommand }
+	Optional = { Left = "ai_will_do" Right = ReligionFromCharFactorWeight }
+}
+
+# hacky but whatever
+# As overriding Trigger/Command does not always work for strange and unclear
+# reasons. It seems to work but when you validate more things it doesn't.
+# So who fucking knows.
+
+
+
+(ContextValidator ReligionFeatureCharTrigger) = {
+	Inherits = CharTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureCharCommand) = {
+	Inherits = CharCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureProvTrigger) = {
+	Inherits = ProvTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureProvCommand) = {
+	Inherits = ProvCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureTitleTrigger) = {
+	Inherits = TitleTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureTitleCommand) = {
+	Inherits = TitleCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureGlobalTrigger) = {
+	Inherits = GlobalTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureGlobalCommand) = {
+	Inherits = GlobalCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureUnitTrigger) = {
+	Inherits = UnitTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureUnitCommand) = {
+	Inherits = UnitCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureSocietyTrigger) = {
+	Inherits = SocietyTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureSocietyCommand) = {
+	Inherits = SocietyCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureArtifactTrigger) = {
+	Inherits = ArtifactTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureArtifactCommand) = {
+	Inherits = ArtifactCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureBattleTrigger) = {
+	Inherits = BattleTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureBattleCommand) = {
+	Inherits = BattleCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureWarTrigger) = {
+	Inherits = WarTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureWarCommand) = {
+	Inherits = WarCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureSiegeTrigger) = {
+	Inherits = SiegeTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureSiegeCommand) = {
+	Inherits = SiegeCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureOffmapPowerTrigger) = {
+	Inherits = OffmapPowerTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureOffmapPowerCommand) = {
+	Inherits = OffmapPowerCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureReligionTrigger) = {
+	Inherits = ReligionTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureReligionCommand) = {
+	Inherits = ReligionCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureCultureTrigger) = {
+	Inherits = CultureTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureCultureCommand) = {
+	Inherits = CultureCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureBloodlineTrigger) = {
+	Inherits = BloodlineTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureBloodlineCommand) = {
+	Inherits = BloodlineCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureWonderBuildingTrigger) = {
+	Inherits = WonderBuildingTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureWonderBuildingCommand) = {
+	Inherits = WonderBuildingCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(ContextValidator ReligionFeatureWonderUpgradeTrigger) = {
+	Inherits = WonderUpgradeTrigger
+	Members = {
+		(N Y) = { Left = "has_selected_religion_feature" Right = ReligionFeature }
+	}
+}
+
+(ContextValidator ReligionFeatureWonderUpgradeCommand) = {
+	Inherits = WonderUpgradeCommand
+	Members = {
+		(Y  ) = { Left = "set_can_grant_invasion_cb" Right = Yes }
+	}
+}
+
+
+
+(Type ReligionFeatureReligionTrigger) = { ContextValidator = ReligionFeatureReligionTrigger }
+(ContextValidator ReligionFeatureReligionTrigger) = {
+	Inherits = ReligionTrigger
+	FromTarget = Char
+	
+	Set = {
+		
+		CharTrigger = ReligionFeatureCharTrigger
+		
+		ProvTrigger = ReligionFeatureProvTrigger
+		
+		TitleTrigger = ReligionFeatureTitleTrigger
+		
+		GlobalTrigger = ReligionFeatureGlobalTrigger
+		
+		UnitTrigger = ReligionFeatureUnitTrigger
+		
+		SocietyTrigger = ReligionFeatureSocietyTrigger
+		
+		ArtifactTrigger = ReligionFeatureArtifactTrigger
+		
+		BattleTrigger = ReligionFeatureBattleTrigger
+		
+		WarTrigger = ReligionFeatureWarTrigger
+		
+		SiegeTrigger = ReligionFeatureSiegeTrigger
+		
+		OffmapPowerTrigger = ReligionFeatureOffmapPowerTrigger
+		
+		ReligionTrigger = ReligionFeatureReligionTrigger
+		
+		CultureTrigger = ReligionFeatureCultureTrigger
+		
+		BloodlineTrigger = ReligionFeatureBloodlineTrigger
+		
+		WonderBuildingTrigger = ReligionFeatureWonderBuildingTrigger
+		
+		WonderUpgradeTrigger = ReligionFeatureWonderUpgradeTrigger
+		
+	}
+}
+
+(Type ReligionFeatureReligionCommand) = { ContextValidator = ReligionFeatureReligionCommand }
+(ContextValidator ReligionFeatureReligionCommand) = {
+	Inherits = ReligionCommand
+	FromTarget = Char
+	
+	Set = {
+		
+		CharTrigger = ReligionFeatureCharTrigger
+		CharCommand = ReligionFeatureCharCommand
+		
+		ProvTrigger = ReligionFeatureProvTrigger
+		ProvCommand = ReligionFeatureProvCommand
+		
+		TitleTrigger = ReligionFeatureTitleTrigger
+		TitleCommand = ReligionFeatureTitleCommand
+		
+		GlobalTrigger = ReligionFeatureGlobalTrigger
+		GlobalCommand = ReligionFeatureGlobalCommand
+		
+		UnitTrigger = ReligionFeatureUnitTrigger
+		UnitCommand = ReligionFeatureUnitCommand
+		
+		SocietyTrigger = ReligionFeatureSocietyTrigger
+		SocietyCommand = ReligionFeatureSocietyCommand
+		
+		ArtifactTrigger = ReligionFeatureArtifactTrigger
+		ArtifactCommand = ReligionFeatureArtifactCommand
+		
+		BattleTrigger = ReligionFeatureBattleTrigger
+		BattleCommand = ReligionFeatureBattleCommand
+		
+		WarTrigger = ReligionFeatureWarTrigger
+		WarCommand = ReligionFeatureWarCommand
+		
+		SiegeTrigger = ReligionFeatureSiegeTrigger
+		SiegeCommand = ReligionFeatureSiegeCommand
+		
+		OffmapPowerTrigger = ReligionFeatureOffmapPowerTrigger
+		OffmapPowerCommand = ReligionFeatureOffmapPowerCommand
+		
+		ReligionTrigger = ReligionFeatureReligionTrigger
+		ReligionCommand = ReligionFeatureReligionCommand
+		
+		CultureTrigger = ReligionFeatureCultureTrigger
+		CultureCommand = ReligionFeatureCultureCommand
+		
+		BloodlineTrigger = ReligionFeatureBloodlineTrigger
+		BloodlineCommand = ReligionFeatureBloodlineCommand
+		
+		WonderBuildingTrigger = ReligionFeatureWonderBuildingTrigger
+		WonderBuildingCommand = ReligionFeatureWonderBuildingCommand
+		
+		WonderUpgradeTrigger = ReligionFeatureWonderUpgradeTrigger
+		WonderUpgradeCommand = ReligionFeatureWonderUpgradeCommand
+		
+	}
+}
+
+(Type ReligionFile) = {
+	Optional = { Left = "secret_religion_visibility_trigger" Right = CharTriggerFromChar }
+
+	(Ch Y N) = { Left = { Type = String } Right = ReligionGroupDef (CheckKey "*" Left IfNot = NoCheckKey) }
+}
+
+(Type.Enum ConvertType) = { Values = { 0 1 2 } }
+
+(Type ReligionGroupDef) = {
+	Inherits = ReligionAndGroupSharedDef
+
+	Single = { Left = "color" Right = { FloatColor Color } }
+	Optional = { Left = "graphical_culture" Right = GraphicalCultureType }
+	Optional = { Left = "has_coa_on_barony_only" Right = Bool }
+	Optional = { Left = "crusade_cb" Right = CasusBelli }
+	Optional = { Left = "playable" Right = Bool }
+	
+	Optional = { Left = "male_names" Right = { (PdoList Y) = { Type = String } } }
+	Optional = { Left = "female_names" Right = { (PdoList Y) = { Type = String } } }
+	
+	Optional = { Left = "ai_convert_same_group" Right = ConvertType }
+	Optional = { Left = "ai_convert_other_group" Right = ConvertType }
+	Optional = { Left = "ai_peaceful" Right = Bool }
+	Optional = { Left = "ai_fabricate_claims" Right = Bool }
+	Optional = { Left = "hostile_within_group" Right = Bool }
+	Optional = { Left = "alternate_start" Right = GlobalTrigger }
+
+	Child = { Left = { Type = String } Right = ReligionDef UniqueId = Left (CheckKey "*" Left IfNot = NoCheckKey) }
+}
+
+(Type ReligionAndGroupSharedDef) = {
+	Optional = { Left = "interface_skin" Right = { (PdoList Y) = { Type = String } } }
+
+}
+
+(Type ReligionDef) = {
+	Inherits = ReligionAndGroupSharedDef
+
+	(CheckKey "*" Left IfNot = NoCheckKey)
+	(CheckKey "*_DESC" Left IfNot = NoCheckKey)
+		
+	Optional = { Left = "graphical_culture" Right = GraphicalCultureType }
+	Single = { Left = "icon" Right = { IconRef = GFX_religion_icon_strip } }
+	Optional = { Left = "heresy_icon" Right = { IconRef = GFX_religion_icon_strip } }
+	Optional = { Left = "color" Right = { FloatColor Color } }
+	Optional = { Left = "ai_convert_same_group" Right = ConvertType }
+	Optional = { Left = "ai_convert_other_group" Right = ConvertType }
+	
+	Optional = { Left = "high_god_name" Right = Key }
+	Optional = { Left = "crusade_name" Right = Key }
+	Optional = { Left = "scripture_name" Right = Key }
+	Optional = { Left = "priest_title" Right = Key }
+	Optional = { Left = "god_names" Right = { (PdoList Y) = { Type = Key } } }
+	Optional = { Left = "evil_god_names" Right = { (PdoList Y) = { Type = Key } } }
+	
+	Optional = { Left = "alternate_start" Right = GlobalTrigger }
+	
+	Optional = { Left = "crusade_cb" Right = CasusBelli }
+	Optional = { Left = "rel_head_defense" Right = Bool }
+	Optional = { Left = "use_new_crusade" Right = Bool }
+	Optional = { Left = "men_can_take_consorts" Right = Bool }
+	Optional = { Left = "women_can_take_consorts" Right = Bool }
+	Optional = { Left = "cousin_marriage" Right = Bool }
+	Optional = { Left = "can_have_antipopes" Right = Bool }
+	Optional = { Left = "matrilineal_marriages" Right = Bool }
+	Optional = { Left = "investiture" Right = Bool }
+	Optional = { Left = "can_excommunicate" Right = Bool }
+	Optional = { Left = "can_grant_divorce" Right = Bool }
+	Optional = { Left = "can_grant_claim" Right = Bool }
+	Optional = { Left = "can_call_crusade" Right = Bool }
+	Optional = { Left = "priests_can_marry" Right = Bool }
+	Optional = { Left = "can_retire_to_monastery" Right = Bool }
+	Optional = { Left = "autocephaly" Right = Bool }
+	Optional = { Left = "pentarchy" Right = Bool }
+	Optional = { Left = "can_grant_invasion_cb" Right = CasusBelli }
+	Optional = { Left = "can_hold_temples" Right = Bool }
+	Optional = { Left = "priests_can_inherit" Right = Bool }
+	(Ch N Y) = { Left = "intermarry" Right = { Religion ReligionGroup } }
+	Optional = { Left = "expel_modifier" Right = Modifier }
+	Optional = { Left = "seafarer" Right = Bool }
+	Optional = { Left = "uses_decadence" Right = Bool }
+	Optional = { Left = "uses_jizya_tax" Right = Bool }
+	Optional = { Left = "attacking_same_religion_piety_loss" Right = Bool }
+	Optional = { Left = "hard_to_convert" Right = Bool }
+	Optional = { Left = "secret_religion" Right = Bool }
+	Optional = { Left = "dynamic_cult" Right = Bool }
+	Optional = { Left = "has_coa_on_barony_only" Right = Bool }
+	Optional = { Left = "castes" Right = Bool }
+	Optional = { Left = "caste_opinions" Right = Bool }
+	Optional = { Left = "join_crusade_if_bordering_hostile" Right = Bool }
+	Optional = { Left = "can_demand_religious_conversion" Right = Bool }
+	
+	Optional = { Left = "parent" Right = Religion }
+	Optional = { Left = "max_wives" Right = NnInt }
+	Optional = { Left = "psc_marriage" Right = Bool }
+	Optional = { Left = "max_consorts" Right = NnInt }
+	Optional = { Left = "defensive_attrition" Right = Bool }
+	Optional = { Left = "pre_reformed" Right = Bool }
+	Optional = { Left = "ignores_defensive_attrition" Right = Bool }
+	
+	(If If = V110) = {
+		Optional = { Left = "independence_war_score_bonus" Right = Double }
+		Optional = { Left = "short_reign_opinion_year_mult" Right = Double }
+		Optional = { Left = "peace_prestige_loss" Right = Bool }
+		Optional = { Left = "reformer_head_of_religion" Right = Bool }
+		Optional = { Left = "raised_vassal_opinion_loss" Right = Bool }
+		Optional = { Left = "allow_looting" Right = Bool }
+		Optional = { Left = "allow_viking_invasion" Right = Bool }
+		Optional = { Left = "pc_marriage" Right = Bool }
+		Optional = { Left = "bs_marriage" Right = Bool }
+		Optional = { Left = "divine_blood" Right = Bool }
+		Optional = { Left = "female_temple_holders" Right = Bool }
+		Optional = { Left = "male_temple_holders" Right = Bool }
+		Optional = { Left = "reformed" Right = Religion }
+		Optional = { Left = "allow_rivermovement" Right = Bool }
+		
+		Optional = { Left = "unit_home_modifier" Right = {
+			Inherits = Modifier
+			Single = { Left = "key" Right = Key }
+		} }
+		Optional = { Left = "unit_modifier" Right = {
+			Inherits = Modifier
+			Single = { Left = "key" Right = Key }
+		} }
+		
+		Optional = { Left = "religious_clothing_head" Right = Int }
+		Optional = { Left = "religious_clothing_priest" Right = Int }
+		Optional = { Left = "aggression" Right = Double }
+
+	}
+	
+	Optional = { Left = "feminist" Right = Bool }
+	Optional = { Left = "pacifist" Right = Bool }
+	Optional = { Left = "secondary_event_pictures" Right = {
+		Type = Religion
+		Literal = "mesoamerican"
+	} }
+	Optional = {
+		Left = "piety_name"
+		Right = String
+		(CheckKey "STAT_PIETY_*" Right IfNot = NoCheckKey)
+		(CheckKey "STAT_PIETY_DESC_*" Right IfNot = NoCheckKey)
+		(CheckKey "MONTHLY_PIETY_*" Right IfNot = NoCheckKey)
+	}
+	Optional = { Left = "peace_piety_gain" Right = Double }
+	Optional = { Left = "has_heir_designation" Right = Bool }
+	Optional = { Left = "character_modifier" Right = CharModifier }
+	
+	Optional = { Left = "landed_kin_prestige_bonus" Right = Bool }
+	Optional = { Left = "allow_in_ruler_designer" Right = Bool }
+	Optional = { Left = "dislike_tribal_organization" Right = Bool }
+	
+	Ck2ReligionChecks
+}

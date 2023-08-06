@@ -1,0 +1,87 @@
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "year_of_birth" Right = { Int VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "is_playable" Right = Bool }
+	(A Y) = { Left = "has_nickname" Right = { Nickname Bool } }
+	(N Y) = { Left = "character" Right = { MaybeEventTargetCharTitle OpinionClauseDefinedTypes CharTargetExcludingMaybeEventTarget Bool AnyTitle NewChar } }
+
+	(N Y) = { Left = "martial" Right = { OnlyCharTarget NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "intrigue" Right = { OnlyCharTarget NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "diplomacy" Right = { OnlyCharTarget NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "stewardship" Right = { OnlyCharTarget NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "learning" Right = { OnlyCharTarget NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "fertility" Right = { NnDbl VariableName } } # Can have comparison operators
+
+	(N Y) = { Left = "monthly_prestige" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "prestige" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "monthly_piety" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "piety" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "realm_size" Right = { Int VariableName } } # Can have comparison operators
+	
+	(Y  ) = { Left = "mercenary" Right = Bool }
+	(Y  ) = { Left = "is_female" Right = Bool }
+	(Y  ) = { Left = "is_adult" Right = Bool }
+	(Y  ) = { Left = "is_marriage_adult" Right = Bool }
+	(Y  ) = { Left = "ai" Right = Bool }
+	(Y  ) = { Left = "in_command" Right = Bool }
+	(Y  ) = { Left = "is_abroad" Right = Bool }
+	(Y  ) = { Left = "is_councillor" Right = Bool }
+	(Y  ) = { Left = "is_pregnant" Right = Bool }
+	(Y  ) = { Left = "in_battle" Right = Bool }
+	(Y  ) = { Left = "is_priest" Right = Bool }
+	(Y  ) = { Left = "is_landed" Right = Bool }
+	(N Y) = { Left = "decadence" Right = Double } # Can have comparison operators
+	(Y  ) = { Left = "pacifist" Right = Bool }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "prestige" Right = { Double VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(Y  ) = { Left = "scaled_prestige" Right = { Double VariableName ScaledClause } }
+	(Y  ) = { Left = "prestige" Right = { Double VariableName } }
+	(Y  ) = { Left = "scaled_piety" Right = { Double VariableName ScaledClause } }
+	(Y  ) = { Left = "piety" Right = { Double VariableName } }
+	(Y  ) = { Left = "change_stewardship" Right = { Int VariableName } }
+	(Y  ) = { Left = "change_learning" Right = { Int VariableName } }
+	(Y  ) = { Left = "change_intrigue" Right = { Int VariableName } }
+	(Y  ) = { Left = "change_diplomacy" Right = { Int VariableName } }
+	(Y  ) = { Left = "change_martial" Right = { Int VariableName } }
+	(Y  ) = { Left = "fertility" Right = { Double VariableName } }
+			
+	(Y  ) = { Left = "give_nickname" Right = { 0 Nickname } }
+	(Y  ) = { Left = "decadence" Right = { Double VariableName } }
+
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(Y  ) = { Left = "prestige" Right = { Double VariableName } }
+
+} }
+
+(Type ScaledClause) = {
+	Single = { Left = "value" Right = { Double VariableName } }
+	Optional = { Left = "min" Right = { Double } }
+	Optional = { Left = "max" Right = { Double } }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

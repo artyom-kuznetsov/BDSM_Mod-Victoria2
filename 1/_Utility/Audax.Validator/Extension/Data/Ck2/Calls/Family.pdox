@@ -1,0 +1,90 @@
+# Family stuff, excluding spouse
+# so basically mother, father, children, siblings
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "any_child" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_child_even_if_dead" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_sibling" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_sibling_even_if_dead" Right = CharTriggerWithCount }
+	
+	(N N) = { Left = "father" Right = CharTrigger }
+	(N N) = { Left = "real_father" Right = CharTrigger }
+	(N N) = { Left = "father_of_unborn" Right = CharTrigger }
+	(N N) = { Left = "father_even_if_dead" Right = CharTrigger }
+	(N N) = { Left = "real_father_even_if_dead" Right = CharTrigger }
+	(N N) = { Left = "mother" Right = CharTrigger }
+	(N N) = { Left = "mother_even_if_dead" Right = CharTrigger }
+	(N N) = { Left = "true_father" Right = CharTrigger }
+	(N N) = { Left = "true_father_even_if_dead" Right = CharTrigger }
+	(N N) = { Left = "twin" Right = CharTrigger }
+	(N N) = { Left = "twin_even_if_dead" Right = CharTrigger }
+
+	# Per https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27225338 no Bool
+	(N Y) = { Left = "is_father" Right = { OnlyCharTarget } }
+	# Per https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27225338 no Bool
+	(N Y) = { Left = "is_mother" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_child_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_twin_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "num_of_children" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "sibling" Right = OnlyCharTarget }
+	# No bool: https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-26787815
+	(N Y) = { Left = "family" Right = OnlyCharTarget }
+	# No bool: https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-26787815
+	(N Y) = { Left = "is_close_relative" Right = { OnlyCharTarget Liege } }
+	(Y  ) = { Left = "was_conceived_a_bastard" Right = Bool }
+	(Y  ) = { Left = "father_of_unborn_known" Right = Bool }
+	
+	(Y  ) = { Left = "is_father_real_father" Right = Bool }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "any_child" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_child" Right = CharRandomCommand }
+	(N N) = { Left = "any_child_even_if_dead" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_child_even_if_dead" Right = CharRandomCommand }
+	
+	(N N) = { Left = "any_sibling" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_sibling" Right = CharRandomCommand }
+	(N N) = { Left = "any_sibling_even_if_dead" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_sibling_even_if_dead" Right = CharRandomCommand }
+
+	(N N) = { Left = "mother" Right = CharCommand }
+	(N N) = { Left = "father" Right = CharCommand }
+	(N N) = { Left = "real_father" Right = CharCommand }
+	(N N) = { Left = "father_of_unborn" Right = CharCommand }
+	(N N) = { Left = "father_even_if_dead" Right = CharCommand }
+	(N N) = { Left = "real_father_even_if_dead" Right = CharCommand }
+	(N N) = { Left = "mother_even_if_dead" Right = CharCommand }
+	(N N) = { Left = "true_father" Right = CharCommand }
+	(N N) = { Left = "true_father_even_if_dead" Right = CharCommand }
+	(N N) = { Left = "twin" Right = CharCommand }
+	(N N) = { Left = "twin_even_if_dead" Right = CharCommand }
+
+	(Y  ) = { Left = "set_father" Right = { OnlyCharTarget 0 } }
+	(Y  ) = { Left = "set_mother" Right = { OnlyCharTarget 0 } }
+	(Y  ) = { Left = "set_real_father" Right = { OnlyCharTarget 0 } }
+	(Y  ) = { Left = "father_of_unborn_known" Right = Bool }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

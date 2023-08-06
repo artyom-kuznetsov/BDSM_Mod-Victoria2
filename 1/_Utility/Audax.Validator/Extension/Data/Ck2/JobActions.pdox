@@ -1,0 +1,190 @@
+(Validator JobActions) = {
+	Type = GroupValidator
+	FriendlyName = "Councillors"
+	Description = "Including job actions, job titles, council positions, and council voting"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\job_actions" "*.txt")
+		ValidatorName = JobActions
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\job_titles" "*.txt")
+		ValidatorName = JobTitles
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\council_positions" "*.txt")
+		ValidatorName = CouncilPositionFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\council_voting" "*.txt")
+		ValidatorName = CouncilVotingFile
+	}
+}
+
+(Type CouncilPositionFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = CouncilPositionDef
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+		UniqueId = Left
+	}
+}
+
+(Type CouncilPositionDef) = {
+	Single = { Left = "icon" Right = { IconRef = GFX_council_postions_sprite } }
+	
+	Optional = { Left = "may_request_law_change" Right = Bool }
+	Single = { Left = "potential" Right = CharTrigger }
+	Single = { Left = "voting_patterns" Right = { (PdoList Y) = { Type = CouncilVotingPattern } } }
+	Single = { Left = "default_selection" Right = {
+		Single = { Left = "value" Right = Double }
+	} }
+	Single = { Left = "selection" Right = {
+		Single = { Left = "value" Right = Double }
+		(Ch N Y) = { Left = "additive_modifier" Right = {
+			Single = { Left = "value" Right = Double }
+			Optional = { Left = "localisation_key" Right = Key }
+			Inherits = CharTrigger
+		} }
+		(Ch N Y) = { Left = "additive_exported_value_modifier" Right = {
+			Optional = { Left = "factor" Right = NzDbl }
+			Optional = { Left = "localisation_key" Right = Key }
+			Single = { Left = "trigger" Right = CharTrigger }
+			Single = { Left = "who" Right = OnlyCharTarget }
+			Optional = { Left = "key" Right = String }
+			Optional = { Left = "min" Right = Double }
+			Optional = { Left = "max" Right = Double }
+			Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+		} }
+		(Ch N Y) = { Left = "additive_opinion_modifier" Right = {
+			Single = { Left = "who" Right = { Liege } }
+			Optional = { Left = "factor" Right = Double }
+			Optional = { Left = "localisation_key" Right = Key }
+			Inherits = CharTrigger
+		} }
+		(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = {
+			Single = { Left = "who" Right = { Liege } }
+			Optional = { Left = "factor" Right = Double }
+			Optional = { Left = "localisation_key" Right = Key }
+			Inherits = CharTrigger
+		} }
+		(Ch N Y) = { Left = "additive_power_diff_modifier" Right = {
+			Single = { Left = "who" Right = { Liege } }
+			Optional = { Left = "factor" Right = Double }
+			Optional = { Left = "localisation_key" Right = Key }
+			Inherits = CharTrigger
+		} }
+		(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+			Single = { Left = "balance" Right = Double }
+			Optional = { Left = "factor" Right = Double }
+			Optional = { Left = "localisation_key" Right = Key }
+			Inherits = CharTrigger
+		} }
+	} }
+	Optional = { Left = "war_target" Right = CouncilPositionWarTarget }
+}
+
+(Type CouncilPositionWarTarget) = { ContextValidator = CouncilPositionWarTarget }
+
+(ContextValidator CouncilPositionWarTarget) = {
+	Inherits = CharTrigger
+	FromTarget = Char
+	FromFromTarget = Char
+}
+
+
+(Type CouncilVotingFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = CouncilVotingDef
+		UniqueId = Left
+	}
+}
+
+(Type CouncilVotingDef) = {
+	Single = { Left = "icon" Right = { IconRef = GFX_voting_reason_sprite } }
+	Single = { Left = "pattern_type" Right = { Literal = "for" Literal = "against" } }
+	
+	# Some special cases we need to handle first
+	Optional = { Left = "declare_war_interaction" Right = CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle }
+	Optional = { Left = "grant_landed_title_interaction" Right = CharTriggerFromCharFromFromCharFromFromFromTitle }
+	Optional = { Left = "revoke_title_interaction" Right = CharTriggerFromCharFromFromCharFromFromFromTitle }
+	
+	(Ch Y N) = { Left = { Type = CouncilVotingTopic Type = Law Literal = "default" } Right = CouncilVotingTrigger }
+	(Ch Y N) = { Left = { Type = TargettedDecision } Right = CouncilTargetedDecisionVotingTrigger }
+}
+
+(Type CouncilVotingTrigger) = { ContextValidator = CouncilVotingTrigger }
+(ContextValidator CouncilVotingTrigger) = {
+	Inherits = CharTrigger
+	FromTarget = Char
+	FromFromTarget = Char
+}
+
+(Type CouncilTargetedDecisionVotingTrigger) = { ContextValidator = CouncilTargetedDecisionVotingTrigger }
+(ContextValidator CouncilTargetedDecisionVotingTrigger) = {
+	Inherits = CharTrigger
+	FromTarget = Char
+	FromFromTarget = Char
+	FromFromFromTarget = Char
+}
+
+(Type JobTitles) = {
+	(Ch Y N) = { Left = { Type = String } Right = JobTitleDef (CheckKey "*" Left IfNot = NoCheckKey) }
+}
+
+(Type JobTitleDef) = {
+	Inherits = NonLandTitleBase
+	
+	Optional = { Left = "is_chancellor" Right = Bool }
+	Optional = { Left = "is_marshal" Right = Bool }
+	Optional = { Left = "is_treasurer" Right = Bool }
+	Optional = { Left = "is_spymaster" Right = Bool }
+	Optional = { Left = "is_spiritual" Right = Bool }
+	Optional = { Left = "dismiss_trigger" Right = CharTriggerFromChar }
+
+	Single = { Left = "attribute" Right = Attribute }
+	(Ch N Y) = { Left = "action" Right = JobAction }
+	
+	Optional = { Left = "lift_fow" Right = Bool }
+	Optional = { Left = "lift_neighbor_fow" Right = Bool }
+}
+
+(Type JobActions) = {
+	(Ch Y N) = { Left = { Type = String } Right = JobActionDef (CheckKey "*" Left IfNot = NoCheckKey) }
+}
+
+(Type JobActionDef) = {
+	Single = { Left = "attribute" Right = Attribute }
+	Optional = { Left = "trigger" Right = JobActionTrigger }
+	Optional = { Left = "potential" Right = JobActionTrigger }
+	Single = { Left = "events" Right = { (PdoList Y) = { Type = CharEventId } } }
+	Optional = { Left = "offmap" Right = Bool }
+	Optional = { Left = "attribute_cap" Right = Int }
+	Optional = { Left = "liege_modifier" Right = Modifier }
+	
+	Child = { Left = "display_on_map" Right = {
+		Single = { Left = "tooltip" Right = Key }
+		Single = { Left = "trigger" Right = JobActionTrigger }
+		Single = { Left = "color" Right = { FloatColor Color } }
+	} }
+	
+	Inherits = ProvModifier
+}
+
+(Type JobActionTrigger) = { ContextValidator = JobActionTrigger }
+(ContextValidator JobActionTrigger) = {
+	FromTarget = Char
+	
+	Inherits = ProvTrigger
+}
+
+

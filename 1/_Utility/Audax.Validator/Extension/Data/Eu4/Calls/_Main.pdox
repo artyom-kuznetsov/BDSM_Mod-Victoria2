@@ -1,0 +1,754 @@
+# FromStatus[None | Country | Province]
+# Call[FromStatus; Location pointer; int id]
+
+Includes = {
+	Control
+	Misc
+	Religion
+	Scopes
+	Status
+	Territory
+}
+
+
+
+
+
+ContextValidatorInfo = {
+	AllowThis = False # True by default
+	AllowRoot = True # False by default; when enabled allows ROOT as a synonym for THIS
+	AllowPrev = True # False by default; when enabled allows arbitrary chaining of PREV
+	EnableNamespaces = True
+	EnableEventTargets = True
+	AllowScripted = True
+	PossibleEventTargets = {
+		(TargetGroup Country)
+		(TargetGroup Country Province)
+		(TargetGroup Province)
+	}
+
+	IdSearch = {
+		(FileGroup "events" "*.txt") = {
+			Province = "province_event\id"
+			Country = "country_event\id"
+			Unit = "unit_event\id"
+		}
+		
+		EventTypes = { Country Province State Global Unit }
+	}
+	
+	ParentNoPush = {
+		"random_list"
+		"trigger_switch"
+	}
+	
+	CallSearch = {
+		(FileGroup "events" "*.txt") = {
+			Province = { SearchRoot = "province_event\option" Type = Event Id = "^\id\[R]" }
+			Country = { SearchRoot = "country_event\option" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\option" Type = Event Id = "^\id\[R]" }
+			Province = { SearchRoot = "province_event\immediate" Type = Event Id = "^\id\[R]" }
+			Country = { SearchRoot = "country_event\immediate" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\immediate" Type = Event Id = "^\id\[R]" }
+			Province = { SearchRoot = "province_event\after" Type = Event Id = "^\id\[R]" }
+			Country = { SearchRoot = "country_event\after" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\after" Type = Event Id = "^\id\[R]" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "decisions" "*.txt") = {
+			Country = "country_decisions\*\effect"
+			Country = "religion_decisions\*\effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "missions"  "*.txt") = {
+			Country = "*\*\effect"
+			#Country = "*\effect"
+			#Country = "*\immediate"
+			#Country = "*\abort_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\rebel_types" "*.txt") = {
+			None = "*\siege_won_effect"
+			None = "*\demands_accepted_effect"
+			None = "*\demands_enforced_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\new_diplomatic_actions" "*.txt") = {
+			Country = "*\on_accept"
+			Country = "*\on_decline"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\incidents" "*.txt") = {
+			None = "*\immediate_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\institutions" "*.txt") = {
+			Province = "*\on_start"
+			
+			SearchMethod = ShallowSearchAllRight
+		}
+		
+		(FileGroup "common\imperial_reforms" "*.txt") = {
+			None = "*\effect"
+			None = "*\on_effect"
+			None = "*\off_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "tutorial" "*.txt") = {
+			None = "tutorial\page\effect"
+			
+			SearchMethod = 2
+		}
+
+		(FileGroup "common\on_actions" "*.txt") = {
+			
+				Country = { SearchRoot = "on_mandate_of_heaven_gained\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_mandate_of_heaven_gained\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_mandate_of_heaven_lost\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_mandate_of_heaven_lost\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_dependency_gained\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_dependency_gained\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_dependency_lost\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_dependency_lost\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_chinese_empire_dismantled\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_chinese_empire_dismantled\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_russian_streltsy\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_russian_streltsy\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_russian_oprichnina\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_russian_oprichnina\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_explorer_recruited\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_explorer_recruited\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_conquistador_recruited\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_conquistador_recruited\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_admiral_recruited\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_admiral_recruited\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_general_recruited\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_general_recruited\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_leader_recruited\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_leader_recruited\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_russian_sudebnik\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_russian_sudebnik\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_death_foreign_slave_ruler\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_death_foreign_slave_ruler\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_bi_yearly_pulse\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_bi_yearly_pulse\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_won_country\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_battle_won_country\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_lost_country\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_battle_lost_country\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_diplomatic_annex\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_diplomatic_annex\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_war_lost\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_war_lost\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_war_won\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_war_won\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_enforce_rebel_demands\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_enforce_rebel_demands\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_integrate\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_integrate\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_annexed\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_annexed\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_colonial_reintegration\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_colonial_reintegration\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_hre_member_true_religion\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_hre_member_true_religion\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_hre_member_false_religion\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_hre_member_false_religion\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_replace_governor\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_replace_governor\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_startup\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_startup\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_refuse_tribute\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_refuse_tribute\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_accept_tribute\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_accept_tribute\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_company_chartered\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_company_chartered\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_province_owner_change\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_province_owner_change\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_won_province\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_battle_won_province\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_added_to_trade_company\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_added_to_trade_company\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_removed_from_company\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_removed_from_company\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_company_formed\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_company_formed\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_company_disolved\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_company_disolved\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_lost_province\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_battle_lost_province\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_siege_won_province\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_siege_won_province\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_siege_lost_province\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_siege_lost_province\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_abandon_colony\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_abandon_colony\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_explore_coast\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_explore_coast\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_conquistador_empty\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_conquistador_empty\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_conquistador_native\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_conquistador_native\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_mercenary_recruited\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_mercenary_recruited\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_regiment_recruited\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_regiment_recruited\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_convert_by_trade_policy\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_convert_by_trade_policy\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_create_vassal\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_create_vassal\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_country_released\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_country_released\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_flagship_destroyed\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_flagship_destroyed\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_flagship_captured\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_flagship_captured\events" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_holy_order_established\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "on_holy_order_established\events" Type = OnAction Id = "^\[L]" }
+			
+			
+			
+				Province = { SearchRoot = "on_siege_won_country\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_siege_won_country\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_siege_lost_country\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_siege_lost_country\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_siberian_pulse\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_siberian_pulse\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_consecrate_patriarch\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_consecrate_patriarch\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_janissaries_raised\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_janissaries_raised\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_remove_pasha\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_remove_pasha\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_add_pasha\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_add_pasha\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_raid_coast\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_raid_coast\events" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_minority_expelled\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "on_minority_expelled\events" Type = OnAction Id = "^\[L]" }
+			
+		
+
+			# IF YOU ADD ANYTHING, ADD IN THE NEXT SECTION TOO!!!
+			
+			Unit = { SearchRoot = "on_battle_won_unit\random_events" Type = OnAction Id = "^\[L]" }
+			Unit = { SearchRoot = "on_battle_won_unit\events" Type = OnAction Id = "^\[L]" }
+			
+			Unit = { SearchRoot = "on_battle_lost_unit\random_events" Type = OnAction Id = "^\[L]" }
+			Unit = { SearchRoot = "on_battle_lost_unit\events" Type = OnAction Id = "^\[L]" }
+	
+			None = { SearchRoot = "*\random_events" Type = OnAction Id = "^\[L]" }
+			None = { SearchRoot = "*\events" Type = OnAction Id = "^\[L]" }
+
+			SearchMethod = 3
+		}
+		
+		(FileGroup "common\religions" "*.txt") = {
+			None = { SearchRoot = "*\*\papacy\*\effect" Type = PapalDecision Id = "^\[L]" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\on_actions" "*.txt") = {
+			
+				Country = { SearchRoot = "on_mandate_of_heaven_gained" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_mandate_of_heaven_lost" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_dependency_gained" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_dependency_lost" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_chinese_empire_dismantled" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_russian_streltsy" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_russian_oprichnina" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_explorer_recruited" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_conquistador_recruited" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_admiral_recruited" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_general_recruited" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_leader_recruited" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_russian_sudebnik" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_death_foreign_slave_ruler" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_bi_yearly_pulse" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_won_country" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_lost_country" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_diplomatic_annex" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_war_lost" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_war_won" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_enforce_rebel_demands" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_integrate" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_annexed" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_colonial_reintegration" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_hre_member_true_religion" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_hre_member_false_religion" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_replace_governor" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_startup" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_refuse_tribute" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_accept_tribute" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_company_chartered" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_province_owner_change" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_won_province" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_added_to_trade_company" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_removed_from_company" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_company_formed" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_company_disolved" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_battle_lost_province" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_siege_won_province" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_siege_lost_province" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_abandon_colony" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_explore_coast" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_conquistador_empty" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_conquistador_native" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_mercenary_recruited" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_regiment_recruited" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_convert_by_trade_policy" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_create_vassal" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_country_released" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_flagship_destroyed" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_flagship_captured" Type = OnAction Id = "^\[L]" }
+			
+				Country = { SearchRoot = "on_holy_order_established" Type = OnAction Id = "^\[L]" }
+			
+			
+				Province = { SearchRoot = "on_siege_won_country" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_siege_lost_country" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_siberian_pulse" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_consecrate_patriarch" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_janissaries_raised" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_remove_pasha" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_add_pasha" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_raid_coast" Type = OnAction Id = "^\[L]" }
+			
+				Province = { SearchRoot = "on_minority_expelled" Type = OnAction Id = "^\[L]" }
+			
+
+
+			
+			Unit = { SearchRoot = "on_battle_won_unit" Type = OnAction Id = "^\[L]" }
+			Unit = { SearchRoot = "on_battle_lost_unit" Type = OnAction Id = "^\[L]" }
+			
+			
+			None = "*"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\disasters" "*.txt") = {
+			None = { SearchRoot = "*\on_monthly\events" Type = Disaster Id = "^\^\[L]" }
+			None = { SearchRoot = "*\on_monthly\random_events" Type = Disaster Id = "^\^\[L]" }
+			None = { SearchRoot = "*\on_start" Type = Disaster Id = "^\[L]" }
+			None = { SearchRoot = "*\on_end" Type = Disaster Id = "^\[L]" }
+			
+			SearchMethod = 3
+		}
+		
+		(FileGroup "common\disasters" "*.txt") = {
+			None = { SearchRoot = "*\on_start_effect" Type = Disaster Id = "^\[L]" }
+		}
+		
+		Search = {
+			province_event
+			country_event
+		}
+	}
+}
+
+
+(ContextValidator Country) = { }
+
+(ContextValidator Province) = { }
+
+(ContextValidator State) = { }
+
+(ContextValidator Global) = { }
+
+(ContextValidator Unit) = { }
+
+
+(ContextValidator Trigger) = {
+	#Abstract = True
+	
+	Set = {
+		
+		CountryTrigger = CountryTrigger
+		Country = Country
+		
+		ProvinceTrigger = ProvinceTrigger
+		Province = Province
+		
+		StateTrigger = StateTrigger
+		State = State
+		
+		GlobalTrigger = GlobalTrigger
+		Global = Global
+		
+		UnitTrigger = UnitTrigger
+		Unit = Unit
+		
+		
+		Trigger = Trigger
+	}
+}
+
+
+
+Global = {
+(Type CountryTrigger) = {
+	ContextValidator = CountryTrigger
+}
+}
+
+(ContextValidator CountryTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = CountryTrigger
+	Conditional = CountryTrigger
+}
+
+
+
+Global = {
+(Type ProvinceTrigger) = {
+	ContextValidator = ProvinceTrigger
+}
+}
+
+(ContextValidator ProvinceTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = ProvinceTrigger
+	Conditional = ProvinceTrigger
+}
+
+
+
+Global = {
+(Type StateTrigger) = {
+	ContextValidator = StateTrigger
+}
+}
+
+(ContextValidator StateTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = StateTrigger
+	Conditional = StateTrigger
+}
+
+
+
+Global = {
+(Type GlobalTrigger) = {
+	ContextValidator = GlobalTrigger
+}
+}
+
+(ContextValidator GlobalTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = GlobalTrigger
+	Conditional = GlobalTrigger
+}
+
+
+
+Global = {
+(Type UnitTrigger) = {
+	ContextValidator = UnitTrigger
+}
+}
+
+(ContextValidator UnitTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = UnitTrigger
+	Conditional = UnitTrigger
+}
+
+
+
+(ContextValidator Command) = {
+	#Abstract = True
+	
+	Set = {
+		
+		CountryTrigger = CountryTrigger
+		CountryCommand = CountryCommand
+		Country = Country
+		
+		ProvinceTrigger = ProvinceTrigger
+		ProvinceCommand = ProvinceCommand
+		Province = Province
+		
+		StateTrigger = StateTrigger
+		StateCommand = StateCommand
+		State = State
+		
+		GlobalTrigger = GlobalTrigger
+		GlobalCommand = GlobalCommand
+		Global = Global
+		
+		UnitTrigger = UnitTrigger
+		UnitCommand = UnitCommand
+		Unit = Unit
+		
+		
+		Trigger = Trigger
+		Command = Command
+	}
+}
+
+
+
+Global = {
+(Type CountryCommand) = {
+	ContextValidator = CountryCommand
+}
+}
+
+(ContextValidator CountryCommand) = {
+	Inherits = Command
+	
+	ThisTarget = CountryCommand
+}
+
+
+
+Global = {
+(Type ProvinceCommand) = {
+	ContextValidator = ProvinceCommand
+}
+}
+
+(ContextValidator ProvinceCommand) = {
+	Inherits = Command
+	
+	ThisTarget = ProvinceCommand
+}
+
+
+
+Global = {
+(Type StateCommand) = {
+	ContextValidator = StateCommand
+}
+}
+
+(ContextValidator StateCommand) = {
+	Inherits = Command
+	
+	ThisTarget = StateCommand
+}
+
+
+
+Global = {
+(Type GlobalCommand) = {
+	ContextValidator = GlobalCommand
+}
+}
+
+(ContextValidator GlobalCommand) = {
+	Inherits = Command
+	
+	ThisTarget = GlobalCommand
+}
+
+
+
+Global = {
+(Type UnitCommand) = {
+	ContextValidator = UnitCommand
+}
+}
+
+(ContextValidator UnitCommand) = {
+	Inherits = Command
+	
+	ThisTarget = UnitCommand
+}
+
+
+
+Global = {
+(Type.Enum Owner) = { Values = { "owner" } }
+(Type.Enum Controller) = { Values = { "controller" } }
+(Type.Enum Capital) = { Values = { ("capitol" If = Debug) "capital" "CAPITAL" } }
+(Type.Enum Emperor) = { Values = { "emperor" } }
+(Type.Enum Xxx) = { Values = { "xxx" "XXX" } }
+(Type.Enum Rebel) = { Values = { "REB" } }
+(Type.Enum Heretic) = { Values = { "heretic" } }
+(Type.Enum Heathen) = { Values = { "heathen" } }
+(Type.Enum Random) = { Values = { "random" } }
+(Type.Enum Yes) = { Values = { "yes" } }
+(Type.Enum Secondary) = { Values = { "secondary" } }
+(Type.Enum Enemy) = { Values = { "enemy" } }
+(Type.Enum Tribal) = { Values = { "tribal" } }
+(Type.Enum PreviousOwner) = { Values = { "previous_owner" } }
+(Type.Enum TripleDash) = { Values = { "---" } }
+(Type.Enum Any) = { Values = { "any" } }
+}
+
+
+		# ([Left Uniqueness] [Right Uniqueness])
+		# N = never has to be unique
+		# A = has to be unique only in an And clause
+		# 		Only valid in conditionals
+		#		Hence, can have duplicates in Or, Not clauses
+		# Y = always has to be unique
+		# Right can be left out only if left is Y - always must be unique
+		# Hence, it is implied that Right is also Y.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

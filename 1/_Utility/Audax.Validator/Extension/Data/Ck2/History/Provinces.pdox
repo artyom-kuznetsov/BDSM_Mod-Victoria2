@@ -1,0 +1,49 @@
+﻿(AddFlag NoMissingProvinceCheck)
+
+Includes = {
+	"..\..\_Common\ProvinceHistory"
+}
+
+(Type.Or ProvinceHistoryTag) = { Type.Enum = LandProvince }
+(Type ProvinceHistory) = {
+	(SkipIfEmpty If = ProvinceHistory.NoWarnOnEmptyFile)
+
+	Inherits = ProvinceHistoryBase
+	Inherits = ProvinceBase
+	(Ck2ProvinceHistoryCheckKey IfNot = NoCheckKey)
+
+	Single = { Left = "title" Right = CountTitle UniqueId = Right }
+	Single = { Left = "max_settlements" Right = NonNegInt }
+	
+	Single = { Left = "culture" Right = Culture }
+	Single = { Left = "religion" Right = Religion }
+	Optional = { Left = "terrain" Right = Terrain }
+	
+	ProvHistoryComplexCheck
+}
+
+(Type DateClause) = {
+	Inherits = ProvinceBase
+	
+	Optional = { Left = "culture" Right = Culture }
+	Optional = { Left = "religion" Right = Religion }
+	Optional = { Left = "max_settlements" Right = NonNegInt }
+
+	(Ch N Y) = { Left = "remove_settlement" Right = BaronTitle }
+	Optional = { Left = "name" Right = String }
+	Optional = { Left = "trade_post" Right = { Literal = "-1" Type = BaronTitle } }
+	Optional = { Left = "effect" Right = ProvCommand }
+	
+	Optional = { Left = "build_wonder" Right = Wonder }
+	Optional = { Left = "destroy_wonder" Right = Yes }
+	(Ch N Y) = { Left = "build_wonder_upgrade" Right = WonderUpgrade }
+	(Ch N Y) = { Left = "destroy_wonder_upgrade" Right = WonderUpgrade }
+	Optional = { Left = "set_wonder_stage" Right = PInt }
+	Optional = { Left = "set_wonder_damaged" Right = Bool }
+}
+
+(Type ProvinceBase) = {
+	(Ch N N) = { Left = { Type = BaronTitle } Right = { Building ImprovementValue 0 } }
+	Optional = { Left = "capital" Right = BaronTitle }
+
+}

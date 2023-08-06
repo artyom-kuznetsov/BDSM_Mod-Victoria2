@@ -1,0 +1,7 @@
+set PATH_TO_FX_MODS="psth-to\javafx-jmods-14"
+set PATH_TO_JDK="psth-to\jdk-14\bin\"
+%PATH_TO_JDK%\jlink --module-path "%PATH_TO_FX_MODS%;mods\production" --add-modules vic2sgea,VickyWarAnalyzer --output jre --compress=1 --no-header-files --no-man-pages --strip-debug --launcher start=vic2sgea/org.victoria2.tools.vic2sgea.gui.Main
+
+
+jre\bin\java -m vic2sgea/org.victoria2.tools.vic2sgea.gui.Main
+jre\bin\java -m VickyWarAnalyzer/ee.tkasekamp.vickywaranalyzer.gui.GUI

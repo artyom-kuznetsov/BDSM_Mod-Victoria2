@@ -1,0 +1,1414 @@
+
+
+(ContextValidator Trigger) = { Members = {
+	(N N) = { Left = "any_quest_target" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_quester" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_trade_route_province" Right = ProvTriggerWithCount }
+	(Y  ) = { Left = "log_scopes" Right = Yes }
+	(A Y) = { Left = "using_cb" Right = CasusBelli } # Not always valid but too complex to figure out
+	(Y  ) = { Left = "is_local_human_observer" Right = Bool }
+	(Y  ) = { Left = "show_only_failed_conditions" Right = Bool }
+	(Y  ) = { Left = "show_scope_change" Right = Bool }
+	(N Y) = { Left = "has_dlc" Right = Dlc }
+	(Y  ) = { Left = "supported_checksum" Right = Bool }
+	(Y  ) = { Left = "is_save_game" Right = Bool }
+	(Y  ) = { Left = "is_alternate_start" Right = Bool }
+	(Y  ) = { Left = "is_shattered_world" Right = Bool }
+	(Y  ) = { Left = "is_random_world" Right = Bool }
+	(Y  ) = { Left = "has_religion_features" Right = Bool }
+	
+	(N Y) = { Left = "has_alternate_start_parameter" Right = {
+		Single = { Left = "key" Right = String }
+		Single = { Left = "value" Right = String }
+		CheckAlternateStartParameter
+	} }
+	
+	(N Y) = { Left = "has_alternate_start_setting" Right = {
+		NodeSwitcher = {
+			Node = "setting"
+			MarkChecked = True
+			Switch = {
+				"AlternateStartSliderSetting:Enum" = {
+					Single = { Left = "value" Right = Double }
+				}
+				"AlternateStartDoubleSliderSetting:Enum" = {
+					Single = { Left = "min" Right = { Double VariableName } }
+					Single = { Left = "max" Right = { Double VariableName } }
+				}
+				"AlternateStartSelectionSetting:Enum" = {
+					Single = { Left = "option" Right = String }
+					CheckAlternateStartSelectionSetting
+				}
+			}
+		
+		}
+	} }
+	
+	(N N) = { Left = { Type = PrefixedCharId } Right = CharTrigger }
+	(N N) = { Left = { Type = OffmapPower } Right = OffmapPowerTrigger }
+	
+	(N N) = { Left = "any_title" Right = TitleTriggerWithCount }
+	(N N) = { Left = "any_character" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_province" Right = ProvTriggerWithCount }
+	(N N) = { Left = "any_landed_title" Right = TitleTriggerWithCount }
+	(N N) = { Left = "any_player" Right = CharTriggerWithCount }
+	
+	(Y  ) = { Left = "multiplayer" Right = Bool }
+	(Y  ) = { Left = "is_ironman" Right = Bool }
+	(Y  ) = { Left = "has_game_started" Right = Bool }
+	(N Y) = { Left = "start_date" Right = Date } # Can have comparison operators
+
+	(N Y) = { Left = "has_game_rule" Right = {
+		Single = { Left = "name" Right = GameRuleKey }
+		Single = { Left = "value" Right = { DicEnumValueFor = { Enum = GameRule KeySelector = "^\name\[R]" } } }
+	} }
+	(N Y) = { Left = "total_years_played" Right = { NnInt VariableName } } # Can have comparison operators
+	(N N) = { Left = "log" Right = String }
+	
+	(N N) = { Left = { Type = Religion } Right = ReligionTrigger }
+	(N N) = { Left = { Type = ReligionGroup } Right = ReligionTrigger }
+	(N N) = { Left = { Type = Culture } Right = CultureTrigger }
+	(N N) = { Left = { Type = CultureGroup } Right = CultureTrigger }
+} }
+
+(Type DistanceDef) = {
+	Optional = { Left = "where" Right = { Province MaybeEventTargetProvTitle AnyTitle } }
+	Optional = { Left = "value" Right = { NnDbl VariableName } }
+	
+	Optional = { Left = "who" Right = { OnlyCharTarget } }
+	Optional = { Left = "distance" Right = { NnDbl VariableName } }
+	
+	#AllOrNone = { where value }
+	#AllOrNone = { who distance }
+	AtMostOne = { where who }
+	AtMostOne = { distance value }
+	OneOf = { where who }
+	OneOf = { distance value }
+}
+
+(Type CheckConnectivityDef) = {
+	Optional = { Left = "sea_gap" Right = Bool }
+	Optional = { Left = "land_gap" Right = Bool }
+	Optional = { Left = "sub_realm" Right = { Bool MaybeEventTargetChar AnyTitle CharTargetExcludingMaybeEventTarget } }
+	Optional = { Left = "naval_distance" Right = { Bool NnInt } }
+}
+
+(Type IsConnectedToDef) = {
+	Inherits = CheckConnectivityDef
+	Single = { Left = "target" Right = { Literal = "realm_capital" Literal = "capital" Type = MaybeEventTargetProvTitle Type = Province Type = AnyTitle } }
+}
+
+{% for scope in ['Char', 'Prov', 'Title'] %}
+
+(ContextValidator {{ scope }}Trigger) = { Members = {
+	(N N) = { Left = { "any_quester_targeting_this" "any_quester_targetting_this" } Right = CharTriggerWithCount }
+	(Y  ) = { Left = "is_quest_target" Right = Bool }
+	(Y  ) = { Left = "is_quest_target_of" Right = { MaybeEventTargetChar VariousOwners } }
+} }
+
+(ContextValidator {{ scope }}Command) = { Members = {
+	(N N) = { Left = { "any_quester_targeting_this" "any_quester_targetting_this" } Right = CharMaybeLimitCommand }
+	(Y  ) = { Left = "set_quest_target" Right = {
+		# This used to have EventTargetSet
+		# That was part of being used in scope "quest_target" which was marked as Untyped
+		# I guess it was never implemented that way
+		# If we do plan to implement it that way (which is the right way, but hard)
+		# then we have to make sure that even if this setter is never used it is fine.
+		# So probably include a checker somehow as well
+		# Or have a separate quest thing or something
+		Single = { Left = "id" Right = String (LocalOp "chk" "[R]" AddChecker CharQuest) }
+		Optional = { Left = "society" Right = SocietyThings }
+		Single = { Left = "holder" Right = OnlyCharTarget }
+	} }
+} }
+
+{% endfor %}
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "is_connected_to" Right = IsConnectedToDef }
+	(Y  ) = { Left = "is_landed_title_being_created" Right = Bool }
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "hospital_owner" Right = CharTriggerWithCount }
+	(N N) = { Left = "fort_owner" Right = CharTriggerWithCount }
+	(Y  ) = { Left = "trade_post_has_any_building" Right = Bool }
+	(Y  ) = { Left = "fort_has_any_building" Right = Bool }
+
+	(Y  ) = { Left = "has_tribal" Right = Bool }
+	(Y  ) = { Left = "has_temple" Right = Bool }
+	(Y  ) = { Left = "has_city" Right = Bool }
+	(Y  ) = { Left = "has_castle" Right = Bool }
+	(Y  ) = { Left = "has_fort" Right = Bool }
+
+	# Can take comparison ops so can't dedup RHS
+	(N N) = { Left = "supply_limit" Right = {
+		Single = { Left = "for" Right = { OnlyCharTarget Owner } }
+		Optional = { Left = "leader" Right = { OnlyCharTarget Owner } }
+		Single = { Left = "value" Right = { Double VariableName } }
+	} }
+	(A Y) = { Left = "climate" Right = ClimateType }
+	(N Y) = { Left = "is_connected_to" Right = IsConnectedToDef }
+	
+	(N N) = { Left = "any_connected_province" Right = { Inherits = CheckConnectivityDef Inherits = ProvTriggerWithCount } }
+	(N N) = { Left = "any_disconnected_province" Right = { Inherits = CheckConnectivityDef Inherits = ProvTriggerWithCount } }
+
+	# May be useful in case of scripted triggers/effects to make sure either province or title becomes province
+	(N N) = { Left = "location" Right = ProvTrigger }
+
+	(N N) = { Left = "any_province_holding" Right = TitleTriggerWithCount }
+	(N N) = { Left = "sea_zone" Right = ProvTrigger }
+	(N N) = { Left = "capital_holding" Right = TitleTrigger }
+	
+	(N N) = { Left = "trade_post_owner" Right = CharTrigger }
+	(N N) = { Left = "religion_head" Right = CharTrigger }
+	
+	(N Y) = { Left = { "can_land_path_to" } Right = { MaybeEventTargetProv AnyTitle } }
+	(N Y) = { Left = { "can_naval_path_to" } Right = { MaybeEventTargetProv AnyTitle } }
+	(N Y) = { Left = { "can_land_path_to" } Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetProv AnyTitle } }
+		Optional = { Left = "distance" Right = { Int VariableName } }
+	} }
+	(N Y) = { Left = { "can_naval_path_to" } Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetProv AnyTitle } }
+		Optional = { Left = "distance" Right = { Int VariableName } }
+	} }
+	
+	(Y  ) = { Left = "is_occupied" Right = Bool }
+	(N Y) = { Left = "num_of_max_settlements" Right = { NnInt VariableName } } # Can have comparison operators
+
+	(Y  ) = { Left = "has_epidemic" Right = Bool }
+	(Y  ) = { Left = "is_island" Right = Bool }
+	(N Y) = { Left = "distance" Right = { DistanceDef } }
+	(Y  ) = { Left = "has_trade_post" Right = Bool }
+	(A Y) = { Left = "continent" Right = Continent }
+	(Y  ) = { Left = "has_empty_holding" Right = Bool }
+	(Y  ) = { Left = "is_winter" Right = Bool }
+	(N Y) = { Left = "num_of_empty_holdings" Right = { NnInt VariableName } } # Can have comparison operators
+	
+	(Y  ) = { Left = "has_owner" Right = Bool }
+	(Y  ) = { Left = "is_reformed_religion" Right = { Bool } }
+	(Y  ) = { Left = "is_reformed_religion" Right = { OnlyCharTarget VariousOwners } }
+	
+	(Y  ) = { Left = "has_heresies" Right = Bool }
+	(N Y) = { Left = "is_within_diplo_range" Right = { MaybeEventTargetCharOffmapPower OffmapPower CharTargetExcludingMaybeEventTarget } }
+	(Y  ) = { Left = "borders_major_river" Right = Bool }
+	(Y  ) = { Left = "borders_lake" Right = Bool }
+	(N Y) = { Left = "region" Right = GeographicalRegion }
+	(Y  ) = { Left = "is_nomadic" Right = Bool }
+	(N Y) = { Left = "trade_route" Right = { Province TradeRoute MaybeEventTargetProv } }
+	(N Y) = { Left = "trade_post_has_building" Right = ImprovementValue }
+	(Y  ) = { Left = "technology_can_spread" Right = Bool }
+	(Y  ) = { Left = "has_capital" Right = Bool }
+	(Y  ) = { Left = "has_settlement_construction" Right = Bool }
+	(N Y) = { Left = "owned_by" Right = { OnlyCharTarget VariousOwners } }
+
+} }
+
+(Type OpinionDiff) = {
+	Single = { Left = "first" Right = { OnlyCharTarget OpinionClauseDefinedTypes AnyTitle } }
+	Single = { Left = "second" Right = { OnlyCharTarget OpinionClauseDefinedTypes AnyTitle } }
+	Single = { Left = "value" Right = { Double VariableName } }
+	Optional = { Left = "as_if_liege" Right = Bool }
+}
+
+(Type OffmapLikeDef) = {
+	Single = { Left = "type" Right = OffmapPower }
+	Optional = { Left = "context" Right = { Literal = "concubine" Literal = "eunuch" Literal = "wealth" Literal = "tributary"	} }
+}
+
+{% for name, source, target in [
+		('eldership_title', 'Char', 'Title'),
+		('elector_character', 'Title', 'Char'),
+		('pretender', 'Title', 'Char'),
+		('kill_list_character', 'Char', 'Char'),
+		('unit_leader', 'Char', 'Char'),
+		('unit_leader', 'Unit', 'Char'),
+		('unit', 'Char', 'Unit'),
+		('controlled_unit', 'Char', 'Unit'),
+		('fleet', 'Char', 'Unit'),
+		('army', 'Char', 'Unit'),
+		('artifact_owner', 'Artifact', 'Char'),
+		('favor_ower', 'Char', 'Char'),
+		('favor_holder', 'Char', 'Char'),
+	] %}
+{{ ctx.calls.make_any_and_random_scopes(name, source, target) }}
+
+{% endfor %}
+
+(Type TargettedDecisionCheck) = {
+	Single = { Left = "key" Right = TargettedDecision }
+	Single = { Left = "character" Right = { CharTargetExcludingMaybeEventTarget AnyTitle Province MaybeEventTargetCharProvTitle } }
+}
+
+(Type TitleDecisionCheck) = {
+	Single = { Left = "key" Right = TitleDecision }
+	Single = { Left = "title" Right = { MaybeEventTargetProvTitle AnyTitle LandProvince CapitalScope CapitalHolding } }
+}
+
+(Type SettlementDecisionCheck) = {
+	Single = { Left = "key" Right = SettlementDecision }
+	Single = { Left = "title" Right = { MaybeEventTargetTitle BaronTitle CapitalHolding } }
+}
+
+(Type TradePostHospitalFortDecisionCheckBase) = {
+	Single = { Left = "title" Right = { MaybeEventTargetProvTitle AnyTitle LandProvince CapitalScope CapitalHolding PrimaryTitle } }
+}
+
+(Type TradePostDecisionCheck) = {
+	Inherits = TradePostHospitalFortDecisionCheckBase
+	Single = { Left = "key" Right = TradePostDecision }
+}
+
+(Type FortDecisionCheck) = {
+	Inherits = TradePostHospitalFortDecisionCheckBase
+	Single = { Left = "key" Right = FortDecision }
+}
+
+(Type HospitalDecisionCheck) = {
+	Inherits = TradePostHospitalFortDecisionCheckBase
+	Single = { Left = "key" Right = HospitalDecision }
+}
+
+{% for scope in ['Char', 'Title'] %}
+(ContextValidator {{ scope }}Trigger) = { Members = {
+	(Y  ) = { Left = "has_councilor_faction_join_restriction" Right = Bool }
+	(N Y) = { Left = "is_law_allowed" Right = Law }
+	(N Y) = { Left = "is_law_potential" Right = Law }
+	(N Y) = { Left = "is_government_allowed" Right = Government }
+	(N Y) = { Left = "is_government_potential" Right = Government }
+	(N Y) = { Left = "is_decision_allowed" Right = { PureDecision PlotDecision SocietyDecision } }
+	(N Y) = { Left = "is_decision_potential" Right = { PureDecision PlotDecision SocietyDecision } }
+	(N Y) = { Left = "is_targetted_decision_allowed" Right = TargettedDecisionCheck }
+	(N Y) = { Left = "is_targetted_decision_potential" Right = TargettedDecisionCheck }
+	(N Y) = { Left = "is_targeted_decision_allowed" Right = TargettedDecisionCheck }
+	(N Y) = { Left = "is_targeted_decision_potential" Right = TargettedDecisionCheck }
+	(N Y) = { Left = "is_title_decision_allowed" Right = TitleDecisionCheck }
+	(N Y) = { Left = "is_title_decision_potential" Right = TitleDecisionCheck }
+	(N Y) = { Left = "is_settlement_decision_allowed" Right = SettlementDecisionCheck }
+	(N Y) = { Left = "is_settlement_decision_potential" Right = SettlementDecisionCheck }
+	(N Y) = { Left = "is_trade_post_decision_allowed" Right = TradePostDecisionCheck }
+	(N Y) = { Left = "is_trade_post_decision_potential" Right = TradePostDecisionCheck }
+	(N Y) = { Left = "is_fort_decision_allowed" Right = FortDecisionCheck }
+	(N Y) = { Left = "is_fort_decision_potential" Right = FortDecisionCheck }
+	(N Y) = { Left = "is_hospital_decision_allowed" Right = HospitalDecisionCheck }
+	(N Y) = { Left = "is_hospital_decision_potential" Right = HospitalDecisionCheck }
+} }
+{% endfor %}
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "discovered_society" Right = SocietyTrigger }
+	(A Y) = { Left = "faction" Right = Faction }
+	(N Y) = { Left = "num_of_demesne_castles" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_demesne_cities" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_demesne_tribes" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_demesne_temples" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_empty_holdings" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_forts" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_forts_diff" Right = {
+		Single = { Left = "character" Right = OnlyCharTarget }
+		Single = { Left = "value" Right = { Int VariableName } }
+	} }
+	(N Y) = { Left = "num_of_unique_dynasty_vassals" Right =  { NnInt VariableName } } # Can have comparison operators
+
+	(N Y) = { Left = "num_of_kill_list_characters" Right = NnInt }
+	(Y  ) = { Left = "is_neutral" Right = Bool }
+	(N Y) = { Left = "has_cb" Right = OnlyCharTarget }
+	(N Y) = { Left = "reverse_has_cb" Right = OnlyCharTarget }
+	(N N) = { Left = "defacto_liege_title" Right = TitleTrigger }
+	(N Y) = { Left = "in_coalition_against" Right = { MaybeEventTargetCharProvTitle AnyTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "owed_favor_activated_by" Right = { Bool MaybeEventTargetCharProvTitle AnyTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "held_favor_activated_on" Right = { Bool MaybeEventTargetCharProvTitle AnyTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "has_space_for_retinue" Right = RetinueSubunit }
+	(N N) = { Left = "trade_route_control" Right = {
+		Single = { Left = "trade_route" Right = TradeRoute }
+		Single = { Left = "value" Right = { Double VariableName } }
+		Optional = { Left = "type" Right = { Literal = wealth Literal = provinces Literal = trade_posts Literal = trade_post_locations } }
+		Optional = { Left = "indirectly_owned" Right = Bool }
+	} }
+	(N Y) = { Left = "has_elector_stance" Right = {
+		Single = { Left = "stance" Right = ElectorStance }
+		Single = { Left = "title" Right = MaybeEventTargetTitle }
+	} }
+	
+	(N Y) = { Left = "manpower_growth" Right = { Double VariableName } } # comp operators
+	(N Y) = { Left = "max_population" Right = { Double VariableName } } # comp operators
+	(N Y) = { Left = "max_population_and_manpower" Right = { Double VariableName } } # comp operators
+	(N Y) = { Left = "num_of_demesne_empty_provinces" Right =  { Double VariableName } } # comp operators
+	(N Y) = { Left = "population_growth" Right = { Double VariableName } } # comp operators
+	(N Y) = { Left = "population_and_manpower_growth" Right = { Double VariableName } } # comp operators
+	(N Y) = { Left = "raised_manpower" Right = { Double VariableName } } # comp operators
+	(N Y) = { Left = "total_manpower" Right = { Double VariableName } } # comp operators
+
+	(N Y) = { Left = "controls" Right = LandProvince }
+	(N N) = { Left = "official_crusade_recipient" Right = CharTrigger }
+	(N Y) = { Left = "is_offmap_tag_including_dead" Right = OffmapPower }
+	(N Y) = { Left = "num_of_titles_in_realm" Right = { Int VariableName } } # comparison operators
+	(N Y) = { Left = "num_of_baron_titles_in_realm" Right = { Int VariableName } } # comparison operators
+	(N Y) = { Left = "num_of_duke_titles_in_realm" Right = { Int VariableName } } # comparison operators
+	(N Y) = { Left = "num_of_king_titles_in_realm" Right = { Int VariableName } } # comparison operators
+
+	(Y  ) = { Left = "historical" Right = Bool }
+	(N Y) = { Left = "infamy" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "could_be_child_of" Right = OnlyCharTarget }
+	(N Y) = { Left = "could_be_parent_of" Right = OnlyCharTarget }
+	(N Y) = { Left = "is_parent_of" Right = OnlyCharTarget }
+	(N Y) = { Left = "is_cousin_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_aunt_uncle_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_nibling_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_grandparent_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_grandchild_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_descendant_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_ancestor_of" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_important_character_to" Right = { MaybeEventTargetCharProvTitle AnyTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "free_court_slots" Right = { Int VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "has_full_court" Right = Bool }
+	
+	(N Y) = { Left = "immortal_age" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "practical_age" Right = { Int VariableName } } # Can have comparison operators
+	
+	(Y  ) = { Left = "has_pledged_crusade_participation" Right = Bool }
+	(Y  ) = { Left = "is_sub_unit_leader" Right = Bool }
+	(Y  ) = { Left = "is_immune_to_pruning" Right = Bool }
+	
+	(N Y) = { Left = "is_in_same_unit_as" Right = { OnlyCharTarget } }
+	(Y  ) = { Left = "is_or_was_offmap_power_ruler" Right = Bool }
+	(N Y) = { Left = "has_portrait_property" Right = {
+		Single = { Left = "layer" Right = NnInt }
+		Single = { Left = "index" Right = NnInt }
+	} }
+	(N Y) = { Left = "can_use_cb" Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+		Single = { Left = "casus_belli" Right = CasusBelli }
+		Optional = { Left = "thirdparty" Right = MaybeEventTargetChar }
+		Optional = { Left = "thirdparty_title" Right = { MaybeEventTargetTitle AnyTitle } }
+		Optional = { Left = "only_check_triggers" Right = Bool }
+	} }
+	(N Y) = { Left = "liked_by_offmap" Right = OffmapLikeDef }
+	(N Y) = { Left = "disliked_by_offmap" Right = OffmapLikeDef }
+	(N Y) = { Left = "has_offmap_currency" Right = {
+		Single = { Left = "offmap" Right = OffmapPower }
+		Single = { Left = "value" Right = { Int VariableName } }
+	} }
+	(N Y) = { Left = "demesne_size_compared_to_limit" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "shares_realm_border_with" Right = { OnlyCharTarget } }
+	# Can't dedup RHS fully because can have comparison operators
+	(N Y) = { Left = "relative_realm_size" Right = {
+		Single = { Left = "who" Right = { OnlyCharTarget Liege } }
+		Single = { Left = "size" Right = { Double VariableName } }
+	} }
+	(N Y) = { Left = "has_offmap_news_enabled" Right = { OffmapPower MaybeEventTargetOffmapPower } }
+	(A Y) = { Left = "is_offmap_governor" Right = OffmapPower }
+	(A Y) = { Left = "is_offmap_ruler" Right = OffmapPower }
+	(Y  ) = { Left = "is_offmap_governor" Right = Bool }
+	(Y  ) = { Left = "is_offmap_ruler" Right = Bool }
+	
+	(N N) = { Left = "any_pupil" Right = CharTriggerWithCount }
+	(N N) = { Left = "player_heir" Right = CharTrigger }
+	(N N) = { Left = "any_tributary" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_neighbor_independent_ruler" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_unit" Right = UnitTriggerWithCount }
+	(N N) = { Left = "quest_target" Right = CharTrigger }
+	# (N N) = { Left = "quest_target" Right = Untyped } # Will be checked by EventTargetManager
+	(N N) = { Left = "any_artifact" Right = ArtifactTriggerWithCount }
+	(N N) = { Left = "any_host_courtier" Right = CharTriggerWithCount }
+	(N Y) = { Left = "de_facto_liege_title" Right = { AnyTitle CharTargetExcludingMaybeEventTarget MaybeEventTargetCharTitle } }
+	(N Y) = { Left = "same_regnal_name" Right = OnlyCharTarget }
+	(N Y) = { Left = "dynastic_prestige" Right = { Double VariableName } } # Can have comparison operators
+	# Can't dedup RHS because can have comparison operators and who knows how complex the provtrigger will be
+	(N N) = { Left = "regional_percentage" Right = {
+		Single = { Left = "region" Right = GeographicalRegion }
+		Single = { Left = "percentage" Right = { Double VariableName } }
+		Inherits = ProvTrigger
+	} }
+	(N Y) = { Left = "has_assigned_minor_title" Right = { ReligiousTitle MinorTitle } }
+	(N Y) = { Left = "has_assigned_minor_title" Right = {
+		Single = { Left = "title" Right = { MinorTitle ReligiousTitle } }
+		Single = { Left = "count" Right = { NnInt VariableName } }
+	} }
+	(N Y) = { Left = "faction_exists" Right = {
+		Single = { Left = "faction" Right = Faction }
+		Optional = { Left = "title" Right = { AnyTitle MaybeEventTargetTitle } }
+		Optional = { Left = "thirdparty" Right = OnlyCharTarget }
+	} }
+	(N Y) = { Left = "realm_character_percent" Right = {
+		Single = { Left = "target" Right = PDbl }
+		Inherits = CharTrigger
+	} }
+	(N Y) = { Left = "month_of_birth" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "day_of_birth" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "obedient" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "non_interference" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "num_of_artifacts" Right =  { NnInt VariableName } }# Not PInt because "> 0" works # Can have comparison operators
+	(N Y) = { Left = "has_terrain_specialization" Right = { Terrain Any Bool } }
+	(N Y) = { Left = "is_landed_title_allowed" Right = { AnyTitle MaybeEventTargetTitle } }
+	(N Y) = { Left = "has_artifact" Right = { Artifact MaybeEventTargetArtifact } }
+	(Y  ) = { Left = "has_inheritance_blocker" Right = Bool }
+	(Y  ) = { Left = "is_incapable" Right = Bool }
+	(Y  ) = { Left = "is_virtous" Right = Bool }
+	(Y  ) = { Left = "is_wicked" Right = Bool }
+	(Y  ) = { Left = "is_pilgrim" Right = Bool }
+	(Y  ) = { Left = "has_any_symptom" Right = Bool }
+	(Y  ) = { Left = "has_any_quest" Right = Bool }
+	(N Y) = { Left = "num_of_symptoms" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "immortal" Right = Bool }
+	(Y  ) = { Left = "has_children" Right = Bool }
+	(Y  ) = { Left = "has_living_children" Right = Bool }
+	(N Y) = { Left = "over_vassal_limit" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "over_max_demesne_size" Right = { Int VariableName } } # Can have comparison operators
+	(N N) = { Left = "any_faction_backer" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_consort" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_allied_character" Right = CharTriggerWithCount }
+	(N N) = { Left = "highest_ranked_relative" Right = CharTrigger }
+	(N N) = { Left = "biggest_realm_size_relative" Right = CharTrigger }
+	(N N) = { Left = "supported_claimant" Right = CharTrigger }
+	(N N) = { Left = "killer" Right = CharTrigger }
+	(N N) = { Left = "reincarnation_scope" Right = CharTrigger }
+	(N N) = { Left = "dynasty_head" Right = CharTrigger }
+	(N N) = { Left = "consort" Right = CharTrigger }
+	(N N) = { Left = "any_opinion_modifier_target" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_close_relative" Right = CharTriggerWithCount }
+	(N N) = { Left = "suzerain" Right = CharTrigger }
+	(N N) = { Left = "any_suzerain" Right = CharTriggerWithCount }
+	(N N) = { Left = "mercenary_employer" Right = CharTrigger }
+	(N N) = { Left = "blood_brother" Right = TitleTrigger }
+	(N N) = { Left = "succ_law_title" Right = TitleTrigger }
+	(N N) = { Left = "educator" Right = CharTrigger }
+	(N N) = { Left = "center_flank_leader" Right = CharTrigger }
+	(N N) = { Left = "any_non_aggression_pact_character" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_voter" Right = CharTriggerWithCount }
+	
+	(N N) = { Left = "title_to_get_rid_of" Right = TitleTrigger }
+	(N N) = { Left = "capital_holding" Right = TitleTrigger }
+	(N N) = { Left = "family_palace" Right = TitleTrigger }
+	(N N) = { Left = { Type = Faction } Right = TitleTrigger }
+	(N N) = { Left = "clan_title" Right = TitleTrigger }
+	(N N) = { Left = "any_mercenary_band" Right = TitleTriggerWithCount }
+	
+	(N N) = { Left = "any_trade_post" Right = ProvTriggerWithCount }
+	
+	(Y  ) = { Left = "dislike_tribal_organization" Right = Bool }
+	(Y  ) = { Left = "is_dying" Right = Bool }
+	(Y  ) = { Left = "is_vice_royalty" Right = Bool }
+	(N Y) = { Left = "over_max_demesne_size" Right = { Int VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "has_newly_acquired_titles" Right = Bool }
+
+	(N Y) = { Left = "num_of_realm_counties" Right = {
+		Single = { Left = "value" Right = { PInt VariableName } } # Does not support comparison operators, apparently
+		Single = { Left = "title" Right = { MaybeEventTargetTitle AnyTitle } }
+	} }
+	
+	(A Y) = { Left = "in_faction" Right = { Faction Bool } }
+	(N Y) = { Left = "leads_faction" Right = { Faction } }
+	(Y  ) = { Left = "leads_faction" Right = { Bool } }
+	(N Y) = { Left = "faction_power" Right = {
+		Single = { Left = "faction" Right = Faction }
+		Single = { Left = "power" Right = { NnDbl VariableName }
+	} } }
+	
+	(Y  ) = { Left = "has_overseas_holdings" Right = Bool }
+	(N Y) = { Left = "num_of_dynasty_members" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "has_heresies" Right = Bool }
+	(Y  ) = { Left = "is_lowborn" Right = Bool }
+	(Y  ) = { Left = "is_looting" Right = Bool }
+	
+	# Note: Can have comparison ops so can't dedup right fully
+	(N Y) = { Left = "opinion_diff" Right = OpinionDiff }
+	(N Y) = { Left = "personal_opinion_diff" Right = OpinionDiff }
+	(N Y) = { Left = "reverse_opinion_diff" Right = OpinionDiff }
+	(N Y) = { Left = "reverse_personal_opinion_diff" Right = OpinionDiff }
+	(N Y) = { Left = "clan_opinion_diff" Right = OpinionDiff }
+	(N Y) = { Left = "reverse_clan_opinion_diff" Right = OpinionDiff }
+	
+	(N Y) = { Left = "defending_against_claimant" Right = {
+		Single = { Left = "character" Right = OnlyCharTarget }
+		Single = { Left = "title" Right = MaybeEventTargetTitle }
+	} }
+	(N Y) = { Left = "distance" Right = { DistanceDef } }
+	(N Y) = { Left = "has_earmarked_regiments" Right = String (LocalOp "set" "[R]" AddSetter Earmarks) }
+	(N Y) = { Left = "has_earmarked_regiments_not_raiding" Right = String (LocalOp "set" "[R]" AddSetter Earmarks) }
+	(Y  ) = { Left = "has_embargo" Right = OnlyCharTarget }
+	(Y  ) = { Left = "reverse_has_embargo" Right = OnlyCharTarget }
+	(Y  ) = { Left = "diplomatic_immunity" Right = Bool }
+	(Y  ) = { Left = "is_reincarnated" Right = Bool }
+
+	(N Y) = { Left = "num_of_trade_post_diff" Right = {
+		Single = { Left = "character" Right = OnlyCharTarget }
+		Single = { Left = "value" Right = { Int VariableName } }
+	} }
+	(Y  ) = { Left = "num_of_trade_posts" Right =  { NnInt VariableName } }
+	
+	(Y  ) = { Left = "at_sea" Right = Bool }
+	(Y  ) = { Left = "has_autocephaly" Right = Bool }
+	(N Y) = { Left = "graphical_culture" Right = { GraphicalCultureType MaybeEventTargetCharTitle AnyTitle } }
+	(N Y) = { Left = "is_within_diplo_range" Right = { MaybeEventTargetCharOffmapPower OffmapPower CharTargetExcludingMaybeEventTarget } }
+	
+	(A Y) = { Left = "death_reason" Right = DeathReason }
+	
+	(If If = V110) = {
+		# No full dedup because can have comparison operators but we don't recognize
+		(N Y) = {
+			Left = "num_culture_realm_provs"
+			Right = {
+				Single = { Left = "value" Right = { NnInt VariableName } } # can have comparison operators
+				Single = { Left = "culture" Right = { Culture RhsFancyScopeOptionToProv OnlyCharTarget } }
+			}
+		}
+		# No full dedup because can have comparison operators but we don't recognize
+		(N Y) = {
+			Left = "num_religion_realm_provs"
+			Right = {
+				Single = { Left = "value" Right = { NnInt VariableName } } # can have comparison operators
+				Single = { Left = "religion" Right = { Religion RhsFancyScopeOptionToProv Province CharTargetExcludingMaybeEventTarget MaybeEventTargetCharSociety AnyTitle } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "relative_power"
+			Right = {
+				Single = { Left = "who" Right = OnlyCharTarget }
+				Single = { Left = "power" Right = { Double VariableName } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "relative_power_including_allies_attacker"
+			Right = {
+				Single = { Left = "who" Right = OnlyCharTarget }
+				Single = { Left = "power" Right = { Double VariableName } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "relative_power_including_allies_defender"
+			Right = {
+				Single = { Left = "who" Right = OnlyCharTarget }
+				Single = { Left = "power" Right = { Double VariableName } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "attribute_diff"
+			Right = {
+				Single = { Left = { "who" "character" } Right = { OnlyCharTarget } }
+				Single = { Left = "attribute" Right = Attribute }
+				Single = { Left = "value" Right = { Double VariableName } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "age_diff"
+			Right = {
+				Single = { Left = "who" Right = { OnlyCharTarget } }
+				Single = { Left = "years" Right = { Int VariableName } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "realm_levy_diff"
+			Right = {
+				Single = { Left = "who" Right = { OnlyCharTarget AnyTitle } }
+				Single = { Left = "value" Right = Int }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "reverse_realm_levy_diff"
+			Right = {
+				Single = { Left = "who" Right = { OnlyCharTarget AnyTitle } }
+				Single = { Left = "value" Right = { Int VariableName } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "max_realm_levy_diff"
+			Right = {
+				Single = { Left = "who" Right = { AnyTitle CharTargetExcludingMaybeEventTarget MaybeEventTargetCharTitle } }
+				Single = { Left = "value" Right = { Int VariableName } }
+			}
+		}
+		# Can't fully dedup rhs because can take comparison operators
+		(N Y) = {
+			Left = "reverse_max_realm_levy_diff"
+			Right = {
+				Single = { Left = "who" Right = { AnyTitle CharTargetExcludingMaybeEventTarget MaybeEventTargetCharTitle } }
+				Single = { Left = "value" Right = { Int VariableName } }
+			}
+		}
+		(N Y) = { Left = "combat_rating" Right = { Double VariableName OnlyCharTarget } } # Can have comparison operators
+		(N Y) = {
+			Left = "combat_rating_diff"
+			Right = {
+				Single = { Left = { "character" "who" } Right = OnlyCharTarget }
+				Single = { Left = "value" Right = { Double VariableName } }
+			}
+		}
+		(N Y) = {
+			Left = "reverse_combat_rating_diff"
+			Right = {
+				Single = { Left = { "character" "who" } Right = OnlyCharTarget }
+				Single = { Left = "value" Right = { Double VariableName } }
+			}
+		}
+		(N Y) = {
+			Left = "holding_diff"
+			Right = {
+				Single = { Left = "first_type" Right = { None HoldingType } }
+				Optional = { Left = "first_count_vassals" Right = Bool }
+				Single = { Left = "second_type" Right = { None HoldingType } }
+				Optional = { Left = "second_count_vassals" Right = Bool }
+				Single = { Left = "value" Right = { Double VariableName } }
+			}
+		}
+		
+		(Y  ) = { Left = "is_senior_consort_party" Right = Bool }
+		# N because may be inequalities
+		(N Y) = { Left = "num_of_consorts" Right =  { NnInt VariableName } } # Can have comparison operators
+		(N Y) = { Left = "num_of_courtiers" Right =  { NnInt VariableName } } # Can have comparison operators
+		(Y  ) = { Left = "preparing_invasion" Right = Bool }
+		(Y  ) = { Left = "is_reformed_religion" Right = { Bool } }
+		(N Y) = { Left = "is_reformed_religion" Right = { MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget RhsFancyScopeOptionToProv } }
+		# N because may be inequalities
+		(N Y) = { Left = "num_of_holy_sites" Right = { Int VariableName } } # Can have comparison operators
+		(Y  ) = { Left = "rebel" Right = Bool }
+		(N Y) = { Left = "dynasty_realm_power" Right = { Double VariableName } } # Can have comparison operators
+	}
+	
+	(N Y) = { Left = "likes_better_than" Right = {
+		Single = { Left = "who" Right = { OnlyCharTarget } }
+		Single = { Left = "than" Right = { MaybeEventTargetChar PrefixedCharId } }
+	} }
+	(Y  ) = { Left = "holy_order" Right = Bool }
+	(Y  ) = { Left = "is_at_sea" Right = Bool }
+	(N Y) = { Left = "is_older_than" Right = { OnlyCharTarget } }
+	(Y  ) = { Left = "has_regiments" Right = Bool }
+	(Y  ) = { Left = "is_married_matrilineally" Right = Bool }
+	(N Y) = { Left = "is_allied_with" Right = OnlyCharTarget }
+	
+	(A Y) = { Left = "has_focus" Right = Focus }
+	(N Y) = { Left = "is_foe" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "has_any_opinion_modifier" Right = OpinionModifier }
+	(N Y) = { Left = "same_sex" Right = OnlyCharTarget }
+	(Y  ) = { Left = "has_concubinage" Right = Bool }
+	
+	(N Y) = { Left = "pays_tribute_to" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "has_feud_with" Right = OnlyCharTarget }
+	(N Y) = { Left = "has_blood_oath_with" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_opposite_sex" Right = {OnlyCharTarget } }
+	(Y  ) = { Left = "is_nomadic" Right = Bool }
+	(Y  ) = { Left = "is_tributary" Right = Bool }
+	(N Y) = { Left = "is_tributary" Right = {
+		Optional = { Left = "type" Right = TributaryType }
+		Optional = { Left = "suzerain" Right = { MaybeEventTargetCharOffmapPower OffmapPower AnyTitle CharTargetExcludingMaybeEventTarget } }
+	} }
+	(Y  ) = { Left = "uses_decadence" Right = Bool }
+	(N Y) = { Left = "num_of_feuds" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "realm_levies" Right = { NnInt VariableName } } # Can have comparison operators
+	
+	(A Y) = { Left = "government" Right = { Government } }
+	(N Y) = { Left = "government" Right = { MaybeEventTargetCharProv CharTargetExcludingMaybeEventTarget AnyTitle } }
+	(N Y) = { Left = "num_of_count_titles_in_realm" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "can_hold_title" Right = { JobTitle MinorTitle } }
+	(Y  ) = { Left = "is_allowed_to_loot" Right = Bool }
+	(N Y) = { Left = "region" Right = GeographicalRegion }
+	(N Y) = { Left = "completely_controls_region" Right = GeographicalRegion }
+	(Y  ) = { Left = "is_seafarer" Right = Bool }
+	(N Y) = { Left = "population_factor" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "population_and_manpower" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "population" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "is_concubine" Right = MaybeEventTargetChar }
+	(N Y) = { Left = "unused_manpower" Right = { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "clan" Right = Bool }
+	(N N) = { Left = { Type = AiModifier } Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "max_manpower" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "demesne_garrison_size" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_subrealm_cities" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_subrealm_castles" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_subrealm_temples" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_subrealm_tribes" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_subrealm_empty_provinces" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "is_government_potential" Right= Government }
+	(Y  ) = { Left = "risks_minor_clan_rising" Right = Bool }
+	# No full dedup-right because can have comparison operators on right
+	(N Y) = { Left = "num_of_government_vassals" Right = {
+		Single = { Left = "government" Right = Government }
+		Single = { Left = "value" Right = { NnInt VariableName } } # Can have comparison operators
+	} }
+	(N Y) = { Left = "score" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "republic_total_num_of_trade_posts" Right = { NnInt VariableName } } # Can have comparison operators
+	
+	(Y  ) = { Left = "will_liege_enforce_peace" Right = Bool }
+	(Y  ) = { Left = "has_liege_enforced_peace" Right = Bool }
+	(N Y) = { Left = "is_heir" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget AnyTitle } }
+	(Y  ) = { Left = "is_heir" Right = { Bool } }
+	(Y  ) = { Left = "has_mercenary_band" Right = Bool }
+	(Y  ) = { Left = "owns_mercenary_units" Right = Bool }
+	(Y  ) = { Left = "is_voter" Right = Bool }
+	(N Y) = { Left = "can_swap_job_title" Right = OnlyCharTarget }
+	(N Y) = { Left = "owes_favor_to" Right = { Bool OnlyCharTarget } }
+	(N Y) = { Left = "holds_favor_on" Right = { Bool OnlyCharTarget } }
+	(N Y) = { Left = "has_non_aggression_pact_with" Right = { Type = OnlyCharTarget Literal = "crusade_target_char" } }
+	(Y  ) = { Left = "among_most_powerful_vassals" Right = { PInt VariableName } }
+	(N Y) = { Left = "is_valid_romance_target" Right = OnlyCharTarget }
+
+	(N Y) = { Left = "race" Right = {
+		Type = MaybeEventTargetChar
+		Type = Race
+	} }
+	(Y  ) = { Left = "has_council" Right = Bool }
+	(Y  ) = { Left = "is_council_content" Right = Bool }
+	(N Y) = { Left = "relative_income_to_liege" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "has_position" Right = { OnlyCharTarget } }
+	(A Y) = { Left = "has_position" Right = { CouncilPosition } }
+	(N Y) = { Left = "num_of_faction_backers" Right = {
+		Single = { Left = "faction" Right = Faction }
+		# Shouldn't be PInt: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-108#post-20767850
+		Single = { Left = "value" Right = { NnInt VariableName } }
+	} }
+
+	# Should these only be for wardecl?
+	(A Y) = { Left = "stored_token_trigger" Right = CasusBelli }
+	(N N) = { Left = "preferred_war_target" Right = CharTrigger }
+	
+	(Y  ) = { Left = "is_powerful_vassal" Right = Bool }
+	(Y  ) = { Left = "is_multiplayer_host_character" Right = Bool }
+	
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	# Scopes to the capital of the province the current title is in, apparently
+	(N N) = { Left = "capital_holding" Right = TitleTrigger }
+	(N Y) = { Left = "holding_garrison_percent" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "holding_raisable_levy_percent" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "holding_total_levy_percent" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "de_facto_liege_title" Right = { AnyTitle CharTargetExcludingMaybeEventTarget MaybeEventTargetCharTitle } }
+	(Y  ) = { Left = "adventurer" Right = Bool }
+	(N N) = { Left = "band_creator" Right = CharTrigger }
+	(N N) = { Left = "any_claimant" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_previous_holder" Right = CharTriggerWithCount }
+	(N N) = { Left = "heir_under_seniority_law" Right = CharTrigger }
+	(N N) = { Left = "heir_under_primogeniture_law" Right = CharTrigger }
+	(N N) = { Left = "heir_under_ultimogeniture_law" Right = CharTrigger }
+	(N N) = { Left = "trade_post_owner" Right = CharTrigger }
+	(N N) = { Left = "best_crusade_claimant" Right = CharTrigger }
+	
+	(N N) = { Left = "defacto_liege_title" Right = TitleTrigger }
+	(N N) = { Left = "succ_law_title" Right = TitleTrigger }
+
+	(N Y) = { Left = "settlement_age" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "over_vassal_limit" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "over_max_demesne_size" Right = { Int VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "is_crown_law_title" Right = Bool }
+	(Y  ) = { Left = "dislike_tribal_organization" Right = Bool }
+	(Y  ) = { Left = "is_contested" Right = Bool }
+	(Y  ) = { Left = "is_conquered" Right = Bool }
+	(Y  ) = { Left = "has_trade_post" Right = Bool } # May not work, who knows
+	(Y  ) = { Left = "is_recent_grant" Right = Bool }
+	(Y  ) = { Left = "is_vice_royalty" Right = Bool }
+	
+	(If If = V110) = {
+		(Y  ) = { Left = "temporary" Right = Bool }
+		(Y  ) = { Left = "holy_order" Right = Bool }
+		(N Y) = { Left = "is_valid_viking_invasion_target" Right = { MaybeEventTargetChar PrefixedCharId } }
+		(N Y) = { Left = "ruled_years" Right = Int } # Can have comparison operators
+		# No full dedup because can have comparison operators
+		(N Y) = { Left = "num_title_realm_provs" Right = {
+			Single = { Left = "who" Right = OnlyCharTarget }
+			Single = { Left = "value" Right = { Int VariableName } }
+		} }
+		(Y  ) = { Left = "rebel" Right = Bool }
+		(N Y) = { Left = "num_fitting_characters_for_title" Right = { PInt VariableName } } # Can have comparison operators
+	}
+	(N Y) = { Left = "region" Right = GeographicalRegion }
+	(Y  ) = { Left = "is_nomadic" Right = Bool }
+	
+	
+	(Y  ) = { Left = "has_siege" Right = Bool }
+	(Y  ) = { Left = "clan" Right = Bool }
+	(Y  ) = { Left = "has_raised_standing_troops" Right = Bool }
+	(N Y) = { Left = "is_allowed_holding_type" Right = { MaybeEventTargetChar PrefixedCharId } }
+	(N Y) = { Left = "is_preferred_holding_type" Right = { MaybeEventTargetChar PrefixedCharId } }
+	(N Y) = { Left = "mercenary_siphon_factor" Right = { Double VariableName } } # Can have comparison operators
+	(A Y) = { Left = "has_mercenary_maintenance_modifier" Right = NormalModifier }
+} }
+
+(ContextValidator Command) = { Members = {
+	(N N) = { Left = "new_title" Right = TitleCommand }
+
+	(N Y) = { Left = "reset_coa" Right = { MaybeEventTargetTitle AnyTitle } }
+	(N Y) = { Left = "restore_succession" Right = { AnyTitle MaybeEventTargetTitle } }
+	(N Y) = { Left = "save_succession" Right = { AnyTitle MaybeEventTargetTitle } }
+	(N Y) = { Left = "set_offmap_dislike" Right = {
+		Single = { Left = "offmap" Right = OffmapPower }
+		Single = { Left = "type" Right = { Literal = "random" Type = OffmapLike } }
+	} }
+	(N Y) = { Left = "set_offmap_like" Right = {
+		Single = { Left = "offmap" Right = OffmapPower }
+		Single = { Left = "type" Right = { Literal = "random" Type = OffmapLike } }
+	} }
+	(N N) = { Left = "any_quest_target" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "any_quester" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_quester" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_quester_targeting_this" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "new_artifact" Right = ArtifactCommand }
+	(N N) = { Left = "any_trade_route_province" Right = ProvMaybeLimitCommand }
+	(Y  ) = { Left = "log_scopes" Right = Yes }
+	(N Y) = { Left = "set_trade_route_value_multiplier" Right = {
+		Single = { Left = "which" Right = TradeRoute }
+		Single = { Left = "value" Right = { Double VariableName } }
+	} }
+	(N Y) = { Left = "set_trade_route_base_value" Right = {
+		Single = { Left = "which" Right = TradeRoute }
+		Single = { Left = "value" Right = { Double VariableName } }
+	} }
+	(Y  ) = { Left = "show_scope_change" Right = Bool }
+
+	(N N) = { Left = { Type = PrefixedCharId } Right = CharCommand }
+	(N N) = { Left = { Type = OffmapPower } Right = OffmapPowerCommand }
+
+	(N N) = { Left = "any_title" Right = TitleMaybeLimitCommand }
+	(N N) = { Left = "any_character" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "any_player" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "any_province" Right = ProvMaybeLimitCommand }
+	(N N) = { Left = "any_landed_title" Right = TitleMaybeLimitCommand }
+	(N N) = { Left = "random_character" Right = CharRandomCommand }
+	(N N) = { Left = "random_player" Right = CharRandomCommand }
+	(N N) = { Left = "random_province" Right = ProvRandomCommand }
+	(N N) = { Left = "random_landed_title" Right = TitleRandomCommand }
+
+	(N Y) = { Left = "enable_prepared_invasion" Right = { MaybeEventTargetCharReligionSociety Religion SocietyThingsWithoutThis } }
+	(N Y) = { Left = "disable_prepared_invasion" Right = { MaybeEventTargetCharReligionSociety Religion SocietyThingsWithoutThis } }
+	(N N) = { Left = "log" Right = String }
+	(Y  ) = { Left = "break" Right = Yes CheckNoFollowingBreak }
+	
+	(N N) = { Left = "sound_effect" Right = Sound }
+	
+	(N N) = { Left = { Type = Religion } Right = ReligionCommand }
+	(N N) = { Left = { Type = ReligionGroup } Right = ReligionCommand }
+	(N N) = { Left = { Type = Culture } Right = CultureCommand }
+	(N N) = { Left = { Type = CultureGroup } Right = CultureCommand }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "hospital_owner" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "fort_owner" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "any_connected_province" Right = { Inherits = CheckConnectivityDef Inherits = ProvMaybeLimitCommand } }
+	(N N) = { Left = "any_disconnected_province" Right = { Inherits = CheckConnectivityDef Inherits = ProvMaybeLimitCommand } }
+	(N N) = { Left = "random_connected_province" Right = { Inherits = CheckConnectivityDef Inherits = ProvRandomCommand } }
+	(N N) = { Left = "random_disconnected_province" Right = { Inherits = CheckConnectivityDef Inherits = ProvRandomCommand } }
+
+	# May be useful in case of scripted triggers/effects to make sure either province or title becomes province
+	(N N) = { Left = "location" Right = ProvCommand }
+	(N N) = { Left = "any_province_holding" Right = TitleMaybeLimitCommand }
+	(N N) = { Left = "random_province_holding" Right = TitleRandomCommand }
+	(N N) = { Left = "sea_zone" Right = ProvCommand }
+	(N N) = { Left = "capital_holding" Right = TitleCommand }
+	
+	(N N) = { Left = "trade_post_owner" Right = CharCommand }
+	(N N) = { Left = "religion_head" Right = CharCommand }
+
+	(N Y) = { Left = "seize_trade_post" Right = OnlyCharTarget }
+	(Y  ) = { Left = "set_name" Right = String }
+	(Y  ) = { Left = "add_holding_slot" Right = { Int VariableName } }
+	
+	# The right side does not have to be unique
+	# See https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-81#post-19485971
+	(N N) = { Left = "change_tech" Right = {
+		Single = { Left = "technology" Right = Tech }
+		Single = { Left = "value" Right = { Double VariableName } }
+	} }
+	(Y  ) = { Left = "refill_holding_levy" Right = Bool }
+	
+	# These probably don't work in prov scope?
+	#(Y  ) = { Left = "convert_to_city" Right = Bool }
+	#(Y  ) = { Left = "convert_to_castle" Right = Bool }
+	#(Y  ) = { Left = "convert_to_temple" Right = Bool }
+	(N Y) = { Left = "create_title" Right = CreateTitle }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "discovered_society" Right = SocietyCommand }
+	(N N) = { Left = "defacto_liege_title" Right = TitleCommand }
+	(N N) = { Left = "create_retinue" Right = RetinueSubunit }
+	(N N) = { Left = "quest_target" Right = CharCommand }
+	(N N) = { Left = "random_quest_target" Right = CharMaybeLimitCommand }
+	# (N N) = { Left = "random_quest_target" Right = Untyped } # Will be checked by EventTargetManager
+
+	(N Y) = { Left = "lift_embargo" Right = OnlyCharTarget }
+	(Y  ) = { Left = "set_council_malcontent" Right = Yes }
+	(Y  ) = { Left = "set_dynasty_name" Right = Key }
+	(Y  ) = { Left = "set_gender" Right = { Literal = "male" Literal = "female" Literal = "opposite" } }
+	(Y  ) = { Left = "add_age" Right = { Int VariableName } }
+	(Y  ) = { Left = "set_immune_to_pruning" Right = Yes }
+	(Y  ) = { Left = "set_player_character" Right = OnlyCharTarget }
+	(N Y) = { Left = "remove_special_interest" Right = OnlyCharTarget }
+	(N Y) = { Left = "add_special_interest" Right = {
+		Single = { Left = "who" Right = OnlyCharTarget }
+		Single = { Left = "key" Right = Key }
+	} }
+	(N Y) = { Left = "clear_prison_reasons" Right = OnlyCharTarget }
+	(N Y) = { Left = "clear_banish_reasons" Right = OnlyCharTarget }
+	(N Y) = { Left = "clear_revoke_reasons" Right = OnlyCharTarget }
+	(N Y) = { Left = "clear_execute_reasons" Right = OnlyCharTarget }
+	(N N) = { Left = "official_crusade_recipient" Right = CharCommand }
+	(N Y) = { Left = "set_looter_hostility_days" Right = {
+		Single = { Left = "who" Right = OnlyCharTarget }
+		Single = { Left = "days" Right = { NnInt VariableName } }
+	} }
+	(N Y) = { Left = "add_offmap_currency" Right = {
+		Single = { Left = "offmap" Right = OffmapPower }
+		Single = { Left = "value" Right = { Int VariableName } }
+	} }
+	(N Y) = { Left = "set_offmap_currency" Right = {
+		Single = { Left = "offmap" Right = OffmapPower }
+		Single = { Left = "value" Right = { Int VariableName } }
+	} }
+	
+	(N N) = { Left = "any_pupil" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_pupil" Right = CharRandomCommand }
+	(N N) = { Left = "player_heir" Right = CharCommand }
+	(N N) = { Left = "any_tributary" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_tributary" Right = CharRandomCommand }
+	(N N) = { Left = "random_close_relative" Right = CharRandomCommand }
+	(N N) = { Left = "any_neighbor_independent_ruler" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_neighbor_independent_ruler" Right = CharRandomCommand }
+	(N N) = { Left = "any_unit" Right = UnitMaybeLimitCommand }
+	(N N) = { Left = { Type = Faction } Right = TitleCommand }
+	(N N) = { Left = "any_title_under" Right = TitleMaybeLimitCommand }
+	(N N) = { Left = "family_palace" Right = TitleCommand }
+	(N N) = { Left = "capital_holding" Right = TitleCommand }
+	(N N) = { Left = "clan_title" Right = TitleCommand }
+	(N N) = { Left = "any_mercenary_band" Right = TitleMaybeLimitCommand }
+	(N N) = { Left = "succ_law_title" Right = TitleCommand }
+	(N N) = { Left = "any_host_courtier" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_host_courtier" Right = CharRandomCommand }
+	(N N) = { Left = "heir_under_seniority_law" Right = CharCommand }
+	(N N) = { Left = "heir_under_primogeniture_law" Right = CharCommand }
+	(N N) = { Left = "heir_under_ultimogeniture_law" Right = CharCommand }
+	
+	(N N) = { Left = "any_faction_backer" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "any_unique_dynasty_vassal" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "reincarnation_scope" Right = CharCommand }
+	(N N) = { Left = "consort" Right = CharCommand }
+	(N N) = { Left = "any_consort" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_consort" Right = CharRandomCommand }
+	(N N) = { Left = "killer" Right = CharCommand }
+	(N N) = { Left = "dynasty_head" Right = CharCommand }
+	(N N) = { Left = "any_opinion_modifier_target" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_opinion_modifier_target" Right = CharRandomCommand }
+	(N N) = { Left = "any_close_relative" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "suzerain" Right = CharCommand }
+	(N N) = { Left = "any_suzerain" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "educator" Right = CharCommand }
+	(N N) = { Left = "any_allied_character" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_allied_character" Right = CharRandomCommand }
+	(N N) = { Left = "random_non_aggression_pact_character" Right = CharRandomCommand }
+	(N N) = { Left = "center_flank_leader" Right = CharCommand }
+	(N N) = { Left = "most_popular_vassal" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "any_voter" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_voter" Right = CharRandomCommand }
+	(N N) = { Left = "random_artifact" Right = ArtifactRandomCommand }
+	(N N) = { Left = "any_artifact" Right = ArtifactMaybeLimitCommand }
+		
+	(N N) = { Left = "clear_education_trait" Right = Yes }
+	(Y  ) = { Left = "copy_name" Right = OnlyCharTarget }
+	(N Y) = { Left = "show_portrait" Right = { Yes MaybeEventTargetCharOffmapPowerTitle OffmapPower AnyTitle TopLiege JobTitle } }
+	(Y  ) = { Left = "show_trait" Right = Trait }
+	(Y  ) = { Left = "set_quest" Right = String (LocalOp "set" "[R]" AddSetter CharQuest) }
+	(Y  ) = { Left = "cancel_pregnancy" Right = Yes }
+
+	(N N) = { Left = "destroy_artifact" Right = Artifact }
+	(N Y) = { Left = "destroy_artifact" Right = MaybeEventTargetArtifact }
+	(N N) = { Left = "unsafe_destroy_artifact" Right = Artifact }
+	(N Y) = { Left = "unsafe_destroy_artifact" Right = MaybeEventTargetArtifact }
+
+	(Y  ) = { Left = "set_pacified" Right = {
+		Single = { Left = { "days" "months" "years" } Right = PInt }
+	} }
+	(N Y) = { Left = "add_artifact" Right = Artifact }
+	(N Y) = { Left = "set_truce" Right = {
+		Single = { Left = "who" Right = OnlyCharTarget }
+		Single = { Left = { "days" "months" "years" } Right = PInt }
+	} }
+	
+	(Y  ) = { Left = "create_family_palace" Right = Yes }
+	(Y  ) = { Left = "force_host" Right = OnlyCharTarget }
+
+	(Y  ) = { Left = "objective_succeeds" Right = Yes }
+	(N N) = { Left = "title_to_get_rid_of" Right = TitleCommand }
+		
+	(N Y) = { Left = "join_faction" Right = {
+		Single = { Left = "faction" Right = Faction }
+		Optional = { Left = "title" Right = { MaybeEventTargetTitle AnyTitle } }
+		Optional = { Left = "thirdparty" Right = OnlyCharTarget }
+		Single = { Left = "faction_leader" Right = OnlyCharTarget }
+		Optional = { Left = "ignore_requirements" Right = Bool }
+	} }
+	(N Y) = { Left = "leave_faction" Right = { Faction All } }
+	(N Y) = { Left = "start_faction" Right = {
+		Single = { Left = "faction" Right = Faction }
+		Optional = { Left = "title" Right = { MaybeEventTargetTitle AnyTitle } }
+		Optional = { Left = "thirdparty" Right = OnlyCharTarget }
+		Optional = { Left = "can_join_existing" Right = Bool }
+		Optional = { Left = "ignore_requirements" Right = Bool }
+	} }
+	
+	(N Y) = { Left = "disband_event_forces" Right = String (LocalOp "chk" "[R]" AddChecker Earmarks) }
+	(Y  ) = { Left = "faction" Right = Faction }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-161#post-26472723 does not accept event targets
+	# Except that was wrong or something ^
+	(Y  ) = { Left = "capital" Right = { MaybeEventTargetProvTitle BaronTitle CountTitle RhsFancyScopeOptionToProv } } # Might be supposed to be Title only
+	(Y  ) = { Left = "diplomatic_immunity" Right = Bool }
+	(Y  ) = { Left = "embargo" Right = OnlyCharTarget }
+	
+	(N Y) = { Left = "chronicle" Right = {
+		Single = { Left = "entry" Right = Key }
+		#OneOf = { picture portrait type }
+		#AtMostOne = { picture portrait type }
+		Optional = { Left = "picture" Right = String }
+		Optional = { Left = "portrait" Right = String }
+		Optional = { Left = "type" Right = {
+			Literal = FREAK_NATURAL_EVENT
+			Literal = MONSTER_SIGHTED
+			Literal = POPULATION_EVENT
+			Literal = NATURAL_DISASTER
+		} }
+	} }
+	
+	(If If = V110) = {
+		(N Y) = { Left = "create_title" Right = CreateTitle }
+	
+		(N N) = { Left = "spawn_fleet" Right = {
+			#AddContextValidatorStackFrame = None
+			
+			Single = { Left = "province" Right = { Literal = "closest" Type = MaybeEventTargetCharProv Type = Province Literal = "closest_to_capital" } }
+			Single = { Left = "owner" Right = OnlyCharTarget }
+			Optional = { Left = "earmark" Right = String (LocalOp "set" "[R]" AddSetter Earmarks) }
+			Optional = { Left = "troops" Right = {
+				(Ch Y N) = { Left = { Type = Unit Type = SpecialUnit } Right = { (PdoList N 2 2) = { Type = NnInt } } }
+			} }
+			Optional = { Left = "match_character" Right = OnlyCharTarget }
+			Optional = { Left = "match_mult" Right = Double }
+			Optional = { Left = "match_min" Right = Double }
+			Optional = { Left = "disband_on_peace" Right = Bool }
+			Optional = { Left = "cannot_inherit" Right = Bool }
+			Optional = { Left = "merge" Right = Bool }
+			
+		} }
+		
+		(Y  ) = { Left = "culture_techpoints" Right = { Double VariableName } }
+		(Y  ) = { Left = "military_techpoints" Right = { Double VariableName } }
+		(Y  ) = { Left = "economy_techpoints" Right = { Double VariableName } }
+		(Y  ) = { Left = "move_character" Right = OnlyCharTarget }
+		(Y  ) = { Left = "cancel_job_action" Right = { Yes JobAction } }
+	}
+	
+	(N Y) = { Left = "banish_religion" Right = { Religion SocietyThingsWithoutThis RhsFancyScopeOptionToProv CharTargetExcludingMaybeEventTarget MaybeEventTargetCharSociety } }
+	(Y  ) = { Left = "set_name" Right = String }
+	(Y  ) = { Left = "set_reincarnation" Right = { OnlyCharTarget 0 } }
+	(Y  ) = { Left = "hold_election" Right = Yes }
+	
+	(N Y) = { Left = "set_graphical_culture" Right = { Culture MaybeEventTargetCharCultureProv RhsFancyScopeOptionToProv } }
+	
+	# http://forum.paradoxplaza.com/forum/showthread.php?597480-The-Validator-Find-errors-quickly-and-with-minimal-pain!&p=18094719&viewfull=1#post18094719
+	(Y  ) = { Left = "remove_nickname" Right = { MaybeEventTargetChar Nickname Yes } }
+	(Y  ) = { Left = "set_government_type" Right = Government }
+	(N Y) = { Left = "remove_tributary" Right = OnlyCharTarget }
+	(N Y) = { Left = "make_tributary" Right = {
+		Single = { Left = "who" Right = OnlyCharTarget }
+		Optional = { Left = "tributary_type" Right = TributaryType }
+		Optional = { Left = "percentage" Right = { NnDbl VariableName } }
+	} }
+	(N Y) = { Left = "set_special_character_title" Right = Key }
+	(N Y) = { Left = "remove_special_character_title" Right = { Yes Key } }
+	(Y  ) = { Left = "manpower" Right = { Int VariableName } }
+	(Y  ) = { Left = "population" Right = { Int VariableName } }
+	(Y  ) = { Left = "add_population_scaled" Right = { Double VariableName } }
+	(N Y) = { Left = "steal_population_scaled" Right = {
+		Single = { Left = "target" Right = OnlyCharTarget }
+		Single = { Left = "percentage" Right = { Double VariableName } }
+	} }
+	
+	(Y  ) = { Left = "clear_focus" Right = Yes }
+	(Y  ) = { Left = "set_focus" Right = Focus }
+	(N Y) = { Left = "add_favor" Right = OnlyCharTarget }
+	(N Y) = { Left = "reverse_add_favor" Right = OnlyCharTarget }
+	(N Y) = { Left = "remove_favor" Right = OnlyCharTarget }
+	(N Y) = { Left = "reverse_remove_favor" Right = OnlyCharTarget }
+	(N Y) = { Left = "decline_law" Right = MaybeEventTargetTitle }
+	(N Y) = { Left = "break_alliance" Right = OnlyCharTarget }
+	(N Y) = { Left = "add_alliance" Right = {
+		Single = { Left = "who" Right = OnlyCharTarget }
+		Single = { Left = { "days" "months" "years" } Right = PInt }
+	} }
+	(Y  ) = { Left = "set_job_action" Right = {
+		Single = { Left = "action" Right = JobAction }
+		Single = { Left = "where" Right = { LandProvince MaybeEventTargetProv } }
+	} }
+	
+	(Y  ) = { Left = "change_infamy" Right = {
+		Single = { Left = "value" Right = { Double VariableName } }
+		Single = { Left = "localisation" Right = Key }
+	} }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "insert_title_history" Right = { MaybeEventTargetTitle AnyTitle } }
+	# Scopes to the capital of the province the current title is in, apparently
+	(N N) = { Left = "capital_holding" Right = TitleCommand }
+	(N N) = { Left = "band_creator" Right = CharCommand }
+	(N N) = { Left = "best_crusade_claimant" Right = CharCommand }
+	(N N) = { Left = "any_claimant" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "defacto_liege_title" Right = TitleCommand }
+	(N N) = { Left = "succ_law_title" Right = TitleCommand }
+
+	(Y  ) = { Left = "set_councilor_faction_join_restriction" Right = Bool }
+	(Y  ) = { Left = "set_appoint_regents" Right = Bool }
+	(Y  ) = { Left = "elective_voting_rules" Right = SuccessionVotingType }
+	# Used to have MaybeEventTargetTitle but according to https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-154#post-25910990 does not work
+	# According to https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-157#post-26148399 does work fine
+	(Y  ) = { Left = "set_preferred_capital" Right = { AnyTitle LandProvince MaybeEventTargetTitle } }
+	(Y  ) = { Left = "set_pentarch_title" Right = { AnyTitle None MaybeEventTargetTitle } }
+	(N Y) = { Left = "create_title" Right = CreateTitle }
+	(Y  ) = { Left = "set_allow_vice_royalties" Right = { Tier No } }
+	(Y  ) = { Left = "set_name" Right = String }
+	(Y  ) = { Left = "set_coa" Right = { MaybeEventTargetTitle AnyTitle } }
+	(Y  ) = { Left = "province_capital" Right = Yes }
+	(Y  ) = { Left = "copy_title_laws" Right = { AnyTitle MaybeEventTargetTitle } }
+	(Y  ) = { Left = "copy_title_history" Right = { AnyTitle MaybeEventTargetTitle } }
+	(Y  ) = { Left = "seize_trade_post" Right = OnlyCharTarget }
+	(If If = V110) = {
+		(Y  ) = { Left = "refill_holding_levy" Right = Yes }
+		(Y  ) = { Left = "make_primary_title" Right = Yes }
+		(Y  ) = { Left = "adjective" Right = String }
+	}
+	
+	(N Y) = { Left = "best_fit_character_for_title" Right = {
+		Inherits = CharCommand
+		# Needs to be separate, otherwise the AddContextValidatorStackFrame will affect the CharCommand inheritance as well
+		Inherits = BestFitStuff
+		
+	} }
+	
+	(Y  )  = { Left = "convert_to" Right = HoldingType }
+	# Outdated
+	#(Y  ) = { Left = "convert_to_city" Right = Yes }
+	#(Y  ) = { Left = "convert_to_castle" Right = Yes }
+	#(Y  ) = { Left = "convert_to_temple" Right = Yes }
+	#(Y  ) = { Left = "convert_to_tribal" Right = Yes }
+	
+	(N Y) = { Left = "set_title_landless" Right = SetTitle }
+	(N Y) = { Left = "set_title_nomad" Right = SetTitle }
+	(N Y) = { Left = "set_title_adventurer" Right = SetTitle }
+	(N Y) = { Left = "create_oath" Right = MaybeEventTargetTitle }
+	(N Y) = { Left = "end_oath" Right = MaybeEventTargetTitle }
+	(N Y) = { Left = "create_feud" Right = MaybeEventTargetTitle }
+	(Y  ) = { Left = "change_title_army_size" Right = { Double VariableName } }
+	(Y  ) = { Left = "make_capital_holding" Right = Yes }
+	(N Y) = { Left = "destroy_settlement" Right = { Yes MaybeEventTargetTitle } }
+	(Y  ) = { Left = "revoke_capital_holding" Right = Yes }
+	(Y  ) = { Left = "make_capital_holding" Right = Yes }
+	
+	(N Y) = { Left = "disable_council_voting_on_issue" Right = { TargettedDecision CouncilVotingTopic } }
+	(N Y) = { Left = "enable_council_voting_on_issue" Right = { TargettedDecision CouncilVotingTopic } }
+	(Y  ) = { Left = "adjust_siphon_factor" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_mercenary_maintenance_modifier" Right = NormalModifier }
+	
+	(N Y) = { Left = "change_mercenary_composition" Right = {
+		Optional = { Left = "from" Right = { Unit SpecialUnit } }
+		Single = { Left = "type" Right = { Unit SpecialUnit } }
+		Single = { Left = "change" Right = Int }
+	} }
+	(Y  ) = { Left = "cut_mercenary_creator_relation" Right = Yes }
+	
+} }
+
+(Type SetTitle) = {
+	# TODO: can it take other than THIS? If so can it be used anywhere not just title scope?
+	Single = { Left = "title" Right = { Literal = "THIS" } }
+	Single = { Left = "status" Right = Bool }
+}
+
+(Type BestFitStuff) = {
+	# Need this because CharCommand inheritance won't add stack when evaluating "title" field or other fields
+	AddContextValidatorStackFrame = Char
+	Single = { Left = "title" Right = MaybeEventTargetTitle }
+	Single = { Left = "perspective" Right = MaybeEventTargetChar }
+	Single = { Left = "index" Right = PInt }
+}
+
+(Type CreateTitle) = {
+	Single = { Left = "tier" Right = Tier }
+	Optional = { Left = "landless" Right = Bool }
+	Optional = { Left = "temporary" Right = Bool }
+	Optional = { Left = "rebel" Right = Bool }
+	Optional = { Left = "culture" Right = { Culture MaybeEventTargetCharCultureProv CharTargetExcludingMaybeEventTarget } }
+	Optional = { Left = "name" Right = Key }
+	Single = { Left = "holder" Right = { OnlyCharTarget } }
+	Optional = { Left = "custom_created" Right = Bool }
+	Optional = { Left = "copy_title_laws" Right = Bool }
+	Optional = { Left = "mercenary" Right = Bool }
+	Optional = { Left = "adventurer" Right = Bool }
+	Optional = { Left = "ruler" Right = Key }
+	Optional = { Left = "ruler_female" Right = Key }
+	Optional = { Left = "base_title" Right = { AnyTitle MaybeEventTargetCharProvTitle } }
+	Optional = { Left = "foa" Right = Key }
+	Optional = { Left = "nomad" Right = Bool }
+	Optional = { Left = "short_name" Right = Bool }
+	Optional = { Left = "replace_captain_on_death" Right = Bool }
+	Optional = { Left = "siphons_income_to_creator" Right = Double }
+	Optional = { Left = "army_template" Right = MercenaryType }
+	
+}
+
+(ContextValidator ArtifactTrigger) = { Members = {
+	(N N) = { Left = { "original_artifact_owner" "original_owner" } Right = CharTrigger }
+	(N N) = { Left = "owner" Right = CharTrigger }
+	(N N) = { Left = "artifact_owner" Right = CharTrigger }
+	(N N) = { Left = { "previous_owner" "previous_artifact_owner" } Right = CharTrigger }
+
+	(A Y) = { Left = "artifact_type" Right = Artifact }
+	(N Y) = { Left = "quality" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "artifact_type_owned_by" Right = { MaybeEventTargetChar PrefixedCharId } }
+	(Y  ) = { Left = "is_artifact_active" Right = Bool }
+	(N Y) = { Left = "is_artifact_same_type_as" Right = MaybeEventTargetArtifact }
+	(N Y) = { Left = "artifact_can_be_gifted_to" Right = { MaybeEventTargetChar PrefixedCharId } }
+	(Y  ) = { Left = "is_artifact_equipped" Right = Bool }
+	(Y  ) = { Left = "is_indestructible" Right = Bool }
+	(N Y) = { Left = "artifact_age" Right = { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "has_known_creation_date" Right = Bool }
+	(N Y) = { Left = "artifact" Right = MaybeEventTargetArtifact }
+} }
+
+(ContextValidator ArtifactCommand) = { Members = {
+	(N N) = { Left = { "original_artifact_owner" "original_owner" } Right = CharCommand }
+	(N N) = { Left = "owner" Right = CharCommand }
+	(N N) = { Left = "artifact_owner" Right = CharCommand }
+	(N N) = { Left = { "previous_owner" "previous_artifact_owner" } Right = CharCommand }
+	
+	(N Y) = { Left = "copy_artifact_history" Right = MaybeEventTargetArtifact }
+	(Y  ) = { Left = "set_picture" Right = GfxElement }
+	(Y  ) = { Left = "set_description" Right = String }
+	(Y  ) = { Left = "set_name" Right = String }
+	(Y  ) = { Left = "set_creation_date" Right = { Type = Date Literal = "-1.1.1" } }
+	(Y  ) = { Left = "destroy_artifact" Right = Yes }
+	(Y  ) = { Left = "unsafe_destroy_artifact" Right = Yes }
+	(Y  ) = { Left = "transfer_artifact" Right = {
+		Single = { Left = "from" Right = { OnlyCharTarget Owner ArtifactOwner OriginalArtifactOwner OriginalOwner } }
+		Single = { Left = "to" Right = { OnlyCharTarget Owner ArtifactOwner OriginalArtifactOwner OriginalOwner } }
+	} }
+} }
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(N N) = { Left = "owner" Right = CharTrigger }
+	(N N) = { Left = "ruler" Right = CharTrigger }
+	(N N) = { Left = "holder_scope" Right = CharTrigger }
+	(N Y) = { Left = "offmap_has_like" Right = OffmapLike }
+	(N Y) = { Left = "offmap_has_dislike" Right = OffmapLike }
+	
+} }
+
+(ContextValidator OffmapPowerCommand) = { Members = {
+	(N N) = { Left = "owner" Right = CharCommand }
+	(N N) = { Left = "ruler" Right = CharCommand }
+	(N N) = { Left = "holder_scope" Right = CharCommand }
+	(Y  ) = { Left = "set_offmap_holder" Right = MaybeEventTargetChar }
+	
+} }
+
+{% for scope in ['Char', 'Title'] %}
+(ContextValidator {{scope}}Trigger) = { Members = {
+	(N N) = { Left = "offmap_power" Right = OffmapPowerTrigger }
+} }
+
+(ContextValidator {{scope}}Command) = { Members = {
+	(N N) = { Left = "offmap_power" Right = OffmapPowerCommand }
+} }
+
+{% endfor %}
+
+{% for scope in ['Char', 'Title', 'OffmapPower'] %}
+(ContextValidator {{scope}}Trigger) = { Members = {
+	(N N) = { Left = "governor" Right = CharTrigger }
+	(N N) = { Left = "governor_title" Right = TitleTrigger }
+	(N N) = { Left = "offmap_ruler" Right = CharTrigger }
+	(N N) = { Left = "offmap_prev_ruler" Right = CharTrigger }
+
+	(A Y) = { Left = "is_offmap_tag" Right = OffmapPower }
+	(A Y) = { Left = "prev_policy" Right = OffmapPolicy }
+	(N Y) = { Left = "prev_policy_flag" Right = OffmapPolicyFlag }
+	(N Y) = { Left = "has_policy_flag" Right = OffmapPolicyFlag }
+	(A Y) = { Left = "has_policy" Right = OffmapPolicy }
+	(A Y) = { Left = "prev_status" Right = OffmapStatus }
+	(N Y) = { Left = "prev_status_flag" Right = OffmapStatusFlag }
+	(N Y) = { Left = "has_status_flag" Right = OffmapStatusFlag }
+	(A Y) = { Left = "has_status" Right = OffmapStatus }
+	(A Y) = { Left = "has_offmap_name" Right = Key }
+	(N Y) = { Left = "has_had_offmap_name" Right = Key }
+	(N Y) = { Left = "days_since_policy_change" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "days_since_status_change" Right = { NnInt VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator {{scope}}Command) = { Members = {
+	(N N) = { Left = "governor" Right = CharCommand }
+	(N N) = { Left = "governor_title" Right = TitleCommand }
+	(N N) = { Left = "offmap_ruler" Right = CharCommand }
+	(N N) = { Left = "offmap_prev_ruler" Right = CharCommand }
+
+	(Y  ) = { Left = "set_policy" Right = OffmapPolicy }
+	(Y  ) = { Left = "set_status" Right = OffmapStatus }
+	(Y  ) = { Left = "set_offmap_name" Right = Key }
+} }
+
+{% endfor %}
+
+(Type PromptNameClause) = {
+	Single = { Left = "player" Right = MaybeEventTargetChar }
+	Single = { Left = "type" Right = MessageType }
+	Optional = { Left = "portrait" Right = MaybeEventTargetChar }
+	Optional = { Left = "name_list" Right = { Literal = "religion" Literal = "culture" Type = Key } }
+}
+
+{% for scope in ['Char', 'Title', 'Province', 'Artifact', 'Bloodline'] %}
+
+(ContextValidator {{ scope }}Command) = { Members = {
+	(N N) = { Left = "prompt_name" Right = PromptNameClause }
+} }
+
+{% endfor %}
+
+{% for scope in ['Char', 'Prov'] %}
+
+(ContextValidator {{ scope }}Trigger) = { Members = {
+	(N Y) = { Left = "distance_from_realm" Right = {
+		Optional = { Left = "who" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget AnyTitle } }
+		Optional = { Left = "where" Right = { MaybeEventTargetProv Province } }
+		Optional = { Left = "target" Right = { MaybeEventTargetCharProvTitle Province CharTargetExcludingMaybeEventTarget AnyTitle } }
+		OneOf = { "who" "where" "target" }
+		AtMostOne = { "who" "where" "target" }
+		# Supports comparision operations (but probably only one?)
+		Single = { Left = { "value" "distance" } Right = { NnInt VariableName } }
+	} }
+} }
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

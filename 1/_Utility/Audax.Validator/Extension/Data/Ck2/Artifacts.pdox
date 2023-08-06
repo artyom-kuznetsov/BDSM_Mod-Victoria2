@@ -1,0 +1,90 @@
+(Validator Artifacts) = {
+	Type = GroupValidator
+	FriendlyName = "Artifacts"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\artifact_spawns" "*.txt")
+		ValidatorName = ArtifactSpawnFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\artifacts" "*.txt")
+		ValidatorName = ArtifactFile
+	}
+}
+
+(Type ArtifactSpawnFile) = {
+	Child = {
+		Left = { Type = String }
+		Right = ArtifactSpawnDef
+		UniqueId = Left
+	}
+}
+
+(Type ArtifactSpawnDef) = {
+	Single = { Left = "max_amount" Right = PInt }
+	Single = { Left = "spawn_date" Right = { Type = Date Literal = "-1.1.1" } }
+	
+	Single = { Left = "spawn_chance" Right = CharValueWeight }
+	Single = { Left = "weight" Right = CharValueWeight }
+	Single = { Left = "artifacts" Right = {
+		(Ch Y N) = { Left = { Type = Artifact } Right = {
+			Single = { Left = "value" Right = Double }
+		} }
+	} }
+}
+
+(Type ArtifactFile) = {
+	Optional = { Left = "slots" Right = {
+		Child = {
+			Left = { Type = String }
+			Right = PInt
+			UniqueId = Left
+			(CheckKey "*" Left IfNot = NoCheckKey)
+		}
+	} }
+
+	Child = {
+		Left = { Type = String }
+		Right = ArtifactDef
+		UniqueId = Left
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type ArtifactDef) = {
+	Single = { Left = "picture" Right = String }
+	Optional = { Left = "quality" Right = PInt }
+	Optional = { Left = "history" Right = Bool }
+	Optional = {
+		Left = "flags"
+		Right = {
+			(PdoList Y) = {
+				Type = String
+				(LocalOp "set" "[R]" AddSetter ArtifactFlag)
+			}
+		}
+	}
+	Optional = { Left = "stacking" Right = Bool }
+	Optional = { Left = "slot" Right = ArtifactSlot }
+	Optional = { Left = "command_modifier" Right = CommandModifierDef }
+	Optional = { Left = "active" Right = CharTriggerFromTarget }
+	Optional = { Left = "indestructible" Right = Bool }
+	Optional = { Left = "allowed_gift" Right = CharTriggerFromTarget }
+	
+	Inherits = CharModifier
+}
+
+(Type CharTriggerFromTarget) = {
+	ContextValidator = CharTriggerFromTarget
+}
+(ContextValidator CharTriggerFromTarget) = {
+	Inherits = CharTrigger
+	FromTarget = Artifact
+	# Original owner
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-134#post-23666760
+	FromFromTarget = Char
+}

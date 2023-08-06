@@ -1,0 +1,123 @@
+
+(ContextValidator Trigger) = { Members = {
+	(N N) = { Left = { Type = Society } Right = SocietyTrigger }
+	(N N) = { Left = { Type = SecretReligiousSociety } Right = SocietyTrigger }
+	# In society scope => members of that society, otherwise => members of any society
+	(N N) = { Left = "any_society_member" Right = CharTriggerWithCount }
+
+	(N Y) = { Left = "is_society_rank_full" Right = {
+		Single = { Left = "society" Right = SocietyThings }
+		Single = { Left = "rank" Right = { PInt VariableName } }
+	} }
+	
+	(N Y) = { Left = "society_influence" Right = { # Comparison ops
+		Single = { Left = "society" Right = SocietyThings }
+		Single = { Left = "value" Right = NnInt }
+	} }
+	(N Y) = { Left = "society_is_active" Right = SocietyThings }
+} }
+
+(ContextValidator Command) = { Members = {
+	(N N) = { Left = { Type = Society } Right = SocietyCommand }
+	(N N) = { Left = { Type = SecretReligiousSociety } Right = SocietyCommand }
+	# In society scope => members of that society, otherwise => members of any society
+	(N N) = { Left = "any_society_member" Right = CharMaybeLimitCommand }
+} }
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "interested_in_society_of_character" Right = OnlyCharTarget }
+	(N N) = { Left = "society" Right = SocietyTrigger }
+	(Y  ) = { Left = "is_society_discovered" Right = Bool }
+	(Y  ) = { Left = "is_society_discovered_real" Right = Bool }
+	(Y  ) = { Left = "society_is_criminal" Right = Bool }
+	(Y  ) = { Left = "society_is_devil_worshiper" Right = Bool }
+	(Y  ) = { Left = "is_interested_in_any_society" Right = Bool }
+	(N Y) = { Left = "society_influence" Right = NnInt } # Can have comparison operators
+	(N Y) = { Left = "days_in_society" Right = { NnInt VariableName } } # can have comparison operators
+	(N Y) = { Left = "days_at_current_society_rank" Right = { NnInt VariableName } } # can have comparison operators
+	(Y  ) = { Left = "society_can_rank_up" Right = Bool }
+	(Y  ) = { Left = "society_can_rank_down" Right = Bool }
+	(A Y) = { Left = "society_member_of" Right = SocietyThings }
+	(N Y) = { Left = "society_rank" Right = NnInt } # can have comparison operators
+	# can have comparison ops so no deduping
+	(N Y) = { Left = "society_rank" Right = {
+		# Per https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27225338 doesn't support MaybeEventTargetChar or anything else Char
+		# Otherwise this could just be a SocietyThings
+		Single = { Left = "society" Right = { SocietyThingsWithoutThis MaybeEventTargetSociety } }
+		Single = { Left = "rank" Right = NnInt }
+	} }
+	(N Y) = { Left = "interested_in_society" Right = { SocietyThings } }
+	(N Y) = { Left = "can_join_society" Right = { MaybeEventTargetSociety SocietyThings } }
+	(Y  ) = { Left = "society_currency" Right = Double }
+	# According to https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-26598273 doesn't work to use society things but only bool
+	#(A Y) = { Left = "is_in_society" Right = SocietyThings }
+	(Y  ) = { Left = "is_in_society" Right = Bool }
+	(Y  ) = { Left = "has_secret_society" Right = Bool }
+	(N Y) = { Left = "same_society_as" Right = OnlyCharTarget }
+	(Y  ) = { Left = "is_society_grandmaster" Right = Bool }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(Y  ) = { Left = "set_interested_society" Right = { Type = SocietyThings Literal = "none"} }
+	(Y  ) = { Left = "set_discovered_society" Right = Yes }
+	(Y  ) = { Left = "clr_discovered_society" Right = Yes }
+	(N Y) = { Left = "set_discovered_society" Right = SocietyThings }
+	(N N) = { Left = "society" Right = SocietyCommand }
+	# Using "no" should unset
+	(Y  ) = { Left = "set_society_grandmaster" Right = Bool }
+	(Y  ) = { Left = "join_society" Right = SocietyThings }
+	(Y  ) = { Left = "society_rank_up" Right = { PInt VariableName } }
+	(Y  ) = { Left = "society_rank_up" Right = {
+		Single = { Left = "rank" Right = { PInt VariableName } }
+		Single = { Left = "society" Right = SocietyThings }
+	} }
+	(Y  ) = { Left = "society_rank_down" Right = { PInt VariableName } }
+	(Y  ) = { Left = "society_rank_down" Right = {
+		Single = { Left = "rank" Right = { PInt VariableName } }
+		Single = { Left = "society" Right = SocietyThings }
+	} }
+	(Y  ) = { Left = "leave_society" Right = Yes }
+	(Y  ) = { Left = "change_society_currency" Right = { Double VariableName } }
+	(N Y) = { Left = "change_society_currency" Right = {
+		Optional = { Left = "society" Right = { Society SecretReligiousCult MaybeEventTargetSociety } }
+		Single = { Left = "value" Right = { Double VariableName } }
+		Optional = { Left = "scaled_by_influence" Right = Bool }
+	} }
+
+} }
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(N N) = { Left = "leader" Right = CharTrigger }
+
+	(A Y) = { Left = "society_type" Right = SocietyThings }
+	(Y  ) = { Left = "society_has_members" Right = Bool }
+	(Y  ) = { Left = "society_is_active" Right = Bool }
+	
+} }
+
+(ContextValidator SocietyCommand) = { Members = {
+	(N N) = { Left = "leader" Right = CharCommand }
+} }
+
+{% for scope in ['Char', 'Society'] %}
+
+(ContextValidator {{ scope }}Trigger) = { Members = {
+	(N Y) = { Left = "society_progress" Right = { Double VariableName } }
+	(A Y) = { Left = "is_society" Right = SocietyThings }
+	(N Y) = { Left = "num_of_society_members" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "society_has_active_progress" Right = Bool }
+	(N Y) = { Left = "society_has_active_progress" Right = SocietyThings }
+
+} }
+
+(ContextValidator {{ scope }}Command) = { Members = {
+	(Y  ) = { Left = "start_society_progress" Right = Yes }
+	(Y  ) = { Left = "stop_society_progress" Right = Yes }
+	(Y  ) = { Left = "set_society_progress" Right = { Double VariableName } }
+	(Y  ) = { Left = "add_society_progress" Right = { Double VariableName } }
+	(N N) = { Left = "random_society_member" Right = CharRandomCommand }
+
+} }
+
+{% endfor %}

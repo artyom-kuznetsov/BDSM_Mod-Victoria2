@@ -1,0 +1,116 @@
+(Validator Decisions) = {
+	Type = GroupValidator
+	FriendlyName = "Decisions"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "decisions" "*.txt")
+		ValidatorName = DecisionFile
+	}
+}
+
+(Validator Laws) = {
+	Type = GroupValidator
+	FriendlyName = "Laws"
+	Description = "Laws and succession voting"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common/laws" "*.txt")
+		ValidatorName = LawFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\succession_voting" "*.txt")
+		ValidatorName = SuccessionVotingFile
+	}
+}
+
+(Type SuccessionVotingFile) = {
+	(Ch N N) = { Left = { Type = String } Right = SuccesionVotingDef UniqueId = Left }
+}
+
+(Type SuccesionVotingDef) = {
+	Optional = { Left = "candidate_trigger" Right = CharTriggerFromCharFromFromTitleFromFromFromChar }
+	Optional = { Left = "candidate_vote_score" Right = SuccessionVotingMtth }
+	Optional = { Left = "elector_vote_strength" Right = SuccessionVotingMtth }
+	Optional = { Left = "elector_selection" Right = ElectorSelectionDef }
+	Optional = { Left = "elector_stances" Right = ElectorStancesDef }
+}
+
+(Type ElectorSelectionDef) = {
+	Inherits = SuccessionVotingMtth
+	Optional = { Left = "max_amount" Right = NnInt }
+}
+
+(Type ElectorStancesDef) = {
+	(Ch Y N) = { Left = { Type = String } Right = {
+		Inherits = SuccessionVotingMtth
+		Single = { Left = "icon" Right = NnInt }
+	} }
+}
+
+(Type SuccessionVotingMtth) = {
+	Single = { Left = "days" Right = Int }
+	Inherits = CharFromCharFromFromTitleFromFromFromCharWeightBase
+}
+
+(Type DecisionFile) = {
+	(Local ID Uid) = Left
+
+	Child = { Left = "decisions" Right = NormalDecisionGroup }
+	Child = { Left = "plot_decisions" Right = NormalDecisionGroup }
+	Child = { Left = "targetted_decisions" Right = TargetDecisionGroup }
+	Child = { Left = "targeted_decisions" Right = TargetDecisionGroup }
+	Child = { Left = "vassal_decisions" Right = VassalDecisionGroup }
+	Child = { Left = "title_decisions" Right = TitleDecisionGroup }
+	Child = { Left = "trade_post_decisions" Right = TradePostDecisionGroup }
+	Child = { Left = "fort_decisions" Right = FortDecisionGroup }
+	Child = { Left = "settlement_decisions" Right = SettlementDecisionGroup }
+	Child = { Left = "hospital_decisions" Right = HospitalDecisionGroup }
+	Child = { Left = "society_decisions" Right = SocietyDecisionGroup }
+	Child = { Left = "offmap_decisions" Right = OffmapDecisionGroup }
+
+}
+
+(Type LawInfo) = {
+	Optional = { Left = "law_type" Right = LawType } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-151#post-25586576
+	Optional = { Left = "allowed_for_councillors" Right = Bool }
+	Optional = { Left = "left_value" Right = Key }
+	Optional = { Left = "right_value" Right = Key }
+	Optional = { Left = "slider_sprite" Right = String }
+}
+
+(Type LawFile) = {
+	(Local ID Uid) = Left
+	
+	Optional = { Left = "law_groups" Right = {
+		(Ch N N) = {
+			Left = { Type = Law Type = LawGroup }
+			UniqueId = Left
+			Right = LawInfo
+		}
+	} }
+
+	Optional = { Left = "de_jure_laws" Right = DeJureDecisionGroup }
+	Optional = { Left = "laws" Right = DeJureDecisionGroup }
+	Optional = { Left = "gender_laws" Right = DeJureDecisionGroup }
+	Optional = { Left = "succession_laws" Right = SuccessionLawsDecisionGroup }
+	
+}
+
+(Import "NormalDecisionGroup" From "DecisionsHelper" WithFlag "normal")
+(Import "DeJureDecisionGroup" From "DecisionsHelper" WithFlag "dejure")
+(Import "SuccessionLawsDecisionGroup" From "DecisionsHelper" WithFlag "succ")
+(Import "TargetDecisionGroup" From "DecisionsHelper" WithFlag "target")
+(Import "VassalDecisionGroup" From "DecisionsHelper" WithFlag "v")
+(Import "TitleDecisionGroup" From "DecisionsHelper" WithFlag "title")
+(Import "TradePostDecisionGroup" From "DecisionsHelper" WithFlag "tp")
+(Import "FortDecisionGroup" From "DecisionsHelper" WithFlag "fort")
+(Import "SettlementDecisionGroup" From "DecisionsHelper" WithFlag "settle")
+(Import "HospitalDecisionGroup" From "DecisionsHelper" WithFlag "hospital")
+(Import "SocietyDecisionGroup" From "DecisionsHelper" WithFlag "society")
+(Import "OffmapDecisionGroup" From "DecisionsHelper" WithFlag "offmap")
+
+

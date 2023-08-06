@@ -1,0 +1,57 @@
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = { Type = JobTitle } Right = CharTrigger }
+	
+	(Y  ) = { Left = "banish" Right = Bool }
+	(N Y) = { Left = "num_of_prisoners" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "prisoner" Right = Bool }
+	(N Y) = { Left = "imprisoned_days" Right = { NnInt VariableName } } # Can have comparison operators
+	
+	# Outdated; now has_ambition/has_plot
+	#(A Y) = { Left = "has_objective" Right = { Bool Objective } }
+	(A Y) = { Left = "has_job_action" Right = { Bool JobAction } }
+	(N Y) = { Left = "has_job_title" Right = { Bool JobTitle } }
+	(N Y) = { Left = "has_minor_title" Right = { Bool MinorTitle ReligiousTitle } }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = { Type = JobTitle } Right = CharCommand }
+	
+	(Y  ) = { Left = "banish" Right = { Yes OnlyCharTarget } }
+	(Y  ) = { Left = "reverse_banish" Right = OnlyCharTarget }
+	(Y  ) = { Left = "prisoner" Right = { OnlyCharTarget Bool } } # yes=imprisoned by current liege
+	(N Y) = { Left = "imprison" Right = { Bool OnlyCharTarget } }
+	(N Y) = { Left = "reverse_imprison" Right = { Yes OnlyCharTarget } }
+	(Y  ) = { Left = "add_objective" Right = Objective }
+	# Outdated, now cancel_objective/cancel_plot
+	#(Y  ) = { Left = "cancel_objective" Right = { Bool Objective } }
+	(Y  ) = { Left = "give_job_title" Right = JobTitle }
+	(N Y) = { Left = "remove_title" Right = { JobTitle MinorTitle ReligiousTitle } }
+	(Y  ) = { Left = "send_assassin" Right = OnlyCharTarget }
+	(N Y) = { Left = "impregnate" Right = { OnlyCharTarget 0 Yes } }
+	(N Y) = { Left = "impregnate_cuckoo" Right = { OnlyCharTarget Yes } }
+	(N Y) = { Left = "unsafe_impregnate" Right = { OnlyCharTarget 0 Yes } }
+	(N Y) = { Left = "unsafe_impregnate_cuckoo" Right = { OnlyCharTarget Yes } }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

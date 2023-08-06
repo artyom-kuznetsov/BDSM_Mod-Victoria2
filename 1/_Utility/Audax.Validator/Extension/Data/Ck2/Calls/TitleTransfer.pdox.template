@@ -1,0 +1,132 @@
+# stuff for transferring titles, including creation and destruction
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "can_grant_title" Right = { MinorTitle ReligiousTitle } }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(Y  ) = { Left = "can_be_given_away" Right = Bool }
+
+} }
+
+(ContextValidator Command) = { Members = {
+	(N Y) = { Left = "activate_title" Right = {
+		Single = { Left = "title" Right = { AnyTitle MaybeEventTargetTitle } }
+		Single = { Left = "status" Right = Bool }
+	} }
+	(N Y) = { Left = "destroy_landed_title" Right = { MaybeEventTargetCharTitle AnyTitle } }
+	(N Y) = { Left = "unsafe_destroy_landed_title" Right = { MaybeEventTargetCharTitle AnyTitle } }
+
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N Y) = { Left = "build_holding" Right = {
+		Optional = { Left = "title" Right = { BaronTitle MaybeEventTargetTitle } }
+		Single = { Left = "type" Right = Building }
+		Optional = { Left = "holder" Right = { OnlyCharTarget Owner } }
+	} }
+
+} }
+
+Global = {
+(Type.Enum UsurpType) = { Values = { invasion holy_war claim revolt host faction_demand duel created election grant inheritance revoke usurp } }
+}
+
+(Type GainClause) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Single = { Left = "type" Right = UsurpType }
+}
+
+(Type SiezeThing) = {
+	Single = { Left = "title" Right = { MaybeEventTargetTitle AnyTitle } }
+	Single = { Left = "enemy" Right = OnlyCharTarget }
+	Optional = { Left = "is_crusade" Right = Bool }
+	Optional = { Left = "is_religious" Right = Bool }
+	Optional = { Left = "is_revolt" Right = Bool }
+	Optional = { Left = "same_religion" Right = Bool }
+	Optional = { Left = "anti_nomad" Right = Bool }
+	Optional = { Left = "type" Right = UsurpType }
+	Optional = { Left = "as_if_allied_to" Right = OnlyCharTarget }
+}
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "give_minor_title" Right = { MinorTitle ReligiousTitle } }
+	(N Y) = { Left = "unsafe_give_minor_title" Right = { MinorTitle ReligiousTitle } }
+	(N Y) = { Left = "gain_all_occupied_titles" Right = { OnlyCharTarget GainClause } }
+	(N Y) = { Left = "occupy_minors_of_occupied_settlements" Right = OnlyCharTarget }
+	
+	(Y  ) = { Left = "troops" Right = Double }
+	(Y  ) = { Left = "morale" Right = Double }
+	(N Y) = { Left = "vassalize_or_take_under_title" Right = SiezeThing }
+	(N Y) = { Left = "gain_settlements_under_title" Right = SiezeThing }
+	(N Y) = { Left = "vassalize_or_take_under_title_destroy_duchies" Right = SiezeThing }
+	(N Y) = { Left = "subjugate_or_take_under_title" Right = SiezeThing }
+	(N Y) = { Left = "inherit" Right = OnlyCharTarget }
+
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "destroy_landed_title" Right = Yes }
+
+} }
+
+
+(Type UsurpClauseTitle) = {
+	Single = { Left = "target" Right = { AnyTitle MaybeEventTargetTitle } }
+	Single = { Left = "type" Right = UsurpType }
+}
+
+(Type UsurpClauseChar) = {
+	Single = { Left = "target" Right = OnlyCharTarget }
+	Single = { Left = "type" Right = UsurpType }
+}
+
+{% for scope in ['Char', 'Prov', 'Title'] %}
+(ContextValidator {{ scope }}Command) = { Members = {
+	(N Y) = { Left = "press_claim" Right = { MaybeEventTargetCharProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToTitle RhsFancyScopeOptionToProv RhsFancyScopeOptionToChar } }
+
+} }
+{% endfor %}
+
+{% for scope in ['Char', 'Title'] %}
+
+{% if scope == 'Char' %}
+	{% set rhs = """{ AnyTitle MaybeEventTargetTitle UsurpClauseTitle }""" %}
+{% else %}
+	{% set rhs = """{ OnlyCharTarget UsurpClauseChar }""" %}
+{% endif %}
+
+(ContextValidator {{ scope }}Command) = { Members = {
+	(N Y) = { Left = "gain_title" Right = {{ rhs }} }
+	(N Y) = { Left = "gain_title_plus_barony_if_unlanded" Right = {{ rhs }} }
+	(N Y) = { Left = "grant_kingdom_w_adjudication" Right = {{ rhs }} }
+	(N Y) = { Left = "grant_title" Right = {{ rhs }} }
+	(N Y) = { Left = "grant_title_no_opinion" Right = {{ rhs }} }
+	(N Y) = { Left = "usurp_title" Right = {{ rhs }} }
+	(N Y) = { Left = "usurp_title_only" Right = {{ rhs }} }
+	(N Y) = { Left = "usurp_title_plus_barony_if_unlanded" Right = {{ rhs }} }
+	(N Y) = { Left = "usurp_title_plus_barony_if_unlanded_and_vassals" Right = {{ rhs }} }
+	(N Y) = { Left = "usurp_title_plus_barony_if_unlanded_and_vassals_no_adj" Right = {{ rhs }} }
+
+} }
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

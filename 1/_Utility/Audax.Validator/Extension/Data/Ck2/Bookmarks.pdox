@@ -1,0 +1,213 @@
+(Validator Setup) = {
+	Type = GroupValidator
+	FriendlyName = "Setup"
+	Description = "Including alternate starts, bookmarks, and game rules"
+	
+	# Obsolete now
+	#Validator = {
+	#	Type = Default
+	#	(FileGroup "common\province_setup" "*.txt")
+	#	ValidatorName = ProvinceSetupFile
+	#}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\alternate_start" "*.txt")
+		ValidatorName = AlternateStartFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\bookmarks" "*.txt")
+		ValidatorName = BookmarkFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\game_rules" "*.txt")
+		ValidatorName = GameRuleFile
+	}
+}
+
+(Type AlternateStartFile) = {
+	(Ch N N) = { Left = "culture_group_spread" Right = ProvFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "culture_spread" Right = ProvFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "religion_group_spawn" Right = ProvFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "religion_group_spread" Right = ProvFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "religion_spread" Right = ProvFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "dejure_kingdom_spread" Right = ProvFromProvFromFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "dejure_empire_spread" Right = ProvFromProvFromFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "holy_site_spread" Right = ProvFromProvFromFromProvFactorWeight UniqueId = Left }
+	(Ch N N) = { Left = "holding_spread" Right = ProvFromProvFromFromProvFactorWeight UniqueId = Left }
+
+	(Ch N N) = { Left = "religion_name_formats" Right = ReligionNameFormatBlock UniqueId = Left }
+	(Ch N N) = { Left = "adjacencies" Right = AdjacencyBlock UniqueId = Left }
+
+	(Ch N N) = {
+		(CheckKey "setting_*" Left IfNot = NoCheckKey)
+		(CheckKey "setting_*_tooltip" Left IfNot = NoCheckKey)
+		Left = { Type = String }
+		Right = AlternateStartSetting
+		UniqueId = Left
+	}
+}
+
+(Type ReligionNameFormatBlock) = {
+	# Not checking non-dups to allow weighting
+	Single = { Left = "character" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "holy_site" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "dynasty" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "high_god_name" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "evil_god_names" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "scripture_name" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "priest_title" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "crusade_name" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "piety_name" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "desc" Right = { (PdoList N) = { Type = Key } } }
+	Single = { Left = "heresy_desc" Right = { (PdoList N) = { Type = Key } } }
+}
+
+(Type AdjacencyBlock) = {
+	(Ch N N) = { Left = { Type = LandProvince } Right = LandProvince }
+}
+
+(Type AlternateStartSetting) = {
+	Optional = { Left = "priority" Right = Int }
+	Optional = { Left = "sort_priority" Right = Int }
+	Optional = { Left = "separator" Right = Bool }
+	Optional = { Left = "apply_before_generation" Right = Bool }
+	Optional = { Left = "potential" Right = GlobalTrigger }
+	Optional = { Left = "trigger" Right = GlobalTrigger }
+	
+	NodeSwitcher = {
+		Node = "type"
+		MarkChecked = True
+		Switch = {
+			"checkbox" = {
+				Optional = { Left = "random_default" Right = AlternateStartSelectionOption }
+				Optional = { Left = "shattered_default" Right = AlternateStartSelectionOption }
+				Optional = { Left = "checked" Right = AlternateStartSettingOption }
+				Optional = { Left = "unchecked" Right = AlternateStartSettingOption }
+			}
+			"slider" = {
+				Single = { Left = "default" Right = Int }
+				Single = { Left = "min" Right = Int }
+				Single = { Left = "max" Right = Int }
+			}
+			"double_slider" = {
+				Single = { Left = "min_default" Right = Int }
+				Single = { Left = "max_default" Right = Int }
+				Single = { Left = "min" Right = Int }
+				Single = { Left = "max" Right = Int }
+			}
+			"selection" = AlternateStartSettingOptionListDefinition
+			"custom" = AlternateStartSettingOptionListDefinition
+		}
+	}
+}
+
+(Type AlternateStartSettingOptionListDefinition) = {
+	Optional = { Left = "random_default" Right = AlternateStartSelectionOption }
+	Optional = { Left = "shattered_default" Right = AlternateStartSelectionOption }
+	(Ch Y N) = { Left = { Type = String } Right = AlternateStartSettingOption }
+}
+
+(Type AlternateStartSettingOption) = {
+	Optional = { Left = "effect" Right = GlobalCommand }
+	(Ch Y N) = { Left = { Type = String } Right = String }
+}
+
+(Type BookmarkFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = Bookmark
+		UniqueId = Left
+	}
+}
+
+(Type Bookmark) = {
+	Single = { Left = "desc" Right = Key }
+	Single = { Left = "date" Right = Date }
+	
+	Optional = { Left = "era" Right = Bool }
+	Optional = { Left = "custom_start" Right = Bool }
+	
+	NodeSwitcher = {
+		Node = "era"
+		MarkChecked = False
+		Default = NonEraBookmark
+		Switch = {
+			"yes" = EraBookmark
+			"no" = NonEraBookmark
+		}
+	}
+}
+
+(Type NonEraBookmark) = {
+	Single = { Left = "name" Right = Key }
+	(Ch N Y) = { Left = "selectable_character" Right = {
+		Single = { Left = "id" Right = CharacterId }
+	} }
+}
+
+(Type EraBookmark) = {
+	Single = {
+		Left = "name"
+		Right = Key
+		(CheckKey "*_INFO" Right IfNot = NoCheckKey)
+	}
+	Optional = { Left = "picture" Right = String }
+	Optional = { Left = "custom_start" Right = Bool }
+	(Ch N Y) = { Left = "selectable_character" Right = EraSelectableCharacter }
+}
+
+(Type EraSelectableCharacter) = {
+	Single = { Left = "id" Right = CharacterId }
+	Optional = { Left = "age" Right = PInt }
+	Optional = { Left = "name" Right = Key }
+	Optional = { Left = "title" Right = AnyTitle }
+	Optional = { Left = "title_name" Right = Key }
+	Optional = { Left = "coa_dynasty" Right = Bool }
+	Optional = { Left = "dlc" Right = Dlc }
+	
+	Optional = { Left = "character" Right = {
+		Single = { Left = "dna" Right = String }
+		Single = { Left = "properties" Right = String }
+		Single = { Left = "religion" Right = Religion }
+		Single = { Left = "culture" Right = Culture }
+		Single = { Left = "dynasty" Right = DynastyId }
+		Single = { Left = "government" Right = Government }
+		Optional = { Left = "female" Right = Bool }
+	} }
+}
+
+(Type GameRuleFile) = {
+	(Ch N N) = { Left = { Type = String } Right = GameRuleDef UniqueId = Left }
+}
+
+(Type GameRuleDef) = {
+	Single = { Left = "name" Right = Key }
+	Optional = { Left = "dlc" Right = Dlc }
+	Optional = { Left = "alt_start_default" Right = { DicEnumValueFor = { Enum = GameRule KeySelector = "^\name\[R]" } } }
+	(Ch N Y) = { Left = "group" Right = Key }
+	(Ch N Y) = { Left = "option" Right = {
+		Single = { Left = "name" Right = String }
+		Single = { Left = "text" Right = Key }
+		Single = { Left = "desc" Right = Key }
+		Optional = { Left = "achievements" Right = Bool }
+		Optional = { Left = "alt_start_achievements" Right = Bool }
+	} }
+}
+
+(Type ProvinceSetupFile) = {
+	(Ch N N) = { Left = { Type = LandProvince } Right = ProvinceSetupDef UniqueId = Left }
+}
+
+(Type ProvinceSetupDef) = {
+	ProvSetupCheck
+	Single = { Left = "title" Right = CountTitle }
+	Single = { Left = "max_settlements" Right = PInt }
+	Single = { Left = "terrain" Right = Terrain }
+	
+}
+

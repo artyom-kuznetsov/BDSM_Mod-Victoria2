@@ -1,0 +1,317 @@
+(Validator Government) = {
+	Type = GroupValidator
+	FriendlyName = "Government"
+	Description = "Including offmap powers, tributary types, governments, and councils"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\offmap_powers\policies" "*.txt")
+		ValidatorName = OffmapPolicyFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\offmap_powers\statuses" "*.txt")
+		ValidatorName = OffmapStatusFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\offmap_powers" "*.txt")
+		ValidatorName = OffmapPowerFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "history\offmap_powers" "*.txt")
+		ValidatorName = OffmapPowerHistoryFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\tributary_types" "*.txt")
+		ValidatorName = TributaryTypeFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\government_flavor" "*.txt")
+		ValidatorName = GovernmentFlavorFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\governments" "*.txt")
+		ValidatorName = GovernmentFile
+	}
+	
+}
+
+(Type OffmapPolicyFile) = {
+	(Ch N N) = { Left = { Type = String } Right = OffmapPolicyDef UniqueId = Left }
+}
+
+(Type OffmapPolicyDef) = {
+	Single = { Left = "frame" Right = Int }
+	Optional = { Left = "flags" Right = { (PdoList Y) = { Type = String } } }
+	
+	Inherits = Modifier
+}
+
+(Type OffmapStatusFile) = {
+	(Ch N N) = { Left = { Type = String } Right = OffmapStatusDef UniqueId = Left }
+}
+
+(Type OffmapStatusDef) = {
+	Single = { Left = "frame" Right = Int }
+	Optional = { Left = "flags" Right = { (PdoList Y) = { Type = String } } }
+	
+	Inherits = Modifier
+}
+
+(Type OffmapPowerFile) = {
+	(Ch N N) = { Left = { Type = String } Right = OffmapPowerDef UniqueId = Left }
+}
+
+(Type OffmapPowerDef) = {
+	Single = { Left = "name" Right = Key }
+	Single = { Left = "window_name" Right = String }
+	Single = { Left = "button_name" Right = String }
+	Single = { Left = "currency_name" Right = Key }
+	Optional = { Left = "currency_gain" Right = CharModifierDoubleKey }
+	Optional = { Left = "currency_below_zero" Right = Bool }
+	Optional = { Left = "currency_reset_on_dynasty_change" Right = Bool }
+	Single = { Left = "holder_title" Right = MinorTitle }
+	Single = { Left = "governor_title" Right = AnyTitle }
+	Single = { Left = "tier" Right = Tier }
+	Optional = { Left = "coa_religion" Right = Religion }
+	Optional = { Left = "government" Right = Government }
+	Single = { Left = "beginning_of_history" Right = Date }
+	Optional = { Left = "sound" Right = Sound }
+	Optional = { Left = "display_trigger" Right = OffmapPowerTriggerFromChar }
+	Optional = { Left = "policies" Right = { (PdoList Y) = { Type = OffmapPolicy } } }
+	Optional = { Left = "statuses" Right = { (PdoList Y) = { Type = OffmapStatus } } }
+	Optional = { Left = "buttons" Right = {
+		(Ch Y N) = { Left = { Type = String } Right = {
+			Optional = { Left = "is_active_trigger" Right = CharTriggerFromChar }
+			Optional = { Left = "display_trigger" Right = CharTriggerFromChar }
+		} }
+	} }
+	Optional = { Left = "monthly_currency_gain" Right = {
+		(Ch Y N) = { Left = { Type = Key } Right = {
+			Single = { Left = "value" Right = Double }
+			Inherits = CharTriggerFromChar
+		} }
+	} }
+	Optional = { Left = "holder_succession" Right = {
+		Optional = { Left = "is_female" Right = OffmapPowerFromCharFromFromCharValueWeight }
+		Optional = { Left = "culture" Right = {
+			(Ch Y N) = { Left = { Type = Culture Type = ValidEventScopeValue Literal = "actually_culture" } Right = OffmapPowerFromCharFromFromCharValueWeight }
+		} }
+		Optional = { Left = "religion" Right = {
+			(Ch Y N) = { Left = { Type = Religion Type = ValidEventScopeValue } Right = OffmapPowerFromCharFromFromCharValueWeight }
+		} }
+		Optional = { Left = "dynasty" Right = {
+			(Ch Y N) = { Left = { Type = String Type = ValidEventScopeValue } Right = OffmapPowerFromCharFromFromCharValueWeight }
+		} }
+		Optional = { Left = "graphical_culture" Right = {
+			(Ch Y N) = { Left = { Type = GraphicalCultureType Type = ValidEventScopeValue } Right = OffmapPowerFromCharFromFromCharValueWeight }
+		} }
+		Optional = { Left = "likes" Right = {
+			(Ch Y N) = { Left = { Type = OffmapLike } Right = OffmapPowerFromCharFromFromCharValueWeight }
+		} }
+		Optional = { Left = "dislikes" Right = {
+			(Ch Y N) = { Left = { Type = OffmapLike } Right = OffmapPowerFromCharFromFromCharValueWeight }
+		} }
+		Optional = { Left = "culture" Right = {
+			(Ch Y N) = { Left = { Type = Culture Type = ValidEventScopeValue } Right = OffmapPowerFromCharFromFromCharValueWeight }
+		} }
+	} }
+	
+	Optional = { Left = "diplomatic_range" Right = CharTriggerFromChar }
+	Optional = { Left = "non_aggression_modifier" Right = NormalModifier }
+	Optional = { Left = "icon_triggers" Right = {
+		(Ch Y N) = {
+			Left = { Type = String }
+			(CheckKey "*" Left IfNot = NoCheckKey)
+			(CheckKey "*_desc" Left IfNot = NoCheckKey)
+			Right = {
+				Optional = { Left = "right" Right = Bool }
+				Optional = { Left = "frame" Right = Int }
+				Optional = { Left = "window_name" Right = String }
+				Optional = { Left = "trigger" Right = CharTriggerFromOffmapPower }
+			}
+		}
+	} }
+	Optional = { Left = "temple_names" Right = {
+		(Ch N N 2 2) = { Left = "Nameless" Right = { (PdoList Y) = { Type = String } } }
+	} }
+}
+
+(Type.Enum ValidEventScopeValue) = { Values = { FROM } }
+
+(Type TributaryTypeFile) = {
+	(Ch Y N) = { Left = { Type = String } Right = TributaryTypeDef }
+}
+
+(Type TributaryTypeDef) = {
+	Single = { Left = "tributary_name" Right = Key }
+	Single = { Left = "tributary_plural" Right = Key }
+	Single = { Left = "suzerain_name" Right = Key }
+	Single = { Left = "tribute_name" Right = Key }
+	Optional = { Left = "breaks_at_suzerain_death" Right = Bool }
+	Optional = { Left = "breaks_at_tributary_death" Right = Bool }
+	Optional = { Left = "suzerain_can_be_called" Right = Bool }
+	Optional = { Left = "suzerain_must_defend" Right = Bool }
+	Optional = { Left = "tributary_can_be_summoned" Right = Bool }
+	Optional = { Left = "tributary_must_defend" Right = Bool }
+	Optional = { Left = "tributaries_can_infight" Right = Bool }
+	Optional = { Left = "suzerain_can_join_infighting" Right = Bool }
+	Optional = { Left = "tributaries_can_unite" Right = Bool }
+	Optional = { Left = "breaks_on_realm_change" Right = Bool }
+	
+	Single = { Left = "icon" Right = Int }
+	Optional = { Left = "cbs_against_suzerain" Right = { (PdoList Y) = { Type = CasusBelli } } }
+	
+	Optional = { Left = "income_tribute_percentage" Right = CharFromCharValueWeight }
+	Optional = { Left = "reinforce_tribute_percentage" Right = CharFromCharValueWeight }
+	Optional = { Left = "prestige_to_suzerain" Right = CharFromCharValueWeight }
+	Optional = { Left = "prestige_to_tributary" Right = CharFromCharValueWeight }
+	Optional = { Left = "piety_to_suzerain" Right = CharFromCharValueWeight }
+	Optional = { Left = "piety_to_tributary" Right = CharFromCharValueWeight }
+	
+	Optional = { Left = "modifier" Right = Modifier }
+}
+
+(Type GovernmentFile) = {
+	Optional = { Left = "feudal_governments" Right = GovernmentList }
+	Optional = { Left = "nomadic_governments" Right = GovernmentList }
+	Optional = { Left = "republic_governments" Right = GovernmentList }
+	Optional = { Left = "theocracy_governments" Right = GovernmentList }
+	Optional = { Left = "tribal_governments" Right = GovernmentList }
+}
+
+(Type GovernmentList) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		UniqueId = Left
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+		Right = GovernmentDef
+	}
+}
+
+(Type.Enum HoldingTypeCaps) = { Values = { CASTLE FORT TRIBAL TEMPLE NOMAD CITY FAMILY_PALACE TRADE_POST HOSPITAL } }
+
+(Type GovernmentDef) = {
+	Single = { Left = "preferred_holdings" Right = { (PdoList Y) = { Type = HoldingTypeCaps } } }
+	Single = { Left = "allowed_holdings" Right = { (PdoList Y) = { Type = HoldingTypeCaps } } }
+	Optional = { Left = "allowed_holdings_culture" Right = { (PdoList Y) = { Type = HoldingTypeCaps } } }
+	Optional = { Left = "allowed_holdings_religion" Right = { (PdoList Y) = { Type = HoldingTypeCaps } } }
+	Optional = { Left = "allowed_holdings_culture_and_religion" Right = { (PdoList Y) = { Type = HoldingTypeCaps } } }
+	Optional = { Left = "builds_with_prestige" Right = { (PdoList Y) = { Type = HoldingTypeCaps } } }
+	Optional = { Left = "builds_with_piety" Right = { (PdoList Y) = { Type = HoldingTypeCaps } } }
+	
+	Optional = { Left = "free_revoke_on_governments" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "free_revoke_on_governments_culture" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "free_revoke_on_governments_religion" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "free_revoke_on_governments_culture_and_religion" Right = { (PdoList Y) = { Type = Government } } }
+	
+	Optional = { Left = "ignore_in_vassal_limit_calculation" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "no_vassal_tax" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "vassal_call_to_arms" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "forced_contract" Right = { (PdoList Y) = { Type = Government } } }
+	
+	Optional = { Left = "free_revoke_on_tiers" Right = { (PdoList Y) = { Type = Tier } } }
+	
+	Optional = { Left = "title_prefix" Right = String }
+	Optional = { Left = "frame_suffix" Right = String }
+	
+		Optional = { Left = "unit_home_modifier" Right = {
+			Inherits = Modifier
+		} }
+	
+	Single = { Left = "color" Right = { Color FloatColor } }
+	Optional = { Left = "men_can_take_consorts" Right = Bool }
+	Optional = { Left = "women_can_take_consorts" Right = Bool }
+	Optional = { Left = "can_build_tribal" Right = Bool }
+	Optional = { Left = "can_build_holdings" Right = Bool }
+	Optional = { Left = "can_build_forts" Right = Bool }
+	Optional = { Left = "can_build_temple" Right = Bool }
+	Optional = { Left = "free_retract_vassalage" Right = Bool }
+	Optional = { Left = "allows_matrilineal_marriage" Right = Bool }
+	Optional = { Left = "have_gender_laws" Right = Bool }
+	Optional = { Left = "barons_need_dynasty" Right = Bool }
+	Optional = { Left = "dukes_called_kings" Right = Bool }
+	Optional = { Left = "uses_piety_for_law_change" Right = Bool }
+	Optional = { Left = "uses_decadence" Right = Bool }
+	Optional = { Left = "can_build_city" Right = Bool }
+	Optional = { Left = "can_build_temple" Right = Bool }
+	Optional = { Left = "can_build_castle" Right = Bool }
+	Optional = { Left = "can_build_tribal" Right = Bool }
+	Optional = { Left = "can_change_to_nomad_on_start" Right = Bool }
+	Optional = { Left = "allow_looting" Right = Bool }
+	Optional = { Left = "allow_title_revokation" Right = Bool }
+	Optional = { Left = "uses_prestige_for_law_change" Right = Bool }
+	Optional = { Left = "ignores_de_jure_laws" Right = Bool }
+	Optional = { Left = "can_create_kingdoms" Right = Bool }
+	Optional = { Left = "can_be_granted_kingdoms_and_empires_by_other_government" Right = Bool }
+	Optional = { Left = "can_imprison_without_reason" Right = Bool }
+	Optional = { Left = "can_revoke_without_reason" Right = Bool }
+	Optional = { Left = "can_usurp_kingdoms_and_empires" Right = Bool }
+	Optional = { Left = "merchant_republic" Right = Bool }
+	Optional = { Left = "can_grant_kingdoms_and_empires_to_other_government" Right = Bool }
+	Optional = { Left = "free_levies_in_offensive_war" Right = Bool }
+	Optional = { Left = "can_build_hospitals" Right = Bool }
+	Optional = { Left = "landed_inheritance" Right = Bool }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-131#post-23314503
+	Optional = { Left = "uses_jizya_tax" Right = Bool }
+	Optional = { Left = "can_grant_kingdoms_and_empires_to_other_government_group" Right = Bool }
+	Optional = { Left = "can_be_granted_kingdoms_and_empires_by_other_government_group" Right = Bool }
+	Optional = { Left = "gets_religion_opinion_penalties" Right = Bool }
+	Optional = { Left = "gives_religion_opinion_penalties" Right = Bool }
+	Optional = { Left = "vassal_government_opinion_penalties" Right = Bool }
+	Optional = { Left = "can_demand_religious_conversion" Right = Bool }
+	Optional = { Left = "can_create_empires" Right = Bool }
+	Optional = { Left = "can_inherit" Right = Bool }
+	Optional = { Left = "offmap_power" Right = OffmapPower }
+	Optional = { Left = "uses_bride_price" Right = Bool }
+	Optional = { Left = "marriage_ignore_religion" Right = Bool }
+	Optional = { Left = "aggression" Right = Double }
+	
+	Optional = { Left = "accepts_liege_governments" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "accepts_liege_governments_culture" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "accepts_liege_governments_religion" Right = { (PdoList Y) = { Type = Government } } }
+	Optional = { Left = "accepts_liege_governments_culture_and_religion" Right = { (PdoList Y) = { Type = Government } } }
+	
+	Optional = { Left = "demesne_size" Right = NnInt }
+	Optional = { Left = "max_consorts" Right = NnInt }
+	Optional = { Left = "vassal_limit" Right = Int }
+	Optional = { Left = "commander_limit" Right = Int }
+	Optional = { Left = "capital_move_delay" Right = NnInt }
+	Optional = { Left = "allow" Right = CharTrigger }
+	Single = { Left = "potential" Right = CharTrigger }
+	Optional = { Left = "character_modifier" Right = CharModifier }
+	Optional = { Left = "court_size_modifier" Right = Int }
+	Optional = { Left = "court_size_maintenance_cost_modifier" Right = Double }
+	
+	
+	Optional = { Left = "unit_modifier" Right = {
+		Inherits = UnitStatsModifier
+		Optional = { Left = "key" Right = Key }
+	} }
+}
+
+(Type GovernmentFlavorFile) = {
+	(Ch N N) = {
+		Left = "government_flavor"
+		Right = GovernmentFlavorDef
+	}
+}
+
+(Type GovernmentFlavorDef) = {
+	Single = { Left = "name" Right = Key UniqueId = Right }
+	Single = { Left = "graphics" Right = String }
+	Single = { Left = "priority" Right = Int }
+	Single = { Left = "trigger" Right = CharTrigger }
+}

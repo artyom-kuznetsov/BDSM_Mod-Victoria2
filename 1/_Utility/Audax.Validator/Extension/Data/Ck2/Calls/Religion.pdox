@@ -1,0 +1,979 @@
+
+
+
+(ContextValidator Trigger) = { Members = {
+	(N N) = { Left = any_crusade_participant Right = CharTriggerWithCount }
+} }
+(ContextValidator Command) = { Members = {
+	(N N) = { Left = any_crusade_participant Right = CharMaybeLimitCommand }
+	(N N) = { Left = random_crusade_participant Right = CharRandomCommand }
+} }
+
+
+(ContextValidator CharTrigger) = { Scopes = {
+	CharTrigger = "religion_head"
+	CharTrigger = "rightful_religious_head_scope"
+	TitleTrigger = "crusade_target"
+
+} }
+
+(ContextValidator CharCommand) = { Scopes = {
+	CharCommand = "religion_head"
+	CharCommand = "rightful_religious_head_scope"
+
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N Y) = { Left = "any_religion_distance" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "is_heresy_of" Right = { MaybeEventTargetCharProvReligionSocietyTitle Religion AnyTitle Owner TopLiege VariousOwners } }
+	(Y  ) = { Left = "is_heretic" Right = Bool }
+	(N Y) = { Left = "is_parent_religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle Religion AnyTitle Owner TopLiege VariousOwners } }
+	(Y  ) = { Left = "is_hard_to_convert" Right = Bool }
+	(N Y) = { Left = "religion_group" Right = { VariousOwners } }
+	(N Y) = { Left = "religion" Right = { VariousOwners } }
+
+} }
+
+Global = {
+(Type ReligionTargetCheck) = {
+	Single = { Left = "target_type" Right = { Literal = "secret" Literal = "public" Literal = "true" } }
+	Single = { Left = "target" Right = { MaybeEventTargetCharProvReligionSocietyTitle NewChar CharTargetExcludingMaybeEventTarget Location CapitalScope } }
+}
+}
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(A Y) = { Left = "associated_religion" Right = Religion }
+	(N Y) = { Left = "associated_religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis } }
+} }
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "secret_religion_scope" Right = ReligionTrigger }
+	(N N) = { Left = "true_religion_scope" Right = ReligionTrigger }
+	
+	(N N) = { Left = "crusade_beneficiary" Right = CharTrigger }
+	
+	(N Y) = { Left = "is_preparing_crusade" Right = { OnlyCharTarget Location CapitalScope } }
+	(N Y) = { Left = "can_see_secret_religion" Right = OnlyCharTarget }
+	(Y  ) = { Left = "has_pledged_crusade_defense" Right = Bool }
+	(Y  ) = { Left = "is_crusade_target" Right = Bool }
+	(Y  ) = { Left = "has_secret_religion" Right = Bool }
+	(Y  ) = { Left = "is_hard_to_convert" Right = Bool }
+	(A Y) = { Left = "secret_religion" Right = Religion }
+	(N Y) = { Left = "secret_religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle NewChar SocietyThingsWithoutThis AnyTitle CharTargetExcludingMaybeEventTarget RhsFancyScopeOptionToAny Location CapitalScope } }
+	(N Y) = { Left = "secret_religion" Right = ReligionTargetCheck }
+	(A Y) = { Left = "secret_religion_group" Right = ReligionGroup }
+	(A Y) = { Left = "secret_religion_group" Right = Religion }
+	(N Y) = { Left = "secret_religion_group" Right = { MaybeEventTargetCharProvReligionSocietyTitle NewChar SocietyThingsWithoutThis CharTargetExcludingMaybeEventTarget RhsFancyScopeOptionToAny Location CapitalScope } }
+	(N Y) = { Left = "secret_religion_group" Right = ReligionTargetCheck }
+	(A Y) = { Left = "true_religion" Right = Religion }
+	(N Y) = { Left = "true_religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle NewChar SocietyThingsWithoutThis AnyTitle CharTargetExcludingMaybeEventTarget RhsFancyScopeOptionToAny Location CapitalScope } }
+	(N Y) = { Left = "true_religion" Right = ReligionTargetCheck }
+	(A Y) = { Left = "true_religion_group" Right = ReligionGroup }
+	(A Y) = { Left = "true_religion_group" Right = Religion }
+	(N Y) = { Left = "true_religion_group" Right = { MaybeEventTargetCharProvReligionSocietyTitle NewChar SocietyThingsWithoutThis AnyTitle CharTargetExcludingMaybeEventTarget RhsFancyScopeOptionToAny Location CapitalScope } }
+	(N Y) = { Left = "true_religion_group" Right = ReligionTargetCheck }
+
+	(N Y) = { Left = "excommunicated_for" Right = { OnlyCharTarget } }
+	(N Y) = { Left = "is_heresy_of" Right = { Religion MaybeEventTargetCharProvReligionSocietyTitle AnyTitle Location CapitalScope CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "is_parent_religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle Religion  AnyTitle Location CapitalScope CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "rightful_religious_head" Right = { CharTargetExcludingMaybeEventTarget MaybeEventTargetCharTitle AnyTitle } }
+	
+	(Y  ) = { Left = "can_call_crusade" Right = Bool }
+	(Y  ) = { Left = "controls_religion" Right = { Bool } }
+	# https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27114669 doesn't work for Religion
+	#(N Y) = { Left = "controls_religion" Right = { Religion } }
+	(Y  ) = { Left = "has_called_crusade" Right = Bool }
+	(Y  ) = { Left = "is_heretic" Right = Bool }
+	(Y  ) = { Left = "can_change_religion" Right = Bool }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(Y  ) = { Left = "controls_religion" Right = { Bool } }
+	# https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27114669 doesn't work for Religion
+	#(N Y) = { Left = "controls_religion" Right = { Religion } }
+	(N Y) = { Left = "is_holy_site" Right = { MaybeEventTargetCharProvReligionSociety Religion CharacterId PrefixedCharId SocietyThingsWithoutThis } }
+
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N Y) = { Left = "is_holy_site" Right = { MaybeEventTargetCharProvReligionSociety Religion CharacterId PrefixedCharId SocietyThingsWithoutThis } }
+
+} }
+
+(ContextValidator Command) = { Members = {
+	(N Y) = { Left = "set_parent_religion" Right = {
+		Single = { Left = "religion" Right = { Religion MaybeEventTargetCharProvReligionSociety ReligionTargetCheck SocietyThingsWithoutThis CharTargetExcludingMaybeEventTarget Location RhsFancyScopeOptionToReligion RhsFancyScopeOptionToProv } }
+		Single = { Left = "parent" Right = { Type = Religion Literal = "0" Type = MaybeEventTargetCharProvReligionSociety Type = SocietyThingsWithoutThis  Type = CharTargetExcludingMaybeEventTarget Type = RhsFancyScopeOptionToReligion Type = RhsFancyScopeOptionToProv } }
+	} }
+
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(Y  ) = { Left = "religion" Right = { Religion MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(Y  ) = { Left = "unsafe_religion" Right = { Religion MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(Y  ) = { Left = "reverse_religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(Y  ) = { Left = "become_heretic" Right = Yes }
+	(Y  ) = { Left = "abandon_heresy" Right = Yes }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "secret_religion_scope" Right = ReligionCommand }
+	(N N) = { Left = "true_religion_scope" Right = ReligionCommand }
+
+	(N N) = { Left = "crusade_beneficiary" Right = CharCommand }
+
+	(N Y) = { Left = "add_intermarry" Right = RhsFancyScopeOptionToProv }
+	(N Y) = { Left = "remove_intermarry" Right = RhsFancyScopeOptionToProv }
+	(Y  ) = { Left = "become_secret_heretic" Right = Yes }
+	(Y  ) = { Left = "set_crusade_beneficiary" Right = { Type = MaybeEventTargetChar Literal = "NONE" Type = None } }
+	(Y  ) = { Left = "set_crusade_pot_multiplier" Right = Double }
+	(Y  ) = { Left = "pledge_crusade_participation" Right = Bool }
+	(Y  ) = { Left = "pledge_crusade_defense" Right = Bool }
+	(Y  ) = { Left = "convert_to_secret_religion" Right = { Yes OnlyCharTarget } }
+	(Y  ) = { Left = "religion" Right = { Religion MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget TopLiege SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny Location CapitalScope ReligionTargetCheck } }
+	(N Y) = { Left = "unsafe_religion" Right = { Religion MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis Location CapitalScope } }
+	(Y  ) = { Left = "reverse_religion" Right = { MaybeEventTargetCharProv CharTargetExcludingMaybeEventTarget Location CapitalScope } }
+	(Y  ) = { Left = "abandon_heresy" Right = Yes }
+	(Y  ) = { Left = "excommunicate" Right = Bool }
+	(Y  ) = { Left = "become_heretic" Right = Bool }
+	
+	(Y  ) = { Left = "set_secret_religion" Right = { Religion MaybeEventTargetCharProvReligionSocietyTitle NewChar ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny Location CapitalScope } }
+	(Y  ) = { Left = "clear_secret_religion" Right = Yes }
+	
+
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(Y  ) = { Left = "religion" Right = { Religion MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope ReligionTargetCheck } }
+	
+
+	(N Y) = { Left = "set_holy_site" Right = { Type = Religion Type = MaybeEventTargetCharProvReligionSocietyTitle Literal = "location" Type = CharTargetExcludingMaybeEventTarget Type = AnyTitle Type = SocietyThingsWithoutThis } }
+
+
+	(N Y) = { Left = "remove_holy_site" Right = { Type = Religion Type = MaybeEventTargetCharProvReligionSocietyTitle Literal = "location" Type = CharTargetExcludingMaybeEventTarget Type = AnyTitle Type = SocietyThingsWithoutThis } }
+
+
+	(N Y) = { Left = "remove_holy_site_with_heresies" Right = { Type = Religion Type = MaybeEventTargetCharProvReligionSocietyTitle Literal = "location" Type = CharTargetExcludingMaybeEventTarget Type = AnyTitle Type = SocietyThingsWithoutThis } }
+
+
+	(N Y) = { Left = "set_holy_site_with_heresies" Right = { Type = Religion Type = MaybeEventTargetCharProvReligionSocietyTitle Literal = "location" Type = CharTargetExcludingMaybeEventTarget Type = AnyTitle Type = SocietyThingsWithoutThis } }
+
+
+} }
+
+(Type ComplexRA) = {
+	Single = { Left = { "name" "modifier" } Right = ReligionModifier }
+	Optional = { Left = "years" Right = PInt }
+	Optional = { Left = "months" Right = PInt }
+}
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(Y  ) = { Left = "is_name_randomized" Right = Bool }
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(Y  ) = { Left = "set_religion_head" Right = { AnyTitle MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget None } }
+	(N Y) = { Left = "enable_prepared_invasion" Right = Yes }
+	(N Y) = { Left = "disable_prepared_invasion" Right = Yes }
+	(Y  ) = { Left = "make_reformer_head_of_religion" Right = Yes }
+	(Y  ) = { Left = "set_religious_branch" Right = ReligionBranchTag }
+	(Y  ) = { Left = "set_no_head_of_religion" Right = Yes }
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "parent_religion_head" Right = CharTrigger }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "parent_religion_head" Right = CharCommand }
+
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "parent_religion_head" Right = CharTrigger }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "parent_religion_head" Right = CharCommand }
+
+} }
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "religion_scope" Right = ReligionTrigger }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "religion_scope" Right = ReligionCommand }
+
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "religion_scope" Right = ReligionTrigger }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "religion_scope" Right = ReligionCommand }
+
+} }
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(N N) = { Left = "religion_scope" Right = ReligionTrigger }
+} }
+
+(ContextValidator SocietyCommand) = { Members = {
+	(N N) = { Left = "religion_scope" Right = ReligionCommand }
+
+} }
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionTrigger }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionCommand }
+
+} }
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionTrigger }
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionCommand }
+
+} }
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionTrigger }
+} }
+
+(ContextValidator SocietyCommand) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionCommand }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionTrigger }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N N) = { Left = "crusade_religion_targeting_us" Right = ReligionCommand }
+
+} }
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "most_participating_crusader" Right = CharTrigger }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "most_participating_crusader" Right = CharCommand }
+	(N Y) = { Left = "add_evil_god_name" Right = Key }
+	(N Y) = { Left = "add_god_name" Right = Key }
+	(N Y) = { Left = "remove_god_names" Right = Yes }
+	(N Y) = { Left = "remove_evil_god_names" Right = Yes }
+
+} }
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "most_participating_crusader" Right = CharTrigger }
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = "most_participating_crusader" Right = CharCommand }
+	(N Y) = { Left = "add_evil_god_name" Right = Key }
+	(N Y) = { Left = "add_god_name" Right = Key }
+	(N Y) = { Left = "remove_god_names" Right = Yes }
+	(N Y) = { Left = "remove_evil_god_names" Right = Yes }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N N) = { Left = "most_participating_crusader" Right = CharTrigger }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N N) = { Left = "most_participating_crusader" Right = CharCommand }
+	(N Y) = { Left = "add_evil_god_name" Right = Key }
+	(N Y) = { Left = "add_god_name" Right = Key }
+	(N Y) = { Left = "remove_god_names" Right = Yes }
+	(N Y) = { Left = "remove_evil_god_names" Right = Yes }
+
+} }
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleTrigger }
+	(N Y) = { Left = "crusade_preparation_strength" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_elapsed" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_remaining" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_defense_strength" Right = { Int VariableName } }
+
+	(N Y) = { Left = "crusade_gold_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_prestige_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_piety_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_artifact_pot" Right = { Int VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleCommand }
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleTrigger }
+	(N Y) = { Left = "crusade_preparation_strength" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_elapsed" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_remaining" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_defense_strength" Right = { Int VariableName } }
+
+	(N Y) = { Left = "crusade_gold_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_prestige_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_piety_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_artifact_pot" Right = { Int VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleCommand }
+} }
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleTrigger }
+	(N Y) = { Left = "crusade_preparation_strength" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_elapsed" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_remaining" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_defense_strength" Right = { Int VariableName } }
+
+	(N Y) = { Left = "crusade_gold_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_prestige_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_piety_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_artifact_pot" Right = { Int VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleCommand }
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleTrigger }
+	(N Y) = { Left = "crusade_preparation_strength" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_elapsed" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_preparation_time_remaining" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_defense_strength" Right = { Int VariableName } }
+
+	(N Y) = { Left = "crusade_gold_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_prestige_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_piety_pot" Right = { Int VariableName } } # Can have comparison operators
+	(N Y) = { Left = "crusade_artifact_pot" Right = { Int VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N N) = { Left = "crusade_target_title" Right = TitleCommand }
+} }
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(A Y) = { Left = "religion" Right = Religion }
+	(N Y) = { Left = "religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(A Y) = { Left = "religion_group" Right = ReligionGroup }
+	(A Y) = { Left = "religion_group" Right = Religion }
+	(N Y) = { Left = "religion_group" Right = { MaybeEventTargetCharProvReligionSocietyTitle ReligionTargetCheck CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "has_religion_feature" Right = ReligionFeature }
+	(Y  ) = { Left = "is_preparing_crusade" Right = Bool }
+	(Y  ) = { Left = "has_crusade_war_started" Right = Bool }
+		
+	(Y  ) = { Left = "religion_allows_male_temple_holders" Right = Bool }
+	(Y  ) = { Left = "religion_allows_female_temple_holders" Right = Bool }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(Y  ) = { Left = "set_rel_head_defense" Right = Bool }
+	(N Y) = { Left = "religion_authority" Right = { Double ComplexRA } }
+	(Y  ) = { Left = "make_reformer_head_of_religion" Right = Yes }
+	(Y  ) = { Left = "set_divine_blood" Right = Bool }
+	(Y  ) = { Left = "set_peace_piety_gain" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_pacifist" Right = Bool }
+	(Y  ) = { Left = "set_convert_other_groups" Right = Double }
+	(Y  ) = { Left = "set_convert_same_group" Right = Double }
+	(Y  ) = { Left = "set_peace_prestige_loss" Right = Bool }
+	(Y  ) = { Left = "set_ai_aggression" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_hard_to_convert" Right = Bool }
+	(Y  ) = { Left = "set_raised_vassal_opinion_loss" Right = Bool }
+	(Y  ) = { Left = "set_piety_loss_for_attacking_same_religion" Right = Bool }
+	(Y  ) = { Left = "set_max_wives" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_max_consorts" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_feminist" Right = Bool }
+	(Y  ) = { Left = "set_heir_designation" Right = Bool }
+	(Y  ) = { Left = "set_short_reign_opinion_year_mult" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_jizya_tax" Right = Bool }
+	(Y  ) = { Left = "set_can_retire_to_monastery" Right = Bool }
+	(Y  ) = { Left = "set_can_excommunicate" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_divorce" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_invasion_cb" Right = CasusBelli }
+	(Y  ) = { Left = "set_can_grant_claim" Right = Bool }
+	(Y  ) = { Left = "set_can_call_crusade" Right = Bool }
+	(Y  ) = { Left = "set_pc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_bs_marriage" Right = Bool }
+	(Y  ) = { Left = "set_psc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_cousin_marriage" Right = Bool }
+	(Y  ) = { Left = "set_seafaring" Right = Bool }
+	(Y  ) = { Left = "set_allow_looting" Right = Bool }
+	(Y  ) = { Left = "set_allow_rivermovement" Right = Bool }
+	(Y  ) = { Left = "set_autocephaly" Right = Bool }
+	(Y  ) = { Left = "set_pentarchy" Right = Bool }
+	(Y  ) = { Left = "set_uses_decadence" Right = Bool }
+	(Y  ) = { Left = "set_can_have_antipopes" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_marry" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_inherit" Right = Bool }
+	(Y  ) = { Left = "set_ignores_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_character_modifier" Right = {
+		Inherits = Modifier
+		Optional = { Left = "key" Right = Key }
+	} }
+	(N Y) = { Left = "add_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(N Y) = { Left = "remove_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(Y  ) = { Left = "clear_intermarry" Right = Yes }
+	(Y  ) = { Left = "set_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_female_temple_holders" Right = Bool }
+	(Y  ) = { Left = "set_male_temple_holders" Right = Bool }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-154#post-25872877
+	(Y  ) = { Left = "set_allows_matrilineal_marriage" Right = Bool }
+	(Y  ) = { Left = "set_men_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_women_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_unit_home_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+	(Y  ) = { Left = "set_unit_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(A Y) = { Left = "religion" Right = Religion }
+	(N Y) = { Left = "religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(A Y) = { Left = "religion_group" Right = ReligionGroup }
+	(A Y) = { Left = "religion_group" Right = Religion }
+	(N Y) = { Left = "religion_group" Right = { MaybeEventTargetCharProvReligionSocietyTitle ReligionTargetCheck CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "has_religion_feature" Right = ReligionFeature }
+	(Y  ) = { Left = "is_preparing_crusade" Right = Bool }
+	(Y  ) = { Left = "has_crusade_war_started" Right = Bool }
+		
+	(Y  ) = { Left = "religion_allows_male_temple_holders" Right = Bool }
+	(Y  ) = { Left = "religion_allows_female_temple_holders" Right = Bool }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(Y  ) = { Left = "set_rel_head_defense" Right = Bool }
+	(N Y) = { Left = "religion_authority" Right = { Double ComplexRA } }
+	(Y  ) = { Left = "make_reformer_head_of_religion" Right = Yes }
+	(Y  ) = { Left = "set_divine_blood" Right = Bool }
+	(Y  ) = { Left = "set_peace_piety_gain" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_pacifist" Right = Bool }
+	(Y  ) = { Left = "set_convert_other_groups" Right = Double }
+	(Y  ) = { Left = "set_convert_same_group" Right = Double }
+	(Y  ) = { Left = "set_peace_prestige_loss" Right = Bool }
+	(Y  ) = { Left = "set_ai_aggression" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_hard_to_convert" Right = Bool }
+	(Y  ) = { Left = "set_raised_vassal_opinion_loss" Right = Bool }
+	(Y  ) = { Left = "set_piety_loss_for_attacking_same_religion" Right = Bool }
+	(Y  ) = { Left = "set_max_wives" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_max_consorts" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_feminist" Right = Bool }
+	(Y  ) = { Left = "set_heir_designation" Right = Bool }
+	(Y  ) = { Left = "set_short_reign_opinion_year_mult" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_jizya_tax" Right = Bool }
+	(Y  ) = { Left = "set_can_retire_to_monastery" Right = Bool }
+	(Y  ) = { Left = "set_can_excommunicate" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_divorce" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_invasion_cb" Right = CasusBelli }
+	(Y  ) = { Left = "set_can_grant_claim" Right = Bool }
+	(Y  ) = { Left = "set_can_call_crusade" Right = Bool }
+	(Y  ) = { Left = "set_pc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_bs_marriage" Right = Bool }
+	(Y  ) = { Left = "set_psc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_cousin_marriage" Right = Bool }
+	(Y  ) = { Left = "set_seafaring" Right = Bool }
+	(Y  ) = { Left = "set_allow_looting" Right = Bool }
+	(Y  ) = { Left = "set_allow_rivermovement" Right = Bool }
+	(Y  ) = { Left = "set_autocephaly" Right = Bool }
+	(Y  ) = { Left = "set_pentarchy" Right = Bool }
+	(Y  ) = { Left = "set_uses_decadence" Right = Bool }
+	(Y  ) = { Left = "set_can_have_antipopes" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_marry" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_inherit" Right = Bool }
+	(Y  ) = { Left = "set_ignores_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_character_modifier" Right = {
+		Inherits = Modifier
+		Optional = { Left = "key" Right = Key }
+	} }
+	(N Y) = { Left = "add_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(N Y) = { Left = "remove_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(Y  ) = { Left = "clear_intermarry" Right = Yes }
+	(Y  ) = { Left = "set_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_female_temple_holders" Right = Bool }
+	(Y  ) = { Left = "set_male_temple_holders" Right = Bool }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-154#post-25872877
+	(Y  ) = { Left = "set_allows_matrilineal_marriage" Right = Bool }
+	(Y  ) = { Left = "set_men_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_women_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_unit_home_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+	(Y  ) = { Left = "set_unit_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+
+} }
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(A Y) = { Left = "religion" Right = Religion }
+	(N Y) = { Left = "religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(A Y) = { Left = "religion_group" Right = ReligionGroup }
+	(A Y) = { Left = "religion_group" Right = Religion }
+	(N Y) = { Left = "religion_group" Right = { MaybeEventTargetCharProvReligionSocietyTitle ReligionTargetCheck CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "has_religion_feature" Right = ReligionFeature }
+	(Y  ) = { Left = "is_preparing_crusade" Right = Bool }
+	(Y  ) = { Left = "has_crusade_war_started" Right = Bool }
+		
+	(Y  ) = { Left = "religion_allows_male_temple_holders" Right = Bool }
+	(Y  ) = { Left = "religion_allows_female_temple_holders" Right = Bool }
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(Y  ) = { Left = "set_rel_head_defense" Right = Bool }
+	(N Y) = { Left = "religion_authority" Right = { Double ComplexRA } }
+	(Y  ) = { Left = "make_reformer_head_of_religion" Right = Yes }
+	(Y  ) = { Left = "set_divine_blood" Right = Bool }
+	(Y  ) = { Left = "set_peace_piety_gain" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_pacifist" Right = Bool }
+	(Y  ) = { Left = "set_convert_other_groups" Right = Double }
+	(Y  ) = { Left = "set_convert_same_group" Right = Double }
+	(Y  ) = { Left = "set_peace_prestige_loss" Right = Bool }
+	(Y  ) = { Left = "set_ai_aggression" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_hard_to_convert" Right = Bool }
+	(Y  ) = { Left = "set_raised_vassal_opinion_loss" Right = Bool }
+	(Y  ) = { Left = "set_piety_loss_for_attacking_same_religion" Right = Bool }
+	(Y  ) = { Left = "set_max_wives" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_max_consorts" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_feminist" Right = Bool }
+	(Y  ) = { Left = "set_heir_designation" Right = Bool }
+	(Y  ) = { Left = "set_short_reign_opinion_year_mult" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_jizya_tax" Right = Bool }
+	(Y  ) = { Left = "set_can_retire_to_monastery" Right = Bool }
+	(Y  ) = { Left = "set_can_excommunicate" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_divorce" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_invasion_cb" Right = CasusBelli }
+	(Y  ) = { Left = "set_can_grant_claim" Right = Bool }
+	(Y  ) = { Left = "set_can_call_crusade" Right = Bool }
+	(Y  ) = { Left = "set_pc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_bs_marriage" Right = Bool }
+	(Y  ) = { Left = "set_psc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_cousin_marriage" Right = Bool }
+	(Y  ) = { Left = "set_seafaring" Right = Bool }
+	(Y  ) = { Left = "set_allow_looting" Right = Bool }
+	(Y  ) = { Left = "set_allow_rivermovement" Right = Bool }
+	(Y  ) = { Left = "set_autocephaly" Right = Bool }
+	(Y  ) = { Left = "set_pentarchy" Right = Bool }
+	(Y  ) = { Left = "set_uses_decadence" Right = Bool }
+	(Y  ) = { Left = "set_can_have_antipopes" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_marry" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_inherit" Right = Bool }
+	(Y  ) = { Left = "set_ignores_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_character_modifier" Right = {
+		Inherits = Modifier
+		Optional = { Left = "key" Right = Key }
+	} }
+	(N Y) = { Left = "add_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(N Y) = { Left = "remove_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(Y  ) = { Left = "clear_intermarry" Right = Yes }
+	(Y  ) = { Left = "set_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_female_temple_holders" Right = Bool }
+	(Y  ) = { Left = "set_male_temple_holders" Right = Bool }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-154#post-25872877
+	(Y  ) = { Left = "set_allows_matrilineal_marriage" Right = Bool }
+	(Y  ) = { Left = "set_men_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_women_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_unit_home_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+	(Y  ) = { Left = "set_unit_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+
+} }
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(A Y) = { Left = "religion" Right = Religion }
+	(N Y) = { Left = "religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(A Y) = { Left = "religion_group" Right = ReligionGroup }
+	(A Y) = { Left = "religion_group" Right = Religion }
+	(N Y) = { Left = "religion_group" Right = { MaybeEventTargetCharProvReligionSocietyTitle ReligionTargetCheck CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "has_religion_feature" Right = ReligionFeature }
+	(Y  ) = { Left = "is_preparing_crusade" Right = Bool }
+	(Y  ) = { Left = "has_crusade_war_started" Right = Bool }
+		
+	(Y  ) = { Left = "religion_allows_male_temple_holders" Right = Bool }
+	(Y  ) = { Left = "religion_allows_female_temple_holders" Right = Bool }
+} }
+
+(ContextValidator SocietyCommand) = { Members = {
+	(Y  ) = { Left = "set_rel_head_defense" Right = Bool }
+	(N Y) = { Left = "religion_authority" Right = { Double ComplexRA } }
+	(Y  ) = { Left = "make_reformer_head_of_religion" Right = Yes }
+	(Y  ) = { Left = "set_divine_blood" Right = Bool }
+	(Y  ) = { Left = "set_peace_piety_gain" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_pacifist" Right = Bool }
+	(Y  ) = { Left = "set_convert_other_groups" Right = Double }
+	(Y  ) = { Left = "set_convert_same_group" Right = Double }
+	(Y  ) = { Left = "set_peace_prestige_loss" Right = Bool }
+	(Y  ) = { Left = "set_ai_aggression" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_hard_to_convert" Right = Bool }
+	(Y  ) = { Left = "set_raised_vassal_opinion_loss" Right = Bool }
+	(Y  ) = { Left = "set_piety_loss_for_attacking_same_religion" Right = Bool }
+	(Y  ) = { Left = "set_max_wives" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_max_consorts" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_feminist" Right = Bool }
+	(Y  ) = { Left = "set_heir_designation" Right = Bool }
+	(Y  ) = { Left = "set_short_reign_opinion_year_mult" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_jizya_tax" Right = Bool }
+	(Y  ) = { Left = "set_can_retire_to_monastery" Right = Bool }
+	(Y  ) = { Left = "set_can_excommunicate" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_divorce" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_invasion_cb" Right = CasusBelli }
+	(Y  ) = { Left = "set_can_grant_claim" Right = Bool }
+	(Y  ) = { Left = "set_can_call_crusade" Right = Bool }
+	(Y  ) = { Left = "set_pc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_bs_marriage" Right = Bool }
+	(Y  ) = { Left = "set_psc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_cousin_marriage" Right = Bool }
+	(Y  ) = { Left = "set_seafaring" Right = Bool }
+	(Y  ) = { Left = "set_allow_looting" Right = Bool }
+	(Y  ) = { Left = "set_allow_rivermovement" Right = Bool }
+	(Y  ) = { Left = "set_autocephaly" Right = Bool }
+	(Y  ) = { Left = "set_pentarchy" Right = Bool }
+	(Y  ) = { Left = "set_uses_decadence" Right = Bool }
+	(Y  ) = { Left = "set_can_have_antipopes" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_marry" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_inherit" Right = Bool }
+	(Y  ) = { Left = "set_ignores_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_character_modifier" Right = {
+		Inherits = Modifier
+		Optional = { Left = "key" Right = Key }
+	} }
+	(N Y) = { Left = "add_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(N Y) = { Left = "remove_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(Y  ) = { Left = "clear_intermarry" Right = Yes }
+	(Y  ) = { Left = "set_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_female_temple_holders" Right = Bool }
+	(Y  ) = { Left = "set_male_temple_holders" Right = Bool }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-154#post-25872877
+	(Y  ) = { Left = "set_allows_matrilineal_marriage" Right = Bool }
+	(Y  ) = { Left = "set_men_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_women_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_unit_home_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+	(Y  ) = { Left = "set_unit_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(A Y) = { Left = "religion" Right = Religion }
+	(N Y) = { Left = "religion" Right = { MaybeEventTargetCharProvReligionSocietyTitle CharTargetExcludingMaybeEventTarget ReligionTargetCheck SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(A Y) = { Left = "religion_group" Right = ReligionGroup }
+	(A Y) = { Left = "religion_group" Right = Religion }
+	(N Y) = { Left = "religion_group" Right = { MaybeEventTargetCharProvReligionSocietyTitle ReligionTargetCheck CharTargetExcludingMaybeEventTarget SocietyThingsWithoutThis AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "has_religion_feature" Right = ReligionFeature }
+	(Y  ) = { Left = "is_preparing_crusade" Right = Bool }
+	(Y  ) = { Left = "has_crusade_war_started" Right = Bool }
+		
+	(Y  ) = { Left = "religion_allows_male_temple_holders" Right = Bool }
+	(Y  ) = { Left = "religion_allows_female_temple_holders" Right = Bool }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(Y  ) = { Left = "set_rel_head_defense" Right = Bool }
+	(N Y) = { Left = "religion_authority" Right = { Double ComplexRA } }
+	(Y  ) = { Left = "make_reformer_head_of_religion" Right = Yes }
+	(Y  ) = { Left = "set_divine_blood" Right = Bool }
+	(Y  ) = { Left = "set_peace_piety_gain" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_pacifist" Right = Bool }
+	(Y  ) = { Left = "set_convert_other_groups" Right = Double }
+	(Y  ) = { Left = "set_convert_same_group" Right = Double }
+	(Y  ) = { Left = "set_peace_prestige_loss" Right = Bool }
+	(Y  ) = { Left = "set_ai_aggression" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_hard_to_convert" Right = Bool }
+	(Y  ) = { Left = "set_raised_vassal_opinion_loss" Right = Bool }
+	(Y  ) = { Left = "set_piety_loss_for_attacking_same_religion" Right = Bool }
+	(Y  ) = { Left = "set_max_wives" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_max_consorts" Right = { NnInt VariableName } }
+	(Y  ) = { Left = "set_feminist" Right = Bool }
+	(Y  ) = { Left = "set_heir_designation" Right = Bool }
+	(Y  ) = { Left = "set_short_reign_opinion_year_mult" Right = { Double VariableName } }
+	(Y  ) = { Left = "set_jizya_tax" Right = Bool }
+	(Y  ) = { Left = "set_can_retire_to_monastery" Right = Bool }
+	(Y  ) = { Left = "set_can_excommunicate" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_divorce" Right = Bool }
+	(Y  ) = { Left = "set_can_grant_invasion_cb" Right = CasusBelli }
+	(Y  ) = { Left = "set_can_grant_claim" Right = Bool }
+	(Y  ) = { Left = "set_can_call_crusade" Right = Bool }
+	(Y  ) = { Left = "set_pc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_bs_marriage" Right = Bool }
+	(Y  ) = { Left = "set_psc_marriage" Right = Bool }
+	(Y  ) = { Left = "set_cousin_marriage" Right = Bool }
+	(Y  ) = { Left = "set_seafaring" Right = Bool }
+	(Y  ) = { Left = "set_allow_looting" Right = Bool }
+	(Y  ) = { Left = "set_allow_rivermovement" Right = Bool }
+	(Y  ) = { Left = "set_autocephaly" Right = Bool }
+	(Y  ) = { Left = "set_pentarchy" Right = Bool }
+	(Y  ) = { Left = "set_uses_decadence" Right = Bool }
+	(Y  ) = { Left = "set_can_have_antipopes" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_marry" Right = Bool }
+	(Y  ) = { Left = "set_priests_can_inherit" Right = Bool }
+	(Y  ) = { Left = "set_ignores_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_character_modifier" Right = {
+		Inherits = Modifier
+		Optional = { Left = "key" Right = Key }
+	} }
+	(N Y) = { Left = "add_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(N Y) = { Left = "remove_intermarry" Right = { Religion ReligionGroup MaybeEventTargetCharReligion CharTargetExcludingMaybeEventTarget } } # https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-148#post-25244461
+	(Y  ) = { Left = "clear_intermarry" Right = Yes }
+	(Y  ) = { Left = "set_defensive_attrition" Right = Bool }
+	(Y  ) = { Left = "set_female_temple_holders" Right = Bool }
+	(Y  ) = { Left = "set_male_temple_holders" Right = Bool }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-154#post-25872877
+	(Y  ) = { Left = "set_allows_matrilineal_marriage" Right = Bool }
+	(Y  ) = { Left = "set_men_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_women_can_take_consorts" Right = Bool }
+	(Y  ) = { Left = "set_unit_home_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+	(Y  ) = { Left = "set_unit_modifier" Right = {
+		Inherits = Modifier
+		Single = { Left = "key" Right = Key }
+	} }
+
+} }
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	# Can have comparison operators
+	(N N) = { Left = "holy_site_distance" Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetCharProvReligionSociety CharTargetExcludingMaybeEventTarget AnyTitle Religion ReligionGroup Province SocietyThingsWithoutThis Owner Location } }
+		Optional = { Left = "value" Right = { NnInt VariableName } }
+	} }
+	# Can have comparison operators
+	(N N) = { Left = "religion_distance" Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetCharProvReligionSociety CharTargetExcludingMaybeEventTarget AnyTitle Religion ReligionGroup Province SocietyThingsWithoutThis Owner Location } }
+		Optional = { Left = "value" Right = { NnInt VariableName } }
+	} }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	# Can have comparison operators
+	(N N) = { Left = "holy_site_distance" Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetCharProvReligionSociety CharTargetExcludingMaybeEventTarget AnyTitle Religion ReligionGroup Province SocietyThingsWithoutThis Owner Location } }
+		Optional = { Left = "value" Right = { NnInt VariableName } }
+	} }
+	# Can have comparison operators
+	(N N) = { Left = "religion_distance" Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetCharProvReligionSociety CharTargetExcludingMaybeEventTarget AnyTitle Religion ReligionGroup Province SocietyThingsWithoutThis Owner Location } }
+		Optional = { Left = "value" Right = { NnInt VariableName } }
+	} }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	# Can have comparison operators
+	(N N) = { Left = "holy_site_distance" Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetCharProvReligionSociety CharTargetExcludingMaybeEventTarget AnyTitle Religion ReligionGroup Province SocietyThingsWithoutThis Owner Location } }
+		Optional = { Left = "value" Right = { NnInt VariableName } }
+	} }
+	# Can have comparison operators
+	(N N) = { Left = "religion_distance" Right = {
+		Single = { Left = "target" Right = { MaybeEventTargetCharProvReligionSociety CharTargetExcludingMaybeEventTarget AnyTitle Religion ReligionGroup Province SocietyThingsWithoutThis Owner Location } }
+		Optional = { Left = "value" Right = { NnInt VariableName } }
+	} }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+} }
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "secret_religious_cult" Right = SocietyTrigger }
+	(N Y) = { Left = "religion_authority" Right = { NnDbl MaybeEventTargetChar } } # Can have comparison operators
+	(N Y) = { Left = "num_holy_sites_generated" Right = NnInt } # Can have comparison operators
+	(N Y) = { Left = "num_religion_provinces" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N N) = { Left = "parent_religion" Right = ReligionTrigger }
+	(N Y) = { Left = "has_pentarchy" Right = Bool }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "secret_religious_cult" Right = SocietyCommand }
+	(N N) = { Left = "parent_religion" Right = ReligionCommand }
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "secret_religious_cult" Right = SocietyTrigger }
+	(N Y) = { Left = "religion_authority" Right = { NnDbl MaybeEventTargetChar } } # Can have comparison operators
+	(N Y) = { Left = "num_holy_sites_generated" Right = NnInt } # Can have comparison operators
+	(N Y) = { Left = "num_religion_provinces" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N N) = { Left = "parent_religion" Right = ReligionTrigger }
+	(N Y) = { Left = "has_pentarchy" Right = Bool }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "secret_religious_cult" Right = SocietyCommand }
+	(N N) = { Left = "parent_religion" Right = ReligionCommand }
+} }
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "secret_religious_cult" Right = SocietyTrigger }
+	(N Y) = { Left = "religion_authority" Right = { NnDbl MaybeEventTargetChar } } # Can have comparison operators
+	(N Y) = { Left = "num_holy_sites_generated" Right = NnInt } # Can have comparison operators
+	(N Y) = { Left = "num_religion_provinces" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N N) = { Left = "parent_religion" Right = ReligionTrigger }
+	(N Y) = { Left = "has_pentarchy" Right = Bool }
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = "secret_religious_cult" Right = SocietyCommand }
+	(N N) = { Left = "parent_religion" Right = ReligionCommand }
+} }
+
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "official_crusade_recipient" Right = CharTrigger }
+	(N N) = { Left = "crusader_king" Right = CharTrigger }
+	(N N) = { Left = "crusade_target_char" Right = CharTrigger }
+	(N N) = { Left = "any_crusade_defender" Right = CharTriggerWithCount }
+
+	(Y  ) = { Left = "is_religion_crusade_target" Right = Bool }
+	(Y  ) = { Left = "uses_new_crusade" Right = Bool }
+	(Y  ) = { Left = "crusade_war_has_started" Right = Bool }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "official_crusade_recipient" Right = CharCommand }
+	(N N) = { Left = "crusader_king" Right = CharCommand }
+	(N N) = { Left = "crusade_target_char" Right = CharCommand }
+	(N N) = { Left = "any_crusade_defender" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_crusade_defender" Right = CharRandomCommand }
+
+	(Y  ) = { Left = "set_high_god_name" Right = Key }
+	(Y  ) = { Left = "lock_crusade_target" Right = Bool }
+	(Y  ) = { Left = "cancel_crusade" Right = Yes }
+	(Y  ) = { Left = "distribute_crusade_target_title" Right = Yes }
+	(Y  ) = { Left = "set_crusader_king" Right = OnlyCharTarget }
+
+	(N Y) = { Left = "add_to_crusade_gold_pot" Right = { Int VariableName } }
+	(N Y) = { Left = "add_to_crusade_prestige_pot" Right = { Int VariableName } }
+	(N Y) = { Left = "add_to_crusade_piety_pot" Right = { Int VariableName } }
+	(N Y) = { Left = "add_to_crusade_artifact_pot" Right = { Int VariableName } }
+
+	(Y  ) = { Left = "set_official_crusade_recipient" Right = { OnlyCharTarget None } }
+	(Y  ) = { Left = "set_crusade_target" Right = {
+		Single = { Left = "character" Right = OnlyCharTarget }
+		Single = { Left = "title" Right = { AnyTitle MaybeEventTargetTitle } }
+	} }
+	
+	(N Y) = { Left = "distribute_crusade_pot" Right = {
+		Optional = { Left = "amount" Right = Double }
+		Optional = { Left = "type" Right = { Literal = "gold" Literal = "prestige" Literal = "piety" Literal = "artifact" } }
+		Optional = { Left = "who" Right = MaybeEventTargetChar }
+	} }
+} }
+
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "official_crusade_recipient" Right = CharTrigger }
+	(N N) = { Left = "crusader_king" Right = CharTrigger }
+	(N N) = { Left = "crusade_target_char" Right = CharTrigger }
+	(N N) = { Left = "any_crusade_defender" Right = CharTriggerWithCount }
+
+	(Y  ) = { Left = "is_religion_crusade_target" Right = Bool }
+	(Y  ) = { Left = "uses_new_crusade" Right = Bool }
+	(Y  ) = { Left = "crusade_war_has_started" Right = Bool }
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = "official_crusade_recipient" Right = CharCommand }
+	(N N) = { Left = "crusader_king" Right = CharCommand }
+	(N N) = { Left = "crusade_target_char" Right = CharCommand }
+	(N N) = { Left = "any_crusade_defender" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_crusade_defender" Right = CharRandomCommand }
+
+	(Y  ) = { Left = "set_high_god_name" Right = Key }
+	(Y  ) = { Left = "lock_crusade_target" Right = Bool }
+	(Y  ) = { Left = "cancel_crusade" Right = Yes }
+	(Y  ) = { Left = "distribute_crusade_target_title" Right = Yes }
+	(Y  ) = { Left = "set_crusader_king" Right = OnlyCharTarget }
+
+	(N Y) = { Left = "add_to_crusade_gold_pot" Right = { Int VariableName } }
+	(N Y) = { Left = "add_to_crusade_prestige_pot" Right = { Int VariableName } }
+	(N Y) = { Left = "add_to_crusade_piety_pot" Right = { Int VariableName } }
+	(N Y) = { Left = "add_to_crusade_artifact_pot" Right = { Int VariableName } }
+
+	(Y  ) = { Left = "set_official_crusade_recipient" Right = { OnlyCharTarget None } }
+	(Y  ) = { Left = "set_crusade_target" Right = {
+		Single = { Left = "character" Right = OnlyCharTarget }
+		Single = { Left = "title" Right = { AnyTitle MaybeEventTargetTitle } }
+	} }
+	
+	(N Y) = { Left = "distribute_crusade_pot" Right = {
+		Optional = { Left = "amount" Right = Double }
+		Optional = { Left = "type" Right = { Literal = "gold" Literal = "prestige" Literal = "piety" Literal = "artifact" } }
+		Optional = { Left = "who" Right = MaybeEventTargetChar }
+	} }
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

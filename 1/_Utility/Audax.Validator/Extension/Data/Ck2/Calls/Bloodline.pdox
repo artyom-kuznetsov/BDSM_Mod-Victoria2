@@ -1,0 +1,85 @@
+
+(ContextValidator Trigger) = { Members = {
+	(N N) = { Left = "any_bloodline" Right = BloodlineTriggerWithCount }
+	(N N) = { Left = "new_bloodline" Right = BloodlineTrigger }
+
+} }
+
+(ContextValidator Command) = { Members = {
+	(N N) = { Left = "any_bloodline" Right = BloodlineMaybeLimitCommand }
+	(N N) = { Left = "random_bloodline" Right = BloodlineRandomCommand }
+	(N N) = { Left = "new_bloodline" Right = BloodlineCommand }
+
+} }
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "any_owned_bloodline" Right = BloodlineTriggerWithCount }
+	(N Y) = { Left = "is_bloodline_member_of" Right = MaybeEventTargetBloodline }
+	(N Y) = { Left = "is_bloodline_founder_of" Right = MaybeEventTargetBloodline }
+	# Removed in 3.0.1
+	#(N Y) = { Left = "is_bloodline_active" Right = MaybeEventTargetBloodline }
+	(N Y) = { Left = "shares_any_bloodline_with" Right = OnlyCharTarget }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "any_owned_bloodline" Right = BloodlineMaybeLimitCommand }
+	(N N) = { Left = "random_owned_bloodline" Right = BloodlineRandomCommand }
+
+	(N Y) = { Left = "remove_from_bloodline" Right = MaybeEventTargetBloodline }
+	(N Y) = { Left = "add_to_bloodline" Right = MaybeEventTargetBloodline }
+
+	(N Y) = { Left = "create_bloodline" Right = {
+		Single = { Left = "type" Right = BloodlineType }
+		Optional = { Left = "religion" Right = { MaybeEventTargetCharReligion Religion CharTargetExcludingMaybeEventTarget } }
+		Optional = { Left = "society" Right = SocietyThings }
+		Optional = { Left = "allow_bastards" Right = Bool }
+		Optional = { Left = "inheritance" Right = BloodlineSuccession }
+	} }
+} }
+
+(ContextValidator BloodlineTrigger) = { Members = {
+	(N Y) = { Left = "bloodline_is_active_for" Right = { MaybeEventTargetChar PrefixedCharId } }
+	(N Y) = { Left = "bloodline" Right = MaybeEventTargetBloodline }
+	(N N) = { Left = "any_bloodline_member" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_bloodline_member_including_dead" Right = CharTriggerWithCount }
+	(N N) = { Left = "founder" Right = CharTrigger }
+
+} }
+
+(ContextValidator BloodlineCommand) = { Members = {
+	(N Y) = { Left = "bloodline" Right = MaybeEventTargetBloodline }
+	(N N) = { Left = "any_bloodline_member" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_bloodline_member" Right = CharRandomCommand }
+	(N N) = { Left = "any_bloodline_member_including_dead" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "random_bloodline_member_including_dead" Right = CharRandomCommand }
+	(N N) = { Left = "founder" Right = CharCommand }
+
+	(N Y) = { Left = "propagate_bloodline_from" Right = OnlyCharTarget }
+	(Y  ) = { Left = "set_name" Right = Key }
+	(Y  ) = { Left = "set_description" Right = Key }
+	(Y  ) = { Left = "destroy_bloodline" Right = Yes }
+
+	(N Y) = { Left = "remove_bloodline_member" Right = MaybeEventTargetChar }
+	(N Y) = { Left = "add_bloodline_member" Right = MaybeEventTargetChar }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+
+{% set AllScopes = ctx.calls.AllScopes %}
+
+{% for scope in AllScopes %}
+(ContextValidator {{scope}}Trigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = {{scope}}Trigger }
+	(N N) = { Left = "hidden_tooltip" Right = {{scope}}HiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = {{scope}}Trigger }
+} }
+(ContextValidator {{scope}}Command) = { Members = {
+	(N N) = { Left = "tooltip" Right = {{scope}}Command }
+	(N N) = { Left = "hidden_tooltip" Right = {{scope}}HiddenCommandTooltip }
+} }
+
+(Type {{scope}}HiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = {{scope}}Command
+}
+
+(Type {{scope}}HiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = {{scope}}Trigger
+}
+
+(Type {{scope}}HiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = {{scope}}Command
+}
+
+(ContextValidator {{scope}}Trigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = {{scope}}Trigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = {{scope}}Trigger }
+		Inherits = {{scope}}Trigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = {{scope}}Trigger }
+			Inherits = {{scope}}Trigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = {{scope}}Trigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator {{scope}}Command) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = {{scope}}Command
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = {{scope}}HiddenEffect }
+} }
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+(ContextValidator Trigger) = { Members = {
+	(N Y) = { Left = "is_religion_enabled" Right = Religion }
+	(N Y) = { Left = "religion_years" Right = { Single = { Left = { Type = Religion } Right = PInt } } }
+
+} }
+
+(ContextValidator ProvinceTrigger) = { Members = {
+	(Y  ) = { Left = "has_owner_religion" Right = Bool }
+	(A Y) = { Left = "religion" Right = { Religion } }
+	(N Y) = { Left = "religion" Right = { MaybeEventTargetCountryProvince Owner Controller Emperor Secondary VariableOrNewVariable } }
+	(A Y) = { Left = "religion_group" Right = { ReligionGroup } }
+	(N Y) = { Left = "religion_group" Right = { MaybeEventTargetCountryProvince Controller Owner VariableOrNewVariable } }
+	
+} }
+
+(ContextValidator CountryTrigger) = { Members = {
+	(A Y) = { Left = "dominant_religion" Right = { Religion MaybeEventTargetCountry Secondary Capital VariableOrNewVariable } }
+	(A Y) = { Left = "religion" Right = { Religion } }
+	(N Y) = { Left = "religion" Right = { MaybeEventTargetCountryProvince Emperor Owner Secondary VariableOrNewVariable } }
+	(A Y) = { Left = "religion_group" Right = { ReligionGroup } }
+	(N Y) = { Left = "religion_group" Right = { MaybeEventTargetCountryProvince Tag Emperor VariableOrNewVariable } } # UNTESTED Tag
+	
+	(N Y) = { Left = "num_of_religion" Right = {
+		Single = { Left = "religion" Right = { Religion Secondary } }
+		Single = { Left = "value" Right = Double }
+	} }
+	(Y  ) = { Left = "tolerance_to_this" Right = Int }
+
+} }
+
+(ContextValidator Command) = { Members = {
+
+} }
+
+(ContextValidator ProvinceCommand) = { Members = {
+
+} }
+
+(ContextValidator CountryCommand) = { Members = {
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

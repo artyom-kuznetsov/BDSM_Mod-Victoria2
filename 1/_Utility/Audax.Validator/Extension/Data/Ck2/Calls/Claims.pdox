@@ -1,0 +1,67 @@
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "any_claim" Right = TitleTriggerWithCount }
+	
+	(N Y) = { Left = "num_of_claims" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "has_strong_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "has_weak_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "has_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "has_strong_pressed_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "has_weak_pressed_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "has_pressed_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "total_claims" Right = { # Can have comparison operators so can't dedup RHS fully
+		Single = { Left = "who" Right = { OnlyCharTarget } }
+		Optional = { Left = "strong" Right = Bool }
+		Single = { Left = "value" Right = { NnInt VariableName } }
+	} }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "claimed_by" Right = OnlyCharTarget }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "random_claim" Right = TitleRandomCommand }
+	(N N) = { Left = "any_claim" Right = TitleMaybeLimitCommand }
+	
+	# NOTE: The following have MaybeEventTargetTitle removed because of https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-96#post-19867947
+	# As of https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-143#post-24909447 apparently they work again
+	(N Y) = { Left = "add_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "add_pressed_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "add_weak_pressed_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "add_weak_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+	(N Y) = { Left = "remove_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget TitleThingsWithoutThis } }
+
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "add_claim" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget } }
+	(N Y) = { Left = "add_pressed_claim" Right = OnlyCharTarget }
+	(N Y) = { Left = "add_weak_pressed_claim" Right = OnlyCharTarget }
+	(N Y) = { Left = "add_weak_claim" Right = MaybeEventTargetChar }
+	(N Y) = { Left = "remove_claim" Right = OnlyCharTarget }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

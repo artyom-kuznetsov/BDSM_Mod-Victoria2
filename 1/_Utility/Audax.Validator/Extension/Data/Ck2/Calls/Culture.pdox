@@ -1,0 +1,126 @@
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "num_culture_provinces" Right =  { NnInt VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator CharCommand) = { Members = {
+} }
+
+(ContextValidator CultureTrigger) = { Members = {
+	(N Y) = { Left = "num_culture_provinces" Right =  { NnInt VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator CultureCommand) = { Members = {
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N Y) = { Left = "num_culture_provinces" Right =  { NnInt VariableName } } # Can have comparison operators
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+} }
+
+
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "culture_scope" Right = CultureTrigger }
+
+	(A Y) = { Left = "culture" Right = Culture }
+	(N Y) = { Left = "culture" Right = { MaybeEventTargetCharCultureProvTitle OpinionClauseDefinedTypes CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope VariousOwners } }
+	(A Y) = { Left = "conquest_culture" Right = Culture }
+	(N Y) = { Left = "conquest_culture" Right = { MaybeEventTargetCharCultureProvTitle OpinionClauseDefinedTypes CharTargetExcludingMaybeEventTarget } }
+	(A Y) = { Left = "culture_group" Right = CultureGroup }
+	(N Y) = { Left = "culture_group" Right = { MaybeEventTargetCharCultureProvTitle OpinionClauseDefinedTypes CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope VariousOwners } }
+
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "culture_scope" Right = CultureTrigger }
+	(N N) = { Left = "gfx_culture_scope" Right = CultureTrigger }
+
+	(A Y) = { Left = "culture" Right = Culture }
+	(N Y) = { Left = "culture" Right = { MaybeEventTargetCharCultureProvTitle OpinionClauseDefinedTypes CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(A Y) = { Left = "conquest_culture" Right = Culture }
+	(N Y) = { Left = "conquest_culture" Right = { MaybeEventTargetCharCultureProvTitle OpinionClauseDefinedTypes CharTargetExcludingMaybeEventTarget } }
+	(A Y) = { Left = "culture_group" Right = CultureGroup }
+	(N Y) = { Left = "culture_group" Right = { MaybeEventTargetCharCultureProvTitle OpinionClauseDefinedTypes CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(Y  ) = { Left = "has_horde_culture" Right = Bool }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	# TODO: Can you use culture-stuff here?
+	(A Y) = { Left = "culture" Right = Culture }
+	(N Y) = { Left = "culture" Right = { MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(A Y) = { Left = "conquest_culture" Right = { Culture MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget } }
+	(A Y) = { Left = "culture_group" Right = { CultureGroup MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+
+} }
+
+
+
+(ContextValidator CharCommand) = { Members = {
+	(Y  ) = { Left = "culture" Right = { Culture MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "conquest_culture" Right = { Culture MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget None } }
+	(N Y) = { Left = "reverse_culture" Right = { MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+
+} }
+
+
+
+(ContextValidator ProvCommand) = { Members = {
+	(Y  ) = { Left = "culture" Right = { Culture MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "conquest_culture" Right = { Culture MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget None } }
+	(N Y) = { Left = "reverse_culture" Right = { MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+
+} }
+
+
+
+(ContextValidator TitleCommand) = { Members = {
+	(Y  ) = { Left = "culture" Right = { Culture MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+	(N Y) = { Left = "conquest_culture" Right = { Culture MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget None } }
+	(N Y) = { Left = "reverse_culture" Right = { MaybeEventTargetCharCultureProvTitle CharTargetExcludingMaybeEventTarget AnyTitle RhsFancyScopeOptionToAny CapitalScope } }
+
+} }
+
+
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "culture_scope" Right = CultureCommand }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "culture_scope" Right = CultureCommand }
+	(N N) = { Left = "gfx_culture_scope" Right = CultureCommand }
+
+} }
+
+(ContextValidator CultureTrigger) = { Members = {
+	(Y  ) = { Left = "is_name_randomized" Right = Bool }
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

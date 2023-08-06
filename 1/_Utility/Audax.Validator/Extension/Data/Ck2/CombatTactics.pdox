@@ -1,0 +1,123 @@
+(Validator CombatTactics) = {
+	Type = Default
+	FriendlyName = "Combat Tactics"
+	(FileGroup "common\combat_tactics" "*.txt")
+	ValidatorName = CombatTactics
+}
+
+(Type CombatTactics) = {
+	(Ch Y N) = { Left = { Type = String } Right = CombatTacticDef }
+}
+
+Global = {
+(Type.Enum TacticGroup) = { Import = { (FileGroup "common\combat_tactics" "*.txt") SelectPath = "*\group\[R]" } }
+(Type.Enum Tactic) = { Import = { (FileGroup "common\combat_tactics" "*.txt") SelectPath = "*\[L]" } }
+(Type.Enum Phase) = { Values = { melee pursue skirmish } }
+}
+
+(Type CombatTacticDef) = {
+	Optional = { Left = "days" Right = NonNegInt }
+	Optional = { Left = "sprite" Right = { IconRef = GFX_combat_tactic_strip } }
+	Optional = { Left = "trigger" Right = BattleTrigger }
+	Optional = { Left = "mean_time_to_happen" Right = Mtth }
+	Optional = { Left = "siege" Right = { Defender Attacker } }
+	Optional = { Left = "group" Right = TacticGroup }
+	Optional = { Left = "change_phase_to" Right = Phase }
+	Child = { Left = "enemy" Right = EnemyClause }
+	
+	Inherits = UnitStatsModifier
+	(Ch Y N) = { Left = { Type = Unit Type = SpecialUnit } Right = Double }
+}
+
+(Type Mtth) = {
+	Single = { Left = "days" Right = NonNegInt }
+	
+	Inherits = BattleWeightBase
+}
+
+(Type MtthModifier) = {
+	Single = { Left = "factor" Right = NnDbl }
+
+	Inherits = FactorModifier
+	Inherits = BattleTrigger
+}
+
+(Type EnemyClause) = {
+	Single = { Left = "group" Right = TacticGroup }
+	Single = { Left = "factor" Right = Double }
+}
+
+(Type BattleTrigger) = {
+	ContextValidator = BattleTrigger
+	
+	Optional = { Left = "always" Right = Bool }
+}
+
+(Type TroopsInfo) = {
+	Single = { Left = "who" Right = { Type = Unit Type = SpecialUnit Literal = "troops" Literal = "light_troops" Literal = "heavy_troops" } }
+	Single = { Left = "value" Right = NnDbl }
+	Optional = { Left = "enemy" Right = Bool }
+}
+
+
+(ContextValidator BattleTrigger) = { Members = {
+	# These can have RHS comparison operators
+	(N Y) = { Left = "troops" Right = TroopsInfo }
+	(N Y) = { Left = "light_troops" Right = TroopsInfo }
+	(N Y) = { Left = "heavy_troops" Right = TroopsInfo }
+	(Y  ) = { Left = { Type = Unit Type = SpecialUnit } Right = NnDbl }
+
+} }
+
+(ContextValidator UnitTrigger) = { Members = {
+	# These can have RHS comparison operators
+	(N Y) = { Left = "troops" Right = TroopsInfo }
+	(N Y) = { Left = "light_troops" Right = TroopsInfo }
+	(N Y) = { Left = "heavy_troops" Right = TroopsInfo }
+	(Y  ) = { Left = { Type = Unit Type = SpecialUnit } Right = NnDbl }
+
+} }
+
+(ContextValidator SiegeTrigger) = { Members = {
+	# These can have RHS comparison operators
+	(N Y) = { Left = "troops" Right = TroopsInfo }
+	(N Y) = { Left = "light_troops" Right = TroopsInfo }
+	(N Y) = { Left = "heavy_troops" Right = TroopsInfo }
+	(Y  ) = { Left = { Type = Unit Type = SpecialUnit } Right = NnDbl }
+
+} }
+
+
+
+(ContextValidator BattleTrigger) = { Members = {
+	(N Y) = { Left = "days" Right = NonNegInt } # Can have comparison operators
+
+} }
+
+(ContextValidator SiegeTrigger) = { Members = {
+	(N Y) = { Left = "days" Right = NonNegInt } # Can have comparison operators
+
+} }
+
+
+(ContextValidator BattleTrigger) = {
+	Inherits = Trigger
+	Conditional = BattleTrigger
+	
+	Members = {
+		(A Y) = { Left = "flank_has_tactic" Right = Tactic }
+		(N N) = { Left = { Type = AiModifier } Right = { Int VariableName } } # Can have comparison operators
+		(Y  ) = { Left = "is_attacker" Right = Bool }
+		(A Y) = { Left = "phase" Right = Phase }
+		(Y  ) = { Left = "is_flanking" Right = Bool }
+		(Y  ) = { Left = "martial" Right = NonNegInt } # Shortcut for leader martial
+		(Y  ) = { Left = "flank_has_leader" Right = Bool }
+	}
+	
+	Scopes = {
+		CharTrigger = "leader"
+		BattleTrigger = "enemy"
+		ProvTrigger = "location"
+	}
+}
+

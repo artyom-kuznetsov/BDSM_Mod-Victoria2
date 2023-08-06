@@ -1,0 +1,371 @@
+# FromStatus[None | Country | Province]
+# Call[FromStatus; Location pointer; int id]
+
+Includes = {
+	Control
+	Misc
+	Religion
+	Scopes
+	Status
+	Territory
+}
+
+{% set ON_ACTION_COUNTRY = [
+	'on_mandate_of_heaven_gained',
+	'on_mandate_of_heaven_lost',
+	'on_dependency_gained',
+	'on_dependency_lost',
+	'on_chinese_empire_dismantled',
+	'on_russian_streltsy',
+	'on_russian_oprichnina',
+	'on_explorer_recruited',
+	'on_conquistador_recruited',
+	'on_admiral_recruited',
+	'on_general_recruited',
+	'on_leader_recruited',
+	'on_russian_sudebnik',
+	'on_death_foreign_slave_ruler',
+	'on_bi_yearly_pulse',
+	'on_battle_won_country',
+	'on_battle_lost_country',
+	'on_diplomatic_annex',
+	'on_war_lost',
+	'on_war_won',
+	'on_enforce_rebel_demands',
+	'on_integrate',
+	'on_annexed',
+	'on_colonial_reintegration',
+	'on_hre_member_true_religion',
+	'on_hre_member_false_religion',
+	'on_replace_governor',
+	'on_startup',
+	'on_refuse_tribute',
+	'on_accept_tribute',
+	'on_company_chartered',
+	'on_province_owner_change',
+	'on_battle_won_province',
+	'on_added_to_trade_company',
+	'on_removed_from_company',
+	'on_company_formed',
+	'on_company_disolved',
+	'on_battle_lost_province',
+	'on_siege_won_province',
+	'on_siege_lost_province',
+	'on_abandon_colony',
+	'on_explore_coast',
+	'on_conquistador_empty',
+	'on_conquistador_native',
+	'on_mercenary_recruited',
+	'on_regiment_recruited',
+	'on_convert_by_trade_policy',
+	'on_create_vassal',
+	'on_country_released',
+	'on_flagship_destroyed',
+	'on_flagship_captured',
+	'on_holy_order_established',
+] %}
+
+{% set ON_ACTION_PROVINCE = [
+	'on_siege_won_country',
+	'on_siege_lost_country',
+	'on_siberian_pulse',
+	'on_consecrate_patriarch',
+	'on_janissaries_raised',
+	'on_remove_pasha',
+	'on_add_pasha',
+	'on_raid_coast',
+	'on_minority_expelled',
+] %}
+
+ContextValidatorInfo = {
+	AllowThis = False # True by default
+	AllowRoot = True # False by default; when enabled allows ROOT as a synonym for THIS
+	AllowPrev = True # False by default; when enabled allows arbitrary chaining of PREV
+	EnableNamespaces = True
+	EnableEventTargets = True
+	AllowScripted = True
+	PossibleEventTargets = {
+		(TargetGroup Country)
+		(TargetGroup Country Province)
+		(TargetGroup Province)
+	}
+
+	IdSearch = {
+		(FileGroup "events" "*.txt") = {
+			Province = "province_event\id"
+			Country = "country_event\id"
+			Unit = "unit_event\id"
+		}
+		
+		EventTypes = { Country Province State Global Unit }
+	}
+	
+	ParentNoPush = {
+		"random_list"
+		"trigger_switch"
+	}
+	
+	CallSearch = {
+		(FileGroup "events" "*.txt") = {
+			Province = { SearchRoot = "province_event\option" Type = Event Id = "^\id\[R]" }
+			Country = { SearchRoot = "country_event\option" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\option" Type = Event Id = "^\id\[R]" }
+			Province = { SearchRoot = "province_event\immediate" Type = Event Id = "^\id\[R]" }
+			Country = { SearchRoot = "country_event\immediate" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\immediate" Type = Event Id = "^\id\[R]" }
+			Province = { SearchRoot = "province_event\after" Type = Event Id = "^\id\[R]" }
+			Country = { SearchRoot = "country_event\after" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\after" Type = Event Id = "^\id\[R]" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "decisions" "*.txt") = {
+			Country = "country_decisions\*\effect"
+			Country = "religion_decisions\*\effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "missions"  "*.txt") = {
+			Country = "*\*\effect"
+			#Country = "*\effect"
+			#Country = "*\immediate"
+			#Country = "*\abort_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\rebel_types" "*.txt") = {
+			None = "*\siege_won_effect"
+			None = "*\demands_accepted_effect"
+			None = "*\demands_enforced_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\new_diplomatic_actions" "*.txt") = {
+			Country = "*\on_accept"
+			Country = "*\on_decline"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\incidents" "*.txt") = {
+			None = "*\immediate_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\institutions" "*.txt") = {
+			Province = "*\on_start"
+			
+			SearchMethod = ShallowSearchAllRight
+		}
+		
+		(FileGroup "common\imperial_reforms" "*.txt") = {
+			None = "*\effect"
+			None = "*\on_effect"
+			None = "*\off_effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "tutorial" "*.txt") = {
+			None = "tutorial\page\effect"
+			
+			SearchMethod = 2
+		}
+
+		(FileGroup "common\on_actions" "*.txt") = {
+			{% for entry in ON_ACTION_COUNTRY %}
+				Country = { SearchRoot = "{{entry}}\random_events" Type = OnAction Id = "^\[L]" }
+				Country = { SearchRoot = "{{entry}}\events" Type = OnAction Id = "^\[L]" }
+			{% endfor %}
+			
+			{% for entry in ON_ACTION_PROVINCE %}
+				Province = { SearchRoot = "{{entry}}\random_events" Type = OnAction Id = "^\[L]" }
+				Province = { SearchRoot = "{{entry}}\events" Type = OnAction Id = "^\[L]" }
+			{% endfor %}
+		
+
+			# IF YOU ADD ANYTHING, ADD IN THE NEXT SECTION TOO!!!
+			
+			Unit = { SearchRoot = "on_battle_won_unit\random_events" Type = OnAction Id = "^\[L]" }
+			Unit = { SearchRoot = "on_battle_won_unit\events" Type = OnAction Id = "^\[L]" }
+			
+			Unit = { SearchRoot = "on_battle_lost_unit\random_events" Type = OnAction Id = "^\[L]" }
+			Unit = { SearchRoot = "on_battle_lost_unit\events" Type = OnAction Id = "^\[L]" }
+	
+			None = { SearchRoot = "*\random_events" Type = OnAction Id = "^\[L]" }
+			None = { SearchRoot = "*\events" Type = OnAction Id = "^\[L]" }
+
+			SearchMethod = 3
+		}
+		
+		(FileGroup "common\religions" "*.txt") = {
+			None = { SearchRoot = "*\*\papacy\*\effect" Type = PapalDecision Id = "^\[L]" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\on_actions" "*.txt") = {
+			{% for entry in ON_ACTION_COUNTRY %}
+				Country = { SearchRoot = "{{ entry }}" Type = OnAction Id = "^\[L]" }
+			{% endfor %}
+			{% for entry in ON_ACTION_PROVINCE %}
+				Province = { SearchRoot = "{{ entry }}" Type = OnAction Id = "^\[L]" }
+			{% endfor %}
+
+
+			
+			Unit = { SearchRoot = "on_battle_won_unit" Type = OnAction Id = "^\[L]" }
+			Unit = { SearchRoot = "on_battle_lost_unit" Type = OnAction Id = "^\[L]" }
+			
+			
+			None = "*"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\disasters" "*.txt") = {
+			None = { SearchRoot = "*\on_monthly\events" Type = Disaster Id = "^\^\[L]" }
+			None = { SearchRoot = "*\on_monthly\random_events" Type = Disaster Id = "^\^\[L]" }
+			None = { SearchRoot = "*\on_start" Type = Disaster Id = "^\[L]" }
+			None = { SearchRoot = "*\on_end" Type = Disaster Id = "^\[L]" }
+			
+			SearchMethod = 3
+		}
+		
+		(FileGroup "common\disasters" "*.txt") = {
+			None = { SearchRoot = "*\on_start_effect" Type = Disaster Id = "^\[L]" }
+		}
+		
+		Search = {
+			province_event
+			country_event
+		}
+	}
+}
+
+{% for scope in ctx.calls.AllScopes %}
+(ContextValidator {{ scope }}) = { }
+{% endfor %}
+
+(ContextValidator Trigger) = {
+	#Abstract = True
+	
+	Set = {
+		{% for scope in ctx.calls.AllScopes %}
+		{{ scope }}Trigger = {{ scope }}Trigger
+		{{ scope }} = {{ scope }}
+		{% endfor %}
+		
+		Trigger = Trigger
+	}
+}
+
+{% for scope in ctx.calls.AllScopes %}
+
+Global = {
+(Type {{ scope }}Trigger) = {
+	ContextValidator = {{ scope }}Trigger
+}
+}
+
+(ContextValidator {{ scope }}Trigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = {{ scope }}Trigger
+	Conditional = {{ scope }}Trigger
+}
+
+{% endfor %}
+
+(ContextValidator Command) = {
+	#Abstract = True
+	
+	Set = {
+		{% for scope in ctx.calls.AllScopes %}
+		{{ scope }}Trigger = {{ scope }}Trigger
+		{{ scope }}Command = {{ scope }}Command
+		{{ scope }} = {{ scope }}
+		{% endfor %}
+		
+		Trigger = Trigger
+		Command = Command
+	}
+}
+
+{% for scope in ctx.calls.AllScopes %}
+
+Global = {
+(Type {{ scope }}Command) = {
+	ContextValidator = {{ scope }}Command
+}
+}
+
+(ContextValidator {{ scope }}Command) = {
+	Inherits = Command
+	
+	ThisTarget = {{ scope }}Command
+}
+
+{% endfor %}
+
+Global = {
+(Type.Enum Owner) = { Values = { "owner" } }
+(Type.Enum Controller) = { Values = { "controller" } }
+(Type.Enum Capital) = { Values = { ("capitol" If = Debug) "capital" "CAPITAL" } }
+(Type.Enum Emperor) = { Values = { "emperor" } }
+(Type.Enum Xxx) = { Values = { "xxx" "XXX" } }
+(Type.Enum Rebel) = { Values = { "REB" } }
+(Type.Enum Heretic) = { Values = { "heretic" } }
+(Type.Enum Heathen) = { Values = { "heathen" } }
+(Type.Enum Random) = { Values = { "random" } }
+(Type.Enum Yes) = { Values = { "yes" } }
+(Type.Enum Secondary) = { Values = { "secondary" } }
+(Type.Enum Enemy) = { Values = { "enemy" } }
+(Type.Enum Tribal) = { Values = { "tribal" } }
+(Type.Enum PreviousOwner) = { Values = { "previous_owner" } }
+(Type.Enum TripleDash) = { Values = { "---" } }
+(Type.Enum Any) = { Values = { "any" } }
+}
+
+
+		# ([Left Uniqueness] [Right Uniqueness])
+		# N = never has to be unique
+		# A = has to be unique only in an And clause
+		# 		Only valid in conditionals
+		#		Hence, can have duplicates in Or, Not clauses
+		# Y = always has to be unique
+		# Right can be left out only if left is Y - always must be unique
+		# Hence, it is implied that Right is also Y.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

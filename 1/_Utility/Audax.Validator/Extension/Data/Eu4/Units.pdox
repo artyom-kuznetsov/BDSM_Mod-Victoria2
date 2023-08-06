@@ -1,0 +1,133 @@
+
+(Validator Military) = {
+	Type = GroupValidator
+	FriendlyName = "Military"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\naval_doctrines" "*.txt")
+		ValidatorName = NavalDoctrinesFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\flagship_modifications" "*.txt")
+		ValidatorName = FlagshipModificationsFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\professionalism" "*.txt")
+		ValidatorName = ProfessionalismFileDef
+	}
+	
+	Validator = {
+		Type = Default
+		ValidatorName = UnitDef
+		(FileGroup "common\units" "*.txt")
+	}
+}
+
+(Type NavalDoctrinesFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = NavalDoctrinesDefinition
+		UniqueId = Left
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type NavalDoctrinesDefinition) = {
+	Optional = { Left = "can_select" Right = CountryTrigger }
+	Optional = { Left = "country_modifier" Right = CountryModifierDef }
+	Optional = { Left = "button_gfx" Right = NnInt }
+}
+
+(Type FlagshipModificationsFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = FlagshipModificationsDefinition
+		UniqueId = Left
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type FlagshipModificationsDefinition) = {
+	Optional = { Left = "base_modification" Right = Bool }
+	Optional = { Left = "trigger" Right = CountryTrigger }
+	Optional = { Left = "modifier" Right = CountryModifierDef }
+	Optional = { Left = "ai_trade_score" Right = AiPriorityBlock }
+	Optional = { Left = "ai_war_score" Right = AiPriorityBlock }
+
+}
+
+(Type AiPriorityBlock) = {
+	Optional = { Left = "factor" Right = NnDbl }
+	(Ch N Y) = { Left = "modifier" Right = AiPriorityBlockModifier }
+}
+
+(Type AiPriorityBlockModifier) = {
+	Inherits = FactorModifier
+	Optional = { Left = "factor" Right = NnDbl }
+	
+	Inherits = CountryTrigger
+	
+}
+
+(Type ProfessionalismFileDef) = {
+	(Ch Y N) = { Left = { Type = String } Right = ProfessionalismDef UniqueId = Left }
+}
+
+(Type ProfessionalismDef) = {
+	(CheckKey "*" Left IfNot = NoCheckKey)
+	
+	Optional = { Left = "hidden" Right = Bool }
+	
+	Single = { Left = "army_professionalism" Right = Double }
+	Single = { Left = "trigger" Right = CountryTrigger }
+	Single = { Left = "marker_sprite" Right = String }
+	Single = { Left = "unit_sprite_start" Right = String }
+	
+	Inherits = CountryModifierDef
+	
+	Optional = { Left = "may_build_supply_depot" Right = Bool }
+	Optional = { Left = "may_refill_garrison" Right = Bool }
+	Optional = { Left = "may_return_manpower_on_disband" Right = Bool }
+
+}
+
+(Type UnitDef) = {
+	(Ch N Y) = { Left = "unit_type" Right = TechGroup }
+	NodeSwitcher = {
+		Node = "type"
+		Switch = {
+			(LandUnitType Enum) = LandUnitDef
+			(SeaUnitType Enum) = SeaUnitDef
+		}
+	}
+	
+	Optional = { Left = "trigger" Right = CountryTrigger }
+}
+
+(Type LandUnitDef) = {
+	Single = { Left = "maneuver" Right = Int }
+	Single = { Left = "offensive_morale" Right = Int }
+	Single = { Left = "defensive_morale" Right = Int }
+	Single = { Left = "offensive_fire" Right = Int }
+	Single = { Left = "defensive_fire" Right = Int }
+	Single = { Left = "offensive_shock" Right = Int }
+	Single = { Left = "defensive_shock" Right = Int }
+}
+
+(Type SeaUnitDef) = {
+	Single = { Left = "hull_size" Right = Int }
+	Single = { Left = "base_cannons" Right = Int }
+	Single = { Left = "sail_speed" Right = Int }
+	
+	Optional = { Left = "trade_power" Right = Double }
+	Optional = { Left = "sprite_level" Right = NnInt }
+	Optional = { Left = "manpower" Right = NnDbl }
+	Optional = { Left = "sailors" Right = NnDbl }
+}

@@ -1,0 +1,5579 @@
+
+
+
+Includes = {
+	AllMisc
+	Bloodline
+	Calls
+	CharActions
+	CharBasic
+	CharCreation
+	Claims
+	Clans
+	Control
+	Culture
+	Family
+	FriendsRivals
+	Government
+	Guardianship
+	Health
+	Holdings
+	LiegeVassal
+	LoversMarriage
+	Modifiers
+	Money
+	Opinions
+	Plots
+	Province
+	Religion
+	Rulers
+	Societies
+	Tech
+	Tiers
+	TitleBasic
+	TitleTransfer
+	Tooltips
+	Traits
+	Tribal
+	Wars
+	Wonder
+}
+
+ContextValidatorInfo = {
+	AllowThis = False # True by default
+	AllowRoot = True # False by default; when enabled allows ROOT as a synonym for THIS
+	AllowFromFrom = True # False by default; when enabled allows arbitrary chaining of FROM
+	AllowPrev = True # False by default; when enabled allows arbitrary chaining of PREV
+	EnableNamespaces = True
+	EnableEventTargets = True
+	AllowNAND = True
+	AllowScripted = True
+	PossibleEventTargets = {
+		(TargetGroup Artifact)
+
+		(TargetGroup Char)
+		(TargetGroup Prov)
+		(TargetGroup Title)
+		(TargetGroup OffmapPower)
+		(TargetGroup Char OffmapPower)
+		(TargetGroup Char Prov)
+		(TargetGroup Char Society)
+		(TargetGroup Char Title)
+		(TargetGroup Prov Title)
+		(TargetGroup Char Prov Title)
+		
+		(TargetGroup Artifact Char Culture OffmapPower Prov Religion Society Title)
+		(TargetGroup Artifact Char OffmapPower Prov Society Title)
+		(TargetGroup Char Culture OffmapPower Prov Title)
+		(TargetGroup Char OffmapPower Title)
+		(TargetGroup Char OffmapPower Prov Religion Society Title)
+		(TargetGroup Char Prov Religion Society)
+		(TargetGroup Char Prov Religion Society Title)
+		(TargetGroup Char Prov Religion Title)
+		(TargetGroup Char Prov Religion)
+		(TargetGroup Char Religion Title)
+		(TargetGroup Char Religion)
+		(TargetGroup Char Religion Society)
+		
+		(TargetGroup Char Culture Prov Title)
+		(TargetGroup Char Culture Prov)
+		
+		(TargetGroup OffmapPower Title)
+	
+		(TargetGroup Society)
+		(TargetGroup Religion)
+		(TargetGroup Bloodline)
+		(TargetGroup WonderBuilding)
+		(TargetGroup WonderUpgrade)
+	}
+	
+	NoPush = {
+		"if" "IF" "limit" "not" "NOT" "and" "AND" "or" "OR" "nor" "NOR" "nand" "NAND"
+		"else" "ELSE"
+		# Per richvh, post 1060: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-53#post-17234153
+		"war"
+		# http://forum.paradoxplaza.com/forum/showthread.php?597480-The-Validator-Find-errors-quickly-and-with-minimal-pain!&p=18197862&viewfull=1#post18197862
+		"hidden_tooltip"
+		"custom_tooltip"
+		"hidden_effect"
+		"hidden_trigger"
+		# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-93#post-19729345
+		# It mentions spawn_unit but the issue is actually random_list
+		"random_list"
+		# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-97#post-19994471
+		"random"
+		
+		# Is right??
+		"tooltip"
+		
+		# Is correct??? https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-144#post-24988147
+		#"attacker" "defender"
+		
+		"trigger_if" "trigger_else_if"	"else_if" "conditional_tooltip" "trigger_else"
+	}
+	
+	AssumesParentScope = {
+		# Originally this was in NoPush per richvh, post 1036: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-52#post-17205226
+		# However it seems this actually assumes the scope of its parent, as per
+		#	https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-103#post-20545920
+		#	https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-104#post-20554106
+		"any_war"
+	}
+	
+	ParentNoPush = {
+		"random_list"
+		"trigger_switch"
+	}
+
+	IdSearch = {
+		(FileGroup "events" "*.txt") = {
+			Char = "character_event\id"
+			LongChar = "long_character_event\id"
+			Letter = "letter_event\id"
+			Prov = "province_event\id"
+			Narrative = "narrative_event\id"
+			DiploResp = "diploresponse_event\id"
+			Unit = "unit_event\id"
+			SocietyQuest = "society_quest_event\id"
+		}
+		
+		EventTypes = {
+			LongChar Letter Narrative DiploResp SocietyQuest
+			
+			
+			Char
+			
+			
+			
+			Prov
+			
+			
+			
+			Title
+			
+			
+			
+			
+			
+			Unit
+			
+			
+			
+			Society
+			
+			
+			
+			Artifact
+			
+			
+			
+			Battle
+			
+			
+			
+			War
+			
+			
+			
+			Siege
+			
+			
+			
+			OffmapPower
+			
+			
+			
+			Religion
+			
+			
+			
+			Culture
+			
+			
+			
+			Bloodline
+			
+			
+			
+			WonderBuilding
+			
+			
+			
+			WonderUpgrade
+			
+			
+		}
+	}
+	
+	CallSearch = {
+		(FileGroup "events" "*.txt") = {
+			Char = { SearchRoot = "character_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\option" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\option" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\option" Type = Event Id = "^\id\[R]" }
+			
+			Char = { SearchRoot = "character_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\immediate" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\immediate" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\immediate" Type = Event Id = "^\id\[R]" }
+			
+			Char = { SearchRoot = "character_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\after" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\after" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\after" Type = Event Id = "^\id\[R]" }
+			
+			Char = { SearchRoot = "character_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "history\characters" "*.txt") = {
+			Char = { SearchRoot = "*\*\effect" Type = CharacterHistory Id = "^\^\[L]" }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\landed_titles" "*.txt") = {
+			Char = { SearchRoot = "*\*" Type = LandedTitleCall Id = "^\^\[L]" }
+			SearchMethod = 2
+		}
+
+		(FileGroup "common\objectives" "*.txt") = {
+			None = "*"
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\minor_titles" "*.txt") = {
+			Char = { SearchRoot = "*\gain_effect" Type = MinorTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\lose_effect" Type = MinorTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\death_effect" Type = MinorTitle Id = "^\[L]" FromScope = Char }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\religious_titles" "*.txt") = {
+			Char = { SearchRoot = "*\gain_effect" Type = ReligiousTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\lose_effect" Type = ReligiousTitle Id = "^\[L]" FromScope = Char }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\alternate_start" "*.txt") = {
+			None = { SearchRoot = "*\*\effect" Type = AlternateStart Id = "^\[L]" }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\job_titles" "*.txt") = {
+			Char = { SearchRoot = "*\gain_effect" Type = JobTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\lose_effect" Type = JobTitle Id = "^\[L]" FromScope = Char }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\cb_types" "*.txt") = {
+			Char = { SearchRoot = "*\on_add" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_add_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_add_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_success" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_success_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_success_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_fail" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_fail_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_fail_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_reverse_demand" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_reverse_demand_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_reverse_demand_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_attacker_leader_death" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_defender_leader_death" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			None = { SearchRoot = "*\on_thirdparty_death" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_invalidation" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\scripted_effects" "*.txt") = {
+			
+			Char = { SearchRoot = "pledge_crusade_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			Char = { SearchRoot = "unpledge_crusade_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			Char = { SearchRoot = "defender_pledge_crusade_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			Char = { SearchRoot = "defender_unpledge_crusade_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			Char = { SearchRoot = "contribute_to_crusade_pot_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			Char = { SearchRoot = "select_crusade_receiver_stance_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			Char = { SearchRoot = "crusade_give_artifact_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			Char = { SearchRoot = "rename_character_effect" Type = HardcodedScriptedEffect Id = "[L]" }
+			
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "decisions" "*.txt") = {
+			Char = "decisions\*\effect"
+			Char = { SearchRoot = "targetted_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "targeted_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "offmap_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = "plot_decisions\*\effect"
+			Char = "vassal_decisions\*\effect"
+			Char = { SearchRoot = "title_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "trade_post_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "fort_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "settlement_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "society_decisions\*\effect" Type = Decision Id = "^\[L]" }
+			Title = { SearchRoot = "hospital_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\disease" "*.txt") = {
+			None = "*\on_province_infection"
+			None = "*\yearly_province_pulse"
+			None = "*\on_character_infection"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\laws" "*.txt") = {
+			None = "de_jure_laws\*\effect"
+			None = "laws\*\effect"
+			None = "gender_laws\*\effect"
+			Title = "succession_laws\*\effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "tutorial" "*.txt") = {
+			None = "tutorial\page\effect"
+			
+			SearchMethod = 2
+		}
+				None = { SearchRoot = "*\on_thirdparty_death" Type = CasusBelli Id = "^\[L]" }
+	
+		(FileGroup "common\on_actions" "*.txt") = {
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_law_vote_passed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_law_vote_failed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_society_bi_yearly_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_marriage\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_betrothal\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_divorce\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_feud_started\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_feud_ended\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_battle_won_owner\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_battle_lost_owner\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_become_imprisoned_any_reason\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_tyranny_gained\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_absorb_clan_attempted_started_war\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_split_clan_attempted_started_war\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_war_ended_defeat\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_war_ended_whitepeace\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_war_ended_victory\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_war_ended_invalid\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_war_started\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_failed_assassination\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_failed_assassination_disc\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_assassination\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_assassination_disc\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_bastard_birth\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_pregnancy\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_bastard_pregnancy\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_avoided_imprison_started_war\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_became_imprisoned\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_avoided_imprison_fled_country\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_released_from_prison\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_executed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_exiled\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_prepared_invasion_monthly\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_prepared_invasion_expires\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_prepared_invasion_aborts\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_forced_consort\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_chronicle_owner_change\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_elective_gavelkind_succession\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_rel_elector_chosen\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_rel_head_chosen\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_crusade_monthly\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_crusade_failure\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_crusade_success\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_crusade_invalid\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "councilor_on_approve_law\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_siege_over\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_approve_de_jure_law\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_approve_law\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_siege_over_winner\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_siege_over_loc_chars\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_siege_won_leader\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_siege_lost_leader\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_settlement_construction_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_settlement_construction_completed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_holding_building_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_crusade_creation\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_create_title\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_settlement_looted\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_loot_settlement\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_switch_society_interest\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_society_rank_up\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_society_rank_down\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_join_society\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_leave_society\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_ask_to_join_society\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_kicked_from_society\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_character_stop_showing_interest\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_society_created\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_society_destroyed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_society_progress_zero\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Society = { SearchRoot = "on_society_progress_full\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "GRANT_LANDED_TITLE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "REVOKE_TITLE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "REVOKE_TITLE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SPLIT_CLAN_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SPLIT_CLAN_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "GRANT_VICE_ROYALTY_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "DEMAND_RELIGIOUS_CONVERSION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "DEMAND_RELIGIOUS_CONVERSION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_PEACE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_PEACE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SEND_GIFT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SEND_GIFT_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_MONEY_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_MONEY_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_CLAIM_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_CLAIM_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "NOMINATE_BISHOP_TO_POPE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "NOMINATE_BISHOP_TO_POPE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_VASSALIZATION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_VASSALIZATION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ARRANGE_BETROTHAL_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ARRANGE_BETROTHAL_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ARRANGE_SUCC_BETROTHAL_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ARRANGE_SUCC_BETROTHAL_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_SUCCESSION_MARRIGE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_SUCCESSION_MARRIGE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_MARRIGE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_MARRIGE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RANSOM_CHARACTER_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RANSOM_CHARACTER_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "EDUCATE_CHARACTER_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "EDUCATE_CHARACTER_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ABANDON_AMBITION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ABANDON_AMBITION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "STOP_BACKING_AMBITION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "STOP_BACKING_AMBITION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "JOIN_AMBITION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "JOIN_AMBITION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "GRANT_LANDED_TITLE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "APPOINT_TO_OFFICE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "APPOINT_TO_OFFICE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_INVASION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_INVASION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_DIVORCE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_DIVORCE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_EXCOMMUNICATION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_EXCOMMUNICATION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "CALL_ALLY_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "CALL_ALLY_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "DECLARE_WAR_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RETRACT_VASSAL_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RETRACT_VASSAL_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "INVITE_TO_COURT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "INVITE_TO_COURT_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_VASSALIZATION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_VASSALIZATION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_LIFT_EXCOMMUNICATION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_LIFT_EXCOMMUNICATION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_RANSOM_CHARACTER_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_RANSOM_CHARACTER_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SETTLE_ADVENTURER_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SETTLE_ADVENTURER_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_JOIN_WAR_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_JOIN_WAR_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_EMBARGO_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_EMBARGO_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "MAKE_CONSORT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "MAKE_CONSORT_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ABSORB_CLAN_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ABSORB_CLAN_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORM_BLOOD_OATH_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORM_BLOOD_OATH_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SETTLE_FEUD_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SETTLE_FEUD_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORM_ALLIANCE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORM_ALLIANCE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "DISSOLVE_ALLIANCE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "DISSOLVE_ALLIANCE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "BUY_FAVOR_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "BUY_FAVOR_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "REQUEST_SUPPORT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "REQUEST_SUPPORT_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORM_NON_AGGRESSION_PACT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORM_NON_AGGRESSION_PACT_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_COUNCIL_POSITION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_COUNCIL_POSITION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_REALM_PEACE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_REALM_PEACE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORCE_JOIN_FACTION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "FORCE_JOIN_FACTION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_JOIN_AMBITION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_JOIN_AMBITION_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "OFFER_CONSORT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "GIVE_ARTIFACT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_CRUSADE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_FOR_CRUSADE_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_DECLARE_WAR_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASK_TO_DECLARE_WAR_INTERACTION_DECLINE_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "APPOINT_COMMANDER_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "ASSIGN_VOTER_TITLE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "AWARD_HONORARY_TITLE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "BREAK_BETROTHAL_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "CALL_IN_FAVOR_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "CALL_IN_FAVOR_SUCCESSION_VOTE_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "CHANGE_CRUSADE_TARGET_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "DISMISS_CONSORT_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "DIVORCE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "EXECUTE_IMPRISONED_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "EXILE_IMPRISONED_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "IMPRISON_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "LEAVE_COALITION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "PREPARE_INVASION_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RELEASE_FROM_PRISON_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RELEASE_VASSAL_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "REPLACE_MERCENARY_CAPTAIN_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RESIGN_AS_COMMANDER_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RESIGN_COMMANDER_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "RESIGN_FROM_OFFICE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "REVOKE_HONORARY_TITLE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "REVOKE_VOTER_TITLE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "SEND_ASSASSIN_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "START_COALITION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "STOP_ENFORCE_PEACE_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "TRANSFER_VASSAL_INTERACTION_ACCEPT_EVENT\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_battle_lost_leader\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_major_battle_lost_leader\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_battle_won_leader\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_major_battle_won_leader\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_battle_lost\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_major_battle_lost\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_battle_won\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_major_battle_won\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_combat_pulse\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_siege_pulse\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_vassal_accepts_religious_conversion\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_mercenary_captain_replacement\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_host_change\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_employer_change\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_combat_starting\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_excommunicate_interaction\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_rebel_revolt\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_province_major_modifier\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_outbreak\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_offmap_governor_changed\*" Type = OnAction Id = "^\[L]" FromScope = OffmapPower  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_offmap_ruler_changed\*" Type = OnAction Id = "^\[L]" FromScope = OffmapPower  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			OffmapPower = { SearchRoot = "on_offmap_monthly_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			OffmapPower = { SearchRoot = "on_offmap_yearly_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			OffmapPower = { SearchRoot = "on_offmap_policy_changed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			OffmapPower = { SearchRoot = "on_offmap_status_changed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_navy_returns_with_loot\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_defect_from_rebels\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_loot_province\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_over_winner_fort\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_over_winner_trade_post\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_won_leader_fort\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_won_leader_trade_post\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_lost_leader_fort\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_lost_leader_trade_post\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_over_loc_chars_fort\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_siege_over_loc_chars_trade_post\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_defect_to_rebels\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_trade_post_construction_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_fort_construction_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_hospital_construction_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_trade_post_construction_completed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_fort_construction_completed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Prov = { SearchRoot = "on_hospital_construction_completed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_new_holder\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_new_holder_inheritance\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Title = { SearchRoot = "on_new_holder_usurpation\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_childhood_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_adolescence_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_startup\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_yearly_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_bi_yearly_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_five_year_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_decade_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_yearly_childhood_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_focus_pulse\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_birth\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_adulthood\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_adolescence\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_post_birth\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_death\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_merc_rampage\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_merc_leave\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_merc_turn_coat_to\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_merc_turn_coat_from\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_holy_order_leave\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_letter_event_message\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_character_event_message\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_warleader_death\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_reform_religion\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_become_doge\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_unlanded\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_create_chronicle_if_empty\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_chronicle_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_acquire_nickname\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_over_vassal_limit_succession\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_blood_brother_death\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_ai_end_raid\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_mercenary_hired\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_mercenary_dismissed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_enforce_peace\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_enforce_peace_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_enforce_peace_six_vassals\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_player_mercenary_income\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_focus_selected\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_quest_success\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_quest_failure\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_eu4_conversion_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_eu4_conversion_done\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_tyranny_gained_tyrant_only\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_alternate_start\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_bloodline_renamed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_artifact_renamed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_province_renamed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_title_renamed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_character_renamed\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_unpledge_crusade_defense\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_unpledge_crusade_participation\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_pledge_crusade_defense\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_pledge_crusade_participation\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_crusade_canceled\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_crusade_launches\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_crusade_preparation_starts\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_command_sub_unit\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_command_unit\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_unit_entering_province\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			None = { SearchRoot = "on_post_birth_stillbirth\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_loot_start\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_stage_loot_finish\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_stage_loot_start\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_restore_start\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_restore_finish\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_destroyed\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_stage_finish\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_construction_start\*" Type = OnAction Id = "^\[L]" FromScope = Prov  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderUpgrade = { SearchRoot = "on_wonder_upgrade_destroyed\*" Type = OnAction Id = "^\[L]" FromScope = WonderBuilding FromFromScope = Prov }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderUpgrade = { SearchRoot = "on_wonder_upgrade_finish\*" Type = OnAction Id = "^\[L]" FromScope = WonderBuilding FromFromScope = Prov }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderUpgrade = { SearchRoot = "on_wonder_upgrade_start\*" Type = OnAction Id = "^\[L]" FromScope = WonderBuilding FromFromScope = Prov }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderUpgrade = { SearchRoot = "on_wonder_renamed\*" Type = OnAction Id = "^\[L]" FromScope = WonderBuilding FromFromScope = Prov }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_crusade_target_changes\*" Type = OnAction Id = "^\[L]" FromScope = Title FromFromScope = Char }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_entering_port\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Religion = { SearchRoot = "on_county_religion_change\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_character_convert_culture\*" Type = OnAction Id = "^\[L]" FromScope = Culture  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_character_convert_religion\*" Type = OnAction Id = "^\[L]" FromScope = Religion  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Artifact = { SearchRoot = "on_artifact_inheritance\*" Type = OnAction Id = "^\[L]" FromScope = Char  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_revoke_attempted_started_war\*" Type = OnAction Id = "^\[L]" FromScope = Title  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_retract_vassal_attempted_started_war\*" Type = OnAction Id = "^\[L]" FromScope = Title  }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Religion = { SearchRoot = "on_character_convert_secret_religion\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Char = { SearchRoot = "on_society_failed_to_find_new_leader\*" Type = OnAction Id = "^\[L]"   }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			WonderBuilding = { SearchRoot = "on_wonder_owner_change\*" Type = OnAction Id = "^\[L]" FromScope = Char FromFromScope = Prov }
+
+	
+		
+	
+	
+	
+		
+	
+	
+	
+		
+	
+	
+			Religion = { SearchRoot = "on_heresy_takeover\*" Type = OnAction Id = "^\[L]" FromScope = Religion  }
+
+			
+			SearchMethod = 3
+		}
+		
+		Search = {
+			character_event
+			long_character_event
+			letter_event
+			province_event
+			narrative_event
+			diploresponse_event
+			unit_event
+			repeat_event
+			society_quest_event
+		}
+	}
+}
+
+
+(ContextValidator Char) = { }
+
+(ContextValidator Prov) = { }
+
+(ContextValidator Title) = { }
+
+(ContextValidator Global) = { }
+
+(ContextValidator Unit) = { }
+
+(ContextValidator Society) = { }
+
+(ContextValidator Artifact) = { }
+
+(ContextValidator Battle) = { }
+
+(ContextValidator War) = { }
+
+(ContextValidator Siege) = { }
+
+(ContextValidator OffmapPower) = { }
+
+(ContextValidator Religion) = { }
+
+(ContextValidator Culture) = { }
+
+(ContextValidator Bloodline) = { }
+
+(ContextValidator WonderBuilding) = { }
+
+(ContextValidator WonderUpgrade) = { }
+
+(ContextValidator None) = { }
+(ContextValidator Letter) = { }
+(ContextValidator Narrative) = { }
+(ContextValidator DiploResp) = { }
+(ContextValidator SocietyQuest) = { }
+
+(ContextValidator Trigger) = {
+	Abstract = True
+	
+	Set = {
+		
+		CharTrigger = CharTrigger
+		Char = Char
+		
+		ProvTrigger = ProvTrigger
+		Prov = Prov
+		
+		TitleTrigger = TitleTrigger
+		Title = Title
+		
+		GlobalTrigger = GlobalTrigger
+		Global = Global
+		
+		UnitTrigger = UnitTrigger
+		Unit = Unit
+		
+		SocietyTrigger = SocietyTrigger
+		Society = Society
+		
+		ArtifactTrigger = ArtifactTrigger
+		Artifact = Artifact
+		
+		BattleTrigger = BattleTrigger
+		Battle = Battle
+		
+		WarTrigger = WarTrigger
+		War = War
+		
+		SiegeTrigger = SiegeTrigger
+		Siege = Siege
+		
+		OffmapPowerTrigger = OffmapPowerTrigger
+		OffmapPower = OffmapPower
+		
+		ReligionTrigger = ReligionTrigger
+		Religion = Religion
+		
+		CultureTrigger = CultureTrigger
+		Culture = Culture
+		
+		BloodlineTrigger = BloodlineTrigger
+		Bloodline = Bloodline
+		
+		WonderBuildingTrigger = WonderBuildingTrigger
+		WonderBuilding = WonderBuilding
+		
+		WonderUpgradeTrigger = WonderUpgradeTrigger
+		WonderUpgrade = WonderUpgrade
+		
+		
+		Trigger = Trigger
+		
+		None = None
+		Letter = Letter
+		Narrative = Narrative
+		DiploResp = DiploResp
+	}
+}
+
+
+Global = {
+(Type CharTrigger) = {
+	ContextValidator = CharTrigger
+}
+}
+
+(ContextValidator CharTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = CharTrigger
+	Conditional = CharTrigger
+	BaseType = Char
+}
+
+Global = {
+(Type ProvTrigger) = {
+	ContextValidator = ProvTrigger
+}
+}
+
+(ContextValidator ProvTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = ProvTrigger
+	Conditional = ProvTrigger
+	BaseType = Prov
+}
+
+Global = {
+(Type TitleTrigger) = {
+	ContextValidator = TitleTrigger
+}
+}
+
+(ContextValidator TitleTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = TitleTrigger
+	Conditional = TitleTrigger
+	BaseType = Title
+}
+
+Global = {
+(Type GlobalTrigger) = {
+	ContextValidator = GlobalTrigger
+}
+}
+
+(ContextValidator GlobalTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = GlobalTrigger
+	Conditional = GlobalTrigger
+	BaseType = Global
+}
+
+Global = {
+(Type UnitTrigger) = {
+	ContextValidator = UnitTrigger
+}
+}
+
+(ContextValidator UnitTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = UnitTrigger
+	Conditional = UnitTrigger
+	BaseType = Unit
+}
+
+Global = {
+(Type SocietyTrigger) = {
+	ContextValidator = SocietyTrigger
+}
+}
+
+(ContextValidator SocietyTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = SocietyTrigger
+	Conditional = SocietyTrigger
+	BaseType = Society
+}
+
+Global = {
+(Type ArtifactTrigger) = {
+	ContextValidator = ArtifactTrigger
+}
+}
+
+(ContextValidator ArtifactTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = ArtifactTrigger
+	Conditional = ArtifactTrigger
+	BaseType = Artifact
+}
+
+Global = {
+(Type BattleTrigger) = {
+	ContextValidator = BattleTrigger
+}
+}
+
+(ContextValidator BattleTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = BattleTrigger
+	Conditional = BattleTrigger
+	BaseType = Battle
+}
+
+Global = {
+(Type WarTrigger) = {
+	ContextValidator = WarTrigger
+}
+}
+
+(ContextValidator WarTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = WarTrigger
+	Conditional = WarTrigger
+	BaseType = War
+}
+
+Global = {
+(Type SiegeTrigger) = {
+	ContextValidator = SiegeTrigger
+}
+}
+
+(ContextValidator SiegeTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = SiegeTrigger
+	Conditional = SiegeTrigger
+	BaseType = Siege
+}
+
+Global = {
+(Type OffmapPowerTrigger) = {
+	ContextValidator = OffmapPowerTrigger
+}
+}
+
+(ContextValidator OffmapPowerTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = OffmapPowerTrigger
+	Conditional = OffmapPowerTrigger
+	BaseType = OffmapPower
+}
+
+Global = {
+(Type ReligionTrigger) = {
+	ContextValidator = ReligionTrigger
+}
+}
+
+(ContextValidator ReligionTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = ReligionTrigger
+	Conditional = ReligionTrigger
+	BaseType = Religion
+}
+
+Global = {
+(Type CultureTrigger) = {
+	ContextValidator = CultureTrigger
+}
+}
+
+(ContextValidator CultureTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = CultureTrigger
+	Conditional = CultureTrigger
+	BaseType = Culture
+}
+
+Global = {
+(Type BloodlineTrigger) = {
+	ContextValidator = BloodlineTrigger
+}
+}
+
+(ContextValidator BloodlineTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = BloodlineTrigger
+	Conditional = BloodlineTrigger
+	BaseType = Bloodline
+}
+
+Global = {
+(Type WonderBuildingTrigger) = {
+	ContextValidator = WonderBuildingTrigger
+}
+}
+
+(ContextValidator WonderBuildingTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = WonderBuildingTrigger
+	Conditional = WonderBuildingTrigger
+	BaseType = WonderBuilding
+}
+
+Global = {
+(Type WonderUpgradeTrigger) = {
+	ContextValidator = WonderUpgradeTrigger
+}
+}
+
+(ContextValidator WonderUpgradeTrigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = WonderUpgradeTrigger
+	Conditional = WonderUpgradeTrigger
+	BaseType = WonderUpgrade
+}
+
+
+(ContextValidator Command) = {
+	Abstract = True
+	
+	Set = {
+		
+		CharTrigger = CharTrigger
+		CharCommand = CharCommand
+		Char = Char
+		
+		ProvTrigger = ProvTrigger
+		ProvCommand = ProvCommand
+		Prov = Prov
+		
+		TitleTrigger = TitleTrigger
+		TitleCommand = TitleCommand
+		Title = Title
+		
+		GlobalTrigger = GlobalTrigger
+		GlobalCommand = GlobalCommand
+		Global = Global
+		
+		UnitTrigger = UnitTrigger
+		UnitCommand = UnitCommand
+		Unit = Unit
+		
+		SocietyTrigger = SocietyTrigger
+		SocietyCommand = SocietyCommand
+		Society = Society
+		
+		ArtifactTrigger = ArtifactTrigger
+		ArtifactCommand = ArtifactCommand
+		Artifact = Artifact
+		
+		BattleTrigger = BattleTrigger
+		BattleCommand = BattleCommand
+		Battle = Battle
+		
+		WarTrigger = WarTrigger
+		WarCommand = WarCommand
+		War = War
+		
+		SiegeTrigger = SiegeTrigger
+		SiegeCommand = SiegeCommand
+		Siege = Siege
+		
+		OffmapPowerTrigger = OffmapPowerTrigger
+		OffmapPowerCommand = OffmapPowerCommand
+		OffmapPower = OffmapPower
+		
+		ReligionTrigger = ReligionTrigger
+		ReligionCommand = ReligionCommand
+		Religion = Religion
+		
+		CultureTrigger = CultureTrigger
+		CultureCommand = CultureCommand
+		Culture = Culture
+		
+		BloodlineTrigger = BloodlineTrigger
+		BloodlineCommand = BloodlineCommand
+		Bloodline = Bloodline
+		
+		WonderBuildingTrigger = WonderBuildingTrigger
+		WonderBuildingCommand = WonderBuildingCommand
+		WonderBuilding = WonderBuilding
+		
+		WonderUpgradeTrigger = WonderUpgradeTrigger
+		WonderUpgradeCommand = WonderUpgradeCommand
+		WonderUpgrade = WonderUpgrade
+		
+	
+		Trigger = Trigger
+		Command = Command
+		
+		None = None
+		Letter = Letter
+		Narrative = Narrative
+		DiploResp = DiploResp
+	}
+}
+
+
+Global = {
+(Type CharCommand) = {
+	ContextValidator = CharCommand
+}
+}
+
+(ContextValidator CharCommand) = {
+	Inherits = Command
+	
+	ThisTarget = CharCommand
+	BaseType = Char
+}
+
+Global = {
+(Type ProvCommand) = {
+	ContextValidator = ProvCommand
+}
+}
+
+(ContextValidator ProvCommand) = {
+	Inherits = Command
+	
+	ThisTarget = ProvCommand
+	BaseType = Prov
+}
+
+Global = {
+(Type TitleCommand) = {
+	ContextValidator = TitleCommand
+}
+}
+
+(ContextValidator TitleCommand) = {
+	Inherits = Command
+	
+	ThisTarget = TitleCommand
+	BaseType = Title
+}
+
+Global = {
+(Type GlobalCommand) = {
+	ContextValidator = GlobalCommand
+}
+}
+
+(ContextValidator GlobalCommand) = {
+	Inherits = Command
+	
+	ThisTarget = GlobalCommand
+	BaseType = Global
+}
+
+Global = {
+(Type UnitCommand) = {
+	ContextValidator = UnitCommand
+}
+}
+
+(ContextValidator UnitCommand) = {
+	Inherits = Command
+	
+	ThisTarget = UnitCommand
+	BaseType = Unit
+}
+
+Global = {
+(Type SocietyCommand) = {
+	ContextValidator = SocietyCommand
+}
+}
+
+(ContextValidator SocietyCommand) = {
+	Inherits = Command
+	
+	ThisTarget = SocietyCommand
+	BaseType = Society
+}
+
+Global = {
+(Type ArtifactCommand) = {
+	ContextValidator = ArtifactCommand
+}
+}
+
+(ContextValidator ArtifactCommand) = {
+	Inherits = Command
+	
+	ThisTarget = ArtifactCommand
+	BaseType = Artifact
+}
+
+Global = {
+(Type BattleCommand) = {
+	ContextValidator = BattleCommand
+}
+}
+
+(ContextValidator BattleCommand) = {
+	Inherits = Command
+	
+	ThisTarget = BattleCommand
+	BaseType = Battle
+}
+
+Global = {
+(Type WarCommand) = {
+	ContextValidator = WarCommand
+}
+}
+
+(ContextValidator WarCommand) = {
+	Inherits = Command
+	
+	ThisTarget = WarCommand
+	BaseType = War
+}
+
+Global = {
+(Type SiegeCommand) = {
+	ContextValidator = SiegeCommand
+}
+}
+
+(ContextValidator SiegeCommand) = {
+	Inherits = Command
+	
+	ThisTarget = SiegeCommand
+	BaseType = Siege
+}
+
+Global = {
+(Type OffmapPowerCommand) = {
+	ContextValidator = OffmapPowerCommand
+}
+}
+
+(ContextValidator OffmapPowerCommand) = {
+	Inherits = Command
+	
+	ThisTarget = OffmapPowerCommand
+	BaseType = OffmapPower
+}
+
+Global = {
+(Type ReligionCommand) = {
+	ContextValidator = ReligionCommand
+}
+}
+
+(ContextValidator ReligionCommand) = {
+	Inherits = Command
+	
+	ThisTarget = ReligionCommand
+	BaseType = Religion
+}
+
+Global = {
+(Type CultureCommand) = {
+	ContextValidator = CultureCommand
+}
+}
+
+(ContextValidator CultureCommand) = {
+	Inherits = Command
+	
+	ThisTarget = CultureCommand
+	BaseType = Culture
+}
+
+Global = {
+(Type BloodlineCommand) = {
+	ContextValidator = BloodlineCommand
+}
+}
+
+(ContextValidator BloodlineCommand) = {
+	Inherits = Command
+	
+	ThisTarget = BloodlineCommand
+	BaseType = Bloodline
+}
+
+Global = {
+(Type WonderBuildingCommand) = {
+	ContextValidator = WonderBuildingCommand
+}
+}
+
+(ContextValidator WonderBuildingCommand) = {
+	Inherits = Command
+	
+	ThisTarget = WonderBuildingCommand
+	BaseType = WonderBuilding
+}
+
+Global = {
+(Type WonderUpgradeCommand) = {
+	ContextValidator = WonderUpgradeCommand
+}
+}
+
+(ContextValidator WonderUpgradeCommand) = {
+	Inherits = Command
+	
+	ThisTarget = WonderUpgradeCommand
+	BaseType = WonderUpgrade
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,309 @@
+(Validator Religion) = {
+	Type = GroupValidator
+	FriendlyName = "Religion"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\holy_orders" "*.txt")
+		ValidatorName = HolyOrdersFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\religious_conversions" "*.txt")
+		ValidatorName = ReligiousConversionFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\fetishist_cults" "*.txt")
+		ValidatorName = FetishistCultFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\religions" "*.txt")
+		ValidatorName = ReligionFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\personal_deities" "*.txt")
+		ValidatorName = PersonalDeityFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\church_aspects" "*.txt")
+		ValidatorName = ChurchAspectsFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\religious_reforms" "*.txt")
+		ValidatorName = ReligiousReformsFile
+	}
+}
+
+(Type HolyOrdersFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = HolyOrderDef
+		UniqueId = Left
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type HolyOrderDef) = {
+	Single = { Left = "icon" Right = SpriteType }
+	
+	Optional = { Left = "trigger" Right = ProvinceTrigger }
+	Single = { Left = "cost" Right = Int }
+	Single = { Left = "cost_type" Right = { Literal = "adm_power" Literal = "mil_power" Literal = "dip_power" } }
+	
+	Optional = { Left = "per_province_effect" Right = ProvinceCommand }
+	Optional = { Left = "per_province_abandon_effect" Right = ProvinceCommand }
+	
+	Optional = { Left = "modifier" Right = ProvinceModifierDef }
+	
+	Optional = { Left = "ai_priority" Right = AiPriorityBlock }
+}
+
+(Type AiPriorityBlock) = {
+	Optional = { Left = "factor" Right = NnDbl }
+	(Ch N Y) = { Left = "modifier" Right = AiPriorityBlockModifier }
+}
+
+(Type AiPriorityBlockModifier) = {
+	Inherits = FactorModifier
+	Optional = { Left = "factor" Right = NnDbl }
+	
+	Inherits = ProvinceTrigger
+	
+}
+
+(Type ReligiousConversionFile) = {
+	(Ch N N) = { Left = { Type = String } Right = ReligiousConversionDef UniqueId = Left }
+}
+
+(Type ReligiousConversionDef) = {
+	(CheckKey "*" Left IfNot = NoCheckKey)
+
+	Optional = { Left = "trading_policy" Right = Bool }
+	Optional = { Left = "max_distance" Right = Double }
+	Optional = { Left = "religion" Right = Religion }
+	
+	Single = { Left = "map_icon" Right = String }
+	Single = { Left = "base_conversion_speed" Right = Double }
+	Single = { Left = "target_province_weights" Right = {
+		Single = { Left = "factor" Right = Double }
+		(Ch N Y) = { Left = "modifier" Right = {
+			Single = { Left = "factor" Right = Double }
+			Inherits = ProvinceTriggerFromCountry
+		} }
+	} }
+}
+
+(Type FetishistCultFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = FetishistCultDef
+		UniqueId = Left
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type FetishistCultDef) = {
+	Inherits = CountryModifierDef
+	
+	Single = { Left = "allow" Right = CountryTrigger }
+	Single = { Left = "sprite" Right = NnInt }
+	Single = { Left = "ai_will_do" Right = AiWillDo }
+}
+
+(Type ReligionFile) = {
+	(Ch N N) = { Left = { Type = String } Right = ReligionGroupDef (CheckKey "*" Left IfNot = NoCheckKey) UniqueId = Left }
+}
+
+(Type ReligionGroupDef) = {
+	Optional = { Left = "harmonized_modifier" Right = { EventModifier StaticModifier } }
+	Optional = { Left = "defender_of_faith" Right = Bool }
+	Optional = { Left = "crusade_name" Right = Key }
+	Optional = { Left = "can_form_personal_unions" Right = Bool }
+	Optional = { Left = "center_of_religion" Right = LandProvince }
+	Optional = { Left = "flags_with_emblem_percentage" Right = Int }
+	Optional = { Left = "flag_emblem_index_range" Right = { (PdoList N 2 2) = { Type = Int } } }
+	Optional = { Left = "religious_schools" Right = { (Ch Y N) = { Left = { Type = String } Right = ReligiousSchoolDef } } }
+	Optional = { Left = "ai_will_propagate_through_trade" Right = Bool }
+
+	(Ch N N) = { Left = { Type = String } Right = ReligionDef UniqueId = Left (CheckKey "*" Left IfNot = NoCheckKey) }
+
+}
+
+(Type ReligiousSchoolDef) = {
+	(CheckKey "*" Left IfNot = NoCheckKey)
+	(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	
+	Optional = { Left = "potential_invite_scholar" Right = CountryTriggerFromCountry }
+	Optional = { Left = "can_invite_scholar" Right = CountryTriggerFromCountry }
+	Optional = { Left = "on_invite_scholar" Right = CountryCommandFromCountry }
+	Single = { Left = "picture" Right = String }
+	Optional = { Left = "invite_scholar_modifier_display" Right = { EventModifier StaticModifier } }
+	
+	Inherits = CountryModifierDef
+}
+
+(Type ReligionDef) = {
+	Single = { Left = "color" Right = AnyColor }
+	Single = { Left = "icon" Right = { IconRef = "GFX_religion_icon_strip" } }
+	
+	Optional = { Left = "harmonized_modifier" Right = { EventModifier StaticModifier } }
+	Optional = { Left = "allowed_conversion" Right = { (PdoList Y) = { Type = Religion } } }
+	Optional = { Left = "allowed_center_conversion" Right = { (PdoList Y) = { Type = Religion } } }
+	Optional = { Left = "uses_harmony" Right = Bool }
+	Optional = { Left = "uses_isolationism" Right = Bool }
+	Optional = { Left = "doom" Right = Bool }
+	Optional = { Left = "authority" Right = Bool }
+	Optional = { Left = "declare_war_in_regency" Right = Bool }
+	Optional = { Left = "religious_reforms" Right = Bool }
+	Optional = { Left = "reform_tooltip" Right = Key }
+	Optional = { Left = "annex" Right = Bool }
+	Optional = { Left = "uses_piety" Right = Bool }
+	Optional = { Left = "has_patriarchs" Right = Bool }
+	Optional = { Left = "misguided_heretic" Right = Bool }
+	Optional = { Left = "personal_deity" Right = Bool }
+	Optional = { Left = "uses_church_power" Right = Bool }
+	Optional = { Left = "uses_karma" Right = Bool }
+	Optional = { Left = "aspects" Right = { (PdoList Y) = { Type = ChurchAspect } } }
+	Optional = { Left = "aspects_name" Right = Key }
+	Optional = { Left = "fervor" Right = Bool }
+	Optional = { Left = "hre_religion" Right = Bool }
+	Optional = { Left = "uses_anglican_power" Right = Bool }
+	Optional = { Left = "hre_heretic_religion" Right = Bool }
+	Optional = { Left = "heretic" Right = { (PdoList Y) = { Type = Key } } }
+	Optional = { Left = "on_convert" Right = CountryCommand }
+	Optional = { Left = "country" Right = CountryModifierDef }
+	Optional = { Left = "country_as_secondary" Right = CountryModifierDef }
+	Optional = { Left = "province" Right = ProvinceModifierDef }
+	Optional = { Left = "date" Right = Date }
+	Optional = { Left = "will_get_center" Right = CountryTrigger }
+	Optional = { Left = "flags_with_emblem_percentage" Right = Int }
+	Optional = { Left = "flag_emblem_index_range" Right = { (PdoList N 2 2) = { Type = Int } } }
+	Optional = { Left = "can_have_secondary_religion" Right = Bool }
+	Optional = { Left = "fetishist_cult" Right = Bool }
+	Optional = { Left = "blessings" Right = { (PdoList Y) = { Type = ChurchAspect } } }
+	Optional = { Left = "holy_sites" Right = { (PdoList Y) = { Type = LandProvince } } }
+	Optional = { Left = "orthodox_icons" Right = IconList }
+	
+	Optional = { Left = "papacy" Right = {
+		Single = { Left = "papal_tag" Right = Tag }
+		Single = { Left = "election_cost" Right = Int }
+		Single = { Left = "seat_of_papacy" Right = LandProvince }
+		(Ch Y N) = {
+			Left = { Type = String }
+		(CheckKey "*" Left IfNot = NoCheckKey)
+			Right = {
+				Single = { Left = "cost" Right = Double }
+				Single = { Left = "potential" Right = CountryTrigger }
+				Single = { Left = "allow" Right = CountryTrigger }
+				Single = { Left = "effect" Right = CountryCommand }
+				Single = { Left = "ai_will_do" Right = AiWillDo }
+
+			}
+		}
+	} }
+
+}
+
+(Type IconList) = {
+	(Ch Y N) = {
+		Left = { Type = String }
+		Right = IconDef
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "desc_*" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type IconDef) = {
+	Inherits = CountryModifierDef
+	
+	Optional = { Left = "allow" Right = CountryTrigger }
+	Optional = { Left = "ai_will_do" Right = AiWillDo }
+}
+
+(Type PersonalDeityFile) = {
+	(Ch N N) = { Left = { Type = String } Right = PersonalDeityDef UniqueId = Left }
+}
+
+(Type PersonalDeityDef) = {
+	(CheckKey "*" Left IfNot = NoCheckKey)
+	(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	
+	Single = { Left = "allow" Right = CountryTrigger }
+	Single = { Left = "ai_will_do" Right = AiWillDo }
+	Single = { Left = "sprite" Right = { IconRef = "GFX_hindu_deities_strip" } }
+	
+	Inherits = CountryModifierDef
+}
+
+(Type AiWillDo) = {
+	Optional = { Left = "factor" Right = NnDbl }
+	(Ch N Y) = { Left = "modifier" Right = Modifier }
+}
+
+(Type Modifier) = {
+	Inherits = FactorModifier
+	Optional = { Left = "factor" Right = NnDbl }
+	
+	Inherits = CountryTrigger
+}
+
+(Type ChurchAspectsFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = ChurchAspectDef
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "desc_*" Left IfNot = NoCheckKey)
+		UniqueId = Left
+	}
+}
+
+(Type ChurchAspectDef) = {
+	Optional = { Left = "sprite" Right = String }
+	Optional = { Left = "potential" Right = CountryTrigger }
+	Optional = { Left = "trigger" Right = CountryTrigger }
+	Optional = { Left = "effect" Right = CountryCommand }
+	Optional = { Left = "cost" Right = Int }
+	Optional = { Left = "modifier" Right = CountryModifierDef }
+	Single = { Left = "ai_will_do" Right = AiWillDo }
+	Optional = { Left = "is_blessing" Right = Bool }
+}
+
+(Type ReligiousReformsFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = ReligiousReformGroupDef
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		UniqueId = Left
+	}
+}
+
+(Type ReligiousReformGroupDef) = {
+	Single = { Left = "trigger" Right = CountryTrigger }
+	Single = { Left = "can_buy_idea" Right = CountryTrigger }
+	Single = { Left = "ai_will_do" Right = AiWillDo }
+	
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = ReligiousReformDef
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+		UniqueId = Left
+	}
+}
+
+(Type ReligiousReformDef) = {
+	Inherits = CountryModifierDef
+}

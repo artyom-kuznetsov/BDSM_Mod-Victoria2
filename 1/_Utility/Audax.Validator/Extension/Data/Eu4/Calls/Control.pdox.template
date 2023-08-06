@@ -1,0 +1,71 @@
+(ContextValidator Trigger) = { Members = {
+	(A Y) = { Left = "start_date" Right = Date }
+
+	# Event targets
+	(N N) = { Left = { Type = TriggerEventTargetName } Right = Untyped } # Event target code will check at end once target has been resolved
+	(Y N) = { Left = { Type = ScriptedTrigger } Right =  { Bool } ScriptedTriggerCheck }
+	(N N) = { Left = { Type = ScriptedTrigger } Right =  { ScriptedArguments } ScriptedTriggerCheck }
+	(N Y) = { Left = "has_saved_event_target" Right = String EventTargetHasNonPersistent }
+} }
+
+(Type ScriptedArguments) = {
+	(Ch Y N) = { Left = { Type = String } Right = String }
+}
+
+(ContextValidator Command) = { Members = {
+	(N Y) = { Left = "custom_tooltip" Right = Key }
+	
+	# Event targets
+	(Y  ) = { Left = "clear_global_event_targets" Right = Yes }
+	(N Y) = { Left = "clear_global_event_target" Right = String EventTargetClearGlobal }
+	(N Y) = { Left = "clear_event_target" Right = String EventTargetClear }
+	(N Y) = { Left = "save_event_target_as" Right = String EventTargetSet }
+	(N Y) = { Left = "save_global_event_target_as" Right = String EventTargetSetGlobal }
+	(N N) = { Left = { Type = CommandEventTargetName } Right = Untyped } # Event target code will check at end once target has been resolved
+	(N N) = { Left = { Type = ScriptedCommand } Right = { Yes ScriptedArguments } ScriptedCommandCheck }
+} }
+
+(ContextValidator ProvinceCommand) = { Members = {
+	(N N) = { Left = "province_event" Right = {
+		Inherits = EventCallBase
+		Single = { Left = "id" Right = ProvinceEventId }
+	} }
+} }
+
+(ContextValidator CountryCommand) = { Members = {
+	(N N) = { Left = "country_event" Right = {
+		Inherits = EventCallBase
+		Single = { Left = "id" Right = { CountryEventId (ProvinceEventId IfNot = Events.StrictIdChecking) } }
+	} }
+} }
+
+
+{% for scope in ctx.calls.AllScopes %}
+
+(ContextValidator {{ scope }}Command) = { Members = {
+	(N N) = { Left = "random" Right = Random{{ scope }}Command }
+	(N N) = { Left = "random_list" Right = Random{{ scope }}List }
+	
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = {{ scope }}Trigger Command = {{ scope }}Command } } }
+} }
+
+(Type Random{{ scope }}Command) = {
+	Inherits = {{ scope }}Command
+	Single = { Left = "chance" Right = Int }
+}
+
+(Type Random{{ scope }}List) = {
+	(Ch N N) = { Left = { Type = Double } Right = {{ scope }}Command }
+}
+
+{% endfor %}
+
+
+(Type EventCallBase) = {
+	Optional = { Left = "days" Right = NnInt }
+	#Optional = { Left = "months" Right = NnInt }
+	#Optional = { Left = "years" Right = NnInt }
+	AtMostOne = { days years months }
+	Optional = { Left = "tooltip" Right = Key }
+	Optional = { Left = "random" Right = PInt }
+}

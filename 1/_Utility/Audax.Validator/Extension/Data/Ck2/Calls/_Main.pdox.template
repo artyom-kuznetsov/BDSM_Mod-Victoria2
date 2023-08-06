@@ -1,0 +1,438 @@
+
+{% set AllScopes = ctx.calls.AllScopes %}
+
+Includes = {
+	AllMisc
+	Bloodline
+	Calls
+	CharActions
+	CharBasic
+	CharCreation
+	Claims
+	Clans
+	Control
+	Culture
+	Family
+	FriendsRivals
+	Government
+	Guardianship
+	Health
+	Holdings
+	LiegeVassal
+	LoversMarriage
+	Modifiers
+	Money
+	Opinions
+	Plots
+	Province
+	Religion
+	Rulers
+	Societies
+	Tech
+	Tiers
+	TitleBasic
+	TitleTransfer
+	Tooltips
+	Traits
+	Tribal
+	Wars
+	Wonder
+}
+
+ContextValidatorInfo = {
+	AllowThis = False # True by default
+	AllowRoot = True # False by default; when enabled allows ROOT as a synonym for THIS
+	AllowFromFrom = True # False by default; when enabled allows arbitrary chaining of FROM
+	AllowPrev = True # False by default; when enabled allows arbitrary chaining of PREV
+	EnableNamespaces = True
+	EnableEventTargets = True
+	AllowNAND = True
+	AllowScripted = True
+	PossibleEventTargets = {
+		(TargetGroup Artifact)
+
+		(TargetGroup Char)
+		(TargetGroup Prov)
+		(TargetGroup Title)
+		(TargetGroup OffmapPower)
+		(TargetGroup Char OffmapPower)
+		(TargetGroup Char Prov)
+		(TargetGroup Char Society)
+		(TargetGroup Char Title)
+		(TargetGroup Prov Title)
+		(TargetGroup Char Prov Title)
+		
+		(TargetGroup Artifact Char Culture OffmapPower Prov Religion Society Title)
+		(TargetGroup Artifact Char OffmapPower Prov Society Title)
+		(TargetGroup Char Culture OffmapPower Prov Title)
+		(TargetGroup Char OffmapPower Title)
+		(TargetGroup Char OffmapPower Prov Religion Society Title)
+		(TargetGroup Char Prov Religion Society)
+		(TargetGroup Char Prov Religion Society Title)
+		(TargetGroup Char Prov Religion Title)
+		(TargetGroup Char Prov Religion)
+		(TargetGroup Char Religion Title)
+		(TargetGroup Char Religion)
+		(TargetGroup Char Religion Society)
+		
+		(TargetGroup Char Culture Prov Title)
+		(TargetGroup Char Culture Prov)
+		
+		(TargetGroup OffmapPower Title)
+	
+		(TargetGroup Society)
+		(TargetGroup Religion)
+		(TargetGroup Bloodline)
+		(TargetGroup WonderBuilding)
+		(TargetGroup WonderUpgrade)
+	}
+	
+	NoPush = {
+		"if" "IF" "limit" "not" "NOT" "and" "AND" "or" "OR" "nor" "NOR" "nand" "NAND"
+		"else" "ELSE"
+		# Per richvh, post 1060: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-53#post-17234153
+		"war"
+		# http://forum.paradoxplaza.com/forum/showthread.php?597480-The-Validator-Find-errors-quickly-and-with-minimal-pain!&p=18197862&viewfull=1#post18197862
+		"hidden_tooltip"
+		"custom_tooltip"
+		"hidden_effect"
+		"hidden_trigger"
+		# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-93#post-19729345
+		# It mentions spawn_unit but the issue is actually random_list
+		"random_list"
+		# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-97#post-19994471
+		"random"
+		
+		# Is right??
+		"tooltip"
+		
+		# Is correct??? https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-144#post-24988147
+		#"attacker" "defender"
+		
+		"trigger_if" "trigger_else_if"	"else_if" "conditional_tooltip" "trigger_else"
+	}
+	
+	AssumesParentScope = {
+		# Originally this was in NoPush per richvh, post 1036: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-52#post-17205226
+		# However it seems this actually assumes the scope of its parent, as per
+		#	https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-103#post-20545920
+		#	https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-104#post-20554106
+		"any_war"
+	}
+	
+	ParentNoPush = {
+		"random_list"
+		"trigger_switch"
+	}
+
+	IdSearch = {
+		(FileGroup "events" "*.txt") = {
+			Char = "character_event\id"
+			LongChar = "long_character_event\id"
+			Letter = "letter_event\id"
+			Prov = "province_event\id"
+			Narrative = "narrative_event\id"
+			DiploResp = "diploresponse_event\id"
+			Unit = "unit_event\id"
+			SocietyQuest = "society_quest_event\id"
+		}
+		
+		EventTypes = {
+			LongChar Letter Narrative DiploResp SocietyQuest
+			{% for scope in AllScopes %}
+			{% if scope != 'Global' %}
+			{{scope}}
+			{% endif %}
+			{% endfor %}
+		}
+	}
+	
+	CallSearch = {
+		(FileGroup "events" "*.txt") = {
+			Char = { SearchRoot = "character_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\option" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\option" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\option" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\option" Type = Event Id = "^\id\[R]" }
+			
+			Char = { SearchRoot = "character_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\immediate" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\immediate" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\immediate" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\immediate" Type = Event Id = "^\id\[R]" }
+			
+			Char = { SearchRoot = "character_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\after" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\after" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\after" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\after" Type = Event Id = "^\id\[R]" }
+			
+			Char = { SearchRoot = "character_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "long_character_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "letter_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Prov = { SearchRoot = "province_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "narrative_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "diploresponse_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Unit = { SearchRoot = "unit_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			Char = { SearchRoot = "society_quest_event\fail_trigger_effect" Type = Event Id = "^\id\[R]" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "history\characters" "*.txt") = {
+			Char = { SearchRoot = "*\*\effect" Type = CharacterHistory Id = "^\^\[L]" }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\landed_titles" "*.txt") = {
+			Char = { SearchRoot = "*\*" Type = LandedTitleCall Id = "^\^\[L]" }
+			SearchMethod = 2
+		}
+
+		(FileGroup "common\objectives" "*.txt") = {
+			None = "*"
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\minor_titles" "*.txt") = {
+			Char = { SearchRoot = "*\gain_effect" Type = MinorTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\lose_effect" Type = MinorTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\death_effect" Type = MinorTitle Id = "^\[L]" FromScope = Char }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\religious_titles" "*.txt") = {
+			Char = { SearchRoot = "*\gain_effect" Type = ReligiousTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\lose_effect" Type = ReligiousTitle Id = "^\[L]" FromScope = Char }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\alternate_start" "*.txt") = {
+			None = { SearchRoot = "*\*\effect" Type = AlternateStart Id = "^\[L]" }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\job_titles" "*.txt") = {
+			Char = { SearchRoot = "*\gain_effect" Type = JobTitle Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\lose_effect" Type = JobTitle Id = "^\[L]" FromScope = Char }
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\cb_types" "*.txt") = {
+			Char = { SearchRoot = "*\on_add" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_add_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_add_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_success" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_success_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_success_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_fail" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_fail_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_fail_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_reverse_demand" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_reverse_demand_title" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_reverse_demand_posttitle" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_attacker_leader_death" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_defender_leader_death" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			None = { SearchRoot = "*\on_thirdparty_death" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			Char = { SearchRoot = "*\on_invalidation" Type = CasusBelli Id = "^\[L]" FromScope = Char }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\scripted_effects" "*.txt") = {
+			{% for hardcoded in ctx.hardcoded_scripted.Effects %}
+			{{ hardcoded.root_scope }} = { SearchRoot = "{{ hardcoded.name }}" Type = HardcodedScriptedEffect Id = "[L]" }
+			{% endfor %}
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "decisions" "*.txt") = {
+			Char = "decisions\*\effect"
+			Char = { SearchRoot = "targetted_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "targeted_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "offmap_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = "plot_decisions\*\effect"
+			Char = "vassal_decisions\*\effect"
+			Char = { SearchRoot = "title_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "trade_post_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "fort_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "settlement_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			Char = { SearchRoot = "society_decisions\*\effect" Type = Decision Id = "^\[L]" }
+			Title = { SearchRoot = "hospital_decisions\*\effect" Type = Decision Id = "^\[L]" FromScope = Char FromFromScope = "!Ck2DecisionFromFrom" }
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\disease" "*.txt") = {
+			None = "*\on_province_infection"
+			None = "*\yearly_province_pulse"
+			None = "*\on_character_infection"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "common\laws" "*.txt") = {
+			None = "de_jure_laws\*\effect"
+			None = "laws\*\effect"
+			None = "gender_laws\*\effect"
+			Title = "succession_laws\*\effect"
+			
+			SearchMethod = 2
+		}
+		
+		(FileGroup "tutorial" "*.txt") = {
+			None = "tutorial\page\effect"
+			
+			SearchMethod = 2
+		}
+				None = { SearchRoot = "*\on_thirdparty_death" Type = CasusBelli Id = "^\[L]" }
+	
+		(FileGroup "common\on_actions" "*.txt") = {
+{% for action in ctx.on_actions.OnActions %}
+	{% if not action.from_scope %}
+		{% set lhs_scope = 'None' %}
+	{% else %}
+		{% set lhs_scope = action.from_scope %}
+	{% endif %}
+	
+	{% if action.from_from_scope %}
+		{% set from_from_handling = 'FromScope = ' + action.from_from_scope %}
+	{% else %}
+		{% set from_from_handling = '' %}
+	{% endif %}
+	
+	{% if action.from_from_from_scope %}
+		{% set from_from_from_handling = 'FromFromScope = ' + action.from_from_from_scope %}
+	{% else %}
+		{% set from_from_from_handling = '' %}
+	{% endif %}
+	
+			{{ lhs_scope }} = { SearchRoot = "{{ action.name }}\*" Type = OnAction Id = "^\[L]" {{ from_from_handling }} {{ from_from_from_handling }} }
+{% endfor %}
+			
+			SearchMethod = 3
+		}
+		
+		Search = {
+			character_event
+			long_character_event
+			letter_event
+			province_event
+			narrative_event
+			diploresponse_event
+			unit_event
+			repeat_event
+			society_quest_event
+		}
+	}
+}
+
+{% for scope in AllScopes %}
+(ContextValidator {{scope}}) = { }
+{% endfor %}
+(ContextValidator None) = { }
+(ContextValidator Letter) = { }
+(ContextValidator Narrative) = { }
+(ContextValidator DiploResp) = { }
+(ContextValidator SocietyQuest) = { }
+
+(ContextValidator Trigger) = {
+	Abstract = True
+	
+	Set = {
+		{% for scope in AllScopes %}
+		{{scope}}Trigger = {{scope}}Trigger
+		{{scope}} = {{scope}}
+		{% endfor %}
+		
+		Trigger = Trigger
+		
+		None = None
+		Letter = Letter
+		Narrative = Narrative
+		DiploResp = DiploResp
+	}
+}
+
+{% for scope in AllScopes %}
+Global = {
+(Type {{scope}}Trigger) = {
+	ContextValidator = {{scope}}Trigger
+}
+}
+
+(ContextValidator {{scope}}Trigger) = {
+	Inherits = Trigger
+	
+	ThisTarget = {{scope}}Trigger
+	Conditional = {{scope}}Trigger
+	BaseType = {{scope}}
+}
+{% endfor %}
+
+(ContextValidator Command) = {
+	Abstract = True
+	
+	Set = {
+		{% for scope in AllScopes %}
+		{{scope}}Trigger = {{scope}}Trigger
+		{{scope}}Command = {{scope}}Command
+		{{scope}} = {{scope}}
+		{% endfor %}
+	
+		Trigger = Trigger
+		Command = Command
+		
+		None = None
+		Letter = Letter
+		Narrative = Narrative
+		DiploResp = DiploResp
+	}
+}
+
+{% for scope in AllScopes %}
+Global = {
+(Type {{scope}}Command) = {
+	ContextValidator = {{scope}}Command
+}
+}
+
+(ContextValidator {{scope}}Command) = {
+	Inherits = Command
+	
+	ThisTarget = {{scope}}Command
+	BaseType = {{scope}}
+}
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

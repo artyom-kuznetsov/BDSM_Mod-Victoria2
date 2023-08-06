@@ -1,0 +1,79 @@
+
+Shared = {
+(Type CountryMissionDef) = {
+	Optional = { Left = "provinces_to_highlight" Right = CountryProvinceTrigger }
+	Optional = { Left = "ai" Right = Bool }
+	Optional = { Left = "completed_by" Right = Date }
+	Optional = { Left = "position" Right = PInt }
+	Single = { Left = "icon" Right = String }
+	Single = { Left = "trigger" Right = MissionCountryTrigger }
+	Optional = { Left = "required_missions" Right = { (PdoList Y) = { Type = Mission } } }
+	#Single = { Left = "allow" Right = MissionCountryTrigger }
+	#Optional = { Left = "abort" Right = MissionCountryTrigger }
+	#Single = { Left = "success" Right = MissionCountryTrigger }
+	#Single = { Left = "chance" Right = CountryChanceClause }
+	Single = { Left = "effect" Right = MissionCountryCommand }
+	#Optional = { Left = "immediate" Right = MissionCountryCommand }
+	#Optional = { Left = "abort_effect" Right = MissionCountryCommand }
+	#Optional = { Left = "target_provinces" Right = CountryProvinceTrigger }
+	#Optional = { Left = "target_colonial_region_list" Right = { (PdoList Y) = { Type = ColonialRegion } } }
+	#Optional = { Left = "target_provinces_list" Right = { (PdoList Y) = { Type = LandProvince } } }
+	#Optional = { Left = "target_areas_list" Right = { (PdoList Y) = { Type = Area } } }
+	
+	Optional = { Left = "ai_priority" Right = {
+		Single = { Left = "factor" Right = Double }
+	} }
+	
+	Optional = { Left = "ai_weight" Right = {
+		Single = { Left = "factor" Right = Double }
+		(Ch N Y) = { Left = "modifier" Right = {
+			Inherits = FactorModifier
+			Optional = { Left = "factor" Right = NnDbl }
+			
+			Inherits = CountryTrigger
+		} }
+	} }
+}
+}
+
+Global = {
+(Type CountryProvinceTrigger) = { ContextValidator = CountryProvinceTrigger }
+}
+(ContextValidator CountryProvinceTrigger) = {
+	Inherits = ProvinceTrigger
+	ThisTarget = Country
+}
+
+(Type MissionCountryTrigger) = { ContextValidator = MissionCountryTrigger }
+(ContextValidator MissionCountryTrigger) = {
+	Inherits = CountryTrigger
+	UseScope = "HasTargetProvince"
+	FromTarget = Country
+	Set = {
+		CountryTrigger = MissionCountryTrigger
+	}
+}
+
+(Type MissionCountryCommand) = { ContextValidator = MissionCountryCommand }
+(ContextValidator MissionCountryCommand) = {
+	Inherits = CountryCommand
+	UseScope = "HasTargetProvince"
+	FromTarget = Country
+	Set = {
+		CountryTrigger = MissionCountryTrigger
+		CountryCommand = MissionCountryCommand
+	}
+}
+
+(Type CountryChanceClause) = {
+	Optional = { Left = "factor" Right = NnDbl }
+	(Ch N Y) = { Left = "modifier" Right = CountryChanceModifier }
+}
+
+(Type CountryChanceModifier) = {
+	Inherits = FactorModifier
+	Optional = { Left = "factor" Right = NnDbl }
+	
+	Inherits = MissionCountryTrigger
+	
+}

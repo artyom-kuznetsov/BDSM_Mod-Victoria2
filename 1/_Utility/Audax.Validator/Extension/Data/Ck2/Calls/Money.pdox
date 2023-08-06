@@ -1,0 +1,66 @@
+
+
+(Type ScaledWealthTriggerClause) = {
+	Single = { Left = "value" Right = { Double } }
+	Optional = { Left = "min" Right = { Double } }
+	Optional = { Left = "max" Right = { Double } }
+}
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "scaled_wealth" Right = { Double VariableName ScaledWealthTriggerClause } } # Can have comparison operators
+	(N Y) = { Left = "wealth" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "treasury" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "gold" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "yearly_income" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "monthly_income" Right = { Double VariableName } } # Can have comparison operators
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "monthly_income" Right = { Double VariableName } } # Can have comparison operators
+	(N Y) = { Left = "yearly_income" Right = { Double VariableName } } # Can have comparison operators
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "transfer_scaled_wealth" Right = {
+		Optional = { Left = "from" Right = OnlyCharTarget }
+		Optional = { Left = "to" Right = OnlyCharTarget }
+		Single = { Left = "value" Right = { All NnDbl VariableName } }
+		Optional = { Left = "min" Right = { NnDbl } }
+		Optional = { Left = "max" Right = NnDbl }
+		OneOf = { from to }
+	} }
+	(Y  ) = { Left = "scaled_wealth" Right = { Double VariableName ScaledWealthClause } }
+	(Y  ) = { Left = "clear_wealth" Right = Yes }
+	# Per https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27225338 doesn't support char stuff (just behaves same as yes)
+	# (N Y) = { Left = "clear_wealth" Right = MaybeEventTargetChar }
+	(Y  ) = { Left = "wealth" Right = { MaybeEventTargetCharTitle CharTargetExcludingMaybeEventTarget AnyTitle Double VariableName } }
+	(Y  ) = { Left = "treasury" Right = { Double VariableName OnlyCharTarget } }
+	(Y  ) = { Left = "gold" Right = { Double VariableName } }
+
+} }
+
+(Type ScaledWealthClause) = {
+	Single = { Left = "value" Right = { All Double } }
+	Optional = { Left = "min" Right = { Double } }
+	Optional = { Left = "max" Right = { Double } }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

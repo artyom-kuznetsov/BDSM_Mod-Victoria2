@@ -1,0 +1,125 @@
+(Validator War) = {
+	Type = GroupValidator
+	FriendlyName = "War"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\peace_treaties" "*.txt")
+		ValidatorName = PeaceTreatyFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\wargoal_types" "*.txt")
+		ValidatorName = WargoalFile
+	}
+}
+
+(Type PeaceTreatyFile) = {
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = PeaceTreatyDef
+		UniqueId = Left
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+		(CheckKey "PEACE_*" Left IfNot = NoCheckKey)
+		(CheckKey "CB_ALLOWED_*" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type PeaceTreatyDef) = {
+	Optional = { Left = "category" Right = NnInt }
+	Optional = { Left = "power_projection" Right = PowerProjection }
+	Optional = { Left = "power_cost_base" Right = Double }
+	Optional = { Left = "prestige_base" Right = Double }
+	Optional = { Left = "ae_base" Right = Double }
+	Optional = { Left = "warscore_cost" Right = {
+		Optional = { Left = "all_provinces" Right = Double }
+		Optional = { Left = "no_provinces" Right = Double }
+		Optional = { Left = "owner_keeps" Right = Double }
+		Optional = { Left = "conquered" Right = Double }
+		Optional = { Left = "returned_core" Right = Double }
+		Optional = { Left = "released_nation" Right = Double }
+		Optional = { Left = "cancelled_subject" Right = Double }
+		Optional = { Left = "concede_colonial_region" Right = Double }
+	} }
+	Optional = { Left = "warscore_cap" Right = Double }
+	Optional = { Left = "requires_demand_independence" Right = Bool }
+	Optional = { Left = "is_make_subject" Right = Bool }
+	Optional = { Left = "requires_is_allowed" Right = Bool }
+	Optional = { Left = "is_visible" Right = CountryTriggerFromCountry }
+	Optional = { Left = "is_allowed" Right = CountryTriggerFromCountry }
+	Optional = { Left = "effect" Right = CountryCommandFromCountry }
+	# Probably needs more fleshing out
+	Optional = { Left = "ai_weight" Right = {
+		Single = { Left = "export_to_variable" Right = {
+			Single = { Left = "variable_name" Right = { Literal = "ai_value" } }
+			Single = { Left = "value" Right = Int }
+		} }
+		Optional = { Left = "limit" Right = CountryTriggerFromCountry }
+	} }
+}
+
+(Type WargoalFile) = {
+	(Ch Y N) = { Left = { Type = String } Right = WargoalDef }
+}
+
+(Type WargoalDef) = {
+	(CheckKey "*" Left IfNot = NoCheckKey)
+	(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	
+	Inherits = SideInformation
+	
+	Single = { Left = "type" Right = { (Type.Enum) = { Values = { take_colony take_core
+		take_border take_province take_capital defend_capital defend_country
+		naval_superiority superiority take_region blockade_ports } } } }
+		
+	Optional = { Left = "attacker" Right = SideInformation }
+	Optional = { Left = "defender" Right = SideInformation }
+	
+	Optional = { Left = "war_name" Right = Key }
+	Optional = { Left = "elector_relation" Right = { Literal = "revoke_elector" } }
+	
+}
+
+(Type SideInformation) = {
+	Optional = { Left = "badboy_factor" Right = Double }
+	Optional = { Left = "prestige_factor" Right = Double }
+	Optional = { Left = "peace_cost_factor" Right = Double }
+	Optional = { Left = "transfer_trade_cost_factor" Right = Double }
+	Optional = { Left = "dipcost_factor" Right = Double }
+	
+	(Ch Y N) = { Left = "peace_options" Right = { (PdoList Y) = { Type = PeaceOffer } } }
+	
+	Optional = { Left = "allowed_provinces_are_eligible" Right = Bool }
+	Optional = { Left = "deny_annex" Right = Bool }
+	
+	Optional = { Left = "allow_annex" Right = Bool }
+	Optional = { Left = "allow_leader_change" Right = Bool }
+	
+	Optional = { Left = "allowed_provinces" Right = WargoalAllowedProvinceTrigger }
+	Optional = { Left = "prov_desc" Right = Key }
+	Optional = { Left = "allowed_countries" Right = WargoalAllowedCountryTrigger }
+	Optional = { Left = "country_desc" Right = Key }
+	
+}
+
+(Type WargoalAllowedProvinceTrigger) = { ContextValidator = WargoalAllowedProvinceTrigger }
+
+(ContextValidator WargoalAllowedProvinceTrigger) = {
+	Inherits = ProvinceTrigger
+	ThisTarget = Country
+	FromTarget = Country
+}
+
+(Type WargoalAllowedCountryTrigger) = { ContextValidator = WargoalAllowedCountryTrigger }
+
+(ContextValidator WargoalAllowedCountryTrigger) = {
+	Inherits = CountryTrigger
+	ThisTarget = Country
+}
+
+
+
+
+
+

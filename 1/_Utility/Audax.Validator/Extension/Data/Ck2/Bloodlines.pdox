@@ -1,0 +1,23 @@
+(Validator Bloodlines) = {
+	Type = Default
+	FriendlyName = "Bloodlines"
+	(FileGroup "common\bloodlines" "*.txt")
+	ValidatorName = BloodlineFile
+}
+
+(Type BloodlineFile) = {
+	(Ch N N) = { Left = { Type = String } Right = BloodlineDef UniqueId = Left }
+}
+
+(Type BloodlineDef) = {
+	Optional = { Left = "inheritance" Right = BloodlineSuccession }
+	Optional = { Left = "matrilineal_override" Right = Bool }
+	Optional = { Left = "allow_bastards" Right = Bool }
+	Optional = { Left = "picture" Right = String }
+	Optional = { Left = "flags" Right = { (PdoList Y) = { Type = String } } }
+	Optional = { Left = "active" Right = CharTriggerFromBloodline }
+	
+	Optional = { Left = "command_modifier" Right = CommandModifierDef }
+	Inherits = CharModifier
+
+}

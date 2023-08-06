@@ -1,0 +1,25 @@
+(Validator Interface) = {
+	Type = GroupValidator
+	FriendlyName = "Interface"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "interface\portrait_properties" "*.txt")
+		ValidatorName = PortraitPropertiesFile
+	}
+}
+
+(Type PortraitPropertiesFile) = {
+	Child = { Left = { Type = NnInt } Right = PpGroup }
+
+}
+
+(Type PpGroup) = {
+	Child = { Left = { Type = NnInt } Right = PpOption }
+}
+
+(Type PpOption) = {
+	Inherits = CharFactorWeight
+	(Ch N Y) = { Left = "hide_layers" Right = { (Ch Y N) = { Left = { Type = NnInt } Right = Empty } } }
+}
+

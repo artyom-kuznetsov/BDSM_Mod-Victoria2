@@ -1,0 +1,154 @@
+
+{% for name, source, target in [
+		('realm_wonder_upgrade', 'Char', 'WonderUpgrade'),
+		('demesne_wonder', 'Char', 'WonderBuilding'),
+		('realm_wonder', 'Char', 'WonderBuilding'),
+		('wonder', '', 'WonderBuilding'),
+		('previous_wonder_owner', 'WonderBuilding', 'Char'),
+		('wonder_owner', '', 'Char'),
+		('wonder_upgrade', '', 'WonderUpgrade'),
+		('demesne_wonder_upgrade', 'Char', 'WonderUpgrade'),
+		('upgrade_on_wonder', 'WonderBuilding', 'WonderUpgrade'),
+	] %}
+{{ ctx.calls.make_any_and_random_scopes(name, source, target) }}
+{% endfor %}
+
+{% for scope in ['WonderBuilding', 'WonderUpgrade'] %}
+
+(ContextValidator {{ scope }}Trigger) = { Members = {
+	(N N) = { Left = "location" Right = ProvTrigger }
+
+	(Y  ) = { Left = "is_active" Right = Bool }
+	(N Y) = { Left = "has_wonder_upgrade" Right = WonderUpgrade }
+
+	(Y  ) = { Left = "is_building_wonder_upgrade" Right = Bool }
+
+} }
+
+(ContextValidator {{ scope }}Command) = { Members = {
+	(N N) = { Left = "location" Right = ProvCommand }
+	(Y  ) = { Left = "set_description" Right = String }
+	(Y  ) = { Left = "set_name" Right = String }
+
+} }
+
+{% endfor %}
+
+{% for scope in ['Char', 'Prov'] %}
+
+(ContextValidator {{ scope }}Trigger) = { Members = {
+	(N Y) = { Left = "num_of_wonders" Right =  { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "has_wonder_upgrade" Right = WonderUpgrade }
+	(Y  ) = { Left = "has_started_building_wonder" Right = Bool }
+	(N Y) = { Left = "has_started_building_wonder" Right = Wonder }
+} }
+
+(ContextValidator {{ scope }}Command) = { Members = {
+} }
+
+{% endfor %}
+
+(ContextValidator WonderBuildingTrigger) = { Members = {
+	(N N) = { Left = "original_wonder_owner" Right = CharTrigger }
+	(N N) = { Left = "previous_wonder_owner" Right = CharTrigger }
+	(N N) = { Left = "wonder_owner" Right = CharTrigger }
+
+	(Y  ) = { Left = "same_wonder_as" Right = MaybeEventTargetWonderBuilding }
+	(Y  ) = { Left = "is_being_restored" Right = Bool }
+	(Y  ) = { Left = "is_at_max_stage" Right = Bool }
+	(Y  ) = { Left = "has_custom_description" Right = Bool }
+	(Y  ) = { Left = "has_started_building_wonder" Right = Bool }
+	(Y  ) = { Left = "has_custom_name" Right = Bool }
+	(N Y) = { Left = "wonder_stage_age" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "wonder_stage" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "wonder_age" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "num_of_wonder_upgrades" Right = { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "is_being_looted" Right = Bool }
+	(Y  ) = { Left = "is_damaged" Right = Bool }
+	
+	(Y  ) = { Left = "has_wonder" Right = Bool }
+	(A Y) = { Left = "has_wonder" Right = Wonder }
+	(Y  ) = { Left = "is_at_lootable_stage" Right = Bool }
+
+	(Y  ) = { Left = "is_building_wonder" Right = Bool }
+	(A Y) = { Left = "is_building_wonder" Right = Wonder }
+	(A Y) = { Left = "is_building_wonder_upgrade" Right = WonderUpgrade }
+	(N Y) = { Left = "has_wonder_upgrade_flag" Right = String (LocalOp "chk" "[R]" AddChecker WonderUpgradeFlag) }
+	#(N Y) = { Left = "had_wonder_upgrade_flag" Right = WonderUpgradeFlagClause }
+} }
+
+(ContextValidator WonderBuildingCommand) = { Members = {
+	(N N) = { Left = "original_wonder_owner" Right = CharCommand }
+	(N N) = { Left = "previous_wonder_owner" Right = CharCommand }
+	(N N) = { Left = "wonder_owner" Right = CharCommand }
+
+	(Y  ) = { Left = "remove_wonder_upgrade_slots" Right = { PInt VariableName } }
+	(Y  ) = { Left = "add_wonder_upgrade_slots" Right = { PInt VariableName } }
+	(Y  ) = { Left = "add_wonder_stage" Right = PInt }
+	(Y  ) = { Left = "set_wonder_model" Right = String }
+	(Y  ) = { Left = "set_wonder_damaged" Right = Yes }
+	(N Y) = { Left = "add_wonder_upgrade" Right = WonderUpgrade }
+	(N Y) = { Left = "destroy_wonder_upgrade" Right = WonderUpgrade }
+} }
+
+(ContextValidator WonderUpgradeTrigger) = { Members = {
+	(N N) = { Left = "wonder" Right = WonderBuildingTrigger }
+	(N Y) = { Left = "wonder_upgrade" Right = MaybeEventTargetWonderUpgrade }
+	(N Y) = { Left = "wonder_upgrade_age" Right = Int } # Can have comparison operators
+
+} }
+
+(ContextValidator WonderUpgradeCommand) = { Members = {
+	(N N) = { Left = "wonder" Right = WonderBuildingCommand }
+
+	(Y N) = { Left = "destroy_wonder_upgrade" Right = Yes }
+	(N Y) = { Left = "add_wonder_upgrade" Right = Yes }
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "wonder" Right = WonderBuildingTrigger }
+	
+	(Y  ) = { Left = "has_wonder" Right = Bool }
+	(A Y) = { Left = "has_wonder" Right = Wonder }
+	(Y  ) = { Left = "is_building_wonder" Right = Bool }
+	(A Y) = { Left = "is_building_wonder" Right = Wonder }
+
+} }
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "num_of_wonder_upgrades" Right = { NnInt VariableName } } # Total across all that char owns, probably # Can have comparison operators
+	(Y  ) = { Left = "has_wonder" Right = Bool }
+	(A Y) = { Left = "has_wonder" Right = Wonder }
+	(Y  ) = { Left = "is_building_wonder" Right = Bool }
+	(Y  ) = { Left = "has_started_building_wonder_upgrade" Right = Bool }
+	(N Y) = { Left = "is_building_wonder" Right = Wonder }
+
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "wonder" Right = WonderBuildingCommand }
+	(Y  ) = { Left = "add_wonder" Right = Wonder }
+	(Y  ) = { Left = "destroy_wonder" Right = Yes }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

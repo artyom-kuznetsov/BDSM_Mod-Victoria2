@@ -1,0 +1,6543 @@
+
+
+
+# This file contains flags, if statements,
+# limits, random, THIS-stuff, variables, etc
+
+(ContextValidator Trigger) = { Members = {
+	(N N) = { Left = "check_variable" Right = CheckVar }
+	(N Y) = { Left = "is_variable_equal" Right = CheckVar }
+
+	
+	
+	(N N) = { Left = { Type = ThisChar } Right = CharTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisProv } Right = ProvTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisTitle } Right = TitleTrigger }
+	
+	
+	
+	
+	
+	(N N) = { Left = { Type = ThisUnit } Right = UnitTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisSociety } Right = SocietyTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisArtifact } Right = ArtifactTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisBattle } Right = BattleTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisWar } Right = WarTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisSiege } Right = SiegeTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisOffmapPower } Right = OffmapPowerTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisReligion } Right = ReligionTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisCulture } Right = CultureTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisBloodline } Right = BloodlineTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisWonderBuilding } Right = WonderBuildingTrigger }
+	
+	
+	
+	(N N) = { Left = { Type = ThisWonderUpgrade } Right = WonderUpgradeTrigger }
+	
+	
+
+	(Y  ) = { Left = "always" Right = Bool }
+	(N Y) = { Left = "difficulty" Right = NnInt } # comp operators
+
+	(N Y) = { Left = "year" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "month" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "real_month_of_year" Right = { NnInt VariableName } } # Can have comparison operators
+	(N Y) = { Left = "real_day_of_year" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "random" Right = { Double VariableName } }
+
+	# Event targets
+	(N N) = { Left = { Type = TriggerEventTargetName } Right = Untyped } # Event target code will check at end once target has been resolved
+	
+	(Y N) = { Left = { Type = ScriptedTrigger } Right = Bool ScriptedTriggerCheck }
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = CharTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = ProvTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = TitleTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator GlobalTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = GlobalTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator UnitTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = UnitTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = SocietyTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator ArtifactTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = ArtifactTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator BattleTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = BattleTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator WarTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = WarTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator SiegeTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = SiegeTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = OffmapPowerTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = ReligionTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator CultureTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = CultureTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator BloodlineTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = BloodlineTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator WonderBuildingTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = WonderBuildingTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+(ContextValidator WonderUpgradeTrigger) = { Members = {
+	(N N) = { Left = "calc_true_if" Right = {
+		Single = { Left = "amount" Right = { PInt VariableName } }
+		ContextValidator = {
+			Target = WonderUpgradeTrigger
+			IsOrClause = True
+			NestedOrIsCool = True
+		}
+	} }
+
+} }
+
+
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "clear_flags_with_prefix" Right = String }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N Y) = { Left = "clear_flags_with_prefix" Right = String }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "clear_flags_with_prefix" Right = String }
+} }
+
+(ContextValidator ArtifactCommand) = { Members = {
+	(N Y) = { Left = "clear_flags_with_prefix" Right = String }
+} }
+
+(ContextValidator OffmapCommand) = { Members = {
+	(N Y) = { Left = "clear_flags_with_prefix" Right = String }
+} }
+
+(ContextValidator WonderBuildingCommand) = { Members = {
+	(N Y) = { Left = "clear_flags_with_prefix" Right = String }
+} }
+
+
+
+
+
+
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker ProvFlag) }
+	(N Y) = { Left = "had_flag" Right = ProvFlagClause }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter ProvFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter ProvFlag) }
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker CharFlag) }
+	(N Y) = { Left = "had_flag" Right = CharFlagClause }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter CharFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter CharFlag) }
+} }
+
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker TitleFlag) }
+	(N Y) = { Left = "had_flag" Right = TitleFlagClause }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter TitleFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter TitleFlag) }
+} }
+
+
+(ContextValidator ArtifactTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker ArtifactFlag) }
+	(N Y) = { Left = "had_flag" Right = ArtifactFlagClause }
+} }
+
+(ContextValidator ArtifactCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter ArtifactFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter ArtifactFlag) }
+} }
+
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapFlag) }
+	(N Y) = { Left = "had_flag" Right = OffmapFlagClause }
+} }
+
+(ContextValidator OffmapPowerCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter OffmapFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter OffmapFlag) }
+} }
+
+
+(ContextValidator BloodlineTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker BloodlineFlag) }
+	(N Y) = { Left = "had_flag" Right = BloodlineFlagClause }
+} }
+
+(ContextValidator BloodlineCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter BloodlineFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter BloodlineFlag) }
+} }
+
+
+(ContextValidator CultureTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker CultureFlag) }
+	(N Y) = { Left = "had_flag" Right = CultureFlagClause }
+} }
+
+(ContextValidator CultureCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter CultureFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter CultureFlag) }
+} }
+
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker ReligionFlag) }
+	(N Y) = { Left = "had_flag" Right = ReligionFlagClause }
+} }
+
+(ContextValidator ReligionCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter ReligionFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter ReligionFlag) }
+} }
+
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker SocietyFlag) }
+	(N Y) = { Left = "had_flag" Right = SocietyFlagClause }
+} }
+
+(ContextValidator SocietyCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter SocietyFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter SocietyFlag) }
+} }
+
+
+(ContextValidator WonderBuildingTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker WonderFlag) }
+	(N Y) = { Left = "had_flag" Right = WonderFlagClause }
+} }
+
+(ContextValidator WonderBuildingCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter WonderFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter WonderFlag) }
+} }
+
+
+(ContextValidator WonderUpgradeTrigger) = { Members = {
+	(N Y) = { Left = "has_flag" Right = String (LocalOp "chk" "[R]" AddChecker WonderUpgradeFlag) }
+	(N Y) = { Left = "had_flag" Right = WonderUpgradeFlagClause }
+} }
+
+(ContextValidator WonderUpgradeCommand) = { Members = {
+	(N Y) = { Left = "set_flag" Right = String (LocalOp "set" "[R]" AddSetter WonderUpgradeFlag) }
+	(N Y) = { Left = "clr_flag" Right = String (LocalOp "clr" "[R]" AddSetter WonderUpgradeFlag) }
+} }
+
+
+
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N Y) = { Left = "has_province_flag" Right = String (LocalOp "chk" "[R]" AddChecker ProvFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_province_flag" Right = ProvFlagClause }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N Y) = { Left = "set_province_flag" Right = String (LocalOp "set" "[R]" AddSetter ProvFlag) }
+	(N Y) = { Left = "clr_province_flag" Right = String (LocalOp "clr" "[R]" AddSetter ProvFlag) }
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_dynasty_flag" Right = String (LocalOp "chk" "[R]" AddChecker DynastyFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_dynasty_flag" Right = DynastyFlagClause }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "set_dynasty_flag" Right = String (LocalOp "set" "[R]" AddSetter DynastyFlag) }
+	(N Y) = { Left = "clr_dynasty_flag" Right = String (LocalOp "clr" "[R]" AddSetter DynastyFlag) }
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_character_flag" Right = String (LocalOp "chk" "[R]" AddChecker CharFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_character_flag" Right = CharFlagClause }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "set_character_flag" Right = String (LocalOp "set" "[R]" AddSetter CharFlag) }
+	(N Y) = { Left = "clr_character_flag" Right = String (LocalOp "clr" "[R]" AddSetter CharFlag) }
+} }
+
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "has_title_flag" Right = String (LocalOp "chk" "[R]" AddChecker TitleFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_title_flag" Right = TitleFlagClause }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "set_title_flag" Right = String (LocalOp "set" "[R]" AddSetter TitleFlag) }
+	(N Y) = { Left = "clr_title_flag" Right = String (LocalOp "clr" "[R]" AddSetter TitleFlag) }
+} }
+
+
+(ContextValidator ArtifactTrigger) = { Members = {
+	(N Y) = { Left = "has_artifact_flag" Right = String (LocalOp "chk" "[R]" AddChecker ArtifactFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_artifact_flag" Right = ArtifactFlagClause }
+} }
+
+(ContextValidator ArtifactCommand) = { Members = {
+	(N Y) = { Left = "set_artifact_flag" Right = String (LocalOp "set" "[R]" AddSetter ArtifactFlag) }
+	(N Y) = { Left = "clr_artifact_flag" Right = String (LocalOp "clr" "[R]" AddSetter ArtifactFlag) }
+} }
+
+
+(ContextValidator Trigger) = { Members = {
+	(N Y) = { Left = "has_global_flag" Right = String (LocalOp "chk" "[R]" AddChecker GlobalFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_global_flag" Right = GlobalFlagClause }
+} }
+
+(ContextValidator Command) = { Members = {
+	(N Y) = { Left = "set_global_flag" Right = String (LocalOp "set" "[R]" AddSetter GlobalFlag) }
+	(N Y) = { Left = "clr_global_flag" Right = String (LocalOp "clr" "[R]" AddSetter GlobalFlag) }
+} }
+
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(N Y) = { Left = "has_offmap_tmp_flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapTmpFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_offmap_tmp_flag" Right = OffmapTmpFlagClause }
+} }
+
+(ContextValidator OffmapPowerCommand) = { Members = {
+	(N Y) = { Left = "set_offmap_tmp_flag" Right = String (LocalOp "set" "[R]" AddSetter OffmapTmpFlag) }
+	(N Y) = { Left = "clr_offmap_tmp_flag" Right = String (LocalOp "clr" "[R]" AddSetter OffmapTmpFlag) }
+} }
+
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(N Y) = { Left = "has_offmap_flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_offmap_flag" Right = OffmapFlagClause }
+} }
+
+(ContextValidator OffmapPowerCommand) = { Members = {
+	(N Y) = { Left = "set_offmap_flag" Right = String (LocalOp "set" "[R]" AddSetter OffmapFlag) }
+	(N Y) = { Left = "clr_offmap_flag" Right = String (LocalOp "clr" "[R]" AddSetter OffmapFlag) }
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_offmap_tmp_flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapTmpFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_offmap_tmp_flag" Right = OffmapTmpFlagClause }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "set_offmap_tmp_flag" Right = String (LocalOp "set" "[R]" AddSetter OffmapTmpFlag) }
+	(N Y) = { Left = "clr_offmap_tmp_flag" Right = String (LocalOp "clr" "[R]" AddSetter OffmapTmpFlag) }
+} }
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_offmap_flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_offmap_flag" Right = OffmapFlagClause }
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "set_offmap_flag" Right = String (LocalOp "set" "[R]" AddSetter OffmapFlag) }
+	(N Y) = { Left = "clr_offmap_flag" Right = String (LocalOp "clr" "[R]" AddSetter OffmapFlag) }
+} }
+
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "has_offmap_tmp_flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapTmpFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_offmap_tmp_flag" Right = OffmapTmpFlagClause }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "set_offmap_tmp_flag" Right = String (LocalOp "set" "[R]" AddSetter OffmapTmpFlag) }
+	(N Y) = { Left = "clr_offmap_tmp_flag" Right = String (LocalOp "clr" "[R]" AddSetter OffmapTmpFlag) }
+} }
+
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "has_offmap_flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_offmap_flag" Right = OffmapFlagClause }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	(N Y) = { Left = "set_offmap_flag" Right = String (LocalOp "set" "[R]" AddSetter OffmapFlag) }
+	(N Y) = { Left = "clr_offmap_flag" Right = String (LocalOp "clr" "[R]" AddSetter OffmapFlag) }
+} }
+
+
+(ContextValidator BloodlineTrigger) = { Members = {
+	(N Y) = { Left = "has_bloodline_flag" Right = String (LocalOp "chk" "[R]" AddChecker BloodlineFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_bloodline_flag" Right = BloodlineFlagClause }
+} }
+
+(ContextValidator BloodlineCommand) = { Members = {
+	(N Y) = { Left = "set_bloodline_flag" Right = String (LocalOp "set" "[R]" AddSetter BloodlineFlag) }
+	(N Y) = { Left = "clr_bloodline_flag" Right = String (LocalOp "clr" "[R]" AddSetter BloodlineFlag) }
+} }
+
+
+(ContextValidator WonderBuildingTrigger) = { Members = {
+	(N Y) = { Left = "has_wonder_flag" Right = String (LocalOp "chk" "[R]" AddChecker WonderFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_wonder_flag" Right = WonderFlagClause }
+} }
+
+(ContextValidator WonderBuildingCommand) = { Members = {
+	(N Y) = { Left = "set_wonder_flag" Right = String (LocalOp "set" "[R]" AddSetter WonderFlag) }
+	(N Y) = { Left = "clr_wonder_flag" Right = String (LocalOp "clr" "[R]" AddSetter WonderFlag) }
+} }
+
+
+(ContextValidator WonderUpgradeTrigger) = { Members = {
+	(N Y) = { Left = "has_wonder_upgrade_flag" Right = String (LocalOp "chk" "[R]" AddChecker WonderUpgradeFlag) }
+	# No dedup RHS because can have comparison ops and we don't check that
+	(N Y) = { Left = "had_wonder_upgrade_flag" Right = WonderUpgradeFlagClause }
+} }
+
+(ContextValidator WonderUpgradeCommand) = { Members = {
+	(N Y) = { Left = "set_wonder_upgrade_flag" Right = String (LocalOp "set" "[R]" AddSetter WonderUpgradeFlag) }
+	(N Y) = { Left = "clr_wonder_upgrade_flag" Right = String (LocalOp "clr" "[R]" AddSetter WonderUpgradeFlag) }
+} }
+
+
+
+
+(Type ProvFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker ProvFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type DynastyFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker DynastyFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type CharFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker CharFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type TitleFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker TitleFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type ArtifactFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker ArtifactFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type GlobalFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker GlobalFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type OffmapTmpFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapTmpFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type OffmapFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker OffmapFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type BloodlineFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker BloodlineFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type WonderFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker WonderFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type WonderUpgradeFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker WonderUpgradeFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type CultureFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker CultureFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type ReligionFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker ReligionFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+(Type SocietyFlagClause) = {
+	Single = { Left = "flag" Right = String (LocalOp "chk" "[R]" AddChecker SocietyFlag) }
+	Single = { Left = { "days" "months" "years" } Right = NnInt }
+	# May not work anymore (or never worked?): https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-105#post-20657258
+	#Optional = { Left = "random" Right = PInt }
+}
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_quest" Right = String (LocalOp "chk" "[R]" AddChecker CharQuest) }
+} }
+
+(ContextValidator Command) = { Members = {
+	(N N) = { Left = "set_variable" Right = SetVar }
+	(N N) = { Left = "change_variable" Right = ChangeVar }
+	(N N) = { Left = "multiply_variable" Right = ChangeVar }
+	(N N) = { Left = "subtract_variable" Right = ChangeVar }
+	(N N) = { Left = "divide_variable" Right = ChangeVar }
+	(N N) = { Left = "modulo_variable" Right = ChangeVar }
+
+	
+	
+	(N N) = { Left = { Type = ThisChar } Right = CharCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisProv } Right = ProvCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisTitle } Right = TitleCommand }
+	
+	
+	
+	
+	
+	(N N) = { Left = { Type = ThisUnit } Right = UnitCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisSociety } Right = SocietyCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisArtifact } Right = ArtifactCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisBattle } Right = BattleCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisWar } Right = WarCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisSiege } Right = SiegeCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisOffmapPower } Right = OffmapPowerCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisReligion } Right = ReligionCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisCulture } Right = CultureCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisBloodline } Right = BloodlineCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisWonderBuilding } Right = WonderBuildingCommand }
+	
+	
+	
+	(N N) = { Left = { Type = ThisWonderUpgrade } Right = WonderUpgradeCommand }
+	
+	
+	
+	# Event targets
+	(Y  ) = { Left = "clear_global_event_targets" Right = Yes }
+	# May set target between clears hence not checking dups
+	(N N) = { Left = "clear_global_event_target" Right = String EventTargetClearGlobal }
+	# May set target between clears hence not checking dups
+	(N N) = { Left = "clear_event_target" Right = String EventTargetClear }
+	(N Y) = { Left = "save_event_target_as" Right = String EventTargetSet }
+	(N Y) = { Left = "save_persistent_event_target" Right = PersistentEventTargetSetClause }
+	(N Y) = { Left = "clear_persistent_event_target" Right = String EventTargetClearPersistent }
+	(N Y) = { Left = "save_global_event_target_as" Right = String EventTargetSetGlobal }
+	(N N) = { Left = { Type = CommandEventTargetName } Right = Untyped } # Event target code will check at end once target has been resolved
+	(N N) = { Left = "repeat_event" Right = {
+		Single = { Left = "id" Right = String }
+		AtMostOne = { "days" "months" "years" }
+		Optional = { Left = "days" Right = PInt }
+		Optional = { Left = "months" Right = PInt }
+		Optional = { Left = "years" Right = PInt }
+		Optional = { Left = "random" Right = NnDbl }
+		Optional = { Left = "tooltip" Right = Key }
+	} }
+
+	(N N) = { Left = { Type = ScriptedCommand } Right = Yes ScriptedCommandCheck }
+	
+	# RHS need not be unique if setting a variable multiple times after doing calculation in between
+	(N N) = { Left = "export_to_variable" Right = ExportToVariable }
+} }
+
+(Type ExportToVariable) = {
+	(LocalOp "cng" "which\[R]" 0 AddSetter Variable)
+	Single = { Left = "which" Right = String }
+	Single = { Left = "value" Right = String }
+
+	NodeSwitcher = {
+		Node = "value"
+		MarkChecked = False
+		Default = ExportToVariableNormal
+		
+		Switch = {
+			"alternate_start_value" = ExportToVariableAlternateStart
+			"alternate_start_min_value" = ExportToVariableAlternateStart
+			"alternate_start_max_value" = ExportToVariableAlternateStart
+		}
+		
+	}
+}
+
+(Type ExportToVariableNormal) = {
+	Optional = { Left = "who" Right = { MaybeEventTargetCharProvTitle RhsFancyScopeOptionToChar RhsFancyScopeOptionToProv RhsFancyScopeOptionToTitle } }
+	CheckExportToVariableValue
+}
+
+(Type ExportToVariableAlternateStart) = {
+	Single = { Left = "key" Right = AlternateStartSelection }
+}
+
+(Type PersistentEventTargetSetClause) = {
+	Single = { Left = "name" Right = String EventTargetSetPersistent }
+	Single = { Left = "scope" Right = {
+		MaybeEventTargetArtifactCharCultureOffmapPowerProvReligionSocietyTitle
+		AnyTitle
+		PrefixedCharId
+		JobTitle
+		Religion
+		Culture
+		RhsFancyScopeOptionToReligion
+		RhsFancyScopeOptionToSociety
+		RhsFancyScopeOptionToCulture
+		RhsFancyScopeOptionToTitle
+		RhsFancyScopeOptionToProv
+		RhsFancyScopeOptionToChar
+	} }
+}
+
+
+(Type CharRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = CharTrigger
+}
+(Type CharRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = CharTrigger
+}
+
+(Type ProvRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = ProvTrigger
+}
+(Type ProvRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = ProvTrigger
+}
+
+(Type TitleRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = TitleTrigger
+}
+(Type TitleRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = TitleTrigger
+}
+
+(Type GlobalRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = GlobalTrigger
+}
+(Type GlobalRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = GlobalTrigger
+}
+
+(Type UnitRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = UnitTrigger
+}
+(Type UnitRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = UnitTrigger
+}
+
+(Type SocietyRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = SocietyTrigger
+}
+(Type SocietyRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = SocietyTrigger
+}
+
+(Type ArtifactRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = ArtifactTrigger
+}
+(Type ArtifactRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = ArtifactTrigger
+}
+
+(Type BattleRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = BattleTrigger
+}
+(Type BattleRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = BattleTrigger
+}
+
+(Type WarRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = WarTrigger
+}
+(Type WarRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = WarTrigger
+}
+
+(Type SiegeRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = SiegeTrigger
+}
+(Type SiegeRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = SiegeTrigger
+}
+
+(Type OffmapPowerRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = OffmapPowerTrigger
+}
+(Type OffmapPowerRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = OffmapPowerTrigger
+}
+
+(Type ReligionRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = ReligionTrigger
+}
+(Type ReligionRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = ReligionTrigger
+}
+
+(Type CultureRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = CultureTrigger
+}
+(Type CultureRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = CultureTrigger
+}
+
+(Type BloodlineRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = BloodlineTrigger
+}
+(Type BloodlineRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = BloodlineTrigger
+}
+
+(Type WonderBuildingRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = WonderBuildingTrigger
+}
+(Type WonderBuildingRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = WonderBuildingTrigger
+}
+
+(Type WonderUpgradeRandomListModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "factor" Right = NonNegDbl }
+	
+	Inherits = WonderUpgradeTrigger
+}
+(Type WonderUpgradeRandomListAdditiveModifier) = {
+	Inherits = FactorModifier
+	Single = { Left = "value" Right = Double }
+	
+	Inherits = WonderUpgradeTrigger
+}
+
+
+
+Global = {
+
+
+
+(Type CharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTrigger
+	Inherits = FactorModifier
+}
+
+(Type CharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type CharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTrigger
+}
+
+
+(Type CharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharWeightBase }
+	Optional = { Left = "trigger" Right = CharTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharWeightBase
+}
+
+
+(Type CharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type ProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvTrigger
+	Inherits = FactorModifier
+}
+
+(Type ProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ProvTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type ProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ProvTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ProvWeightBase }
+	Optional = { Left = "trigger" Right = ProvTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ProvAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ProvWeightBase
+}
+
+
+(Type ProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type TitleMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = TitleTrigger
+	Inherits = FactorModifier
+}
+
+(Type TitleAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = TitleTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type TitleAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = TitleTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type TitleWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = TitleWeightBase }
+	Optional = { Left = "trigger" Right = TitleTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = TitleMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = TitleAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = TitleAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type TitleValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = TitleWeightBase
+}
+
+
+(Type TitleFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = TitleWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type GlobalMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = GlobalTrigger
+	Inherits = FactorModifier
+}
+
+(Type GlobalAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = GlobalTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type GlobalAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = GlobalTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type GlobalWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = GlobalWeightBase }
+	Optional = { Left = "trigger" Right = GlobalTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = GlobalMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = GlobalAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = GlobalAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type GlobalValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = GlobalWeightBase
+}
+
+
+(Type GlobalFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = GlobalWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type UnitMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = UnitTrigger
+	Inherits = FactorModifier
+}
+
+(Type UnitAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = UnitTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type UnitAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = UnitTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type UnitWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = UnitWeightBase }
+	Optional = { Left = "trigger" Right = UnitTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = UnitMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = UnitAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = UnitAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type UnitValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = UnitWeightBase
+}
+
+
+(Type UnitFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = UnitWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type SocietyMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = SocietyTrigger
+	Inherits = FactorModifier
+}
+
+(Type SocietyAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = SocietyTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type SocietyAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = SocietyTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type SocietyWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = SocietyWeightBase }
+	Optional = { Left = "trigger" Right = SocietyTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = SocietyMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = SocietyAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = SocietyAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type SocietyValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = SocietyWeightBase
+}
+
+
+(Type SocietyFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = SocietyWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type ArtifactMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ArtifactTrigger
+	Inherits = FactorModifier
+}
+
+(Type ArtifactAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ArtifactTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type ArtifactAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ArtifactTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ArtifactWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ArtifactWeightBase }
+	Optional = { Left = "trigger" Right = ArtifactTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ArtifactMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ArtifactAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ArtifactAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ArtifactValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ArtifactWeightBase
+}
+
+
+(Type ArtifactFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ArtifactWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type BattleMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = BattleTrigger
+	Inherits = FactorModifier
+}
+
+(Type BattleAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = BattleTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type BattleAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = BattleTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type BattleWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = BattleWeightBase }
+	Optional = { Left = "trigger" Right = BattleTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = BattleMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = BattleAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = BattleAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type BattleValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = BattleWeightBase
+}
+
+
+(Type BattleFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = BattleWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type WarMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = WarTrigger
+	Inherits = FactorModifier
+}
+
+(Type WarAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = WarTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type WarAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = WarTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type WarWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = WarWeightBase }
+	Optional = { Left = "trigger" Right = WarTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = WarMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = WarAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = WarAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type WarValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = WarWeightBase
+}
+
+
+(Type WarFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = WarWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type SiegeMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = SiegeTrigger
+	Inherits = FactorModifier
+}
+
+(Type SiegeAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = SiegeTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type SiegeAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = SiegeTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type SiegeWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = SiegeWeightBase }
+	Optional = { Left = "trigger" Right = SiegeTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = SiegeMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = SiegeAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = SiegeAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type SiegeValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = SiegeWeightBase
+}
+
+
+(Type SiegeFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = SiegeWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type OffmapPowerMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = OffmapPowerTrigger
+	Inherits = FactorModifier
+}
+
+(Type OffmapPowerAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = OffmapPowerTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type OffmapPowerAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = OffmapPowerTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type OffmapPowerWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = OffmapPowerWeightBase }
+	Optional = { Left = "trigger" Right = OffmapPowerTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = OffmapPowerMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = OffmapPowerAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = OffmapPowerAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type OffmapPowerValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = OffmapPowerWeightBase
+}
+
+
+(Type OffmapPowerFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = OffmapPowerWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type ReligionMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ReligionTrigger
+	Inherits = FactorModifier
+}
+
+(Type ReligionAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ReligionTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type ReligionAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ReligionTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ReligionWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ReligionWeightBase }
+	Optional = { Left = "trigger" Right = ReligionTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ReligionMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ReligionAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ReligionAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ReligionValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ReligionWeightBase
+}
+
+
+(Type ReligionFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ReligionWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type CultureMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CultureTrigger
+	Inherits = FactorModifier
+}
+
+(Type CultureAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CultureTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type CultureAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CultureTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type CultureWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CultureWeightBase }
+	Optional = { Left = "trigger" Right = CultureTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CultureMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CultureAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CultureAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type CultureValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CultureWeightBase
+}
+
+
+(Type CultureFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CultureWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type BloodlineMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = BloodlineTrigger
+	Inherits = FactorModifier
+}
+
+(Type BloodlineAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = BloodlineTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type BloodlineAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = BloodlineTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type BloodlineWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = BloodlineWeightBase }
+	Optional = { Left = "trigger" Right = BloodlineTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = BloodlineMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = BloodlineAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = BloodlineAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type BloodlineValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = BloodlineWeightBase
+}
+
+
+(Type BloodlineFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = BloodlineWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type WonderBuildingMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = WonderBuildingTrigger
+	Inherits = FactorModifier
+}
+
+(Type WonderBuildingAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = WonderBuildingTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type WonderBuildingAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = WonderBuildingTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type WonderBuildingWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = WonderBuildingWeightBase }
+	Optional = { Left = "trigger" Right = WonderBuildingTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = WonderBuildingMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = WonderBuildingAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = WonderBuildingAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type WonderBuildingValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = WonderBuildingWeightBase
+}
+
+
+(Type WonderBuildingFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = WonderBuildingWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+(Type WonderUpgradeMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = WonderUpgradeTrigger
+	Inherits = FactorModifier
+}
+
+(Type WonderUpgradeAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = WonderUpgradeTrigger
+	Inherits = AdditiveModifier
+}
+
+(Type WonderUpgradeAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = WonderUpgradeTrigger }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type WonderUpgradeWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = WonderUpgradeWeightBase }
+	Optional = { Left = "trigger" Right = WonderUpgradeTrigger }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = WonderUpgradeMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = WonderUpgradeAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = WonderUpgradeAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type WonderUpgradeValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = WonderUpgradeWeightBase
+}
+
+
+(Type WonderUpgradeFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = WonderUpgradeWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromBloodline) = { ContextValidator = CharCommandFromBloodline }
+(ContextValidator CharCommandFromBloodline) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Bloodline
+	
+	
+	
+	
+}
+
+
+(Type CharTriggerFromBloodline) = { ContextValidator = CharTriggerFromBloodline }
+(ContextValidator CharTriggerFromBloodline) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Bloodline
+	
+	
+	
+	
+}
+
+
+
+
+(Type CharFromBloodlineMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromBloodline
+	Inherits = FactorModifier
+}
+
+(Type CharFromBloodlineAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromBloodline
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromBloodlineAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromBloodline }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromBloodlineAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromBloodline
+}
+
+
+(Type CharFromBloodlineWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromBloodlineWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromBloodline }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromBloodlineMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromBloodlineAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromBloodlineAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromBloodlineAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromBloodlineAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromBloodlineAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromBloodlineAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromBloodlineValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromBloodlineWeightBase
+}
+
+
+(Type CharFromBloodlineFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromBloodlineWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromChar) = { ContextValidator = CharCommandFromChar }
+(ContextValidator CharCommandFromChar) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+(Type CharTriggerFromChar) = { ContextValidator = CharTriggerFromChar }
+(ContextValidator CharTriggerFromChar) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromChar
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromChar
+}
+
+
+(Type CharFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharWeightBase
+}
+
+
+(Type CharFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromOffmapPower) = { ContextValidator = CharCommandFromOffmapPower }
+(ContextValidator CharCommandFromOffmapPower) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = OffmapPower
+	
+	
+	
+	
+}
+
+
+(Type CharTriggerFromOffmapPower) = { ContextValidator = CharTriggerFromOffmapPower }
+(ContextValidator CharTriggerFromOffmapPower) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = OffmapPower
+	
+	
+	
+	
+}
+
+
+
+
+(Type CharFromOffmapPowerMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromOffmapPower
+	Inherits = FactorModifier
+}
+
+(Type CharFromOffmapPowerAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromOffmapPower
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromOffmapPowerAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromOffmapPower }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromOffmapPowerAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromOffmapPower
+}
+
+
+(Type CharFromOffmapPowerWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromOffmapPowerWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromOffmapPower }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromOffmapPowerMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromOffmapPowerAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromOffmapPowerAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromOffmapPowerAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromOffmapPowerAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromOffmapPowerAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromOffmapPowerAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromOffmapPowerValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromOffmapPowerWeightBase
+}
+
+
+(Type CharFromOffmapPowerFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromOffmapPowerWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromProv) = { ContextValidator = CharCommandFromProv }
+(ContextValidator CharCommandFromProv) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+(Type CharTriggerFromProv) = { ContextValidator = CharTriggerFromProv }
+(ContextValidator CharTriggerFromProv) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+
+
+(Type CharFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromProv
+	Inherits = FactorModifier
+}
+
+(Type CharFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromProvAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromProv
+}
+
+
+(Type CharFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromProvWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromProvAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromProvAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromProvWeightBase
+}
+
+
+(Type CharFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromReligion) = { ContextValidator = CharCommandFromReligion }
+(ContextValidator CharCommandFromReligion) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Religion
+	
+	
+	
+	
+}
+
+
+(Type CharTriggerFromReligion) = { ContextValidator = CharTriggerFromReligion }
+(ContextValidator CharTriggerFromReligion) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Religion
+	
+	
+	
+	
+}
+
+
+
+
+(Type CharFromReligionMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromReligion
+	Inherits = FactorModifier
+}
+
+(Type CharFromReligionAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromReligion
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromReligionAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromReligion }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromReligionAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromReligion
+}
+
+
+(Type CharFromReligionWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromReligionWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromReligion }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromReligionMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromReligionAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromReligionAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromReligionAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromReligionAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromReligionAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromReligionAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromReligionValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromReligionWeightBase
+}
+
+
+(Type CharFromReligionFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromReligionWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromSociety) = { ContextValidator = CharCommandFromSociety }
+(ContextValidator CharCommandFromSociety) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Society
+	
+	
+	
+	
+}
+
+
+(Type CharTriggerFromSociety) = { ContextValidator = CharTriggerFromSociety }
+(ContextValidator CharTriggerFromSociety) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Society
+	
+	
+	
+	
+}
+
+
+
+
+(Type CharFromSocietyMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromSociety
+	Inherits = FactorModifier
+}
+
+(Type CharFromSocietyAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromSociety
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromSocietyAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromSociety }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromSocietyAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromSociety
+}
+
+
+(Type CharFromSocietyWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromSocietyWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromSociety }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromSocietyMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromSocietyAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromSocietyAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromSocietyAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromSocietyAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromSocietyAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromSocietyAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromSocietyValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromSocietyWeightBase
+}
+
+
+(Type CharFromSocietyFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromSocietyWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromTitle) = { ContextValidator = CharCommandFromTitle }
+(ContextValidator CharCommandFromTitle) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Title
+	
+	
+	
+	
+}
+
+
+(Type CharTriggerFromTitle) = { ContextValidator = CharTriggerFromTitle }
+(ContextValidator CharTriggerFromTitle) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Title
+	
+	
+	
+	
+}
+
+
+
+
+(Type CharFromTitleMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromTitle
+	Inherits = FactorModifier
+}
+
+(Type CharFromTitleAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromTitle
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromTitleAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromTitle }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromTitleAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromTitle
+}
+
+
+(Type CharFromTitleWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromTitleWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromTitle }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromTitleMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromTitleAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromTitleAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromTitleAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromTitleValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromTitleWeightBase
+}
+
+
+(Type CharFromTitleFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromTitleWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CultureCommandFromProv) = { ContextValidator = CultureCommandFromProv }
+(ContextValidator CultureCommandFromProv) = {
+	Inherits = CultureCommand
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+(Type CultureTriggerFromProv) = { ContextValidator = CultureTriggerFromProv }
+(ContextValidator CultureTriggerFromProv) = {
+	Inherits = CultureTrigger
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+
+
+(Type CultureFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CultureTriggerFromProv
+	Inherits = FactorModifier
+}
+
+(Type CultureFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CultureTriggerFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type CultureFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CultureTriggerFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type CultureFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CultureFromProvWeightBase }
+	Optional = { Left = "trigger" Right = CultureTriggerFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CultureFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CultureFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CultureFromProvAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type CultureFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CultureFromProvWeightBase
+}
+
+
+(Type CultureFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CultureFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type OffmapPowerCommandFromChar) = { ContextValidator = OffmapPowerCommandFromChar }
+(ContextValidator OffmapPowerCommandFromChar) = {
+	Inherits = OffmapPowerCommand
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+(Type OffmapPowerTriggerFromChar) = { ContextValidator = OffmapPowerTriggerFromChar }
+(ContextValidator OffmapPowerTriggerFromChar) = {
+	Inherits = OffmapPowerTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+
+
+(Type OffmapPowerFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = OffmapPowerTriggerFromChar
+	Inherits = FactorModifier
+}
+
+(Type OffmapPowerFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = OffmapPowerTriggerFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type OffmapPowerFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = OffmapPowerTriggerFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type OffmapPowerFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = OffmapPowerFromCharWeightBase }
+	Optional = { Left = "trigger" Right = OffmapPowerTriggerFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = OffmapPowerFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = OffmapPowerFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = OffmapPowerFromCharAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type OffmapPowerFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = OffmapPowerFromCharWeightBase
+}
+
+
+(Type OffmapPowerFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = OffmapPowerFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type ProvCommandFromChar) = { ContextValidator = ProvCommandFromChar }
+(ContextValidator ProvCommandFromChar) = {
+	Inherits = ProvCommand
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+(Type ProvTriggerFromChar) = { ContextValidator = ProvTriggerFromChar }
+(ContextValidator ProvTriggerFromChar) = {
+	Inherits = ProvTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+
+
+(Type ProvFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvTriggerFromChar
+	Inherits = FactorModifier
+}
+
+(Type ProvFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ProvTriggerFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type ProvFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ProvTriggerFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ProvFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ProvFromCharWeightBase }
+	Optional = { Left = "trigger" Right = ProvTriggerFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ProvFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ProvFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ProvFromCharAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ProvFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ProvFromCharWeightBase
+}
+
+
+(Type ProvFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type ProvCommandFromProv) = { ContextValidator = ProvCommandFromProv }
+(ContextValidator ProvCommandFromProv) = {
+	Inherits = ProvCommand
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+(Type ProvTriggerFromProv) = { ContextValidator = ProvTriggerFromProv }
+(ContextValidator ProvTriggerFromProv) = {
+	Inherits = ProvTrigger
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+
+
+(Type ProvFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvTriggerFromProv
+	Inherits = FactorModifier
+}
+
+(Type ProvFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ProvTriggerFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type ProvFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ProvTriggerFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ProvFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ProvFromProvWeightBase }
+	Optional = { Left = "trigger" Right = ProvTriggerFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ProvFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ProvFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ProvFromProvAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ProvFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ProvFromProvWeightBase
+}
+
+
+(Type ProvFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type ProvCommandFromReligion) = { ContextValidator = ProvCommandFromReligion }
+(ContextValidator ProvCommandFromReligion) = {
+	Inherits = ProvCommand
+	
+	
+	FromTarget = Religion
+	
+	
+	
+	
+}
+
+
+(Type ProvTriggerFromReligion) = { ContextValidator = ProvTriggerFromReligion }
+(ContextValidator ProvTriggerFromReligion) = {
+	Inherits = ProvTrigger
+	
+	
+	FromTarget = Religion
+	
+	
+	
+	
+}
+
+
+
+
+(Type ProvFromReligionMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvTriggerFromReligion
+	Inherits = FactorModifier
+}
+
+(Type ProvFromReligionAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ProvTriggerFromReligion
+	Inherits = AdditiveModifier
+}
+
+(Type ProvFromReligionAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ProvTriggerFromReligion }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ProvFromReligionWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ProvFromReligionWeightBase }
+	Optional = { Left = "trigger" Right = ProvTriggerFromReligion }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ProvFromReligionMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ProvFromReligionAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ProvFromReligionAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ProvFromReligionValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ProvFromReligionWeightBase
+}
+
+
+(Type ProvFromReligionFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvFromReligionWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type TitleCommandFromChar) = { ContextValidator = TitleCommandFromChar }
+(ContextValidator TitleCommandFromChar) = {
+	Inherits = TitleCommand
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+(Type TitleTriggerFromChar) = { ContextValidator = TitleTriggerFromChar }
+(ContextValidator TitleTriggerFromChar) = {
+	Inherits = TitleTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+
+
+(Type TitleFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = TitleTriggerFromChar
+	Inherits = FactorModifier
+}
+
+(Type TitleFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = TitleTriggerFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type TitleFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = TitleTriggerFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type TitleFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = TitleFromCharWeightBase }
+	Optional = { Left = "trigger" Right = TitleTriggerFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = TitleFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = TitleFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = TitleFromCharAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type TitleFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = TitleFromCharWeightBase
+}
+
+
+(Type TitleFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = TitleFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type ReligionCommandFromChar) = { ContextValidator = ReligionCommandFromChar }
+(ContextValidator ReligionCommandFromChar) = {
+	Inherits = ReligionCommand
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+(Type ReligionTriggerFromChar) = { ContextValidator = ReligionTriggerFromChar }
+(ContextValidator ReligionTriggerFromChar) = {
+	Inherits = ReligionTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+
+
+(Type ReligionFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ReligionTriggerFromChar
+	Inherits = FactorModifier
+}
+
+(Type ReligionFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ReligionTriggerFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type ReligionFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ReligionTriggerFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ReligionFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ReligionFromCharWeightBase }
+	Optional = { Left = "trigger" Right = ReligionTriggerFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ReligionFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ReligionFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ReligionFromCharAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ReligionFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ReligionFromCharWeightBase
+}
+
+
+(Type ReligionFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ReligionFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type ReligionCommandFromProv) = { ContextValidator = ReligionCommandFromProv }
+(ContextValidator ReligionCommandFromProv) = {
+	Inherits = ReligionCommand
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+(Type ReligionTriggerFromProv) = { ContextValidator = ReligionTriggerFromProv }
+(ContextValidator ReligionTriggerFromProv) = {
+	Inherits = ReligionTrigger
+	
+	
+	FromTarget = Prov
+	
+	
+	
+	
+}
+
+
+
+
+(Type ReligionFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ReligionTriggerFromProv
+	Inherits = FactorModifier
+}
+
+(Type ReligionFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ReligionTriggerFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type ReligionFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ReligionTriggerFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ReligionFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ReligionFromProvWeightBase }
+	Optional = { Left = "trigger" Right = ReligionTriggerFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ReligionFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ReligionFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ReligionFromProvAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ReligionFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ReligionFromProvWeightBase
+}
+
+
+(Type ReligionFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ReligionFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type UnitCommandFromChar) = { ContextValidator = UnitCommandFromChar }
+(ContextValidator UnitCommandFromChar) = {
+	Inherits = UnitCommand
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+(Type UnitTriggerFromChar) = { ContextValidator = UnitTriggerFromChar }
+(ContextValidator UnitTriggerFromChar) = {
+	Inherits = UnitTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+
+
+(Type UnitFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = UnitTriggerFromChar
+	Inherits = FactorModifier
+}
+
+(Type UnitFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = UnitTriggerFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type UnitFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = UnitTriggerFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type UnitFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = UnitFromCharWeightBase }
+	Optional = { Left = "trigger" Right = UnitTriggerFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = UnitFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = UnitFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = UnitFromCharAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type UnitFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = UnitFromCharWeightBase
+}
+
+
+(Type UnitFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = UnitFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromArtifactFromFromChar) = { ContextValidator = CharCommandFromArtifactFromFromChar }
+(ContextValidator CharCommandFromArtifactFromFromChar) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Artifact
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+(Type CharTriggerFromArtifactFromFromChar) = { ContextValidator = CharTriggerFromArtifactFromFromChar }
+(ContextValidator CharTriggerFromArtifactFromFromChar) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Artifact
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+
+
+(Type CharFromArtifactFromFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromArtifactFromFromChar
+	Inherits = FactorModifier
+}
+
+(Type CharFromArtifactFromFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromArtifactFromFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromArtifactFromFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromArtifactFromFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromArtifactFromFromCharAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromArtifactFromFromChar
+}
+
+
+(Type CharFromArtifactFromFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromArtifactFromFromCharWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromArtifactFromFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromArtifactFromFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromArtifactFromFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromArtifactFromFromCharAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromArtifactFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromArtifactFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromArtifactFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromArtifactFromFromCharAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromArtifactFromFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromArtifactFromFromCharWeightBase
+}
+
+
+(Type CharFromArtifactFromFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromArtifactFromFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromArtifact) = { ContextValidator = CharCommandFromCharFromFromArtifact }
+(ContextValidator CharCommandFromCharFromFromArtifact) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Artifact
+	
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromArtifact) = { ContextValidator = CharTriggerFromCharFromFromArtifact }
+(ContextValidator CharTriggerFromCharFromFromArtifact) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Artifact
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromArtifactMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromArtifact
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromArtifactAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromArtifact
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromArtifactAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromArtifact }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromArtifactAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromArtifact
+}
+
+
+(Type CharFromCharFromFromArtifactWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromArtifactWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromArtifact }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromArtifactMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromArtifactAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromArtifactAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromArtifactAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromArtifactAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromArtifactAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromArtifactAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromArtifactValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromArtifactWeightBase
+}
+
+
+(Type CharFromCharFromFromArtifactFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromArtifactWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromChar) = { ContextValidator = CharCommandFromCharFromFromChar }
+(ContextValidator CharCommandFromCharFromFromChar) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromChar) = { ContextValidator = CharTriggerFromCharFromFromChar }
+(ContextValidator CharTriggerFromCharFromFromChar) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromChar
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromCharAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromChar
+}
+
+
+(Type CharFromCharFromFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromCharWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromCharAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromCharAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromCharWeightBase
+}
+
+
+(Type CharFromCharFromFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromCulture) = { ContextValidator = CharCommandFromCharFromFromCulture }
+(ContextValidator CharCommandFromCharFromFromCulture) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Culture
+	
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromCulture) = { ContextValidator = CharTriggerFromCharFromFromCulture }
+(ContextValidator CharTriggerFromCharFromFromCulture) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Culture
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCultureMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromCulture
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromCultureAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromCulture
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromCultureAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromCulture }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromCultureAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromCulture
+}
+
+
+(Type CharFromCharFromFromCultureWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromCultureWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromCulture }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromCultureMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromCultureAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromCultureAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromCultureAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromCultureAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromCultureAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromCultureAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCultureValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromCultureWeightBase
+}
+
+
+(Type CharFromCharFromFromCultureFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromCultureWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromOffmapPower) = { ContextValidator = CharCommandFromCharFromFromOffmapPower }
+(ContextValidator CharCommandFromCharFromFromOffmapPower) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = OffmapPower
+	
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromOffmapPower) = { ContextValidator = CharTriggerFromCharFromFromOffmapPower }
+(ContextValidator CharTriggerFromCharFromFromOffmapPower) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = OffmapPower
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromOffmapPowerMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromOffmapPower
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromOffmapPowerAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromOffmapPower
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromOffmapPowerAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromOffmapPower }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromOffmapPowerAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromOffmapPower
+}
+
+
+(Type CharFromCharFromFromOffmapPowerWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromOffmapPowerWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromOffmapPower }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromOffmapPowerMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromOffmapPowerAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromOffmapPowerAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromOffmapPowerAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromOffmapPowerAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromOffmapPowerAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromOffmapPowerAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromOffmapPowerValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromOffmapPowerWeightBase
+}
+
+
+(Type CharFromCharFromFromOffmapPowerFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromOffmapPowerWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromProv) = { ContextValidator = CharCommandFromCharFromFromProv }
+(ContextValidator CharCommandFromCharFromFromProv) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Prov
+	
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromProv) = { ContextValidator = CharTriggerFromCharFromFromProv }
+(ContextValidator CharTriggerFromCharFromFromProv) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Prov
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromProv
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromProvAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromProv
+}
+
+
+(Type CharFromCharFromFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromProvWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromProvAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromProvAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromProvWeightBase
+}
+
+
+(Type CharFromCharFromFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromReligion) = { ContextValidator = CharCommandFromCharFromFromReligion }
+(ContextValidator CharCommandFromCharFromFromReligion) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Religion
+	
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromReligion) = { ContextValidator = CharTriggerFromCharFromFromReligion }
+(ContextValidator CharTriggerFromCharFromFromReligion) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Religion
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromReligionMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromReligion
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromReligionAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromReligion
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromReligionAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromReligion }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromReligionAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromReligion
+}
+
+
+(Type CharFromCharFromFromReligionWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromReligionWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromReligion }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromReligionMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromReligionAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromReligionAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromReligionAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromReligionAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromReligionAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromReligionAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromReligionValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromReligionWeightBase
+}
+
+
+(Type CharFromCharFromFromReligionFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromReligionWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromTitle) = { ContextValidator = CharCommandFromCharFromFromTitle }
+(ContextValidator CharCommandFromCharFromFromTitle) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Title
+	
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromTitle) = { ContextValidator = CharTriggerFromCharFromFromTitle }
+(ContextValidator CharTriggerFromCharFromFromTitle) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Title
+	
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromTitleMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromTitle
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromTitleAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromTitle
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromTitleAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromTitle }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromTitleAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromTitle
+}
+
+
+(Type CharFromCharFromFromTitleWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromTitleWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromTitle }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromTitleMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromTitleAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromTitleAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromTitleAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromTitleValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromTitleWeightBase
+}
+
+
+(Type CharFromCharFromFromTitleFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromTitleWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromTitleFromFromChar) = { ContextValidator = CharCommandFromTitleFromFromChar }
+(ContextValidator CharCommandFromTitleFromFromChar) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Title
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+(Type CharTriggerFromTitleFromFromChar) = { ContextValidator = CharTriggerFromTitleFromFromChar }
+(ContextValidator CharTriggerFromTitleFromFromChar) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Title
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+
+
+(Type CharFromTitleFromFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromTitleFromFromChar
+	Inherits = FactorModifier
+}
+
+(Type CharFromTitleFromFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromTitleFromFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromTitleFromFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromTitleFromFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromTitleFromFromCharAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromTitleFromFromChar
+}
+
+
+(Type CharFromTitleFromFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromTitleFromFromCharWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromTitleFromFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromTitleFromFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromTitleFromFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromTitleFromFromCharAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromTitleFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromTitleFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromTitleFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromTitleFromFromCharAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromTitleFromFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromTitleFromFromCharWeightBase
+}
+
+
+(Type CharFromTitleFromFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromTitleFromFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type ProvCommandFromProvFromFromProv) = { ContextValidator = ProvCommandFromProvFromFromProv }
+(ContextValidator ProvCommandFromProvFromFromProv) = {
+	Inherits = ProvCommand
+	
+	
+	FromTarget = Prov
+	
+	
+	FromFromTarget = Prov
+	
+	
+	
+}
+
+
+(Type ProvTriggerFromProvFromFromProv) = { ContextValidator = ProvTriggerFromProvFromFromProv }
+(ContextValidator ProvTriggerFromProvFromFromProv) = {
+	Inherits = ProvTrigger
+	
+	
+	FromTarget = Prov
+	
+	
+	FromFromTarget = Prov
+	
+	
+	
+}
+
+
+
+
+(Type ProvFromProvFromFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvTriggerFromProvFromFromProv
+	Inherits = FactorModifier
+}
+
+(Type ProvFromProvFromFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = ProvTriggerFromProvFromFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type ProvFromProvFromFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = ProvTriggerFromProvFromFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type ProvFromProvFromFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = ProvFromProvFromFromProvWeightBase }
+	Optional = { Left = "trigger" Right = ProvTriggerFromProvFromFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = ProvFromProvFromFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = ProvFromProvFromFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = ProvFromProvFromFromProvAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type ProvFromProvFromFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = ProvFromProvFromFromProvWeightBase
+}
+
+
+(Type ProvFromProvFromFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = ProvFromProvFromFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromWonderBuildingFromFromProv) = { ContextValidator = CharCommandFromWonderBuildingFromFromProv }
+(ContextValidator CharCommandFromWonderBuildingFromFromProv) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = WonderBuilding
+	
+	
+	FromFromTarget = Prov
+	
+	
+	
+}
+
+
+(Type CharTriggerFromWonderBuildingFromFromProv) = { ContextValidator = CharTriggerFromWonderBuildingFromFromProv }
+(ContextValidator CharTriggerFromWonderBuildingFromFromProv) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = WonderBuilding
+	
+	
+	FromFromTarget = Prov
+	
+	
+	
+}
+
+
+
+
+(Type CharFromWonderBuildingFromFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromWonderBuildingFromFromProv
+	Inherits = FactorModifier
+}
+
+(Type CharFromWonderBuildingFromFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromWonderBuildingFromFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromWonderBuildingFromFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromWonderBuildingFromFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromWonderBuildingFromFromProvAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromWonderBuildingFromFromProv
+}
+
+
+(Type CharFromWonderBuildingFromFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromWonderBuildingFromFromProvWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromWonderBuildingFromFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromWonderBuildingFromFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromWonderBuildingFromFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromWonderBuildingFromFromProvAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromWonderBuildingFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromWonderBuildingFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromWonderBuildingFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromWonderBuildingFromFromProvAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromWonderBuildingFromFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromWonderBuildingFromFromProvWeightBase
+}
+
+
+(Type CharFromWonderBuildingFromFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromWonderBuildingFromFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type OffmapPowerCommandFromCharFromFromChar) = { ContextValidator = OffmapPowerCommandFromCharFromFromChar }
+(ContextValidator OffmapPowerCommandFromCharFromFromChar) = {
+	Inherits = OffmapPowerCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+(Type OffmapPowerTriggerFromCharFromFromChar) = { ContextValidator = OffmapPowerTriggerFromCharFromFromChar }
+(ContextValidator OffmapPowerTriggerFromCharFromFromChar) = {
+	Inherits = OffmapPowerTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	
+}
+
+
+
+
+(Type OffmapPowerFromCharFromFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = OffmapPowerTriggerFromCharFromFromChar
+	Inherits = FactorModifier
+}
+
+(Type OffmapPowerFromCharFromFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = OffmapPowerTriggerFromCharFromFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type OffmapPowerFromCharFromFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = OffmapPowerTriggerFromCharFromFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type OffmapPowerFromCharFromFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = OffmapPowerFromCharFromFromCharWeightBase }
+	Optional = { Left = "trigger" Right = OffmapPowerTriggerFromCharFromFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = OffmapPowerFromCharFromFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = OffmapPowerFromCharFromFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = OffmapPowerFromCharFromFromCharAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type OffmapPowerFromCharFromFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = OffmapPowerFromCharFromFromCharWeightBase
+}
+
+
+(Type OffmapPowerFromCharFromFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = OffmapPowerFromCharFromFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromCharFromFromFromTitle) = { ContextValidator = CharCommandFromCharFromFromCharFromFromFromTitle }
+(ContextValidator CharCommandFromCharFromFromCharFromFromFromTitle) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	FromFromFromTarget = Title
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromCharFromFromFromTitle) = { ContextValidator = CharTriggerFromCharFromFromCharFromFromFromTitle }
+(ContextValidator CharTriggerFromCharFromFromCharFromFromFromTitle) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	FromFromFromTarget = Title
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCharFromFromFromTitleMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromCharFromFromFromTitle
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromCharFromFromFromTitleAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromCharFromFromFromTitle
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromCharFromFromFromTitleAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromCharFromFromFromTitle }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromCharFromFromFromTitleAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromCharFromFromFromTitle
+}
+
+
+(Type CharFromCharFromFromCharFromFromFromTitleWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromCharFromFromFromTitleWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromCharFromFromFromTitle }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromCharFromFromFromTitleMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromCharFromFromFromTitleAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromCharFromFromFromTitleAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromCharFromFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromCharFromFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromCharFromFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromCharFromFromFromTitleAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCharFromFromFromTitleValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromCharFromFromFromTitleWeightBase
+}
+
+
+(Type CharFromCharFromFromCharFromFromFromTitleFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromCharFromFromFromTitleWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromTitleFromFromFromChar) = { ContextValidator = CharCommandFromCharFromFromTitleFromFromFromChar }
+(ContextValidator CharCommandFromCharFromFromTitleFromFromFromChar) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Title
+	
+	
+	FromFromFromTarget = Char
+	
+	
+}
+
+
+(Type CharTriggerFromCharFromFromTitleFromFromFromChar) = { ContextValidator = CharTriggerFromCharFromFromTitleFromFromFromChar }
+(ContextValidator CharTriggerFromCharFromFromTitleFromFromFromChar) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Title
+	
+	
+	FromFromFromTarget = Char
+	
+	
+}
+
+
+
+
+(Type CharFromCharFromFromTitleFromFromFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromTitleFromFromFromChar
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromTitleFromFromFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromTitleFromFromFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromTitleFromFromFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromTitleFromFromFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromTitleFromFromFromCharAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromTitleFromFromFromChar
+}
+
+
+(Type CharFromCharFromFromTitleFromFromFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromTitleFromFromFromCharWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromTitleFromFromFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromTitleFromFromFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromTitleFromFromFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromTitleFromFromFromCharAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromTitleFromFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromTitleFromFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromTitleFromFromFromCharAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromTitleFromFromFromCharAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromTitleFromFromFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromTitleFromFromFromCharWeightBase
+}
+
+
+(Type CharFromCharFromFromTitleFromFromFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromTitleFromFromFromCharWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromWonderUpgradeFromFromWonderBuildingFromFromFromProv) = { ContextValidator = CharCommandFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+(ContextValidator CharCommandFromWonderUpgradeFromFromWonderBuildingFromFromFromProv) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = WonderUpgrade
+	
+	
+	FromFromTarget = WonderBuilding
+	
+	
+	FromFromFromTarget = Prov
+	
+	
+}
+
+
+(Type CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv) = { ContextValidator = CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+(ContextValidator CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = WonderUpgrade
+	
+	
+	FromFromTarget = WonderBuilding
+	
+	
+	FromFromFromTarget = Prov
+	
+	
+}
+
+
+
+
+(Type CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv
+	Inherits = FactorModifier
+}
+
+(Type CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv
+}
+
+
+(Type CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromWonderUpgradeFromFromWonderBuildingFromFromFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvWeightBase
+}
+
+
+(Type CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromWonderUpgradeFromFromWonderBuildingFromFromFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromWonderBuildingFromFromCharFromFromFromProv) = { ContextValidator = CharCommandFromWonderBuildingFromFromCharFromFromFromProv }
+(ContextValidator CharCommandFromWonderBuildingFromFromCharFromFromFromProv) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = WonderBuilding
+	
+	
+	FromFromTarget = Char
+	
+	
+	FromFromFromTarget = Prov
+	
+	
+}
+
+
+(Type CharTriggerFromWonderBuildingFromFromCharFromFromFromProv) = { ContextValidator = CharTriggerFromWonderBuildingFromFromCharFromFromFromProv }
+(ContextValidator CharTriggerFromWonderBuildingFromFromCharFromFromFromProv) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = WonderBuilding
+	
+	
+	FromFromTarget = Char
+	
+	
+	FromFromFromTarget = Prov
+	
+	
+}
+
+
+
+
+(Type CharFromWonderBuildingFromFromCharFromFromFromProvMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromWonderBuildingFromFromCharFromFromFromProv
+	Inherits = FactorModifier
+}
+
+(Type CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromWonderBuildingFromFromCharFromFromFromProv
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromWonderBuildingFromFromCharFromFromFromProv }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromWonderBuildingFromFromCharFromFromFromProv
+}
+
+
+(Type CharFromWonderBuildingFromFromCharFromFromFromProvWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromWonderBuildingFromFromCharFromFromFromProvWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromWonderBuildingFromFromCharFromFromFromProv }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromWonderBuildingFromFromCharFromFromFromProvMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromWonderBuildingFromFromCharFromFromFromProvAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromWonderBuildingFromFromCharFromFromFromProvValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromWonderBuildingFromFromCharFromFromFromProvWeightBase
+}
+
+
+(Type CharFromWonderBuildingFromFromCharFromFromFromProvFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromWonderBuildingFromFromCharFromFromFromProvWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type CharCommandFromCharFromFromCharFromFromFromCharFromFromFromFromTitle) = { ContextValidator = CharCommandFromCharFromFromCharFromFromFromCharFromFromFromFromTitle }
+(ContextValidator CharCommandFromCharFromFromCharFromFromFromCharFromFromFromFromTitle) = {
+	Inherits = CharCommand
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	FromFromFromTarget = Char
+	
+	
+	FromFromFromFromTarget = Title
+	
+}
+
+
+(Type CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle) = { ContextValidator = CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle }
+(ContextValidator CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle) = {
+	Inherits = CharTrigger
+	
+	
+	FromTarget = Char
+	
+	
+	FromFromTarget = Char
+	
+	
+	FromFromFromTarget = Char
+	
+	
+	FromFromFromFromTarget = Title
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle
+	Inherits = FactorModifier
+}
+
+(Type CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle
+	Inherits = AdditiveModifier
+}
+
+(Type CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+(Type CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveOpinionModifier) = {
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "this" Right = OnlyCharTarget }
+	Optional = { Left = "factor" Right = Double }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle
+}
+
+
+(Type CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleWeightBase }
+	Optional = { Left = "trigger" Right = CharTriggerFromCharFromFromCharFromFromFromCharFromFromFromFromTitle }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveExportedValueModifier }
+	
+	
+	(Ch N Y) = { Left = "additive_opinion_modifier" Right = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_compared_realm_size_modifier" Right = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_power_diff_modifier" Right = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveOpinionModifier }
+	(Ch N Y) = { Left = "additive_realm_size_modifier" Right = {
+		Single = { Left = "balance" Right = Double }
+		Inherits = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleAdditiveOpinionModifier
+	} }
+	
+}
+
+
+
+
+(Type CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleWeightBase
+}
+
+
+(Type CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = CharFromCharFromFromCharFromFromFromCharFromFromFromFromTitleWeightBase
+}
+
+}
+
+
+Global = {
+
+
+
+
+
+(Type TitleCommandThisCharFromChar) = { ContextValidator = TitleCommandThisCharFromChar }
+(ContextValidator TitleCommandThisCharFromChar) = {
+	Inherits = TitleCommand
+	
+	ThisTarget = Char
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+(Type TitleTriggerThisCharFromChar) = { ContextValidator = TitleTriggerThisCharFromChar }
+(ContextValidator TitleTriggerThisCharFromChar) = {
+	Inherits = TitleTrigger
+	
+	ThisTarget = Char
+	
+	
+	FromTarget = Char
+	
+	
+	
+	
+}
+
+
+
+
+(Type TitleThisCharFromCharMultModifier) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = TitleTriggerThisCharFromChar
+	Inherits = FactorModifier
+}
+
+(Type TitleThisCharFromCharAdditiveModifier) = {
+	Single = { Left = "value" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Inherits = TitleTriggerThisCharFromChar
+	Inherits = AdditiveModifier
+}
+
+(Type TitleThisCharFromCharAdditiveExportedValueModifier) = {
+	Optional = { Left = "factor" Right = NzDbl }
+	Optional = { Left = "localisation_key" Right = Key }
+	Single = { Left = "trigger" Right = TitleTriggerThisCharFromChar }
+	Single = { Left = "who" Right = OnlyCharTarget }
+	Optional = { Left = "key" Right = String }
+	Optional = { Left = "min" Right = Double }
+	Optional = { Left = "max" Right = Double }
+	Single = { Left = "value" Right = { ExportToVariableGlobalValue ExportToVariableTitleOnlyValue ExportToVariableProvOnlyValue ExportToVariableCharOnlyValue } }
+}
+
+
+
+(Type TitleThisCharFromCharWeightBase) = {
+	(Ch Y N) = { Left = { Type = ScriptedScoreValue } Right = Yes ScriptedScoreValueCheck = TitleThisCharFromCharWeightBase }
+	Optional = { Left = "trigger" Right = TitleTriggerThisCharFromChar }
+	(Ch N Y) = { Left = { "modifier" "mult_modifier" } Right = TitleThisCharFromCharMultModifier }
+	(Ch N Y) = { Left = "additive_modifier" Right = TitleThisCharFromCharAdditiveModifier }
+	(Ch N Y) = { Left = "additive_exported_value_modifier" Right = TitleThisCharFromCharAdditiveExportedValueModifier }
+	
+	
+}
+
+
+
+
+(Type TitleThisCharFromCharValueWeight) = {
+	Single = { Left = "value" Right = Double }
+	Inherits = TitleThisCharFromCharWeightBase
+}
+
+
+(Type TitleThisCharFromCharFactorWeight) = {
+	Single = { Left = "factor" Right = Double }
+	Inherits = TitleThisCharFromCharWeightBase
+}
+
+}
+
+
+
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = CharIfClause }
+	(N N) = { Left = { "else_if" } Right = CharIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = CharCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = CharWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = CharCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = CharWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = CharCommand
+			Inherits = CharWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = CharCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = CharTrigger Command = CharCommand } } }
+} }
+
+(Type CharIfClause) = {
+	Single = { Left = "limit" Right = CharTrigger }
+	Inherits = CharCommand
+}
+
+(Type CharWhileClause) = {
+	Optional = { Left = "limit" Right = CharTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = CharCommand
+}
+
+Global = {
+(Type CharTriggerWithCount) = {
+	Inherits = CharTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type CharMaybeLimitCommand) = {
+	Inherits = CharCommand
+	Inherits = CharLimit # Needs to be outside so that the AddStackFrame doesn't interfere with CharCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = CharValueWeight }
+}
+
+(Type CharRandomCommand) = {
+	Inherits = CharCommand
+	Inherits = CharLimit # Needs to be outside so that the AddStackFrame doesn't interfere with CharCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = CharTrigger }
+}
+}
+
+(Type CharLimit) = {
+	AddContextValidatorStackFrame = Char
+	Optional = { Left = "limit" Right = CharTrigger }
+}
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = ProvIfClause }
+	(N N) = { Left = { "else_if" } Right = ProvIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = ProvCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = ProvWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = ProvCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = ProvWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = ProvCommand
+			Inherits = ProvWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = ProvCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = ProvTrigger Command = ProvCommand } } }
+} }
+
+(Type ProvIfClause) = {
+	Single = { Left = "limit" Right = ProvTrigger }
+	Inherits = ProvCommand
+}
+
+(Type ProvWhileClause) = {
+	Optional = { Left = "limit" Right = ProvTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = ProvCommand
+}
+
+Global = {
+(Type ProvTriggerWithCount) = {
+	Inherits = ProvTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type ProvMaybeLimitCommand) = {
+	Inherits = ProvCommand
+	Inherits = ProvLimit # Needs to be outside so that the AddStackFrame doesn't interfere with ProvCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = ProvValueWeight }
+}
+
+(Type ProvRandomCommand) = {
+	Inherits = ProvCommand
+	Inherits = ProvLimit # Needs to be outside so that the AddStackFrame doesn't interfere with ProvCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = ProvTrigger }
+}
+}
+
+(Type ProvLimit) = {
+	AddContextValidatorStackFrame = Prov
+	Optional = { Left = "limit" Right = ProvTrigger }
+}
+
+(ContextValidator TitleCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = TitleIfClause }
+	(N N) = { Left = { "else_if" } Right = TitleIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = TitleCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = TitleWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = TitleCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = TitleWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = TitleCommand
+			Inherits = TitleWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = TitleCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = TitleTrigger Command = TitleCommand } } }
+} }
+
+(Type TitleIfClause) = {
+	Single = { Left = "limit" Right = TitleTrigger }
+	Inherits = TitleCommand
+}
+
+(Type TitleWhileClause) = {
+	Optional = { Left = "limit" Right = TitleTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = TitleCommand
+}
+
+Global = {
+(Type TitleTriggerWithCount) = {
+	Inherits = TitleTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type TitleMaybeLimitCommand) = {
+	Inherits = TitleCommand
+	Inherits = TitleLimit # Needs to be outside so that the AddStackFrame doesn't interfere with TitleCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = TitleValueWeight }
+}
+
+(Type TitleRandomCommand) = {
+	Inherits = TitleCommand
+	Inherits = TitleLimit # Needs to be outside so that the AddStackFrame doesn't interfere with TitleCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = TitleTrigger }
+}
+}
+
+(Type TitleLimit) = {
+	AddContextValidatorStackFrame = Title
+	Optional = { Left = "limit" Right = TitleTrigger }
+}
+
+(ContextValidator GlobalCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = GlobalIfClause }
+	(N N) = { Left = { "else_if" } Right = GlobalIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = GlobalCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = GlobalWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = GlobalCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = GlobalWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = GlobalCommand
+			Inherits = GlobalWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = GlobalCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = GlobalTrigger Command = GlobalCommand } } }
+} }
+
+(Type GlobalIfClause) = {
+	Single = { Left = "limit" Right = GlobalTrigger }
+	Inherits = GlobalCommand
+}
+
+(Type GlobalWhileClause) = {
+	Optional = { Left = "limit" Right = GlobalTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = GlobalCommand
+}
+
+Global = {
+(Type GlobalTriggerWithCount) = {
+	Inherits = GlobalTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type GlobalMaybeLimitCommand) = {
+	Inherits = GlobalCommand
+	Inherits = GlobalLimit # Needs to be outside so that the AddStackFrame doesn't interfere with GlobalCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = GlobalValueWeight }
+}
+
+(Type GlobalRandomCommand) = {
+	Inherits = GlobalCommand
+	Inherits = GlobalLimit # Needs to be outside so that the AddStackFrame doesn't interfere with GlobalCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = GlobalTrigger }
+}
+}
+
+(Type GlobalLimit) = {
+	AddContextValidatorStackFrame = Global
+	Optional = { Left = "limit" Right = GlobalTrigger }
+}
+
+(ContextValidator UnitCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = UnitIfClause }
+	(N N) = { Left = { "else_if" } Right = UnitIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = UnitCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = UnitWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = UnitCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = UnitWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = UnitCommand
+			Inherits = UnitWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = UnitCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = UnitTrigger Command = UnitCommand } } }
+} }
+
+(Type UnitIfClause) = {
+	Single = { Left = "limit" Right = UnitTrigger }
+	Inherits = UnitCommand
+}
+
+(Type UnitWhileClause) = {
+	Optional = { Left = "limit" Right = UnitTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = UnitCommand
+}
+
+Global = {
+(Type UnitTriggerWithCount) = {
+	Inherits = UnitTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type UnitMaybeLimitCommand) = {
+	Inherits = UnitCommand
+	Inherits = UnitLimit # Needs to be outside so that the AddStackFrame doesn't interfere with UnitCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = UnitValueWeight }
+}
+
+(Type UnitRandomCommand) = {
+	Inherits = UnitCommand
+	Inherits = UnitLimit # Needs to be outside so that the AddStackFrame doesn't interfere with UnitCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = UnitTrigger }
+}
+}
+
+(Type UnitLimit) = {
+	AddContextValidatorStackFrame = Unit
+	Optional = { Left = "limit" Right = UnitTrigger }
+}
+
+(ContextValidator SocietyCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = SocietyIfClause }
+	(N N) = { Left = { "else_if" } Right = SocietyIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = SocietyCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = SocietyWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = SocietyCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = SocietyWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = SocietyCommand
+			Inherits = SocietyWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = SocietyCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = SocietyTrigger Command = SocietyCommand } } }
+} }
+
+(Type SocietyIfClause) = {
+	Single = { Left = "limit" Right = SocietyTrigger }
+	Inherits = SocietyCommand
+}
+
+(Type SocietyWhileClause) = {
+	Optional = { Left = "limit" Right = SocietyTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = SocietyCommand
+}
+
+Global = {
+(Type SocietyTriggerWithCount) = {
+	Inherits = SocietyTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type SocietyMaybeLimitCommand) = {
+	Inherits = SocietyCommand
+	Inherits = SocietyLimit # Needs to be outside so that the AddStackFrame doesn't interfere with SocietyCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = SocietyValueWeight }
+}
+
+(Type SocietyRandomCommand) = {
+	Inherits = SocietyCommand
+	Inherits = SocietyLimit # Needs to be outside so that the AddStackFrame doesn't interfere with SocietyCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = SocietyTrigger }
+}
+}
+
+(Type SocietyLimit) = {
+	AddContextValidatorStackFrame = Society
+	Optional = { Left = "limit" Right = SocietyTrigger }
+}
+
+(ContextValidator ArtifactCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = ArtifactIfClause }
+	(N N) = { Left = { "else_if" } Right = ArtifactIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = ArtifactCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = ArtifactWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = ArtifactCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = ArtifactWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = ArtifactCommand
+			Inherits = ArtifactWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = ArtifactCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = ArtifactTrigger Command = ArtifactCommand } } }
+} }
+
+(Type ArtifactIfClause) = {
+	Single = { Left = "limit" Right = ArtifactTrigger }
+	Inherits = ArtifactCommand
+}
+
+(Type ArtifactWhileClause) = {
+	Optional = { Left = "limit" Right = ArtifactTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = ArtifactCommand
+}
+
+Global = {
+(Type ArtifactTriggerWithCount) = {
+	Inherits = ArtifactTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type ArtifactMaybeLimitCommand) = {
+	Inherits = ArtifactCommand
+	Inherits = ArtifactLimit # Needs to be outside so that the AddStackFrame doesn't interfere with ArtifactCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = ArtifactValueWeight }
+}
+
+(Type ArtifactRandomCommand) = {
+	Inherits = ArtifactCommand
+	Inherits = ArtifactLimit # Needs to be outside so that the AddStackFrame doesn't interfere with ArtifactCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = ArtifactTrigger }
+}
+}
+
+(Type ArtifactLimit) = {
+	AddContextValidatorStackFrame = Artifact
+	Optional = { Left = "limit" Right = ArtifactTrigger }
+}
+
+(ContextValidator BattleCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = BattleIfClause }
+	(N N) = { Left = { "else_if" } Right = BattleIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = BattleCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = BattleWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = BattleCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = BattleWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = BattleCommand
+			Inherits = BattleWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = BattleCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = BattleTrigger Command = BattleCommand } } }
+} }
+
+(Type BattleIfClause) = {
+	Single = { Left = "limit" Right = BattleTrigger }
+	Inherits = BattleCommand
+}
+
+(Type BattleWhileClause) = {
+	Optional = { Left = "limit" Right = BattleTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = BattleCommand
+}
+
+Global = {
+(Type BattleTriggerWithCount) = {
+	Inherits = BattleTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type BattleMaybeLimitCommand) = {
+	Inherits = BattleCommand
+	Inherits = BattleLimit # Needs to be outside so that the AddStackFrame doesn't interfere with BattleCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = BattleValueWeight }
+}
+
+(Type BattleRandomCommand) = {
+	Inherits = BattleCommand
+	Inherits = BattleLimit # Needs to be outside so that the AddStackFrame doesn't interfere with BattleCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = BattleTrigger }
+}
+}
+
+(Type BattleLimit) = {
+	AddContextValidatorStackFrame = Battle
+	Optional = { Left = "limit" Right = BattleTrigger }
+}
+
+(ContextValidator WarCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = WarIfClause }
+	(N N) = { Left = { "else_if" } Right = WarIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = WarCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = WarWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = WarCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = WarWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = WarCommand
+			Inherits = WarWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = WarCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = WarTrigger Command = WarCommand } } }
+} }
+
+(Type WarIfClause) = {
+	Single = { Left = "limit" Right = WarTrigger }
+	Inherits = WarCommand
+}
+
+(Type WarWhileClause) = {
+	Optional = { Left = "limit" Right = WarTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = WarCommand
+}
+
+Global = {
+(Type WarTriggerWithCount) = {
+	Inherits = WarTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type WarMaybeLimitCommand) = {
+	Inherits = WarCommand
+	Inherits = WarLimit # Needs to be outside so that the AddStackFrame doesn't interfere with WarCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = WarValueWeight }
+}
+
+(Type WarRandomCommand) = {
+	Inherits = WarCommand
+	Inherits = WarLimit # Needs to be outside so that the AddStackFrame doesn't interfere with WarCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = WarTrigger }
+}
+}
+
+(Type WarLimit) = {
+	AddContextValidatorStackFrame = War
+	Optional = { Left = "limit" Right = WarTrigger }
+}
+
+(ContextValidator SiegeCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = SiegeIfClause }
+	(N N) = { Left = { "else_if" } Right = SiegeIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = SiegeCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = SiegeWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = SiegeCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = SiegeWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = SiegeCommand
+			Inherits = SiegeWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = SiegeCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = SiegeTrigger Command = SiegeCommand } } }
+} }
+
+(Type SiegeIfClause) = {
+	Single = { Left = "limit" Right = SiegeTrigger }
+	Inherits = SiegeCommand
+}
+
+(Type SiegeWhileClause) = {
+	Optional = { Left = "limit" Right = SiegeTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = SiegeCommand
+}
+
+Global = {
+(Type SiegeTriggerWithCount) = {
+	Inherits = SiegeTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type SiegeMaybeLimitCommand) = {
+	Inherits = SiegeCommand
+	Inherits = SiegeLimit # Needs to be outside so that the AddStackFrame doesn't interfere with SiegeCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = SiegeValueWeight }
+}
+
+(Type SiegeRandomCommand) = {
+	Inherits = SiegeCommand
+	Inherits = SiegeLimit # Needs to be outside so that the AddStackFrame doesn't interfere with SiegeCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = SiegeTrigger }
+}
+}
+
+(Type SiegeLimit) = {
+	AddContextValidatorStackFrame = Siege
+	Optional = { Left = "limit" Right = SiegeTrigger }
+}
+
+(ContextValidator OffmapPowerCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = OffmapPowerIfClause }
+	(N N) = { Left = { "else_if" } Right = OffmapPowerIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = OffmapPowerCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = OffmapPowerWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = OffmapPowerCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = OffmapPowerWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = OffmapPowerCommand
+			Inherits = OffmapPowerWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = OffmapPowerCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = OffmapPowerTrigger Command = OffmapPowerCommand } } }
+} }
+
+(Type OffmapPowerIfClause) = {
+	Single = { Left = "limit" Right = OffmapPowerTrigger }
+	Inherits = OffmapPowerCommand
+}
+
+(Type OffmapPowerWhileClause) = {
+	Optional = { Left = "limit" Right = OffmapPowerTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = OffmapPowerCommand
+}
+
+Global = {
+(Type OffmapPowerTriggerWithCount) = {
+	Inherits = OffmapPowerTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type OffmapPowerMaybeLimitCommand) = {
+	Inherits = OffmapPowerCommand
+	Inherits = OffmapPowerLimit # Needs to be outside so that the AddStackFrame doesn't interfere with OffmapPowerCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = OffmapPowerValueWeight }
+}
+
+(Type OffmapPowerRandomCommand) = {
+	Inherits = OffmapPowerCommand
+	Inherits = OffmapPowerLimit # Needs to be outside so that the AddStackFrame doesn't interfere with OffmapPowerCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = OffmapPowerTrigger }
+}
+}
+
+(Type OffmapPowerLimit) = {
+	AddContextValidatorStackFrame = OffmapPower
+	Optional = { Left = "limit" Right = OffmapPowerTrigger }
+}
+
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = ReligionIfClause }
+	(N N) = { Left = { "else_if" } Right = ReligionIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = ReligionCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = ReligionWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = ReligionCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = ReligionWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = ReligionCommand
+			Inherits = ReligionWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = ReligionCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = ReligionTrigger Command = ReligionCommand } } }
+} }
+
+(Type ReligionIfClause) = {
+	Single = { Left = "limit" Right = ReligionTrigger }
+	Inherits = ReligionCommand
+}
+
+(Type ReligionWhileClause) = {
+	Optional = { Left = "limit" Right = ReligionTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = ReligionCommand
+}
+
+Global = {
+(Type ReligionTriggerWithCount) = {
+	Inherits = ReligionTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type ReligionMaybeLimitCommand) = {
+	Inherits = ReligionCommand
+	Inherits = ReligionLimit # Needs to be outside so that the AddStackFrame doesn't interfere with ReligionCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = ReligionValueWeight }
+}
+
+(Type ReligionRandomCommand) = {
+	Inherits = ReligionCommand
+	Inherits = ReligionLimit # Needs to be outside so that the AddStackFrame doesn't interfere with ReligionCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = ReligionTrigger }
+}
+}
+
+(Type ReligionLimit) = {
+	AddContextValidatorStackFrame = Religion
+	Optional = { Left = "limit" Right = ReligionTrigger }
+}
+
+(ContextValidator CultureCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = CultureIfClause }
+	(N N) = { Left = { "else_if" } Right = CultureIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = CultureCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = CultureWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = CultureCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = CultureWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = CultureCommand
+			Inherits = CultureWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = CultureCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = CultureTrigger Command = CultureCommand } } }
+} }
+
+(Type CultureIfClause) = {
+	Single = { Left = "limit" Right = CultureTrigger }
+	Inherits = CultureCommand
+}
+
+(Type CultureWhileClause) = {
+	Optional = { Left = "limit" Right = CultureTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = CultureCommand
+}
+
+Global = {
+(Type CultureTriggerWithCount) = {
+	Inherits = CultureTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type CultureMaybeLimitCommand) = {
+	Inherits = CultureCommand
+	Inherits = CultureLimit # Needs to be outside so that the AddStackFrame doesn't interfere with CultureCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = CultureValueWeight }
+}
+
+(Type CultureRandomCommand) = {
+	Inherits = CultureCommand
+	Inherits = CultureLimit # Needs to be outside so that the AddStackFrame doesn't interfere with CultureCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = CultureTrigger }
+}
+}
+
+(Type CultureLimit) = {
+	AddContextValidatorStackFrame = Culture
+	Optional = { Left = "limit" Right = CultureTrigger }
+}
+
+(ContextValidator BloodlineCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = BloodlineIfClause }
+	(N N) = { Left = { "else_if" } Right = BloodlineIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = BloodlineCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = BloodlineWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = BloodlineCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = BloodlineWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = BloodlineCommand
+			Inherits = BloodlineWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = BloodlineCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = BloodlineTrigger Command = BloodlineCommand } } }
+} }
+
+(Type BloodlineIfClause) = {
+	Single = { Left = "limit" Right = BloodlineTrigger }
+	Inherits = BloodlineCommand
+}
+
+(Type BloodlineWhileClause) = {
+	Optional = { Left = "limit" Right = BloodlineTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = BloodlineCommand
+}
+
+Global = {
+(Type BloodlineTriggerWithCount) = {
+	Inherits = BloodlineTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type BloodlineMaybeLimitCommand) = {
+	Inherits = BloodlineCommand
+	Inherits = BloodlineLimit # Needs to be outside so that the AddStackFrame doesn't interfere with BloodlineCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = BloodlineValueWeight }
+}
+
+(Type BloodlineRandomCommand) = {
+	Inherits = BloodlineCommand
+	Inherits = BloodlineLimit # Needs to be outside so that the AddStackFrame doesn't interfere with BloodlineCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = BloodlineTrigger }
+}
+}
+
+(Type BloodlineLimit) = {
+	AddContextValidatorStackFrame = Bloodline
+	Optional = { Left = "limit" Right = BloodlineTrigger }
+}
+
+(ContextValidator WonderBuildingCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = WonderBuildingIfClause }
+	(N N) = { Left = { "else_if" } Right = WonderBuildingIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = WonderBuildingCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = WonderBuildingWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = WonderBuildingCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = WonderBuildingWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = WonderBuildingCommand
+			Inherits = WonderBuildingWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = WonderBuildingCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = WonderBuildingTrigger Command = WonderBuildingCommand } } }
+} }
+
+(Type WonderBuildingIfClause) = {
+	Single = { Left = "limit" Right = WonderBuildingTrigger }
+	Inherits = WonderBuildingCommand
+}
+
+(Type WonderBuildingWhileClause) = {
+	Optional = { Left = "limit" Right = WonderBuildingTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = WonderBuildingCommand
+}
+
+Global = {
+(Type WonderBuildingTriggerWithCount) = {
+	Inherits = WonderBuildingTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type WonderBuildingMaybeLimitCommand) = {
+	Inherits = WonderBuildingCommand
+	Inherits = WonderBuildingLimit # Needs to be outside so that the AddStackFrame doesn't interfere with WonderBuildingCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = WonderBuildingValueWeight }
+}
+
+(Type WonderBuildingRandomCommand) = {
+	Inherits = WonderBuildingCommand
+	Inherits = WonderBuildingLimit # Needs to be outside so that the AddStackFrame doesn't interfere with WonderBuildingCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = WonderBuildingTrigger }
+}
+}
+
+(Type WonderBuildingLimit) = {
+	AddContextValidatorStackFrame = WonderBuilding
+	Optional = { Left = "limit" Right = WonderBuildingTrigger }
+}
+
+(ContextValidator WonderUpgradeCommand) = { Members = {
+	(N N) = { Left = { "if" "IF" } Right = WonderUpgradeIfClause }
+	(N N) = { Left = { "else_if" } Right = WonderUpgradeIfClause CheckHasIfOrElseIfPrior }
+	(N N) = { Left = { "else" } Right = WonderUpgradeCommand CheckHasIfOrElseIfPrior }
+	(N N) = { Left = "while" Right = WonderUpgradeWhileClause }
+	
+	(N N) = { Left = "random" Right = {
+		Inherits = WonderUpgradeCommand
+		Single = { Left = "chance" Right = Int }
+		Inherits = WonderUpgradeWeightBase
+	} }
+	(N N) = { Left = "random_list" Right = {
+		(Ch N N) = { Left = { Type = Int } Right = {
+			Inherits = WonderUpgradeCommand
+			Inherits = WonderUpgradeWeightBase
+		} }
+		(Ch Y N) = { Left = "fallback" Right = {
+			Inherits = WonderUpgradeCommand
+		} }
+	} }
+
+	(N N) = { Left = "trigger_switch" Right = { OnTriggerChecker = { Trigger = WonderUpgradeTrigger Command = WonderUpgradeCommand } } }
+} }
+
+(Type WonderUpgradeIfClause) = {
+	Single = { Left = "limit" Right = WonderUpgradeTrigger }
+	Inherits = WonderUpgradeCommand
+}
+
+(Type WonderUpgradeWhileClause) = {
+	Optional = { Left = "limit" Right = WonderUpgradeTrigger }
+	Optional = { Left = "count" Right = PInt }
+	OneOf = { "limit" "count" }
+	Inherits = WonderUpgradeCommand
+}
+
+Global = {
+(Type WonderUpgradeTriggerWithCount) = {
+	Inherits = WonderUpgradeTrigger
+	# Since can use comparison operations (but only one?)
+	Optional = { Left = "count" Right = NnInt }
+}
+(Type WonderUpgradeMaybeLimitCommand) = {
+	Inherits = WonderUpgradeCommand
+	Inherits = WonderUpgradeLimit # Needs to be outside so that the AddStackFrame doesn't interfere with WonderUpgradeCommand
+	
+	# Limits number of targets
+	Optional = { Left = "count" Right = PInt }
+	
+	(Ch N Y) = { Left = "score_value" Right = WonderUpgradeValueWeight }
+}
+
+(Type WonderUpgradeRandomCommand) = {
+	Inherits = WonderUpgradeCommand
+	Inherits = WonderUpgradeLimit # Needs to be outside so that the AddStackFrame doesn't interfere with WonderUpgradeCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = WonderUpgradeTrigger }
+}
+}
+
+(Type WonderUpgradeLimit) = {
+	AddContextValidatorStackFrame = WonderUpgrade
+	Optional = { Left = "limit" Right = WonderUpgradeTrigger }
+}
+
+
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "clr_quest" Right = String (LocalOp "clr" "[R]" AddSetter CharQuest) }
+	(N Y) = { Left = "clr_quest" Right = {
+		Single = { Left = "id" Right = String (LocalOp "clr" "[R]" AddSetter CharQuest) }
+		Optional = { Left = "failure" Right = Bool }
+	} }
+} }
+
+
+
+(ContextValidator ArtifactCommand) = { Members = {
+	(Y  ) = { Left = { "set_original_owner" } Right = MaybeEventTargetChar }
+	# Per https://forum.paradoxplaza.com/forum/threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/post-27225338 this doesn't work and set_original_owner is the correct thing
+	# (Y  ) = { Left = { "set_artifact_original_owner" } Right = MaybeEventTargetChar }
+} }
+
+
+
+
+
+
+
+
+
+
+(Type Var) = {
+	Single = { Left = "which" Right = String }
+	Single = { Left = "value" Right = Double }
+}
+
+(Type CheckVar) = {
+	FancilyPickCorrectBecauseParadoxDoesntMakeThingsWithDifferentNames = { TwoWhich = CheckVar0 Else = CheckVar1 }
+}
+
+(Type CheckVar0) = {
+	# A third which is something like ROOT to specify the variable scope
+	# No dedup RHS because can have things like
+	#check_variable = {
+	#	which = some_variable # variable to use in current scope
+	#	which < some_variable # variable to use in second scope
+	#	which = catholic      # scope to pull second variable from
+	#}
+	(Ch N N 2 3) = { Left = "which" Right = String }
+	(LocalOp "chk" "which\[R]" AddChecker Variable)
+}
+
+(Type CheckVar1) = {
+	Inherits = Var
+	(LocalOp "chk" "which\[R]" AddChecker Variable)
+}
+
+(Type SetVar) = {
+	FancilyPickCorrectBecauseParadoxDoesntMakeThingsWithDifferentNames = { TwoWhich = SetVar0 Else = SetVar1 }
+}
+
+(Type SetVar0) = {
+	# A third which is something like ROOT to specify the variable scope
+	(Ch N Y 2 3) = { Left = "which" Right = String }
+	(LocalOp "set" "which\[R]" 0 AddSetter Variable)
+	(LocalOp "set" "which\[R]" 1 AddChecker Variable)
+}
+
+(Type SetVar1) = {
+	Inherits = Var
+	(LocalOp "set" "which\[R]" AddSetter Variable)
+}
+
+(Type ChangeVar) = {
+	FancilyPickCorrectBecauseParadoxDoesntMakeThingsWithDifferentNames = { TwoWhich = ChangeVar0 Else = ChangeVar1 }
+}
+
+(Type ChangeVar0) = {
+	# A third which is something like ROOT to specify the variable scope
+	(Ch N N 2 3) = { Left = "which" Right = String }
+	#Optional = { Left = "who" Right = String }
+	(LocalOp "cng" "which\[R]" 0 AddSetter Variable)
+	(LocalOp "cng" "which\[R]" 1 AddChecker Variable)
+}
+
+(Type ChangeVar1) = {
+	Inherits = Var
+	(LocalOp "cng" "which\[R]" AddSetter Variable)
+}
+
+
+

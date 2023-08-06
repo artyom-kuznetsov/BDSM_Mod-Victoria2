@@ -1,0 +1,916 @@
+
+
+
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = CharTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = CharHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = CharTrigger }
+} }
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = CharCommand }
+	(N N) = { Left = "hidden_tooltip" Right = CharHiddenCommandTooltip }
+} }
+
+(Type CharHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = CharCommand
+}
+
+(Type CharHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = CharTrigger
+}
+
+(Type CharHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = CharCommand
+}
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = CharTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = CharTrigger }
+		Inherits = CharTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = CharTrigger }
+			Inherits = CharTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = CharTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = CharCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = CharHiddenEffect }
+} }
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = ProvTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = ProvHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = ProvTrigger }
+} }
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = ProvCommand }
+	(N N) = { Left = "hidden_tooltip" Right = ProvHiddenCommandTooltip }
+} }
+
+(Type ProvHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ProvCommand
+}
+
+(Type ProvHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ProvTrigger
+}
+
+(Type ProvHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ProvCommand
+}
+
+(ContextValidator ProvTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = ProvTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = ProvTrigger }
+		Inherits = ProvTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = ProvTrigger }
+			Inherits = ProvTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = ProvTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = ProvCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = ProvHiddenEffect }
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = TitleTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = TitleHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = TitleTrigger }
+} }
+(ContextValidator TitleCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = TitleCommand }
+	(N N) = { Left = "hidden_tooltip" Right = TitleHiddenCommandTooltip }
+} }
+
+(Type TitleHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = TitleCommand
+}
+
+(Type TitleHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = TitleTrigger
+}
+
+(Type TitleHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = TitleCommand
+}
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = TitleTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = TitleTrigger }
+		Inherits = TitleTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = TitleTrigger }
+			Inherits = TitleTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = TitleTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator TitleCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = TitleCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = TitleHiddenEffect }
+} }
+
+(ContextValidator GlobalTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = GlobalTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = GlobalHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = GlobalTrigger }
+} }
+(ContextValidator GlobalCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = GlobalCommand }
+	(N N) = { Left = "hidden_tooltip" Right = GlobalHiddenCommandTooltip }
+} }
+
+(Type GlobalHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = GlobalCommand
+}
+
+(Type GlobalHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = GlobalTrigger
+}
+
+(Type GlobalHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = GlobalCommand
+}
+
+(ContextValidator GlobalTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = GlobalTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = GlobalTrigger }
+		Inherits = GlobalTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = GlobalTrigger }
+			Inherits = GlobalTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = GlobalTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator GlobalCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = GlobalCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = GlobalHiddenEffect }
+} }
+
+(ContextValidator UnitTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = UnitTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = UnitHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = UnitTrigger }
+} }
+(ContextValidator UnitCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = UnitCommand }
+	(N N) = { Left = "hidden_tooltip" Right = UnitHiddenCommandTooltip }
+} }
+
+(Type UnitHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = UnitCommand
+}
+
+(Type UnitHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = UnitTrigger
+}
+
+(Type UnitHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = UnitCommand
+}
+
+(ContextValidator UnitTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = UnitTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = UnitTrigger }
+		Inherits = UnitTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = UnitTrigger }
+			Inherits = UnitTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = UnitTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator UnitCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = UnitCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = UnitHiddenEffect }
+} }
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = SocietyTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = SocietyHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = SocietyTrigger }
+} }
+(ContextValidator SocietyCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = SocietyCommand }
+	(N N) = { Left = "hidden_tooltip" Right = SocietyHiddenCommandTooltip }
+} }
+
+(Type SocietyHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = SocietyCommand
+}
+
+(Type SocietyHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = SocietyTrigger
+}
+
+(Type SocietyHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = SocietyCommand
+}
+
+(ContextValidator SocietyTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = SocietyTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = SocietyTrigger }
+		Inherits = SocietyTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = SocietyTrigger }
+			Inherits = SocietyTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = SocietyTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator SocietyCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = SocietyCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = SocietyHiddenEffect }
+} }
+
+(ContextValidator ArtifactTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = ArtifactTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = ArtifactHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = ArtifactTrigger }
+} }
+(ContextValidator ArtifactCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = ArtifactCommand }
+	(N N) = { Left = "hidden_tooltip" Right = ArtifactHiddenCommandTooltip }
+} }
+
+(Type ArtifactHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ArtifactCommand
+}
+
+(Type ArtifactHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ArtifactTrigger
+}
+
+(Type ArtifactHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ArtifactCommand
+}
+
+(ContextValidator ArtifactTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = ArtifactTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = ArtifactTrigger }
+		Inherits = ArtifactTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = ArtifactTrigger }
+			Inherits = ArtifactTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = ArtifactTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator ArtifactCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = ArtifactCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = ArtifactHiddenEffect }
+} }
+
+(ContextValidator BattleTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = BattleTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = BattleHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = BattleTrigger }
+} }
+(ContextValidator BattleCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = BattleCommand }
+	(N N) = { Left = "hidden_tooltip" Right = BattleHiddenCommandTooltip }
+} }
+
+(Type BattleHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = BattleCommand
+}
+
+(Type BattleHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = BattleTrigger
+}
+
+(Type BattleHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = BattleCommand
+}
+
+(ContextValidator BattleTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = BattleTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = BattleTrigger }
+		Inherits = BattleTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = BattleTrigger }
+			Inherits = BattleTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = BattleTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator BattleCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = BattleCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = BattleHiddenEffect }
+} }
+
+(ContextValidator WarTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = WarTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = WarHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = WarTrigger }
+} }
+(ContextValidator WarCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = WarCommand }
+	(N N) = { Left = "hidden_tooltip" Right = WarHiddenCommandTooltip }
+} }
+
+(Type WarHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WarCommand
+}
+
+(Type WarHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WarTrigger
+}
+
+(Type WarHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WarCommand
+}
+
+(ContextValidator WarTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = WarTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = WarTrigger }
+		Inherits = WarTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = WarTrigger }
+			Inherits = WarTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = WarTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator WarCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = WarCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = WarHiddenEffect }
+} }
+
+(ContextValidator SiegeTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = SiegeTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = SiegeHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = SiegeTrigger }
+} }
+(ContextValidator SiegeCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = SiegeCommand }
+	(N N) = { Left = "hidden_tooltip" Right = SiegeHiddenCommandTooltip }
+} }
+
+(Type SiegeHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = SiegeCommand
+}
+
+(Type SiegeHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = SiegeTrigger
+}
+
+(Type SiegeHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = SiegeCommand
+}
+
+(ContextValidator SiegeTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = SiegeTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = SiegeTrigger }
+		Inherits = SiegeTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = SiegeTrigger }
+			Inherits = SiegeTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = SiegeTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator SiegeCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = SiegeCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = SiegeHiddenEffect }
+} }
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = OffmapPowerTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = OffmapPowerHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = OffmapPowerTrigger }
+} }
+(ContextValidator OffmapPowerCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = OffmapPowerCommand }
+	(N N) = { Left = "hidden_tooltip" Right = OffmapPowerHiddenCommandTooltip }
+} }
+
+(Type OffmapPowerHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = OffmapPowerCommand
+}
+
+(Type OffmapPowerHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = OffmapPowerTrigger
+}
+
+(Type OffmapPowerHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = OffmapPowerCommand
+}
+
+(ContextValidator OffmapPowerTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = OffmapPowerTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = OffmapPowerTrigger }
+		Inherits = OffmapPowerTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = OffmapPowerTrigger }
+			Inherits = OffmapPowerTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = OffmapPowerTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator OffmapPowerCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = OffmapPowerCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = OffmapPowerHiddenEffect }
+} }
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = ReligionTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = ReligionHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = ReligionTrigger }
+} }
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = ReligionCommand }
+	(N N) = { Left = "hidden_tooltip" Right = ReligionHiddenCommandTooltip }
+} }
+
+(Type ReligionHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ReligionCommand
+}
+
+(Type ReligionHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ReligionTrigger
+}
+
+(Type ReligionHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = ReligionCommand
+}
+
+(ContextValidator ReligionTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = ReligionTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = ReligionTrigger }
+		Inherits = ReligionTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = ReligionTrigger }
+			Inherits = ReligionTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = ReligionTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator ReligionCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = ReligionCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = ReligionHiddenEffect }
+} }
+
+(ContextValidator CultureTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = CultureTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = CultureHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = CultureTrigger }
+} }
+(ContextValidator CultureCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = CultureCommand }
+	(N N) = { Left = "hidden_tooltip" Right = CultureHiddenCommandTooltip }
+} }
+
+(Type CultureHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = CultureCommand
+}
+
+(Type CultureHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = CultureTrigger
+}
+
+(Type CultureHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = CultureCommand
+}
+
+(ContextValidator CultureTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = CultureTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = CultureTrigger }
+		Inherits = CultureTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = CultureTrigger }
+			Inherits = CultureTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = CultureTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator CultureCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = CultureCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = CultureHiddenEffect }
+} }
+
+(ContextValidator BloodlineTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = BloodlineTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = BloodlineHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = BloodlineTrigger }
+} }
+(ContextValidator BloodlineCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = BloodlineCommand }
+	(N N) = { Left = "hidden_tooltip" Right = BloodlineHiddenCommandTooltip }
+} }
+
+(Type BloodlineHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = BloodlineCommand
+}
+
+(Type BloodlineHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = BloodlineTrigger
+}
+
+(Type BloodlineHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = BloodlineCommand
+}
+
+(ContextValidator BloodlineTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = BloodlineTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = BloodlineTrigger }
+		Inherits = BloodlineTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = BloodlineTrigger }
+			Inherits = BloodlineTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = BloodlineTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator BloodlineCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = BloodlineCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = BloodlineHiddenEffect }
+} }
+
+(ContextValidator WonderBuildingTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = WonderBuildingTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = WonderBuildingHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = WonderBuildingTrigger }
+} }
+(ContextValidator WonderBuildingCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = WonderBuildingCommand }
+	(N N) = { Left = "hidden_tooltip" Right = WonderBuildingHiddenCommandTooltip }
+} }
+
+(Type WonderBuildingHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WonderBuildingCommand
+}
+
+(Type WonderBuildingHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WonderBuildingTrigger
+}
+
+(Type WonderBuildingHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WonderBuildingCommand
+}
+
+(ContextValidator WonderBuildingTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = WonderBuildingTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = WonderBuildingTrigger }
+		Inherits = WonderBuildingTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = WonderBuildingTrigger }
+			Inherits = WonderBuildingTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = WonderBuildingTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator WonderBuildingCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = WonderBuildingCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = WonderBuildingHiddenEffect }
+} }
+
+(ContextValidator WonderUpgradeTrigger) = { Members = {
+	(N N) = { Left = "tooltip" Right = WonderUpgradeTrigger }
+	(N N) = { Left = "hidden_tooltip" Right = WonderUpgradeHiddenTriggerTooltip }
+	(N N) = { Left = "hidden_trigger" Right = WonderUpgradeTrigger }
+} }
+(ContextValidator WonderUpgradeCommand) = { Members = {
+	(N N) = { Left = "tooltip" Right = WonderUpgradeCommand }
+	(N N) = { Left = "hidden_tooltip" Right = WonderUpgradeHiddenCommandTooltip }
+} }
+
+(Type WonderUpgradeHiddenEffect) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WonderUpgradeCommand
+}
+
+(Type WonderUpgradeHiddenTriggerTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WonderUpgradeTrigger
+}
+
+(Type WonderUpgradeHiddenCommandTooltip) = {
+	Optional = { Left = "generate_tooltip" Right = Bool }
+	Inherits = WonderUpgradeCommand
+}
+
+(ContextValidator WonderUpgradeTrigger) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = WonderUpgradeTrigger
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = { "conditional_tooltip" "trigger_if" } Right = {
+		Single = { Left = { "trigger" "limit" } Right = WonderUpgradeTrigger }
+		Inherits = WonderUpgradeTrigger
+	} }
+
+	(N N) = {
+		Left = { "trigger_else_if" }
+		Right = {
+			Single = { Left = "limit" Right = WonderUpgradeTrigger }
+			Inherits = WonderUpgradeTrigger
+		}
+		CheckHasTriggerIfOrElseIfPrior
+	}
+
+	(N N) = { Left = "trigger_else" Right = WonderUpgradeTrigger CheckHasTriggerIfOrElseIfPrior }
+} }
+(ContextValidator WonderUpgradeCommand) = { Members = {
+	(N N) = { Left = "custom_tooltip" Right = {
+		Inherits = WonderUpgradeCommand
+		(Single IfNot = Debug) = { Left = "text" Right = Key }
+		(Optional If = Debug) = { Left = "text" Right = Key }
+	} }
+	(N N) = { Left = "hidden_effect" Right = WonderUpgradeHiddenEffect }
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

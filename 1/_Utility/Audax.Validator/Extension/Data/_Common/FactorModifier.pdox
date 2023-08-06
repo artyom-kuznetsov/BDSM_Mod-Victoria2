@@ -1,0 +1,67 @@
+Shared = {
+
+(Type FactorModifier) = {
+	(Ensure IfNot = FactorModifier.DisableNonFactorCheck) = {
+		Description = "There must be at least one non-factor entry within a factor modifier."
+		
+		Select = {
+			Condition = { Not = { Left = "factor" } }
+			Target = Right
+		}
+		
+		Operation = Count
+		
+		TrueForResult = {
+			GreaterThan = 0
+		}
+	}
+	
+	(Ensure IfNot = ContextValidator.NoWarnOnFactorOne ErrorCode = 1003) = {
+		Description = "Having a factor of 1 is useless."
+		
+		Select = {
+			Condition = { Left = "factor" }
+			Target = Right
+		}
+		
+		Operation = Sum
+		
+		TrueForResult = {
+			NotEquals = 1
+		}
+	}
+}
+
+(Type AdditiveModifier) = {
+	(Ensure IfNot = FactorModifier.DisableNonFactorCheck) = {
+		Description = "There must be at least one non-value entry within a additive modifier."
+		
+		Select = {
+			Condition = { Not = { Left = "additive" } }
+			Target = Right
+		}
+		
+		Operation = Count
+		
+		TrueForResult = {
+			GreaterThan = 0
+		}
+	}
+	
+	(Ensure IfNot = ContextValidator.NoWarnOnFactorOne ErrorCode = 1003) = {
+		Description = "Having a value of 0 is useless."
+		
+		Select = {
+			Condition = { Left = "value" }
+			Target = Right
+		}
+		
+		Operation = Sum
+		
+		TrueForResult = {
+			NotEquals = 0
+		}
+	}
+}
+
+}

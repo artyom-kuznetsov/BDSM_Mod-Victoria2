@@ -1,0 +1,253 @@
+(Validator Trading) = {
+	Type = GroupValidator
+	FriendlyName = "Trading"
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\centers_of_trade" "*.txt")
+		ValidatorName = CentersOfTradeFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\tradecompany_investments" "*.txt")
+		ValidatorName = TradeCompanyInvestmentFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\trading_policies" "*.txt")
+		ValidatorName = TradingPolicyFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\region_colors" "*.txt")
+		ValidatorName = CotColorFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\tradegoods" "*.txt")
+		ValidatorName = TradeGoodFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\prices" "*.txt")
+		ValidatorName = PriceFile
+	}
+	
+	Validator = {
+		Type = Default
+		(FileGroup "common\tradenodes" "*.txt")
+		ValidatorName = TradeNodeFile
+	}
+	
+	Validator = {
+		Type = ResourceUseValidator
+		Description = "All nonwasteland provinces must be in trade nodes"
+		SupplyUnique = True
+		
+		Supply = {
+			(DataSource Enum) = { Key = LandNonWastelandNonRnwProvince }
+			
+			MustBeMatched = True
+		}
+		
+		Demand = {
+			(DataSource Chained) = {
+				Pdo = { (FileGroup "common\tradenodes" "*.txt") }
+				SelectPath = { Path = "*\members\*\[R]" }
+			}
+			
+			MustBeMatched = False
+		}
+	
+	}
+}
+
+(Type CentersOfTradeFile) = {
+	(Ch Y N) = {
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+		Left = { Type = String }
+		Right = CenterOfTradeDef
+	}
+}
+
+(Type CenterOfTradeDef) = {
+	Single = { Left = "level" Right = Int }
+	Single = { Left = "type" Right = {
+		Literal = "coastal"
+		Literal = "inland"
+	} }
+	Optional = { Left = "cost" Right = Int }
+	Optional = { Left = "province_modifiers" Right = ProvinceModifierDef }
+	Optional = { Left = "state_modifiers" Right = ProvinceModifierDef }
+	Optional = { Left = "global_modifiers" Right = CountryModifierDef }
+}
+
+(Type TradeCompanyInvestmentFile) = {
+	
+	(Ch N N) = {
+		Left = { Type = String }
+		Right = TradeCompanyInvestmentDef
+		(CheckKey "*" Left IfNot = NoCheckKey)
+		(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	}
+}
+
+(Type TradeCompanyInvestmentDef) = {
+	Single = { Left = "category" Right = {
+		Literal = "company_garrison"
+		Literal = "governance"
+		Literal = "foreign_influence"
+		Literal = "local_venture"
+		Literal = "harbor"
+	} }
+	Single = { Left = "sprite" Right = String }
+	Optional = { Left = "upgrades_to" Right = TradeCompanyInvestment }
+	Optional = { Left = "cost" Right = Double }
+	Optional = { Left = "allow" Right = ProvinceTrigger }
+	
+	Optional = { Left = "company_province_area_modifier" Right = ProvinceModifierDef }
+	Optional = { Left = "owner_modifier" Right = ProvinceModifierDef }
+	Optional = { Left = "company_region_modifier" Right = ProvinceModifierDef }
+	Optional = { Left = "area_modifier" Right = ProvinceModifierDef }
+	Optional = { Left = "owner_company_region_modifier" Right = ProvinceModifierDef }
+	
+	Optional = { Left = "ai_global_worth" Right = TradeCompanyInvestmentDefAiWillDo }
+	Optional = { Left = "ai_area_worth" Right = TradeCompanyInvestmentDefAiWillDo }
+	Optional = { Left = "ai_region_worth" Right = TradeCompanyInvestmentDefAiWillDo }
+}
+
+(Type TradeCompanyInvestmentDefAiWillDo) = {
+	Single = { Left = "factor" Right = Int }
+}
+
+(Type TradingPolicyFile) = {
+	(Ch N N) = { Left = { Type = String } Right = TradingPolicyDef UniqueId = Left }
+}
+
+(Type TradingPolicyDef) = {
+	(CheckKey "*" Left IfNot = NoCheckKey)
+	(CheckKey "*_desc" Left IfNot = NoCheckKey)
+	
+	Optional = { Left = "can_select" Right = CountryTriggerFromProvince }
+	Optional = { Left = "can_maintain" Right = CountryTriggerFromProvince }
+	Optional = { Left = "countries_with_merchant_modifier" Right = CountryModifierDef }
+	Optional = { Left = "node_province_modifier" Right = ProvinceModifierDef }
+	Optional = { Left = "button_gfx" Right = String }
+	Optional = { Left = "show_alert" Right = Bool }
+	Optional = { Left = "center_of_reformation" Right = Bool }
+	Optional = { Left = "unique" Right = Bool }
+	
+}
+
+(Type CotColorFile) = {
+	Child = { Left = "color" Right = AnyColor }
+}
+
+(Type TradeGoodFile) = {
+	(Ch N N) = { Left = { Type = String } Right = TradeGoodDef (CheckKey "*" Left IfNot = NoCheckKey) (CheckKey "*DESC" Left IfNot = NoCheckKey) UniqueId = Left }
+}
+
+(Type TradeGoodDef) = {
+	Single = { Left = "color" Right = AnyColor }
+	Optional = { Left = "modifier" Right = CountryModifierDef }
+	Optional = { Left = "chance" Right = TradeGoodChance }
+	Optional = { Left = "province" Right = ProvinceModifierDef }
+	Optional = { Left = "trigger" Right = ProvinceTrigger }
+	Optional = { Left = "is_latent" Right = Bool }
+	Optional = { Left = "is_valuable" Right = Bool }
+	Optional = { Left = "rnw_latent_chance" Right = Int }
+}
+
+(Type PriceFile) = {
+	RequiredList = { Left = { Type = TradeGood } Right = PriceDef }
+}
+
+(Type PriceDef) = {
+	Single = { Left = "base_price" Right = Double }
+	Optional = { Left = "min_demand" Right = Double }
+	Optional = { Left = "max_demand" Right = Double }
+	Optional = { Left = "supply" Right = Double }
+	Optional = { Left = "goldtype" Right = Bool }
+	Optional = { Left = "demand" Right = DemandClause }
+}
+
+(Type DemandClause) = {
+	Optional = { Left = "factor" Right = NnDbl }
+	(Ch N Y) = { Left = "modifier" Right = DemandModifier }
+}
+
+(Type DemandModifier) = {
+	Inherits = FactorModifier
+	Optional = { Left = "factor" Right = NnDbl }
+	
+	Inherits = ProvinceTrigger
+	
+}
+
+(Type TradeGoodChance) = {
+	Optional = { Left = "factor" Right = NnDbl }
+	(Ch N Y) = { Left = "modifier" Right = TradeGoodChanceModifier }
+}
+
+(Type TradeGoodChanceModifier) = {
+	Inherits = FactorModifier
+	Optional = { Left = "factor" Right = NnDbl }
+	
+	Inherits = TradeGoodChanceModifierProvinceTrigger
+	
+}
+
+(Type TradeGoodChanceModifierProvinceTrigger) = { ContextValidator = TradeGoodChanceModifierProvinceTrigger }
+(ContextValidator TradeGoodChanceModifierProvinceTrigger) = {
+	Inherits = ProvinceTrigger
+	FromTarget = Country
+}
+
+(Type TradeNodeFile) = {
+	(Ch N N) = { Left = { Type = String } Right = TradeNodeDef UniqueId = Left }
+}
+
+(Type TradeNodeDef) = {
+	(CheckKey "*" Left IfNot = NoCheckKey)
+	
+	Single = { Left = "location" Right = Province }
+	Single = {
+		Left = "members"
+		Right = {
+			Child = { Left = "Item" Right = { Type = Province } UniqueId = Right }
+		} 
+	}
+	(Ch N Y) = { Left = "outgoing" Right = {
+		Single = { Left = "name" Right = TradeNode }
+		Single = { Left = "path" Right = { (PdoList Y) = { Type = Province } } }
+		Single = { Left = "control" Right = { (PdoList N) = { Type = Double } } }
+	} }
+	Optional = { Left = "color" Right = AnyColor }
+	Optional = { Left = "inland" Right = Bool }
+	Optional = { Left = "end" Right = Bool }
+}
+
+Global = {
+(Type CountryTriggerFromProvince) = { ContextValidator = CountryTriggerFromProvince }
+
+(ContextValidator CountryTriggerFromProvince) = {
+	Inherits = CountryTrigger
+	FromTarget = Province
+}
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,113 @@
+
+(Type PlotTrigger) = {
+	AddContextValidatorStackFrame = Char
+	Optional = { Left = "target" Right = MaybeEventTargetChar }
+	Inherits = CharTrigger
+}
+	
+(Type PlotCommand) = {
+	AddContextValidatorStackFrame = Char
+	Optional = { Left = "target" Right = MaybeEventTargetChar }
+	Inherits = CharCommand
+}
+
+
+(Type PlotMaybeLimitCommand) = {
+	Inherits = PlotCommand
+	Inherits = PlotLimit
+}
+
+(Type PlotLimit) = {
+	# XXX? AddContextValidatorStackFrame = Char
+	Optional = { Left = "limit" Right = CharTrigger }
+}
+
+(Type PlotTriggerWithCount) = {
+	Inherits = PlotTrigger
+	Optional = { Left = "count" Right = PInt }
+}
+
+(Type PlotRandomCommand) = {
+	Inherits = PlotCommand
+	Inherits = PlotLimit # Needs to be outside so that the AddStackFrame doesn't interfere with PlotCommand
+	
+	(Ch N Y) = { Left = "preferred_limit" Right = PlotTrigger }
+}
+
+{% for name, source, target in [
+		('unknown_plotter', 'Char', 'Plot'),
+		('known_plotter', 'Char', 'Plot'),
+		('plotter', 'Char', 'Plot'),
+	] %}
+{{ ctx.calls.make_any_and_random_scopes(name, source, target) }}
+{% endfor %}
+
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = "plot_target_char" Right = CharTrigger }
+	(N N) = { Left = "any_plot_backer" Right = CharTriggerWithCount }
+	(N N) = { Left = "any_backed_character" Right = CharTriggerWithCount }
+	(N N) = { Left = "plot_target_title" Right = TitleTrigger }
+	(N N) = { Left = "supported_claimant_title" Right = TitleTrigger }
+	(N N) = { Left = "plot_target_province" Right = ProvTrigger }
+
+	(N Y) = { Left = "plot_months" Right =  { NnInt VariableName } } # comparison operators
+	(N Y) = { Left = "num_of_plot_backers" Right =  { NnInt VariableName } } # Can have comparison operators
+	(Y  ) = { Left = "is_plot_target_of" Right = { OnlyCharTarget } }
+	(Y  ) = { Left = "is_plot_active" Right = Bool }
+	(N Y) = { Left = "plot_power" Right = { NnDbl VariableName } } # Can have comparison operators
+	(N Y) = { Left = "plot_power_contribution" Right = {
+		Single = { Left = "plotter" Right = { MaybeEventTargetChar PrefixedCharId } }
+		Single = { Left = "power" Right = { NnDbl VariableName } }
+	} }
+	
+	(A Y) = { Left = "has_plot" Right = { Plot Bool OnlyCharTarget } }
+	(A Y) = { Left = "has_ambition" Right = { Objective Bool OnlyCharTarget } }
+	(N Y) = { Left = "plot_is_known_by" Right = { MaybeEventTargetChar PrefixedCharId } }
+	
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N N) = { Left = "any_plot_backer" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "plot_target_char" Right = CharCommand }
+	(N N) = { Left = "random_backed_character" Right = CharRandomCommand }
+	(N N) = { Left = "any_backed_character" Right = CharMaybeLimitCommand }
+	(N N) = { Left = "supported_claimant" Right = CharCommand }
+	
+	(N N) = { Left = "supported_claimant_title" Right = TitleCommand }
+	(N N) = { Left = "plot_target_title" Right = TitleCommand }
+	
+	(N N) = { Left = "plot_target_province" Right = ProvCommand }
+	
+	(Y  ) = { Left = "activate_plot" Right = Bool }
+	(N Y) = { Left = "back_plot" Right = OnlyCharTarget }
+	(N Y) = { Left = "reverse_back_plot" Right = OnlyCharTarget }
+	(Y  ) = { Left = "reveal_plot" Right = { Yes MaybeEventTargetChar } }
+	(Y  ) = { Left = "leave_plot" Right = OnlyCharTarget }
+	(Y  ) = { Left = "reverse_leave_plot" Right = OnlyCharTarget }
+	(N Y) = { Left = "reveal_plot_w_message" Right = { Yes OnlyCharTarget } }
+	
+	(Y  ) = { Left = "cancel_plot" Right = { Plot Yes } }
+	(Y  ) = { Left = "plot_succeeds" Right = Yes }
+	(Y  ) = { Left = "ambition_succeeds" Right = Yes }
+	(Y  ) = { Left = "cancel_ambition" Right = Yes }
+	(Y  ) = { Left = "add_ambition" Right = Objective }
+	(N Y) = { Left = "change_plot_power" Right = { Double VariableName } }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

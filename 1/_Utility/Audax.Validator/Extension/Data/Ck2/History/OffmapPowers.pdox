@@ -1,0 +1,44 @@
+﻿
+
+Global = {
+(Type OffmapPowerHistoryFile) = {
+	# Warns about anything not matching the specified format.
+	# Also warns if anything is not actually a province
+	ExaminePath = {
+		IfTrue = {
+			NameWithoutExtension = {
+				Or = {
+					Not = { (Match "^(?<offmap>[^.]+)$") = { } }
+					(Match "^(?<offmap>[^.]+)$") = {
+						(Capture offmap) = { Not = { IsInstanceOf = OffmapPower } }
+					}
+				}
+			}
+		}
+		
+		Then = {
+			(Warn "Invalid offmap power history file (name in wrong format or ID does not exist): $File$" "Invalid file")
+			Skip
+		}
+	}
+	
+	CheckDatesOrdered
+	CheckDupsInDates
+	
+	(Ch N N) = { Left = "! INJECTED" Right = DateClause }
+	(Ch N N) = { Left = { Type = Date } Right = DateClause }
+}
+}
+
+
+(Type DateClause) = {
+	Optional = { Left = "holder" Right = { CharacterId 0 } }
+	Optional = { Left = "status" Right = OffmapStatus }
+	Optional = { Left = "policy" Right = OffmapPolicy }
+	Optional = { Left = "name" Right = Key }
+	
+	Inherits = OffmapPowerCommand
+}
+
+
+

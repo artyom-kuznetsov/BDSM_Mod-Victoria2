@@ -1,0 +1,91 @@
+(ContextValidator ProvTrigger) = { Members = {
+	(N Y) = { Left = "has_province_modifier" Right = { NormalModifier TriggeredModifier } }
+	(N Y) = { Left = "has_instances_of_province_modifier" Right = { # comparisons so can't dedup RHS
+		Single = { Left = { "name" "modifier" } Right = { NormalModifier TriggeredModifier } }
+		Single = { Left = "amount" Right = { NnInt VariableName } } # Can comp ops against 0
+	} }
+
+} }
+
+(ContextValidator CharTrigger) = { Members = {
+	(N Y) = { Left = "has_dynasty_modifier" Right = NormalModifier }
+	(N Y) = { Left = "has_character_modifier" Right = { NormalModifier TriggeredModifier } }
+	# No dedup-right because can have comparison operators which we don't check
+	(N Y) = { Left = "has_instances_of_character_modifier" Right = {
+		Single = { Left = { "name" "modifier" } Right = { NormalModifier TriggeredModifier } }
+		Single = { Left = "amount" Right = { NnInt VariableName } } # Can take comparison operators
+	} }
+	# https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-92#post-19690931
+	# Check if this actually works
+	#(N Y) = { Left = "has_province_modifier" Right = { NormalModifier TriggeredModifier } }
+
+} }
+
+(ContextValidator TitleTrigger) = { Members = {
+	(N Y) = { Left = "has_holding_modifier" Right = { NormalModifier TriggeredModifier } }
+	# Comparison operators
+	(N Y) = { Left = "has_instances_of_holding_modifier" Right = {
+		Single = { Left = { "name" "modifier" } Right = { NormalModifier TriggeredModifier } }
+		Single = { Left = "amount" Right = { NnInt VariableName } }
+	} }
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	# Okay to duplicate RHS for stacking modifiers: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-142#post-24887851
+	(N N) = { Left = "add_province_modifier" Right = AddModifier }
+	(N Y) = { Left = "remove_province_modifier" Right = NormalModifier }
+	(N Y) = { Left = "remove_province_modifiers" Right = {
+		Single = { Left = { "name" "modifier" } Right = NormalModifier }
+		Single = { Left = "amount" Right = { PInt VariableName } }
+	} }
+
+} }
+
+(ContextValidator CharCommand) = { Members = {
+	(N Y) = { Left = "add_dynasty_modifier" Right = NormalModifier }
+	(N Y) = { Left = "remove_dynasty_modifier" Right = NormalModifier }
+
+	# Okay to duplicate RHS for stacking modifiers: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-142#post-24887851
+	(N N) = { Left = "add_character_modifier" Right = AddModifier }
+	(N Y) = { Left = "remove_character_modifier" Right = NormalModifier }
+	(N Y) = { Left = "remove_character_modifiers" Right = {
+		Single = { Left = { "name" "modifier" } Right = NormalModifier }
+		Single = { Left = "amount" Right = { PInt VariableName } }
+	} }
+	# Okay to duplicate RHS for stacking modifiers: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-142#post-24887851
+	(N N) = { Left = "add_province_modifier" Right = AddModifier }
+	(N Y) = { Left = "remove_province_modifier" Right = NormalModifier }
+
+	# Okay to duplicate RHS for stacking modifiers: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-142#post-24887851
+	(N N) = { Left = "add_society_modifier" Right = AddModifier }
+	(N Y) = { Left = "remove_society_modifier" Right = NormalModifier }
+	(N Y) = { Left = "remove_society_modifiers" Right = {
+		Single = { Left = "modifier" Right = NormalModifier }
+		Single = { Left = "amount" Right = { PInt VariableName } }
+	} }
+} }
+
+(ContextValidator TitleCommand) = { Members = {
+	# Okay to duplicate RHS for stacking modifiers: https://forum.paradoxplaza.com/forum/index.php?threads/the-validator-find-errors-quickly-and-with-minimal-pain.597480/page-142#post-24887851
+	(N N) = { Left = "add_holding_modifier" Right = AddModifier }
+	(N Y) = { Left = "remove_holding_modifier" Right = NormalModifier }
+	(N Y) = { Left = "remove_holding_modifiers" Right = {
+		Single = { Left = { "name" "modifier" } Right = NormalModifier }
+		Single = { Left = "amount" Right = { PInt VariableName } }
+	} }
+
+} }
+
+(Type AddModifier Example = "{ name = X [duration = Y] ... }") = {
+	Single = { Left = { "modifier" "name" } Right = NormalModifier }
+	Optional = { Left = { "duration" "days" "months" "years" } Right = { -1 PInt } }
+	Optional = { Left = "hidden" Right = Bool }
+	Optional = { Left = "inherit" Right = Bool }
+	Optional = { Left = "stacking" Right = Bool }
+
+}
+
+
+
+
+

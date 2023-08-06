@@ -1,0 +1,40 @@
+(ContextValidator ProvTrigger) = { Members = {
+	(N Y) = { Left = "has_higher_tech_than" Right = { MaybeEventTargetCharProv PrefixedCharId } }
+	(N N) = { Left = { Type = Tech } Right = NnInt } # Can have comparison operators
+
+} }
+
+# For nomads
+(ContextValidator CharTrigger) = { Members = {
+	(N N) = { Left = { Type = Tech } Right = NnInt } # Can have comparison operators
+
+} }
+
+(ContextValidator ProvCommand) = { Members = {
+	(N N) = { Left = "change_random_eco_tech" Right = { Int VariableName } }
+	(N N) = { Left = "change_random_civ_tech" Right = { Int VariableName } }
+	(N N) = { Left = "change_random_mil_tech" Right = { Int VariableName } }
+	(N N) = { Left = "steal_random_tech" Right = { MaybeEventTargetCharProvTitle CharTargetExcludingMaybeEventTarget Province AnyTitle } }
+
+} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
