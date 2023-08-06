@@ -36,6 +36,41 @@ political_decisions = {
 			}
 			set_country_flag = the_meiji_restoration_flag
 			capital = 1649
+			
+			any_country = {
+				clr_country_flag = daimyo_flag
+			}
+		}
+	}
+	ainu_expedition_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = {
+				has_country_flag = korean_conquest_flag
+			}
+			primary_culture = japanese
+			owns = 1672
+			AIN = {
+				owns = 1643
+			}
+		}
+		
+		allow = {
+			AIN = {
+				OR = {
+					in_sphere = JAP
+					alliance_with = JAP
+					vassal_of = JAP
+				}
+			}
+			state_n_government = 1
+		}
+		
+		effect = {
+			prestige = 5
+			AIN = {
+				annex_to = THIS
+			}
 		}
 	}
 	korean_conquest_dec = {

@@ -14,9 +14,225 @@ country_event = {
 	option = {
 		name = "sengoku_EvtOptA"
 		set_country_flag = sengoku_flag
+		set_country_flag = daimyo_flag
 		add_country_modifier = {
 			name = sengoku_modifier
 			duration = -1
+		}
+		any_country = {
+			limit = {
+				primary_culture = japanese
+			}
+			set_country_flag = daimyo_flag
+		}
+		any_pop = {
+			limit = {
+				primary_culture = ainu
+			}
+			consciousness = 5
+			militancy = 5
+		}
+	}
+}
+country_event = {
+	title = "sengoku_tokugawa_annex_EvtName"
+	desc = "sengoku_annex_EvtDesc"
+	id = 57801
+	
+	trigger = {
+		primary_culture = japanese
+		owns = 1649
+		NOT = {
+			tag = TKG
+			tag = JAP
+		}
+		ai = no
+	}
+	
+	fire_only_once = yes
+	option = {
+		name = "sengoku_EvtOptA"
+		add_country_modifier = {
+			name = sengoku_win
+			duration = 180
+		}
+	}
+}
+
+country_event = {
+	title = "sengoku_satsuma_annex_EvtName"
+	desc = "sengoku_annex_EvtDesc"
+	id = 57802
+	
+	trigger = {
+		primary_culture = japanese
+		owns = 1661
+		NOT = {
+			tag = SAT
+			tag = JAP
+		}
+		ai = no
+	}
+	
+	fire_only_once = yes
+	option = {
+		name = "sengoku_EvtOptA"
+		add_country_modifier = {
+			name = sengoku_win
+			duration = 180
+		}
+	}
+}
+
+country_event = {
+	title = "sengoku_choshu_annex_EvtName"
+	desc = "sengoku_annex_EvtDesc"
+	id = 57803
+	
+	trigger = {
+		primary_culture = japanese
+		owns = 1638
+		NOT = {
+			tag = CHO
+			tag = JAP
+		}
+		ai = no
+	}
+	
+	fire_only_once = yes
+	option = {
+		name = "sengoku_EvtOptA"
+		add_country_modifier = {
+			name = sengoku_win
+			duration = 180
+		}
+	}
+}
+
+country_event = {
+	title = "sengoku_kyoto_annex_EvtName"
+	desc = "sengoku_annex_EvtDesc"
+	id = 57804
+	
+	trigger = {
+		primary_culture = japanese
+		owns = 1657
+		NOT = {
+			tag = KYO
+			tag = JAP
+		}
+		ai = no
+	}
+	
+	fire_only_once = yes
+	option = {
+		name = "sengoku_EvtOptA"
+		add_country_modifier = {
+			name = sengoku_win
+			duration = 180
+		}
+	}
+}
+
+country_event = {
+	title = "sengoku_kaga_annex_EvtName"
+	desc = "sengoku_annex_EvtDesc"
+	id = 57805
+	
+	trigger = {
+		primary_culture = japanese
+		owns = 1646
+		NOT = {
+			tag = KAG
+			tag = JAP
+		}
+		ai = no
+	}
+	
+	fire_only_once = yes
+	option = {
+		name = "sengoku_EvtOptA"
+		add_country_modifier = {
+			name = sengoku_win
+			duration = 180
+		}
+	}
+}
+
+country_event = {
+	title = "sengoku_uesugi_annex_EvtName"
+	desc = "sengoku_annex_EvtDesc"
+	id = 57806
+	
+	trigger = {
+		primary_culture = japanese
+		owns = 1653
+		NOT = {
+			tag = USG
+			tag = JAP
+		}
+		ai = no
+	}
+	
+	fire_only_once = yes
+	option = {
+		name = "sengoku_EvtOptA"
+		add_country_modifier = {
+			name = sengoku_win
+			duration = 180
+		}
+	}
+}
+
+country_event = {
+	title = "sengoku_sendai_annex_EvtName"
+	desc = "sengoku_annex_EvtDesc"
+	id = 57807
+	
+	trigger = {
+		primary_culture = japanese
+		owns = 1668
+		NOT = {
+			tag = SEN
+			tag = JAP
+		}
+		ai = no
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "sengoku_EvtOptA"
+		add_country_modifier = {
+			name = sengoku_win
+			duration = 180
+		}
+	}
+}
+
+# UNIFICATION RAILROAD
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 57808
+	
+	trigger = {
+		primary_culture = japanese
+		JAP = {
+			exists = no
+		}
+		year = 1850
+	}
+	
+	mean_time_to_happen = 2
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+				primary_culture = japanese
+			}
+			annex_to = THIS
 		}
 	}
 }
