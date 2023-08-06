@@ -1,0 +1,22 @@
+country_event = {
+	title = "sengoku_EvtName"
+	desc = "sengoku_EvtDesc"
+	id = 57800
+	
+	trigger = {
+		primary_culture = japanese
+		ai = no
+		NOT = {
+			has_country_flag = sengoku_flag
+		}
+	}
+	
+	option = {
+		name = "sengoku_EvtOptA"
+		set_country_flag = sengoku_flag
+		add_country_modifier = {
+			name = sengoku_modifier
+			duration = -1
+		}
+	}
+}
