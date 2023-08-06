@@ -215,12 +215,16 @@ acquire_state_invasion = {
 		any_owned_province = {
 			OR = {
 				any_neighbor_province = { 
-					owned_by = THIS 
+					OR = {
+						owned_by = THIS 
+						controlled_by = THIS
+					}
 				}
 				AND = {
 					port = yes
 					THIS = { num_of_ports = 1 }
 				}
+				
 			}
 		}
 	}
@@ -726,7 +730,7 @@ sengoku = {
 	is_triggered_only = yes
 	months = 12
 	crisis = no
-	construction_speed = 1
+	construction_speed = 1.5
 	
 	badboy_factor = 0.4
 	prestige_factor = 2
@@ -2065,6 +2069,7 @@ demand_concession_casus_belli = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { has_country_flag = daimyo_flag }
 	}
 	
 	allowed_states = {
@@ -2146,6 +2151,7 @@ establish_protectorate_casus_belli = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { has_country_flag = daimyo_flag }
 	}
 	
 	po_annex = yes

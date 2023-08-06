@@ -37,6 +37,8 @@ political_decisions = {
 			set_country_flag = the_meiji_restoration_flag
 			capital = 1649
 			
+			remove_country_modifier = sengoku_modifier
+			
 			any_country = {
 				clr_country_flag = daimyo_flag
 			}
@@ -50,26 +52,46 @@ political_decisions = {
 			}
 			primary_culture = japanese
 			owns = 1672
-			AIN = {
-				owns = 1643
-			}
 		}
 		
 		allow = {
-			AIN = {
-				OR = {
-					in_sphere = JAP
-					alliance_with = JAP
-					vassal_of = JAP
+			OR = {
+				AND = {
+					AIN = {
+						OR = {
+							in_sphere = JAP
+							alliance_with = JAP
+							vassal_of = JAP
+						}
+					}
+					state_n_government = 1
 				}
 			}
-			state_n_government = 1
 		}
 		
 		effect = {
 			prestige = 5
-			AIN = {
-				annex_to = THIS
+			random_owned = {
+				limit = {
+					owner = {
+						exists = AIN
+					}
+				}
+				AIN = {
+					annex_to = THIS
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { exists = AIN }
+					}
+				}
+				AIN = {
+					all_core = {
+						add_core = THIS
+					}
+				}
 			}
 		}
 	}

@@ -1,10 +1,47 @@
+# UNIQUE INVENTIONS
+
+tokugawa_infantry = {
+	limit = { ideological_thought = 1 }
+	
+	chance = {
+		base = 0
+		modifier = {
+			factor = 100
+			has_country_flag = iron_discipline_flag
+		}
+	}
+	
+	effect = {
+		irregular = {
+			attack = 1
+			defence = 1
+		}
+		infantry = {
+			attack = 1
+			defence = 1
+		}
+		guard = {
+			attack = 1
+			defence = 1
+		}
+		cuirassier = {
+			attack = 1
+			defence = 1
+		}
+		morale = 0.2
+	}
+}
+
 family_planning = {
-	limit = { year = 1890 }
+	limit = { medicine = 1 }
 	chance = {
 		base = 100
 		modifier = {
 			factor = -100
-			civilized = no
+			OR = {
+				civilized = no
+				year = 1890
+			}
 		}
 	}
 	effect = {

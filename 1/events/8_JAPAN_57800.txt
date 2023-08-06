@@ -11,6 +11,8 @@ country_event = {
 		}
 	}
 	
+	picture = "shogun"
+	
 	option = {
 		name = "sengoku_EvtOptA"
 		set_country_flag = sengoku_flag
@@ -39,6 +41,8 @@ country_event = {
 	desc = "sengoku_annex_EvtDesc"
 	id = 57801
 	
+	picture = "shogun"
+	
 	trigger = {
 		primary_culture = japanese
 		owns = 1649
@@ -63,6 +67,8 @@ country_event = {
 	title = "sengoku_satsuma_annex_EvtName"
 	desc = "sengoku_annex_EvtDesc"
 	id = 57802
+	
+	picture = "shogun"
 	
 	trigger = {
 		primary_culture = japanese
@@ -89,6 +95,8 @@ country_event = {
 	desc = "sengoku_annex_EvtDesc"
 	id = 57803
 	
+	picture = "shogun"
+	
 	trigger = {
 		primary_culture = japanese
 		owns = 1638
@@ -113,6 +121,8 @@ country_event = {
 	title = "sengoku_kyoto_annex_EvtName"
 	desc = "sengoku_annex_EvtDesc"
 	id = 57804
+	
+	picture = "shogun"
 	
 	trigger = {
 		primary_culture = japanese
@@ -139,6 +149,8 @@ country_event = {
 	desc = "sengoku_annex_EvtDesc"
 	id = 57805
 	
+	picture = "shogun"
+	
 	trigger = {
 		primary_culture = japanese
 		owns = 1646
@@ -164,6 +176,8 @@ country_event = {
 	desc = "sengoku_annex_EvtDesc"
 	id = 57806
 	
+	picture = "shogun"
+	
 	trigger = {
 		primary_culture = japanese
 		owns = 1653
@@ -188,6 +202,8 @@ country_event = {
 	title = "sengoku_sendai_annex_EvtName"
 	desc = "sengoku_annex_EvtDesc"
 	id = 57807
+	
+	picture = "shogun"
 	
 	trigger = {
 		primary_culture = japanese
@@ -224,7 +240,13 @@ country_event = {
 		year = 1850
 	}
 	
-	mean_time_to_happen = 2
+	mean_time_to_happen = {
+		months = 2
+		modifier = {
+			ai = no
+			factor = 0.01
+		}
+	}
 	
 	option = {
 		name = "noloc"
@@ -233,6 +255,192 @@ country_event = {
 				primary_culture = japanese
 			}
 			annex_to = THIS
+		}
+	}
+}
+
+# UNIQUE MODIFIERS
+# SATSUMA
+country_event = {
+	title = "satsuma_start_EvtName"
+	desc = "satsuma_start_EvtDesc"
+	id = 57809
+	trigger = {
+		tag = SAT
+	}
+	
+	picture = "navy_japan"
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "satsuma_start_EvtOptA"
+		set_country_flag = satsuma_ports_flag
+		1661 = {
+			add_province_modifier = {
+				name = satsuma_port_modifier
+				duration = -1
+			}
+		}
+		1662 = {
+			add_province_modifier = {
+				name = satsuma_port_modifier
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = satsuma_modifier
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	title = "satsuma_ports_EvtName"
+	desc = "satsuma_ports_EvtDesc"
+	id = 57810
+	
+	picture = "navy_japan"
+	
+	trigger = {
+		has_country_flag = satsuma_ports_flag
+		owns = 1661
+		owns = 1662
+		OR = {
+			NOT = {
+				1661 = {
+					has_province_modifier = satsuma_port_modifier
+				}
+			}
+			NOT = {
+				1662 = {
+					has_province_modifier = satsuma_port_modifier
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "satsuma_ports_EvtOptA"
+		1661 = {
+			add_province_modifier = {
+				name = satsuma_port_modifier
+				duration = -1
+			}
+		}
+		1662 = {
+			add_province_modifier = {
+				name = satsuma_port_modifier
+				duration = -1
+			}
+		}
+	}
+	
+}
+
+# TOKUGAWA
+country_event = {
+	title = "tokugawa_start_EvtName"
+	desc = "tokugawa_start_EvtDesc"
+	id = 57811
+	trigger = {
+		tag = TKG
+	}
+	
+	picture = "samurai"
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "tokugawa_start_EvtOptA"
+		set_country_flag = iron_discipline_flag
+		invention = tokugawa_infantry
+		CUSTOM_TOOLTIP_57811 = {}
+	}
+}
+
+# KYOTO
+country_event = {
+	title = "kyoto_start_EvtName"
+	desc = "kyoto_start_EvtDesc"
+	id = 57812
+	trigger = {
+		tag = KYO
+	}
+	
+	picture = "industrial"
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "kyoto_start_EvtOptA"
+		add_country_modifier = {
+			name = kyoto_modifier
+			duration = -1
+		}
+	}
+}
+
+# KAGA
+country_event = {
+	title = "kaga_start_EvtName"
+	desc = "kaga_start_EvtDesc"
+	id = 57813
+	trigger = {
+		tag = KAG
+	}
+	
+	picture = "royal_japan"
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "kaga_start_EvtOptA"
+		add_country_modifier = {
+			name = kaga_modifier
+			duration = -1
+		}
+	}
+}
+
+# DATE
+country_event = {
+	title = "sendai_start_EvtName"
+	desc = "sendai_start_EvtDesc"
+	id = 57814
+	trigger = {
+		tag = SEN
+	}
+	
+	picture = "army_datte"
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "sendai_start_EvtOptA"
+		add_country_modifier = {
+			name = sendai_modifier
+			duration = -1
 		}
 	}
 }
