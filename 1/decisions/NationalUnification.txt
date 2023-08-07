@@ -191,58 +191,6 @@ political_decisions = {
 			factor = 1
 		}
 	}	
-	form_scandinavia = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			OR = {
-				is_culture_group = scandinavian
-				is_culture_group = bears
-			}
-			NOT = {
-				exists = SCA
-			}
-		}
-		
-		allow = {
-			is_greater_power = yes
-			prestige = 45
-			war = no
-			SCA = {
-				all_core = {
-					OR = {
-						owned_by = THIS
-						owner = {
-							in_sphere = THIS
-						}
-					}
-				}
-			}
-		}
-		
-		effect = {
-			prestige = 20
-			change_tag = SCA
-			add_accepted_culture = swedish
-			add_accepted_culture = danish
-			add_accepted_culture = norwegian
-			add_accepted_culture = finnish
-			add_accepted_culture = icelandic
-			add_accepted_culture = sami
-			any_country = {
-				limit = {
-					NOT = {
-						is_greater_power = yes
-					}
-					is_culture_group = scandinavian
-					in_sphere = THIS
-				}
-				country_event = { id=11101 days=0 }
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
 	
 	concede_finland = {
 		potential = {

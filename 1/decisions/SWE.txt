@@ -1,4 +1,129 @@
 political_decisions = {
+	swe_economic_boom_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			OR = { 
+				tag = SWE 
+				tag = SCA 
+			}
+			NOT = { has_country_flag = swe_economic_boom_flag }
+		}
+		allow = {
+			has_country_flag = industrial_revolution_flag
+			money = 300000
+			scientific_management = 1
+			late_classical_theory = 1
+			clean_coal = 1
+		}
+		effect = {
+			set_country_flag = swe_economic_boom_flag
+			add_country_modifier = { name = swe_economic_boom_modifier duration = 1825 }
+			money = -300000
+		}
+	}
+	integration_of_baltics_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			OR = {
+				owns = 349
+				owns = 354
+				owns = 360
+			}
+			empiricism = 1
+			OR = {
+				tag = RUS
+				tag = SWE
+				tag = SCA
+			}
+			NOT = { has_country_flag = baltics_integrated_flag }
+		}
+		allow = {
+			biologism = 1
+			phenomenalism = 1
+			money = 1000000
+			citizens_rights = all_voting_pops
+		}
+		effect = {
+			add_accepted_culture = estonian
+			any_pop = {
+				limit = {
+					has_pop_culture = estonian
+				}
+				consciousness = 10
+				militancy = 10
+			}
+			set_country_flag = baltics_integrated_flag
+			money = -1000000
+		}
+	}
+	form_scandinavia = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			OR = {
+				is_culture_group = scandinavian
+				is_culture_group = bears
+			}
+			NOT = {
+				exists = SCA
+			}
+		}
+		
+		allow = {
+			322 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			334 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			372 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			367 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			313 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			321 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			307 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+		}
+		
+		effect = {
+			prestige = 20
+			change_tag = SCA
+			any_country = {
+				limit = {
+					NOT = {
+						is_greater_power = yes
+					}
+					is_culture_group = scandinavian
+					in_sphere = THIS
+				}
+				country_event = { id=11101 days=0 }
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 	svenska_pansarbats_foreningen = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
@@ -23,15 +148,14 @@ political_decisions = {
 				average_militancy = 3
 			}
 			steel_steamers = 1
+			money = 15000
 		}
 		
 		effect = {
-			any_pop = {
-				money = -0.1
-			}
+			money = -15000
 			329 = {
 				sub_unit = {
-					type = cruiser
+					type = battleship
 					value = current
 				}
 			}
@@ -55,13 +179,15 @@ political_decisions = {
 		
 		allow = {
 			ideological_thought = 1
+			money = 200000
 		}
 		
 		effect = {
 			add_country_modifier = {
 				name = folkis_educates
-				duration = -1
+				duration = 14600
 			}
+			money = -200000
 		}
 	}
 	
@@ -78,6 +204,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = the_vega_expedition_went
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -106,6 +233,7 @@ political_decisions = {
 			NOT = {
 				has_global_flag = motala_verkstad_expanded
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -119,10 +247,11 @@ political_decisions = {
 		
 		effect = {
 			325 = {
-				add_province_modifier = {
-					name = motala_verkstad
-					duration = -1
-				}
+				life_rating = 3
+			}
+			add_country_modifier = {
+				name = motala_verkstad
+				duration = -1
 			}
 			prestige = 5
 			set_global_flag = motala_verkstad_expanded
@@ -146,6 +275,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = court_yard_speech_held
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -166,6 +296,77 @@ political_decisions = {
 				
 			}
 			set_country_flag = court_yard_speech_held
+		}
+	}
+	greenland_oil_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = swedish
+			owns = 251
+			NOT = {
+				has_country_flag = greenland_oil_flag
+			}
+			organic_chemistry = 1
+		}
+		
+		allow = {
+			electricity = 1
+			money = 500000
+		}
+		
+		effect = {
+			money = -500000
+			
+			2636 = {
+				trade_goods = oil
+				add_province_modifier = {
+					name = selector_pop_boost_modifier
+					duration = 365
+				}
+			}
+			2591 = {
+				trade_goods = oil
+				add_province_modifier = {
+					name = selector_pop_boost_modifier
+					duration = 365
+				}
+			}
+			251 = {
+				trade_goods = oil
+				add_province_modifier = {
+					name = selector_pop_boost_modifier
+					duration = 365
+				}
+			}
+			set_country_flag = greenland_oil_flag
+		}
+	}
+	norway_oil_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = swedish
+			owns = 308
+			NOT = {
+				has_country_flag = norway_oil_flag
+			}
+			organic_chemistry = 1
+		}
+		
+		allow = {
+			electricity = 1
+			money = 500000
+		}
+		
+		effect = {
+			money = -500000
+			
+			306 = {
+				trade_goods = oil
+			}
+			308 = {
+				trade_goods = oil
+			}
+			set_country_flag = norway_oil_flag
 		}
 	}
 }
