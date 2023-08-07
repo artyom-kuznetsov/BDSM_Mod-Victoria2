@@ -137,7 +137,10 @@ political_decisions = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = spanish_education_program_flag }
-			primary_culture = spanish
+			OR = {
+				primary_culture = spanish
+				primary_culture = turkish
+			}
 			positivism = 1
 		}
 		

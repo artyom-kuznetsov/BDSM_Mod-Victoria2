@@ -754,6 +754,13 @@ emigration_chance =
 	}
 	
 	modifier = {
+		factor = -0.15
+		country = {
+			has_country_flag = uesugi_flag
+		}
+	}
+	
+	modifier = {
 		factor = 0.1
 		country = { citizens_rights = primary_culture_only }
 		NOT = { 
@@ -777,6 +784,11 @@ assimilation_chance =
 {
 	factor = 0.5
 
+	modifier = {
+    	factor = -0.5
+		has_culture_core = yes
+	}
+	
 	modifier = {
 		factor = -30
 		state_scope = { is_colonial = yes }
@@ -847,6 +859,22 @@ assimilation_chance =
 	group = {
 		modifier = {
 			factor = -0.3
+			militancy = 3
+		}
+		modifier = {
+			factor = -0.3
+			militancy = 4
+		}
+		modifier = {
+			factor = -0.3
+			militancy = 5
+		}
+		modifier = {
+			factor = -0.3
+			militancy = 6
+		}
+		modifier = {
+			factor = -0.3
 			militancy = 7
 		}
 		modifier = {
@@ -863,7 +891,15 @@ assimilation_chance =
 	group = {
 		modifier = {
 			factor = -0.3
-			consciousness = 7
+			consciousness = 4
+		}
+		modifier = {
+			factor = -0.3
+			consciousness = 5
+		}
+		modifier = {
+			factor = -0.3
+			consciousness = 6
 		}
 		modifier = {
 			factor = -0.3
@@ -876,8 +912,15 @@ assimilation_chance =
 	}
 
 	modifier = {
-		factor = -1
+		factor = -0.2
 		is_accepted_culture = yes
+	}
+
+	modifier = {
+		factor = 0.5
+		country = {
+			has_country_flag = choshu_flag
+		}
 	}
 
 

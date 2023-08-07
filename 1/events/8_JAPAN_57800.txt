@@ -435,3 +435,79 @@ country_event = {
 		}
 	}
 }
+
+# UESUGI
+country_event = {
+	title = "uesugi_start_EvtName"
+	desc = "uesugi_start_EvtDesc"
+	id = 57815
+	trigger = {
+		tag = USG
+	}
+	
+	picture = "confucian"
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "uesugi_start_EvtOptA"
+		set_country_flag = uesugi_flag
+		CUSTOM_TOOLTIP_57815 = { }
+	}
+}
+
+# UESUGI WESTERN
+country_event = {
+	title = "uesugi_civilized_EvtName"
+	desc = "uesugi_civilized_EvtDesc"
+	id = 57816
+	trigger = {
+		has_country_flag = uesugi_flag
+		civilized = yes
+	}
+	
+	picture = "confucian"
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "uesugi_civilized_EvtOptA"
+		activate_technology = military_plans
+		activate_technology = market_structure
+		activate_technology = positivism
+		activate_technology = battleship_column_doctrine
+		activate_technology = mechanical_production
+	}
+}
+
+# CHOSHU
+country_event = {
+	title = "choshu_start_EvtName"
+	desc = "choshu_start_EvtDesc"
+	id = 57817
+	trigger = {
+		tag = CHO
+	}
+	
+	picture = "diplomacy"
+	
+	mean_time_to_happen = {
+		months = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "choshu_start_EvtOptA"
+		set_country_flag = choshu_flag
+		add_country_modifier = {
+			name = choshu_modifier
+			duration = -1
+		}
+		CUSTOM_TOOLTIP_57817 = { }
+	}
+}
