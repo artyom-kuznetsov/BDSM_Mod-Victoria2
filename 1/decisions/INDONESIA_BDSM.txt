@@ -1,0 +1,155 @@
+political_decisions = {
+	dei_declare_independence_dec = {
+		potential = {
+			tag = DEI
+			vassal_of = NET
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = dei_declare_independence_flag }
+		}
+		
+		allow = {
+			ideological_thought = 1
+		}
+		
+		effect = {
+			prestige = 5
+			set_country_flag = dei_declare_independence_dec
+			overlord = {
+				release_vassal = THIS
+			}
+		}
+	}
+	form_indonesia_dec = {
+		potential = {
+			is_culture_group = indonesian
+			is_independant = yes
+			INA = { exists = no }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			state_n_government = 1
+			1405 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1413 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1416 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1418 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1431 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1426 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1398 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			1399 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+		}
+		
+		effect = {
+			prestige = 10
+			change_tag = INA
+			add_accepted_culture = union
+			
+			any_country = {
+				limit = {
+					is_culture_group = indonesian
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+				}
+				country_event = { id=11101 days=0 }
+			}
+			ATJ = { all_core = { add_core = THIS } }
+			BRU = { all_core = { add_core = THIS } }
+			PPA = { all_core = { add_core = THIS } }
+			BAL = { all_core = { add_core = THIS } }
+			capital = 1413
+		}
+	}
+	conquer_indochina_dec = {
+		potential = {
+			tag = INA
+			owns = 1401
+			NOT = { has_country_flag = hide_all_decs_flag }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			revolution_n_counterrevolution = 1
+			owns = 1385
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			add_accepted_culture = vietnamese
+			add_accepted_culture = thai
+			add_accepted_culture = burmese
+		}
+	}
+	conquer_philippines_indonesia_dec = {
+		potential = {
+			tag = INA
+			owns = 1433
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			any_owned_province = {
+				is_core = PHI
+			}
+			nationalism_n_imperialism = 1
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			add_accepted_culture = filipino
+		}
+	}
+	conquer_ceylon_indonesia_dec = {
+		potential = {
+			tag = INA
+			nationalism_n_imperialism = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			owns = 1322
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			add_accepted_culture = sinhala
+			ENG_1321 = { add_core = THIS }
+		}
+	}
+}
