@@ -362,3 +362,37 @@ country_event = { # DEBUFF FOR OWNING NETHERLANDS
 		remove_country_modifier = netherland_occupation_modifier
 	}
 }
+
+province_event = {
+	id = 9565 #Agriculture Decision Change
+	picture = "farming"
+	title = "mine_rgo_change_EvtName"
+	desc = "mine_rgo_change_EvtDesc"
+
+	is_triggered_only = yes
+	
+
+	option = {
+		name = "mine_rgo_change_EvtOptA" #IRON
+		owner = { clr_country_flag = deciding_flag }
+		province_selector = -1
+		trade_goods = iron
+	}
+	option = {
+		name = "mine_rgo_change_EvtOptB" #COAL
+		owner = { clr_country_flag = deciding_flag }
+		province_selector = -1
+		trade_goods = coal
+	}
+	option = {
+		name = "mine_rgo_change_EvtOptC" #Сера
+		owner = { clr_country_flag = deciding_flag }
+		province_selector = -1
+		trade_goods = sulphur
+	}
+	option = {
+		name = "mine_rgo_change_EvtOptCancel"
+		owner = { clr_country_flag = deciding_flag }
+		money = 50000
+	}
+}

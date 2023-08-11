@@ -230,4 +230,43 @@ political_decisions = {
 			}
 		}
 	}
+	selector_change_mine_dec = {
+		potential = {
+			NOT = { has_country_flag = open_money_transfers_flag }
+			ai = no
+			NOT = { has_country_flag = deciding_flag }
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = iron
+					trade_goods = coal
+					trade_goods = sulphur
+				}
+			}
+		}	
+		allow = {
+			any_owned_province = {
+				has_building = province_selector
+				OR = {
+					trade_goods = iron
+					trade_goods = coal
+					trade_goods = sulphur
+				}
+			}
+		}
+		effect = {
+			set_country_flag = deciding_flag
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					OR = {
+						trade_goods = iron
+						trade_goods = coal
+						trade_goods = sulphur
+					}
+				}
+				province_event = { id = 9565  days = 0 }
+			}
+		}
+	}
 }
