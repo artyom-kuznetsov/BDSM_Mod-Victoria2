@@ -111,11 +111,11 @@ political_decisions = {
 			change_tag = SCA
 			any_country = {
 				limit = {
-					NOT = {
-						is_greater_power = yes
+					primary_culture = swedish
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
 					}
-					is_culture_group = scandinavian
-					in_sphere = THIS
 				}
 				country_event = { id=11101 days=0 }
 			}
