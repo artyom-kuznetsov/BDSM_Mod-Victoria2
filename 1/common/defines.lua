@@ -61,7 +61,7 @@ country = {
 	NEWSPAPER_TIMEOUT_PERIOD = 890, -- the max period for news that may be printed. The probability is decreased with time.
 	NEWSPAPER_MAX_TENSION = 750, -- when tension of printing gets this high, the newspaper will attempt to be printed immediately.
 	NAVAL_BASE_SUPPLY_SCORE_BASE = 10, -- base value that is powered by level of naval base. Determines the naval supplying capabilities.
-	NAVAL_BASE_SUPPLY_SCORE_EMPTY = 2, -- min value for coastal provinces with no naval base.
+	NAVAL_BASE_SUPPLY_SCORE_EMPTY = 5, -- min value for coastal provinces with no naval base.
 	NAVAL_BASE_NON_CORE_SUPPLY_SCORE = 0.3, -- modifier for supply score for naval bases that are not in core provinces.
 	COLONIAL_POINTS_FROM_SUPPLY_FACTOR = 1,
 	COLONIAL_POINTS_FOR_NON_CORE_BASE = 1,
@@ -189,10 +189,10 @@ military = {
 	RECON_SIEGE_EFFECT = 0.5, -- multiplier to effect of recon on speeding up sieges
 	SIEGE_ATTRITION = 2, -- fixed attrition on sieging units
 	BASE_MILITARY_TACTICS = 1.5, -- base mil tactics before tech
-	NAVAL_LOW_SUPPLY_DAMAGE_SUPPLY_STATUS = 0.25, -- how little supply is acceptable before getting damage to STR
-	NAVAL_LOW_SUPPLY_DAMAGE_DAYS_DELAY = 30, -- delay in days before the STR will get damage due to no supplies. Sometimes supply status may jump bcoz of the market.
+	NAVAL_LOW_SUPPLY_DAMAGE_SUPPLY_STATUS = 0.75, -- how little supply is acceptable before getting damage to STR
+	NAVAL_LOW_SUPPLY_DAMAGE_DAYS_DELAY = 1, -- delay in days before the STR will get damage due to no supplies. Sometimes supply status may jump bcoz of the market.
 	NAVAL_LOW_SUPPLY_DAMAGE_MIN_STR = 5.0, -- when low supply, the navy will supply STR damage but no less then X% to avoid destruction (value from 0 to 100.0)
-	NAVAL_LOW_SUPPLY_DAMAGE_PER_DAY = 0.25, -- damage to navies STR per day if totally 0% supplies (value from 0 to 100.0)
+	NAVAL_LOW_SUPPLY_DAMAGE_PER_DAY = 0.5, -- damage to navies STR per day if totally 0% supplies (value from 0 to 100.0)
 },
 
 diplomacy = {
