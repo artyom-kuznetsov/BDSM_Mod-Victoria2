@@ -684,6 +684,41 @@ political_decisions = {
 			}
 		}
 	}
+	deoccupy_dec = {
+		alert = no
+		potential = {
+			ai = no
+			war = yes
+			NOT = {
+				has_country_modifier = recently_deoccupied_modifier
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+			capital_scope = {
+				controller = {
+					ai = no
+				}
+				NOT = {
+					controlled_by = THIS
+				}
+			}
+		}
+		
+		allow = {
+			
+		}
+		
+		effect = {
+			capital_scope = {
+				controller = {
+					country_event = 57079
+				}
+			}
+			add_country_modifier = {
+				name = recently_deoccupied_modifier
+				duration = 30
+			}
+		}
+	}
 	
 	revoke_voting_dec = {
 		alert = no
