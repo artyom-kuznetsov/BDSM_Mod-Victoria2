@@ -927,11 +927,11 @@ promote_to =
 			}
 			modifier = {
 				factor = 1.5
-				military_spending = 0.34
+				military_spending = 0.294
 			}
 			modifier = {
 				factor = 1.5
-				military_spending = 0.39
+				military_spending = 0.299
 			}
 			modifier = {
 				factor = 1.5
@@ -943,11 +943,11 @@ promote_to =
 			}
 			modifier = {
 				factor = 1
-				military_spending = 0.54
+				military_spending = 0.494
 			}
 			modifier = {
 				factor = 1
-				military_spending = 0.59
+				military_spending = 0.499
 			}
 			modifier = {
 				factor = 1
@@ -959,11 +959,11 @@ promote_to =
 			}
 			modifier = {
 				factor = 0.5
-				military_spending = 0.74
+				military_spending = 0.694
 			}
 			modifier = {
 				factor = 0.5
-				military_spending = 0.79
+				military_spending = 0.699
 			}
 			modifier = {
 				factor = 0.5
@@ -1033,12 +1033,6 @@ promote_to =
 	}
 	craftsmen = {
 		factor = 0.01
-		modifier = {
-			factor = -100
-			is_primary_culture = no
-			is_accepted_culture = no
-			country = { has_country_flag = disable_non_accepted_craftsmen }
-		}
 		group = {
 			modifier = {
 				factor = 2
@@ -1108,24 +1102,31 @@ promote_to =
 					is_colonial = yes
 				}
 		}
-		modifier = {
-			factor = 30
-				country = { ai = yes }
-				OR = {
-					is_culture_group = east_asian
-					is_culture_group = south_asian
-				}
-				location = { total_pops = 2000000 }
-		}
-		modifier = {
-			factor = 20
-				country = { ai = yes }
-				is_culture_group = american_cultures
-		}
-		modifier = {
-			factor = -10
-				country = { ai = yes }
-				is_culture_group = germanic
+		group = {
+			modifier = {
+				factor = -5
+				craftsmen = 0.2
+			}
+			modifier = {
+				factor = -2
+				craftsmen = 0.22
+			}
+			modifier = {
+				factor = -2
+				craftsmen = 0.24
+			}
+			modifier = {
+				factor = -2
+				craftsmen = 0.26
+			}
+			modifier = {
+				factor = -2
+				craftsmen = 0.28
+			}
+			modifier = {
+				factor = -2
+				craftsmen = 0.3
+			}
 		}
 	}
 	clergymen =

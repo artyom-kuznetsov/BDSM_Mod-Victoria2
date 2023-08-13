@@ -98,6 +98,7 @@ political_decisions = {
 			tag = INA
 			owns = 1401
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = conquer_indochina_flag }
 			nationalism_n_imperialism = 1
 		}
 		
@@ -112,6 +113,7 @@ political_decisions = {
 			add_accepted_culture = vietnamese
 			add_accepted_culture = thai
 			add_accepted_culture = burmese
+			set_country_flag = conquer_indochina_flag
 		}
 	}
 	conquer_philippines_indonesia_dec = {
@@ -119,6 +121,7 @@ political_decisions = {
 			tag = INA
 			owns = 1433
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = conquer_philippines_indonesia_flag }
 		}
 		
 		allow = {
@@ -132,6 +135,7 @@ political_decisions = {
 			prestige = 10
 			badboy = 5
 			add_accepted_culture = filipino
+			set_country_flag = conquer_philippines_indonesia_flag
 		}
 	}
 	conquer_ceylon_indonesia_dec = {
@@ -139,6 +143,8 @@ political_decisions = {
 			tag = INA
 			nationalism_n_imperialism = 1
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = conquer_ceylon_indonesia_flag }
+			
 		}
 		
 		allow = {
@@ -150,6 +156,7 @@ political_decisions = {
 			badboy = 5
 			add_accepted_culture = sinhala
 			ENG_1321 = { add_core = THIS }
+			set_country_flag = conquer_ceylon_indonesia_flag
 		}
 	}
 }

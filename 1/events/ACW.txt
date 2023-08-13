@@ -2000,7 +2000,7 @@ province_event = {
 }
 
 #Secessionist Sentiments
-province_event = {
+country_event = {
 	id = 16250
 	title = "EVTNAME16250"
 	desc = "EVTDESC16250"
@@ -2009,12 +2009,10 @@ province_event = {
 		NOT = {
 			is_core = CSA
 		}
-		owner = {
-			tag = USA
-			slavery = yes_slavery
-			NOT = {
-				has_global_flag = american_civil_war_has_happened
-			}
+		tag = USA
+		slavery = yes_slavery
+		NOT = {
+			has_global_flag = american_civil_war_has_happened
 		}
 		state_scope = {
 			is_slave = yes
@@ -2025,7 +2023,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 3
+		months = 12
 		modifier = {
 			factor = 0.5
 			yes_slavery = 15
@@ -2042,7 +2040,12 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA16250"
-		state_scope = {
+		any_owned = {
+			limit = {
+				state_scope = {
+					is_slave = yes
+				}
+			}
 			any_owned = {
 				add_core = CSA
 			}
