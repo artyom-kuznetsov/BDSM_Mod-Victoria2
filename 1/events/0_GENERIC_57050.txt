@@ -383,7 +383,7 @@ country_event = {
 	}
 }
 
-# деаютт мю ярпнийс йнпюакеи б бниме
+# О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫О©╫О©╫О©╫
 #country_event = {
 #	title = "War_Shipbuilding_EvtName"
 #	desc = "War_Shipbuilding_EvtDesc"
@@ -410,7 +410,7 @@ country_event = {
 #		}
 #	}
 #}
-# йнпюакеярпнмхе бнеммнцн бпелемх сапюрэ
+# О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
 #country_event = {
 #	title = "War_Shipbuilding_EvtName"
 #	desc = "War_Shipbuilding_End_EvtDesc"
@@ -430,7 +430,7 @@ country_event = {
 #	}
 #}
 
-### йюохрскъжхъ
+### О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 country_event = {
 	title = "Capitulation_EvtName"
 	desc = "Capitulation_EvtDesc"
@@ -1195,6 +1195,28 @@ country_event = {
 				}
 				change_controller = FROM
 			}
+		}
+	}
+}
+
+country_event = {
+	id = 57080
+	title = "revoke_voting_EvtName"
+	desc = "revoke_voting_EvtDesc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "revoke_voting_EvtDecline"
+	}
+	option = {
+		name = "revoke_voting_EvtAccept"
+		political_reform = none_voting
+		political_reform = party_appointed
+		badboy = 2
+		any_pop = {
+			militancy = 5
+			consciousness = 5
 		}
 	}
 }
