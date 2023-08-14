@@ -407,11 +407,11 @@ promote_to =
 			}
 			modifier = {
 				factor = 1.5
-				military_spending = 0.294
+				military_spending = 0.34
 			}
 			modifier = {
 				factor = 1.5
-				military_spending = 0.299
+				military_spending = 0.39
 			}
 			modifier = {
 				factor = 1.5
@@ -423,11 +423,7 @@ promote_to =
 			}
 			modifier = {
 				factor = 1
-				military_spending = 0.494
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.499
+				military_spending = 0.54
 			}
 			modifier = {
 				factor = 1
@@ -438,12 +434,8 @@ promote_to =
 				military_spending = 0.69
 			}
 			modifier = {
-				factor = 0.5
-				military_spending = 0.694
-			}
-			modifier = {
-				factor = 0.5
-				military_spending = 0.699
+				factor = 1
+				military_spending = 0.74
 			}
 			modifier = {
 				factor = 0.5
@@ -462,48 +454,6 @@ promote_to =
 				military_spending = 0.99
 			}
 		}
-		group = {
-			modifier = {
-				factor = -2
-				soldiers = 0.005
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.01
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.015
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.02
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.025
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.03
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.035
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.04
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.045
-			}
-			modifier = {
-				factor = -2
-				soldiers = 0.05
-			}			
-		}
 		modifier = {
 			factor = 5
 			country = {
@@ -513,12 +463,6 @@ promote_to =
 	}
 	clerks = {
 		factor = 0.01
-		modifier = {
-			factor = -100
-			is_primary_culture = no
-			is_accepted_culture = no
-			country = { has_country_flag = disable_non_accepted_craftsmen }
-		}
 		group = {
 			modifier = {
 				factor = 1
@@ -1004,44 +948,18 @@ promote_to =
 				}
 			}
 		}
-		modifier = {
-			factor = 30
-				country = { ai = yes }
-				OR = {
-					is_culture_group = east_asian
-					is_culture_group = south_asian
-				}
-				location = { total_pops = 2000000 }
-		}
-		modifier = {
-			factor = 20
-				country = { ai = yes }
-				is_culture_group = american_cultures
-		}
-		modifier = {
-			factor = -10
-				country = { ai = yes }
-				is_culture_group = germanic
-		}
 	}
 	farmers = {
 		factor = 0.01
 		modifier = {
 			factor = 10
-			location = { is_colonial = no }
+			location = { is_colonial = yes }
 		}
 		modifier = {
 			factor = 10
 			location = { is_colonial = yes }
 			NOT = { is_accepted_culture = yes }
 			NOT = { is_primary_culture = yes }
-		}
-		modifier = {
-			factor = 10
-			OR = {
-				is_culture_group = east_asian
-				is_culture_group = south_asian
-			}
 		}
 		modifier = {
 			factor = -100
