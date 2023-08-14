@@ -2007,19 +2007,14 @@ country_event = {
 	
 	trigger = {
 		NOT = {
-			is_core = CSA
+			has_country_flag = csa_cores_flag
 		}
 		tag = USA
-		slavery = yes_slavery
 		NOT = {
 			has_global_flag = american_civil_war_has_happened
 		}
-		state_scope = {
-			is_slave = yes
-		}
 		yes_slavery = 10
-		average_consciousness = 5
-		continent = north_america
+		average_consciousness = 3
 	}
 	
 	mean_time_to_happen = {
@@ -2046,16 +2041,15 @@ country_event = {
 					is_slave = yes
 				}
 			}
-			any_owned = {
-				add_core = CSA
+			add_core = CSA
+		}
+		set_country_flag = csa_cores_flag
+		any_pop = {
+			dominant_issue = {
+				value = yes_slavery
+				factor = 0.2
 			}
-			any_pop = {
-				dominant_issue = {
-					value = yes_slavery
-					factor = 0.2
-				}
-				militancy = 1
-			}
+			militancy = 1
 		}
 	}
 }
