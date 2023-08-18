@@ -47,6 +47,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9559
 		country_event = 9560
 		country_event = 9561
+		country_event = 9562
 		country_event = 57073
 		country_event = 57604
 	}
@@ -398,5 +399,45 @@ province_event = {
 		owner = { clr_country_flag = deciding_flag }
 		# Audax Validator "." Ignore_NEXT
 		money = 50000
+	}
+}
+
+country_event = { # GERMANY
+	title = "noloc"
+	desc = "noloc"
+	id = 9562
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		GER = {
+			all_core = { 
+				limit = {
+					culture = north_german
+				}
+				secede_province = THIS 
+			} 
+		}
+		activate_technology = nationalism_n_imperialism
+		
+		diplomatic_influence = {
+			who = BAV
+			value = 400
+		}
+		diplomatic_influence = {
+			who = WUR
+			value = 400
+		}
+		diplomatic_influence = {
+			who = BAD
+			value = 400
+		}
+		FRA_412 = {
+			secede_province = THIS
+		}
+		371 = {
+			secede_province = THIS
+		}
 	}
 }

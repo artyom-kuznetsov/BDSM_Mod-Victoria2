@@ -159,6 +159,7 @@ political_decisions = {
 		
 		effect = {
 			prestige = 20
+			change_tag = GER
 			add_accepted_culture = north_german
 			add_accepted_culture = south_german
 			any_country = {
@@ -169,7 +170,7 @@ political_decisions = {
 						vassal_of = THIS
 					}
 				}
-				country_event = { id=11101 days=0 }
+				annex_to = THIS
 			}
 			any_country = {
 				limit = {
@@ -180,7 +181,6 @@ political_decisions = {
 				}
 				country_event = 57603
 			}
-			change_tag = GER
 		}
 		ai_will_do = {
 			factor = 1

@@ -83,7 +83,9 @@ political_decisions = {
 					controlled_by = THIS
 				}
 				state_scope = {
-					add_province_modifier = { name = scorched_earth_modifier duration = 730 }
+					any_owned = {
+						add_province_modifier = { name = scorched_earth_modifier duration = 730 }
+					}
 				}
 				# Audax Validator "." Ignore_NEXT
 				province_selector = -1

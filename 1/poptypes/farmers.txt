@@ -549,24 +549,6 @@ migration_target =
 
 promote_to =
 {
-	farmers = {
-		factor = 0.01
-		modifier = {
-			factor = 10
-			location = { is_colonial = no }
-		}
-		modifier = {
-			factor = 10
-			location = { is_colonial = yes }
-			NOT = { is_accepted_culture = yes }
-			NOT = { is_primary_culture = yes }
-		}
-		modifier = {
-			factor = -100
-			location = { NOT = { has_pop_type = farmers } }
-		}
-	}
-	
 	bureaucrats =
 	{
 		factor = 0.01
