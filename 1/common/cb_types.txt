@@ -490,7 +490,10 @@ conquest_claimed = {
 			}
 			AND = {
 				THIS = { has_country_flag = latin_american_claim_flag }
-				primary_culture = central_american
+				OR = {
+					primary_culture = central_american
+					tag = MOR
+				}
 			}
 			AND = {
 				THIS = { has_country_flag = korean_conquest_flag }

@@ -90,33 +90,3 @@ country_event = {
 		relation = { who = RUS value = -75 }
 	}
 }
-
-country_event = {
-		
-	id = 31102 # Flight to Ankara
-	
-	trigger = {
-		tag = TUR
-		NOT = { is_greater_power = yes }
-		capital = 860
-		NOT = { owns = 817 }
-		NOT = { owns = 816 }
-		NOT = { owns = 830 }
-		owns = 876
-
-	}
-
-	mean_time_to_happen = {
-		months = 1
-	}
-
-	title = "EVTNAME31102" #Flight from Istanbul
-	desc = "EVTDESC31102" #Our position in Istanbul is no longer secure. We should move our government to a safer place.
-	picture = "administration"
-		
-	option = {
-		name = "EVTOPTA31102" #We have been ultimately driven from Europe...
-		prestige = -10
-		capital = 876
-	}
-}
