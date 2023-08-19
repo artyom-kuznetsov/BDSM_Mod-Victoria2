@@ -1,4 +1,25 @@
 political_decisions = {
+	turkish_military_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = turkish_military_dec }
+			primary_culture = turkish
+			ideological_thought = 1
+		}
+		
+		allow = {
+			muzzle_loaded_rifles = 1
+			military_plans = 1
+		}
+		
+		effect = {
+			prestige = 5
+			set_country_flag = turkish_military_dec
+			political_reform = ref_sizeable_military_budget
+		}
+	}
+	
 	integrate_greece_tur_dec = {
 		alert = yes
 		potential = {
