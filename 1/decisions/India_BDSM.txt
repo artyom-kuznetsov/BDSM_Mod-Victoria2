@@ -116,6 +116,9 @@ political_decisions = {
 	mge_form_dec = {
 		potential = {
 			primary_culture = avadhi
+			NOT = {
+				exists = MGE
+			}
 		}
 		
 		allow = {
@@ -128,12 +131,12 @@ political_decisions = {
 		
 		effect = {
 			prestige = 20
-			change_tag = MGE
 			HND = {
 				all_core = {
 					add_core = THIS
 				}
 			}
+			change_tag = MGE
 		}
 	}
 }
