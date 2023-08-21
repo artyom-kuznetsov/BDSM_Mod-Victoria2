@@ -363,6 +363,7 @@ war_for_mil_access = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		THIS = { war = yes ai = no }
+		NOT = { tag = WBK }
 	}
 	
 	on_add = {
@@ -385,6 +386,7 @@ conquest = {
 	crisis = no
 	
 	can_use = {
+		NOT = { tag = WBK }
 		NOT = { is_our_vassal = THIS }
 		OR = {
 			NOT = { number_of_states = 3 }
@@ -490,10 +492,7 @@ conquest_claimed = {
 			}
 			AND = {
 				THIS = { has_country_flag = latin_american_claim_flag }
-				OR = {
-					primary_culture = central_american
-					tag = MOR
-				}
+				primary_culture = central_american
 			}
 			AND = {
 				THIS = { has_country_flag = korean_conquest_flag }
@@ -503,7 +502,12 @@ conquest_claimed = {
 				THIS = { tag = SWE }
 				primary_culture = swedish
 			}
+			AND = {
+				THIS = { primary_culture = spanish }
+				tag = MOR
+			}
 		}
+		NOT = { tag = WBK }
 	}
 
 	badboy_factor = 1
@@ -597,6 +601,7 @@ conquest_small = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { tag = WBK }
 	}
 
 	badboy_factor = 0.7
@@ -728,6 +733,7 @@ add_to_sphere = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { tag = WBK }
 	}
 	
 	is_valid = {
@@ -1366,6 +1372,7 @@ place_in_the_sun = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { tag = WBK }
 	}
 	
 	allowed_states = {
@@ -1830,6 +1837,7 @@ dismantle_forts = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { tag = WBK }
 	}
 
 	# THIS - us
@@ -1939,6 +1947,7 @@ make_puppet = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { tag = WBK }
 	}
 	
 	# THIS - us
@@ -2054,6 +2063,7 @@ humiliate = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { tag = WBK }
 	}	
 	on_add = {
 		move_issue_percentage = { 
@@ -2096,6 +2106,7 @@ demand_reparations = {
 				NOT = { year = 1870 } 
 			}
 		}
+		NOT = { tag = WBK }
 	}
 	
 	on_add = {
@@ -2144,6 +2155,7 @@ demand_concession_casus_belli = {
 			}
 		}
 		NOT = { has_country_flag = daimyo_flag }
+		NOT = { tag = WBK }
 	}
 	
 	allowed_states = {
@@ -2226,6 +2238,7 @@ establish_protectorate_casus_belli = {
 			}
 		}
 		NOT = { has_country_flag = daimyo_flag }
+		NOT = { tag = WBK }
 	}
 	
 	po_annex = yes

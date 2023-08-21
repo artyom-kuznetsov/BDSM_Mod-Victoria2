@@ -274,6 +274,7 @@ political_decisions = {
 					trade_goods = sulphur
 				}
 			}
+			NOT = { has_country_modifier = selector_change_mine_cooldown }
 		}
 		effect = {
 			set_country_flag = deciding_flag
@@ -291,6 +292,10 @@ political_decisions = {
 					id = 9565  
 					days = 0 
 				}
+			}
+			add_country_modifier = {
+				name = selector_change_mine_cooldown
+				duration = 730
 			}
 		}
 	}
