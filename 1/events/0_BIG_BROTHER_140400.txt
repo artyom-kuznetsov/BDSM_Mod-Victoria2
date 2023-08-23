@@ -355,143 +355,144 @@ country_event = { # POPS LOSE LITERACY
 }
 
 # CHECK TAXES
-country_event = {
-	id = 140404
-	title = "noloc"
-	desc = "noloc"
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_country = {
-			limit = {
-				OR = {
-					AND = {
-						NOT = { rich_tax = 0.01 }
-						NOT = {
-							has_country_modifier = very_low_taxes_rich_trmod
-						}
-					}
-					AND = {
-						rich_tax = 0.24
-						NOT = { rich_tax = 0.26 }
-						NOT = {
-							has_country_modifier = low_taxes_rich_trmod
-						}
-					}
-					AND = {
-						rich_tax = 0.49
-						NOT = { rich_tax = 0.51 }
-						NOT = {
-							has_country_modifier = rich_taxes_rich_trmod
-						}
-					}
-					AND = {
-						rich_tax = 0.74
-						NOT = { rich_tax = 0.76 }
-						NOT = {
-							has_country_modifier = high_taxes_rich_trmod
-						}
-					}
-					AND = {
-						rich_tax = 0.99
-						NOT = {
-							has_country_modifier = very_high_taxes_rich_trmod
-						}
-					}
-				}
-			}
-			add_country_modifier = {
-				name = rich_taxation_changed_modifier
-				duration = 30
-			}
-		}
-		any_country = {
-			limit = {
-				OR = {
-					AND = {
-						NOT = { middle_tax = 0.01 }
-						NOT = {
-							has_country_modifier = very_low_taxes_medium_trmod
-						}
-					}
-					AND = {
-						middle_tax = 0.24
-						NOT = { middle_tax = 0.26 }
-						NOT = {
-							has_country_modifier = low_taxes_medium_trmod
-						}
-					}
-					AND = {
-						middle_tax = 0.49
-						NOT = { middle_tax = 0.51 }
-						NOT = {
-							has_country_modifier = middle_taxes_medium_trmod
-						}
-					}
-					AND = {
-						middle_tax = 0.74
-						NOT = { middle_tax = 0.76 }
-						NOT = {
-							has_country_modifier = high_taxes_medium_trmod
-						}
-					}
-					AND = {
-						middle_tax = 0.99
-						NOT = {
-							has_country_modifier = very_high_taxes_medium_trmod
-						}
-					}
-				}
-			}
-			add_country_modifier = {
-				name = middle_taxation_changed_modifier
-				duration = 30
-			}
-		}
-		any_country = {
-			limit = {
-				OR = {
-					AND = {
-						NOT = { poor_tax = 0.01 }
-						NOT = {
-							has_country_modifier = very_low_taxes_poor_trmod
-						}
-					}
-					AND = {
-						poor_tax = 0.24
-						NOT = { poor_tax = 0.26 }
-						NOT = {
-							has_country_modifier = low_taxes_poor_trmod
-						}
-					}
-					AND = {
-						poor_tax = 0.49
-						NOT = { poor_tax = 0.51 }
-						NOT = {
-							has_country_modifier = medium_taxes_poor_trmod
-						}
-					}
-					AND = {
-						poor_tax = 0.74
-						NOT = { poor_tax = 0.76 }
-						NOT = {
-							has_country_modifier = high_taxes_poor_trmod
-						}
-					}
-					AND = {
-						poor_tax = 0.99
-						NOT = {
-							has_country_modifier = very_high_taxes_poor_trmod
-						}
-					}
-				}
-			}
-			add_country_modifier = {
-				name = poor_taxation_changed_modifier
-				duration = 30
-			}
-		}
-	}
-}
+#country_event = {
+#	id = 140404
+#	title = "noloc"
+#	desc = "noloc"
+#	
+#	is_triggered_only = yes
+#	
+#	option = {
+#		name = "noloc"
+#		any_country = {
+#			limit = {
+#				OR = {
+#					AND = {
+#						NOT = { rich_tax = 0.01 }
+#						NOT = {
+#							has_country_modifier = very_low_taxes_rich_trmod
+#						}
+#					}
+#					AND = {
+#						rich_tax = 0.24
+#						NOT = { rich_tax = 0.26 }
+#						NOT = {
+#							has_country_modifier = low_taxes_rich_trmod
+#						}
+#					}
+#					AND = {
+#						rich_tax = 0.49
+#						NOT = { rich_tax = 0.51 }
+#						NOT = {
+#							has_country_modifier = rich_taxes_rich_trmod
+#						}
+#					}
+#					AND = {
+#						rich_tax = 0.74
+#						NOT = { rich_tax = 0.76 }
+#						NOT = {
+#							has_country_modifier = high_taxes_rich_trmod
+#						}
+#					}
+#					AND = {
+#						rich_tax = 0.99
+#						NOT = {
+#							has_country_modifier = very_high_taxes_rich_trmod
+#						}
+#					}
+#				}
+#			}
+#			add_country_modifier = {
+#				name = rich_taxation_changed_modifier
+#				duration = 30
+#			}
+#		}
+#		any_country = {
+#			limit = {
+#				OR = {
+#					AND = {
+#						NOT = { middle_tax = 0.01 }
+#						NOT = {
+#							has_country_modifier = very_low_taxes_medium_trmod
+#						}
+#					}
+#					AND = {
+#						middle_tax = 0.24
+#						NOT = { middle_tax = 0.26 }
+#						NOT = {
+#							has_country_modifier = low_taxes_medium_trmod
+#						}
+#					}
+#					AND = {
+#						middle_tax = 0.49
+#						NOT = { middle_tax = 0.51 }
+#						NOT = {
+#							has_country_modifier = middle_taxes_medium_trmod
+#						}
+#					}
+#					AND = {
+#						middle_tax = 0.74
+#						NOT = { middle_tax = 0.76 }
+#						NOT = {
+#							has_country_modifier = high_taxes_medium_trmod
+#						}
+#					}
+#					AND = {
+#						middle_tax = 0.99
+#						NOT = {
+#							has_country_modifier = very_high_taxes_medium_trmod
+#						}
+#					}
+#				}
+#			}
+#			add_country_modifier = {
+#				name = middle_taxation_changed_modifier
+#				duration = 30
+#			}
+#		}
+#		any_country = {
+#			limit = {
+#				OR = {
+#					AND = {
+#						NOT = { poor_tax = 0.01 }
+#						NOT = {
+#							has_country_modifier = very_low_taxes_poor_trmod
+#						}
+#					}
+#					AND = {
+#						poor_tax = 0.24
+#						NOT = { poor_tax = 0.26 }
+#						NOT = {
+#							has_country_modifier = low_taxes_poor_trmod
+#						}
+#					}
+#					AND = {
+#						poor_tax = 0.49
+#						NOT = { poor_tax = 0.51 }
+#						NOT = {
+#							has_country_modifier = medium_taxes_poor_trmod
+#						}
+#					}
+#					AND = {
+#						poor_tax = 0.74
+#						NOT = { poor_tax = 0.76 }
+#						NOT = {
+#							has_country_modifier = high_taxes_poor_trmod
+#						}
+#					}
+#					AND = {
+#						poor_tax = 0.99
+#						NOT = {
+#							has_country_modifier = very_high_taxes_poor_trmod
+#						}
+#					}
+#				}
+#			}
+#			add_country_modifier = {
+#				name = poor_taxation_changed_modifier
+#				duration = 30
+#			}
+#		}
+#	}
+#}
+#
