@@ -56,6 +56,7 @@ political_decisions = {
 			}
 		}
 	}
+	
 	turkish_expansion_route_dec = {
 		alert = yes
 		potential = {
@@ -221,6 +222,69 @@ political_decisions = {
 					tag = ENG
 				}
 			}
+		}
+	}
+	
+	vassalize_egypt_dec = {
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = vassalize_egypt_flag }
+			EGY = {
+				exists = yes
+				NOT = {
+					vassal_of = THIS
+				}
+			}
+		}
+		
+		allow = {
+			913 = { owned_by = THIS }
+			919 = { owned_by = THIS }
+			894 = { owned_by = THIS }
+			NOT = {
+				truce_with = EGY
+			}
+		}
+		
+		effect = {
+			set_country_flag = vassalize_egypt_flag
+			
+			TUR = {
+				war = {
+					target = EGY
+					attacker_goal = {
+						casus_belli = make_puppet
+					}
+					defender_goal = {
+						casus_belli = demand_reparations
+					}
+				}
+			}
+			badboy = -5
+		}
+	}
+	
+	annex_egypt_dec = {
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = annex_egypt_flag }
+			EGY = {
+				vassal_of = THIS
+			}
+		}
+		
+		allow = {
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = annex_egypt_flag
+			EGY = {
+				annex_to = THIS
+			}
+			badboy = 5
 		}
 	}
 }
