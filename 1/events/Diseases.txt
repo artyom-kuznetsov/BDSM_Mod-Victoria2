@@ -9,6 +9,8 @@ country_event = {
 		NOT = {
 			poor_strata_everyday_needs = 0.8
 		}
+		NOT = { has_country_modifier = epidemy_cooldown_modifier }
+		
 	}
 	
 	mean_time_to_happen = {
@@ -28,7 +30,7 @@ country_event = {
 		}
 		modifier = {
 			factor = 1.5
-			organic_chemistry = 1
+			medicine = 1
 		}
 	}
 	
@@ -103,6 +105,7 @@ country_event = {
 		NOT = {
 			poor_strata_everyday_needs = 0.90
 		}
+		NOT = { has_country_modifier = epidemy_cooldown_modifier }
 	}
 	
 	mean_time_to_happen = {
@@ -121,27 +124,15 @@ country_event = {
 		}
 		modifier = {
 			factor = 1.5
+			medicine = 1
+		}
+		modifier = {
+			factor = 1.5
 			organic_chemistry = 1
 		}
 		modifier = {
 			factor = 1.5
 			average_consciousness = 4
-		}
-		modifier = {
-			factor = 1.1
-			year = 1850
-		}
-		modifier = {
-			factor = 1.1
-			year = 1870
-		}
-		modifier = {
-			factor = 1.1
-			year = 1890
-		}
-		modifier = {
-			factor = 1.1
-			year = 1910
 		}
 	}
 	
@@ -180,6 +171,7 @@ country_event = {
 		NOT = {
 			has_country_modifier = pandemic_influenza
 		}
+		NOT = { has_country_modifier = epidemy_cooldown_modifier }
 	}
 	
 	mean_time_to_happen = {
@@ -200,6 +192,10 @@ country_event = {
 		}
 		modifier = {
 			factor = 1.5
+			medicine = 1
+		}
+		modifier = {
+			factor = 1.5
 			organic_chemistry = 1
 		}
 		modifier = {
@@ -207,6 +203,7 @@ country_event = {
 			any_neighbor_country = {
 				has_country_modifier = pandemic_influenza
 			}
+			NOT = { organic_chemistry = 1 }
 		}
 		
 	}
@@ -240,6 +237,7 @@ country_event = {
 		NOT = {
 			poor_strata_everyday_needs = 0.5
 		}
+		NOT = { has_country_modifier = epidemy_cooldown_modifier }
 	}
 	
 	mean_time_to_happen = {
@@ -256,6 +254,10 @@ country_event = {
 #				luxury_needs = 0.9
 #			}
 #		}
+		modifier = {
+			factor = 1.5
+			medicine = 1
+		}
 		modifier = {
 			factor = 1.5
 			organic_chemistry = 1

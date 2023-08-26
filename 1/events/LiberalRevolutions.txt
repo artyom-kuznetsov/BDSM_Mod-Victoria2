@@ -312,11 +312,12 @@ country_event = {
 		continent = europe
 		civilized = yes
 		NOT = { inorganic_chemistry = 1 }
+		NOT = { has_country_modifier = epidemy_cooldown_modifier }
 		
 	}
 	
 	mean_time_to_happen = {
-		months = 250
+		months = 350
 		modifier = {
 			factor = 0.8
 			any_owned_province = {
@@ -324,10 +325,10 @@ country_event = {
 			}
 		}
 		modifier = {
-			factor = 0.9
-				NOT = {
-					medicine = 1
-				}
+			factor = 0.8
+			NOT = {
+				medicine = 1
+			}
 		}
 		modifier = {
 			factor = 0.9

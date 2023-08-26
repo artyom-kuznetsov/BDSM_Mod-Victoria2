@@ -32,14 +32,6 @@ country_event = {
 			name = macau_exploitation_modifier
 			duration = -1
 		}
-		1493 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57103
-			}
-		}
 	}
 }
 
@@ -80,7 +72,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1493
+		1498 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = macau_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
@@ -106,7 +112,7 @@ country_event = {
 			primary_culture = beifaren
 			primary_culture = manchu
 		}
-		1496 = { # MACAU
+		1496 = { # HONKONG
 			controlled_by = THIS
 		}
 		NOT = { 
@@ -126,14 +132,6 @@ country_event = {
 		add_country_modifier = {
 			name = hongkong_exploitation_modifier
 			duration = -1
-		}
-		1493 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57106
-			}
 		}
 	}
 }
@@ -175,7 +173,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1493
+		1496 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = hongkong_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
@@ -222,14 +234,6 @@ country_event = {
 			name = shanghai_exploitation_modifier
 			duration = -1
 		}
-		1539 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57109
-			}
-		}
 	}
 }
 
@@ -270,7 +274,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1539
+		1538 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = shanghai_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
@@ -316,14 +334,6 @@ country_event = {
 			name = tsindao_exploitation_modifier
 			duration = -1
 		}
-		1565 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57112
-			}
-		}
 	}
 }
 
@@ -364,7 +374,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1565
+		1566 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = tsindao_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
@@ -411,14 +435,6 @@ country_event = {
 			name = weihaiwei_exploitation_modifier
 			duration = -1
 		}
-		1565 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57115
-			}
-		}
 	}
 }
 
@@ -459,7 +475,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1565
+		1569 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = weihaiwei_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
@@ -506,14 +536,6 @@ country_event = {
 			name = arthur_exploitation_modifier
 			duration = -1
 		}
-		1479 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57118
-			}
-		}
 	}
 }
 
@@ -554,7 +576,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1479
+		1481 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = arthur_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
@@ -601,14 +637,6 @@ country_event = {
 			name = tientsin_exploitation_modifier
 			duration = -1
 		}
-		1617 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57121
-			}
-		}
 	}
 }
 
@@ -649,7 +677,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1617
+		2569 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = tientsin_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
@@ -696,14 +738,6 @@ country_event = {
 			name = guangjou_exploitation_modifier
 			duration = -1
 		}
-		1495 = {
-			owner = {
-				limit = {
-					primary_culture = beifaren
-				}
-				country_event = 57124
-			}
-		}
 	}
 }
 
@@ -744,7 +778,21 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	is_triggered_only = yes
+	trigger = {
+		primary_culture = beifaren
+		owns = 1495
+		2615 = {
+			NOT = {
+				owned_by = THIS
+			}
+			NOT = {
+				owner = {
+					primary_culture = beifaren
+				}
+			}
+		}
+		NOT = { has_country_modifier = guangjou_exploitation_modifier_china }
+	}
 	
 	immediate = {
 		add_country_modifier = {
