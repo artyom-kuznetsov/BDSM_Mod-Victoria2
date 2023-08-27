@@ -2,12 +2,7 @@ political_decisions = {
 	citizenship_law_eng = {
 		potential = {
 			tag = ENG
-			OR = {
-				owns = 254
-				owns = 263
-				owns = 258
-				owns = 260
-			}
+			any_owned_province = { is_core = IRE }
 			year = 1845
 			NOT = {
 				has_country_flag = hide_all_decs_flag
