@@ -52,6 +52,42 @@ country_migration_target =
 	factor = 1
 
 	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1855 }
+	}
+	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1870 }
+	}
+	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1885 }
+	}
+	modifier = {
+		factor = 1.5
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = polynesia
+		}
+		NOT = { year = 1900 }
+	}
+	modifier = {
 		factor = 10
 		primary_culture = ashkenazi
 		THIS = {
@@ -62,63 +98,13 @@ country_migration_target =
 		}
 	}
 	modifier = {
-		factor = 10
-		primary_culture = boer
-		THIS = { has_pop_culture = boer }
-	}
-	modifier = {
-		factor = 10
-		OR = {
-			primary_culture = australian
-			primary_culture = anglo_canadian
-			primary_culture = british
-		}
-		NOT = { continent = europe }
-		THIS = { has_pop_culture = british }
-	}
-	modifier = {
-		factor = 10
-		primary_culture = british
-		continent = asia
-		THIS = { has_pop_culture = british }
-	}
-	modifier = {
-		factor = 0
-		NOT = {
-			OR = {
-				primary_culture = australian
-				primary_culture = anglo_canadian
-				primary_culture = british
-			}
-		}
-		THIS = { has_pop_culture = british }
-	}
-	modifier = {
-		factor = 10
-		is_culture_group = american_cultures
-		THIS = { has_pop_culture = irish }
-	}
-	modifier = {
-		factor = 0.01
-		NOT = { is_culture_group = american_cultures }
-		NOT = { is_culture_group = neo_european_cultures }
-		THIS = { has_pop_culture = irish }
-	}
-	modifier = {
 		factor = 0.9
 		OR = {
 			government = proletarian_dictatorship
+			government = bourgeois_dictatorship
 			government = presidential_dictatorship
 			government = fascist_dictatorship
 			government = absolute_monarchy
-		}
-	}
-	modifier = {
-		factor = 0
-		border_policy = quota_immigration
-		THIS = {
-			NOT = { literacy = 0.5 }
-			NOT = { has_pop_culture = irish }
 		}
 	}
 	modifier = {
@@ -148,7 +134,16 @@ country_migration_target =
 		factor = 0.95
 		war_exhaustion = 25
 	}
+	modifier = {
+		factor = 0.9
+		border_policy = quota_immigration
+	}
+	modifier = {
+		factor = 0.01
+		border_policy = closed_borders
+	}
 }
+
 
 migration_target = # POP SCOPE
 {

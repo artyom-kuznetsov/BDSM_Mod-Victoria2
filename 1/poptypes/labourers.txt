@@ -100,17 +100,6 @@ country_migration_target =
 		}
 	}
 	modifier = {
-		factor = 10
-		is_culture_group = american_cultures
-		THIS = { has_pop_culture = irish }
-	}
-	modifier = {
-		factor = 0.01
-		NOT = { is_culture_group = american_cultures }
-		NOT = { is_culture_group = neo_european_cultures }
-		THIS = { has_pop_culture = irish }
-	}
-	modifier = {
 		factor = 0.9
 		OR = {
 			government = proletarian_dictatorship
@@ -147,7 +136,16 @@ country_migration_target =
 		factor = 0.95
 		war_exhaustion = 25
 	}
+	modifier = {
+		factor = 0.9
+		border_policy = quota_immigration
+	}
+	modifier = {
+		factor = 0.01
+		border_policy = closed_borders
+	}
 }
+
 
 
 migration_target =
