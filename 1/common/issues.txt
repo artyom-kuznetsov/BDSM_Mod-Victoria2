@@ -469,10 +469,16 @@ political_reforms = {
 	
 	border_policy = {
 		closed_borders = {
+			global_immigrant_attract = -2
+			non_accepted_pop_consciousness_modifier = 0.01
+			allow = {
+				has_country_flag = is_totalitarian_flag
+			}
 		}
 		quota_immigration = {
 		}
 		open_borders = {
+			global_immigrant_attract = 0.02
 		}
 	}
 
@@ -528,7 +534,7 @@ political_reforms = {
 		confederalism = {
 			global_pop_consciousness_modifier = -0.02
 			suppression_points_modifier = -0.30
-			administrative_efficiency_modifier = -0.05
+			administrative_efficiency_modifier = -0.1
 			allow = {
 				NOT = {
 					number_of_states = 8
@@ -542,7 +548,6 @@ political_reforms = {
 			global_assimilation_rate = 0.05
 			allow = {
 				has_country_flag = has_rev_n_counterrev_flag
-				NOT = { has_country_flag = the_slavery_debate }
 				NOT = { has_country_flag = is_totalitarian_flag }
 			}
 		}
@@ -564,7 +569,8 @@ political_reforms = {
 			global_pop_consciousness_modifier = 0.02
 			global_pop_militancy_modifier = 0.01
 			allow = {
-				always = no
+				has_country_flag = has_rev_n_counterrev_flag
+				has_country_flag = is_totalitarian_flag
 			}
 		}
 	}

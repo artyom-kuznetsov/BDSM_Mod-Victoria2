@@ -517,7 +517,7 @@ emigration_chance =
 	}
 	
 	modifier = {
-		factor = -0.02
+		factor = 0.02
 		country = {
 			NOT = { vote_franschise = none_voting }
 		}
@@ -527,6 +527,13 @@ emigration_chance =
 		factor = -0.02
 		country = {
 			NOT = { press_rights = free_press }
+		}
+	}
+	
+	modifier = {
+		factor = -0.3
+		country = {
+			NOT = { border_policy = closed_borders }
 		}
 	}
 	
