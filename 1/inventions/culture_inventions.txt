@@ -32,22 +32,6 @@ tokugawa_infantry = {
 	}
 }
 
-family_planning = {
-	limit = { medicine = 1 }
-	chance = {
-		base = 100
-		modifier = {
-			factor = -100
-			OR = {
-				civilized = no
-				NOT = { year = 1890 }
-			}
-		}
-	}
-	effect = {
-		pop_growth = -0.0006
-	}
-}
 #romanticism
 romanticist_literature = {
 	limit = { romanticism = 1 }
