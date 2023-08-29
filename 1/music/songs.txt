@@ -175,6 +175,17 @@ song = {
 	}
 }
 song = {
+	name = "Zhizn I Smert.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+
+song = {
 	name = "Durnoi Vkus - Plastinki.mp3"
 	
 	chance = {
@@ -214,14 +225,16 @@ song = {
 		}
 		modifier = {
 			factor = -1
-			OR = {
-				government = absolute_monarchy
-				government = prussian_constitutionalism
-				government = hms_government
-				government = fascist_dictatorship
-				government = presidential_dictatorship
-				government = bourgeois_dictatorship
-				government = colonial_company
+			NOT = {
+				OR = {
+					government = absolute_monarchy
+					government = prussian_constitutionalism
+					government = hms_government
+					government = fascist_dictatorship
+					government = presidential_dictatorship
+					government = bourgeois_dictatorship
+					government = colonial_company
+				}
 			}
 		}
 	}
