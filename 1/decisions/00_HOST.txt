@@ -1,0 +1,86 @@
+political_decisions = {
+	host_show_host_decisions_dec = {
+		alert = no
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			OR = {
+				has_country_flag = is_host_flag
+				NOT = {
+					has_global_flag = host_determined_flag
+				}
+			}
+			ai = no
+		}
+		
+		allow = {
+			
+		}
+		
+		effect = {
+			set_country_flag = show_host_decs_flag
+			set_country_flag = hide_all_decs_flag
+		}
+	}
+	host_hide_host_decisions_dec = {
+		potential = {
+			has_country_flag = show_host_decs_flag
+		}
+		
+		allow = {
+			
+		}
+		
+		effect = {
+			clr_country_flag = hide_all_decs_flag
+			clr_country_flag = show_host_decs_flag
+		}
+	}
+	host_i_am_host_dec = {
+		potential = {
+			NOT = { has_global_flag = host_determined_flag }
+			has_country_flag = show_host_decs_flag
+		}
+		
+		allow = {
+			ai = no
+		}
+		
+		effect = {
+			set_country_flag = is_host_flag
+			set_global_flag = host_determined_flag
+			CUSTOM_TOOLTIP_IAMHOST = { }
+		}
+	}
+	host_singleplayer_dec = {
+		potential = {
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			NOT = { has_global_flag = singleplayer_flag }
+		}
+		
+		allow = {
+			ai = no
+		}
+		
+		effect = {
+			set_global_flag = singleplayer_flag
+			CUSTOM_TOOLTIP_SET_SINGLEPLAYER = { }
+		}
+	}
+	host_deact_singleplayer_dec = {
+		potential = {
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			has_global_flag = singleplayer_flag
+		}
+		
+		allow = {
+			ai = no
+		}
+		
+		effect = {
+			clr_global_flag = singleplayer_flag
+			CUSTOM_TOOLTIP_CLR_SINGLEPLAYER = { }
+		}
+	}
+}
