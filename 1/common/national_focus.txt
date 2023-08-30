@@ -115,6 +115,11 @@ promotion_focus =
 		soldiers = 0.2 #30% more likeley to become this type
 		icon = 15
 		outliner_show_as_percent = yes
+		limit = {
+			state_scope = {
+				is_colonial = no
+			}
+		}
 	}
 }
 
@@ -168,7 +173,6 @@ production_focus =
 		limit = { 
 			# Audax Validator "." Ignore_NEXT
 			ai = no
-			state_scope = { any_owned_province = { port = yes } }
 		}
 	}
 
