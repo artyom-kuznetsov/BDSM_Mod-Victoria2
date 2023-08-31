@@ -1,44 +1,44 @@
 political_decisions = {
-	abolish_serfdom = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			tag = RUS
-			has_country_flag = serfdom_not_abolished
-			#government = absolute_monarchy
-		}
-		allow = {
-			OR = {
-				AND = {
-					upper_house = {
-						ideology = liberal
-						value = 0.3
-					}
-					average_consciousness = 3
-				}	
-				AND = {
-					ruling_party_ideology = liberal
-					average_consciousness = 3
-				}
-				average_militancy = 3
-			}
-			money = 500000
-		}
-		effect = {
-			farmers = {
-				militancy = -2
-				consciousness = 1
-			}
-			labourers = {
-				militancy = -2
-				consciousness = 1
-			}
-			badboy = -4
-			years_of_research = 0.05
-			clr_country_flag = serfdom_not_abolished
-			political_reform = bankruptcy
-			money = -500000
-		}
-	}
+	#abolish_serfdom = {
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		tag = RUS
+	#		has_country_flag = serfdom_not_abolished
+	#		#government = absolute_monarchy
+	#	}
+	#	allow = {
+	#		OR = {
+	#			AND = {
+	#				upper_house = {
+	#					ideology = liberal
+	#					value = 0.3
+	#				}
+	#				average_consciousness = 3
+	#			}	
+	#			AND = {
+	#				ruling_party_ideology = liberal
+	#				average_consciousness = 3
+	#			}
+	#			average_militancy = 3
+	#		}
+	#		money = 500000
+	#	}
+	#	effect = {
+	#		farmers = {
+	#			militancy = -2
+	#			consciousness = 1
+	#		}
+	#		labourers = {
+	#			militancy = -2
+	#			consciousness = 1
+	#		}
+	#		badboy = -4
+	#		years_of_research = 0.05
+	#		clr_country_flag = serfdom_not_abolished
+	#		political_reform = bankruptcy
+	#		money = -500000
+	#	}
+	#}
 	establish_the_sovnarkom = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
