@@ -805,3 +805,37 @@ country_event = {
 		name = "TreatyPort_macau_exploited_china_EvtOptA"
 	}
 }
+
+country_event = { #  »“¿… ¿ÕÕ≈ —»–”≈“ √”¿Õ◊∆Œ”¬¿Õ‹
+	id = 57125
+	title = "treatyport_seized_EvtName"
+	desc = "guangjou_seized_EvtDesc"
+	picture = "opium_war"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		2615 = { secede_province = CHI }
+	}
+	
+	option = {
+		name = "treatyport_seized_EvtOptB"
+		prestige = -10
+	}
+	
+	option = {
+		name = "treatyport_seized_EvtOptA"
+		war = {
+			target = FROM
+			attacker_goal = {
+				casus_belli = take_treaty_port
+				state_province_id = 2615
+			}
+			badboy = -4
+			
+			defender_goal = {
+				casus_belli = demand_reparations
+			}
+		}
+	}
+}

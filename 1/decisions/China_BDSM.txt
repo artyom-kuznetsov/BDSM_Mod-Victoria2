@@ -32,7 +32,7 @@ political_decisions = {
 	chi_move_capital_dec = {
 		alert = yes
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
 			has_country_flag = formed_china_flag
 			NOT = {
 				has_country_flag = chi_capital_moved_flag
@@ -58,6 +58,45 @@ political_decisions = {
 		}
 		ai_will_do = {
 			factor = 1
+		}
+	}
+	
+	chi_annex_guangjouwan_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 2615 }
+			NOT = { has_country_flag = chi_annex_guangjouwan_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			#nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				2615 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			#revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_guangjouwan_flag
+			prestige = 3
+			badboy = 2
+			2615 = {
+				owner = {
+					country_event = 57125
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
 		}
 	}
 }
