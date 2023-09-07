@@ -1,7 +1,7 @@
 political_decisions = {
 # North-American Minors
 	apply_for_USA_statehood = {
-		potential = {	
+		potential = {
 			exists = USA
 			OR = {
 				tag = TEX
@@ -849,6 +849,27 @@ political_decisions = {
 				}
 			}
 		}
+	}
 	
+	conquer_canada_usa_dec = {
+		potential = {
+			tag = USA
+			state_n_government = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = conquer_canada_usa_flag }
+		}
+		
+		allow = {
+			owns = 51
+			owns = 13
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			add_accepted_culture = anglo_canadian
+			set_country_flag = conquer_canada_usa_flag
+		}
 	}
 }
