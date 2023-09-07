@@ -99,4 +99,26 @@ political_decisions = {
 			}
 		}
 	}
+	
+	conquer_manchuria_china_dec = {
+		potential = {
+			tag = CHI
+			state_n_government = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = conquer_manchuria_china_flag }
+		}
+		
+		allow = {
+			owns = 1479
+			owns = 1552
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			add_accepted_culture = manchu
+			set_country_flag = conquer_manchuria_china_flag
+		}
+	}
 }
