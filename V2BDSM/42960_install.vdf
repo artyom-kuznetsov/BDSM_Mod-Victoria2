@@ -1,0 +1,78 @@
+"InstallScript"
+{
+	"Registry"
+	{
+		"HKEY_LOCAL_MACHINE\\SOFTWARE\\Paradox Interactive\\Victoria 2"
+		{
+			"string"
+			{
+				"app"		"%INSTALLDIR%\\victoria2.exe"
+				"path"		"%INSTALLDIR%"
+				"run"		"enable"
+				"version"		"1.01.0.0"
+				"english"
+				{
+					"lang"		"English"
+				}
+				"french"
+				{
+					"lang"		"French"
+				}
+				"german"
+				{
+					"lang"		"German"
+				}
+			}
+		}
+		"HKEY_LOCAL_MACHINE\\SOFTWARE\\Paradox Interactive\\Victoria 2\\1.00.0.0"
+		{
+			"string"
+			{
+				"(Default)"		""
+			}
+		}
+		"HKEY_LOCAL_MACHINE\\SOFTWARE\\Paradox Interactive\\Victoria 2\\1.01.0.0"
+		{
+			"string"
+			{
+				"(Default)"		""
+			}
+		}
+	}
+	"File Template"
+	{
+		"Time_Stamp"
+		{
+			"HasRunKey"		"HKEY_CURRENT_USER\\Software\\Valve\\Steam\\Apps\\42960"
+			"template_file"		"%INSTALLDIR%\\STEAM_time"
+			"output_file"		"%INSTALLDIR%\\map\\cache\\time"
+			"MinimumHasRunValue"		"3"
+		}
+	}
+	"Run Process"
+	{
+		"DirectX"
+		{
+			"Process 1"		"%INSTALLDIR%\\dx\\DXSETUP.exe"
+			"Command 1"		"/silent"
+		}
+		"dotnetfx"
+		{
+			"Process 1"		"%INSTALLDIR%\\dotnetfx.exe"
+			"Command 1"		"/q"
+			"Requirement_OS"
+			{
+				"Is64BitWindows"		"0"
+			}
+		}
+		"vcredist"
+		{
+			"Process 1"		"%INSTALLDIR%\\vcredist_x86.exe"
+			"Command 1"		"/q"
+		}
+	}
+}
+"kvsignatures"
+{
+	"InstallScript"		"afb8c1752ea30cda0e63de503e0d82a74921d457e9e8c44716050dc35773814bb2efe2333294b3be2f47ac0b5fba5dd07a5186b3ec47a38432c512d2e23e531b908ae4be2dd66d069485607d07f3c5995008a446bde5815d5c42fc853797701cd74737081e86e62194acb14a6d394965890d5cfe96095206016ed48334ce3f05"
+}
