@@ -155,6 +155,15 @@ political_decisions = {
 			remove_country_modifier = tientsin_exploitation_modifier_china
 			remove_country_modifier = guangjou_exploitation_modifier_china
 			set_global_flag = ban_opium_trade_flag
+			any_country = {
+				limit = {
+					ai = no
+					NOT = {
+						tag = THIS
+					}
+				}
+				country_event = 57605
+			}
 		}
 	}
 }

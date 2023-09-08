@@ -79,3 +79,26 @@ country_event = {
 		name = "chi_breakup_notification_OptA"
 	}
 }
+
+country_event = {
+	title = "chi_ban_opium_notification_EvtName"
+	desc = "chi_ban_opium_notification_EvtDesc"
+	picture = "patrol"
+	
+	id = 57605
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "chi_ban_opium_notification_OptA"
+		
+		remove_country_modifier = macau_exploitation_modifier
+		remove_country_modifier = hongkong_exploitation_modifier
+		remove_country_modifier = shanghai_exploitation_modifier
+		remove_country_modifier = tsindao_exploitation_modifier
+		remove_country_modifier = weihaiwei_exploitation_modifier
+		remove_country_modifier = arthur_exploitation_modifier
+		remove_country_modifier = tientsin_exploitation_modifier
+		remove_country_modifier = guangjou_exploitation_modifier
+	}
+}
