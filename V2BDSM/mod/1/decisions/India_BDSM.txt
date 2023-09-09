@@ -10,6 +10,7 @@ political_decisions = {
 				owns = 1265
 				owns = 1227
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -37,6 +38,7 @@ political_decisions = {
 				has_country_flag = conquer_bhopal_flag
 			}
 			primary_culture = avadhi
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -69,6 +71,7 @@ political_decisions = {
 				owns = 1250
 				owns = 1261
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -96,6 +99,7 @@ political_decisions = {
 				owns = 1277
 				owns = 1297
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -119,6 +123,7 @@ political_decisions = {
 			NOT = {
 				exists = MGE
 			}
+			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -137,6 +142,40 @@ political_decisions = {
 				}
 			}
 			change_tag = MGE
+		}
+	}
+	mge_centralization_dec = {
+		potential = {
+			OR = {
+				AWM = { vassal_of = THIS }
+				BIM = { vassal_of = THIS }
+				NAM = { vassal_of = THIS }
+				BHM = { vassal_of = THIS }
+			}
+			NOT = { has_country_flag = mge_centralization_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			OR = {
+				admin_reform = yes_admin_reform
+				land_reform = yes_land_reform
+				civilized = yes
+			}
+		}
+		
+		effect = {
+			prestige = 5
+			any_country = {
+				limit = {
+					is_culture_group = THIS
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+				}
+				country_event = { id=11101 days=0 }
+			}
 		}
 	}
 }

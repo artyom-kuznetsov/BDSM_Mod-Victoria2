@@ -81,11 +81,14 @@ promotion_focus =
 
 	promote_craftsmen =
 	{
-		craftsmen = 0.15 #15% more likeley to become this type
+		craftsmen = 0.2 #15% more likeley to become this type
 		icon = 11
 		outliner_show_as_percent = yes
 		limit = {
-			has_country_flag = industrial_revolution_flag
+			OR = {
+				has_country_flag = industrial_revolution_flag
+				is_capital = yes 
+			}
 		}
 	}
 
