@@ -65,6 +65,13 @@ political_decisions = {
 		effect = {
 			set_global_flag = singleplayer_flag
 			CUSTOM_TOOLTIP_SET_SINGLEPLAYER = { }
+			any_country = {
+				limit = {
+					NOT = { tag = THIS }
+					ai = no
+				}
+				country_event = 57606
+			}
 		}
 	}
 	host_deact_singleplayer_dec = {
@@ -81,6 +88,27 @@ political_decisions = {
 		effect = {
 			clr_global_flag = singleplayer_flag
 			CUSTOM_TOOLTIP_CLR_SINGLEPLAYER = { }
+			any_country = {
+				limit = {
+					NOT = { tag = THIS }
+					ai = no
+				}
+				country_event = 57607
+			}
+		}
+	}
+	spawn_money_dec = {
+		potential = {
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+		}
+		
+		allow = {
+			ai = no
+		}
+		
+		effect = {
+			country_event = 57608
 		}
 	}
 }
