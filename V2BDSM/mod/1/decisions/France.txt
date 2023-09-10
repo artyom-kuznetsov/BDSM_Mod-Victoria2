@@ -136,9 +136,9 @@ political_decisions = {
 			is_greater_power = yes
 			ideological_thought = 1
 			MAD = {
-				civilized = no
 				OR = {
 					in_sphere = FRA
+					vassal_of = FRA
 					NOT = { part_of_sphere = yes }
 				}
 			}
@@ -159,22 +159,26 @@ political_decisions = {
 			OR = {
 				has_country_flag = lambert_has_been_chartered
 				MAD = {
-					in_sphere = FRA
-					civilized = no
-			}
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
 				}
+			}
 			NOT = {
 				has_country_flag = merina_monarchy_is_over
 			}
 			exists = MAD
-			MAD = { ai = yes}
+			MAD = { ai = yes }
 			tag = FRA
 		}
 		
 		allow = {
 			MAD = {
-				in_sphere = FRA
-				civilized = no
+				OR = {
+					in_sphere = FRA
+					vassal = FRA
+				}
 				war = no
 			}
 			invention = mission_to_civilize
@@ -185,6 +189,7 @@ political_decisions = {
 		effect = {
 			inherit = MAD
 			set_country_flag = merina_monarchy_is_over
+			badboy = 5
 		}
 	}
 	
