@@ -622,3 +622,26 @@ country_event = { # POPS LOSE LITERACY
 		}
 		
 	}
+	
+country_event = {
+	id = 140405
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		NOT = { year = 1845 }
+		NOT = { has_country_modifier = sphere_clear_cooldown_modifier }
+		is_culture_group = south_asian
+	}
+	
+	option = {
+		name = "noloc"
+		add_country_modifier = { name = sphere_clear_cooldown_modifier duration = 90 }
+		any_country = {
+			diplomatic_influence = {
+				who = THIS
+				value = -200
+			}
+		}
+	}
+}
