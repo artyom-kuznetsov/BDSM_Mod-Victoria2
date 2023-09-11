@@ -67,8 +67,9 @@ fascist_group = {
 				NOT = { ruling_party_ideology = fascist }
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				has_country_flag = force_reform
+				ruling_party_ideology = fascist
 			}
 		}
 		
@@ -92,10 +93,6 @@ conservative_group = {
 		# Audax Validator "." Ignore_NEXT
 		remove_political_reform = {
 			base = 1
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
 		}
 		# Audax Validator "." Ignore_NEXT
 		add_social_reform = {
@@ -108,10 +105,6 @@ conservative_group = {
 		# Audax Validator "." Ignore_NEXT
 		remove_social_reform = {
 			base = 1
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
 		}
 		
 		# Audax Validator "." Ignore_NEXT
@@ -206,6 +199,10 @@ conservative_group = {
 		# Audax Validator "." Ignore_NEXT
 		remove_political_reform = {
 			base = 0
+			modifier = {
+				factor = 1
+				has_country_flag = force_reform
+			}
 		}
 		# Audax Validator "." Ignore_NEXT
 		add_social_reform = {
