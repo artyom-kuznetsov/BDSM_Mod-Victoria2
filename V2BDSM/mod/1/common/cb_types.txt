@@ -389,9 +389,11 @@ conquest = {
 		NOT = { tag = WBK }
 		NOT = { is_our_vassal = THIS }
 		OR = {
+			NOT = { number_of_states = 1 }
 			AND = {
 				civilized = yes
 				NOT = { number_of_states = 3 }
+				NOT = { tag = GRE }
 			}
 			AND = {
 				civilized = no
@@ -400,12 +402,9 @@ conquest = {
 			}
 			AND = {
 				civilized = no
-				number_of_states = 3
+				NOT = { number_of_states = 3 }
 				THIS = {
-					OR = {
-						NOT = { is_greater_power = yes }
-						NOT = { nationalism_n_imperialism = 1 }
-					}
+					civilized = yes
 				}
 			}
 			AND = {
@@ -438,7 +437,7 @@ conquest = {
 	break_truce_prestige_factor = 5
 	break_truce_infamy_factor = 2
 	break_truce_militancy_factor = 2
-	truce_months = 48
+	truce_months = 0
 	
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
@@ -515,7 +514,7 @@ conquest_claimed = {
 	break_truce_prestige_factor = 5
 	break_truce_infamy_factor = 2
 	break_truce_militancy_factor = 2
-	truce_months = 48
+	truce_months = 0
 	
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1
@@ -609,7 +608,7 @@ conquest_small = {
 	break_truce_prestige_factor = 5
 	break_truce_infamy_factor = 2
 	break_truce_militancy_factor = 2
-	truce_months = 36
+	truce_months = 0
 	
 	good_relation_prestige_factor = 1
 	good_relation_infamy_factor = 1

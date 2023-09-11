@@ -104,3 +104,30 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110104
+	
+	trigger = {
+		tag = HYM
+		NOT = {
+			vassal_of = MUG
+		}
+		NOT = {
+			vassal_of = MGE
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		change_tag = HYM
+		HYM = {
+			all_core = {
+				remove_core = HYM
+				add_core = HYD
+			}
+		}
+	}
+}
