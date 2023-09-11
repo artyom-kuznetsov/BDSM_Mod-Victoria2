@@ -99,20 +99,16 @@ torpedo_boats = {
 	}
 }
 submarines = {
-	limit = { iron_steamers = 1 }
+	limit = { steel_steamers = 1 }
 	chance = {
 		base = 1
-		modifier = {
-			factor = -10
-			NOT = { year = 1885 }
-		}
 		modifier = {
 			factor = 2
 			cheap_iron = 1
 		}
 		modifier = {
 			factor = 3
-			steel_steamers = 1
+			main_armament = 1
 		}
 	}
 	effect = {
@@ -248,8 +244,7 @@ advanced_cruisers = {
 	}
 	effect = {
 		cruiser = {
-			hull = 0.5
-			gun_power = 0.5
+			gun_power = 3
 		} 
 	}
 }
@@ -307,12 +302,12 @@ advanced_battleships = {
 	}
 	effect = {
 		battleship = {
-			hull = 1
-			gun_power = 1
+			hull = 5
+			gun_power = 5
 		}
 		dreadnought = {
-			hull = 2
-			gun_power = 2
+			hull = 5
+			gun_power = 5
 		} 
 	}
 }
@@ -560,7 +555,16 @@ rifled_guns = {
 			gun_power = 2
 		}
 		cruiser = {
-			gun_power = 0.5
+			gun_power = 2
+		}
+		ironclad = {
+			gun_power = 4
+			hull = 4
+		}
+		monitor = {
+			hull = 4
+			gun_power = 5
+			torpedo_attack = 1
 		}
 	}
 }
@@ -575,10 +579,11 @@ armoured_citadels = {
 	}
 	effect = {
 		battleship = {
-			hull = 2
+			hull = 5
 		}
 		cruiser = {
-			hull = 0.5
+			hull = 1
+			gun_power = 1
 		}
 	}
 }
@@ -639,13 +644,14 @@ gun_hydraulics = {
 	}
 	effect = {
 		dreadnought = {
-			gun_power = 3
+			gun_power = 5
+			hull = 3
 		}
 		battleship = {
 			gun_power = 2
 		}
 		cruiser = {
-			gun_power = 0.5
+			gun_power = 1
 		}
 	}
 }
@@ -664,7 +670,7 @@ large_hull_form = {
 	}
 	effect = {
 		dreadnought = {
-			hull = 3
+			hull = 7
 		}
 		battleship = {
 			hull = 2
@@ -713,6 +719,7 @@ heavy_armour_plates = {
 	effect = {
 		dreadnought = {
 			hull = 4
+			gun_power = 1
 		}
 		battleship = {
 			hull = 2
@@ -746,7 +753,7 @@ advanced_fire_control = {
 			gun_power = 2
 		}
 		cruiser = {
-			gun_power = 0.5
+			gun_power = 1
 		}
 		monitor = {
 			torpedo_attack = 2
