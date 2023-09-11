@@ -47,9 +47,9 @@ political_decisions = {
 			}
 			any_pop = {
 				militancy = -1
-				consciousness = 1
 			}
 			set_country_flag = corn_laws_repealed_flag
+			badboy = -1
 		}
 	}
 	#crown_empress_of_india = {
@@ -120,6 +120,8 @@ political_decisions = {
 				has_country_flag = elementary_my_dear_watson # I know, he never says it in the books, yadiyadi.
 			}
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { penal_system = incarceration }
+			NOT = { penal_system = rehabilitation }
 		}
 
 		allow = {
@@ -127,10 +129,7 @@ political_decisions = {
 		}
 
 		effect = {
-			add_country_modifier = {
-				name = the_yard
-				duration = -1
-			}
+			social_reform = incarceration
 			set_country_flag = elementary_my_dear_watson
 		}
 	}

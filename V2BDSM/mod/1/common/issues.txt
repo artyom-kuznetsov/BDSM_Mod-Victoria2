@@ -390,6 +390,7 @@ political_reforms = {
 				NOT = {
 					has_country_flag = ref_serfdom_abolished_flag
 				}
+				war = no
 			}
 		}
 		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
@@ -398,6 +399,7 @@ political_reforms = {
 			mobilisation_size = 0.01
 			allow = {
 				has_country_flag = ref_serfdom_abolished_flag
+				war = no
 			}
 		}
 		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
@@ -409,6 +411,7 @@ political_reforms = {
 			allow = {
 				has_country_flag = army_professionalism_flag
 				has_country_flag = ref_serfdom_abolished_flag
+				war = no
 			}
 		}
 		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
@@ -418,6 +421,7 @@ political_reforms = {
 			allow = {
 				has_country_flag = aeronautics_researched_flag
 				has_country_flag = ref_serfdom_abolished_flag
+				war = no
 			}
 		}
 	}
@@ -811,8 +815,8 @@ social_reforms = {
 		}
 		trinket_health_care = {
 			global_population_growth = 0.001
-			min_social_spending = 0.2
-			max_social_spending = 0.2
+			min_social_spending = 0.25
+			max_social_spending = 0.25
 			pension_level	= 1
 			global_immigrant_attract = 0.01
 			allow = { 
@@ -821,8 +825,8 @@ social_reforms = {
 		}
 		low_health_care = {
 			global_population_growth = 0.002
-			min_social_spending = 0.4
-			max_social_spending = 0.4
+			min_social_spending = 0.5
+			max_social_spending = 0.5
 			pension_level	= 1
 			global_immigrant_attract = 0.02
 			allow = { 
@@ -831,8 +835,8 @@ social_reforms = {
 		}
 		acceptable_health_care = {
 			global_population_growth = 0.003
-			min_social_spending = 0.6
-			max_social_spending = 0.6
+			min_social_spending = 0.75
+			max_social_spending = 0.75
 			pension_level	= 1.25
 			global_immigrant_attract = 0.03
 			allow = {
@@ -841,20 +845,10 @@ social_reforms = {
 		}
 		good_health_care = {
 			global_population_growth = 0.004
-			min_social_spending = 0.8
-			max_social_spending = 0.8
-			pension_level	= 1.6
+			min_social_spending = 1.0
+			max_social_spending = 1.0
+			pension_level	= 1.75
 			global_immigrant_attract = 0.04
-			allow = { 
-				always = no
-			}
-		}
-		universal_health_care = {
-			global_population_growth = 0.005
-			min_social_spending = 1
-			max_social_spending = 1
-			pension_level	= 2
-			global_immigrant_attract = 0.05
 			allow = { 
 				always = no
 			}

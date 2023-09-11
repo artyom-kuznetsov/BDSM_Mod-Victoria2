@@ -1033,6 +1033,23 @@ catalytic_fermentative_process = {
 		} 
 	}
 }
+germ_theory = {
+	limit = { inorganic_chemistry = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			literacy = 0.4
+		}
+		modifier = {
+			factor = 2
+			literacy = 0.5
+		}
+	}
+	effect = {
+		pop_growth = 0.0001
+	} 
+}
 vaccination = {
 	limit = { inorganic_chemistry = 1 }
 	chance = {
