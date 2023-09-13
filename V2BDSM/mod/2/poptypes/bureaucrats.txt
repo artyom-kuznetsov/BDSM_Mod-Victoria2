@@ -281,19 +281,19 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = 3
+			factor = 5
 			state_scope = {
 				craftsmen = 0.05
 			}
 		}
 		modifier = {
-			factor = 3
+			factor = 5
 			state_scope = {
 				craftsmen = 0.08
 			}
 		}
 		modifier = {
-			factor = 3
+			factor = 5
 			state_scope = {
 				craftsmen = 0.1
 			}
@@ -333,24 +333,6 @@ promote_to =
 			}
 		}
 	}
-	bureaucrats =
-	{
-		factor = 0.01
-		modifier = {
-			factor = -100
-			NOT = { is_accepted_culture = yes }
-			NOT = { is_primary_culture = yes }
-		}
-		modifier = {
-			factor = 30
-			OR = {
-				is_accepted_culture = yes
-				is_primary_culture = yes
-			}
-			location = { is_colonial = yes }
-		}
-	}
-
 	clerks = {
 		factor = 0.01
 		modifier = {
@@ -649,14 +631,6 @@ promote_to =
 		factor = 0.01
 		modifier = {
 			factor = -100
-			country = { has_country_flag = jan_mayen }
-		}
-		modifier = {
-			factor = 10
-			location = { is_colonial = no }
-		}
-		modifier = {
-			factor = -100
 			state_scope = {
 				NOT = { bureaucrats = 0.01 }
 			}
@@ -665,6 +639,14 @@ promote_to =
 			factor = -100
 			location = { NOT = { has_pop_type = farmers } }
 		}
+		modifier = {
+			factor = 10
+			NOT = { everyday_needs = 0.10 }
+		}
+		modifier = {
+			factor = 10
+			NOT = { life_needs = 0.99 }
+		}	
 	}
 	labourers = 
 	{
