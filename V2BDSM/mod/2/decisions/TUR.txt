@@ -21,6 +21,29 @@ political_decisions = {
 		}
 	}
 	
+	religion_tax_tur_dec = {
+		alert = yes
+		potential = {
+			tag = TUR
+			NOT = { has_country_flag = religion_tax_tur_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			NOT = { debt_law = serfdom }
+			prestige = 5
+		}
+		
+		effect = {
+			set_country_flag = religion_tax_tur_flag
+			add_country_modifier = {
+				name = religious_tax_turkey_modifier
+				duration = 7300
+			}
+			prestige = -5
+		}
+	}
+	
 	integrate_greece_tur_dec = {
 		alert = yes
 		potential = {
