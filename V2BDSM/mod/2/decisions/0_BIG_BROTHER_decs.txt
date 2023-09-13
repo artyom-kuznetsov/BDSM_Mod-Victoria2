@@ -964,6 +964,31 @@ political_decisions = {
 		}
 		ai_will_do = { factor = 1 }
 	}
+	dod_setup_dec = {
+		potential = {
+			NOT = { year = 1837 }
+			NOT = { has_global_flag = dod_setup_flag }
+			exists = DUA
+			exists = BRG
+		}
+		
+		allow = {
+			exists = yes
+		}
+		
+		effect = {
+			409 = {
+				state_scope = {
+					change_region_name = "Ёльзас"
+				}
+			}
+			PRV = {
+				primary_culture = provencal
+				add_accepted_culture = french
+				add_accepted_culture = north_italian
+			}
+		}
+	}
 	mob_cooldown_dec = {
 		potential = {
 			tag = WBK
