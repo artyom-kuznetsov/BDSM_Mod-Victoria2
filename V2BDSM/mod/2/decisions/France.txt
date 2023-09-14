@@ -321,4 +321,29 @@ political_decisions = {
 			set_country_flag = extreme_home_makeover
 		}
 	}
+	
+	conquer_canada_france_dec = {
+		potential = {
+			tag = FRA
+			state_n_government = 1
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = conquer_canada_france_flag }
+		}
+		
+		allow = {
+			OR = {
+				owns = 75
+				owns = 51
+				owns = 13
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			add_accepted_culture = anglo_canadian
+			set_country_flag = conquer_canada_france_flag
+		}
+	}
 }
