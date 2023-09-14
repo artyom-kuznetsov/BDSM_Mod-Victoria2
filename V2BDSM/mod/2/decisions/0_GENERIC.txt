@@ -155,7 +155,7 @@ political_decisions = {
 		}
 		
 		allow = {
-			organic_chemistry = 1
+			electricity = 1
 			literacy = 0.6
 		}
 		
@@ -189,7 +189,7 @@ political_decisions = {
 		}
 		
 		allow = {
-			electricity = 1
+			synthetic_polymers = 1
 			literacy = 0.75
 		}
 		
@@ -211,39 +211,6 @@ political_decisions = {
 		
 		effect = {
 			social_reform = acceptable_health_care
-		}
-	}
-	
-	med_reform_4_to_5_dec = {
-		alert = yes
-		potential = {
-			civilized = yes
-			health_care = good_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-		}
-		
-		allow = {
-			synthetic_polymers = 1
-			literacy = 0.95
-		}
-		
-		effect = {
-			social_reform = universal_health_care
-		}
-	}
-	med_reform_5_to_4_dec = {
-		potential = {
-			civilized = yes
-			health_care = universal_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			social_reform = good_health_care
 		}
 	}
 	
@@ -729,7 +696,6 @@ political_decisions = {
 			ai = no
 			NOT = {
 				vote_franschise = none_voting
-				vote_franschise = landed_voting
 			}
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}

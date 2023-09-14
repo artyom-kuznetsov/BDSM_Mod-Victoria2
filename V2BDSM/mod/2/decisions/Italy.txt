@@ -327,7 +327,8 @@ political_decisions = {
 			SAR_720 = { owned_by = THIS }
 			SAR_765 = { owned_by = THIS }
 			#AUS_726 = { owned_by = THIS }
-			MOD_739 = { owned_by = THIS }
+			EMILIA_STATE = { owned_by = THIS }
+			ROMAGNA_STATE = { owned_by = THIS }
 			TUS_744 = { owned_by = THIS }
 			PAP_749 = { owned_by = THIS }
 			SIC_754 = { owned_by = THIS }
@@ -629,8 +630,7 @@ political_decisions = {
 	
 	recover_greece_dec = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
-			
+			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = ita_greece_recovered }
 			OR = {	
 				tag = SIC

@@ -151,7 +151,7 @@ country_event = { # ITALIAN URBANIZATION
 		name = "Italian_Urbanization_event_optA"
 		add_country_modifier = {
 			name = italian_urbanization_modifier
-			duration = 3650
+			duration = 2555
 		}
 		721 = { life_rating = 5 }
 		720 = { life_rating = 5 }
@@ -260,5 +260,34 @@ country_event = { # ANNEX MINOR NOTIFICATION
 	
 	option = {
 		name = "annexed_minor_ita_optA"
+	}
+}
+
+country_event = { # SWI REMOVE CORES
+	id = 57905
+	title = "southern_cantons_EvtName"
+	desc = "southern_cantons_EvtDesc"
+	
+	picture = "europe"
+	
+	trigger = {
+		609 = {
+			is_core = SWI
+			owned_by = THIS
+		}
+		2568 = {
+			is_core = SWI
+			owned_by = THIS
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "southern_cantons_EvtOptA"
+		609 = { remove_core = SWI }
+		2568 = { remove_core = SWI }
 	}
 }
