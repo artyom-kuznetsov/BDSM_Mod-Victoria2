@@ -70,7 +70,7 @@ political_decisions = {
 			NOT = { owns = 2615 }
 			NOT = { has_country_flag = chi_annex_guangjouwan_flag }
 			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
-			#nationalism_n_imperialism = 1
+			nationalism_n_imperialism = 1
 		}
 		
 		allow = {
@@ -81,7 +81,7 @@ political_decisions = {
 					}
 				}
 			}
-			#revolution_n_counterrevolution = 1
+			revolution_n_counterrevolution = 1
 		}
 		
 		effect = {
@@ -91,6 +91,318 @@ political_decisions = {
 			2615 = {
 				owner = {
 					country_event = 57125
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_macau_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 1498 }
+			NOT = { has_country_flag = chi_annex_macau_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				1498 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_macau_flag
+			prestige = 3
+			badboy = 2
+			1498 = {
+				owner = {
+					country_event = 57126
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_hongkong_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 1496 }
+			NOT = { has_country_flag = chi_annex_hongkong_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				1496 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_hongkong_flag
+			prestige = 3
+			badboy = 2
+			1496 = {
+				owner = {
+					country_event = 57127
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_shanghai_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 1538 }
+			NOT = { has_country_flag = chi_annex_hongkong_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				1538 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_hongkong_flag
+			prestige = 3
+			badboy = 2
+			1538 = {
+				owner = {
+					country_event = 57128
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_tsindao_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 1566 }
+			NOT = { has_country_flag = chi_annex_hongkong_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				1566 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_hongkong_flag
+			prestige = 3
+			badboy = 2
+			1566 = {
+				owner = {
+					country_event = 57129
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_weihaiwei_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 1569 }
+			NOT = { has_country_flag = chi_annex_hongkong_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				1569 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_hongkong_flag
+			prestige = 3
+			badboy = 2
+			1569 = {
+				owner = {
+					country_event = 57130
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_tientsin_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 2659 }
+			NOT = { has_country_flag = chi_annex_hongkong_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				2659 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_hongkong_flag
+			prestige = 3
+			badboy = 2
+			2659 = {
+				owner = {
+					country_event = 57131
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_port_arthur_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 1481 }
+			NOT = { has_country_flag = chi_annex_hongkong_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				1481 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_hongkong_flag
+			prestige = 3
+			badboy = 2
+			1481 = {
+				owner = {
+					country_event = 57132
+				}
+			}
+			add_country_modifier = {
+				name = treatyport_seized_cooldown_modifier
+				duration = 1095
+			}
+		}
+	}
+	
+	chi_annex_port_arthur_dec = {
+		alert = yes
+		
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = beifaren
+			NOT = { owns = 1481 }
+			NOT = { has_country_flag = chi_annex_hongkong_flag }
+			NOT = { has_country_modifier = treatyport_seized_cooldown_modifier }
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			NOT = {
+				1481 = {
+					owner = {
+						war_with = THIS
+					}
+				}
+			}
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			set_country_flag = chi_annex_hongkong_flag
+			prestige = 3
+			badboy = 2
+			1481 = {
+				owner = {
+					country_event = 57132
 				}
 			}
 			add_country_modifier = {
