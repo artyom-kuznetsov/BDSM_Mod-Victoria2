@@ -11,6 +11,7 @@ country_event = {
 		ruling_party_ideology = communist
 		vote_franschise = none_voting
 		trade_unions = all_trade_unions
+		upper_house_composition = party_appointed
 	}
 	
 	mean_time_to_happen = {
@@ -45,6 +46,7 @@ country_event = {
 		ruling_party_ideology = socialist
 		vote_franschise = none_voting
 		trade_unions = all_trade_unions
+		upper_house_composition = party_appointed
 		OR = {
 			debt_law = debtors_prisons
 			debt_law = bankruptcy
@@ -112,7 +114,7 @@ country_event = {
 	option = {
 		name = "EVTOPTA60080"
 		
-		centralization = totalitarianism
+		political_reform = totalitarianism
 		social_reform = child_labor_illegal
 		political_reform = no_slavery
 		government = proletarian_dictatorship
@@ -131,7 +133,6 @@ country_event = {
 		OR = {
 			government = hms_government
 			government = prussian_constitutionalism
-			government = democracy
 		}
 		civilized = yes
 		political_parties = underground_parties
@@ -145,25 +146,11 @@ country_event = {
 	}
 	
 	option = {
-		name = "EVTOPTA60010"
-		government = presidential_dictatorship
-		clr_country_flag = is_totalitarian_flag
-		clr_country_flag = is_communist_flag
-		clr_country_flag = is_fascist_flag
-		any_pop = {
-			consciousness = 1
-		}
-	}
-	option = {
 		name = "EVTOPTB60010"
 		government = absolute_monarchy
 		clr_country_flag = is_totalitarian_flag
 		clr_country_flag = is_communist_flag
 		clr_country_flag = is_fascist_flag
-		any_pop = {
-			consciousness = 2
-		}
-		badboy = 1
 	}
 }
 
@@ -198,8 +185,9 @@ country_event = {
 		name = "EVTOPTB60010"
 		government = absolute_monarchy
 		any_pop = {
-			consciousness = 1
+			consciousness = 2
 		}
+		badboy = 1
 	}
 }
 
@@ -288,7 +276,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA60030"
-		centralization = totalitarianism
+		political_reform = totalitarianism
+		political_reform = underground_parties
 		government = fascist_dictatorship
 		set_country_flag = is_fascist_flag
 		set_country_flag = is_totalitarian_flag
@@ -317,7 +306,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA60080"
-		centralization = totalitarianism
+		political_reform = totalitarianism
 		government = fascist_dictatorship
 		set_country_flag = is_fascist_flag
 		set_country_flag = is_totalitarian_flag
@@ -461,5 +450,63 @@ country_event = {
 		any_pop = {
 			consciousness = 1
 		}
+	}
+}
+
+# —“¿–“Œ¬€… »¬≈Õ“ œŒÃŒŸ» ¬ —Ã≈Õ≈
+country_event = {
+	id = 60071
+	title = "governments_assistance_EvtName"
+	desc = "governments_assistance_EvtDesc"
+	picture = "question"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "governments_assistance_EvtOptProletarian"
+		CUSTOM_TOOLTIP_PROLETARIAN_DICTATOR = { }
+	}
+	option = {
+		name = "governments_assistance_EvtOptSocial"
+		CUSTOM_TOOLTIP_SOCIALREP = { }
+	}
+	option = {
+		name = "governments_assistance_EvtOptFascist"
+		CUSTOM_TOOLTIP_FASCIST_DICTATOR = { }
+	}
+	option = {
+		name = "governments_assistance_EvtOptAbsolute"
+		CUSTOM_TOOLTIP_ABSOLUTE = { }
+	}
+	option = {
+		name = "governments_assistance_EvtOptNext"
+		country_event = 60072
+	}
+}
+
+# œŒÃŒŸ‹ ¬ —Ã≈Õ≈ 2 —“–¿Õ»÷¿
+country_event = {
+	id = 60072
+	title = "governments_assistance_EvtName"
+	desc = "governments_assistance_EvtDesc"
+	picture = "question"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "governments_assistance_EvtOptBourgeoisPresidental"
+		CUSTOM_TOOLTIP_LAME_DICTATOR = { }
+	}
+	option = {
+		name = "governments_assistance_EvtOptConstitutional"
+		CUSTOM_TOOLTIP_CONSTITUTIONAL = { }
+	}
+	option = {
+		name = "governments_assistance_EvtOptHMS"
+		CUSTOM_TOOLTIP_HMS = { }
+	}
+	option = {
+		name = "governments_assistance_EvtOptPrev"
+		country_event = 60071
 	}
 }
