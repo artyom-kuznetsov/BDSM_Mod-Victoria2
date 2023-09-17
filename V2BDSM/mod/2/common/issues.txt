@@ -139,7 +139,6 @@ party_issues = {
 	}
 	war_policy = {
 		jingoism = {
-			max_military_spending = 1
 			war_exhaustion_effect = 0.25
 			factory_throughput = -0.05
 			is_jingoism = yes
@@ -147,18 +146,15 @@ party_issues = {
 			mobilization_impact = 100
 		}
 		pro_military = {
-			max_military_spending = 1
 			cb_generation_speed_modifier = 0.1
 			mobilization_impact = 100
 		}
 		anti_military = {
-			max_military_spending = 1
 			factory_throughput = 0.05
 			cb_generation_speed_modifier = -0.1
 			mobilization_impact = 100
 		}
 		pacifism = {
-			max_military_spending = 1
 			factory_throughput = 0.1
 			cb_generation_speed_modifier = -0.2
 			mobilization_impact = 100
@@ -370,7 +366,6 @@ political_reforms = {
 	
 	conscription = {
 		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
-			max_military_spending = -1
 			supply_consumption = -0.2
 			tax_efficiency = 0.01
 			mobilisation_size = -0.02
@@ -381,7 +376,7 @@ political_reforms = {
 			}
 		}
 		ref_disarmed_nation = {		#  –≈—“‹ﬂÕ— Œ≈
-			max_military_spending = -0.25
+			max_military_spending = 0.75
 			mobilisation_size = 0.02
 			land_unit_start_experience = -5
 			# +50% Mob Impact
@@ -394,7 +389,7 @@ political_reforms = {
 			}
 		}
 		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
-			max_military_spending = -0.25
+			max_military_spending = 0.75
 			supply_consumption = -0.1
 			mobilisation_size = 0.01
 			allow = {
@@ -403,7 +398,7 @@ political_reforms = {
 			}
 		}
 		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
-			max_military_spending = -0.25
+			max_military_spending = 1.0
 			mobilisation_size = -0.01
 			land_unit_start_experience = 5
 			reinforce_speed = 0.05
@@ -415,7 +410,7 @@ political_reforms = {
 			}
 		}
 		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
-			max_military_spending = -0.25
+			max_military_spending = 0.75
 			mobilisation_size = 0.04
 			# +100% Mob Impact
 			allow = {

@@ -982,6 +982,44 @@ political_decisions = {
 				add_accepted_culture = french
 				add_accepted_culture = north_italian
 			}
+			AUS = {
+				primary_culture = danubian
+			}
+			SWI = {
+				primary_culture = danubian
+				add_accepted_culture = rhenish
+				remove_accepted_culture = french
+			}
+			BAV = {
+				primary_culture = danubian
+			}
+			BAD = {
+				primary_culture = rhenish
+				add_accepted_culture = danubian
+			}
+			WUR = {
+				primary_culture = rhenish
+				add_accepted_culture = danubian
+			}
+			HES = {
+				primary_culture = rhenish
+				add_accepted_culture = danubian
+				remove_accepted_culture = south_german
+			}
+			FRM = {
+				primary_culture = rhenish
+				add_accepted_culture = danubian
+			}
+			FTB = {
+				primary_culture = rhenish
+			}
+			FRB = {
+				primary_culture = rhenish
+			}
+			FUL = {
+				primary_culture = danubian
+				add_accepted_culture = rhenish
+			}
 			set_global_flag = dod_setup_flag
 		}
 	}
@@ -1073,6 +1111,14 @@ political_decisions = {
 					NOT = { has_country_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
+				DUA = {
+					NOT = { has_country_flag = cant_mobilize_flag }
+					is_mobilised = yes
+				}
+				BRG = {
+					NOT = { has_country_flag = cant_mobilize_flag }
+					is_mobilised = yes
+				}
 			}
 		}
 		
@@ -1156,6 +1202,12 @@ political_decisions = {
 					has_country_flag = cant_mobilize_flag
 				}
 				INA = {
+					has_country_flag = cant_mobilize_flag
+				}
+				DUA = {
+					has_country_flag = cant_mobilize_flag
+				}
+				BRG = {
 					has_country_flag = cant_mobilize_flag
 				}
 			}
