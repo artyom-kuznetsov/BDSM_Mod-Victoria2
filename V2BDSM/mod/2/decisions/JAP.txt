@@ -132,4 +132,26 @@ political_decisions = {
 			set_country_flag = korean_conquest_flag
 		}
 	}
+	korean_integration_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = JAP
+			any_owned_province = { is_core = KOR }
+		}
+		allow = {
+			money = 300000
+			owns = 1632
+			owns = 1624
+			owns = 1625
+			owns = 1619
+		}
+		effect = {
+			money = -300000
+			set_country_flag = korean_integration_flag
+			KOR = {
+				all_core = { add_core = THIS }
+			}
+			CUSTOM_TOOLTIP_KOREAN = { }
+		}
+	}
 }
