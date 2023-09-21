@@ -1000,9 +1000,6 @@ province_event = {
 			province_id = 1416		# Yogyakarta
 			province_id = 1425		# Tarakan
 			province_id = 1432		# Mamuju
-			province_id = 1160		# ARABIA
-			province_id = 1159		# ARABIA
-			province_id = 1157		# ARABIA
 		}
 		not = { trade_goods = oil }
 		OR = {
@@ -1047,10 +1044,7 @@ province_event = {
 
 	trigger = {
 		year = 1886
-		or = {
-			province_id = 1335		# Kyaukse
 			province_id = 134		# Dallas
-		}
 		not = { trade_goods = oil }
 		OR = {
 			owner = {
@@ -1218,49 +1212,6 @@ province_event = {
 		# life_rate = 5
 	}
 }
-
-#province_event = {
-#
-#	id = 1126
-#
-#	trigger = {
-#		year = 1894
-#		province_id = 2173		# Queretaro
-#		not = { trade_goods = oil }
-#		OR = {
-#			owner = {
-#				part_of_sphere = yes
-#				sphere_owner = {
-#					or = {
-#						invention = daimlers_automobile
-#						invention = cracking
-#						invention = protected_cruisers
-#					}
-#				}
-#			}
-#			owner = {
-#				or = {
-#					invention = daimlers_automobile
-#					invention = cracking
-#					invention = protected_cruisers
-#				}
-#			}
-#		}
-#	}
-#
-#	mean_time_to_happen = {
-#		months = 36
-#	}
-#
-#	title = "EVTNAME1109"
-#	desc = "EVTDESC1109"
-#
-#	option = {
-#		name = "EVTOPTA1109"
-#		trade_goods = oil
-#		# life_rate = 5
-#	}
-#}
 
 province_event = {
 
@@ -1497,7 +1448,6 @@ province_event = {
 	trigger = {
 		year = 1910
 		or = {
-			province_id = 1167		# Abu Dhabi
 			province_id = 2234		# Curacao
 			province_id = 2270		# Maracaibo
 		}
@@ -1544,7 +1494,6 @@ province_event = {
 	trigger = {
 		year = 1912
 		or = {
-			province_id = 1163		# Qatif
 			province_id = 1732		# Ghayran
 			province_id = 1720		# Timimoun
 			province_id = 2253		# Quibdo
@@ -1635,7 +1584,6 @@ province_event = {
 	id = 1135
 
 	trigger = {
-		year = 1915
 		province_id = 2291		# Piura
 		not = { trade_goods = oil }
 		OR = {
@@ -1721,51 +1669,7 @@ province_event = {
 	id = 1137
 
 	trigger = {
-		year = 1923
 		province_id = 928		# Mendeli
-		not = { trade_goods = oil }
-		OR = {
-			owner = {
-				part_of_sphere = yes
-				sphere_owner = {
-					or = {
-						invention = daimlers_automobile
-						invention = cracking
-						invention = protected_cruisers
-					}
-				}
-			}
-			owner = {
-				or = {
-					invention = daimlers_automobile
-					invention = cracking
-					invention = protected_cruisers
-				}
-			}
-		}
-	}
-
-	mean_time_to_happen = {
-		months = 8
-	}
-
-	title = "EVTNAME1109"
-	desc = "EVTDESC1109"
-
-	option = {
-		name = "EVTOPTA1109"
-		trade_goods = oil
-		# life_rate = 5
-	}
-}
-
-province_event = {
-
-	id = 1138
-
-	trigger = {
-		year = 1927
-		province_id = 923		# Mosul
 		not = { trade_goods = oil }
 		OR = {
 			owner = {

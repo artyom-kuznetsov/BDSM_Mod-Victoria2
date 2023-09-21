@@ -1,0 +1,69 @@
+###	###	###	###	###
+###		OIL		###
+### ### ### ### ###
+
+province_event = { # ARABIA OIL EVENT
+	id = 110200
+	title = "EVTNAME1109"
+	desc = "EVTDESC1109"
+	
+	trigger = {
+		invention = cracking
+		NOT = { trade_goods = oil }
+		OR = {
+			province_id = 1160		# HAIL
+			province_id = 1159		# HALABAN
+			province_id = 1157		# ER-RIYAD
+			province_id = 1167		# ABU DHABI
+			province_id = 1162		# BAHRAIN
+			province_id = 1165		# DOHA
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 16
+		modifier = {
+			factor = 0.1
+			year = 1900
+		}
+	}
+
+	option = {
+		name = "EVTOPTA1109"
+		trade_goods = oil
+	}
+}
+
+province_event = { # MANCHURIA OIL EVENT
+	id = 110201
+	title = "EVTNAME1109"
+	desc = "EVTDESC1109"
+	
+	trigger = {
+		invention = cracking
+		NOT = { trade_goods = oil }
+		OR = {
+			province_id = 2673		# N MANCHURIA
+			province_id = 2621		# S MANCHURIA
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 16
+		modifier = {
+			factor = 0.1
+			year = 1900
+		}
+	}
+
+	option = {
+		name = "EVTOPTA1109"
+		trade_goods = oil
+	}
+}
+
+
+
+
+
+
