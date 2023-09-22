@@ -609,3 +609,78 @@ country_event = {
 		}
 	}
 }
+
+	#  ¿–¿  ¿ œŒÀ”◊»“‹ ÃŒƒ»‘» ¿“Œ–
+country_event = {
+	title = "spa_carrack_modifier_EvtName"
+	desc = "spa_carrack_EvtDesc"
+	id = 57321
+	trigger = {
+		ai = no
+		#  ¿–¿  ¿ ¬ œ–Œ¬ ≈
+		any_owned_province = { 
+			has_province_modifier = spanish_carrack_prov_modifier
+		}
+		
+		# ≈Ÿ® Õ≈“ ÃŒƒ»‘» ¿“Œ–¿
+		NOT = { has_country_modifier = spanish_carrack_modifier } 
+		
+		#  ¿–¿  ¿ ¬ —“–¿Õ≈
+		has_country_flag = has_spanish_carrack_flag
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTA"
+		add_country_modifier = {
+			name = spanish_carrack_modifier duration = -1
+		}
+	}
+}
+
+	#  ¿–¿  ¿ œŒ“≈–ﬂ“‹ ÃŒƒ»‘» ¿“Œ–
+country_event = {
+	title = "spa_carrack_EvtName"
+	desc = "spa_carrack_lose_EvtName"
+	id = 57322
+	trigger = {
+		has_country_modifier = spanish_carrack_modifier
+		ai = no
+		NOT = {
+			any_owned_province = { 
+				has_province_modifier = spanish_carrack_prov_modifier
+			}
+		}
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTB"
+		remove_country_modifier = spanish_carrack_modifier
+	}
+}
+
+	#  ¿–¿  ¿ Õ≈ –¿—œŒÀŒ∆≈Õ¿ ÕŒ »Ã≈≈“—ﬂ
+country_event = {
+	title = "spa_carrack_EvtName"
+	desc = "spa_carrack_not_placed_EvtName"
+	id = 57323
+	trigger = {
+		has_country_flag = has_spanish_carrack_flag
+		ai = no
+		war = no
+		NOT = {
+			any_owned_province = { 
+				has_province_modifier = spanish_carrack_prov_modifier
+			}
+		}
+		NOT = { has_country_modifier = moved_monument_modifier }
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "spa_carrack_not_placed_EvtOptA"
+		prestige = -5
+	}
+}

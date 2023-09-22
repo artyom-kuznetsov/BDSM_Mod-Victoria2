@@ -253,7 +253,7 @@ political_decisions = {
 	}
 	selector_change_mine_dec = {
 		potential = {
-			NOT = { has_country_flag = open_money_transfers_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
 			ai = no
 			NOT = { has_country_flag = deciding_flag }
 			any_owned_province = {
@@ -296,6 +296,46 @@ political_decisions = {
 			add_country_modifier = {
 				name = selector_change_mine_cooldown
 				duration = 180
+			}
+		}
+	}
+	selector_place_spanish_carrack_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+			has_country_flag = has_spanish_carrack_flag
+			NOT = {
+				any_owned_province = { 
+					has_province_modifier = spanish_carrack_prov_modifier
+				}
+			}
+		}
+		
+		allow = {
+			any_owned_province = {
+				has_building = province_selector
+				is_colonial = no
+				is_core = THIS
+			}
+			war = no
+		}
+		
+		effect = {
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					is_colonial = no
+					is_core = THIS
+				}
+				add_province_modifier = {
+					name = spanish_carrack_prov_modifier
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = moved_monument_modifier
+				duration = 365
 			}
 		}
 	}
