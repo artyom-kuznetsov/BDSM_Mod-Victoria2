@@ -108,7 +108,6 @@ political_decisions = {
 			NOT = {
 				has_country_flag = tanzimat_reforms_enacted
 			}
-			government = absolute_monarchy
 		}
 		
 		allow = {
@@ -126,7 +125,23 @@ political_decisions = {
 				consciousness = 1
 			}
 			set_country_flag = tanzimat_reforms_enacted
-			political_reform = culture_voting_only
+			
+			random_owned = {
+				limit = {
+					owner = {
+						citizens_rights = primary_culture_only
+					}
+				}
+				owner = { political_reform = culture_voting_only }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						citizens_rights = culture_voting_only
+					}
+				}
+				owner = { political_reform = all_voting_pops }
+			}
 			political_reform = confederalism
 			random_owned = {
 				limit = {
@@ -135,6 +150,22 @@ political_decisions = {
 					}
 				}
 				owner = { political_reform = peonage }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						debt_law = peonage
+					}
+				}
+				owner = { political_reform = debtors_prisons }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						debt_law = debtors_prisons
+					}
+				}
+				owner = { political_reform = bankruptcy }
 			}
 		}
 	}
