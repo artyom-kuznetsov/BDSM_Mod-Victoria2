@@ -2,12 +2,12 @@
 country_event = { # «¿Ÿ»“¿ œŒ–“”√¿À»»
 	title = "protect_portugal_EvtName"
 	desc = "protect_portugal_EvtDesc"
-	id = 11100
+	id = 111000
 	
 	picture = "iberia"
 	
 	trigger = {
-		tag = SPA
+		primary_culture = spanish
 		POR = {
 			in_sphere = THIS
 		}
@@ -27,6 +27,212 @@ country_event = { # «¿Ÿ»“¿ œŒ–“”√¿À»»
 				secede_province = THIS
 			}
 		}
+	}
+}
+
+country_event = { # ”–Œ¬≈Õ‹ ∆»«Õ»
+	title = "spa_liferate_EvtName"
+	desc = "spa_liferate_EvtDesc"
+	id = 111001
+	
+	picture = "iberia"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "spa_liferate_EvtOptA"
+		set_country_flag = spa_liferate_flag
+		474 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		492 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		496 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		498 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		503 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		487 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		480 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		510 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		513 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		509 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		524 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+		518 = {
+			state_scope = {
+				any_owned = {
+					life_rating = 5
+				}
+			}
+		}
+	}
+}
+
+
+country_event = { # ”–Œ¬≈Õ‹ ∆»«Õ»
+	title = "spa_liferate_EvtName"
+	desc = "spa_liferate_end_EvtDesc"
+	id = 111002
+	
+	picture = "iberia"
+	
+	trigger = {
+		has_country_flag = spa_metropolian_flag
+		NOT = { has_country_modifier = spa_metropolian_modifier }
+		NOT = { has_country_flag = spa_metropolian_end_flag }
+	}
+	
+	immediate = {
+		474 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		492 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		496 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		498 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		503 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		487 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		480 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		510 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		513 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		509 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		524 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+		518 = {
+			state_scope = {
+				any_owned = {
+					life_rating = -5
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "spa_liferate_end_EvtOptA"
+		set_country_flag = spa_metropolian_end_flag
 	}
 }
 

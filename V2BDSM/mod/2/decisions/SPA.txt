@@ -1,4 +1,31 @@
 political_decisions = {
+	form_iberian_union_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			is_culture_group = iberian
+			IBE = { exists = no }
+		}
+		
+		allow = {
+			IBE = { all_core = { owned_by = THIS } }
+			citizens_rights = all_voting_pops
+		}
+		
+		effect = {
+			add_accepted_culture = portuguese
+			add_accepted_culture = spanish
+			change_tag = IBE
+			prestige = 5
+			any_state = {
+				any_pop = {
+					consciousness = 1.0
+				}
+			}
+			capital = 487
+		}
+		
+	}
+	
 	return_mexico_dec = {
 		potential = {
 			primary_culture = spanish
@@ -48,6 +75,7 @@ political_decisions = {
 		}
 		
 		effect = {
+			CUSTOM_TOOLTIP_SPA_LATIN = { }
 			set_country_flag = reintegrate_latin_flag
 			add_accepted_culture = central_american
 			any_owned = {
@@ -80,14 +108,22 @@ political_decisions = {
 		}
 		
 		allow = {
-			revolution_n_counterrevolution = 1
+			inorganic_chemistry = 1
 		}
 		
 		effect = {
+			CUSTOM_TOOLTIP_SPA_METRO = { }
 			set_country_flag = reintegrate_latin_flag
 			POR = {
 				all_core = { add_core = THIS }
 			}
+			set_country_flag = spa_metropolian_flag
+			add_country_modifier = {
+				name = spa_metropolian_modifier
+				duration = 5475
+			}
+			CUSTOM_TOOLTIP_SPA_METRO_LIFERATE = { }
+			country_event = 111001
 		}
 	}
 	restore_colonial_spa_dec = {
@@ -240,11 +276,6 @@ political_decisions = {
 				}
 			}
 			badboy = -5
-			POR = {
-				all_core = {
-					add_core = THIS
-				}
-			}
 		}
 		ai_will_do = {
 			factor = 1
