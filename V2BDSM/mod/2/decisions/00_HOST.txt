@@ -2,6 +2,7 @@ political_decisions = {
 	host_show_host_decisions_dec = {
 		alert = no
 		potential = {
+			ai = no
 			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				has_country_flag = is_host_flag
@@ -9,7 +10,6 @@ political_decisions = {
 					has_global_flag = host_determined_flag
 				}
 			}
-			ai = no
 		}
 		
 		allow = {
@@ -37,12 +37,12 @@ political_decisions = {
 	}
 	host_i_am_host_dec = {
 		potential = {
+			ai = no
 			NOT = { has_global_flag = host_determined_flag }
 			has_country_flag = show_host_decs_flag
 		}
 		
 		allow = {
-			ai = no
 		}
 		
 		effect = {
@@ -51,15 +51,83 @@ political_decisions = {
 			CUSTOM_TOOLTIP_IAMHOST = { }
 		}
 	}
+	host_i_am_not_host_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			clr_country_flag = is_host_flag
+			clr_global_flag = host_determined_flag
+		}
+	}
+	host_selectcountries_allow_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			NOT = { has_global_flag = host_selectcountries_allow_flag }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_global_flag = host_selectcountries_allow_flag
+		}
+	}
+	host_selectcountries_disallow_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			has_global_flag = host_selectcountries_allow_flag
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			clr_global_flag = host_selectcountries_allow_flag
+			any_country = { clr_country_flag = player_selected_flag }
+		}
+	}
+	player_selectMe_dec = {
+		alert = no
+		
+		potential = {
+			ai = no
+			has_global_flag = host_selectcountries_allow_flag
+			NOT = { has_country_flag = player_selected_flag }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_country_flag = player_selected_flag
+			any_country = {
+				limit = {
+					has_country_flag = is_host_flag
+				}
+				country_event = 57614
+			}
+		}
+	}
 	host_singleplayer_dec = {
 		potential = {
+			ai = no
 			has_country_flag = is_host_flag
 			has_country_flag = show_host_decs_flag
 			NOT = { has_global_flag = singleplayer_flag }
 		}
 		
 		allow = {
-			ai = no
 		}
 		
 		effect = {
@@ -71,6 +139,86 @@ political_decisions = {
 					ai = no
 				}
 				country_event = 57606
+			}
+		}
+	}
+	host_give_badboy_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			has_global_flag = host_selectcountries_allow_flag
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			any_country = {
+				limit = {
+					has_country_flag = player_selected_flag
+				}
+				badboy = 5
+			}
+		}
+	}
+	host_take_badboy_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			has_global_flag = host_selectcountries_allow_flag
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			any_country = {
+				limit = {
+					has_country_flag = player_selected_flag
+				}
+				badboy = -5
+			}
+		}
+	}
+	host_give_prestige_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			has_global_flag = host_selectcountries_allow_flag
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			any_country = {
+				limit = {
+					has_country_flag = player_selected_flag
+				}
+				prestige = 50
+			}
+		}
+	}
+	host_take_prestige_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			has_global_flag = host_selectcountries_allow_flag
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			any_country = {
+				limit = {
+					has_country_flag = player_selected_flag
+				}
+				prestige = -50
 			}
 		}
 	}
