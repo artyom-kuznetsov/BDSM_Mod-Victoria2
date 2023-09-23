@@ -448,3 +448,22 @@ country_event = { # NGF
 		}
 	}
 }
+
+country_event = { # IBERIA
+	title = "noloc"
+	desc = "noloc"
+	id = 9567
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		IBE = {
+			all_core = { 
+				secede_province = THIS 
+			} 
+		}
+		activate_technology = nationalism_n_imperialism
+		political_reform = all_voting_pops
+	}
+}
