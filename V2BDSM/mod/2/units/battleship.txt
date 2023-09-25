@@ -10,7 +10,7 @@ battleship = {
 	move_sound = steam_move
 	select_sound = steam_selected
 	floating_flag = yes
-	colonial_points = 42
+	colonial_points = 32
 	
 	#Core Abilities
 	priority = 40
@@ -25,23 +25,21 @@ battleship = {
 	build_time = 540
 	build_cost = {
 		steamer_convoy = 80
-		artillery = 20
-		canned_food = 10
-		coal = 25
+		fuel = 10
 	}
 	min_port_level = 5
 	limit_per_port = -1 #-1 is unlimited, but it is possible to limit number of ships per port level.
 	supply_consumption_score = 1
 	
 	supply_consumption = 1.0
-	supply_cost = { # v4.0 CALCULATED MAINT 106
-		steamer_convoy = 1.55
-		coal = 2.5
+	supply_cost = { # v4.1 CALCULATED MAINT 80
+		steamer_convoy = 1
+		fuel = 0.6
 	}
 	
 	#Naval Abilties
-	hull = 70		# MAX 84
-	gun_power = 50	# MAX 61
+	hull = 29		# +5 actual +9 max
+	gun_power = 23	# +5 actual +7 max
 	fire_range = 0.75
 	evasion = 0
 }

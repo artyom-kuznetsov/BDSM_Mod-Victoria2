@@ -244,7 +244,7 @@ advanced_cruisers = {
 	}
 	effect = {
 		cruiser = {
-			gun_power = 3
+			gun_power = 2
 		} 
 	}
 }
@@ -268,6 +268,9 @@ modern_cruisers = {
 	effect = {
 		cruiser = {
 			maximum_speed = 1
+		}  
+		monitor = {
+			maximum_speed = 2
 		}  
 	}
 }
@@ -426,10 +429,10 @@ optical_rangefinders = {
 	}
 	effect = {
 		manowar = {
-			gun_power = 0.4
+			gun_power = 2
 		}
 		frigate = {
-			gun_power = 0.2
+			gun_power = 1
 		}
 	}
 }
@@ -445,8 +448,8 @@ monitors = {
 	}
 	effect = {
 		ironclad = {
-			gun_power = 1
-			hull = 1
+			gun_power = 2
+			hull = 2
 		} 
 	}
 }
@@ -461,7 +464,7 @@ destroyers = {
 	}
 	effect = {
 		commerce_raider = {
-			hull = 0.5
+			hull = 2
 		}
 	}
 }
@@ -484,59 +487,6 @@ armour_piercing_projectiles = {
 		}
 	}
 }
-#sea_mine_equipment = {
-#	limit = { weapon_platforms = 1 }
-#	chance = {
-#		base = 6
-#	}
-#	effect = { 
-#	}
-#}
-#armoured_turrets = {
-#	limit = { weapon_platforms = 1 }
-#	chance = {
-#		base = 2
-#		modifier = {
-#			factor = 2
-#			invention = ironclads
-#		}
-#		modifier = {
-#			factor = 2
-#			cheap_iron = 1
-#		}
-#	}
-#	effect = {
-#		navy_base = {
-#			hull = 1
-#		} 
-#	}
-#}
-#main_armament
-#bomb_guns = {
-#	limit = { main_armament = 1 }
-#	chance = {
-#		base = 2
-#		modifier = {
-#			factor = 2
-#			invention = armour_piercing_exploding_projectiles
-#		}
-#		modifier = {
-#			factor = 2
-#			military_statistics = 1
-#		}
-#	}
-#	effect = {
-#		battleship = {
-#			gun_power = 3
-#		}
-#		dreadnought = {
-#			gun_power = 4
-#		}	
-#		cruiser = {
-#			gun_power = 1
-#		}			
-#	}
-#}
 rifled_guns = {
 	limit = { main_armament = 1 }
 	chance = {
@@ -551,19 +501,16 @@ rifled_guns = {
 		}
 	}
 	effect = {
-		battleship = {
-			gun_power = 2
-		}
 		cruiser = {
 			gun_power = 2
 		}
 		ironclad = {
-			gun_power = 4
-			hull = 4
+			gun_power = 2
+			hull = 2
 		}
 		monitor = {
-			hull = 4
-			gun_power = 5
+			hull = 2
+			gun_power = 2
 			torpedo_attack = 1
 		}
 	}
@@ -578,57 +525,16 @@ armoured_citadels = {
 		}
 	}
 	effect = {
-		battleship = {
-			hull = 5
-		}
 		cruiser = {
 			hull = 1
 			gun_power = 1
 		}
+		monitor = {
+			hull = 1
+			maximum_speed = 3
+		}
 	}
 }
-#heavy_caliber_guns = {
-#	limit = { main_armament = 1 }
-#	chance = {
-#		base = 2
-#		modifier = {
-#			factor = 2
-#			invention = rifled_guns
-#		}
-#		modifier = {
-#			factor = 2
-#			steel_breech_loaded_artillery = 1
-#		}
-#	}
-#	effect = {
-#		battleship = {
-#			gun_power = 4
-#		}
-#		dreadnought = {
-#			gun_power = 6
-#		}
-#	}
-#}
-#advanced_naval_design
-#on_board_recon_aircraft = {
-#	limit = { advanced_naval_design = 1 }
-#	chance = {
-#		base = 2
-#		modifier = {
-#			factor = 2
-#			invention = wright_n_langleys_aeroplanes
-#		}
-#		modifier = {
-#			factor = 1
-#			naval_risk_management = 1
-#		}
-#	}
-#	effect = {
-#		navy_base = {
-#			default_organisation = 5
-#		}
-#	}
-#}
 gun_hydraulics = {
 	limit = { advanced_naval_design = 1 }
 	chance = {
@@ -644,11 +550,12 @@ gun_hydraulics = {
 	}
 	effect = {
 		dreadnought = {
-			gun_power = 5
+			gun_power = 2
 			hull = 3
 		}
 		battleship = {
-			gun_power = 2
+			hull = 5
+			gun_power = 5
 		}
 		cruiser = {
 			gun_power = 1
@@ -670,16 +577,13 @@ large_hull_form = {
 	}
 	effect = {
 		dreadnought = {
-			hull = 7
+			hull = 2
 		}
 		battleship = {
 			hull = 2
 		}
 		cruiser = {
-			hull = 0.5
-		}
-		monitor = {
-			hull = 0.5
+			hull = 1
 		}
 	}
 }
@@ -694,7 +598,7 @@ torpedo_gyroscope = {
 	}
 	effect = {
 		monitor = {
-			torpedo_attack = 2
+			torpedo_attack = 1
 		}
 	}
 }
@@ -725,10 +629,10 @@ heavy_armour_plates = {
 			hull = 2
 		}
 		cruiser = {
-			hull = 0.5
+			hull = 1
 		}
 		monitor = {
-			hull = 0.5
+			hull = 1
 		}
 	}
 }
@@ -756,7 +660,7 @@ advanced_fire_control = {
 			gun_power = 1
 		}
 		monitor = {
-			torpedo_attack = 2
+			gun_power = 2
 		}
 	}
 }
