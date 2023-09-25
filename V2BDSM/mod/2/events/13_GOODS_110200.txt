@@ -8,7 +8,9 @@ province_event = { # ARABIA OIL EVENT
 	desc = "EVTDESC1109"
 	
 	trigger = {
-		invention = cracking
+		owner = {
+			invention = cracking
+		}
 		NOT = { trade_goods = oil }
 		OR = {
 			province_id = 1160		# HAIL
@@ -40,7 +42,9 @@ province_event = { # MANCHURIA OIL EVENT
 	desc = "EVTDESC1109"
 	
 	trigger = {
-		invention = cracking
+		owner = {
+			invention = cracking
+		}
 		NOT = { trade_goods = oil }
 		OR = {
 			province_id = 2673		# N MANCHURIA

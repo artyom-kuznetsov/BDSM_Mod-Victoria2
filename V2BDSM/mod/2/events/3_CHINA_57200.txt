@@ -16,115 +16,60 @@ country_event = {
 		}
 	}
 	
-	mean_time_to_happen = {
-		months = 12
-		modifier = {
-			factor = 0.5
-			year = 1838
-		}
-		modifier = {
-			factor = 0.5
-			year = 1840
-		}
-		modifier = {
-			factor = 0.5
-			average_militancy = 2
-		}
-		modifier = {
-			factor = 0.5
-			average_militancy = 3
-		}
-		modifier = {
-			factor = 0.5
-			average_consciousness = 2
-		}
-		modifier = {
-			factor = 0.5
-			average_consciousness = 3
-		}
-	}
+	#mean_time_to_happen = {
+	#	months = 12
+	#	modifier = {
+	#		factor = 0.5
+	#		year = 1838
+	#	}
+	#	modifier = {
+	#		factor = 0.5
+	#		year = 1840
+	#	}
+	#	modifier = {
+	#		factor = 0.5
+	#		average_militancy = 2
+	#	}
+	#	modifier = {
+	#		factor = 0.5
+	#		average_militancy = 3
+	#	}
+	#	modifier = {
+	#		factor = 0.5
+	#		average_consciousness = 2
+	#	}
+	#	modifier = {
+	#		factor = 0.5
+	#		average_consciousness = 3
+	#	}
+	#}
 	
 	immediate = {
 		set_global_flag = China_Breakup_flag
 		
 		primary_culture = beifaren
 		remove_accepted_culture = manchu
-		any_owned = {
-			limit = {
-				is_core = TPG
-			}
-			secede_province = TPG
-		}
 		release_vassal = TPG
-		any_owned = {
-			limit = {
-				is_core = MCK
-			}
-			secede_province = MCK
-		}
+		release_vassal = TPG
 		release_vassal = MCK
-		any_owned = {
-			limit = {
-				is_core = XIN
-			}
-			secede_province = XIN
-		}
+		release_vassal = MCK
 		release_vassal = XIN
-		any_owned = {
-			limit = {
-				is_core = TIB
-			}
-			secede_province = TIB
-		}
+		release_vassal = XIN
 		release_vassal = TIB
-		any_owned = {
-			limit = {
-				is_core = MGL
-			}
-			secede_province = MGL
-		}
+		release_vassal = TIB
 		release_vassal = MGL
-		any_owned = {
-			limit = {
-				is_core = IMG
-			}
-			secede_province = IMG
-		}
+		release_vassal = MGL
 		release_vassal = IMG
-		any_owned = {
-			limit = {
-				is_core = XBI
-			}
-			secede_province = XBI
-		}
+		release_vassal = IMG
 		release_vassal = XBI
-		any_owned = {
-			limit = {
-				is_core = YNN
-			}
-			secede_province = YNN
-		}
+		release_vassal = XBI
 		release_vassal = YNN
-		any_owned = {
-			limit = {
-				is_core = GXI
-			}
-			secede_province = GXI
-		}
+		release_vassal = YNN
 		release_vassal = GXI
-		any_owned = {
-			limit = {
-				is_core = HNN
-			}
-			secede_province = HNN
-		}
+		release_vassal = GXI
 		release_vassal = HNN
-		any_owned = {
-			limit = {
-				is_core = HUI
-			}
-			secede_province = HUI
-		}
+		release_vassal = HNN
+		release_vassal = HUI
 		release_vassal = HUI
 		any_owned = {
 			limit = {
@@ -137,10 +82,6 @@ country_event = {
 		
 		any_country = {
 			limit = {
-				NOT = {
-					tag = HBI
-					tag = CHI
-				}
 				ai = no
 			}
 			country_event = 57604
