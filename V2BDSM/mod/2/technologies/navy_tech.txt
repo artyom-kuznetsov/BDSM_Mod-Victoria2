@@ -1311,7 +1311,6 @@ naval_design_bureaus = {
 	year = 1836
 	cost = 3600
 	navy_base = {
-		build_time = -10
 		maximum_speed = 2
 	}
 	unciv_military = yes
@@ -1347,8 +1346,7 @@ fire_control_systems = {
 	year = 1836
 	cost = 7200
 	unciv_military = yes
-	navy_base = { build_time = -10 }
-	commerce_raider = { build_time = -60 }
+	raider = { build_time = -30 }
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1382,8 +1380,8 @@ weapon_platforms = {
 	year = 1865
 	cost = 10800
 	unciv_military = yes
-	navy_base = { build_time = -10 }
-	ironclad = { build_time = -40 }
+	raider = { build_time = -30 }
+	ironclad = { build_time = -45 }
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1416,7 +1414,8 @@ main_armament = {
 	year = 1880
 	cost = 14400
 	unciv_military = yes
-	navy_base = { build_time = -10 }
+	ironclad = { build_time = -45 }
+	cruiser = { build_time = -60 }
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1449,9 +1448,9 @@ advanced_naval_design = {
 	year = 1900
 	cost = 18000
 	unciv_military = yes
-	navy_base = { build_time = -10 }
-	cruiser = { build_time = -40 }
-	battleship = { build_time = -150 }
+	cruiser = { build_time = -60 }
+	monitor = { build_time = -60 }
+	battleship = { build_time = -90 }
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1484,11 +1483,9 @@ early_modern_naval_design = {
 	year = 1910
 	cost = 21600
 	unciv_military = yes
-	navy_base = { build_time = -10 }
-	cruiser = { build_time = -40 }
-	dreadnought = {
-		build_time = -180
-	}
+	monitor = { build_time = -30 }
+	battleship = { build_time = -60 }
+	battleship = { build_time = -90 }
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1521,10 +1518,10 @@ modern_naval_design = {
 	year = 1920
 	cost = 21600
 	unciv_military = yes
-	navy_base = { build_time = -10 }
-	monitor = { build_time = -40 }
+	monitor = { build_time = -30 }
+	battleship = { build_time = -60 }
+	carrier = { build_time = -150 }
 	carrier = {
-		build_time = -180
 		hull = 10
 	}
 	ai_chance = {
