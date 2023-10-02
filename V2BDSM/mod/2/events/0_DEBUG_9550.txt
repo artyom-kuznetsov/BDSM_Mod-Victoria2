@@ -277,6 +277,7 @@ country_event = { # REDUCE POP IN LOW COUNTRIES
 		NOT = {
 			is_culture_group = beneluxian
 		}
+		NET = { ai = yes }
 	}
 	
 	fire_only_once = yes
@@ -337,6 +338,7 @@ country_event = { # DEBUFF FOR OWNING NETHERLANDS
 		NOT = {
 			is_culture_group = beneluxian
 		}
+		NET = { ai = yes }
 	}
 	
 	option = {
@@ -484,3 +486,32 @@ country_event = { # BENELUX
 		political_reform = all_voting_pops
 	}
 }
+
+province_event = {
+	id = 9569
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		is_core = BLX
+		NOT = {
+			is_culture_group = beneluxian
+		}
+		NOT = {
+			has_province_modifier = separatism_modifier
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		state_scope = {
+			any_owned = {
+				add_province_modifier = {
+					name = separatism_modifier
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
