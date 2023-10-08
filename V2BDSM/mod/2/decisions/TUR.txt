@@ -341,4 +341,77 @@ political_decisions = {
 			badboy = 5
 		}
 	}
+	
+	# TURKISH UNION
+	establish_turkish_union_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = establish_turkish_union_flag }
+			tag = TUR
+			OR = {
+				is_ideology_enabled = communist
+				is_ideology_enabled = socialist
+			}
+		}
+		allow = {
+			trade_unions = all_trade_unions
+			NOT = { citizens_rights = primary_culture_only }
+			OR = {
+				government = proletarian_dictatorship
+				government = social_republic
+			}
+		}
+		effect = {
+			capital = 876
+			876 = { add_province_modifier = { name = baby_boom duration = 365 } }
+			political_reform = all_voting_pops
+			political_reform = no_slavery
+			political_reform = child_labor_illegal
+			political_reform = bankruptcy
+			political_reform = totalitarianism
+			any_pop = {
+				militancy = -2
+			}
+			any_pop = {
+				consciousness = 2
+			}
+			set_country_flag = establish_turkish_union_flag
+		}
+	}
+	# TURKISH FEDERATION
+	establish_turkish_federation_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = establish_turkish_union_flag }
+			tag = TUR
+			OR = {
+				is_ideology_enabled = communist
+				is_ideology_enabled = socialist
+			}
+		}
+		allow = {
+			NOT = { citizens_rights = capital_punishment }
+			NOT = {
+				government = proletarian_dictatorship
+				government = social_republic
+			}
+		}
+		effect = {
+			capital = 876
+			876 = { add_province_modifier = { name = baby_boom duration = 1035 } }
+			political_reform = secret_ballots
+			political_reform = no_slavery
+			political_reform = bankruptcy
+			political_reform = federalism
+			any_pop = {
+				militancy = -2
+			}
+			any_pop = {
+				consciousness = 2
+			}
+			set_country_flag = establish_turkish_union_flag
+		}
+	}
 }

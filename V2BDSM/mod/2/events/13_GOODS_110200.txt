@@ -66,6 +66,36 @@ province_event = { # MANCHURIA OIL EVENT
 	}
 }
 
+province_event = { # POLAND OIL EVENT
+	id = 110202
+	title = "EVTNAME1109"
+	desc = "EVTDESC1109"
+	
+	trigger = {
+		owner = {
+			invention = cracking
+		}
+		NOT = { trade_goods = oil }
+		OR = {
+			province_id = 713		# N MANCHURIA
+			province_id = 717		# S MANCHURIA
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 16
+		modifier = {
+			factor = 0.1
+			year = 1900
+		}
+	}
+
+	option = {
+		name = "EVTOPTA1109"
+		trade_goods = oil
+	}
+}
+
 
 
 
