@@ -498,8 +498,10 @@ province_event = {
 	
 	trigger = {
 		is_core = BLX
-		NOT = {
-			is_culture_group = beneluxian
+		owner = {
+			NOT = {
+				is_culture_group = beneluxian
+			}
 		}
 		NOT = {
 			has_province_modifier = separatism_modifier
