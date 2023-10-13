@@ -704,10 +704,8 @@ country_event = {
 			NOT = {
 				owned_by = THIS
 			}
-			NOT = {
-				owner = {
-					primary_culture = beifaren
-				}
+			owner = {
+				NOT = { primary_culture = beifaren }
 			}
 		}
 		NOT = { has_country_modifier = tientsin_exploitation_modifier_china }
