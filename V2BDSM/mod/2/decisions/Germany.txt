@@ -566,6 +566,7 @@ political_decisions = {
 	
 	von_moltkes_staff_reforms = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = PRU
 				tag = GER
@@ -574,7 +575,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = von_moltke
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { year = 1888 }
 		}
 		allow = {
 			military_plans = 1

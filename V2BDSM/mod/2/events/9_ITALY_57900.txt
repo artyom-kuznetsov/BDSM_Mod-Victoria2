@@ -291,3 +291,28 @@ country_event = { # SWI REMOVE CORES
 		2568 = { remove_core = SWI }
 	}
 }
+
+country_event = { # ANNEX ITA MINOR 
+	id = 57906
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		is_culture_group = italian
+		ai = yes
+		capital_scope = {
+			controller = {
+				has_country_flag = expedition_to_sicily
+				ai = no
+			}
+		}
+		all_core = { NOT = { { controlled_by = THIS } }
+	}
+	
+	option = {
+		name = "noloc"
+		capital_scope = {
+			controller = { inherit = THIS }
+		}
+	}
+}
