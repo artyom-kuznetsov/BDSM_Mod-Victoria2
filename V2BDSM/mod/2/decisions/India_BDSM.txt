@@ -167,7 +167,13 @@ political_decisions = {
 			prestige = 5
 			any_country = {
 				limit = {
-					is_culture_group = THIS
+					OR = {
+						tag = AWM
+						tag = BIM
+						tag = NAM
+						tag = BHM
+						tag = HYM
+					}
 					OR = {
 						in_sphere = THIS
 						vassal_of = THIS
