@@ -19,14 +19,19 @@ political_decisions = {
 			enable_canal = 14
 			enable_canal = 15
 			enable_canal = 16
-			#NET = { create_vassal = DEI }
-			#DEI = { create_vassal = JAV }
-			#DEI = { create_vassal = SUM }
 			set_global_flag = 1836_setup_complete_flag
 			# ¬—≈Ã —“–¿Õ¿Ã
 			any_country = {
 				limit = {
 					exists = yes
+					NOT = {
+						tag = JAP
+						tag = MUG
+						tag = DEI
+						tag = SPA
+						tag = TUR
+						tag = CHI
+					}
 				}
 				add_country_modifier = {
 					name = force_reform_cooldown_modifier
@@ -955,7 +960,10 @@ political_decisions = {
 			AUS = {
 				any_pop = {
 					limit = {
-						culture = north_italian
+						OR = {
+							culture = north_italian
+							culture = venetian
+						}
 					}
 					literacy = 0.14
 				}
