@@ -146,4 +146,32 @@ political_decisions = {
 		}
 		
 	}
+	eliminate_lom_ven_kingdom_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = KUK
+			owns = 726
+			owns = 729
+			NOT = { has_country_flag = eliminate_lom_ven_kingdom_flag }
+		}
+		
+		allow = {
+			biologism = 1
+		}
+		
+		effect = {
+			add_accepted_culture = venetian
+			set_country_flag = eliminate_lom_ven_kingdom_flag
+			736 = {
+				state_scope = {
+					remove_core = ITA
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+		
+	}
 }
