@@ -853,7 +853,13 @@ assimilation_chance =
 	}
 	
 	modifier = {
-		factor = -30
+		factor = 0.8
+		country = { has_country_flag = TUR_assimilation_flag }
+		location = { is_core = THIS }
+	}
+	
+	modifier = {
+		factor = -0.5
 		strata = middle
 	}
 
@@ -866,6 +872,7 @@ assimilation_chance =
 			continent = oceania
 		}
 	}
+	
 	modifier = {
 		factor = 2
 		culture = ainu
@@ -890,6 +897,7 @@ assimilation_chance =
 			literacy = 0.8
 		}
 	}
+	
 	group = {
 		modifier = {
 			factor = 0.2
@@ -984,7 +992,9 @@ assimilation_chance =
 	modifier = {
     	factor = 0.5
 		culture = korean
-		has_country_flag = korean_integration_flag
+		country = {
+			has_country_flag = korean_integration_flag
+		}
 	}
 
 	group = {
