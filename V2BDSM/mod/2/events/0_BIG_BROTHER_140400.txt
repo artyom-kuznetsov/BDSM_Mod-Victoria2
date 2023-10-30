@@ -233,6 +233,20 @@ country_event = {
 			}
 			political_reform = open_borders
 		}
+		any_country = { # «¿œ–≈“ »» ‘ÀŒ“¿
+			limit = {
+				ai = yes
+			}
+			any_owned = {
+				limit = {
+					is_coastal = yes
+				}
+				add_province_modifier = {
+					name = prohibited_shipbuilding_modifier
+					duration = -1
+				}
+			}
+		}
 	}
 }
 

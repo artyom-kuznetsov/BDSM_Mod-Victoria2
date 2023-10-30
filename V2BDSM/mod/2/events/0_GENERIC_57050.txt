@@ -1239,3 +1239,23 @@ country_event = {
 		overlord = { release_vassal = THIS }
 	}
 }
+
+country_event = {
+	id = 57091
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		ai = no
+		any_owned_province = {
+			has_province_modifier = prohibited_shipbuilding_modifier
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		any_owned = {
+			remove_province_modifier = prohibited_shipbuilding_modifier
+		}
+	}
+}
