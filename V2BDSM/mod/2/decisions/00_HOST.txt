@@ -182,6 +182,26 @@ political_decisions = {
 			}
 		}
 	}
+	host_give_research_dec = {
+		potential = {
+			ai = no
+			has_country_flag = is_host_flag
+			has_country_flag = show_host_decs_flag
+			has_global_flag = host_selectcountries_allow_flag
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			any_country = {
+				limit = {
+					has_country_flag = player_selected_flag
+				}
+				years_of_research = 0.5
+			}
+		}
+	}
 	host_give_prestige_dec = {
 		potential = {
 			ai = no
