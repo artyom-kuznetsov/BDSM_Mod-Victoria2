@@ -829,6 +829,18 @@ emigration_chance =
 		}
 	}
 	
+	modifier = {
+		factor = -1
+		country = { 
+			OR = {
+				primary_culture = japanese
+				primary_culture = beifaren
+				primary_culture = javan
+			}
+			NOT = { year = 1870 }
+		}
+	}
+	
 }
 
 #general assimilation mtth, same for all pops
