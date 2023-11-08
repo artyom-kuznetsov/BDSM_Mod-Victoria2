@@ -363,4 +363,52 @@ political_decisions = {
 			}
 		}
 	}
+	select_shipbuilding_state_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+			any_owned_province = { 
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+			}
+		}
+		allow = {
+			any_owned_province = {
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+				controlled_by = THIS
+				is_coastal = yes
+				NOT = {
+					has_province_modifier = shipbuilding_state_modifier
+				}
+			}
+			money = 100000
+			#war = yes
+		}
+		effect = {
+			any_owned = {
+				remove_province_modifier = shipbuilding_state_modifier
+			}
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					is_coastal = yes
+					NOT = {
+						has_province_modifier = shipbuilding_state_modifier
+					}
+					controlled_by = THIS
+				}
+				state_scope = {
+					any_owned = {
+						add_province_modifier = { name = shipbuilding_state_modifier duration = -1 }
+					}
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+				money = -100000
+			}
+		}
+	}
 }
