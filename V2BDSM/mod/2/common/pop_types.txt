@@ -6,44 +6,48 @@ promotion_chance =
 	### LITERACY
 	group = {
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.05
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.1 
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.2
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.3
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.4
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.5
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.6
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.7
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.8
 		}
 		modifier = {
-			factor = 0.03
+			factor = 0.04
 			literacy = 0.9
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.95
 		}
 	}
 	
@@ -54,7 +58,7 @@ promotion_chance =
 	}
 	
 	modifier = {
-		factor = -0.06
+		factor = -0.08
 		country = {
 			is_mobilised = yes
 		}
@@ -86,17 +90,39 @@ promotion_chance =
 
 	group = {
 		modifier = {
-			factor = 0.1
+			factor = 0.05
 			life_needs = 0.9
 	
 		}
 		modifier = {
-			factor = 0.1
+			factor = 0.05
 			life_needs = 0.8 
 		}
 		modifier = {
-			factor = 0.1
+			factor = 0.05
 			life_needs = 0.7
+			strata = poor
+		}
+		modifier = {
+			factor = 0.05
+			life_needs = 0.6
+			strata = poor
+		}
+	}
+
+	group = {
+		modifier = {
+			factor = 0.1
+			everyday_needs = 0.9
+	
+		}
+		modifier = {
+			factor = 0.1
+			everyday_needs = 0.8 
+		}
+		modifier = {
+			factor = 0.1
+			everyday_needs = 0.7
 			strata = poor
 		}
 	}
@@ -129,7 +155,7 @@ promotion_chance =
 		country = { penal_system = incarceration }
 	}
 	modifier = {
-		factor = 0.05
+		factor = 0.06
 		country = { penal_system = rehabilitation }
 	}
 	
@@ -825,6 +851,18 @@ emigration_chance =
 		}
 	}
 	
+	modifier = {
+		factor = -1
+		country = { 
+			OR = {
+				primary_culture = japanese
+				primary_culture = beifaren
+				primary_culture = javan
+			}
+			NOT = { year = 1870 }
+		}
+	}
+	
 }
 
 #general assimilation mtth, same for all pops
@@ -849,7 +887,13 @@ assimilation_chance =
 	}
 	
 	modifier = {
-		factor = -30
+		factor = 0.8
+		country = { has_country_flag = TUR_assimilation_flag }
+		location = { is_core = THIS }
+	}
+	
+	modifier = {
+		factor = -0.5
 		strata = middle
 	}
 
@@ -862,6 +906,7 @@ assimilation_chance =
 			continent = oceania
 		}
 	}
+	
 	modifier = {
 		factor = 2
 		culture = ainu
@@ -886,6 +931,7 @@ assimilation_chance =
 			literacy = 0.8
 		}
 	}
+	
 	group = {
 		modifier = {
 			factor = 0.2
@@ -980,7 +1026,9 @@ assimilation_chance =
 	modifier = {
     	factor = 0.5
 		culture = korean
-		has_country_flag = korean_integration_flag
+		country = {
+			has_country_flag = korean_integration_flag
+		}
 	}
 
 	group = {

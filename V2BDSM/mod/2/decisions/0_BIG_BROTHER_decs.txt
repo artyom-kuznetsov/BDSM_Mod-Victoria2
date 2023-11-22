@@ -19,23 +19,25 @@ political_decisions = {
 			enable_canal = 14
 			enable_canal = 15
 			enable_canal = 16
-			#NET = { create_vassal = DEI }
-			#DEI = { create_vassal = JAV }
-			#DEI = { create_vassal = SUM }
 			set_global_flag = 1836_setup_complete_flag
 			# ¬—≈Ã —“–¿Õ¿Ã
 			any_country = {
 				limit = {
 					exists = yes
+					NOT = {
+						primary_culture = japanese
+						tag = MUG
+						tag = DEI
+						tag = SPA
+						tag = TUR
+						tag = CHI
+					}
 				}
 				add_country_modifier = {
 					name = force_reform_cooldown_modifier
 					duration = 3650
 				}
-				add_country_modifier = {
-					name = start_badboy_increase_modifier
-					duration = 5475
-				}
+				badboy = 10
 			}
 			MUG = {
 				add_country_modifier = {
@@ -955,7 +957,10 @@ political_decisions = {
 			AUS = {
 				any_pop = {
 					limit = {
-						culture = north_italian
+						OR = {
+							culture = north_italian
+							culture = venetian
+						}
 					}
 					literacy = 0.14
 				}
@@ -968,9 +973,9 @@ political_decisions = {
 					literacy = 0.2
 				}
 			}
-			CIV = {
-				## Audax Validator "." Ignore_NEXT
-				annex_to = FROM
+			CIV = { 
+				# Audax Validator "." Ignore_NEXT
+				annex_to = FROM 
 			}
 			
 		}
@@ -1028,6 +1033,10 @@ political_decisions = {
 				primary_culture = rhenish
 				add_accepted_culture = danubian
 			}
+			MRK = {
+				primary_culture = rhenish
+				add_accepted_culture = danubian
+			}
 			FTB = {
 				primary_culture = rhenish
 			}
@@ -1041,6 +1050,18 @@ political_decisions = {
 			ANB = {
 				primary_culture = danubian
 			}
+			BMB = {
+				primary_culture = danubian
+			}
+			SAL = {
+				primary_culture = danubian
+			}
+			BEG = {
+				primary_culture = rhenish
+			}
+			MNR = {
+				primary_culture = rhenish
+			}
 			THU = {
 				primary_culture = elbian
 				add_accepted_culture = danubian
@@ -1048,6 +1069,9 @@ political_decisions = {
 			WZB = {
 				primary_culture = danubian
 				add_accepted_culture = rhenish
+			}
+			LIP = {
+				primary_culture = danubian
 			}
 			OLD = {
 				primary_culture = elbian

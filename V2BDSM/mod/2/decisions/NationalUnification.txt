@@ -152,6 +152,7 @@ political_decisions = {
 					is_culture_group = japanese_cg
 					is_culture_group = indonesian
 					is_culture_group = beneluxian
+					primary_culture = romanian
 					tag = ECU
 					tag = CLM
 					tag = VNZ
@@ -366,56 +367,48 @@ political_decisions = {
 	}	
 
 unite_moldavia_wallachia = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			OR = {
-				tag = WAL
-				tag = MOL
-			}
-			exists = WAL
-			exists = MOL
-			NOT = { exists = ROM }
-		}
+	potential = {
+		NOT = { has_country_flag = hide_all_decs_flag }
+		primary_culture = romanian
+		NOT = { exists = ROM }
+	}
 
-		allow = {
-			OR = {
-				state_n_government = 1
-				is_vassal = no
-			}
-			WAL = {
-				war = no
-				is_vassal = no
-			}
-			MOL = {
-				war = no
-				is_vassal = no
-			}
+	allow = {
+		state_n_government = 1
+		
+		664 = { OR = {
+			owned_by = THIS
+			owner = { vassal_of = THIS }
+			owner = { in_sphere = THIS } }
 		}
-
-		effect = {
-			prestige = 10
-			change_tag = ROM
-			random_country = {
-				limit = {
-					tag = WAL
-					exists = yes
-				}
-				country_event = 11101
-			}
-			random_country = {
-				limit = {
-					tag = MOL
-					exists = yes
-				}
-				country_event = 11101
-			}
-			capital = 664
-		}
-
-		ai_will_do = {
-			factor = 1
+		670 = { OR = {
+			owned_by = THIS
+			owner = { vassal_of = THIS }
+			owner = { in_sphere = THIS } }
 		}
 	}
+
+	effect = {
+		prestige = 10
+		ROM = {
+			all_core = {
+				limit = {
+					OR = {
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS }
+					}
+				}
+				secede_province = THIS
+			}
+		}
+		capital = 664
+		change_tag = ROM
+	}
+
+	ai_will_do = {
+		factor = 1
+	}
+}
 
 	form_yugoslavia = {
 		potential = {

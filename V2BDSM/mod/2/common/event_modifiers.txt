@@ -195,7 +195,7 @@
 #####	   # JAPAN #		#####
 
 	sengoku_modifier = {
-		mobilisation_size = 0.15
+		mobilisation_size = 0.05
 		tax_efficiency = 0.05
 		badboy = -0.03
 		icon = 15
@@ -273,8 +273,7 @@
 	indian_unification_modifier = {
 		diplomatic_points_modifier = 0.25
 		mobilisation_size = 0.12
-		cb_generation_speed_modifier = 0.25
-		badboy = -0.1
+		badboy = -0.15
 		icon = 15
 	}
 	
@@ -300,9 +299,34 @@
 
 #####	   # GENERIC #		#####
 
+	agitation_n_propaganda_modifier = {
+		global_pop_consciousness_modifier = 0.05
+		tax_efficiency = -0.05
+		icon = 1
+	}
+	
+	tax_cuts_modifer = {
+		global_pop_consciousness_modifier = -0.05
+		global_pop_militancy_modifier = -0.05
+		max_tariff = -0.1
+		tax_efficiency = -0.05
+		icon = 26
+	}
+	
+	administrative_expenses_modifier = {
+		tax_efficiency = -0.04
+		administrative_efficiency_modifier = -0.05
+		icon = 30
+	}
+
 	moved_monument_modifier = {
 		tax_efficiency = -0.05
 		icon = 26
+	}
+	
+	shipbuilding_state_modifier = {
+		local_ship_build = -0.4
+		icon = 23
 	}
 	
 	mobilization_cooldown = {
@@ -427,17 +451,7 @@
 		icon = 35
 	}
 	
-	start_badboy_increase_modifier = {
-		badboy = 0.04
-		icon = 30
-	}
 	
-	netherland_occupation_modifier = {
-		badboy = 0.05
-		pop_consciousness_modifier = 0.03
-		rgo_output = -0.2
-		factory_output = -0.15
-	}
 	
 ##### ^^^ GENERIC ^^^ #####
 
@@ -450,6 +464,14 @@
 		icon = 19
 	}
 
+	netherland_occupation_modifier = {
+		badboy = 0.05
+		pop_consciousness_modifier = 0.03
+		rgo_output = -0.2
+		factory_output = -0.15
+		
+		icon = 28
+	}
 
 strategic_rgo = {
 	local_rgo_throughput = 2
@@ -602,7 +624,7 @@ colonial_mismanagement = {
 colonial_recruitment = {
 	immigrant_attract = 1		#100%
 	life_rating = 0.1
-	population_growth = 0.01
+	population_growth = 0.002
 	assimilation_rate = 0.25
 	icon = 9
 }
@@ -853,26 +875,31 @@ the_statue_of_liberty = {
 
 
 ### GER - GERMANY, PRU - PRUSSIA ###
-germania_werft = {
-	local_repair = 0.5
-	local_ship_build = -0.05
-	icon = 15
-}
+	germania_werft = {
+		local_repair = 0.5
+		local_ship_build = -0.05
+		icon = 15
+	}
 
-ruhr_boom = {
-	factory_owner_cost = -0.5
-	global_population_growth = 0.002
-	factory_throughput = 0.05
-	icon = 11
-}
+	ruhr_boom = {
+		factory_owner_cost = -0.5
+		global_population_growth = 0.002
+		factory_throughput = 0.05
+		icon = 11
+	}
 
-prussian_general_staff = {
-	org_regain = 0.1
-	land_organisation = 0.05
-	land_unit_start_experience = 0.5
-	supply_consumption = -0.05
-	icon = 15
-}
+	prussian_general_staff = {
+		org_regain = 0.1
+		land_organisation = 0.05
+		land_unit_start_experience = 0.5
+		supply_consumption = -0.1
+		mobilisation_size = 0.01
+		icon = 15
+	}
+
+	annex_minor_cooldown_modifier = {
+		icon = 20
+	}
 
 ##### Boer War #####
 trek_boers = {
@@ -1034,7 +1061,7 @@ the_walhalla = {
  
  ##
  meiji_restoration_boost = {
-	research_points_modifier = 0.3
+	research_points_modifier = 0.4
 	icon = 5
 }
 

@@ -17,8 +17,14 @@ country_event = { # AUTO ANNEX MINORS BDSM v4.0
 			}
 		}
 		OR = { 
-			neighbour = PRU
-			neighbour = NGF
+			PRU = { 
+				neighbour = THIS 
+				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
+			}
+			NGF = { 
+				neighbour = THIS 
+				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
+			}
 		}
 		NOT = {	
 			tag = ISR 
@@ -26,13 +32,17 @@ country_event = { # AUTO ANNEX MINORS BDSM v4.0
 	}
 	
 	mean_time_to_happen = {
-		months = 12
+		months = 8
 	}
 	
 	option = {
 		name = "EVTOPTA60120"
 		sphere_owner = {
 			country_event = { id=60130 days=0 }
+			add_country_modifier = {
+				name = annex_minor_cooldown_modifier
+				duration = 90
+			}
 		}
 	}
 }

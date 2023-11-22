@@ -32,7 +32,6 @@
 
 (ContextValidator ProvinceCommand) = { Members = {
 	(N Y) = { Left = "set_country_flag" Right = { Right = String (LocalOp "set" "[R]" AddSetter CountryFlag) } } # TODO: Valid in this scope?
-	(N Y) = { Left = "set_province_flag" Right = { Right = String (LocalOp "set" "[R]" AddSetter ProvinceFlag) } }
 	
 	(N Y) = { Left = "add_province_modifier" Right = AddProvModifier }
 	(N Y) = { Left = "remove_province_modifier" Right = { EventModifier StaticModifier } }

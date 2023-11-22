@@ -191,6 +191,9 @@ country_event = { # ITALIAN URBANIZATION
 		762 = { life_rating = 5 }
 		766 = { life_rating = 5 }
 		765 = { life_rating = 5 }
+		1813 = { life_rating = 5 }
+		743 = { life_rating = 5 }
+		778 = { life_rating = 5 }
 	}
 }
 country_event = { # ITALIAN URBANIZATION END
@@ -289,5 +292,30 @@ country_event = { # SWI REMOVE CORES
 		name = "southern_cantons_EvtOptA"
 		609 = { remove_core = SWI }
 		2568 = { remove_core = SWI }
+	}
+}
+
+country_event = { # ANNEX ITA MINOR 
+	id = 57906
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		is_culture_group = italian
+		ai = yes
+		capital_scope = {
+			controller = {
+				has_country_flag = expedition_to_sicily
+				ai = no
+			}
+		}
+		all_core = { NOT = { controlled_by = THIS } }
+	}
+	
+	option = {
+		name = "noloc"
+		capital_scope = {
+			controller = { inherit = THIS }
+		}
 	}
 }

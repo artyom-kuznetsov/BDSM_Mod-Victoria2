@@ -1427,6 +1427,7 @@ province_event = {
 			has_province_modifier = cholera_epidemic_small
 			has_province_modifier = cholera_epidemic_big
 		}
+		NOT = { has_country_modifier = epidemy_cooldown_modifier }
 	}
 
 	mean_time_to_happen = {
@@ -1472,6 +1473,13 @@ province_event = {
 					name = cholera_epidemic_small
 					duration = 365
 				}
+			}
+		}
+		
+		owner = { 
+			add_country_modifier = { 
+				name = epidemy_cooldown_modifier 
+				duration = 1825 
 			}
 		}
 	}

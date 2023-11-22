@@ -4,7 +4,7 @@ is_artisan = yes
 max_size = 250000
 merge_max_size = 10000
 
-strata = poor
+strata = middle
 rebel =
 {
 	infantry = 0.5
@@ -909,12 +909,6 @@ promote_to =
 	}
 	craftsmen = {
 		factor = 0.01
-		modifier = {
-			factor = -100
-			is_primary_culture = no
-			is_accepted_culture = no
-			country = { has_country_flag = disable_non_accepted_craftsmen }
-		}
 		group = {
 			modifier = {
 				factor = 2
@@ -1022,7 +1016,7 @@ ideologies = {
 		factor = 1
 		modifier = {
 			factor = 2
-			country = { has_country_flag = fascist_influence }
+			country = { has_country_flag = fascist_propaganda_flag }
 		}
 		modifier = {
 			factor = -100
@@ -1104,7 +1098,7 @@ ideologies = {
 		factor = 1.1
 		modifier = {
 			factor = 2
-			country = { has_country_flag = reactionary_influence }
+			country = { has_country_flag = reactionary_propaganda_flag }
 		}
 		modifier = {
 			factor = 1.2
@@ -1204,7 +1198,7 @@ ideologies = {
 		factor = 1
 		modifier = {
 			factor = 2
-			country = { has_country_flag = conservative_influence }
+			country = { has_country_flag = conservative_propaganda_flag }
 		}
 		modifier = {
 			factor = 2
@@ -1308,7 +1302,7 @@ ideologies = {
 		factor = 1
 		modifier = {
 			factor = 2
-			country = { has_country_flag = socialist_influence }
+			country = { has_country_flag = socialist_propaganda_flag }
 		}
 		modifier = {
 			factor = 1.2
@@ -1417,7 +1411,7 @@ ideologies = {
 		factor = 1
 		modifier = {
 			factor = 2
-			country = { has_country_flag = communist_influence }
+			country = { has_country_flag = communist_propaganda_flag }
 		}
 		modifier = {
 			factor = 0.1
@@ -1478,11 +1472,7 @@ ideologies = {
 		factor = 1.1
 		modifier = {
 			factor = 2
-			country = { has_country_flag = liberal_influence }
-		}
-		modifier = {
-			factor = 2
-			country = { has_country_flag = colorado_rebels }
+			country = { has_country_flag = liberal_propaganda_flag }
 		}
 		modifier = {
 			factor = 1.2
@@ -1600,7 +1590,7 @@ ideologies = {
 		factor = 1
 		modifier = {
 			factor = 2
-			country = { has_country_flag = anarcho_liberal_influence }
+			country = { has_country_flag = anarcho_liberal_propaganda_flag }
 		}
 		modifier = {
 			factor = 0.1

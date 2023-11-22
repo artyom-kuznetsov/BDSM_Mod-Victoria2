@@ -50,7 +50,7 @@ political_decisions = {
 			}
 			add_country_modifier = {
 				name = force_reform_cooldown_modifier
-				duration = 1825
+				duration = 2920
 			}
 			money = -100000
 		}
@@ -445,12 +445,8 @@ political_decisions = {
 	increase_rnd_dec = {
 		alert = yes
 		potential = {
-			NOT = { research_and_development = futuristic_rnd }
 			civilized = yes
 			NOT = { has_country_flag = hide_all_decs_flag }
-		}
-
-		allow = {
 			OR = {
 				AND = {
 					research_and_development = no_rnd
@@ -546,6 +542,9 @@ political_decisions = {
 					literacy = 0.99
 				}
 			}
+		}
+
+		allow = {
 		}
 
 		effect = {
@@ -743,6 +742,76 @@ political_decisions = {
 		
 		ai_will_do = {
 			factor = 0
+		}
+	}
+	
+	education_schools_low_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			civilized = yes
+			NOT = { school_reforms = compulsory_schools }
+			NOT = { has_country_modifier = administrative_expenses_modifier }
+		}
+		
+		allow = {
+			OR = {
+				AND = {
+					school_reforms = no_schools
+					positivism = 1
+				}
+				AND = {
+					school_reforms = low_schools
+					functionalism = 1
+				}
+				AND = {
+					school_reforms = acceptable_schools
+					biologism = 1
+				}
+				AND = {
+					school_reforms = good_schools
+					social_science = 1
+				}
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 730
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = good_schools
+					}
+				}
+				owner = { social_reform = compulsory_schools }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = acceptable_schools
+					}
+				}
+				owner = { social_reform = good_schools }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = low_schools
+					}
+				}
+				owner = { social_reform = acceptable_schools }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = no_schools
+					}
+				}
+				owner = { social_reform = low_schools }
+			}
 		}
 	}
 }

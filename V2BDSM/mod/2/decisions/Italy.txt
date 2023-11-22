@@ -11,7 +11,7 @@ political_decisions = {
 				tag = TUS
 			}
 			NOT = { exists = ITA }
-			NOT = { has_global_flag = expedition_to_sicily }
+			NOT = { has_country_flag = expedition_to_sicily }
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 
@@ -20,13 +20,13 @@ political_decisions = {
 		}
 
 		effect = {
-			set_global_flag = expedition_to_sicily
+			CUSTOM_TOOLTIP_EXPEDITION_TO_SICILY = { }
+			set_country_flag = expedition_to_sicily
 			define_general = {
 				name = "§RДжузеппе Гарибальди§W"
 				personality = org05mor40
 				background = 5a4d_1
 			}
-			CUSTOM_TOOLTIP_EXPEDITION_TO_SICILY = { }
 			any_country = {
 				limit = {
 					NOT = { tag = THIS }
@@ -380,9 +380,6 @@ political_decisions = {
 			736 = {
 				add_core = ITA
 			}
-			737 = {
-				add_core = ITA
-			}
 			769 = {
 				add_core = ITA
 			}
@@ -613,6 +610,7 @@ political_decisions = {
 			prestige = 15
 			change_tag = ITA
 			add_accepted_culture = mediterranean_italian
+			add_accepted_culture = venetian
 			any_country = {
 				limit = {
 					is_culture_group = italian

@@ -150,12 +150,12 @@ party_issues = {
 			mobilization_impact = 100
 		}
 		anti_military = {
-			factory_throughput = 0.05
+			factory_throughput = 0.02
 			cb_generation_speed_modifier = -0.1
 			mobilization_impact = 100
 		}
 		pacifism = {
-			factory_throughput = 0.1
+			factory_throughput = 0.05
 			cb_generation_speed_modifier = -0.2
 			mobilization_impact = 100
 		}
@@ -372,7 +372,7 @@ political_reforms = {
 			global_immigrant_attract = 0.03
 			allow = {
 				war_policy = pacifism
-				war = no
+				is_mobilised = no
 			}
 		}
 		ref_disarmed_nation = {		#  –≈—“‹ﬂÕ— Œ≈
@@ -385,7 +385,7 @@ political_reforms = {
 				NOT = {
 					has_country_flag = ref_serfdom_abolished_flag
 				}
-				war = no
+				is_mobilised = no
 			}
 		}
 		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
@@ -394,7 +394,7 @@ political_reforms = {
 			mobilisation_size = 0.01
 			allow = {
 				has_country_flag = ref_serfdom_abolished_flag
-				war = no
+				is_mobilised = no
 			}
 		}
 		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
@@ -406,7 +406,7 @@ political_reforms = {
 			allow = {
 				has_country_flag = army_professionalism_flag
 				has_country_flag = ref_serfdom_abolished_flag
-				war = no
+				is_mobilised = no
 			}
 		}
 		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
@@ -416,7 +416,7 @@ political_reforms = {
 			allow = {
 				has_country_flag = aeronautics_researched_flag
 				has_country_flag = ref_serfdom_abolished_flag
-				war = no
+				is_mobilised = no
 			}
 		}
 	}
@@ -857,26 +857,29 @@ social_reforms = {
 		low_schools = {
 			global_assimilation_rate = 0.05
 			global_immigrant_attract = 0.02	
+			allow = {
+				always = no
+			}
 		}
 		acceptable_schools = {
 			global_assimilation_rate = 0.1
 			global_immigrant_attract = 0.03
 			allow = {
-				has_country_flag = has_positivism_flag
+				always = no
 			}
 		}
 		good_schools = {
 			global_assimilation_rate = 0.15
 			global_immigrant_attract = 0.04
 			allow = {
-				has_country_flag = has_functionalism_flag
+				always = no
 			}
 		}
 		compulsory_schools = {
 			global_assimilation_rate = 0.2
 			global_immigrant_attract = 0.05
 			allow = {
-				has_country_flag = has_biologism_flag
+				always = no
 			}
 		}
 	}
