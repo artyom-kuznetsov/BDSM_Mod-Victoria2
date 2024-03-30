@@ -1,26 +1,4 @@
 political_decisions = {
-	swe_economic_boom_dec = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			OR = { 
-				tag = SWE 
-				tag = SCA 
-			}
-			NOT = { has_country_flag = swe_economic_boom_flag }
-		}
-		allow = {
-			has_country_flag = industrial_revolution_flag
-			money = 300000
-			scientific_management = 1
-			late_classical_theory = 1
-			clean_coal = 1
-		}
-		effect = {
-			set_country_flag = swe_economic_boom_flag
-			add_country_modifier = { name = swe_economic_boom_modifier duration = 1825 }
-			money = -300000
-		}
-	}
 	integration_of_baltics_dec = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
@@ -36,6 +14,7 @@ political_decisions = {
 				tag = SCA
 			}
 			NOT = { has_country_flag = baltics_integrated_flag }
+			functionalism = 1
 		}
 		allow = {
 			biologism = 1
