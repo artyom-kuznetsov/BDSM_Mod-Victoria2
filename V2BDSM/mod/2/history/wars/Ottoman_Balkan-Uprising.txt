@@ -1,0 +1,53 @@
+name = "Балканское восстание"
+
+1835.1.1 = {
+	add_attacker = SER
+	add_attacker = ALB
+	add_attacker = MCD
+	add_attacker = WAL
+	
+	add_defender = TUR
+	
+	# actor
+	# receiver
+	# casus_belli - cb type
+	# country - 3rd party
+	# state_province_id - target state capital
+	war_goal = {
+		casus_belli = status_quo
+		actor = SER
+		receiver = TUR
+	}
+	#war_goal = {
+	#	casus_belli = status_quo
+	#	actor = ALB
+	#	receiver = TUR
+	#}
+	#war_goal = {
+	#	casus_belli = status_quo
+	#	actor = MCD
+	#	receiver = TUR
+	#}
+	#war_goal = {
+	#	casus_belli = status_quo
+	#	actor = WAL
+	#	receiver = TUR
+	#}
+	
+	war_goal = {
+		casus_belli = annex_core_country
+		actor = TUR
+		receiver = ALB
+	}
+	war_goal = {
+		casus_belli = annex_core_country
+		actor = TUR
+		receiver = SER
+	}
+	war_goal = {
+		casus_belli = annex_core_country
+		actor = TUR
+		receiver = MCD
+	}
+
+}

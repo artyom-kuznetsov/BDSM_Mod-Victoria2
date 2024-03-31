@@ -1,26 +1,26 @@
 political_decisions = {
-	turkish_military_dec = {
-		alert = yes
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = turkish_military_dec }
-			primary_culture = turkish
-			ideological_thought = 1
-		}
-		
-		allow = {
-			muzzle_loaded_rifles = 1
-			military_plans = 1
-			exists = KUK
-		}
-		
-		effect = {
-			prestige = 5
-			set_country_flag = turkish_military_dec
-			political_reform = ref_sizeable_military_budget
-			CUSTOM_TOOLTIP_TURKISH_MIL = { }
-		}
-	}
+	#turkish_military_dec = {
+	#	alert = yes
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		NOT = { has_country_flag = turkish_military_dec }
+	#		primary_culture = turkish
+	#		ideological_thought = 1
+	#	}
+	#	
+	#	allow = {
+	#		muzzle_loaded_rifles = 1
+	#		military_plans = 1
+	#		exists = KUK
+	#	}
+	#	
+	#	effect = {
+	#		prestige = 5
+	#		set_country_flag = turkish_military_dec
+	#		political_reform = ref_sizeable_military_budget
+	#		CUSTOM_TOOLTIP_TURKISH_MIL = { }
+	#	}
+	#}
 	
 	religion_tax_tur_dec = {
 		alert = yes
@@ -294,11 +294,12 @@ political_decisions = {
 		}
 		
 		allow = {
-			913 = { owned_by = THIS }
-			919 = { owned_by = THIS }
-			894 = { owned_by = THIS }
+			913 = { owned_by = THIS controlled_by = THIS }
+			919 = { owned_by = THIS controlled_by = THIS }
+			894 = { owned_by = THIS controlled_by = THIS }
 			NOT = {
 				truce_with = EGY
+				war_with = EGY
 			}
 		}
 		
