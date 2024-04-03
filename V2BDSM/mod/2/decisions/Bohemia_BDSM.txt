@@ -1,0 +1,165 @@
+political_decisions = {
+	form_elbian_confederation = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			OR = {
+				primary_culture = elbian
+				primary_culture = czech
+			}
+			NOT = {
+				exists = GER
+				exists = ELB
+			}
+		}	
+		allow = {
+			state_n_government = 1
+			OR = {
+				AND = {
+					NOT = { year = 1855 }
+					625 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					682 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					559 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					554 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					549 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					536 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					534 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					546 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+					682 = {
+						owner = {
+							OR = {
+								in_sphere = THIS
+								vassal_of = THIS
+								tag = THIS
+							}
+						}
+					}
+				}
+				AND = {
+					owns = 625
+					owns = 549
+					year = 1855
+				}
+			}
+		}
+		
+		effect = {
+			prestige = 15
+			any_country = {
+				limit = {
+					primary_culture = elbian
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+					NOT = {
+						tag = THIS
+					}
+					ai = yes
+				}
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				annex_to = THIS
+			}
+			change_tag = ELB
+			
+			SAX_561 = { add_core = THIS }
+			AUS_625 = { add_core = THIS }
+			MORAVIA_STATE = { add_core = THIS }
+			AUS_627 = { add_core = THIS }
+			PRU_682 = { add_core = THIS }
+			PRU_549 = { add_core = THIS }
+			KUSTRIN_STATE = { add_core = THIS }
+			PRU_680 = { add_core = THIS }
+			HAN_534 = { add_core = THIS }
+			HAN_538 = { add_core = THIS }
+			PRU_581 = { add_core = THIS }
+			
+			political_reform = confederalism
+			primary_culture = czech
+			add_accepted_culture = elbian
+			
+			any_country = {
+				limit = {
+					NOT = {
+						tag = THIS
+					}
+					ai = no
+				}
+				country_event = 57615
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
