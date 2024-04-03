@@ -53,6 +53,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9568
 		country_event = 9570
 		country_event = 9571
+		country_event = 9572
 		country_event = 57073
 		country_event = 57604
 	}
@@ -556,7 +557,30 @@ province_event = {
 		inherit = ANB
 		inherit = FTB
 		inherit = BMB
+		state_n_government = 1
 		SWI = { 614 = { state_scope = { any_owned = { secede_province = THIS } } } }
+	}
+}
+
+# RUSSIA
+province_event = {
+	id = 9572
+	title = "noloc"
+	desc = "noloc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		inherit = RYA
+		inherit = VRZ
+		inherit = KZN
+		inherit = XAC
+		inherit = NOG
+		inherit = NOV
+		inherit = PSV
+		state_n_government = 1
+		CRI = { 980 = { state_scope = { any_owned = { secede_province = THIS } } } }
 	}
 }
 

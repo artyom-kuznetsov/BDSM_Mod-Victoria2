@@ -1,0 +1,190 @@
+political_decisions = {
+	establish_the_sovnarkom = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = RUS
+			NOT = {
+				has_country_flag = big_brother_is_watching
+			}
+			government = proletarian_dictatorship
+		}
+		allow = {
+			mass_politics = 1
+		}
+		
+		effect = {
+			any_pop = {
+				militancy = -1
+				consciousness = -1
+				ideology = {
+					value = socialist
+					factor = 0.05
+				}
+			}
+			prestige = 5
+			set_country_flag = big_brother_is_watching
+		}
+	}
+	
+	manifesto_on_unshakable_autocracy = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = RUS
+			government = absolute_monarchy
+			NOT = {
+				has_country_flag = the_manifesto
+			}
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			prestige = 5
+			badboy = 3
+			any_pop = {
+				consciousness = -0.5
+				militancy = -0.5
+			}
+			set_country_flag = the_manifesto
+		}
+	}
+	
+	rus_primorye_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			has_global_flag = russian_vladivostok
+			NOT = { has_country_flag = rus_primorye_flag }
+			owns = 1082
+		}
+		
+		allow = {
+			
+		}
+	
+		effect = {
+			CHI_1082 = {
+				remove_core = CHI
+				remove_core = MCK
+			}
+			1085 = {
+				change_province_name = "Благовещенск"
+			}
+			1084 = {
+				change_province_name = "Николаевск-на-Амуре"
+			}
+			1083 = {
+				change_province_name = "Хабаровск"
+			}
+			2617 = {
+				change_province_name = "Пашково"
+			}
+			1082 = {
+				change_province_name = "Владивосток"
+				state_scope = {
+					change_region_name = "Приморье"
+				}
+			}
+			set_country_flag = rus_primorye_flag
+			prestige = 5
+		}
+	}
+	
+	move_capital_to_moscow = {
+		potential = {
+			tag = RUS
+			owns = 1008 # Moscow
+			NOT = { capital = 1008 }
+		}
+		
+		allow = {
+			state_n_government = 1
+		}
+		
+		effect = {
+			capital = 1008
+			prestige = -10
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	russian_unification_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			OR = {
+				primary_culture = russian
+				primary_culture = ruthenian
+			}
+			NOT = {
+				exists = RUS
+			}
+		}	
+		allow = {
+			state_n_government = 1
+			RUS = {
+				all_core = {
+					owner = {
+						OR = {
+							in_sphere = THIS
+							vassal_of = THIS
+							tag = THIS
+						}
+					}
+				}
+			}
+		}
+		
+		effect = {
+			prestige = 15
+			any_country = {
+				limit = {
+					OR = {
+						primary_culture = russian
+						primary_culture = ruthenian
+					}
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+					NOT = {
+						tag = THIS
+					}
+					ai = yes
+				}
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				annex_to = THIS
+			}
+			change_tag = RUS
+			
+			RUS_943 = { add_core = THIS }
+			RUS_980 = { add_core = THIS }
+			1016 = { add_core = THIS }
+			
+			add_accepted_culture = russian
+			
+			any_country = {
+				limit = {
+					NOT = {
+						tag = THIS
+					}
+					ai = no
+				}
+				country_event = 57616
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
