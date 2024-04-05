@@ -21,3 +21,59 @@ country_event = { # EXPANSION ROUTE
 	}
 	
 }
+
+country_event = { # Turkish Civil War
+	title = "tur_cw_EvtName"
+	desc = "tur_cw_EvtDesc"
+	id = 57501
+	trigger = {
+		tag = TUR
+		NOT = {
+			has_country_flag = turkish_civil_war_has_happened
+		}
+		war = no
+		year = 1845
+	}
+
+	immediate = {
+		badboy = 10
+		any_owned = {
+			limit = {
+				is_core = KDS
+			}
+			secede_province = KDS
+		}
+		KDS = {
+			capital = 899
+			leadership = 30
+			add_country_modifier = { 
+				name = independent_war 
+				uration = -1 
+			}
+			add_accepted_culture = turkish 
+			add_accepted_culture = armenian
+			add_accepted_culture = bedouin
+			prestige = -30
+		}
+		war = {
+			target = KDS
+			attacker_goal = {
+				casus_belli = civil_war
+			}
+			
+			defender_goal = {
+				casus_belli = status_quo
+			}
+		}
+		TUR_882 = { secede_province = KDS }
+		TUR_894 = { secede_province = KDS }
+		EGY_897 = { secede_province = KDS }
+		TUR_901 = { secede_province = KDS }
+		TUR_923 = { secede_province = KDS }
+	}
+
+	option = {
+		name = "Turkish_Civil_War"
+		set_country_flag = turkish_civil_war_has_happened
+	}
+}

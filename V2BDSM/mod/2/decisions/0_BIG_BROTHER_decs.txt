@@ -33,14 +33,21 @@ political_decisions = {
 						tag = CHI
 					}
 				}
-				add_country_modifier = {
+				add_province_modifier = {
 					name = force_reform_cooldown_modifier
 					duration = 3650
 				}
 				#badboy = 10
 			}
+			TUR_882 = { add_province_modifier = { name = separatism_modifier duration = -1 } }
+			TUR_894 = { add_province_modifier = { name = separatism_modifier duration = -1 } }
+			EGY_897 = { add_province_modifier = { name = separatism_modifier duration = -1 } }
+			TUR_901 = { add_province_modifier = { name = separatism_modifier duration = -1 } }
+			TUR_923 = { add_province_modifier = { name = separatism_modifier duration = -1 } }
+			TUR_889 = { add_province_modifier = { name = separatism_modifier duration = -1 } }
+			TUR_890 = { add_province_modifier = { name = separatism_modifier duration = -1 } }
 			MUG = {
-				add_country_modifier = {
+				add_province_modifier = {
 					name = indian_unification_modifier
 					duration = 1825
 				}
@@ -1008,103 +1015,103 @@ political_decisions = {
 			tag = WBK
 			OR = {
 				ENG = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				FRA = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				SAR = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				ITA = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				SPA = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				PRU = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				NGF = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				GER = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				TUR = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				SWE = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				SCA = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				RUS = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				JAP = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				USA = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				BRZ = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				MEX = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				CHI = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				HNN = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				HBI = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				DEI = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				INA = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				DUA = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				BRG = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				BOH = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 				HUN = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
 			}
@@ -1116,11 +1123,11 @@ political_decisions = {
 		effect = {
 			any_country = {
 				limit = {
-					NOT = { has_country_flag = cant_mobilize_flag }
+					NOT = { has_province_flag = cant_mobilize_flag }
 					is_mobilised = yes
 				}
-				set_country_flag = cant_mobilize_flag
-				add_country_modifier = { name = mobilization_cooldown duration = 30 }
+				set_province_flag = cant_mobilize_flag
+				add_province_modifier = { name = mobilization_cooldown duration = 30 }
 			}
 		}
 	}
@@ -1130,79 +1137,79 @@ political_decisions = {
 			tag = WBK
 			OR = {
 				ENG = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				FRA = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				SAR = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				ITA = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				SPA = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				PRU = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				NGF = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				GER = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				TUR = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				SWE = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				SCA = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				RUS = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				JAP = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				USA = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				BRZ = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				MEX = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				CHI = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				HNN = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				HBI = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				DEI = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				INA = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				DUA = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				BRG = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				BOH = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 				HUN = {
-					has_country_flag = cant_mobilize_flag
+					has_province_flag = cant_mobilize_flag
 				}
 			}
 		}
@@ -1212,8 +1219,8 @@ political_decisions = {
 		
 		effect = {
 			any_country = {
-				limit = { has_country_flag = cant_mobilize_flag }
-				clr_country_flag = cant_mobilize_flag
+				limit = { has_province_flag = cant_mobilize_flag }
+				clr_province_flag = cant_mobilize_flag
 			}
 		}
 		
@@ -1227,7 +1234,7 @@ political_decisions = {
 			SAR = { exists = yes }
 			AUS = { exists = yes }
 			NOT = {
-				has_country_flag = 1848_setup_flag
+				has_province_flag = 1848_setup_flag
 			}
 		}
 		
@@ -1244,14 +1251,14 @@ political_decisions = {
 						tag = ENG
 					}
 				}
-				add_country_modifier = {
+				add_province_modifier = {
 					name = springtime_of_nations
 					duration = 1035
 				}
 				any_pop = { militancy = 5 }
 				any_pop = { consciousness = 5 }
 			}
-			set_country_flag = 1848_setup_flag
+			set_province_flag = 1848_setup_flag
 		}
 		
 	}
