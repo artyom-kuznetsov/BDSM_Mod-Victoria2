@@ -1983,9 +1983,6 @@ country_event = {
 	desc = "EVTDESC16250"
 	
 	trigger = {
-		NOT = {
-			has_country_flag = csa_cores_flag
-		}
 		tag = USA
 		NOT = {
 			has_global_flag = american_civil_war_has_happened
@@ -2020,7 +2017,6 @@ country_event = {
 			}
 			add_core = CSA
 		}
-		set_country_flag = csa_cores_flag
 		any_pop = {
 			dominant_issue = {
 				value = yes_slavery

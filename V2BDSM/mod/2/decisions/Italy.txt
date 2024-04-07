@@ -468,146 +468,15 @@ political_decisions = {
 		potential = {
 			is_culture_group = italian
 			NOT = { exists = ITA }
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ideological_thought = 1
 		}
 		
 		allow = {
-			prestige = 20
-			720 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			738 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			739 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			741 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			744 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			746 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			749 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			754 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			757 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			758 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			762 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
-			765 = {
-				OR = { 
-					owned_by = THIS
-					owner = { in_sphere = THIS }
-					owner = { vassal_of = THIS }
-					owner = { 
-						alliance_with = THIS 
-						is_culture_group = italian
-					}
-				}
-			}
+			nationalism_n_imperialism = 1
 		}
 		
 		effect = {
-			prestige = 15
 			change_tag = ITA
 			add_accepted_culture = mediterranean_italian
 			add_accepted_culture = venetian

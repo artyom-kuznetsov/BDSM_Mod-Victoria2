@@ -32,7 +32,19 @@ political_decisions = {
 			all_core = {
 				limit = {
 					NOT = {
-						culture = south_german
+						province_id = 612
+						province_id = 614
+						province_id = 735
+						province_id = 615
+						province_id = 613
+						province_id = 618
+						province_id = 617
+						province_id = 616
+						province_id = 622
+						province_id = 620
+						province_id = 624
+						province_id = 619
+						province_id = 621
 					}
 				}
 				remove_core = AUS
@@ -42,7 +54,6 @@ political_decisions = {
 					OR = {
 						culture = hungarian
 						culture = south_german
-						culture = czech
 						culture = croat
 					}
 				}
@@ -50,7 +61,6 @@ political_decisions = {
 			}
 			
 			add_accepted_culture = hungarian
-			add_accepted_culture = czech
 			add_accepted_culture = croat
 			change_tag = KUK
 			set_country_flag = dual_monarchy_done
@@ -59,6 +69,34 @@ political_decisions = {
 			AUS_702 = { add_core = THIS }
 			AUS_705 = { add_core = THIS }
 			663 = { add_core = THIS }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	czech_industrialism_dec = {
+		potential = {
+			tag = AUS
+			any_owned_province = {
+				is_core = BOH
+			}
+			NOT = {
+				has_country_flag = czech_industrialism_flag
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+	
+		allow = {
+			nationalism_n_imperialism = 1
+		}
+	
+		effect = {
+			add_accepted_culture = czech
+			set_country_flag = czech_industrialism_flag
+			AUS_625 = { add_province_modifier = { name = bohemian_industrialism_modifier duration = 1825 } }
+			MORAVIA_STATE = { add_province_modifier = { name = bohemian_industrialism_modifier duration = 1825 } }
+			AUS_627 = { add_province_modifier = { name = bohemian_industrialism_modifier duration = 1825 } }
 		}
 		ai_will_do = {
 			factor = 1
