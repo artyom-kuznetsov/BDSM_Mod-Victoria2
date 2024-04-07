@@ -22,6 +22,12 @@ political_decisions = {
 			set_global_flag = 1836_setup_complete_flag
 			# ¬—≈Ã —“–¿Õ¿Ã
 			any_country = {
+				add_country_modifier = {
+					name = force_reform_cooldown_modifier
+					duration = 3650
+				}
+			}
+			any_country = {
 				limit = {
 					exists = yes
 					NOT = {
@@ -32,10 +38,6 @@ political_decisions = {
 						tag = TUR
 						tag = CHI
 					}
-				}
-				add_country_modifier = {
-					name = force_reform_cooldown_modifier
-					duration = 3650
 				}
 				badboy = 10
 			}

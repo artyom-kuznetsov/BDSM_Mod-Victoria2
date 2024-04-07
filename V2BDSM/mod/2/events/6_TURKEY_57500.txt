@@ -21,3 +21,62 @@ country_event = { # EXPANSION ROUTE
 	}
 	
 }
+
+province_event = {
+	title = "tur_exp_route_EvtName"
+	desc = "tur_assimilatable_EvtDesc"
+	id = 57501
+	
+	trigger = {
+		owner = { 
+			has_country_flag = TUR_assimilation_flag 
+		}
+		OR = {
+			is_core = THIS
+			any_neighbor_province = { is_core = THIS }
+		}
+		NOT = { 
+			has_province_modifier = TUR_prov_assimilatABLE_prov_modifier 
+			has_province_modifier = TUR_prov_assimilatED_prov_modifier
+			is_core = GRE
+			is_core = YUG
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+		modifier = {
+			has_country_flag = industrial_revolution_flag
+			factor = 0.5
+		}
+	}
+	
+	option = {
+		name = "tur_assimilatable_EvtOptA"
+		state_scope = {
+			any_owned = {
+				add_province_modifier = { name = TUR_prov_assimilatABLE_prov_modifier duration = -1 }
+			}
+		}
+	}
+}
+
+province_event = {
+	title = "tur_assim_EvtName"
+	desc = "tur_assimilate_EvtDesc"
+	id = 57502
+	
+	trigger = {
+		year = 1841
+		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+	}
+	
+	option = {
+		name = "tur_assimilate_EvtOptA"
+		
+		add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 730 }
+		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+		assimilate = yes
+	}
+}
