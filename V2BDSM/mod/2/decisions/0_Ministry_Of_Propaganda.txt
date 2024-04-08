@@ -96,5 +96,28 @@
 			}
 		}
 	}
+	
+	mop_tax_lift_dec = {
+		potential = {
+			ai = no
+			has_country_flag = mop_opened_flag
+			NOT = {
+				has_country_modifier = tax_lift_modifer
+			}
+		}
+		
+		allow = {
+			prestige = 50
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = tax_lift_modifer
+				duration = 730
+			}
+			money = 60000
+			prestige = -10
+		}
+	}
 
 }
