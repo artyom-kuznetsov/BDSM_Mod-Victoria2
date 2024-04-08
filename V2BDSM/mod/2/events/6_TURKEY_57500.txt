@@ -35,19 +35,31 @@ province_event = {
 			is_core = THIS
 			any_neighbor_province = { is_core = THIS }
 		}
+		any_neighbor_province = { 
+			OR = {
+				has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+				has_province_modifier = TUR_prov_assimilatED_prov_modifier
+				is_capital = yes
+			}
+		}
 		NOT = { 
 			has_province_modifier = TUR_prov_assimilatABLE_prov_modifier 
 			has_province_modifier = TUR_prov_assimilatED_prov_modifier
 			is_core = GRE
 			is_core = YUG
 		}
+		is_colonial = no
 	}
 	
 	mean_time_to_happen = {
-		months = 600
+		months = 180
 		modifier = {
 			has_country_flag = industrial_revolution_flag
 			factor = 0.5
+		}
+		modifier = {
+			year = 1870
+			factor = 0.2
 		}
 	}
 	
@@ -62,19 +74,71 @@ province_event = {
 }
 
 province_event = {
-	title = "tur_assim_EvtName"
+	title = "tur_exp_route_EvtName"
 	desc = "tur_assimilate_EvtDesc"
 	id = 57502
 	
 	trigger = {
 		year = 1841
+		NOT = { year = 1871 }
+		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
+		
 		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		any_neighbor_province = { 
+			OR = {
+				has_province_modifier = TUR_prov_assimilatED_prov_modifier 
+				is_capital = yes
+			}
+		}
+		
+		any_pop = {
+			is_primary_culture = no
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 3
 	}
 	
 	option = {
 		name = "tur_assimilate_EvtOptA"
 		assimilate = yes
-		add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 730 }
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 270 } }
+		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+	}
+}
+
+province_event = {
+	title = "tur_exp_route_EvtName"
+	desc = "tur_assimilate_EvtDesc"
+	id = 57503
+	
+	trigger = {
+		year = 1871
+		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
+		
+		any_neighbor_province = { 
+			OR = {
+				has_province_modifier = TUR_prov_assimilatED_prov_modifier 
+				is_capital = yes
+			}
+		}
+		
+		any_pop = {
+			is_primary_culture = no
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "tur_assimilate_EvtOptA"
+		assimilate = yes
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 670 } }
 		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
 		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
 	}
