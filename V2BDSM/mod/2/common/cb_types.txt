@@ -637,6 +637,69 @@ conquest_claimed = {
 	war_name = WAR_CONQUEST_NAME
 }
 
+# Risorgimento
+risorgimento = {
+	sprite_index = 14
+	is_triggered_only = yes
+	months = 480
+	crisis = no
+	construction_speed = 1
+	
+	can_use = {
+		NOT = { is_our_vassal = THIS }
+		OR = {
+			AND = {
+				THIS = { has_country_flag = expedition_to_sicily }
+				OR = {
+					primary_culture = south_italian
+					primary_culture = north_italian
+				}
+			}
+		}
+		NOT = { tag = WBK }
+	}
+
+	badboy_factor = 0.0
+	prestige_factor = 0
+	peace_cost_factor = 3
+	penalty_factor = 0
+	
+	break_truce_prestige_factor = 0
+	break_truce_infamy_factor = 0
+	break_truce_militancy_factor = 0
+	truce_months = 0
+	
+	good_relation_prestige_factor = 0
+	good_relation_infamy_factor = 0
+	good_relation_militancy_factor = 0
+	
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+	
+	po_annex = yes
+	
+	war_name = WAR_CONQUEST_NAME
+}
+
 # Conquest Small
 conquest_small = {
 	sprite_index = 2

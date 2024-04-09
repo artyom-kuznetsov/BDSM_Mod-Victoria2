@@ -319,3 +319,29 @@ country_event = { # ANNEX ITA MINOR
 		}
 	}
 }
+
+
+country_event = { # DAY 1 GUIDE
+	id = 57907
+	title = "ita_guide_EvtName"
+	desc = "ita_guide_EvtDesc"
+	
+	trigger = {
+		primary_culture = italian
+		ai = no
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "ita_guide_EvtOptA"
+		add_country_modifier = {
+			name = pandemic_influenza
+			duration = 365
+		}
+	}
+	option = {
+		name = "ita_guide_EvtOptB"
+		money = 15
+	}
+}
