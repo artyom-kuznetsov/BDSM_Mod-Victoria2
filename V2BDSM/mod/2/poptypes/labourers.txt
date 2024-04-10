@@ -224,21 +224,6 @@ migration_target =
 
 promote_to =
 {
-	artisans = {
-		factor = 0.01
-		modifier = {
-			factor = 20
-			location = {
-				NOT = {
-					work_available = {
-						worker = labourers
-					}
-				}
-				is_colonial = no
-			}
-		}
-	}
-	
 	bureaucrats =
 	{
 		factor = 0.01
@@ -258,18 +243,6 @@ promote_to =
 		group = {
 			modifier = {
 				factor = -4
-				state_scope = { bureaucrats = 0.002 }
-			}
-			modifier = {
-				factor = -4
-				state_scope = { bureaucrats = 0.004 }
-			}
-			modifier = {
-				factor = -4
-				state_scope = { bureaucrats = 0.006 }
-			}
-			modifier = {
-				factor = -4
 				state_scope = { bureaucrats = 0.008 }
 			}
 			modifier = {
@@ -281,15 +254,15 @@ promote_to =
 				state_scope = { bureaucrats = 0.012 }
 			}
 			modifier = {
-				factor = -2
+				factor = -4
 				state_scope = { bureaucrats = 0.014 }
 			}
 			modifier = {
-				factor = -2
+				factor = -4
 				state_scope = { bureaucrats = 0.016 }
 			}
 			modifier = {
-				factor = -2
+				factor = -4
 				state_scope = { bureaucrats = 0.018 }
 			}
 			modifier = {
@@ -421,41 +394,279 @@ promote_to =
 			}
 		}
 	}
-	craftsmen = {
+	soldiers =
+	{
 		factor = 0.01
-		modifier = {
-			factor = -100
-			location = {
-				work_available = {
-					worker = labourers
-				}
-			}
+		
+		group = {		
+			modifier = {
+                factor = -100
+                soldiers = 0.05
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.055
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.060
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.065
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.070
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.075
+            }
+			modifier = {
+                factor = -100
+                soldiers = 0.080
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.085
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.090
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.095
+            }
+            modifier = {
+                factor = -100
+                soldiers = 0.1
+            }			
 		}
-		modifier = {
-			factor = -100
-			is_primary_culture = no
-			is_accepted_culture = no
-			country = { has_country_flag = disable_non_accepted_craftsmen }
+		group = {		
+			modifier = {
+                factor = 100
+                soldiers = 0.050
+                revanchism = 0.05
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.055
+                revanchism = 0.10
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}			
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.060
+                revanchism = 0.15
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.065
+                revanchism = 0.20
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.070
+                revanchism = 0.25
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }
+			modifier = {
+                factor = 100
+                soldiers = 0.075
+                revanchism = 0.30
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.080
+                revanchism = 0.35
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}			
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.085
+                revanchism = 0.40
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.090
+                revanchism = 0.45
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }
+            modifier = {
+                factor = 100
+                soldiers = 0.095
+                revanchism = 0.50
+				# Audax Validator "." Ignore_NEXT
+				location = { 
+					# Audax Validator "." Ignore_NEXT
+					is_core = THIS 
+				}
+            }			
 		}
 		group = {
 			modifier = {
-				factor = 2
-				literacy = 0.1
+				factor = 1.5
+				military_spending = 0.04
 			}
 			modifier = {
-				factor = 2
-				literacy = 0.2
+				factor = 1.5
+				military_spending = 0.09
 			}
 			modifier = {
-				factor = 2
+				factor = 1.5
+				military_spending = 0.14
+			}
+			modifier = {
+				factor = 1.5
+				military_spending = 0.19
+			}
+			modifier = {
+				factor = 1.5
+				military_spending = 0.24
+			}
+			modifier = {
+				factor = 1.5
+				military_spending = 0.29
+			}
+			modifier = {
+				factor = 1.5
+				military_spending = 0.34
+			}
+			modifier = {
+				factor = 1.5
+				military_spending = 0.39
+			}
+			modifier = {
+				factor = 1.5
+				military_spending = 0.44
+			}
+			modifier = {
+				factor = 1.5
+				military_spending = 0.49
+			}
+			modifier = {
+				factor = 1
+				military_spending = 0.54
+			}
+			modifier = {
+				factor = 1
+				military_spending = 0.64
+			}
+			modifier = {
+				factor = 1
+				military_spending = 0.69
+			}
+			modifier = {
+				factor = 1
+				military_spending = 0.74
+			}
+			modifier = {
+				factor = 0.5
+				military_spending = 0.84
+			}
+			modifier = {
+				factor = 0.5
+				military_spending = 0.89
+			}
+			modifier = {
+				factor = 0.5
+				military_spending = 0.94
+			}
+			modifier = {
+				factor = 0.5
+				military_spending = 0.99
+			}
+		}
+		modifier = {
+			factor = 10
+			country = {
+				conscription = ref_professional_army
+			}
+		}
+		modifier = {
+			factor = -10
+			location = {
+				is_colonial = yes
+			}
+		}
+	}
+	craftsmen = {
+		factor = 0.01
+		group = {
+			modifier = {
+				factor = -5
+				not = { literacy = 0.1 }
+			}
+			modifier = {
+				factor = -3
+				not = { literacy = 0.15 }
+			}
+			modifier = {
+				factor = -2
+				not = { literacy = 0.2 }
+			}
+			modifier = {
+				factor = -2
+				not = { literacy = 0.25 }
+			}
+			modifier = {
+				factor = -2
+				not = { literacy = 0.3 }
+			}
+		}
+		group = {
+			modifier = {
+				factor = 1
 				literacy = 0.3
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.4
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.5
 			}
 			modifier = {
@@ -477,6 +688,12 @@ promote_to =
 			modifier = {
 				factor = 1
 				literacy = 1
+			}
+		}
+		modifier = {
+			factor = 10
+			state_scope = {
+				has_factories = yes
 			}
 		}
 		modifier = {
@@ -502,14 +719,14 @@ promote_to =
 		}
 		modifier = {
 			factor = -100
-				location = {
-					is_colonial = yes
-				}
+			location = {
+				is_colonial = yes
+			}
 		}
 	}
 	clergymen =
 	{
-		factor = 0.01			
+		factor = 0.01		
 		group = {
 			modifier = {
 				factor = 1
@@ -550,6 +767,32 @@ promote_to =
 			modifier = {
 				factor = 1
 				literacy = 0.99
+			}
+		}
+		group = {
+			modifier = {
+				factor = 3
+				country = {
+					school_reforms = low_schools
+				}
+			}
+			modifier = {
+				factor = 3
+				country = {
+					school_reforms = acceptable_schools
+				}
+			}
+			modifier = {
+				factor = 3
+				country = {
+					school_reforms = good_schools
+				}
+			}
+			modifier = {
+				factor = 3
+				country = {
+					school_reforms = compulsory_schools
+				}
 			}
 		}
 		group = {
@@ -604,7 +847,7 @@ promote_to =
 				location = { is_colonial = no }
 			}
 		}
-		group = {		
+		group = {	
 			modifier = {
 				factor = -2
 				clergymen = 0.004
@@ -681,6 +924,26 @@ promote_to =
 		modifier = {
 			factor = -100
 			clergymen = 0.04
+		}
+	}
+	aristocrats = 
+	{
+		factor = 0.01
+		
+		modifier = {
+			factor = -100
+			state_scope = {
+				aristocrats = 0.02
+			}
+		}
+
+		modifier = {
+			factor = -100
+			NOT = { luxury_needs = 0.10 }
+		}		
+		modifier = {
+			factor = 10
+			luxury_needs = 1
 		}
 	}
 }

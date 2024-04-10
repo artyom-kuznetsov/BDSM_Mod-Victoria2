@@ -626,23 +626,37 @@ promote_to =
 		factor = 0.01
 		group = {
 			modifier = {
-				factor = 2
-				literacy = 0.1
+				factor = -5
+				not = { literacy = 0.1 }
 			}
 			modifier = {
-				factor = 2
-				literacy = 0.2
+				factor = -3
+				not = { literacy = 0.15 }
 			}
 			modifier = {
-				factor = 2
+				factor = -2
+				not = { literacy = 0.2 }
+			}
+			modifier = {
+				factor = -2
+				not = { literacy = 0.25 }
+			}
+			modifier = {
+				factor = -2
+				not = { literacy = 0.3 }
+			}
+		}
+		group = {
+			modifier = {
+				factor = 1
 				literacy = 0.3
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.4
 			}
 			modifier = {
-				factor = 2
+				factor = 1
 				literacy = 0.5
 			}
 			modifier = {
@@ -664,6 +678,12 @@ promote_to =
 			modifier = {
 				factor = 1
 				literacy = 1
+			}
+		}
+		modifier = {
+			factor = 10
+			state_scope = {
+				has_factories = yes
 			}
 		}
 		modifier = {
@@ -689,9 +709,9 @@ promote_to =
 		}
 		modifier = {
 			factor = -100
-				location = {
-					is_colonial = yes
-				}
+			location = {
+				is_colonial = yes
+			}
 		}
 	}
 	clergymen =
