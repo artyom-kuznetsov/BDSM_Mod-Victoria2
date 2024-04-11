@@ -1197,6 +1197,62 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 14680551
+	title = "Ponchik_EvtName"
+	desc = "Ponchik_EvtDesc"
+	picture = "ponchik"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		invention = mission_to_civilize
+	}
+	
+	mean_time_to_happen = {	
+		months = 700
+	}
+	
+	option = {
+		name = "Ponchik_EvtOptA"
+		add_country_modifier = {
+			name = anton_kushaet_modifier
+			duration = 60
+		}
+	}
+	
+	option = {
+		name = "Ponchik_EvtOptB"
+		CUSTOM_TOOLTIP_14680551 = { }
+		set_country_flag = rejected_ponchiki_flag
+	}
+}
+
+country_event = {
+	id = 14680552
+	title = "Ponchik_EvtName"
+	desc = "Ponchik2_EvtDesc"
+	picture = "ponchik"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = rejected_ponchiki_flag
+	}
+	
+	mean_time_to_happen = {	
+		months = 120
+	}
+	
+	option = {
+		name = "Ponchik2_EvtOptA"
+		add_country_modifier = {
+			name = anton_kushaet2_modifier
+			duration = 365
+		}
+	}
+}
+
 # Loyal Colonials
 country_event = {
 	id = 14690
