@@ -686,17 +686,20 @@ country_event = {
 	#  ¿–¿  ¿ œŒ“≈–ﬂ“‹ ÃŒÕ”Ã≈Õ“
 country_event = {
 	title = "spa_carrack_EvtName"
-	desc = "spa_carrack_lose_EvtName"
+	desc = "spa_carrack_lose_mon_EvtName"
 	id = 57324
 	
 	is_triggered_only = yes
 	
-	option = {
-		name = "SUEZMODEVT_OPTB"
+	immediate = {
 		remove_country_modifier = spanish_carrack_modifier
-		remove_country_flag = has_spanish_carrack_flag
+		clr_country_flag = has_spanish_carrack_flag
 		any_owned = { 
 			remove_province_modifier = spanish_carrack_prov_modifier
 		}
+	}
+	
+	option = {
+		name = "SUEZMODEVT_OPTB"
 	}
 }
