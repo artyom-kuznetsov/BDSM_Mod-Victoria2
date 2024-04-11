@@ -58,6 +58,7 @@ peace_order = {
 	colonial_competition
 	cut_down_to_size_boxer
 	cut_down_to_size 
+	capture_monument_spa_carrack_cb
 	free_peoples
 	liberate_country
 	release_puppet
@@ -1723,6 +1724,57 @@ cut_down_to_size = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		conscription = ref_huge_military_budget
+		NOT = {
+			AND = {
+				has_country_flag = chinese_warlord_flag
+				NOT = { year = 1870 } 
+			}
+		}
+	}
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+}
+
+# MONUMENT CARRACK
+capture_monument_spa_carrack_cb = {
+	sprite_index = 21
+	is_triggered_only = yes
+	months = 12
+	
+	badboy_factor = 3.75
+	prestige_factor = 0
+	peace_cost_factor = 20
+	penalty_factor = 1
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 1
+	break_truce_militancy_factor = 1
+	truce_months = 48
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	#po_disarmament = yes
+
+	war_name = WAR_NAME
+	
+	on_po_accepted = {
+		country_event = 57324
+		THIS = {
+			set_country_flag = has_spanish_carrack_flag
+		}
+	}
+	
+	can_use = {
+		NOT = { is_our_vassal = THIS }
+		has_country_flag = has_spanish_carrack_flag
 		NOT = {
 			AND = {
 				has_country_flag = chinese_warlord_flag
