@@ -42,13 +42,13 @@ political_decisions = {
 		
 		allow = {
 			NOT = { has_country_modifier = academic_confusion }
-			money = 500000
+			prestige = 25
 		}
 		effect = {
 			set_country_flag = hide_all_decs_flag
 			set_country_flag = show_academy_decs_flag
-			prestige = -10
-			money = -500000
+			prestige = -25
+			
 			
 			tech_school = army_tech_school
 			add_country_modifier = { name = academic_confusion duration = 3650 }
@@ -64,14 +64,14 @@ political_decisions = {
 		
 		allow = {
 			NOT = { has_country_modifier = academic_confusion }
-			money = 500000
+			prestige = 25
 			total_amount_of_ships = 50
 		}
 		effect = {
 			set_country_flag = hide_all_decs_flag
 			set_country_flag = show_academy_decs_flag
-			prestige = -10
-			money = -500000
+			prestige = -25
+			
 			
 			tech_school = naval_tech_school
 			add_country_modifier = { name = academic_confusion duration = 3650 }
@@ -87,14 +87,14 @@ political_decisions = {
 		
 		allow = {
 			NOT = { has_country_modifier = academic_confusion }
-			money = 500000
+			prestige = 25
 			average_consciousness = 3
 		}
 		effect = {
 			set_country_flag = hide_all_decs_flag
 			set_country_flag = show_academy_decs_flag
-			prestige = -10
-			money = -500000
+			prestige = -25
+			
 			
 			tech_school = culture_tech_school
 			add_country_modifier = { name = academic_confusion duration = 3650 }
@@ -110,13 +110,13 @@ political_decisions = {
 		
 		allow = {
 			NOT = { has_country_modifier = academic_confusion }
-			money = 500000
+			prestige = 25
 		}
 		effect = {
 			set_country_flag = hide_all_decs_flag
 			set_country_flag = show_academy_decs_flag
-			prestige = -10
-			money = -500000
+			prestige = -25
+			
 			
 			tech_school = commerce_tech_school
 			add_country_modifier = { name = academic_confusion duration = 3650 }
@@ -133,15 +133,38 @@ political_decisions = {
 		
 		allow = {
 			NOT = { has_country_modifier = academic_confusion }
-			money = 500000
+			prestige = 25
 		}
 		effect = {
 			set_country_flag = hide_all_decs_flag
 			set_country_flag = show_academy_decs_flag
-			prestige = -10
-			money = -500000
+			prestige = -25
+			
 			
 			tech_school = prussian_tech_school
+			add_country_modifier = { name = academic_confusion duration = 3650 }
+		}
+	}
+	switch_to_italian_tech_school = {
+		alert = no
+		potential = {
+			has_country_flag = show_academy_decs_flag
+			has_country_flag = italian_tech_school_access_flag
+			ai = no
+			NOT = { tech_school = italian_tech_school }
+		}
+		
+		allow = {
+			NOT = { has_country_modifier = academic_confusion }
+			prestige = 25
+		}
+		effect = {
+			set_country_flag = hide_all_decs_flag
+			set_country_flag = show_academy_decs_flag
+			prestige = -25
+			
+			
+			tech_school = italian_tech_school
 			add_country_modifier = { name = academic_confusion duration = 3650 }
 		}
 	}

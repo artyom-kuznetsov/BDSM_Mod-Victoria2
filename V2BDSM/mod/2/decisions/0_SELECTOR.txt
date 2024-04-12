@@ -118,6 +118,33 @@ political_decisions = {
 			}
 		}
 	}
+	selector_destroy_navalbase_dec = {
+		alert = no
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			ai = no
+			any_owned_province = { 
+				is_core = THIS
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+				has_building = naval_base
+			}
+		}
+		allow = {
+		}
+		effect = {
+			random_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				has_building = naval_base
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+				naval_base = -7
+			}
+		}
+	}
 	selector_removebureaucrats_dec = {
 		alert = no
 		potential = {
