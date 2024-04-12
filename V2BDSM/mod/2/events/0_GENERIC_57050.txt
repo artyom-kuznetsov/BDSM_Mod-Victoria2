@@ -1367,3 +1367,42 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 57092
+	title = "sphered_EvtName"
+	desc = "sphered_EvtDesc"
+	
+	trigger = {
+		part_of_sphere = yes
+		NOT = { has_country_modifier = in_sphere_cmodifier }
+	}
+	
+	option = {
+		name = "sphered_EvtOptA"
+		add_country_modifier = {
+			name = in_sphere_cmodifier
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = 57093
+	title = "sphered_EvtName"
+	desc = "unsphered_EvtDesc"
+	
+	immediate = {
+		remove_country_modifier = in_sphere_cmodifier
+	}
+	
+	trigger = {
+		part_of_sphere = no
+		has_country_modifier = in_sphere_cmodifier
+	}
+	
+	option = {
+		name = "unsphered_EvtOptA"
+	}
+}
+
+
