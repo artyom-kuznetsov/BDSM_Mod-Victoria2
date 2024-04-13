@@ -1405,4 +1405,54 @@ country_event = {
 	}
 }
 
+province_event = {
+	id = 57094
+	title = "pop_growth_EvtName"
+	desc = "pop_growth_EvtDesc"
+	picture = "migration"
+	
+	trigger = {
+		NOT = { 
+			total_pops = 20000 
+			has_province_modifier = selector_pop_boost_modifier
+			owner = {
+				has_country_modifier = pop_boost_cooldown_modifier
+			}
+		}
+		owner = {
+			money = 200000
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	option = {
+		name = "pop_growth_EvtDecline"
+	}
+	
+	option = {
+		name = "pop_growth_EvtAccept"
+		owner = {
+			add_country_modifier = {
+				name = pop_boost_cooldown_modifier
+				duration = 365
+			}
+			money = -100000
+		}
+	}
+	
+	option = {
+		name = "pop_growth_EvtBlock"
+		owner = {
+			add_country_modifier = {
+				name = pop_boost_cooldown_modifier
+				duration = 1825
+			}
+		}
+		CUSTOM_TOOLTIP_DEMOGRAPHIC_BOOM = { }
+	}
+}
+
 

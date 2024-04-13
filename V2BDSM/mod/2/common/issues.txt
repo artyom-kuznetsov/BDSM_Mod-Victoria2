@@ -14,7 +14,7 @@ party_issues = {
 	}
 	economic_policy = {
 		laissez_faire = {
-			factory_owner_cost = 0.25
+			factory_owner_cost = 0.5
 			factory_maintenance = -0.1
 			factory_output = 0.05
 			
@@ -39,7 +39,7 @@ party_issues = {
 			}
 		}
 		interventionism = {
-			factory_owner_cost = 0.4
+			factory_owner_cost = 0.75
 			
 			rules = {
 				build_factory = no
@@ -64,7 +64,7 @@ party_issues = {
 			}
 		}
 		state_capitalism = {
-			factory_owner_cost = 0.6
+			factory_owner_cost = 1
 			
 			rules = {
 				build_factory = yes
@@ -74,7 +74,7 @@ party_issues = {
 				build_railway = yes
 				factory_priority = yes
 				can_subsidise = yes
-				pop_build_factory = no
+				pop_build_factory = yes
 				pop_expand_factory = yes
 				pop_open_factory = yes
 				delete_factory_if_no_input = no
@@ -86,7 +86,7 @@ party_issues = {
 		}
 		planned_economy = {
 			factory_throughput = 0.05
-			factory_owner_cost = -1
+			factory_owner_cost = 1.5
 			
 			rules = {
 				build_factory = yes
@@ -96,7 +96,7 @@ party_issues = {
 				build_railway = yes
 				factory_priority = yes
 				can_subsidise = yes
-				pop_build_factory = no
+				pop_build_factory = yes
 				pop_expand_factory = no
 				pop_open_factory = no
 				delete_factory_if_no_input = no
@@ -146,15 +146,18 @@ party_issues = {
 			mobilization_impact = 100
 		}
 		pro_military = {
+			war_exhaustion_effect = 0.33
 			cb_generation_speed_modifier = 0.1
 			mobilization_impact = 100
 		}
 		anti_military = {
+			war_exhaustion_effect = 0.4
 			factory_throughput = 0.02
 			cb_generation_speed_modifier = -0.1
 			mobilization_impact = 100
 		}
 		pacifism = {
+			war_exhaustion_effect = 0.5
 			factory_throughput = 0.05
 			cb_generation_speed_modifier = -0.2
 			mobilization_impact = 100
