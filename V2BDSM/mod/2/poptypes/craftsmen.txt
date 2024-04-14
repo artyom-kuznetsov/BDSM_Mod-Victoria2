@@ -359,42 +359,43 @@ promote_to =
 			}		
 		}
 
+
 		group = {
 			modifier = {
 				factor = 2
-				crime_fighting = 0.1
+				crime_fighting = 0.09
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.2
+				crime_fighting = 0.19
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.3
+				crime_fighting = 0.29
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.4
+				crime_fighting = 0.39
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.5
+				crime_fighting = 0.49
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.6
+				crime_fighting = 0.59
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.7
+				crime_fighting = 0.69
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.8
+				crime_fighting = 0.79
 			}
 			modifier = {
 				factor = 2
-				crime_fighting = 0.9
+				crime_fighting = 0.89
 			}
 			modifier = {
 				factor = 2
@@ -642,25 +643,7 @@ promote_to =
 	}
 	clerks = {
 		factor = 0.01
-		modifier = {
-			factor = -100
-			is_primary_culture = no
-			is_accepted_culture = no
-			country = { has_country_flag = disable_non_accepted_craftsmen }
-		}
 		group = {
-			modifier = {
-				factor = 1
-				literacy = 0.3
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.4
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.5
-			}
 			modifier = {
 				factor = 1
 				literacy = 0.6
@@ -682,9 +665,23 @@ promote_to =
 				literacy = 0.98
 			}
 		}
+		group = {
+			modifier = {
+				factor = -4
+				clerks = 0.04
+			}
+			modifier = {
+				factor = -5
+				clerks = 0.06
+			}
+		}
 		modifier = {
-			factor = -8
-			clerks = 0.05
+			factor = 3
+			craftsmen = 0.08
+		}
+		modifier = {
+			factor = -3
+			NOT = { craftsmen = 0.05 }
 		}
 		modifier = {
 			factor = 5
@@ -756,47 +753,47 @@ promote_to =
 		group = {
 			modifier = {
 				factor = 2
-				education_spending = 0.1
+				education_spending = 0.09
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.2
+				education_spending = 0.19
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.3
+				education_spending = 0.29
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.4
+				education_spending = 0.39
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.5
+				education_spending = 0.49
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.6
+				education_spending = 0.59
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.7
+				education_spending = 0.69
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.8
+				education_spending = 0.79
 				location = { is_colonial = no }
 			}
 			modifier = {
 				factor = 2
-				education_spending = 0.9
+				education_spending = 0.89
 				location = { is_colonial = no }
 			}
 			modifier = {

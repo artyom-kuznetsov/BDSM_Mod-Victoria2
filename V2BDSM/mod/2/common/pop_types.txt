@@ -1,7 +1,14 @@
 #general promote mtth, same for all pops
 promotion_chance = 
 {
-	factor = 0.32
+	factor = 0.35
+	
+	modifier = {
+		factor = 0.05
+		country = {
+			economic_policy = laissez_faire
+		}
+	}
 	
 	### LITERACY
 	group = {
@@ -186,6 +193,13 @@ promotion_chance =
 demotion_chance = 
 {
 	factor = 1
+	
+	modifier = {
+		factor = 0.2
+		country = {
+			economic_policy = laissez_faire
+		}
+	}
 	
 	### QUICKER IF FACTORY UNEMPLOYMENT ON A NICE TRADE GOOD
 	modifier = {
