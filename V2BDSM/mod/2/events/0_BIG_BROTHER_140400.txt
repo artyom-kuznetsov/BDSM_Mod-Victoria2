@@ -16,6 +16,34 @@ country_event = {
 		name = "noloc"
 		add_country_modifier = { name = mcl_happened_modifier duration = 30 }
 		
+		any_country = {
+			any_owned = {
+				limit = {
+					OR = {
+						trade_goods = coal
+						trade_goods = iron
+						trade_goods = sulphur
+						trade_goods = market_goods
+						trade_goods = precious_metal
+						trade_goods = oil
+					}
+					NOT = {
+						unemployment_by_type = {
+							type = labourers
+							value = 0.001
+						}
+					}
+				}
+				random_pop = {
+					limit = {
+						type = artisans
+					}
+					pop_type = labourers
+				}
+			}
+		}
+		
+		
 		any_pop = {
 			money = 2000000
 		}

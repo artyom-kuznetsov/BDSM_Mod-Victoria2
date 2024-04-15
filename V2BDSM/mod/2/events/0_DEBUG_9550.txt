@@ -193,23 +193,16 @@ country_event = { # ANNEX TUR ACCEPTABLE BALKANS
 	
 	option = {
 		name = "noloc"
-		any_country = {
-			any_owned = {
-				limit = {
-					OR = {
-						is_core = YUG
-						is_core = ROM
-						is_core = ALB
-					}
-				}
-				secede_province = THIS
-			}
-		}
 		activate_technology = nationalism_n_imperialism
 		enable_ideology = communist
 		political_reform = all_trade_unions
 		political_reform = all_voting_pops
-		country_event = 60000
+		inherit = EGY
+		inherit = JAB
+		inherit = SER
+		inherit = WAL
+		inherit = MOL
+		inherit = MON
 	}
 }
 

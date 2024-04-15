@@ -1,7 +1,7 @@
 #general promote mtth, same for all pops
 promotion_chance = 
 {
-	factor = 0.35
+	factor = 1
 	
 	modifier = {
 		factor = 0.05
@@ -192,7 +192,7 @@ promotion_chance =
 
 demotion_chance = 
 {
-	factor = 1
+	factor = 1.5
 	
 	modifier = {
 		factor = 0.2
@@ -1050,7 +1050,7 @@ assimilation_chance =
 	}
 
 	modifier = {
-    	factor = 0.5
+    	factor = 2
 		culture = korean
 		country = {
 			has_country_flag = korean_integration_flag
@@ -1065,6 +1065,17 @@ assimilation_chance =
 		modifier = {
 			factor = 0.05
 			NOT = { unemployment = 0.05 }
+		}
+	}
+	
+	modifier = {
+    	factor = 2
+		OR = {
+			culture = mongol
+			culture = crimean
+		}
+		country = {
+			has_country_flag = is_russia_flag
 		}
 	}
 }

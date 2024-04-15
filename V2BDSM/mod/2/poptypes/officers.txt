@@ -185,53 +185,6 @@ migration_target =
 
 promote_to =
 {
-	officers =
-	{
-		factor = 0.01
-		group = {
-			modifier = {
-				factor = 2
-				military_spending = 0.10
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.20
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.290
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.40
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.49
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.6
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.69
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.8
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.9
-			}
-			modifier = {
-				factor = 2
-				military_spending = 0.99
-			}
-		}
-		
-	}
 	clergymen =
 	{
 		factor = 0.01		
@@ -462,45 +415,43 @@ promote_to =
 	}
 	clerks = {
 		factor = 0.01
-		modifier = {
-			factor = -100
-			is_primary_culture = no
-			is_accepted_culture = no
-			country = { has_country_flag = disable_non_accepted_craftsmen }
-		}
 		group = {
 			modifier = {
 				factor = 1
-				literacy = 0.3
+				literacy = 0.29
 			}
 			modifier = {
 				factor = 1
-				literacy = 0.4
+				literacy = 0.39
 			}
 			modifier = {
 				factor = 1
-				literacy = 0.5
+				literacy = 0.49
 			}
 			modifier = {
 				factor = 1
-				literacy = 0.6
+				literacy = 0.59
 			}
 			modifier = {
 				factor = 1
-				literacy = 0.7
+				literacy = 0.69
 			}
 			modifier = {
 				factor = 1
-				literacy = 0.8
+				literacy = 0.79
 			}
 			modifier = {
 				factor = 2
-				literacy = 0.9
+				literacy = 0.89
 			}
 			modifier = {
 				factor = 2
-				literacy = 1
+				literacy = 0.99
 			}
+		}
+		modifier = {
+			factor = -100
+			NOT = { location = { officers = 0.2 } }
 		}
 		modifier = {
 			factor = 5
@@ -522,6 +473,13 @@ promote_to =
 					}
 				}
 			}
+		}
+	}
+	farmers = {
+		factor = 0.01
+		modifier = {
+			factor = 100
+			location = { is_colonial = yes }
 		}
 	}
 	bureaucrats =

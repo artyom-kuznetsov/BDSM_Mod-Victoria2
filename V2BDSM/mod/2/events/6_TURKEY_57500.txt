@@ -143,3 +143,32 @@ province_event = {
 		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
 	}
 }
+
+# NOT FOR TURKEY
+province_event = {
+	title = "generic_assimilated_EvtName"
+	desc = "tur_assimilate_EvtDesc"
+	id = 57504
+	
+	trigger = {
+		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
+		
+		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		
+		any_pop = {
+			is_primary_culture = no
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "tur_assimilate_EvtOptA"
+		assimilate = yes
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 270 } }
+		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+	}
+}
