@@ -14,47 +14,157 @@ promotion_chance =
 	group = {
 		modifier = {
 			factor = 0.04
+			literacy = 0.05		
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.1			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.2		
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.3			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.4			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.5			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.6			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.7			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.8			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.9			
+		}
+		modifier = {
+			factor = 0.04
+			literacy = 0.99			
+		}
+		modifier = {
+			factor = -0.02
 			literacy = 0.05
-		}
+			total_pops = 2000000
+		}	
 		modifier = {
-			factor = 0.04
-			literacy = 0.1 
-		}
+			factor = -0.02
+			literacy = 0.1
+			total_pops = 2000000
+		}	
 		modifier = {
-			factor = 0.04
+			factor = -0.02
 			literacy = 0.2
-		}
+			total_pops = 2000000
+		}	
 		modifier = {
-			factor = 0.04
+			factor = -0.02
 			literacy = 0.3
+			total_pops = 2000000
 		}
 		modifier = {
-			factor = 0.04
+			factor = -0.02
 			literacy = 0.4
-		}
+			total_pops = 2000000
+		}	
 		modifier = {
-			factor = 0.04
+			factor = -0.02
 			literacy = 0.5
+			total_pops = 2000000
 		}
 		modifier = {
-			factor = 0.04
+			factor = -0.02
 			literacy = 0.6
+			total_pops = 2000000
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.7
+			factor = -0.02
+			literacy = 0.7		
+			total_pops = 2000000
 		}
 		modifier = {
-			factor = 0.04
+			factor = -0.02
 			literacy = 0.8
+			total_pops = 2000000
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.9
+			factor = -0.02
+			literacy = 0.9		
+			total_pops = 2000000
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.95
+			factor = -0.02
+			literacy = 0.99		
+			total_pops = 2000000
+		}
+		modifier = {
+			factor = -0.01
+			literacy = 0.05
+			total_pops = 4000000						
+		}	
+		modifier = {
+			factor = -0.01
+			literacy = 0.1
+			total_pops = 4000000						
+		}	
+		modifier = {
+			factor = -0.01
+			literacy = 0.2
+			total_pops = 4000000					
+		}	
+		modifier = {
+			factor = -0.01
+			literacy = 0.3
+			total_pops = 4000000						
+		}
+		modifier = {
+			factor = -0.01
+			literacy = 0.4
+			total_pops = 4000000					
+		}	
+		modifier = {
+			factor = -0.01
+			literacy = 0.5
+			total_pops = 4000000						
+		}
+		modifier = {
+			factor = -0.01
+			literacy = 0.6
+			total_pops = 4000000						
+		}
+		modifier = {
+			factor = -0.01
+			literacy = 0.7		
+			total_pops = 4000000						
+		}
+		modifier = {
+			factor = -0.01
+			literacy = 0.8
+			total_pops = 4000000						
+		}
+		modifier = {
+			factor = -0.01
+			literacy = 0.9		
+			total_pops = 4000000						
+		}
+		modifier = {
+			factor = -0.01
+			literacy = 0.99	
+			total_pops = 4000000						
 		}
 	}
 	
@@ -98,24 +208,48 @@ promotion_chance =
 	group = {
 		modifier = {
 			factor = 0.1
-			life_needs = 0.9
-	
+			life_needs = 0.4			
 		}
 		modifier = {
 			factor = 0.1
-			life_needs = 0.8 
+			life_needs = 0.6		
 		}
 		modifier = {
-			factor = 0.05
-			life_needs = 0.7
-			strata = poor
+			factor = 0.1
+			life_needs = 0.8	
 		}
 		modifier = {
-			factor = 0.05
+			factor = -0.05
+			life_needs = 0.4
+			total_pops = 2000000
+		}
+		modifier = {
+			factor = -0.05
 			life_needs = 0.6
-			strata = poor
+			total_pops = 2000000
+		}
+		modifier = {
+			factor = -0.05
+			life_needs = 0.8
+			total_pops = 2000000
+		}
+		modifier = {
+			factor = -0.025
+			life_needs = 0.4
+			total_pops = 4000000			
+		}
+		modifier = {
+			factor = -0.025
+			life_needs = 0.6
+			total_pops = 4000000
+		}
+		modifier = {
+			factor = -0.025
+			life_needs = 0.8
+			total_pops = 4000000
 		}
 	}
+
 
 	group = {
 		modifier = {
@@ -130,10 +264,14 @@ promotion_chance =
 		modifier = {
 			factor = 0.1
 			everyday_needs = 0.7
-			strata = poor
 		}
 	}
 
+	modifier = {
+		factor = 0.25
+		strata = middle
+	}
+	
 	### COLONY
 	modifier = {
 		factor = -0.1
@@ -216,6 +354,18 @@ demotion_chance =
 				trade_goods= sulphur
 			}
 		}
+	}
+	
+	# LARGE STATE
+	modifier = {
+		factor = -10
+		total_pops = 2000000
+	}
+	
+	# MIDDLE STRATA
+	modifier = {
+		factor = 1
+		strata = middle
 	}
 	
 	### COLONIAL
