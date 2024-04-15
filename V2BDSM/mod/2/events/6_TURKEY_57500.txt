@@ -152,7 +152,7 @@ province_event = {
 	
 	trigger = {
 		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
-		
+		owner = { NOT = { tag = TUR } }
 		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
 		
 		any_pop = {
