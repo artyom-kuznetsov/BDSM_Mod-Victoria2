@@ -247,12 +247,13 @@ promote_to =
 			NOT = { state_scope = { aristocrats = 0.015 } }
 		}
 		
-		modfier = {
+		modifier = {
 			factor = 3
 			state_scope = {
 				has_factories = yes
 			}
 		}
+		
 		modifier = {
 			factor = 3
 			state_scope = {
@@ -691,6 +692,7 @@ promote_to =
 				crime_fighting = 0.99
 			}
 		}
+	}
 	farmers = { #and labourers
 		factor = 0.01
 		modifier = {
@@ -1222,62 +1224,6 @@ ideologies = {
 			poor_strata_militancy = 8
 			middle_strata_militancy = 8
 			}
-		}
-	}
-	anarcho_liberal = {
-		factor = 1
-		modifier = {
-			factor = 2
-			country = { has_country_flag = anarcho_liberal_propaganda_flag }
-		}
-		modifier = {
-			factor = 0.1
-			NOT = { militancy = 6 }
-			NOT = { government = bourgeois_dictatorship }
-		}
-		modifier = {
-			factor = 1.5
-			ruling_party_ideology = anarcho_liberal 
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.10
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.20
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.30
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.40
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.50
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.60
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.70
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.80
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 0.90
-		}
-		modifier = {
-			factor = 1.1
-			political_reform_want = 1
 		}
 	}
 }

@@ -647,17 +647,12 @@ risorgimento = {
 	construction_speed = 2
 	
 	can_use = {
-		NOT = { is_our_vassal = THIS }
+		NOT = { is_our_vassal = THIS tag = WBK }
+		THIS = { has_country_flag = expedition_to_sicily }
 		OR = {
-			AND = {
-				THIS = { has_country_flag = expedition_to_sicily }
-				OR = {
-					primary_culture = south_italian
-					primary_culture = north_italian
-				}
-			}
+			primary_culture = south_italian
+			primary_culture = north_italian
 		}
-		NOT = { tag = WBK }
 	}
 
 	badboy_factor = 0.0
