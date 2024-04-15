@@ -346,3 +346,26 @@ country_event = { # DAY 1 GUIDE
 		money = 15
 	}
 }
+
+country_event = { # NATIONALISM
+	id = 57908
+	title = "ita_nationalism_EvtName"
+	desc = "ita_nationalism_EvtName_EvtDesc"
+	picture = "italia"
+	
+	trigger = {
+		is_culture_group = italian
+		NOT = { exists = ITA }
+		nationalism_n_imperialism = 1
+		NOT = {
+			has_country_flag = ita_nationalism_flag
+		}
+	}
+	
+	
+	option = {
+		name = "ita_guide_EvtOptA"
+		set_country_flag = ita_nationalism_flag
+		CUSTOM_TOOLTIP_ITA_NATIONALISM = { }
+	}
+}

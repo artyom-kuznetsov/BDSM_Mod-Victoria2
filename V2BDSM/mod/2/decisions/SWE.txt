@@ -69,40 +69,72 @@ political_decisions = {
 		}
 		
 		allow = {
-			322 = { OR = {
-				owned_by = THIS
-				owner = { vassal_of = THIS }
-				owner = { in_sphere = THIS } }
-			}
-			334 = { OR = {
-				owned_by = THIS
-				owner = { vassal_of = THIS }
-				owner = { in_sphere = THIS } }
-			}
-			372 = { OR = {
-				owned_by = THIS
-				owner = { vassal_of = THIS }
-				owner = { in_sphere = THIS } }
-			}
-			367 = { OR = {
-				owned_by = THIS
-				owner = { vassal_of = THIS }
-				owner = { in_sphere = THIS } }
-			}
-			313 = { OR = {
-				owned_by = THIS
-				owner = { vassal_of = THIS }
-				owner = { in_sphere = THIS } }
-			}
-			321 = { OR = {
-				owned_by = THIS
-				owner = { vassal_of = THIS }
-				owner = { in_sphere = THIS } }
-			}
-			307 = { OR = {
-				owned_by = THIS
-				owner = { vassal_of = THIS }
-				owner = { in_sphere = THIS } }
+			OR = {
+				AND = {
+					322 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					334 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					372 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					367 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					313 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					321 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					307 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+				}
+				AND = {
+					nationalism_n_imperialism = 1
+					322 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					334 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					321 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					313 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+					307 = { OR = {
+						owned_by = THIS
+						owner = { vassal_of = THIS }
+						owner = { in_sphere = THIS } }
+					}
+				}
 			}
 		}
 		
