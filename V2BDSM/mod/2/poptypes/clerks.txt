@@ -832,6 +832,14 @@ promote_to =
 			factor = -100
 			location = { NOT = { has_pop_type = farmers } }
 		}
+		modifier = {
+			factor = -100
+			NOT = {
+				state_scope = {
+					unemployment = 0.15
+				}
+			}
+		}
 	}
 	labourers = 
 	{

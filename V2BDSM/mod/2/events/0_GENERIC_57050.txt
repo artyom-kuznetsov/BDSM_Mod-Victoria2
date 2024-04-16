@@ -1221,6 +1221,7 @@ country_event = {
 			militancy = 5
 			consciousness = 5
 		}
+		add_country_modifier = { name = usurp_cooldown_modifier duration = 1825 }
 	}
 }
 
@@ -1412,6 +1413,7 @@ province_event = {
 	picture = "migration"
 	
 	trigger = {
+		medicine = 1
 		NOT = { 
 			total_pops = 20000 
 			has_province_modifier = selector_pop_boost_modifier
@@ -1419,17 +1421,10 @@ province_event = {
 				has_country_modifier = pop_boost_cooldown_modifier
 			}
 		}
-		owner = {
-			money = 200000
-		}
 	}
 	
 	mean_time_to_happen = {
 		months = 24
-	}
-	
-	option = {
-		name = "pop_growth_EvtDecline"
 	}
 	
 	option = {
@@ -1439,23 +1434,11 @@ province_event = {
 				name = pop_boost_cooldown_modifier
 				duration = 365
 			}
-			money = -100000
 		}
 		add_province_modifier = {
 			name = selector_pop_boost_modifier
 			duration = 730
 		}
-	}
-	
-	option = {
-		name = "pop_growth_EvtBlock"
-		owner = {
-			add_country_modifier = {
-				name = pop_boost_cooldown_modifier
-				duration = 1825
-			}
-		}
-		CUSTOM_TOOLTIP_DEMOGRAPHIC_BOOM = { }
 	}
 }
 

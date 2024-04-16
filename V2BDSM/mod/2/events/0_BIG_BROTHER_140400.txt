@@ -109,7 +109,10 @@ country_event = {
 		any_country = { # ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
 			limit = {
 				exists = yes
-				government = proletarian_dictatorship
+				OR = {
+					government = proletarian_dictatorship
+					government = social_republic
+				}
 				NOT = { has_country_flag = is_communist_flag }
 			}
 			set_country_flag = is_communist_flag
@@ -117,7 +120,10 @@ country_event = {
 		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
 			limit = {
 				exists = yes
-				NOT = { government = proletarian_dictatorship }
+				NOT = { 
+					government = proletarian_dictatorship 
+					government = social_republic 
+				}
 				has_country_flag = is_communist_flag
 			}
 			clr_country_flag = is_communist_flag

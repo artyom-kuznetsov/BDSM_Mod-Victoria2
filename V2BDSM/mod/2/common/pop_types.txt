@@ -1,12 +1,21 @@
 #general promote mtth, same for all pops
 promotion_chance = 
 {
-	factor = 1
+	factor = 0.35
 	
 	modifier = {
 		factor = 0.05
 		country = {
 			economic_policy = laissez_faire
+		}
+	}
+	
+	modifier = {
+		factor = -0.10
+		country = {
+			NOT = {
+				year = 1860
+			}
 		}
 	}
 	
@@ -175,7 +184,7 @@ promotion_chance =
 	}
 	
 	modifier = {
-		factor = -0.08
+		factor = -0.1
 		country = {
 			is_mobilised = yes
 		}
@@ -330,10 +339,10 @@ promotion_chance =
 
 demotion_chance = 
 {
-	factor = 1.5
+	factor = 1.25
 	
 	modifier = {
-		factor = 0.2
+		factor = 0.1
 		country = {
 			economic_policy = laissez_faire
 		}
@@ -358,7 +367,7 @@ demotion_chance =
 	
 	# LARGE STATE
 	modifier = {
-		factor = -10
+		factor = -0.5
 		total_pops = 2000000
 	}
 	
@@ -1044,15 +1053,15 @@ emigration_chance =
 #general assimilation mtth, same for all pops
 assimilation_chance = 
 {
-	factor = 0.5
+	factor = 0.75
 
 	modifier = {
-    	factor = -0.5
+    	factor = -0.75
 		has_culture_core = yes
 	}
 	
 	modifier = {
-    	factor = 0.75
+    	factor = 1.25
 		year = 1870
 		location = { is_core = THIS }
 	}
@@ -1200,7 +1209,7 @@ assimilation_chance =
 	}
 
 	modifier = {
-    	factor = 2
+    	factor = 2.5
 		culture = korean
 		country = {
 			has_country_flag = korean_integration_flag
@@ -1219,7 +1228,7 @@ assimilation_chance =
 	}
 	
 	modifier = {
-    	factor = 2
+    	factor = 3
 		OR = {
 			culture = mongol
 			culture = crimean

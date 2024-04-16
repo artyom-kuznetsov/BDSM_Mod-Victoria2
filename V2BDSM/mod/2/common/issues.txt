@@ -6,6 +6,7 @@ party_issues = {
 		protectionism = {
 			max_tariff = 1
 			min_tariff = 0
+			pop_build_factory = no
 		}
 		free_trade = {
 			max_tariff = 1
@@ -106,6 +107,28 @@ party_issues = {
 				can_invest_in_pop_projects = yes
 			}
 		}
+		planned_economy_2 = {
+			factory_throughput = 0.05
+			factory_owner_cost = 1.5
+			
+			rules = {
+				build_factory = yes
+				expand_factory = yes
+				open_factory = yes
+				destroy_factory = yes		
+				build_railway = yes
+				factory_priority = yes
+				can_subsidise = yes
+				pop_build_factory = no
+				pop_expand_factory = no
+				pop_open_factory = no
+				delete_factory_if_no_input = no
+				build_factory_invest = yes
+				expand_factory_invest = yes
+				build_railway_invest = yes
+				can_invest_in_pop_projects = yes
+			}
+		}
 	}
 	
 	religious_policy = {
@@ -174,6 +197,9 @@ political_reforms = {
 	
 		yes_slavery = {
 			rules = { slavery_allowed = yes }
+			allow = {
+				NOT = { has_country_flag = is_communist_flag }
+			}
 		}
 		
 		freedom_of_womb = {
@@ -183,6 +209,7 @@ political_reforms = {
 					NOT = { has_country_flag = the_slavery_debate }
 					year = 1870
 				}
+				NOT = { has_country_flag = is_communist_flag }
 			}
 		}
 		
@@ -403,8 +430,7 @@ political_reforms = {
 		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
 			max_military_spending = 1.0
 			mobilisation_size = -0.01
-			land_unit_start_experience = 5
-			reinforce_speed = 0.05
+			land_unit_start_experience = 10
 			# -25% Mob Impact
 			allow = {
 				has_country_flag = army_professionalism_flag
@@ -457,13 +483,22 @@ political_reforms = {
 		
 		serfdom = {
 			rgo_output = 0.15
+			allow = {
+				NOT = { has_country_flag = is_communist_flag }
+			}
 		}
 		
 		peonage = {
 			rgo_output = 0.05
+			allow = {
+				NOT = { has_country_flag = is_communist_flag }
+			}
 		}
 		
 		debtors_prisons = {
+			allow = {
+				NOT = { has_country_flag = is_communist_flag }
+			}
 		}
 		
 		bankruptcy = {
