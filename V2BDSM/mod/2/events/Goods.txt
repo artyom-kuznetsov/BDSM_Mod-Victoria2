@@ -549,6 +549,37 @@ province_event = {
 	}
 }
 
+# SILK EVENT
+province_event = {
+
+	id = 1110
+
+	trigger = {
+		invention = rayon
+		OR = {
+			province_id = 1104		# Sicily
+			province_id = 869		# Aydin
+			province_id = 1763		# Egypt
+			province_id = 503		# Valencia
+			province_id = 200		# Florida
+		}
+		not = { trade_goods = silk }
+	}
+
+	mean_time_to_happen = {
+		months = 8
+	}
+
+	title = "EVTNAME1109"
+	desc = "EVTDESC1109"
+
+	option = {
+		name = "EVTOPTA1109"
+		trade_goods = silk
+		# life_rate = 5
+	}
+}
+
 province_event = {
 
 	id = 1111
