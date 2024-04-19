@@ -464,6 +464,7 @@ political_reforms = {
 		}
 		culture_voting_only = {
 			rules = { culture_voting = yes }
+			non_accepted_pop_consciousness_modifier = 0.01
 			allow = {
 				NOT = { citizenship_policy = residency }
 			}
@@ -471,6 +472,7 @@ political_reforms = {
 		all_voting_pops = {
 			rules = { all_voting = yes }
 			non_accepted_pop_consciousness_modifier = -0.01
+			non_accepted_pop_militancy_modifier = -0.02
 			global_immigrant_attract = 0.02
 			allow = {
 				NOT = { citizenship_policy = residency }
