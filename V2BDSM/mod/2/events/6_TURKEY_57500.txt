@@ -18,6 +18,9 @@ country_event = { # EXPANSION ROUTE
 		name = "tur_exp_route_EvtOptLater"
 		set_country_flag = TUR_assimilation_flag
 		CUSTOM_TOOLTIP_57500 = { }
+		capital_scope = {
+			add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+		}
 	}
 	
 }
@@ -86,10 +89,7 @@ province_event = {
 		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
 		OR = {
 			any_neighbor_province = { 
-				OR = {
-					has_province_modifier = TUR_prov_assimilatED_prov_modifier 
-					is_capital = yes
-				}
+				has_province_modifier = TUR_prov_assimilatED_prov_modifier 
 			}
 			state_scope = {
 				any_owned = {
@@ -128,10 +128,7 @@ province_event = {
 		
 		OR = {
 			any_neighbor_province = { 
-				OR = {
-					has_province_modifier = TUR_prov_assimilatED_prov_modifier 
-					is_capital = yes
-				}
+				has_province_modifier = TUR_prov_assimilatED_prov_modifier 
 			}
 			state_scope = {
 				any_owned = {
@@ -181,7 +178,7 @@ province_event = {
 	option = {
 		name = "tur_assimilate_EvtOptA"
 		assimilate = yes
-		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 270 } }
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 365 } }
 		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
 		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
 	}
