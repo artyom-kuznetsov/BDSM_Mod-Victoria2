@@ -80,14 +80,21 @@ province_event = {
 	
 	trigger = {
 		year = 1841
-		NOT = { year = 1871 }
+		NOT = { year = 1881 }
 		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
 		
 		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
-		any_neighbor_province = { 
-			OR = {
-				has_province_modifier = TUR_prov_assimilatED_prov_modifier 
-				is_capital = yes
+		OR = {
+			any_neighbor_province = { 
+				OR = {
+					has_province_modifier = TUR_prov_assimilatED_prov_modifier 
+					is_capital = yes
+				}
+			}
+			state_scope = {
+				any_owned = {
+					has_province_modifier = TUR_prov_assimilatED_prov_modifier
+				}
 			}
 		}
 		
@@ -103,7 +110,7 @@ province_event = {
 	option = {
 		name = "tur_assimilate_EvtOptA"
 		assimilate = yes
-		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 270 } }
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 240 } }
 		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
 		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
 	}
@@ -115,14 +122,21 @@ province_event = {
 	id = 57503
 	
 	trigger = {
-		year = 1871
+		year = 1881
 		has_province_modifier = TUR_prov_assimilatABLE_prov_modifier
 		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
 		
-		any_neighbor_province = { 
-			OR = {
-				has_province_modifier = TUR_prov_assimilatED_prov_modifier 
-				is_capital = yes
+		OR = {
+			any_neighbor_province = { 
+				OR = {
+					has_province_modifier = TUR_prov_assimilatED_prov_modifier 
+					is_capital = yes
+				}
+			}
+			state_scope = {
+				any_owned = {
+					has_province_modifier = TUR_prov_assimilatED_prov_modifier
+				}
 			}
 		}
 		

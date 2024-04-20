@@ -1413,7 +1413,9 @@ province_event = {
 	picture = "migration"
 	
 	trigger = {
-		medicine = 1
+		owner = {
+			medicine = 1
+		}
 		NOT = { 
 			total_pops = 20000 
 			has_province_modifier = selector_pop_boost_modifier
@@ -1424,7 +1426,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 24
+		months = 12
 	}
 	
 	option = {
