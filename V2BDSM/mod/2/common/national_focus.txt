@@ -58,120 +58,6 @@ rail_focus =
 	}
 }
 
-small_promotion_focus =
-{
-	small_promote_aristocrats =
-	{
-		aristocrats = 0.40 #40% more likeley to become this type
-		icon = 5
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-		}
-	}
-
-	small_promote_bureaucrats =
-	{
-		bureaucrats = 0.40 #40% more likeley to become this type
-		icon = 7
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-		}
-	}
-
-	small_promote_capitalists =
-	{
-		capitalists = 0.40 #40% more likeley to become this type
-		icon = 8
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-		}
-	}
-	
-	small_promote_clergymen =
-	{
-		clergymen = 0.40 #40% more likeley to become this type
-		icon = 9
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-		}
-	}
-
-	small_promote_clerks =
-	{
-		clerks = 0.40 #40% more likeley to become this type
-		icon = 10
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-			has_country_flag = industrial_revolution_flag
-		}
-	}
-
-	small_promote_craftsmen =
-	{
-		craftsmen = 0.2 #20% more likeley to become this type
-		icon = 11
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-			OR = {
-				has_country_flag = industrial_revolution_flag
-				state_scope = {
-					any_owned_province = {
-						is_capital = yes 
-					}
-				}
-			}
-		}
-	}
-
-	small_promote_farmers =
-	{
-		farmers = 0.40 #40% more likeley to become this type
-		icon = 12
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-		}
-	}
-
-	small_promote_labourers =
-	{
-		labourers = 0.40 #40% more likeley to become this type
-		icon = 13
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-		}	
-	}
-
-	small_promote_officers =
-	{
-		officers = 0.40 #40% more likeley to become this type
-		icon = 14
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-		}
-	}
-
-	small_promote_soldiers =
-	{
-		soldiers = 0.40 #40% more likeley to become this type
-		icon = 15
-		outliner_show_as_percent = yes
-		limit = {
-			NOT = { state_scope = { total_pops = 250000 } }
-			state_scope = {
-				is_colonial = no
-			}
-		}
-	}
-}
 promotion_focus =
 {
 	promote_aristocrats =
@@ -179,12 +65,12 @@ promotion_focus =
 		aristocrats = 0.20 #30% more likeley to become this type
 		icon = 5
 		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-		}
+		#limit = {
+		#	state_scope = {
+		#		total_pops = 250000
+		#		NOT = { total_pops = 1000000 }
+		#	}
+		#}
 	}
 
 	promote_bureaucrats =
@@ -192,12 +78,12 @@ promotion_focus =
 		bureaucrats = 0.20 #40% more likeley to become this type
 		icon = 7
 		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-		}
+		#limit = {
+		#	state_scope = {
+		#		total_pops = 250000
+		#		NOT = { total_pops = 1000000 }
+		#	}
+		#}
 	}
 
 	promote_capitalists =
@@ -205,12 +91,12 @@ promotion_focus =
 		capitalists = 0.20 #30% more likeley to become this type
 		icon = 8
 		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-		}
+		#limit = {
+		#	state_scope = {
+		#		total_pops = 250000
+		#		NOT = { total_pops = 1000000 }
+		#	}
+		#}
 	}
 
 	promote_clergymen =
@@ -218,13 +104,12 @@ promotion_focus =
 		clergymen = 0.20 #30% more likeley to become this type
 		icon = 9
 		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-			has_country_flag = industrial_revolution_flag
-		}
+		#limit = {
+		#	state_scope = {
+		#		total_pops = 250000
+		#		NOT = { total_pops = 1000000 }
+		#	}
+		#}
 	}
 
 	promote_clerks =
@@ -233,10 +118,10 @@ promotion_focus =
 		icon = 10
 		outliner_show_as_percent = yes
 		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
+			#state_scope = {
+			#	total_pops = 250000
+			#	NOT = { total_pops = 1000000 }
+			#}
 			has_country_flag = industrial_revolution_flag
 		}
 	}
@@ -247,10 +132,10 @@ promotion_focus =
 		icon = 11
 		outliner_show_as_percent = yes
 		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
+			#state_scope = {
+			#	total_pops = 250000
+			#	NOT = { total_pops = 1000000 }
+			#}
 			OR = {
 				has_country_flag = industrial_revolution_flag
 				state_scope = {
@@ -267,12 +152,12 @@ promotion_focus =
 		farmers = 0.20 #30% more likeley to become this type
 		icon = 12
 		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-		}
+		#limit = {
+		#	state_scope = {
+		#		total_pops = 250000
+		#		NOT = { total_pops = 1000000 }
+		#	}
+		#}
 	}
 
 	promote_labourers =
@@ -280,12 +165,12 @@ promotion_focus =
 		labourers = 0.20 #30% more likeley to become this type
 		icon = 13
 		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-		}	
+		#limit = {
+		#	state_scope = {
+		#		total_pops = 250000
+		#		NOT = { total_pops = 1000000 }
+		#	}
+		#}
 	}
 
 	promote_officers =
@@ -293,12 +178,12 @@ promotion_focus =
 		officers = 0.20 #30% more likeley to become this type
 		icon = 14
 		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-		}
+		#limit = {
+		#	state_scope = {
+		#		total_pops = 250000
+		#		NOT = { total_pops = 1000000 }
+		#	}
+		#}
 	}
 
 	promote_soldiers =
@@ -307,147 +192,10 @@ promotion_focus =
 		icon = 15
 		outliner_show_as_percent = yes
 		limit = {
-			state_scope = {
-				total_pops = 250000
-				NOT = { total_pops = 1000000 }
-			}
-			state_scope = {
-				is_colonial = no
-			}
-		}
-	}
-}
-
-large_promotion_focus =
-{
-	large_promote_aristocrats =
-	{
-		aristocrats = 0.10 #20% more likeley to become this type
-		icon = 5
-		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-	}
-
-	large_promote_bureaucrats =
-	{
-		bureaucrats = 0.10 #20% more likeley to become this type
-		icon = 7
-		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-	}
-
-	large_promote_capitalists =
-	{
-		capitalists = 0.10 #20% more likeley to become this type
-		icon = 8
-		outliner_show_as_percent = yes
-		limit = { 
-			civilized = yes
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-
-	}
-	
-	large_promote_clergymen =
-	{
-		clergymen = 0.10 #20% more likeley to become this type
-		icon = 9
-		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-	}
-
-	large_promote_clerks =
-	{
-		clerks = 0.10 #20% more likeley to become this type
-		icon = 10
-		outliner_show_as_percent = yes
-		limit = { 
-			state_scope = {
-				total_pops = 1000000
-			}
-			has_country_flag = industrial_revolution_flag
-		}
-	}
-
-	large_promote_craftsmen =
-	{
-		craftsmen = 0.05 #10% more likeley to become this type
-		icon = 11
-		outliner_show_as_percent = yes
-		limit = { 
-			state_scope = {
-				total_pops = 1000000
-			}
-			OR = {
-				has_country_flag = industrial_revolution_flag
-				state_scope = {
-					any_owned_province = {
-						is_capital = yes 
-					}
-				}
-			}
-		}
-	}
-
-	large_promote_farmers =
-	{
-		farmers = 0.10 #20% more likeley to become this type
-		icon = 12
-		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-	}
-
-	large_promote_labourers =
-	{
-		labourers = 0.1 #20% more likeley to become this type
-		icon = 13
-		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-	}
-
-	large_promote_officers =
-	{
-		officers = 0.10 #20% more likeley to become this type
-		icon = 14
-		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-	}
-
-	large_promote_soldiers =
-	{
-		soldiers = 0.10 #20% more likeley to become this type
-		icon = 15
-		outliner_show_as_percent = yes
-		limit = {
-			state_scope = {
-				total_pops = 1000000
-			}
+			#state_scope = {
+			#	total_pops = 250000
+			#	NOT = { total_pops = 1000000 }
+			#}
 			state_scope = {
 				is_colonial = no
 			}
