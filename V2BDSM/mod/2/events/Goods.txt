@@ -555,7 +555,17 @@ province_event = {
 	id = 11105553
 
 	trigger = {
-		invention = rayon
+		OR = {
+			owner = {
+				part_of_sphere = yes
+				sphere_owner = {
+					invention = rayon
+				}
+			}
+			owner = {
+				invention = rayon
+			}
+		}
 		OR = {
 			province_id = 1104		# Sicily
 			province_id = 869		# Aydin
