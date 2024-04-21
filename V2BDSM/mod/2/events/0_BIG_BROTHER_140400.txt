@@ -44,6 +44,15 @@ country_event = {
 		}
 		
 		any_country = {
+			limit = {
+				has_global_flag = singleplayer_flag
+				ai = yes
+				NOT = { money = 250000 }
+			}
+			money = 50000
+		}
+		
+		any_country = {
 			any_owned = {
 				random_pop = {
 					limit = {

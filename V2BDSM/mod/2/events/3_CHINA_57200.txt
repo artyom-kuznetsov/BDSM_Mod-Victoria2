@@ -380,6 +380,42 @@ country_event = {
 		PKG = {
 			capital = 1616
 		}
+		THIS = {
+			limit = {
+				ai = no
+			}
+			set_global_flag = china_has_player_flag
+		}
 	}
 }
 
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 57207
+	
+	trigger = {
+		is_culture_group = east_asian
+		ai = yes
+		any_neighbor_country = {
+			is_culture_group = east_asian
+			alliance_with = THIS
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 24
+	}
+	
+	option = {
+		name = "noloc"
+		random_country = {
+			limit = {
+				is_culture_group = east_asian
+				alliance_with = THIS
+			}
+			relation = { who = THIS value = -200 }
+			leave_alliance = THIS
+		}
+	}
+}

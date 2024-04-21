@@ -1,4 +1,13 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.3.X \nОжидаемая контрольная сумма: ВЕРНУТЬ -2 К ВЫСАДКЕ;X
+construct_italy_dec_title;@ITAСоздание Италии;X
+construct_italy_dec_desc;Вся Италия под нами. Мы можем объединить итальянские княжества в одну страну в нашей сфере влияния.;X
+singleplayer_ai_buff;Бонус ИИ;X
+MopActions_EvtName;Министерство внутренних дел;X
+MopActions_EvtDesc;Министерство внутренних дел к вашим услугам! Выберите действие:;X
+MopActions_EvtOptCancel;§R<§! Отмена;X
+MopActions_EvtOptAgitProp;§G>§! Пропаганда идеологии;X
+MopActions_EvtOptTaxCut;§G>§! §GСнижение§! налогов;X
+MopActions_EvtOptTaxLift;§G>§! §RПовышение§! налогов;X
 is_communist_flag;Социально-ориентированная форма правления;X
 small_promotion_focus;Население в маленьких регионах;X
 large_promotion_focus;Население в больших регионах;X
@@ -4531,14 +4540,23 @@ add_to_sphere_setup;§B5§! Расширить сферу влияния на державу $RECIPIENT$.;X
 take_from_sphere;§B8§! Выбить из сферы;X
 take_from_sphere_short;§B8§! Исключение державы $THIRD$ из сферы влияния;X
 take_from_sphere_setup;§B8§! Исключить державу $THIRD$ из сферы влияния державы $RECIPIENT$.;X
+acquire_core_state_AI;§B10§! Захват нац. территории;X
+acquire_core_state_AI_short;§B10§! Присоединение региона $STATE$;X
+acquire_core_state_AI_setup;§B10§! Отобрать у державы $RECIPIENT$ наш национальный регион $STATE$.;X
+acquire_core_state_AI_desc;Захват вражеского §Yрегиона§W, в котором находятся наши §Yнациональные провинции§W.;X
 acquire_core_state;§B10§! Захват нац. территории;X
 acquire_core_state_short;§B10§! Присоединение региона $STATE$;X
 acquire_core_state_setup;§B10§! Отобрать у державы $RECIPIENT$ наш национальный регион $STATE$.;X
+acquire_core_state_desc;Захват вражеского §Yрегиона§W, в котором находятся наши §Yнациональные провинции§W.;X
 ;;X# TAKE ALL CORES CB
 acquire_all_cores_short;Освобождение всех нац. территорий;X
 acquire_all_cores_setup;Освобождение всех нац. территорий;X
 acquire_all_cores;Захват всех нац. территорий;X
 acquire_all_cores_desc;Цель войны, присоединяющая все национальные территории.;X
+acquire_all_cores_AI_short;Освобождение всех нац. территорий;X
+acquire_all_cores_AI_setup;Освобождение всех нац. территорий;X
+acquire_all_cores_AI;Захват всех нац. территорий;X
+acquire_all_cores_AI_desc;Цель войны, присоединяющая все национальные территории.;X
 ;;X#TAKE STATE CB
 acquire_state;§B30§! Захват региона;X
 acquire_state_short;§B30§! Присоединение региона $STATE$;X
@@ -4560,6 +4578,10 @@ take_treaty_port_short;§B5§! Присоединение порта $STATE$;X
 take_treaty_port_setup;§B5§! Захватить порт $STATE$ у державы $RECIPIENT$.;X
 take_treaty_port_desc;Захват §Yкитайского порта§W, принадлежащего врагу.;X
 ;;X#TAKE STATE CHINA WARLORD CB
+acquire_state_warlord_AI;Объединение Китая;X
+acquire_state_warlord_AI_short;Присоединение региона $STATE$;X
+acquire_state_warlord_AI_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state_warlord_AI_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
 acquire_state_warlord;Объединение Китая;X
 acquire_state_warlord_short;Присоединение региона $STATE$;X
 acquire_state_warlord_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
@@ -20813,7 +20835,6 @@ WARDIALOG_SELECT_STATE;Выберите §Yрегион§W из списка справа.;X
 status_quo_desc;Попытка вмешательства в войну, дабы не допустить достижения любой из сторон своих §Yвоенных целей§W.;X
 add_to_sphere_desc;Расширение свой §Yсферы влияния§W на эту державу.;X
 take_from_sphere_desc;Исключение страны из §Yсферы влияния§W другой державы с включением ее в нашу сферу.;X
-acquire_core_state_desc;Захват вражеского §Yрегиона§W, в котором находятся наши §Yнациональные провинции§W.;X
 place_in_the_sun_desc;Захват §Yколониальной области§W, принадлежащей врагу.;X
 cut_down_to_size_desc;Заставить §Yдержаву§W выплатить нам репарации, а также установить "структуру армии" на уровень §Yдемилитаризация§!.;X
 free_peoples_desc;Освобождение §Yстраны§W от власти её угнетателей.\n\n§YЭта цель войны снижает стоимость региона по ОП на 25%.§!;X
