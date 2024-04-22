@@ -600,37 +600,25 @@ political_decisions = {
 				tag = GER
 				tag = NGF
 			}
-			owns = 578
-			owns = 574
-			owns = 575
-			owns = 541
-			owns = 554
-			owns = 558
-			owns = 582
 			NOT = {
 				has_global_flag = ruhr_boom_has_happened
 			}
 			NOT = { has_country_flag = hide_all_decs_flag }
-			year = 1865
+			year = 1860
+			war = no
 		}
 		
 		allow = {
 			market_structure = 1
 			organized_factories = 1
 			early_railroad = 1
-			year = 1875
+			year = 1870
 		}
 		
 		effect = {
-			578 = { state_scope = { any_owned = { add_province_modifier = { name = ruhr_boom duration = 3650 } } } }
-			574 = { state_scope = { any_owned = {add_province_modifier = { name = ruhr_boom duration = 3650 } } } }
-			575 = { state_scope = { any_owned = {add_province_modifier = { name = ruhr_boom duration = 3650 } } } }
-			541 = { state_scope = { any_owned = {add_province_modifier = { name = ruhr_boom duration = 3650 } } } }
-			558 = { state_scope = { any_owned = {add_province_modifier = { name = ruhr_boom duration = 3650 } } } }
-			582 = { state_scope = { any_owned = {add_province_modifier = { name = ruhr_boom duration = 3650 } } } }
-			554 = { state_scope = { any_owned = {add_province_modifier = { name = ruhr_boom duration = 3650 } } } }
-			
+			set_country_flag = can_ruhr_boom_flag
 			set_global_flag = ruhr_boom_has_happened
+			CUSTOM_TOOLTIP_RUHRBOOM = { }
 		}
 	}
 }
