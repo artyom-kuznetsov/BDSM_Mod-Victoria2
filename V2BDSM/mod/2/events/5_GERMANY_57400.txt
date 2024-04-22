@@ -16,8 +16,9 @@ country_event = { # SOUTH GERMANS ANNEX TO NGF
 		}
 		primary_culture = south_german
 		NOT = { tag = SGF tag = KUK tag = AUS }
-		NGF = {
-			owns = 43
+		OR = {
+			NGF = { owns = 43 }
+			NGF = { revolution_n_counterrevolution = 1 }
 		}
 		OR = {
 			part_of_sphere = no

@@ -1,0 +1,375 @@
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110400
+	
+	trigger = {
+		tag = RUS
+		ai = yes
+		owns = 1194
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "noloc"
+		KAZ = {
+			add_casus_belli = {
+				target = RUS
+				type = conquest_small
+			}
+		}
+		KHI = {
+			add_casus_belli = {
+				target = RUS
+				type = conquest_small
+			}
+		}
+		BUK = {
+			add_casus_belli = {
+				target = RUS
+				type = conquest
+			}
+		}
+		TKM = {
+			add_casus_belli = {
+				target = RUS
+				type = establish_protectorate_casus_belli
+			}
+		}
+		KOK = {
+			add_casus_belli = {
+				target = RUS
+				type = demand_concession_casus_belli
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110401
+	
+	trigger = {
+		tag = RUS
+		ai = yes
+		owns = 1194
+		exists = BUK
+		war = no
+	}
+	
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		war = {
+			target = BUK
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = demand_reparations
+			}
+		}
+		badboy = -12
+	}
+}
+
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110402
+	
+	trigger = {
+		tag = RUS
+		ai = yes
+		owns = 1194
+		exists = KAZ
+		war = no
+	}
+	
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		war = {
+			target = KAZ
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = demand_reparations
+			}
+		}
+		badboy = -12
+	}
+}
+
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110403
+	
+	trigger = {
+		tag = RUS
+		ai = yes
+		owns = 1194
+		exists = KHI
+		war = no
+	}
+	
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		war = {
+			target = KHI
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = demand_reparations
+			}
+		}
+		badboy = -12
+	}
+}
+
+
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110404
+	
+	trigger = {
+		tag = RUS
+		ai = yes
+		owns = 1194
+		exists = KOK
+		war = no
+	}
+	
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		war = {
+			target = KOK
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = demand_reparations
+			}
+		}
+		badboy = -12
+	}
+}
+
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110405
+	
+	trigger = {
+		tag = MOD
+		ai = yes
+		nationalism_n_imperialism = 1
+		PAR = {
+			exists = yes
+			war = no
+		}
+		LUC = {
+			exists = yes
+			war = no
+		}
+		war = no
+	}
+	
+	option = {
+		name = "noloc"
+		inherit = LUC
+		inherit = PAR
+	}
+}
+
+# FRANCE ALGERIA
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110406
+	
+	trigger = {
+		tag = FRA
+		ai = yes
+		owns = 1700
+		exists = ALD
+		war = no
+		ideological_thought = 1
+	}
+	
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		war = {
+			target = ALD
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = demand_reparations
+			}
+		}
+		badboy = -12
+	}
+}
+
+# JAPAN KOREA
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110407
+	
+	trigger = {
+		tag = JAP
+		ai = yes
+		KOR = { exists = yes ai = yes part_of_sphere = no }
+		war = no
+		civilized = yes
+	}
+	
+	
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		war = {
+			target = KOR
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = demand_reparations
+			}
+		}
+		badboy = -12
+	}
+}
+
+# JAPAN MANCHURIA
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110408
+	
+	trigger = {
+		tag = JAP
+		ai = yes
+		nationalism_n_imperialism = 1
+		owns = 1620
+	}
+	
+	
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		MCK = { all_core = { add_core = THIS } }
+	}
+}
+
+# DUTCH EIC ACEH
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110409
+	
+	trigger = {
+		tag = DEI
+		ai = yes
+		owns = 1401
+	}
+
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		ATJ = { all_core = { add_core = THIS } }
+	}
+}
+
+# OTTOMAN PERSIA
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110410
+	
+	trigger = {
+		tag = TUR
+		ai = yes
+		nationalism_n_imperialism = 1
+		PER = {
+			exists = yes
+			ai = yes
+		}
+		war = no
+		NOT = { badboy = 20 }
+	}
+
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		PER = {
+			add_casus_belli = {
+				target = TUR
+				type = demand_concession_casus_belli
+			}
+		}
+		PER = {
+			add_casus_belli = {
+				target = TUR
+				type = acquire_state
+			}
+		}
+		PER = {
+			add_casus_belli = {
+				target = TUR
+				type = acquire_capital
+			}
+		}
+		badboy = 8
+	}
+}
+
+# INDONESIAN SIAM & PHILIPPINES
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110411
+	
+	trigger = {
+		tag = INA
+		ai = yes
+		owns = 1390
+		NOT = { badboy = 15 }
+	}
+
+	mean_time_to_happen = { months = 12 }
+	
+	option = {
+		name = "noloc"
+		1346 = { state_scope = { add_core = THIS } }
+		PHI = { all_core = { add_core = THIS } }
+		badboy = 10
+	}
+}
+

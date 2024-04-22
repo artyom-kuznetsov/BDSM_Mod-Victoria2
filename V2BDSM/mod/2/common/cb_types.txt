@@ -198,8 +198,7 @@ acquire_state_warlord_AI = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
-		THIS = { has_country_flag = chinese_warlord_flag ai = yes NOT = { has_global_flag = china_has_player_flag } }
-		
+		THIS = { has_country_flag = chinese_warlord_flag ai = yes }
 		has_country_flag = chinese_warlord_flag
 		
 		is_independant = yes
@@ -264,6 +263,7 @@ acquire_state_warlord_AI = {
 		}
 	}
 }
+
 
 acquire_state_china_japan = {
 	sprite_index = 20
@@ -800,7 +800,7 @@ risorgimento = {
 conquest_small = {
 	sprite_index = 2
 	is_triggered_only = yes
-	months = 12
+	months = 60
 	crisis = no
 	
 	can_use = {
@@ -2628,7 +2628,7 @@ demand_concession_casus_belli = {
 establish_protectorate_casus_belli = {
 	sprite_index = 7
 	is_triggered_only = yes
-	months = 0
+	months = 60
 	construction_speed = 1.2
 	crisis = no
 	

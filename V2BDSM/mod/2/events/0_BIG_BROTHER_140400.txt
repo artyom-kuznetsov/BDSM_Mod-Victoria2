@@ -76,6 +76,16 @@ country_event = {
 			}
 			random_owned = {
 				limit = {
+					NOT = { total_pops = 20000 }
+					total_pops = 5000
+				}
+				add_province_modifier = {
+					name = selector_pop_boost_modifier
+					duration = 730
+				}
+			}
+			random_owned = {
+				limit = {
 					NOT = { total_pops = 5000 }
 				}
 				add_province_modifier = {
