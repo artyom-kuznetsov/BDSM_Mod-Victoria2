@@ -41,6 +41,13 @@ country_event = {
 					pop_type = labourers
 				}
 			}
+			any_pop = {
+				limit = {
+					type = bureaucrats
+					is_accepted_culture = no
+				}
+				pop_type = farmers
+			}
 		}
 		
 		any_country = {
@@ -67,7 +74,7 @@ country_event = {
 			random_owned = {
 				limit = {
 					NOT = { total_pops = 20000 }
-					total_pops = 5000
+					total_pops = 10000
 				}
 				add_province_modifier = {
 					name = selector_pop_boost_modifier
@@ -76,7 +83,7 @@ country_event = {
 			}
 			random_owned = {
 				limit = {
-					NOT = { total_pops = 20000 }
+					NOT = { total_pops = 10000 }
 					total_pops = 5000
 				}
 				add_province_modifier = {
@@ -806,4 +813,190 @@ country_event = {
 		886 = { life_rating = -3 }
 	}
 	
+}
+
+province_event = {
+	title = "Selector_EvtName"
+	desc = "Selector_EvtDesc"
+	id = 140407
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Selector_EvtOptCancel"
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	option = {
+		name = "Selector_EvtOptScorch"
+		state_scope = {
+			any_owned = {
+				add_province_modifier = { name = scorched_earth_modifier duration = 730 }
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	option = {
+		name = "Selector_EvtOptAbandonCore"
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+		province_event = { id = 140408 }
+	}
+	
+	option = {
+		name = "Selector_EvtOptDestroyNavalBase"
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+		naval_base = -7
+	}
+	
+	option = {
+		name = "Selector_EvtOptImmigration"
+		state_scope = {
+			any_owned = {
+				add_province_modifier = { name = immigrator_modifier duration = -1 }
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	option = {
+		name = "Selector_EvtOptChangeResource"
+		owner = {
+			random_owned = {
+				limit = {
+					has_building = province_selector
+					OR = {
+						trade_goods = iron
+						trade_goods = coal
+						trade_goods = sulphur
+					}
+				}
+				province_event = { 
+					# Audax Validator "." Ignore_NEXT
+					id = 9565  
+					days = 0 
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "Selector_EvtOptShipbuildingState"
+		owner = {
+			any_owned = { remove_province_modifier = shipbuilding_state_modifier }
+		}
+		state_scope = {
+			any_owned = {
+				limit = {
+					is_coastal = yes
+				}
+				add_province_modifier = { name = shipbuilding_state_modifier duration = -1 }
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	option = {
+		name = "Selector_EvtOptMonumentActions"
+		add_core = WBK
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+		province_event = { id = 140409 }
+	}
+	
+}
+
+province_event = {
+	id = 140408
+	title = "Abandon_Core_EvtName"
+	desc = "Abandon_Core_EvtDesc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Abandon_Core_EvtOptConfirm"
+		state_scope = { any_owned = { remove_core = THIS } }
+	}
+	
+	option = {
+		name = "Abandon_Core_EvtOptCancel"
+	}
+}
+
+province_event = {
+	id = 140409
+	title = "MonumentActions_EvtName"
+	desc = "MonumentActions_EvtDesc"
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = "MonumentActions_EvtOptCancel"
+		remove_core = WBK
+	}
+	
+	option = {
+		name = "MonumentActions_EvtOptSpanishCarrack"
+		province_event = { id = 140410 }
+	}
+}
+
+province_event = {
+	id = 140410
+	title = "MonumentActions_EvtName"
+	desc = "MonumentActions_EvtDesc"
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = "MonumentActions_EvtOptCancel"
+		remove_core = WBK
+	}
+	
+	option = {
+		name = "MonumentActions_EvtOptSpanishCarrack_Place"
+		owner = {
+			random_owned = {
+				limit = {
+					is_core = WBK
+					is_colonial = no
+					is_core = THIS
+					owner = { 
+						has_country_flag = has_spanish_carrack_flag 
+						NOT = { any_owned_province = { has_province_modifier = spanish_carrack_prov_modifier } }
+					}
+				}
+				add_province_modifier = {
+					name = spanish_carrack_prov_modifier
+					duration = -1
+				}
+				owner = {
+					add_country_modifier = {
+						name = moved_monument_modifier
+						duration = 365
+					}
+				}
+				remove_core = WBK
+			}
+		}
+		owner = {
+			limit = {
+				any_owned_province = { has_province_modifier = spanish_carrack_prov_modifier }
+			}
+			CUSTOM_TOOLTIP_MONUMENT_ALREADY_PLACED = { }
+		}
+	}
+	
+	option = {
+		name = "MonumentActions_EvtOptSpanishCarrack_Hide"
+		owner = {
+			any_owned = { remove_province_modifier = spanish_carrack_prov_modifier }
+		}
+		CUSTOM_TOOLTIP_MONUMENT_HIDE = { }
+		remove_core = WBK
+	}
 }

@@ -1,189 +1,189 @@
 political_decisions = {
-	selector_select_all_dec = {
-		alert = no
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { 
-				any_owned_province = { 
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector 
-				}
-			}
-			ai = no
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			any_owned = {
-				limit = {
-					NOT = { 
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-					}
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = 1
-			}
-		}
-	}
-	reset_province_selector_dec = {
-		alert = yes
-		potential = {
-			ai = no
-			any_owned_province = { 
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector 
-			}
-			NOT = { has_country_flag = hide_all_decs_flag }
-		}	
-		allow = {
-			
-		}
-		effect = {
-			any_owned = {
-				limit = {
-					has_building = province_selector
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-		}
-	}
-	selector_scorched_earth_dec = {
-		alert = no
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-			any_owned_province = { 
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-			}
-		}
-		allow = {
-			any_owned_province = {
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-				controlled_by = THIS
-				NOT = {
-					has_province_modifier = scorched_earth_modifier
-				}
-			}
-			#war = yes
-		}
-		effect = {
-			any_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-					NOT = {
-						has_province_modifier = scorched_earth_modifier
-					}
-					controlled_by = THIS
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = { name = scorched_earth_modifier duration = 730 }
-					}
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-		}
-	}
-	selector_revokecores_dec = {
-		alert = no
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-			any_owned_province = { 
-				is_core = THIS
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-			}
-		}
-		allow = {
-		}
-		effect = {
-			any_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-					is_core = THIS
-				}
-				remove_core = THIS
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-		}
-	}
-	selector_destroy_navalbase_dec = {
-		alert = no
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-			any_owned_province = { 
-				is_core = THIS
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-				has_building = naval_base
-			}
-		}
-		allow = {
-		}
-		effect = {
-			random_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-				has_building = naval_base
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-				naval_base = -7
-			}
-		}
-	}
-	selector_removebureaucrats_dec = {
-		alert = no
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-			any_owned_province = { 
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-			}
-		}
-		allow = {
-			any_owned_province = {
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-				controlled_by = THIS
-			}
-			money = 50000
-		}
-		effect = {
-			money = -50000
-			random_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-				}
-				state_scope = {
-					any_pop = {
-						limit = {
-							NOT = { is_accepted_culture = yes }
-							type = bureaucrats
-						}
-						reduce_pop = 0.01
-					}
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-		}
-	}
+	#selector_select_all_dec = {
+	#	alert = no
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		NOT = { 
+	#			any_owned_province = { 
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector 
+	#			}
+	#		}
+	#		ai = no
+	#	}
+	#	
+	#	allow = {
+	#	}
+	#	
+	#	effect = {
+	#		any_owned = {
+	#			limit = {
+	#				NOT = { 
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector
+	#				}
+	#			}
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = 1
+	#		}
+	#	}
+	#}
+	#reset_province_selector_dec = {
+	#	alert = yes
+	#	potential = {
+	#		ai = no
+	#		any_owned_province = { 
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector 
+	#		}
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#	}	
+	#	allow = {
+	#		
+	#	}
+	#	effect = {
+	#		any_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#			}
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#		}
+	#	}
+	#}
+	#selector_scorched_earth_dec = {
+	#	alert = no
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		ai = no
+	#		any_owned_province = { 
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#		}
+	#	}
+	#	allow = {
+	#		any_owned_province = {
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#			controlled_by = THIS
+	#			NOT = {
+	#				has_province_modifier = scorched_earth_modifier
+	#			}
+	#		}
+	#		#war = yes
+	#	}
+	#	effect = {
+	#		any_owned = {
+	#			limit = {
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector
+	#				NOT = {
+	#					has_province_modifier = scorched_earth_modifier
+	#				}
+	#				controlled_by = THIS
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = { name = scorched_earth_modifier duration = 730 }
+	#				}
+	#			}
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#		}
+	#	}
+	#}
+	#selector_revokecores_dec = {
+	#	alert = no
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		ai = no
+	#		any_owned_province = { 
+	#			is_core = THIS
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#		}
+	#	}
+	#	allow = {
+	#	}
+	#	effect = {
+	#		any_owned = {
+	#			limit = {
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector
+	#				is_core = THIS
+	#			}
+	#			remove_core = THIS
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#		}
+	#	}
+	#}
+	#selector_destroy_navalbase_dec = {
+	#	alert = no
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		ai = no
+	#		any_owned_province = { 
+	#			is_core = THIS
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#			has_building = naval_base
+	#		}
+	#	}
+	#	allow = {
+	#	}
+	#	effect = {
+	#		random_owned = {
+	#			limit = {
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector
+	#			has_building = naval_base
+	#			}
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#			naval_base = -7
+	#		}
+	#	}
+	#}
+	#selector_removebureaucrats_dec = {
+	#	alert = no
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		ai = no
+	#		any_owned_province = { 
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#		}
+	#	}
+	#	allow = {
+	#		any_owned_province = {
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#			controlled_by = THIS
+	#		}
+	#		money = 50000
+	#	}
+	#	effect = {
+	#		money = -50000
+	#		random_owned = {
+	#			limit = {
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector
+	#			}
+	#			state_scope = {
+	#				any_pop = {
+	#					limit = {
+	#						NOT = { is_accepted_culture = yes }
+	#						type = bureaucrats
+	#					}
+	#					reduce_pop = 0.01
+	#				}
+	#			}
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#		}
+	#	}
+	#}
 	#selector_pop_boost_dec = {
 	#	alert = yes
 	#	potential = {
@@ -221,44 +221,44 @@ political_decisions = {
 	#		}
 	#	}
 	#}
-	selector_target_immigration_dec = {
-		alert = yes
-		potential = {
-			ai = no
-			NOT = { has_country_flag = hide_all_decs_flag }
-			any_owned_province = { 
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-				is_colonial = no
-			}
-		}
-		
-		allow = {
-			NOT = {
-				any_owned_province = { 
-					has_province_modifier = immigrator_modifier
-				}
-			}
-		}
-		
-		effect = {
-			random_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-					NOT = { has_province_modifier = immigrator_modifier }
-					is_colonial = no
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = { name = immigrator_modifier duration = -1 }
-					}
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-		}
-	}
+	#selector_target_immigration_dec = {
+	#	alert = yes
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		any_owned_province = { 
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#			is_colonial = no
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		NOT = {
+	#			any_owned_province = { 
+	#				has_province_modifier = immigrator_modifier
+	#			}
+	#		}
+	#	}
+	#	
+	#	effect = {
+	#		random_owned = {
+	#			limit = {
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector
+	#				NOT = { has_province_modifier = immigrator_modifier }
+	#				is_colonial = no
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = { name = immigrator_modifier duration = -1 }
+	#				}
+	#			}
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#		}
+	#	}
+	#}
 	selector_cancel_immigration_dec = {
 		alert = no
 		potential = {
@@ -278,164 +278,163 @@ political_decisions = {
 			}
 		}
 	}
-	selector_change_mine_dec = {
-		potential = {
-			ai = no
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = deciding_flag }
-			any_owned_province = {
-				has_building = province_selector
-				OR = {
-					trade_goods = iron
-					trade_goods = coal
-					trade_goods = sulphur
-				}
-			}
-		}	
-		allow = {
-			any_owned_province = {
-				has_building = province_selector
-				OR = {
-					trade_goods = iron
-					trade_goods = coal
-					trade_goods = sulphur
-				}
-			}
-			NOT = { has_country_modifier = selector_change_mine_cooldown }
-		}
-		effect = {
-			set_country_flag = deciding_flag
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					OR = {
-						trade_goods = iron
-						trade_goods = coal
-						trade_goods = sulphur
-					}
-				}
-				province_event = { 
-					# Audax Validator "." Ignore_NEXT
-					id = 9565  
-					days = 0 
-				}
-			}
-			add_country_modifier = {
-				name = selector_change_mine_cooldown
-				duration = 180
-			}
-		}
-	}
-	selector_place_spanish_carrack_dec = {
-		alert = yes
-		potential = {
-			ai = no
-			NOT = { has_country_flag = hide_all_decs_flag }
-			has_country_flag = has_spanish_carrack_flag
-			NOT = {
-				any_owned_province = { 
-					has_province_modifier = spanish_carrack_prov_modifier
-				}
-			}
-		}
-		
-		allow = {
-			any_owned_province = {
-				has_building = province_selector
-				is_colonial = no
-				is_core = THIS
-			}
-			war = no
-		}
-		
-		effect = {
-			random_owned = {
-				limit = {
-					has_building = province_selector
-					is_colonial = no
-					is_core = THIS
-				}
-				add_province_modifier = {
-					name = spanish_carrack_prov_modifier
-					duration = -1
-				}
-			}
-			add_country_modifier = {
-				name = moved_monument_modifier
-				duration = 365
-			}
-		}
-	}
-	selector_hide_spanish_carrack_dec = {
-		alert = yes
-		potential = {
-			ai = no
-			NOT = { has_country_flag = hide_all_decs_flag }
-			has_country_flag = has_spanish_carrack_flag
-			any_owned_province = { 
-				has_province_modifier = spanish_carrack_prov_modifier
-				has_building = province_selector
-			}
-		}
-		
-		allow = {
-			war = no
-		}
-		
-		effect = {
-			any_owned = {
-				remove_province_modifier = spanish_carrack_prov_modifier
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-		}
-	}
-	select_shipbuilding_state_dec = {
-		alert = yes
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-			any_owned_province = { 
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-			}
-		}
-		allow = {
-			any_owned_province = {
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
-				controlled_by = THIS
-				is_coastal = yes
-				NOT = {
-					has_province_modifier = shipbuilding_state_modifier
-				}
-			}
-			money = 100000
-			#war = yes
-		}
-		effect = {
-			any_owned = {
-				remove_province_modifier = shipbuilding_state_modifier
-			}
-			random_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-					is_coastal = yes
-					NOT = {
-						has_province_modifier = shipbuilding_state_modifier
-					}
-					controlled_by = THIS
-				}
-				state_scope = {
-					any_owned = {
-						add_province_modifier = { name = shipbuilding_state_modifier duration = -1 }
-					}
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-			money = -100000
-		}
-	}
+	#selector_change_mine_dec = {
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		NOT = { has_country_flag = deciding_flag }
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			OR = {
+	#				trade_goods = iron
+	#				trade_goods = coal
+	#				trade_goods = sulphur
+	#			}
+	#		}
+	#	}	
+	#	allow = {
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			OR = {
+	#				trade_goods = iron
+	#				trade_goods = coal
+	#				trade_goods = sulphur
+	#			}
+	#		}
+	#		NOT = { has_country_modifier = selector_change_mine_cooldown }
+	#	}
+	#	effect = {
+	#		set_country_flag = deciding_flag
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				OR = {
+	#					trade_goods = iron
+	#					trade_goods = coal
+	#					trade_goods = sulphur
+	#				}
+	#			}
+	#			province_event = { 
+	#				# Audax Validator "." Ignore_NEXT
+	#				id = 9565  
+	#				days = 0 
+	#			}
+	#		}
+	#		add_country_modifier = {
+	#			name = selector_change_mine_cooldown
+	#			duration = 180
+	#		}
+	#	}
+	#}
+	#selector_place_spanish_carrack_dec = {
+	#	alert = yes
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		has_country_flag = has_spanish_carrack_flag
+	#		NOT = {
+	#			any_owned_province = { 
+	#				has_province_modifier = spanish_carrack_prov_modifier
+	#			}
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		any_owned_province = {
+	#			has_building = province_selector
+	#			is_colonial = no
+	#			is_core = THIS
+	#		}
+	#		war = no
+	#	}
+	#	
+	#	effect = {
+	#		random_owned = {
+	#			limit = {
+	#				has_building = province_selector
+	#				is_colonial = no
+	#				is_core = THIS
+	#			}
+	#			add_province_modifier = {
+	#				name = spanish_carrack_prov_modifier
+	#				duration = -1
+	#			}
+	#		}
+	#		add_country_modifier = {
+	#			name = moved_monument_modifier
+	#			duration = 365
+	#		}
+	#	}
+	#}
+	#selector_hide_spanish_carrack_dec = {
+	#	alert = yes
+	#	potential = {
+	#		ai = no
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		has_country_flag = has_spanish_carrack_flag
+	#		any_owned_province = { 
+	#			has_province_modifier = spanish_carrack_prov_modifier
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		war = no
+	#	}
+	#	
+	#	effect = {
+	#		any_owned = {
+	#			remove_province_modifier = spanish_carrack_prov_modifier
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#		}
+	#	}
+	#}
+	#select_shipbuilding_state_dec = {
+	#	alert = yes
+	#	potential = {
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		ai = no
+	#		any_owned_province = { 
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#		}
+	#	}
+	#	allow = {
+	#		any_owned_province = {
+	#			# Audax Validator "." Ignore_NEXT
+	#			has_building = province_selector
+	#			controlled_by = THIS
+	#			is_coastal = yes
+	#			NOT = {
+	#				has_province_modifier = shipbuilding_state_modifier
+	#			}
+	#		}
+	#		money = 100000
+	#		#war = yes
+	#	}
+	#	effect = {
+	#		any_owned = {
+	#			remove_province_modifier = shipbuilding_state_modifier
+	#		}
+	#		random_owned = {
+	#			limit = {
+	#				# Audax Validator "." Ignore_NEXT
+	#				has_building = province_selector
+	#				is_coastal = yes
+	#				NOT = {
+	#					has_province_modifier = shipbuilding_state_modifier
+	#				}
+	#				controlled_by = THIS
+	#			}
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = { name = shipbuilding_state_modifier duration = -1 }
+	#				}
+	#			}
+	#			# Audax Validator "." Ignore_NEXT
+	#			province_selector = -1
+	#		}
+	#		money = -100000
+	#	}
+	#}
 }

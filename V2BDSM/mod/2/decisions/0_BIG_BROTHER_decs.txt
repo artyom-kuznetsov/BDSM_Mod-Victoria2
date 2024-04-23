@@ -1,4 +1,37 @@
 political_decisions = {
+	province_selector_event_dec = {
+		potential = {
+			tag = WBK
+			META_1 = {
+				owner = {
+					ai = no
+					any_owned_province = { has_building = province_selector }
+				}
+			}
+		}
+		allow = {
+		}
+		effect = {
+			any_country = {
+				limit = {
+					ai = no
+					any_owned_province = { has_building = province_selector }
+				}
+				random_owned = {
+					limit = {
+						has_building = province_selector
+					}
+					province_event = {
+						## Audax Validator "." Ignore_NEXT
+						id = 140407 days = 0
+					}
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+	
 	1836_setup_dec = {
 		potential = {
 			tag = WBK
@@ -1374,4 +1407,5 @@ political_decisions = {
 		}
 		
 	}
+	
 }
