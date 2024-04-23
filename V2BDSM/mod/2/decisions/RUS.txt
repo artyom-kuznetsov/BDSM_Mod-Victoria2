@@ -447,4 +447,29 @@ political_decisions = {
 		}
 	}
 	
+	volga_caspian_channel_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			owns = 979
+			owns = 1040
+			owns = 1045
+			NOT = { has_global_flag = volgo_caspian_channel_gflag }
+			cheap_iron = 1
+		}
+		
+		allow = {
+			cheap_steel = 1
+			steam_turbine = 1
+			money = 250000
+		}
+		
+		effect = {
+			prestige = 10
+			CUSTOM_TOOLTIP_CASPIAN_CANAL = { }
+			enable_canal = 20
+			money = -250000
+		}
+		
+	}
+	
 }

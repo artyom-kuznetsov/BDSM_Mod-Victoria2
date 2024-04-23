@@ -114,7 +114,16 @@ political_decisions = {
 				}
 				sub_unit = { type = clipper_transport value = current }
 			}
-			
+			random_owned = {
+				limit = {
+					owner = {
+						ai = yes
+					}
+				}
+				owner = {
+					add_country_modifier = { name = risorgimento_ai_modifier duration = 4000 }
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 1

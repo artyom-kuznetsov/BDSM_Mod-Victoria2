@@ -3,6 +3,8 @@ country_event = {
 	desc = "noloc"
 	id = 110400
 	
+	picture = "migration"
+	
 	trigger = {
 		tag = RUS
 		ai = yes
@@ -85,7 +87,7 @@ country_event = {
 	trigger = {
 		tag = RUS
 		ai = yes
-		owns = 1194
+		owns = 1181
 		exists = KAZ
 		war = no
 	}
@@ -321,7 +323,7 @@ country_event = {
 			ai = yes
 		}
 		war = no
-		NOT = { badboy = 20 }
+		NOT = { badboy = 0.8 }
 	}
 
 	mean_time_to_happen = { months = 12 }
@@ -346,7 +348,6 @@ country_event = {
 				type = acquire_capital
 			}
 		}
-		badboy = 8
 	}
 }
 
@@ -360,16 +361,153 @@ country_event = {
 		tag = INA
 		ai = yes
 		owns = 1390
-		NOT = { badboy = 15 }
+		NOT = { badboy = 0.6 }
 	}
 
+	fire_only_once = yes
+	
 	mean_time_to_happen = { months = 12 }
 	
 	option = {
 		name = "noloc"
-		1346 = { state_scope = { add_core = THIS } }
-		PHI = { all_core = { add_core = THIS } }
+		SIA_1346 = { add_core = THIS }
+		SPA_1463 = { add_core = THIS }
+		SPA_1460 = { add_core = THIS }
+		SPA_1455 = { add_core = THIS }
 		badboy = 10
+	}
+}
+
+# AI AFRICAN MINORS
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110412
+	
+	trigger = {
+		ai = yes
+		num_of_ports = 1
+		rank = 12
+		war = no
+		total_amount_of_ships = 15
+		nationalism_n_imperialism = 1
+		BEN = {
+			exists = yes
+			war = no
+		}
+	}
+
+	mean_time_to_happen = { 
+		months = 12 
+		modifier = {
+			factor = 0.1
+			BEN = {
+				in_sphere = THIS
+			}
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		
+		war = {
+			target = BEN
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = status_quo
+			}
+		}
+	}
+}
+
+# AI AFRICAN MINORS
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110413
+	
+	trigger = {
+		ai = yes
+		num_of_ports = 1
+		rank = 12
+		war = no
+		total_amount_of_ships = 15
+		nationalism_n_imperialism = 1
+		CNG = {
+			exists = yes
+			war = no
+		}
+	}
+
+	mean_time_to_happen = { 
+		months = 12 
+		modifier = {
+			factor = 0.1
+			CNG = {
+				in_sphere = THIS
+			}
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		
+		war = {
+			target = CNG
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = status_quo
+			}
+		}
+	}
+}
+
+# AI SPANISH MOROCCO
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	id = 110414
+	
+	trigger = {
+		ai = yes
+		tag = SPA
+		war = no
+		total_amount_of_ships = 15
+		MOR = {
+			exists = yes
+			war = no
+		}
+	}
+
+	mean_time_to_happen = { 
+		months = 24
+		modifier = {
+			factor = 0.1
+			MOR = {
+				in_sphere = THIS
+			}
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		
+		war = {
+			target = MOR
+			attacker_goal = {
+				casus_belli = conquest
+			}
+			
+			defender_goal = {
+				casus_belli = status_quo
+			}
+		}
 	}
 }
 
