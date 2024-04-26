@@ -182,3 +182,32 @@ province_event = {
 		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
 	}
 }
+# NOT FOR TURKEY LOSSY
+province_event = {
+	title = "generic_assimilated_EvtName"
+	desc = "tur_assimilate_EvtDesc"
+	id = 57505
+	
+	trigger = {
+		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
+		owner = { NOT = { tag = TUR } }
+		has_province_modifier = TUR_prov_assimilatABLE_lossy_prov_modifier
+		
+		any_pop = {
+			is_primary_culture = no
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "tur_assimilate_EvtOptA"
+		any_pop = { reduce_pop = 0.67 }
+		assimilate = yes
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 365 } }
+		remove_province_modifier = TUR_prov_assimilatABLE_lossy_prov_modifier
+		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+	}
+}

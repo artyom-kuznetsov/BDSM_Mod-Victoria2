@@ -1,0 +1,46 @@
+country_event = { # Caucasian War
+    id = 110500
+    title = "Caucasian_War_EvtName"
+    desc = "Caucasian_War_EvtDesc"
+    picture = "caucasian_war"
+
+    fire_only_once = yes
+
+    trigger = {
+        tag = RUS
+        NOT = {
+            exists = CIR
+            exists = DAG
+        }
+        owns = 1051
+        owns = 1055
+        owns = 1036
+    }
+
+    option = {
+        name = "Caucasian_War_EvtOptA"
+        prestige = 5
+        1051 = {
+            state_scope = {
+                any_owned = {
+                    add_province_modifier = { name = TUR_prov_assimilatABLE_lossy_prov_modifier duration = -1}
+                }
+            }
+        }
+        1055 = {
+            state_scope = {
+                any_owned = {
+                    add_province_modifier = { name = TUR_prov_assimilatABLE_lossy_prov_modifier duration = -1}
+                }
+            }
+        }
+        1036 = {
+            state_scope = {
+                any_owned = {
+                    add_province_modifier = { name = TUR_prov_assimilatABLE_lossy_prov_modifier duration = -1}
+                }
+            }
+        }
+        set_global_flag = circassian_war_ended_gflag
+    }
+}
