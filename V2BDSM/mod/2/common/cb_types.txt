@@ -198,9 +198,9 @@ acquire_state_warlord_AI = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
-		THIS = { has_country_flag = chinese_warlord_flag ai = yes }
+		THIS = { has_country_flag = chinese_warlord_flag ai = yes NOT = { tag = KOR } }
 		has_country_flag = chinese_warlord_flag
-		
+		ai = yes
 		is_independant = yes
 		any_owned_province = {
 			OR = {

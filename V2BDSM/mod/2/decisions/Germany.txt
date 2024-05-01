@@ -7,23 +7,49 @@ political_decisions = {
 				exists = GER
 				exists = NGF
 			}
-			year = 1837
 		}	
 		allow = {
-			GER = {
-				all_core = {
-					OR = {
-						OR = {
-							owned_by = THIS
-							owner = {
+			OR = {
+				AND = {
+					NOT = { year = 1840 }
+					GER = {
+						all_core = {
+							OR = {
 								OR = {
-									in_sphere = THIS
-									vassal_of = THIS
+									owned_by = THIS
+									owner = {
+										OR = {
+											in_sphere = THIS
+											vassal_of = THIS
+										}
+									}
+								}
+								NOT = {
+									culture = north_german
 								}
 							}
 						}
-						NOT = {
-							culture = north_german
+					}
+				}
+				AND = {
+					year = 1840
+					GER = {
+						all_core = {
+							OR = {
+								OR = {
+									owned_by = THIS
+									owner = {
+										OR = {
+											in_sphere = THIS
+											vassal_of = THIS
+										}
+									}
+								}
+								NOT = {
+									culture = north_german
+								}
+								is_core = SCA
+							}
 						}
 					}
 				}
@@ -475,9 +501,9 @@ political_decisions = {
 		effect = {
 			prestige = 10
 			2531 = {
-				change_province_name = "Фридрих-Вильгельмсхафен"
+				change_province_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 				state_scope = {
-					change_region_name = "Земля Кайзера Вильгельма"
+					change_region_name = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 				}
 			}
 			set_country_flag = wir_wollen_unseren_alten_kaiser_wilhelm_wiederhaben
