@@ -96,6 +96,32 @@ province_event = { # POLAND OIL EVENT
 	}
 }
 
+### GOLD ###
+
+province_event = { # POLAND OIL EVENT
+	id = 110202
+	title = "EVTNAME1100"
+	desc = "EVTDESC1100"
+	
+	trigger = {
+		owner = {
+			clean_coal = 1
+			experimental_railroad = 1
+		}
+		NOT = { trade_goods = gold }
+		province_id = 840		# N MANCHURIA
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = "EVTOPTA1100"
+		trade_goods = gold
+	}
+}
+
 
 
 

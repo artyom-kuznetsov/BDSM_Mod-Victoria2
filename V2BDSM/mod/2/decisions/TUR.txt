@@ -357,6 +357,11 @@ political_decisions = {
 					}
 				}
 			}
+			EGY_1745 = { change_region_name = "Каир (9 для TUR)" }
+			EGY_1751 = { change_region_name = "Александрия (9 для TUR)" }
+			EGY_1762 = { change_region_name = "Средний Египет (9 для TUR)" }
+			EGY_1746 = { change_region_name = "Синай (9 для TUR)" }
+			EGY_1771 = { change_region_name = "Верхний Египет (9 для TUR)" }
 		}
 	}
 	
@@ -472,7 +477,10 @@ political_decisions = {
 	# ANNEX ROMANIANS
 	integrate_moldavia_dec = {
 		potential = {
-			tag = TUR
+			OR = {
+				tag = TUR
+				tag = BYZ
+			}
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = integrate_moldavia_flag }
 			MOL = {

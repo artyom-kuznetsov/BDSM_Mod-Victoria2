@@ -3,7 +3,6 @@ country_event = {
 	id = 31100
 
 	trigger = {
-		tag = TUR
 		year = 1872
 		owns = 865 #Canakkale, where Troy is located
 		NOT = {
@@ -40,7 +39,10 @@ country_event = {
 country_event = {
 	id = 31101 #setup by GER33005
 	trigger = {
-		tag = TUR 
+		OR = {
+			tag = TUR 
+			tag = BYZ
+		}
 		war = no
 		year = 1903
 		owns = 926 #Baghdad
