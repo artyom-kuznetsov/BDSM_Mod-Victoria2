@@ -394,6 +394,7 @@ country_event = { # KURDISTAN RISE AFTER GREEKS ALLOWED
 	option = {
 		name = "kds_rising_EvtOptA"
 		CUSTOM_TOOLTIP_KURDISH_WAR = { }
+		set_country_flag = KDS_rebellion_flag
 		release = KDS
 		war = {
 			target = KDS
@@ -407,7 +408,7 @@ country_event = { # KURDISTAN RISE AFTER GREEKS ALLOWED
 		}
 		add_country_modifier = {
 			name = kds_rebellion_countdown_modifier
-			duration = 365
+			duration = 548
 		}
 		KDS = {
 			add_country_modifier = { name = rebel_country_modifier duration = -1 }
@@ -421,7 +422,31 @@ country_event = { # KURDISTAN RISE AFTER GREEKS ALLOWED
 		release_vassal = KDS
 		KDS = {
 			add_country_modifier = { name = rebel_country_modifier duration = -1 }
+			add_accepted_culture = armenian
+			add_accepted_culture = turkish
 		}
+	}
+}
+
+
+country_event = { # KURDISTAN FORCE PEACE
+	title = "kds_rising_EvtName"
+	desc = "kds_peace_EvtDesc"
+	id = 57510
+	
+	picture = "kurds"
+	
+	trigger = {
+		has_country_flag = KDS_rebellion_flag
+		NOT = { has_country_modifier = kds_rebellion_countdown_modifier }
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "kds_peace_EvtOptA"
+		end_war = KDS
+		KDS = { all_core = { remove_core = THIS } }
 	}
 }
 
