@@ -506,5 +506,44 @@ political_decisions = {
 			}
 		}
 	}
-	
+	# TRIUMPH OVER ANATOLIA
+	anatolia_triumph_dec = {
+		potential = {
+			tag = BYZ
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = anatolia_triumph_flag }
+		}
+
+		allow = {
+			owns = 856
+			owns = 890
+		}
+
+		effect = {
+			prestige = 10
+			set_country_flag = anatolia_triumph_flag
+			add_accepted_culture = kurdish
+			add_accepted_culture = armenian
+		}
+	}
+	# TRIUMPH OVER EGYPT
+	egypt_triumph_dec = {
+		potential = {
+			tag = BYZ
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = egypt_triumph_flag }
+		}
+
+		allow = {
+			owns = 1745
+			owns = 1751
+		}
+
+		effect = {
+			prestige = 10
+			set_country_flag = egypt_triumph_flag
+			add_accepted_culture = kurdish
+			add_accepted_culture = armenian
+		}
+	}
 }
