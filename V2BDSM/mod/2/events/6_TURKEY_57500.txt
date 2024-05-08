@@ -561,6 +561,7 @@ country_event = { # ANARCHY
 		}
 		add_country_modifier = { name = anarchy_cmodifier duration = -1 }
 		leadership = -60
+		prestige = -50
 		any_country = {
 			limit = {
 				vassal_of = THIS
@@ -695,14 +696,18 @@ country_event = { # BYZANTINES
 		858 = { change_province_name = "Агатополь" }
 		881 = { change_province_name = "Гераклея" }
 		869 = { change_province_name = "Смирна" }
+		TUR_869 = { change_region_name = "Смирна" }
 		861 = { change_province_name = "Никомедия" }
 		863 = { change_province_name = "Никея" }
+		TUR_863 = { change_region_name = "Никея" }
 		865 = { change_province_name = "Абидос" }
 		876 = { change_province_name = "Анкира" }
+		TUR_876 = { change_region_name = "Анкира" }
 		868 = { change_province_name = "Дорилей" }
 		870 = { change_province_name = "Пергам" }
 		871 = { change_province_name = "Аморион" }
 		873 = { change_province_name = "Иконий" }
+		TUR_873 = { change_region_name = "Киликия" }
 		872 = { change_province_name = "Эфес" }
 		874 = { change_province_name = "Лаодикия" }
 		895 = { change_province_name = "Селевкия" }
@@ -721,6 +726,7 @@ country_event = { # BYZANTINES
 		GRE = { all_core = { add_core = THIS } }
 		CAU = { all_core = { add_core = THIS } }
 		WAL = { all_core = { add_core = THIS } }
+		prestige = 10
 		SER = { 
 			all_core = { 
 				limit = {
@@ -736,3 +742,92 @@ country_event = { # BYZANTINES
 	}
 }
 
+# TRIUMPH OVER EGYPT 
+province_event = {
+	title = "generic_assimilated_EvtName"
+	desc = "tur_assimilate_EvtDesc"
+	id = 57517
+	
+	trigger = {
+		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
+		owner = { tag = BYZ has_country_flag = egypt_triumph_flag }
+		is_core = EGY
+		any_pop = {
+			is_primary_culture = no
+		}
+		NOT = { has_province_modifier = TUR_prov_assimilatED_prov_modifier }
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "tur_assimilate_EvtOptA"
+		assimilate = yes
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 90 } }
+		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+	}
+}
+
+# BYZ BALKAN TRIUMP ASSIM
+province_event = {
+	title = "generic_assimilated_EvtName"
+	desc = "tur_assimilate_EvtDesc"
+	id = 57518
+	
+	trigger = {
+		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
+		owner = { tag = BYZ }
+		is_core = BUL
+		owner = { has_country_flag = balkan_triumph_flag }
+		any_pop = {
+			is_primary_culture = no
+		}
+		NOT = { has_province_modifier = TUR_prov_assimilatED_prov_modifier }
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "tur_assimilate_EvtOptA"
+		assimilate = yes
+		any_pop = { literacy = 0.1 }
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 90 } }
+		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+	}
+}
+
+# BYZ TUR ASSIM
+province_event = {
+	title = "generic_assimilated_EvtName"
+	desc = "tur_assimilate_EvtDesc"
+	id = 57520
+	
+	trigger = {
+		NOT = { owner = { has_country_modifier = TUR_assimilation_cooldown_modifier } }
+		owner = { tag = BYZ }
+		is_core = TUR
+		any_pop = {
+			is_primary_culture = no
+		}
+		NOT = { has_province_modifier = TUR_prov_assimilatED_prov_modifier }
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	option = {
+		name = "tur_assimilate_EvtOptA"
+		assimilate = yes
+		any_pop = { literacy = 0.1 }
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 90 } }
+		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
+		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+	}
+}
