@@ -1281,64 +1281,38 @@ country_event = {
 	}
 }
 
-#province_event = {
-#	id = 57094
-#	title = "pop_growth_EvtName"
-#	desc = "pop_growth_EvtDesc"
-#	picture = "migration"
-#	
-#	trigger = {
-#		owner = {
-#			medicine = 1
-#		}
-#		NOT = { 
-#			total_pops = 20000 
-#			has_province_modifier = selector_pop_boost_modifier
-#			owner = {
-#				has_country_modifier = pop_boost_cooldown_modifier
-#			}
-#		}
-#	}
-#	
-#	mean_time_to_happen = {
-#		months = 12
-#	}
-#	
-#	option = {
-#		name = "pop_growth_EvtAccept"
-#		owner = {
-#			add_country_modifier = {
-#				name = pop_boost_cooldown_modifier
-#				duration = 182
-#			}
-#		}
-#		state_scope = {
-#			any_owned = {
-#				limit = {
-#					NOT = { total_pops = 20000 }
-#				}
-#				add_province_modifier = {
-#					name = selector_pop_boost_modifier
-#					duration = 730
-#				}
-#			}
-#		}
-#		state_scope = {
-#			any_owned = {
-#				limit = {
-#					NOT = { total_pops = 5000 }
-#				}
-#				add_province_modifier = {
-#					name = selector_pop_boost_2_modifier
-#					duration = 730
-#				}
-#			}
-#		}
-#	}
-#	
-#	option = {
-#		name = "pop_growth_EvtDecline"
-#	}
-#}
+country_event = {
+	id = 57094
+	title = "CapSupply_Depot_EvtName"
+	desc = "CapSupply_Depot_EvtDesc"
+	picture = "armament_depot"
+
+
+	trigger = {
+		OR = {
+			capital_scope = {
+				NOT = { has_province_modifier = capital_supply_depot_pmodifier }
+			}
+			any_owned_province = {
+				is_capital = no
+				has_province_modifier = capital_supply_depot_pmodifier
+			}
+		}
+	}
+
+	option = {
+		name = "CapSupply_Depot_EvtOptA"
+		any_owned = {
+			limit = {
+				is_capital = no
+				has_province_modifier = capital_supply_depot_pmodifier
+			}
+			remove_province_modifier = capital_supply_depot_pmodifier
+		}
+		capital_scope = {
+			add_province_modifier = { name = capital_supply_depot_pmodifier duration = -1 }
+		}
+	}
+}
 
 
