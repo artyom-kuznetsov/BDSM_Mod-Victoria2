@@ -832,6 +832,14 @@ country_event = {
 		name = "Annex_Norway_EvtOptA"
 		prestige = 5
 		NOR = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
 			annex_to = THIS
 			all_core = {
 				add_core = THIS

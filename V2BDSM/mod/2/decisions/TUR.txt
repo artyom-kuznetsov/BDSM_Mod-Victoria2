@@ -342,6 +342,14 @@ political_decisions = {
 		effect = {
 			set_country_flag = annex_egypt_flag
 			EGY = {
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
 				annex_to = THIS
 			}
 			badboy = 5
