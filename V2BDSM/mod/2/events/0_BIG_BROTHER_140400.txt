@@ -901,9 +901,9 @@ province_event = {
 					id = 9565  
 					days = 0 
 				}
-				remove_core = WBK
 			}
 		}
+		remove_core = WBK
 	}
 	
 	option = {
@@ -946,6 +946,15 @@ province_event = {
 		province_event = { id = 140409 }
 	}
 	
+	option = {
+		name = "Selector_EvtOptRemAllSelectors"
+		owner = {
+			any_owned = {
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
 }
 
 province_event = {
@@ -981,6 +990,7 @@ province_event = {
 	option = {
 		name = "MonumentActions_EvtOptSpanishCarrack"
 		province_event = { id = 140410 }
+		remove_core = WBK
 	}
 }
 
@@ -1020,7 +1030,6 @@ province_event = {
 						duration = 365
 					}
 				}
-				remove_core = WBK
 			}
 		}
 		owner = {
@@ -1029,6 +1038,7 @@ province_event = {
 			}
 			CUSTOM_TOOLTIP_MONUMENT_ALREADY_PLACED = { }
 		}
+		remove_core = WBK
 	}
 	
 	option = {
