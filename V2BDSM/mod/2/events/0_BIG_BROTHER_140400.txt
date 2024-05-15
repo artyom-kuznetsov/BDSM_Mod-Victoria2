@@ -885,10 +885,11 @@ province_event = {
 	}
 	option = {
 		name = "Selector_EvtOptChangeResource"
+		add_core = WBK
 		owner = {
 			random_owned = {
 				limit = {
-					has_building = province_selector
+					is_core = WBK
 					OR = {
 						trade_goods = iron
 						trade_goods = coal
@@ -900,6 +901,7 @@ province_event = {
 					id = 9565  
 					days = 0 
 				}
+				remove_core = WBK
 			}
 		}
 	}
@@ -920,6 +922,22 @@ province_event = {
 		# Audax Validator "." Ignore_NEXT
 		province_selector = -1
 	}
+	
+	option = {
+		name = "Selector_EvtOptSupplyDepot"
+		owner = {
+			any_owned = {
+				remove_province_modifier = generic_supply_depot_pmodifier
+			}
+		}
+		add_province_modifier = {
+			name = generic_supply_depot_pmodifier
+			duration = -1
+		}
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	
 	option = {
 		name = "Selector_EvtOptMonumentActions"
 		add_core = WBK
