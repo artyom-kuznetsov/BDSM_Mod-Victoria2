@@ -1,0 +1,28 @@
+#######################
+Warning Before Use!
+#######################
+	The way this tool edits and saves the /history/pops files is not through changing specific lines in the file, rather, it reconstructs the whole file from scratch destroying anything that is not related to the pop data. If you are the kind of person to write a lot of comments alongside the pop data, beware that this tool will ERASE your precious notes.
+#######################
+About The Mod directory
+#######################
+	This tool requires the Root Folder path of your mod. After you piked your directory, the /config/config.txt file will save the path down. You can either enter a new path in the program text bar or edit the config file directly if you want to change the data source.
+#######################
+About Shortcut Keys
+#######################
+	After selecting a data row or a data cell, 
+		pressing Alt+D will duplicate the selected pop
+		pressing Alt+R will remove the selected pop
+		pressing Alt+C will copy the selected pop
+		pressing Alt+V will paste the copied pop as a new pop
+	At any time, pressing Ctrl+S will save your changes.
+	###If you move to another province before manually saving, your changes will be lost###
+	copied pop information will not be lost
+#######################
+About Selecting Multiple Provinces
+#######################
+	You can select multiple provinces in the province list. The pie charts will calculate all provinces' combined statistics for visualization. But the pop editing interface will only show the first province in the collection.
+#######################
+"This province does not have an entrance!"
+#######################
+	When you see this warning, it means that the /history/pops files do not even mention the province's id at all(sea provinces for instance). You need to at least provide an id in any of the /history/pops files for enabling the editing.
+		Sample: 2434 = {}
