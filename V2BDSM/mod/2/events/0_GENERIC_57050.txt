@@ -899,107 +899,11 @@ country_event = {
 	id = 57071
 	
 	trigger = {
-		civilized = yes
-		OR = {
-			literacy = 0.4
-			AND = {
-				literacy = 0.3
-				year = 1870
-			}
-		}
-		experimental_railroad = 1
-		freedom_of_trade = 1
-		NOT = {
-			has_country_flag = industrial_revolution_flag
-		}
+		invention = industrial_revolution
 	}
 	
 	immediate = {
 		set_country_flag = industrial_revolution_flag
-	}
-	
-	mean_time_to_happen = {
-		months = 60
-		modifier = {
-			factor = 0.5
-			year = 1860
-		}
-		modifier = {
-			factor = 0.5
-			year = 1870
-		}
-		modifier = {
-			factor = 0.8
-			has_country_flag = industrial_revolution_more_likely_flag
-		}
-		modifier = {
-			factor = 0.8
-			stock_exchange = 1
-		}
-		modifier = {
-			factor = 0.8
-			early_railroad = 1
-		}
-		modifier = {
-			factor = 0.8
-			clean_coal = 1
-		}
-		modifier = {
-			factor = 0.8
-			practical_steam_engine = 1
-		}
-		modifier = {
-			factor = 0.8
-			high_n_low_pressure_steam_engines = 1
-		}
-		modifier = {
-			factor = 0.8
-			steam_turbine = 1
-		}
-		modifier = {
-			factor = 0.8
-			mechanical_production = 1
-		}
-		modifier = {
-			factor = 0.8
-			interchangeable_parts = 1
-		}
-		modifier = {
-			factor = 0.8
-			semi_automatization = 1
-		}
-		modifier = {
-			factor = 0.8
-			cheap_iron = 1
-		}
-		modifier = {
-			factor = 0.8
-			cheap_steel = 1
-		}
-		modifier = {
-			factor = 0.8
-			literacy = 0.5
-		}
-		modifier = {
-			factor = 0.8
-			literacy = 0.6
-		}
-		modifier = {
-			factor = 0.8
-			literacy = 0.7
-		}
-		modifier = {
-			factor = 0.8
-			literacy = 0.8
-		}
-		modifier = {
-			factor = 0.8
-			literacy = 0.9
-		}
-		modifier = {
-			factor = 0.5
-			industrial_score = 100
-		}
 	}
 	
 	option = {

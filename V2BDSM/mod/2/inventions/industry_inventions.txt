@@ -1,3 +1,100 @@
+#industrial revolution
+industrial_revolution_inv = {
+	limit = { ideological_thought = 1 }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 4
+			literacy = 0.50
+		}
+		modifier = {
+			factor = 2
+			literacy = 0.40
+		}
+		modifier = {
+			factor = 2
+			literacy = 0.30
+			year = 1870
+		}
+		modifier = {
+			factor = -100
+			NOT = { experimental_railroad = 1 }
+		}
+		modifier = {
+			factor = -100
+			NOT = { freedom_of_trade = 1 }
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.30
+			early_railroad = 1
+			year = 1870
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.30
+			clean_coal = 1
+			year = 1870
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.30
+			practical_steam_engine = 1
+			year = 1870
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.30
+			high_n_low_pressure_steam_engines = 1
+			year = 1870
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.30
+			steam_turbine = 1
+			year = 1870
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.30
+			mechanical_production = 1
+			year = 1870
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.40
+			early_railroad = 1
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.40
+			clean_coal = 1
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.40
+			practical_steam_engine = 1
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.40
+			high_n_low_pressure_steam_engines = 1
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.40
+			steam_turbine = 1
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.40
+			mechanical_production = 1
+		}
+	}
+	effect = {
+		core_pop_consciousness_modifier = 0.01
+	}
+}
 #combustion_engine
 daimlers_automobile = {
 	limit = { combustion_engine = 1 }
