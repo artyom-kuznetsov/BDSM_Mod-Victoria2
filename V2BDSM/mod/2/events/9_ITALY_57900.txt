@@ -35,6 +35,7 @@ country_event = { # MINOR GOOD RELATION ANNEX
 	trigger = {
 		is_culture_group = italian
 		ai = yes
+		
 		OR = {
 			SAR = {
 				OR = {
@@ -120,6 +121,27 @@ country_event = { # MINOR GOOD RELATION ANNEX
 		any_owned = {
 			# Audax Validator "." Ignore_NEXT
 			province_selector = -1
+		}
+		any_country = {
+			limit = {
+				OR = {
+					has_country_flag = is_ITA_player_flag
+					NOT = { has_global_flag = ITA_has_player_flag }
+				}
+				is_culture_group = italian
+				OR = {
+					AND = {
+						relation = {
+							who = THIS
+							value = 149
+						}
+						alliance_with = THIS
+					}
+					is_sphere_leader_of = THIS
+				}
+				GRE = { vassal_of = THIS }
+			}
+			create_vassal = GRE
 		}
 		any_country = {
 			limit = {
