@@ -350,11 +350,17 @@ promotion_chance =
 	### SLAVERY
 	modifier = {
 		factor = -0.1
-		country = { slavery = yes_slavery }
+		country = {
+			slavery = yes_slavery 
+			NOT = { has_country_flag = the_slavery_debate }
+		}
 	}
 	modifier = {
 		factor = -0.05
-		country = { slavery = freedom_of_womb }
+		country = { 
+			slavery = freedom_of_womb 
+			NOT = { has_country_flag = the_slavery_debate }
+		}
 	}
 	
 	# PENAL SYSTEM
@@ -427,9 +433,27 @@ demotion_chance =
 	}
 	
 	# MIDDLE STRATA
-	modifier = {
-		factor = 0.75
-		strata = middle
+	group = {
+		modifier = {
+			factor = 0.25
+			strata = middle
+			literacy = 0.3
+		}
+		modifier = {
+			factor = 0.25
+			strata = middle
+			literacy = 0.5
+		}
+		modifier = {
+			factor = 0.25
+			strata = middle
+			literacy = 0.7
+		}
+		modifier = {
+			factor = 0.25
+			strata = middle
+			literacy = 0.9
+		}
 	}
 	
 	### COLONIAL
@@ -505,27 +529,27 @@ demotion_chance =
 			not = { literacy = 0.6 }
 		}
 		modifier = {
-			factor = -0.02
+			factor = -0.03
 			not = { literacy = 0.5 }
 		}
 		modifier = {
-			factor = -0.02
+			factor = -0.03
 			not = { literacy = 0.4 }
 		}
 		modifier = {
-			factor = -0.02
+			factor = -0.04
 			not = { literacy = 0.3 }
 		}
 		modifier = {
-			factor = -0.02
+			factor = -0.04
 			not = { literacy = 0.2 }
 		}
 		modifier = {
-			factor = -0.02
+			factor = -0.05
 			not = { literacy = 0.15 }
 		}
 		modifier = {
-			factor = -0.02
+			factor = -0.05
 			not = { literacy = 0.1 }
 		}
 	}

@@ -392,6 +392,7 @@ political_decisions = {
 		effect = {
 			any_pop = {
 				consciousness = -1
+				militancy = 2
 			}
 			set_country_flag = house_gag_rule_enacted
 		}
@@ -417,6 +418,7 @@ political_decisions = {
 		effect = {
 			any_pop = {
 				consciousness = -2
+				militancy = 3
 			}
 			set_country_flag = clay_and_douglas_draft_enacted
 		}
@@ -442,6 +444,7 @@ political_decisions = {
 		effect = {
 			any_pop = {
 				consciousness = -2
+				militancy = 3
 			}
 			set_country_flag = corwin_amendment_enacted
 		}
@@ -470,6 +473,7 @@ political_decisions = {
 				}
 				any_pop = {
 					consciousness = -2
+					militancy = 3
 				}
 			}
 			set_country_flag = fugitive_slave_act_enacted
@@ -499,6 +503,7 @@ political_decisions = {
 				}
 				any_pop = {
 					consciousness = -3
+					militancy = 3
 				}
 			}
 			set_country_flag = nashville_convention_held
@@ -575,13 +580,20 @@ political_decisions = {
 				limit = {
 					is_slave = yes
 				}
-				any_pop = { consciousness = -2 }
+				any_pop = { 
+					consciousness = -2 
+					militancy = 3
+				}
 			}
 			any_state = {
 				limit = {
 					is_slave = no
 				}
-				any_pop = { consciousness = 1 }
+				any_pop = { 
+					consciousness = 1
+					militancy = 3
+				}
+				
 			}
 			set_country_flag = kansas_nebraska_act_acting
 		}
@@ -618,6 +630,7 @@ political_decisions = {
 				}
 				any_pop = {
 					consciousness = -2
+					militancy = 3
 				}
 			}
 			any_state = {
@@ -626,6 +639,7 @@ political_decisions = {
 				}
 				any_pop = {
 					consciousness = 1
+					militancy = 3
 				}
 			}
 			set_country_flag = wilmot_proviso_providing
