@@ -818,7 +818,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 100
+		months = 200
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -857,9 +857,12 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA16090"
-		add_province_modifier = {
-			name = knights_of_the_golden_circle
-			duration = 365
+		state_scope = { any_owned = {
+				add_province_modifier = {
+					name = knights_of_the_golden_circle
+					duration = 365
+				}
+			}
 		}
 	}
 	
@@ -896,7 +899,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 100 #1000
+		months = 200 #1000
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -935,9 +938,13 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA16100"
-		add_province_modifier = {
-			name = american_anti_slavery_society
-			duration = 365
+		state_scope = {
+			any_owned = {
+				add_province_modifier = {
+					name = american_anti_slavery_society
+					duration = 365
+				}
+			}
 		}
 		any_pop = {
 			militancy = 0.2 #2
@@ -1303,7 +1310,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 100 #800
+		months = 400 #800
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -1342,9 +1349,12 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA16150"
-		add_province_modifier = {
-			name = copperhead_democrats
-			duration = 365
+		state_scope = { any_owned = {
+				add_province_modifier = {
+					name = copperhead_democrats
+					duration = 365
+				}
+			}
 		}
 	}
 	
