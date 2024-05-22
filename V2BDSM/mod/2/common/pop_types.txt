@@ -395,6 +395,16 @@ promotion_chance =
 		}
 	}
 	
+	modifier = {
+		factor = 0.2
+		# Audax Validator "." Ignore_NEXT
+		NOT = { state_scope = { total_pops = 200000 } }
+	}	
+	modifier = {
+		factor = 0.1
+		# Audax Validator "." Ignore_NEXT
+		NOT = { state_scope = { total_pops = 100000 } }
+	}
 }
 
 demotion_chance = 
@@ -411,10 +421,10 @@ demotion_chance =
 	### QUICKER IF FACTORY UNEMPLOYMENT ON A NICE TRADE GOOD
 	group = {
 		modifier = {
-			factor = 0.5
+			factor = 0.25
 			unemployment = 0.2
 			strata = poor
-			literacy = 0.6
+			literacy = 0.5
 			location = {
 				OR = {
 					trade_goods= coal
@@ -430,7 +440,23 @@ demotion_chance =
 			factor = 0.5
 			unemployment = 0.2
 			strata = poor
-			literacy = 0.3
+			literacy = 0.35
+			location = {
+				OR = {
+					trade_goods= coal
+					trade_goods= iron
+					trade_goods= oil
+					trade_goods= precious_metal
+					trade_goods= market_goods
+					trade_goods= sulphur
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			unemployment = 0.2
+			strata = poor
+			literacy = 0.25
 			location = {
 				OR = {
 					trade_goods= coal
@@ -673,6 +699,18 @@ demotion_chance =
 		factor = -10
 		location = { NOT = { controlled_by = owner } }
 	}
+	
+	modifier = {
+		factor = 0.25
+		# Audax Validator "." Ignore_NEXT
+		NOT = { state_scope = { total_pops = 200000 } }
+	}
+	
+	modifier = {
+		factor = 0.25
+		# Audax Validator "." Ignore_NEXT
+		NOT = { state_scope = { total_pops = 100000 } }
+	}
 }
 
 #general migration chance mtth, same for all pops
@@ -741,6 +779,51 @@ migration_chance = {
 			factor = 0.05
 			unemployment = 0.99
 			location = { controlled_by = owner }
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 0.2
+			state_scope = {
+				total_pops = 600000
+			}
+		}
+		modifier = {
+			factor = 0.2
+			state_scope = {
+				total_pops = 700000
+			}
+		}
+		modifier = {
+			factor = 0.2
+			state_scope = {
+				total_pops = 800000
+			}
+		}
+		modifier = {
+			factor = 0.2
+			state_scope = {
+				total_pops = 900000
+			}
+		}
+		modifier = {
+			factor = 0.2
+			state_scope = {
+				total_pops = 1000000
+			}
+		}
+	}
+	modifier = {
+		factor = -1
+		state_scope = {
+			NOT = { total_pops = 200000 }
+		}
+	}
+	modifier = {
+		factor = -0.5
+		state_scope = {
+			NOT = { total_pops = 300000 }
 		}
 	}
 }

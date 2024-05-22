@@ -1229,7 +1229,7 @@ province_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 100 #600
+		months = 200 #600
 		modifier = {
 			factor = 0.9
 			average_consciousness = 5
@@ -1268,9 +1268,11 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA16140"
-		add_province_modifier = {
-			name = underground_railroad
-			duration = 365
+		state_scope = {
+			add_province_modifier = {
+				name = underground_railroad
+				duration = 365
+			}
 		}
 	}
 	

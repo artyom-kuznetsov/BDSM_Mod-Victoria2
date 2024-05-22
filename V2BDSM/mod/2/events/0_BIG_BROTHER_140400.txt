@@ -281,9 +281,10 @@ country_event = {
 			}
 		}
 		
-		any_country = { # ”¡–¿“‹ √Œ—“ ﬁÕ»“€
+		any_country = {
 			limit = {
 				exists = no
+                is_greater_power = no
                 capital_scope = { NOT = { province_control_days = 120 } }
                 OR = {
                     is_mobilised = yes
