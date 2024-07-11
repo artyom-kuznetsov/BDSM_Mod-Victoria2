@@ -5,7 +5,11 @@ political_decisions = {
 			any_owned_province = {
 				is_core = HUN
 			}
-			NOT = { has_country_flag = hide_all_decs_flag exists = KUK }
+			NOT = { 
+				has_country_flag = hide_all_decs_flag 
+				has_country_flag = subjugate_south_germans_flag 
+				exists = KUK
+			}
 		}
 	
 		allow = {
@@ -230,6 +234,56 @@ political_decisions = {
 		ai_will_do = {
 			factor = 1
 		}
+	}
+	
+	subjugate_south_germans_dec = {
+		potential = {
+			is_greater_power = yes
+			primary_culture = south_german
+			NOT = { has_country_flag = hide_all_decs_flag has_country_flag = subjugate_south_germans_flag }
+			OR = {
+				BAV = {
+					exists = yes
+					NOT = { vassal_of = THIS }
+					ai = yes
+				}
+				BAD = {
+					exists = yes
+					NOT = { vassal_of = THIS }
+					ai = yes
+				}
+				WUR = {
+					exists = yes
+					NOT = { vassal_of = THIS }
+					ai = yes
+				}
+				SGF = {
+					exists = yes
+					NOT = { vassal_of = THIS }
+					ai = yes
+				}
+			}
+		}
 		
+		allow = {
+			state_n_government = 1
+		}
+		
+		effect = {
+			badboy = 10
+			plurality = -10
+			CUSTOM_TOOLTIP_SUBJUGATE_SOUTHGERMANS = { }
+			SGF = { all_core = { add_core = THIS } }
+			any_country = {
+				limit = {
+					primary_culture = south_german
+					NOT = { vassal_of = THIS }
+					in_sphere = THIS
+					ai = yes
+				}
+				country_event = 110421
+			}
+			set_country_flag = subjugate_south_germans_flag
+		}
 	}
 }

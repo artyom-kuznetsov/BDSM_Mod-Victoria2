@@ -528,10 +528,14 @@ political_reforms = {
 			global_immigrant_attract = -0.05
 			allow = {
 				has_country_flag = has_rev_n_counterrev_flag
+				NOT = { has_country_flag = temprorary_border_closure }
 			}
 		}
 		open_borders = {
 			global_immigrant_attract = 0.02
+			allow = {
+				NOT = { has_country_flag = temprorary_border_closure }
+			}
 		}
 	}
 
