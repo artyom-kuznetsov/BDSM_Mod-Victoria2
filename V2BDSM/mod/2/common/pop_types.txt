@@ -969,54 +969,54 @@ emigration_chance =
 	group = {
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.49 border_policy = quota_immigration }
+			country = { administration_spending = 0.49 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.59 border_policy = quota_immigration }
+			country = { administration_spending = 0.59 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.69 border_policy = quota_immigration }
+			country = { administration_spending = 0.69 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.79 border_policy = quota_immigration }
+			country = { administration_spending = 0.79 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.89 border_policy = quota_immigration }
+			country = { administration_spending = 0.89 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.99 border_policy = quota_immigration }
+			country = { administration_spending = 0.99 border_policy = quota_immigration ai = no }
 		}
 	}
 	
 	group = {
 		modifier = {
 			factor = -0.05
-			country = { administration_spending = 0.49 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.59 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.69 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.79 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.89 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.99 border_policy = closed_borders }
+			country = { administration_spending = 0.49 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.59 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.69 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.79 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.89 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.99 border_policy = closed_borders ai = no}
 		}
 	}
 	
@@ -1313,6 +1313,15 @@ emigration_chance =
 	}
 	
 	
+	modifier = {
+		factor = -0.12
+		country = { border_policy = quota_immigration ai = yes }
+	}
+	
+	modifier = {                                                                  
+		factor = -0.3                             
+		country = { border_policy = closed_borders ai = yes }
+	}
 }
 
 #general assimilation mtth, same for all pops
