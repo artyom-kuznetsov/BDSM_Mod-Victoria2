@@ -49,7 +49,7 @@ political_decisions = {
 					remove_province_modifier = harsh_spring_pmodifier
 				}
 				any_owned = {
-					limit = { NOT = { continent = africa terrain = desert terrain = desert_mine terrain = coastal_desert terrain = jungle terrain = jungle_mine } }
+					limit = { NOT = { terrain = arctic continent = africa terrain = desert terrain = desert_mine terrain = coastal_desert terrain = jungle terrain = jungle_mine } }
 					add_province_modifier = { name = summer_pmodifier duration = -1 }
 				}
 			}
@@ -69,8 +69,22 @@ political_decisions = {
 					remove_province_modifier = autumn_pmodifier
 				}
 				any_owned = {
-					limit = { NOT = { continent = africa continent = anatolia_persia continent = middle_east }
-					OR = { terrain = farmlands terrain = farmlands_mine terrain = forest terrain = forest_mine terrain = hills terrain = terrain_strait_control_tile_hills terrain = hills_mine terrain = woods terrain = woods_mine terrain = steppe terrain = steppe_mine terrain = terrain_strait_control_tile_plains terrain = plains terrain = plains_mine terrain = marsh terrain = marsh_mine terrain = urban terrain = terrain_strait_control_tile_urban terrain = urban_mine } }
+					limit = { 
+						NOT = {
+							AND = {
+								OR = {
+									terrain = steppe 
+									terrain = steppe_mine 
+								}
+								climate = mild_climate
+							}
+							continent = east_indies 
+							continent = africa 
+							continent = anatolia_persia 
+							continent = middle_east
+						}
+					OR = {
+					terrain = farmlands terrain = farmlands_mine terrain = forest terrain = forest_mine terrain = hills terrain = terrain_strait_control_tile_hills terrain = hills_mine terrain = woods terrain = woods_mine terrain = steppe terrain = steppe_mine terrain = terrain_strait_control_tile_plains terrain = plains terrain = plains_mine terrain = marsh terrain = marsh_mine terrain = urban terrain = terrain_strait_control_tile_urban terrain = urban_mine } }
 					add_province_modifier = { name = winter_pmodifier duration = -1 }
 				}
 				any_owned = {
