@@ -12,6 +12,11 @@ country_event = {
 	title = "ElectionInterference_EvtName"
 	desc = "ElectionInterference_EvtDesc"
 	picture = "election_polls"
+	
+	immediate = {
+		add_country_modifier = { name = election_national_cooldown duration = 1320 }
+		add_country_modifier = { name = elections_ongoing_modifier duration = 210 }
+	}
 
 	trigger = {
 		election = yes
@@ -24,14 +29,14 @@ country_event = {
 	option = {
 		name = "ElectionInterference_EvtOptPass"
 		clr_country_flag = election_suffled
-		add_country_modifier = { name = let_the_chips_fall duration = 213 }
+		add_country_modifier = { name = let_the_chips_fall duration = 180 }
 		CUSTOM_TOOLTIP_ELECTIONS_MUTED = { }
 		ai_chance = { factor = 1 }
 	}
 
 	option = {
 		name = "ElectionInterference_EvtOptAffect"
-		add_country_modifier = { name = will_influence_elections duration = 213 }
+		add_country_modifier = { name = will_influence_elections duration = 180 }
 		CUSTOM_TOOLTIP_ELECTIONS_UNMUTED = { }
 		ai_chance = { factor = 0 }
 	}
@@ -1591,10 +1596,6 @@ country_event = {
 		has_country_flag = election_initialized
 	}
 
-	mean_time_to_happen = {
-		days = 1
-	}
-
 	immediate = { clr_country_flag = election_initialized }
 
 	option = {
@@ -1604,6 +1605,7 @@ country_event = {
 		remove_country_modifier = violent_elections
 		remove_country_modifier = will_influence_elections
 		remove_country_modifier = let_the_chips_fall
+		remove_country_modifier = elections_ongoing_modifier
 		any_owned = {
 			remove_province_modifier = support_the_government
 		}
@@ -2227,6 +2229,7 @@ country_event = {
 
 	trigger = {
 		election = yes
+		NOT = { has_country_modifier = elections_ongoing_modifier }
 		has_country_modifier = election_national_cooldown
 	}
 
