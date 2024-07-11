@@ -34,10 +34,6 @@ country_event = {
 	option = {
 		name = "Nationalize_EvtOptA"
 	}
-	option = {
-		name = "Nationalize_EvtOptB"
-		nationalize = yes
-	}
 }
 
 country_event = {
@@ -383,52 +379,6 @@ country_event = {
 	}
 }
 
-# ������ �� ������� �������� � �����
-#country_event = {
-#	title = "War_Shipbuilding_EvtName"
-#	desc = "War_Shipbuilding_EvtDesc"
-#	id = 57061
-#	
-#	trigger = {
-#		war = yes
-#		NOT = {
-#			has_country_flag = country_at_war_flag
-#		}
-#	}
-#	
-#	option = {
-#		name = "War_Shipbuilding_EvtOptA"
-#		set_country_flag = country_at_war_flag
-#		any_owned = {
-#			limit = {
-#				is_coastal = yes
-#			}
-#			add_province_modifier = {
-#				name = war_shipbuilding_modifier
-#				duration = -1
-#			}
-#		}
-#	}
-#}
-# �������������� �������� ������� ������
-#country_event = {
-#	title = "War_Shipbuilding_EvtName"
-#	desc = "War_Shipbuilding_End_EvtDesc"
-#	id = 57062
-#	
-#	trigger = {
-#		war = no
-#		has_country_flag = country_at_war_flag
-#	}
-#	
-#	option = {
-#		name = "War_Shipbuilding_End_EvtOptA"
-#		clr_country_flag = country_at_war_flag
-#		any_owned = {
-#			remove_province_modifier = war_shipbuilding_modifier
-#		}
-#	}
-#}
 
 ### �����������
 country_event = {
@@ -889,6 +839,7 @@ country_event = {
 	
 	option = {
 		name = "disarmed_EvtOptA"
+		plurality = -15
 	}
 }
 
@@ -1122,7 +1073,8 @@ country_event = {
 		name = "revoke_voting_EvtAccept"
 		political_reform = none_voting
 		political_reform = party_appointed
-		badboy = 2
+		badboy = 1
+		plurality = -10
 		any_pop = {
 			militancy = 5
 			consciousness = 5
@@ -1238,6 +1190,11 @@ country_event = {
 	option = {
 		name = "GuideEvent_EvtOptMilitary"
 		country_event = 57097
+	}
+	
+	option = {
+		name = "GuideEvent_EvtOptStability"
+		CUSTOM_TOOLTIP_STABILITYGUIDE = { }
 	}
 	
 	option = {

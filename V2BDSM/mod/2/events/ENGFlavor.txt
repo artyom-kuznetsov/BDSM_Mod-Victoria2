@@ -27,6 +27,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA36898"
+		plurality = 3
 		release_vassal = HAN
 		diplomatic_influence = {
 			who = HAN
@@ -187,6 +188,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36902" 
+		plurality = 0.5
 		craftsmen = {
 			consciousness = -1
 		}
@@ -243,6 +245,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36902" 
+		plurality = 1
 		prestige = 5
 	}
 }
@@ -283,6 +286,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36904" 
+		plurality = -1
 		capitalists = {
 			consciousness = 1
 		}
@@ -334,6 +338,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36905" 
+		plurality = 0.5
 		craftsmen = {
 			consciousness = -1
 		}
@@ -379,6 +384,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36904" 
+		plurality = -1
 		capitalists = {
 			consciousness = 1
 		}
@@ -813,6 +819,7 @@ country_event = {
 	option = {
 		name = "EVTOPTA36918" 
 		prestige = 1
+		plurality = 0.5
 		farmers = {
 			consciousness = -1
 		}
@@ -869,6 +876,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36919" 
+		plurality = 0.5
 		war_exhaustion = -1
 	}
 }
@@ -914,7 +922,15 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36921" 
+		plurality = -0.5
 		labourers = {
+			ideology = {
+				value = socialist
+				factor = 0.1
+			}
+			consciousness = 1
+		}
+		farmers = {
 			ideology = {
 				value = socialist
 				factor = 0.1
@@ -1116,7 +1132,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA36925" 
-		prestige = -5
+		plurality = -1
 		any_pop = {
 			consciousness = 1
 		}
@@ -1125,6 +1141,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTB36925" 
+		plurality = -0.5
 		prestige = -5
 		any_pop = {
 			militancy = 1
@@ -1604,9 +1621,10 @@ province_event = {
 
 	option = {
 		name = "EVTOPTA36938" 
+		plurality = -0.5
 		any_pop = {
 			limit = {
-				has_pop_religion = hindu 
+				culture = bengali
 				}
 			militancy = 1
 			consciousness = 2
@@ -1659,13 +1677,13 @@ country_event = {
 		name = "EVTOPTA36939"
 		any_pop = {
 			limit = {
-				has_pop_religion = hindu
+				culture = bengali
 			}
 			militancy = 2
 		}
 		any_pop = {
 			limit = {
-				has_pop_religion = sunni
+				culture = marathi
 			}
 			militancy = 2
 		}
@@ -1681,13 +1699,13 @@ country_event = {
 			}
 		any_pop = {
 			limit = {
-				has_pop_religion = hindu
+				culture = bengali
 			}
 			militancy = -1
 		}
 		any_pop = {
 			limit = {
-				has_pop_religion = sunni
+				culture = marathi
 			}
 			militancy = -1
 		}	

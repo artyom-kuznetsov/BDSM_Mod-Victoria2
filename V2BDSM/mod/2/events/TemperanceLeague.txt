@@ -162,6 +162,7 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA120"
+		plurality = -1
 		poor_strata = {
 			militancy = 2
 			consciousness = -1
@@ -212,6 +213,7 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA130"
+		plurality = -0.5
 		remove_province_modifier = beer_halls
 		state_scope = {
 			any_pop = {
@@ -222,6 +224,7 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTB130"
+		plurality = -1
 		state_scope = {
 			random_owned = {
 				limit = {
@@ -291,6 +294,7 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA140"
+		plurality = -0.25
 		remove_province_modifier = beer_halls
 		poor_strata = {
 			militancy = 1
@@ -303,157 +307,13 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTB140"
+		plurality = -0.5
 		middle_strata = {
 			consciousness = 2
 			militancy = 1
 		}
 		poor_strata = {
 			militancy = -1
-		}
-	}
-}
-
-#Religious Temperance
-country_event = {
-	id = 150
-	title = "EVTNAME150"
-	desc = "EVTDESC150"
-	picture = "god"
-
-	trigger = {
-		civilized = yes
-		NOT = {
-			OR = {
-				religion = sunni
-				religion = shiite
-			}
-		}
-		moralism = 10
-		conservative = 20
-	}
-	
-	mean_time_to_happen = {
-		months = 500
-		modifier = {
-			factor = 0.9
-			moralism = 15
-		}
-		modifier = {
-			factor = 0.9
-			average_consciousness = 5
-		}
-		modifier = {
-			factor = 0.9
-			average_militancy = 5
-		}
-		modifier = {
-			factor = 1.5
-			NOT = {
-				average_consciousness = 5
-			}
-		}
-		modifier = {
-			factor = 0.9
-			religious_policy = moralism
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA150"
-		random_state = {
-			limit = {
-				is_colonial = no
-			}
-			any_pop = {
-				dominant_issue = {
-					value = moralism
-					factor = 0.5
-				}
-			}
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB150"
-		random_state = {
-			limit = {
-				is_colonial = no
-			}
-			any_pop = {
-				consciousness = 1
-			}
-		}
-	}
-}
-	
-#Licensing Act
-country_event = {
-	id = 160
-	title = "EVTNAME160"
-	desc = "EVTDESC160"
-	picture = "liquor"
-		
-	trigger = {
-		civilized = yes
-		NOT = {
-			OR = {
-				religion = sunni
-				religion = shiite
-			}
-		}
-		has_country_modifier = temperance_league
-	}
-
-	mean_time_to_happen = {
-		months = 300
-		modifier = {
-			factor = 0.9
-			moralism = 20
-		}
-		modifier = {
-			factor = 0.9
-			conservative = 50
-		}
-		modifier = {
-			factor = 0.9
-			average_consciousness = 5
-		}
-		modifier = {
-			factor = 1.5
-			average_militancy = 5
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA160"
-		random_state = {
-			any_owned = {
-				remove_province_modifier = beer_halls
-			}
-			poor_strata = {
-				militancy = 0.5
-			}
-			middle_strata = {
-				militancy = -1
-			}
-			rich_strata = {
-				militancy = 0.5
-			}
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB160"
-		random_state = {
-			poor_strata = {
-				militancy = -0.5
-			}
-			middle_strata = {
-				militancy = 1
-			}
-			rich_strata = {
-				militancy = -0.5
-			}
 		}
 	}
 }
@@ -502,27 +362,25 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA170"
-		random_state = {
-			poor_strata = {
-				militancy = -1
-				consciousness = 2
-			}
-			middle_strata = {
-				consciousness = 1
-			}
+		plurality = -0.5
+		poor_strata = {
+			militancy = -1
+			consciousness = 2
+		}
+		middle_strata = {
+			consciousness = 1
 		}
 	}
 	
 	option = {
 		name = "EVTOPTB170"
-		random_state = {
-			poor_strata = {
-				militancy = 2
-				consciousness = -1
-			}
-			middle_strata = {
-				consciousness = 1
-			}
+		plurality = -1
+		poor_strata = {
+			militancy = 2
+			consciousness = -1
+		}
+		middle_strata = {
+			consciousness = 1
 		}
 	}
 }
@@ -562,6 +420,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA180"
+		plurality = -0.25
 		random_state = {
 			any_owned = {
 				add_crime = mafia
@@ -571,6 +430,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB180"
+		plurality = -0.25
 		random_state = {
 			any_pop = {
 				militancy = 1

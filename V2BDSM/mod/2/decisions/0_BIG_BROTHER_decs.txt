@@ -1046,6 +1046,20 @@ political_decisions = {
 				annex_to = FROM 
 			}
 			
+			any_country = { # мер опюб цнкняю
+				limit = {
+					vote_franschise = none_voting
+					NOT = { has_country_flag = none_voting_flag }
+				}
+				set_country_flag = none_voting_flag
+			}
+			any_country = { # цнкнясчр анцюрше
+				limit = {
+					vote_franschise = wealth_weighted_voting
+					NOT = { has_country_flag = wealth_weighted_voting_flag }
+				}
+				set_country_flag = wealth_weighted_voting_flag
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}

@@ -343,6 +343,7 @@ acquire_state_china_japan = {
 				province_selector = -1
 			}
 		}
+		plurality = -5
 	}
 	
 	on_add = {
@@ -437,6 +438,7 @@ acquire_state_invasion = {
 				province_selector = -1
 			}
 		}
+		plurality = -5
 	}
 	
 	on_add = {
@@ -811,7 +813,7 @@ manifest_destiny_cb = {
 			has_country_flag = hasmanifestdestiny
 		}
 		tag = MEX
-		any_owned_province = { has_core = THIS }
+		any_owned_province = { is_core = THIS }
 		ai = yes
 	}
 
@@ -842,6 +844,7 @@ manifest_destiny_cb = {
 			}
 		}
 		country_event = 110600
+		plurality = -15
 	}
 	
 	on_add = {
@@ -1058,6 +1061,10 @@ add_to_sphere = {
 			value = 0.25
 		}
 	}
+	
+	on_po_accepted = {
+		plurality = -5
+	}
 }
 
 take_from_sphere = {
@@ -1107,6 +1114,10 @@ take_from_sphere = {
 			to = pro_military
 			value = 0.25
 		}
+	}
+	
+	on_po_accepted = {
+		plurality = -2
 	}
 }
 
@@ -1231,6 +1242,7 @@ acquire_core_state = {
 				province_selector = -1
 			}
 		}
+		plurality = -1
 	}
 }
 
@@ -1297,6 +1309,7 @@ acquire_core_state_AI = {
 				province_selector = -1
 			}
 		}
+		plurality = -1
 	}
 }
 
@@ -1366,6 +1379,7 @@ acquire_all_cores = {
 				province_selector = -1
 			}
 		}
+		plurality = -5
 	}
 }
 
@@ -1433,6 +1447,7 @@ acquire_all_cores_AI = {
 				province_selector = -1
 			}
 		}
+		plurality = -5
 	}
 }
 
@@ -1674,6 +1689,7 @@ acquire_state = {
 				province_selector = -1
 			}
 		}
+		plurality = -5
 	}
 }
 
@@ -1777,6 +1793,7 @@ acquire_capital = {
 				province_selector = -1
 			}
 		}
+		plurality = -15
 	}
 }
 
@@ -1856,6 +1873,7 @@ place_in_the_sun = {
 				province_selector = -1
 			}
 		}
+		plurality = -2
 	}
 }
 
@@ -1931,6 +1949,7 @@ take_treaty_port = {
 				province_selector = -1
 			}
 		}
+		plurality = -1
 	}
 }
 
@@ -1979,6 +1998,7 @@ colonial_competition = {
 				province_selector = -1
 			}
 		}
+		plurality = -3
 	}
 }
 
@@ -2121,6 +2141,10 @@ cut_down_to_size_boxer = {
 			value = 0.25
 		}
 	}
+	
+	on_po_accepted = {
+		plurality = -5
+	}
 }
 
 # Free Peoples
@@ -2209,6 +2233,10 @@ free_peoples = {
 			to = pro_military
 			value = 0.25
 		}
+	}
+	
+	on_po_accepted = {
+		plurality = -3
 	}
 }
 
@@ -2300,6 +2328,9 @@ liberate_country = {
 			value = 0.25
 		}
 	}
+	on_po_accepted = {
+		plurality = -5
+	}
 }
 
 # Dismantle fortifications (forts + naval bases)
@@ -2358,6 +2389,10 @@ dismantle_forts = {
 			value = 0.25
 		}
 	}
+	
+	on_po_accepted = {
+		plurality = -3
+	}
 }
 
 
@@ -2405,6 +2440,10 @@ release_puppet = {
 			to = pro_military
 			value = 0.25
 		}
+	}
+	
+	on_po_accepted = {
+		plurality = -2
 	}
 }
 
@@ -2464,6 +2503,10 @@ make_puppet = {
 			value = 0.25
 		}
 	}
+	
+	on_po_accepted = {
+		plurality = -5
+	}
 }
 
 # Become Independent
@@ -2520,6 +2563,10 @@ become_independent = {
 		leave_alliance = FROM
 		release_vassal = THIS
 	}
+	
+	on_po_accepted = {
+		plurality = -3
+	}
 }
 
 
@@ -2567,6 +2614,9 @@ humiliate = {
 			value = 0.25
 		}
 	}
+	on_po_accepted = {
+		plurality = -15
+	}
 }
 
 demand_reparations = {
@@ -2610,6 +2660,10 @@ demand_reparations = {
 			to = pro_military
 			value = 0.25
 		}
+	}
+	
+	on_po_accepted = {
+		plurality = -3
 	}
 }
 # Demand Concession
@@ -2682,6 +2736,7 @@ demand_concession_casus_belli = {
 				province_selector = -1
 			}
 		}
+		plurality = -5
 	}
 }
 
@@ -3070,6 +3125,7 @@ rude_boy = {
 			value = 0.1
 		}
 	}
+	
 }
 
 # Install Communist Government
@@ -3135,6 +3191,7 @@ install_communist_gov_cb = {
 		political_reform = state_controlled
 		political_reform = underground_parties
 		social_reform = child_labor_illegal
+		plurality = -10
 	}
 }
 
@@ -3185,6 +3242,10 @@ uninstall_communist_gov_cb = {
 			to = pro_military
 			value = 0.25
 		}
+	}
+	
+	on_po_accepted = {
+		plurality = -10
 	}
 }
 

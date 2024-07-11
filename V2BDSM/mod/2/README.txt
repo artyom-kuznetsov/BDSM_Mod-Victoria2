@@ -1,4 +1,4 @@
-Assets from the following mods were used in this mod:
+Assets and ideas from the following mods were used in this mod:
 - Victoria Universalis
 - Mish Mash Map Mod
 - Divergences of Darkness

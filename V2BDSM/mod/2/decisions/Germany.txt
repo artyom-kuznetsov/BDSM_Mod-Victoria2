@@ -57,6 +57,7 @@ political_decisions = {
 		}
 		
 		effect = {
+			plurality = 5
 			prestige = 15
 			any_country = {
 				limit = {
@@ -190,6 +191,7 @@ political_decisions = {
 		}
 		
 		effect = {
+			plurality = 10
 			prestige = 20
 			change_tag = GER
 			add_accepted_culture = north_german
@@ -366,6 +368,7 @@ political_decisions = {
 			}
 		}
 		effect = {
+			plurality = 1
 			prestige = 5
 			badboy = -1
 			set_country_flag = watching_the_rhine
@@ -374,13 +377,13 @@ political_decisions = {
 	
 	niederwald_denkmal = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = GER
 			has_country_flag = watching_the_rhine
 			war = no
 			NOT = {
 				has_country_flag = niederwald_denkmal
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -389,6 +392,7 @@ political_decisions = {
 		}
 		
 		effect = {
+			plurality = 1
 			any_pop = {
 				militancy = -1
 			}
@@ -584,11 +588,9 @@ political_decisions = {
 		}
 		
 		effect = {
+			plurality = 1
 			any_pop = {
-				limit = {
-					has_pop_religion = protestant
-				}
-				militancy = -1
+				militancy = -0.5
 			}
 			set_country_flag = presbyteries_introduced
 		}

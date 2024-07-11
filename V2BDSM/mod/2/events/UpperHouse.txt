@@ -19,6 +19,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18000"
+		plurality = 0.5
 		upper_house = {
 			ideology = socialist
 			value = 0.10
@@ -27,6 +28,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18000"
+		plurality = -0.25
 		any_pop = {
 			scaled_militancy = {
 				ideology = liberal
@@ -98,6 +100,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18020"
+		plurality = 0.25
 		upper_house = {
 			ideology = liberal
 			value = 0.1
@@ -106,6 +109,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18020"
+		plurality = -0.25
 		upper_house = {
 			ideology = liberal
 			value = 0.2
@@ -182,6 +186,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18040"
+		plurality = -0.25
 		upper_house = {
 			ideology = socialist
 			value = 0.2
@@ -190,6 +195,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18040"
+		plurality = -1
 		upper_house = {
 			ideology = socialist
 			value = 0.1
@@ -315,6 +321,7 @@ country_event = {
 	option = {
 		name = "EVTOPTA18070"
 		political_reform = party_appointed
+		plurality = -2
 		any_pop = {
 			militancy = 3
 		}
@@ -360,6 +367,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18080"
+		plurality = -1
 		any_pop = {
 			militancy = 2
 		}
@@ -387,6 +395,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18090"
+		plurality = -0.5
 		upper_house = {
 			ideology = liberal
 			value = 0.45
@@ -395,6 +404,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18090"
+		plurality = -1
 		any_pop = {
 			militancy = 1
 		}
@@ -424,6 +434,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18110"
+		plurality = 1
 		social_reform = trinket_subsidies
 		any_pop = {
 			militancy = -1
@@ -436,6 +447,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18110"
+		plurality = -2
 		scaled_militancy = {
 			issue = trinket_subsidies
 			factor = 8
@@ -474,6 +486,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18120"
+		plurality = 1
 		prestige = -5
 		any_pop = {
 			militancy = 1
@@ -505,6 +518,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18130"
+		plurality = -1
 		upper_house = {
 			ideology = socialist
 			value = 0.5
@@ -516,6 +530,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18130"
+		plurality = -1
 		scaled_militancy = {
 			ideology = socialist
 			factor = 4
@@ -557,6 +572,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18140"
+		plurality = -1
 		scaled_militancy = {
 			ideology = fascist
 			factor = 4
@@ -592,6 +608,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18150"
+		plurality = -1
 		any_pop = {
 			militancy = 1
 		}
@@ -601,7 +618,7 @@ country_event = {
 		name = "EVTOPTB18150"
 		upper_house = {
 			ideology = liberal
-			value = 0.1
+			value = 0.25
 		}
 	}
 }
@@ -633,6 +650,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18150"
+		plurality = -0.5
 		any_pop = {
 			consciousness = 1
 		}
@@ -640,6 +658,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18150"
+		plurality = -0.5
 		any_pop = {
 			militancy = 1
 		}
@@ -669,6 +688,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18170"
+		plurality = 1
 		any_pop = {
 			militancy = -1
 		}
@@ -680,6 +700,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18170"
+		plurality = -2
 		scaled_militancy = {
 			ideology = socialist
 			factor = 3
@@ -708,6 +729,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18180"
+		plurality = 1
 		any_pop = {
 			consciousness = -1
 		}
@@ -715,6 +737,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB18180"
+		plurality = 1
 		any_pop = {
 			militancy = -1
 		}
@@ -745,6 +768,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA18190"
+		plurality = 1
 		any_pop = {
 			consciousness = -1
 		}
@@ -765,40 +789,40 @@ country_event = {
 	}
 }
 
-country_event = {
-	id = 18200
-	title = "EVTNAME18200"
-	desc = "EVTDESC18200"
-	picture = "Upperhouse"
-	
-	trigger = {
-		upper_house = {
-			ideology = anarcho_liberal
-			value = 0.05
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 232
-	}
-	
-	option = {
-		name = "EVTOPTA18200"
-		any_pop = {
-			dominant_issue = {
-				value = laissez_faire
-				factor = 0.1
-			}
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB18200"
-		any_pop = {
-			scaled_militancy = {
-				ideology = anarcho_liberal
-				factor = 3
-			}
-		}
-	}
-}
+#country_event = {
+#	id = 18200
+#	title = "EVTNAME18200"
+#	desc = "EVTDESC18200"
+#	picture = "Upperhouse"
+#	
+#	trigger = {
+#		upper_house = {
+#			ideology = anarcho_liberal
+#			value = 0.05
+#		}
+#	}
+#	
+#	mean_time_to_happen = {
+#		months = 232
+#	}
+#	
+#	option = {
+#		name = "EVTOPTA18200"
+#		any_pop = {
+#			dominant_issue = {
+#				value = laissez_faire
+#				factor = 0.1
+#			}
+#		}
+#	}
+#	
+#	option = {
+#		name = "EVTOPTB18200"
+#		any_pop = {
+#			scaled_militancy = {
+#				ideology = anarcho_liberal
+#				factor = 3
+#			}
+#		}
+#	}
+#}

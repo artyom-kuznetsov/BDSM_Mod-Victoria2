@@ -95,10 +95,6 @@ romanticist_music = {
 			is_greater_power = no
 		}
 		modifier = {
-			factor = 2
-			plurality = 5
-		}
-		modifier = {
 			factor = -2
 			OR = {
 				invention = romanticist_art
@@ -146,10 +142,6 @@ realist_art = {
 		modifier = {
 			factor = 2
 			average_consciousness = 3
-		}
-		modifier = {
-			factor = 3
-			plurality = 5
 		}
 		modifier = {
 			factor = -2
@@ -575,10 +567,6 @@ i_analytic_philosophy = {
 		modifier = {
 			factor = 2
 			biologism = 1
-		}	
-		modifier = {
-			factor = 1
-			plurality = 5
 		}
 	}
 	effect = {
@@ -762,7 +750,7 @@ sociology = {
 			scientific_management = 1
 		}
 	}
-	effect = { plurality = 0.05 }
+	effect = { core_pop_militancy_modifier = 0.01 }
 }
 social_psychology = {
 	limit = { social_science = 1 }
@@ -778,7 +766,7 @@ social_psychology = {
 			behaviorism = 1
 		}
 	}
-	effect = { plurality = 0.05 }
+	effect = { }
 }
 political_science = {
 	limit = { social_science = 1 }
@@ -794,7 +782,7 @@ political_science = {
 			naval_directionism = 1
 		}
 	}
-	effect = { plurality = 0.05 }
+	effect = { core_pop_consciousness_modifier = 0.01 }
 }
 social_anthropology = {
 	limit = { social_science = 1 }
@@ -811,7 +799,6 @@ social_anthropology = {
 		}
 	}
 	effect = {
-		plurality = 0.05
 		colonial_prestige = 0.1 
 	}
 }
@@ -940,7 +927,6 @@ rationalism = {
 		}
 	}
 	effect = {
-		plurality = 0.2
 		suppression_points_modifier = -0.05
 	}
 }
@@ -982,8 +968,8 @@ secularization = {
 		}
 	}
 	effect = {
-		plurality = 0.2
 		suppression_points_modifier = -0.05
+		research_points_modifier = 0.1
 	}
 }
 social_conscience = {
@@ -1001,9 +987,9 @@ social_conscience = {
 		}
 	}
 	effect = {
-		plurality = 0.1
 		political_reform_desire = 0.1
 		suppression_points_modifier = -0.05
+		research_points_modifier = 0.2
 	}
 }
 
@@ -1043,7 +1029,7 @@ clericalism_vs._anticlericalism = {
 		}
 	}
 	effect = {
-		plurality = 0.05
+		research_points_modifier = 0.05
 	}
 }
 meritocracy_vs._aristocracy = {
@@ -1061,7 +1047,7 @@ meritocracy_vs._aristocracy = {
 		}
 	}
 	effect = {
-		plurality = 0.05 
+		research_points_modifier = 0.05
 	}
 }
 #nationalism_n_imperialism
@@ -1085,7 +1071,6 @@ biased_multiculturalism = {
 	}
 	effect = {
 		colonial_migration = 0.05
-		plurality = 0.05
 	}
 }
 manifest_destiny = {

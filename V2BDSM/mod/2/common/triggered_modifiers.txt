@@ -640,8 +640,63 @@ war_encouragement_1 = {
 early_game_trmod = {
 	trigger = {
 		exists = yes
-		NOT = { year = 1841 }
+		NOT = { year = 1843 }
 	}
-	research_points = 1
+	research_points = 2
 }
 
+# v4.4 STABILITY
+
+very_low_stability_trmod = {
+	trigger = {
+		exists = yes
+		NOT = { plurality = 25 }
+	}
+	global_immigrant_attract = -0.02
+	administrative_efficiency_modifier = -0.4
+	prestige = -0.2
+	org_regain = -0.4
+	tax_efficiency = -0.04
+	land_organisation = -0.4
+	cb_generation_speed_modifier = -0.2
+}
+
+low_stability_trmod = {
+	trigger = {
+		exists = yes
+		plurality = 25
+		NOT = { plurality = 40 }
+	}
+	global_immigrant_attract = -0.01
+	administrative_efficiency_modifier = -0.2
+	prestige = -0.1
+	org_regain = -0.2
+	max_tariff = -0.1
+	tax_efficiency = -0.02
+	land_organisation = -0.2
+	cb_generation_speed_modifier = -0.1
+}
+
+high_stability_trmod = {
+	trigger = {
+		exists = yes
+		plurality = 55
+		NOT = { plurality = 65 }
+	}
+}
+
+very_high_stability_trmod = {
+	trigger = {
+		exists = yes
+		plurality = 65
+	}
+	cb_generation_speed_modifier = 0.1
+}
+
+stability_equalizer = {
+	trigger = {
+		exists = yes
+	}
+	ruling_party_support = -0.5
+	administrative_efficiency_modifier = -0.5
+}

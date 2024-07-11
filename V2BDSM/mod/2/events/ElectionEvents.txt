@@ -6,6 +6,38 @@
 #
 # Event IDs 14000 are reserved for this. DO NOT CHANGE.
 #
+#Select if you are going to vote on the elections or not
+country_event = {
+	id = 14005
+	title = "ElectionInterference_EvtName"
+	desc = "ElectionInterference_EvtDesc"
+	picture = "election_polls"
+
+	trigger = {
+		election = yes
+		NOT = {
+			has_country_modifier = will_influence_elections
+			has_country_modifier = let_the_chips_fall
+		}
+	}
+
+	option = {
+		name = "ElectionInterference_EvtOptPass"
+		clr_country_flag = election_suffled
+		add_country_modifier = { name = let_the_chips_fall duration = 213 }
+		CUSTOM_TOOLTIP_ELECTIONS_MUTED = { }
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = "ElectionInterference_EvtOptAffect"
+		add_country_modifier = { name = will_influence_elections duration = 213 }
+		CUSTOM_TOOLTIP_ELECTIONS_UNMUTED = { }
+		ai_chance = { factor = 0 }
+	}
+	
+}
+
 ###########################################################################
 # A Heated Debate: Trade Policy
 country_event = {
@@ -15,7 +47,8 @@ country_event = {
 
 	election = yes
 	issue_group = trade_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	
 	option = {
@@ -105,7 +138,8 @@ country_event = {
 	
 	election = yes
 	issue_group = economic_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14010"
@@ -172,7 +206,8 @@ country_event = {
 	
 	election = yes
 	issue_group = religious_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14020"
@@ -239,7 +274,8 @@ country_event = {
 
 	election = yes
 	issue_group = citizenship_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14030"
@@ -292,7 +328,8 @@ country_event = {
 	
 	election = yes
 	issue_group = war_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14040"
@@ -359,7 +396,8 @@ country_event = {
 	
 	election = yes
 	issue_group = trade_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14050"
@@ -428,7 +466,8 @@ country_event = {
 	
 	election = yes
 	issue_group = trade_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14060"
@@ -497,7 +536,8 @@ country_event = {
 	
 	election = yes
 	issue_group = economic_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14070"
@@ -566,7 +606,8 @@ country_event = {
 	
 	election = yes
 	issue_group = economic_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14080"
@@ -635,7 +676,8 @@ country_event = {
 	
 	election = yes
 	issue_group = economic_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14090"
@@ -704,7 +746,8 @@ country_event = {
 	
 	election = yes
 	issue_group = economic_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14100"
@@ -773,7 +816,8 @@ country_event = {
 	
 	election = yes
 	issue_group = religious_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14110"
@@ -842,7 +886,8 @@ country_event = {
 	
 	election = yes
 	issue_group = religious_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14120"
@@ -911,7 +956,8 @@ country_event = {
 	
 	election = yes
 	issue_group = religious_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14130"
@@ -980,7 +1026,8 @@ country_event = {
 	
 	election = yes
 	issue_group = religious_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14140"
@@ -1049,7 +1096,8 @@ country_event = {
 	
 	election = yes
 	issue_group = citizenship_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14150"
@@ -1118,7 +1166,8 @@ country_event = {
 	
 	election = yes
 	issue_group = citizenship_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14160"
@@ -1187,7 +1236,8 @@ country_event = {
 	
 	election = yes
 	issue_group = citizenship_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14170"
@@ -1256,7 +1306,8 @@ country_event = {
 	
 	election = yes
 	issue_group = war_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14180"
@@ -1325,7 +1376,8 @@ country_event = {
 
 	election = yes
 	issue_group = war_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14190"
@@ -1394,7 +1446,8 @@ country_event = {
 	
 	election = yes
 	issue_group = war_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14200"
@@ -1463,7 +1516,8 @@ country_event = {
 	
 	election = yes
 	issue_group = war_policy
-	is_triggered_only = yes
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
 	
 	option = {
 		name = "EVTOPTA14210"
@@ -1524,3 +1578,694 @@ country_event = {
 	}
 }
 
+
+# Elections End
+country_event = {
+	id = 14211
+	title = "ElectionsEnd_EvtName"
+	desc = "ElectionsEnd_EvtDesc"
+	picture = "election_win"
+
+	trigger = {
+		election = no
+		has_country_flag = election_initialized
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = { clr_country_flag = election_initialized }
+
+	option = {
+		name = "ElectionsEnd_EvtOptA"
+		add_country_modifier = { name = election_national_cooldown duration = 1300 }
+		remove_country_modifier = wartime_elections
+		remove_country_modifier = violent_elections
+		random_owned = {
+			limit = {
+				owner = {
+					ruling_party_ideology = conservative
+				}
+			}
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						OR = {
+							is_primary_culture = yes
+							is_accepted_culture = yes
+						}
+					}
+					ideology = { value = conservative factor = 0.02 }
+					scaled_militancy = { ideology = conservative factor = -2 }
+					scaled_consciousness = { ideology = conservative factor = -2 }
+				}
+				CUSTOM_TOOLTIP_ELECTIONS_CONSERVATIVE_WIN = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					ruling_party_ideology = reactionary
+				}
+			}
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						OR = {
+							is_primary_culture = yes
+							is_accepted_culture = yes
+						}
+					}
+					ideology = { value = reactionary factor = 0.02 }
+					scaled_militancy = { ideology = reactionary factor = -2 }
+					scaled_consciousness = { ideology = reactionary factor = -2 }
+				}
+				CUSTOM_TOOLTIP_ELECTIONS_REACTIONARY_WIN = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					ruling_party_ideology = liberal
+				}
+			}
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						OR = {
+							is_primary_culture = yes
+							is_accepted_culture = yes
+						}
+					}
+					ideology = { value = liberal factor = 0.02 }
+					scaled_militancy = { ideology = liberal factor = -2 }
+					scaled_consciousness = { ideology = liberal factor = -2 }
+				}
+				CUSTOM_TOOLTIP_ELECTIONS_LIBERAL_WIN = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					ruling_party_ideology = socialist
+				}
+			}
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						OR = {
+							is_primary_culture = yes
+							is_accepted_culture = yes
+						}
+					}
+					ideology = { value = socialist factor = 0.02 }
+					scaled_militancy = { ideology = socialist factor = -2 }
+					scaled_consciousness = { ideology = socialist factor = -2 }
+				}
+				CUSTOM_TOOLTIP_ELECTIONS_SOCIALIST_WIN = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					ruling_party_ideology = communist
+				}
+			}
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						OR = {
+							is_primary_culture = yes
+							is_accepted_culture = yes
+						}
+					}
+					ideology = { value = communist factor = 0.02 }
+					scaled_militancy = { ideology = communist factor = -2 }
+					scaled_consciousness = { ideology = communist factor = -2 }
+				}
+				CUSTOM_TOOLTIP_ELECTIONS_COMMUNIST_WIN = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					ruling_party_ideology = fascist
+				}
+			}
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						OR = {
+							is_primary_culture = yes
+							is_accepted_culture = yes
+						}
+					}
+					ideology = { value = fascist factor = 0.02 }
+					scaled_militancy = { ideology = fascist factor = -2 }
+					scaled_consciousness = { ideology = fascist factor = -2 }
+				}
+				CUSTOM_TOOLTIP_ELECTIONS_FASCIST_WIN = { }
+			}
+		}
+		any_owned = { remove_province_modifier = support_the_government }
+	}
+}
+
+#War-Time Election
+country_event = {
+	id = 14212
+	title = "WartimeElections_EvtName"
+	desc = "WartimeElections_EvtDesc"
+	picture = "election_crowd"
+
+	trigger = {
+		election = yes
+		war = yes
+		NOT = { has_country_flag = election_initialized }
+	}
+
+	mean_time_to_happen = {
+		days = 15
+		modifier = {
+			factor = 0.5
+			any_greater_power = { war_with = THIS }
+		}
+		modifier = {
+			factor = 0.5
+			any_neighbor_country = {
+				rank = 16
+				war_with = THIS
+			}
+		}
+		modifier = {
+			factor = 0.5
+			is_secondary_power = no
+			is_greater_power = no
+		}
+		modifier = {
+			factor = 0.5
+			war_exhaustion = 20
+		}
+		modifier = {
+			factor = 0.5
+			war_exhaustion = 40
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { war_exhaustion = 20 }
+		}
+		modifier = {
+			factor = 0.1
+			any_owned_province = {
+				NOT = { controlled_by = THIS }
+				NOT = { controlled_by = REB }
+			}
+		}
+		modifier = {
+			factor = 3
+			is_greater_power = yes
+			NOT = { any_greater_power = { war_with = THIS } }
+			NOT = {
+				any_owned_province = {
+					NOT = { controlled_by = THIS }
+					NOT = { controlled_by = REB }
+				}
+			}
+		}
+	}
+
+	immediate = { set_country_flag = election_initialized }
+
+	option = {
+		name = "WartimeElections_EvtOptA"
+
+		plurality = -1.5
+		add_country_modifier = { name = wartime_elections duration = -1 }
+
+		random_owned = {
+			limit = { owner = { is_ideology_enabled = fascist } }
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						is_primary_culture = yes
+					}
+					ideology = {
+						value = fascist
+						factor = 0.05
+					}
+				}
+			}
+		}
+		random_owned = {
+			limit = { owner = { NOT = { is_ideology_enabled = fascist } } }
+			owner = {
+				any_pop = {
+					limit = {
+						location = { is_colonial = no }
+						OR = {
+							type = soldiers
+							type = officers
+							type = aristocrats
+						}
+					}
+					ideology = {
+						value = reactionary
+						factor = 0.05
+					}
+				}
+			}
+		}
+
+		any_pop = {
+			limit = {
+				location = { is_core = THIS }
+				is_primary_culture = yes
+			}
+			dominant_issue = {
+				factor = 0.05
+				value = jingoism
+			}
+		}
+		any_pop = {
+			limit = {
+				location = { is_core = THIS }
+				is_primary_culture = no
+			}
+			dominant_issue = {
+				factor = 0.05
+				value = pacifism
+			}
+		}
+	}
+}
+
+#Violent Election
+country_event = {
+	id = 14213
+	title = "ViolentElections_EvtName"
+	desc = "ViolentElections_EvtDesc"
+	picture = "communist_riot"
+
+	trigger = {
+		election = yes
+		OR = {
+			average_militancy = 3
+			unemployment = 0.1
+			war_exhaustion = 20
+		}
+		NOT = { has_country_flag = election_initialized }
+	}
+
+	mean_time_to_happen = {
+		days = 15
+		modifier = {
+			factor = 1.5
+			NOT = { average_militancy = 2 }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { average_militancy = 1 }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { average_consciousness = 5 }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { unemployment = 0.1 }
+		}
+		modifier = {
+			factor = 0.8
+			war_exhaustion = 20
+		}
+		modifier = {
+			factor = 0.8
+			war_exhaustion = 30
+		}
+		modifier = {
+			factor = 0.8
+			unemployment = 0.2
+		}
+		modifier = {
+			factor = 0.7
+			unemployment = 0.3
+		}
+		modifier = {
+			factor = 0.6
+			unemployment = 0.4
+		}
+		modifier = {
+			factor = 0.5
+			unemployment = 0.5
+		}
+		modifier = {
+			factor = 0.8
+			average_militancy = 3
+		}
+		modifier = {
+			factor = 0.8
+			average_consciousness = 8
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 5
+		}
+		modifier = {
+			factor = 0.25
+			average_militancy = 8
+		}
+	}
+
+	immediate = { set_country_flag = election_initialized }
+
+	option = {
+		name = "ViolentElections_EvtOptA"
+		plurality = -1
+		add_country_modifier = { name = violent_elections duration = -1 }
+		random_owned = {
+			limit = {
+				owner = {
+					is_greater_power = no
+					is_secondary_power = yes
+				}
+			}
+			owner = { prestige = -10 }
+		}
+		random_owned = {
+			limit = { owner = { is_greater_power = yes } }
+			owner = { prestige = -20 }
+		}
+		any_pop = {
+			limit = { location = { is_colonial = no } }
+			militancy = 2
+			consciousness = 2
+		}
+	}
+}
+
+#Government Supported
+country_event = {
+	id = 14214
+	title = "GovSupported_EvtName"
+	desc = "GovSupported_EvtDesc"
+	picture = "election"
+
+	trigger = {
+		election = yes
+		any_owned_province = {
+			is_colonial = no
+			NOT = { unemployment = 0.05 }
+			NOT = { average_militancy = 1 }
+			NOT = { controlled_by = REB }
+		}
+		NOT = {
+			average_militancy = 4
+			unemployment = 0.3
+			revolt_percentage = 0.1
+			has_country_flag = election_initialized
+		}
+		OR = {
+			AND = {
+				ruling_party_ideology = conservative
+				NOT = { conservative = 0.25 }
+			}
+			AND = {
+				ruling_party_ideology = liberal
+				NOT = { liberal = 0.25 }
+			}
+			AND = {
+				ruling_party_ideology = anarcho_liberal
+				NOT = { anarcho_liberal = 0.25 }
+			}
+			AND = {
+				ruling_party_ideology = socialist
+				NOT = { socialist = 0.25 }
+			}
+			AND = {
+				ruling_party_ideology = fascist
+				NOT = { fascist = 0.25 }
+			}
+			AND = {
+				ruling_party_ideology = communist
+				NOT = { communist = 0.25 }
+			}
+			AND = {
+				ruling_party_ideology = reactionary
+				NOT = { reactionary = 0.25 }
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 15
+		modifier = {
+			factor = 2
+			num_of_revolts = 1
+		}
+		modifier = {
+			factor = 1.2
+			war_exhaustion = 10
+		}
+		modifier = {
+			factor = 1.2
+			war_exhaustion = 20
+		}
+		modifier = {
+			factor = 1.2
+			war_exhaustion = 30
+		}
+		modifier = {
+			factor = 1.2
+			unemployment = 0.1
+		}
+		modifier = {
+			factor = 1.3
+			unemployment = 0.2
+		}
+		modifier = {
+			factor = 1.2
+			average_militancy = 3
+		}
+		modifier = {
+			factor = 1.2
+			average_consciousness = 8
+		}
+	}
+
+	immediate = { set_country_flag = election_initialized }
+
+	option = {
+		name = "GovSupported_EvtOptA"
+		plurality = 1
+		any_owned = {
+			limit = {
+				is_colonial = no
+				NOT = { unemployment = 0.05 }
+				NOT = { average_militancy = 1 }
+				NOT = { controlled_by = REB }
+			}
+			add_province_modifier = { name = support_the_government duration = -1 }
+		}
+
+		any_pop = {
+			limit = {
+				country = { ruling_party_ideology = conservative }
+				location = { has_province_modifier = support_the_government }
+				is_primary_culture = yes
+				NOT = { unemployment = 0.01 }
+				NOT = { militancy = 0.5 }
+			}
+			ideology = { value = conservative factor = 0.05 }
+		}
+		any_pop = {
+			limit = {
+				country = { ruling_party_ideology = liberal }
+				location = { has_province_modifier = support_the_government }
+				is_primary_culture = yes
+				NOT = { unemployment = 0.01 }
+				NOT = { militancy = 0.5 }
+			}
+			ideology = { value = liberal factor = 0.05 }
+		}
+		any_pop = {
+			limit = {
+				country = { ruling_party_ideology = anarcho_liberal }
+				location = { has_province_modifier = support_the_government }
+				is_primary_culture = yes
+				NOT = { unemployment = 0.01 }
+				NOT = { militancy = 0.5 }
+			}
+			ideology = { value = anarcho_liberal factor = 0.05 }
+		}
+		any_pop = {
+			limit = {
+				country = { ruling_party_ideology = socialist }
+				location = { has_province_modifier = support_the_government }
+				is_primary_culture = yes
+				NOT = { unemployment = 0.01 }
+				NOT = { militancy = 0.5 }
+			}
+			ideology = { value = socialist factor = 0.05 }
+		}
+		any_pop = {
+			limit = {
+				country = { ruling_party_ideology = fascist }
+				location = { has_province_modifier = support_the_government }
+				is_primary_culture = yes
+				NOT = { unemployment = 0.01 }
+				NOT = { militancy = 0.5 }
+			}
+			ideology = { value = fascist factor = 0.05 }
+		}
+		any_pop = {
+			limit = {
+				country = { ruling_party_ideology = communist }
+				location = { has_province_modifier = support_the_government }
+				is_primary_culture = yes
+				NOT = { unemployment = 0.01 }
+				NOT = { militancy = 0.5 }
+			}
+			ideology = { value = communist factor = 0.05 }
+		}
+		any_pop = {
+			limit = {
+				country = { ruling_party_ideology = reactionary }
+				location = { has_province_modifier = support_the_government }
+				is_primary_culture = yes
+				NOT = { unemployment = 0.01 }
+				NOT = { militancy = 0.5 }
+			}
+			ideology = { value = reactionary factor = 0.05 }
+		}
+
+		any_pop = {
+			limit = {
+				location = { has_province_modifier = support_the_government }
+				OR = {
+					is_primary_culture = yes
+					is_accepted_culture = yes
+				}
+			}
+			militancy = -2
+			consciousness = -2
+		}
+	}
+}
+
+
+#Orderly Election
+country_event = {
+	id = 14215
+	title = "OrderlyElection_EvtName"
+	desc = "OrderlyElection_EvtDesc"
+	picture = "chartists"
+
+	trigger = {
+		election = yes
+		war = no
+		NOT = {
+			average_militancy = 4
+			unemployment = 0.3
+			war_exhaustion = 30
+			num_of_revolts = 1
+		}
+		NOT = { has_country_flag = election_initialized }
+	}
+
+	mean_time_to_happen = {
+		days = 15
+	}
+
+	immediate = { set_country_flag = election_initialized }
+
+	option = {
+		name = "OrderlyElection_EvtOptA"
+		plurality = 0.5
+		any_pop = {
+			limit = {
+				location = { is_colonial = no }
+				OR = {
+					is_primary_culture = yes
+					is_accepted_culture = yes
+				}
+			}
+			militancy = -1
+		}
+	}
+}
+
+
+#Repeated Elections
+country_event = {
+	id = 14216
+	title = "RepeatedElection_EvtName"
+	desc = "RepeatedElection_EvtDesc"
+	picture = "communist_riot"
+
+	trigger = {
+		election = yes
+		has_country_modifier = election_national_cooldown
+	}
+
+	option = {
+		name = "RepeatedElection_EvtOptA"
+		remove_country_modifier = election_national_cooldown
+
+		change_variable = { which = repeated_elections value = 1 }
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { check_variable = { which = repeated_elections value = 1 } }
+				}
+			}
+			owner = { plurality = -2.5 }
+		}
+
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = repeated_elections value = 1 }
+					NOT = { check_variable = { which = repeated_elections value = 2 } }
+				}
+			}
+			owner = { plurality = -5 }
+		}
+
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = repeated_elections value = 2 }
+					NOT = { check_variable = { which = repeated_elections value = 3 } }
+				}
+			}
+			owner = { plurality = -7.5 }
+		}
+
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = repeated_elections value = 3 }
+					NOT = { check_variable = { which = repeated_elections value = 4 } }
+				}
+			}
+			owner = { plurality = -10 }
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = repeated_elections value = 4 }
+				}
+			}
+			owner = { plurality = -20 }
+		}
+	}
+}

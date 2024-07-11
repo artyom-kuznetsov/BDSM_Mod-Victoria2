@@ -11,7 +11,7 @@ country_event = {
 	
 	trigger = {
 		NOT = {
-			government = proletarian_dictatorship
+			economic_policy = planned_economy
 		}
 		government_interventionism = 1
 		NOT = {
@@ -51,6 +51,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22500"
+		plurality = -3
 		add_country_modifier = {
 			name = stock_market_crash
 			duration = 730
@@ -59,8 +60,10 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22500"
+		plurality = -5
 		any_pop = {
-			militancy = 1
+			militancy = 2
+			consciousness = 3
 		}
 		add_country_modifier = {
 			name = stock_market_crash
@@ -118,6 +121,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22510"
+		plurality = -5
 		any_country = {
 			limit = {
 				civilized = yes
@@ -194,6 +198,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22520"
+		plurality = 1
 		random_state = {
 			limit = {
 				is_colonial = no
@@ -238,6 +243,18 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22530"
+		CUSTOM_TOOLTIP_RAILROAD = { }
+		random_state = {
+			any_owned = {
+				limit = { 
+					can_build_in_province = {
+						building = railroad
+						limit_to_world_greatest_level = yes # optional
+					}
+				}
+				infrastructure = 1
+			}
+		}
 		random_state = {
 			any_owned = {
 				limit = { 
@@ -253,6 +270,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22530"
+		plurality = 1
 		random_state = {
 			any_pop = {
 				militancy = -1
@@ -271,7 +289,7 @@ country_event = {
 	trigger = {
 		stock_exchange = 1
 		NOT = {
-			government = proletarian_dictatorship
+			economic_policy = planned_economy
 		}
 	}
 	
@@ -343,6 +361,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22550"
+		plurality = 0.5
+		money = 10000
 		random_state = {
 			any_pop = {
 				money = -20
@@ -354,6 +374,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22550"
+		plurality = 0.5
+		money = -30000
 		capitalists = {
 			militancy = 1
 			consciousness = 1
@@ -404,6 +426,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22560"
+		plurality = 1
 		add_country_modifier = {
 			name = economic_boom
 			duration = 365
@@ -412,6 +435,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22560"
+		plurality = 2
 		any_pop = {
 			militancy = -1
 			consciousness = -1
@@ -469,6 +493,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22570"
+		plurality = -0.2
 		capitalists = {
 			militancy = 1
 			consciousness = 1
@@ -512,6 +537,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22580"
+		plurality = 1
 		random_state = {
 			limit = {
 				is_colonial = no
@@ -524,6 +550,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22580"
+		money = 20000
 		poor_strata = {
 			consciousness = 1
 			militancy = 1

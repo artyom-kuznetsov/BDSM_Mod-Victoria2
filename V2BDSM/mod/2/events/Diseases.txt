@@ -32,10 +32,15 @@ country_event = {
 			factor = 1.5
 			medicine = 1
 		}
+		modifier = {
+			factor = 1.5
+			inorganic_chemistry = 1
+		}
 	}
 	
 	option = {
 		name = "EVTOPTA21000"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				reduce_pop = 0.96
@@ -86,6 +91,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB21010"
+		plurality = -1
 		random_state = {
 			poor_strata = {
 				reduce_pop = 0.95
@@ -139,6 +145,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA21020"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				reduce_pop = 0.95
@@ -149,9 +156,10 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB21020"
+		plurality = -0.5
 		random_state = {
 			any_pop = {
-				reduce_pop = 0.96
+				reduce_pop = 0.97
 				militancy = 2
 			}
 		}
@@ -223,6 +231,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB21030"
+		plurality = -0.5
 		add_country_modifier = {
 			name = pandemic_influenza
 			duration = 480
@@ -277,6 +286,7 @@ country_event = {
 				consciousness = 2
 			}
 		}
+		money = -10000
 		add_country_modifier = { name = epidemy_cooldown_modifier duration = 1825 }
 	}
 	
@@ -288,6 +298,7 @@ country_event = {
 				militancy = -1
 			}
 		}
+		plurality = -0.5
 		add_country_modifier = { name = epidemy_cooldown_modifier duration = 1825 }
 	}
 }

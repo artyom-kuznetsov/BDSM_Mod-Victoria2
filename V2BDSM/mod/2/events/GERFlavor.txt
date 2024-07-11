@@ -138,6 +138,7 @@ province_event = {
 			}
 			militancy = 2
 		}
+		plurality = -2
 		relation = { who = DEN value = -100 }
 		set_global_flag = GermanizeSchlewsigDanes
 	}
@@ -347,11 +348,40 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA33005" 
-		prestige = 10
-		set_global_flag = BerlinBaghdadRail
-		relation = { who = TUR value = 100 }
-		relation = { who = ENG value = -75 }
-		relation = { who = RUS value = -75 }
+		random_owned = {
+			limit = {
+				owner = {
+					money = 250000
+				}
+			}
+			owner = {
+				money = -250000
+				set_global_flag = BerlinBaghdadRail
+				relation = { who = TUR value = 100 }
+				relation = { who = ENG value = -75 }
+				relation = { who = RUS value = -75 }
+				prestige = 10
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { money = 250000 }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
+				relation = { who = TUR value = -50 }
+				relation = { who = ENG value = 75 }
+				relation = { who = RUS value = 75 }
+				officers = {
+					consciousness = 2
+				}
+				capitalists = {
+					consciousness = 2
+				}
+			}
+		}
 	}
 
 	option = {
@@ -361,10 +391,10 @@ country_event = {
 		relation = { who = RUS value = 75 }
 		officers = {
 			consciousness = 2
-			}
+		}
 		capitalists = {
 			consciousness = 2
-			}
+		}
 	}
 
 }

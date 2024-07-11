@@ -67,6 +67,7 @@ country_event = {
 				}
 			}
 		}
+		plurality = -0.5
 	}
 	
 	option = {
@@ -82,6 +83,7 @@ country_event = {
 				}
 			}
 		}
+		plurality = -1
 	}
 }
 
@@ -131,6 +133,7 @@ country_event  = {
 				}
 			}
 		}
+		plurality = -0.5
 	}
 
 	option = {
@@ -238,6 +241,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14530"
+		plurality = -2
 		capital_scope = {
 			state_scope = {
 				bureaucrats = {
@@ -250,6 +254,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB14530"
+		plurality = -1
 		random_state = {
 			limit = {
 				is_colonial = yes
@@ -489,6 +494,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14570"
+		plurality = -0.5
 		random_state = {
 			limit = {
 				is_colonial = yes
@@ -505,7 +511,7 @@ country_event = {
 				is_colonial = yes
 			}
 			any_pop = {
-				consciousness = 3
+				consciousness = 4
 			}
 		}
 	}
@@ -557,13 +563,11 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTB14580"
+		plurality = -0.5
 		state_scope = {
 			any_pop = {
-				limit = {
-					is_state_religion = no
-				}
-				militancy = 3
-				consciousness = 2
+				militancy = 2
+				consciousness = 1
 			}
 		}
 	}
@@ -608,6 +612,7 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA14590"
+		plurality = -1
 		state_scope = {
 			any_pop = {
 				limit = {
@@ -621,6 +626,7 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTB14590"
+		plurality = -0.5
 		owner = {
 			prestige = -1
 		}
@@ -673,12 +679,13 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14600"
+		plurality = -1
 		any_owned = {
 			limit = {
 				is_colonial = yes
 			}
 			any_pop = {
-				militancy = 1
+				militancy = 2
 			}
 		}
 	}
@@ -729,6 +736,7 @@ province_event = {
 	}
 	
 	option = {
+		plurality = 1
 		name = "EVTOPTA14610"
 		state_scope = {
 			any_pop = {
@@ -775,6 +783,7 @@ province_event = {
 	
 	option = {
 		name = "EVTOPTA14620"
+		plurality = -1
 		state_scope = {
 			any_pop = {
 				reduce_pop = 0.95
@@ -785,6 +794,7 @@ province_event = {
 	}
 	
 	option = {
+		plurality = 1
 		name = "EVTOPTB14620"
 		state_scope = {
 			any_pop = {
@@ -897,6 +907,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14640"
+		plurality = -0.5
 		random_state = {
 			limit = {
 				is_colonial = yes
@@ -909,6 +920,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB14640"
+		plurality = -1
 		random_state = {
 			limit = {
 				is_colonial = yes
@@ -1116,6 +1128,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14670"
+		plurality = -5
 		badboy = 5
 		prestige = -5
 		
@@ -1123,6 +1136,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB14670"
+		plurality = -8
 		badboy = 2
 		prestige = -2
 		random_state = {
@@ -1290,6 +1304,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14690"
+		plurality = 1
 		random_state = {
 			limit = {
 				is_colonial = yes
@@ -1302,6 +1317,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB14690"
+		plurality = 1
 		random_owned = {
 			limit = {
 				is_colonial = yes
@@ -1357,6 +1373,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14700"
+		plurality = 1
 		any_pop = {
 			militancy = -0.5
 		}
@@ -1402,13 +1419,14 @@ country_event = {
 	option = {
 		name = "EVTOPTA14710"
 		capitalists = {
-			militancy = 0.5
-			consciousness = 2
+			militancy = 2
+			consciousness = 3
 		}
 	}
 	
 	option = {
 		name = "EVTOPTB14710"
+		plurality = -0.5
 		random_state = {
 			limit = {
 				is_colonial = yes
@@ -1472,6 +1490,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14720"
+		plurality = -0.5
 		any_owned = {
 			limit = {
 				is_colonial = no
@@ -1534,6 +1553,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14730"
+		plurality = -1
 		any_pop = {
 			scaled_militancy = {
 				ideology = socialist
@@ -1544,20 +1564,22 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB14730"
+		plurality = 0.5
 		any_pop = {
 			scaled_consciousness = {
 				ideology = conservative
-				factor = 1
+				factor = 2
 			}
 			scaled_consciousness = {
 				ideology = socialist
-				factor = 1
+				factor = 3
 			}
 		}
 	}
 
 	option = {
 		name = "EVTOPTC14730"
+		plurality = -1
 		any_pop = {
 			scaled_militancy = {
 				ideology = conservative
@@ -1630,6 +1652,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14740"
+		plurality = 2
 		prestige = 10
 		years_of_research = 0.2
 		random_state = {
@@ -1675,6 +1698,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14750"
+		plurality = 1
 		upper_house = {
 			ideology = conservative
 			value = 0.05
@@ -1748,6 +1772,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB14760"
+		plurality = -0.5
 		capitalists = {
 			militancy = 2
 			consciousness = 2
@@ -1804,6 +1829,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14770"
+		plurality = 1
 		prestige = 10
 		capital_scope = {
 			any_pop = {
@@ -2029,6 +2055,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA14810"
+		plurality = -1
 		random_state = {
 			limit = {
 				is_colonial = yes
@@ -2041,6 +2068,7 @@ country_event = {
 	}
 	
 	option = {
+		plurality = -1
 		name = "EVTOPTB14810"
 		capital_scope = {
 			capitalists = {

@@ -43,6 +43,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22000"
+		plurality = -0.5
 		random_state = {
 			any_owned = {
 				add_province_modifier = {
@@ -55,6 +56,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22000"
+		plurality = -0.5
 		random_state = {
 			any_pop = {
 				consciousness = 2
@@ -193,6 +195,7 @@ country_event = {
 	}
 	
 	option = {
+		plurality = -0.5
 		name = "EVTOPTA22020"
 		any_pop = {
 			militancy = -0.5
@@ -200,13 +203,15 @@ country_event = {
 	}
 	
 	option = {
+		money = -10000
 		name = "EVTOPTB22020"
 		any_pop = {
-			consciousness = -0.5
+			consciousness = -1
 		}
 	}
 	
 	option = {
+		money = -5000
 		name = "EVTOPTC22020"
 		upper_house = {
 			ideology = liberal
@@ -257,28 +262,26 @@ country_event = {
 	}
 	
 	option = {
+		plurality = -0.5
 		name = "EVTOPTA22030"
-		random_state = {
-			rich_strata = {
-				militancy = 0.5
-			}
-			poor_strata = {
-				militancy = -0.5
-				consciousness = 0.5
-			}
+		rich_strata = {
+			militancy = 2
+		}
+		poor_strata = {
+			militancy = -0.5
+			consciousness = -0.5
 		}
 	}
 	
 	option = {
+		plurality = -1
 		name = "EVTOPTB22030"
-		random_state = {
-			poor_strata = {
-				militancy = 0.5
-			}
-			rich_strata = {
-				militancy = -0.5
-				consciousness = 0.5
-			}
+		poor_strata = {
+			militancy = 0.5
+		}
+		rich_strata = {
+			militancy = -2
+			consciousness = -2
 		}
 	}
 }
@@ -385,6 +388,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22050"
+		plurality = -0.5
 		poor_strata = {
 			militancy = 1
 		}
@@ -426,7 +430,7 @@ country_event = {
 		poor_strata = {
 			militancy = -0.5
 		}
-		prestige = -2
+		prestige = -5
 	}
 	
 	option = {
@@ -434,7 +438,8 @@ country_event = {
 		poor_strata = {
 			militancy = 0.5
 		}
-		prestige = 2
+		prestige = 5
+		plurality = -1
 	}
 }
 
@@ -480,6 +485,7 @@ country_event = {
 		capitalists = {
 			militancy = 0.5
 		}
+		plurality = 0.5
 	}
 	
 	option = {
@@ -490,6 +496,8 @@ country_event = {
 		capitalists = {
 			militancy = -0.5
 		}
+		plurality = -0.5
+		prestige = 4
 	}
 }
 
@@ -536,12 +544,12 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA22080"
-		plurality = 1
+		plurality = 0.5
 		capital_scope = {
 			any_pop = {
 				scaled_consciousness = {
 					ideology = liberal
-					factor = 3
+					factor = -1
 				}
 			}
 		}
@@ -549,12 +557,12 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB22080"
-		plurality = 1
+		plurality = -0.5
 		capital_scope = {
 			any_pop = {
 				scaled_consciousness = {
 					ideology = conservative
-					factor = 3
+					factor = -3
 				}
 			}
 		}

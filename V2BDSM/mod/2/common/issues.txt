@@ -237,6 +237,7 @@ political_reforms = {
 			middle_vote = 0
 			poor_vote = 0
 			global_immigrant_attract = 0.02
+			cb_generation_speed_modifier = 0.1
 			allow = { 
 				OR = {
 					has_country_flag = liberal_revolution_in_progress
@@ -245,7 +246,6 @@ political_reforms = {
 					ai = no
 				}
 			}
-			cb_generation_speed_modifier = 0.1
 		}
 		wealth_weighted_voting = {
 			rich_vote = 1
@@ -1150,7 +1150,6 @@ economic_reforms = {
 			on_execute = {
 				effect = {
 					set_country_flag = education_reform
-					plurality = 5
 					activate_technology = malthusian_thought
 					activate_technology = positivism
 					social_reform = compulsory_schools
@@ -1190,7 +1189,6 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					plurality = 5
 					activate_technology = state_n_government
 					activate_technology = market_structure
 					any_pop = {

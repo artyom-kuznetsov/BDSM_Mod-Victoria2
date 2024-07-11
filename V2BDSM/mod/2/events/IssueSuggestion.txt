@@ -83,6 +83,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3000"
+		plurality = -0.5
 		random_state = {
 			limit = {
 				is_colonial = no
@@ -121,6 +122,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3002"
+		plurality = 1
 		random_state = {
 			middle_strata = {
 				militancy = -2
@@ -161,6 +163,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3003"
+		plurality = -0.5
 		random_state = {
 			any_pop = {
 				ideology = {
@@ -177,6 +180,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3003"
+		plurality = -0.5
 		random_state = {
 			any_pop = {
 				ideology = {
@@ -193,6 +197,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3003"
+		plurality = -1
 		poor_strata = {
 			militancy = 1
 		}
@@ -234,6 +239,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3004"
+		plurality = 0.5
 		random_state = {
 			poor_strata = {
 				militancy = -1
@@ -256,6 +262,7 @@ country_event = {
 	option = {
 		name = "EVTOPTC3004"
 		prestige = 4
+		plurality = -0.5
 		random_state = {
 			poor_strata = {
 				consciousness = 1
@@ -292,6 +299,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3005"
+		money = -30000
 		random_state = {
 			scaled_militancy = {
 				ideology = conservative
@@ -300,7 +308,7 @@ country_event = {
 			random_province = {
 				add_province_modifier = {
 					name = government_sanitarium
-					duration = -1
+					duration = 3650
 				}
 			}
 		}
@@ -325,7 +333,7 @@ country_event = {
 			random_province = {
 				add_province_modifier = {
 					name = government_sanitarium
-					duration = 3650
+					duration = 1825
 				}
 			}
 		}
@@ -402,6 +410,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3300"
+		plurality = -0.5
 		farmers = {
 			militancy = 1
 		}
@@ -426,6 +435,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3301"
+		money = -10000
 		any_pop = {
 			dominant_issue = {
 				value = low_pensions
@@ -440,18 +450,21 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3302"
+		plurality = -1
 		any_pop = {
 			scaled_militancy = {
 				ideology = liberal
 				factor = 3
 			}
-			consciousness = -2
+			consciousness = 2
 		}
 	}
 	
 	option = {
 		name = "EVTOPTC3302"
 		social_reform = no_pensions
+		plurality = -3
+		money = 50000
 		any_pop = {
 			militancy = 3
 			consciousness = 1
@@ -479,6 +492,8 @@ country_event = {
 	option = {
 		name = "EVTOPTA3302"
 		social_reform = acceptable_pensions
+		plurality = 1
+		money = -35000
 		scaled_militancy = {
 			ideology = conservative
 			factor = 4
@@ -501,6 +516,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3302"
+		plurality = -1
+		money = 20000
 		social_reform = trinket_pensions
 		scaled_militancy = {
 			issue = acceptable_pensions
@@ -554,6 +571,8 @@ country_event = {
 	option = {
 		name = "EVTOPTB3303"
 		social_reform = good_pensions
+		plurality = 1
+		money = -50000
 		scaled_militancy = {
 			ideology = conservative
 			factor = 4
@@ -609,9 +628,11 @@ country_event = {
 	option = {
 		name = "EVTOPTA3304"
 		social_reform = acceptable_pensions
+		plurality = -1
+		money = 40000
 		any_pop = {
 			limit = {
-				consciousness = 5
+				consciousness = 3
 			}
 			militancy = 4
 		}
@@ -694,6 +715,8 @@ country_event = {
 	option = {
 		name = "EVTOPTA3305"
 		social_reform = acceptable_pensions
+		plurality = 0.5
+		money = -10000
 		middle_strata = {
 			scaled_consciousness = {
 				ideology = liberal
@@ -705,6 +728,8 @@ country_event = {
 	option = {
 		name = "EVTOPTB3305"
 		social_reform = acceptable_minimum_wage
+		plurality = 0.5
+		money = -10000
 		rich_strata = {
 			scaled_consciousness = {
 				ideology = conservative
@@ -715,6 +740,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3305"
+		plurality = -0.5
 		any_pop = {
 			militancy = 1
 			consciousness = 1
@@ -739,14 +765,25 @@ country_event = {
 		war = yes
 		war_exhaustion = 6
 		social_reform_want = 0.1
+		NOT = { plurality = 50 }
 	}
 	
 	mean_time_to_happen = {
 		months = 800 # Common
 		
 		modifier = {
-			factor = 0.8
+			factor = 0.5
 			average_militancy = 6
+		}
+		
+		modifier = {
+			factor = 0.5
+			war_exhaustion = 15
+		}
+		
+		modifier = {
+			factor = 0.5
+			NOT = { plurality = 40 }
 		}
 		
 		modifier = {
@@ -766,6 +803,7 @@ country_event = {
 		name = "EVTOPTA3306"
 		set_country_flag = promised_post_war_pensions
 		war_exhaustion = -4
+		plurality = 1
 		any_pop = {
 			militancy = -1
 			consciousness = -1
@@ -778,6 +816,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3306"
+		plurality = -1
 		war_exhaustion = 1
 		prestige = 5
 	}
@@ -811,6 +850,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3307"
+		money = -30000
 		social_reform = low_pensions
 		war_exhaustion = -2
 		any_pop = {
@@ -822,6 +862,7 @@ country_event = {
 	option = {
 		name = "EVTOPTC3307"
 		war_exhaustion = 2
+		plurality = -3
 		any_pop = {
 			militancy = -1
 		}
@@ -862,6 +903,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3400"
+		plurality = -1
 		random_state = {
 			poor_strata = {
 				scaled_militancy = {
@@ -874,6 +916,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3400"
+		plurality = -1
 		random_state = {
 			poor_strata = {
 				scaled_consciousness = {
@@ -886,6 +929,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3400"
+		plurality = -0.5
 		random_state = {
 			poor_strata = {
 				dominant_issue = {
@@ -935,6 +979,8 @@ country_event = {
 	option = {
 		name = "EVTOPTA3401"
 		social_reform = no_subsidies
+		plurality = -2
+		money = 25000
 		any_pop = {
 			scaled_militancy = {
 				ideology = liberal
@@ -953,6 +999,8 @@ country_event = {
 	option = {
 		name = "EVTOPTC3401"
 		social_reform = acceptable_subsidies
+		plurality = 0.5
+		money = -15000
 		any_pop = {
 			scaled_militancy = {
 				ideology = conservative
@@ -981,6 +1029,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3402"
+		plurality = -0.5
 		random_state = {
 			rich_strata = {
 				consciousness = 3
@@ -992,6 +1041,7 @@ country_event = {
 	option = {
 		name = "EVTOPTB3402"
 		social_reform = low_subsidies
+		plurality = -2
 		rich_strata = {
 			consciousness = -1
 			militancy = -1
@@ -1008,6 +1058,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3402"
+		money = -20000
 		any_pop = {
 			dominant_issue = {
 				value = good_subsidies
@@ -1053,6 +1104,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3403"
+		plurality = -2
 		random_state = {
 			any_pop = {
 				dominant_issue = {
@@ -1069,6 +1121,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3403"
+		plurality = -2
 		random_state = {
 			any_pop = {
 				dominant_issue = {
@@ -1085,6 +1138,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3403"
+		plurality = -3
 		random_state = {
 			any_pop = {
 				militancy = 2
@@ -1124,6 +1178,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3404"
+		plurality = -1.5
 		random_state = {
 			any_pop = {
 				dominant_issue = {
@@ -1137,6 +1192,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTB3404"
+		plurality = -3
 		random_state = {
 			any_pop = {
 				militancy = 2
@@ -1175,6 +1231,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3600"
+		plurality = -1
 		random_state = {
 			limit = {
 				trinket_safety = 1
@@ -1190,6 +1247,8 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3600"
+		plurality = -0.5
+		money = -10000
 		random_state = {
 			limit = {
 				trinket_safety = 1
@@ -1233,6 +1292,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3601"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				scaled_militancy = {
@@ -1287,6 +1347,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3602"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				scaled_militancy = {
@@ -1299,6 +1360,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3602"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				scaled_consciousness = {
@@ -1311,6 +1373,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3602"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				scaled_militancy = {
@@ -1356,6 +1419,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3603"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				consciousness = 1
@@ -1366,6 +1430,8 @@ country_event = {
 	option = {
 		name = "EVTOPTB3603"
 		social_reform = low_safety
+		plurality = -3
+		money = -20000
 		random_state = {
 			poor_strata = {
 				consciousness = 4
@@ -1376,6 +1442,7 @@ country_event = {
 	option = {
 		name = "EVTOPTC3603"
 		social_reform = good_safety
+		plurality = 1
 		random_state = {
 			rich_strata = {
 				consciousness = 4
@@ -1419,6 +1486,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3604"
+		plurality = 0.5
 		random_state = {
 			poor_strata = {
 				militancy = -3
@@ -1428,6 +1496,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3604"
+		plurality = 0.5
 		random_state = {
 			poor_strata = {
 				consciousness = -3
@@ -1445,7 +1514,10 @@ country_event = {
 	
 	trigger = {
 		civilized = yes
-		safety_regulations = low_safety
+		OR = {
+			safety_regulations = no_safety
+			safety_regulations = low_safety
+		}
 		health_care = low_health_care
 	}
 	
@@ -1465,6 +1537,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3605"
+		plurality = -5
 		random_state = {
 			bureaucrats = {
 				militancy = 3
@@ -1475,6 +1548,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3605"
+		plurality = -2
+		money = -20000
 		random_state = {
 			bureaucrats = {
 				militancy = -4
@@ -1524,6 +1599,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTA3606"
+		plurality = -2
 		random_state = {
 			poor_strata = {
 				militancy = 1
@@ -1533,6 +1609,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3606"
+		plurality = -0.5
+		money = -10000
 		random_state = {
 			poor_strata = {
 				dominant_issue = {
@@ -1575,6 +1653,7 @@ country_event = {
 
 	option = {
 		name = "EVTOPTA3607"
+		plurality = 1
 		random_state = {
 			any_pop = {
 				militancy = -2
@@ -1584,6 +1663,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3607"
+		plurality = 0.5
 		prestige = 5
 	}
 }
@@ -1620,6 +1700,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3700"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				dominant_issue = {
@@ -1633,6 +1714,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3700"
+		plurality = -3
 		random_state = {
 			poor_strata = {
 				militancy = 3
@@ -1678,6 +1760,8 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3701"
+		plurality = -0.5
+		money = -10000
 		social_reform = twelve_hours
 		poor_strata = {
 			militancy = -1
@@ -1689,6 +1773,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3701"
+		plurality = -2
 		social_reform = no_work_hour_limit
 		poor_strata = {
 			militancy = 3
@@ -1731,6 +1816,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3702"
+		plurality = -3
 		social_reform = fourteen_hours
 		poor_strata = {
 			militancy = 3
@@ -1745,6 +1831,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3702"
+		plurality = -0.5
 		random_state = {
 			any_pop = {
 				militancy = -2
@@ -1757,6 +1844,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3702"
+		plurality = 0.5
+		money = -50000
 		social_reform = ten_hours
 		rich_strata = {
 			militancy = 4
@@ -1787,6 +1876,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3703"
+		plurality = -5
+		money = 70000
 		social_reform = fourteen_hours
 		poor_strata = {
 			militancy = 3
@@ -1799,6 +1890,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3703"
+		plurality = -2
 		rich_strata = {
 			consciousness = 1
 		}
@@ -1809,6 +1901,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3703"
+		money = -30000
 		social_reform = eight_hours
 		rich_strata = {
 			militancy = 5
@@ -1861,6 +1954,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3800"
+		plurality = -0.5
 		random_state = {
 			any_pop = {
 				dominant_issue = {
@@ -1874,6 +1968,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3800"
+		plurality = -2
 		random_state = {
 			rich_strata = {
 				militancy = -2
@@ -1883,6 +1978,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3800"
+		money = -50000
 		social_reform = trinket_wage
 		poor_strata = {
 			militancy = -1
@@ -1925,22 +2021,29 @@ country_event = {
 				social_reform_want = 0.2
 			}
 		}
+		
+		modifier = {
+			factor = 0.3
+			war = yes
+		}
 	}
 	
 	option = {
 		name = "EVTOPTA3801"
+		plurality = -0.5
 		poor_strata = {
 			consciousness = 1
 			militancy = -2
 		}
 		rich_strata = {
-			consciousness = 1
+			consciousness = 2
 			militancy = 2
 		}
 	}
 	
 	option = {	
 		name = "EVTOPTB3801"
+		plurality = -0.5
 		poor_strata = {
 			militancy = 1
 		}
@@ -1951,6 +2054,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3801"
+		plurality = -3
+		money = 40000
 		social_reform = no_minimum_wage
 		poor_strata = {
 			consciousness = 3
@@ -1990,6 +2095,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3802"
+		plurality = -3
+		money = 50000
 		social_reform = no_minimum_wage
 		poor_strata = {
 			militancy = 2
@@ -2007,6 +2114,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3802"
+		plurality = -1
 		rich_strata = {
 			militancy = -1
 		}
@@ -2018,6 +2126,8 @@ country_event = {
 	option = {
 		name = "EVTOPTC3802"
 		social_reform = acceptable_minimum_wage
+		plurality = 0.5
+		money = -30000
 		rich_strata = {
 			militancy = 4
 			consciousness = 2
@@ -2053,6 +2163,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3803"
+		plurality = -3
+		money = 30000
 		social_reform = acceptable_minimum_wage
 		poor_strata = {
 			militancy = 2
@@ -2063,6 +2175,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3803"
+		plurality = -0.5
 		random_state = {
 			rich_strata = {
 				militancy = 1
@@ -2104,6 +2217,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3900"
+		plurality = -2
 		any_pop = {
 			scaled_militancy = {
 				issue = state_controlled
@@ -2114,6 +2228,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3900"
+		plurality = -1
 		random_state = {
 			any_pop = {
 				dominant_issue = {
@@ -2126,6 +2241,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3900"
+		plurality = 0.5
+		money = -25000
 		political_reform = state_controlled
 		rich_strata = {
 			scaled_militancy = {
@@ -2180,6 +2297,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3901"
+		plurality = 0.5
 		any_pop = {
 			scaled_militancy = {
 				issue = non_socialist
@@ -2194,6 +2312,8 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3901"
+		plurality = -2
+		money = 20000
 		political_reform = no_trade_unions
 		poor_strata = {
 			militancy = 3
@@ -2207,6 +2327,8 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC3901"
+		plurality = 0.5
+		money = -25000
 		political_reform = non_socialist
 		rich_strata = {
 			militancy = 2
@@ -2247,6 +2369,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA3902"
+		plurality = -1
 		random_state = {
 			poor_strata = {
 				consciousness = 1
@@ -2257,6 +2380,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB3902"
+		plurality = -1
 		random_state = {
 			poor_strata = {
 				consciousness = 2
@@ -2267,6 +2391,8 @@ country_event = {
 
 	option = {
 		name = "EVTOPTC3902"
+		plurality = -3
+		money = 20000
 		political_reform = state_controlled
 		poor_strata = {
 			militancy = 2
@@ -2311,6 +2437,8 @@ country_event = {
 	option = {
 		name = "EVTOPTA3903"
 		political_reform = non_socialist
+		plurality = -5
+		money = 50000
 		poor_strata = {
 			militancy = 4
 			consciousness = 2
@@ -2323,6 +2451,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB3903"
+		plurality = -1
 		capitalists = {
 			militancy = -2
 			consciousness = -2
@@ -2376,6 +2505,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA4000"
+		plurality = -2
 		random_state = {
 			limit = {
 				no_slavery = 10
@@ -2391,6 +2521,7 @@ country_event = {
 	
 	option = {	
 		name = "EVTOPTB4000"
+		plurality = -1
 		random_state = {
 			limit = {
 				no_slavery = 10
@@ -2406,6 +2537,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTC4000"
+		plurality = -4
 		random_state = {
 			limit = {
 				no_slavery = 10
@@ -2466,6 +2598,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA4001"
+		plurality = -0.5
 		random_country = {
 			limit = {
 				slavery = yes_slavery
@@ -2486,6 +2619,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB4001"
+		plurality = -2
 		prestige = -2
 	}
 }

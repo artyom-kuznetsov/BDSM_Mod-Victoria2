@@ -54,6 +54,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9569
 		country_event = 9570
 		country_event = 9571
+		country_event = 9572
 		country_event = 57073
 		country_event = 57604
 	}
@@ -554,3 +555,43 @@ province_event = {
 	}
 }
 
+province_event = {
+	id = 9572
+	title = "noloc"
+	desc = "noloc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		political_reform = party_appointed
+	}
+}
+
+country_event = {
+	id = 9573
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		ai = yes
+		part_of_sphere = yes
+		is_greater_power = no
+		sphere_owner = {
+			NOT = { alliance_with = THIS }
+		}
+	}
+	
+	option = {
+		any_country = {
+			limit = {
+				is_greater_power = yes
+			}
+			leave_alliance = THIS
+		}
+		sphere_owner = {
+			create_alliance = THIS
+			military_access = THIS
+		}
+	}
+}

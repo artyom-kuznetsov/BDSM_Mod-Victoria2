@@ -1,0 +1,75 @@
+country_event = {                   	
+	id = 110800
+	title = "Vassal_Breakfree_Stab_EvtName"               
+	desc = "Vassal_Breakfree_Stab_EvtDesc"  
+	picture = RebuildAndFreedom  
+	
+	trigger = { 
+		is_vassal = yes 
+		overlord = { NOT = { plurality = 25 } }
+	}
+	
+	is_triggered_only = yes 
+	
+	mean_time_to_happen = {
+		months = 200
+
+		modifier = { overlord = { NOT = { plurality = 20 } }
+			factor = 0.1
+		}
+		modifier = { overlord = { NOT = { plurality = 15 } }
+			factor = 0.7
+		}
+		modifier = { overlord = { NOT = { plurality = 12 } }
+			factor = 0.3
+		}
+		modifier = { overlord = { NOT = { plurality = 10 } }
+			factor = 0.15
+		}
+		modifier = { overlord = { NOT = { plurality = 5 } }
+			factor = 0.1
+		}
+		modifier = { militancy = 5
+			factor = 0.5
+		}
+	}
+
+	option = {
+		name = "Vassal_Breakfree_Stab_EvtOptDeclare"
+		overlord = { country_event = 110801 }
+		overlord = { leave_alliance = THIS }
+		release_vassal = THIS
+		any_pop = { militancy = -2 }
+	} 
+
+	option = {
+		name = "Vassal_Breakfree_Stab_EvtOptStay"
+		overlord = { plurality = 1 }
+		any_pop = { militancy = 2 }
+	}   
+}
+
+country_event = {                   	
+	id = 110801
+	title = "Vassal_Breakfree_Notif_Stab_EvtName"               
+	desc = "Vassal_Breakfree_Notif_Stab_EvtDesc"   
+	picture = rebellion
+	
+	is_triggered_only = yes
+
+	option = {
+		name = "Vassal_Breakfree_Notif_Stab_EvtOptLetgo"
+		prestige = -10
+		plurality = 2
+	}
+
+	option = {
+		name = "Vassal_Breakfree_Notif_Stab_EvtOptForce"
+		prestige = -5
+		FROM = { add_casus_belli = { target = THIS
+							type = make_puppet
+							months = 3
+			}
+		}
+	}  
+}

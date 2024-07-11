@@ -250,6 +250,7 @@ country_event = { # GREECE RIOTS
 	immediate = { set_country_flag = greek_riots_fired_flag }
 	
 	option = {
+		plurality = -5
 		name = "greece_riots_EvtOptSuppress"
 		set_country_flag = TUR_suppressed_greece_flag
 		CUSTOM_TOOLTIP_SUPPRESS_GREEKS = { }
@@ -269,6 +270,7 @@ country_event = { # GREECE RIOTS
 	}
 	
 	option = {
+		plurality = -10
 		name = "greece_riots_EvtOptAllow"
 		set_country_flag = TUR_allowed_greece_flag
 		CUSTOM_TOOLTIP_ALLOW_GREEKS = { }
@@ -351,6 +353,7 @@ country_event = { # GREECE ACCEPTED AFTER SUPPRESSED
 	}
 	
 	option = {
+		plurality = 5
 		name = "greece_accepted_EvtOptA"
 		add_accepted_culture = greek
 		set_country_flag = greek_separatism_ended_flag
@@ -381,6 +384,7 @@ country_event = { # GREECE ACCEPTED GENERIC
 	}
 	
 	option = {
+		plurality = 5
 		name = "greece_accepted_EvtOptA"
 		add_accepted_culture = greek
 		set_country_flag = greek_separatism_ended_flag
@@ -406,6 +410,7 @@ country_event = { # KURDISTAN RISE AFTER GREEKS ALLOWED
 	}
 	
 	option = {
+		plurality = -10
 		name = "kds_rising_EvtOptA"
 		CUSTOM_TOOLTIP_KURDISH_WAR = { }
 		set_country_flag = KDS_rebellion_flag
@@ -447,6 +452,7 @@ country_event = { # KURDISTAN FORCE PEACE
 	fire_only_once = yes
 	
 	option = {
+		plurality = -5
 		name = "kds_peace_EvtOptA"
 		end_war = KDS
 		KDS = { all_core = { remove_core = THIS } }
@@ -475,6 +481,7 @@ country_event = { # EGYPT REBELLION AFTER KDS
 	fire_only_once = yes
 	
 	option = {
+		plurality = -5
 		name = "kds_rising_EvtOptA"
 		release_vassal = EGY
 		add_country_modifier = {
@@ -513,6 +520,7 @@ province_event = { # ADMINISTRATIVE ISSUES
 	}
 	
 	option = {
+		plurality = -5
 		name = "admin_issues_EvtOptA"
 		owner = { add_country_modifier = { name = admin_issues_cmodifier duration = 365 } }
 		state_scope = {
@@ -547,6 +555,7 @@ country_event = { # ANARCHY
 	}
 	
 	option = {
+		plurality = -10
 		name = "TUR_Anarchy_EvtOptA"
 		set_country_flag = TUR_Anarchy_flag
 		primary_culture = no_accepted_culture
@@ -596,6 +605,7 @@ country_event = { # BULGARIAN REVOLT
 	}
 	
 	option = {
+		plurality = -5
 		name = "TUR_Bulgarian_Revolt_EvtOptA"
 		809 = {
 			state_scope = {
@@ -633,6 +643,7 @@ country_event = { # SERB REVOLT
 	fire_only_once = yes
 	
 	option = {
+		plurality = -5
 		name = "TUR_Bulgarian_Revolt_EvtOptA"
 		783 = {
 			state_scope = {
@@ -683,6 +694,7 @@ country_event = { # BYZANTINES
 	fire_only_once = yes
 	
 	option = {
+		plurality = 15
 		name = "Byzantium_EvtOptA"
 		change_tag = BYZ
 		primary_culture = greek

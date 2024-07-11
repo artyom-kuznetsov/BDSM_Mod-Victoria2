@@ -3,7 +3,8 @@ political_decisions = {
 		potential = {
 			tag = MEX
 			government = democracy
-			liberal = 20
+			
+			NOT = { plurality = 40 }
 			NOT = {
 				has_country_flag = we_have_tried_this_once
 			}
@@ -18,6 +19,7 @@ political_decisions = {
 			average_militancy = 4
 		}
 		effect = {
+			plurality = 10
 			government = hms_government
 			any_pop = {
 				scaled_militancy = {
