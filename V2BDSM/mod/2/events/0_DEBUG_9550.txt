@@ -55,6 +55,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9570
 		country_event = 9571
 		country_event = 9572
+		country_event = 9574
 		country_event = 57073
 		country_event = 57604
 	}
@@ -592,6 +593,59 @@ country_event = {
 		sphere_owner = {
 			create_alliance = THIS
 			military_access = THIS
+		}
+	}
+}
+
+country_event = { # 
+	title = "noloc"
+	desc = "noloc"
+	id = 9574
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		any_owned = {
+			limit = {
+				OR = {
+					trade_goods = coal
+					trade_goods = iron
+					trade_goods = sulphur
+					trade_goods = market_goods
+					trade_goods = precious_metal
+					trade_goods = oil
+				}
+			}
+			any_pop = {
+				limit = {
+					type = farmers
+				}
+				pop_type = labourers
+			}
+		}
+	}
+}
+
+country_event = { # 
+	title = "noloc"
+	desc = "noloc"
+	id = 9575
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		any_owned = {
+			limit = { 
+				trade_goods = iron
+			}
+			any_pop = {
+				limit = {
+					has_pop_type = farmers
+				}
+				pop_type = labourers
+			}
 		}
 	}
 }
