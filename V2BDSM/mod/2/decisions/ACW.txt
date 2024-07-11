@@ -730,6 +730,7 @@ political_decisions = {
 	
 	annex_hawaii = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = {
 				has_country_flag = hawaii_annexed
 			}
@@ -737,7 +738,6 @@ political_decisions = {
 			tag = USA
 			is_sphere_leader_of = HAW
 			HAW = { ai = yes }
-			NOT = { has_country_flag = hide_all_decs_flag }
 		}
 		
 		allow = {
@@ -752,6 +752,21 @@ political_decisions = {
 			prestige = 2
 			inherit = HAW
 			set_country_flag = hawaii_annexed
+		}
+	}
+	
+	grant_hawaii_statehood_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag has_country_flag = hawaii_statehood_flag }
+			owns = 658
+			OR = { tag = USA tag = CSA }
+		}
+		
+		allow = { revolution_n_counterrevolution = 1 }
+		
+		effect = {
+			add_accepted_culture = hawaiian
+			set_country_flag = hawaii_statehood_flag
 		}
 	}
 	

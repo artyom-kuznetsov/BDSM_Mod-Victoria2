@@ -3,12 +3,17 @@ political_decisions = {
 		potential = {
 			OR = {
 				tag = SAR
-				tag = LOM
-				tag = VEN
-				tag = PAR
-				tag = MOD
-				tag = LUC
-				tag = TUS
+				AND = {
+					ai = yes
+					OR = {
+						tag = LOM
+						tag = VEN
+						tag = PAR
+						tag = MOD
+						tag = LUC
+						tag = TUS
+					}
+				}
 			}
 			NOT = { exists = ITA }
 			NOT = { has_country_flag = expedition_to_sicily }
@@ -850,8 +855,8 @@ political_decisions = {
 				change_tag = ITA
 				add_accepted_culture = mediterranean_italian
 				add_accepted_culture = venetian
-				AUS_726 = { add_core = THIS }
-				AUS_729 = { add_core = THIS }
+				AUS_726 = { add_core = ITA }
+				AUS_729 = { add_core = ITA }
 			}
 			any_country = {
 				limit = {

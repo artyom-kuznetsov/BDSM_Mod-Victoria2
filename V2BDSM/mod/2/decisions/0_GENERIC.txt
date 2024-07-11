@@ -15,6 +15,21 @@ political_decisions = {
 	}
 	
 	
+	help_decision_dec = {
+		alert = yes
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = hide_guide_flag }
+			NOT = { has_country_modifier = hide_guide_modifier }
+		}
+		
+		allow = { }
+		
+		effect = {
+			country_event = 57095
+		}
+	}
+	
 	exchange_settings_dec = {
 		alert = no
 		potential = {

@@ -14,7 +14,7 @@ party_issues = {
 	}
 	economic_policy = {
 		laissez_faire = {
-			factory_owner_cost = 0.5
+			factory_owner_cost = 0.4
 			factory_maintenance = -0.1
 			factory_output = 0.05
 			
@@ -39,7 +39,7 @@ party_issues = {
 			}
 		}
 		interventionism = {
-			factory_owner_cost = 0.75
+			factory_owner_cost = 0.6
 			
 			rules = {
 				build_factory = no
@@ -396,16 +396,18 @@ political_reforms = {
 	conscription = {
 		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
 			supply_consumption = -0.2
-			tax_efficiency = 0.01
 			mobilisation_size = -0.02
-			global_immigrant_attract = 0.03
+			global_immigrant_attract = 0.01
+			max_military_spending = 0.1
+			min_military_spending = 0.02
 			allow = {
 				war_policy = pacifism
 				is_mobilised = no
 			}
 		}
 		ref_disarmed_nation = {		#  –≈—“‹ﬂÕ— Œ≈
-			max_military_spending = 0.75
+			max_military_spending = 1
+			min_military_spending = 0.02
 			mobilisation_size = 0.02
 			land_unit_start_experience = -5
 			# +50% Mob Impact
@@ -418,7 +420,8 @@ political_reforms = {
 			}
 		}
 		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
-			max_military_spending = 0.75
+			max_military_spending = 1
+			min_military_spending = 0.05
 			supply_consumption = -0.1
 			mobilisation_size = 0.01
 			allow = {
@@ -428,6 +431,7 @@ political_reforms = {
 		}
 		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
 			max_military_spending = 1.0
+			min_military_spending = 0.1
 			mobilisation_size = -0.01
 			land_unit_start_experience = 10
 			# -25% Mob Impact
@@ -438,7 +442,8 @@ political_reforms = {
 			}
 		}
 		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
-			max_military_spending = 0.75
+			max_military_spending = 1
+			min_military_spending = 0.15
 			mobilisation_size = 0.04
 			# +100% Mob Impact
 			allow = {

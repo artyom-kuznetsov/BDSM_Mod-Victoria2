@@ -1,21 +1,12 @@
 #general promote mtth, same for all pops
 promotion_chance = 
 {
-	factor = 0.25
+	factor = 0.3
 	
 	modifier = {
-		factor = 0.05
+		factor = 0.1
 		country = {
 			economic_policy = laissez_faire
-		}
-	}
-	
-	modifier = {
-		factor = -0.05
-		country = {
-			NOT = {
-				year = 1860
-			}
 		}
 	}
 	
@@ -65,139 +56,224 @@ promotion_chance =
 			factor = 0.04
 			literacy = 0.99			
 		}
+	}
+	
+	### TAXES ###
+	
+	group = {
+	
 		modifier = {
-			factor = -0.02
-			literacy = 0.05
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
-		}	
+			factor = 0.02
+			strata = middle
+			country = { NOT = { middle_tax = 0.25 } }
+		}
 		modifier = {
-			factor = -0.02
-			literacy = 0.1
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
-		}	
+			factor = 0.02
+			strata = middle
+			country = { NOT = { middle_tax = 0.5 } }
+		}
 		modifier = {
-			factor = -0.02
+			factor = 0.02
 			literacy = 0.2
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
-		}	
-		modifier = {
-			factor = -0.02
-			literacy = 0.3
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
+			strata = middle
+			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = -0.02
-			literacy = 0.4
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
-		}	
-		modifier = {
-			factor = -0.02
-			literacy = 0.5
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
+			factor = 0.02
+			strata = middle
+			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = -0.02
-			literacy = 0.6
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
-		}
-		modifier = {
-			factor = -0.02
-			literacy = 0.7	
-			# Audax Validator "." Ignore_NEXT			
-			total_pops = 1000000
-		}
-		modifier = {
-			factor = -0.02
-			literacy = 0.8
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
-		}
-		modifier = {
-			factor = -0.02
-			literacy = 0.9
-			# Audax Validator "." Ignore_NEXT			
-			total_pops = 1000000
-		}
-		modifier = {
-			factor = -0.02
-			literacy = 0.99
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 1000000
-		}
-		modifier = {
-			factor = -0.01
-			literacy = 0.05
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
-		}	
-		modifier = {
-			factor = -0.01
-			literacy = 0.1
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
-		}	
-		modifier = {
-			factor = -0.01
+			factor = 0.02
 			literacy = 0.2
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000					
-		}	
-		modifier = {
-			factor = -0.01
-			literacy = 0.3
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
+			strata = middle
+			country = { NOT = { middle_tax = 0.25 } }
 		}
 		modifier = {
-			factor = -0.01
-			literacy = 0.4
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000					
-		}	
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 0.5 } }
+		}
 		modifier = {
-			factor = -0.01
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.02
 			literacy = 0.5
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
+			strata = middle
+			country = { NOT = { middle_tax = 0.25 } }
 		}
 		modifier = {
-			factor = -0.01
-			literacy = 0.6
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
+			factor = 0.02
+			literacy = 0.5
+			strata = middle
+			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
-			factor = -0.01
-			literacy = 0.7
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
+			factor = 0.02
+			literacy = 0.5
+			strata = middle
+			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = -0.01
-			literacy = 0.8
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
+			factor = 0.02
+			literacy = 0.5
+			strata = middle
+			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = -0.01
-			literacy = 0.9
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
+			factor = 0.02
+			strata = middle
+			country = { NOT = { middle_tax = 0.25 } }
 		}
 		modifier = {
-			factor = -0.01
-			literacy = 0.99
-			# Audax Validator "." Ignore_NEXT
-			total_pops = 2000000						
+			factor = 0.02
+			strata = middle
+			country = { NOT = { middle_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.02
+			strata = middle
+			country = { NOT = { middle_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 0.25 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = middle
+			country = { NOT = { middle_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.5
+			strata = middle
+			country = { NOT = { middle_tax = 0.25 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.5
+			strata = middle
+			country = { NOT = { middle_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.5
+			strata = middle
+			country = { NOT = { middle_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.5
+			strata = middle
+			country = { NOT = { middle_tax = 1 } }
 		}
 	}
+	group = {
+	
+		modifier = {
+			factor = 0.02
+			strata = poor
+			country = { NOT = { poor_tax = 0.25 } }
+		}
+		modifier = {
+			factor = 0.02
+			strata = poor
+			country = { NOT = { poor_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.01
+			literacy = 0.2
+			strata = poor
+			country = { NOT = { poor_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = poor
+			country = { NOT = { poor_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.01
+			literacy = 0.2
+			strata = poor
+			country = { NOT = { poor_tax = 0.25 } }
+		}
+		modifier = {
+			factor = 0.01
+			literacy = 0.2
+			strata = poor
+			country = { NOT = { poor_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = poor
+			country = { NOT = { poor_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.02
+			literacy = 0.2
+			strata = poor
+			country = { NOT = { poor_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.01
+			literacy = 0.5
+			strata = poor
+			country = { NOT = { poor_tax = 0.25 } }
+		}
+		modifier = {
+			factor = 0.01
+			literacy = 0.5
+			strata = poor
+			country = { NOT = { poor_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.01
+			literacy = 0.5
+			strata = poor
+			country = { NOT = { poor_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.01
+			literacy = 0.5
+			strata = poor
+			country = { NOT = { poor_tax = 1 } }
+		}
+	}
+	
 	
 	group = {
 		modifier = {
@@ -224,11 +300,6 @@ promotion_chance =
 			factor = -0.03
 			NOT = { literacy = 0.7	}	
 		}
-	}
-	
-	modifier = {
-		factor = -5
-		strata = rich
 	}
 	
 	modifier = {
@@ -262,6 +333,7 @@ promotion_chance =
 		}
 	}
 
+	
 	group = {
 		modifier = {
 			factor = 0.1
@@ -343,7 +415,7 @@ promotion_chance =
 	
 	### NON-ACCEPTED
 	modifier = {
-		factor = -0.1
+		factor = -0.15
 		not = { culture = this }
 	}
 	
@@ -404,6 +476,24 @@ promotion_chance =
 		factor = 0.1
 		# Audax Validator "." Ignore_NEXT
 		NOT = { state_scope = { total_pops = 100000 } }
+	}
+	
+	modifier = {
+		factor = -0.05
+		country = {
+			NOT = {
+				year = 1860
+			}
+		}
+	}
+	
+	modifier = {
+		factor = -0.05
+		country = {
+			NOT = {
+				has_country_flag = industrial_revolution_flag
+			}
+		}
 	}
 }
 
@@ -613,6 +703,7 @@ demotion_chance =
 			not = { literacy = 0.1 }
 		}
 	}
+	
 	group = {
 		modifier = {
 			factor = 0.5
@@ -711,6 +802,7 @@ demotion_chance =
 		# Audax Validator "." Ignore_NEXT
 		NOT = { state_scope = { total_pops = 100000 } }
 	}
+	
 }
 
 #general migration chance mtth, same for all pops
@@ -832,7 +924,7 @@ migration_chance = {
 colonialmigration_chance = 
 {
 	factor = 0.1
-
+	
 	modifier = {
 		factor = -2
 		strata = rich
@@ -881,14 +973,17 @@ colonialmigration_chance =
 		modifier = {
 			factor = 0.1
 			unemployment = 0.1
+			strata = poor
 		}
 		modifier = {
 			factor = 0.1
 			unemployment = 0.2
+			strata = poor
 		}
 		modifier = {
 			factor = 0.1
 			unemployment = 0.3
+			strata = poor
 		}
 		
 	}
@@ -897,55 +992,28 @@ colonialmigration_chance =
 #general emigration chance
 emigration_chance = 
 {
-	factor = 0.5
+	factor = 0.75
 
 	modifier = {
-		factor = -0.5
+		factor = -0.2
 		NOT = { strata = poor }
-	}
-	modifier = {
-		factor = -0.5
-		strata = rich
 	}
 
 	group = {
 		modifier = {
-			factor = -0.02
-			country = {
-				vote_franschise = wealth_weighted_voting
-			}
+			factor = -0.04
+			strata = poor
+			NOT = { literacy = 0.15 }
 		}
 		modifier = {
-			factor = -0.02
-			country = {
-				vote_franschise = wealth_voting
-			}
+			factor = -0.03
+			strata = poor
+			NOT = { literacy = 0.25 }
 		}
 		modifier = {
-			factor = -0.01
-			country = {
-				vote_franschise = universal_weighted_voting
-			}
-		}
-		modifier = {
-			factor = -0.01
-			country = {
-				vote_franschise = universal_voting
-			}
-		}
-	}
-	
-	modifier = {
-		factor = 0.02
-		country = {
-			vote_franschise = none_voting
-		}
-	}
-	
-	modifier = {
-		factor = -0.02
-		country = {
-			press_rights = free_press
+			factor = -0.03
+			strata = poor
+			NOT = { literacy = 0.35 }
 		}
 	}
 	
@@ -1004,7 +1072,7 @@ emigration_chance =
 	}
 	
 	modifier = {
-		factor = 0.02
+		factor = 0.03
 		country = {
 			NOT = { trade_unions = all_trade_unions }
 		}
@@ -1022,7 +1090,7 @@ emigration_chance =
 			militancy = 4
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.1
 			militancy = 5
 		}
 		modifier = {
@@ -1045,7 +1113,7 @@ emigration_chance =
 			consciousness = 5
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.1
 			consciousness = 6
 		}
 		modifier = {
@@ -1064,15 +1132,15 @@ emigration_chance =
 
 	group = {
 		modifier = {
-			factor = 0.05
+			factor = 0.1
 			not = { life_needs = 0.8 }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.1
 			not = { life_needs = 0.7 }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.1
 			not = { life_needs = 0.6 }
 		}
 	}
@@ -1155,17 +1223,17 @@ emigration_chance =
 
 	group = {
 		modifier = {
-			factor = 0.02
+			factor = 0.05
 			unemployment = 0.2
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.02
+			factor = 0.05
 			unemployment = 0.3
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.02
+			factor = 0.05
 			unemployment = 0.4
 			location = { controlled_by = owner }
 		}
@@ -1177,7 +1245,7 @@ emigration_chance =
 	
 	### CITIZENSHIP POLICY
 	modifier = {
-		factor = 0.075
+		factor = 0.06
 		country = { citizenship_policy = residency }
 		NOT = { 
 			is_primary_culture = yes
@@ -1226,10 +1294,8 @@ emigration_chance =
 	modifier = {
 		factor = 0.1
 		country = { citizens_rights = culture_voting_only }
-		NOT = { 
-			is_primary_culture = yes
-			is_accepted_culture = yes
-		}
+		is_primary_culture = no
+		is_accepted_culture = no
 	}
 	
 	modifier = {
@@ -1243,6 +1309,60 @@ emigration_chance =
 			NOT = { year = 1870 }
 		}
 	}
+	
+	modifier = {
+		factor = -1
+		country = {
+			year = 1836
+			NOT = { month = 2 year = 1837 }
+		}
+	}
+	modifier = {
+		factor = -0.2
+		strata = rich
+	}
+
+	group = {
+		modifier = {
+			factor = -0.02
+			country = {
+				vote_franschise = wealth_weighted_voting
+			}
+		}
+		modifier = {
+			factor = -0.02
+			country = {
+				vote_franschise = wealth_voting
+			}
+		}
+		modifier = {
+			factor = -0.01
+			country = {
+				vote_franschise = universal_weighted_voting
+			}
+		}
+		modifier = {
+			factor = -0.01
+			country = {
+				vote_franschise = universal_voting
+			}
+		}
+	}
+	
+	modifier = {
+		factor = 0.02
+		country = {
+			vote_franschise = none_voting
+		}
+	}
+	
+	modifier = {
+		factor = -0.02
+		country = {
+			press_rights = free_press
+		}
+	}
+	
 	
 }
 
@@ -1264,7 +1384,9 @@ assimilation_chance =
 	
 	modifier = {
 		factor = -30
-		state_scope = { is_colonial = yes }
+		state_scope = { 
+			is_colonial = yes 
+		}
 	}
 	
 	modifier = {

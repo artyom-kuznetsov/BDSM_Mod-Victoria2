@@ -194,18 +194,36 @@ province_event = {
 		set_global_flag = botanical_expedition_in_progress
 
 		owner = {
-			prestige = 5
-			treasury = -200000
+			random_owned = {
+				limit = {
+					owner = {
+						money = 200000
+					}
+				}
+				prestige = 5
+				treasury = -200000
+			}
+			any_country = {
+				limit = {
+					civilized = yes
+					prestige = 25
+					NOT = {
+						tag = THIS
+					}
+				}
+				country_event = { id=19022 days=0 }
+			}
 		}
-		any_country = {
-			limit = {
-				civilized = yes
-				prestige = 25
-				NOT = {
-					tag = THIS
+		owner = {
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { money = 200000 }
+					}
 				}
 			}
-			country_event = { id=19022 days=0 }
+			CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
+			prestige = -5
 		}
 	}
 
@@ -260,7 +278,28 @@ country_event = {
 
 	option = {
 		name = "EVTOPTB19023"
-		treasury = -100000
+		owner = {
+			random_owned = {
+				limit = {
+					owner = {
+						money = 100000
+					}
+				}
+			}
+			treasury = -100000
+		}
+		owner = {
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { money = 100000 }
+					}
+				}
+			}
+			CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
+			clr_country_flag = participates_in_botanical_expedition
+			prestige = -5
+		}
 	}
 }
 

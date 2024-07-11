@@ -64,6 +64,37 @@ cheap_factory_template = {
 	workforce = 10000 
 }
 
+primitive_factory_template = {
+	efficiency = { #0.8 saved
+		coal = 1 #if no cement, work at 75% efficiency #cost = £3.2/level
+		lumber = 1 #0.5	total cost = 5.3
+	}
+	
+	owner =
+	{
+		poptype = capitalists 
+		effect = input
+		effect_multiplier = -2.5
+	}
+	
+	employees = {		
+		{ 
+			poptype = craftsmen
+			effect = throughput
+			amount = 0.8
+		}		
+		{ 
+			poptype = clerks 
+			effect = output
+			effect_multiplier = 1.5
+			amount = 0.2
+		}
+	
+	}
+	type = factory
+	workforce = 10000 
+}
+
 machine_part_user_template = {
 	efficiency = { #1.2 saved
 		cement = 0.3			#4.8
@@ -544,7 +575,7 @@ furniture_factory = {
 }
 
 paper_mill = {       
-	template = factory_template		#7.625
+	template = primitive_factory_template		#7.625
 	input_goods = { 
 		timber = 7.2		#24.64	total input+maint = 32.265
 	}
@@ -748,7 +779,7 @@ winery = {
 }
 
 lumber_mill = {       
-	template = cheap_factory_template	#3.7
+	template = primitive_factory_template	#3.7
 	input_goods = {       
 		timber = 9			#28.8	total input+maint = 32.5
 	}

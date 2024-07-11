@@ -796,6 +796,67 @@ risorgimento = {
 	war_name = WAR_CONQUEST_NAME
 }
 
+# USA cores
+manifest_destiny_cb = {
+	sprite_index = 14
+	is_triggered_only = yes
+	months = 480
+	crisis = no
+	construction_speed = 2
+	always = no
+	
+	can_use = {
+		NOT = { is_our_vassal = THIS tag = WBK }
+		THIS = { 
+			has_country_flag = hasmanifestdestiny
+		}
+		tag = MEX
+		any_owned_province = { has_core = THIS }
+		ai = yes
+	}
+
+	badboy_factor = 1.5
+	prestige_factor = 1
+	peace_cost_factor = 50
+	penalty_factor = 0
+	
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 1
+	break_truce_militancy_factor = 0
+	truce_months = 60
+	
+	good_relation_prestige_factor = 0
+	good_relation_infamy_factor = 0
+	good_relation_militancy_factor = 0
+	
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+		country_event = 110600
+	}
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+	
+	po_remove_prestige = yes
+	
+	war_name = WAR_CONQUEST_NAME
+}
+
 # Conquest Small
 conquest_small = {
 	sprite_index = 2

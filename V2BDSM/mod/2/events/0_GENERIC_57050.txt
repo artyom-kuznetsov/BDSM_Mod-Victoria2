@@ -1221,3 +1221,130 @@ country_event = {
 }
 
 
+country_event = {
+	id = 57095
+	title = "GuideEvent_EvtName"
+	desc = "GuideEvent_EvtDesc"
+	picture = "TODO"
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = "GuideEvent_EvtOptEconomy"
+		country_event = 57096
+	}
+	
+	option = {
+		name = "GuideEvent_EvtOptMilitary"
+		country_event = 57097
+	}
+	
+	option = {
+		name = "GuideEvent_EvtOptTempHide"
+		add_country_modifier = { name = hide_guide_modifier duration = 1825 }
+	}
+	
+	option = {
+		name = "GuideEvent_EvtOptHide"
+		set_country_flag = hide_guide_flag
+	}
+}
+
+country_event = {
+	id = 57096
+	title = "GuideEvent_EvtName"
+	desc = "GuideEventHoverToSee_EvtDesc"
+	picture = "TODO"
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EcoGuide_EvtOptIndustrialRevolution"
+		CUSTOM_TOOLTIP_INDREV_GUIDE = {}
+	}
+	option = {
+		name = "EcoGuide_EvtOptConversion"
+		CUSTOM_TOOLTIP_CONVERIOSN_GUIDE = {}
+	}
+	option = {
+		name = "EcoGuide_EvtOptPopulation"
+		CUSTOM_TOOLTIP_POPULATION_GUIDE = {}
+	}
+	option = {
+		name = "EcoGuide_EvtOptInflation"
+		CUSTOM_TOOLTIP_INFLATION_GUIDE = {}
+	}
+}
+
+
+country_event = {
+	id = 57097
+	title = "GuideEvent_EvtName"
+	desc = "GuideEventHoverToSee_EvtDesc"
+	picture = "TODO"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "MilGuide_EvtOptWarExhaustion"
+		CUSTOM_TOOLTIP_WAREXHAUSTION_GUIDE = {}
+	}
+	option = {
+		name = "EcoGuide_EvtOptUnits"
+		country_event = 57098
+	}
+	option = {
+		name = "EcoGuide_EvtOptSpending_Navy"
+		CUSTOM_TOOLTIP_NAVY_GUIDE = {}
+	}
+}
+
+country_event = {
+	id = 57098
+	title = "GuideEvent_EvtName"
+	desc = "GuideEventUnits_EvtDesc"
+	picture = "TODO"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "MilGuide_Irregular"
+		CUSTOM_TOOLTIP_IRREGULAR_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Infantry"
+		CUSTOM_TOOLTIP_INFANTRY_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Regulars"
+		CUSTOM_TOOLTIP_REGULARS_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Marines"
+		CUSTOM_TOOLTIP_MARINES_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Artillery"
+		CUSTOM_TOOLTIP_ARTY_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Engineer"
+		CUSTOM_TOOLTIP_ENGINEER_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Hussars"
+		CUSTOM_TOOLTIP_HUSSARS_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Dragoon"
+		CUSTOM_TOOLTIP_DRAGOON_GUIDE = {}
+	}
+	option = {
+		name = "MilGuide_Plank"
+		CUSTOM_TOOLTIP_PLANETANK_GUIDE = {}
+	}
+}
+
+
