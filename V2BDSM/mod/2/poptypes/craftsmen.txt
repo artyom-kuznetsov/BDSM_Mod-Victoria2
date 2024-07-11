@@ -2120,7 +2120,7 @@ issues =
 	residency = {
 		factor = 1
 		modifier = {
-			factor = 0 
+			factor = 0
 			NOT = { consciousness  = 5}
 		}
 		modifier = {
@@ -2285,7 +2285,10 @@ issues =
 		modifier = {
 			factor = 0 
 			country = {
-				slavery = no_slavery
+				OR = {
+					slavery = no_slavery
+					slavery = freedom_of_womb
+				}
 			}
 		}
 		modifier = {
@@ -2428,12 +2431,12 @@ issues =
 	landed_voting = {
 		factor = 1
 		modifier = {
-			factor = 0
+			factor = 0.5
 			OR = {
 				NOT = {
 					is_next_reform = landed_voting
 				}
-				NOT = { consciousness = 6 }
+				NOT = { consciousness = 3 }
 				luxury_needs =  1.0
 				NOT = { life_needs = 0.7 }
 			}
@@ -2506,7 +2509,7 @@ issues =
 				NOT = {
 					is_next_reform = wealth_weighted_voting
 				}
-				NOT = { consciousness = 6 }
+				NOT = { consciousness = 3 }
 				luxury_needs =  1.0
 				NOT = { life_needs = 0.7 }
 			}
@@ -2579,7 +2582,7 @@ issues =
 				NOT = {
 					is_next_reform = wealth_voting
 				}
-				NOT = { consciousness = 6 }
+				NOT = { consciousness = 3 }
 				luxury_needs =  1.0
 				NOT = { life_needs = 0.7 }
 			}
@@ -2652,7 +2655,7 @@ issues =
 				NOT = {
 					is_next_reform = universal_weighted_voting
 				}
-				NOT = { consciousness = 6 }
+				NOT = { consciousness = 3 }
 				luxury_needs =  1.0
 				NOT = { life_needs = 0.7 }
 			}
@@ -2723,7 +2726,7 @@ issues =
 			factor = 0
 			OR = {
 				vote_franschise = universal_voting
-				NOT = { consciousness = 6 }
+				NOT = { consciousness = 3 }
 				luxury_needs =  1.0
 				NOT = { life_needs = 0.7 }
 			}

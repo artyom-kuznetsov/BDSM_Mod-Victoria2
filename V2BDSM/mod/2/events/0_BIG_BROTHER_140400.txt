@@ -392,6 +392,12 @@ country_event = {
 			}
 			clr_country_flag = election_flag
 		}
+		#any_country = {
+		#	limit = { civilized = yes }
+		#	any_pop = {
+		#		
+		#	}
+		#}
 		### RULING PARTY CHECK ###
 		any_country = { limit = { ruling_party_ideology = reactionary } set_country_flag = reactionary_flag	}
 		any_country = { limit = { ruling_party_ideology = conservative } set_country_flag = conservative_flag	}
@@ -431,6 +437,7 @@ country_event = {
 						location = { any_pop = { limit = { strata = poor NOT = { agree_with_ruling_party = 0.5 }} militancy = 0.08 } }
 			}
 		}
+		
 		
 		#Stability ticking down cause of war exaustion, this is meant to be acomulative, as it does not need to be so finely adjusted as the militancy spread
 		any_country = {	limit = { war_exhaustion = 10 } plurality = -0.1 }
@@ -499,10 +506,10 @@ country_event = {
 		any_country = {	limit = { NOT = { plurality = 4 } } any_pop = { limit = { NOT = { agree_with_ruling_party = 0.5 }} militancy = 1 } }
 		
 		#Administration
-		any_country = { limit = { exists = yes administration_spending = 0.99 } plurality = 0.075 }
+		any_country = { limit = { exists = yes administration_spending = 0.99 } plurality = 0.025 }
 		any_country = { limit = { exists = yes administration_spending = 0.89 } plurality = 0.05 }
-		any_country = { limit = { exists = yes administration_spending = 0.79 } plurality = 0.04 }
-		any_country = { limit = { exists = yes administration_spending = 0.69 } plurality = 0.03 }
+		any_country = { limit = { exists = yes administration_spending = 0.79 } plurality = 0.025 }
+		any_country = { limit = { exists = yes administration_spending = 0.69 } plurality = 0.025 }
 		any_country = { limit = { exists = yes administration_spending = 0.59 } plurality = 0.025 }
 
 		any_country = { limit = { exists = yes NOT = { administration_spending = 0.4 } } plurality = -0.005 }
@@ -532,6 +539,7 @@ country_event = {
 		any_country = { limit = { has_country_modifier = martial_law_modifier } plurality = 0.1 }
 		any_country = { limit = { has_country_modifier = the_homestead_act } plurality = 0.02 }
 		any_country = { limit = { has_country_modifier = great_depression } plurality = -0.5 }
+		any_country = { limit = { has_country_modifier = revolution_happened_cmodifier } plurality = -0.1 }
 		any_country = { limit = { has_country_modifier = economic_boom } plurality = 0.1 }
 		any_country = { limit = { has_country_modifier = corn_laws_repealed } plurality = 0.05 }
 		any_country = { limit = { has_country_modifier = signed_the_geneva_convention } plurality = 0.02 }
@@ -681,148 +689,6 @@ country_event = { # YEARLY CLEANUP
 	}
 }
 
-# CHECK TAXES
-#country_event = {
-#	id = 140404
-#	title = "noloc"
-#	desc = "noloc"
-#	
-#	is_triggered_only = yes
-#	
-#	option = {
-#		name = "noloc"
-#		any_country = {
-#			limit = {
-#				OR = {
-#					AND = {
-#						NOT = { rich_tax = 0.01 }
-#						NOT = {
-#							has_country_modifier = very_low_taxes_rich_trmod
-#						}
-#					}
-#					AND = {
-#						rich_tax = 0.24
-#						NOT = { rich_tax = 0.26 }
-#						NOT = {
-#							has_country_modifier = low_taxes_rich_trmod
-#						}
-#					}
-#					AND = {
-#						rich_tax = 0.49
-#						NOT = { rich_tax = 0.51 }
-#						NOT = {
-#							has_country_modifier = rich_taxes_rich_trmod
-#						}
-#					}
-#					AND = {
-#						rich_tax = 0.74
-#						NOT = { rich_tax = 0.76 }
-#						NOT = {
-#							has_country_modifier = high_taxes_rich_trmod
-#						}
-#					}
-#					AND = {
-#						rich_tax = 0.99
-#						NOT = {
-#							has_country_modifier = very_high_taxes_rich_trmod
-#						}
-#					}
-#				}
-#			}
-#			add_country_modifier = {
-#				name = rich_taxation_changed_modifier
-#				duration = 30
-#			}
-#		}
-#		any_country = {
-#			limit = {
-#				OR = {
-#					AND = {
-#						NOT = { middle_tax = 0.01 }
-#						NOT = {
-#							has_country_modifier = very_low_taxes_medium_trmod
-#						}
-#					}
-#					AND = {
-#						middle_tax = 0.24
-#						NOT = { middle_tax = 0.26 }
-#						NOT = {
-#							has_country_modifier = low_taxes_medium_trmod
-#						}
-#					}
-#					AND = {
-#						middle_tax = 0.49
-#						NOT = { middle_tax = 0.51 }
-#						NOT = {
-#							has_country_modifier = middle_taxes_medium_trmod
-#						}
-#					}
-#					AND = {
-#						middle_tax = 0.74
-#						NOT = { middle_tax = 0.76 }
-#						NOT = {
-#							has_country_modifier = high_taxes_medium_trmod
-#						}
-#					}
-#					AND = {
-#						middle_tax = 0.99
-#						NOT = {
-#							has_country_modifier = very_high_taxes_medium_trmod
-#						}
-#					}
-#				}
-#			}
-#			add_country_modifier = {
-#				name = middle_taxation_changed_modifier
-#				duration = 30
-#			}
-#		}
-#		any_country = {
-#			limit = {
-#				OR = {
-#					AND = {
-#						NOT = { poor_tax = 0.01 }
-#						NOT = {
-#							has_country_modifier = very_low_taxes_poor_trmod
-#						}
-#					}
-#					AND = {
-#						poor_tax = 0.24
-#						NOT = { poor_tax = 0.26 }
-#						NOT = {
-#							has_country_modifier = low_taxes_poor_trmod
-#						}
-#					}
-#					AND = {
-#						poor_tax = 0.49
-#						NOT = { poor_tax = 0.51 }
-#						NOT = {
-#							has_country_modifier = medium_taxes_poor_trmod
-#						}
-#					}
-#					AND = {
-#						poor_tax = 0.74
-#						NOT = { poor_tax = 0.76 }
-#						NOT = {
-#							has_country_modifier = high_taxes_poor_trmod
-#						}
-#					}
-#					AND = {
-#						poor_tax = 0.99
-#						NOT = {
-#							has_country_modifier = very_high_taxes_poor_trmod
-#						}
-#					}
-#				}
-#			}
-#			add_country_modifier = {
-#				name = poor_taxation_changed_modifier
-#				duration = 30
-#			}
-#		}
-#	}
-#}
-#
 country_event = {
 	title = "noloc"
 	desc = "noloc"
@@ -1072,6 +938,9 @@ province_event = {
 	
 	option = {
 		name = "Selector_EvtOptImmigration"
+		any_owned = {
+			remove_province_modifier = immigrator_modifier
+		}
 		state_scope = {
 			any_owned = {
 				add_province_modifier = { name = immigrator_modifier duration = -1 }

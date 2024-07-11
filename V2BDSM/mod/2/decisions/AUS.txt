@@ -5,10 +5,7 @@ political_decisions = {
 			any_owned_province = {
 				is_core = HUN
 			}
-			NOT = {
-				has_country_flag = dual_monarchy_done
-			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = hide_all_decs_flag exists = KUK }
 		}
 	
 		allow = {
@@ -149,7 +146,10 @@ political_decisions = {
 	
 	subjugate_balkans_dec = {
 		potential = {
-			primary_culture = south_german
+			OR = {
+				primary_culture = south_german
+				tag = HUN
+			}
 			ideological_thought = 1
 			OR = {
 				owns = 2538
@@ -157,6 +157,7 @@ political_decisions = {
 			}
 			NOT = {
 				has_country_flag = subjugate_balkans_flag
+				has_country_flag = hide_all_decs_flag
 			}
 		}
 		
@@ -205,7 +206,7 @@ political_decisions = {
 	eliminate_lom_ven_kingdom_dec = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
-			tag = KUK
+			primary_culture = south_german
 			owns = 726
 			owns = 729
 			NOT = { has_country_flag = eliminate_lom_ven_kingdom_flag }

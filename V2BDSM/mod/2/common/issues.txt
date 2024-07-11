@@ -14,7 +14,7 @@ party_issues = {
 	}
 	economic_policy = {
 		laissez_faire = {
-			factory_owner_cost = 0.4
+			factory_owner_cost = 0.3
 			factory_maintenance = -0.1
 			factory_output = 0.05
 			
@@ -39,7 +39,7 @@ party_issues = {
 			}
 		}
 		interventionism = {
-			factory_owner_cost = 0.6
+			factory_owner_cost = 0.5
 			
 			rules = {
 				build_factory = no
@@ -64,7 +64,7 @@ party_issues = {
 			}
 		}
 		state_capitalism = {
-			factory_owner_cost = 1
+			factory_owner_cost = 0.9
 			
 			rules = {
 				build_factory = yes
@@ -86,7 +86,7 @@ party_issues = {
 		}
 		planned_economy = {
 			factory_throughput = 0.05
-			factory_owner_cost = 1.5
+			factory_owner_cost = 1
 			
 			rules = {
 				build_factory = yes
@@ -266,6 +266,7 @@ political_reforms = {
 			middle_vote = 2
 			poor_vote = 1
 			cb_generation_speed_modifier = -0.1
+			literacy_con_impact = -0.1
 			global_immigrant_attract = 0.08
 		}
 		universal_voting = {
@@ -273,6 +274,7 @@ political_reforms = {
 			middle_vote = 1
 			poor_vote = 1
 			cb_generation_speed_modifier = -0.15
+			literacy_con_impact = -0.2
 			global_immigrant_attract = 0.1
 		}
 	}
@@ -341,7 +343,7 @@ political_reforms = {
 			global_immigrant_attract = 0.01
 		}
 		free_press = {
-			literacy_con_impact = 0.25
+			literacy_con_impact = 0.5
 			issue_change_speed = 0.5
 			global_immigrant_attract = 0.02
 			suppression_points_modifier = -0.25
@@ -375,7 +377,7 @@ political_reforms = {
 		harassment = {
 			ruling_party_support = 0.15
 			global_immigrant_attract = 0.02
-			allow = { }
+			allow = { NOT = { vote_franschise = none_voting } }
 		}
 		gerrymandering = {
 			ruling_party_support = 0.10

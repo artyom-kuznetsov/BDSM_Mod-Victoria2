@@ -1602,6 +1602,11 @@ country_event = {
 		add_country_modifier = { name = election_national_cooldown duration = 1300 }
 		remove_country_modifier = wartime_elections
 		remove_country_modifier = violent_elections
+		remove_country_modifier = will_influence_elections
+		remove_country_modifier = let_the_chips_fall
+		any_owned = {
+			remove_province_modifier = support_the_government
+		}
 		random_owned = {
 			limit = {
 				owner = {
@@ -1609,6 +1614,7 @@ country_event = {
 				}
 			}
 			owner = {
+				CUSTOM_TOOLTIP_ELECTIONS_CONSERVATIVE_WIN = { }
 				any_pop = {
 					limit = {
 						location = { is_colonial = no }
@@ -1621,7 +1627,6 @@ country_event = {
 					scaled_militancy = { ideology = conservative factor = -2 }
 					scaled_consciousness = { ideology = conservative factor = -2 }
 				}
-				CUSTOM_TOOLTIP_ELECTIONS_CONSERVATIVE_WIN = { }
 			}
 		}
 		random_owned = {
@@ -1631,6 +1636,7 @@ country_event = {
 				}
 			}
 			owner = {
+				CUSTOM_TOOLTIP_ELECTIONS_REACTIONARY_WIN = { }
 				any_pop = {
 					limit = {
 						location = { is_colonial = no }
@@ -1643,7 +1649,6 @@ country_event = {
 					scaled_militancy = { ideology = reactionary factor = -2 }
 					scaled_consciousness = { ideology = reactionary factor = -2 }
 				}
-				CUSTOM_TOOLTIP_ELECTIONS_REACTIONARY_WIN = { }
 			}
 		}
 		random_owned = {
@@ -1653,6 +1658,7 @@ country_event = {
 				}
 			}
 			owner = {
+				CUSTOM_TOOLTIP_ELECTIONS_LIBERAL_WIN = { }
 				any_pop = {
 					limit = {
 						location = { is_colonial = no }
@@ -1665,7 +1671,6 @@ country_event = {
 					scaled_militancy = { ideology = liberal factor = -2 }
 					scaled_consciousness = { ideology = liberal factor = -2 }
 				}
-				CUSTOM_TOOLTIP_ELECTIONS_LIBERAL_WIN = { }
 			}
 		}
 		random_owned = {
@@ -1675,6 +1680,7 @@ country_event = {
 				}
 			}
 			owner = {
+				CUSTOM_TOOLTIP_ELECTIONS_SOCIALIST_WIN = { }
 				any_pop = {
 					limit = {
 						location = { is_colonial = no }
@@ -1687,7 +1693,6 @@ country_event = {
 					scaled_militancy = { ideology = socialist factor = -2 }
 					scaled_consciousness = { ideology = socialist factor = -2 }
 				}
-				CUSTOM_TOOLTIP_ELECTIONS_SOCIALIST_WIN = { }
 			}
 		}
 		random_owned = {
@@ -1697,6 +1702,7 @@ country_event = {
 				}
 			}
 			owner = {
+				CUSTOM_TOOLTIP_ELECTIONS_COMMUNIST_WIN = { }
 				any_pop = {
 					limit = {
 						location = { is_colonial = no }
@@ -1709,7 +1715,6 @@ country_event = {
 					scaled_militancy = { ideology = communist factor = -2 }
 					scaled_consciousness = { ideology = communist factor = -2 }
 				}
-				CUSTOM_TOOLTIP_ELECTIONS_COMMUNIST_WIN = { }
 			}
 		}
 		random_owned = {
@@ -1719,6 +1724,7 @@ country_event = {
 				}
 			}
 			owner = {
+				CUSTOM_TOOLTIP_ELECTIONS_FASCIST_WIN = { }
 				any_pop = {
 					limit = {
 						location = { is_colonial = no }
@@ -1731,7 +1737,6 @@ country_event = {
 					scaled_militancy = { ideology = fascist factor = -2 }
 					scaled_consciousness = { ideology = fascist factor = -2 }
 				}
-				CUSTOM_TOOLTIP_ELECTIONS_FASCIST_WIN = { }
 			}
 		}
 		any_owned = { remove_province_modifier = support_the_government }

@@ -657,4 +657,34 @@ political_decisions = {
 			CUSTOM_TOOLTIP_RUHRBOOM = { }
 		}
 	}
+	
+	annex_austria_dec = {
+		potential = {
+			tag = GER
+			NOT = { has_country_flag = hide_all_decs_flag }
+			is_greater_power = yes
+			AUS = { exists = yes is_greater_power = no ai = yes}
+		}
+		
+		allow = {
+			AUS = {
+				OR = {
+					in_sphere = THIS
+					vassal_of = THIS
+				}
+				NOT = { any_owned_province = { is_core = HUN } }
+				war = no
+			}
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_ANSCHLUSS = { }
+			prestige = 25
+			AUS = {
+				country_event = 110417
+			}
+			badboy = 10
+			plurality = -10
+		}
+	}
 }

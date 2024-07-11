@@ -200,33 +200,24 @@ province_event = {
 			random_owned = {
 				limit = {
 					owner = {
-						money = 200000
+						has_country_modifier = spanish_carrack_modifier
 					}
 				}
-				prestige = 5
-				treasury = -200000
-			}
-			any_country = {
-				limit = {
-					civilized = yes
-					prestige = 25
-					NOT = {
-						tag = THIS
-					}
+				owner = {
+					CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
+					add_country_modifier = { name = expedition_sent_cmodifier duration = 365 }
 				}
-				country_event = { id=19022 days=0 }
 			}
-		}
-		owner = {
 			random_owned = {
 				limit = {
 					owner = {
-						NOT = { money = 200000 }
+						NOT = { has_country_modifier = spanish_carrack_modifier }
 					}
 				}
+				owner = {
+					add_country_modifier = { name = expedition_sent_cmodifier duration = 730 }
+				}
 			}
-			CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-			prestige = -5
 		}
 	}
 
@@ -281,27 +272,26 @@ country_event = {
 
 	option = {
 		name = "EVTOPTB19023"
-		owner = {
-			random_owned = {
-				limit = {
-					owner = {
-						money = 100000
-					}
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = spanish_carrack_modifier
 				}
 			}
-			treasury = -100000
+			owner = {
+				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
+				add_country_modifier = { name = expedition2_sent_cmodifier duration = 365 }
+			}
 		}
-		owner = {
-			random_owned = {
-				limit = {
-					owner = {
-						NOT = { money = 100000 }
-					}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
-			CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-			clr_country_flag = participates_in_botanical_expedition
-			prestige = -5
+			owner = {
+				add_country_modifier = { name = expedition2_sent_cmodifier duration = 730 }
+			}
 		}
 	}
 }
@@ -332,6 +322,27 @@ country_event = {
 
 	option = {
 		name = "EVTOPTB19024"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = spanish_carrack_modifier
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
+				add_country_modifier = { name = expedition_sent_cmodifier duration = 365 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
+				}
+			}
+			owner = {
+				add_country_modifier = { name = expedition_sent_cmodifier duration = 730 }
+			}
+		}
 		any_pop = {
 			scaled_militancy = {
 				ideology = liberal

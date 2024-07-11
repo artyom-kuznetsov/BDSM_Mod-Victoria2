@@ -1,9 +1,10 @@
-Assets and ideas from the following mods were used in this mod:
+Assets/ideas from the following mods were used in this mod:
 - Victoria Universalis
 - Mish Mash Map Mod
 - Divergences of Darkness
 - 2/3 Mod
 - The Grand Combination
 - Greater Flavor Mod
+- The Third Age
 
-‘оздатель мода 				- 	https://www.youtube.com/channel/UCHt7fLn63yqC6gOXFI0dFUA
+Создатель мода 				- 	https://www.youtube.com/channel/UCHt7fLn63yqC6gOXFI0dFUA

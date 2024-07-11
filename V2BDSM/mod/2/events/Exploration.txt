@@ -46,36 +46,22 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 1000000
-				}
-			}
-			owner = {
-				money = -1000000
-			}
-		}
-		random_owned = {
-			limit = {
-				NOT = { 
-					owner = {
-						money = 1000000
-					}
-				}
-			}
-			owner = {
-				prestige = -5
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-				money = 1000000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 500000
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 365 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
+				}
+			}
+			owner = {
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 730 }
 			}
 		}
 		set_country_flag = YesGoToNile
@@ -131,42 +117,26 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 120000
-				}
-			}
-			owner = {
-				money = -120000
-				set_country_flag = YesGoToNileAgain
-				clr_country_flag = YesGoToNile
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 120000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 60000
+				add_country_modifier = { name = expedition2_nile_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 120000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -25
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-				clr_country_flag = YesGoToNile
-				set_country_flag = NoGoToNile
+				add_country_modifier = { name = expedition2_nile_sent_cmodifier duration = 730 }
 			}
 		}
+		set_country_flag = YesGoToNileAgain
+		clr_country_flag = YesGoToNile
 	}
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
@@ -212,43 +182,27 @@ country_event = {
 	option = {
 		name = "EVTOPTA23201" # Fund third attempt
 		ai_chance = { factor = 60 }
+		set_country_flag = YesGoToNileThird
+		clr_country_flag = YesGoToNileAgain
 		random_owned = {
 			limit = {
 				owner = {
-					money = 120000
-				}
-			}
-			owner = {
-				money = -120000
-				set_country_flag = YesGoToNileThird
-				clr_country_flag = YesGoToNileAgain
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 120000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 60000
+				add_country_modifier = { name = expedition2_nile_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 120000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -25
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-				clr_country_flag = YesGoToNileAgain
-				set_country_flag = NoGoToNile
+				add_country_modifier = { name = expedition2_nile_sent_cmodifier duration = 730 }
 			}
 		}
 	}
@@ -303,9 +257,12 @@ country_event = {
 	option = {
 		name = "EVTOPTA23203" # Success
 		prestige = 100
+		years_of_research = 0.5
 		set_global_flag = NileDiscovered
 		clr_country_flag = YesGoToNileAgain
 		clr_country_flag = YesGoToNileThird
+		remove_country_modifier = expedition_nile_sent_cmodifier
+		remove_country_modifier = expedition2_nile_sent_cmodifier
 	}
 }
 
@@ -352,39 +309,25 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 150000
-				}
-			}
-			owner = {
-				money = -150000
-				set_country_flag = YesGoToNorthPole
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 150000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 75000
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 150000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -5
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 730 }
 			}
 		}
+		set_country_flag = YesGoToNorthPole
 	}
 	option = {
 		name = "EVTOPTB23200" # Consider the idea later
@@ -433,43 +376,27 @@ country_event = {
 	option = {
 		name = "EVTOPTA23201" # Fund second attempt
 		ai_chance = { factor = 60 }
+		set_country_flag = YesGoToNorthPoleAgain
+		clr_country_flag = YesGoToNorthPole
 		random_owned = {
 			limit = {
 				owner = {
-					money = 150000
-				}
-			}
-			owner = {
-				money = -150000
-				set_country_flag = YesGoToNorthPoleAgain
-				clr_country_flag = YesGoToNorthPole
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 150000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 75000
+				add_country_modifier = { name = expedition_npole_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 150000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -25
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-				clr_country_flag = YesGoToNorthPole
-				set_country_flag = NoGoToNorthPole
+				add_country_modifier = { name = expedition_npole_sent_cmodifier duration = 730 }
 			}
 		}
 	}
@@ -517,43 +444,27 @@ country_event = {
 	option = {
 		name = "EVTOPTA23201" # Fund third attempt
 		ai_chance = { factor = 60 }
+		set_country_flag = YesGoToNorthPoleThird
+		clr_country_flag = YesGoToNorthPoleAgain
 		random_owned = {
 			limit = {
 				owner = {
-					money = 125000
-				}
-			}
-			owner = {
-				money = -125000
-				set_country_flag = YesGoToNorthPoleThird
-				clr_country_flag = YesGoToNorthPoleAgain
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 125000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 62500
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 125000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -25
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-				clr_country_flag = YesGoToNorthPoleAgain
-				set_country_flag = NoGoToNorthPole
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 730 }
 			}
 		}
 	}
@@ -608,9 +519,12 @@ country_event = {
 	option = {
 		name = "EVTOPTA23203" # Success!
 		prestige = 100
+		years_of_research = 0.5
 		set_global_flag = NorthPoleDiscovered
 		clr_country_flag = YesGoToNorthPoleAgain
 		clr_country_flag = YesGoToNorthPoleThird
+		remove_country_modifier = expedition_npole_sent_cmodifier
+		remove_country_modifier = expedition2_npole_sent_cmodifier
 	}
 }
 
@@ -653,40 +567,26 @@ country_event = {
 	option = {
 		name = "EVTOPTA23200" # Support the mission
 		ai_chance = { factor = 25 }
+		set_country_flag = YesGoToSouthPole
 		random_owned = {
 			limit = {
 				owner = {
-					money = 300000
-				}
-			}
-			owner = {
-				money = -300000
-				set_country_flag = YesGoToSouthPole
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 300000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 150000
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 300000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -5
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 730 }
 			}
 		}
 	}
@@ -738,43 +638,27 @@ country_event = {
 	option = {
 		name = "EVTOPTA23201" # Fund second attempt
 		ai_chance = { factor = 60 }
+		set_country_flag = YesGoToSouthPoleAgain
+		clr_country_flag = YesGoToSouthPole
 		random_owned = {
 			limit = {
 				owner = {
-					money = 200000
-				}
-			}
-			owner = {
-				money = -200000
-				set_country_flag = YesGoToSouthPoleAgain
-				clr_country_flag = YesGoToSouthPole
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 200000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 100000
+				add_country_modifier = { name = expedition2_nile_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 200000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -25
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-			clr_country_flag = YesGoToSouthPoleAgain
-			set_country_flag = NoGoToSouthPole
+				add_country_modifier = { name = expedition2_nile_sent_cmodifier duration = 730 }
 			}
 		}
 	}
@@ -822,45 +706,29 @@ country_event = {
 	option = {
 		name = "EVTOPTA23201" # Fund third attempt
 		ai_chance = { factor = 60 }
+		set_country_flag = YesGoToSouthPoleThird
+		clr_country_flag = YesGoToSouthPoleAgain
 		random_owned = {
 			limit = {
 				owner = {
-					money = 200000
-				}
-			}
-			owner = {
-				money = -200000
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					money = 200000
 					has_country_modifier = spanish_carrack_modifier
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
-				money = 100000
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 365 }
 			}
 		}
 		random_owned = {
 			limit = {
-				NOT = { 
-					owner = {
-						money = 200000
-					}
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
 				}
 			}
 			owner = {
-				prestige = -25
-				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
-			clr_country_flag = YesGoToSouthPoleAgain
-			set_country_flag = NoGoToSouthPole
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 730 }
 			}
 		}
-		set_country_flag = YesGoToSouthPoleThird
-		clr_country_flag = YesGoToSouthPoleAgain
 	}
 	option = {
 		name = "EVTOPTB23201" # Reject second attempt
@@ -913,6 +781,7 @@ country_event = {
 	option = {
 		name = "EVTOPTA23203" # Success!
 		prestige = 100
+		years_of_research = 0.5
 		set_global_flag = SouthPoleDiscovered
 		clr_country_flag = YesGoToSouthPoleAgain
 		clr_country_flag = YesGoToSouthPoleThird
