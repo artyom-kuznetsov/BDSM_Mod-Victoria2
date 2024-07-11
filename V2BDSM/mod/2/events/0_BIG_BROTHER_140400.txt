@@ -1003,8 +1003,10 @@ province_event = {
 	
 	option = {
 		name = "Selector_EvtOptImmigration"
-		any_owned = {
-			remove_province_modifier = immigrator_modifier
+		owner = {
+			any_owned = {
+				remove_province_modifier = immigrator_modifier
+			}
 		}
 		state_scope = {
 			any_owned = {
@@ -1122,6 +1124,7 @@ province_event = {
 	
 	option = {
 		name = "MonumentActions_EvtOptSpanishCarrack"
+		# Audax Validator "." Ignore_NEXT
 		province_event = { id = 140410 }
 		remove_core = WBK
 	}

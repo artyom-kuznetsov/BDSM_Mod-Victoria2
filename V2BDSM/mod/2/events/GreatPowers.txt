@@ -242,6 +242,37 @@ country_event = {
 		name = "EVTOPTA19022"
 		set_country_flag = participates_in_botanical_expedition
 		prestige = 5
+		any_country = {
+			limit = {
+				civilized = yes
+				prestige = 25
+				NOT = {
+					tag = THIS
+				}
+			}
+			country_event = { id=19022 days=0 }
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = spanish_carrack_modifier
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
+				add_country_modifier = { name = expedition_sent_cmodifier duration = 365 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
+				}
+			}
+			owner = {
+				add_country_modifier = { name = expedition_sent_cmodifier duration = 730 }
+			}
+		}
 	}
 
 	option = {
