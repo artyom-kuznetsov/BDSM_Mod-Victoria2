@@ -1199,7 +1199,7 @@ province_event = {
 		remove_core = WBK
 	}
 }
-country_event = {	# SEASON CLEANUP
+country_event = {	# WEATHER CLEANUP
 	id = 140411
 	title = "noloc"
 	desc = "noloc"
@@ -1342,20 +1342,6 @@ country_event = {	# SEASON CLEANUP
 			remove_province_modifier = very_low_temperature
 			remove_province_modifier = extremely_low_temperature
 		}
-		
-		country_event = { id = 140411 days = 7 }
-	}
-}
-
-country_event = {	# WEATHER CLEANUP
-	id = 140412
-	title = "noloc"
-	desc = "noloc"
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
 		
 		# OPTION 1
 		random_owned = {
@@ -4092,6 +4078,6 @@ country_event = {	# WEATHER CLEANUP
 		}
 		
 		change_variable = { which = season_randomizer value = 1 }
-		country_event = { id = 140412 days = 15 }
+		country_event = { id = 140411 days = 7 }
 	}
 }
