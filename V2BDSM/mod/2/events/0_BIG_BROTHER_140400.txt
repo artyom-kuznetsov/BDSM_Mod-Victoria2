@@ -1342,16 +1342,11 @@ country_event = {	# WEATHER CLEANUP
 			remove_province_modifier = extremely_low_temperature
 		}
 		
+		# OPTION 1
 		random_owned = {
 			limit = {
 				owner = {
 					NOT = { check_variable = { which = season_randomizer value = 0.1 } } 
-				}
-				NOT = {
-					terrain = mountain
-					terrain = mountain_mine
-					terrain = desert
-					terrain = desert_mine
 				}
 			}
 			any_neighbor_province = {	# WINTER ARCTIC
@@ -1377,20 +1372,7 @@ country_event = {	# WEATHER CLEANUP
 					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
 				}
 			}
-		}
-		
-		random_owned = {
-			limit = {
-				owner = {
-					NOT = { check_variable = { which = season_randomizer value = 0.1 } } 
-				}
-				NOT = {
-					terrain = mountain
-					terrain = mountain_mine
-					terrain = desert
-					terrain = desert_mine
-				}
-			}
+			
 			any_neighbor_province = {	# SPRING TEMPERATE
 				limit = {
 					has_province_modifier = spring_temperate_pmodifier
@@ -1435,19 +1417,7 @@ country_event = {	# WEATHER CLEANUP
 					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
 				}
 			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					NOT = { check_variable = { which = season_randomizer value = 0.1 } } 
-				}
-				NOT = {
-					terrain = mountain
-					terrain = mountain_mine
-					terrain = desert
-					terrain = desert_mine
-				}
-			}
+			
 			any_neighbor_province = {	# SPRING SUBTROPICAL
 				limit = {
 					has_province_modifier = spring_subtropical_pmodifier
@@ -1491,19 +1461,7 @@ country_event = {	# WEATHER CLEANUP
 					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
 				}
 			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					NOT = { check_variable = { which = season_randomizer value = 0.1 } } 
-				}
-				NOT = {
-					terrain = mountain
-					terrain = mountain_mine
-					terrain = desert
-					terrain = desert_mine
-				}
-			}
+			
 			any_neighbor_province = {	# WET TROPICAL
 				limit = {
 					has_province_modifier = wet_season_tropical_pmodifier
@@ -1524,19 +1482,6 @@ country_event = {	# WEATHER CLEANUP
 					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
 					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
 					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
-				}
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = {
-					NOT = { check_variable = { which = season_randomizer value = 0.1 } } 
-				}
-				NOT = {
-					terrain = mountain
-					terrain = mountain_mine
-					terrain = desert
-					terrain = desert_mine
 				}
 			}
 			any_neighbor_province = {	# WET EQUATORIAL
@@ -1562,6 +1507,2574 @@ country_event = {	# WEATHER CLEANUP
 			}
 		}
 		
+		# OPTION 2
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 0.9 }
+					NOT = { check_variable = { which = season_randomizer value = 1.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 1 }
+			}
+		}
+		
+		# OPTION 3
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 1.9 }
+					NOT = { check_variable = { which = season_randomizer value = 2.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+		}
+		
+		# OPTION 4
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 2.9 }
+					NOT = { check_variable = { which = season_randomizer value = 3.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 2 }
+				random = { chance = 2 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+			}
+		}
+		
+		# OPTION 5
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 3.9 }
+					NOT = { check_variable = { which = season_randomizer value = 4.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+				random = { chance = 4 }
+			}
+		}
+		
+		
+		# OPTION 6
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 4.9 }
+					NOT = { check_variable = { which = season_randomizer value = 5.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+				random = { chance = 5 }
+			}
+		}
+		# OPTION 7
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 5.9 }
+					NOT = { check_variable = { which = season_randomizer value = 6.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+				random = { chance = 6 }
+			}
+		}
+		# OPTION 8
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 6.9 }
+					NOT = { check_variable = { which = season_randomizer value = 7.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+				random = { chance = 7 }
+			}
+		}
+		
+		# OPTION 9
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 7.9 }
+					NOT = { check_variable = { which = season_randomizer value = 8.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+				random = { chance = 8 }
+			}
+		}
+		
+		# OPTION 10
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 8.9 }
+					NOT = { check_variable = { which = season_randomizer value = 9.1 } } 
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+				random = { chance = 9 }
+			}
+		}
+		
+		# OPTION 11
+		random_owned = {
+			limit = {
+				owner = {
+					check_variable = { which = season_randomizer value = 9.9 }
+				}
+			}
+			any_neighbor_province = {	# WINTER ARCTIC
+				limit = {
+					has_province_modifier = winter_arctic_pmodifier
+				}
+				
+				random_list = {
+					40 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# SUMMER ARCTIC
+				limit = {
+					has_province_modifier = summer_arctic_pmodifier
+				}
+				
+				random_list = {
+					15 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					35 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			
+			any_neighbor_province = {	# SPRING TEMPERATE
+				limit = {
+					has_province_modifier = spring_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					30 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# WINTER TEMPERATE
+				limit = {
+					has_province_modifier = winter_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# AUTUMN TEMPERATE
+				limit = {
+					has_province_modifier = autumn_temperate_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# SUMMER TEMPERATE
+				limit = {
+					has_province_modifier = summer_temperate_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = low_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			
+			any_neighbor_province = {	# SPRING SUBTROPICAL
+				limit = {
+					has_province_modifier = spring_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# WINTER SUBTROPICAL
+				limit = {
+					has_province_modifier = winter_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# AUTUMN SUBTROPICAL
+				limit = {
+					has_province_modifier = autumn_subtropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					15 = { add_province_modifier = { name = low_temperature duration = 7 } }
+					5 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# SUMMER SUBTROPICAL
+				limit = {
+					has_province_modifier = summer_subtropical_pmodifier
+				}
+				
+				random_list = {
+					50 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			
+			any_neighbor_province = {	# WET TROPICAL
+				limit = {
+					has_province_modifier = wet_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# DRY TROPICAL
+				limit = {
+					has_province_modifier = dry_season_tropical_pmodifier
+				}
+				
+				random_list = {
+					60 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					10 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# WET EQUATORIAL
+				limit = {
+					has_province_modifier = wet_season_equatorial_pmodifier
+				}
+				random_list = {
+					20 = { add_province_modifier = { name = normal_temperature duration = 7 } }
+					60 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			any_neighbor_province = {	# DRY EQUATORIAL
+				limit = {
+					has_province_modifier = dry_season_equatorial_pmodifier
+				}
+				
+				random_list = {
+					30 = { add_province_modifier = { name = high_temperature duration = 7 } }
+					50 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
+					20 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
+				}
+				
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+				random = { chance = 10 }
+			}
+			owner = { set_variable = { which = season_randomizer value = -1 } }
+		}
+		
 		# MOUNTAINS
 		META_1 = {
 			limit = {
@@ -1570,6 +4083,12 @@ country_event = {	# WEATHER CLEANUP
 					terrain = mountain_mine
 				}
 			}
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
 			# Audax Validator "." Ignore_NEXT
 			random_list = {
 				25 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
@@ -1584,6 +4103,12 @@ country_event = {	# WEATHER CLEANUP
 					terrain = desert_mine
 				}
 			}
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
 			# Audax Validator "." Ignore_NEXT
 			random_list = {
 				10 = { add_province_modifier = { name = high_temperature duration = 7 } }
@@ -1599,6 +4124,12 @@ country_event = {	# WEATHER CLEANUP
 					terrain = desert_mine
 				}
 			}
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
 			# Audax Validator "." Ignore_NEXT
 			random_list = {
 				25 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
@@ -1613,6 +4144,12 @@ country_event = {	# WEATHER CLEANUP
 					terrain = desert_mine
 				}
 			}
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
 			# Audax Validator "." Ignore_NEXT
 			random_list = {
 				25 = { add_province_modifier = { name = high_temperature duration = 7 } }
@@ -1627,6 +4164,12 @@ country_event = {	# WEATHER CLEANUP
 					terrain = desert_mine
 				}
 			}
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
 			# Audax Validator "." Ignore_NEXT
 			random_list = {
 				25 = { add_province_modifier = { name = high_temperature duration = 7 } }
