@@ -1336,6 +1336,7 @@ country_event = {	# WEATHER CLEANUP
 			# Audax Validator "." Ignore_NEXT
 			remove_province_modifier = extremely_high_temperature
 			remove_province_modifier = very_high_temperature
+			remove_province_modifier = high_temperature
 			remove_province_modifier = normal_temperature
 			remove_province_modifier = low_temperature
 			remove_province_modifier = very_low_temperature
@@ -1960,8 +1961,9 @@ country_event = {	# WEATHER CLEANUP
 					5 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
 				}
 				
-				random = { chance = 2 }
-				random = { chance = 2 }
+				random = { chance = 3 }
+				random = { chance = 3 }
+				random = { chance = 3 }
 			}
 			any_neighbor_province = {	# WINTER TEMPERATE
 				limit = {
@@ -4075,108 +4077,6 @@ country_event = {	# WEATHER CLEANUP
 			owner = { set_variable = { which = season_randomizer value = -1 } }
 		}
 		
-		# MOUNTAINS
-		META_1 = {
-			limit = {
-				OR = {
-					terrain = mountain
-					terrain = mountain_mine
-				}
-			}
-			remove_province_modifier = extremely_high_temperature
-			remove_province_modifier = very_high_temperature
-			remove_province_modifier = normal_temperature
-			remove_province_modifier = low_temperature
-			remove_province_modifier = very_low_temperature
-			remove_province_modifier = extremely_low_temperature
-			# Audax Validator "." Ignore_NEXT
-			random_list = {
-				25 = { add_province_modifier = { name = extremely_low_temperature duration = 7 } }
-				10 = { add_province_modifier = { name = very_low_temperature duration = 7 } }
-			}
-		}
-		# DESERTS
-		META_TROPICAL = {
-			limit = {
-				OR = {
-					terrain = desert
-					terrain = desert_mine
-				}
-			}
-			remove_province_modifier = extremely_high_temperature
-			remove_province_modifier = very_high_temperature
-			remove_province_modifier = normal_temperature
-			remove_province_modifier = low_temperature
-			remove_province_modifier = very_low_temperature
-			remove_province_modifier = extremely_low_temperature
-			# Audax Validator "." Ignore_NEXT
-			random_list = {
-				10 = { add_province_modifier = { name = high_temperature duration = 7 } }
-				25 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
-				10 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
-			}
-		}
-		# DESERTS
-		META_EQUATORIAL = {
-			limit = {
-				OR = {
-					terrain = desert
-					terrain = desert_mine
-				}
-			}
-			remove_province_modifier = extremely_high_temperature
-			remove_province_modifier = very_high_temperature
-			remove_province_modifier = normal_temperature
-			remove_province_modifier = low_temperature
-			remove_province_modifier = very_low_temperature
-			remove_province_modifier = extremely_low_temperature
-			# Audax Validator "." Ignore_NEXT
-			random_list = {
-				25 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
-				10 = { add_province_modifier = { name = extremely_high_temperature duration = 7 } }
-			}
-		}
-		# DESERTS
-		META_SUBTROPICAL = {
-			limit = {
-				OR = {
-					terrain = desert
-					terrain = desert_mine
-				}
-			}
-			remove_province_modifier = extremely_high_temperature
-			remove_province_modifier = very_high_temperature
-			remove_province_modifier = normal_temperature
-			remove_province_modifier = low_temperature
-			remove_province_modifier = very_low_temperature
-			remove_province_modifier = extremely_low_temperature
-			# Audax Validator "." Ignore_NEXT
-			random_list = {
-				25 = { add_province_modifier = { name = high_temperature duration = 7 } }
-				25 = { add_province_modifier = { name = very_high_temperature duration = 7 } }
-				10 = { add_province_modifier = { name = normal_temperature duration = 7 } }
-			}
-		}
-		META_TEMPERATE = {
-			limit = {
-				OR = {
-					terrain = desert
-					terrain = desert_mine
-				}
-			}
-			remove_province_modifier = extremely_high_temperature
-			remove_province_modifier = very_high_temperature
-			remove_province_modifier = normal_temperature
-			remove_province_modifier = low_temperature
-			remove_province_modifier = very_low_temperature
-			remove_province_modifier = extremely_low_temperature
-			# Audax Validator "." Ignore_NEXT
-			random_list = {
-				25 = { add_province_modifier = { name = high_temperature duration = 7 } }
-				10 = { add_province_modifier = { name = normal_temperature duration = 7 } }
-			}
-		}
-
 		change_variable = { which = season_randomizer value = 1 }
 		country_event = { id = 140411 days = 7 }
 	}
