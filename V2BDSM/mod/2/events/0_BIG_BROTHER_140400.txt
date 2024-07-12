@@ -1489,7 +1489,6 @@ country_event = {	# WEATHER CLEANUP
 		META_TROPICAL = {
 			limit = {
 				has_province_modifier = dry_season_tropical_pmodifier
-				NOT = { terrain = desert terrain = desert_mine }
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1504,7 +1503,6 @@ country_event = {	# WEATHER CLEANUP
 		META_TROPICAL = {
 			limit = {
 				has_province_modifier = wet_season_tropical_pmodifier
-				NOT = { terrain = desert terrain = desert_mine }
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1518,7 +1516,6 @@ country_event = {	# WEATHER CLEANUP
 		META_EQUATORIAL = {
 			limit = {
 				has_province_modifier = dry_season_equatorial_pmodifier
-				NOT = { terrain = desert terrain = desert_mine }
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1533,7 +1530,6 @@ country_event = {	# WEATHER CLEANUP
 		META_EQUATORIAL = {
 			limit = {
 				has_province_modifier = wet_season_equatorial_pmodifier
-				NOT = { terrain = desert terrain = desert_mine }
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1544,6 +1540,107 @@ country_event = {	# WEATHER CLEANUP
 			}
 		}
 
+		# MOUNTAINS
+		META_1 = {
+			limit = {
+				OR = {
+					terrain = mountain
+					terrain = mountain_mine
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
+			random_list = {
+				25 = { add_province_modifier = { name = extremely_low_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = very_low_temperature duration = -1 } }
+			}
+		}
+		# DESERTS
+		META_TROPICAL = {
+			limit = {
+				OR = {
+					terrain = desert
+					terrain = desert_mine
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
+			random_list = {
+				10 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				25 = { add_province_modifier = { name = very_high_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = extremely_high_temperature duration = -1 } }
+			}
+		}
+		# DESERTS
+		META_EQUATORIAL = {
+			limit = {
+				OR = {
+					terrain = desert
+					terrain = desert_mine
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
+			random_list = {
+				25 = { add_province_modifier = { name = very_high_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = extremely_high_temperature duration = -1 } }
+			}
+		}
+		# DESERTS
+		META_SUBTROPICAL = {
+			limit = {
+				OR = {
+					terrain = desert
+					terrain = desert_mine
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
+			random_list = {
+				25 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				25 = { add_province_modifier = { name = very_high_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+			}
+		}
+		META_TEMPERATE = {
+			limit = {
+				OR = {
+					terrain = desert
+					terrain = desert_mine
+				}
+			}
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
+			random_list = {
+				25 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+			}
+		}
 
 		#change_variable = { which = season_randomizer value = 1 }
 	}
