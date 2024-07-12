@@ -133,7 +133,7 @@ country_event = {
 				}
 				add_province_modifier = {
 					name = selector_pop_boost_modifier
-					duration = 730
+					duration = -130
 				}
 			}
 			random_owned = {
@@ -144,7 +144,7 @@ country_event = {
 				}
 				add_province_modifier = {
 					name = selector_pop_boost_modifier
-					duration = 730
+					duration = -130
 				}
 			}
 			random_owned = {
@@ -154,7 +154,7 @@ country_event = {
 				}
 				add_province_modifier = {
 					name = selector_pop_boost_2_modifier
-					duration = 730
+					duration = -130
 				}
 			}
 			random_owned = {
@@ -164,7 +164,7 @@ country_event = {
 				}
 				add_province_modifier = {
 					name = selector_pop_boost_2_modifier
-					duration = 730
+					duration = -130
 				}
 			}
 		}
@@ -993,7 +993,7 @@ province_event = {
 		name = "Selector_EvtOptScorch"
 		state_scope = {
 			any_owned = {
-				add_province_modifier = { name = scorched_earth_modifier duration = 730 }
+				add_province_modifier = { name = scorched_earth_modifier duration = -130 }
 			}
 		}
 		# Audax Validator "." Ignore_NEXT
@@ -1332,6 +1332,219 @@ country_event = {	# WEATHER CLEANUP
 			add_province_modifier = { name = dry_season_equatorial_pmodifier duration = -1 }
 			remove_province_modifier = wet_season_equatorial_pmodifier
 		}
+		
+		META_1 = {
+			# Audax Validator "." Ignore_NEXT
+			remove_province_modifier = extremely_high_temperature
+			remove_province_modifier = very_high_temperature
+			remove_province_modifier = normal_temperature
+			remove_province_modifier = low_temperature
+			remove_province_modifier = very_low_temperature
+			remove_province_modifier = extremely_low_temperature
+		}
+		
+			# SUMMER ARCTIC
+		META_ARCTIC = {
+			limit = {
+				owner = {
+					NOT = { check_variable = { which = season_randomizer value = 0.1 } }
+				}
+				has_province_modifier = summer_arctic_pmodifier
+			}
+			
+			random_list = {
+				15 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				35 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = very_low_temperature duration = -1 } }
+				5 = { add_province_modifier = { name = extremely_low_temperature duration = -1 } }
+			}
+		}
+			# WINTER ARCTIC
+		META_ARCTIC = {
+			limit = {
+				owner = {
+					NOT = { check_variable = { which = season_randomizer value = 0.1 } }
+				}
+				has_province_modifier = winter_arctic_pmodifier
+			}
+			
+			random_list = {
+				40 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				30 = { add_province_modifier = { name = very_low_temperature duration = -1 } }
+				30 = { add_province_modifier = { name = extremely_low_temperature duration = -1 } }
+			}
+		}
+			# SUMMER TEMPERATE
+		META_TEMPERATE = {
+			limit = {
+				owner = {
+					NOT = { check_variable = { which = season_randomizer value = 0.1 } }
+				}
+				has_province_modifier = summer_temperate_pmodifier
+			}
+			
+			random_list = {
+				50 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				5 = { add_province_modifier = { name = low_temperature duration = -1 } }
+			}
+		}
+		
+			# AUTUMN TEMPERATE
+		META_TEMPERATE = {
+			limit = {
+				has_province_modifier = autumn_temperate_pmodifier
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+				
+			random_list = {
+				60 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				15 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				5 = { add_province_modifier = { name = very_low_temperature duration = -1 } }
+			}
+		}
+			# WINTER TEMPERATE
+		META_TEMPERATE = {
+			limit = {
+				has_province_modifier = winter_temperate_pmodifier
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				50 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = very_low_temperature duration = -1 } }
+				5 = { add_province_modifier = { name = extremely_low_temperature duration = -1 } }
+			}
+		}
+		
+			# SPRING TEMPERATE
+		META_TEMPERATE = {
+			limit = {
+				has_province_modifier = spring_temperate_pmodifier
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				50 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				30 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				5 = { add_province_modifier = { name = very_low_temperature duration = -1 } }
+			}
+		}
+		
+			# SUMMER SUBTROPICAL
+		META_SUBTROPICAL = {
+			limit = {
+				has_province_modifier = summer_subtropical_pmodifier
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				50 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = high_temperature duration = -1 } }
+			}
+		}
+		
+			# AUTUMN SUBTROPICAL
+		META_SUBTROPICAL = {
+			limit = {
+				has_province_modifier = autumn_subtropical_pmodifier
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				60 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				15 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				5 = { add_province_modifier = { name = high_temperature duration = -1 } }
+			}
+		}
+		
+			# WINTER SUBTROPICAL
+		META_SUBTROPICAL = {
+			limit = {
+				has_province_modifier = winter_subtropical_pmodifier
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				50 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				5 = { add_province_modifier = { name = very_low_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+			}
+		}
+		
+			# SPRING SUBTROPICAL
+		META_SUBTROPICAL = {
+			limit = {
+				has_province_modifier = spring_subtropical_pmodifier
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				50 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = low_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = high_temperature duration = -1 } }
+			}
+		}
+			# DRY TROPICAL
+		META_TROPICAL = {
+			limit = {
+				has_province_modifier = dry_season_tropical_pmodifier
+				NOT = { terrain = desert terrain = desert_mine }
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				10 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				50 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = very_high_temperature duration = -1 } }
+			}
+		}
+		
+			# WET TROPICAL
+		META_TROPICAL = {
+			limit = {
+				has_province_modifier = wet_season_tropical_pmodifier
+				NOT = { terrain = desert terrain = desert_mine }
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				60 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				10 = { add_province_modifier = { name = very_high_temperature duration = -1 } }
+			}
+		}
+			# DRY EQUATORIAL
+		META_EQUATORIAL = {
+			limit = {
+				has_province_modifier = dry_season_equatorial_pmodifier
+				NOT = { terrain = desert terrain = desert_mine }
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				30 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				50 = { add_province_modifier = { name = very_high_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = extremely_high_temperature duration = -1 } }
+			}
+		}
+		
+			# WET EQUATORIAL
+		META_EQUATORIAL = {
+			limit = {
+				has_province_modifier = wet_season_equatorial_pmodifier
+				NOT = { terrain = desert terrain = desert_mine }
+				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
+			}
+			
+			random_list = {
+				20 = { add_province_modifier = { name = normal_temperature duration = -1 } }
+				60 = { add_province_modifier = { name = high_temperature duration = -1 } }
+				20 = { add_province_modifier = { name = very_high_temperature duration = -1 } }
+			}
+		}
 
+
+		#change_variable = { which = season_randomizer value = 1 }
 	}
 }
