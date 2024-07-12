@@ -1218,7 +1218,7 @@ country_event = {	# WEATHER CLEANUP
 				}
 			}
 			add_province_modifier = { name = winter_arctic_pmodifier duration = -1 }
-			remove_province_modifier = autumn_arctic_pmodifier
+			remove_province_modifier = summer_arctic_pmodifier
 		}
 		META_ARCTIC = {	# SUMMER
 			limit = {
@@ -1226,7 +1226,7 @@ country_event = {	# WEATHER CLEANUP
 				NOT = { month = 10 }
 			}
 			add_province_modifier = { name = summer_arctic_pmodifier duration = -1 }
-			remove_province_modifier = spring_arctic_pmodifier
+			remove_province_modifier = winter_arctic_pmodifier
 		}
 		META_TEMPERATE = {	# WINTER
 			limit = {
@@ -1312,7 +1312,7 @@ country_event = {	# WEATHER CLEANUP
 				NOT = { month = 9 }
 			}
 			add_province_modifier = { name = dry_season_tropical_pmodifier duration = -1 }
-			remove_province_modifier = wet_season_equatorial_pmodifier
+			remove_province_modifier = wet_season_tropical_pmodifier
 		}
 		META_EQUATORIAL = {	# WET
 			limit = {
@@ -1435,6 +1435,12 @@ country_event = {	# WEATHER CLEANUP
 		META_SUBTROPICAL = {
 			limit = {
 				has_province_modifier = summer_subtropical_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1448,6 +1454,12 @@ country_event = {	# WEATHER CLEANUP
 		META_SUBTROPICAL = {
 			limit = {
 				has_province_modifier = autumn_subtropical_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1462,6 +1474,12 @@ country_event = {	# WEATHER CLEANUP
 		META_SUBTROPICAL = {
 			limit = {
 				has_province_modifier = winter_subtropical_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1476,6 +1494,12 @@ country_event = {	# WEATHER CLEANUP
 		META_SUBTROPICAL = {
 			limit = {
 				has_province_modifier = spring_subtropical_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1489,6 +1513,12 @@ country_event = {	# WEATHER CLEANUP
 		META_TROPICAL = {
 			limit = {
 				has_province_modifier = dry_season_tropical_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1503,6 +1533,12 @@ country_event = {	# WEATHER CLEANUP
 		META_TROPICAL = {
 			limit = {
 				has_province_modifier = wet_season_tropical_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1516,6 +1552,12 @@ country_event = {	# WEATHER CLEANUP
 		META_EQUATORIAL = {
 			limit = {
 				has_province_modifier = dry_season_equatorial_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
@@ -1530,6 +1572,12 @@ country_event = {	# WEATHER CLEANUP
 		META_EQUATORIAL = {
 			limit = {
 				has_province_modifier = wet_season_equatorial_pmodifier
+				NOT = {
+					terrain = mountain
+					terrain = mountain_mine
+					terrain = desert
+					terrain = desert_mine
+				}
 				owner = { NOT = { check_variable = { which = season_randomizer value = 0.1 } } }
 			}
 			
