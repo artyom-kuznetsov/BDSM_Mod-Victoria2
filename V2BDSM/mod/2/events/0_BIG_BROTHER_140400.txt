@@ -3,18 +3,11 @@ country_event = {
 	desc = "noloc"
 	id = 140400
 	
-	trigger = {
-		tag = WBK
-		NOT = {
-			has_country_modifier = mcl_happened_modifier
-		}
-		has_global_flag = 1836_setup_complete_flag
-	}
+	is_triggered_only = yes
 	
 	
 	option = {
 		name = "noloc"
-		add_country_modifier = { name = mcl_happened_modifier duration = 30 }
 		
 		any_country = {
 			any_owned = {
@@ -1204,5 +1197,157 @@ province_event = {
 		}
 		CUSTOM_TOOLTIP_MONUMENT_HIDE = { }
 		remove_core = WBK
+	}
+}
+country_event = {	# WEATHER CLEANUP
+	id = 140410
+	title = "noloc"
+	desc = "noloc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		country_event = { id = 140410 days = 15 }
+		
+		META_ARCTIC = {	# WINTER
+			limit = {
+				OR = {
+					month = 11 # means 12
+					NOT = { month = 2 }
+				}
+			}
+			add_province_modifier = { name = winter_arctic_pmodifier duration = -1 }
+			remove_province_modifier = autumn_arctic_pmodifier
+		}
+		META_ARCTIC = {	# SPRING
+			limit = {
+				month = 2 # means 3
+				NOT = { month = 5 }
+			}
+			add_province_modifier = { name = spring_arctic_pmodifier duration = -1 }
+			remove_province_modifier = winter_arctic_pmodifier
+		}
+		META_ARCTIC = {	# SUMMER
+			limit = {
+				month = 5 # means 6
+				NOT = { month = 8 }
+			}
+			add_province_modifier = { name = summer_arctic_pmodifier duration = -1 }
+			remove_province_modifier = spring_arctic_pmodifier
+		}
+		META_ARCTIC = {	# AUTUMN
+			limit = {
+				month = 8 # means 9
+				NOT = { month = 11 }
+			}
+			add_province_modifier = { name = autumn_arctic_pmodifier duration = -1 }
+			remove_province_modifier = summer_arctic_pmodifier
+		}
+		META_TEMPERATE = {	# WINTER
+			limit = {
+				OR = {
+					month = 11 # means 12
+					NOT = { month = 2 }
+				}
+			}
+			add_province_modifier = { name = winter_temperate_pmodifier duration = -1 }
+			remove_province_modifier = autumn_temperate_pmodifier
+		}
+		META_TEMPERATE = {	# SPRING
+			limit = {
+				month = 2 # means 3
+				NOT = { month = 5 }
+			}
+			add_province_modifier = { name = spring_temperate_pmodifier duration = -1 }
+			remove_province_modifier = winter_temperate_pmodifier
+		}
+		META_TEMPERATE = {	# SUMMER
+			limit = {
+				month = 5 # means 6
+				NOT = { month = 8 }
+			}
+			add_province_modifier = { name = summer_temperate_pmodifier duration = -1 }
+			remove_province_modifier = spring_temperate_pmodifier
+		}
+		META_TEMPERATE = {	# AUTUMN
+			limit = {
+				month = 8 # means 9
+				NOT = { month = 11 }
+			}
+			add_province_modifier = { name = autumn_temperate_pmodifier duration = -1 }
+			remove_province_modifier = summer_temperate_pmodifier
+		}
+		META_SUBTROPICAL = {	# WINTER
+			limit = {
+				OR = {
+					month = 11 # means 12
+					NOT = { month = 2 }
+				}
+			}
+			add_province_modifier = { name = winter_subtropical_pmodifier duration = -1 }
+			remove_province_modifier = autumn_subtropical_pmodifier
+		}
+		META_SUBTROPICAL = {	# SPRING
+			limit = {
+				month = 2 # means 3
+				NOT = { month = 5 }
+			}
+			add_province_modifier = { name = spring_subtropical_pmodifier duration = -1 }
+			remove_province_modifier = winter_subtropical_pmodifier
+		}
+		META_SUBTROPICAL = {	# SUMMER
+			limit = {
+				month = 5 # means 6
+				NOT = { month = 8 }
+			}
+			add_province_modifier = { name = summer_subtropical_pmodifier duration = -1 }
+			remove_province_modifier = spring_subtropical_pmodifier
+		}
+		META_SUBTROPICAL = {	# AUTUMN
+			limit = {
+				month = 8 # means 9
+				NOT = { month = 11 }
+			}
+			add_province_modifier = { name = autumn_subtropical_pmodifier duration = -1 }
+			remove_province_modifier = summer_subtropical_pmodifier
+		}
+		META_TROPICAL = {	# WET
+			limit = {
+				OR = {
+					month = 9
+					NOT = { month = 3 }
+				}
+			}
+			add_province_modifier = { name = wet_season_tropical_pmodifier duration = -1 }
+			remove_province_modifier = dry_season_equatorial_pmodifier
+		}
+		META_TROPICAL = {	# DRY
+			limit = {
+				month = 3
+				NOT = { month = 9 }
+			}
+			add_province_modifier = { name = dry_season_tropical_pmodifier duration = -1 }
+			remove_province_modifier = wet_season_equatorial_pmodifier
+		}
+		META_EQUATORIAL = {	# WET
+			limit = {
+				OR = {
+					month = 9
+					NOT = { month = 3 }
+				}
+			}
+			add_province_modifier = { name = wet_season_equatorial_pmodifier duration = -1 }
+			remove_province_modifier = dry_season_equatorial_pmodifier
+		}
+		META_EQUATORIAL = {	# DRY
+			limit = {
+				month = 3
+				NOT = { month = 9 }
+			}
+			add_province_modifier = { name = dry_season_equatorial_pmodifier duration = -1 }
+			remove_province_modifier = wet_season_equatorial_pmodifier
+		}
+
 	}
 }

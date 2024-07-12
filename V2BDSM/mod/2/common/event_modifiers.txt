@@ -1,6 +1,126 @@
 ##################################################################################################
 # scriptable and usable for event-system below.
 ##################################################################################################
+#####	SEASONS		#####
+
+	### ARCTIC CLIMATE ###
+	
+		winter_arctic_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			movement_cost = 0.1
+			pop_militancy_modifier = 0.01
+			pop_consciousness_modifier = 0.01
+			icon = 43
+		}
+		
+		spring_arctic_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			movement_cost = 0.05
+			farm_RGO_eff = -0.05
+			icon = 44
+		}
+		
+		summer_arctic_pmodifier = {
+			farm_RGO_eff = 0.1
+			pop_militancy_modifier = -0.01
+			pop_consciousness_modifier = -0.01
+			icon = 41
+		}
+		
+		autumn_arctic_pmodifier = {
+			farm_RGO_eff = 0.05
+			icon = 42
+		}
+
+	### TEMPERATE CLIMATE ###
+	
+		winter_temperate_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			movement_cost = 0.1
+			pop_militancy_modifier = 0.01
+			pop_consciousness_modifier = 0.01
+			icon = 43
+		}
+		
+		spring_temperate_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			movement_cost = 0.05
+			farm_RGO_eff = -0.05
+			icon = 44
+		}
+		
+		summer_temperate_pmodifier = {
+			farm_RGO_eff = 0.1
+			pop_militancy_modifier = -0.01
+			pop_consciousness_modifier = -0.01
+			icon = 41
+		}
+		
+		autumn_temperate_pmodifier = {
+			farm_RGO_eff = 0.05
+			icon = 42
+		}
+
+	### SUBTROPICAL CLIMATE ###
+	
+		winter_subtropical_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			movement_cost = 0.1
+			pop_militancy_modifier = 0.01
+			pop_consciousness_modifier = 0.01
+			icon = 43
+		}
+		
+		spring_subtropical_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			movement_cost = 0.05
+			farm_RGO_eff = -0.05
+			icon = 44
+		}
+		
+		summer_subtropical_pmodifier = {
+			farm_RGO_eff = 0.1
+			pop_militancy_modifier = -0.01
+			pop_consciousness_modifier = -0.01
+			icon = 41
+		}
+		
+		autumn_subtropical_pmodifier = {
+			farm_RGO_eff = 0.05
+			icon = 42
+		}
+
+	### TROPICAL CLIMATE ###
+	
+		dry_season_tropical_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			pop_militancy_modifier = 0.01
+			pop_consciousness_modifier = 0.01
+			icon = 41
+		}
+		wet_season_tropical_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			pop_militancy_modifier = -0.01
+			pop_consciousness_modifier = -0.01
+			icon = 44
+		}
+
+	### EQUATORIAL CLIMATE ###
+	
+		dry_season_equatorial_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			pop_militancy_modifier = 0.01
+			pop_consciousness_modifier = 0.01
+			icon = 41
+		}
+		wet_season_equatorial_pmodifier = {
+			# Audax Validator "." Ignore_NEXT
+			pop_militancy_modifier = -0.01
+			pop_consciousness_modifier = -0.01
+			icon = 44
+		}
+
+	
 
 #####	MONUMENTS   #####
 	kiel_canal_in_progress_modifier = {
@@ -396,54 +516,7 @@
 	will_influence_elections = {
 		icon = 21
 	}
-
-	season_changed_cooldown_modifier = {
-		icon = 20
-	}
 	
-	spring_pmodifier = {
-		# Audax Validator "." Ignore_NEXT
-		movement_cost = 0.05
-		farm_RGO_eff = 0.05
-		icon = 44
-	}
-
-	harsh_spring_pmodifier = {
-		# Audax Validator "." Ignore_NEXT
-		movement_cost = 0.08
-		pop_consciousness_modifier = 0.01
-		icon = 44
-	}
-
-	winter_pmodifier = {
-		# Audax Validator "." Ignore_NEXT
-		movement_cost = 0.1
-		farm_RGO_eff = -0.25
-		pop_militancy_modifier = 0.01
-		pop_consciousness_modifier = 0.01
-		icon = 43
-	}
-
-	harsh_winter_pmodifier = {
-		# Audax Validator "." Ignore_NEXT
-		movement_cost = 0.15
-		farm_RGO_eff = -0.3
-		pop_militancy_modifier = 0.02
-		pop_consciousness_modifier = 0.02
-		icon = 43
-	}
-	
-	summer_pmodifier = {
-		farm_RGO_eff = 0.1
-		pop_militancy_modifier = -0.01
-		pop_consciousness_modifier = -0.01
-		icon = 41
-	}
-	
-	autumn_pmodifier = {
-		farm_RGO_eff = 0.05
-		icon = 42
-	}
 
 	agitation_n_propaganda_modifier = {
 		global_pop_consciousness_modifier = 0.05
@@ -700,9 +773,6 @@
 	}
 
 ### BIG BROTHER ###
-	mcl_happened_modifier = {
-		icon = 19
-	}
 
 	ycl_happened_modifier = {
 		icon = 19
