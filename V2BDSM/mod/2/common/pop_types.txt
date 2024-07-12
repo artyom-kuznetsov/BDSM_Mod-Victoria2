@@ -74,7 +74,6 @@ promotion_chance =
 		}
 		modifier = {
 			factor = 0.02
-			literacy = 0.2
 			strata = middle
 			country = { NOT = { middle_tax = 0.75 } }
 		}
@@ -401,12 +400,18 @@ promotion_chance =
 	modifier = {
 		factor = 0.2
 		# Audax Validator "." Ignore_NEXT
-		NOT = { state_scope = { total_pops = 200000 } }
+		NOT = { 
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { total_pops = 200000 } 
+		}
 	}	
 	modifier = {
 		factor = 0.1
 		# Audax Validator "." Ignore_NEXT
-		NOT = { state_scope = { total_pops = 100000 } }
+		NOT = { 
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { total_pops = 100000 } 
+		}
 	}
 	
 	modifier = {
@@ -725,13 +730,19 @@ demotion_chance =
 	modifier = {
 		factor = 0.25
 		# Audax Validator "." Ignore_NEXT
-		NOT = { state_scope = { total_pops = 200000 } }
+		NOT = { 
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { total_pops = 200000 } 
+		}
 	}
 	
 	modifier = {
 		factor = 0.25
 		# Audax Validator "." Ignore_NEXT
-		NOT = { state_scope = { total_pops = 100000 } }
+		NOT = { 
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { total_pops = 100000 } 
+		}
 	}
 	
 }
@@ -808,30 +819,35 @@ migration_chance = {
 	group = {
 		modifier = {
 			factor = 0.2
+			# Audax Validator "." Ignore_NEXT
 			state_scope = {
 				total_pops = 600000
 			}
 		}
 		modifier = {
 			factor = 0.2
+			# Audax Validator "." Ignore_NEXT
 			state_scope = {
 				total_pops = 700000
 			}
 		}
 		modifier = {
 			factor = 0.2
+			# Audax Validator "." Ignore_NEXT
 			state_scope = {
 				total_pops = 800000
 			}
 		}
 		modifier = {
 			factor = 0.2
+			# Audax Validator "." Ignore_NEXT
 			state_scope = {
 				total_pops = 900000
 			}
 		}
 		modifier = {
 			factor = 0.2
+			# Audax Validator "." Ignore_NEXT
 			state_scope = {
 				total_pops = 1000000
 			}
@@ -840,12 +856,14 @@ migration_chance = {
 	modifier = {
 		factor = -1
 		state_scope = {
+			# Audax Validator "." Ignore_NEXT
 			NOT = { total_pops = 200000 }
 		}
 	}
 	modifier = {
 		factor = -0.5
 		state_scope = {
+			# Audax Validator "." Ignore_NEXT
 			NOT = { total_pops = 300000 }
 		}
 	}
@@ -951,54 +969,54 @@ emigration_chance =
 	group = {
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.49 border_policy = quota_immigration }
+			country = { administration_spending = 0.49 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.59 border_policy = quota_immigration }
+			country = { administration_spending = 0.59 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.69 border_policy = quota_immigration }
+			country = { administration_spending = 0.69 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.79 border_policy = quota_immigration }
+			country = { administration_spending = 0.79 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.89 border_policy = quota_immigration }
+			country = { administration_spending = 0.89 border_policy = quota_immigration ai = no }
 		}
 		modifier = {
 			factor = -0.02
-			country = { administration_spending = 0.99 border_policy = quota_immigration }
+			country = { administration_spending = 0.99 border_policy = quota_immigration ai = no }
 		}
 	}
 	
 	group = {
 		modifier = {
 			factor = -0.05
-			country = { administration_spending = 0.49 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.59 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.69 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.79 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.89 border_policy = closed_borders }
-		}
-		modifier = {
-			factor = -0.05
-			country = { administration_spending = 0.99 border_policy = closed_borders }
+			country = { administration_spending = 0.49 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.59 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.69 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.79 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.89 border_policy = closed_borders ai = no}
+		}                                                                             
+		modifier = {                                                                  
+			factor = -0.05                                                            
+			country = { administration_spending = 0.99 border_policy = closed_borders ai = no}
 		}
 	}
 	
@@ -1295,6 +1313,15 @@ emigration_chance =
 	}
 	
 	
+	modifier = {
+		factor = -0.12
+		country = { border_policy = quota_immigration ai = yes }
+	}
+	
+	modifier = {                                                                  
+		factor = -0.3                             
+		country = { border_policy = closed_borders ai = yes }
+	}
 }
 
 #general assimilation mtth, same for all pops
@@ -1303,7 +1330,7 @@ assimilation_chance =
 	factor = 1
 
 	modifier = {
-    	factor = -0.75
+    	factor = -0.25
 		has_culture_core = yes
 	}
 	

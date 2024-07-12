@@ -77,7 +77,13 @@ political_decisions = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = martial_law_flag }
-			ai = no
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					NOT = { plurality = 40 }
+				}
+			}
 		}
 		allow = {
 			OR = {
@@ -100,6 +106,13 @@ political_decisions = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			has_country_flag = martial_law_flag
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					plurality = 50
+				}
+			}
 		}
 		allow = {
 		}

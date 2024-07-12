@@ -58,6 +58,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9574
 		country_event = 57073
 		country_event = 57604
+		add_country_modifier = { name = revolution_happened_cmodifier duration = 1 }
 	}
 }
 
@@ -529,7 +530,7 @@ province_event = {
 }
 
 
-province_event = {
+country_event = {
 	id = 9570
 	title = "noloc"
 	desc = "noloc"
@@ -543,7 +544,7 @@ province_event = {
 }
 
 
-province_event = {
+country_event = {
 	id = 9571
 	title = "noloc"
 	desc = "noloc"
@@ -556,7 +557,7 @@ province_event = {
 	}
 }
 
-province_event = {
+country_event = {
 	id = 9572
 	title = "noloc"
 	desc = "noloc"
@@ -584,6 +585,7 @@ country_event = {
 	}
 	
 	option = {
+		name = "noloc"
 		any_country = {
 			limit = {
 				is_greater_power = yes
@@ -593,59 +595,6 @@ country_event = {
 		sphere_owner = {
 			create_alliance = THIS
 			military_access = THIS
-		}
-	}
-}
-
-country_event = { # 
-	title = "noloc"
-	desc = "noloc"
-	id = 9574
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_owned = {
-			limit = {
-				OR = {
-					trade_goods = coal
-					trade_goods = iron
-					trade_goods = sulphur
-					trade_goods = market_goods
-					trade_goods = precious_metal
-					trade_goods = oil
-				}
-			}
-			any_pop = {
-				limit = {
-					type = farmers
-				}
-				pop_type = labourers
-			}
-		}
-	}
-}
-
-country_event = { # 
-	title = "noloc"
-	desc = "noloc"
-	id = 9575
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_owned = {
-			limit = { 
-				trade_goods = iron
-			}
-			any_pop = {
-				limit = {
-					has_pop_type = farmers
-				}
-				pop_type = labourers
-			}
 		}
 	}
 }

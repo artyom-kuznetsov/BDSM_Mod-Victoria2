@@ -365,6 +365,21 @@
 		icon = 4
 	}
 	
+
+	violent_elections = {
+		global_pop_militancy_modifier = 0.03
+		issue_change_speed = -0.05
+		icon = 22
+	}
+
+	wartime_elections = {
+		war_exhaustion = 0.1
+		global_pop_militancy_modifier = -0.01
+		global_pop_consciousness_modifier = 0.02
+		issue_change_speed = 0.1
+		icon = 22
+	}
+	
 	election_national_cooldown = {
 		icon = 22
 	}
@@ -387,18 +402,21 @@
 	}
 	
 	spring_pmodifier = {
+		# Audax Validator "." Ignore_NEXT
 		movement_cost = 0.05
 		farm_RGO_eff = 0.05
 		icon = 44
 	}
 
 	harsh_spring_pmodifier = {
+		# Audax Validator "." Ignore_NEXT
 		movement_cost = 0.08
 		pop_consciousness_modifier = 0.01
 		icon = 44
 	}
 
 	winter_pmodifier = {
+		# Audax Validator "." Ignore_NEXT
 		movement_cost = 0.1
 		farm_RGO_eff = -0.25
 		pop_militancy_modifier = 0.01
@@ -407,6 +425,7 @@
 	}
 
 	harsh_winter_pmodifier = {
+		# Audax Validator "." Ignore_NEXT
 		movement_cost = 0.15
 		farm_RGO_eff = -0.3
 		pop_militancy_modifier = 0.02
@@ -499,11 +518,6 @@
 		icon = 25
 	}
 	
-	mobilization_cooldown = {
-		mobilisation_size = -0.2
-		icon = 20
-	}
-	
 	epidemy_cooldown_modifier = {
 		icon = 19
 	}
@@ -578,6 +592,12 @@
 	
 	recently_deoccupied_modifier = {
 		icon = 19
+	}
+	
+	rejected_border_closure = {
+		global_pop_militancy_modifier = -0.01
+		global_pop_consciousness_modifier = -0.01
+		icon = 20
 	}
 
 	martial_law_modifier = {

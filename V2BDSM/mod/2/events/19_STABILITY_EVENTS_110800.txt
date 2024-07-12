@@ -1,6 +1,8 @@
 country_event = {                   	
 	id = 110800
-	title = "Vassal_Breakfree_Stab_EvtName"               
+	## Audax Validator "." Ignore_NEXT
+	title = "Vassal_Breakfree_Stab_EvtName"       
+	## Audax Validator "." Ignore_NEXT
 	desc = "Vassal_Breakfree_Stab_EvtDesc"  
 	picture = RebuildAndFreedom  
 	
@@ -8,8 +10,6 @@ country_event = {
 		is_vassal = yes 
 		overlord = { NOT = { plurality = 25 } }
 	}
-	
-	is_triggered_only = yes 
 	
 	mean_time_to_happen = {
 		months = 200
@@ -72,4 +72,57 @@ country_event = {
 			}
 		}
 	}  
+}
+
+country_event = {                   	
+	id = 110802
+	title = "WarCloseBorders_EvtName"               
+	desc = "WarCloseBorders_EvtDesc"   
+	picture = "Administration"
+	
+	trigger = {
+		war = yes
+		war_exhaustion = 20
+		NOT = { border_policy = closed_borders }
+	}
+
+	option = {
+		name = "WarCloseBorders_EvtOptYes"
+		political_reform = closed_borders
+		set_country_flag = temprorary_border_closure
+		ai_chance = {
+			factor = 100
+		}
+	}
+
+	option = {
+		name = "WarCloseBorders_EvtOptNo"
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = { name = rejected_border_closure duration = 180 }
+	}  
+}
+
+country_event = {                   	
+	id = 110803
+	title = "WarOpenBorders_EvtName"               
+	desc = "WarOpenBorders_EvtDesc"   
+	picture = "Administration"
+	
+	trigger = {
+		has_country_flag = temprorary_border_closure
+		war = no
+		border_policy = closed_borders
+		NOT = { has_country_flag = is_totalitarian_flag }
+	}
+
+	option = {
+		name = "WarOpenBorders_EvtOptYes"
+		political_reform = closed_borders
+		clr_country_flag = temprorary_border_closure
+		ai_chance = {
+			factor = 100
+		}
+	}
 }

@@ -117,7 +117,7 @@ country_event = {
 				ai = yes
 				NOT = { money = 250000 }
 			}
-			money = 50000
+			money = 250000
 		}
 		
 		any_country = {
@@ -395,7 +395,10 @@ country_event = {
 		
 		any_country = { # Œ“ –€“‹ √–¿Õ»÷€ ” Õ≈ “Œ“¿À»“¿–Õ€’
 			limit = {
-				NOT = { centralization = totalitarianism }
+				NOT = { 
+					centralization = totalitarianism
+					has_country_flag = temprorary_border_closure
+				}
 				border_policy = closed_borders
 			}
 			political_reform = open_borders
@@ -441,6 +444,23 @@ country_event = {
 			clr_country_flag = communist_flag
 			clr_country_flag = socialist_flag
 			clr_country_flag = fascist_flag
+		}
+		
+		any_country = {
+			random_owned = {
+				limit = {
+					NOT = { controlled_by = owner }
+					has_province_modifier = generic_supply_depot_pmodifier
+				}
+				remove_province_modifier = generic_supply_depot_pmodifier
+			}
+			random_owned = {
+				limit = {
+					NOT = { controlled_by = owner }
+					has_province_modifier = capital_supply_depot_pmodifier
+				}
+				remove_province_modifier = capital_supply_depot_pmodifier
+			}
 		}
 		#any_country = {
 		#	limit = { civilized = yes }
@@ -506,7 +526,7 @@ country_event = {
 		any_country = {	limit = { war_exhaustion = 10 } plurality = -0.1 }
 		any_country = {	limit = { war_exhaustion = 20 } plurality = -0.05 }
 		any_country = {	limit = { war_exhaustion = 30 } plurality = -0.1 }
-		any_country = {	limit = { war_exhaustion = 40 } plurality = -0.2 }
+		any_country = {	limit = { war_exhaustion = 40 } plurality = -0.1 }
 		any_country = {	limit = { war_exhaustion = 50 } plurality = -0.15 }
 		
 		#Stability suffering from war
@@ -575,10 +595,10 @@ country_event = {
 		any_country = { limit = { exists = yes administration_spending = 0.69 } plurality = 0.025 }
 		any_country = { limit = { exists = yes administration_spending = 0.59 } plurality = 0.025 }
 
-		any_country = { limit = { exists = yes NOT = { administration_spending = 0.4 } } plurality = -0.005 }
-		any_country = { limit = { exists = yes NOT = { administration_spending = 0.3 } } plurality = -0.01 }
-		any_country = { limit = { exists = yes NOT = { administration_spending = 0.2 } } plurality = -0.025 }
-		any_country = { limit = { exists = yes NOT = { administration_spending = 0.1 } } plurality = -0.04 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.4 } } plurality = -0.005 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.3 } } plurality = -0.01 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.2 } } plurality = -0.025 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.1 } } plurality = -0.04 }
 		
 		### MODIFIERS ###
 		any_country = { limit = { has_country_modifier = macau_exploitation_modifier_china } plurality = -0.005 }
@@ -1003,8 +1023,10 @@ province_event = {
 	
 	option = {
 		name = "Selector_EvtOptImmigration"
-		any_owned = {
-			remove_province_modifier = immigrator_modifier
+		owner = {
+			any_owned = {
+				remove_province_modifier = immigrator_modifier
+			}
 		}
 		state_scope = {
 			any_owned = {
@@ -1122,6 +1144,7 @@ province_event = {
 	
 	option = {
 		name = "MonumentActions_EvtOptSpanishCarrack"
+		# Audax Validator "." Ignore_NEXT
 		province_event = { id = 140410 }
 		remove_core = WBK
 	}
