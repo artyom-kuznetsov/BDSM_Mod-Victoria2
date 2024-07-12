@@ -1208,41 +1208,25 @@ country_event = {	# WEATHER CLEANUP
 	
 	option = {
 		name = "noloc"
-		country_event = { id = 140410 days = 15 }
+		country_event = { id = 140410 days = 7 }
 		
 		META_ARCTIC = {	# WINTER
 			limit = {
 				OR = {
-					month = 11 # means 12
-					NOT = { month = 2 }
+					month = 10
+					NOT = { month = 8 }
 				}
 			}
 			add_province_modifier = { name = winter_arctic_pmodifier duration = -1 }
 			remove_province_modifier = autumn_arctic_pmodifier
 		}
-		META_ARCTIC = {	# SPRING
-			limit = {
-				month = 2 # means 3
-				NOT = { month = 5 }
-			}
-			add_province_modifier = { name = spring_arctic_pmodifier duration = -1 }
-			remove_province_modifier = winter_arctic_pmodifier
-		}
 		META_ARCTIC = {	# SUMMER
 			limit = {
-				month = 5 # means 6
-				NOT = { month = 8 }
+				month = 8
+				NOT = { month = 10 }
 			}
 			add_province_modifier = { name = summer_arctic_pmodifier duration = -1 }
 			remove_province_modifier = spring_arctic_pmodifier
-		}
-		META_ARCTIC = {	# AUTUMN
-			limit = {
-				month = 8 # means 9
-				NOT = { month = 11 }
-			}
-			add_province_modifier = { name = autumn_arctic_pmodifier duration = -1 }
-			remove_province_modifier = summer_arctic_pmodifier
 		}
 		META_TEMPERATE = {	# WINTER
 			limit = {
