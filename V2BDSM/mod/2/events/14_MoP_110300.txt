@@ -148,11 +148,28 @@ country_event = { # MOP ACTIONS
 	
 	option = {
 		name = "MopActions_EvtOptTaxCut"
-		add_country_modifier = {
-			name = tax_cuts_modifer
-			duration = 730
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						has_country_modifier = tax_cuts_modifer
+					}
+				}
+			}
+			add_country_modifier = {
+				name = tax_cuts_modifer
+				duration = 730
+			}
+			plurality = 1
 		}
-		plurality = 1
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = tax_cuts_modifer
+				}
+			}
+			CUSTOM_TOOLTIP_TAX_ALREADY_CUT = { }
+		}
 	}
 	
 	option = {
