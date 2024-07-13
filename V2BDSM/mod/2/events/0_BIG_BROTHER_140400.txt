@@ -9,6 +9,7 @@ country_event = {
 	option = {
 		name = "noloc"
 		
+		
 		any_country = {
 			any_owned = {
 				limit = {
@@ -322,7 +323,7 @@ country_event = {
 		
 		any_country = { # сахрэ бяел нрмньемхъ я лхпаюмйнл
 			limit = {
-				exists = yes
+				is_greater_power = yes
 			}
 			relation = { who = THIS value = -400 }
 			
@@ -986,6 +987,7 @@ country_event = {
 		885 = { life_rating = -3 }
 		1096 = { life_rating = -3 }
 		886 = { life_rating = -3 }
+		country_event = { id = 140400 days = 30 }
 	}
 	
 }
