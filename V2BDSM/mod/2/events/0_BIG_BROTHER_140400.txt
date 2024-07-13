@@ -176,6 +176,27 @@ country_event = {
 		prestige = -100
 		
 		
+		any_country = {
+			limit = {
+				government = colonial_company
+				is_independant = yes
+			}
+			random_owned = {
+				owner = {
+					limit = {
+						vote_franschise = none_voting
+					}
+					government = absolute_monarchy
+				}
+				owner = {
+					limit = {
+						NOT = { vote_franschise = none_voting }
+					}
+					government = democracy
+				}
+			}
+		}
+		
 		# мер йпеонярмнцн опюбю
 		any_country = {
 			limit = {
