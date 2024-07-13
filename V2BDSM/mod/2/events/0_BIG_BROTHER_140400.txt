@@ -189,21 +189,18 @@ country_event = {
 			limit = {
 				government = colonial_company
 				is_independant = yes
+				vote_franschise = none_voting
 			}
-			random_owned = {
-				owner = {
-					limit = {
-						vote_franschise = none_voting
-					}
-					government = absolute_monarchy
-				}
-				owner = {
-					limit = {
-						NOT = { vote_franschise = none_voting }
-					}
-					government = democracy
-				}
+			government = absolute_monarchy
+		}
+		
+		any_country = {
+			limit = {
+				government = colonial_company
+				is_independant = yes
+				NOT = { vote_franschise = none_voting }
 			}
+			government = democracy
 		}
 		
 		# мер йпеонярмнцн опюбю
@@ -666,6 +663,7 @@ country_event = {
 		any_country = { limit = { any_owned_province = { has_province_modifier = trustee_system } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = penal_colonies } } plurality = 0.02 }
 		
+		country_event = { id = 140410 days = 30 }
 	}
 }
 
@@ -995,7 +993,6 @@ country_event = {
 		885 = { life_rating = -3 }
 		1096 = { life_rating = -3 }
 		886 = { life_rating = -3 }
-		country_event = { id = 140400 days = 30 }
 	}
 	
 }

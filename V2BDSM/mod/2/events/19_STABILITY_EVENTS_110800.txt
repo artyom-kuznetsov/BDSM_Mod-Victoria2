@@ -36,8 +36,12 @@ country_event = {
 
 	option = {
 		name = "Vassal_Breakfree_Stab_EvtOptDeclare"
-		overlord = { country_event = 110801 }
-		overlord = { leave_alliance = THIS }
+		overlord = { 
+			country_event = 110801 
+			leave_alliance = THIS 
+			relation = { who = THIS value = -100 }
+			diplomatic_influence = { who = THIS value = -200 }
+		}
 		release_vassal = THIS
 		any_pop = { militancy = -2 }
 	} 
@@ -60,15 +64,17 @@ country_event = {
 	option = {
 		name = "Vassal_Breakfree_Notif_Stab_EvtOptLetgo"
 		prestige = -10
-		plurality = 2
+		plurality = 5
 	}
 
 	option = {
 		name = "Vassal_Breakfree_Notif_Stab_EvtOptForce"
 		prestige = -5
-		FROM = { add_casus_belli = { target = THIS
-							type = make_puppet
-							months = 3
+		FROM = { 
+			add_casus_belli = { 
+				target = THIS
+				type = make_puppet
+				months = 60
 			}
 		}
 	}  
