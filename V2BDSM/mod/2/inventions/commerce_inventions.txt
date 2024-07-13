@@ -192,19 +192,36 @@ buying_on_margin = {
 	limit = { mutual_funds = 1 }
 	news = no
 	chance = {
-		base = 2
+		base = 1
 		modifier = {
 			factor = 2
 			ruling_party_ideology = liberal
 		}
 		modifier = {
-			factor = 1
-			nationalvalue = nv_liberty
+			factor = 2
+			keynesian_economics = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.1
+	}
+}
+derivatives = {
+	limit = { mutual_funds = 1 }
+	news = no
+	chance = {
+		base = 1
+		modifier = {
+			factor = 2
+			ruling_party_ideology = liberal
+		}
+		modifier = {
+			factor = 2
+			organizational_development = 1
 		}
 	}
 	effect = {
 		tax_eff = 1
-		factory_cost = -0.01
 	}
 }
 #modern_financial_institutions
@@ -212,23 +229,36 @@ venture_capital = {
 	limit = { modern_financial_institutions = 1 }
 	news = no
 	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			ruling_party_ideology = liberal
-		}
+		base = 1
 		modifier = {
 			factor = 2
 			economic_policy = laissez_faire
 		}
 		modifier = {
-			factor = 1
-			nationalvalue = nv_liberty
+			factor = 2
+			fiat_based_monetary_system = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.1
+	}
+}
+money_markets = {
+	limit = { modern_financial_institutions = 1 }
+	news = no
+	chance = {
+		base = 1
+		modifier = {
+			factor = 2
+			economic_policy = laissez_faire
+		}
+		modifier = {
+			factor = 2
+			neoliberal_theory = 1
 		}
 	}
 	effect = {
 		tax_eff = 1
-		factory_cost = -0.01
 	}
 }
 #no_standard
