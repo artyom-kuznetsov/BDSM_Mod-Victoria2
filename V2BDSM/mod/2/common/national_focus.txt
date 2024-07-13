@@ -65,12 +65,6 @@ promotion_focus =
 		aristocrats = 0.20 #30% more likeley to become this type
 		icon = 5
 		outliner_show_as_percent = yes
-		#limit = {
-		#	state_scope = {
-		#		total_pops = 250000
-		#		NOT = { total_pops = 1000000 }
-		#	}
-		#}
 	}
 
 	promote_bureaucrats =
@@ -78,12 +72,6 @@ promotion_focus =
 		bureaucrats = 0.20 #40% more likeley to become this type
 		icon = 7
 		outliner_show_as_percent = yes
-		#limit = {
-		#	state_scope = {
-		#		total_pops = 250000
-		#		NOT = { total_pops = 1000000 }
-		#	}
-		#}
 	}
 
 	promote_capitalists =
@@ -91,12 +79,6 @@ promotion_focus =
 		capitalists = 0.20 #30% more likeley to become this type
 		icon = 8
 		outliner_show_as_percent = yes
-		#limit = {
-		#	state_scope = {
-		#		total_pops = 250000
-		#		NOT = { total_pops = 1000000 }
-		#	}
-		#}
 	}
 
 	promote_clergymen =
@@ -104,12 +86,6 @@ promotion_focus =
 		clergymen = 0.20 #30% more likeley to become this type
 		icon = 9
 		outliner_show_as_percent = yes
-		#limit = {
-		#	state_scope = {
-		#		total_pops = 250000
-		#		NOT = { total_pops = 1000000 }
-		#	}
-		#}
 	}
 
 	promote_clerks =
@@ -118,10 +94,6 @@ promotion_focus =
 		icon = 10
 		outliner_show_as_percent = yes
 		limit = {
-			#state_scope = {
-			#	total_pops = 250000
-			#	NOT = { total_pops = 1000000 }
-			#}
 			has_country_flag = industrial_revolution_flag
 		}
 	}
@@ -132,10 +104,6 @@ promotion_focus =
 		icon = 11
 		outliner_show_as_percent = yes
 		limit = {
-			#state_scope = {
-			#	total_pops = 250000
-			#	NOT = { total_pops = 1000000 }
-			#}
 			OR = {
 				has_country_flag = industrial_revolution_flag
 				state_scope = {
@@ -152,12 +120,6 @@ promotion_focus =
 		farmers = 0.20 #30% more likeley to become this type
 		icon = 12
 		outliner_show_as_percent = yes
-		#limit = {
-		#	state_scope = {
-		#		total_pops = 250000
-		#		NOT = { total_pops = 1000000 }
-		#	}
-		#}
 	}
 
 	promote_labourers =
@@ -165,12 +127,6 @@ promotion_focus =
 		labourers = 0.20 #30% more likeley to become this type
 		icon = 13
 		outliner_show_as_percent = yes
-		#limit = {
-		#	state_scope = {
-		#		total_pops = 250000
-		#		NOT = { total_pops = 1000000 }
-		#	}
-		#}
 	}
 
 	promote_officers =
@@ -178,12 +134,6 @@ promotion_focus =
 		officers = 0.20 #30% more likeley to become this type
 		icon = 14
 		outliner_show_as_percent = yes
-		#limit = {
-		#	state_scope = {
-		#		total_pops = 250000
-		#		NOT = { total_pops = 1000000 }
-		#	}
-		#}
 	}
 
 	promote_soldiers =
@@ -192,12 +142,11 @@ promotion_focus =
 		icon = 15
 		outliner_show_as_percent = yes
 		limit = {
-			#state_scope = {
-			#	total_pops = 250000
-			#	NOT = { total_pops = 1000000 }
-			#}
-			state_scope = {
-				is_colonial = no
+			OR = {
+				state_scope = {
+					is_colonial = no
+				}
+				has_country_flag = french_foreign_legion_supported
 			}
 		}
 	}

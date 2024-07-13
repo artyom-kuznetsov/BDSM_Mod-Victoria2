@@ -236,12 +236,13 @@ promote_to =
 	farmers = {
 		factor = 0.01
 		modifier = {
-			factor = 5.0
-			soldiers = 0.05
+			factor = 100
+			soldiers = 0.052
 		}
 		modifier = {
 			factor = 100
 			location = { is_colonial = yes }
+			NOT = { country = { has_country_flag = french_foreign_legion_supported } }
 		}
 		modifier = {
 			factor = -100
@@ -302,7 +303,7 @@ promote_to =
 		factor = 0.01
 		modifier = {
 			factor = 5
-			soldiers = 0.05
+			soldiers = 0.052
 		}
 		modifier = {
 			factor = -1020

@@ -15,6 +15,7 @@ country_event = {
 					state_scope = {
 						is_colonial = yes
 					}
+					owner = { NOT = { has_country_flag = french_foreign_legion_supported } }
 				}
 				soldiers = {
 					pop_type = artisans
@@ -527,24 +528,27 @@ country_event = {
 		any_country = {	limit = { is_mobilised = yes } plurality = -0.1 }
 		
 		#Stability increases with low militancy
-		any_country = {	limit = { NOT = { average_militancy = 2 } } plurality = 0.0125 }
-		any_country = {	limit = { NOT = { average_militancy = 1 } } plurality = 0.0125 }
-		any_country = {	limit = { NOT = { average_militancy = 0.5 } } plurality = 0.025 }
+		any_country = {	limit = { NOT = { average_militancy = 2 } } plurality = 0.025 }
+		any_country = {	limit = { NOT = { average_militancy = 1 } } plurality = 0.025}
+		any_country = {	limit = { NOT = { average_militancy = 0.5 } } plurality = 0.05 }
 		any_country = {	limit = { NOT = { average_militancy = 0.1 } } plurality = 0.05 }
 
 		#Stability decreases with high militancy
-		any_country = {	limit = { average_militancy = 5 } plurality = -0.0125 }
+		any_country = {	limit = { average_militancy = 3 } plurality = -0.0125 }
+		any_country = {	limit = { average_militancy = 4 } plurality = -0.0125 }
+		any_country = {	limit = { average_militancy = 5 } plurality = -0.025 }
 		any_country = {	limit = { average_militancy = 6 } plurality = -0.025 }
 		any_country = {	limit = { average_militancy = 7 } plurality = -0.05 }
 		any_country = {	limit = { average_militancy = 8 } plurality = -0.1 }
-		any_country = {	limit = { average_militancy = 9 } plurality = -0.2 }
-		any_country = {	limit = { average_militancy = 10 } plurality = -0.3 }
+		any_country = {	limit = { average_militancy = 9 } plurality = -0.1 }
+		any_country = {	limit = { average_militancy = 10 } plurality = -0.2 }
 		
 		#Stability diminishing returns
+		any_country = {	limit = { plurality = 50 } plurality = -0.05 }
 		any_country = {	limit = { plurality = 60 } plurality = -0.1 }
-		any_country = {	limit = { plurality = 70 } plurality = -0.2 }
-		any_country = {	limit = { plurality = 80 } plurality = -0.3 }
-		any_country = {	limit = { plurality = 90 } plurality = -0.4 }
+		any_country = {	limit = { plurality = 70 } plurality = -0.1 }
+		any_country = {	limit = { plurality = 80 } plurality = -0.1 }
+		any_country = {	limit = { plurality = 90 } plurality = -0.1 }
 		
 		#Stability diminishing chaos
 		any_country = {	limit = { NOT = { plurality = 5 } } plurality = 0.5 }
@@ -553,6 +557,8 @@ country_event = {
 		any_country = {	limit = { NOT = { plurality = 20 } } plurality = 0.2 }
 		any_country = {	limit = { NOT = { plurality = 25 } } plurality = 0.1 }
 		any_country = {	limit = { NOT = { plurality = 30 } } plurality = 0.08 }
+		any_country = {	limit = { NOT = { plurality = 40 } } plurality = 0.05 }
+		any_country = {	limit = { NOT = { plurality = 50 } } plurality = 0.05 }
 		
 		#Militancy increases with low stability, le positive feedback loop dahora
 		any_country = {	limit = { NOT = { plurality = 40 } } any_pop = { militancy = 0.015 } } 
