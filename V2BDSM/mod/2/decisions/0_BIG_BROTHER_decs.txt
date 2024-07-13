@@ -71,6 +71,13 @@ political_decisions = {
 					name = force_reform_cooldown_modifier
 					duration = 3650
 				}
+				random_owned = {
+					limit = {
+						is_capital = yes
+						NOT = { has_province_modifier = capital_supply_depot_pmodifier }
+					}
+					add_country_modifier = { name = capital_supply_depot_pmodifier duration = -1 }
+				}
 			}
 			any_country = {
 				limit = {
