@@ -70,14 +70,19 @@ political_decisions = {
 		}
 		
 		allow = {
-			AIN = {
-				OR = {
-					in_sphere = THIS
-					alliance_with = THIS
-					vassal_of = THIS
+			OR = {
+				AND = {
+					AIN = {
+						OR = {
+							in_sphere = THIS
+							alliance_with = THIS
+							vassal_of = THIS
+						}
+					}
+					state_n_government = 1
 				}
+				nationalism_n_imperialism = 1
 			}
-			state_n_government = 1
 		}
 		
 		effect = {
@@ -85,7 +90,11 @@ political_decisions = {
 			random_owned = {
 				limit = {
 					owner = {
-						exists = AIN
+						OR = {
+							AIN = { in_sphere = THIS }
+							AIN = { alliance_with = THIS }
+							AIN = { vassal_of = THIS }
+						}
 					}
 				}
 				AIN = {
@@ -95,7 +104,13 @@ political_decisions = {
 			random_owned = {
 				limit = {
 					owner = {
-						NOT = { exists = AIN }
+						NOT = { 
+							OR = {
+								AIN = { in_sphere = THIS }
+								AIN = { alliance_with = THIS }
+								AIN = { vassal_of = THIS }
+							}
+						}
 					}
 				}
 				AIN = {
@@ -112,7 +127,6 @@ political_decisions = {
 				militancy = 5
 			}
 			set_country_flag = ainu_expedition_flag
-			1643 = { state_scope = { any_owned = { add_province_modifier = { name = TUR_prov_assimilatABLE_prov_modifier duration = -1 } } } }
 		}
 	}
 	korean_conquest_dec = {

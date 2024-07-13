@@ -187,6 +187,24 @@ alternating_current = {
 		factory_throughput = 0.02
 	}
 }
+transformers = {
+	limit = { electrical_power_generation = 1 }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			invention = alternating_current
+		}
+		modifier = {
+			factor = 2
+			invention = direct_current
+		}
+	}
+	effect = {
+		rgo_output = 0.05
+		factory_throughput = 0.05
+	}
+}
 national_radio_networks = {
 	limit = { electrical_power_generation = 1 }
 	chance = {
@@ -238,6 +256,24 @@ polyphase_system = {
 		factory_throughput = 0.02
 	}
 }
+gasification = {
+	limit = { modern_power_generation = 1 }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			invention = transformers
+		}
+		modifier = {
+			factor = 2
+			invention = polyphase_system
+		}
+	}
+	effect = {
+		rgo_output = 0.05
+		factory_throughput = 0.05
+	}
+}
 vacuum_tube = {
 	limit = { 
 		electricity = 1
@@ -246,11 +282,11 @@ vacuum_tube = {
 	chance = {
 		base = 1
 		modifier = {
-			factor = 5
+			factor = 2
 			invention = direct_current
 		}
 		modifier = {
-			factor = 5
+			factor = 2
 			invention = alternating_current
 		}			
 	}
@@ -628,6 +664,23 @@ refrigerator_technology = {
 	}
 }
 #shift_work
+shift_schedule = {
+	limit = { shift_work = 1 }
+	chance = {
+		base = 1
+		modifier = {
+			factor = 2
+			investment_banks = 1
+		}
+		modifier = {
+			factor = 2
+			time_saving_measures = 1
+		}
+	}
+	effect = {
+		factory_throughput = 0.02
+	}
+}
 graveyard_shift = {
 	limit = { shift_work = 1 }
 	chance = {
@@ -642,23 +695,44 @@ graveyard_shift = {
 		}
 	}
 	effect = {
-		factory_throughput = 0.05
+		factory_throughput = 0.03
 		factory_goods_output = { radio = 0.03 }
 		factory_goods_output = { telephones = 0.03 }
 	}
 }
 #mechanized_manufacturing
-factory_automation_infrastructure = {
+control_theory = {
 	limit = { mechanized_manufacturing = 1 }
 	chance = {
-		base = 2
+		base = 1
+		modifier = {
+			factor = 2
+			electrical_power_generation = 1
+		}
 		modifier = {
 			factor = 2
 			electricity = 1
 		}
 	}
 	effect = {
-		factory_throughput = 0.05
+		factory_throughput = 0.02
+	}
+}
+factory_automation_infrastructure = {
+	limit = { mechanized_manufacturing = 1 }
+	chance = {
+		base = 1
+		modifier = {
+			factor = 2
+			electricity = 1
+		}
+		modifier = {
+			factor = 2
+			invention = control_theory
+		}
+	}
+	effect = {
+		factory_throughput = 0.03
 	}
 }
 #Metulurgy
@@ -928,9 +1002,174 @@ stainless_steel = {
 		}
 	}
 }
+#experimental_railroad
+market_squares = {
+	limit = { experimental_railroad = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			freedom_of_trade = 1
+		}
+		modifier = {
+			factor = 2
+			guild_based_production = 1
+		}
+	}
+	effect = {
+		factory_goods_output = {
+			lumber = 0.02
+		}
+	}
+}
 #early_railroad
+gas_streetlights = {
+	limit = { early_railroad = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			mechanized_mining = 1
+		}
+		modifier = {
+			factor = 2
+			invention = coke
+		}
+		modifier = {
+			factor = 2
+			practical_steam_engine = 1
+		}
+	}
+	effect = {
+		rgo_goods_output = 0.02 
+	}
+}
 #iron_railroad
+public_trams = {
+	limit = { iron_railroad = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			state_n_government = 1
+		}
+		modifier = {
+			factor = 2
+			invention = bessemer_steel
+		}
+		modifier = {
+			factor = 2
+			high_n_low_pressure_steam_engines = 1
+		}
+	}
+	effect = {
+		factory_cost = 0.05
+		factory_throughput = 0.01
+	}
+}
 #steel_railroad
+elevators = {
+	limit = { steel_railroad = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			steam_turbine = 1
+		}
+		modifier = {
+			factor = 2
+			invention = machine_tools
+		}
+		modifier = {
+			factor = 2
+			invention = electric_machinery
+		}
+	}
+	effect = {
+		factory_goods_output = {
+			machine_parts = 0.02
+		}
+	}
+}
+#integral_rail_system
+modern_sewerage = {
+	limit = { integral_rail_system = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 1
+			market_regulations = 1
+		}
+		modifier = {
+			factor = 1
+			invention = portland_cement
+		}
+		modifier = {
+			factor = 1
+			invention = thomas_steel
+		}
+	}
+	effect = {
+		factory_goods_output = {
+			fertilizer = 0.02
+		}
+	}
+}
+#limited_access_roads
+skyscrapers = {
+	limit = { limited_access_roads = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 1
+			electricity = 1
+		}
+		modifier = {
+			factor = 1
+			invention = steel_alloys
+		}
+		modifier = {
+			factor = 1
+			invention = rotary_kiln
+		}
+	}
+	effect = {
+		factory_goods_output = {
+			cement = 0.02
+		}
+	}
+}
+#modern_infrastructure
+airport = {
+	limit = { modern_infrastructure = 1 }
+	news = no
+	chance = {
+		base = 1
+		modifier = {
+			factor = -3
+			NOT = { invention = wright_n_langleys_aeroplanes }
+		}
+		modifier = {
+			factor = 1
+			modern_power_generation = 1
+		}
+		modifier = {
+			factor = 1
+			organizational_development = 1
+		}
+	}
+	effect = {
+		factory_goods_output = {
+			aeroplanes = 0.02
+		}
+	}
+}
 #medicine
 pharmaceuticals = {
 	limit = { organic_chemistry = 1 }
