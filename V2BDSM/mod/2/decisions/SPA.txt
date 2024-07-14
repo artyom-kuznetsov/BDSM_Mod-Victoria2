@@ -414,12 +414,44 @@ political_decisions = {
 			nationalism_n_imperialism = 1
 		}		
 		effect = {
-			set_country_flag = magrib_imigration_SPA_dec_flag
+			set_country_flag = magrib_SPA_imigration_dec_flag
 			set_country_flag = magrib_imigration_check_flag
 			add_country_modifier = { 
 				name = magrib_imigration_modifier
 				duration = 1825
 			}
+		}
+	}
+	immigration_from_magrib_SPA_dec = {
+		potential = {
+			tag = SPA
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = immigration_from_magrib_SPA_flag }
+			has_country_flag = magrib_SPA_imigration_dec_flag 
+		}
+		allow = {
+			AND = {
+				owns = 1680
+				owns = 1690
+				owns = 1720
+				MOR_1686 = {
+					state_scope = { is_colonial = no }
+				}
+				MOR_1693 = {
+					state_scope = { is_colonial = no }
+				}				
+				MOR_1684 = {
+					state_scope = { is_colonial = no }
+				}
+			}		
+		}
+		effect = {
+				set_country_flag = immigration_from_magrib_SPA_flag
+				set_country_flag = immigration_from_magrib_chek_flag
+				add_country_modifier = { 
+					name = from_magrib_imigration_modifier
+					duration = 1825
+				}
 		}
 	}
 

@@ -205,6 +205,15 @@ country_event = {
 			}
 			clr_country_flag = magrib_imigration_check_flag
 		}
+		
+		any_country = {
+			limit = {
+				has_country_flag = immigration_from_magrib_chek_flag
+				NOT = { has_country_modifier = from_magrib_imigration_modifier }
+			}
+			clr_country_flag = immigration_from_magrib_chek_flag
+		}
+
 		any_pop = {
 			money = 2000000
 		}

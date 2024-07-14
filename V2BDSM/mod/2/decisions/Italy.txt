@@ -907,21 +907,53 @@ political_decisions = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = magrib_ITA_imigration_dec_flag }
 		}
-		allow = 
-			{
+		allow = {
 			owns = 1725
-			owns = 1731
-			owns = 1741
-			owns = 1736
-			nationalism_n_imperialism = 1
+		#	owns = 1731
+		#	owns = 1741
+		#	owns = 1736
+		#	nationalism_n_imperialism = 1
 		}		
 		effect = {
-			set_country_flag = magrib_imigration_ITA_dec_flag
+			set_country_flag = magrib_ITA_imigration_dec_flag
 			set_country_flag = magrib_imigration_check_flag
 			add_country_modifier = { 
 				name = magrib_imigration_modifier
 				duration = 1825
 			}
+		}
+	}
+	immigration_from_magrib_ITA_dec = {
+		potential = {
+			tag = ITA
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = immigration_from_magrib_ITA_flag }
+			has_country_flag = magrib_ITA_imigration_dec_flag 
+		}
+		allow = {
+			AND = {
+				owns = 1725
+				owns = 1731
+				owns = 1741
+				owns = 1736
+				TUN_1726 = {
+					state_scope = { is_colonial = no }
+				}
+				TRI_1743 = {
+					state_scope = { is_colonial = no }
+				}				
+				EGY_1737 = {
+					state_scope = { is_colonial = no }
+				}
+			}		
+		}
+		effect = {
+				set_country_flag = immigration_from_magrib_ITA_flag
+				set_country_flag = immigration_from_magrib_chek_flag
+				add_country_modifier = { 
+					name = from_magrib_imigration_modifier
+					duration = 1825
+				}
 		}
 	}
 }
