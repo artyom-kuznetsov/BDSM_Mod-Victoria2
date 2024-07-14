@@ -1,6 +1,6 @@
 Log of Audax.Validator, version 1.32.49 [1.32.49.0]
 
-Current Time: 14.07.2024 1:03:34
+Current Time: 14.07.2024 2:46:37
 .NET Version: 4.0.30319.42000
 OS Version: Microsoft Windows NT 6.2.9200.0
 Current Culture: ru-RU
@@ -13,7 +13,7 @@ System Directory: C:\WINDOWS\system32
 User Name: [user_name <******>]
 User Domain Name: [machine_name <*******-*******>]
 User Interactive: True
-Tick Count: 02:00:02.6710000
+Tick Count: 03:43:05.1710000
 Shutdown Started: False
 
 ENVIRONMENT VARIABLES
@@ -592,113 +592,3 @@ DynamicErrors:
 DynamicErrors: 
 ValidationManager: StatusLog > Beginning initialization...
 ValidationManager: StatusLog > Initialization complete!
-ModSystem: Using file system Audax.Pdox.IO.Ck2FileSystem
-ModSystem: Loading mod list...
-ModSystem: Mod dir exists in game path D:\Victoria2_DEVELOPMENT\V2BDSM, enumerating
-ModSystem: Found mod Clausewitz2Mod ModName=Based Mod v4.4 ModPath=D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2 OriginalModFilePath=D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2.mod
-ModSystem: Examining default directory
-ModSystem: Default directory data path is: C:\Users\[user_name <******>]\Documents\Paradox Interactive\Crusader Kings II\mod
-ModSystem: Data path does not exist
-VSET: Processing settings...
-VSET: Found settings file at D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2\ValidatorSettings.txt with structure 
-# This is the settings file for Vic2 and expansions
-# To use, copy this to your Vic2 installation base or mod directory and rename it "ValidatorSettings.txt"
-# If you don't want to use it then don't copy it.
-# Uncomment something to use it, or comment something to disable it.
-# ##########################################
-# General
-# ##########################################
-# Generates files containing flag and variable analysis.
-# AddFlag = TraceFlags
-# Generates a CSV file with basic information about events. Please note that the country column is determined based on heuristics and therefore may not be accurate.
-# AddFlag = ExportEventInfo
-# Ignores the warning when there is only one item in an OR clause
-# AddFlag = ContextValidator.IgnoreOneItemInOrClauseWarning
-# Ignores the warning when there is only one item in an AND clause
-# AddFlag = ContextValidator.IgnoreOneItemInAndClauseWarning
-# Ignores the warning when we are already in an AND clause.
-# AddFlag = ContextValidator.IgnoreAlreadyInAndClauseWarning
-# Ignores the warning "Having a factor of 1 is useless."
-AddFlag = ContextValidator.NoWarnOnFactorOne
-# Ignore Feb 29 errors for leap years
-# AddFlag = IgnoreFeb29Errors
-# ##########################################
-# LOCALIZATION
-# ##########################################
-# Disables check that all keys are found in the localization file. This assumes that you use keys everywhere. If not you'll get lots of false positives.
-# AddFlag = NoCheckKey
-# ##########################################
-# COUNTRY HISTORY
-# ##########################################
-# Disables checks that dates are in chronological order, and that there are no duplicates within groups of dates.
-# Note that this option currently won't work anyways
-# AddFlag = CountryHistory.NoComplexDateChecks
-# ##########################################
-# PROVINCE HISTORY
-# ##########################################
-# Disables checks that dates are in chronological order, and that there are no duplicates within groups of dates.
-# AddFlag = ProvinceHistory.NoComplexDateChecks
-
-VSET: Processing node element AddFlag = ContextValidator.NoWarnOnFactorOne
-ValidationManager: StatusLog > Beginning validation...
-ValidationManager: StatusLog > Beginning Modifiers validation...
-ValidationManager: StatusLog > Modifiers validation complete in 2094 ms!
-ValidationManager: StatusLog > Beginning Pop types validation...
-ValidationManager: StatusLog > Pop types validation complete in 6002 ms!
-ValidationManager: StatusLog > Cache hits: 292 Cache misses: 268
-ValidationManager: StatusLog > Validation complete!
-ModSystem: Using file system Audax.Pdox.IO.Ck2FileSystem
-ModSystem: Loading mod list...
-ModSystem: Mod dir exists in game path D:\Victoria2_DEVELOPMENT\V2BDSM, enumerating
-ModSystem: Found mod Clausewitz2Mod ModName=Based Mod v4.4 ModPath=D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2 OriginalModFilePath=D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2.mod
-ModSystem: Examining default directory
-ModSystem: Default directory data path is: C:\Users\[user_name <******>]\Documents\Paradox Interactive\Crusader Kings II\mod
-ModSystem: Data path does not exist
-VSET: Processing settings...
-VSET: Found settings file at D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2\ValidatorSettings.txt with structure 
-# This is the settings file for Vic2 and expansions
-# To use, copy this to your Vic2 installation base or mod directory and rename it "ValidatorSettings.txt"
-# If you don't want to use it then don't copy it.
-# Uncomment something to use it, or comment something to disable it.
-# ##########################################
-# General
-# ##########################################
-# Generates files containing flag and variable analysis.
-# AddFlag = TraceFlags
-# Generates a CSV file with basic information about events. Please note that the country column is determined based on heuristics and therefore may not be accurate.
-# AddFlag = ExportEventInfo
-# Ignores the warning when there is only one item in an OR clause
-# AddFlag = ContextValidator.IgnoreOneItemInOrClauseWarning
-# Ignores the warning when there is only one item in an AND clause
-# AddFlag = ContextValidator.IgnoreOneItemInAndClauseWarning
-# Ignores the warning when we are already in an AND clause.
-# AddFlag = ContextValidator.IgnoreAlreadyInAndClauseWarning
-# Ignores the warning "Having a factor of 1 is useless."
-AddFlag = ContextValidator.NoWarnOnFactorOne
-# Ignore Feb 29 errors for leap years
-# AddFlag = IgnoreFeb29Errors
-# ##########################################
-# LOCALIZATION
-# ##########################################
-# Disables check that all keys are found in the localization file. This assumes that you use keys everywhere. If not you'll get lots of false positives.
-# AddFlag = NoCheckKey
-# ##########################################
-# COUNTRY HISTORY
-# ##########################################
-# Disables checks that dates are in chronological order, and that there are no duplicates within groups of dates.
-# Note that this option currently won't work anyways
-# AddFlag = CountryHistory.NoComplexDateChecks
-# ##########################################
-# PROVINCE HISTORY
-# ##########################################
-# Disables checks that dates are in chronological order, and that there are no duplicates within groups of dates.
-# AddFlag = ProvinceHistory.NoComplexDateChecks
-
-VSET: Processing node element AddFlag = ContextValidator.NoWarnOnFactorOne
-ValidationManager: StatusLog > Beginning validation...
-ValidationManager: StatusLog > Beginning Modifiers validation...
-ValidationManager: StatusLog > Modifiers validation complete in 1763 ms!
-ValidationManager: StatusLog > Beginning Pop types validation...
-ValidationManager: StatusLog > Pop types validation complete in 5542 ms!
-ValidationManager: StatusLog > Cache hits: 293 Cache misses: 268
-ValidationManager: StatusLog > Validation complete!
