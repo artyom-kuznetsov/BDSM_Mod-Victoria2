@@ -4161,3 +4161,28 @@ country_event = {	# WEATHER CLEANUP
 		country_event = { id = 140411 days = 7 }
 	}
 }
+
+country_event = {
+	id = 140412
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		NOT = { has_global_flag = AST_has_player }
+		tag = WBK
+		AST = { ai = no }
+	}
+	
+	option = {
+		name = "noloc"
+		META_1 = {
+			limit = {
+				AST = { ai = no }
+				owned_by = AST
+			}
+			life_rating = 5
+			set_global_flag = AST_has_player
+		}
+	}
+}
+

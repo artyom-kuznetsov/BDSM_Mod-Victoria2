@@ -27,11 +27,31 @@ political_decisions = {
 		effect = {
 			CUSTOM_TOOLTIP_EXPEDITION_TO_SICILY = { }
 			set_country_flag = expedition_to_sicily
-			define_general = {
-				name = "§RДжузеппе Гарибальди§W"
-				personality = org05mor40
-				background = 5a4d_1
+			set_country_flag = hidden_tooltip
+			random_owned = {
+				limit = {
+					owner = {
+						has_country_flag = hidden_tooltip
+					}
+				}
+				owner = {
+					define_general = {
+						name = "§RДжузеппе Гарибальди§W"
+						personality = org05mor40
+						background = 5a4d_1
+					}
+					THIS = {
+						limit = {
+							GRE = { vassal_of = SIC }
+						}
+						create_vassal = GRE
+					}
+					SIC = {
+						plurality = -20
+					}
+				}
 			}
+			clr_country_flag = hidden_tooltip
 			any_country = {
 				limit = {
 					NOT = { tag = THIS }
@@ -128,15 +148,6 @@ political_decisions = {
 				owner = {
 					add_country_modifier = { name = risorgimento_ai_modifier duration = 4000 }
 				}
-			}
-			THIS = {
-				limit = {
-					GRE = { vassal_of = SIC }
-				}
-				create_vassal = GRE
-			}
-			SIC = {
-				plurality = -20
 			}
 		}
 		ai_will_do = {

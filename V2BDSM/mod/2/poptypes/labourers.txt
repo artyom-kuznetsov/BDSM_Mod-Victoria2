@@ -348,6 +348,21 @@ promote_to =
 			penal_system = rehabilitation
 		}
 	}
+	artisans = {
+		factor = 0.01
+		
+		modifier = {
+			factor = 5
+			state_scope = {
+				has_factories = no
+			}
+		}
+		
+		modifier = {
+			factor = -99
+			NOT = { unemployment_by_type = { type = labourers value = 0.2 } }
+		}
+	}
 	soldiers =
 	{
 		factor = 0.01
@@ -587,42 +602,41 @@ promote_to =
 				conscription = ref_professional_army
 			}
 		}
-		modifier = {
-			factor = -100
-			location = {
-				is_colonial = yes
-			}
-			NOT = { country = { has_country_flag = french_foreign_legion_supported } }
-		}
-		
 		group = {
 			modifier = {
 				factor = -3
 				NOT = { recruited_percentage = 0.80 }
+				country = { military_score = 1 }
 			}
 			modifier = {
 				factor = -3
 				NOT = { recruited_percentage = 0.70 }
+				country = { military_score = 1 }
 			}
 			modifier = {
 				factor = -3
 				NOT = { recruited_percentage = 0.60 }
+				country = { military_score = 1 }
 			}
 			modifier = {
 				factor = -3
 				NOT = { recruited_percentage = 0.50 }
+				country = { military_score = 1 }
 			}
 			modifier = {
 				factor = -3
 				NOT = { recruited_percentage = 0.40 }
+				country = { military_score = 1 }
 			}
 			modifier = {
 				factor = -3
 				NOT = { recruited_percentage = 0.33 }
+				country = { military_score = 1 }
 			}
 			modifier = {
 				factor = -10
 				NOT = { recruited_percentage = 0.25 }
+				country = { military_score = 1 }
 			}
 		}
 		
@@ -904,6 +918,14 @@ promote_to =
 				unemployment_by_type = { type = labourers value = 0.1 } 
 			}
 		}
+		modifier = {
+			factor = -100
+			location = {
+				is_colonial = yes
+			}
+			NOT = { country = { has_country_flag = french_foreign_legion_supported } }
+		}
+		
 	}
 	aristocrats = 
 	{
