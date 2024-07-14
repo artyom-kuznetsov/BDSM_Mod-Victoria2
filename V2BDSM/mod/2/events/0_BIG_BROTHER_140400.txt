@@ -179,6 +179,25 @@ country_event = {
 			}
 		}
 		
+		any_country = {
+			1481 = {
+				limit ={
+					owner = {
+						is_culture_group = east_asian
+					}
+				}
+				1481 = { change_province_name = "Люйшунь" }
+			}
+			1481 = {
+				limit ={
+					owner = {
+						NOT = { is_culture_group = east_asian }
+					}
+				}
+				1481 = { change_province_name = "Порт-Артур" }
+			}
+		}
+		
 		any_pop = {
 			money = 2000000
 		}
