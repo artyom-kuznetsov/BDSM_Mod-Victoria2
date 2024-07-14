@@ -43,11 +43,12 @@ political_decisions = {
 	}
 	support_french_foreign_legion = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = FRA
+			NOT = { has_country_flag = hide_all_decs_flag }
 			owns = 1700
 			NOT = {
 				has_country_flag = french_foreign_legion_supported
+				has_country_modifier = administrative_expenses_modifier 
 			}
 		}
 		allow = {
@@ -60,6 +61,10 @@ political_decisions = {
 				duration = -1
 			}
 			set_country_flag = french_foreign_legion_supported
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 730
+			}
 		}
 	}
 	
