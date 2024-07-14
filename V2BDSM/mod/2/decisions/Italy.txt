@@ -984,4 +984,91 @@ political_decisions = {
 			prestige = 5
 		}
 	}
+	east_italian_africa_step1_dec = {
+		potential = {
+			tag = ITA
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = east_italian_africa_step1_flag }
+		}
+		allow = {
+			OR = {
+				owns = 1849
+				owns = 1875
+			}
+		}		
+		effect = {
+			set_country_flag = east_italian_africa_step1_flag
+			prestige = 5
+		}
+	}
+	
+	east_italian_africa_step2_dec = {
+		potential = {
+			tag = ITA
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = east_italian_africa_step2_flag }
+			has_country_flag = east_italian_africa_step1_flag
+			ETH = {
+				limit = { 
+					exists = yes
+					any_owned_province = {
+						OR = {
+							any_neighbor_province = { 
+								owned_by = THIS 
+							}
+							AND = {
+								port = yes
+								THIS = { num_of_ports = 1 }
+							}	
+						}
+					}
+				} 
+		}
+		allow = {
+			nationalism_n_imperialism = 1
+		}		
+		effect = {
+			set_country_flag = east_italian_africa_step2_flag	
+				war = {
+					target = ETH
+					attacker_goal = { casus_belli = make_puppet }
+					defender_goal = { casus_belli = demand_reparations }
+				}	
+			}
+		}
+	}
+	east_italian_africa_step3_dec = {
+		potential = {
+			tag = ITA
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = east_italian_africa_step3_flag }
+			has_country_flag = east_italian_africa_step1_flag
+		}
+		allow = {
+			owns = 1852
+			owns = 1858
+			owns = 1859
+			owns = 1865
+			owns = 1849
+			owns = 1875
+		}
+		effect = {
+			any_owned = {
+				limit = {
+					OR = {
+						region = ETH_1852
+						region = ETH_1858
+						region = ETH_1859
+						region = ETH_1867
+						region = ENG_1848
+						region = ENG_1868
+					}
+				}
+				add_province_modifier = {
+					name = east_italian_africa_development_modifier
+					duration = 1825
+				}
+			}
+		}
+	}
 }
