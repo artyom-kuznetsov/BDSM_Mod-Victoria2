@@ -49,16 +49,16 @@ political_decisions = {
 					SIC = {
 						plurality = -20
 					}
+					any_country = {
+						limit = {
+							NOT = { tag = THIS }
+							owns = 754
+						}
+						country_event = { id = 35305 days = 0 }
+					}
 				}
 			}
 			clr_country_flag = hidden_tooltip
-			any_country = {
-				limit = {
-					NOT = { tag = THIS }
-					owns = 754
-				}
-				country_event = { id = 35305 days = 0 }
-			}
 			random_owned = {
 				limit = {
 					owner = { ai = yes }
@@ -963,6 +963,23 @@ political_decisions = {
 					name = from_magrib_imigration_modifier
 					duration = 1825
 				}
+		}
+	}
+	italian_call_for_union_dec = {
+		potential = {
+			NOT = { has_global_flag = italian_call_for_union }
+			is_culture_group = italian
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			ideological_thought = 1
+		}
+		
+		effect = {
+			set_global_flag = italian_call_for_union
+			CUSTOM_TOOLTIP_ITA_CALL_FOR_UNION = { }
+			prestige = 5
 		}
 	}
 }

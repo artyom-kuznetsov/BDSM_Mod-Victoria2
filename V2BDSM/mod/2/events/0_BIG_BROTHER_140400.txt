@@ -531,6 +531,14 @@ country_event = {
 				remove_province_modifier = capital_supply_depot_pmodifier
 			}
 		}
+		any_country = {
+			limit = {
+				is_culture_group = italian
+				NOT = { has_country_flag = ita_nationalism_flag }
+				has_global_flag = italian_call_for_union
+			}
+			set_country_flag = ita_nationalism_flag
+		}
 		#any_country = {
 		#	limit = { civilized = yes }
 		#	any_pop = {
