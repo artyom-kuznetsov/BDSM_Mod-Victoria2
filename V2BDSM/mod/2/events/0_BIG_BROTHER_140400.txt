@@ -181,7 +181,7 @@ country_event = {
 		
 		any_country = {
 			1481 = {
-				limit ={
+				limit = {
 					owner = {
 						is_culture_group = east_asian
 					}
@@ -198,6 +198,13 @@ country_event = {
 			}
 		}
 		
+		any_country = {
+			limit = {
+				has_country_flag = magrib_imigration_check_flag
+				NOT = { has_country_modifier = magrib_imigration_modifier }
+			}
+			clr_country_flag = magrib_imigration_check_flag
+		}
 		any_pop = {
 			money = 2000000
 		}
