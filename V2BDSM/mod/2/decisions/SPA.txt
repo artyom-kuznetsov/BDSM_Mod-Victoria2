@@ -422,35 +422,4 @@ political_decisions = {
 			}
 		}
 	}
-	immigration_from_magrib_SPA_dec = {
-		potential = {
-			tag = SPA
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = immigration_from_magrib_SPA_flag }
-			has_country_flag = magrib_SPA_imigration_dec_flag 
-		}
-		allow = {
-			owns = 1680
-			owns = 1690
-			owns = 1720
-			MOR_1686 = {
-				is_colonial = no
-			}
-			MOR_1693 = {
-				is_colonial = no
-			}				
-			MOR_1684 = {
-				is_colonial = no
-			}
-		
-		}
-		effect = {
-				set_country_flag = immigration_from_magrib_SPA_flag
-				set_country_flag = immigration_from_magrib_chek_flag
-				add_country_modifier = { 
-					name = from_magrib_imigration_modifier
-					duration = 1825
-				}
-		}
-	}
 }

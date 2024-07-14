@@ -94,6 +94,7 @@ country_event = { # ITALY
 		AUS_729 = {
 			secede_province = THIS
 		}
+		AUS_726 = { secede_province = THIS }
 		change_tag = ITA
 	}
 }
@@ -596,5 +597,20 @@ country_event = {
 			create_alliance = THIS
 			military_access = THIS
 		}
+	}
+}
+
+# ITALIAN NORTH AFRICA
+country_event = {
+	id = 9574
+	title = "noloc"
+	desc = "noloc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		inherit = TUN
+		TRI = { all_core = { secede_province = THIS } }
 	}
 }
