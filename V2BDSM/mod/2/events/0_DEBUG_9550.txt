@@ -598,3 +598,22 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = 9574
+	title = "noloc"
+	desc = "noloc"
+	is_triggered_only = yes
+	option = {
+		any_owned ={
+			limit = {
+				state_scope = { is_colonial = yes }
+			}
+			add_province_modifier = {
+				name = imigration_on
+				duration = -1
+			}
+		}
+	}
+	
+}

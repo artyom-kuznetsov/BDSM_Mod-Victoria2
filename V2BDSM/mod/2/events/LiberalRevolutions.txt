@@ -1271,25 +1271,26 @@ province_event = {
 			has_country_modifier = global_liberal_agitation
 		}
 	}
+	
 	mean_time_to_happen = {
-		months = 400
+		months = 800
 		modifier = {
 			factor = 1.5
 			nationalvalue = nv_liberty
 		}
 		modifier = {
 			factor = 0.9
-			average_consciousness = 1
+			average_consciousness = 2
 		}
 		modifier = {
 			factor = 0.9
-			average_consciousness = 2
+			average_consciousness = 3
 		}
 	}
 
 	option = {
 		name = "EVTOPTA10210"
-		owner = { plurality = -2 }
+		owner = { plurality = -2 any_pop = { militancy = 0.5 } }
 		any_pop = {
 			militancy = 4
 		}

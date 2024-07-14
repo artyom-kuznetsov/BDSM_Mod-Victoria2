@@ -1,0 +1,208 @@
+country_event = {	# HOST OPTIONS
+	id = 140900
+	title = "HostOptions_EvtName"
+	desc = "HostOptions_EvtDesc"
+	picture = "options"
+
+	is_triggered_only = yes
+
+	allow_multiple_instances = yes
+	
+	option = {
+		name = "HostOptions_EvtOptSingleplayer"
+		CUSTOM_TOOLTIP_SINGLEPLAYER = { }
+		random_owned = {
+			limit = {
+				NOT = { owner = { has_global_flag = singleplayer_flag } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_DISABLED = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { has_global_flag = singleplayer_flag }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_ENABLED = { }
+			}
+		}
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+				WBK = { country_event = 57616 }
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptSpawnMoney"
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+				country_event = 57608
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
+		name = "HostOptions_EvtOptSelect"
+		CUSTOM_TOOLTIP_SELECTION = { }
+		random_owned = {
+			limit = {
+				NOT = { owner = { has_global_flag = host_selectcountries_allow_flag } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_DISABLED = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_global_flag = host_selectcountries_allow_flag
+				}
+			}
+			owner = {
+				any_country = { clr_country_flag = player_selected_flag }
+				CUSTOM_TOOLTIP_OPTION_ENABLED = { }
+			}
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+				WBK = { country_event = 57617 }
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptGiveBadboy"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			badboy = 5
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptTakeBadboy"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			badboy = -5
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptTakePrestige"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			prestige = -50
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptGivePrestige"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			prestige = 50
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
+		name = "HostOptions_EvtOptGiveResearch"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			country_event = 57618
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
+		name = "HostOptions_EvtOptClose"
+	}
+}

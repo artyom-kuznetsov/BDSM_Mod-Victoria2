@@ -130,48 +130,102 @@ country_event = {
 }
 
 country_event = {
-	title = "noloc"
-	desc = "noloc"
+	title = "SpawnMoney_EvtName"
+	desc = "SpawnMoney_EvtDesc"
+	picture = "weneedmoney"
 	
 	id = 57608
 	
 	is_triggered_only = yes
 	
 	option = {
-		name = "noloc"
+		name = "SpawnMoney_EvtOptNo"
 	}
 	
 	option = {
 		name = "spawn_100k"
 		money = 100000
-		any_country = {
-			limit = { NOT = { tag = THIS } ai = no }
-			country_event = 57609
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57609
+				}
+			}
 		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
 	}
 	option = {
 		name = "spawn_200k"
 		money = 200000
-		any_country = {
-			limit = { NOT = { tag = THIS } ai = no }
-			country_event = 57610
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57609
+				}
+			}
 		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
 	}
 	option = {
 		name = "spawn_500k"
 		money = 500000
-		any_country = {
-			limit = { NOT = { tag = THIS } ai = no }
-			country_event = 57611
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57609
+				}
+			}
 		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
 	}
 	option = {
 		name = "spawn_1000k"
 		money = 1000000
-		any_country = {
-			limit = { NOT = { tag = THIS } ai = no }
-			country_event = 57612
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57609
+				}
+			}
 		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
 	}
 }
 
@@ -269,5 +323,90 @@ country_event = {
 	
 	option = {
 		name = "chi_form_notif_EvtOptA"
+	}
+}
+
+# НАСТРОЙКА СП РЕЖИМ
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	
+	id = 57616
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		set_global_flag = singleplayer_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = singleplayer_flag
+			}
+		}
+	}
+	option = {
+		name = "noloc"
+		clr_global_flag = singleplayer_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_global_flag = singleplayer_flag }
+			}
+		}
+	}
+
+}
+
+# НАСТРОЙКА ВЫБОР СТРАН
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	
+	id = 57617
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		set_global_flag = host_selectcountries_allow_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = host_selectcountries_allow_flag
+			}
+		}
+	}
+	option = {
+		name = "noloc"
+		clr_global_flag = host_selectcountries_allow_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_global_flag = host_selectcountries_allow_flag }
+			}
+		}
+	}
+}
+
+# ВЫДАЧА ОИ
+country_event = {
+	title = "ResearchGranted_EvtName"
+	desc = "ResearchGranted_EvtDesc"
+	
+	id = 57618
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "ResearchGranted_EvtOptNo"
+	}
+	option = {
+		name = "ResearchGranted_EvtYes"
+		years_of_research = 0.5
 	}
 }

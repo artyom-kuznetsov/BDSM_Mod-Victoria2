@@ -645,7 +645,7 @@ early_game_trmod = {
 		exists = yes
 		NOT = { year = 1841 }
 	}
-	research_points = 2
+	research_points = 1
 }
 
 # v4.4 STABILITY
@@ -653,7 +653,7 @@ early_game_trmod = {
 very_low_stability_trmod = {
 	trigger = {
 		exists = yes
-		NOT = { plurality = 25 }
+		NOT = { plurality = 20 }
 	}
 	global_immigrant_attract = -0.02
 	prestige = -0.2
@@ -666,8 +666,8 @@ very_low_stability_trmod = {
 low_stability_trmod = {
 	trigger = {
 		exists = yes
-		plurality = 25
-		NOT = { plurality = 40 }
+		plurality = 20
+		NOT = { plurality = 35 }
 	}
 	global_immigrant_attract = -0.01
 	prestige = -0.1
@@ -680,17 +680,21 @@ low_stability_trmod = {
 high_stability_trmod = {
 	trigger = {
 		exists = yes
-		plurality = 55
-		NOT = { plurality = 65 }
+		plurality = 60
+		NOT = { plurality = 70 }
 	}
+	global_immigrant_attract = 0.02
+	prestige = 0.05
 }
 
 very_high_stability_trmod = {
 	trigger = {
 		exists = yes
-		plurality = 65
+		plurality = 70
 	}
 	cb_generation_speed_modifier = 0.1
+	global_immigrant_attract = 0.05
+	prestige = 0.1
 }
 
 stability_equalizer = {

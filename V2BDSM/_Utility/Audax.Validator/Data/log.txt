@@ -1,6 +1,6 @@
 Log of Audax.Validator, version 1.32.49 [1.32.49.0]
 
-Current Time: 12.07.2024 20:35:11
+Current Time: 14.07.2024 2:46:37
 .NET Version: 4.0.30319.42000
 OS Version: Microsoft Windows NT 6.2.9200.0
 Current Culture: ru-RU
@@ -13,23 +13,23 @@ System Directory: C:\WINDOWS\system32
 User Name: [user_name <******>]
 User Domain Name: [machine_name <*******-*******>]
 User Interactive: True
-Tick Count: 10.21:46:21.5930000
+Tick Count: 03:43:05.1710000
 Shutdown Started: False
 
 ENVIRONMENT VARIABLES
 SystemDrive: C:
 ProgramFiles(x86): C:\Program Files (x86)
-Path: C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\[user_name <******>]\AppData\Local\Microsoft\WindowsApps;C:\Users\[user_name <******>]\AppData\Local\GitHubDesktop\bin
 ProgramW6432: C:\Program Files
 PROCESSOR_IDENTIFIER: AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD
 VBOX_MSI_INSTALL_PATH: C:\Program Files\Oracle\VirtualBox\
 TMP: C:\Users\[user_name <******>]\AppData\Local\Temp
 PROCESSOR_ARCHITECTURE: AMD64
-PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+Path: C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\[user_name <******>]\AppData\Local\Microsoft\WindowsApps;C:\Users\[user_name <******>]\AppData\Local\GitHubDesktop\bin
+USERPROFILE: C:\Users\[user_name <******>]
 PROCESSOR_REVISION: 1801
 TEMP: C:\Users\[user_name <******>]\AppData\Local\Temp
-USERPROFILE: C:\Users\[user_name <******>]
-CommonProgramFiles(x86): C:\Program Files (x86)\Common Files
+FPS_BROWSER_APP_PROFILE_STRING: Internet Explorer
+FPS_BROWSER_USER_PROFILE_STRING: Default
 LOGONSERVER: \\[machine_name <*******-*******>]
 USERNAME: [user_name <******>]
 SystemRoot: C:\WINDOWS
@@ -40,6 +40,7 @@ ProgramData: C:\ProgramData
 RlsSvcPort: 22112
 HOMEPATH: \Users\[user_name <******>]
 COMPUTERNAME: [machine_name <*******-*******>]
+CommonProgramFiles(x86): C:\Program Files (x86)\Common Files
 ALLUSERSPROFILE: C:\ProgramData
 CommonProgramW6432: C:\Program Files\Common Files
 OneDriveCommercial: C:\Users\[user_name <******>]\OneDrive - Tallinn Polytechnic School
@@ -53,6 +54,7 @@ NUMBER_OF_PROCESSORS: 8
 OS: Windows_NT
 ProgramFiles: C:\Program Files
 ComSpec: C:\WINDOWS\system32\cmd.exe
+PATHEXT: .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
 PSModulePath: C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
 APPDATA: C:\Users\[user_name <******>]\AppData\Roaming
 USERDOMAIN: [machine_name <*******-*******>]
@@ -590,58 +592,3 @@ DynamicErrors:
 DynamicErrors: 
 ValidationManager: StatusLog > Beginning initialization...
 ValidationManager: StatusLog > Initialization complete!
-ModSystem: Using file system Audax.Pdox.IO.Ck2FileSystem
-ModSystem: Loading mod list...
-ModSystem: Mod dir exists in game path D:\Victoria2_DEVELOPMENT\V2BDSM, enumerating
-ModSystem: Found mod Clausewitz2Mod ModName=Based Mod v4.4 ModPath=D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2 OriginalModFilePath=D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2.mod
-ModSystem: Examining default directory
-ModSystem: Default directory data path is: C:\Users\[user_name <******>]\Documents\Paradox Interactive\Crusader Kings II\mod
-ModSystem: Data path does not exist
-VSET: Processing settings...
-VSET: Found settings file at D:\Victoria2_DEVELOPMENT\V2BDSM\mod\2\ValidatorSettings.txt with structure 
-# This is the settings file for Vic2 and expansions
-# To use, copy this to your Vic2 installation base or mod directory and rename it "ValidatorSettings.txt"
-# If you don't want to use it then don't copy it.
-# Uncomment something to use it, or comment something to disable it.
-# ##########################################
-# General
-# ##########################################
-# Generates files containing flag and variable analysis.
-# AddFlag = TraceFlags
-# Generates a CSV file with basic information about events. Please note that the country column is determined based on heuristics and therefore may not be accurate.
-# AddFlag = ExportEventInfo
-# Ignores the warning when there is only one item in an OR clause
-# AddFlag = ContextValidator.IgnoreOneItemInOrClauseWarning
-# Ignores the warning when there is only one item in an AND clause
-# AddFlag = ContextValidator.IgnoreOneItemInAndClauseWarning
-# Ignores the warning when we are already in an AND clause.
-# AddFlag = ContextValidator.IgnoreAlreadyInAndClauseWarning
-# Ignores the warning "Having a factor of 1 is useless."
-AddFlag = ContextValidator.NoWarnOnFactorOne
-# Ignore Feb 29 errors for leap years
-# AddFlag = IgnoreFeb29Errors
-# ##########################################
-# LOCALIZATION
-# ##########################################
-# Disables check that all keys are found in the localization file. This assumes that you use keys everywhere. If not you'll get lots of false positives.
-# AddFlag = NoCheckKey
-# ##########################################
-# COUNTRY HISTORY
-# ##########################################
-# Disables checks that dates are in chronological order, and that there are no duplicates within groups of dates.
-# Note that this option currently won't work anyways
-# AddFlag = CountryHistory.NoComplexDateChecks
-# ##########################################
-# PROVINCE HISTORY
-# ##########################################
-# Disables checks that dates are in chronological order, and that there are no duplicates within groups of dates.
-# AddFlag = ProvinceHistory.NoComplexDateChecks
-
-VSET: Processing node element AddFlag = ContextValidator.NoWarnOnFactorOne
-ValidationManager: StatusLog > Beginning validation...
-ValidationManager: StatusLog > Beginning Events validation...
-ValidationManager: StatusLog > Events validation complete in 4540 ms!
-ValidationManager: StatusLog > Beginning Map validation...
-ValidationManager: StatusLog > Map validation complete in 5455 ms!
-ValidationManager: StatusLog > Cache hits: 219 Cache misses: 197
-ValidationManager: StatusLog > Validation complete!

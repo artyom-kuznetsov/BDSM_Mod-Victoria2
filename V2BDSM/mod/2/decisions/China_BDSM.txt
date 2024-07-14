@@ -460,3 +460,28 @@ political_decisions = {
 		}
 	}
 }
+	chi_port_artur_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = RUS
+			NOT = { has_country_flag = chi_port_artur_flag }
+			owns = 1082
+		}
+		
+		allow = {
+			
+		}
+	
+		effect = {
+			CHI_1082 = {
+				remove_core = CHI
+				remove_core = MCK
+				add_province_modifier = { name = TUR_prov_assimilatABLE_prov_modifier duration = -1 }
+			}
+			1481 = {
+				change_province_name = "Люйшунь"
+			}
+			set_country_flag = chi_port_artur_flag
+			prestige = 5
+		}
+	}
