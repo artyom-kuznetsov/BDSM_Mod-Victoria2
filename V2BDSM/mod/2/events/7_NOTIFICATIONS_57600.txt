@@ -326,7 +326,7 @@ country_event = {
 	}
 }
 
-# ВЕРНУТЬ ИВЕНТ С НАСТРОЙКАМИ
+# НАСТРОЙКА СП РЕЖИМ
 country_event = {
 	title = "noloc"
 	desc = "noloc"
@@ -337,11 +337,30 @@ country_event = {
 	
 	option = {
 		name = "noloc"
-		FROM = { country_event = 140900 }
+		set_global_flag = singleplayer_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = singleplayer_flag
+			}
+		}
 	}
+	option = {
+		name = "noloc"
+		clr_global_flag = singleplayer_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_global_flag = singleplayer_flag }
+			}
+		}
+	}
+
 }
 
-# ВЕРНУТЬ ИВЕНТ С ВЫДАЧЕЙ ДЕНЕГ
+# НАСТРОЙКА ВЫБОР СТРАН
 country_event = {
 	title = "noloc"
 	desc = "noloc"
@@ -352,6 +371,24 @@ country_event = {
 	
 	option = {
 		name = "noloc"
-		FROM = { country_event = 57608 }
+		set_global_flag = host_selectcountries_allow_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = host_selectcountries_allow_flag
+			}
+		}
+	}
+	option = {
+		name = "noloc"
+		clr_global_flag = host_selectcountries_allow_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_global_flag = host_selectcountries_allow_flag }
+			}
+		}
 	}
 }
