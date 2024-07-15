@@ -37,7 +37,7 @@ country_event = {
 	option = {
 		name = "Vassal_Breakfree_Stab_EvtOptDeclare"
 		overlord = { 
-			country_event = 110801 
+			country_event = 110801
 			leave_alliance = THIS 
 			relation = { who = THIS value = -100 }
 			diplomatic_influence = { who = THIS value = -200 }
@@ -129,6 +129,178 @@ country_event = {
 		clr_country_flag = temprorary_border_closure
 		ai_chance = {
 			factor = 100
+		}
+	}
+}
+
+# ШЕСТВИЕ НА ПЛОЩАДИ
+country_event = {                   	
+	id = 110804
+	title = "AntiGovMeeting_EvtName"               
+	desc = "AntiGovMeeting_EvtDesc"   
+	picture = "communist_riot"
+	
+	trigger = {
+		OR = {
+			average_militancy = 2
+			average_consciousness = 4
+		}
+		NOT = { plurality = 35 }
+	}
+	
+	mean_time_to_happen = {
+		months = 240
+		modifier = {
+			factor = 0.9
+			average_militancy = 3
+		}
+		modifier = {
+			factor = 0.9
+			average_consciousness = 5
+		}
+	}
+
+	option = {
+		name = "AntiGovMeeting_EvtOptStop"
+		plurality = 3
+		random_owned = { any_pop = { reduce_pop = 0.99 } }
+		any_pop = { militancy = 0.5 consciousness = 0.5 }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				NOT = { plurality = 20 }
+			}
+		}
+	}
+
+	option = {
+		name = "AntiGovMeeting_EvtOptAllow"
+		plurality = -1
+		random_owned = {
+			limit = {
+				owner = {
+					public_meetings = no_meeting
+				}
+			}
+			owner = {
+				any_pop = { dominant_issue = { factor = 0.1 value = yes_meeting } }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					public_meetings = yes_meeting
+					press_rights = state_press
+				}
+			}
+			owner = {
+				any_pop = { dominant_issue = { factor = 0.1 value = censored_press } }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					public_meetings = yes_meeting
+					press_rights = censored_press
+				}
+			}
+			owner = {
+				any_pop = { dominant_issue = { factor = 0.1 value = free_press } }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					public_meetings = yes_meeting
+					press_rights = free_press
+					wage_reform = no_minimum_wage
+				}
+			}
+			owner = {
+				any_pop = { dominant_issue = { factor = 0.1 value = trinket_wage } }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					public_meetings = yes_meeting
+					press_rights = free_press
+					wage_reform = trinket_wage
+				}
+			}
+			owner = {
+				any_pop = { dominant_issue = { factor = 0.1 value = low_minimum_wage } }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					public_meetings = yes_meeting
+					press_rights = censored_press
+					wage_reform = low_minimum_wage
+				}
+			}
+			owner = {
+				any_pop = { dominant_issue = { factor = 0.1 value = acceptable_minimum_wage } }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					public_meetings = yes_meeting
+					press_rights = free_press
+					wage_reform = acceptable_minimum_wage
+				}
+			}
+			owner = {
+				any_pop = { dominant_issue = { factor = 0.1 value = good_minimum_wage } }
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0.3
+				plurality = 30
+			}
+		}
+	}	
+}
+
+# МИТИНГ ЛОЯЛИСТОВ
+country_event = {
+	id = 110805
+	title = "LoyalistMeeting_EvtName"               
+	desc = "LoyalistMeeting_EvtDesc"   
+	picture = "election_win"
+	
+	trigger = {
+		NOT = {
+			average_consciousness = 4
+		}
+		public_meetings = yes_meeting
+		NOT = { press_rights = state_press }
+	}
+	
+	mean_time_to_happen = {
+		months = 240
+		modifier = {
+			factor = 0.9
+			NOT = { average_militancy = 1 }
+		}
+		modifier = {
+			factor = 0.9
+			NOT = { average_consciousness = 3 }
+		}
+	}
+
+	option = {
+		name = "LoyalistMeeting_EvtOptA"
+		plurality = 3
+		any_pop = { militancy = -0.5 consciousness = -0.5 }
+		
+		ai_chance = {
+			factor = 1
 		}
 	}
 }
