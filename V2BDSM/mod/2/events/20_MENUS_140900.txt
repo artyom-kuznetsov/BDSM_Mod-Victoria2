@@ -379,5 +379,135 @@ country_event = {
 			}
 		}
 	}
+	option = {
+		name = "TechSchool_EvtOptKrupp"
+		random_owned = {
+			limit = {
+				owner = { 
+					has_country_modifier = academic_confusion 
+					NOT = { has_country_flag = prussian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = prussian_tech_school } }
+				owner = { 
+					prestige = 25 
+					NOT = { has_country_modifier = academic_confusion } 
+					has_country_flag = prussian_tech_school_access_flag
+				}
+			}
+			owner = {
+				tech_school = prussian_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25 tech_school = prussian_tech_school } }
+				owner = { 
+					prestige = 25 
+					NOT = { has_country_modifier = academic_confusion } 
+					NOT = { has_country_flag = prussian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					tech_school = prussian_tech_school 
+					NOT = { has_country_flag = prussian_tech_school_access_flag }
+					prestige = 25
+					NOT = { has_country_modifier = academic_confusion }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = prussian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_ACCESS_TECHSCHOOL = { }
+			}
+		}
+	}
+	option = {
+		name = "TechSchool_EvtOptItalian"
+		random_owned = {
+			limit = {
+				owner = { 
+					has_country_modifier = academic_confusion 
+					NOT = { has_country_flag = italian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = italian_tech_school } }
+				owner = { 
+					prestige = 25 
+					NOT = { has_country_modifier = academic_confusion } 
+					has_country_flag = italian_tech_school_access_flag
+				}
+			}
+			owner = {
+				tech_school = italian_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25 tech_school = italian_tech_school } }
+				owner = { 
+					prestige = 25 
+					NOT = { has_country_modifier = academic_confusion } 
+					NOT = { has_country_flag = italian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					tech_school = italian_tech_school 
+					NOT = { has_country_flag = italian_tech_school_access_flag }
+					prestige = 25
+					NOT = { has_country_modifier = academic_confusion }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = italian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_ACCESS_TECHSCHOOL = { }
+			}
+		}
+	}
 }
 
