@@ -362,7 +362,13 @@ country_event = {
 		}
 		random_owned = {
 			limit = {
-				owner = { NOT = { prestige = 25 tech_school = commerce_tech_school NOT = { has_country_modifier = academic_confusion } } }
+				owner = { 
+					NOT = { 
+						prestige = 25 
+						tech_school = commerce_tech_school 
+					} 
+					NOT = { has_country_modifier = academic_confusion }
+				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
