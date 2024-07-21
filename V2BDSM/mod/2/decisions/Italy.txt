@@ -1,10 +1,8 @@
 political_decisions = {
 	expedition_to_sicily = {
 		potential = {
-			OR = {
-				tag = SAR
-			}
-			NOT = { exists = ITA }
+			tag = SAR
+			NOT = { exists = ITA owns = 754 }
 			NOT = { has_country_flag = expedition_to_sicily }
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}
@@ -35,15 +33,13 @@ political_decisions = {
 						}
 						create_vassal = GRE
 					}
-					SIC = {
-						plurality = -20
-					}
 					any_country = {
 						limit = {
 							NOT = { tag = THIS }
 							owns = 754
 						}
-						country_event = { id = 35305 days = 0 }
+						country_event = 35305
+						plurality = -20
 					}
 				}
 			}
@@ -141,18 +137,6 @@ political_decisions = {
 		}
 		ai_will_do = {
 			factor = 1
-			modifier = {
-				factor = 0
-				OR = {
-					war_exhaustion = 1
-					war = yes
-					754 = {
-						owner = {
-							brigades_compare = 1.2
-						}
-					}
-				}
-			}
 		}
 	}
 	cavours_diplomacy = {
