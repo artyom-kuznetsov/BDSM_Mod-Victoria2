@@ -47,12 +47,13 @@ country_event = { # ПРОЖАТИЕ ПРАВ ЗЕМЛЕВЛАДЕЛЬЦЕВ
 		random_owned = { # ЕСЛИ ПРОИЗОШЁЛ ОТКАТ БОЛЕЕ ЛИБЕРАЛЬНОЙ РЕФОРМЫ
 			limit = {
 				owner = {
-					has_country_flag = wealth_weighted_voting_flag
+					NOT = { government = { absolute_monarchy }
 				}
 			}
 			owner = {
 				CUSTOM_TOOLTIP_REVOKED_VOTING = { }
 				clr_country_flag = wealth_weighted_voting_flag
+				clr_country_flag = none_voting_flag
 				set_country_flag = landed_voting_flag
 				any_pop = { consciousness = 1 militancy = 1 }
 				any_pop = { 
