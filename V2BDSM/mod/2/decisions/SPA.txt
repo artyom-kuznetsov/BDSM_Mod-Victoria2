@@ -402,11 +402,13 @@ political_decisions = {
 	magrib_SPA_imigration_dec = {
 		potential = {
 			tag = SPA
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = magrib_SPA_imigration_dec_flag }
+			NOT = { 
+				has_country_flag = hide_all_decs_flag
+				has_country_flag = magrib_SPA_imigration_dec_flag 
+				has_country_flag = reintegrate_latin_flag
+			}
 		}
-		allow = 
-			{
+		allow = {
 			has_country_flag = spa_metropolian_flag
 			owns = 1680
 			owns = 1690
