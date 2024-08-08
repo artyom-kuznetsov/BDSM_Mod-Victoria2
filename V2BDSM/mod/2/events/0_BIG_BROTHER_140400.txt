@@ -732,6 +732,66 @@ country_event = {
 		any_country = { limit = { any_owned_province = { has_province_modifier = trustee_system } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = penal_colonies } } plurality = 0.02 }
 		
+		
+		any_country = {
+			limit = {
+				NOT = { total_pops = 200000 }
+			}
+			set_country_flag = country_pops_upto_200k_flag
+			clr_country_flag = country_pops_upto_500k_flag
+			clr_country_flag = country_pops_upto_1m_flag
+			clr_country_flag = country_pops_upto_2m_flag
+			clr_country_flag = country_pops_2m_flag
+		}
+		
+		any_country = {
+			limit = {
+				NOT = { total_pops = 500000 }
+				total_pops = 200000
+			}
+			clr_country_flag = country_pops_upto_200k_flag
+			set_country_flag = country_pops_upto_500k_flag
+			clr_country_flag = country_pops_upto_1m_flag
+			clr_country_flag = country_pops_upto_2m_flag
+			clr_country_flag = country_pops_2m_flag
+		}
+		
+		any_country = {
+			limit = {
+				NOT = { total_pops = 100000 }
+				total_pops = 500000
+			}
+			clr_country_flag = country_pops_upto_200k_flag
+			clr_country_flag = country_pops_upto_500k_flag
+			set_country_flag = country_pops_upto_1m_flag
+			clr_country_flag = country_pops_upto_2m_flag
+			clr_country_flag = country_pops_2m_flag
+		}
+		
+		any_country = {
+			limit = {
+				NOT = { total_pops = 200000 }
+				total_pops = 1000000
+			}
+			clr_country_flag = country_pops_upto_200k_flag
+			clr_country_flag = country_pops_upto_500k_flag
+			clr_country_flag = country_pops_upto_1m_flag
+			set_country_flag = country_pops_upto_2m_flag
+			clr_country_flag = country_pops_2m_flag
+		}
+		
+		any_country = {
+			limit = {
+				total_pops = 2000000
+			}
+			clr_country_flag = country_pops_upto_200k_flag
+			clr_country_flag = country_pops_upto_500k_flag
+			clr_country_flag = country_pops_upto_1m_flag
+			clr_country_flag = country_pops_upto_2m_flag
+			set_country_flag = country_pops_2m_flag
+		}
+		
+		
 		country_event = { id = 140400 days = 30 }
 	}
 }

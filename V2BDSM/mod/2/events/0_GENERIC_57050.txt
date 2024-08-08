@@ -316,6 +316,8 @@ country_event = {
 	title = "aid_came_EvtName"
 	desc = "50K_came_EvtDesc"
 	id = 57055
+
+	allow_multiple_instances = yes
 	
 	is_triggered_only = yes
 	
@@ -327,6 +329,8 @@ country_event = {
 	title = "aid_came_EvtName"
 	desc = "100K_came_EvtDesc"
 	id = 57056
+
+	allow_multiple_instances = yes
 	
 	is_triggered_only = yes
 	
@@ -338,6 +342,8 @@ country_event = {
 	title = "aid_came_EvtName"
 	desc = "250K_came_EvtDesc"
 	id = 57057
+
+	allow_multiple_instances = yes
 	
 	is_triggered_only = yes
 	
@@ -349,6 +355,8 @@ country_event = {
 	title = "aid_came_EvtName"
 	desc = "500K_came_EvtDesc"
 	id = 57058
+
+	allow_multiple_instances = yes
 	
 	is_triggered_only = yes
 	
@@ -360,6 +368,8 @@ country_event = {
 	title = "aid_came_EvtName"
 	desc = "1M_came_EvtDesc"
 	id = 57059
+
+	allow_multiple_instances = yes
 	
 	is_triggered_only = yes
 	
@@ -371,6 +381,8 @@ country_event = {
 	title = "aid_came_EvtName"
 	desc = "2M_came_EvtDesc"
 	id = 57060
+
+	allow_multiple_instances = yes
 	
 	is_triggered_only = yes
 	
@@ -980,60 +992,9 @@ country_event = {
 #	}
 #}
 
-country_event = {
-	title = "vassal_interaction_EvtName"
-	desc = "vassal_interaction_EvtDesc"
-	id = 57076
-	picture = "upperhouse"
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "vassal_interaction_EvtOptCancel"
-	}
-	
-	option = {
-		name = "vassal_interaction_EvtOptProceed"
-		any_country = {
-			limit = { vassal_of = THIS }
-			country_event = { id = 57077 days = 0 }
-		}
-	}
-}
-
-country_event = {
-	id = 57077
-	title = "noloc"
-	desc = "noloc"
-	picture = "upperhouse"
-
-
-	is_triggered_only = yes
-
-	option = {
-		name = "noloc"
-		overlord = { country_event = { id = 57078 days = 0} }
-	}
-}
-
-country_event = {
-	id = 57078
-	title = "vassal_interaction_targeted_EvtName"
-	desc = "vassal_interaction_targeted_EvtDesc"
-	picture = "upperhouse"
-
-	allow_multiple_instances = yes
-
-	is_triggered_only = yes
-
-	option = {
-		name = "vassal_interaction_targeted_EvtOptA"
-	}
-	option = {
-		name = "vassal_interaction_targeted_EvtRelease"
-		release_vassal = FROM
-	}
-}
+# ID 57076 EMPTY 
+# ID 57077 EMPTY
+# ID 57078 EMPTY
 
 country_event = {
 	id = 57079

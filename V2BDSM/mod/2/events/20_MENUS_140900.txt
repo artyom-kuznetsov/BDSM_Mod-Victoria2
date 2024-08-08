@@ -497,3 +497,126 @@ country_event = {
 	}
 }
 
+
+country_event = {
+	title = "vassal_interaction_EvtName"
+	desc = "vassal_interaction_EvtDesc"
+	id = 140902
+	picture = "upperhouse"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "vassal_interaction_EvtOptCancel"
+	}
+	
+	option = {
+		name = "vassal_interaction_EvtOptProceed"
+		any_country = {
+			limit = { vassal_of = THIS }
+			country_event = { id = 140903 days = 0 }
+		}
+	}
+}
+
+country_event = {
+	id = 140903
+	title = "noloc"
+	desc = "noloc"
+	picture = "upperhouse"
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = "noloc"
+		overlord = { country_event = { id = 140904 days = 0} }
+	}
+}
+
+country_event = {
+	id = 140904
+	title = "vassal_interaction_targeted_EvtName"
+	desc = "vassal_interaction_targeted_EvtDesc"
+	picture = "upperhouse"
+
+	allow_multiple_instances = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = "vassal_interaction_targeted_EvtOptA"
+	}
+	
+	option = {
+		name = "vassal_interaction_targeted_EvtRelease"
+		release_vassal = FROM
+	}
+	
+	option = {
+		name = "vassal_interaction_targeted_EvtAnnex"
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = administrative_expenses2_modifier }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ADMIN_EXPENSES = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { FROM = { has_country_flag = country_pops_upto_200k_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				badboy = 3
+				CUSTOM_TOOLTIP_ANNEX_200K_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { FROM = { has_country_flag = country_pops_upto_500k_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				badboy = 5
+				CUSTOM_TOOLTIP_ANNEX_500K_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { FROM = { has_country_flag = country_pops_upto_1m_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				badboy = 7
+				CUSTOM_TOOLTIP_ANNEX_1M_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { FROM = { has_country_flag = country_pops_upto_2m_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				badboy = 9
+				CUSTOM_TOOLTIP_ANNEX_2M_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { FROM = { has_country_flag = country_pops_2m_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				badboy = 12
+				CUSTOM_TOOLTIP_ANNEX_M2M_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+	}
+}
