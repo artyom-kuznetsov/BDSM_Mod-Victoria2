@@ -47,6 +47,55 @@ country_event = { # AUTO ANNEX MINORS BDSM v4.0
 		}
 	}
 }
+country_event = { # SGF FORMED BY AUSTRIA
+	id = 160121
+	title = "AusSGF_EvtName"
+	desc = "AusSGF_EvtDesc"
+	picture = "greatpowers"
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		months = 8
+	}
+	
+	option = {
+		name = "AusSGF_EvtOptA"
+		prestige = -20
+		CUSTOM_TOOLTIP_SPHERE_WEAKENS = { }
+		add_country_modifier = { name = national_humiliation_cmodifier duration = 3650 }
+		any_country = {
+			limit = {
+				ai = yes
+			}
+			country_event = 160122
+		}
+	}
+}
+
+country_event = { # SGF FORMED BY AUSTRIA
+	id = 160122
+	title = "OverlordHumiliation_EvtName"
+	desc = "noloc"
+	picture = "greatpowers"
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		months = 8
+	}
+	
+	option = {
+		name = "noloc"
+		prestige = -20
+		FROM = {
+			diplomatic_influence = {
+				who = THIS
+				value = -50
+			}
+		}
+	}
+}
 
 country_event = {
 

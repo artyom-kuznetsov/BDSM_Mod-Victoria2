@@ -14,40 +14,10 @@ country_event = { # ПРОЖАТИЕ ПРАВ ЗЕМЛЕВЛАДЕЛЬЦЕВ
 	
 	option = {
 		name = "VotingRights_EvtOptA"	
-		random_owned = { # АБСОЛЮТНАЯ МОНАРХИЯ СТАНОВИТСЯ КОНСТИТУЦИОННОЙ
-			limit = {
-				owner = {
-					has_country_flag = none_voting_flag
-					government = absolute_monarchy
-				}
-			}
-			owner = {
-				CUSTOM_TOOLTIP_GRANTED_VOTING_LIBERALIZATION_GOV = { }
-				government = prussian_constitutionalism
-				clr_country_flag = none_voting_flag
-				set_country_flag = landed_voting_flag
-				any_pop = { 
-					consciousness = 1
-					scaled_militancy = {
-						factor = -2
-						ideology = liberal
-					}
-					scaled_militancy = {
-						factor = 2
-						ideology = reactionary
-					}
-					scaled_militancy = {
-						factor = 2
-						ideology = fascist
-					}
-				}
-				plurality = -2
-			}
-		}
 		random_owned = { # ЕСЛИ ПРОИЗОШЁЛ ОТКАТ БОЛЕЕ ЛИБЕРАЛЬНОЙ РЕФОРМЫ
 			limit = {
 				owner = {
-					NOT = { government = { absolute_monarchy } }
+					NOT = { government = absolute_monarchy }
 				}
 			}
 			owner = {
@@ -78,6 +48,36 @@ country_event = { # ПРОЖАТИЕ ПРАВ ЗЕМЛЕВЛАДЕЛЬЦЕВ
 					scaled_militancy = {
 						factor = -1
 						ideology = communist
+					}
+				}
+				plurality = -2
+			}
+		}
+		random_owned = { # АБСОЛЮТНАЯ МОНАРХИЯ СТАНОВИТСЯ КОНСТИТУЦИОННОЙ
+			limit = {
+				owner = {
+					has_country_flag = none_voting_flag
+					government = absolute_monarchy
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_GRANTED_VOTING_LIBERALIZATION_GOV = { }
+				government = prussian_constitutionalism
+				clr_country_flag = none_voting_flag
+				set_country_flag = landed_voting_flag
+				any_pop = { 
+					consciousness = 1
+					scaled_militancy = {
+						factor = -2
+						ideology = liberal
+					}
+					scaled_militancy = {
+						factor = 2
+						ideology = reactionary
+					}
+					scaled_militancy = {
+						factor = 2
+						ideology = fascist
 					}
 				}
 				plurality = -2

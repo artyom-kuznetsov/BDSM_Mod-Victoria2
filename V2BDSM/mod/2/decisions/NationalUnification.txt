@@ -101,6 +101,7 @@ political_decisions = {
 		
 		effect = {
 			prestige = 10
+			CUSTOM_TOOLTIP_AUSTRIAN_SGF = { }
 			any_country = {
 				limit = {
 					primary_culture = south_german
@@ -128,6 +129,14 @@ political_decisions = {
 			diplomatic_influence = {
 				who = SGF
 				value = 300
+			}
+			any_country = {
+				limit = {
+					is_greater_power = yes
+					is_culture_group = germanic
+					NOT = { tag = THIS }
+				}
+				country_event = 160121
 			}
 		}
 		ai_will_do = {
