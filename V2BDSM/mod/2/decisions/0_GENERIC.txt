@@ -652,4 +652,23 @@ political_decisions = {
 			}
 		}
 	}
+	
+	expeditions_menu_dec = {
+		potential = {
+			OR = {
+				NOT = { has_country_flag = NileDiscovered }
+				NOT = { has_country_flag = NorthPoleDiscovered }
+				NOT = { has_country_flag = SouthPoleDiscovered }
+			}
+			NOT = { has_country_flag = expeditions_menu_flag }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			country_event = 140905
+			set_country_flag = expeditions_menu_flag
+		}
+	}
 }

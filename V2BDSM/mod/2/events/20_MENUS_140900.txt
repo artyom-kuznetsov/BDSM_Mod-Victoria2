@@ -620,3 +620,344 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = 140905
+	title = "Expedition_Menu_EvtName"
+	desc = "Expedition_Menu_EvtDesc"
+	picture = "upperhouse"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Expedition_Menu_EvtOptCancel"
+		clr_country_flag = expeditions_menu_flag
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptNile"
+		country_event = 140906
+		clr_country_flag = expeditions_menu_flag
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptNPole"
+		country_event = 140907
+		clr_country_flag = expeditions_menu_flag
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptSPole"
+		country_event = 140908
+		clr_country_flag = expeditions_menu_flag
+	}
+}
+
+country_event = {
+	id = 140906
+	title = "Expedition_Menu_Nile_EvtName"
+	desc = "Expedition_Menu_EvtDesc"
+	picture = "Nile"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Expedition_Menu_EvtOptSend"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = spanish_carrack_modifier
+					NOT = {
+						has_global_flag = NileDiscovered 
+					}
+					year = 1866
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 365 }
+				set_country_flag = YesGoToNile
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
+					NOT = {
+						has_global_flag = NileDiscovered
+					}
+					year = 1866
+				}
+			}
+			owner = {
+				add_country_modifier = { name = expedition_nile_sent_cmodifier duration = 730 }
+				set_country_flag = YesGoToNile
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { year = 1866 }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_WAIT_TILL_1866 = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_global_flag = NileDiscovered 
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NILE_ALREADY_FOUND = { }
+			}
+		}
+	}
+	option = {
+		name = "Expedition_Menu_EvtOptRetrieve"
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						has_country_flag = YesGoToNile
+						has_country_flag = YesGoToNileAgain
+						has_country_flag = YesGoToNileThird
+					}
+				}
+			}
+			owner = {
+				clr_country_flag = YesGoToNile
+				clr_country_flag = YesGoToNileAgain
+				clr_country_flag = YesGoToNileThird
+				remove_country_modifier = expedition_nile_sent_cmodifier
+				remove_country_modifier = expedition2_nile_sent_cmodifier
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						has_country_flag = YesGoToNile
+						has_country_flag = YesGoToNileAgain
+						has_country_flag = YesGoToNileThird
+					}
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_EXPEDITION = { }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 140907
+	title = "Expedition_Menu_NPole_EvtName"
+	desc = "Expedition_Menu_EvtDesc"
+	picture = "NorthPole1"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Expedition_Menu_EvtOptSend"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = spanish_carrack_modifier
+					NOT = { 
+						has_global_flag = NorthPoleDiscovered 
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPoleThird 
+					}
+					year = 1895
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 365 }
+				set_country_flag = YesGoToNorthPole
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
+					NOT = { 
+						has_global_flag = NorthPoleDiscovered 
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPoleThird 
+					}
+					year = 1895
+				}
+			}
+			owner = {
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 730 }
+				set_country_flag = YesGoToNorthPole
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { year = 1895 }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_WAIT_TILL_1895 = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_global_flag = NorthPoleDiscovered 
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NPOLE_ALREADY_FOUND = { }
+			}
+		}
+	}
+	option = {
+		name = "Expedition_Menu_EvtOptRetrieve"
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPoleThird 
+					}
+				}
+			}
+			owner = {
+				clr_country_flag = YesGoToNorthPole
+				clr_country_flag = YesGoToNorthPole
+				clr_country_flag = YesGoToNorthPoleThird
+				remove_country_modifier = expedition_npole_sent_cmodifier
+				remove_country_modifier = expedition2_npole_sent_cmodifier
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPole
+						has_country_flag = YesGoToNorthPoleThird
+					}
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_EXPEDITION = { }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 140908
+	title = "Expedition_Menu_SPole_EvtName"
+	desc = "Expedition_Menu_EvtDesc"
+	picture = "SouthPole1"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Expedition_Menu_EvtOptSend"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = spanish_carrack_modifier
+					NOT = { 
+						has_global_flag = SouthPoleDiscovered
+						has_country_flag = YesGoToSouthPoleAgain
+						has_country_flag = YesGoToSouthPole
+						has_country_flag = YesGoToSouthPoleThird 
+					}
+					year = 1906
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_SPA_CARRACK_CASHBACK = { }
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 365 }
+				set_country_flag = YesGoToSouthPole
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_modifier = spanish_carrack_modifier }
+					NOT = { 
+						has_global_flag = SouthPoleDiscovered 
+						has_country_flag = YesGoToSouthPoleAgain
+						has_country_flag = YesGoToSouthPole
+						has_country_flag = YesGoToSouthPoleThird 
+					}
+					year = 1906
+				}
+			}
+			owner = {
+				add_country_modifier = { name = expedition2_npole_sent_cmodifier duration = 730 }
+				set_country_flag = YesGoToSouthPole
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { year = 1906 }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_WAIT_TILL_1906 = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_global_flag = SouthPoleDiscovered 
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_SPOLE_ALREADY_FOUND = { }
+			}
+		}
+	}
+	option = {
+		name = "Expedition_Menu_EvtOptRetrieve"
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						has_country_flag = YesGoToSouthPole
+						has_country_flag = YesGoToSouthPoleAgain
+						has_country_flag = YesGoToSouthPoleThird
+					}
+				}
+			}
+			owner = {
+				clr_country_flag = YesGoToSouthPole
+				clr_country_flag = YesGoToSouthPoleAgain
+				clr_country_flag = YesGoToSouthPoleThird
+				remove_country_modifier = expedition_nile_sent_cmodifier
+				remove_country_modifier = expedition2_nile_sent_cmodifier
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						has_country_flag = YesGoToSouthPole
+						has_country_flag = YesGoToSouthPoleAgain
+						has_country_flag = YesGoToSouthPoleThird
+					}
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_EXPEDITION = { }
+			}
+		}
+	}
+}
