@@ -198,6 +198,16 @@ political_decisions = {
 		}
 		
 		effect = {
+			KRA = {
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+			}
 			inherit = KRA
 			badboy = 3
 		}
