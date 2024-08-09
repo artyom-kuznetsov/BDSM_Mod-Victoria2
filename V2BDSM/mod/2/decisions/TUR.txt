@@ -460,67 +460,67 @@ political_decisions = {
 			set_country_flag = establish_turkish_union_flag
 		}
 	}
-	# ANNEX ROMANIANS
-	integrate_wallachia_dec = {
-		potential = {
-			tag = TUR
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = integrate_wallachia_flag }
-			WAL = {
-				vassal_of = THIS
-			}
-			state_n_government = 1
-		}
-		
-		allow = {
-			nationalism_n_imperialism = 1
-			NOT = { has_country_modifier = administrative_expenses_modifier }
-		}
-		
-		effect = {
-			set_country_flag = integrate_wallachia_flag
-			WAL = {
-				annex_to = THIS
-			}
-			badboy = 5
-			add_country_modifier = {
-				name = administrative_expenses_modifier
-				duration = 730
-			}
-		}
-	}
-	# ANNEX ROMANIANS
-	integrate_moldavia_dec = {
-		potential = {
-			OR = {
-				tag = TUR
-				tag = BYZ
-			}
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = integrate_moldavia_flag }
-			MOL = {
-				vassal_of = THIS
-			}
-			state_n_government = 1
-		}
-		
-		allow = {
-			nationalism_n_imperialism = 1
-			NOT = { has_country_modifier = administrative_expenses_modifier }
-		}
-		
-		effect = {
-			set_country_flag = integrate_moldavia_flag
-			MOL = {
-				annex_to = THIS
-			}
-			badboy = 5
-			add_country_modifier = {
-				name = administrative_expenses_modifier
-				duration = 730
-			}
-		}
-	}
+	## ANNEX ROMANIANS
+	#integrate_wallachia_dec = {
+	#	potential = {
+	#		tag = TUR
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		NOT = { has_country_flag = integrate_wallachia_flag }
+	#		WAL = {
+	#			vassal_of = THIS
+	#		}
+	#		state_n_government = 1
+	#	}
+	#	
+	#	allow = {
+	#		nationalism_n_imperialism = 1
+	#		NOT = { has_country_modifier = administrative_expenses_modifier }
+	#	}
+	#	
+	#	effect = {
+	#		set_country_flag = integrate_wallachia_flag
+	#		WAL = {
+	#			annex_to = THIS
+	#		}
+	#		badboy = 5
+	#		add_country_modifier = {
+	#			name = administrative_expenses_modifier
+	#			duration = 730
+	#		}
+	#	}
+	#}
+	## ANNEX ROMANIANS
+	#integrate_moldavia_dec = {
+	#	potential = {
+	#		OR = {
+	#			tag = TUR
+	#			tag = BYZ
+	#		}
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		NOT = { has_country_flag = integrate_moldavia_flag }
+	#		MOL = {
+	#			vassal_of = THIS
+	#		}
+	#		state_n_government = 1
+	#	}
+	#	
+	#	allow = {
+	#		nationalism_n_imperialism = 1
+	#		NOT = { has_country_modifier = administrative_expenses_modifier }
+	#	}
+	#	
+	#	effect = {
+	#		set_country_flag = integrate_moldavia_flag
+	#		MOL = {
+	#			annex_to = THIS
+	#		}
+	#		badboy = 5
+	#		add_country_modifier = {
+	#			name = administrative_expenses_modifier
+	#			duration = 730
+	#		}
+	#	}
+	#}
 	# TRIUMPH OVER ANATOLIA
 	anatolia_triumph_dec = {
 		potential = {
