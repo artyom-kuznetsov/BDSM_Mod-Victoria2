@@ -564,8 +564,46 @@ country_event = {
 			}
 		}
 		random_owned = {
-			limit = {
-				owner = { FROM = { has_country_flag = country_pops_upto_200k_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			limit = {							# 100K
+				owner = { FROM = { civilized = yes NOT = { total_pops = 100000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 1
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 100-200K
+				owner = { FROM = { civilized = yes total_pops = 100000 NOT = { total_pops = 200000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 2
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 200-300K
+				owner = { FROM = { total_pops = 200000 NOT = { total_pops = 300000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -578,13 +616,32 @@ country_event = {
 					province_selector = -1
 				}
 				badboy = 3
-				CUSTOM_TOOLTIP_ANNEX_200K_VASSAL = { }
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
 				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
 			}
 		}
 		random_owned = {
-			limit = {
-				owner = { FROM = { has_country_flag = country_pops_upto_500k_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			limit = {							# 300-400K
+				owner = { FROM = { civilized = yes total_pops = 300000 NOT = { total_pops = 400000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 4
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 400-500K
+				owner = { FROM = { civilized = yes total_pops = 400000 NOT = { total_pops = 500000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -597,13 +654,13 @@ country_event = {
 					province_selector = -1
 				}
 				badboy = 5
-				CUSTOM_TOOLTIP_ANNEX_500K_VASSAL = { }
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
 				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
 			}
 		}
 		random_owned = {
-			limit = {
-				owner = { FROM = { has_country_flag = country_pops_upto_1m_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			limit = {							# 500-600K
+				owner = { FROM = { civilized = yes total_pops = 500000 NOT = { total_pops = 600000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -615,14 +672,14 @@ country_event = {
 					# Audax Validator "." Ignore_NEXT
 					province_selector = -1
 				}
-				badboy = 7
-				CUSTOM_TOOLTIP_ANNEX_1M_VASSAL = { }
+				badboy = 6
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
 				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
 			}
 		}
 		random_owned = {
-			limit = {
-				owner = { FROM = { has_country_flag = country_pops_upto_2m_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			limit = {							# 600-800K
+				owner = { FROM = { civilized = yes total_pops = 600000 NOT = { total_pops = 800000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -634,14 +691,52 @@ country_event = {
 					# Audax Validator "." Ignore_NEXT
 					province_selector = -1
 				}
-				badboy = 9
-				CUSTOM_TOOLTIP_ANNEX_2M_VASSAL = { }
+				badboy = 8
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
 				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
 			}
 		}
 		random_owned = {
-			limit = {
-				owner = { FROM = { has_country_flag = country_pops_2m_flag } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			limit = {							# 800-1000K
+				owner = { FROM = { civilized = yes total_pops = 800000 NOT = { total_pops = 1000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 10
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 1000-1250K
+				owner = { FROM = { civilized = yes total_pops = 1000000 NOT = { total_pops = 1250000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 11
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 1250-1500K
+				owner = { FROM = { civilized = yes total_pops = 1250000 NOT = { total_pops = 1500000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -654,7 +749,350 @@ country_event = {
 					province_selector = -1
 				}
 				badboy = 12
-				CUSTOM_TOOLTIP_ANNEX_M2M_VASSAL = { }
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 1500-1750K
+				owner = { FROM = { civilized = yes total_pops = 1500000 NOT = { total_pops = 1750000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 13
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 1750-2000K
+				owner = { FROM = { civilized = yes total_pops = 1750000 NOT = { total_pops = 2000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 14
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 2M-2.5M
+				owner = { FROM = { civilized = yes total_pops = 2000000 NOT = { total_pops = 2500000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 16
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 2.5M-3M
+				owner = { FROM = { civilized = yes total_pops = 2500000 NOT = { total_pops = 3000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 18
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 3M+
+				owner = { FROM = { civilized = yes total_pops = 3000000 } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 20
+				CUSTOM_TOOLTIP_ANNEX_CIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		
+		random_owned = {
+			limit = {							# 250K
+				owner = { FROM = { civilized = no NOT = { total_pops = 250000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 1
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 250K-500K
+				owner = { FROM = { civilized = no total_pops = 250000 NOT = { total_pops = 500000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 2
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 500K-750K
+				owner = { FROM = { civilized = no total_pops = 500000 NOT = { total_pops = 750000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 3
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 750K-1000K
+				owner = { FROM = { civilized = no total_pops = 750000 NOT = { total_pops = 1000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 4
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 1M-1.5M
+				owner = { FROM = { civilized = no total_pops = 1000000 NOT = { total_pops = 1500000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 6
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 1.5M-2M
+				owner = { FROM = { civilized = no total_pops = 1500000 NOT = { total_pops = 2000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 8
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 2M-2.5M
+				owner = { FROM = { civilized = no total_pops = 2000000 NOT = { total_pops = 2500000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 9
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 2.5M-3M
+				owner = { FROM = { civilized = no total_pops = 2500000 NOT = { total_pops = 3000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 10
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 3M-4M
+				owner = { FROM = { civilized = no total_pops = 3000000 NOT = { total_pops = 4000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 12
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 4M-5M
+				owner = { FROM = { civilized = no total_pops = 4000000 NOT = { total_pops = 5000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 14
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 5M-6M
+				owner = { FROM = { civilized = no total_pops = 5000000 NOT = { total_pops = 6000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 16
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 6M-7M
+				owner = { FROM = { civilized = no total_pops = 6000000 NOT = { total_pops = 7000000 } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 18
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
+				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
+			}
+		}
+		random_owned = {
+			limit = {							# 7M+
+				owner = { FROM = { civilized = no total_pops = 7000000 } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+			}
+			owner = {
+				inherit = FROM
+				any_owned = {
+					limit = {
+						# Audax Validator "." Ignore_NEXT
+						has_building = province_selector
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+				badboy = 20
+				CUSTOM_TOOLTIP_ANNEX_UNCIVILIZED_VASSAL = { }
 				add_country_modifier = { name = administrative_expenses2_modifier duration = 1465 }
 			}
 		}

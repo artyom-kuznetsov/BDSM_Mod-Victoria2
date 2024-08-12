@@ -330,53 +330,53 @@ political_decisions = {
 		}
 	}
 	
-	annex_egypt_dec = {
-		potential = {
-			tag = TUR
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = annex_egypt_flag }
-			EGY = {
-				vassal_of = THIS
-			}
-		}
-		
-		allow = {
-			revolution_n_counterrevolution = 1
-		}
-		
-		effect = {
-			set_country_flag = annex_egypt_flag
-			EGY = {
-				any_owned = {
-					limit = {
-						# Audax Validator "." Ignore_NEXT
-						has_building = province_selector
-					}
-					# Audax Validator "." Ignore_NEXT
-					province_selector = -1
-				}
-				annex_to = THIS
-			}
-			badboy = 5
-			1749 = {
-				assimilate = yes
-				add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
-				state_scope = {
-					any_owned = {
-						add_province_modifier = {
-							name = TUR_prov_assimilatABLE_prov_modifier
-							duration = -1
-						}
-					}
-				}
-			}
-			1748 = { state_scope = { change_region_name = "Каир (9 для TUR)" } }
-			1751 = { state_scope = { change_region_name = "Александрия (9 для TUR)" } }
-			1763 = { state_scope = { change_region_name = "Средний Египет (9 для TUR)" } }
-			737 = { state_scope = { change_region_name = "Синай (9 для TUR)" } }
-			1769 = { state_scope = { change_region_name = "Верхний Египет (9 для TUR)" } }
-		}
-	}
+	#annex_egypt_dec = {
+	#	potential = {
+	#		tag = TUR
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		NOT = { has_country_flag = annex_egypt_flag }
+	#		EGY = {
+	#			vassal_of = THIS
+	#		}
+	#	}
+	#	
+	#	allow = {
+	#		revolution_n_counterrevolution = 1
+	#	}
+	#	
+	#	effect = {
+	#		set_country_flag = annex_egypt_flag
+	#		EGY = {
+	#			any_owned = {
+	#				limit = {
+	#					# Audax Validator "." Ignore_NEXT
+	#					has_building = province_selector
+	#				}
+	#				# Audax Validator "." Ignore_NEXT
+	#				province_selector = -1
+	#			}
+	#			annex_to = THIS
+	#		}
+	#		badboy = 5
+	#		1749 = {
+	#			assimilate = yes
+	#			add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+	#			state_scope = {
+	#				any_owned = {
+	#					add_province_modifier = {
+	#						name = TUR_prov_assimilatABLE_prov_modifier
+	#						duration = -1
+	#					}
+	#				}
+	#			}
+	#		}
+	#		1748 = { state_scope = { change_region_name = "Каир (9 для TUR)" } }
+	#		1751 = { state_scope = { change_region_name = "Александрия (9 для TUR)" } }
+	#		1763 = { state_scope = { change_region_name = "Средний Египет (9 для TUR)" } }
+	#		737 = { state_scope = { change_region_name = "Синай (9 для TUR)" } }
+	#		1769 = { state_scope = { change_region_name = "Верхний Египет (9 для TUR)" } }
+	#	}
+	#}
 	
 	# TURKISH UNION
 	establish_turkish_union_dec = {
