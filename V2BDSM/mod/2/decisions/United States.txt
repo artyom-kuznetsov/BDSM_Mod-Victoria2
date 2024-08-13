@@ -909,4 +909,36 @@ political_decisions = {
 			set_country_flag = conquer_canada_usa_flag
 		}
 	}
+	
+	oregon_treaty_dec = {
+		potential = {
+			owns = 114
+			NOT = { owns = 78 has_country_flag = oregon_treaty_flag }
+			78 = { owner = { OR = { tag = ENG vassal_of = ENG } } }
+		}
+		
+		allow = {
+			state_n_government = 1
+			relation = {
+				who = ENG
+				value = 100
+			}
+		}
+		
+		effect = {
+			USA_116 = { 
+				limit = {
+					owner = { OR = { tag = ENG vassal_of = ENG } }
+				}
+				secede_province = THIS
+			}
+			USA_81 = { 
+				limit = {
+					owner = { OR = { tag = ENG vassal_of = ENG } }
+				}
+				secede_province = THIS
+			}
+			prestige = 5
+		}
+	}
 }
