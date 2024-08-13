@@ -919,9 +919,12 @@ political_decisions = {
 		
 		allow = {
 			state_n_government = 1
-			relation = {
-				who = ENG
-				value = 100
+			OR = {
+				relation = {
+					who = ENG
+					value = 100
+				}
+				AND = { ai = yes year = 1846 }
 			}
 		}
 		

@@ -1829,6 +1829,7 @@ country_event = {
 	id = 141000
 	title = "Canadian_Unifier_EvtName"
 	desc = "Canadian_Unifier_EvtDesc"
+	picture = "canada"
 	
 	trigger = {
 		CAN = { exists = no }
@@ -1858,6 +1859,15 @@ country_event = {
 				primary_culture = anglo_canadian
 				vassal_of = ENG
 			}
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+					owner = { has_country_flag = hidden_tooltip }
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
 			annex_to = THIS
 		}
 		any_country = {
@@ -1867,6 +1877,9 @@ country_event = {
 			add_country_modifier = {
 				name = canadian_unifier_modifier duration = 1825
 			}
+		}
+		add_country_modifier = {
+			name = canadian_unifier_modifier duration = 1825
 		}
 	}
 }
