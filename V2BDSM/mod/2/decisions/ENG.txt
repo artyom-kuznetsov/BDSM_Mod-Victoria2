@@ -1,4 +1,30 @@
 political_decisions = {
+	form_canada_dec = {
+		potential = {
+			NOT = { exists = CAN }
+			primary_culture = anglo_canadian
+		}
+		
+		allow = {
+			owns = 58
+			owns = 57
+			owns = 36
+			owns = 13
+		}
+		
+		effect = {
+			change_tag = CAN
+			plurality = 5
+			prestige = 5
+			META_1 = {
+				remove_core = UCD
+				remove_core = LWC
+				remove_core = NBC
+				remove_core = HBC
+			}
+		}
+	}
+	
 	citizenship_law_eng = {
 		potential = {
 			tag = ENG

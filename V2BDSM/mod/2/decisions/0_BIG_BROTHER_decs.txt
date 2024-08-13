@@ -1078,6 +1078,19 @@ political_decisions = {
 				}
 				set_country_flag = wealth_weighted_voting_flag
 			}
+			any_country = {
+				limit = {
+					primary_culture = anglo_canadian
+				}
+				add_country_modifier = { name = canadian_unifier_modifier duration = 3650 }
+			}
+			any_country = {
+				limit = {
+					primary_culture = anglo_canadian
+					ai = no
+				}
+				set_global_flag = canada_has_player_flag
+			}
 		}
 		ai_will_do = { factor = 1 }
 	}

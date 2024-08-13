@@ -1823,3 +1823,50 @@ country_event = {
 			}
 		}
 }
+
+# UNIFY CANADA
+country_event = {
+	id = 141000
+	title = "Canadian_Unifier_EvtName"
+	desc = "Canadian_Unifier_EvtDesc"
+	
+	trigger = {
+		CAN = { exists = no }
+		NOT = { has_country_modifier = canadian_unifier_modifier }
+		OR = {
+			NOT = { has_global_flag = canada_has_player_flag }
+			ai = no
+		}
+		vassal_of = ENG
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+		modifier = {
+			NOT = { has_global_flag = singleplayer_flag }
+			ai = no
+			factor = 0.5
+		}
+	}
+	
+	option = {
+		name = "Canadian_Unifier_EvtOptA"
+		prestige = 5
+		random_country = {
+			limit = {
+				neighbour = THIS
+				primary_culture = anglo_canadian
+				vassal_of = ENG
+			}
+			annex_to = THIS
+		}
+		any_country = {
+			limit = {
+				primary_culture = anglo_canadian
+			}
+			add_country_modifier = {
+				name = canadian_unifier_modifier duration = 1825
+			}
+		}
+	}
+}
