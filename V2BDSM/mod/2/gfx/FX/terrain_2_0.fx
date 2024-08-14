@@ -47,7 +47,8 @@ const float3 GREYIFY = float3( 0.212671, 0.715160, 0.072169 );
 float3 ApplyFOWColor( float3 c, float FOW ) 
 {
 	float Grey = dot( c.rgb, GREYIFY );
-	return lerp( Grey.rrr * 0.4, c.rgb, FOW > 0.8 ? 1.0 : 0.3 );
+	// return lerp( Grey.rrr * 0.4, c.rgb, FOW > 0.8 ? 1.0 : 0.3 );
+	return c;
 }
 
 sampler BaseTexture  =
