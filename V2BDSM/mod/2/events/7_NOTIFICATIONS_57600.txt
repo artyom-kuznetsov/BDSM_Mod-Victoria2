@@ -384,3 +384,69 @@ country_event = {
 		years_of_research = 0.5
 	}
 }
+
+# ЭКСПЕДИЦИЯ К НИЛУ МОЖНО
+country_event = {
+	title = "ExpeditionAvailable_EvtName"
+	desc = "Nile_ExpeditionAvailable_EvtDesc"
+	picture = "Nile"
+	
+	id = 57619
+	
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_global_flag = NileDiscovered 
+		}
+		year = 1866
+	}
+	
+	option = {
+		name = "Nile_ExpeditionAvailable_EvtOptA"
+	}
+}
+
+# ЭКСПЕДИЦИЯ К СПОЛЮСУ МОЖНО
+country_event = {
+	title = "ExpeditionAvailable_EvtName"
+	desc = "NPole_ExpeditionAvailable_EvtDesc"
+	picture = "NorthPole1"
+	
+	id = 57620
+	
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_global_flag = NileDiscoveredNorthPoleDiscovered
+		}
+		year = 1895
+	}
+	
+	option = {
+		name = "NPole_ExpeditionAvailable_EvtOptA"
+	}
+}
+
+# ЭКСПЕДИЦИЯ К ЮПОЛЮСУ МОЖНО
+country_event = {
+	title = "ExpeditionAvailable_EvtName"
+	desc = "SPole_ExpeditionAvailable_EvtDesc"
+	picture = "SouthPole1"
+	
+	id = 57621
+	
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_global_flag = SouthPoleDiscovered
+		}
+		year = 1906
+	}
+	
+	option = {
+		name = "SPole_ExpeditionAvailable_EvtOptA"
+	}
+}
