@@ -1839,6 +1839,7 @@ country_event = {
 			ai = no
 		}
 		vassal_of = ENG
+		war = no
 	}
 	
 	mean_time_to_happen = {
@@ -1858,7 +1859,16 @@ country_event = {
 				neighbour = THIS
 				primary_culture = anglo_canadian
 				vassal_of = ENG
+			}			
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
 			}
+			all_core = { add_core = THIS }
 			annex_to = THIS
 		}
 		add_country_modifier = {
@@ -1872,7 +1882,6 @@ country_event = {
 				}
 				# Audax Validator "." Ignore_NEXT
 				owner = {
-					any_owned = { province_selector = -1 }
 					any_country = {
 						limit = {
 							primary_culture = anglo_canadian
