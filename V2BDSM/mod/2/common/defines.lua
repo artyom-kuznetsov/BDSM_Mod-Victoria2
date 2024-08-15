@@ -192,7 +192,7 @@ military = {
 	NAVAL_LOW_SUPPLY_DAMAGE_SUPPLY_STATUS = 0.75, -- how little supply is acceptable before getting damage to STR
 	NAVAL_LOW_SUPPLY_DAMAGE_DAYS_DELAY = 1, -- delay in days before the STR will get damage due to no supplies. Sometimes supply status may jump bcoz of the market.
 	NAVAL_LOW_SUPPLY_DAMAGE_MIN_STR = 5.0, -- when low supply, the navy will supply STR damage but no less then X% to avoid destruction (value from 0 to 100.0)
-	NAVAL_LOW_SUPPLY_DAMAGE_PER_DAY = 0.5, -- damage to navies STR per day if totally 0% supplies (value from 0 to 100.0)
+	NAVAL_LOW_SUPPLY_DAMAGE_PER_DAY = 0.8, -- damage to navies STR per day if totally 0% supplies (value from 0 to 100.0)
 },
 
 diplomacy = {
