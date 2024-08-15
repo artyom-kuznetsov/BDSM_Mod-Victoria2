@@ -73,6 +73,7 @@ peace_order = {
 	demand_reparations
 	demand_concession_casus_belli
 	establish_protectorate_casus_belli
+	establish_small_protectorate_casus_belli
 	unification_humiliate_cb
 	unification_release_puppet_cb
 	unification_casus_belli
@@ -576,34 +577,24 @@ conquest = {
 		NOT = { tag = WBK }
 		NOT = { is_our_vassal = THIS }
 		OR = {
-			NOT = { number_of_states = 1 }
 			AND = {
 				civilized = yes
-				NOT = { number_of_states = 3 }
-				NOT = { tag = GRE }
+				THIS = { civilized = yes }
 			}
 			AND = {
 				civilized = no
 				THIS = { civilized = no }
-				NOT = { number_of_states = 3 }
-			}
-			AND = {
-				civilized = no
-				NOT = { number_of_states = 3 }
-				THIS = {
-					civilized = yes
-				}
-			}
-			AND = {
-				NOT = { number_of_states = 4 }
-				tag = ALD
 			}
 		}
-		OR = {
-			total_pops = 400000 
+		total_pops = 200000
+		OR = {	# ВОЗМОЖЕН CONQUEST СТРАНЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 400К ДО НАЦИЗМА ИЛИ МЕНЬШЕ 600К ПОСЛЕ НАЦИЗМА
+			NOT = { number_of_states = 2 }
+			
+			NOT = { total_pops = 400000 THIS = { nationalism_n_imperialism = 1 } }
+			
 			AND = {
-				total_pops = 600000 
-				year = 1870
+				NOT = { total_pops = 600000 }
+				THIS = { nationalism_n_imperialism = 1 }
 			}
 		}
 		is_independant = yes
@@ -868,41 +859,10 @@ conquest_small = {
 	crisis = no
 	
 	can_use = {
+		NOT = { tag = WBK }
 		NOT = { is_our_vassal = THIS }
-		# only one state or unciv
-		NOT = { number_of_states = 5 }
-		OR = {
-			AND = {
-				civilized = yes
-				NOT = { number_of_states = 2 }
-			}
-			AND = {
-				civilized = no
-				THIS = { civilized = no }
-				NOT = { number_of_states = 2 }
-			}
-			AND = {
-				civilized = no
-				number_of_states = 2
-				THIS = {
-					OR = {
-						NOT = { is_greater_power = yes }
-						NOT = { nationalism_n_imperialism = 1 }
-					}
-				}
-			}
-		}
-		OR = {
-			NOT = { 
-				total_pops = 400000 
-			}
-			AND = {
-				NOT = { 
-					total_pops = 600000 
-				}
-				year = 1870
-			}
-		}
+		civilized = yes
+		NOT = { total_pops = 200000 }
 		is_independant = yes
 		NOT = {
 			AND = {
@@ -910,7 +870,7 @@ conquest_small = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = daimyo_flag }
 	}
 
 	badboy_factor = 0.7
@@ -2758,7 +2718,7 @@ establish_protectorate_casus_belli = {
 	break_truce_prestige_factor = 5
 	break_truce_infamy_factor = 2
 	break_truce_militancy_factor = 2
-	truce_months = 12
+	truce_months = 24
 	
 	good_relation_prestige_factor = 0
 	good_relation_infamy_factor = 0
@@ -2767,22 +2727,22 @@ establish_protectorate_casus_belli = {
 	always = no
 	
 	can_use = {
+		NOT = { tag = WBK }
 		NOT = { is_our_vassal = THIS }
-		THIS = {
-			civilized = yes
-		}
-		OR = {
-			NOT = {
-				number_of_states = 2 
-			}
-			AND = {
-				THIS = {
-					nationalism_n_imperialism = 1
-				}
-				NOT = { number_of_states = 3 }
-			}
-		}
 		civilized = no
+		THIS = { civilized = yes }
+		total_pops = 200000
+		OR = {	# ВОЗМОЖЕН CONQUEST СТРАНЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 400К ДО НАЦИЗМА ИЛИ МЕНЬШЕ 600К ПОСЛЕ НАЦИЗМА
+			NOT = { number_of_states = 2 }
+			
+			NOT = { total_pops = 400000 THIS = { nationalism_n_imperialism = 1 } }
+			
+			AND = {
+				NOT = { total_pops = 600000 }
+				THIS = { nationalism_n_imperialism = 1 }
+			}
+		}
+		is_independant = yes
 		NOT = {
 			AND = {
 				has_country_flag = chinese_warlord_flag
@@ -2790,7 +2750,72 @@ establish_protectorate_casus_belli = {
 			}
 		}
 		NOT = { has_country_flag = daimyo_flag }
+	}
+	
+	po_annex = yes
+	
+	war_name = WAR_PROTECTORATE_NAME
+
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+				# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+}
+
+# Establish Protectorate
+establish_small_protectorate_casus_belli = {
+	sprite_index = 7
+	is_triggered_only = yes
+	months = 60
+	construction_speed = 1.2
+	crisis = no
+	
+	badboy_factor = 0.5
+	prestige_factor = 0.5
+	peace_cost_factor = 1
+	penalty_factor = 0.5
+
+	break_truce_prestige_factor = 5
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 24
+	
+	good_relation_prestige_factor = 0
+	good_relation_infamy_factor = 0
+	good_relation_militancy_factor = 0
+	
+	always = no
+	
+	can_use = {
 		NOT = { tag = WBK }
+		NOT = { is_our_vassal = THIS }
+		civilized = no
+		THIS = { civilized = yes }
+		NOT = { total_pops = 200000 }
+		is_independant = yes
+		NOT = {
+			AND = {
+				has_country_flag = chinese_warlord_flag
+				NOT = { year = 1870 } 
+			}
+		}
+		NOT = { has_country_flag = daimyo_flag }
 	}
 	
 	po_annex = yes
