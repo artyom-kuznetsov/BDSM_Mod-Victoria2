@@ -499,6 +499,7 @@ country_event = {
     title = "StealPuppetVassal_EvtName"
     desc = "StealPuppetVassal_EvtDesc"
     picture = "danishgovernment"
+    fire_only_once = yes
 	
     is_triggered_only = yes
 	
@@ -512,6 +513,35 @@ country_event = {
 
     option = {
         name = "StealPuppetVassal_EvtOptA"
+		FROM = {
+			diplomatic_influence = {
+				who = THIS
+				value = 400
+			}
+			relation = {
+				who = THIS
+				value = 400
+			}
+			create_alliance = THIS
+		}
+    }
+}
+
+country_event = {
+    id = 9576
+    title = "ReleasedPuppet_EvtName"
+    desc = "ReleasedPuppet_EvtDesc"
+    picture = "danishgovernment"
+    fire_only_once = yes
+    is_triggered_only = yes
+    allow_multiple_instances = yes
+
+    immediate = {
+        overlord = { release_vassal = THIS }
+    }
+
+    option = {
+        name = "ReleasedPuppet_EvtOptA"
 		FROM = {
 			diplomatic_influence = {
 				who = THIS
