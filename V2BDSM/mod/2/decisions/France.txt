@@ -401,4 +401,26 @@ political_decisions = {
 				}
 		}
 	}
+	
+	integrate_wallonia_dec = {
+		potential = {
+			NOT = { has_country_flag = integrate_wallonia_flag }
+			primary_culture = french
+			NOT = { accepted_culture = wallonian }
+		}
+		
+		allow = {
+			NOT = { badboy = 0.8 }
+			nationalism_n_imperialism = 1
+			empiricism = 1
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			add_accepted_culture = wallonian
+			set_country_flag = integrate_wallonia_flag
+			BEL_394 = { add_core = THIS }
+		}
+	}
 }
