@@ -220,10 +220,6 @@ migration_target =
 		}
 	}
 	modifier = {
-		factor = 1.2
-		has_pop_religion = THIS
-	}
-	modifier = {
 		factor = 1.5
 		any_core = { is_primary_culture = THIS }
 	}
@@ -1773,19 +1769,6 @@ issues =
 	pro_atheism = {
 		factor = 1
 		modifier = {
-			factor = 1.1
-			consciousness = 8
-			NOT = { is_state_religion = yes }
-		}
-		modifier = {
-			factor = 1.1
-			consciousness = 6
-			NOT = { is_state_religion = yes }
-			country = {
-				religious_policy = moralism
-			}
-		}
-		modifier = {
 			factor = 0.5
 			not = { consciousness = 6 }
 		}
@@ -1807,20 +1790,6 @@ issues =
 		modifier = {
 			factor = 1.1
 			consciousness = 6
-			NOT = { consciousness = 8 }
-			NOT = { is_state_religion = yes }
-		}
-		modifier = {
-			factor = 1.1
-			consciousness = 6
-			NOT = { is_state_religion = yes }
-			country = {
-				religious_policy = pluralism
-			}
-		}
-		modifier = {
-			factor = 1.1
-			consciousness = 6
 		}
 		modifier = {
 			factor = 1.1
@@ -1837,12 +1806,6 @@ issues =
 	}
 	pluralism = {
 		factor = 1
-		modifier = {
-			factor = 1.1
-			consciousness = 2
-			NOT = { consciousness = 4 }
-			is_state_religion = yes
-		}
 		modifier = {
 			factor = 0.9
 			consciousness = 6
@@ -1862,11 +1825,6 @@ issues =
 	}
 	moralism = {
 		factor = 1
-		modifier = {
-			factor = 1.2
-			NOT = { consciousness = 4 }
-			is_state_religion = yes
-		}
 		modifier = {
 			factor = 1.1
 			not = { consciousness = 4 }
