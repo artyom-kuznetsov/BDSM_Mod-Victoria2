@@ -67,7 +67,12 @@ peace_order = {
 	liberate_country
 	release_puppet
 	become_independent
+	transfer_puppet
+	transfer_puppet_small
+	transfer_puppet_tiny
 	make_puppet
+	make_puppet_small
+	make_puppet_tiny
 	dismantle_forts
 	humiliate
 	demand_reparations
@@ -1611,7 +1616,6 @@ acquire_state = {
 				NOT = { year = 1870 } 
 			}
 		}
-		is_independant = yes
 	}
 	
 	allowed_states = {
@@ -2372,56 +2376,170 @@ dismantle_forts = {
 }
 
 
-# Release Puppet
-release_puppet = {
-	sprite_index = 10
-	is_triggered_only = yes
-	months = 12
+#Steal Puppet CB
+transfer_puppet = {
+    sprite_index = 24
+    is_triggered_only = yes
+    months = 12
 
-	badboy_factor = 1
-	prestige_factor = 1
-	peace_cost_factor = 15
-	penalty_factor = 1
+    construction_speed = 0.4
 
-	break_truce_prestige_factor = 1
-	break_truce_infamy_factor = 1
-	break_truce_militancy_factor = 1
-	truce_months = 48
-	
-	good_relation_prestige_factor = 1
-	good_relation_infamy_factor = 1
-	good_relation_militancy_factor = 1
+    badboy_factor = 6
+    prestige_factor = 1
+    peace_cost_factor = 60
+    penalty_factor = 1
 
-	can_use = {
-		NOT = { is_our_vassal = THIS }
-		num_of_vassals_no_substates = 1
-	}
-	
-	# THIS - us
-	# FROM - country scope is possible match?
-	# war target country of goal is scope
-	allowed_countries = {
-		is_our_vassal = FROM
-		FROM = { is_substate = no }
-	}
-	
-	po_release_puppet = yes
-	po_add_to_sphere = yes
+    break_truce_prestige_factor = 1
+    break_truce_infamy_factor = 1
+    break_truce_militancy_factor = 1
+    truce_months = 60
 
-	war_name = WAR_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
-	on_po_accepted = {
-		plurality = -2
-	}
+    good_relation_prestige_factor = 1
+    good_relation_infamy_factor = 1
+    good_relation_militancy_factor = 1
+
+    can_use = {
+		is_vassal = yes
+		total_pops = 400000
+        NOT = {
+            is_our_vassal = THIS
+			tag = WBK
+			has_country_flag = daimyo_flag
+			total_pops = 2000000
+        }
+        war_with = THIS
+    }
+
+    # THIS - us
+    # FROM - country scope is possible match?
+    # war target country of goal is scope
+
+	po_remove_prestige = yes
+
+    war_name = WAR_NAME
+
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
+
+    on_po_accepted = {
+		country_event = 9575
+    }
 }
+
+#Steal Puppet CB
+transfer_puppet_small = {
+    sprite_index = 24
+    is_triggered_only = yes
+    months = 12
+
+    construction_speed = 0.4
+
+    badboy_factor = 3
+    prestige_factor = 1
+    peace_cost_factor = 60
+    penalty_factor = 1
+
+    break_truce_prestige_factor = 1
+    break_truce_infamy_factor = 1
+    break_truce_militancy_factor = 1
+    truce_months = 60
+
+    good_relation_prestige_factor = 1
+    good_relation_infamy_factor = 1
+    good_relation_militancy_factor = 1
+
+    can_use = {
+		is_vassal = yes
+		total_pops = 200000
+        NOT = {
+            is_our_vassal = THIS
+			tag = WBK
+			has_country_flag = daimyo_flag
+			total_pops = 400000
+        }
+        war_with = THIS
+    }
+
+    # THIS - us
+    # FROM - country scope is possible match?
+    # war target country of goal is scope
+
+	po_remove_prestige = yes
+
+    war_name = WAR_NAME
+
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
+
+    on_po_accepted = {
+		country_event = 9575
+    }
+}
+
+#Steal Puppet CB
+transfer_puppet_tiny = {
+    sprite_index = 24
+    is_triggered_only = yes
+    months = 12
+
+    construction_speed = 0.4
+
+    badboy_factor = 1.25
+    prestige_factor = 1
+    peace_cost_factor = 60
+    penalty_factor = 1
+
+    break_truce_prestige_factor = 1
+    break_truce_infamy_factor = 1
+    break_truce_militancy_factor = 1
+    truce_months = 48
+
+    good_relation_prestige_factor = 1
+    good_relation_infamy_factor = 1
+    good_relation_militancy_factor = 1
+
+    can_use = {
+		is_vassal = yes
+        NOT = {
+            is_our_vassal = THIS
+			tag = WBK
+			has_country_flag = daimyo_flag
+			total_pops = 200000
+        }
+        war_with = THIS
+    }
+
+    # THIS - us
+    # FROM - country scope is possible match?
+    # war target country of goal is scope
+
+	po_remove_prestige = yes
+
+    war_name = WAR_NAME
+
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
+
+    on_po_accepted = {
+		country_event = 9575
+    }
+}
+
 
 # Make Puppet
 make_puppet = {
@@ -2451,6 +2569,7 @@ make_puppet = {
 		NOT = { 
 			is_our_vassal = THIS 
 			has_country_flag = daimyo_flag
+			tag = WBK
 		}
 		OR = {
 			NOT = { number_of_states = 2 }
@@ -2464,7 +2583,6 @@ make_puppet = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
 		OR = {
             AND = {
                 THIS = { num_of_ports = 1 }
