@@ -1876,19 +1876,17 @@ country_event = {
 		}
 		set_country_flag = hidden_tooltip
 		random_owned = {
-			any_owned = {
-				limit = {
-					owner = { has_country_flag = hidden_tooltip }
-				}
-				# Audax Validator "." Ignore_NEXT
-				owner = {
-					any_country = {
-						limit = {
-							primary_culture = anglo_canadian
-						}
-						add_country_modifier = {
-							name = canadian_unifier_modifier duration = 1825
-						}
+			limit = {
+				owner = { has_country_flag = hidden_tooltip }
+			}
+			# Audax Validator "." Ignore_NEXT
+			owner = {
+				any_country = {
+					limit = {
+						primary_culture = anglo_canadian
+					}
+					add_country_modifier = {
+						name = canadian_unifier_modifier duration = 1825
 					}
 				}
 			}

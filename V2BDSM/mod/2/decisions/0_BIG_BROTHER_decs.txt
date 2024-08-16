@@ -1094,50 +1094,13 @@ political_decisions = {
 			META_1 = {
 				limit = {
 					has_global_flag = canada_has_player_flag
+					# Audax Validator "." Ignore_NEXT
 					is_core = CAN
 				}
 				life_rating = 5
 			}
 		}
 		ai_will_do = { factor = 1 }
-	}
-	
-	1848_setup = {
-		potential = {
-			tag = WBK
-			MEX = { owns = 101 }
-			HON = { owns = 2195 }
-			POR = { owns = 2001 }
-			SAR = { exists = yes }
-			AUS = { exists = yes }
-			NOT = {
-				has_country_flag = 1848_setup_flag
-			}
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			any_country = {
-				limit = {
-					OR = {
-						tag = AUS
-						tag = FRA
-						tag = PRU
-						tag = ENG
-					}
-				}
-				add_country_modifier = {
-					name = springtime_of_nations
-					duration = 1035
-				}
-				any_pop = { militancy = 5 }
-				any_pop = { consciousness = 5 }
-			}
-			set_country_flag = 1848_setup_flag
-		}
-		
 	}
 	
 }
