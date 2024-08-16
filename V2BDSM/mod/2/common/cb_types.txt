@@ -576,7 +576,7 @@ conquest = {
 		NOT = { tag = WBK is_our_vassal = THIS }
 		OR = {
             AND = {
-                THIS = { any_owned_province = { port = yes } }
+                THIS = { num_of_ports = 1 } }
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
@@ -1725,11 +1725,6 @@ acquire_capital = {
 				any_owned_province = { port = yes }
 				THIS = {
 					num_of_ports = 1
-					OR = {
-						is_greater_power = yes
-						is_secondary_power = yes
-						ai = no
-					}
 				}
 			}
 		}
@@ -2143,6 +2138,13 @@ free_peoples = {
 	# FROM - country scope is possible match?
 	# war target country of goal is scope
 	allowed_countries = {
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
+		}
 		number_of_states = 2
 		NOT = {
 			tag = FROM
@@ -2236,6 +2238,13 @@ liberate_country = {
 	# FROM - country scope is possible match?
 	# war target country of goal is scope
 	allowed_countries = {
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
+		}
 		number_of_states = 2
 		NOT = {
 			tag = FROM
@@ -2456,8 +2465,13 @@ make_puppet = {
 			}
 		}
 		NOT = { tag = WBK }
-        THIS = { any_owned_province = { port = yes } }
-        any_owned_province = { port = yes }
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
+		}
 	}
 	
 	# THIS - us
@@ -2523,8 +2537,13 @@ make_puppet_small = {
 			}
 		}
 		NOT = { tag = WBK }
-        THIS = { any_owned_province = { port = yes } }
-        any_owned_province = { port = yes }
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
+		}
 	}
 	
 	# THIS - us
@@ -2589,7 +2608,13 @@ make_puppet_tiny = {
 			}
 		}
 		NOT = { tag = WBK }
-        THIS = { any_owned_province = { port = yes } }
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
+		}
         any_owned_province = { port = yes }
 	}
 	
@@ -2812,6 +2837,13 @@ demand_concession_casus_belli = {
 				NOT = { year = 1870 } 
 			}
 		}
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
+		}
 		NOT = { has_country_flag = daimyo_flag }
 		NOT = { tag = WBK }
 	}
@@ -2896,6 +2928,13 @@ establish_protectorate_casus_belli = {
 				NOT = { year = 1870 } 
 			}
 		}
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
+		}
 		NOT = { has_country_flag = daimyo_flag }
 	}
 	
@@ -2961,6 +3000,13 @@ establish_small_protectorate_casus_belli = {
 				has_country_flag = chinese_warlord_flag
 				NOT = { year = 1870 } 
 			}
+		}
+		OR = {
+            AND = {
+                THIS = { num_of_ports = 1 } }
+                any_owned_province = { port = yes }
+            }
+            neighbour = THIS
 		}
 		NOT = { has_country_flag = daimyo_flag }
 	}
