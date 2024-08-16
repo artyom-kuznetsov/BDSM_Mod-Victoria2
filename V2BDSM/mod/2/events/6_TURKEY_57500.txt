@@ -3,6 +3,7 @@ country_event = { # EXPANSION ROUTE
 	title = "tur_exp_route_EvtName"
 	desc = "tur_exp_route_EvtDesc"
 	id = 57500
+	picture = "ottoman_ethnic"
 	
 	trigger = {
 		tag = TUR
@@ -18,18 +19,31 @@ country_event = { # EXPANSION ROUTE
 		name = "tur_exp_route_EvtOptLater"
 		set_country_flag = TUR_assimilation_flag
 		CUSTOM_TOOLTIP_57500 = { }
-		capital_scope = {
-			add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
-			assimilate = yes
-			state_scope = {
-				any_owned = {
-					limit = {
-						is_capital = no
+		
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				capital_scope = {
+					add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
+					assimilate = yes
+					state_scope = {
+						any_owned = {
+							limit = {
+								is_capital = no
+							}
+							add_province_modifier = { name = TUR_prov_assimilatABLE_prov_modifier duration = -1 }
+						}
 					}
-					add_province_modifier = { name = TUR_prov_assimilatABLE_prov_modifier duration = -1 }
 				}
 			}
 		}
+		clr_country_flag = hidden_tooltip
 	}
 	
 }
