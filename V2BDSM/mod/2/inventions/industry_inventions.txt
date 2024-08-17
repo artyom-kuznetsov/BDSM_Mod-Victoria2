@@ -58,6 +58,72 @@ industrial_revolution_inv = {
 		core_pop_consciousness_modifier = 0.01
 	}
 }
+#practical_steam_engine
+bronze_boiler = {
+	limit = { practical_steam_engine = 1 }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 1
+			mechanical_production = 1
+		}
+		modifier = {
+			factor = 3
+			clean_coal = 1
+		}
+		modifier = {
+			factor = 3
+			high_n_low_pressure_steam_engines = 1
+		}
+	}
+	effect = {
+		factory_throughput = 0.05
+	}
+}
+#high_n_low_pressure_steam_engines
+steel_boiler = {
+	limit = { high_n_low_pressure_steam_engines = 1 }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 1
+			interchangeable_parts = 1
+		}
+		modifier = {
+			factor = 3
+			cheap_iron = 1
+		}
+		modifier = {
+			factor = 3
+			steam_turbine = 1
+		}
+	}
+	effect = {
+		factory_throughput = 0.05
+	}
+}
+#steam_turbine
+high_pressure_boiler = {
+	limit = { steam_turbine = 1 }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 1
+			semi_automatization = 1
+		}
+		modifier = {
+			factor = 3
+			cheap_steel = 1
+		}
+		modifier = {
+			factor = 3
+			combustion_engine = 1
+		}
+	}
+	effect = {
+		factory_throughput = 0.05
+	}
+}
 #combustion_engine
 daimlers_automobile = {
 	limit = { combustion_engine = 1 }
