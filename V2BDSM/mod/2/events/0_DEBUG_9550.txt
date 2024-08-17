@@ -564,8 +564,8 @@ country_event = {
     fire_only_once = yes
     is_triggered_only = yes
     allow_multiple_instances = yes
-
-    immediate = {
+	
+	immediate = { 
         FROM = {
 			create_vassal = THIS
 			create_alliance = THIS
@@ -574,9 +574,11 @@ country_event = {
 				value = 200
 			}
 		}
-    }
+	}
+
 
     option = {
         name = "noloc"
+		government = colonial_company
     }
 }
