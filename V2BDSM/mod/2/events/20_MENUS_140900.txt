@@ -554,6 +554,36 @@ country_event = {
 	}
 	
 	option = {
+		name = "vassal_interaction_targeted_EvtOptTax"
+		release_vassal = FROM
+		leave_alliance = FROM
+		war = {
+			target = FROM
+			attacker_goal = { casus_belli = demand_reparations }
+			defender_goal = { casus_belli = status_quo }
+		}
+		badboy = 1
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				FROM = {
+					set_country_flag = tax_war
+					any_owned = {
+						change_controller = THIS
+					}
+				}
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
 		name = "vassal_interaction_targeted_EvtAnnex"
 		random_owned = {
 			limit = {
