@@ -1,0 +1,703 @@
+
+country_event = {
+	id = 110100
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = no
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "noloc"
+		remove_country_modifier = ai_kill_research_modifier
+	}
+}
+
+country_event = {
+	id = 110101
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { strategic_mobility = 1 }
+		overlord = {
+			strategic_mobility = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = strategic_mobility
+		activate_technology = muzzle_loaded_rifles
+		activate_technology = iron_muzzle_loaded_artillery
+		activate_technology = military_plans
+		activate_technology = army_professionalism
+	}
+}
+
+country_event = {
+	id = 110102
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { point_defense_system = 1 }
+		overlord = {
+			point_defense_system = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = point_defense_system
+		activate_technology = breech_loaded_rifles
+		activate_technology = iron_breech_loaded_artillery
+		activate_technology = military_statistics
+		activate_technology = army_decision_making
+	}
+}
+
+country_event = {
+	id = 110103
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { deep_defense_system = 1 }
+		overlord = {
+			deep_defense_system = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = deep_defense_system
+		activate_technology = machine_guns
+		activate_technology = steel_breech_loaded_artillery
+		activate_technology = military_logistics
+		activate_technology = army_risk_management
+	}
+}
+
+country_event = {
+	id = 110104
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { trench_systems = 1 }
+		overlord = {
+			trench_systems = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = trench_systems
+		activate_technology = bolt_action_rifles
+		activate_technology = indirect_artillery_fire
+		activate_technology = aeronautics
+		activate_technology = army_nco_training
+	}
+}
+country_event = {
+	id = 110105
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { infiltration = 1 }
+		overlord = {
+			infiltration = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = infiltration
+		activate_technology = chemical_weapons
+		activate_technology = creeping_barrage
+		activate_technology = barrel_experiments
+		activate_technology = great_war_experience
+	}
+}
+
+country_event = {
+	id = 110106
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { fire_control_systems = 1 }
+		overlord = {
+			fire_control_systems = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = battleship_column_doctrine
+		activate_technology = steamers
+		activate_technology = fire_control_systems
+		activate_technology = naval_plans
+		activate_technology = naval_professionalism
+	}
+}
+country_event = {
+	id = 110107
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { weapon_platforms = 1 }
+		overlord = {
+			weapon_platforms = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = raider_group_doctrine
+		activate_technology = iron_steamers
+		activate_technology = weapon_platforms
+		activate_technology = naval_statistics
+		activate_technology = naval_decision_making
+	}
+}
+country_event = {
+	id = 110108
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { main_armament = 1 }
+		overlord = {
+			main_armament = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = blue_and_brown_water_schools
+		activate_technology = steel_steamers
+		activate_technology = main_armament
+		activate_technology = naval_logistics
+		activate_technology = naval_risk_management
+	}
+}
+
+country_event = {
+	id = 110109
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { advanced_naval_design = 1 }
+		overlord = {
+			advanced_naval_design = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = high_sea_battle_fleet
+		activate_technology = steam_turbine_ships
+		activate_technology = advanced_naval_design
+		activate_technology = naval_directionism
+		activate_technology = naval_nco_training
+	}
+}
+
+country_event = {
+	id = 110110
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { early_modern_naval_design = 1 }
+		overlord = {
+			early_modern_naval_design = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = early_modern_naval_doctrine
+		activate_technology = oil_driven_ships
+		activate_technology = early_modern_naval_design
+		activate_technology = naval_integration
+		activate_technology = early_modern_naval_training
+	}
+}
+
+country_event = {
+	id = 110111
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { modern_naval_design = 1 }
+		overlord = {
+			modern_naval_design = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = modern_naval_doctrine
+		activate_technology = aircraft_carriers
+		activate_technology = modern_naval_design
+		activate_technology = naval_aviation
+		activate_technology = modern_naval_training
+	}
+}
+
+country_event = {
+	id = 110112
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { ad_hoc_money_bill_printing = 1 }
+		overlord = {
+			ad_hoc_money_bill_printing = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = stock_exchange
+		activate_technology = ad_hoc_money_bill_printing
+		activate_technology = late_classical_theory
+		activate_technology = market_structure
+		activate_technology = organized_factories
+	}
+}
+
+country_event = {
+	id = 110113
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { private_bank_money_bill_printing = 1 }
+		overlord = {
+			private_bank_money_bill_printing = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = business_banks
+		activate_technology = private_bank_money_bill_printing
+		activate_technology = collectivist_theory
+		activate_technology = business_regulations
+		activate_technology = scientific_management
+	}
+}
+country_event = {
+	id = 110114
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { central_bank_money_bill_printing = 1 }
+		overlord = {
+			central_bank_money_bill_printing = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = investment_banks
+		activate_technology = central_bank_money_bill_printing
+		activate_technology = the_historical_theory
+		activate_technology = market_regulations
+		activate_technology = time_saving_measures
+	}
+}
+
+country_event = {
+	id = 110115
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { modern_central_bank_system = 1 }
+		overlord = {
+			modern_central_bank_system = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = bank_inspection_board
+		activate_technology = modern_central_bank_system
+		activate_technology = neoclassical_theory
+		activate_technology = economic_responsibility
+		activate_technology = management_strategy
+	}
+}
+
+country_event = {
+	id = 110116
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { market_determined_exchange_rates = 1 }
+		overlord = {
+			market_determined_exchange_rates = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = mutual_funds
+		activate_technology = market_determined_exchange_rates
+		activate_technology = keynesian_economics
+		activate_technology = government_interventionism
+		activate_technology = organizational_development
+	}
+}
+
+country_event = {
+	id = 110117
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { fiat_based_monetary_system = 1 }
+		overlord = {
+			fiat_based_monetary_system = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = modern_financial_institutions
+		activate_technology = fiat_based_monetary_system
+		activate_technology = neoliberal_theory
+		activate_technology = monetarism
+		activate_technology = modern_business_management
+	}
+}
+
+country_event = {
+	id = 110118
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { idealism = 1 }
+		overlord = {
+			idealism = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = ideological_thought
+		activate_technology = associationism
+		social_reform = low_schools
+	}
+}
+
+country_event = {
+	id = 110119
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { empiricism = 1 }
+		overlord = {
+			empiricism = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = state_n_government
+		activate_technology = phenomenalism
+		activate_technology = functionalism
+		social_reform = acceptable_schools
+	}
+}
+
+country_event = {
+	id = 110120
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { analytic_philosophy = 1 }
+		overlord = {
+			analytic_philosophy = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = nationalism_n_imperialism
+		activate_technology = experimental_psychology
+		activate_technology = biologism
+		social_reform = acceptable_schools
+	}
+}
+
+country_event = {
+	id = 110121
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { phenomenology_n_hermeneutic = 1 }
+		overlord = {
+			phenomenology_n_hermeneutic = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = nationalism_n_imperialism
+		activate_technology = psychoanalysis
+		activate_technology = social_science
+		social_reform = good_schools
+	}
+}
+
+country_event = {
+	id = 110122
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { anti__rationalism = 1 }
+		overlord = {
+			anti__rationalism = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = revolution_n_counterrevolution
+		activate_technology = behaviorism
+		activate_technology = social_alienation
+		social_reform = compulsory_schools
+	}
+}
+
+country_event = {
+	id = 110123
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { quantum_mechanics = 1 }
+		overlord = {
+			quantum_mechanics = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = mass_politics
+		activate_technology = humanistic_psychology
+		activate_technology = critical_theory
+	}
+}
+
+country_event = {
+	id = 110124
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { medicine = 1 }
+		overlord = {
+			medicine = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = medicine
+		activate_technology = early_railroad
+	}
+}
+
+country_event = {
+	id = 110125
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { inorganic_chemistry = 1 }
+		overlord = {
+			inorganic_chemistry = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = high_n_low_pressure_steam_engines
+		activate_technology = interchangeable_parts
+		activate_technology = cheap_iron
+		activate_technology = iron_railroad
+		activate_technology = inorganic_chemistry
+	}
+}
+
+country_event = {
+	id = 110126
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { steel_railroad = 1 }
+		overlord = {
+			steel_railroad = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = steam_turbine
+		activate_technology = semi_automatization
+		activate_technology = cheap_steel
+		activate_technology = steel_railroad
+		activate_technology = organic_chemistry
+	}
+}
+
+country_event = {
+	id = 110127
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { integral_rail_system = 1 }
+		overlord = {
+			integral_rail_system = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = combustion_engine
+		activate_technology = assembly_line
+		activate_technology = advanced_metallurgy
+		activate_technology = integral_rail_system
+		activate_technology = electricity
+	}
+}
+
+country_event = {
+	id = 110128
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { limited_access_roads = 1 }
+		overlord = {
+			limited_access_roads = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = electrical_power_generation
+		activate_technology = shift_work
+		activate_technology = electric_furnace
+		activate_technology = limited_access_roads
+		activate_technology = synthetic_polymers
+	}
+}
+
+country_event = {
+	id = 110129
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { modern_infrastructure = 1 }
+		overlord = {
+			modern_infrastructure = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		activate_technology = modern_power_generation
+		activate_technology = mechanized_manufacturing
+		activate_technology = modern_metallurgy
+		activate_technology = modern_infrastructure
+		activate_technology = modern_chemistry
+	}
+}
+
+
+
+
