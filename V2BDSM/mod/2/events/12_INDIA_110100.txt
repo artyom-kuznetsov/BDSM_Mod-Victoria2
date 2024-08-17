@@ -698,6 +698,31 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 110130
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = yes
+		NOT = { has_country_modifier = canadian_unifier_modifier }
+		num_of_vassals = 1
+	}
+	
+	option = {
+		name = "noloc"
+		random_country = {
+			limit = {
+				vassal_of = THIS
+			}
+			annex_to = THIS
+			all_core = { add_core = THIS }
+		}
+		add_country_modifier = { name = canadian_unifier_modifier duration = 1825 }
+	}
+}
+
 
 
 

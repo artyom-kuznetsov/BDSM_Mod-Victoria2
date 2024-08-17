@@ -1080,7 +1080,10 @@ political_decisions = {
 			}
 			any_country = {
 				limit = {
-					primary_culture = anglo_canadian
+					OR = {
+						primary_culture = anglo_canadian
+						tag = EIC
+					}
 				}
 				add_country_modifier = { name = canadian_unifier_modifier duration = 3650 }
 			}
