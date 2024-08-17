@@ -3802,6 +3802,7 @@ great_war_penalty_cb = {
 vassal_tax = {
 	sprite_index = 22
 	is_triggered_only = yes
+	constructing_cb = no
 	months = 12
 	
 	badboy_factor = 0.6
@@ -3836,14 +3837,9 @@ vassal_tax = {
 	on_po_accepted = {
 		plurality = -3
 		clr_country_flag = tax_war
+		country_event = 9577
 		THIS = {
-			prestige = 100
 			create_vassal = FROM
-			create_alliance = FROM
-			relation = {
-				who = FROM
-				value = 200
-			}
 		}
 		FROM = { government = colonial_company }
 	}
