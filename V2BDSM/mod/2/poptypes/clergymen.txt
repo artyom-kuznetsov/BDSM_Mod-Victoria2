@@ -2,7 +2,7 @@ sprite = 3
 color = { 234 227 40 }
 strata = middle
 
-research_points = 3.25	#if max %, then 2 extra research points.
+research_points = 3.5	#if max %, then 2 extra research points.
 research_optimum = 0.02	#1%
 
 rebel =
@@ -437,13 +437,20 @@ promote_to =
 				crime_fighting = 0.99
 			}
 		}
-		modifier = {
-			factor = 3
-			penal_system = incarceration
-		}
-		modifier = {
-			factor = 6
-			penal_system = rehabilitation
+		
+		group = {
+			modifier = {
+				factor = -6
+				penal_system = capital_punishment
+			}
+			modifier = {
+				factor = -4
+				penal_system = punitive_labour
+			}
+			modifier = {
+				factor = -2
+				penal_system = incarceration
+			}
 		}
 	}
 

@@ -981,7 +981,7 @@ colonialmigration_chance =
 #general emigration chance
 emigration_chance = 
 {
-	factor = 0.75
+	factor = 0.5
 
 	modifier = {
 		factor = -0.2
@@ -990,19 +990,24 @@ emigration_chance =
 
 	group = {
 		modifier = {
-			factor = -0.04
+			factor = -0.05
 			strata = poor
-			NOT = { literacy = 0.15 }
+			NOT = { literacy = 0.1 }
 		}
 		modifier = {
-			factor = -0.03
+			factor = -0.05
 			strata = poor
-			NOT = { literacy = 0.25 }
+			NOT = { literacy = 0.2 }
 		}
 		modifier = {
-			factor = -0.03
+			factor = -0.05
 			strata = poor
-			NOT = { literacy = 0.35 }
+			NOT = { literacy = 0.3 }
+		}
+		modifier = {
+			factor = -0.05
+			strata = poor
+			NOT = { literacy = 0.4 }
 		}
 	}
 	
@@ -1238,7 +1243,7 @@ emigration_chance =
 	
 	### CITIZENSHIP POLICY
 	modifier = {
-		factor = 0.06
+		factor = 0.05
 		country = { citizenship_policy = residency }
 		NOT = { 
 			is_primary_culture = yes
@@ -1246,7 +1251,7 @@ emigration_chance =
 		}
 	}
 	modifier = {
-		factor = 0.05
+		factor = 0.04
 		country = { citizenship_policy = limited_citizenship }
 		NOT = { 
 			is_primary_culture = yes
@@ -1365,6 +1370,20 @@ emigration_chance =
 	modifier = {                                                                  
 		factor = -0.3                             
 		country = { border_policy = closed_borders ai = yes }
+	}
+	
+	modifier = {
+		factor = -0.2
+		country = {
+			capital_scope = {
+				OR = {
+					continent = north_america
+					continent = south_america
+					continent = oceania
+				}
+			}
+			NOT = { year = 1900 }
+		}
 	}
 }
 

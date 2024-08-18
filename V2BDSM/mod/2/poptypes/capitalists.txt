@@ -172,13 +172,20 @@ promote_to =
 				crime_fighting = 0.99
 			}
 		}
-		modifier = {
-			factor = 3
-			penal_system = incarceration
-		}
-		modifier = {
-			factor = 6
-			penal_system = rehabilitation
+		
+		group = {
+			modifier = {
+				factor = -6
+				penal_system = capital_punishment
+			}
+			modifier = {
+				factor = -4
+				penal_system = punitive_labour
+			}
+			modifier = {
+				factor = -2
+				penal_system = incarceration
+			}
 		}
 	}
 	clerks = {
