@@ -737,6 +737,25 @@ post_irony = {
 		increase_research = 0.05
 	}
 }
+#biologism
+meta_irony = {
+	limit = { biologism = 1 }
+	chance = {
+		base = 1
+		modifier = {
+			factor = 1
+			experimental_psychology = 1
+		}
+		modifier = {
+			factor = 1
+			empiricism = 1
+		}
+	}
+	
+	effect = {
+		increase_research = 0.1
+	}
+}
 
 #biologism
 darwinism = {
@@ -1036,7 +1055,7 @@ populism_vs._establishment = {
 		}
 		modifier = {
 			factor = 1
-			nationalvalue = nv_order
+			NOT = { government = democracy }
 		}
 	}
 
@@ -1095,7 +1114,7 @@ biased_multiculturalism = {
 		}
 		modifier = {
 			factor = 1
-			nationalvalue = nv_order
+			NOT = { government = democracy }
 		}
 	}
 	effect = {
@@ -1195,7 +1214,7 @@ dogma_of_violence = {
 		}
 		modifier = {
 			factor = 2
-			nationalvalue = nv_order
+			NOT = { government = democracy }
 		}
 	}
 	effect = {
@@ -1278,11 +1297,11 @@ expansionism = {
 		base = 2
 		modifier = {
 			factor = 3
-			average_consciousness = 3
+			literacy = 0.6
 		}
 		modifier = {
 			factor = 2
-			nationalvalue = nv_order
+			NOT = { government = democracy }
 		}
 	}
 	effect = {
@@ -1299,11 +1318,15 @@ the_doctrine_of_fascism = {
 		}
 		modifier = {
 			factor = 1
-			nationalvalue = nv_order
+			NOT = { government = democracy }
 		}
 		modifier = {
 			factor = 3
 			average_militancy = 4
+		}
+		modifier = {
+			factor = 1
+			literacy = 0.8
 		}
 	}
 	effect = {

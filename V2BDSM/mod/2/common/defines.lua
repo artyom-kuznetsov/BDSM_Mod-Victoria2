@@ -124,7 +124,7 @@ economy = {
 	TRADE_CAP_LOW_LIMIT_LAND = 0.3, 				-- the lowest % the slider can go for land units
 	TRADE_CAP_LOW_LIMIT_NAVAL = 0.5, 			-- the lowest % the slider can go for naval units
 	TRADE_CAP_LOW_LIMIT_CONSTRUCTIONS = 0, 		-- the lowest % the slider can go for constructions
-	FACTORY_PURCHASE_MIN_FACTOR = 0.99,			-- the lowest % of its daily needs a factory will purchase
+	FACTORY_PURCHASE_MIN_FACTOR = 0.75,			-- the lowest % of its daily needs a factory will purchase
 	FACTORY_PURCHASE_DRAWDOWN_FACTOR = 0.025		-- the % a factory will reduce its input purchases each day if it did not sell all its goods (also used for scaling up production if all goods are sold)
 },
 
@@ -177,7 +177,7 @@ military = {
 	AI_CAVALRY_PROPORTION = 0.15, -- fraction of brigades that should be cavalry
 	AI_SUPPORT_PROPORTION = 0.3, -- fraction of brigades that should be artillery and other support units
 	AI_SPECIAL_PROPORTION = 0.15, -- fraction of brigades that should be engineers and tanks
-	AI_ESCORT_RATIO = 1.0, -- ratio of escorts to transports in invasion fleets
+	AI_ESCORT_RATIO = 2.0, -- ratio of escorts to transports in invasion fleets
 	AI_ARMY_TAXBASE_FRACTION = 0.3, -- max of tax base that AI will spend on army supply costs (based on peacetime costs)
 	AI_NAVY_TAXBASE_FRACTION = 0.3, -- max of tax base that AI will spend on navy supply costs (based on peacetime costs)
 	AI_BLOCKADE_RANGE = 200, -- max distance the AI will send out blockade fleets from their home base
@@ -618,7 +618,7 @@ diplomacy = {
 
 
 pops = {
-	BASE_CLERGY_FOR_LITERACY = 0.005, 
+	BASE_CLERGY_FOR_LITERACY = 0, 
 	MAX_CLERGY_FOR_LITERACY = 0.04, 
 	LITERACY_CHANGE_SPEED = 0.08,
 
@@ -636,7 +636,7 @@ pops = {
 	LIFE_RATING_GROWTH_BONUS = 0.0001,
 	LIFE_NEED_STARVATION_LIMIT = 0.5,
 
-	MIL_LACK_EVERYDAY_NEED = 0.05,
+	MIL_LACK_EVERYDAY_NEED = 0.1,
 	MIL_HAS_EVERYDAY_NEED = -0.1,
 	MIL_HAS_LUXURY_NEED = -0.2,
 	MIL_NO_LIFE_NEED = 0.2,
@@ -651,12 +651,12 @@ pops = {
 	CON_LUXURY_GOODS = 0.1,
 	CON_POOR_CLERGY = -2.5,
 	CON_MIDRICH_CLERGY = -1.25,
-	CON_REFORM_IMPACT = -50,
+	CON_REFORM_IMPACT = -70,
 	CON_COLONIAL_FACTOR = 0.5,
 	RULING_PARTY_HAPPY_CHANGE = -1,
 	RULING_PARTY_ANGRY_CHANGE = 0.5,
 
-	PDEF_BASE_CON = 20.0,			-- so half'ed effect.
+	PDEF_BASE_CON = 1000.0,			-- so half'ed effect.
 	
 	NATIONAL_FOCUS_DIVIDER = 50000.0,
 	

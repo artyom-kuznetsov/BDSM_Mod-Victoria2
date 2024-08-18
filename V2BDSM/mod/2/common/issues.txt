@@ -460,8 +460,7 @@ political_reforms = {
 		next_step_only = yes
 		primary_culture_only = {
 			rules = { primary_culture_voting = yes }
-			core_pop_consciousness_modifier = -0.01
-			non_accepted_pop_consciousness_modifier = 0.02
+			non_accepted_pop_militancy_modifier = 0.02
 			global_assimilation_rate = 0.05
 			global_immigrant_attract = -0.02
 			allow = {
@@ -470,14 +469,12 @@ political_reforms = {
 		}
 		culture_voting_only = {
 			rules = { culture_voting = yes }
-			non_accepted_pop_consciousness_modifier = 0.01
 			allow = {
 				NOT = { citizenship_policy = residency }
 			}
 		}
 		all_voting_pops = {
 			rules = { all_voting = yes }
-			non_accepted_pop_consciousness_modifier = -0.01
 			non_accepted_pop_militancy_modifier = -0.02
 			global_immigrant_attract = 0.02
 			allow = {
@@ -517,7 +514,7 @@ political_reforms = {
 	border_policy = {
 		closed_borders = {
 			global_immigrant_attract = -2
-			non_accepted_pop_consciousness_modifier = 0.01
+			global_pop_militancy_modifier = 0.01
 			allow = {
 				has_country_flag = is_totalitarian_flag
 			}
@@ -585,7 +582,7 @@ political_reforms = {
 			}
 		}
 		confederalism = {
-			global_pop_consciousness_modifier = -0.02
+			global_pop_militancy_modifier = -0.02
 			suppression_points_modifier = -0.30
 			administrative_efficiency_modifier = -0.1
 			allow = {
@@ -596,7 +593,7 @@ political_reforms = {
 			}
 		}
 		federalism = {
-			core_pop_consciousness_modifier = -0.01
+			core_pop_militancy_modifier = -0.01
 			suppression_points_modifier = -0.1
 			global_assimilation_rate = 0.05
 			allow = {
@@ -619,7 +616,7 @@ political_reforms = {
 			tax_efficiency = 0.02
 			cb_generation_speed_modifier = 0.2
 			suppression_points_modifier = 0.2
-			global_pop_consciousness_modifier = 0.02
+			global_pop_consciousness_modifier = -0.02
 			global_pop_militancy_modifier = 0.01
 			allow = {
 				has_country_flag = has_rev_n_counterrev_flag
@@ -738,20 +735,16 @@ social_reforms = {
 			minimum_wage = 0.25
 			factory_output = -0.02
 			global_immigrant_attract = 0.02
-			non_accepted_pop_consciousness_modifier = -0.01
 		}
 		acceptable_minimum_wage = {
 			minimum_wage = 0.5
 			factory_output = -0.03
 			global_immigrant_attract = 0.03
-			non_accepted_pop_consciousness_modifier = -0.01
 			non_accepted_pop_militancy_modifier = -0.01
 		}
 		good_minimum_wage = {
 			minimum_wage = 0.75
 			factory_output = -0.04
-			global_pop_consciousness_modifier = -0.01
-			non_accepted_pop_consciousness_modifier = -0.01
 			global_pop_militancy_modifier = -0.01
 			global_immigrant_attract = 0.04
 		}
@@ -781,7 +774,6 @@ social_reforms = {
 			factory_throughput = -0.05
 			RGO_throughput = -0.05
 			global_pop_militancy_modifier = -0.01
-			global_pop_consciousness_modifier = -0.01
 			global_immigrant_attract = 0.04
 		}
 	}
@@ -808,7 +800,6 @@ social_reforms = {
 		good_safety = {
 			factory_maintenance = 0.2
 			rgo_output = -0.08
-			global_pop_consciousness_modifier = -0.01
 			global_pop_militancy_modifier = -0.01
 			global_immigrant_attract = 0.04
 		}
@@ -831,7 +822,6 @@ social_reforms = {
 		}
 		good_subsidies = {
 			unemployment_benefit = 4
-			global_pop_consciousness_modifier = -0.01
 			global_immigrant_attract = 0.04
 		}
 	}
@@ -854,7 +844,6 @@ social_reforms = {
 		}
 		good_pensions = {
 			pension_level	= 0.125
-			global_pop_consciousness_modifier = -0.01
 			global_immigrant_attract = 0.04
 		}
 	}
@@ -964,7 +953,6 @@ social_reforms = {
 		
 		rehabilitation = {
 			administrative_multiplier = 2
-			global_pop_consciousness_modifier = -0.01
 			global_pop_militancy_modifier = -0.01
 			global_immigrant_attract = 0.02
 		}
@@ -981,7 +969,6 @@ social_reforms = {
 		
 		child_labor_restricted = {
 			education_efficiency_modifier = -0.05
-			global_pop_consciousness_modifier = -0.01
 			RGO_throughput = 0.025
 			factory_throughput = 0.025
 			global_immigrant_attract = 0.01
@@ -990,7 +977,6 @@ social_reforms = {
 		child_labor_illegal = {
 			education_efficiency_modifier = 0.05
 			global_pop_militancy_modifier = -0.01
-			global_pop_consciousness_modifier = -0.01
 			global_immigrant_attract = 0.02
 		}
 	}

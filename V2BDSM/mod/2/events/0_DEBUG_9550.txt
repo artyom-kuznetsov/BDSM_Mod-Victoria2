@@ -378,37 +378,7 @@ country_event = { # BENELUX
 	}
 }
 
-province_event = {
-	id = 9569
-	title = "noloc"
-	desc = "noloc"
-	
-	trigger = {
-		is_core = BLX
-		NOT = { province_id = 397 }
-		owner = {
-			NOT = {
-				is_culture_group = beneluxian
-			}
-		}
-		NOT = {
-			has_province_modifier = separatism_modifier
-		}
-	}
-	
-	option = {
-		name = "noloc"
-		state_scope = {
-			any_owned = {
-				add_province_modifier = {
-					name = separatism_modifier
-					duration = -1
-				}
-			}
-		}
-	}
-}
-
+# 95694
 
 country_event = {
 	id = 9570
