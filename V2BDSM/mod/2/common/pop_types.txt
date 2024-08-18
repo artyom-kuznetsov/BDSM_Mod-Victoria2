@@ -765,7 +765,7 @@ migration_chance = {
 		factor = 2.0
 		state_scope = { is_colonial = no }
 		culture = maghrebi
-		country = { has_country_flag = immigration_from_magrib_chek_flag }	
+		country = { has_country_flag = immigration_from_magrib_chek_flag }
 	}
 	group = {
 		modifier = {
@@ -869,6 +869,21 @@ migration_chance = {
 		state_scope = {
 			# Audax Validator "." Ignore_NEXT
 			NOT = { total_pops = 300000 }
+		}
+	}
+	modifier = {
+		factor = -0.5
+		NOT = { unemployment = 0.1 }
+		strata = poor
+		location = {
+			OR = {
+				trade_goods= opium
+				trade_goods= silk
+				trade_goods= rubber
+				trade_goods= tropical_wood
+				trade_goods= coffee
+				trade_goods= tea_leaves
+			}
 		}
 	}
 }

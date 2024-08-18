@@ -251,6 +251,26 @@ migration_target =
 			worker = labourers
 		}
 	}
+	modifier = {
+    	factor = 100
+    	has_province_modifier = immigrator_modifier
+		OR = {
+			work_available = { worker = labourers }
+			work_available = { worker = farmers }
+		}
+	}
+	modifier = {
+		factor = 1.2
+		NOT = { unemployment = 0.1 }
+		OR = {
+			trade_goods= opium
+			trade_goods= silk
+			trade_goods= rubber
+			trade_goods= tropical_wood
+			trade_goods= coffee
+			trade_goods= tea_leaves
+		}
+	}
 }
 
 promote_to =
