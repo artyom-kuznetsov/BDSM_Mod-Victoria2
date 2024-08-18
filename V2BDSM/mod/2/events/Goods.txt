@@ -581,15 +581,52 @@ province_event = {
 		months = 8
 	}
 
-	title = "EVTNAME1109"
-	desc = "EVTDESC1109"
+	title = "Silk_EvtName"
+	desc = "Silk_EvtDesc"
 
 	option = {
-		name = "EVTOPTA1109"
+		name = "Silk_EvtOptA"
 		trade_goods = silk
 		# life_rate = 5
 	}
 }
+
+## OPIUM EVENT
+#province_event = {
+#
+#	id = 11105554
+#
+#	trigger = {
+#		OR = {
+#			owner = {
+#				part_of_sphere = yes
+#				sphere_owner = {
+#					invention = pharmaceuticals
+#				}
+#			}
+#			owner = {
+#				invention = pharmaceuticals
+#			}
+#		}
+#		OR = {
+#			province_id = 1266
+#			province_id = 1249
+#		}
+#		not = { trade_goods = opium }
+#	}
+#
+#	mean_time_to_happen = {
+#		months = 8
+#	}
+#
+#	title = "Opium_EvtName"
+#	desc = "Opium_EvtDesc"
+#
+#	option = {
+#		name = "Opium_EvtOptA"
+#		trade_goods = opium
+#	}
+#}
 
 province_event = {
 
