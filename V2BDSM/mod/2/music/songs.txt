@@ -10,137 +10,8 @@ song = {
 	}
 }
 
-# ANYTIME
 song = {
-	name = "PolkovnikuNiktoNePishet.mp3"
-	chance = {
-		modifier = {
-			factor = -1
-			has_country_flag = disable_polkovnik
-		}
-	}
-}
-
-song = {
-	name = "Lumen - Odnoi Krovi.mp3"
-	chance = {
-		modifier = {
-			factor = -1
-			has_country_flag = disable_polkovnik
-		}
-	}
-}
-
-song = {
-	name = "Little Dark Age.mp3"
-	chance = {
-		modifier = {
-			factor = -1
-			has_country_flag = disable_polkovnik
-		}
-	}
-}
-
-song = {
-	name = "moi baik.mp3"
-	chance = {
-		modifier = {
-			factor = -1
-			has_country_flag = disable_polkovnik
-		}
-	}
-}
-
-### WAR / MOB ###
-song = {
-	name = "Paint it Black.mp3"
-	
-	chance = {
-		modifier = {
-			factor = -1
-			war = no
-		}
-		modifier = {
-			factor = -1
-			is_mobilised  = no
-		}
-	}
-}
-song = {
-	name = "At Eternals Gate Jacob.mp3"
-	
-	chance = {
-		modifier = {
-			factor = -1
-			is_mobilised  = no
-		}
-	}
-}
-song = {
-	name = "Plamenev - Noch pered boem.mp3"
-	
-	chance = {
-		modifier = {
-			factor = -1
-			is_mobilised  = no
-		}
-		modifier = {
-			factor = 1
-			OR = {
-				is_culture_group = south_slavic
-				is_culture_group = east_slavic
-			}
-			is_mobilised  = yes
-		}
-	}
-}
-song = {
-	name = "was wollen wir trinken.mp3"
-	
-	chance = {
-		modifier = {
-			# Audax Validator "." Ignore_NEXT
-			factor = -1
-			is_mobilised  = no
-		}
-		modifier = {
-			factor = -1
-			NOT = {	primary_culture = north_german }
-		}
-	}
-}
-### WAR ###
-song = {
-	name = "kapitan_zalupa.mp3"
-	
-	chance = {
-		modifier = {
-			# Audax Validator "." Ignore_NEXT
-			factor = -1
-			NOT = {
-				war = yes
-				OR = {
-					tag = USA
-					tag = ENG
-					tag = JAP
-					total_amount_of_ships = 100
-				}
-			}
-		}
-	}
-}
-song = {
-	name = "Fun Mode - Ekho Voiny.mp3"
-	
-	chance = {
-		modifier = {
-			factor = -1
-			war = no
-		}
-	}
-}
-song = {
-	name = "Raizer Explode.mp3"
+	name = "The Prodigy - Omen.mp3"
 	
 	chance = {
 		modifier = {
@@ -217,6 +88,39 @@ song = {
 }
 song = {
 	name = "Wanted Girl.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+
+song = {
+	name = "Dolphin - 713.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+
+song = {
+	name = "Mertvie Delfiny - Vampiry.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = yes
+		}
+	}
+}
+
+song = {
+	name = "Lumen - Molchanie.mp3"
 	
 	chance = {
 		modifier = {
