@@ -716,3 +716,86 @@ country_event = {
 		FROM = { create_vassal = THIS }
 	}
 }
+
+country_event = {	# AI ANNEX SUBJECTS
+	title = "noloc"
+	desc = "noloc"
+	id = 110422
+	
+	trigger = {
+		ai = yes
+		is_vassal = yes
+		NOT = { has_country_modifier = ai_new_vassal_modifier }
+		NOT = { has_country_flag = new_vassal_flag }
+	}
+	
+	option = {
+		name = "noloc"
+		add_country_modifier = {
+			name = ai_new_vassal_modifier duration = 3650
+		}
+		set_country_flag = new_vassal_flag
+	}
+}
+
+country_event = {	# AI ANNEX SUBJECTS
+	title = "noloc"
+	desc = "noloc"
+	id = 110423
+	
+	trigger = {
+		ai = yes
+		is_vassal = yes
+		has_country_flag = new_vassal_flag
+		NOT = { has_country_modifier = ai_new_vassal_modifier }
+	}
+	
+	option = {
+		name = "noloc"
+		set_country_flag = old_vassal_flag
+	}
+}
+
+country_event = {	# AI ANNEX SUBJECTS
+	title = "noloc"
+	desc = "noloc"
+	id = 110424
+	
+	trigger = {
+		is_vassal = no
+		has_country_flag = new_vassal_flag
+	}
+	
+	option = {
+		name = "noloc"
+		clr_country_flag = old_vassal_flag
+		clr_country_flag = new_vassal_flag
+		remove_country_modifier = ai_new_vassal_modifier
+	}
+}
+
+country_event = {	# AI ANNEX SUBJECTS
+	title = "noloc"
+	desc = "noloc"
+	id = 110423
+	
+	trigger = {
+		ai = yes
+		overlord = {
+			ai = yes
+			war = no
+			NOT = { badboy = 0.8 }
+		}
+		has_country_flag = old_vassal_flag
+	}
+	
+	mean_time_to_happen = 36
+	
+	option = {
+		name = "noloc"
+		overlord = {
+			badboy = 5
+			inherit = THIS
+		}
+	}
+}
