@@ -913,20 +913,6 @@ colonialmigration_chance =
 		strata = rich
 	}
 	
-	group = {
-		modifier = {
-			factor = -0.1
-			consciousness = 6
-		}
-		modifier = {
-			factor = -0.1
-			consciousness = 7
-		}
-		modifier = {
-			factor = -0.1
-			consciousness = 8
-		}
-	}
 	modifier = {
 		factor = -2.0
 		state_scope = { is_colonial = yes }
@@ -970,6 +956,7 @@ colonialmigration_chance =
 		}
 		
 	}
+	
 	modifier = {
 		factor = 2.1
 		state_scope = { is_colonial = no }
@@ -1411,29 +1398,8 @@ assimilation_chance =
 	}
 	
 	modifier = {
-		factor = 1.2
-		country = { has_country_flag = TUR_assimilation_flag }
-		location = { is_core = THIS }
-	}
-	
-	modifier = {
 		factor = -0.2
 		strata = middle
-	}
-
-	modifier = {
-		factor = 5
-		is_accepted_culture = no
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-	}
-	
-	modifier = {
-		factor = 25
-		culture = ainu
 	}
 
 	###LITERACY###
@@ -1583,14 +1549,27 @@ assimilation_chance =
 			primary_culture = no_accepted_culture
 		}
 	}
+	modifier = {
+		factor = 1.2
+		country = { has_country_flag = TUR_assimilation_flag }
+		location = { is_core = THIS }
+	}
 	
 	modifier = {
-		factor = 20
-		culture = turkish
-		country = {
-			tag = BYZ
+		factor = 5
+		is_accepted_culture = no
+		OR = { 
+			continent = north_america
+			continent = south_america
+			continent = oceania
 		}
 	}
+	
+	modifier = {
+		factor = 25
+		culture = ainu
+	}
+	
 }
 
 #general conversion mtth, same for all pops

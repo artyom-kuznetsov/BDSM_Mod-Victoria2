@@ -195,11 +195,10 @@ migration_target = # POP SCOPE
 		any_core = { is_primary_culture = THIS }
 	}
 	modifier = {
-		factor = 0.75
-		state_scope = {
-			is_slave = yes
-		}
-	}	
+    	factor = 0.01
+    	state_scope = { is_colonial = yes }
+		NOT = { continent = south_america continent = north_america continent = oceania }
+	}
 	modifier = {
 		factor = 1.1
 		is_capital = yes

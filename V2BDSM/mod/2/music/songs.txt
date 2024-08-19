@@ -21,6 +21,17 @@ song = {
 	}
 }
 
+# ANYTIME
+song = {
+	name = "Anacondaz - Spasi no ne sohranyay.mp3"
+	chance = {
+		modifier = {
+			factor = -1
+			has_country_flag = disable_polkovnik
+		}
+	}
+}
+
 song = {
 	name = "Little Dark Age.mp3"
 	chance = {
@@ -343,6 +354,47 @@ song = {
 					government = social_republic
 				}
 			}
+		}
+	}
+}
+# EXCLUSIVE
+
+song = {
+	name = "America F Yeah.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			war = no
+		}
+		modifier = {
+			factor = -1
+			NOT = { tag = USA }
+		}
+		modifier = {
+			factor = 1
+			tag = USA
+			war = yes
+		}
+	}
+}
+song = {
+	name = "Shaman - Yarusskiy.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			NOT = { primary_culture = russian }
+		}
+	}
+}
+song = {
+	name = "Rammstein - Deutschland.mp3"
+	
+	chance = {
+		modifier = {
+			factor = -1
+			NOT = { OR = { primary_culture = north_german primary_culture = south_german } }
 		}
 	}
 }

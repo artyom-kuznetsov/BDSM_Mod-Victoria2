@@ -187,6 +187,11 @@ migration_target =
     	has_culture_core = no
 	}
 	modifier = {
+    	factor = 0.01
+    	state_scope = { is_colonial = yes }
+		NOT = { continent = south_america continent = north_america continent = oceania }
+	}
+	modifier = {
 		factor = 2
 		state_scope = {
 			has_factories = yes
@@ -196,12 +201,6 @@ migration_target =
 		factor = 1.5
 		any_core = { is_primary_culture = THIS }
 	}
-	modifier = {
-		factor = 0.75
-		state_scope = {
-			is_slave = yes
-		}
-	}	
 	modifier = {
 		factor = 1.05
 		is_coastal = yes
@@ -260,7 +259,7 @@ migration_target =
 		}
 	}
 	modifier = {
-		factor = 1.2
+		factor = 2
 		NOT = { unemployment = 0.1 }
 		OR = {
 			trade_goods= opium
