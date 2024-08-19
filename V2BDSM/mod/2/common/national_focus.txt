@@ -4,15 +4,13 @@ rail_focus =
 	{
 		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
 		
-		local_RGO_output = 0.4
-		local_factory_output = 0.1
+		local_RGO_output = 0.1
+		local_factory_throughput = 0.25
 		
 		icon = 2
 		limit = {
 			# Audax Validator "." Ignore_NEXT
-			owner = {
-				ai = no
-			}
+			state_scope = { is_colonial = no }
 		}
 	}
 	
@@ -60,98 +58,48 @@ rail_focus =
 	}
 }
 
-promotion_focus =
-{
-	promote_aristocrats =
-	{
-		aristocrats = 0.20 #30% more likeley to become this type
-		icon = 5
-		outliner_show_as_percent = yes
-	}
-
-	promote_bureaucrats =
-	{
-		bureaucrats = 0.20 #40% more likeley to become this type
+colonial_natfocus = {
+	bureaucrats_colonial_focus = {
+		bureaucrats = 0.2
 		icon = 7
-		outliner_show_as_percent = yes
+		limit = {
+			state_scope = { is_colonial = yes }
+		}
 	}
-
-	promote_capitalists =
-	{
-		capitalists = 0.20 #30% more likeley to become this type
-		icon = 8
-		outliner_show_as_percent = yes
-	}
-
-	promote_clergymen =
-	{
-		clergymen = 0.20 #30% more likeley to become this type
+	clegymen_colonial_focus = {
+		clergymen = 0.2
 		icon = 9
-		outliner_show_as_percent = yes
-	}
-
-	promote_clerks =
-	{
-		clerks = 0.20 #30% more likeley to become this type
-		icon = 10
-		outliner_show_as_percent = yes
 		limit = {
-			has_country_flag = industrial_revolution_flag
+			state_scope = { is_colonial = yes }
 		}
 	}
-
-	promote_craftsmen =
+	colonial_rail = 
 	{
-		craftsmen = 0.1 #15% more likeley to become this type
-		icon = 11
-		outliner_show_as_percent = yes
+		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
+		
+		local_RGO_output = 0.5
+		pop_militancy_modifier = 0.02
+		
+		icon = 2
 		limit = {
-			OR = {
-				has_country_flag = industrial_revolution_flag
-				state_scope = {
-					any_owned_province = {
-						is_capital = yes 
-					}
-				}
-			}
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { is_colonial = yes }
 		}
 	}
-
-	promote_farmers =
+	colonial_suppression_focus = 
 	{
-		farmers = 0.20 #30% more likeley to become this type
-		icon = 12
-		outliner_show_as_percent = yes
-	}
-
-	promote_labourers =
-	{
-		labourers = 0.20 #30% more likeley to become this type
-		icon = 13
-		outliner_show_as_percent = yes
-	}
-
-	promote_officers =
-	{
-		officers = 0.20 #30% more likeley to become this type
-		icon = 14
-		outliner_show_as_percent = yes
-	}
-
-	promote_soldiers =
-	{
-		soldiers = 0.20 #30% more likeley to become this type
-		icon = 15
-		outliner_show_as_percent = yes
+		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
+		
+		pop_consciousness_modifier = -0.1
+		pop_militancy_modifier = -0.1
+		
+		icon = 34
 		limit = {
-			OR = {
-				state_scope = {
-					is_colonial = no
-				}
-				has_country_flag = french_foreign_legion_supported
-			}
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { is_colonial = yes }
 		}
 	}
+	
 }
 
 production_focus =
