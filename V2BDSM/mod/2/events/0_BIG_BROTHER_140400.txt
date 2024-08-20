@@ -866,7 +866,10 @@ country_event = { # YEARLY CLEANUP
 				literacy = -0.01
 			}
 		}
-		PER = { limit = { NOT = { has_country_modifier = persian_centralization_modifier } clr_country_flag = persian_centralization_ongoing_flag } }
+		PER = { 
+			limit = { NOT = { has_country_modifier = persian_centralization_modifier } }
+			clr_country_flag = persian_centralization_ongoing_flag
+		}
 	}
 }
 
