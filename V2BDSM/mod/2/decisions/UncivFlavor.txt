@@ -152,30 +152,6 @@ political_decisions = {
 		}
 	}
 	
-	establish_the_dar_al_funun = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			tag = PER
-			civilized = no
-			NOT = {
-				has_country_flag = dar_al_funun_built
-			}
-		}
-		allow = {
-			literacy = 0.1
-		}
-		effect = {
-			years_of_research = 2
-			any_pop = {
-				consciousness = 0.5
-			}
-			set_country_flag = dar_al_funun_built
-			add_country_modifier = {
-				name = dar_al_funun
-				duration = -1
-			}
-		}
-	}
 	annals_of_the_fulani_jihad = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }

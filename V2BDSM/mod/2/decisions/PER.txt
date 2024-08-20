@@ -1,0 +1,62 @@
+political_decisions = {
+	establish_the_dar_al_funun = {
+		potential = {
+			tag = PER
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = {
+				has_country_flag = dar_al_funun_built
+			}
+		}
+		
+		allow = {
+			literacy = 0.1
+			NOT = { has_country_modifier = administrative_expenses_modifier }
+		}
+		
+		effect = {
+			years_of_research = 2
+			any_pop = {
+				consciousness = 0.5
+			}
+			set_country_flag = dar_al_funun_built
+			add_country_modifier = {
+				name = dar_al_funun
+				duration = 7300
+			}
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 365
+			}
+		}
+	}
+	persian_centralization_dec = {
+		potential = {
+			tag = PER
+			NOT = { has_country_flag = persian_centralization_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			civilized = yes
+			NOT = { has_country_modifier = administrative_expenses_modifier }
+		}
+		
+		effect = {
+			set_country_flag = persian_centralization_ongoing_flag
+			inherit = ARS
+			political_reform = regionalism
+			set_country_flag = persian_centralization_flag
+			add_country_modifier = { name = persian_centralization_modifier duration = 3650 }
+			
+			1110 = { add_core = THIS }
+			1111 = { add_core = THIS }
+			1131 = { add_core = THIS }
+			1132 = { add_core = THIS }
+			
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 730
+			}
+		}
+	}
+}
