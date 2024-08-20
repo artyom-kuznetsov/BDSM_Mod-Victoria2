@@ -44,6 +44,7 @@ political_decisions = {
 		effect = {
 			set_country_flag = persian_centralization_ongoing_flag
 			inherit = ARS
+			inherit = MKN
 			political_reform = regionalism
 			set_country_flag = persian_centralization_flag
 			add_country_modifier = { name = persian_centralization_modifier duration = 3650 }
@@ -61,4 +62,117 @@ political_decisions = {
 			}
 		}
 	}
+	raid_on_afghan_dec = {
+		potential = {
+			tag = PER
+			NOT = { has_country_flag = raid_on_afghan_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_country_flag = raid_on_afghan_flag
+			
+			random_owned = {
+				limit = {
+					owner = {
+						exists = AFG
+					}
+				}
+				owner = {
+					war = {
+						target = AFG
+						attacker_goal = {
+							casus_belli = make_puppet
+						}
+					}	
+				}
+			}
+			
+			set_country_flag = hidden_tooltip
+			random_owned = {
+				limit = {
+					owner = {
+						has_country_flag = hidden_tooltip
+					}
+				}
+				owner = {
+					badboy = -9
+				}
+				AFG = { all_core = { add_core = THIS } }
+			}
+			clr_country_flag = hidden_tooltip
+		}
+	}
+	raid_on_punjab_dec = {
+		potential = {
+			tag = PER
+			NOT = { has_country_flag = raid_on_panjab_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_country_flag = raid_on_panjab_flag
+			
+			random_owned = {
+				limit = {
+					owner = {
+						exists = PAN
+					}
+				}
+				owner = {
+					war = {
+						target = PAN
+						attacker_goal = {
+							casus_belli = make_puppet
+						}
+					}	
+				}
+			}
+			
+			set_country_flag = hidden_tooltip
+			random_owned = {
+				limit = {
+					owner = {
+						has_country_flag = hidden_tooltip
+					}
+				}
+				owner = {
+					badboy = -9
+				}
+				PAN = { all_core = { add_core = THIS } }
+			}
+			clr_country_flag = hidden_tooltip
+		}
+	}
+	eastern_heritage_dec = {
+		potential = {
+			tag = PER
+			NOT = { has_country_flag = eastern_heritage_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			civilized = yes
+			NOT = { citizens_rights = primary_culture_only has_country_modifier = administrative_expenses_modifier }
+		}
+		
+		effect = {
+			set_country_flag = eastern_heritage_flag
+			
+			add_accepted_culture = pashtun
+			add_accepted_culture = panjabi
+			plurality = -10
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 365
+			}
+		}
+	}
+	
 }
