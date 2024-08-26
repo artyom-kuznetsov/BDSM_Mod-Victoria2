@@ -555,23 +555,16 @@ province_event = {
 	id = 11105553
 
 	trigger = {
-		OR = {
-			owner = {
-				part_of_sphere = yes
-				sphere_owner = {
-					invention = rayon
-				}
-			}
-			owner = {
-				invention = rayon
-			}
-		}
+		year = 1885
 		OR = {
 			province_id = 1104		# Sicily
 			province_id = 869		# Aydin
 			province_id = 1763		# Egypt
 			province_id = 503		# Valencia
 			province_id = 200		# Florida
+			province_id = 1241
+			province_id = 1273
+			province_id = 1585
 		}
 		not = { trade_goods = silk }
 	}
@@ -1863,6 +1856,9 @@ province_event = {
 			province_id = 1382		#Hatien
 			province_id = 1899		#Bondouku
 			province_id = 1910		#Kumasi
+			province_id = 1270		#Kumasi
+			AND = { province_id = 1277 year = 1890 }
+			AND = { province_id = 1280 year = 1890 }
 		}
 		NOT = { trade_goods = coffee_beans }
 		OR = {
@@ -1908,6 +1904,8 @@ province_event = {
 			province_id = 1501		#Zhaoqing
 			province_id = 1558		#Kegudo
 			province_id = 1603		#Puer
+			province_id = 1310
+			province_id = 1309
 		}
 		not = { trade_goods = opium }
 	}
@@ -1923,5 +1921,37 @@ province_event = {
 	option = {
 		name = "EVTOPTA1143"
 		trade_goods = opium
+	}
+}
+
+############################
+#       GRAIN EVENTS       #
+############################
+
+province_event = {
+	
+	id = 1144
+
+	trigger = {
+		year = 1890
+		or = {
+			province_id = 1276
+			province_id = 1275
+			province_id = 1251
+		}
+		not = { trade_goods = grain }
+	}
+
+	mean_time_to_happen =  {
+		months = 12
+	}
+
+	title = "EVTNAME1144"
+	desc = "EVTDESC1144"
+	picture = ""
+
+	option = {
+		name = "EVTOPTA1144"
+		trade_goods = grain
 	}
 }
