@@ -554,6 +554,551 @@ country_event = {
 	}
 	
 	option = {
+		name = "HostOptions_EvtOptSingleplayer"
+		CUSTOM_TOOLTIP_SINGLEPLAYER = { }
+		random_owned = {
+			limit = {
+				NOT = { owner = { has_global_flag = singleplayer_flag } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_DISABLED = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { has_global_flag = singleplayer_flag }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_ENABLED = { }
+			}
+		}
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+				WBK = { country_event = 57616 }
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptSpawnMoney"
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+				country_event = 57608
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
+		name = "HostOptions_EvtOptSelect"
+		CUSTOM_TOOLTIP_SELECTION = { }
+		random_owned = {
+			limit = {
+				NOT = { owner = { has_global_flag = host_selectcountries_allow_flag } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_DISABLED = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					has_global_flag = host_selectcountries_allow_flag
+				}
+			}
+			owner = {
+				any_country = { clr_country_flag = player_selected_flag }
+				CUSTOM_TOOLTIP_OPTION_ENABLED = { }
+			}
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+				WBK = { country_event = 57617 }
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptGiveBadboy"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			badboy = 5
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptTakeBadboy"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			badboy = -5
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptTakePrestige"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			prestige = -50
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	option = {
+		name = "HostOptions_EvtOptGivePrestige"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			prestige = 50
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
+		name = "HostOptions_EvtOptGiveResearch"
+		any_country = {
+			limit = {
+				has_country_flag = player_selected_flag
+			}
+			country_event = 57618
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
+		name = "HostOptions_EvtOptClose"
+	}
+}
+
+
+
+#### TECH SCHOOL CHANGES ####
+
+country_event = {
+	id = 140901
+	title = "TechSchool_EvtName"
+	desc = "TechSchool_EvtDesc"
+	picture = "ministry"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "TechSchool_EvtOptMIC"
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = academic_confusion }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = army_tech_school } }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				tech_school = army_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25	tech_school = army_tech_school } NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { tech_school = army_tech_school }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+	}
+	option = {
+		name = "TechSchool_EvtOptNaval"
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = academic_confusion }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = naval_tech_school } }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				tech_school = naval_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25	tech_school = naval_tech_school } NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { tech_school = naval_tech_school }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+	}
+	option = {
+		name = "TechSchool_EvtOptAvantgarde"
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = academic_confusion }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = culture_tech_school } }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				tech_school = culture_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25	tech_school = culture_tech_school } NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { tech_school = culture_tech_school }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+	}
+	option = {
+		name = "TechSchool_EvtOptCommerce"
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = academic_confusion }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = commerce_tech_school } }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				tech_school = commerce_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25 	tech_school = commerce_tech_school } NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { tech_school = commerce_tech_school }
+				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+	}
+	option = {
+		name = "TechSchool_EvtOptKrupp"
+		random_owned = {
+			limit = {
+				owner = { 
+					has_country_modifier = academic_confusion 
+					NOT = { has_country_flag = prussian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = prussian_tech_school } }
+				owner = { 
+					prestige = 25 
+					NOT = { has_country_modifier = academic_confusion } 
+					has_country_flag = prussian_tech_school_access_flag
+				}
+			}
+			owner = {
+				tech_school = prussian_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25	tech_school = culture_tech_school } NOT = { has_country_modifier = academic_confusion } has_country_flag = prussian_tech_school_access_flag }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					tech_school = prussian_tech_school 
+					NOT = { has_country_flag = prussian_tech_school_access_flag }
+					prestige = 25
+					NOT = { has_country_modifier = academic_confusion }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = prussian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_ACCESS_TECHSCHOOL = { }
+			}
+		}
+	}
+	option = {
+		name = "TechSchool_EvtOptItalian"
+		random_owned = {
+			limit = {
+				owner = { 
+					has_country_modifier = academic_confusion 
+					NOT = { has_country_flag = italian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_ACADEMIC_CONFUSION = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				NOT = { owner = { tech_school = italian_tech_school } }
+				owner = { 
+					prestige = 25 
+					NOT = { has_country_modifier = academic_confusion } 
+					has_country_flag = italian_tech_school_access_flag
+				}
+			}
+			owner = {
+				tech_school = italian_tech_school
+				prestige = -25
+				add_country_modifier = { name = academic_confusion duration = 3650 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { prestige = 25	tech_school = culture_tech_school } NOT = { has_country_modifier = academic_confusion } has_country_flag = italian_tech_school_access_flag }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_PRESTIGE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					tech_school = italian_tech_school 
+					NOT = { has_country_flag = italian_tech_school_access_flag }
+					prestige = 25
+					NOT = { has_country_modifier = academic_confusion }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = italian_tech_school_access_flag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NO_ACCESS_TECHSCHOOL = { }
+			}
+		}
+	}
+}
+
+
+country_event = {
+	title = "vassal_interaction_EvtName"
+	desc = "vassal_interaction_EvtDesc"
+	id = 140902
+	picture = "upperhouse"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "vassal_interaction_EvtOptCancel"
+	}
+	
+	option = {
+		name = "vassal_interaction_EvtOptProceed"
+		any_country = {
+			limit = { vassal_of = THIS }
+			country_event = { id = 140903 days = 0 }
+		}
+	}
+}
+
+country_event = {
+	id = 140903
+	title = "noloc"
+	desc = "noloc"
+	picture = "upperhouse"
+
+
+	is_triggered_only = yes
+
+	option = {
+		name = "noloc"
+		overlord = { country_event = { id = 140904 days = 0} }
+	}
+}
+
+country_event = {
+	id = 140904
+	title = "vassal_interaction_targeted_EvtName"
+	desc = "vassal_interaction_targeted_EvtDesc"
+	picture = "upperhouse"
+
+	allow_multiple_instances = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = "vassal_interaction_targeted_EvtOptA"
+	}
+	
+	option = {
+		name = "vassal_interaction_targeted_EvtRelease"
+		release_vassal = FROM
+	}
+	
+	option = {
 		name = "vassal_interaction_targeted_EvtOptTax"
 		release_vassal = FROM
 		leave_alliance = FROM
@@ -602,8 +1147,17 @@ country_event = {
 			}
 		}
 		random_owned = {
+			limit = {
+				owner = { FROM = { tag = EIC } revolution_n_counterrevolution = 1 }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_CAN_ANNEX_EIC = { }
+				badboy = 22
+			}
+		}
+		random_owned = {
 			limit = {							# 100K
-				owner = { FROM = { civilized = yes NOT = { total_pops = 100000 OR = { tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes NOT = { total_pops = 100000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -632,7 +1186,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 100-200K
-				owner = { FROM = { civilized = yes total_pops = 100000 NOT = { total_pops = 200000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 100000 NOT = { total_pops = 200000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -661,7 +1215,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 200-300K
-				owner = { FROM = { total_pops = 200000 NOT = { total_pops = 300000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { total_pops = 200000 NOT = { total_pops = 300000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -690,7 +1244,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 300-400K
-				owner = { FROM = { civilized = yes total_pops = 300000 NOT = { total_pops = 400000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 300000 NOT = { total_pops = 400000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -719,7 +1273,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 400-500K
-				owner = { FROM = { civilized = yes total_pops = 400000 NOT = { total_pops = 500000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 400000 NOT = { total_pops = 500000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -748,7 +1302,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 500-600K
-				owner = { FROM = { civilized = yes total_pops = 500000 NOT = { total_pops = 600000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 500000 NOT = { total_pops = 600000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -777,7 +1331,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 600-800K
-				owner = { FROM = { civilized = yes total_pops = 600000 NOT = { total_pops = 800000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 600000 NOT = { total_pops = 800000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -806,7 +1360,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 800-1000K
-				owner = { FROM = { civilized = yes total_pops = 800000 NOT = { total_pops = 1000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 800000 NOT = { total_pops = 1000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -835,7 +1389,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 1000-1250K
-				owner = { FROM = { civilized = yes total_pops = 1000000 NOT = { total_pops = 1250000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 1000000 NOT = { total_pops = 1250000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -864,7 +1418,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 1250-1500K
-				owner = { FROM = { civilized = yes total_pops = 1250000 NOT = { total_pops = 1500000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 1250000 NOT = { total_pops = 1500000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -893,7 +1447,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 1500-1750K
-				owner = { FROM = { civilized = yes total_pops = 1500000 NOT = { total_pops = 1750000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 1500000 NOT = { total_pops = 1750000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -922,7 +1476,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 1750-2000K
-				owner = { FROM = { civilized = yes total_pops = 1750000 NOT = { total_pops = 2000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 1750000 NOT = { total_pops = 2000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -951,7 +1505,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 2M-2.5M
-				owner = { FROM = { civilized = yes total_pops = 2000000 NOT = { total_pops = 2500000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 2000000 NOT = { total_pops = 2500000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -980,7 +1534,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 2.5M-3M
-				owner = { FROM = { civilized = yes total_pops = 2500000 NOT = { total_pops = 3000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 2500000 NOT = { total_pops = 3000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1009,7 +1563,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 3M+
-				owner = { FROM = { civilized = yes total_pops = 3000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = yes total_pops = 3000000 tag = EIC } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1039,7 +1593,7 @@ country_event = {
 		
 		random_owned = {
 			limit = {							# 250K
-				owner = { FROM = { civilized = no NOT = { total_pops = 250000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no NOT = { total_pops = 250000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1068,7 +1622,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 250K-500K
-				owner = { FROM = { civilized = no total_pops = 250000 NOT = { total_pops = 500000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 250000 NOT = { total_pops = 500000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1097,7 +1651,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 500K-750K
-				owner = { FROM = { civilized = no total_pops = 500000 NOT = { total_pops = 750000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 500000 NOT = { total_pops = 750000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1126,7 +1680,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 750K-1000K
-				owner = { FROM = { civilized = no total_pops = 750000 NOT = { total_pops = 1000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 750000 NOT = { total_pops = 1000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1155,7 +1709,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 1M-1.5M
-				owner = { FROM = { civilized = no total_pops = 1000000 NOT = { total_pops = 1500000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 1000000 NOT = { total_pops = 1500000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1184,7 +1738,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 1.5M-2M
-				owner = { FROM = { civilized = no total_pops = 1500000 NOT = { total_pops = 2000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 1500000 NOT = { total_pops = 2000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1213,7 +1767,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 2M-2.5M
-				owner = { FROM = { civilized = no total_pops = 2000000 NOT = { total_pops = 2500000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 2000000 NOT = { total_pops = 2500000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1242,7 +1796,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 2.5M-3M
-				owner = { FROM = { civilized = no total_pops = 2500000 NOT = { total_pops = 3000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 2500000 NOT = { total_pops = 3000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1271,7 +1825,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 3M-4M
-				owner = { FROM = { civilized = no total_pops = 3000000 NOT = { total_pops = 4000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 3000000 NOT = { total_pops = 4000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1300,7 +1854,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 4M-5M
-				owner = { FROM = { civilized = no total_pops = 4000000 NOT = { total_pops = 5000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 4000000 NOT = { total_pops = 5000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1329,7 +1883,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 5M-6M
-				owner = { FROM = { civilized = no total_pops = 5000000 NOT = { total_pops = 6000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 5000000 NOT = { total_pops = 6000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1358,7 +1912,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 6M-7M
-				owner = { FROM = { civilized = no total_pops = 6000000 NOT = { total_pops = 7000000 tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 6000000 NOT = { total_pops = 7000000 tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM
@@ -1387,7 +1941,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = {							# 7M+
-				owner = { FROM = { civilized = no total_pops = 7000000 NOT = { tag = EIC NOT = { revolution_n_counterrevolution = 1 } } } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
+				owner = { FROM = { civilized = no total_pops = 7000000 NOT = { tag = EIC } } NOT = { has_country_modifier = administrative_expenses2_modifier } }
 			}
 			owner = {
 				inherit = FROM

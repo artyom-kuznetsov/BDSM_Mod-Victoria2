@@ -134,6 +134,32 @@ country_event = {
 		
 		any_country = {
 			limit = {
+				has_country_flag = persian_centralization_flag
+				NOT = { has_country_modifier = persian_centralization_modifier }
+			}
+			any_owned = { 
+				clr_country_flag = persian_centralization_flag
+			}
+		}
+		
+		any_country = {
+			limit = {
+				is_vassal = yes
+			}
+			any_owned = { 
+				add_province_modifier = { name = subject_suplimit duration = -1 }
+			}
+		}
+		
+		any_country = {
+			limit = {
+				is_vassal = no
+			}
+			any_owned = { limit = { has_province_modifier = subject_suplimit } remove_province_modifier = subject_suplimit }
+		}
+		
+		any_country = {
+			limit = {
 				has_country_flag = migration_magnet_cflag
 				ai = yes
 			}

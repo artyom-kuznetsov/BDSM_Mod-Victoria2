@@ -111,6 +111,7 @@ political_decisions = {
 			tag = PER
 			NOT = { has_country_flag = raid_on_panjab_flag }
 			NOT = { has_country_flag = hide_all_decs_flag }
+			1209 = { OR = { owned_by = THIS owner = { vassal_of = THIS } } }
 		}
 		
 		allow = {
@@ -131,7 +132,7 @@ political_decisions = {
 						attacker_goal = {
 							casus_belli = make_puppet
 						}
-					}	
+					}
 				}
 			}
 			
@@ -171,6 +172,58 @@ political_decisions = {
 			add_country_modifier = {
 				name = administrative_expenses_modifier
 				duration = 365
+			}
+		}
+	}
+	lost_legacy_dec = {
+		potential = {
+			tag = PER
+			civilized = yes
+			NOT = { has_country_flag = lost_legacy_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			civilized = yes
+			medicine = 1
+			PER_1142 = { owned_by = THIS }
+		}
+		
+		effect = {
+			set_country_flag = lost_legacy_flag
+			prestige = 5
+			2638 = { trade_goods = silk add_province_modifier = { name = baby_boom duration = 500 } }
+			2647 = { trade_goods = silk add_province_modifier = { name = baby_boom duration = 500 } }
+			1140 = { add_province_modifier = { name = baby_boom duration = 500 } }
+			1143 = { add_province_modifier = { name = baby_boom duration = 365 } }
+			1145 = { add_province_modifier = { name = baby_boom duration = 365 } }
+		}
+	}
+	renovate_tehran_dec = {
+		potential = {
+			tag = PER
+			civilized = yes
+			owns = 1121
+			NOT = { has_country_flag = renovate_tehran_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			civilized = yes
+			inorganic_chemistry = 1
+			NOT = { has_country_modifier = administrative_expenses_modifier }
+		}
+		
+		effect = {
+			set_country_flag = renovate_tehran_flag
+			prestige = 5
+			1121 = { 
+				life_rating = 5 
+				state_scope = {
+					any_owned = {
+						add_province_modifier = { name = baby_boom duration = 185 }
+					}
+				}
 			}
 		}
 	}

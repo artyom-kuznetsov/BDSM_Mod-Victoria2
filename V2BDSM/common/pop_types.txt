@@ -103,10 +103,14 @@ promotion_chance =
 		state_scope = {
 				is_slave = yes
 			}
-	}	
+	}
 	modifier = {
 		factor = -100
 		location = { NOT = { controlled_by = owner } }
+	}
+	modifier = {
+		factor = 0.2
+		location = { owner = { has_country_flag = persian_centralization_flag } }
 	}
 	
 }
