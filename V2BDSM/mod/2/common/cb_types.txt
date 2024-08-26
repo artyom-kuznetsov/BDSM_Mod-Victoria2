@@ -588,6 +588,7 @@ conquest = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
 		OR = {
 			AND = {
@@ -2151,6 +2152,7 @@ free_peoples = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
 		number_of_states = 2
 		NOT = {
@@ -2251,6 +2253,7 @@ liberate_country = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
 		number_of_states = 2
 		NOT = {
@@ -2758,6 +2761,7 @@ make_puppet = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
 	}
 	
@@ -2831,6 +2835,7 @@ make_puppet_small = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
 	}
 	
@@ -2903,8 +2908,8 @@ make_puppet_tiny = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
-        any_owned_province = { port = yes }
 	}
 	
 	# THIS - us
@@ -3133,9 +3138,9 @@ demand_concession_casus_belli = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
-		NOT = { has_country_flag = daimyo_flag }
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = daimyo_flag tag = WBK }
 	}
 	
 	allowed_states = {
@@ -3224,6 +3229,7 @@ establish_protectorate_casus_belli = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
 		NOT = { has_country_flag = daimyo_flag }
 	}
@@ -3297,6 +3303,7 @@ establish_small_protectorate_casus_belli = {
                 any_owned_province = { port = yes }
             }
             neighbour = THIS
+			any_neighbor_country = { vassal_of = THIS }
 		}
 		NOT = { has_country_flag = daimyo_flag }
 	}
