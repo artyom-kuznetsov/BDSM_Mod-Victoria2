@@ -186,7 +186,10 @@ political_decisions = {
 		allow = {
 			civilized = yes
 			medicine = 1
-			PER_1142 = { owned_by = THIS }
+			owns = 1144
+			owns = 1139
+			owns = 1142
+			industrial_score = 50
 		}
 		
 		effect = {
@@ -224,6 +227,10 @@ political_decisions = {
 						add_province_modifier = { name = baby_boom duration = 185 }
 					}
 				}
+			}
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 365
 			}
 		}
 	}
