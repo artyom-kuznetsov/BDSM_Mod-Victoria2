@@ -103,7 +103,6 @@ political_decisions = {
 		}
 	
 		effect = {
-			add_accepted_culture = czech
 			set_country_flag = czech_industrialism_flag
 			AUS_625 = { add_province_modifier = { name = bohemian_industrialism_modifier duration = 1825 } }
 			MORAVIA_STATE = { add_province_modifier = { name = bohemian_industrialism_modifier duration = 1825 } }
@@ -152,6 +151,7 @@ political_decisions = {
 	
 	subjugate_balkans_dec = {
 		potential = {
+			NOT = { has_global_flag = historical_flag }
 			OR = {
 				primary_culture = south_german
 				tag = HUN
