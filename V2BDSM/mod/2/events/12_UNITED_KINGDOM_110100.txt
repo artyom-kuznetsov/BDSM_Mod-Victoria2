@@ -817,6 +817,70 @@ country_event = {
 	}
 }
 
+# RAJ COLLAPSES
+country_event = {
+	id = 110133
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		tag = EIC
+		is_vassal = no
+		ai = yes
+	}
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+				vassal_of = THIS
+				is_culture_group = south_asian
+			}
+			annex_to = THIS
+		}
+		
+		release = ASM
+		release = BIH
+		release = SRI
+		release = KRN
+		release = MAH
+		release = IOT
+		release = EIC
+		release = CRC
+		release = BNG
+		
+		release = TRA
+		release = SIN
+		release = SIK
+		release = SHI
+		release = PAN
+		release = ORI
+		release = NEP
+		release = NAG
+		release = MYS
+		release = MEW
+		release = MAK
+		release = LAD
+		release = KUT
+		release = KAS
+		release = KAL
+		release = JOD
+		release = JAS
+		release = JAI
+		release = IND
+		release = HYD
+		release = GWA
+		release = BUN
+		release = BIK
+		release = BHO
+		release = BER
+		release = BAS
+		release = AWA
+		release = HND
+		neutrality = yes
+	}
+}
+
 
 
 # Coronation of Queen Victoria

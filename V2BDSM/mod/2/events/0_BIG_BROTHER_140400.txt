@@ -4239,4 +4239,59 @@ country_event = {
 		}
 	}
 }
+ 
+ # HISTORICAL SETUP
+country_event = {
+	id = 140413
+	title = "noloc"
+	desc = "noloc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		GRE = {
+			limit = {
+				is_vassal = yes
+			}
+			release_vassal = GRE
+		}
+		WAL = {
+			limit = {
+				is_vassal = yes
+			}
+			release_vassal = WAL
+		}
+		MOL = {
+			limit = {
+				is_vassal = yes
+			}
+			release_vassal = MOL
+		}
+		EIC = {
+			inherit = KUT
+			inherit = BIH
+			inherit = MEW
+			inherit = MUG
+			inherit = BNG
+			inherit = GWA
+			inherit = JOI
+			create_vassal = JAI
+			create_vassal = IND
+			create_vassal = BUN
+			create_vassal = NAG
+			create_vassal = BIH
+			create_vassal = AWA
+			create_vassal = BHO
+			JAI = { government = colonial_company }
+			IND = { government = colonial_company }
+			BUN = { government = colonial_company }
+			NAG = { government = colonial_company }
+			AWA = { government = colonial_company }
+			BHO = { government = colonial_company }
+			BIH = { government = colonial_company }
+		}
+		ENG = { inherit = SRI }
+	}
+}
 

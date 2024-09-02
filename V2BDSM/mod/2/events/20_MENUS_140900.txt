@@ -203,6 +203,25 @@ country_event = {	# HOST OPTIONS
 	}
 	
 	option = {
+		name = "HostOptions_EvtOptHistScenario"
+		CUSTOM_TOOLTIP_HISTORICAL = { }
+		set_global_flag = historical_flag
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				country_event = 140900
+				WBK = { country_event = 140413 }
+			}
+		}
+		clr_country_flag = hidden_tooltip
+	}
+	
+	option = {
 		name = "HostOptions_EvtOptClose"
 	}
 }
