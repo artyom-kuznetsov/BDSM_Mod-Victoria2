@@ -2273,7 +2273,7 @@ country_event = {
 	
 	trigger = {
 		civilized = yes
-		economic_policy = interventionism
+		economic_system = interventionism_ref
 	}
 	
 	mean_time_to_happen = {
@@ -2329,7 +2329,7 @@ country_event = {
 	
 	trigger = {
 		civilized = yes
-		economic_policy = state_capitalism
+		economic_system = state_capitalism_ref
 		NOT = {
 			poor_strata_everyday_needs = 0.8
 		}
@@ -2372,7 +2372,7 @@ country_event = {
 	
 	trigger = {
 		civilized = yes
-		economic_policy = planned_economy
+		economic_system = planned_economy_ref
 	}
 	
 	mean_time_to_happen = {
@@ -2953,8 +2953,8 @@ country_event = {
 	
 	trigger = {
 		civilized = yes
-		economic_policy = laissez_faire
-		laissez_faire = 10
+		economic_system = laissez_faire_ref
+		laissez_faire_ref = 10
 		moralism = 10
 		upper_house = {
 			ideology = liberal
@@ -3131,8 +3131,8 @@ country_event = {
 	trigger = {
 		civilized = yes
 		OR = {
-			economic_policy = state_capitalism
-			economic_policy = planned_economy
+			economic_system = state_capitalism_ref
+			economic_system = planned_economy_ref
 		}
 		public_meetings = yes_meeting
 		NOT = {
@@ -3463,8 +3463,8 @@ country_event = {
 		NOT = {
 			poor_strata_life_needs = 0.9
 		}
-		economic_policy = laissez_faire
-		interventionism = 5
+		economic_system = laissez_faire_ref
+		interventionism_ref = 5
 	}
 	
 	mean_time_to_happen = {
@@ -3485,7 +3485,7 @@ country_event = {
 		modifier = {
 			factor = 1.2
 			NOT = {
-				interventionism = 10
+				interventionism_ref = 10
 			}
 		}
 	}
@@ -3502,7 +3502,7 @@ country_event = {
 		name = "EVTOPTB4424"
 		any_pop = {
 			scaled_militancy = {
-				issue = interventionism
+				issue = interventionism_ref
 				factor = 3
 			}
 		}

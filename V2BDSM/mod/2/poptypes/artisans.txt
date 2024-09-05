@@ -576,15 +576,23 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = -7
+				factor = -4
 				state_scope = { bureaucrats = 0.008 }
 			}
 			modifier = {
-				factor = -7
+				factor = -4
+				state_scope = { bureaucrats = 0.009 }
+			}
+			modifier = {
+				factor = -4
 				state_scope = { bureaucrats = 0.010 }
 			}
 			modifier = {
-				factor = -7
+				factor = -3
+				state_scope = { bureaucrats = 0.011 }
+			}
+			modifier = {
+				factor = -3
 				state_scope = { bureaucrats = 0.012 }
 			}
 			modifier = {
@@ -597,7 +605,7 @@ promote_to =
 			}
 			modifier = {
 				factor = -100
-				state_scope = { bureaucrats = 0.02 }
+				state_scope = { bureaucrats = 0.018 }
 			}		
 		}
 
@@ -658,6 +666,10 @@ promote_to =
 				factor = -2
 				penal_system = incarceration
 			}
+		}
+		modifier = {
+			factor = -2
+			economic_system = traditionalism_ref
 		}
 	}
 	clergymen =
@@ -1652,28 +1664,28 @@ issues =
 				life_needs = 1.0
 			}
 			country = {
-				economic_policy = laissez_faire
+				economic_system = laissez_faire_ref
 			}
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { economic_policy = laissez_faire }
+			country = { economic_system = laissez_faire_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { economic_policy = laissez_faire }
+			country = { economic_system = laissez_faire_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { economic_policy = laissez_faire }
+			country = { economic_system = laissez_faire_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { economic_policy = laissez_faire }
+			country = { economic_system = laissez_faire_ref }
 		}
 	} 
 	interventionism = {
@@ -1684,28 +1696,28 @@ issues =
 				life_needs = 1.0
 			}
 			country = {
-				economic_policy = interventionism
+				economic_system = interventionism_ref
 			}
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { economic_policy = interventionism }
+			country = { economic_system = interventionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { economic_policy = interventionism }
+			country = { economic_system = interventionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { economic_policy = interventionism }
+			country = { economic_system = interventionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { economic_policy = interventionism }
+			country = { economic_system = interventionism_ref }
 		}
 	} 
 	state_capitalism = {
@@ -1716,28 +1728,28 @@ issues =
 				life_needs = 1.0
 			}
 			country = {
-				economic_policy = state_capitalism
+				economic_system = state_capitalism_ref
 			}
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { economic_policy = state_capitalism }
+			country = { economic_system = state_capitalism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { economic_policy = state_capitalism }
+			country = { economic_system = state_capitalism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { economic_policy = state_capitalism }
+			country = { economic_system = state_capitalism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { economic_policy = state_capitalism }
+			country = { economic_system = state_capitalism_ref }
 		}
 	} 
 	planned_economy = {
@@ -1748,28 +1760,28 @@ issues =
 				life_needs = 1.0
 			}
 			country = {
-				economic_policy = planned_economy
+				economic_system = planned_economy_ref
 			}
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { economic_policy = planned_economy }
+			country = { economic_system = planned_economy_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { economic_policy = planned_economy }
+			country = { economic_system = planned_economy_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { economic_policy = planned_economy }
+			country = { economic_system = planned_economy_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { economic_policy = planned_economy }
+			country = { economic_system = planned_economy_ref }
 		}
 	} 
 	planned_economy_2 = {
