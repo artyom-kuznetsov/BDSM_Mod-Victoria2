@@ -377,10 +377,6 @@ promote_to =
 				penal_system = incarceration
 			}
 		}
-		modifier = {
-			factor = -2
-			economic_system = traditionalism_ref
-		}
 	}
 	soldiers =
 	{
@@ -1812,45 +1808,6 @@ issues =
 			country = { economic_system = state_capitalism_ref }
 		}
 	} 
-	agrarianism_ref = {
-		factor = 0.5
-		modifier = {
-			factor = 0
-			NOT = {
-				life_needs = 1.0
-			}
-			country = {
-				economic_system = agrarianism_ref
-			}
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 1.0
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.25
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.5
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.75
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 3
-			country = { economic_system = traditionalism_ref }
-		}
-	} 
-	traditionalism_ref = {
-		factor = 0.5
-	}
 	planned_economy = {
 		factor = 1
 		modifier = {

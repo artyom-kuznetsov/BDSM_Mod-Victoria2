@@ -51,9 +51,10 @@ country_event = {
 	title = "EVTNAME14000"
 	desc = "EVTDESC14000"
 
+	election = yes
 	issue_group = trade_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	
@@ -142,9 +143,10 @@ country_event = {
 	title = "EVTNAME14010"
 	desc = "EVTDESC14010"
 	
+	election = yes
 	issue_group = economic_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -152,10 +154,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = laissez_faire_ref
+				value = laissez_faire
 			}
 			scaled_militancy = {
-				issue = planned_economy_ref
+				issue = planned_economy
 				factor = 0.2
 			}
 		}
@@ -166,10 +168,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = interventionism_ref
+				value = interventionism
 			}
 			scaled_militancy = {
-				issue = state_capitalism_ref
+				issue = state_capitalism
 				factor = 0.2
 			}
 		}
@@ -180,10 +182,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = state_capitalism_ref
+				value = state_capitalism
 			}
 			scaled_militancy = {
-				issue = interventionism_ref
+				issue = interventionism
 				factor = 0.2
 			}
 		}
@@ -194,10 +196,79 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = planned_economy_ref
+				value = planned_economy
 			}
 			scaled_militancy = {
-				issue = laissez_faire_ref
+				issue = laissez_faire
+				factor = 0.2
+			}
+		}
+	}
+}
+	
+# A Heated Debate: Religious Policy
+country_event = {
+	id = 14020
+	title = "EVTNAME14020"
+	desc = "EVTDESC14020"
+	
+	election = yes
+	issue_group = religious_policy
+	# Audax Validator "." Ignore_NEXT
+	trigger = { has_country_modifier = will_influence_elections }
+	mean_time_to_happen = { months = 40 }
+	
+	option = {
+		name = "EVTOPTA14020"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.4
+				value = pro_atheism
+			}
+			scaled_militancy = {
+				issue = moralism
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTB14020"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.4
+				value = secularized
+			}
+			scaled_militancy = {
+				issue = pluralism
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTC14020"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.4
+				value = pluralism
+			}
+			scaled_militancy = {
+				issue = secularized
+				factor = 0.2
+			}
+		}
+	}
+	
+	option = {
+		name = "EVTOPTD14020"
+		any_pop = {
+			dominant_issue = {
+				factor = 0.4
+				value = moralism
+			}
+			scaled_militancy = {
+				issue = pro_atheism
 				factor = 0.2
 			}
 		}
@@ -210,10 +281,10 @@ country_event = {
 	title = "EVTNAME14030"
 	desc = "EVTDESC14030"
 
-	
+	election = yes
 	issue_group = citizenship_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -265,10 +336,10 @@ country_event = {
 	title = "EVTNAME14040"
 	desc = "EVTDESC14040"
 	
-	
+	election = yes
 	issue_group = war_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -334,10 +405,10 @@ country_event = {
 	title = "EVTNAME14050"
 	desc = "EVTDESC14050"
 	
-	
+	election = yes
 	issue_group = trade_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -405,10 +476,10 @@ country_event = {
 	title = "EVTNAME14060"
 	desc = "EVTDESC14060"
 	
-	
+	election = yes
 	issue_group = trade_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -476,10 +547,10 @@ country_event = {
 	title = "EVTNAME14070"
 	desc = "EVTDESC14070"
 	
-	
+	election = yes
 	issue_group = economic_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -487,10 +558,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.30
-				value = laissez_faire_ref
+				value = laissez_faire
 			}
 			scaled_militancy = {
-				issue = planned_economy_ref
+				issue = planned_economy
 				factor = 0.2
 			}
 		}
@@ -501,10 +572,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.25
-				value = laissez_faire_ref
+				value = laissez_faire
 			}
 			scaled_militancy = {
-				issue = planned_economy_ref
+				issue = planned_economy
 				factor = 0.2
 			}
 		}
@@ -515,7 +586,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.15
-				value = laissez_faire_ref
+				value = laissez_faire
 			}
 		}
 	}
@@ -525,7 +596,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.10
-				value = laissez_faire_ref
+				value = laissez_faire
 			}
 		}
 	}
@@ -535,7 +606,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.05
-				value = laissez_faire_ref
+				value = laissez_faire
 			}
 		}
 	}
@@ -547,10 +618,10 @@ country_event = {
 	title = "EVTNAME14080"
 	desc = "EVTDESC14080"
 	
-	
+	election = yes
 	issue_group = economic_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -558,10 +629,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = interventionism_ref
+				value = interventionism
 			}
 			scaled_militancy = {
-				issue = state_capitalism_ref
+				issue = state_capitalism
 				factor = 0.2
 			}
 		}
@@ -572,10 +643,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = interventionism_ref
+				value = interventionism
 			}
 			scaled_militancy = {
-				issue = state_capitalism_ref
+				issue = state_capitalism
 				factor = 0.2
 			}
 		}
@@ -586,7 +657,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.1
-				value = interventionism_ref
+				value = interventionism
 			}
 		}
 	}
@@ -596,7 +667,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.10
-				value = interventionism_ref
+				value = interventionism
 			}
 		}
 	}
@@ -606,7 +677,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.05
-				value = interventionism_ref
+				value = interventionism
 			}
 		}
 	}
@@ -618,10 +689,10 @@ country_event = {
 	title = "EVTNAME14090"
 	desc = "EVTDESC14090"
 	
-	
+	election = yes
 	issue_group = economic_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -629,10 +700,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = state_capitalism_ref
+				value = state_capitalism
 			}
 			scaled_militancy = {
-				issue = interventionism_ref
+				issue = interventionism
 				factor = 0.2
 			}
 		}
@@ -643,10 +714,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = state_capitalism_ref
+				value = state_capitalism
 			}
 			scaled_militancy = {
-				issue = interventionism_ref
+				issue = interventionism
 				factor = 0.2
 			}
 		}
@@ -657,7 +728,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = state_capitalism_ref
+				value = state_capitalism
 			}
 		}
 	}
@@ -667,7 +738,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.10
-				value = state_capitalism_ref
+				value = state_capitalism
 			}
 		}
 	}
@@ -677,7 +748,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.05
-				value = state_capitalism_ref
+				value = state_capitalism
 			}
 		}
 	}
@@ -689,10 +760,10 @@ country_event = {
 	title = "EVTNAME14100"
 	desc = "EVTDESC14100"
 	
-	
+	election = yes
 	issue_group = economic_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -700,10 +771,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.5
-				value = planned_economy_ref
+				value = planned_economy
 			}
 			scaled_militancy = {
-				issue = laissez_faire_ref
+				issue = laissez_faire
 				factor = 0.2
 			}
 		}
@@ -714,10 +785,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = planned_economy_ref
+				value = planned_economy
 			}
 			scaled_militancy = {
-				issue = laissez_faire_ref
+				issue = laissez_faire
 				factor = 0.2
 			}
 		}
@@ -728,7 +799,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = planned_economy_ref
+				value = planned_economy
 			}
 		}
 	}
@@ -738,7 +809,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = planned_economy_ref
+				value = planned_economy
 			}
 		}
 	}
@@ -748,7 +819,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.1
-				value = planned_economy_ref
+				value = planned_economy
 			}
 		}
 	}
@@ -760,10 +831,10 @@ country_event = {
 	title = "EVTNAME14110"
 	desc = "EVTDESC14110"
 	
-	
+	election = yes
 	issue_group = religious_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -831,10 +902,10 @@ country_event = {
 	title = "EVTNAME14120"
 	desc = "EVTDESC14120"
 	
-	
+	election = yes
 	issue_group = religious_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -902,10 +973,10 @@ country_event = {
 	title = "EVTNAME14130"
 	desc = "EVTDESC14130"
 	
-	
+	election = yes
 	issue_group = religious_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -973,10 +1044,10 @@ country_event = {
 	title = "EVTNAME14140"
 	desc = "EVTDESC14140"
 	
-	
+	election = yes
 	issue_group = religious_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -1044,10 +1115,10 @@ country_event = {
 	title = "EVTNAME14150"
 	desc = "EVTDESC14150"
 	
-	
+	election = yes
 	issue_group = citizenship_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -1115,10 +1186,10 @@ country_event = {
 	title = "EVTNAME14160"
 	desc = "EVTDESC14160"
 	
-	
+	election = yes
 	issue_group = citizenship_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -1186,10 +1257,10 @@ country_event = {
 	title = "EVTNAME14170"
 	desc = "EVTDESC14170"
 	
-	
+	election = yes
 	issue_group = citizenship_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -1257,10 +1328,10 @@ country_event = {
 	title = "EVTNAME14180"
 	desc = "EVTDESC14180"
 	
-	
+	election = yes
 	issue_group = war_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -1328,10 +1399,10 @@ country_event = {
 	title = "EVTNAME14190"
 	desc = "EVTDESC14190"
 
-	
+	election = yes
 	issue_group = war_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -1399,10 +1470,10 @@ country_event = {
 	title = "EVTNAME14200"
 	desc = "EVTDESC14200"
 	
-	
+	election = yes
 	issue_group = war_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {
@@ -1470,10 +1541,10 @@ country_event = {
 	title = "EVTNAME14210"
 	desc = "EVTDESC14210"
 	
-	
+	election = yes
 	issue_group = war_policy
 	# Audax Validator "." Ignore_NEXT
-	trigger = { has_country_modifier = will_influence_elections election = yes }
+	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
 	
 	option = {

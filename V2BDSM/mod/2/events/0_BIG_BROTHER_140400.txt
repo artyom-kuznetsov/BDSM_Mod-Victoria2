@@ -137,7 +137,9 @@ country_event = {
 				has_country_flag = persian_centralization_ongoing_flag
 				NOT = { has_country_modifier = persian_centralization_modifier }
 			}
-			clr_country_flag = persian_centralization_ongoing_flag
+			any_owned = { 
+				clr_country_flag = persian_centralization_ongoing_flag
+			}
 		}
 		
 		any_country = {
@@ -773,7 +775,7 @@ country_event = {
 		any_country = { limit = { any_owned_province = { has_province_modifier = penal_colonies } } plurality = 0.02 }
 		
 		
-		# END OF MONTHLY CLEANUP
+		
 		country_event = { id = 140400 days = 30 }
 	}
 }
@@ -4274,6 +4276,7 @@ country_event = {
 			inherit = MUG
 			inherit = BNG
 			inherit = GWA
+			inherit = JOI
 			create_vassal = JAI
 			create_vassal = IND
 			create_vassal = BUN

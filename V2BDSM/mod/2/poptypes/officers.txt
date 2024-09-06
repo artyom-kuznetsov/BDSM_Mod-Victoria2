@@ -605,10 +605,6 @@ promote_to =
 				penal_system = incarceration
 			}
 		}
-		modifier = {
-			factor = -2
-			economic_system = traditionalism_ref
-		}
 	}
 	aristocrats = 
 	{
@@ -1230,6 +1226,62 @@ ideologies = {
 			}
 		}
 	}
+	anarcho_liberal = {
+		factor = 1
+		modifier = {
+			factor = 2
+			country = { has_country_flag = anarcho_liberal_propaganda_flag }
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { militancy = 6 }
+			NOT = { government = bourgeois_dictatorship }
+		}
+		modifier = {
+			factor = 1.5
+			ruling_party_ideology = anarcho_liberal 
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.10
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.20
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.30
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.40
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.50
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.60
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.70
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.80
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.90
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 1
+		}
+	}
 }
 
 
@@ -1391,54 +1443,6 @@ issues =
 			country = { economic_system = state_capitalism_ref }
 		}
 	} 
-	agrarianism_ref = {
-		factor = 1
-		modifier = {
-			factor = 0
-			NOT = {
-				life_needs = 1.0
-			}
-			country = {
-				economic_system = agrarianism_ref
-			}
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 1.0
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.25
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.5
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.75
-			country = { economic_system = agrarianism_ref }
-		}
-		modifier = {
-			factor = 1.1
-			NOT = { literacy = 0.3 }
-		}
-		modifier = {
-			factor = 1.1
-			NOT = { literacy = 0.2 }
-		}
-		modifier = {
-			factor = 1.2
-			NOT = { literacy = 0.2 }
-			country = { economic_system = traditionalism_ref }
-		}
-	} 
-	traditionalism_ref = {
-		factor = 0.5
-	}
 	planned_economy = {
 		factor = 1
 		modifier = {

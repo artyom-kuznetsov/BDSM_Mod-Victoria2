@@ -381,14 +381,14 @@ country_event = {
 	
 	trigger = {
 		is_greater_power = yes
-		economic_system = laissez_faire_ref
+		economic_policy = laissez_faire
 		OR = {
 			war_policy = jingoism
 			war_policy = pro_military
 		}
 		any_neighbor_country = {
 			NOT = {
-				economic_system = laissez_faire_ref
+				economic_policy = laissez_faire
 			}
 		}
 	}
@@ -457,7 +457,7 @@ country_event = {
 			limit = {
 				NOT = {
 					tag = THIS
-					economic_system = laissez_faire_ref
+					economic_policy = laissez_faire
 				}
 			}
 			add_casus_belli = {
