@@ -142,8 +142,10 @@ country_event = {
 		plurality = 1
 		any_pop = {
 			limit = {
-				has_pop_culture = hungarian
-				has_pop_culture = transylvanian
+				OR = {
+					has_pop_culture = hungarian
+					has_pop_culture = transylvanian
+				}
 			}
 			militancy = -1
 			consciousness = 1
