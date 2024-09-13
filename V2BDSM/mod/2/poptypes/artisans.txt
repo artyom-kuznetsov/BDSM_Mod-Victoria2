@@ -996,7 +996,7 @@ promote_to =
 
 
 ideologies = {
-	
+
 	fascist = {
 		factor = 1
 		modifier = {
@@ -1297,6 +1297,22 @@ ideologies = {
 			factor = 0.9
 			poor_strata_militancy = 9
 		}
+		modifier = {
+			factor = 0.9
+			literacy = 0.5
+		}
+		modifier = {
+			factor = 0.9
+			literacy = 0.6
+		}
+		modifier = {
+			factor = 0.9
+			literacy = 0.7
+		}
+		modifier = {
+			factor = 0.9
+			literacy = 0.8
+		}
 	}
 
 	socialist = {
@@ -1476,6 +1492,10 @@ ideologies = {
 			country = { has_country_flag = liberal_propaganda_flag }
 		}
 		modifier = {
+			factor = 2
+			country = { has_country_flag = colorado_rebels }
+		}
+		modifier = {
 			factor = 1.2
 			consciousness = 9 
 		}
@@ -1589,11 +1609,10 @@ ideologies = {
 	}
 }
 
-
 issues =
 {
 	protectionism = {
-		factor = 1.2
+		factor = 1.1
 		modifier = {
 			factor = 1.1
 			NOT = {
@@ -1653,7 +1672,7 @@ issues =
 		}
 	}
 	laissez_faire = {
-		factor = 1.2
+		factor = 1
 		modifier = {
 			factor = 0
 			NOT = {
@@ -2314,7 +2333,7 @@ issues =
 			consciousness = 9
 		}
 	}
-
+	
 
 ################################################################REFORMS#######################################################################	
 	
@@ -4979,6 +4998,10 @@ issues =
 		modifier = {
 			factor = 0
 				country = { ai = yes }
+		}
+		modifier = {
+			factor = 0
+				country = { ai = yes }
 				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
 		}
@@ -5052,6 +5075,10 @@ issues =
 		modifier = {
 			factor = 0 
 				NOT = { is_next_reform = compulsory_schools }
+		}
+		modifier = {
+			factor = 0
+				country = { ai = yes }
 		}
 		modifier = {
 			factor = 0
@@ -5419,7 +5446,6 @@ issues =
 			literacy = 0.9
 		}
 	}
-
 
 #######################################Penal System
 
