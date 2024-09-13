@@ -1036,22 +1036,8 @@ ideologies = {
 	fascist = {
 		factor = 1
 		modifier = {
-			factor = 2
-			country = { has_country_flag = fascist_propaganda_flag }
-		}
-		modifier = {
-			factor = -100
-			OR = {
-				country = { government = colonial_company }
-				AND = {
-					is_primary_culture = no
-					is_accepted_culture = no
-				}
-			}
-		}
-		modifier = {
-			factor = 1.5
-			ruling_party_ideology = fascist 
+			factor = 0.5
+			not = { militancy = 6 }
 		}
 		modifier = {
 			factor = 1.1
@@ -1096,6 +1082,10 @@ ideologies = {
 		modifier = {
 			factor = 1.1
 			NOT = { political_reform_want = 0.10 }
+		}	
+		modifier = {
+			factor = 2
+			ruling_party_ideology = fascist
 		}
 		modifier = {
 			factor = 1.1
@@ -1116,19 +1106,25 @@ ideologies = {
 	}
 	
 	reactionary = {
-		factor = 1.1
+		factor = 1
 		modifier = {
-			factor = 2
-			country = { has_country_flag = reactionary_propaganda_flag }
+			factor = 0.5
+			not = { militancy = 6 }
 		}
 		modifier = {
 			factor = 1.2
 			ruling_party_ideology = reactionary
 		}
 		modifier = {
-			factor = 0.5
-			NOT = { militancy = 6 }
-		}		
+			factor = 1.2
+			NOT = { literacy = 0.30 }
+		}
+		modifier = {
+			factor = 1.2
+			country = {
+				NOT = { plurality = 0.20 }
+			}
+		}
 		modifier = {
 			factor = 0.5
 			consciousness = 6
@@ -1149,98 +1145,42 @@ ideologies = {
 			factor = 1.1
 			militancy = 6
 			NOT = { consciousness = 4 }
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
 		}
 		modifier = {
 			factor = 1.1
 			militancy = 7
 			NOT = { consciousness = 4 }
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
 		}
 		modifier = {
 			factor = 1.1
 			militancy = 8
 			NOT = { consciousness = 4 }
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
 		}
 		modifier = {
 			factor = 1.1
 			militancy = 9
 			NOT = { consciousness = 4 }
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
 		}
 		modifier = {
 			factor = 1.1
 			poor_strata_militancy = 5
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
 		}
 		modifier = {
 			factor = 1.1
 			poor_strata_militancy = 6
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
 		}
 		modifier = {
 			factor = 1.1
 			poor_strata_militancy = 7
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
 		}
 		modifier = {
 			factor = 1.1
 			poor_strata_militancy = 8
-			OR = {
-				is_primary_culture = yes
-				is_accepted_culture = yes
-			}
-		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.5
-		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.6
-		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.7
-		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.8
 		}
 	}
 
 	conservative = {
 		factor = 1
-		modifier = {
-			factor = 2
-			country = { has_country_flag = conservative_propaganda_flag }
-		}
-		modifier = {
-			factor = 2
-			country = { has_country_flag = blanco_rebels }
-		}
 		modifier = {
 			factor = 0.5
 			militancy = 6
@@ -1278,39 +1218,27 @@ ideologies = {
 			NOT = { consciousness = 1 }
 		}
 		modifier = {
-			factor = 1.05
-			luxury_needs = 0.25
+			factor = 1.5
+			luxury_needs = 1
 		}		
 		modifier = {
-			factor = 1.05
-			luxury_needs = 0.5
-		}
-		modifier = {
-			factor = 1.05
-			luxury_needs = 0.75
-		}
-		modifier = {
-			factor = 1.05
-			luxury_needs = 0.99
-		}
-		modifier = {
-			factor = 1.05
-			everyday_needs = 0.25
-		}
-		modifier = {
-			factor = 1.05
-			everyday_needs = 0.5
+			factor = 1.1
+			luxury_needs = 0.1
 		}	
 		modifier = {
-			factor = 1.05
-			everyday_needs = 0.75
-		}	
-		modifier = {
-			factor = 1.05
-			everyday_needs = 0.99
+			factor = 2
+			state_scope = {
+				poor_strata_everyday_needs = 1
+			}
 		}
 		modifier = {
-			factor = 1.2
+			factor = 1.25
+			state_scope = {
+				middle_strata_everyday_needs = 1
+			}
+		}
+		modifier = {
+			factor = 1.1
 			nationalvalue = nv_order
 		}
 		modifier = {
@@ -1333,33 +1261,13 @@ ideologies = {
 			factor = 0.9
 			poor_strata_militancy = 9
 		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.5
-		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.6
-		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.7
-		}
-		modifier = {
-			factor = 0.9
-			literacy = 0.8
-		}
 	}
 
 	socialist = {
 		factor = 1
 		modifier = {
-			factor = 2
-			country = { has_country_flag = socialist_propaganda_flag }
-		}
-		modifier = {
-			factor = 1.2
-			citizens_rights = all_voting_pops
+			factor = 1.1
+			nationalvalue = nv_equality
 			NOT = { ruling_party_ideology = communist }
 		}
 		modifier = {
@@ -1447,41 +1355,27 @@ ideologies = {
 			}
 		}
 		modifier = {
-			factor = 1.1
+			factor = 1.05
 			consciousness = 9 
 		}
 		modifier = {
-			factor = 1.1
+			factor = 1.05
 			consciousness = 8
 		}
 		modifier = {
-			factor = 1.1
+			factor = 1.05
 			consciousness = 7
-		}
-		modifier = {
-			factor = 1.5
-			invention = vangaurd_party
 		}
 	}
 
 	communist = {
 		factor = 1
 		modifier = {
-			factor = 2
-			country = { has_country_flag = communist_propaganda_flag }
-		}
-		modifier = {
 			factor = 0.1
 			NOT = { militancy = 6 }
-			NOT = { government = proletarian_dictatorship }
 		}
 		modifier = {
-			factor = 1.2
-			citizens_rights = all_voting_pops
-			ruling_party_ideology = communist
-		}
-		modifier = {
-			factor = 1.5
+			factor = 2
 			ruling_party_ideology = communist 
 		}
 		modifier = {
@@ -1528,14 +1422,6 @@ ideologies = {
 	liberal = {
 		factor = 1.1
 		modifier = {
-			factor = 2
-			country = { has_country_flag = liberal_propaganda_flag }
-		}
-		modifier = {
-			factor = 2
-			country = { has_country_flag = colorado_rebels }
-		}
-		modifier = {
 			factor = 1.2
 			consciousness = 9 
 		}
@@ -1561,22 +1447,19 @@ ideologies = {
 		}
 		modifier = {
 			factor = 1.1
-			# Audax Validator "." Ignore_NEXT
 			NOT = { is_ideology_enabled = socialist }
 		}
 		modifier = {
 			factor = 1.1
-			# Audax Validator "." Ignore_NEXT
 			NOT = { is_ideology_enabled = communist }
 		}
 		modifier = {
 			factor = 1.1
-			# Audax Validator "." Ignore_NEXT
 			NOT = { is_ideology_enabled = anarcho_liberal }
 		}
 		modifier = {
-			factor = 1.2
-			citizens_rights = culture_voting_only
+			factor = 1.1
+			nationalvalue = nv_liberty
 		}
 		modifier = {
 			factor = 1.1
@@ -1645,6 +1528,57 @@ ideologies = {
 			poor_strata_militancy = 8
 			middle_strata_militancy = 8
 			}
+		}
+	}
+	anarcho_liberal = {
+		factor = 1
+		modifier = {
+			factor = 2
+			ruling_party_ideology = anarcho_liberal
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { militancy = 6 }
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.10
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.20
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.30
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.40
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.50
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.60
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.70
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.80
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 0.90
+		}
+		modifier = {
+			factor = 1.1
+			political_reform_want = 1
 		}
 	}
 }
