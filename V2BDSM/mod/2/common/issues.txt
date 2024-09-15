@@ -169,20 +169,7 @@ party_issues = {
 # Political reforms.
 ##########################################
 political_reforms = {
-	
-	security = {
-		no_security = {
-			allow = { always = no }
-		}
-		
-		moderate_security = {
-			allow = { always = no }
-		}
-		
-		police_state = {
-			allow = { always = no }
-		}
-	}
+
 
 	vote_franschise = {
 		next_step_only = yes
@@ -247,19 +234,16 @@ political_reforms = {
 		}
 		appointed = {
 			rules = { rich_only = yes }
-			global_immigrant_attract = 0.01
 		}
 		state_equal_weight = {
 			rules = { state_vote = yes }
 			allow = {
 				NOT = { vote_franschise = none_voting }
 			}
-			global_immigrant_attract = 0.02
 		}
 		population_equal_weight = {
 			rules = { population_vote = yes }
 			allow = { NOT = { vote_franschise = none_voting } }
-			global_immigrant_attract = 0.03
 		}
 	}
 
@@ -430,6 +414,10 @@ political_reforms = {
 	military_organization = {
 		next_step_only = yes
 		
+		min_organization = {
+			allow = { always = no }
+		}
+		
 		low_organization = {
 			allow = { always = no }
 		}
@@ -446,6 +434,24 @@ political_reforms = {
 			allow = { always = no }
 		}
 		
+	}
+	
+	security = {
+		no_security = {
+			allow = { always = no }
+		}
+		
+		minimal_security = {
+			allow = { always = no }
+		}
+		
+		moderate_security = {
+			allow = { always = no }
+		}
+		
+		police_state = {
+			allow = { always = no }
+		}
 	}
 	
 	education_institution = {
@@ -670,52 +676,15 @@ social_reforms = {
 		}
 	}
 	health_care = {
-		next_step_only = yes	
+		next_step_only = no	
 		no_health_care = {
 			max_social_spending = 0.01
-			allow = {
-				always = no
-			}
 		}
 		trinket_health_care = {
-			global_population_growth = 0.001
-			min_social_spending = 0.2
-			max_social_spending = 0.2
-			pension_level	= 1
-			global_immigrant_attract = 0.01
-			allow = { 
-				always = no
-			}
 		}
 		low_health_care = {
-			global_population_growth = 0.002
-			min_social_spending = 0.35
-			max_social_spending = 0.35
-			pension_level	= 1
-			global_immigrant_attract = 0.02
-			allow = { 
-				always = no
-			}
 		}
 		acceptable_health_care = {
-			global_population_growth = 0.003
-			min_social_spending = 0.6
-			max_social_spending = 0.6
-			pension_level	= 1.25
-			global_immigrant_attract = 0.03
-			allow = {
-				always = no
-			}
-		}
-		good_health_care = {
-			global_population_growth = 0.004
-			min_social_spending = 1.0
-			max_social_spending = 1.0
-			pension_level	= 1.75
-			global_immigrant_attract = 0.04
-			allow = { 
-				always = no
-			}
 		}
 	}
 	school_reforms = {
