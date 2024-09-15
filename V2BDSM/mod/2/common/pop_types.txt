@@ -3,73 +3,66 @@ promotion_chance =
 {
 	factor = 0.3
 	
-	modifier = {
-		factor = 0.1
-		country = {
-			economic_policy = laissez_faire
-		}
-	}
+	#modifier = {
+	#	factor = 0.1
+	#	country = {
+	#		economic_policy = laissez_faire
+	#	}
+	#}
 	
 	### LITERACY
 	group = {
 		modifier = {
-			factor = 0.04
-			literacy = 0.05		
+			factor = -0.03
+			NOT = { literacy = 0.95 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.1			
+			factor = -0.03
+			NOT = { literacy = 0.9 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.2		
+			factor = -0.03
+			NOT = { literacy = 0.85 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.3			
+			factor = -0.03
+			NOT = { literacy = 0.8 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.4			
+			factor = -0.03
+			NOT = { literacy = 0.75 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.5			
+			factor = -0.03
+			NOT = { literacy = 0.7 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.6			
+			factor = -0.03
+			NOT = { literacy = 0.65 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.7			
+			factor = -0.03
+			NOT = { literacy = 0.6 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.8			
+			factor = -0.05
+			NOT = { literacy = 0.6 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.9			
+			factor = -0.05
+			NOT = { literacy = 0.5 }
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.99			
+			factor = -0.05
+			NOT = { literacy = 0.4 }
 		}
 		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.8
+			factor = -0.05
+			NOT = { literacy = 0.3 }
 		}
 		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.9			
-		}
-		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.99			
+			factor = -0.05
+			NOT = { literacy = 0.2 }
 		}
 	}
 	
@@ -222,19 +215,19 @@ promotion_chance =
 	
 	group = {
 		modifier = {
-			factor = -0.03
+			factor = -0.05
 			NOT = { literacy = 0.2	}	
 		}
 		modifier = {
-			factor = -0.03
+			factor = -0.05
 			NOT = { literacy = 0.3	}	
 		}
 		modifier = {
-			factor = -0.03
+			factor = -0.05
 			NOT = { literacy = 0.4	}	
 		}
 		modifier = {
-			factor = -0.03
+			factor = -0.05
 			NOT = { literacy = 0.5	}	
 		}
 		modifier = {
@@ -243,7 +236,31 @@ promotion_chance =
 		}
 		modifier = {
 			factor = -0.03
+			NOT = { literacy = 0.65	}	
+		}
+		modifier = {
+			factor = -0.03
 			NOT = { literacy = 0.7	}	
+		}
+		modifier = {
+			factor = -0.03
+			NOT = { literacy = 0.75	}	
+		}
+		modifier = {
+			factor = -0.03
+			NOT = { literacy = 0.8	}	
+		}
+		modifier = {
+			factor = -0.03
+			NOT = { literacy = 0.85	}	
+		}
+		modifier = {
+			factor = -0.03
+			NOT = { literacy = 0.9	}	
+		}
+		modifier = {
+			factor = -0.03
+			NOT = { literacy = 0.95	}	
 		}
 	}
 	
@@ -348,7 +365,7 @@ promotion_chance =
 	}
 
 	modifier = {
-		factor = 0.5
+		factor = 0.25
 		strata = middle
 	}
 	
@@ -363,40 +380,6 @@ promotion_chance =
 		factor = -0.1
 		not = { culture = this }
 	}
-	
-	### SLAVERY
-	modifier = {
-		factor = -0.1
-		country = {
-			slavery = yes_slavery 
-			NOT = { has_country_flag = the_slavery_debate }
-		}
-	}
-	modifier = {
-		factor = -0.05
-		country = { 
-			slavery = freedom_of_womb 
-			NOT = { has_country_flag = the_slavery_debate }
-		}
-	}
-	
-	# PENAL SYSTEM
-	modifier = {
-		factor = 0.03
-		country = { penal_system = incarceration }
-	}
-	modifier = {
-		factor = 0.06
-		country = { penal_system = rehabilitation }
-	}
-	
-	### SLAVE STATE
-	modifier = {
-		factor = -0.05
-		state_scope = {
-			is_slave = yes
-		}
-	}	
 	
 	### OCCUPATION
 	modifier = {
@@ -413,44 +396,19 @@ promotion_chance =
 	}
 	
 	modifier = {
-		factor = 0.2
-		# Audax Validator "." Ignore_NEXT
-		NOT = { 
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 200000 } 
-		}
-	}	
-	modifier = {
 		factor = 0.1
 		# Audax Validator "." Ignore_NEXT
 		NOT = { 
 			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 100000 } 
+			state_scope = { total_pops = 400000 } 
 		}
-	}
-	
+	}	
 	modifier = {
-		factor = -0.05
-		country = {
-			NOT = {
-				year = 1860
-			}
-		}
-	}
-	
-	modifier = {
-		factor = -0.05
-		country = {
-			NOT = {
-				has_country_flag = industrial_revolution_flag
-			}
-		}
-	}
-	
-	modifier = {
-		factor = 0.2
-		country = {
-			has_country_flag = persian_centralization_ongoing_flag
+		factor = 0.05
+		# Audax Validator "." Ignore_NEXT
+		NOT = { 
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { total_pops = 200000 } 
 		}
 	}
 }
@@ -459,12 +417,12 @@ demotion_chance =
 {
 	factor = 1.25
 	
-	modifier = {
-		factor = 0.1
-		country = {
-			economic_policy = laissez_faire
-		}
-	}
+	#modifier = {
+	#	factor = 0.1
+	#	country = {
+	#		economic_policy = laissez_faire
+	#	}
+	#}
 	
 	### QUICKER IF FACTORY UNEMPLOYMENT ON A NICE TRADE GOOD
 	group = {

@@ -13,7 +13,7 @@ country = {
 	GOLD_TO_WORKER_PAY_RATE = 3.5, -- Multiplier for how much money gold pays to pops
 	GREAT_NATIONS_COUNT = 8,
 	GREATNESS_DAYS = 365, 	   -- how many days until country risks losing status as great nation
-	BADBOY_LIMIT = 25,
+	BADBOY_LIMIT = 40,
 	MAX_BUREAUCRACY_PERCENTAGE = 0.01, -- More than max percent bureaucrats of poplation will give no additional benefits
 	BUREAUCRACY_PERCENTAGE_INCREMENT = 0.001, -- For each social administrative reform level, this is added to MAX_BUREAUCRACY_PERCENTAGE
 	MIN_CRIMEFIGHT_PERCENT = 0.2,
@@ -620,7 +620,7 @@ diplomacy = {
 pops = {
 	BASE_CLERGY_FOR_LITERACY = 0, 
 	MAX_CLERGY_FOR_LITERACY = 0.04, 
-	LITERACY_CHANGE_SPEED = 0.08,
+	LITERACY_CHANGE_SPEED = 0.05,
 
 
 	ASSIMILATION_SCALE = 0.004,

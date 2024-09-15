@@ -170,34 +170,17 @@ party_issues = {
 ##########################################
 political_reforms = {
 	
-	slavery = {
-	
-		yes_slavery = {
-			rules = { slavery_allowed = yes }
-			allow = {
-				NOT = { has_country_flag = is_communist_flag }
-			}
+	security = {
+		no_security = {
+			allow = { always = no }
 		}
 		
-		freedom_of_womb = {
-			rules = { slavery_allowed = yes }
-			allow = {
-				OR = {
-					NOT = { has_country_flag = the_slavery_debate }
-					year = 1870
-				}
-				NOT = { has_country_flag = is_communist_flag }
-			}
+		moderate_security = {
+			allow = { always = no }
 		}
 		
-		no_slavery = {
-			rules = { slavery_allowed = no }
-			allow = {
-				OR = {
-					NOT = { has_country_flag = the_slavery_debate }
-					year = 1880
-				}
-			}
+		police_state = {
+			allow = { always = no }
 		}
 	}
 
@@ -435,23 +418,6 @@ political_reforms = {
 		}
 	}
 	
-	military_organization = {
-		next_step_only = yes
-		
-		low_organization = {
-		}
-		
-		medium_organization = {
-		}
-		
-		high_organization = {
-		}
-		
-		total_war_organization = {
-		}
-		
-	}
-	
 	border_policy = {
 		closed_borders = {
 		}
@@ -461,39 +427,61 @@ political_reforms = {
 		}
 	}
 
-	colonial_migration = {
-		ref_no_colonial_policy = {
-			allow = {
-				colonial_nation = yes
-				always = no
-			}
+	military_organization = {
+		next_step_only = yes
+		
+		low_organization = {
+			allow = { always = no }
 		}
+		
+		medium_organization = {
+			allow = { always = no }
+		}
+		
+		high_organization = {
+			allow = { always = no }
+		}
+		
+		total_war_organization = {
+			allow = { always = no }
+		}
+		
+	}
+	
+	education_institution = {
+		no_education_investment = {
+			allow = { always = no }
+		}
+		
+		low_education_investment = {
+			allow = { always = no }
+		}
+		
+		medium_education_investment = {
+			allow = { always = no }
+		}
+		
+		high_education_investment = {
+			allow = { always = no }
+		}
+	}
 
-	#	ref_settlement = {
-	#		tax_efficiency = -0.02
-	#		allow = {
-	#			colonial_nation = yes
-	#			always = no
-	#		}
-	#	}
-	#
-	#	ref_civilization = {
-	#		non_accepted_pop_consciousness_modifier = 0.01
-	#		
-	#		allow = {
-	#			colonial_nation = yes
-	#			always = no
-	#		}
-	#	}
-	#
-	#	ref_exploitation = {
-	#		non_accepted_pop_consciousness_modifier = 0.03
-	#		non_accepted_pop_militancy_modifier = 0.03
-	#		allow = {
-	#			colonial_nation = no
-	#			always = no
-	#		}
-	#	}
+	healthcare_institution = {
+		no_healthcare_investment = {
+			allow = { always = no }
+		}
+		
+		low_healthcare_investment = {
+			allow = { always = no }
+		}
+		
+		medium_healthcare_investment = {
+			allow = { always = no }
+		}
+		
+		high_healthcare_investment = {
+			allow = { always = no }
+		}
 	}
 
 	centralization = {
