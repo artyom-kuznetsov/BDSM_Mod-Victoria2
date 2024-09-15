@@ -108,20 +108,20 @@ party_issues = {
 		}
 	}
 	
-	religious_policy = {
-		pro_atheism = {
-			#no effect
-		}
-		secularized = {
-			#no effect
-		}
-		pluralism = {
-			#no effect
-		}
-		moralism = {
-			#no effect
-		}
-	}
+	#religious_policy = {
+	#	pro_atheism = {
+	#		#no effect
+	#	}
+	#	secularized = {
+	#		#no effect
+	#	}
+	#	pluralism = {
+	#		#no effect
+	#	}
+	#	moralism = {
+	#		#no effect
+	#	}
+	#}
 	citizenship_policy = {
 		residency = {
 			rules = { culture_voting = yes }
@@ -435,32 +435,21 @@ political_reforms = {
 		}
 	}
 	
-	debt_law = {
+	military_organization = {
 		next_step_only = yes
 		
-		serfdom = {
-			rgo_output = 0.15
-			allow = {
-				NOT = { has_country_flag = is_communist_flag }
-			}
+		low_organization = {
 		}
 		
-		peonage = {
-			rgo_output = 0.05
-			allow = {
-				NOT = { has_country_flag = is_communist_flag }
-			}
+		medium_organization = {
 		}
 		
-		debtors_prisons = {
-			allow = {
-				NOT = { has_country_flag = is_communist_flag }
-			}
+		high_organization = {
 		}
 		
-		bankruptcy = {
-			global_immigrant_attract = 0.01
+		total_war_organization = {
 		}
+		
 	}
 	
 	border_policy = {

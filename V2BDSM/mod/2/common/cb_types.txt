@@ -162,6 +162,9 @@ acquire_state_warlord = {
 	
 	war_name = WAR_TAKE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -256,6 +259,9 @@ acquire_state_warlord_AI = {
 		}
 	}
 	
+	on_add = {
+	}
+	
 }
 
 
@@ -338,6 +344,9 @@ acquire_state_china_japan = {
 			}
 		}
 		plurality = -5
+	}
+	
+	on_add = {
 	}
 	
 }
@@ -428,6 +437,9 @@ acquire_state_invasion = {
 		plurality = -5
 	}
 	
+	on_add = {
+	}
+	
 }
 
 gunboat = {
@@ -458,6 +470,9 @@ gunboat = {
 	peace_cost_factor = 1
 	penalty_factor = 1
 	
+	on_add = {
+	}
+	
 	po_gunboat = yes
 	
 	war_name = WAR_GUNBOAT_NAME
@@ -483,6 +498,9 @@ status_quo = {
 	prestige_factor = 1
 	peace_cost_factor = 1
 	penalty_factor = 1
+	
+	on_add = {
+	}
 	
 	po_status_quo = yes
 	
@@ -514,6 +532,9 @@ war_for_mil_access = {
 	can_use = {
 		NOT = { is_our_vassal = THIS war_with = THIS tag = WBK }
 		THIS = { war = yes ai = no }
+	}
+	
+	on_add = {
 	}
 	
 	war_name = WAR_MIL_ACCESS_NAME
@@ -597,6 +618,9 @@ conquest = {
 		}
 	}
 	
+	on_add = {
+	}
+	
 	po_annex = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -665,6 +689,9 @@ conquest_claimed = {
 		}
 	}
 	
+	on_add = {
+	}
+	
 	po_annex = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -721,6 +748,9 @@ risorgimento = {
 		}
 	}
 	
+	on_add = {
+	}
+	
 	po_annex = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -775,6 +805,9 @@ manifest_destiny_cb = {
 		plurality = -15
 	}
 	
+	on_add = {
+	}
+	
 	po_remove_prestige = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -817,6 +850,9 @@ conquest_small = {
 	good_relation_militancy_factor = 1
 	
 	construction_speed = 0.5
+	
+	on_add = {
+	}
 	
 	
 	on_po_accepted = {
@@ -868,6 +904,9 @@ civil_war = {
 	po_annex = yes
 	
 	war_name = CIVIL_WAR_NAME
+	
+	on_add = {
+	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -928,6 +967,9 @@ add_to_sphere = {
 	
 	war_name = WAR_ADD_SPHERE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		plurality = -5
 	}
@@ -973,6 +1015,9 @@ take_from_sphere = {
 	po_add_to_sphere = yes
 	
 	war_name = WAR_TAKE_SPHERE_NAME
+	
+	on_add = {
+	}
 	
 	
 	on_po_accepted = {
@@ -1025,6 +1070,9 @@ sengoku = {
 		}
 	}
 	
+	on_add = {
+	}
+	
 	po_annex = yes
 	
 	war_name = WAR_SENGOKU_NAME
@@ -1073,6 +1121,9 @@ acquire_core_state = {
 	po_demand_state = yes
 	
 	war_name = WAR_TAKE_CORE_NAME
+	
+	on_add = {
+	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1132,6 +1183,9 @@ acquire_core_state_AI = {
 	po_demand_state = yes
 	
 	war_name = WAR_TAKE_CORE_NAME
+	
+	on_add = {
+	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1195,6 +1249,9 @@ acquire_all_cores = {
 	
 	war_name = WAR_LIBERATE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1255,6 +1312,9 @@ acquire_all_cores_AI = {
 	
 	war_name = WAR_LIBERATE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1311,6 +1371,9 @@ annex_core_country = {
 	po_annex = yes
 	
 	war_name = WAR_RESTORE_ORDER_NAME
+	
+	on_add = {
+	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1378,6 +1441,9 @@ acquire_substate_region = {
 	po_demand_state = yes
 	
 	war_name = WAR_TAKE_NAME
+	
+	on_add = {
+	}
 	
 	
 	on_po_accepted = {
@@ -1473,6 +1539,9 @@ acquire_state = {
 	
 	war_name = WAR_TAKE_NAME
 	
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		THIS = {
@@ -1565,6 +1634,9 @@ acquire_capital = {
 	
 	war_name = WAR_TAKE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1637,6 +1709,9 @@ place_in_the_sun = {
 
 	war_name = WAR_COLONIAL_NAME
 	
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		THIS = {
@@ -1706,6 +1781,9 @@ take_treaty_port = {
 	
 	war_name = WAR_TAKE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1746,6 +1824,9 @@ colonial_competition = {
 	po_colony = yes
 
 	war_name = WAR_COLONIAL_NAME
+	
+	on_add = {
+	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1804,6 +1885,9 @@ cut_down_to_size = {
 		}
 	}
 	
+	on_add = {
+	}
+	
 }
 
 # MONUMENT CARRACK
@@ -1848,6 +1932,9 @@ capture_monument_spa_carrack_cb = {
 		}
 	}
 	
+	on_add = {
+	}
+	
 }
 
 	
@@ -1881,6 +1968,9 @@ cut_down_to_size_boxer = {
 	po_reparations = yes
 
 	war_name = WAR_BOXER_NAME
+	
+	on_add = {
+	}
 	
 	
 	on_po_accepted = {
@@ -1976,6 +2066,9 @@ free_peoples = {
 
 	war_name = WAR_FREE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		plurality = -3
 	}
@@ -2070,6 +2163,9 @@ liberate_country = {
 
 	war_name = WAR_LIBERATE_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		plurality = -5
 	}
@@ -2124,6 +2220,9 @@ dismantle_forts = {
 
 	war_name = WAR_NAME
 	
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		plurality = -3
@@ -2173,6 +2272,9 @@ release_puppet = {
 
     war_name = WAR_NAME
 
+	on_add = {
+	}
+	
 
     on_po_accepted = {
 		country_event = 9576
@@ -2221,6 +2323,9 @@ release_puppet_small = {
 
     war_name = WAR_NAME
 
+	on_add = {
+	}
+	
 
     on_po_accepted = {
 		country_event = 9576
@@ -2268,6 +2373,9 @@ release_puppet_tiny = {
 
     war_name = WAR_NAME
 
+	on_add = {
+	}
+	
 
     on_po_accepted = {
 		country_event = 9576
@@ -2317,6 +2425,9 @@ transfer_puppet = {
 
     war_name = WAR_NAME
 
+	on_add = {
+	}
+	
     on_po_accepted = {
 		country_event = 9575
     }
@@ -2364,6 +2475,9 @@ transfer_puppet_small = {
 
     war_name = WAR_NAME
 
+	on_add = {
+	}
+	
 
     on_po_accepted = {
 		country_event = 9575
@@ -2411,6 +2525,9 @@ transfer_puppet_tiny = {
 
     war_name = WAR_NAME
 
+	on_add = {
+	}
+	
 
     on_po_accepted = {
 		country_event = 9575
@@ -2484,6 +2601,9 @@ make_puppet = {
 
 	war_name = WAR_PUPPET_NAME
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		plurality = -5
 	}
@@ -2549,6 +2669,9 @@ make_puppet_small = {
 	po_add_to_sphere = yes
 
 	war_name = WAR_PUPPET_NAME
+	
+	on_add = {
+	}
 	
 	
 	on_po_accepted = {
@@ -2616,6 +2739,9 @@ make_puppet_tiny = {
 
 	war_name = WAR_PUPPET_NAME
 	
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		plurality = -5
@@ -2657,6 +2783,9 @@ become_independent = {
 			FROM = { is_our_vassal = THIS }
 			war_with = THIS
 		}
+	}
+	
+	on_add = {
 	}
 	
 	po_release_puppet = yes
@@ -2704,6 +2833,9 @@ humiliate = {
 	
 	war_name = WAR_HUMILIATE_NAME
 
+	on_add = {
+	}
+	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		has_recently_lost_war = no
@@ -2753,6 +2885,9 @@ demand_reparations = {
 			}
 		}
 		NOT = { tag = WBK }
+	}
+	
+	on_add = {
 	}
 	
 	
@@ -2818,6 +2953,9 @@ demand_concession_casus_belli = {
 	
 	war_name = WAR_CONCESSION_NAME
 
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		THIS = {
@@ -2896,6 +3034,9 @@ establish_protectorate_casus_belli = {
 	
 	war_name = WAR_PROTECTORATE_NAME
 
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		THIS = {
@@ -2963,6 +3104,9 @@ establish_small_protectorate_casus_belli = {
 	
 	war_name = WAR_PROTECTORATE_NAME
 
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		THIS = {
@@ -3021,6 +3165,9 @@ unification_humiliate_cb = {
 	
 	war_name = UNIFICATION_HUMILIATE_NAME
 	
+	on_add = {
+	}
+	
 }
 
 # Release Puppet
@@ -3072,6 +3219,9 @@ unification_release_puppet_cb = {
 	po_add_to_sphere = yes
 
 	war_name = WAR_NAME
+	
+	on_add = {
+	}
 	
 }
 
@@ -3133,6 +3283,9 @@ unification_casus_belli = {
 	
 	war_name = WAR_UNIFICATION_NAME
 
+	
+	on_add = {
+	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -3197,6 +3350,9 @@ unification_annex_casus_belli = {
 	
 	war_name = WAR_UNIFICATION_ANNEX_NAME
 
+	on_add = {
+	}
+	
 	
 	on_po_accepted = {
 		THIS = {
@@ -3241,6 +3397,9 @@ rude_boy = {
 	}
 	
 
+	on_add = {
+	}
+	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		badboy = 1
@@ -3301,6 +3460,9 @@ install_communist_gov_cb = {
 	war_name = WAR_NAME
 	
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		political_reform = none_voting
 		political_reform = party_appointed
@@ -3354,6 +3516,9 @@ uninstall_communist_gov_cb = {
 	war_name = WAR_NAME
 	
 	
+	on_add = {
+	}
+	
 	on_po_accepted = {
 		plurality = -10
 	}
@@ -3389,6 +3554,9 @@ great_war_penalty_cb = {
 
 	war_name = WAR_NAME
 	
+	on_add = {
+	}
+	
 	#can_use = {
 	#	NOT = { is_our_vassal = THIS }
 	#	is_disarmed = no
@@ -3422,6 +3590,9 @@ vassal_tax = {
 	war_name = WAR_NAME
 	
 	can_use = {
+	}
+	
+	on_add = {
 	}
 	
 	on_po_accepted = {
@@ -3471,6 +3642,8 @@ negotiated_transfer = {
 	
 	war_name = WAR_TAKE_NAME
 
+	on_add = {
+	}
 	
 	on_po_accepted = {
 		THIS = {
