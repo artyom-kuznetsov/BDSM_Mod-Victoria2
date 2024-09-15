@@ -13,17 +13,6 @@ country_event = {
 		any_country = {
 			any_owned = {
 				limit = {
-					state_scope = {
-						is_colonial = yes
-					}
-					owner = { NOT = { has_country_flag = french_foreign_legion_supported } }
-				}
-				soldiers = {
-					pop_type = artisans
-				}
-			}
-			any_owned = {
-				limit = {
 					NOT = {
 						OR = {
 							trade_goods = grain
@@ -47,30 +36,6 @@ country_event = {
 				}
 				# Audax Validator "." Ignore_NEXT
 				farmland = -1
-			}
-			any_owned = {
-				limit = {
-					OR = {
-						trade_goods = coal
-						trade_goods = iron
-						trade_goods = sulphur
-						trade_goods = market_goods
-						trade_goods = precious_metal
-						trade_goods = oil
-					}
-					NOT = {
-						unemployment_by_type = {
-							type = labourers
-							value = 0.001
-						}
-					}
-				}
-				random_pop = {
-					limit = {
-						type = artisans
-					}
-					pop_type = labourers
-				}
 			}
 			any_pop = {
 				limit = {
@@ -122,26 +87,6 @@ country_event = {
 		
 		any_country = {
 			limit = {
-				OR = {
-					continent = south_america
-					continent = north_america
-					continent = oceania
-				}
-				ai = no
-			}
-			set_country_flag = migration_magnet_cflag
-		}
-		
-		any_country = {
-			limit = {
-				has_country_flag = persian_centralization_ongoing_flag
-				NOT = { has_country_modifier = persian_centralization_modifier }
-			} 
-			clr_country_flag = persian_centralization_ongoing_flag
-		}
-		
-		any_country = {
-			limit = {
 				is_vassal = yes
 			}
 			any_owned = { 
@@ -185,85 +130,8 @@ country_event = {
 					pop_type = farmers
 				}
 			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 20000 }
-					is_colonial = no
-					total_pops = 10000
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_modifier
-					duration = 130
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 10000 }
-					is_colonial = no
-					total_pops = 5000
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_modifier
-					duration = 130
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 5000 }
-					is_colonial = no
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_2_modifier
-					duration = 130
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 5000 }
-					is_colonial = no
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_2_modifier
-					duration = 130
-				}
-			}
 		}
 		
-		any_country = {
-			1481 = {
-				limit = {
-					owner = {
-						is_culture_group = east_asian
-					}
-				}
-				1481 = { change_province_name = "Люйшунь" }
-			}
-			1481 = {
-				limit ={
-					owner = {
-						NOT = { is_culture_group = east_asian }
-					}
-				}
-				1481 = { change_province_name = "Порт-Артур" }
-			}
-		}
-		
-		any_country = {
-			limit = {
-				has_country_flag = magrib_imigration_check_flag
-				NOT = { has_country_modifier = magrib_imigration_modifier }
-			}
-			clr_country_flag = magrib_imigration_check_flag
-		}
-		
-		any_country = {
-			limit = {
-				has_country_flag = immigration_from_magrib_chek_flag
-				NOT = { has_country_modifier = from_magrib_imigration_modifier }
-			}
-			clr_country_flag = immigration_from_magrib_chek_flag
-		}
-
 		any_pop = {
 			money = 2000000
 		}
@@ -276,7 +144,7 @@ country_event = {
 				is_independant = yes
 				vote_franschise = none_voting
 			}
-			government = absolute_monarchy
+			government = presidental_dictatorship
 		}
 		
 		any_country = {
