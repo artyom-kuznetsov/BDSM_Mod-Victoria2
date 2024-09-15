@@ -174,14 +174,6 @@ acquire_state_warlord = {
 			}
 		}
 	}
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 }
 
 acquire_state_warlord_AI = {
@@ -264,13 +256,6 @@ acquire_state_warlord_AI = {
 		}
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 }
 
 
@@ -355,13 +340,6 @@ acquire_state_china_japan = {
 		plurality = -5
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 }
 
 acquire_state_invasion = {
@@ -450,13 +428,6 @@ acquire_state_invasion = {
 		plurality = -5
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 }
 
 gunboat = {
@@ -487,14 +458,6 @@ gunboat = {
 	peace_cost_factor = 1
 	penalty_factor = 1
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	po_gunboat = yes
 	
 	war_name = WAR_GUNBOAT_NAME
@@ -520,14 +483,6 @@ status_quo = {
 	prestige_factor = 1
 	peace_cost_factor = 1
 	penalty_factor = 1
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	po_status_quo = yes
 	
@@ -559,14 +514,6 @@ war_for_mil_access = {
 	can_use = {
 		NOT = { is_our_vassal = THIS war_with = THIS tag = WBK }
 		THIS = { war = yes ai = no }
-	}
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
 	}
 	
 	war_name = WAR_MIL_ACCESS_NAME
@@ -650,14 +597,6 @@ conquest = {
 		}
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	po_annex = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -726,14 +665,6 @@ conquest_claimed = {
 		}
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	po_annex = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -787,14 +718,6 @@ risorgimento = {
 				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
-		}
-	}
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
 		}
 	}
 	
@@ -852,14 +775,6 @@ manifest_destiny_cb = {
 		plurality = -15
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	po_remove_prestige = yes
 	
 	war_name = WAR_CONQUEST_NAME
@@ -903,13 +818,6 @@ conquest_small = {
 	
 	construction_speed = 0.5
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -960,14 +868,6 @@ civil_war = {
 	po_annex = yes
 	
 	war_name = CIVIL_WAR_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1028,14 +928,6 @@ add_to_sphere = {
 	
 	war_name = WAR_ADD_SPHERE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	on_po_accepted = {
 		plurality = -5
 	}
@@ -1082,13 +974,6 @@ take_from_sphere = {
 	
 	war_name = WAR_TAKE_SPHERE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -2
@@ -1137,14 +1022,6 @@ sengoku = {
 				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
-		}
-	}
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
 		}
 	}
 	
@@ -1197,14 +1074,6 @@ acquire_core_state = {
 	
 	war_name = WAR_TAKE_CORE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	
-	}
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1264,14 +1133,6 @@ acquire_core_state_AI = {
 	
 	war_name = WAR_TAKE_CORE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	
-	}
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1334,14 +1195,6 @@ acquire_all_cores = {
 	
 	war_name = WAR_LIBERATE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1402,14 +1255,6 @@ acquire_all_cores_AI = {
 	
 	war_name = WAR_LIBERATE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1466,14 +1311,6 @@ annex_core_country = {
 	po_annex = yes
 	
 	war_name = WAR_RESTORE_ORDER_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1542,13 +1379,6 @@ acquire_substate_region = {
 	
 	war_name = WAR_TAKE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1643,13 +1473,6 @@ acquire_state = {
 	
 	war_name = WAR_TAKE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1742,14 +1565,6 @@ acquire_capital = {
 	
 	war_name = WAR_TAKE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1822,13 +1637,6 @@ place_in_the_sun = {
 
 	war_name = WAR_COLONIAL_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -1898,14 +1706,6 @@ take_treaty_port = {
 	
 	war_name = WAR_TAKE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1946,14 +1746,6 @@ colonial_competition = {
 	po_colony = yes
 
 	war_name = WAR_COLONIAL_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -2012,13 +1804,6 @@ cut_down_to_size = {
 		}
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 }
 
 # MONUMENT CARRACK
@@ -2063,13 +1848,6 @@ capture_monument_spa_carrack_cb = {
 		}
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 }
 
 	
@@ -2104,13 +1882,6 @@ cut_down_to_size_boxer = {
 
 	war_name = WAR_BOXER_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -5
@@ -2204,14 +1975,6 @@ free_peoples = {
 	po_transfer_provinces = yes
 
 	war_name = WAR_FREE_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -3
@@ -2307,13 +2070,6 @@ liberate_country = {
 
 	war_name = WAR_LIBERATE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	on_po_accepted = {
 		plurality = -5
 	}
@@ -2368,13 +2124,6 @@ dismantle_forts = {
 
 	war_name = WAR_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -3
@@ -2424,13 +2173,6 @@ release_puppet = {
 
     war_name = WAR_NAME
 
-    on_add = {
-        move_issue_percentage = {
-            from = jingoism
-            to = pro_military
-            value = 0.25
-        }
-    }
 
     on_po_accepted = {
 		country_event = 9576
@@ -2479,13 +2221,6 @@ release_puppet_small = {
 
     war_name = WAR_NAME
 
-    on_add = {
-        move_issue_percentage = {
-            from = jingoism
-            to = pro_military
-            value = 0.25
-        }
-    }
 
     on_po_accepted = {
 		country_event = 9576
@@ -2533,13 +2268,6 @@ release_puppet_tiny = {
 
     war_name = WAR_NAME
 
-    on_add = {
-        move_issue_percentage = {
-            from = jingoism
-            to = pro_military
-            value = 0.25
-        }
-    }
 
     on_po_accepted = {
 		country_event = 9576
@@ -2589,14 +2317,6 @@ transfer_puppet = {
 
     war_name = WAR_NAME
 
-    on_add = {
-        move_issue_percentage = {
-            from = jingoism
-            to = pro_military
-            value = 0.25
-        }
-    }
-
     on_po_accepted = {
 		country_event = 9575
     }
@@ -2644,13 +2364,6 @@ transfer_puppet_small = {
 
     war_name = WAR_NAME
 
-    on_add = {
-        move_issue_percentage = {
-            from = jingoism
-            to = pro_military
-            value = 0.25
-        }
-    }
 
     on_po_accepted = {
 		country_event = 9575
@@ -2698,13 +2411,6 @@ transfer_puppet_tiny = {
 
     war_name = WAR_NAME
 
-    on_add = {
-        move_issue_percentage = {
-            from = jingoism
-            to = pro_military
-            value = 0.25
-        }
-    }
 
     on_po_accepted = {
 		country_event = 9575
@@ -2778,14 +2484,6 @@ make_puppet = {
 
 	war_name = WAR_PUPPET_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
 	on_po_accepted = {
 		plurality = -5
 	}
@@ -2852,13 +2550,6 @@ make_puppet_small = {
 
 	war_name = WAR_PUPPET_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -5
@@ -2925,13 +2616,6 @@ make_puppet_tiny = {
 
 	war_name = WAR_PUPPET_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -5
@@ -2981,11 +2665,6 @@ become_independent = {
 	war_name = WAR_INDEPENDENCE_NAME
 	
 	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
 		add_war_goal = {
 			casus_belli = make_puppet
 		}
@@ -3036,13 +2715,6 @@ humiliate = {
 		}
 		NOT = { tag = WBK }
 	}	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	on_po_accepted = {
 		plurality = -15
 	}
@@ -3083,13 +2755,6 @@ demand_reparations = {
 		NOT = { tag = WBK }
 	}
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -3
@@ -3153,13 +2818,6 @@ demand_concession_casus_belli = {
 	
 	war_name = WAR_CONCESSION_NAME
 
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.1
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -3238,13 +2896,6 @@ establish_protectorate_casus_belli = {
 	
 	war_name = WAR_PROTECTORATE_NAME
 
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.1
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -3312,13 +2963,6 @@ establish_small_protectorate_casus_belli = {
 	
 	war_name = WAR_PROTECTORATE_NAME
 
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.1
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -3377,13 +3021,6 @@ unification_humiliate_cb = {
 	
 	war_name = UNIFICATION_HUMILIATE_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.1
-		}
-	}
 }
 
 # Release Puppet
@@ -3436,13 +3073,6 @@ unification_release_puppet_cb = {
 
 	war_name = WAR_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 }
 
 # Unification Demand State
@@ -3503,13 +3133,6 @@ unification_casus_belli = {
 	
 	war_name = WAR_UNIFICATION_NAME
 
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.1
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -3574,13 +3197,6 @@ unification_annex_casus_belli = {
 	
 	war_name = WAR_UNIFICATION_ANNEX_NAME
 
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.1
-		}
-	}
 	
 	on_po_accepted = {
 		THIS = {
@@ -3635,14 +3251,6 @@ rude_boy = {
 	
 	war_name = WAR_RUDEBOI_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.1
-		}
-	}
-	
 }
 
 # Install Communist Government
@@ -3692,13 +3300,6 @@ install_communist_gov_cb = {
 
 	war_name = WAR_NAME
 	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		political_reform = none_voting
@@ -3707,7 +3308,6 @@ install_communist_gov_cb = {
 		political_reform = state_press
 		political_reform = state_controlled
 		political_reform = underground_parties
-		social_reform = child_labor_illegal
 		plurality = -10
 	}
 }
@@ -3753,13 +3353,6 @@ uninstall_communist_gov_cb = {
 
 	war_name = WAR_NAME
 	
-	on_add = {
-		move_issue_percentage = {
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
 	
 	on_po_accepted = {
 		plurality = -10
@@ -3800,14 +3393,7 @@ great_war_penalty_cb = {
 	#	NOT = { is_our_vassal = THIS }
 	#	is_disarmed = no
 	#}
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
+
 }
 
 vassal_tax = {
@@ -3836,14 +3422,6 @@ vassal_tax = {
 	war_name = WAR_NAME
 	
 	can_use = {
-	}
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
 	}
 	
 	on_po_accepted = {
@@ -3892,14 +3470,7 @@ negotiated_transfer = {
 	po_demand_state = yes
 	
 	war_name = WAR_TAKE_NAME
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
+
 	
 	on_po_accepted = {
 		THIS = {
