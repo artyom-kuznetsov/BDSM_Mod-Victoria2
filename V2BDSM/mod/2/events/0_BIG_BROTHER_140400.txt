@@ -590,6 +590,17 @@ country_event = {
 		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.2 } } plurality = -0.025 }
 		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.1 } } plurality = -0.04 }
 		
+		### REFORMS ###
+		any_country = { limit = { exists = yes ai = no public_meetings = restricted_meeting 			} plurality = -0.02 }
+		any_country = { limit = { exists = yes ai = no public_meetings = yes_meeting					} plurality = -0.03 }
+		any_country = { limit = { exists = yes ai = no press_rights = censored_press					} plurality = -0.02 }
+		any_country = { limit = { exists = yes ai = no press_rights = free_press						} plurality = -0.03 }
+		any_country = { limit = { exists = yes ai = no executive_power = independent					} plurality = 0.01 }
+		any_country = { limit = { exists = yes ai = no military_organization = low_organization			} plurality = -0.02 }
+		any_country = { limit = { exists = yes ai = no military_organization = medium_organization 		} plurality = -0.04 }
+		any_country = { limit = { exists = yes ai = no military_organization = high_organization 		} plurality = -0.07 }
+		any_country = { limit = { exists = yes ai = no military_organization = total_war_organization 	} plurality = -0.1 }
+		
 		### MODIFIERS ###
 		any_country = { limit = { has_country_modifier = macau_exploitation_modifier_china } plurality = -0.005 }
 		any_country = { limit = { has_country_modifier = hongkong_exploitation_modifier_china } plurality = -0.005 }

@@ -180,7 +180,7 @@ political_reforms = {
 			allow = { NOT = { election = yes } }
 		}
 		limited_voting = {
-			rich_vote = 0.7
+			rich_vote = 2
 			middle_vote = 0.2
 			poor_vote = 0.1
 			allow = { NOT = { election = yes } }
@@ -215,6 +215,19 @@ political_reforms = {
 	
 	economic_system = {
 		traditionalism_r = {
+			always = no
+		}
+		agrarianism_r = {
+			always = no
+		}
+		interventionism_r = {
+			always = no
+		}
+		laissez_faire_r = {
+			always = no
+		}
+		planned_economy_r = {
+			always = no
 		}
 	}
 	
@@ -241,12 +254,17 @@ political_reforms = {
 	public_meetings = {
 		no_meeting = {
 			suppression_points_modifier = 0.1
-			global_immigrant_attract = -0.04
+		}
+		restricted_meeting = {
+			issue_change_speed = 0.5
+			global_immigrant_attract = 0.05
+			# monthly stab -0.02
 		}
 		yes_meeting = {
 			issue_change_speed = 1
-			global_immigrant_attract = 0.02
+			global_immigrant_attract = 0.1
 			suppression_points_modifier = -0.25
+			# monthly stab -0.03
 		}
 
 	}
@@ -255,26 +273,30 @@ political_reforms = {
 		state_press = {
 		}
 		censored_press = {
+			# monthly stab -0.02
 		}
 		free_press = {
+			# monthly stab -0.03
 		}
 	}
-	trade_unions = {
+	executive_power = {
 		next_step_only = yes
-		no_trade_unions = {
-			#no immediate effect
+		independent = {
+			ruling_party_support = 0.1
+			# monthly stab +0.01
 		}
-		state_controlled = {
-			social_reform_desire = 0.1
-			global_immigrant_attract = 0.01
+		parliamentary = {
+			issue_change_speed = 0.5
 		}
-		non_socialist = {
-			social_reform_desire = 0.2
-			global_immigrant_attract = 0.02
+		worker_councils = {
+			issue_change_speed = 0.5
+			poor_vote = 1
 		}
-		all_trade_unions = {
-			social_reform_desire = 0.3
-			global_immigrant_attract = 0.03
+		political_bureau = {
+			ruling_party_support = 0.15
+			rich_vote = 0.5
+			middle_vote = 0.5
+			poor_vote = 0.1
 		}
 	}
 
@@ -301,26 +323,12 @@ political_reforms = {
 		next_step_only = yes
 		primary_culture_only = {
 			rules = { primary_culture_voting = yes }
-			non_accepted_pop_militancy_modifier = 0.02
-			global_assimilation_rate = 0.05
-			global_immigrant_attract = -0.02
-			allow = {
-				citizenship_policy = residency 
-			}
 		}
 		culture_voting_only = {
 			rules = { culture_voting = yes }
-			allow = {
-				NOT = { citizenship_policy = residency }
-			}
 		}
 		all_voting_pops = {
 			rules = { all_voting = yes }
-			non_accepted_pop_militancy_modifier = -0.02
-			global_immigrant_attract = 0.02
-			allow = {
-				NOT = { citizenship_policy = residency }
-			}
 		}
 	}
 	
@@ -355,6 +363,7 @@ political_reforms = {
 			mobilisation_size = 0.03
 			global_immigrant_attract = 0.06
 			min_military_spending = 0.1
+			# monthly stab -0.02
 			
 			allow = { always = no }
 			administrative_multiplier = 1
@@ -367,6 +376,7 @@ political_reforms = {
 			mobilisation_size = 0.04
 			global_immigrant_attract = 0.03
 			min_military_spending = 0.2
+			# monthly stab -0.04
 			
 			allow = { always = no }
 			administrative_multiplier = 2
@@ -378,6 +388,7 @@ political_reforms = {
 			supply_consumption = -0.1
 			mobilisation_size = 0.05
 			min_military_spending = 0.3
+			# monthly stab -0.07
 			
 			allow = { always = no }
 			administrative_multiplier = 3
@@ -389,6 +400,7 @@ political_reforms = {
 			mobilisation_size = 0.08
 			global_immigrant_attract = -0.05
 			min_military_spending = 0.5
+			# monthly stab -0.1
 			
 			allow = { always = no }
 			administrative_multiplier = 4
@@ -494,55 +506,6 @@ political_reforms = {
 
 	centralization = {
 		regionalism = {
-			global_assimilation_rate = -0.25
-			administrative_efficiency_modifier = -0.05
-			diplomatic_points_modifier = -0.1
-			cb_generation_speed_modifier = -0.05
-			allow = {
-				NOT = { has_country_flag = is_totalitarian_flag }
-			}
-		}
-		confederalism = {
-			global_pop_militancy_modifier = -0.02
-			suppression_points_modifier = -0.30
-			administrative_efficiency_modifier = -0.1
-			allow = {
-				NOT = {
-					number_of_states = 8
-				}
-				NOT = { has_country_flag = is_totalitarian_flag }
-			}
-		}
-		federalism = {
-			core_pop_militancy_modifier = -0.01
-			suppression_points_modifier = -0.1
-			global_assimilation_rate = 0.05
-			allow = {
-				has_country_flag = has_rev_n_counterrev_flag
-				NOT = { has_country_flag = is_totalitarian_flag }
-			}
-		}
-		unitary = {
-			global_assimilation_rate = 0.2
-			non_accepted_pop_consciousness_modifier = 0.02
-			non_accepted_pop_militancy_modifier = 0.02
-			leadership_modifier = 0.1
-			cb_generation_speed_modifier = 0.1
-			allow = {
-				has_country_flag = has_rev_n_counterrev_flag
-				NOT = { has_country_flag = is_totalitarian_flag }
-			}
-		}
-		totalitarianism = {
-			tax_efficiency = 0.02
-			cb_generation_speed_modifier = 0.2
-			suppression_points_modifier = 0.2
-			global_pop_consciousness_modifier = -0.02
-			global_pop_militancy_modifier = 0.01
-			allow = {
-				has_country_flag = has_rev_n_counterrev_flag
-				has_country_flag = is_totalitarian_flag
-			}
 		}
 	}
 }
