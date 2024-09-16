@@ -808,72 +808,24 @@ promote_to =
 	}
 	clergymen =
 	{
-		factor = 0.01		
+		factor = 0.01
 		group = {
 			modifier = {
-				factor = 1
-				literacy = 0.1
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.2
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.3
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.4
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.5
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.6
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.7
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.8
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.9
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.99
-			}
-		}
-		group = {
-			modifier = {
-				factor = 8
+				factor = 3
 				country = {
-					school_reforms = low_schools
+					education_institution = low_education_investment
 				}
 			}
 			modifier = {
-				factor = 8
+				factor = 3
 				country = {
-					school_reforms = acceptable_schools
+					education_institution = medium_education_investment
 				}
 			}
 			modifier = {
-				factor = 8
+				factor = 3
 				country = {
-					school_reforms = good_schools
-				}
-			}
-			modifier = {
-				factor = 8
-				country = {
-					school_reforms = compulsory_schools
+					education_institution = high_education_investment
 				}
 			}
 		}
@@ -931,7 +883,7 @@ promote_to =
 		}
 		modifier = {
 			factor = -100
-			clergymen = 0.02
+			clergymen = 0.01
 			country = {
 				ai = no
 				school_reforms = no_schools
@@ -939,26 +891,70 @@ promote_to =
 		}
 		modifier = {
 			factor = -100
-			clergymen = 0.025
+			clergymen = 0.015
 			country = {
 				ai = no
-				school_reforms = low_schools
+				school_reforms = private_schools
+			}
+		}
+		modifier = {
+			factor = 100
+			clergymen = 0.015
+			NOT = { clergymen = 0.025 }
+			country = {
+				ai = no
+				school_reforms = private_schools
+				education_institution = low_education_investment
 			}
 		}
 		modifier = {
 			factor = -100
-			clergymen = 0.03
+			clergymen = 0.02
 			country = {
 				ai = no
-				school_reforms = acceptable_schools
+				OR = {
+					school_reforms = mixed_schools
+					school_reforms = public_schools
+				}
 			}
 		}
 		modifier = {
-			factor = -100
-			clergymen = 0.035
+			factor = 100
+			clergymen = 0.02
+			NOT = { clergymen = 0.03 }
 			country = {
 				ai = no
-				school_reforms = good_schools
+				OR = {
+					school_reforms = private_schools
+					school_reforms = public_schools
+				}
+				education_institution = low_education_investment
+			}
+		}
+		modifier = {
+			factor = 100
+			clergymen = 0.02
+			NOT = { clergymen = 0.035 }
+			country = {
+				ai = no
+				OR = {
+					school_reforms = private_schools
+					school_reforms = public_schools
+				}
+				education_institution = medium_education_investment
+			}
+		}
+		modifier = {
+			factor = 100
+			clergymen = 0.02
+			NOT = { clergymen = 0.04 }
+			country = {
+				ai = no
+				OR = {
+					school_reforms = private_schools
+					school_reforms = public_schools
+				}
+				education_institution = high_education_investment
 			}
 		}
 		modifier = {

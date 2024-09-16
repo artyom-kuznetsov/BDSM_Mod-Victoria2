@@ -403,16 +403,19 @@ political_reforms = {
 	}
 	
 	border_policy = {
+		administrative = yes
 		closed_borders = {
+			administrative_multiplier = 2
 		}
 		quota_immigration = {
+			administrative_multiplier = 1
 		}
 		open_borders = {
 		}
 	}
 
 	military_organization = {
-		next_step_only = yes
+		administrative = yes
 		
 		min_organization = {
 			allow = { always = no }
@@ -420,54 +423,83 @@ political_reforms = {
 		
 		low_organization = {
 			allow = { always = no }
+			administrative_multiplier = 1
 		}
 		
 		medium_organization = {
 			allow = { always = no }
+			administrative_multiplier = 2
 		}
 		
 		high_organization = {
 			allow = { always = no }
+			administrative_multiplier = 3
 		}
 		
 		total_war_organization = {
 			allow = { always = no }
+			administrative_multiplier = 4
 		}
 		
 	}
 	
 	security = {
+		administrative = yes
 		no_security = {
+			administrative_efficiency_modifier = -0.1
+			tax_efficiency = -0.01
+			global_pop_militancy_modifier = 0.03
+			global_pop_consciousness_modifier = -0.03
 			allow = { always = no }
 		}
 		
 		minimal_security = {
+			administrative_efficiency_modifier = -0.05
+			global_pop_militancy_modifier = 0.01
+			global_pop_consciousness_modifier = -0.01
+			administrative_multiplier = 1
 			allow = { always = no }
+			global_immigrant_attract = 0.04
 		}
 		
 		moderate_security = {
+			administrative_multiplier = 2
+			tax_efficiency = 0.01
+			global_pop_militancy_modifier = -0.01
 			allow = { always = no }
+			global_immigrant_attract = 0.08
 		}
 		
 		police_state = {
+			administrative_multiplier = 3
+			tax_efficiency = 0.01
+			global_pop_militancy_modifier = -0.03
+			global_pop_consciousness_modifier = -0.03
 			allow = { always = no }
+			global_immigrant_attract = 0.03
 		}
 	}
 	
 	education_institution = {
+		administrative = yes
 		no_education_investment = {
 			allow = { always = no }
 		}
 		
 		low_education_investment = {
 			allow = { always = no }
+			global_immigrant_attract = 0.02
 		}
 		
 		medium_education_investment = {
+			administrative_multiplier = 1
 			allow = { always = no }
+			global_immigrant_attract = 0.05
 		}
 		
 		high_education_investment = {
+			administrative_multiplier = 2
+			global_immigrant_attract = 0.08
 			allow = { always = no }
 		}
 	}
@@ -478,14 +510,29 @@ political_reforms = {
 		}
 		
 		low_healthcare_investment = {
+			global_population_growth = 0.001
+			min_social_spending = 0.2
+			max_social_spending = 0.2
+			pension_level = 1
+			global_immigrant_attract = 0.02
 			allow = { always = no }
 		}
 		
 		medium_healthcare_investment = {
+			min_social_spending = 0.4
+			max_social_spending = 0.4
+			pension_level = 1
+			global_population_growth = 0.002
+			global_immigrant_attract = 0.05
 			allow = { always = no }
 		}
 		
 		high_healthcare_investment = {
+			min_social_spending = 0.6
+			max_social_spending = 0.6
+			pension_level = 1
+			global_population_growth = 0.003
+			global_immigrant_attract = 0.08
 			allow = { always = no }
 		}
 	}
@@ -678,47 +725,44 @@ social_reforms = {
 	health_care = {
 		next_step_only = no	
 		no_health_care = {
-			max_social_spending = 0.01
+			global_population_growth = 0.001
 		}
 		trinket_health_care = {
+			global_population_growth = 0.001
+			tax_efficiency = 0.02
+			global_immigrant_attract = 0.04
 		}
 		low_health_care = {
+			min_social_spending = 0.2
+			max_social_spending = 0.2
+			global_population_growth = 0.001
+			tax_efficiency = 0.01
+			global_immigrant_attract = 0.07
 		}
 		acceptable_health_care = {
+			min_social_spending = 0.4
+			max_social_spending = 0.4
+			global_population_growth = 0.001
+			global_immigrant_attract = 0.1
 		}
 	}
+	
 	school_reforms = {
-		administrative = yes	
-		next_step_only = yes	
+		administrative = yes
 		no_schools = {
 		}
-		low_schools = {
+		private_schools = {
+			tax_efficiency = 0.02
+			global_immigrant_attract = 0.02
+		}
+		mixed_schools = {
+			tax_efficiency = 0.01
 			global_assimilation_rate = 0.05
-			global_immigrant_attract = 0.02	
-			allow = {
-				always = no
-			}
-		}
-		acceptable_schools = {
-			global_assimilation_rate = 0.1
-			global_immigrant_attract = 0.03
-			allow = {
-				always = no
-			}
-		}
-		good_schools = {
-			global_assimilation_rate = 0.15
-			global_immigrant_attract = 0.04
-			allow = {
-				always = no
-			}
-		}
-		compulsory_schools = {
-			global_assimilation_rate = 0.2
 			global_immigrant_attract = 0.05
-			allow = {
-				always = no
-			}
+		}
+		public_schools = {
+			global_assimilation_rate = 0.1
+			global_immigrant_attract = 0.1
 		}
 	}
 	penal_system = {
