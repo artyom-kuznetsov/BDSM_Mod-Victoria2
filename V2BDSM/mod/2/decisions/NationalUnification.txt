@@ -190,6 +190,7 @@ political_decisions = {
 			change_tag = culture
 			any_country = {
 				limit = {
+					ai = yes
 					NOT = {
 						is_greater_power = yes
 						tag = AUS
@@ -198,7 +199,7 @@ political_decisions = {
 					is_culture_group = THIS
 					in_sphere = THIS
 				}
-				country_event = { id=11101 days=0 }
+				annex_to = THIS
 			}
 			add_accepted_culture = union
 		}

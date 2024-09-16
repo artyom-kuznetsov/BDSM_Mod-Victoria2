@@ -981,45 +981,6 @@ country_event = {
 	}
 }
 
-#Foreign governant
-country_event = {
-	id = 13120
-	title = "EVTNAME13120"
-	desc = "EVTDESC13120"
-	
-	#news_desc_long = "EVTDESC13120_NEWS_LONG"
-	#news_desc_medium = "EVTDESC13120_NEWS_MEDIUM"
-	#news_desc_short = "EVTDESC13120_NEWS_SHORT"
-	picture = "Western_education"
-
-	trigger = {
-		has_country_flag = princes_recieve_foreign_education
-		OR = {
-			government = hms_government
-			government = absolute_monarchy
-		}
-		slavery = yes_slavery
-	}
-
-	mean_time_to_happen = {
-		months = 12
-	}
-
-	option = {
-		name = "EVTOPTA13120"
-		years_of_research = 0.01
-	}
-
-	option = {
-		name = "EVTOPTB13120"
-		political_reform = no_slavery
-		prestige = 5
-		any_pop = {
-			militancy = 3
-		}
-	}
-}
-
 #Military Mission
 province_event = {
 	id = 13130

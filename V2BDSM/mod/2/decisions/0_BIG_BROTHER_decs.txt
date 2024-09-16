@@ -223,7 +223,7 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 1600000
+						total_pops = 2240000
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 9
@@ -247,8 +247,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 1400000
-						NOT = { total_pops = 1600000 }
+						total_pops = 1920000
+						NOT = { total_pops = 2240000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 8
@@ -272,8 +272,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 1200000
-						NOT = { total_pops = 1400000 }
+						total_pops = 1600000
+						NOT = { total_pops = 1920000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 7
@@ -297,8 +297,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 1000000
-						NOT = { total_pops = 1200000 }
+						total_pops = 1280000
+						NOT = { total_pops = 1600000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 6
@@ -322,8 +322,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 800000
-						NOT = { total_pops = 1000000 }
+						total_pops = 960000
+						NOT = { total_pops = 1280000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 5
@@ -347,8 +347,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 600000
-						NOT = { total_pops = 800000 }
+						total_pops = 640000
+						NOT = { total_pops = 960000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 4
@@ -372,8 +372,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 400000
-						NOT = { total_pops = 600000 }
+						total_pops = 480000
+						NOT = { total_pops = 640000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 3
@@ -397,8 +397,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 200000
-						NOT = { total_pops = 400000 }
+						total_pops = 280000
+						NOT = { total_pops = 480000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 2
@@ -422,8 +422,8 @@ political_decisions = {
 							trade_goods = opium
 							trade_goods = tobacco
 						}
-						total_pops = 100000
-						NOT = { total_pops = 200000 }
+						total_pops = 140000
+						NOT = { total_pops = 280000 }
 					}
 					## Audax Validator "." Ignore_NEXT
 					farmland = 1
@@ -435,75 +435,11 @@ political_decisions = {
 			any_country = {
 				treasury = 200000
 			}
-			any_country = {
-				limit = {
-					tag = NET
-					ai = no
-				}
-				badboy = 12.5
-			}
-			AUS = {
-				any_pop = {
-					limit = {
-						OR = {
-							culture = north_italian
-							culture = venetian
-						}
-					}
-					literacy = 0.3
-				}
-			}
-			ENG = {
-				any_pop = {
-					limit = {
-						culture = irish
-					}
-					literacy = 0.2
-				}
-			}
 			CIV = { 
 				# Audax Validator "." Ignore_NEXT
 				annex_to = FROM 
 			}
 			
-			any_country = { # мер опюб цнкняю
-				limit = {
-					vote_franschise = none_voting
-					NOT = { has_country_flag = none_voting_flag }
-				}
-				set_country_flag = none_voting_flag
-			}
-			any_country = { # цнкнясчр анцюрше
-				limit = {
-					vote_franschise = wealth_weighted_voting
-					NOT = { has_country_flag = wealth_weighted_voting_flag }
-				}
-				set_country_flag = wealth_weighted_voting_flag
-			}
-			any_country = {
-				limit = {
-					OR = {
-						primary_culture = anglo_canadian
-						tag = EIC
-					}
-				}
-				add_country_modifier = { name = canadian_unifier_modifier duration = 3650 }
-			}
-			any_country = {
-				limit = {
-					primary_culture = anglo_canadian
-					ai = no
-				}
-				set_global_flag = canada_has_player_flag
-			}
-			META_1 = {
-				limit = {
-					has_global_flag = canada_has_player_flag
-					# Audax Validator "." Ignore_NEXT
-					is_core = CAN
-				}
-				life_rating = 5
-			}
 		}
 		ai_will_do = { factor = 1 }
 	}

@@ -529,47 +529,6 @@ demotion_chance =
 		strata = poor
 	}
 	
-	### SERFDOM 
-	modifier = {
-		factor = -0.08
-		country = {
-			debt_law = serfdom
-		}
-	}
-	
-	modifier = {
-		factor = -0.05
-		country = {
-			debt_law = peonage
-		}
-	}
-	
-	modifier = {
-		factor = -0.03
-		country = {
-			debt_law = debtors_prisons
-		}
-	}
-	
-	### SLAVERY DEMOTE SLOWER
-	modifier = {
-		factor = -0.1
-		country = { slavery = yes_slavery }
-	}
-	
-	modifier = {
-		factor = -0.05
-		country = { slavery = freedom_of_womb }
-	}
-	
-	### SLAVE STATES DEMOTE SLOWER
-	modifier = {
-		factor = -0.05
-		state_scope = {
-			is_slave = yes
-		}
-	}
-	
 	### NON-ACCEPTED DEMOTE SLOWER
 	modifier = {
 		factor = -0.1
@@ -1017,14 +976,6 @@ emigration_chance =
 		}
 	}
 	
-	modifier = {
-		factor = 0.03
-		country = {
-			NOT = { trade_unions = all_trade_unions }
-		}
-		is_ideology_enabled = socialist
-	}
-
 	group = {
 
 		modifier = {
@@ -1193,78 +1144,18 @@ emigration_chance =
 		agree_with_ruling_party = 0.25
 	}
 	
-	### CITIZENSHIP POLICY
-	modifier = {
-		factor = 0.05
-		country = { citizenship_policy = residency }
-		NOT = { 
-			is_primary_culture = yes
-			is_accepted_culture = yes 
-		}
-	}
-	modifier = {
-		factor = 0.04
-		country = { citizenship_policy = limited_citizenship }
-		NOT = { 
-			is_primary_culture = yes
-			is_accepted_culture = yes 
-		}
-	}
 
-	modifier = {
-		factor = -2.0
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		year = 1900
-	}
-	
 	modifier = {
 		factor = -2.0
 		state_scope = { is_colonial = yes }
 	}
 	
-	modifier = {
-		factor = -0.15
-		country = {
-			has_country_flag = uesugi_flag
-		}
-	}
-	
-	modifier = {
-		factor = 0.1
-		country = { citizens_rights = primary_culture_only }
-		NOT = { 
-			is_primary_culture = yes
-		}
-	}
-	
-	modifier = {
-		factor = 0.1
-		country = { citizens_rights = culture_voting_only }
-		is_primary_culture = no
-		is_accepted_culture = no
-	}
-	
-	modifier = {
-		factor = -1
-		country = { 
-			OR = {
-				primary_culture = japanese
-				primary_culture = beifaren
-				primary_culture = javan
-			}
-			NOT = { year = 1870 }
-		}
-	}
 	
 	modifier = {
 		factor = -1
 		country = {
-			year = 1836
-			NOT = { month = 2 year = 1837 }
+			year = 1992
+			NOT = { month = 3 year = 1993 }
 		}
 	}
 	modifier = {
@@ -1272,57 +1163,6 @@ emigration_chance =
 		strata = rich
 	}
 
-	group = {
-		modifier = {
-			factor = -0.02
-			country = {
-				vote_franschise = wealth_weighted_voting
-			}
-		}
-		modifier = {
-			factor = -0.02
-			country = {
-				vote_franschise = wealth_voting
-			}
-		}
-		modifier = {
-			factor = -0.01
-			country = {
-				vote_franschise = universal_weighted_voting
-			}
-		}
-		modifier = {
-			factor = -0.01
-			country = {
-				vote_franschise = universal_voting
-			}
-		}
-	}
-	
-	modifier = {
-		factor = 0.02
-		country = {
-			vote_franschise = none_voting
-		}
-	}
-	
-	modifier = {
-		factor = -0.02
-		country = {
-			press_rights = free_press
-		}
-	}
-	
-	
-	modifier = {
-		factor = -0.12
-		country = { border_policy = quota_immigration ai = yes }
-	}
-	
-	modifier = {                                                                  
-		factor = -0.3                             
-		country = { border_policy = closed_borders ai = yes }
-	}
 	
 	modifier = {
 		factor = -0.2

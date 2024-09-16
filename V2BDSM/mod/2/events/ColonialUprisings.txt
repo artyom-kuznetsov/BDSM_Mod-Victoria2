@@ -1331,54 +1331,6 @@ country_event = {
 }
 
 
-# A Boatload of Bananas
-country_event = {
-	id = 14700
-	title = "EVTNAME14700"
-	desc = "EVTDESC14700"
-	picture = "emigration"
-	
-	trigger = {
-		colonial_nation = yes
-		market_regulations = 1
-	}
-	
-	mean_time_to_happen = {
-		months = 1200
-		modifier = {
-			factor = 0.9
-			average_consciousness = 5
-		}
-		modifier = {
-			factor = 0.9
-			is_greater_power = yes
-		}
-		modifier = {
-			factor = 0.9
-			nationalism_n_imperialism = 1
-		}
-		modifier = {
-			factor = 0.9
-			economic_policy = laissez_faire
-		}
-		modifier = {
-			factor = 0.8
-			invention = refrigerator_technology
-		}
-		modifier = {
-			factor = 1.5
-			average_militancy = 5
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA14700"
-		plurality = 1
-		any_pop = {
-			militancy = -0.5
-		}
-	}
-}
 
 # War is a Racket
 country_event = {
@@ -1837,69 +1789,6 @@ country_event = {
 				consciousness = -2
 			}
 		}
-	}
-}
-
-# Colonial Diseases
-country_event = {
-	id = 14780
-	title = "EVTNAME14780"
-	desc = "EVTDESC14780"
-	picture = "smallpox"
-	
-	trigger = {
-		colonial_nation = yes
-		explosives = 2
-		cement = 15
-		steel = 5
-		lumber = 20
-	}
-	
-	mean_time_to_happen = {
-		months = 1000
-		modifier = {
-			factor = 0.9
-			NOT = {
-				poor_strata_everyday_needs = 0.8
-			}
-		}
-		modifier = {
-			factor = 0.9
-			NOT = {
-				OR = {
-					health_care = good_health_care
-					health_care = acceptable_health_care
-				}
-			}
-		}
-		modifier = {
-			factor = 0.9
-			average_militancy = 5
-		}
-		modifier = {
-			factor = 1.5
-			health_care = good_health_care
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA14780"
-		random_state = {
-			limit = {
-				is_colonial = yes
-			}
-			any_owned = {
-				life_rating = -1
-			}
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB14780"
-		explosives = -2
-		cement = -15
-		steel = -5
-		lumber = -20
 	}
 }
 

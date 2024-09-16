@@ -340,28 +340,6 @@ gasification = {
 		factory_throughput = 0.05
 	}
 }
-vacuum_tube = {
-	limit = { 
-		electricity = 1
-		modern_power_generation = 1
-	}
-	chance = {
-		base = 1
-		modifier = {
-			factor = 2
-			invention = direct_current
-		}
-		modifier = {
-			factor = 2
-			invention = alternating_current
-		}			
-	}
-	effect = {
-		factory_goods_output = { radio = 0.03 }
-		factory_goods_output = { telephones = 0.03 }
-		factory_goods_output = { electric_gear = 0.03 } 
-	}
-}
 #mechanical_production
 sharp_n_roberts_power_loom = {
 	limit = { mechanical_production = 1 }
@@ -474,44 +452,6 @@ machine_tools = {
 		}
 		factory_throughput = 0.05		
 		mine_RGO_eff = 0.1
-	}
-}
-whitney_n_colts_standardized_small_arms = {
-	limit = { interchangeable_parts = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			breech_loaded_rifles = 1
-		}
-		modifier = {
-			factor = 2
-			invention = manifest_destiny
-		}
-	}
-	effect = {
-		factory_goods_output = {
-			small_arms = 0.02 
-		}
-	}
-}
-food_packing_system = {
-	limit = { interchangeable_parts = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = distribution_channels
-		}
-		modifier = {
-			factor = 2
-			invention = limited_partnership_company
-		}
-	}
-	effect = {
-		factory_goods_output = {
-			canned_food = 0.02 
-		}
 	}
 }
 integral_distillery_process = {
@@ -667,68 +607,6 @@ fordism = {
 #	effect = {
 #	}
 #}
-industrialized_armament_industry = {
-	limit = { assembly_line = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = precision_work
-		}
-		modifier = {
-			factor = 2
-			invention = whitney_n_colts_standardized_small_arms
-		}
-	}
-	effect = {
-		factory_goods_output = {
-			small_arms = 0.03
-		}
-		factory_goods_output = {
-			ammunition = 0.03
-		}
-		factory_goods_output = {
-			artillery = 0.03
-		}
-		factory_goods_output = {
-			explosives = 0.03
-		}
-	}
-}
-refrigerator_technology = {
-	limit = { assembly_line = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = food_packing_system
-		}
-		modifier = {
-			factor = 2
-			integral_rail_system = 1
-		}
-	}
-	effect = {
-		rgo_goods_output = {
-			cattle = 0.2
-		}
-		rgo_goods_output = {
-			fruit = 0.1
-		}
-		rgo_goods_output = {
-			fish = 0.1
-		}
-		factory_goods_output = {
-			liquor = 0.02
-		}
-		factory_goods_output = {
-			wine = 0.02
-		}
-		factory_goods_output = {
-			pharmaceuticals = 0.02
-		}
-	}
-}
 #shift_work
 shift_schedule = {
 	limit = { shift_work = 1 }
@@ -799,24 +677,6 @@ factory_automation_infrastructure = {
 	}
 	effect = {
 		factory_throughput = 0.03
-	}
-}
-#Metulurgy
-ammunition_production = {
-	limit = { mechanized_mining = 1 }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 5
-			invention = whitney_n_colts_standardized_small_arms
-		}
-		modifier = {
-			factor = 5
-			army_professionalism = 1
-		}
-	}
-	effect = {
-		activate_building = ammunition_factory 
 	}
 }
 small_arms_production = {

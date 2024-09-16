@@ -213,157 +213,6 @@ political_reforms = {
 		}
 	}
 	
-	economic_system = {
-		administrative = yes
-		traditionalism_r = {
-			administrative_multiplier = -5
-			allow = { always = no }
-			global_pop_consciousness_modifier = -0.05
-			factory_throughput = -0.9
-			rgo_output = -0.5
-			
-			rules = {
-				build_factory = no
-				expand_factory = no
-				open_factory = no
-				destroy_factory = no
-				build_railway = no
-				factory_priority = no
-				can_subsidise = no
-				pop_build_factory = no
-				pop_expand_factory = no
-				pop_open_factory = no
-				delete_factory_if_no_input = yes
-				pop_build_factory_invest = no
-				pop_expand_factory_invest = no
-				open_factory_invest = no
-				allow_foreign_investment = yes
-				build_railway_invest = no
-				can_invest_in_pop_projects = no
-			}
-		}
-		agrarianism_r = {
-			allow = { always = no }
-			global_pop_consciousness_modifier = -0.02
-			factory_throughput = -0.5
-			rgo_output = 0.2
-			
-			rules = {
-				build_factory = no
-				expand_factory = no
-				open_factory = no
-				destroy_factory = yes
-				build_railway = yes
-				factory_priority = no
-				can_subsidise = no
-				pop_build_factory = yes
-				pop_expand_factory = yes
-				pop_open_factory = yes
-				delete_factory_if_no_input = yes
-				pop_build_factory_invest = no
-				pop_expand_factory_invest = no
-				open_factory_invest = no
-				allow_foreign_investment = yes
-				build_railway_invest = yes
-				can_invest_in_pop_projects = yes
-			}
-		}
-		interventionism_r = {
-			allow = { always = no }
-			administrative_multiplier = 2
-			
-			rules = {
-				build_factory = yes
-				expand_factory = yes
-				open_factory = yes
-				destroy_factory = yes
-				build_railway = yes
-				factory_priority = yes
-				can_subsidise = yes
-				pop_build_factory = yes
-				pop_expand_factory = yes
-				pop_open_factory = yes
-				delete_factory_if_no_input = no
-				pop_build_factory_invest = yes
-				pop_expand_factory_invest = yes
-				open_factory_invest = yes
-				allow_foreign_investment = yes
-				build_railway_invest = yes
-				can_invest_in_pop_projects = yes
-			}
-		}
-		laissez_faire_r = {
-			allow = { always = no }
-			administrative_multiplier = 1
-			
-			factory_owner_cost = 0.5
-			factory_maintenance = -0.1
-			
-			rules = {
-				build_factory = no
-				expand_factory = no
-				open_factory = no
-				destroy_factory = no
-				build_railway = no
-				factory_priority = no
-				can_subsidise = no
-				pop_build_factory = yes
-				pop_expand_factory = yes
-				pop_open_factory = yes
-				delete_factory_if_no_input = yes
-				pop_build_factory_invest = yes
-				pop_expand_factory_invest = yes
-				open_factory_invest = yes
-				allow_foreign_investment = yes
-				build_railway_invest = yes
-				can_invest_in_pop_projects = no
-			}
-		}
-		planned_economy_r = {
-			allow = { always = no }
-			administrative_multiplier = 4
-			factory_owner_cost = 1.5
-			
-			rules = {
-				build_factory = yes
-				expand_factory = yes
-				open_factory = yes
-				destroy_factory = yes		
-				build_railway = yes
-				factory_priority = yes
-				can_subsidise = yes
-				#pop_build_factory = yes	# DEFINED BY ANOTHER REFORM
-				pop_expand_factory = no
-				pop_open_factory = no
-				delete_factory_if_no_input = no
-				build_factory_invest = yes
-				expand_factory_invest = yes
-				build_railway_invest = yes
-				can_invest_in_pop_projects = yes
-			}
-		}
-	}
-	
-	upper_house_composition = {
-		party_appointed = {
-			rules = { same_as_ruling_party = yes }
-			ruling_party_support = 0.05
-		}
-		appointed = {
-			rules = { rich_only = yes }
-		}
-		state_equal_weight = {
-			rules = { state_vote = yes }
-			allow = {
-				NOT = { vote_franschise = none_voting }
-			}
-		}
-		population_equal_weight = {
-			rules = { population_vote = yes }
-			allow = { NOT = { vote_franschise = none_voting } }
-		}
-	}
-
 	public_meetings = {
 		no_meeting = {
 			suppression_points_modifier = 0.1
@@ -423,11 +272,23 @@ political_reforms = {
 		}
 	}
 	
-	conscription = {
-		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
+	pop_construction = {
+		no_pop_construction = {
+			rules = {
+				pop_build_factory = no
+			}
+			
 			allow = {
-				war_policy = pacifism
-				is_mobilised = no
+				always = no
+			}
+		}
+		yes_pop_construction = {
+			rules = {
+				pop_build_factory = yes
+			}
+			
+			allow = {
+				always = no
 			}
 		}
 	}
@@ -457,6 +318,182 @@ political_reforms = {
 		}
 	}
 
+	
+
+	healthcare_institution = {
+		no_healthcare_investment = {
+			allow = { always = no }
+		}
+		
+		low_healthcare_investment = {
+			global_population_growth = 0.001
+			min_social_spending = 0.2
+			max_social_spending = 0.2
+			pension_level = 1
+			global_immigrant_attract = 0.02
+			allow = { always = no }
+		}
+		
+		medium_healthcare_investment = {
+			min_social_spending = 0.4
+			max_social_spending = 0.4
+			pension_level = 1
+			global_population_growth = 0.002
+			global_immigrant_attract = 0.05
+			allow = { always = no }
+		}
+		
+		high_healthcare_investment = {
+			min_social_spending = 0.6
+			max_social_spending = 0.6
+			pension_level = 1
+			global_population_growth = 0.003
+			global_immigrant_attract = 0.08
+			allow = { always = no }
+		}
+	}
+	economic_system = {
+		administrative = yes
+		traditionalism_r = {
+			allow = { always = no }
+			administrative_multiplier = -5
+			global_pop_consciousness_modifier = -0.05
+			factory_throughput = -0.9
+			rgo_output = -0.5
+			
+			rules = {
+				build_factory = no
+				expand_factory = no
+				open_factory = no
+				destroy_factory = no
+				build_railway = no
+				factory_priority = no
+				can_subsidise = no
+				#pop_build_factory = no
+				pop_expand_factory = no
+				pop_open_factory = no
+				delete_factory_if_no_input = yes
+				pop_build_factory_invest = no
+				pop_expand_factory_invest = no
+				open_factory_invest = no
+				allow_foreign_investment = yes
+				build_railway_invest = no
+				can_invest_in_pop_projects = no
+			}
+		}
+		agrarianism_r = {
+			allow = { always = no }
+			global_pop_consciousness_modifier = -0.02
+			factory_throughput = -0.5
+			rgo_output = 0.2
+			
+			rules = {
+				build_factory = no
+				expand_factory = no
+				open_factory = no
+				destroy_factory = yes
+				build_railway = yes
+				factory_priority = no
+				can_subsidise = no
+				pop_build_factory = yes
+				pop_expand_factory = yes
+				pop_open_factory = yes
+				delete_factory_if_no_input = yes
+				pop_build_factory_invest = no
+				pop_expand_factory_invest = no
+				open_factory_invest = no
+				allow_foreign_investment = yes
+				build_railway_invest = yes
+				can_invest_in_pop_projects = yes
+			}
+		}
+		interventionism_r = {
+			allow = { always = no }
+			administrative_multiplier = 2
+			
+			rules = {
+				build_factory = yes
+				expand_factory = yes
+				open_factory = yes
+				destroy_factory = yes
+				build_railway = yes
+				factory_priority = yes
+				can_subsidise = yes
+				#pop_build_factory = yes
+				pop_expand_factory = yes
+				pop_open_factory = yes
+				delete_factory_if_no_input = no
+				pop_build_factory_invest = yes
+				pop_expand_factory_invest = yes
+				open_factory_invest = yes
+				allow_foreign_investment = yes
+				build_railway_invest = yes
+				can_invest_in_pop_projects = yes
+			}
+		}
+		laissez_faire_r = {
+			allow = { always = no }
+			administrative_multiplier = 1
+			
+			factory_owner_cost = 0.5
+			factory_maintenance = -0.1
+			
+			rules = {
+				build_factory = no
+				expand_factory = no
+				open_factory = no
+				destroy_factory = no
+				build_railway = no
+				factory_priority = no
+				can_subsidise = no
+				#pop_build_factory = yes
+				pop_expand_factory = yes
+				pop_open_factory = yes
+				delete_factory_if_no_input = yes
+				pop_build_factory_invest = yes
+				pop_expand_factory_invest = yes
+				open_factory_invest = yes
+				allow_foreign_investment = yes
+				build_railway_invest = yes
+				can_invest_in_pop_projects = no
+			}
+		}
+		planned_economy_r = {
+			allow = { always = no }
+			administrative_multiplier = 4
+			factory_owner_cost = 1.5
+			
+			rules = {
+				build_factory = yes
+				expand_factory = yes
+				open_factory = yes
+				destroy_factory = yes		
+				build_railway = yes
+				factory_priority = yes
+				can_subsidise = yes
+				#pop_build_factory = yes	# DEFINED BY ANOTHER REFORM
+				pop_expand_factory = no
+				pop_open_factory = no
+				delete_factory_if_no_input = no
+				build_factory_invest = yes
+				expand_factory_invest = yes
+				build_railway_invest = yes
+				can_invest_in_pop_projects = yes
+			}
+		}
+	}
+	
+
+	centralization = {
+		regionalism = {
+		}
+	}
+}
+
+##########################################
+# Social reforms.
+##########################################
+social_reforms = {
 	military_organization = {
 		administrative = yes
 		
@@ -583,50 +620,6 @@ political_reforms = {
 			allow = { always = no }
 		}
 	}
-
-	healthcare_institution = {
-		no_healthcare_investment = {
-			allow = { always = no }
-		}
-		
-		low_healthcare_investment = {
-			global_population_growth = 0.001
-			min_social_spending = 0.2
-			max_social_spending = 0.2
-			pension_level = 1
-			global_immigrant_attract = 0.02
-			allow = { always = no }
-		}
-		
-		medium_healthcare_investment = {
-			min_social_spending = 0.4
-			max_social_spending = 0.4
-			pension_level = 1
-			global_population_growth = 0.002
-			global_immigrant_attract = 0.05
-			allow = { always = no }
-		}
-		
-		high_healthcare_investment = {
-			min_social_spending = 0.6
-			max_social_spending = 0.6
-			pension_level = 1
-			global_population_growth = 0.003
-			global_immigrant_attract = 0.08
-			allow = { always = no }
-		}
-	}
-
-	centralization = {
-		regionalism = {
-		}
-	}
-}
-
-##########################################
-# Social reforms.
-##########################################
-social_reforms = {
 	wage_reform = {
 		administrative = yes	
 		next_step_only = yes
@@ -987,7 +980,6 @@ economic_reforms = {
 					set_country_flag = education_reform
 					#activate_technology = malthusian_thought
 					#activate_technology = positivism
-					social_reform = compulsory_schools
 					any_pop = {
 						scaled_militancy = {
 							ideology = liberal

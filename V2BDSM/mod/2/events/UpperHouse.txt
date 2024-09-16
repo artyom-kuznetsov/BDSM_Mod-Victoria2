@@ -162,60 +162,6 @@ country_event = {
 }
 
 country_event = {
-	id = 18040
-	title = "EVTNAME18040"
-	desc = "EVTDESC18040"
-	picture = "Upperhouse"
-	
-	trigger = {
-		is_ideology_enabled = socialist
-		political_reform_want = 0.1
-		average_militancy = 4
-		NOT = {
-			upper_house = {
-				ideology = socialist
-				value = 0.1
-			}
-			trade_unions = all_trade_unions
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 300
-	}
-	
-	option = {
-		name = "EVTOPTA18040"
-		plurality = -0.25
-		upper_house = {
-			ideology = socialist
-			value = 0.2
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB18040"
-		plurality = -1
-		upper_house = {
-			ideology = socialist
-			value = 0.1
-		}
-		scaled_militancy = {
-			issue = all_trade_unions
-			factor = 3
-		}
-		scaled_militancy = {
-			issue = state_controlled
-			factor = 3
-		}
-		scaled_militancy = {
-			issue = non_socialist
-			factor = 3
-		}
-	}
-}
-
-country_event = {
 	id = 18050
 	title = "EVTNAME18050"
 	desc = "EVTDESC18050"

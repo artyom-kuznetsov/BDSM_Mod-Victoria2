@@ -17,61 +17,6 @@ multitude_of_financial_instruments = {
 		tax_eff = 1
 	}
 }
-insurance_companies = {
-	limit = { stock_exchange = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			economic_policy = laissez_faire
-		}
-		modifier = {
-			factor = 2
-			slavery = no_slavery
-		}
-	}
-	effect = {
-		tax_eff = 1 
-	}
-}
-regulated_buying_and_selling_of_stocks = {
-	limit = { stock_exchange = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			economic_policy = interventionism
-		}
-		modifier = {
-			factor = 1
-			economic_policy = state_capitalism
-		}
-	}
-	effect = {
-		tax_eff = 1 
-	}
-}
-#business_banks
-liquidation_of_assets = {
-	limit = { business_banks = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 3
-			economic_policy = laissez_faire
-		}
-		modifier = {
-			factor = 2
-			trade_policy = protectionism
-		}
-	}
-	effect = {
-		factory_cost = -0.01
-	}
-}
 capital_for_investors = {
 	limit = { business_banks = 1 }
 	news = no
@@ -470,25 +415,6 @@ PS_unlocked = {
 	}
 }
 
-#late_classical_theory
-john_elliot_cairnes = {
-	limit = { late_classical_theory = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			nationalvalue = nv_liberty
-		}
-		modifier = {
-			factor = 1
-			trade_unions = all_trade_unions
-		}
-	}
-	effect = {
-		permanent_prestige = 1 
-	}
-}
 robert_torrens = {
 	limit = { late_classical_theory = 1 }
 	news = no
@@ -705,24 +631,6 @@ wilhelm_roscher = {
 		modifier = {
 			factor = 1
 			nationalvalue = nv_order
-		}
-	}
-	effect = {
-		permanent_prestige = 1 
-	}
-}
-bruno_hildebrand = {
-	limit = { the_historical_theory = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			economic_policy = interventionism
-		}
-		modifier = {
-			factor = 1
-			religious_policy = pluralism
 		}
 	}
 	effect = {
@@ -1739,24 +1647,7 @@ i_scientific_management = {
 		factory_output = 0.01
 	}
 }
-human_resource_development = {
-	limit = { organizational_development = 1 }
-	news = no
-	chance = {
-		base = 3
-		modifier = {
-			factor = 2
-			average_consciousness = 3
-		}
-		modifier = {
-			factor = 2
-			trade_unions = all_trade_unions
-		}
-	}
-	effect = {
-		factory_output = 0.01
-	}
-}
+
 supply_chain_management = {
 	limit = { organizational_development = 1 }
 	news = no

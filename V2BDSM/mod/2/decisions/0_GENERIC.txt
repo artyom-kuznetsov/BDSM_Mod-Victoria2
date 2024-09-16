@@ -1,4 +1,36 @@
 political_decisions = {
+	pop_construction_dec = {
+		alert = no
+		potential = {
+			ai = no
+			OR = {
+				economic_system = agrarianism_r
+				economic_system = planned_economy_r
+			}
+		}
+		
+		allow = { }
+		
+		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						pop_construction = no_pop_construction
+					}
+				}
+				owner = { political_reform = yes_pop_construction }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						pop_construction = yes_pop_construction
+					}
+				}
+				owner = { political_reform = no_pop_construction }
+			}
+		}
+	}
+
 	governments_assistance_dec = {
 		alert = no
 		potential = {
@@ -124,142 +156,6 @@ political_decisions = {
 			clr_country_flag = martial_law_flag
 		}
 	}
-
-	med_reform_0_to_1_dec = {
-		alert = yes
-		potential = {
-			civilized = yes
-			health_care = no_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-		}
-		
-		allow = {
-			medicine = 1
-			literacy = 0.25
-		}
-		
-		effect = {
-			social_reform = trinket_health_care
-		}
-	}
-	med_reform_1_to_0_dec = {
-		alert = no
-		potential = {
-			civilized = yes
-			health_care = trinket_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			social_reform = no_health_care
-		}
-	}
-	
-	med_reform_1_to_2_dec = {
-		alert = yes
-		potential = {
-			civilized = yes
-			health_care = trinket_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-		}
-		
-		allow = {
-			inorganic_chemistry = 1
-			literacy = 0.4
-		}
-		
-		effect = {
-			social_reform = low_health_care
-		}
-	}
-	med_reform_2_to_1_dec = {
-		alert = no
-		potential = {
-			civilized = yes
-			health_care = low_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			social_reform = trinket_health_care
-		}
-	}
-	
-	med_reform_2_to_3_dec = {
-		alert = yes
-		potential = {
-			civilized = yes
-			health_care = low_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-		}
-		
-		allow = {
-			electricity = 1
-			literacy = 0.6
-		}
-		
-		effect = {
-			social_reform = acceptable_health_care
-		}
-	}
-	med_reform_3_to_2_dec = {
-		alert = no
-		potential = {
-			civilized = yes
-			health_care = acceptable_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			social_reform = low_health_care
-		}
-	}
-	
-	med_reform_3_to_4_dec = {
-		alert = yes
-		potential = {
-			civilized = yes
-			health_care = acceptable_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-		}
-		
-		allow = {
-			synthetic_polymers = 1
-			literacy = 0.75
-		}
-		
-		effect = {
-			social_reform = good_health_care
-		}
-	}
-	med_reform_4_to_3_dec = {
-		alert = no
-		potential = {
-			civilized = yes
-			health_care = good_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
-			ai = no
-		}
-		
-		allow = {
-		}
-		
-		effect = {
-			social_reform = acceptable_health_care
-		}
-	}
 	
 	
 	capitulate_dec = {
@@ -366,76 +262,6 @@ political_decisions = {
 		
 		ai_will_do = {
 			factor = 0
-		}
-	}
-	
-	education_schools_low_dec = {
-		alert = yes
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			civilized = yes
-			NOT = { school_reforms = compulsory_schools }
-			NOT = { has_country_modifier = administrative_expenses_modifier }
-		}
-		
-		allow = {
-			OR = {
-				AND = {
-					school_reforms = no_schools
-					positivism = 1
-				}
-				AND = {
-					school_reforms = low_schools
-					functionalism = 1
-				}
-				AND = {
-					school_reforms = acceptable_schools
-					biologism = 1
-				}
-				AND = {
-					school_reforms = good_schools
-					social_science = 1
-				}
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = administrative_expenses_modifier
-				duration = 730
-			}
-			random_owned = {
-				limit = {
-					owner = {
-						school_reforms = good_schools
-					}
-				}
-				owner = { social_reform = compulsory_schools }
-			}
-			random_owned = {
-				limit = {
-					owner = {
-						school_reforms = acceptable_schools
-					}
-				}
-				owner = { social_reform = good_schools }
-			}
-			random_owned = {
-				limit = {
-					owner = {
-						school_reforms = low_schools
-					}
-				}
-				owner = { social_reform = acceptable_schools }
-			}
-			random_owned = {
-				limit = {
-					owner = {
-						school_reforms = no_schools
-					}
-				}
-				owner = { social_reform = low_schools }
-			}
 		}
 	}
 	

@@ -1,24 +1,4 @@
 political_decisions = {
-	dei_declare_independence_dec = {
-		potential = {
-			tag = DEI
-			vassal_of = NET
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = dei_declare_independence_flag }
-		}
-		
-		allow = {
-			ideological_thought = 1
-		}
-		
-		effect = {
-			prestige = 5
-			set_country_flag = dei_declare_independence_dec
-			overlord = {
-				release_vassal = THIS
-			}
-		}
-	}
 	form_indonesia_dec = {
 		potential = {
 			is_culture_group = indonesian
@@ -80,89 +60,20 @@ political_decisions = {
 			any_country = {
 				limit = {
 					is_culture_group = indonesian
+					ai = yes
 					OR = {
 						in_sphere = THIS
 						vassal_of = THIS
 					}
 				}
-				country_event = { id=11101 days=0 }
+				annex_to = THIS
 			}
 			ATJ = { all_core = { add_core = THIS } }
 			BRU = { all_core = { add_core = THIS } }
 			PPA = { all_core = { add_core = THIS } }
 			BAL = { all_core = { add_core = THIS } }
 			JOH = { all_core = { add_core = THIS } }
-			social_reform = compulsory_schools
 			capital = 1413
-		}
-	}
-	conquer_indochina_dec = {
-		potential = {
-			tag = INA
-			owns = 1401
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = conquer_indochina_flag }
-			nationalism_n_imperialism = 1
-		}
-		
-		allow = {
-			revolution_n_counterrevolution = 1
-			owns = 1385
-			owns = 1346
-		}
-		
-		effect = {
-			plurality = 2
-			prestige = 10
-			badboy = 5
-			add_accepted_culture = thai
-			SIA = { all_core = { add_core = THIS } }
-			set_country_flag = conquer_indochina_flag
-		}
-	}
-	conquer_philippines_indonesia_dec = {
-		potential = {
-			tag = INA
-			owns = 1433
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = conquer_philippines_indonesia_flag }
-		}
-		
-		allow = {
-			any_owned_province = {
-				is_core = PHI
-			}
-			nationalism_n_imperialism = 1
-		}
-		
-		effect = {
-			plurality = 2
-			prestige = 10
-			badboy = 5
-			add_accepted_culture = filipino
-			set_country_flag = conquer_philippines_indonesia_flag
-		}
-	}
-	conquer_ceylon_indonesia_dec = {
-		potential = {
-			tag = INA
-			nationalism_n_imperialism = 1
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = conquer_ceylon_indonesia_flag }
-			
-		}
-		
-		allow = {
-			owns = 1322
-		}
-		
-		effect = {
-			plurality = 1
-			prestige = 10
-			badboy = 5
-			add_accepted_culture = sinhala
-			ENG_1321 = { add_core = THIS }
-			set_country_flag = conquer_ceylon_indonesia_flag
 		}
 	}
 }

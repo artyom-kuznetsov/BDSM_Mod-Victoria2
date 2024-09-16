@@ -11,6 +11,12 @@ country_event = { # MILITANCY CONSC
 			consciousness = 5
 		}
 	}
+	option = {
+		name = "noloc"
+		social_reform = high_education_investment
+		social_reform = police_state
+		social_reform = total_war_organization
+	}
 }
 
 country_event = { # WAR EXHAUST
@@ -38,16 +44,6 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9550
 		country_event = 9551
 		country_event = 9552
-		country_event = 9553
-		country_event = 9554
-		country_event = 9555
-		country_event = 9556
-		country_event = 9557
-		country_event = 9558
-		country_event = 9559
-		country_event = 9560
-		country_event = 9561
-		country_event = 9562
 		country_event = 9566
 		country_event = 9567
 		country_event = 9568
@@ -62,209 +58,6 @@ country_event = { # «¿√À”ÿ ¿
 	}
 }
 
-country_event = { # GERMANY
-	title = "noloc"
-	desc = "noloc"
-	id = 9553
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		GER = { all_core = { secede_province = THIS } }
-		activate_technology = nationalism_n_imperialism
-		FRA_412 = {
-			secede_province = THIS
-		}
-	}
-}
-
-country_event = { # ITALY
-	title = "noloc"
-	desc = "noloc"
-	id = 9554
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		ITA = { all_core = { secede_province = THIS } }
-		#activate_technology = nationalism_n_imperialism
-		#activate_technology = state_n_government
-		AUS_729 = {
-			secede_province = THIS
-		}
-		AUS_726 = { secede_province = THIS }
-		change_tag = ITA
-	}
-}
-
-country_event = { # AUSTRIA-HUNGARY
-	title = "noloc"
-	desc = "noloc"
-	id = 9555
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		TUR_788 = { secede_province = THIS }
-		activate_technology = nationalism_n_imperialism
-		PRU = { change_tag = GER }
-		SAR = { change_tag = ITA }
-	}
-}
-
-country_event = { # CHINA
-	title = "noloc"
-	desc = "noloc"
-	id = 9556
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_country = {
-			limit = {
-				OR = {
-					is_culture_group = east_asian
-					primary_culture = mongol
-				}
-			}
-			any_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-			annex_to = THIS
-		}
-		activate_technology = nationalism_n_imperialism
-	}
-}
-
-country_event = { # INDIA
-	title = "noloc"
-	desc = "noloc"
-	id = 9557
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		HND = {
-			all_core = {
-				secede_province = THIS
-			}
-		}
-		activate_technology = nationalism_n_imperialism
-	}
-}
-
-country_event = { # ANNEX ARABS
-	title = "noloc"
-	desc = "noloc"
-	id = 9558
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_country = {
-			any_owned = {
-				limit = {
-					OR = {
-						is_core = NEJ
-						is_core = YEM
-						is_core = HDJ
-						is_core = OMA
-						is_core = ABU
-						is_core = EGY
-						is_core = IRQ
-						is_core = TRI
-						is_core = TUN
-						is_core = ALD
-						is_core = MOR
-						is_core = BAH
-					}
-				}
-				secede_province = THIS
-			}
-		}
-		activate_technology = nationalism_n_imperialism
-	}
-}
-
-country_event = { # ANNEX TUR ACCEPTABLE BALKANS
-	title = "noloc"
-	desc = "noloc"
-	id = 9559
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		activate_technology = nationalism_n_imperialism
-		enable_ideology = communist
-		political_reform = all_trade_unions
-		political_reform = all_voting_pops
-		inherit = EGY
-		inherit = JAB
-		inherit = SER
-		inherit = WAL
-		inherit = MOL
-		inherit = MON
-	}
-}
-
-country_event = { # ANNEX TUR ACCEPTABLE EAST
-	title = "noloc"
-	desc = "noloc"
-	id = 9560
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_country = {
-			any_owned = {
-				limit = {
-					OR = {
-						is_core = GEO
-						is_core = PER
-						is_core = ALB
-						is_core = ARM
-						is_core = AZB
-					}
-				}
-				secede_province = THIS
-			}
-		}
-		activate_technology = nationalism_n_imperialism
-	}
-}
-
-country_event = { # JAPAN
-	title = "noloc"
-	desc = "noloc"
-	id = 9561
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_country = {
-			any_owned = {
-				limit = {
-					is_core = JAP
-				}
-				secede_province = THIS
-			}
-		}
-	}
-}
 
 province_event = {
 	id = 9565 #Agriculture Decision Change

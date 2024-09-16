@@ -138,49 +138,6 @@ country_event = {
 		prestige = -100
 		
 		
-		any_country = {
-			limit = {
-				government = colonial_company
-				is_independant = yes
-				vote_franschise = none_voting
-			}
-			government = presidental_dictatorship
-		}
-		
-		any_country = {
-			limit = {
-				government = colonial_company
-				is_independant = yes
-				NOT = { vote_franschise = none_voting }
-			}
-			government = democracy
-		}
-		
-		# ÍÅÒ ÊĞÅÏÎÑÒÍÎÃÎ ÏĞÀÂÀ
-		any_country = {
-			limit = {
-				OR = {
-					debt_law = debtors_prisons
-					debt_law = bankruptcy
-				}
-				NOT = { has_country_flag = ref_serfdom_abolished_flag }
-			}
-			set_country_flag = ref_serfdom_abolished_flag
-		}
-		
-		any_country = {
-			limit = {
-				NOT = {
-					OR = {
-						debt_law = debtors_prisons
-						debt_law = bankruptcy
-					}
-				}
-				has_country_flag = ref_serfdom_abolished_flag
-			}
-			clr_country_flag = ref_serfdom_abolished_flag
-		}
-		
 		# ÊÎĞÀÁËÅÑÒĞÎÅÍÈÅ ÂÎÅÍÍÎÃÎ ÂĞÅÌÅÍÈ
 		any_country = {
 			limit = {
@@ -212,73 +169,6 @@ country_event = {
 		}
 
 
-		any_country = { # ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
-			limit = {
-				exists = yes
-				OR = {
-					government = proletarian_dictatorship
-					government = social_republic
-				}
-				NOT = { has_country_flag = is_communist_flag }
-			}
-			set_country_flag = is_communist_flag
-		}
-		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
-			limit = {
-				exists = yes
-				NOT = { 
-					government = proletarian_dictatorship 
-					government = social_republic 
-				}
-				has_country_flag = is_communist_flag
-			}
-			clr_country_flag = is_communist_flag
-		}
-		
-		any_country = { # ÔËÀÃ ÔÀØÈÑÒÎÂ
-			limit = {
-				exists = yes
-				government = fascist_dictatorship
-				NOT = { has_country_flag = is_fascist_flag }
-			}
-			set_country_flag = is_fascist_flag
-		}
-		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÔÀØÈÑÒÎÂ
-			limit = {
-				exists = yes
-				NOT = { government = fascist_dictatorship }
-				has_country_flag = is_fascist_flag
-			}
-			clr_country_flag = is_fascist_flag
-		}
-		
-		any_country = { # ÔËÀÃ ÒÎÒÀËÈÒÀĞÍÎÑÒÈ
-			limit = {
-				exists = yes
-				OR = {
-					AND = {
-						government = absolute_monarchy
-						revolution_n_counterrevolution = 1
-					}
-					government = proletarian_dictatorship
-					government = fascist_dictatorship
-				}
-				NOT = { has_country_flag = is_totalitarian_flag }
-			}
-			set_country_flag = is_totalitarian_flag
-		}
-		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÒÎÒÀËÈÒÀĞÍÎÑÒÈ
-			limit = {
-				exists = yes
-				NOT = { government = absolute_monarchy }
-				NOT = { government = proletarian_dictatorship }
-				NOT = { government = fascist_dictatorship }
-				
-				has_country_flag = is_totalitarian_flag
-			}
-			clr_country_flag = is_totalitarian_flag
-		}
-		
 		any_country = { # ÓÁÈÒÜ ÂÑÅÌ ÎÒÍÎØÅÍÈß Ñ ÌÈĞÁÀÍÊÎÌ
 			limit = {
 				is_greater_power = yes
@@ -305,112 +195,6 @@ country_event = {
 			annex_to = FROM
 		}
 		
-		any_country = { # ÔËÀÃ ÏÎÇÈÒÈÂÈÇÌÀ
-			limit = {
-				positivism = 1
-				exists = yes
-				NOT = { has_country_flag = has_positivism_flag }
-			}
-			set_country_flag = has_positivism_flag
-		}
-		any_country = { # ÔËÀÃ ÔÓÍÊÖÈÎÍÀËÈÇÌÀ
-			limit = {
-				functionalism = 1
-				exists = yes
-				NOT = { has_country_flag = has_functionalism_flag }
-			}
-			set_country_flag = has_functionalism_flag
-		}
-		any_country = { # ÔËÀÃ ÁÈÎËÎÃÈÇÌÀ
-			limit = {
-				biologism = 1
-				exists = yes
-				NOT = { has_country_flag = has_biologism_flag }
-			}
-			set_country_flag = has_biologism_flag
-		}
-		any_country = { # ÔËÀÃ ÏĞÎÔ ÀĞÌÈÈ
-			limit = {
-				army_professionalism = 1
-				exists = yes
-				NOT = { has_country_flag = army_professionalism_flag }
-			}
-			set_country_flag = army_professionalism_flag
-		}
-		any_country = { # ÔËÀÃ ÂÎÇÄÓÕÎÏËÀÂÀÍÜß
-			limit = {
-				aeronautics = 1
-				exists = yes
-				NOT = { has_country_flag = aeronautics_researched_flag }
-			}
-			set_country_flag = aeronautics_researched_flag
-		}
-		any_country = { # ÔËÀÃ ĞÅÂ È ÊÎÍÒĞĞÅÂ
-			limit = {
-				exists = yes
-				revolution_n_counterrevolution = 1
-				NOT = { has_country_flag = has_rev_n_counterrev_flag }
-			}
-			set_country_flag = has_rev_n_counterrev_flag
-		}
-		any_country = { # ÔËÀÃ İÊÑÏÀÍÑÈÎÍÈÇÌ
-			limit = {
-				exists = yes
-				invention = expansionism
-				NOT = { has_country_flag = expansionism_flag }
-			}
-			set_country_flag = expansionism_flag
-		}
-		any_country = { # ÔËÀÃ ÔÀØÈÇÌ
-			limit = {
-				exists = yes
-				invention = the_doctrine_of_fascism
-				NOT = { has_country_flag = fascism_doctrine_flag }
-			}
-			set_country_flag = fascism_doctrine_flag
-		}
-		
-		any_country = { # ÎÒÊĞÛÒÜ ÃĞÀÍÈÖÛ Ó ÍÅ ÒÎÒÀËÈÒÀĞÍÛÕ
-			limit = {
-				NOT = { 
-					centralization = totalitarianism
-					has_country_flag = temprorary_border_closure
-				}
-				border_policy = closed_borders
-			}
-			political_reform = open_borders
-		}
-		
-		any_country = { # ÍÅÒ ÏĞÀÂ ÃÎËÎÑÀ
-			limit = {
-				vote_franschise = none_voting
-				NOT = { has_country_flag = none_voting_flag }
-			}
-			set_country_flag = none_voting_flag
-		}
-		any_country = { # ÃÎËÎÑÓŞÒ ÁÎÃÀÒÛÅ
-			limit = {
-				vote_franschise = wealth_weighted_voting
-				NOT = { has_country_flag = wealth_weighted_voting_flag }
-			}
-			set_country_flag = wealth_weighted_voting_flag
-		}
-		any_country = {
-			limit = {
-				election = yes
-				NOT = { 
-					has_country_flag = election_flag 
-				}
-			}
-			set_country_flag = election_flag
-		}
-		any_country = {
-			limit = {
-				vote_franschise = none_voting
-				has_country_flag = election_flag
-			}
-			clr_country_flag = election_flag
-		}
 		any_country = {
 			limit = {
 				election = yes
@@ -439,29 +223,27 @@ country_event = {
 				remove_province_modifier = capital_supply_depot_pmodifier
 			}
 		}
+		
+		
+		### ECONOMIC SYSTEM CONS ###
 		any_country = {
 			limit = {
-				is_culture_group = italian
-				NOT = { has_country_flag = ita_nationalism_flag }
-				has_global_flag = italian_call_for_union
+				economic_system = traditionalism_r
 			}
-			set_country_flag = ita_nationalism_flag
+			political_reform = no_pop_construction
 		}
-		#any_country = {
-		#	limit = { civilized = yes }
-		#	any_pop = {
-		#		
-		#	}
-		#}
-		### RULING PARTY CHECK ###
-		any_country = { limit = { ruling_party_ideology = reactionary } set_country_flag = reactionary_flag	}
-		any_country = { limit = { ruling_party_ideology = conservative } set_country_flag = conservative_flag	}
-		any_country = { limit = { ruling_party_ideology = liberal } set_country_flag = liberal_flag	}
-		any_country = { limit = { ruling_party_ideology = socialist } set_country_flag = socialist_flag	}
-		any_country = { limit = { ruling_party_ideology = communist } set_country_flag = communist_flag	}
-		any_country = { limit = { ruling_party_ideology = fascist } set_country_flag = fascist_flag	}
+		any_country = {
+			limit = {
+				OR = {
+					economic_system = laissez_faire_r
+					economic_system = interventionism_r
+				}
+			}
+			political_reform = yes_pop_construction
+		}
 		
-		### STABILITY NULLIFIER ###any_country = { limit = { average_consciousness = 0.5 } plurality = -0.011 set_country_flag = stability_adjusted }
+		### STABILITY NULLIFIER ###
+		any_country = { limit = { average_consciousness = 0.5 } plurality = -0.011 set_country_flag = stability_adjusted }
 		any_country = { limit = { average_consciousness = 1 } plurality = -0.022 set_country_flag = stability_adjusted }
 		any_country = { limit = { average_consciousness = 2 } plurality = -0.044 set_country_flag = stability_adjusted }
 		any_country = { limit = { average_consciousness = 3 } plurality = -0.066 set_country_flag = stability_adjusted }
@@ -618,7 +400,6 @@ country_event = {
 		any_country = { limit = { has_country_modifier = springtime_of_nations } plurality = -0.5 }
 		any_country = { limit = { has_country_modifier = global_liberal_agitation } plurality = -0.2 }
 		any_country = { limit = { has_country_modifier = western_influences } plurality = -0.15 }
-		any_country = { limit = { has_country_modifier = the_slavery_debate } plurality = -0.2 }
 		any_country = { limit = { has_country_modifier = uncivilized_isolationism } plurality = 0.1 }
 		any_country = { limit = { has_country_modifier = martial_law_modifier } plurality = 0.1 }
 		any_country = { limit = { has_country_modifier = the_homestead_act } plurality = 0.02 }
@@ -637,7 +418,6 @@ country_event = {
 		any_country = { limit = { any_owned_province = { has_province_modifier = colonial_mismanagement } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = local_opium_habit } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = free_staters } } plurality = -0.02 }
-		any_country = { limit = { any_owned_province = { has_province_modifier = underground_railroad } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = knights_of_the_golden_circle } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = american_anti_slavery_society } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = copperhead_democrats } } plurality = -0.02 }

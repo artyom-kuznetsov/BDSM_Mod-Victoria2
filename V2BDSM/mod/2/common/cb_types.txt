@@ -1873,16 +1873,6 @@ cut_down_to_size = {
 	}
 	
 	can_use = {
-		NOT = { 
-			is_our_vassal = THIS
-			conscription = ref_huge_military_budget
-		}
-		NOT = {
-			AND = {
-				has_country_flag = chinese_warlord_flag
-				NOT = { year = 1870 } 
-			}
-		}
 	}
 	
 	on_add = {
@@ -3461,12 +3451,6 @@ install_communist_gov_cb = {
 	}
 	
 	on_po_accepted = {
-		political_reform = none_voting
-		political_reform = party_appointed
-		political_reform = no_meeting
-		political_reform = state_press
-		political_reform = state_controlled
-		political_reform = underground_parties
 		plurality = -10
 	}
 }
@@ -3497,15 +3481,6 @@ uninstall_communist_gov_cb = {
 	good_relation_militancy_factor = 1
 
 	can_use = {
-		THIS = {
-			# If actor ruling party is not communist
-			NOT = {
-				government = proletarian_dictatorship
-			}
-		}
-		
-		# If reciever current gov is proletarian_dictatorship
-		government = proletarian_dictatorship
 	}
 	
 	po_uninstall_communist_gov_type = yes
