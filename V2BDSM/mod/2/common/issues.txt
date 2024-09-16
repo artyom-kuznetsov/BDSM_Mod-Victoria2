@@ -316,23 +316,12 @@ political_reforms = {
 	
 	conscription = {
 		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
-			supply_consumption = -0.2
-			mobilisation_size = -0.02
-			global_immigrant_attract = 0.01
-			max_military_spending = 0.1
-			min_military_spending = 0.02
 			allow = {
 				war_policy = pacifism
 				is_mobilised = no
 			}
 		}
 		ref_disarmed_nation = {		#  –≈—“‹ﬂÕ— Œ≈
-			max_military_spending = 1
-			min_military_spending = 0.02
-			mobilisation_size = 0.02
-			land_unit_start_experience = -5
-			# +50% Mob Impact
-			
 			allow = {
 				NOT = {
 					has_country_flag = ref_serfdom_abolished_flag
@@ -341,21 +330,12 @@ political_reforms = {
 			}
 		}
 		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
-			max_military_spending = 1
-			min_military_spending = 0.05
-			supply_consumption = -0.1
-			mobilisation_size = 0.01
 			allow = {
 				has_country_flag = ref_serfdom_abolished_flag
 				is_mobilised = no
 			}
 		}
 		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
-			max_military_spending = 1.0
-			min_military_spending = 0.1
-			mobilisation_size = -0.01
-			land_unit_start_experience = 10
-			# -25% Mob Impact
 			allow = {
 				has_country_flag = army_professionalism_flag
 				has_country_flag = ref_serfdom_abolished_flag
@@ -363,10 +343,6 @@ political_reforms = {
 			}
 		}
 		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
-			max_military_spending = 1
-			min_military_spending = 0.15
-			mobilisation_size = 0.04
-			# +100% Mob Impact
 			allow = {
 				has_country_flag = aeronautics_researched_flag
 				has_country_flag = ref_serfdom_abolished_flag
@@ -418,25 +394,48 @@ political_reforms = {
 		administrative = yes
 		
 		min_organization = {
+			supply_consumption = -0.5
+			mobilisation_size = 0.02
+			global_immigrant_attract = 0.1
+			min_military_spending = 0.05
+			
 			allow = { always = no }
 		}
 		
 		low_organization = {
+			supply_consumption = -0.35
+			mobilisation_size = 0.03
+			global_immigrant_attract = 0.06
+			min_military_spending = 0.1
+			
 			allow = { always = no }
 			administrative_multiplier = 1
 		}
 		
 		medium_organization = {
+			supply_consumption = -0.2
+			mobilisation_size = 0.04
+			global_immigrant_attract = 0.03
+			min_military_spending = 0.2
+			
 			allow = { always = no }
 			administrative_multiplier = 2
 		}
 		
 		high_organization = {
+			supply_consumption = -0.1
+			mobilisation_size = 0.05
+			min_military_spending = 0.3
+			
 			allow = { always = no }
 			administrative_multiplier = 3
 		}
 		
 		total_war_organization = {
+			mobilisation_size = 0.08
+			global_immigrant_attract = -0.05
+			min_military_spending = 0.5
+			
 			allow = { always = no }
 			administrative_multiplier = 4
 		}

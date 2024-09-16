@@ -335,288 +335,57 @@ promote_to =
 	{
 		factor = 0.01
 		
-		group = {		
-			modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.05 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.055 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.060 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.065 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.070 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.075 }
-            }
-			modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.080 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.085 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.090 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.095 }
-            }
-            modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.1 }
-            }			
-		}
-		group = {		
-			modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.050 }
-                revanchism = 0.05
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.055 }
-                revanchism = 0.10
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}			
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.060 }
-                revanchism = 0.15
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.065 }
-                revanchism = 0.20
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.070 }
-                revanchism = 0.25
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }
-			modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.075 }
-                revanchism = 0.30
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.080 }
-                revanchism = 0.35
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}			
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.085 }
-                revanchism = 0.40
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.090 }
-                revanchism = 0.45
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }
-            modifier = {
-                factor = 100
-                state_scope = { soldiers = 0.095 }
-                revanchism = 0.50
-				# Audax Validator "." Ignore_NEXT
-				location = { 
-					# Audax Validator "." Ignore_NEXT
-					is_core = THIS 
-				}
-            }			
-		}
 		group = {
 			modifier = {
-				factor = 1
-				military_spending = 0.04
+				factor = -100 state_scope = { soldiers = 0.02 }
+				country = { ai = no military_organization = min_organization }
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.09
+				factor = -100 state_scope = { soldiers = 0.04 }
+				country = { ai = no military_organization = low_organization }
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.14
+				factor = -100 state_scope = { soldiers = 0.06 }
+				country = { ai = no military_organization = medium_organization }
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.19
+				factor = -100 state_scope = { soldiers = 0.08 }
+				country = { ai = no military_organization = high_organization }
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.24
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.29
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.34
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.39
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.44
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.49
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.54
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.64
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.69
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.74
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.84
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.89
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.94
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.99
-			}
-		}
-		#modifier = {	# NO PROF ARMY BUFF FOR CRAFTSMEN
-		#	factor = 10
-		#	country = {
-		#		conscription = ref_professional_army
-		#	}
-		#}
-		modifier = {
-			factor = -10
-			location = {
-				is_colonial = yes
+				factor = -100 state_scope = { soldiers = 0.1 }
+				country = { ai = no military_organization = total_war_organization }
 			}
 		}
 		
-		group = {
-			modifier = {
-				factor = -3
-				NOT = { recruited_percentage = 0.80 }
-			}
-			modifier = {
-				factor = -3
-				NOT = { recruited_percentage = 0.70 }
-			}
-			modifier = {
-				factor = -3
-				NOT = { recruited_percentage = 0.60 }
-			}
-			modifier = {
-				factor = -3
-				NOT = { recruited_percentage = 0.50 }
-			}
-			modifier = {
-				factor = -3
-				NOT = { recruited_percentage = 0.40 }
-			}
-			modifier = {
-				factor = -3
-				NOT = { recruited_percentage = 0.33 }
-			}
-			modifier = {
-				factor = -10
-				NOT = { recruited_percentage = 0.25 }
-			}
+		group = { modifier = { factor = 1 military_spending = 0.04 }
+			modifier = { factor = 1 military_spending = 0.09 }
+			modifier = { factor = 1 military_spending = 0.14 }
+			modifier = { factor = 1 military_spending = 0.19 }
+			modifier = { factor = 1 military_spending = 0.24 }
+			modifier = { factor = 1 military_spending = 0.29 }
+			modifier = { factor = 1 military_spending = 0.34 }
+			modifier = { factor = 1 military_spending = 0.39 }
+			modifier = { factor = 1 military_spending = 0.44 }
+			modifier = { factor = 1 military_spending = 0.49 }
+			modifier = { factor = 1 military_spending = 0.54 }
+			modifier = { factor = 1 military_spending = 0.64 }
+			modifier = { factor = 1 military_spending = 0.69 }
+			modifier = { factor = 1 military_spending = 0.74 }
+			modifier = { factor = 1 military_spending = 0.84 }
+			modifier = { factor = 1 military_spending = 0.89 }
+			modifier = { factor = 1 military_spending = 0.94 }
+			modifier = { factor = 1 military_spending = 0.99 }
 		}
 		
 		group = {
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.01 }
-			}
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.02 }
-			}
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.03 }
-			}
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.04 }
-			}
+			modifier = { factor = -3 NOT = { recruited_percentage = 0.80 } }
+			modifier = { factor = -3 NOT = { recruited_percentage = 0.70 } }
+			modifier = { factor = -3 NOT = { recruited_percentage = 0.60 } }
+			modifier = { factor = -3 NOT = { recruited_percentage = 0.50 } }
+			modifier = { factor = -3 NOT = { recruited_percentage = 0.40 } }
+			modifier = { factor = -3 NOT = { recruited_percentage = 0.33 } }
+			modifier = { factor = -3 NOT = { recruited_percentage = 0.25 } }
 		}
 	}
 	clerks = {

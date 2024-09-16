@@ -236,15 +236,30 @@ promote_to =
 	
 	farmers = {
 		factor = 0.01
-		modifier = {
-			factor = 100
-			state_scope = { soldiers = 0.052 }
+		
+		group = {
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.022 }
+				country = { ai = no military_organization = min_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.042 }
+				country = { ai = no military_organization = low_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.062 }
+				country = { ai = no military_organization = medium_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.082 }
+				country = { ai = no military_organization = high_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.102 }
+				country = { ai = no military_organization = total_war_organization }
+			}
 		}
-		modifier = {
-			factor = 100
-			location = { is_colonial = yes }
-			NOT = { country = { has_country_flag = french_foreign_legion_supported } }
-		}
+		
 		modifier = {
 			factor = -100
 			location = { NOT = { has_pop_type = farmers } }
@@ -322,9 +337,27 @@ promote_to =
 	labourers = 
 	{
 		factor = 0.01
-		modifier = {
-			factor = 5
-			state_scope = { soldiers = 0.052 }
+		group = {
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.022 }
+				country = { ai = no military_organization = min_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.042 }
+				country = { ai = no military_organization = low_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.062 }
+				country = { ai = no military_organization = medium_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.082 }
+				country = { ai = no military_organization = high_organization }
+			}
+			modifier = {
+				factor = 100 state_scope = { soldiers = 0.102 }
+				country = { ai = no military_organization = total_war_organization }
+			}
 		}
 		modifier = {
 			factor = -1020
