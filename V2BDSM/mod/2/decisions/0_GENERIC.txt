@@ -30,10 +30,24 @@ political_decisions = {
 			}
 		}
 	}
-
-	governments_assistance_dec = {
+	
+	economic_system_dec = {
 		alert = no
 		potential = {
+			ai = no
+		}
+		
+		allow = { }
+		
+		effect = {
+			country_event = 57072
+		}
+	}
+
+	governments_assistance_dec = {	# DISABLED
+		alert = no
+		potential = {
+			always = no
 			ai = no
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}
@@ -47,9 +61,10 @@ political_decisions = {
 	}
 	
 	
-	help_decision_dec = {
+	help_decision_dec = {	# DISABLED
 		alert = yes
 		potential = {
+			always = no
 			ai = no
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = hide_guide_flag }
