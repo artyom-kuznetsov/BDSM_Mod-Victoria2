@@ -178,52 +178,43 @@ political_reforms = {
 			middle_vote = 0
 			poor_vote = 0
 			allow = { NOT = { election = yes } }
-			cb_generation_speed_modifier = 0.15
 		}
-		landed_voting = {
-			rich_vote = 1
-			middle_vote = 0
-			poor_vote = 0
-			global_immigrant_attract = 0.02
-			cb_generation_speed_modifier = 0.1
-			allow = { 
-				OR = {
-					has_country_flag = liberal_revolution_in_progress
-					has_country_flag = had_liberal_revolution
-					year = 1850
-					ai = no
-				}
-			}
-		}
-		wealth_weighted_voting = {
-			rich_vote = 1
-			middle_vote = 0.1
-			poor_vote = 0
-			cb_generation_speed_modifier = 0.05
-			global_immigrant_attract = 0.04
-		}
-		wealth_voting = {
-			rich_vote = 1
-			middle_vote = 1
-			poor_vote = 0
-
-			global_immigrant_attract = 0.06
-		}
-		universal_weighted_voting = {
-			rich_vote = 3
-			middle_vote = 2
-			poor_vote = 1
-			cb_generation_speed_modifier = -0.1
-			literacy_con_impact = -0.1
-			global_immigrant_attract = 0.08
+		limited_voting = {
+			rich_vote = 0.7
+			middle_vote = 0.2
+			poor_vote = 0.1
+			allow = { NOT = { election = yes } }
 		}
 		universal_voting = {
 			rich_vote = 1
 			middle_vote = 1
 			poor_vote = 1
-			cb_generation_speed_modifier = -0.15
-			literacy_con_impact = -0.2
-			global_immigrant_attract = 0.1
+			allow = { NOT = { election = yes } }
+		}
+	}
+	
+	upper_house_composition = {
+		party_appointed = {
+			rules = { same_as_ruling_party = yes }
+			ruling_party_support = 0.05
+		}
+		appointed = {
+			rules = { rich_only = yes }
+		}
+		state_equal_weight = {
+			rules = { state_vote = yes }
+			allow = {
+				NOT = { vote_franschise = none_voting }
+			}
+		}
+		population_equal_weight = {
+			rules = { population_vote = yes }
+			allow = { NOT = { vote_franschise = none_voting } }
+		}
+	}
+	
+	economic_system = {
+		traditionalism_r = {
 		}
 	}
 	
@@ -289,28 +280,11 @@ political_reforms = {
 
 	political_parties = {
 		next_step_only = yes
-		underground_parties = {
-			ruling_party_support = 0.2
-			global_immigrant_attract = -0.01
+		theocracy_r = {
 		}
-		harassment = {
-			ruling_party_support = 0.15
-			global_immigrant_attract = 0.02
-			allow = { NOT = { vote_franschise = none_voting } }
+		monarchy_r = {
 		}
-		gerrymandering = {
-			ruling_party_support = 0.10
-			global_immigrant_attract = 0.03
-			allow = { NOT = { vote_franschise = none_voting } }
-		}
-		non_secret_ballots = {
-			ruling_party_support = 0.05
-			global_immigrant_attract = 0.04
-			allow = { NOT = { vote_franschise = none_voting } }
-		}
-		secret_ballots = {
-			global_immigrant_attract = 0.05
-			allow = { NOT = { vote_franschise = none_voting } }
+		republic_r = {
 		}
 	}
 	
@@ -318,34 +292,6 @@ political_reforms = {
 		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
 			allow = {
 				war_policy = pacifism
-				is_mobilised = no
-			}
-		}
-		ref_disarmed_nation = {		#  –≈—“‹ﬂÕ— Œ≈
-			allow = {
-				NOT = {
-					has_country_flag = ref_serfdom_abolished_flag
-				}
-				is_mobilised = no
-			}
-		}
-		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
-			allow = {
-				has_country_flag = ref_serfdom_abolished_flag
-				is_mobilised = no
-			}
-		}
-		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
-			allow = {
-				has_country_flag = army_professionalism_flag
-				has_country_flag = ref_serfdom_abolished_flag
-				is_mobilised = no
-			}
-		}
-		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
-			allow = {
-				has_country_flag = aeronautics_researched_flag
-				has_country_flag = ref_serfdom_abolished_flag
 				is_mobilised = no
 			}
 		}
