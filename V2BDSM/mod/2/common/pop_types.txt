@@ -1,7 +1,7 @@
 #general promote mtth, same for all pops
 promotion_chance = 
 {
-	factor = 0.3
+	factor = 0.25
 	
 	#modifier = {
 	#	factor = 0.1
@@ -13,56 +13,64 @@ promotion_chance =
 	### LITERACY
 	group = {
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.95 }
+			factor = 0.05
+			literacy = 0.05
 		}
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.9 }
+			factor = 0.05
+			literacy = 0.1 
 		}
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.85 }
+			factor = 0.05
+			literacy = 0.2
 		}
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.8 }
+			factor = 0.05
+			literacy = 0.3
 		}
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.75 }
+			factor = 0.05
+			literacy = 0.4
 		}
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.7 }
+			factor = 0.05
+			literacy = 0.5
 		}
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.65 }
+			factor = 0.03
+			literacy = 0.55
 		}
 		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.6 }
+			factor = 0.03
+			literacy = 0.6
 		}
 		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.6 }
+			factor = 0.03
+			literacy = 0.65
 		}
 		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.5 }
+			factor = 0.03
+			literacy = 0.7
 		}
 		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.4 }
+			factor = 0.03
+			literacy = 0.75
 		}
 		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.3 }
+			factor = 0.03
+			literacy = 0.8
 		}
 		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.2 }
+			factor = 0.03
+			literacy = 0.85
+		}
+		modifier = {
+			factor = 0.03
+			literacy = 0.9
+		}
+		modifier = {
+			factor = 0.03
+			literacy = 0.95
 		}
 	}
 	
@@ -213,57 +221,6 @@ promotion_chance =
 	}
 	
 	
-	group = {
-		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.2	}	
-		}
-		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.3	}	
-		}
-		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.4	}	
-		}
-		modifier = {
-			factor = -0.05
-			NOT = { literacy = 0.5	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.6	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.65	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.7	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.75	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.8	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.85	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.9	}	
-		}
-		modifier = {
-			factor = -0.03
-			NOT = { literacy = 0.95	}	
-		}
-	}
-	
 	modifier = {
 		factor = -0.1
 		country = {
@@ -319,31 +276,31 @@ promotion_chance =
 			factor = -0.05
 			life_needs = 0.6
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 4000000
+			total_pops = 3000000
 		}
 		modifier = {
 			factor = -0.05
 			life_needs = 0.8
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 4000000
+			total_pops = 3000000
 		}
 		modifier = {
 			factor = -0.025
 			life_needs = 0.4
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 4000000			
+			total_pops = 3000000			
 		}
 		modifier = {
 			factor = -0.025
 			life_needs = 0.6
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 4000000
+			total_pops = 3000000
 		}
 		modifier = {
 			factor = -0.025
 			life_needs = 0.8
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 4000000
+			total_pops = 3000000
 		}
 	}
 
@@ -972,11 +929,6 @@ emigration_chance =
 		modifier = {
 			factor = 0.1
 			not = { life_needs = 0.8 }
-		}
-		modifier = {
-			factor = -0.05
-			not = { life_needs = 0.8 }
-			total_pops = 1500000
 		}
 		modifier = {
 			factor = 0.1

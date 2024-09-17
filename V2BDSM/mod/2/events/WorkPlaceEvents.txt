@@ -694,59 +694,6 @@ province_event = {
 	}
 }
 
-# Quality Problems
-province_event = {
-	id = 12130
-	title = "EVTNAME12130"
-	desc = "EVTDESC12130"
-		
-	trigger = {
-		produces = wool
-	}
-	
-	mean_time_to_happen = {
-		months = 1000
-		modifier = {
-			factor = 0.9
-			owner = {
-				economic_policy = laissez_faire
-			}
-		}
-		modifier = {
-			factor = 1.5
-			NOT = {
-				owner = {
-					economic_policy = laissez_faire
-				}
-			}
-		}
-		modifier = {
-			factor = 1.1
-			average_militancy = 5
-		}
-	}
-	
-	option = {
-		name = "EVTOPTA12130"
-		owner = {
-			regular_clothes = 15
-		}
-		any_pop = {
-			militancy = -0.5
-		}
-	}
-	
-	option = {
-		name = "EVTOPTB12130"
-		owner = {
-			luxury_clothes = 5
-		}
-		any_pop = {
-			consciousness = -0.5
-		}
-	}
-}
-
 # Clippings
 province_event = {
 	id = 12140
