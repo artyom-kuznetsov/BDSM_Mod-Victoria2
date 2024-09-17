@@ -1085,32 +1085,6 @@ logistical_calculations = {
 }
 
 
-#barrel_experiments
-tank_experiments = {
-	limit = { barrel_experiments = 1 }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 90
-			war = yes
-			war_countries = { invention = tank_experiments }
-		}
-		modifier = {
-			factor = -60
-			not = { combustion_engine = 1 }
-		}
-		modifier = {
-			factor = -10
-			NOT = { total_pops = 1000000 }
-			part_of_sphere = yes
-			ai = yes
-		}
-	}
-	effect = {
-		activate_unit = tank
-		activate_building = barrel_factory 
-	}
-}
 tank_exploits = {
 	limit = { barrel_experiments = 1 }
 	chance = {

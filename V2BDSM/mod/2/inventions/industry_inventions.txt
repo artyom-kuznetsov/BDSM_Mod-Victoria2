@@ -124,81 +124,6 @@ high_pressure_boiler = {
 		factory_throughput = 0.05
 	}
 }
-#combustion_engine
-daimlers_automobile = {
-	limit = { combustion_engine = 1 }
-	chance = {
-		base = 0
-		modifier = {
-			factor = 6
-			electricity = 1
-			year = 1886
-		}
-		modifier = {
-			factor = 2
-			average_consciousness = 3
-			year = 1886
-		}
-		modifier = {
-			factor = -8
-			NOT = {
-				invention = edison_light_bulb
-			}
-		}
-		modifier = {
-			factor = -10
-			NOT = { total_pops = 1000000 }
-			part_of_sphere = yes
-			ai = yes
-		}
-	}
-	effect = {
-		activate_building = automobile_factory 
-		factory_goods_output = {
-			machine_parts = 0.02 
-		}
-	}
-}
-wright_n_langleys_aeroplanes = {
-	limit = { combustion_engine = 1 }
-	chance = {
-		base = 0
-		modifier = {
-			factor = 6
-			electricity = 1
-			year = 1900
-		}
-		modifier = {
-			factor = 2
-			average_consciousness = 4
-			year = 1903
-		}
-		modifier = {
-			factor = 2
-			economic_policy = laissez_faire
-			year = 1903
-		}
-		modifier = {
-			factor = -10
-			NOT = {
-				invention = edison_light_bulb
-			}
-		}
-		modifier = {
-			factor = -10
-			NOT = { total_pops = 1000000 }
-			part_of_sphere = yes
-			ai = yes
-		}
-	}
-	effect = {
-		activate_building =aeroplane_factory 
-		factory_goods_output = {
-			machine_parts = 0.02 
-		}
-	}
-}
-
 tractors = {
 	limit = { combustion_engine = 1 }
 	chance = {
@@ -269,38 +194,6 @@ transformers = {
 	effect = {
 		rgo_output = 0.05
 		factory_throughput = 0.05
-	}
-}
-national_radio_networks = {
-	limit = { electrical_power_generation = 1 }
-	chance = {
-		base = 6
-		modifier = {
-			factor = 4
-			government = democracy
-		}
-		modifier = {
-			factor = -4
-			NOT = {
-				press_rights = free_press
-			}
-		}
-		modifier = {
-			factor = -6
-			NOT = {
-				invention = edison_light_bulb
-			}
-		}
-		modifier = {
-			factor = -10
-			NOT = { total_pops = 1000000 }
-			part_of_sphere = yes
-			ai = yes
-		}
-	}
-	effect = { 
-		activate_building = radio_factory 
-		suppression_points_modifier = -0.05
 	}
 }
 #modern_power_generation
@@ -411,47 +304,6 @@ hussey_n_mccormicks_reaping_machine = {
 		rgo_goods_output = {
 			fruit = 0.1
 		}
-	}
-}
-#interchangeable_parts
-precision_work = {
-	limit = { mechanical_production = 1 }
-	chance = {
-		base = 3
-		modifier = {
-			factor = 3
-			early_railroad = 1
-		}
-	}
-	effect = {
-		factory_goods_output = {
-			glass = 0.05
-		} 
-		factory_goods_output = {
-			ammunition = 0.1
-		} 
-		activate_building = machine_parts_factory 
-	}
-}
-machine_tools = {
-	limit = { interchangeable_parts = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = precision_work
-		}
-		modifier = {
-			factor = 2
-			early_railroad = 1
-		}
-	}
-	effect = {
-		factory_goods_output = {
-			machine_parts = 0.02 
-		}
-		factory_throughput = 0.05		
-		mine_RGO_eff = 0.1
 	}
 }
 integral_distillery_process = {
@@ -625,25 +477,6 @@ shift_schedule = {
 		factory_throughput = 0.02
 	}
 }
-graveyard_shift = {
-	limit = { shift_work = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = edison_light_bulb
-		}
-		modifier = {
-			factor = 2
-			time_saving_measures = 1
-		}
-	}
-	effect = {
-		factory_throughput = 0.03
-		factory_goods_output = { radio = 0.03 }
-		factory_goods_output = { telephones = 0.03 }
-	}
-}
 #mechanized_manufacturing
 control_theory = {
 	limit = { mechanized_manufacturing = 1 }
@@ -677,57 +510,6 @@ factory_automation_infrastructure = {
 	}
 	effect = {
 		factory_throughput = 0.03
-	}
-}
-small_arms_production = {
-	limit = { mechanized_mining = 1 }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 5
-			strategic_mobility = 1
-		}
-		modifier = {
-			factor = 5
-			early_railroad = 1
-		}
-	}
-	effect = {
-		activate_building = small_arms_factory
-	}
-}
-explosives_production = {
-	limit = { mechanized_mining = 1 }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 5
-			medicine = 1
-		}
-		modifier = {
-			factor = 5
-			invention = nitroglycerin
-		}
-	}
-	effect = {
-		activate_building = explosives_factory 
-	}
-}
-artillery_production = {
-	limit = { mechanized_mining = 1 }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 5
-			invention = explosives_production
-		}
-		modifier = {
-			factor = 5
-			iron_muzzle_loaded_artillery = 1
-		}
-	}
-	effect = {
-		activate_building = artillery_factory 
 	}
 }
 #clean_coal
@@ -1096,21 +878,6 @@ airport = {
 		}
 	}
 }
-#medicine
-pharmaceuticals = {
-	limit = { organic_chemistry = 1 }
-	news = no
-	chance = {
-		base = 6
-		modifier = {
-			factor = -10 
-			civilized = no
-		}
-	}
-	effect = {
-		activate_building = pharmaceutical_plant 
-	}
-}
 combat_medicine = {
 	limit = { medicine = 1 }
 	chance = {
@@ -1322,24 +1089,6 @@ smokeless_powder = {
 		}
 	}
 }
-#organic_chemistry
-synthetic_dye = {
-	limit = { organic_chemistry = 1 }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 5
-			clean_coal = 1
-		}
-		modifier = {
-			factor = 5
-			management_strategy = 1
-		}
-	}
-	effect = {
-		activate_building = dye_factory 
-	}
-}
 gaslights = {
 	limit = { organic_chemistry = 1 }
 	chance = {
@@ -1375,23 +1124,6 @@ carbon_soil_enrichment = {
 		factory_goods_input = {
 			fertilizer = 0.05
 		}
-	}
-}
-cracking = {
-	limit = { organic_chemistry = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = oil_pumping_machinery
-		}
-		modifier = {
-			factor = 2
-			management_strategy = 1
-		}
-	}
-	effect = {
-		activate_building = fuel_refinery 
 	}
 }
 prophylaxis_against_malaria = {
@@ -1462,80 +1194,6 @@ x_rays = {
 	effect = {
 		pop_growth = 0.0001
 		land_attrition = -0.02 
-	}
-}
-edison_light_bulb = {
-	limit = { electricity = 1 }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 5
-			invention = direct_current
-		}
-		modifier = {
-			factor = 5
-			electrical_power_generation = 1
-		}
-		modifier = {
-			factor = -10
-			NOT = { total_pops = 1000000 }
-			part_of_sphere = yes
-			ai = yes
-		}
-	}
-	effect = {
-		activate_building = electric_gear_factory 
-	}
-}
-bell_n_greys_telephones = {
-	limit = { electricity = 1 }
-	chance = {
-		base = 4
-		modifier = {
-			factor = 4
-			electrical_power_generation = 1
-		}
-		modifier = {
-			factor = 4
-			invention = telegraph_coordination
-		}
-		modifier = {
-			factor = -12
-			NOT = {
-				invention = edison_light_bulb
-			}
-		}
-		modifier = {
-			factor = -10
-			NOT = { total_pops = 1000000 }
-			part_of_sphere = yes
-			ai = yes
-		}
-	}
-	effect = {
-		activate_building = telephone_factory 
-	}
-}
-electrical_lighting = {
-	limit = { electricity = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = edison_light_bulb
-		}
-		modifier = {
-			factor = 2
-			invention = gaslights
-		}
-		modifier = {
-			factor = 2
-			electrical_power_generation = 1
-		}
-	}
-	effect = {
-		factory_throughput = 0.05
-		mine_RGO_eff = 0.05
 	}
 }
 
