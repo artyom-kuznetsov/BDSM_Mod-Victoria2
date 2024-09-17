@@ -753,48 +753,6 @@ migration_chance = {
 		}
 	}
 	
-	group = {
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 1000000
-			}
-			NOT = { strata = rich }
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 2000000
-			}
-			NOT = { strata = rich }
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 3000000
-			}
-			NOT = { strata = rich }
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 4000000
-			}
-			NOT = { strata = rich }
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 5000000
-			}
-			NOT = { strata = rich }
-		}
-	}
 	modifier = {
 		factor = -1
 		state_scope = {
@@ -1008,26 +966,6 @@ emigration_chance =
 			factor = 0.02
 			NOT = { consciousness = 4 }
 		}
-		modifier = {
-			factor = 0.02
-			NOT = { consciousness = 5 }
-		}
-		modifier = {
-			factor = 0.02
-			NOT = { consciousness = 6 }
-		}
-		modifier = {
-			factor = 0.02
-			NOT = { consciousness = 7 }
-		}
-		modifier = {
-			factor = 0.02
-			NOT = { consciousness = 8 }
-		}
-		modifier = {
-			factor = 0.02
-			NOT = { consciousness = 9 }
-		}
 	}
 
 	group = {
@@ -1036,12 +974,22 @@ emigration_chance =
 			not = { life_needs = 0.8 }
 		}
 		modifier = {
+			factor = -0.05
+			not = { life_needs = 0.8 }
+			total_pops = 1500000
+		}
+		modifier = {
 			factor = 0.1
 			not = { life_needs = 0.7 }
 		}
 		modifier = {
 			factor = 0.1
 			not = { life_needs = 0.6 }
+		}
+		modifier = {
+			factor = -0.05
+			not = { life_needs = 0.6 }
+			total_pops = 1000000
 		}
 	}
 	group = {
