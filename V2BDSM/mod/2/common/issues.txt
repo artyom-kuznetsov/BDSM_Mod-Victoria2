@@ -241,9 +241,20 @@ political_reforms = {
 		}
 	}
 
-	
 
+
+	notused = {
+		administrative = yes
+		
+		no_healthcare_investment = {
+			allow = { always = no }
+		}
+		
+	}
+	
 	healthcare_institution = {
+		administrative = yes
+		
 		no_healthcare_investment = {
 			allow = { always = no }
 		}
@@ -275,6 +286,7 @@ political_reforms = {
 			allow = { always = no }
 		}
 	}
+	
 	economic_system = {
 		administrative = yes
 		traditionalism_r = {
@@ -444,6 +456,28 @@ political_reforms = {
 # Social reforms.
 ##########################################
 social_reforms = {
+	economic_system_crutch = {
+		administrative = yes
+		traditionalism_r_crutch = {
+			allow = { always = no }
+			administrative_multiplier = -5
+		}
+		agrarianism_r_crutch = {
+			allow = { always = no }
+		}
+		interventionism_r_crutch = {
+			allow = { always = no }
+			administrative_multiplier = 2
+		}
+		laissez_faire_r_crutch = {
+			allow = { always = no }
+			administrative_multiplier = 1
+		}
+		planned_economy_r_crutch = {
+			allow = { always = no }
+			administrative_multiplier = 4
+		}
+	}
 	military_organization = {
 		administrative = yes
 		
@@ -681,19 +715,19 @@ social_reforms = {
 		}
 		trinket_pensions = {
 			pension_level	= 0.05
-			global_immigrant_attract = 0.01
-		}
-		low_pensions = {
-			pension_level	= 0.075
-			global_immigrant_attract = 0.02
-		}
-		acceptable_pensions = {
-			pension_level	= 0.1
 			global_immigrant_attract = 0.03
 		}
+		low_pensions = {
+			pension_level	= 0.1
+			global_immigrant_attract = 0.05
+		}
+		acceptable_pensions = {
+			pension_level	= 0.15
+			global_immigrant_attract = 0.08
+		}
 		good_pensions = {
-			pension_level	= 0.125
-			global_immigrant_attract = 0.04
+			pension_level	= 0.2
+			global_immigrant_attract = 0.1
 		}
 	}
 	health_care = {

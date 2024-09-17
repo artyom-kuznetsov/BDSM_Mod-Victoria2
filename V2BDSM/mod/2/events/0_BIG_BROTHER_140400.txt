@@ -136,6 +136,21 @@ country_event = {
 		}
 		prestige = -100
 		
+		any_country = {
+			limit = {
+				NOT = { vote_franschise = none_voting }
+				executive_power = independent
+				political_parties = monarchy_r
+			}
+			political_reform = parliamentary
+		}
+		
+		any_country = { limit = { economic_system = traditionalism_r NOT = { economic_system_crutch = traditionalism_r_crutch } } }
+		any_country = { limit = { economic_system = agrarianism_r NOT = { economic_system_crutch = agrarianism_r_crutch } } }
+		any_country = { limit = { economic_system = interventionism_r NOT = { economic_system_crutch = interventionism_r_crutch } } }
+		any_country = { limit = { economic_system = laissez_faire_r NOT = { economic_system_crutch = laissez_faire_r_crutch } } }
+		any_country = { limit = { economic_system = planned_economy_r NOT = { economic_system_crutch = planned_economy_r_crutch } } }
+		
 		
 		# йнпюакеярпнемхе бнеммнцн бпелемх
 		any_country = {
