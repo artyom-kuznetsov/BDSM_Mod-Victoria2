@@ -772,3 +772,27 @@ country_event = {
     }
 }
 
+# SAHARA
+country_event = {
+    id = 57028
+    title = "EVTNAME57000"
+    desc = "EVTDESC57028"
+    picture = "colonial_factory"
+
+    fire_only_once = yes
+
+    trigger = {
+        invention = colonial_negotiations
+		year = 1890
+        1812 = { empty = yes }
+        owns = 1808
+    }
+
+    option = {
+        name = "EVTOPTA57000"
+        FRA_1811 = { 
+            limit = { empty = yes }
+            secede_province = THIS 
+        }
+    }
+}
