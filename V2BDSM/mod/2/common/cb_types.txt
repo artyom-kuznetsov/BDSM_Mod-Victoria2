@@ -55,7 +55,9 @@ peace_order = {
 	acquire_all_cores_AI
 	sengoku 
 	annex_core_country
-	acquire_state 
+	acquire_state_small
+	acquire_state_medium
+	acquire_state
 	acquire_substate_region
 	place_in_the_sun
 	take_treaty_port
@@ -162,9 +164,6 @@ acquire_state_warlord = {
 	
 	war_name = WAR_TAKE_NAME
 	
-	on_add = {
-	}
-	
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -175,6 +174,14 @@ acquire_state_warlord = {
 				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
+		}
+	}
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
 		}
 	}
 }
@@ -260,8 +267,12 @@ acquire_state_warlord_AI = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 }
 
 
@@ -347,8 +358,12 @@ acquire_state_china_japan = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 }
 
 acquire_state_invasion = {
@@ -438,8 +453,12 @@ acquire_state_invasion = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 }
 
 gunboat = {
@@ -471,6 +490,11 @@ gunboat = {
 	penalty_factor = 1
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	po_gunboat = yes
@@ -500,6 +524,11 @@ status_quo = {
 	penalty_factor = 1
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	po_status_quo = yes
@@ -535,6 +564,11 @@ war_for_mil_access = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	war_name = WAR_MIL_ACCESS_NAME
@@ -619,6 +653,11 @@ conquest = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	po_annex = yes
@@ -690,6 +729,11 @@ conquest_claimed = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	po_annex = yes
@@ -749,6 +793,11 @@ risorgimento = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	po_annex = yes
@@ -806,6 +855,11 @@ manifest_destiny_cb = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	po_remove_prestige = yes
@@ -852,8 +906,12 @@ conquest_small = {
 	construction_speed = 0.5
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -906,6 +964,11 @@ civil_war = {
 	war_name = CIVIL_WAR_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -968,6 +1031,11 @@ add_to_sphere = {
 	war_name = WAR_ADD_SPHERE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -1017,8 +1085,12 @@ take_from_sphere = {
 	war_name = WAR_TAKE_SPHERE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		plurality = -2
@@ -1071,6 +1143,11 @@ sengoku = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	po_annex = yes
@@ -1123,8 +1200,13 @@ acquire_core_state = {
 	war_name = WAR_TAKE_CORE_NAME
 	
 	on_add = {
-	}
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	
+	}
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1185,8 +1267,13 @@ acquire_core_state_AI = {
 	war_name = WAR_TAKE_CORE_NAME
 	
 	on_add = {
-	}
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	
+	}
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1250,8 +1337,13 @@ acquire_all_cores = {
 	war_name = WAR_LIBERATE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
+
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1313,8 +1405,13 @@ acquire_all_cores_AI = {
 	war_name = WAR_LIBERATE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
+
 	on_po_accepted = {
 		THIS = {
 			any_owned = {
@@ -1373,6 +1470,11 @@ annex_core_country = {
 	war_name = WAR_RESTORE_ORDER_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -1443,8 +1545,12 @@ acquire_substate_region = {
 	war_name = WAR_TAKE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -1460,6 +1566,218 @@ acquire_substate_region = {
 	}
 }
 
+
+# Gain control of State
+acquire_state_small = {
+	sprite_index = 26
+	is_triggered_only = yes
+	months = 12
+	construction_speed = 0.5
+	
+	badboy_factor = 0.8
+	prestige_factor = 1
+	peace_cost_factor = 1
+	penalty_factor = 1
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 48
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	can_use = {
+		NOT = { has_country_flag = daimyo_flag }
+		NOT = { is_our_vassal = THIS }
+		number_of_states = 2 # annex if you want their last state
+		any_owned_province = {
+			not = { is_core = THIS }
+			is_colonial = no
+		}
+		OR = {
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = yes
+				}
+			}
+			AND = {
+				civilized = no
+				THIS = {
+					civilized = no
+				}
+			}
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = no
+				}
+			}
+		}
+		any_owned_province = {
+			is_core = SMA
+			is_colonial = no
+		}
+		NOT = {
+			AND = {
+				has_country_flag = chinese_warlord_flag
+				NOT = { year = 1870 } 
+			}
+		}
+	}
+	
+	allowed_states = {
+		is_colonial = no
+		any_owned_province = {
+			not = {	is_core = THIS }
+			is_colonial = no
+		}
+		not = { any_owned_province = { is_capital = yes } }
+		any_owned_province = { is_core = SMA }
+	}
+	
+	allowed_states_in_crisis = {
+		any_owned_province = {
+			any_neighbor_province = {
+				owner = { tag = THIS }
+			}
+		}
+	}		
+
+	po_demand_state = yes
+	
+	war_name = WAR_TAKE_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+		plurality = -5
+	}
+}
+
+# Gain control of State
+acquire_state_medium = {
+	sprite_index = 25
+	is_triggered_only = yes
+	months = 12
+	construction_speed = 0.5
+	
+	badboy_factor = 1.4
+	prestige_factor = 1.5
+	peace_cost_factor = 1
+	penalty_factor = 1
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 48
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	can_use = {
+		NOT = { has_country_flag = daimyo_flag }
+		NOT = { is_our_vassal = THIS }
+		number_of_states = 2 # annex if you want their last state
+		any_owned_province = {
+			not = { is_core = THIS }
+			is_colonial = no
+		}
+		OR = {
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = yes
+				}
+			}
+			AND = {
+				civilized = no
+				THIS = {
+					civilized = no
+				}
+			}
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = no
+				}
+			}
+		}
+		any_owned_province = {
+			is_core = MST
+			is_colonial = no
+		}
+		NOT = {
+			AND = {
+				has_country_flag = chinese_warlord_flag
+				NOT = { year = 1870 } 
+			}
+		}
+	}
+	
+	allowed_states = {
+		is_colonial = no
+		any_owned_province = {
+			not = {	is_core = THIS }
+			is_colonial = no
+		}
+		not = { any_owned_province = { is_capital = yes } }
+		any_owned_province = { is_core = MST }
+	}
+	
+	allowed_states_in_crisis = {
+		any_owned_province = {
+			any_neighbor_province = {
+				owner = { tag = THIS }
+			}
+		}
+	}		
+
+	po_demand_state = yes
+	
+	war_name = WAR_TAKE_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+		plurality = -5
+	}
+}
 
 # Gain control of State
 acquire_state = {
@@ -1510,6 +1828,10 @@ acquire_state = {
 				}
 			}
 		}
+		any_owned_province = {
+			NOT = { is_core = SMA is_core = MST }
+			is_colonial = no
+		}
 		NOT = {
 			AND = {
 				has_country_flag = chinese_warlord_flag
@@ -1524,7 +1846,7 @@ acquire_state = {
 			not = {	is_core = THIS }
 			is_colonial = no
 		}
-		not = { any_owned_province = { is_capital = yes } }
+		not = { any_owned_province = { is_capital = yes } is_core = MST is_core = SMA }
 	}
 	
 	allowed_states_in_crisis = {
@@ -1540,8 +1862,12 @@ acquire_state = {
 	war_name = WAR_TAKE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -1560,7 +1886,7 @@ acquire_state = {
 
 # Gain control of Capital
 acquire_capital = {
-	sprite_index = 6
+	sprite_index = 27
 	is_triggered_only = yes
 	months = 12
 	construction_speed = 0.5
@@ -1635,6 +1961,11 @@ acquire_capital = {
 	war_name = WAR_TAKE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -1710,8 +2041,12 @@ place_in_the_sun = {
 	war_name = WAR_COLONIAL_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -1782,6 +2117,11 @@ take_treaty_port = {
 	war_name = WAR_TAKE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -1826,6 +2166,11 @@ colonial_competition = {
 	war_name = WAR_COLONIAL_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -1873,11 +2218,25 @@ cut_down_to_size = {
 	}
 	
 	can_use = {
+		NOT = { 
+			is_our_vassal = THIS
+			conscription = ref_huge_military_budget
+		}
+		NOT = {
+			AND = {
+				has_country_flag = chinese_warlord_flag
+				NOT = { year = 1870 } 
+			}
+		}
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 }
 
 # MONUMENT CARRACK
@@ -1923,8 +2282,12 @@ capture_monument_spa_carrack_cb = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 }
 
 	
@@ -1960,8 +2323,12 @@ cut_down_to_size_boxer = {
 	war_name = WAR_BOXER_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		plurality = -5
@@ -2057,6 +2424,11 @@ free_peoples = {
 	war_name = WAR_FREE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -2154,8 +2526,12 @@ liberate_country = {
 	war_name = WAR_LIBERATE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	on_po_accepted = {
 		plurality = -5
 	}
@@ -2211,8 +2587,12 @@ dismantle_forts = {
 	war_name = WAR_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		plurality = -3
@@ -2262,9 +2642,13 @@ release_puppet = {
 
     war_name = WAR_NAME
 
-	on_add = {
-	}
-	
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
 
     on_po_accepted = {
 		country_event = 9576
@@ -2313,9 +2697,13 @@ release_puppet_small = {
 
     war_name = WAR_NAME
 
-	on_add = {
-	}
-	
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
 
     on_po_accepted = {
 		country_event = 9576
@@ -2363,9 +2751,13 @@ release_puppet_tiny = {
 
     war_name = WAR_NAME
 
-	on_add = {
-	}
-	
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
 
     on_po_accepted = {
 		country_event = 9576
@@ -2415,9 +2807,14 @@ transfer_puppet = {
 
     war_name = WAR_NAME
 
-	on_add = {
-	}
-	
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
+
     on_po_accepted = {
 		country_event = 9575
     }
@@ -2465,9 +2862,13 @@ transfer_puppet_small = {
 
     war_name = WAR_NAME
 
-	on_add = {
-	}
-	
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
 
     on_po_accepted = {
 		country_event = 9575
@@ -2515,9 +2916,13 @@ transfer_puppet_tiny = {
 
     war_name = WAR_NAME
 
-	on_add = {
-	}
-	
+    on_add = {
+        move_issue_percentage = {
+            from = jingoism
+            to = pro_military
+            value = 0.25
+        }
+    }
 
     on_po_accepted = {
 		country_event = 9575
@@ -2592,6 +2997,11 @@ make_puppet = {
 	war_name = WAR_PUPPET_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -2661,8 +3071,12 @@ make_puppet_small = {
 	war_name = WAR_PUPPET_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		plurality = -5
@@ -2730,8 +3144,12 @@ make_puppet_tiny = {
 	war_name = WAR_PUPPET_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		plurality = -5
@@ -2781,6 +3199,11 @@ become_independent = {
 	war_name = WAR_INDEPENDENCE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 		add_war_goal = {
 			casus_belli = make_puppet
 		}
@@ -2820,9 +3243,6 @@ humiliate = {
 	
 	war_name = WAR_HUMILIATE_NAME
 
-	on_add = {
-	}
-	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		has_recently_lost_war = no
@@ -2834,6 +3254,13 @@ humiliate = {
 		}
 		NOT = { tag = WBK }
 	}	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
 	on_po_accepted = {
 		plurality = -15
 	}
@@ -2875,8 +3302,12 @@ demand_reparations = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 	
 	on_po_accepted = {
 		plurality = -3
@@ -2941,8 +3372,12 @@ demand_concession_casus_belli = {
 	war_name = WAR_CONCESSION_NAME
 
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -3022,8 +3457,12 @@ establish_protectorate_casus_belli = {
 	war_name = WAR_PROTECTORATE_NAME
 
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -3092,8 +3531,12 @@ establish_small_protectorate_casus_belli = {
 	war_name = WAR_PROTECTORATE_NAME
 
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -3153,8 +3596,12 @@ unification_humiliate_cb = {
 	war_name = UNIFICATION_HUMILIATE_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
 	}
-	
 }
 
 # Release Puppet
@@ -3208,8 +3655,12 @@ unification_release_puppet_cb = {
 	war_name = WAR_NAME
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
-	
 }
 
 # Unification Demand State
@@ -3270,8 +3721,12 @@ unification_casus_belli = {
 	
 	war_name = WAR_UNIFICATION_NAME
 
-	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
 	}
 	
 	on_po_accepted = {
@@ -3338,8 +3793,12 @@ unification_annex_casus_belli = {
 	war_name = WAR_UNIFICATION_ANNEX_NAME
 
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
 	}
-	
 	
 	on_po_accepted = {
 		THIS = {
@@ -3384,9 +3843,6 @@ rude_boy = {
 	}
 	
 
-	on_add = {
-	}
-	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		badboy = 1
@@ -3396,6 +3852,14 @@ rude_boy = {
 	po_reparations = yes
 	
 	war_name = WAR_RUDEBOI_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.1
+		}
+	}
 	
 }
 
@@ -3446,11 +3910,22 @@ install_communist_gov_cb = {
 
 	war_name = WAR_NAME
 	
-	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
+		political_reform = none_voting
+		political_reform = party_appointed
+		political_reform = no_meeting
+		political_reform = state_press
+		political_reform = state_controlled
+		political_reform = underground_parties
+		social_reform = child_labor_illegal
 		plurality = -10
 	}
 }
@@ -3481,14 +3956,27 @@ uninstall_communist_gov_cb = {
 	good_relation_militancy_factor = 1
 
 	can_use = {
+		THIS = {
+			# If actor ruling party is not communist
+			NOT = {
+				government = proletarian_dictatorship
+			}
+		}
+		
+		# If reciever current gov is proletarian_dictatorship
+		government = proletarian_dictatorship
 	}
 	
 	po_uninstall_communist_gov_type = yes
 
 	war_name = WAR_NAME
 	
-	
 	on_add = {
+		move_issue_percentage = {
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -3526,14 +4014,18 @@ great_war_penalty_cb = {
 
 	war_name = WAR_NAME
 	
-	on_add = {
-	}
-	
 	#can_use = {
 	#	NOT = { is_our_vassal = THIS }
 	#	is_disarmed = no
 	#}
-
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
 }
 
 vassal_tax = {
@@ -3565,6 +4057,11 @@ vassal_tax = {
 	}
 	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
@@ -3613,8 +4110,13 @@ negotiated_transfer = {
 	po_demand_state = yes
 	
 	war_name = WAR_TAKE_NAME
-
+	
 	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
 	}
 	
 	on_po_accepted = {
