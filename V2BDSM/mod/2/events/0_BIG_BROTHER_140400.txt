@@ -472,13 +472,6 @@ country_event = { # YEARLY CLEANUP
 	desc = "noloc"
 
 	is_triggered_only = yes
-
-	#trigger = {
-	#	tag = WBK
-	#	NOT = { has_country_modifier = ycl_happened_modifier }
-	#	has_global_flag = 1836_setup_complete_flag
-	#	year = 1841
-	#}
 	
 	option = {
 		name = "noloc"
@@ -553,10 +546,6 @@ country_event = { # YEARLY CLEANUP
 				literacy = -0.01
 			}
 		}
-		PER = { 
-			limit = { NOT = { has_country_modifier = persian_centralization_modifier } }
-			clr_country_flag = persian_centralization_ongoing_flag
-		}
 		any_country = {
 			any_owned = {
 				limit = {
@@ -581,7 +570,7 @@ country_event = { # YEARLY CLEANUP
 		any_country = {
 			any_owned = {
 				limit = {
-					year = 1860 NOT = { year = 1880 is_core = SMA }
+					year = 1880 NOT = { is_core = SMA }
 					## Audax Validator "." Ignore_NEXT
 					state_scope = { NOT = { total_pops = 250000 } }
 				}
@@ -591,7 +580,7 @@ country_event = { # YEARLY CLEANUP
 		any_country = {
 			any_owned = {
 				limit = {
-					year = 1860 NOT = { year = 1880 }
+					year = 1880
 					is_core = SMA 
 					## Audax Validator "." Ignore_NEXT
 					state_scope = { total_pops = 250000 }
@@ -612,7 +601,7 @@ country_event = { # YEARLY CLEANUP
 		any_country = {
 			any_owned = {
 				limit = {
-					NOT = { year = 1860 }
+					NOT = { year = 1880 }
 					is_core = MST
 					## Audax Validator "." Ignore_NEXT
 					state_scope = { total_pops = 300000 }
@@ -623,7 +612,7 @@ country_event = { # YEARLY CLEANUP
 		any_country = {
 			any_owned = {
 				limit = {
-					year = 1860 NOT = { year = 1880 is_core = MST }
+					year = 1880 NOT = { is_core = MST }
 					## Audax Validator "." Ignore_NEXT
 					state_scope = { NOT = { total_pops = 400000 } }
 				}
@@ -633,7 +622,7 @@ country_event = { # YEARLY CLEANUP
 		any_country = {
 			any_owned = {
 				limit = {
-					year = 1860 NOT = { year = 1880 }
+					year = 1880
 					is_core = MST
 					## Audax Validator "." Ignore_NEXT
 					state_scope = { total_pops = 400000 }
