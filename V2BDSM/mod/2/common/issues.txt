@@ -263,7 +263,6 @@ political_reforms = {
 			global_population_growth = 0.001
 			min_social_spending = 0.2
 			max_social_spending = 0.2
-			pension_level = 1
 			global_immigrant_attract = 0.02
 			allow = { always = no }
 		}
@@ -271,7 +270,6 @@ political_reforms = {
 		medium_healthcare_investment = {
 			min_social_spending = 0.4
 			max_social_spending = 0.4
-			pension_level = 1
 			global_population_growth = 0.002
 			global_immigrant_attract = 0.05
 			allow = { always = no }
@@ -280,7 +278,6 @@ political_reforms = {
 		high_healthcare_investment = {
 			min_social_spending = 0.6
 			max_social_spending = 0.6
-			pension_level = 1
 			global_population_growth = 0.003
 			global_immigrant_attract = 0.08
 			allow = { always = no }
@@ -687,6 +684,10 @@ social_reforms = {
 			global_immigrant_attract = 0.04
 		}
 	}
+	unemployment_subsidies = {
+		no_subsidies = {
+		}
+	}
 	pensions = {
 		administrative = yes
 		next_step_only = yes
@@ -720,11 +721,13 @@ social_reforms = {
 		trinket_health_care = {
 			global_population_growth = 0.001
 			tax_efficiency = 0.02
+			pension_level = 1
 			global_immigrant_attract = 0.04
 		}
 		low_health_care = {
 			min_social_spending = 0.2
 			max_social_spending = 0.2
+			pension_level = 1
 			global_population_growth = 0.001
 			tax_efficiency = 0.01
 			global_immigrant_attract = 0.07
@@ -732,6 +735,7 @@ social_reforms = {
 		acceptable_health_care = {
 			min_social_spending = 0.4
 			max_social_spending = 0.4
+			pension_level = 1
 			global_population_growth = 0.001
 			global_immigrant_attract = 0.1
 		}

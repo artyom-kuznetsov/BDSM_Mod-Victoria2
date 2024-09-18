@@ -145,11 +145,11 @@ country_event = {
 			political_reform = parliamentary
 		}
 		
-		any_country = { limit = { economic_system = traditionalism_r NOT = { economic_system_crutch = traditionalism_r_crutch } } }
-		any_country = { limit = { economic_system = agrarianism_r NOT = { economic_system_crutch = agrarianism_r_crutch } } }
-		any_country = { limit = { economic_system = interventionism_r NOT = { economic_system_crutch = interventionism_r_crutch } } }
-		any_country = { limit = { economic_system = laissez_faire_r NOT = { economic_system_crutch = laissez_faire_r_crutch } } }
-		any_country = { limit = { economic_system = planned_economy_r NOT = { economic_system_crutch = planned_economy_r_crutch } } }
+		any_country = { limit = { economic_system = traditionalism_r NOT = { economic_system = traditionalism_r_crutch } } social_reform = traditionalism_r_crutch }
+		any_country = { limit = { economic_system = agrarianism_r NOT = { economic_system = agrarianism_r_crutch } }  social_reform = agrarianism_r_crutch }
+		any_country = { limit = { economic_system = interventionism_r NOT = { economic_system = interventionism_r_crutch } } social_reform = interventionism_r_crutch }
+		any_country = { limit = { economic_system = laissez_faire_r NOT = { economic_system = laissez_faire_r_crutch } } social_reform = laissez_faire_r_crutch }
+		any_country = { limit = { economic_system = planned_economy_r NOT = { economic_system = planned_economy_r_crutch } } social_reform = planned_economy_r_crutch }
 		
 		
 		#  Œ–¿¡À≈—“–Œ≈Õ»≈ ¬Œ≈ÕÕŒ√Œ ¬–≈Ã≈Õ»
@@ -411,12 +411,10 @@ country_event = {
 		any_country = { limit = { has_country_modifier = swe_economic_boom_modifier } plurality = 0.1 }
 		any_country = { limit = { has_country_modifier = choshu_modifier } plurality = 0.1 }
 		any_country = { limit = { has_country_modifier = redshirts } plurality = -0.5 }
-		any_country = { limit = { has_country_modifier = springtime_of_nations } plurality = -0.5 }
 		any_country = { limit = { has_country_modifier = global_liberal_agitation } plurality = -0.2 }
 		any_country = { limit = { has_country_modifier = western_influences } plurality = -0.15 }
 		any_country = { limit = { has_country_modifier = uncivilized_isolationism } plurality = 0.1 }
 		any_country = { limit = { has_country_modifier = martial_law_modifier } plurality = 0.1 }
-		any_country = { limit = { has_country_modifier = the_homestead_act } plurality = 0.02 }
 		any_country = { limit = { has_country_modifier = great_depression } plurality = -0.5 }
 		any_country = { limit = { has_country_modifier = revolution_happened_cmodifier } plurality = -0.1 }
 		any_country = { limit = { has_country_modifier = economic_boom } plurality = 0.1 }
@@ -424,7 +422,6 @@ country_event = {
 		any_country = { limit = { has_country_modifier = signed_the_geneva_convention } plurality = 0.02 }
 		any_country = { limit = { has_country_modifier = protector_of_eastern_christendom } plurality = 0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = separatism_modifier } } plurality = -0.02 }
-		any_country = { limit = { any_owned_province = { has_province_modifier = liberal_agitation } } plurality = -0.03 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = western_presence } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = foreign_smugglers } } plurality = -0.03 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = foreign_trading_post } } plurality = -0.02 }
@@ -551,7 +548,12 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					NOT = { year = 1860 is_core = SMA }
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 150000 } }
+					state_scope = { 
+						## Audax Validator "." Ignore_NEXT
+						NOT = { 
+							total_pops = 150000 
+						} 
+					}
 				}
 				add_core = SMA
 			}
