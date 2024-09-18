@@ -55,7 +55,9 @@ peace_order = {
 	acquire_all_cores_AI
 	sengoku 
 	annex_core_country
-	acquire_state 
+	acquire_state_small
+	acquire_state_medium
+	acquire_state
 	acquire_substate_region
 	place_in_the_sun
 	take_treaty_port
@@ -1566,6 +1568,218 @@ acquire_substate_region = {
 
 
 # Gain control of State
+acquire_state_small = {
+	sprite_index = 26
+	is_triggered_only = yes
+	months = 12
+	construction_speed = 0.5
+	
+	badboy_factor = 0.8
+	prestige_factor = 1
+	peace_cost_factor = 1
+	penalty_factor = 1
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 48
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	can_use = {
+		NOT = { has_country_flag = daimyo_flag }
+		NOT = { is_our_vassal = THIS }
+		number_of_states = 2 # annex if you want their last state
+		any_owned_province = {
+			not = { is_core = THIS }
+			is_colonial = no
+		}
+		OR = {
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = yes
+				}
+			}
+			AND = {
+				civilized = no
+				THIS = {
+					civilized = no
+				}
+			}
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = no
+				}
+			}
+		}
+		any_owned_province = {
+			is_core = SMA
+			is_colonial = no
+		}
+		NOT = {
+			AND = {
+				has_country_flag = chinese_warlord_flag
+				NOT = { year = 1870 } 
+			}
+		}
+	}
+	
+	allowed_states = {
+		is_colonial = no
+		any_owned_province = {
+			not = {	is_core = THIS }
+			is_colonial = no
+		}
+		not = { any_owned_province = { is_capital = yes } }
+		any_owned_province = { is_core = SMA }
+	}
+	
+	allowed_states_in_crisis = {
+		any_owned_province = {
+			any_neighbor_province = {
+				owner = { tag = THIS }
+			}
+		}
+	}		
+
+	po_demand_state = yes
+	
+	war_name = WAR_TAKE_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+		plurality = -5
+	}
+}
+
+# Gain control of State
+acquire_state_medium = {
+	sprite_index = 25
+	is_triggered_only = yes
+	months = 12
+	construction_speed = 0.5
+	
+	badboy_factor = 1.4
+	prestige_factor = 1.5
+	peace_cost_factor = 1
+	penalty_factor = 1
+
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 2
+	break_truce_militancy_factor = 2
+	truce_months = 48
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+
+	can_use = {
+		NOT = { has_country_flag = daimyo_flag }
+		NOT = { is_our_vassal = THIS }
+		number_of_states = 2 # annex if you want their last state
+		any_owned_province = {
+			not = { is_core = THIS }
+			is_colonial = no
+		}
+		OR = {
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = yes
+				}
+			}
+			AND = {
+				civilized = no
+				THIS = {
+					civilized = no
+				}
+			}
+			AND = {
+				civilized = yes
+				THIS = {
+					civilized = no
+				}
+			}
+		}
+		any_owned_province = {
+			is_core = MST
+			is_colonial = no
+		}
+		NOT = {
+			AND = {
+				has_country_flag = chinese_warlord_flag
+				NOT = { year = 1870 } 
+			}
+		}
+	}
+	
+	allowed_states = {
+		is_colonial = no
+		any_owned_province = {
+			not = {	is_core = THIS }
+			is_colonial = no
+		}
+		not = { any_owned_province = { is_capital = yes } }
+		any_owned_province = { is_core = MST }
+	}
+	
+	allowed_states_in_crisis = {
+		any_owned_province = {
+			any_neighbor_province = {
+				owner = { tag = THIS }
+			}
+		}
+	}		
+
+	po_demand_state = yes
+	
+	war_name = WAR_TAKE_NAME
+	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
+		}
+	}
+	
+	on_po_accepted = {
+		THIS = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+		plurality = -5
+	}
+}
+
+# Gain control of State
 acquire_state = {
 	sprite_index = 6
 	is_triggered_only = yes
@@ -1614,6 +1828,10 @@ acquire_state = {
 				}
 			}
 		}
+		any_owned_province = {
+			NOT = { is_core = SMA is_core = MST }
+			is_colonial = no
+		}
 		NOT = {
 			AND = {
 				has_country_flag = chinese_warlord_flag
@@ -1628,7 +1846,7 @@ acquire_state = {
 			not = {	is_core = THIS }
 			is_colonial = no
 		}
-		not = { any_owned_province = { is_capital = yes } }
+		not = { any_owned_province = { is_capital = yes } is_core = MST is_core = SMA }
 	}
 	
 	allowed_states_in_crisis = {
@@ -1668,7 +1886,7 @@ acquire_state = {
 
 # Gain control of Capital
 acquire_capital = {
-	sprite_index = 6
+	sprite_index = 27
 	is_triggered_only = yes
 	months = 12
 	construction_speed = 0.5
