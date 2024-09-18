@@ -12,21 +12,24 @@ political_decisions = {
 		allow = { }
 		
 		effect = {
+			set_country_flag = effect_apply_flag
 			random_owned = {
 				limit = {
 					owner = {
 						pop_construction = no_pop_construction
+						has_country_flag = effect_apply_flag
 					}
 				}
-				owner = { political_reform = yes_pop_construction }
+				owner = { political_reform = yes_pop_construction clr_country_flag = effect_apply_flag }
 			}
 			random_owned = {
 				limit = {
 					owner = {
 						pop_construction = yes_pop_construction
+						has_country_flag = effect_apply_flag
 					}
 				}
-				owner = { political_reform = no_pop_construction }
+				owner = { political_reform = no_pop_construction clr_country_flag = effect_apply_flag }
 			}
 		}
 	}

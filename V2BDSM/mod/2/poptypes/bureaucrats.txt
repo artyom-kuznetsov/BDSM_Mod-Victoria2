@@ -497,7 +497,7 @@ promote_to =
 			country = { has_country_flag = jan_mayen }
 		}
 		modifier = {
-			factor = -100
+			factor = -2
 			state_scope = {
 				NOT = { bureaucrats = 0.01 }
 			}
@@ -510,17 +510,19 @@ promote_to =
 		}
 
 		modifier = {
-			factor = -10
-			NOT = { luxury_needs = 0.10 }
-		}		
-		modifier = {
 			factor = 10
 			luxury_needs = 1
 		}
 		
-		modifier = {
-			factor = 2
-			not = { literacy = 0.50 }
+		group = {
+			modifier = {
+				factor = 2
+				not = { state_scope = { aristocrats = 0.01 } }
+			}
+			modifier = {
+				factor = 4
+				not = { state_scope = { aristocrats = 0.005 } }
+			}
 		}
 	}
 	farmers = {

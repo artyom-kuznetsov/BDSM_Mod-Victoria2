@@ -6,7 +6,7 @@
 tiny_nation = {
 	trigger = {
 		NOT = {
-			total_pops = 1000000 #1 million POPs
+			total_pops = 2000000 #2 million POPs
 		}
 	}
 	leadership_modifier = -0.4
@@ -19,9 +19,9 @@ tiny_nation = {
 
 small_nation = {
 	trigger = {
-		total_pops = 1000000 #1 million POPs
+		total_pops = 2000000 #2 million POPs
 		NOT = {
-			total_pops = 3500000 #3.5 million POPs
+			total_pops = 5000000 #5 million POPs
 		}
 	}
 	leadership_modifier = -0.25
@@ -34,9 +34,9 @@ small_nation = {
 
 medium_nation = {
 	trigger = {
-		total_pops = 3500000
+		total_pops = 5000000
 		NOT = {
-			total_pops = 7500000 #7.5 million POPs
+			total_pops = 12500000 #12.5 million POPs
 		}
 	}
 	leadership_modifier = -0.1
@@ -47,7 +47,7 @@ medium_nation = {
 
 large_nation = {
 	trigger = {
-		total_pops = 7500000
+		total_pops = 12500000
 		NOT = { total_pops = 30000000 } #30 million POPs
 		NOT = { civilized = no }		
 	}
@@ -61,15 +61,6 @@ empire = {
 		NOT = { civilized = no }			
 	}
 	leadership_modifier = 0.2
-	icon = 9
-}
-
-superpower = {
-	trigger = {
-		total_pops = 60000000
-		NOT = { civilized = no }		
-	}
-	leadership_modifier = 0.4
 	icon = 9
 }
 
