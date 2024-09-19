@@ -1,4 +1,20 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.5.X \nОжидаемая чексумма: XXXX;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW;§YМаксимальный уровень складывается из следующих вещей§!;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS;§G+1§Y от закона: §LЧастное образование§!;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS;§G+2§Y от закона: §LСмешанное образование§!;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS;§G+2§Y от закона: §LБесплатное образование§!;X
+CUSTOM_TOOLTIP_INSTITUTION_LIMIT;Недоступно: наши законы или технологии не позволяют более высокий уровень института\n;X
+CUSTOM_TOOLTIP_INSTITUTION_AT_MAX;Недоступно: У нас уже максимальный уровень этого института.;X
+CUSTOM_TOOLTIP_INSTITUTION_COOLDOWN;Недоступно: У нас действует модификатор §RИзменение уровня института§!;X
+institution_changed_cmodifier;Изменение уровня института;X
+institution_changed_cmodifier_desc;До истечения этого модификатора, мы не можем изменять уровни инвестиций в институты.;X
+institutions_EvtName;Государственные институты;X
+institutions_EvtDesc;§BВыберите институт, который вас интересует§!\n  Максимальный уровень институтов зависит от технологий или социальных законов.;X
+institutions_EvtOptEducation;Образование;X
+institutions_education_EvtDesc;Выберите действие с институтом §GОбразование§!.;X
+institutions_EvtOptDecrease;§G>§! Повысить уровень;X
+institutions_change_dec_title;§L#§B#§L#§! Управление институтами;X
+institutions_change_dec_desc;Изменить уровень инвестиций в различные институты в государстве.;X
 ;;X#TAKE STATE CB
 acquire_state_medium;§B20§! Захват средн. региона;X
 acquire_state_medium_short;§B20§! Присоединение региона $STATE$;X
@@ -111,13 +127,13 @@ no_education_investment_l;Нет финансирования образования;X
 no_education_investment_desc;Мы не выделяем деньги на образование.;X
 low_education_investment;§G+1%§! Низк. финансирование;X
 low_education_investment_l;Низк. финансирование образования;X
-low_education_investment_desc;Мы выделяем небольшую часть бюджета на образование.§YЛимит священников §G+1%§!;X
+low_education_investment_desc;Мы выделяем небольшую часть бюджета на образование.\n\n§YЛимит преподавателей §G+1%§!;X
 medium_education_investment;§G+1.5%§! Средн. финансирование;X
 medium_education_investment_l;Средн. финансирование образования;X
-medium_education_investment_desc;Мы выделяем существенную часть бюджета на образование.\n\n§YЛимит священников §G+1.5%§!\n§YТребование чиновников §R+0.1%§!;X
+medium_education_investment_desc;Мы выделяем существенную часть бюджета на образование.\n\n§YЛимит преподавателей §G+1.5%§!\n§YТребование чиновников §R+0.1%§!;X
 high_education_investment;§G+2%§! Высок. финансирование;X
 high_education_investment_l;Высок. финансирование образования;X
-high_education_investment_desc;Мы выделяем большую часть бюджета на образование.\n\n§YЛимит священников §G+2%§!\n§YТребование чиновников §R+0.2%§!;X
+high_education_investment_desc;Мы выделяем большую часть бюджета на образование.\n\n§YЛимит преподавателей §G+2%§!\n§YТребование чиновников §R+0.2%§!;X
 security;Безопасность;X
 no_security;Нет служб;X
 no_security_l;Нет служб безопасности;X
@@ -24241,7 +24257,7 @@ mixed_schools_l;Смешанное образование;x
 mixed_schools_desc;У нас действуют как частные школы, так и государственные.\n\n§G+2 макс. уровень института §Yобразование§!;x
 public_schools;§G2%§! Бесплатн. образование;x
 public_schools_l;Бесплатное образование;x
-public_schools_desc;Государство предоставляет бесплатное высшее образование всем.\n\n§G+3 макс. уровень института §Yобразование§!;x
+public_schools_desc;Государство предоставляет бесплатное высшее образование всем.\n\n§G+2 макс. уровень института §Yобразование§!;x
 NATIONALIST_UNION_MOVEMENT;$COUNTRY_ADJ$ движение за объединение;x
 NATIONALIST_LIBERATION_MOVEMENT;Движение за освобождение державы $COUNTRY$;x
 SUPRESSION_MONTHLY_GAIN;Ежемесячный рост: §G$VAL$§!;x

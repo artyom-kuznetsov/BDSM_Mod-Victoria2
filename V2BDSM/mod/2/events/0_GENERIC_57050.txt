@@ -1000,8 +1000,102 @@ country_event = {
 #	}
 #}
 
-# ID 57076 EMPTY 
-# ID 57077 EMPTY
+country_event = {
+	id = 57076
+	title = "institutions_EvtName"
+	desc = "institutions_EvtDesc"
+	picture = "TODO"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "institutions_EvtOptEducation"
+		country_event = 57077
+	}
+}
+
+country_event = {
+	id = 57077
+	title = "institutions_EvtName"
+	desc = "institutions_education_EvtDesc"
+	picture = "TODO"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "institutions_EvtOptDecrease"
+		random_owned = {	# FAIL IF COOLDOWN
+			limit = { owner = { has_country_modifier = institution_changed_cmodifier } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_COOLDOWN = { } }
+		}
+		random_owned = {	# MOVE FROM 0 TO 1
+			limit = { owner = { 
+				education_institution = no_education_investment 
+				OR = {
+					school_reforms = private_schools
+					school_reforms = mixed_schools
+					school_reforms = public_schools
+				}
+				NOT = { has_country_modifier = institution_changed_cmodifier } } }
+			owner = { 
+				add_country_modifier = { name = institution_changed_cmodifier duration = 730 }
+				social_reform = low_education_investment
+			}
+		}
+		random_owned = {	# MOVE FROM 1 TO 2
+			limit = { owner = { 
+				education_institution = low_education_investment 
+				OR = {
+					school_reforms = mixed_schools
+					school_reforms = public_schools
+				}
+				NOT = { has_country_modifier = institution_changed_cmodifier } } }
+			owner = { 
+				add_country_modifier = { name = institution_changed_cmodifier duration = 730 }
+				social_reform = medium_education_investment
+			}
+		}
+		random_owned = {	# MOVE FROM 1 TO 2 FAIL
+			limit = { owner = { 
+				education_institution = low_education_investment 
+				school_reforms = private_schools
+				NOT = { has_country_modifier = institution_changed_cmodifier } } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_LIMIT = { } }
+		}
+		
+	
+		random_owned = {	# IF ALREADY AT MAX
+			limit = { owner = { education_institution = high_education_investment } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_AT_MAX = { } }
+		}
+		
+		
+		
+		### SHOW MAX LEVEL ###
+		
+		random_owned = {
+			limit = { owner = { NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW = { } }
+		}
+		random_owned = {
+			limit = { owner = { 
+				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = private_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS = { } }
+		}
+		random_owned = {
+			limit = { owner = { 
+				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = mixed_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS = { } }
+		}
+		random_owned = {
+			limit = { owner = { 
+				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = public_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS = { } }
+		}
+	}
+}
+
+
 # ID 57078 EMPTY
 
 country_event = {
