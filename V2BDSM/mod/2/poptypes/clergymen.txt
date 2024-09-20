@@ -396,86 +396,64 @@ promote_to =
 		factor = 0.01
 		group = {
 			modifier = {
-				factor = 2
-				literacy = 0.1
+				factor = -5
+				not = { literacy = 0.1 }
 			}
 			modifier = {
-				factor = 2
-				literacy = 0.2
+				factor = -3
+				not = { literacy = 0.15 }
 			}
 			modifier = {
-				factor = 2
-				literacy = 0.3
+				factor = -2
+				not = { literacy = 0.2 }
 			}
 			modifier = {
-				factor = 2
-				literacy = 0.4
+				factor = -2
+				not = { literacy = 0.25 }
 			}
 			modifier = {
-				factor = 2
-				literacy = 0.5
-			}
-			modifier = {
-				factor = 2
-				literacy = 0.6
-			}
-			modifier = {
-				factor = 2
-				literacy = 0.7
-			}
-			modifier = {
-				factor = 2
-				literacy = 0.8
-			}
-			modifier = {
-				factor = 2
-				literacy = 0.9
-			}
-			modifier = {
-				factor = 2
-				literacy = 1
+				factor = -2
+				not = { literacy = 0.3 }
 			}
 		}
 		group = {
 			modifier = {
-				factor = -1
-				military_spending = 0.54
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 0.3
 			}
 			modifier = {
-				factor = -1
-				military_spending = 0.64
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 0.4
 			}
 			modifier = {
-				factor = -1
-				military_spending = 0.69
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 0.5
 			}
 			modifier = {
-				factor = -1
-				military_spending = 0.74
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 0.6
 			}
 			modifier = {
-				factor = -2
-				military_spending = 0.84
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 0.7
 			}
 			modifier = {
-				factor = -2
-				military_spending = 0.89
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 0.8
 			}
 			modifier = {
-				factor = -2
-				military_spending = 0.94
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 0.9
 			}
 			modifier = {
-				factor = -2
-				military_spending = 0.99
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 1
+				literacy = 1
+			}
+		}
+		modifier = {
+			factor = 10
+			state_scope = {
+				has_factories = yes
 			}
 		}
 		modifier = {
@@ -497,37 +475,9 @@ promote_to =
 		}
 		modifier = {
 			factor = -100
-			OR = {
-				location = {
-					is_colonial = yes
-				}
-				country = {
-					civilized = no
-				}
+			location = {
+				is_colonial = yes
 			}
-		}
-		modifier = {
-			factor = -100
-			NOT = { clergymen = 0.04 }
-		}
-		modifier = {
-			factor = 30
-				country = { ai = yes }
-				OR = {
-					is_culture_group = east_asian
-					is_culture_group = south_asian
-				}
-				location = { total_pops = 2000000 }
-		}
-		modifier = {
-			factor = 20
-				country = { ai = yes }
-				is_culture_group = american_cultures
-		}
-		modifier = {
-			factor = -7
-				country = { ai = yes }
-				is_culture_group = germanic
 		}
 	}
 	farmers = {

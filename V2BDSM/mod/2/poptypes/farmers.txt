@@ -365,10 +365,6 @@ promote_to =
 	}
 	craftsmen = {
 		factor = 0.01
-		modifier = {
-			factor = -100
-			is_primary_culture = no is_accepted_culture = no
-		}
 		group = {
 			modifier = {
 				factor = -5
@@ -425,50 +421,8 @@ promote_to =
 				literacy = 1
 			}
 		}
-		group = {
-			modifier = {
-				factor = -1
-				military_spending = 0.54
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -1
-				military_spending = 0.64
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -1
-				military_spending = 0.69
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -1
-				military_spending = 0.74
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -2
-				military_spending = 0.84
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -2
-				military_spending = 0.89
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -2
-				military_spending = 0.94
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -2
-				military_spending = 0.99
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-		}
 		modifier = {
-			factor = 5
+			factor = 10
 			state_scope = {
 				has_factories = yes
 			}
@@ -482,7 +436,13 @@ promote_to =
 		}
 		modifier = {
 			factor = -100
-			unemployment_by_type = { type = craftsmen value = 0.2 }
+			NOT = {
+				location = {
+					work_available = {
+						worker = craftsmen
+					}
+				}
+			}
 		}
 		modifier = {
 			factor = -100
