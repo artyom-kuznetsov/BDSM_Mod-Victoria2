@@ -66,6 +66,13 @@ political_decisions = {
 			USA = {
 				country_event = 16001
 			}
+			any_country = {
+				limit = { is_greater_power = yes }
+				diplomatic_influence = {
+					who = MOR
+					value = -50
+				}
+			}
 			EIC = { add_country_modifier = { name = ai_kill_research_modifier duration = -1 } }
 			any_country = {
 				add_country_modifier = {
