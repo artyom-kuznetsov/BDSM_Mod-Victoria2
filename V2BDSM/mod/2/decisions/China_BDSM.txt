@@ -459,4 +459,29 @@ political_decisions = {
 			}
 		}
 	}
+	
+	china_kickstart_industry_dec = {
+		potential = {
+			tag = CHI
+			civilized = yes
+		}
+		
+		allow = {
+			industrial_score = 400
+			literacy = 0.3
+		}
+		
+		effect = {
+			prestige = 10
+			years_of_research = 0.2
+			add_country_modifier = { name = economic_boom duration = 1850 }
+			
+			random_owned = {
+				limit = {
+					owner = { NOT = { has_country_flag = industrial_revolution_flag } }
+				}
+				owner = { country_event = 57071 }
+			}
+		}
+	}
 }

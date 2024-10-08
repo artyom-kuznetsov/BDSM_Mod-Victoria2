@@ -784,6 +784,14 @@
 		icon = 25
 	}
 	
+	rebel_player_modifier = {
+		tax_efficiency = 0.03
+		mobilisation_size = 0.05
+		global_pop_consciousness_modifier = 0.03
+		global_pop_militancy_modifier = 0.02
+		icon = 28
+	}
+	
 	
 	capital_supply_depot_pmodifier = {
 		max_attrition = -100
@@ -812,14 +820,6 @@
 		population_growth = 0.001
 		icon = 19
 	}
-
-### BIG BROTHER ###
-
-	ycl_happened_modifier = {
-		icon = 19
-	}
-
-
 
 strategic_rgo = {
 	local_rgo_throughput = 2
@@ -1359,11 +1359,51 @@ economic_boom = {
 	}
 
 #### SPA - Spain ####
-la_guardia_civil = {
-	tax_efficiency = 0.02
-	supply_consumption = -0.2
-	icon = 1
-}
+	la_guardia_civil = {
+		tax_efficiency = 0.02
+		supply_consumption = -0.2
+		icon = 1
+	}
+	
+	carlist_victory = {
+		mobilisation_size = 0.02
+		supply_consumption = -0.1
+		icon = 29
+	}
+	
+	republican_victory = {
+		global_pop_consciousness_modifier = 0.02
+		tax_efficiency = 0.01
+		icon = 29
+	}
+	
+	civil_war_aftermath_army = {
+		land_organisation = -0.15
+		org_regain = -0.25
+		mobilisation_size = -0.01
+		icon = 16
+	}
+	
+	civil_war_aftermath_navy = {
+		naval_organisation = -0.5
+		icon = 24
+	}
+	
+	civil_war_aftermath_economy = {
+		administrative_efficiency_modifier = -0.1
+		global_pop_militancy_modifier = 0.03
+		global_pop_consciousness_modifier = 0.03
+		rgo_output = -0.25
+		factory_output = -0.25
+		icon = 12
+	}
+	
+	naval_reorganization_cmodifier = {
+		naval_organisation = 0.1
+		navy_tech_research_bonus = 0.05
+		icon = 23
+	}
+	
 
 #### FRA - France ####
 the_french_foreign_legion = {

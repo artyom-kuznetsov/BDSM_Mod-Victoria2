@@ -85,6 +85,25 @@ political_decisions = {
 		}
 	}
 	
+	aftermath_rebuild_navy_dec = {
+		potential = {
+			has_country_flag = aftermath_decs_available
+			has_country_modifier = civil_war_aftermath_navy
+		}
+		
+		allow = {
+			total_amount_of_ships = 80
+			steamers = 1
+			NOT = { has_country_modifier = administrative_expenses2_modifier }
+		}
+		
+		effect = {
+			add_country_modifier = { name = administrative_expenses2_modifier duration = 365 }
+			remove_country_modifier = civil_war_aftermath_navy
+			add_country_modifier = { name = naval_reorganization_cmodifier duration = 14600 }
+		}
+	}
+	
 	return_mexico_dec = {
 		potential = {
 			primary_culture = spanish

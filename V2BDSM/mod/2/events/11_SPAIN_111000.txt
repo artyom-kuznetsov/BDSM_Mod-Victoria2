@@ -236,6 +236,217 @@ country_event = { # ”–Œ¬≈Õ‹ ∆»«Õ»
 	}
 }
 
+country_event = {
+	title = "SCW_EvtName"
+	desc = "SCW_EvtDesc"
+	id = 111003
+	
+	picture = "iberia"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SCW_EvtOptRepublican"
+		any_pop = {
+			militancy = 1
+			consciousness = 2
+		}
+		
+		CUSTOM_TOOLTIP_SCW_START = { }
+		CUSTOM_TOOLTIP_SCW_REPUBLICAN = { }
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = { has_country_flag = hidden_tooltip }
+			}
+			# Audax Validator "." Ignore_NEXT
+			owner = {
+				SPA_498 = { add_core = SPC }
+				BASCONIA_STATE = { add_core = SPC }
+				SPA_492 = { add_core = SPC }
+			}
+		}
+		clr_country_flag = hidden_tooltip
+		tech_school = culture_tech_school
+		add_country_modifier = { name = rebel_player_modifier duration = -1 }
+		any_owned = { 
+			limit = {
+				is_core = SPC
+			}
+			secede_province = SPC
+		}
+		SPC = {
+			capital = 498
+			leadership = 120
+		}
+		SPA = {
+			war = {
+				target = SPC
+				attacker_goal = {
+					casus_belli = civil_war
+				}
+				defender_goal = {
+					casus_belli = civil_war
+				}
+			}
+		}
+		ai_chance = {
+			factor = 10000
+		}
+	}
+	
+	option = {
+		name = "SCW_EvtOptCarlist"
+		CUSTOM_TOOLTIP_SCW_START = { }
+		CUSTOM_TOOLTIP_SCW_CARLIST = { }
+		
+		#country_event = { id = 111004 days = 1 }
+		
+		SPA_498 = { any_owned = { add_core = SPC } }
+		BALEARES_STATE = { add_core = SPC }
+		BASCONIA_STATE = { add_core = SPC }
+		SPA_498 = { add_core = SPC }
+		SPA_492 = { add_core = SPC } 
+		random_owned = {
+			limit = {
+				NOT = { is_core = SPC is_capital = yes }
+			}
+			state_scope = { any_owned = { add_core = SPC } }
+		}
+		random_owned = {
+			limit = {
+				NOT = { is_core = SPC is_capital = yes }
+			}
+			state_scope = { any_owned = { add_core = SPC } }
+		}
+		random_owned = {
+			limit = {
+				NOT = { is_core = SPC is_capital = yes }
+			}
+			state_scope = { any_owned = { add_core = SPC } }
+		}
+		random_owned = {
+			limit = {
+				NOT = { is_core = SPC is_capital = yes }
+			}
+			state_scope = { any_owned = { add_core = SPC } }
+		}
+		any_owned = { 
+			limit = {
+				is_core = SPC
+			}
+			secede_province = SPC
+		}
+		SPC = {
+			capital = 498
+			leadership = 120
+		}
+		change_tag_no_core_switch = SPC
+		tech_school = army_tech_school
+		add_country_modifier = { name = rebel_player_modifier duration = -1 }
+		SPA = {
+			war = {
+				target = SPC
+				attacker_goal = {
+					casus_belli = civil_war
+				}
+				defender_goal = {
+					casus_belli = civil_war
+				}
+			}
+		}
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = 111004
+	title = "SCW_EvtName"
+	desc = "SCW_End_EvtDesc"
+	picture = "iberia"
+	
+	trigger = {
+		OR = {
+			tag = SPC
+			tag = SPA
+		}
+		OR = { 
+			487 = { controlled_by = THIS }
+			487 = { owned_by = THIS }
+		}
+		OR = { 
+			498 = { controlled_by = THIS }
+			498 = { owned_by = THIS }
+		}
+		OR = { 
+			503 = { controlled_by = THIS }
+			503 = { owned_by = THIS }
+		}
+		OR = { 
+			509 = { controlled_by = THIS }
+			509 = { owned_by = THIS }
+		}
+		OR = { 
+			474 = { controlled_by = THIS }
+			474 = { owned_by = THIS }
+		}
+		OR = { 
+			480 = { controlled_by = THIS }
+			480 = { owned_by = THIS }
+		}
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "SCW_End_EvtOptA"
+		random_owned = {
+			limit = {
+				owner = {
+					tag = SPA
+				}
+			}
+			owner = {
+				inherit = SPC
+				META_1 = { remove_core = SPC }
+				capital = 487
+				remove_country_modifier = rebel_player_modifier
+				CUSTOM_TOOLTIP_AFTERMATH_DECS_AVAILABLE = { }
+				add_country_modifier = { name = carlist_victory duration = 10950 }
+				add_country_modifier = { name = civil_war_aftermath_army duration = 5475 }
+				add_country_modifier = { name = civil_war_aftermath_navy duration = 5475 }
+				add_country_modifier = { name = civil_war_aftermath_economy duration = 5475 }
+				set_country_flag = aftermath_decs_available
+				prestige = 10
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					tag = SPC
+				}
+			}
+			owner = {
+				inherit = SPA
+				change_tag = SPA
+				META_1 = { remove_core = SPC }
+				capital = 487
+				remove_country_modifier = rebel_player_modifier
+				CUSTOM_TOOLTIP_AFTERMATH_DECS_AVAILABLE = { }
+				add_country_modifier = { name = republican_victory duration = 10950 }
+				add_country_modifier = { name = civil_war_aftermath_army duration = 5475 }
+				add_country_modifier = { name = civil_war_aftermath_navy duration = 5475 }
+				add_country_modifier = { name = civil_war_aftermath_economy duration = 5475 }
+				set_country_flag = aftermath_decs_available
+				prestige = 10
+			}
+		}
+	}
+}
 
 ### VANILLA ###
 country_event = {
