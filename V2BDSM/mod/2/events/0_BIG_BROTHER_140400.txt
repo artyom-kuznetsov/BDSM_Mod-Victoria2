@@ -892,8 +892,12 @@ country_event = { # YEARLY CLEANUP
 			any_owned = {
 				limit = {
 					NOT = { year = 1860 is_core = SMA }
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 150000 } }
+					state_scope = { 
+						NOT = { 
+							# Audax Validator "." Ignore_NEXT
+							total_pops = 150000 
+						}
+					}
 				}
 				add_core = SMA
 			}
@@ -903,8 +907,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					NOT = { year = 1860 }
 					is_core = SMA 
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 150000 }
+					state_scope = { 
+					# Audax Validator "." Ignore_NEXT
+					total_pops = 150000 }
 				}
 				remove_core = SMA
 			}
@@ -913,8 +918,9 @@ country_event = { # YEARLY CLEANUP
 			any_owned = {
 				limit = {
 					year = 1880 NOT = { is_core = SMA }
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 250000 } }
+					state_scope = { NOT = { 
+					# Audax Validator "." Ignore_NEXT
+					total_pops = 250000 } }
 				}
 				add_core = SMA
 			}
@@ -924,8 +930,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					year = 1880
 					is_core = SMA 
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 250000 }
+					state_scope = { 
+					# Audax Validator "." Ignore_NEXT
+					total_pops = 250000 }
 				}
 				remove_core = SMA
 			}
@@ -934,8 +941,9 @@ country_event = { # YEARLY CLEANUP
 			any_owned = {
 				limit = {
 					NOT = { year = 1860 is_core = MST }
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 300000 } }
+					state_scope = { NOT = { 
+					# Audax Validator "." Ignore_NEXT
+					total_pops = 300000 } }
 				}
 				add_core = MST
 			}
@@ -945,8 +953,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					NOT = { year = 1880 }
 					is_core = MST
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 300000 }
+					state_scope = { 
+					# Audax Validator "." Ignore_NEXT
+					total_pops = 300000 }
 				}
 				remove_core = MST
 			}
@@ -955,8 +964,9 @@ country_event = { # YEARLY CLEANUP
 			any_owned = {
 				limit = {
 					year = 1880 NOT = { is_core = MST }
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 400000 } }
+					state_scope = { NOT = { 
+					# Audax Validator "." Ignore_NEXT
+					total_pops = 400000 } }
 				}
 				add_core = MST
 			}
@@ -966,8 +976,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					year = 1880
 					is_core = MST
-					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 400000 }
+					state_scope = { 
+					# Audax Validator "." Ignore_NEXT
+					total_pops = 400000 }
 				}
 				remove_core = MST
 			}
