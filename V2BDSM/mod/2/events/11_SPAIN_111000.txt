@@ -30,211 +30,9 @@ country_event = { # «¿Ÿ»“¿ œŒ–“”√¿À»»
 	}
 }
 
-country_event = { # ”–Œ¬≈Õ‹ ∆»«Õ»
-	title = "spa_liferate_EvtName"
-	desc = "spa_liferate_EvtDesc"
-	id = 111001
-	
-	picture = "iberia"
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "spa_liferate_EvtOptA"
-		set_country_flag = spa_liferate_flag
-		474 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		492 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		496 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		498 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		503 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		487 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		480 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		510 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		513 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		509 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		524 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-		518 = {
-			state_scope = {
-				any_owned = {
-					life_rating = 5
-				}
-			}
-		}
-	}
-}
 
-
-country_event = { # ”–Œ¬≈Õ‹ ∆»«Õ»
-	title = "spa_liferate_EvtName"
-	desc = "spa_liferate_end_EvtDesc"
-	id = 111002
-	
-	picture = "iberia"
-	
-	trigger = {
-		has_country_flag = spa_metropolian_flag
-		NOT = { has_country_modifier = spa_metropolian_modifier }
-		NOT = { has_country_flag = spa_metropolian_end_flag }
-	}
-	
-	immediate = {
-		474 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		492 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		496 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		498 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		503 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		487 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		480 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		510 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		513 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		509 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		524 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-		518 = {
-			state_scope = {
-				any_owned = {
-					life_rating = -5
-				}
-			}
-		}
-	}
-	
-	option = {
-		name = "spa_liferate_end_EvtOptA"
-		set_country_flag = spa_metropolian_end_flag
-	}
-}
+### ID 111001 FREE
+### ID 111002 FREE
 
 country_event = {
 	title = "SCW_EvtName"
@@ -398,6 +196,14 @@ country_event = {
 			480 = { controlled_by = THIS }
 			480 = { owned_by = THIS }
 		}
+		OR = { 
+			492 = { controlled_by = THIS }
+			492 = { owned_by = THIS }
+		}
+		OR = { 
+			495 = { controlled_by = THIS }
+			495 = { owned_by = THIS }
+		}
 	}
 	
 	fire_only_once = yes
@@ -416,7 +222,7 @@ country_event = {
 				capital = 487
 				remove_country_modifier = rebel_player_modifier
 				CUSTOM_TOOLTIP_AFTERMATH_DECS_AVAILABLE = { }
-				add_country_modifier = { name = carlist_victory duration = 10950 }
+				add_country_modifier = { name = republican_victory duration = 10950 }
 				add_country_modifier = { name = civil_war_aftermath_army duration = 5475 }
 				add_country_modifier = { name = civil_war_aftermath_navy duration = 5475 }
 				add_country_modifier = { name = civil_war_aftermath_economy duration = 5475 }
@@ -437,13 +243,73 @@ country_event = {
 				capital = 487
 				remove_country_modifier = rebel_player_modifier
 				CUSTOM_TOOLTIP_AFTERMATH_DECS_AVAILABLE = { }
-				add_country_modifier = { name = republican_victory duration = 10950 }
+				add_country_modifier = { name = carlist_victory duration = 10950 }
 				add_country_modifier = { name = civil_war_aftermath_army duration = 5475 }
 				add_country_modifier = { name = civil_war_aftermath_navy duration = 5475 }
 				add_country_modifier = { name = civil_war_aftermath_economy duration = 5475 }
 				set_country_flag = aftermath_decs_available
 				prestige = 10
 			}
+		}
+	}
+}
+
+country_event = {
+	id = 111005
+	title = "NewSpain_EvtName"
+	desc = "NewSpain_EvtDesc"
+	picture = "SpainColonies"
+	
+	trigger = {
+		primary_culture = spanish
+		MEX = { exists = no }
+		any_owned_province = { OR = { continent = north_america continent = south_america } NOT = { is_core = CUB is_core = HAI is_core = THIS province_id = 2222 province_id = 2217 province_id = 2219 } }
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "NewSpain_EvtOptA"
+		release_vassal = MEX
+		MEX = { 
+			government = colonial_company
+			political_reform = no_slavery
+		}
+		any_owned = {
+			limit = {
+				NOT = { is_core = THIS }
+				OR = { continent = north_america continent = south_america }
+			}
+			secede_province = MEX
+			add_core = MEX
+		}
+	}
+}
+
+country_event = {
+	id = 111006
+	title = "NewSpain2_EvtName"
+	desc = "NewSpain_EvtDesc"
+	picture = "SpainColonies"
+	
+	trigger = {
+		primary_culture = spanish
+		MEX = { vassal_of = THIS }
+		any_owned_province = { OR = { continent = north_america continent = south_america } NOT = { is_core = CUB is_core = HAI is_core = THIS province_id = 2222 province_id = 2217 province_id = 2219 } }
+	}
+	
+	fire_only_once = yes
+	
+	option = {
+		name = "NewSpain_EvtOptA"
+		any_owned = {
+			limit = {
+				NOT = { is_core = THIS }
+				OR = { continent = north_america continent = south_america }
+				NOT = { is_core = CUB is_core = HAI is_core = THIS province_id = 2222 province_id = 2217 province_id = 2219 } 
+			}
+			secede_province = MEX
+			add_core = MEX
 		}
 	}
 }

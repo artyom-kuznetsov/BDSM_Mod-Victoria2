@@ -15,34 +15,15 @@ country_event = {
 			limit = {
 				NOT = {
 					tag = THIS
+					tag = AUS
+					tag = KUK
 				}
 				is_culture_group = THIS
 				is_greater_power = no
+				
 				OR = {
 					in_sphere = THIS
-					AND = {
-						part_of_sphere = no
-						NOT = {
-							OR = {
-								tag = AUS
-								tag = KUK
-								}
-							}
-						}
-					tag = WAL
-					tag = MOL
-					tag = MON
-					tag = BOS
-					tag = SER
-					tag = SLO
-					AND = {
-						OR = {
-							tag = AUS
-							tag = KUK
-						}
-						exists = HUN
-						part_of_sphere = no
-					}
+					vassal_of = THIS
 				}
 				num_of_cities = 1
 			}
@@ -55,6 +36,7 @@ country_event = {
 		political_reform = non_socialist
 		political_reform = secret_ballots
 		government = hms_government
+		inherit = FROM
 		add_accepted_culture = union
 		prestige = -15
 		badboy = 10
