@@ -723,6 +723,9 @@ country_event = {
 		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.1 } } plurality = -0.04 }
 		
 		### MODIFIERS ###
+		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }
+		any_country = { limit = { has_country_modifier = civil_war_aftermath_navy } plurality = -0.05 }
+		any_country = { limit = { has_country_modifier = civil_war_aftermath_economy } plurality = -0.1 }
 		any_country = { limit = { has_country_modifier = macau_exploitation_modifier_china } plurality = -0.005 }
 		any_country = { limit = { has_country_modifier = hongkong_exploitation_modifier_china } plurality = -0.005 }
 		any_country = { limit = { has_country_modifier = shanghai_exploitation_modifier_china } plurality = -0.005 }
@@ -882,6 +885,15 @@ country_event = { # YEARLY CLEANUP
 					literacy = 0.99
 				}
 				literacy = -0.01
+			}
+		}
+		any_country = {
+			limit = { has_country_modifier = school_reforms_cmodifier }
+			any_owned = {
+				limit = {
+					colonial = no
+				}
+				any_pop = { literacy = 0.01 }
 			}
 		}
 		PER = { 

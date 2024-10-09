@@ -51,44 +51,11 @@ political_decisions = {
 		
 	}
 	
-	aragon_heritage_dec = {
-		potential = {
-			primary_culture = spanish
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = aragon_heritage_flag }
-			state_n_government = 1
-			OR = {
-				owns = 762
-				owns = 765
-				owns = 502
-			}
-		}
-		
-		allow = {
-			nationalism_n_imperialism = 1
-		}
-		
-		effect = {
-			badboy = 3
-			add_accepted_culture = mediterranean_italian
-			set_country_flag = aragon_heritage_flag
-			765 = {
-				state_scope = {
-					change_region_name = "Тирренские Острова (18 для SPA)"
-				}
-			}
-			762 = {
-				state_scope = {
-					change_region_name = "Сицилия (24 для SPA)"
-				}
-			}
-		}
-	}
-	
 	aftermath_rebuild_navy_dec = {
 		potential = {
 			has_country_flag = aftermath_decs_available
 			has_country_modifier = civil_war_aftermath_navy
+			NOT = { has_country_flag = aftermath_rebuild_navy_flag }
 		}
 		
 		allow = {
@@ -101,6 +68,99 @@ political_decisions = {
 			add_country_modifier = { name = administrative_expenses2_modifier duration = 365 }
 			remove_country_modifier = civil_war_aftermath_navy
 			add_country_modifier = { name = naval_reorganization_cmodifier duration = 14600 }
+			set_country_flag = aftermath_rebuild_navy_flag
+		}
+	}
+	
+	aftermath_rebuild_army_dec = {
+		potential = {
+			has_country_flag = aftermath_decs_available
+			has_country_modifier = civil_war_aftermath_army
+			NOT = { has_country_flag = aftermath_rebuild_army_flag }
+		}
+		
+		allow = {
+			military_plans = 1
+			army_professionalism = 1
+			NOT = { has_country_modifier = administrative_expenses2_modifier }
+		}
+		
+		effect = {
+			add_country_modifier = { name = administrative_expenses2_modifier duration = 365 }
+			remove_country_modifier = civil_war_aftermath_army
+			add_country_modifier = { name = army_reorganization_cmodifier duration = 7300 }
+			set_country_flag = aftermath_rebuild_army_flag
+		}
+	}
+	
+	aftermath_rebuild_economy_dec = {
+		potential = {
+			has_country_flag = aftermath_decs_available
+			has_country_modifier = civil_war_aftermath_economy
+			NOT = { has_country_flag = aftermath_rebuild_economy_flag }
+		}
+		
+		allow = {
+			experimental_railroad = 1
+			medicine = 1
+			NOT = { has_country_modifier = administrative_expenses2_modifier }
+		}
+		
+		effect = {
+			add_country_modifier = { name = administrative_expenses2_modifier duration = 365 }
+			remove_country_modifier = civil_war_aftermath_economy
+			add_country_modifier = { name = economy_reorganization_cmodifier duration = 7300 }
+			set_country_flag = aftermath_rebuild_economy_flag
+		}
+	}
+	
+	aftermath_schools_dec = {
+		potential = {
+			has_country_flag = aftermath_decs_available
+			has_country_modifier = civil_war_aftermath_economy
+		}
+		
+		allow = {
+			school_reforms = low_schools
+			NOT = { has_country_modifier = administrative_expenses2_modifier }
+		}
+		
+		effect = {
+			add_country_modifier = { name = administrative_expenses2_modifier duration = 365 }
+			add_country_modifier = { name = school_reforms_cmodifier duration = 3650 }
+			CUSTOM_TOOLTIP_SCHOOL_REFORMS = { }
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = good_schools
+					}
+				}
+				owner = { social_reform = compulsory_schools }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = acceptable_schools
+					}
+				}
+				owner = { social_reform = good_schools }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = low_schools
+					}
+				}
+				owner = { social_reform = acceptable_schools }
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						school_reforms = no_schools
+					}
+				}
+				owner = { social_reform = low_schools }
+			}
 		}
 	}
 	
