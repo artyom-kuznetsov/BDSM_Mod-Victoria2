@@ -8,7 +8,8 @@ country_event = {
 	
 	trigger = { 
 		is_vassal = yes 
-		overlord = { NOT = { plurality = 25 } }
+		NOT = { has_country_flag = NewSpain_cflag }
+		overlord = { NOT = { plurality = 20 } }
 	}
 	
 	mean_time_to_happen = {
@@ -77,6 +78,18 @@ country_event = {
 				months = 60
 			}
 		}
+		FROM = {
+			war = {
+				target = THIS
+				attacker_goal = {
+					casus_belli = make_puppet
+				}
+				defender_goal = {
+					casus_belli = status_quo
+				}
+			}
+		}
+		
 	}  
 }
 

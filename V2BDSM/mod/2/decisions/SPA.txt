@@ -361,56 +361,6 @@ political_decisions = {
 			factor = 1
 		}
 	}
-	spanish_education_program_dec = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = spanish_education_program_flag }
-			OR = {
-				primary_culture = spanish
-				primary_culture = turkish
-			}
-			positivism = 1
-		}
-		
-		allow = {
-			functionalism = 1
-			money = 200000
-			slavery = no_slavery
-		}
-		
-		effect = {
-			set_country_flag = spanish_education_program_flag
-			money = -200000
-			add_country_modifier = {
-				name = spanish_education_program_modifier
-				duration = 3650
-			}
-			random_owned = {
-				limit = {
-					owner = {
-						school_reforms = good_schools
-					}
-				}
-				owner = { social_reform = compulsory_schools }
-			}
-			random_owned = {
-				limit = {
-					owner = {
-						school_reforms = acceptable_schools
-					}
-				}
-				owner = { social_reform = good_schools }
-			}
-			random_owned = {
-				limit = {
-					owner = {
-						school_reforms = low_schools
-					}
-				}
-				owner = { social_reform = acceptable_schools }
-			}
-		}
-	}
 	magrib_SPA_imigration_dec = {	# SPANISH MOROCCO
 		potential = {
 			tag = SPA

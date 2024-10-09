@@ -270,21 +270,28 @@ country_event = {
 		prestige = -100
 		
 		
-		MEX = {
-			#limit = {
-			#	overlord = { primary_culture = spanish }
-			#}
+		any_country = {
+			limit = {
+				tag = MEX
+				OR = { 
+					vassal_of = IBE
+					vassal_of = SPA
+				}
+			}
 			set_country_flag = NewSpain_cflag
-			#overlord = { set_country_flag = OldSpain_cflag }
+			overlord = { set_country_flag = OldSpain_cflag }
 		}
 		
-		MEX = {
+		any_country = {
 			limit = {
-				NOT = { overlord = { primary_culture = spanish } }
 				has_country_flag = NewSpain_cflag
+				NOT = { 
+					vassal_of = IBE
+					vassal_of = SPA
+				}
 			}
 			clr_country_flag = NewSpain_cflag
-			overlord = { clr_country_flag = OldSpain_cflag }
+			any_country = { clr_country_flag = OldSpain_cflag }
 		}
 		
 		any_country = {

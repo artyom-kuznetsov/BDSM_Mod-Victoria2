@@ -1066,7 +1066,7 @@ emigration_chance =
 		}
 		is_ideology_enabled = socialist
 	}
-
+	
 	group = {
 
 		modifier = {
@@ -1376,15 +1376,19 @@ emigration_chance =
 					continent = oceania
 				}
 			}
-			NOT = { year = 1900 }
+			NOT = { 
+				year = 1900 
+				has_country_flag = NewSpain_cflag 
+			}
 		}
 	}
 	
 	modifier = {
-		factor = 100
+		factor = 0.2
+		culture = central_american
 		country = { has_country_flag = NewSpain_cflag }
 	}
-	
+
 }
 
 #general assimilation mtth, same for all pops
