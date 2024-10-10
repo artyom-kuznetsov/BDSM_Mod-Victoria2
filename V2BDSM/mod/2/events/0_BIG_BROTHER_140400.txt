@@ -746,6 +746,12 @@ country_event = {
 		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.2 } } plurality = -0.025 }
 		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.1 } } plurality = -0.04 }
 		
+		#Policing
+		any_country = { limit = { exists = yes ai = no security = no_security } plurality = -0.02 }
+		any_country = { limit = { exists = yes ai = no security = minimal_security } plurality = 0.01 }
+		any_country = { limit = { exists = yes ai = no security = moderate_security } plurality = 0.03 }
+		any_country = { limit = { exists = yes ai = no security = police_state } plurality = 0.05 }
+		
 		### MODIFIERS ###
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_navy } plurality = -0.05 }
