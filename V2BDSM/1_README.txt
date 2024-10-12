@@ -1,3 +1,6 @@
+ЗАПУСК МОДА ЧЕРЕЗ БАТНИК "0_RUN BDSM MOD.bat"
+
+
 Привет, это так называемый мод базы.
 Узнать, проводятся ли на нём МП партии можно здесь				- 	https://discord.gg/victoria-2-3-738309426905219155
 Найти последние версии мода можно здесь							-	https://github.com/artyom-kuznetsov/BDSM_Mod-Victoria2/releases

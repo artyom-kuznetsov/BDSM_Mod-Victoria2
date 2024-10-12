@@ -631,12 +631,6 @@ promote_to =
 	}
 	craftsmen = {
 		factor = 0.01
-		modifier = {
-			factor = -20
-			NOT = {
-				unemployment_by_type = { type = labourers value = 0.1 } 
-			}
-		}
 		group = {
 			modifier = {
 				factor = -5
@@ -710,7 +704,7 @@ promote_to =
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
 			modifier = {
-				factor = -1
+				factor = -2
 				military_spending = 0.74
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
@@ -720,17 +714,17 @@ promote_to =
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				military_spending = 0.89
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
 			modifier = {
-				factor = -2
+				factor = -3
 				military_spending = 0.94
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
 			modifier = {
-				factor = -2
+				factor = -4
 				military_spending = 0.99
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
@@ -812,25 +806,25 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = 8
+				factor = 5
 				country = {
 					school_reforms = low_schools
 				}
 			}
 			modifier = {
-				factor = 8
+				factor = 5
 				country = {
 					school_reforms = acceptable_schools
 				}
 			}
 			modifier = {
-				factor = 8
+				factor = 5
 				country = {
 					school_reforms = good_schools
 				}
 			}
 			modifier = {
-				factor = 8
+				factor = 5
 				country = {
 					school_reforms = compulsory_schools
 				}
@@ -924,20 +918,6 @@ promote_to =
 			factor = -100
 			clergymen = 0.04
 		}
-		modifier = {
-			factor = -20
-			NOT = {
-				unemployment_by_type = { type = labourers value = 0.1 } 
-			}
-		}
-		modifier = {
-			factor = -100
-			location = {
-				is_colonial = yes
-			}
-			NOT = { country = { has_country_flag = french_foreign_legion_supported } }
-		}
-		
 	}
 	aristocrats = 
 	{

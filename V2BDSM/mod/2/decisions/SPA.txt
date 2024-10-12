@@ -7,7 +7,7 @@ political_decisions = {
 		}
 		
 		allow = {
-			IBE = { all_core = { OR = { owned_by = THIS owner = { in_sphere = THIS } owner = { vassal_of = THIS } } } }
+			IBE = { all_core = { OR = { owned_by = THIS owner = { vassal_of = THIS } } } }
 			citizens_rights = all_voting_pops
 			nationalism_n_imperialism = 1
 		}
@@ -36,11 +36,9 @@ political_decisions = {
 			any_country = {
 				limit = {
 					is_culture_group = iberian
-					ai = no
-					OR = {
-						in_sphere = THIS
-						vassal_of = THIS
-					}
+					ai = yes
+					vassal_of = THIS
+					NOT = { tag = MEX }
 					NOT = {
 						tag = THIS
 					}
@@ -201,24 +199,15 @@ political_decisions = {
 			NOT = { 
 				has_country_flag = hide_all_decs_flag
 				has_country_flag = restore_colonial_spa_flag
-				has_country_modifier = civil_war_aftermath_navy
-			}
-			any_owned_province = {
-				OR = {
-					is_core = MEX
-					is_core = UCA
-				}
 			}
 		}
 		
 		allow = {
-			nationalism_n_imperialism = 1
-			steamers = 1
-			money = 300000
+			NOT = { has_country_modifier = civil_war_aftermath_navy }
+			state_n_government = 1
 		}
 		
 		effect = {
-			money = -300000
 			CUSTOM_TOOLTIP_RESTORE_SPA = { }
 			set_country_flag = latin_american_claim_flag
 			set_country_flag = restore_colonial_spa_flag
