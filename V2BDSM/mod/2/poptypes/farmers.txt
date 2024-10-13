@@ -340,14 +340,16 @@ promote_to =
 	{
 		factor = 0.01
 		
-		group = {		
+		group = {
 			modifier = {
                 factor = -100
                 state_scope = { soldiers = 0.05 }
+				NOT = { conscription = ref_professional_army }
             }
-            modifier = {
+			modifier = {
                 factor = -100
                 state_scope = { soldiers = 0.055 }
+				conscription = ref_professional_army
             }
             modifier = {
                 factor = -100

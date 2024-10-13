@@ -220,10 +220,23 @@ political_decisions = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = FRA
-			exists = PRU
-			PRU = {
-				owns = 572
-				owns = 575
+			OR = {
+				AND = {
+					exists = PRU
+					PRU = {
+						owns = 572
+						owns = 575
+					}
+				}
+			}
+			OR = {
+				AND = {
+					exists = NGF
+					NGF = {
+						owns = 572
+						owns = 575
+					}
+				}
 			}
 			NOT = {
 				has_country_flag = crisis_on_the_rhine
@@ -247,11 +260,37 @@ political_decisions = {
 					value = -100
 				}
 			}
-			casus_belli = {
-				target = PRU
-				type = humiliate
-				months = 1
+			
+			random_owned = {
+				limit = {
+					owner = {
+						exists = PRU
+					}
+				}
+				owner = {
+					casus_belli = {
+						target = PRU
+						type = humiliate
+						months = 12
+					}
+				}
 			}
+			
+			random_owned = {
+				limit = {
+					owner = {
+						exists = NGF
+					}
+				}
+				owner = {
+					casus_belli = {
+						target = NGF
+						type = humiliate
+						months = 12
+					}
+				}
+			}
+			
 			prestige = 10
 			badboy = 2
 			set_country_flag = crisis_on_the_rhine

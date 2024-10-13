@@ -242,8 +242,14 @@ promote_to =
 	farmers = {
 		factor = 0.01
 		modifier = {
-			factor = 100
+			factor = 10
 			state_scope = { soldiers = 0.052 }
+			NOT = { conscription = ref_professional_army }
+		}
+		modifier = {
+			factor = 10
+			state_scope = { soldiers = 0.062 }
+			conscription = ref_professional_army
 		}
 		modifier = {
 			factor = 100
