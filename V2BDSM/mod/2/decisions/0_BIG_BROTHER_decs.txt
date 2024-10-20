@@ -132,6 +132,19 @@ political_decisions = {
 				}
 				set_country_flag = migration_magnet_cflag
 			}
+			USA = { 
+				limit = {
+					ai = no
+				}
+				set_country_flag = is_usa_flag
+			}
+			USA = { 
+				limit = {
+					ai = yes
+					has_country_flag = is_usa_flag
+				}
+				clr_country_flag = is_usa_flag
+			}
 			CIV = { money = 2000000 }
 			META_1 = {
 				limit = {

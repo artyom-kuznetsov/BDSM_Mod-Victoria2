@@ -114,7 +114,7 @@ country_migration_target =
 	}
 	modifier = {
 		factor = 1.5
-		has_country_flag = migration_magnet_cflag
+		has_country_flag = is_usa_flag
 		NOT = { has_global_flag = singleplayer_flag }
 		NOT = { year = 1900 }
 	}
@@ -299,12 +299,14 @@ promote_to =
 			location = { is_colonial = yes }
 		}
 		group = {
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.008 } }
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.009 } }
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.010 } }
-			modifier = { factor = -3 state_scope = { bureaucrats = 0.011 } }
-			modifier = { factor = -3 state_scope = { bureaucrats = 0.012 } }
-			modifier = { factor = -5 state_scope = { bureaucrats = 0.014 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.008 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.009 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.010 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.011 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.012 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.013 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.014 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.015 } }
 			modifier = { factor = -5 state_scope = { bureaucrats = 0.016 } }
 			modifier = { factor = -100 state_scope = { bureaucrats = 0.018 } }		
 		}
@@ -341,16 +343,6 @@ promote_to =
 		factor = 0.01
 		
 		group = {
-			modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.05 }
-				NOT = { conscription = ref_professional_army }
-            }
-			modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.055 }
-				conscription = ref_professional_army
-            }
             modifier = {
                 factor = -100
                 state_scope = { soldiers = 0.060 }
@@ -626,6 +618,16 @@ promote_to =
 				state_scope = { soldiers = 0.04 }
 			}
 		}
+		modifier = {
+            factor = -100
+            state_scope = { soldiers = 0.05 }
+			NOT = { conscription = ref_professional_army }
+        }
+		modifier = {
+            factor = -100
+            state_scope = { soldiers = 0.055 }
+			conscription = ref_professional_army
+        }
 	}
 	craftsmen = {
 		factor = 0.01

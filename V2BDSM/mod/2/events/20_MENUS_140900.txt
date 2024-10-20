@@ -203,22 +203,13 @@ country_event = {	# HOST OPTIONS
 	}
 	
 	option = {
-		name = "HostOptions_EvtOptHistScenario"
-		CUSTOM_TOOLTIP_HISTORICAL = { }
-		set_global_flag = historical_flag
-		set_country_flag = hidden_tooltip
-		random_owned = {
+		name = "HostOptions_EvtOptRemoveSoldiers"
+		any_country = {
 			limit = {
-				owner = {
-					has_country_flag = hidden_tooltip
-				}
+				has_country_flag = player_selected_flag
 			}
-			owner = {
-				country_event = 140900
-				WBK = { country_event = 140413 }
-			}
+			any_pop = { limit = { type = soldiers } pop_type = farmers }
 		}
-		clr_country_flag = hidden_tooltip
 	}
 	
 	option = {

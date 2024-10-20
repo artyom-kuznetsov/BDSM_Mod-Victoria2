@@ -319,14 +319,19 @@ political_decisions = {
 				has_country_flag = hasmanifestdestiny
 			}
 			NOT = { has_country_flag = hide_all_decs_flag }
-			owns = 108
-			owns = 81
 		}
 		allow = {
 			romanticism = 1
 			prestige = 50
 			NOT = {
 				exists = TEX
+			}
+			OR = {
+				AND = {
+					owns = 108
+					owns = 81
+				}
+				nationalism_n_imperialism = 1
 			}
 		}
 		effect = {

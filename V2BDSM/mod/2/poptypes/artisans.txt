@@ -126,7 +126,7 @@ country_migration_target =
 	}
 	modifier = {
 		factor = 1.5
-		has_country_flag = migration_magnet_cflag
+		has_country_flag = is_usa_flag
 		NOT = { has_global_flag = singleplayer_flag }
 		NOT = { year = 1900 }
 	}
@@ -298,16 +298,6 @@ promote_to =
 		group = {
 			modifier = {
                 factor = -100
-                state_scope = { soldiers = 0.05 }
-				NOT = { conscription = ref_professional_army }
-            }
-			modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.055 }
-				conscription = ref_professional_army
-            }
-			modifier = {
-                factor = -100
                 state_scope = { soldiers = 0.055 }
             }
             modifier = {
@@ -450,7 +440,7 @@ promote_to =
 					# Audax Validator "." Ignore_NEXT
 					is_core = THIS 
 				}
-            }			
+            }		
 		}
 		group = {
 			modifier = {
@@ -569,6 +559,16 @@ promote_to =
 				factor = -10
 				NOT = { recruited_percentage = 0.25 }
 			}
+		}
+		modifier = {
+			factor = -100
+			state_scope = { soldiers = 0.05 }
+			NOT = { conscription = ref_professional_army }
+		}
+		modifier = {
+			factor = -100
+			state_scope = { soldiers = 0.055 }
+			conscription = ref_professional_army
 		}
 	}
 	bureaucrats =
