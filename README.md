@@ -1,11 +1,11 @@
-ЗАПУСК МОДА ЧЕРЕЗ БАТНИК "0_RUN BDSM MOD.bat" В ПАПКЕ V2BDSM
+Р—РђРџРЈРЎРљ РњРћР”Рђ Р§Р•Р Р•Р— Р‘РђРўРќРРљ "0_RUN BDSM MOD.bat" Р’ РџРђРџРљР• V2BDSM
 
 
-Привет, это так называемый мод базы.
-Узнать, проводятся ли на нём МП партии можно здесь				- 	https://discord.gg/victoria-2-3-738309426905219155
-Найти последние версии мода можно здесь							-	https://github.com/artyom-kuznetsov/BDSM_Mod-Victoria2/releases
-Официальный русскоязычный сервер OpenVic (ремейк Victoria 2)	- 	https://discord.gg/MxQRTq42Ga
-Создатель мода на YouTube										- 	https://www.youtube.com/channel/UCHt7fLn63yqC6gOXFI0dFUA
+РџСЂРёРІРµС‚, СЌС‚Рѕ С‚Р°Рє РЅР°Р·С‹РІР°РµРјС‹Р№ РјРѕРґ Р±Р°Р·С‹.
+РЈР·РЅР°С‚СЊ, РїСЂРѕРІРѕРґСЏС‚СЃСЏ Р»Рё РЅР° РЅС‘Рј РњРџ РїР°СЂС‚РёРё РјРѕР¶РЅРѕ Р·РґРµСЃСЊ				- 	https://discord.gg/victoria-2-3-738309426905219155
+РќР°Р№С‚Рё РїРѕСЃР»РµРґРЅРёРµ РІРµСЂСЃРёРё РјРѕРґР° РјРѕР¶РЅРѕ Р·РґРµСЃСЊ							-	https://github.com/artyom-kuznetsov/BDSM_Mod-Victoria2/releases
+РћС„РёС†РёР°Р»СЊРЅС‹Р№ СЂСѓСЃСЃРєРѕСЏР·С‹С‡РЅС‹Р№ СЃРµСЂРІРµСЂ OpenVic (СЂРµРјРµР№Рє Victoria 2)	- 	https://discord.gg/MxQRTq42Ga
+РЎРѕР·РґР°С‚РµР»СЊ РјРѕРґР° РЅР° YouTube										- 	https://www.youtube.com/channel/UCHt7fLn63yqC6gOXFI0dFUA
 
 
 Assets/ideas from the following mods were used in this mod:
