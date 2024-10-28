@@ -260,68 +260,48 @@ promote_to =
 	
 	craftsmen = {
 		factor = 0.01
-		group = {
-			modifier = {
-				factor = 2
-				literacy = 0.3
-				NOT = { military_spending = 0.39 }
-			}
-			modifier = {
-				factor = 3
-				literacy = 0.3
-				NOT = { military_spending = 0.29 }
-			}
-			modifier = {
-				factor = 3
-				literacy = 0.3
-				NOT = { military_spending = 0.19 }
-			}
-			modifier = {
-				factor = 5
-				literacy = 0.3
-				NOT = { military_spending = 0.09 }
-			}
+		
+		group = { 
+			modifier = { factor = -1 military_spending = 0.04 }
+			modifier = { factor = -1 military_spending = 0.09 }
+			modifier = { factor = -1 military_spending = 0.14 }
+			modifier = { factor = -1 military_spending = 0.19 }
+			modifier = { factor = -1 military_spending = 0.24 }
+			modifier = { factor = -1 military_spending = 0.29 }
+			modifier = { factor = -1 military_spending = 0.34 }
+			modifier = { factor = -1 military_spending = 0.39 }
+			modifier = { factor = -1 military_spending = 0.44 }
+			modifier = { factor = -1 military_spending = 0.49 }
+			modifier = { factor = -1 military_spending = 0.54 }
+			modifier = { factor = -1 military_spending = 0.64 }
+			modifier = { factor = -1 military_spending = 0.69 }
+			modifier = { factor = -1 military_spending = 0.74 }
+			modifier = { factor = -1 military_spending = 0.84 }
+			modifier = { factor = -1 military_spending = 0.89 }
+			modifier = { factor = -1 military_spending = 0.94 }
+			modifier = { factor = -1 military_spending = 0.99 }
 		}
+		
 		group = {
 			modifier = {
-				factor = -1
-				military_spending = 0.54
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 100 state_scope = { soldiers = 0.022 }
+				country = { ai = no military_organization = min_organization }
 			}
 			modifier = {
-				factor = -1
-				military_spending = 0.64
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 100 state_scope = { soldiers = 0.042 }
+				country = { ai = no military_organization = low_organization }
 			}
 			modifier = {
-				factor = -1
-				military_spending = 0.69
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 100 state_scope = { soldiers = 0.062 }
+				country = { ai = no military_organization = medium_organization }
 			}
 			modifier = {
-				factor = -1
-				military_spending = 0.74
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 100 state_scope = { soldiers = 0.082 }
+				country = { ai = no military_organization = high_organization }
 			}
 			modifier = {
-				factor = -2
-				military_spending = 0.84
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -2
-				military_spending = 0.89
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -2
-				military_spending = 0.94
-				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-			modifier = {
-				factor = -2
-				military_spending = 0.99
-				NOT = { state_scope = { soldiers = 0.05 } }
+				factor = 100 state_scope = { soldiers = 0.102 }
+				country = { ai = no military_organization = total_war_organization }
 			}
 		}
 	}

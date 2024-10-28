@@ -1,6 +1,10 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.5.X \nОжидаемая чексумма: XXXX;X
 CUSTOM_TOOLTIP_INSTITUTION_ALREADY_MIN;Уже минимальный уровень института.;X
 CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_EDUCATION;§bУ нас нет системы образования§!;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_EDUCATION2;У нас нет системы образования;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_MEDICINE;§bУ нас нет системы здравоохранения§!;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_MEDICINE2;У нас нет системы здравоохранения;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_MEDICINE3;Наши реформы здравоохранения не позволяют увеличить уровень института;X
 CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW;§bМаксимальный уровень складывается из следующих модификаторов:§!\n;X
 CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS;§G+1§b от закона: §BЧастное образование§!\n;X
 CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS;§G+2§b от закона: §BСмешанное образование§!\n;X
@@ -13,7 +17,9 @@ institution_changed_cmodifier_desc;До истечения этого модификатора, мы не можем 
 institutions_EvtName;Государственные институты;X
 institutions_EvtDesc;§BВыберите институт, который вас интересует§!\n  Максимальный уровень институтов зависит от технологий или социальных законов.;X
 institutions_EvtOptEducation;§B1.§! Образование;X
+institutions_EvtOptMedicine;§B2.§! Медицина;X
 institutions_education_EvtDesc;Выберите действие с институтом §GОбразование§!.;X
+institutions_medicine_EvtDesc;Выберите действие с институтом §GМедицина§!.;X
 institutions_EvtOptIncrease;§G>§! Повысить уровень;X
 institutions_EvtOptDecrease;§R<§! Понизить уровень;X
 institutions_change_dec_title;§L#§B#§L#§! Управление институтами;X
@@ -53,7 +59,7 @@ protectionism_r_l;Протекционизм;X
 protectionism_r_desc;Государство вмешивается в торговлю, если это связано с национальными интересами.;X
 isolationism_r;Изоляционизм;X
 isolationism_r_l;Изоляционизм;X
-isolationism_r_desc;Мы стараемся полагаться на собственные силы и внутреннее производство, а не международную торговлю.\n\n§Реформа откатывается при нахождении в сфере влияния: §GДа§!\n§G+0.1 фактор повышения статуса§!;X
+isolationism_r_desc;Мы стараемся полагаться на собственные силы и внутреннее производство, а не международную торговлю.\n\n§Реформа откатывается при нахождении в сфере влияния: §GДа§!;X
 economic_system_EvtName;Новая экономическая политика;X
 economic_system_EvtDesc;Выберите интересующий вариант ниже. Если навести на каждый вариант, можно увидеть условия, при которых он становится доступен.;X
 economic_system_EvtOptCancel;Отмена;X
@@ -12671,13 +12677,13 @@ yes_meeting;Свободные митинги;X
 yes_meeting_desc;Разрешены общественные собрания и митинги.\n\n§YЕжемесячная стабильность: §R-0.03§!;X
 no_meeting;Митинги запрещены;X
 no_meeting_desc;Общественные собрания запрещены.;X
-press_rights;Права прессы;X
-state_press;Гос. пресса;X
-state_press_desc;Разрешена пресса, контролируемая государством.;X
-censored_press;Цензура прессы;X
-censored_press_desc;Разрешена свободная пресса, но под цензурой государства.\n\n§YЕжемесячная стабильность: §R-0.02§!;X
-free_press;Свободная пресса;X
-free_press_desc;Разрешена свободная пресса без государственного вмешательства.\n\n§YЕжемесячная стабильность: §R-0.03§!;X
+press_rights;Свобода слова;X
+state_press;Тотальная цензура;X
+state_press_desc;Разрешены СМИ, контролируемые государством.;X
+censored_press;Цензура СМИ;X
+censored_press_desc;Разрешены СМИ, прошедшие государственную цензуру.\n\n§YЕжемесячная стабильность: §R-0.02§!;X
+free_press;Свободные СМИ;X
+free_press_desc;Разрешены все СМИ без государственного вмешательства.\n\n§YЕжемесячная стабильность: §R-0.03§!;X
 trade_unions;Профсоюзы;X
 no_trade_unions;Незаконны;X
 no_trade_unions_desc;Профсоюзы запрещены.;X
@@ -24251,16 +24257,16 @@ SUPPRESSION_POINTS;Очки подавления;x
 school_reforms;Школы;x
 no_schools;§G1%§! Нет образования;x
 no_schools_l;Нет образования;x
-no_schools_desc;У нас нет учебных заведений.;x
+no_schools_desc;У нас нет учебных заведений.\n\n§YЛимит преподавателей §G+1%§!;x
 private_schools;§G1.5%§! Частное образование;x
 private_schools_l;Частное образование;x
-private_schools_desc;Образование предоставляется тем, кто может себе его позволить.\n\n§G+1 макс. уровень института §Yобразование§!;x
+private_schools_desc;Образование предоставляется тем, кто может себе его позволить.\n\n§YЛимит преподавателей §G+1.5%§!\n§G+1 макс. уровень института §Yобразование§!;x
 mixed_schools;§G2%§! Смешанное образование;x
 mixed_schools_l;Смешанное образование;x
-mixed_schools_desc;У нас действуют как частные школы, так и государственные.\n\n§G+2 макс. уровень института §Yобразование§!;x
+mixed_schools_desc;У нас действуют как частные школы, так и государственные.\n\n§YЛимит преподавателей §G+2%§!\n§G+2 макс. уровень института §Yобразование§!;x
 public_schools;§G2%§! Бесплатн. образование;x
 public_schools_l;Бесплатное образование;x
-public_schools_desc;Государство предоставляет бесплатное высшее образование всем.\n\n§G+2 макс. уровень института §Yобразование§!;x
+public_schools_desc;Государство предоставляет бесплатное высшее образование всем.\n\n§YЛимит преподавателей §G+2%§!\n§G+2 макс. уровень института §Yобразование§!;x
 NATIONALIST_UNION_MOVEMENT;$COUNTRY_ADJ$ движение за объединение;x
 NATIONALIST_LIBERATION_MOVEMENT;Движение за освобождение державы $COUNTRY$;x
 SUPRESSION_MONTHLY_GAIN;Ежемесячный рост: §G$VAL$§!;x

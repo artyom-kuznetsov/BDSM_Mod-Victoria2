@@ -333,6 +333,44 @@ promote_to =
 			}
 		}
 	}
+	craftsmen = {
+		factor = 0.01
+		
+		group = {
+			modifier = { factor = 2 state_scope = { bureaucrats = 0.010 } }
+			modifier = { factor = 2 state_scope = { bureaucrats = 0.011 } }
+			modifier = { factor = 2 state_scope = { bureaucrats = 0.012 } }
+			modifier = { factor = 2 state_scope = { bureaucrats = 0.013 } }
+			modifier = { factor = 2 state_scope = { bureaucrats = 0.014 } }
+			modifier = { factor = 4 state_scope = { bureaucrats = 0.016 } }
+			modifier = { factor = 4 state_scope = { bureaucrats = 0.018 } }
+			modifier = { factor = 4 state_scope = { bureaucrats = 0.02 } }
+			modifier = { factor = 4 state_scope = { bureaucrats = 0.022 } }
+			modifier = { factor = 4 state_scope = { bureaucrats = 0.024 } }
+			modifier = { factor = 4 state_scope = { bureaucrats = 0.026 } }
+			modifier = { factor = 4 state_scope = { bureaucrats = 0.028 } }
+			modifier = { factor = 100 state_scope = { bureaucrats = 0.03 } }
+		}
+		group = { 
+			modifier = { factor = -2 military_organization = low_organization }
+			modifier = { factor = -4 military_organization = medium_organization }
+			modifier = { factor = -6 military_organization = high_organization }
+			modifier = { factor = -8 military_organization = total_war_organization }
+		}
+		group = {
+			modifier = { factor = -2 border_policy = quota_immigration }
+			modifier = { factor = -2 border_policy = closed_borders }
+		}
+		group = {
+			modifier = { factor = -2 security = minimal_security }
+			modifier = { factor = -4 security = moderate_security }
+			modifier = { factor = -6 security = police_state }
+		}
+		group = {
+			modifier = { factor = -2 education_institution = medium_education_investment }
+			modifier = { factor = -4 education_institution = high_education_investment }
+		}
+	}
 	clergymen =
 	{
 		factor = 0.01

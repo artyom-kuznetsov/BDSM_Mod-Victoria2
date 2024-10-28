@@ -1012,6 +1012,10 @@ country_event = {
 		name = "institutions_EvtOptEducation"
 		country_event = 57077
 	}
+	option = {
+		name = "institutions_EvtOptMedicine"
+		country_event = 57078
+	}
 }
 
 country_event = {
@@ -1032,18 +1036,15 @@ country_event = {
 			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW = { } }
 		}
 		random_owned = {
-			limit = { owner = { 
-				school_reforms = private_schools } }
+			limit = { owner = { school_reforms = private_schools } }
 			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS = { } }
 		}
 		random_owned = {
-			limit = { owner = { 
-				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = mixed_schools } }
+			limit = { owner = { school_reforms = mixed_schools } }
 			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS = { } }
 		}
 		random_owned = {
-			limit = { owner = { 
-				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = public_schools } }
+			limit = { owner = { school_reforms = public_schools } }
 			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS = { } }
 		}
 	}
@@ -1097,7 +1098,7 @@ country_event = {
 		}
 		random_owned = {
 			limit = { owner = { school_reforms = no_schools } }
-			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_EDUCATION = { } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_EDUCATION2 = { } }
 		}
 	}
 	
@@ -1122,8 +1123,111 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = 57078
+	title = "institutions_EvtName"
+	desc = "institutions_medicine_EvtDesc"
+	picture = "TODO"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		random_owned = {
+			limit = { owner = { health_care = no_health_care } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_MEDICINE = { } }
+		}
+		random_owned = {
+			limit = { owner = { NOT = { health_care = no_health_care } } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW = { } }
+		}
+		random_owned = {
+			limit = { owner = { health_care = trinket_health_care } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS = { } }
+		}
+		random_owned = {
+			limit = { owner = { health_care = low_health_care } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS = { } }
+		}
+		random_owned = {
+			limit = { owner = { health_care = acceptable_health_care } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS = { } }
+		}
+	}
+	
+	
+	option = {
+		name = "institutions_EvtOptIncrease"
+		random_owned = {	# FAIL IF COOLDOWN
+			limit = { owner = { has_country_modifier = institution_changed_cmodifier } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_COOLDOWN = { } }
+		}
+		random_owned = {	# MOVE FROM 0 TO 1
+			limit = { owner = { 
+				healthcare_institution = no_education_investment 
+				OR = {
+					health_care = low_health_care
+					health_care = acceptable_health_care
+				}
+				NOT = { has_country_modifier = institution_changed_cmodifier } } }
+			owner = { 
+				add_country_modifier = { name = institution_changed_cmodifier duration = 730 }
+				social_reform = low_healthcare_investment
+			}
+		}
+		random_owned = {	# MOVE FROM 1 TO 2
+			limit = { owner = { 
+				healthcare_institution = low_healthcare_investment 
+				health_care = acceptable_health_care
+				NOT = { has_country_modifier = institution_changed_cmodifier } } }
+			owner = { 
+				add_country_modifier = { name = institution_changed_cmodifier duration = 730 }
+				social_reform = medium_education_investment
+			}
+		}
+		random_owned = {	# MOVE FROM 1 TO 2 FAIL
+			limit = { owner = { 
+				healthcare_institution = low_healthcare_investment 
+				health_care = low_health_care
+				NOT = { has_country_modifier = institution_changed_cmodifier } } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_LIMIT = { } }
+		}
+		
+	
+		random_owned = {	# IF ALREADY AT MAX
+			limit = { owner = { healthcare_institution = high_healthcare_investment } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_AT_MAX = { } }
+		}
+		random_owned = {
+			limit = { owner = { health_care = no_health_care } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_MEDICINE2 = { } }
+		}
+		random_owned = {
+			limit = { owner = { health_care = trinket_health_care } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_MEDICINE3 = { } }
+		}
+	}
+	
+	option = {
+		name = "institutions_EvtOptDecrease"
+		random_owned = {
+			limit = { owner = { healthcare_institution = no_healthcare_investment } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_ALREADY_MIN = { } }
+		}
+		random_owned = {
+			limit = { owner = { healthcare_institution = low_healthcare_investment } }
+			owner = { social_reform = no_education_investment }
+		}
+		random_owned = {
+			limit = { owner = { healthcare_institution = medium_healthcare_investment } }
+			owner = { social_reform = low_education_investment }
+		}
+		random_owned = {
+			limit = { owner = { healthcare_institution = high_healthcare_investment } }
+			owner = { social_reform = medium_education_investment }
+		}
+	}
+}
 
-# ID 57078 EMPTY
 
 country_event = {
 	id = 57079
