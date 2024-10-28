@@ -1,8 +1,10 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.5.X \nОжидаемая чексумма: XXXX;X
-CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW;§YМаксимальный уровень складывается из следующих вещей§!;X
-CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS;§G+1§Y от закона: §LЧастное образование§!;X
-CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS;§G+2§Y от закона: §LСмешанное образование§!;X
-CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS;§G+2§Y от закона: §LБесплатное образование§!;X
+CUSTOM_TOOLTIP_INSTITUTION_ALREADY_MIN;Уже минимальный уровень института.;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_EDUCATION;§bУ нас нет системы образования§!;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW;§bМаксимальный уровень складывается из следующих модификаторов:§!\n;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS;§G+1§b от закона: §BЧастное образование§!\n;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS;§G+2§b от закона: §BСмешанное образование§!\n;X
+CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS;§G+2§b от закона: §BБесплатное образование§!\n;X
 CUSTOM_TOOLTIP_INSTITUTION_LIMIT;Недоступно: наши законы или технологии не позволяют более высокий уровень института\n;X
 CUSTOM_TOOLTIP_INSTITUTION_AT_MAX;Недоступно: У нас уже максимальный уровень этого института.;X
 CUSTOM_TOOLTIP_INSTITUTION_COOLDOWN;Недоступно: У нас действует модификатор §RИзменение уровня института§!;X
@@ -10,9 +12,10 @@ institution_changed_cmodifier;Изменение уровня института;X
 institution_changed_cmodifier_desc;До истечения этого модификатора, мы не можем изменять уровни инвестиций в институты.;X
 institutions_EvtName;Государственные институты;X
 institutions_EvtDesc;§BВыберите институт, который вас интересует§!\n  Максимальный уровень институтов зависит от технологий или социальных законов.;X
-institutions_EvtOptEducation;Образование;X
+institutions_EvtOptEducation;§B1.§! Образование;X
 institutions_education_EvtDesc;Выберите действие с институтом §GОбразование§!.;X
-institutions_EvtOptDecrease;§G>§! Повысить уровень;X
+institutions_EvtOptIncrease;§G>§! Повысить уровень;X
+institutions_EvtOptDecrease;§R<§! Понизить уровень;X
 institutions_change_dec_title;§L#§B#§L#§! Управление институтами;X
 institutions_change_dec_desc;Изменить уровень инвестиций в различные институты в государстве.;X
 ;;X#TAKE STATE CB
@@ -44,13 +47,13 @@ dependant_economy_l;Зависимая экономика;X
 dependant_economy_desc;Мы находимся в сфере влияния, и самой выгодной политикой для нас будет извлечение прибыли внутри страны, а не с иностранной торговли.;X
 free_trade_r;Свободная торговля;X
 free_trade_r_l;Свободная торговля;X
-free_trade_r_desc;Торговля не контролируется.;X
+free_trade_r_desc;Торговля не контролируется.\n\n§G+0.05 фактор повышения статуса§!;X
 protectionism_r;Протекционизм;X
 protectionism_r_l;Протекционизм;X
 protectionism_r_desc;Государство вмешивается в торговлю, если это связано с национальными интересами.;X
 isolationism_r;Изоляционизм;X
 isolationism_r_l;Изоляционизм;X
-isolationism_r_desc;Мы стараемся полагаться на собственные силы и внутреннее производство, а не международную торговлю.;X
+isolationism_r_desc;Мы стараемся полагаться на собственные силы и внутреннее производство, а не международную торговлю.\n\n§Реформа откатывается при нахождении в сфере влияния: §GДа§!\n§G+0.1 фактор повышения статуса§!;X
 economic_system_EvtName;Новая экономическая политика;X
 economic_system_EvtDesc;Выберите интересующий вариант ниже. Если навести на каждый вариант, можно увидеть условия, при которых он становится доступен.;X
 economic_system_EvtOptCancel;Отмена;X

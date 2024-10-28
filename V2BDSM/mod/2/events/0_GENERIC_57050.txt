@@ -1022,8 +1022,35 @@ country_event = {
 	
 	is_triggered_only = yes
 	
+	immediate = {
+		random_owned = {
+			limit = { owner = { school_reforms = no_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_EDUCATION = { } }
+		}
+		random_owned = {
+			limit = { owner = { NOT = { school_reforms = no_schools } } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW = { } }
+		}
+		random_owned = {
+			limit = { owner = { 
+				school_reforms = private_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS = { } }
+		}
+		random_owned = {
+			limit = { owner = { 
+				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = mixed_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS = { } }
+		}
+		random_owned = {
+			limit = { owner = { 
+				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = public_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS = { } }
+		}
+	}
+	
+	
 	option = {
-		name = "institutions_EvtOptDecrease"
+		name = "institutions_EvtOptIncrease"
 		random_owned = {	# FAIL IF COOLDOWN
 			limit = { owner = { has_country_modifier = institution_changed_cmodifier } }
 			owner = { CUSTOM_TOOLTIP_INSTITUTION_COOLDOWN = { } }
@@ -1068,29 +1095,29 @@ country_event = {
 			limit = { owner = { education_institution = high_education_investment } }
 			owner = { CUSTOM_TOOLTIP_INSTITUTION_AT_MAX = { } }
 		}
-		
-		
-		
-		### SHOW MAX LEVEL ###
-		
 		random_owned = {
-			limit = { owner = { NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } } }
-			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_SHOW = { } }
+			limit = { owner = { school_reforms = no_schools } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_NO_EDUCATION = { } }
+		}
+	}
+	
+	option = {
+		name = "institutions_EvtOptDecrease"
+		random_owned = {
+			limit = { owner = { education_institution = no_education_investment } }
+			owner = { CUSTOM_TOOLTIP_INSTITUTION_ALREADY_MIN = { } }
 		}
 		random_owned = {
-			limit = { owner = { 
-				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = private_schools } }
-			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PRIVATE_SCHOOLS = { } }
+			limit = { owner = { education_institution = low_education_investment } }
+			owner = { social_reform = no_education_investment }
 		}
 		random_owned = {
-			limit = { owner = { 
-				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = mixed_schools } }
-			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_MIXED_SCHOOLS = { } }
+			limit = { owner = { education_institution = medium_education_investment } }
+			owner = { social_reform = low_education_investment }
 		}
 		random_owned = {
-			limit = { owner = { 
-				NOT = { has_country_modifier = institution_changed_cmodifier education_institution = high_education_investment school_reforms = no_schools } school_reforms = public_schools } }
-			owner = { CUSTOM_TOOLTIP_INSTITUTION_MAXLEVEL_PUBLIC_SCHOOLS = { } }
+			limit = { owner = { education_institution = high_education_investment } }
+			owner = { social_reform = medium_education_investment }
 		}
 	}
 }

@@ -95,6 +95,14 @@ country_event = {
 		
 		any_country = {
 			limit = {
+				part_of_sphere = yes
+				trade_policy_rg = isolationism_r
+			}
+			political_reform = dependant_economy
+		}
+		
+		any_country = {
+			limit = {
 				is_vassal = no
 			}
 			any_owned = { limit = { has_province_modifier = subject_suplimit } remove_province_modifier = subject_suplimit }
