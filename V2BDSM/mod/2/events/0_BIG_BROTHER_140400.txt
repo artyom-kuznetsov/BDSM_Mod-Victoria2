@@ -153,11 +153,11 @@ country_event = {
 			political_reform = parliamentary
 		}
 		
-		any_country = { limit = { economic_system = traditionalism_r NOT = { economic_system = traditionalism_r_crutch } } social_reform = traditionalism_r_crutch }
-		any_country = { limit = { economic_system = agrarianism_r NOT = { economic_system = agrarianism_r_crutch } }  social_reform = agrarianism_r_crutch }
-		any_country = { limit = { economic_system = interventionism_r NOT = { economic_system = interventionism_r_crutch } } social_reform = interventionism_r_crutch }
-		any_country = { limit = { economic_system = laissez_faire_r NOT = { economic_system = laissez_faire_r_crutch } } social_reform = laissez_faire_r_crutch }
-		any_country = { limit = { economic_system = planned_economy_r NOT = { economic_system = planned_economy_r_crutch } } social_reform = planned_economy_r_crutch }
+		any_country = { limit = { economic_system = traditionalism_r 	NOT = { economic_system_crutch = traditionalism_r_crutch } } 	social_reform = traditionalism_r_crutch }
+		any_country = { limit = { economic_system = agrarianism_r 		NOT = { economic_system_crutch = agrarianism_r_crutch } }  		social_reform = agrarianism_r_crutch }
+		any_country = { limit = { economic_system = interventionism_r 	NOT = { economic_system_crutch = interventionism_r_crutch } } 	social_reform = interventionism_r_crutch }
+		any_country = { limit = { economic_system = laissez_faire_r 	NOT = { economic_system_crutch = laissez_faire_r_crutch } } 	social_reform = laissez_faire_r_crutch }
+		any_country = { limit = { economic_system = planned_economy_r 	NOT = { economic_system_crutch = planned_economy_r_crutch } } 	social_reform = planned_economy_r_crutch }
 		
 		
 		#  Œ–¿¡À≈—“–Œ≈Õ»≈ ¬Œ≈ÕÕŒ√Œ ¬–≈Ã≈Õ»
@@ -557,8 +557,8 @@ country_event = { # YEARLY CLEANUP
 					NOT = { year = 1860 is_core = SMA }
 					## Audax Validator "." Ignore_NEXT
 					state_scope = { 
-						## Audax Validator "." Ignore_NEXT
 						NOT = { 
+							## Audax Validator "." Ignore_NEXT
 							total_pops = 150000 
 						} 
 					}
@@ -571,8 +571,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					NOT = { year = 1860 }
 					is_core = SMA 
+					state_scope = { 
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 150000 }
+					total_pops = 150000 }
 				}
 				remove_core = SMA
 			}
@@ -581,8 +582,10 @@ country_event = { # YEARLY CLEANUP
 			any_owned = {
 				limit = {
 					year = 1880 NOT = { is_core = SMA }
+					
+					state_scope = { NOT = { 
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 250000 } }
+					total_pops = 250000 } }
 				}
 				add_core = SMA
 			}
@@ -592,8 +595,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					year = 1880
 					is_core = SMA 
+					state_scope = { 
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 250000 }
+					total_pops = 250000 }
 				}
 				remove_core = SMA
 			}
@@ -602,8 +606,9 @@ country_event = { # YEARLY CLEANUP
 			any_owned = {
 				limit = {
 					NOT = { year = 1860 is_core = MST }
+					state_scope = { NOT = { 
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 300000 } }
+					total_pops = 300000 } }
 				}
 				add_core = MST
 			}
@@ -613,8 +618,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					NOT = { year = 1880 }
 					is_core = MST
+					state_scope = { 
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 300000 }
+					total_pops = 300000 }
 				}
 				remove_core = MST
 			}
@@ -623,8 +629,9 @@ country_event = { # YEARLY CLEANUP
 			any_owned = {
 				limit = {
 					year = 1880 NOT = { is_core = MST }
+					state_scope = { NOT = { 
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { NOT = { total_pops = 400000 } }
+					total_pops = 400000 } }
 				}
 				add_core = MST
 			}
@@ -634,8 +641,9 @@ country_event = { # YEARLY CLEANUP
 				limit = {
 					year = 1880
 					is_core = MST
+					state_scope = { 
 					## Audax Validator "." Ignore_NEXT
-					state_scope = { total_pops = 400000 }
+					total_pops = 400000 }
 				}
 				remove_core = MST
 			}

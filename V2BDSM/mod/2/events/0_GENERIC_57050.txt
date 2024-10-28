@@ -855,37 +855,7 @@ country_event = {
 	}
 }
 
-country_event = {
-	title = "industrial_revolution_EvtName"
-	desc = "industrial_revolution_EvtDesc"
-	picture = "iron"
-	id = 57071
-	
-	trigger = {
-		invention = industrial_revolution_inv
-		NOT = { has_country_flag = industrial_revolution_flag }
-	}
-	
-	immediate = {
-		set_country_flag = industrial_revolution_flag
-	}
-	
-	option = {
-		name = "industrial_revolution_EvtOptA"
-		prestige = 5
-		years_of_research = 0.5
-		any_country = {
-			limit = {
-				NOT = {
-					tag = THIS
-				}
-				THIS = { ai = no }
-			}
-			country_event = 57601
-		}
-	}
-}
-
+# ID 57071 FREE
 country_event = {
 	title = "economic_system_EvtName"
 	desc = "economic_system_EvtDesc"
@@ -1163,7 +1133,7 @@ country_event = {
 		}
 		random_owned = {	# MOVE FROM 0 TO 1
 			limit = { owner = { 
-				healthcare_institution = no_education_investment 
+				healthcare_institution = no_healthcare_investment 
 				OR = {
 					health_care = low_health_care
 					health_care = acceptable_health_care
@@ -1171,7 +1141,7 @@ country_event = {
 				NOT = { has_country_modifier = institution_changed_cmodifier } } }
 			owner = { 
 				add_country_modifier = { name = institution_changed_cmodifier duration = 730 }
-				social_reform = low_healthcare_investment
+				political_reform = low_healthcare_investment
 			}
 		}
 		random_owned = {	# MOVE FROM 1 TO 2
@@ -1181,7 +1151,7 @@ country_event = {
 				NOT = { has_country_modifier = institution_changed_cmodifier } } }
 			owner = { 
 				add_country_modifier = { name = institution_changed_cmodifier duration = 730 }
-				social_reform = medium_education_investment
+				political_reform = medium_education_investment
 			}
 		}
 		random_owned = {	# MOVE FROM 1 TO 2 FAIL
@@ -1215,15 +1185,15 @@ country_event = {
 		}
 		random_owned = {
 			limit = { owner = { healthcare_institution = low_healthcare_investment } }
-			owner = { social_reform = no_education_investment }
+			owner = { political_reform = no_healthcare_investment }
 		}
 		random_owned = {
 			limit = { owner = { healthcare_institution = medium_healthcare_investment } }
-			owner = { social_reform = low_education_investment }
+			owner = { political_reform = low_healthcare_investment }
 		}
 		random_owned = {
 			limit = { owner = { healthcare_institution = high_healthcare_investment } }
-			owner = { social_reform = medium_education_investment }
+			owner = { political_reform = medium_healthcare_investment }
 		}
 	}
 }

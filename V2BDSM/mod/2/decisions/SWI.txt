@@ -79,26 +79,4 @@ political_decisions = {
 		}
 	}
 	
-	build_gotthard_tunnel = {
-		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			tag = SWI
-			owns = 606
-			NOT = {
-				has_country_flag = gotthard_tunnel_built
-			}
-		}
-		
-		allow = {
-			invention = machine_tools
-		}
-		
-		effect = {
-			606 = {
-				infrastructure = 4
-			}
-			prestige = 5
-			set_country_flag = gotthard_tunnel_built
-		}
-	}
 }

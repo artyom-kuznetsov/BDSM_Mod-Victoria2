@@ -2213,21 +2213,9 @@ cut_down_to_size = {
 
 	war_name = WAR_NAME
 	
-	on_po_accepted = {
-		country_event = 57070
-	}
 	
 	can_use = {
-		NOT = { 
-			is_our_vassal = THIS
-			conscription = ref_huge_military_budget
-		}
-		NOT = {
-			AND = {
-				has_country_flag = chinese_warlord_flag
-				NOT = { year = 1870 } 
-			}
-		}
+		always = no
 	}
 	
 	on_add = {
@@ -3925,7 +3913,6 @@ install_communist_gov_cb = {
 		political_reform = state_press
 		political_reform = state_controlled
 		political_reform = underground_parties
-		social_reform = child_labor_illegal
 		plurality = -10
 	}
 }
