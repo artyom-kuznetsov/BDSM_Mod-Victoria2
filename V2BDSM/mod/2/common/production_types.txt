@@ -312,6 +312,51 @@ fuel_factory = {
 	value = 2			# 50	# PROFIT 11
 }
 
+radio_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		electric_gear = 0.69	# 11
+		glass = 0.5				# 3
+		tech_alloys	= 0.675		# 13.5
+		steel	= 0.25			# 4.5	# TOTAL 32 + 7
+	}
+	output_goods = radio
+	value = 3.125			# 50	# PROFIT 11
+}
+
+ammunition_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		steel = 0.61	# ~11
+		sulphur = 1		# 12 
+		coal = 1		# 9  # TOTAL ~32 + 7 
+	}
+	output_goods = ammunition
+	value = 5			# 50	# PROFIT 11
+}
+
+barrels_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		automobiles = 0.543	 # 19
+		steel = 0.5			 # 9
+		electric_gear = 0.25 # 4	# TOTAL 32 + 7
+	}
+	output_goods = barrels
+	value = 0.5			# 50	# PROFIT 11
+}
+
+aeroplanes_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		machine_parts = 1		# 15
+		electric_gear = 0.5		# 8
+		rubber = 0.75			# 9	# TOTAL 32 + 7
+	}
+	output_goods = aeroplanes
+	value = 0.5			# 50	# PROFIT 11
+}
+
 ### RGOs #####################################################################################
 
 RGO_template_farmers = {
@@ -781,4 +826,37 @@ artisan_fuel = {
 	workforce = 10000
 }
 
+artisan_radio = {
+	input_goods = {
+		electric_gear = 1	# 16
+		glass = 1			# 6
+		tech_alloys = 0.7	# 14	# 36
+	}
+	output_goods = radio
+	value = 2.875	# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_ammunition = {
+	input_goods = {
+		steel = 1	# 18
+		sulphur = 1 # 12
+		coal = 1	# 9 	# TOTAL 39
+	}
+	output_goods = ammunition
+	value = 4.9		# 49
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
 

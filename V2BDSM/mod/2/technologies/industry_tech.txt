@@ -4,8 +4,7 @@ agriculture_1 = {
 	year = 1992
 	cost = 3600
 
-	mine_rgo_eff = 0.1
-	farm_rgo_eff = 0.1
+	farm_rgo_eff = 0.2
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -36,8 +35,7 @@ agriculture_2 = {
 	cost = 7200
 
 	activate_building = electric_network
-	factory_cost = 0.04
-	factory_throughput = 0.05
+	farm_rgo_eff = 0.1
 	ai_chance = {
 		factor = 1.01
 		modifier = {
@@ -46,9 +44,8 @@ agriculture_2 = {
 				big_producer = grain
 				big_producer = cotton
 				big_producer = cattle
-				big_producer = tea
-				big_producer = coffee
-				big_producer = silk
+				big_producer = tea_leaves
+				big_producer = coffee_beans
 				big_producer = tobacco
 				big_producer = fruit
 			}
@@ -81,8 +78,7 @@ agriculture_3 = {
 	cost = 10800
 
 	max_electric_network = 1
-	factory_cost = 0.04
-	factory_throughput = 0.05
+	farm_rgo_eff = 0.1
 	ai_chance = {
 		factor = 1.01
 		modifier = {
@@ -91,9 +87,8 @@ agriculture_3 = {
 				big_producer = grain
 				big_producer = cotton
 				big_producer = cattle
-				big_producer = tea
-				big_producer = coffee
-				big_producer = silk
+				big_producer = tea_leaves
+				big_producer = coffee_beans
 				big_producer = tobacco
 				big_producer = fruit
 			}
@@ -126,8 +121,7 @@ agriculture_4 = {
 	cost = 14400
 	## Audax Validator "." Ignore_NEXT
 	max_electric_network = 1
-	factory_cost = 0.04
-	factory_throughput = 0.05
+	farm_rgo_eff = 0.1
 	ai_chance = {
 		factor = 1.01
 		modifier = {
@@ -136,9 +130,8 @@ agriculture_4 = {
 				big_producer = grain
 				big_producer = cotton
 				big_producer = cattle
-				big_producer = tea
-				big_producer = coffee
-				big_producer = silk
+				big_producer = tea_leaves
+				big_producer = coffee_beans
 				big_producer = tobacco
 				big_producer = fruit
 			}
@@ -171,8 +164,7 @@ agriculture_5 = {
 	cost = 18000
 	## Audax Validator "." Ignore_NEXT
 	max_electric_network = 1
-	factory_cost = 0.04
-	factory_throughput = 0.05
+	farm_rgo_eff = 0.1
 	ai_chance = {
 		factor = 1.25
 		modifier = {
@@ -181,9 +173,8 @@ agriculture_5 = {
 				big_producer = grain
 				big_producer = cotton
 				big_producer = cattle
-				big_producer = tea
-				big_producer = coffee
-				big_producer = silk
+				big_producer = tea_leaves
+				big_producer = coffee_beans
 				big_producer = tobacco
 				big_producer = fruit
 			}
@@ -216,8 +207,7 @@ agriculture_6 = {
 	cost = 21600
 	## Audax Validator "." Ignore_NEXT
 	max_electric_network = 1
-	factory_cost = 0.04
-	factory_throughput = 0.05
+	farm_rgo_eff = 0.2
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -226,9 +216,8 @@ agriculture_6 = {
 				big_producer = grain
 				big_producer = cotton
 				big_producer = cattle
-				big_producer = tea
-				big_producer = coffee
-				big_producer = silk
+				big_producer = tea_leaves
+				big_producer = coffee_beans
 				big_producer = tobacco
 				big_producer = fruit
 			}
@@ -255,8 +244,7 @@ agriculture_7 = {
 	area = tech_power
 	year = 2080
 	cost = 21600
-	factory_cost = 0.04
-	factory_throughput = 0.05
+	farm_rgo_eff = 0.3
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -265,9 +253,8 @@ agriculture_7 = {
 				big_producer = grain
 				big_producer = cotton
 				big_producer = cattle
-				big_producer = tea
-				big_producer = coffee
-				big_producer = silk
+				big_producer = tea_leaves
+				big_producer = coffee_beans
 				big_producer = tobacco
 				big_producer = fruit
 			}
@@ -293,13 +280,13 @@ agriculture_7 = {
 
 
 #mechanization
-industrial_revolution = {
+factories_1 = {
 	area = mechanization
 	year = 1992
 	cost = 3600
 
-	mine_rgo_eff = 0.2
-	farm_rgo_eff = 0.2
+	factory_throughput = 0.1
+	factory_cost = 0.05
 	ai_chance = {
 		factor = 3
 		modifier = {
@@ -329,13 +316,13 @@ industrial_revolution = {
 	}	
 
 }
-mechanical_production = {
+factories_2 = {
 	area = mechanization
 	year = 2005
 	cost = 7200
 
 	factory_throughput = 0.1
-	factory_cost = 0.1
+	factory_cost = 0.05
 	rgo_goods_output = {
 		
 	}
@@ -360,7 +347,7 @@ mechanical_production = {
 				big_producer = tropical_wood
 				big_producer = fruit
 				big_producer = grain
-				big_producer = tea
+				big_producer = tea_leaves
 				big_producer = cattle
 			}
 		}
@@ -382,13 +369,13 @@ mechanical_production = {
 		}
 	}	
 }
-interchangeable_parts = {
+factories_3 = {
 	area = mechanization
 	year = 2020
 	cost = 10800
 
-	factory_throughput = 0.05
-	factory_cost = 0.15
+	factory_throughput = 0.1
+	factory_cost = 0.05
 	
 	ai_chance = {
 		factor = 1.05
@@ -418,12 +405,12 @@ interchangeable_parts = {
 		}
 	}	
 }
-semi_automatization = {
+factories_4 = {
 	area = mechanization
 	year = 2035
 	cost = 14400
-	factory_throughput = 0.05
-	factory_cost = 0.2
+	factory_throughput = 0.1
+	factory_cost = 0.05
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -452,15 +439,14 @@ semi_automatization = {
 		}
 	}	
 }
-assembly_line = {
+factories_5 = {
 	area = mechanization
 	year = 2050
 	cost = 18000
-	factory_throughput = 0.05
-	factory_goods_output = {
-		machine_parts = 0.02 
-	}
-	factory_cost = 0.3
+	
+	factory_throughput = 0.15
+	factory_cost = 0.1
+	
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -481,18 +467,15 @@ assembly_line = {
 		}
 	}	
 }
-shift_work = {
+factories_6 = {
 	area = mechanization
-	year = 2075
+	year = 2065
 	cost = 21600
 
 	
-	rgo_output = 0.1
-	factory_throughput = 0.05
-	factory_goods_output = {
-		machine_parts = 0.02 
-	}
-	factory_cost = 0.35
+	factory_throughput = 0.15
+	factory_cost = 0.1
+	
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -513,18 +496,15 @@ shift_work = {
 		}
 	}	
 }
-mechanized_manufacturing = {
+factories_7 = {
 	area = mechanization
-	year = 2090
+	year = 2080
 	cost = 21600
 
 	
-	rgo_output = 0.1
-	factory_throughput = 0.05
-	factory_goods_output = {
-		machine_parts = 0.02 
-	}
-	factory_cost = 0.4
+	factory_throughput = 0.15
+	factory_cost = 0.1
+	
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -548,17 +528,15 @@ mechanized_manufacturing = {
 
 
 #metallurgy
-mechanized_mining = {
+metallurgy_1 = {
 	area = metallurgy
 	year = 1992
 	cost = 3600
 	
-
 	rgo_goods_output = {
 		iron = 0.1
-	}
-	rgo_goods_output = {
 		coal = 0.1
+		colored_metals = 0.1
 	}
 	
 	ai_chance = {
@@ -605,14 +583,16 @@ mechanized_mining = {
 		}
 	}
 }
-clean_coal = {
+metallurgy_2 = {
 	area = metallurgy
 	year = 2005
 	cost = 7200
 	
 	activate_building = mines
 	rgo_goods_output = {
+		iron = 0.1
 		coal = 0.1
+		colored_metals = 0.1
 	}
 	
 	ai_chance = {
@@ -659,7 +639,7 @@ clean_coal = {
 		}
 	}
 }
-cheap_iron = {
+metallurgy_3 = {
 	area = metallurgy
 	year = 2020
 	cost = 10800
@@ -668,6 +648,8 @@ cheap_iron = {
 	max_mines = 1
 	rgo_goods_output = {
 		iron = 0.1
+		coal = 0.1
+		colored_metals = 0.1
 	}
 
 	ai_chance = {
@@ -714,7 +696,7 @@ cheap_iron = {
 		}
 	}
 }
-cheap_steel = {
+metallurgy_4 = {
 	area = metallurgy
 	year = 2035
 	cost = 14400
@@ -722,10 +704,9 @@ cheap_steel = {
 	## Audax Validator "." Ignore_NEXT
 	max_mines = 1
 	rgo_goods_output = {
-		coal = 0.1
-	}
-	rgo_goods_output = {
 		iron = 0.1
+		coal = 0.1
+		colored_metals = 0.1
 	}
 	
 	ai_chance = {
@@ -772,7 +753,7 @@ cheap_steel = {
 		}
 	}
 }
-advanced_metallurgy = {
+metallurgy_5 = {
 	area = metallurgy
 	year = 2050
 	cost = 18000
@@ -780,10 +761,9 @@ advanced_metallurgy = {
 	## Audax Validator "." Ignore_NEXT
 	max_mines = 1
 	rgo_goods_output = {
-		coal = 0.1
-	}
-	rgo_goods_output = {
 		iron = 0.1
+		coal = 0.1
+		colored_metals = 0.1
 	}
 	
 	ai_chance = {
@@ -830,18 +810,17 @@ advanced_metallurgy = {
 		}
 	}
 }
-electric_furnace = {
+metallurgy_6 = {
 	area = metallurgy
-	year = 2075
+	year = 2065
 	cost = 21600
 
 	## Audax Validator "." Ignore_NEXT
 	max_mines = 1
 	rgo_goods_output = {
-		coal = 0.1
-	}
-	rgo_goods_output = {
 		iron = 0.1
+		coal = 0.1
+		colored_metals = 0.1
 	}
 	
 	ai_chance = {
@@ -888,18 +867,17 @@ electric_furnace = {
 		}
 	}
 }
-modern_metallurgy = {
+metallurgy_7 = {
 	area = metallurgy
-	year = 2090
+	year = 2080
 	cost = 21600
 
 	## Audax Validator "." Ignore_NEXT
 	max_mines = 1
 	rgo_goods_output = {
-		coal = 0.1
-	}
-	rgo_goods_output = {
 		iron = 0.1
+		coal = 0.1
+		colored_metals = 0.1
 	}
 	
 	ai_chance = {
@@ -949,7 +927,7 @@ modern_metallurgy = {
 
 
 #tech_infrastructure
-experimental_railroad = {
+infrastructure_1 = {
 	area = tech_infrastructure
 	year = 1992
 	cost = 3600
@@ -973,7 +951,7 @@ experimental_railroad = {
 		}
 	}
 }
-early_railroad = {
+infrastructure_2 = {
 	area = tech_infrastructure
 	year = 2005
 	cost = 7200
@@ -997,7 +975,7 @@ early_railroad = {
 		}
 	}
 }
-iron_railroad = {
+infrastructure_3 = {
 	area = tech_infrastructure
 	year = 2020
 	cost = 10800
@@ -1020,7 +998,7 @@ iron_railroad = {
 		}
 	}
 }
-steel_railroad = {
+infrastructure_4 = {
 	area = tech_infrastructure
 	year = 2035
 	cost = 14400
@@ -1043,7 +1021,7 @@ steel_railroad = {
 		}
 	}
 }
-integral_rail_system = {
+infrastructure_5 = {
 	area = tech_infrastructure
 	year = 2050
 	cost = 18000
@@ -1066,9 +1044,9 @@ integral_rail_system = {
 		}
 	}
 }
-limited_access_roads = {
+infrastructure_6 = {
 	area = tech_infrastructure
-	year = 2075
+	year = 2065
 	cost = 21600
 
 	max_railroad = 1
@@ -1088,9 +1066,9 @@ limited_access_roads = {
 		}
 	}
 }
-modern_infrastructure = {
+infrastructure_7 = {
 	area = tech_infrastructure
-	year = 2090
+	year = 2080
 	cost = 21600
 
 	max_railroad = 1
@@ -1113,14 +1091,16 @@ modern_infrastructure = {
 
 
 #chemistry_and_electricity
-basic_chemistry = {
+chemistry_1 = {
 	area = chemistry_and_electricity
 	year = 1992
 	cost = 3600
 
 	supply_limit = 0.25
 	rgo_goods_output = {
-		sulphur = 0.2
+		sulphur = 0.1
+		oil = 0.08
+		natural_gas = 0.1
 	}
 	land_attrition = -0.05
 
@@ -1132,12 +1112,17 @@ basic_chemistry = {
 		}
 	}
 }
-medicine = {
+chemistry_2 = {
 	area = chemistry_and_electricity
 	year = 2005
 	cost = 7200
 
 	supply_limit = 0.125
+	rgo_goods_output = {
+		sulphur = 0.1
+		oil = 0.08
+		natural_gas = 0.1
+	}
 	
 	ai_chance = {
 		factor = 1.1
@@ -1147,14 +1132,16 @@ medicine = {
 		}
 	}
 }
-inorganic_chemistry = {
+chemistry_3 = {
 	area = chemistry_and_electricity
 	year = 2020
 	cost = 10800
 
 	supply_limit = 0.125
 	rgo_goods_output = {
-		sulphur = 0.2
+		sulphur = 0.1
+		oil = 0.08
+		natural_gas = 0.1
 	}
 
 	ai_chance = {
@@ -1165,14 +1152,16 @@ inorganic_chemistry = {
 		}
 	}
 }
-organic_chemistry = {
+chemistry_4 = {
 	area = chemistry_and_electricity
 	year = 2035
 	cost = 14400
 
 	supply_limit = 0.125
 	rgo_goods_output = {
-		sulphur = 0.2
+		sulphur = 0.1
+		oil = 0.08
+		natural_gas = 0.1
 	}
 
 	ai_chance = {
@@ -1183,12 +1172,17 @@ organic_chemistry = {
 		}
 	}
 }
-electricity = {
+chemistry_5 = {
 	area = chemistry_and_electricity
 	year = 2050
 	cost = 18000
 	
 	supply_limit = 0.125
+	rgo_goods_output = {
+		sulphur = 0.2
+		oil = 0.16
+		natural_gas = 0.2
+	}
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -1198,12 +1192,17 @@ electricity = {
 	}
 
 }
-synthetic_polymers = {
+chemistry_6 = {
 	area = chemistry_and_electricity
-	year = 2075
+	year = 2065
 	cost = 21600
 
 	supply_limit = 0.125
+	rgo_goods_output = {
+		sulphur = 0.2
+		oil = 0.16
+		natural_gas = 0.2
+	}
 	ai_chance = {
 		factor = 1.1
 		modifier = {
@@ -1224,13 +1223,17 @@ synthetic_polymers = {
 		}
 	}
 }
-modern_chemistry = {
+chemistry_7 = {
 	area = chemistry_and_electricity
 	year = 2090
 	cost = 21600
 
 	supply_limit = 0.25
-	rgo_output = 0.05
+	rgo_goods_output = {
+		sulphur = 0.2
+		oil = 0.16
+		natural_gas = 0.2
+	}
 	ai_chance = {
 		factor = 1.1
 		modifier = {
