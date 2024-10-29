@@ -1,11 +1,10 @@
 
 ### Factories #####################################################################################
 
-factory_template = {
+tier_0_template = {
 	efficiency = { #1.2 saved
-		cement = 0.3 #if no cement, work at 75% efficiency #cost = 4.8
-		machine_parts = 0.125	#1.825
-		lumber = 0.5			#1	total cost = 6.625
+		timber 	= 0.5	# 2.5
+		iron 	= 0.5	# 5		# TOTAL 7.5
 	}
 	
 	owner =
@@ -27,22 +26,104 @@ factory_template = {
 			effect_multiplier = 1.5
 			amount = 0.2
 		}
+	}
+	type = factory
+	workforce = 10000 
+}
+tier_1_template = {
+	efficiency = { #1.2 saved
+		cement 	= 0.2 	# 3.2	
+		coal	= 0.2	# 1.8 	
+		lumber 	= 0.5	# 3		# TOTAL 8
+	}
 	
+	owner =
+	{
+		poptype = capitalists 
+		effect = input
+		effect_multiplier = -2.5
+	}
+
+	employees = {		
+		{ 
+			poptype = craftsmen
+			effect = throughput
+			amount = 0.8
+		}		
+		{ 
+			poptype = clerks 
+			effect = output
+			effect_multiplier = 1.5
+			amount = 0.2
+		}
 	}
 	type = factory
 	workforce = 10000 
 }
 
-clipper_shipyard = {       
-	template = factory_template		#7.625
+cement_factory = {       
+	template = tier_0_template		# 7.5
 	input_goods = {         
-		fabric = 3			#5.4
-		lumber = 5			#10
-		steel = 2			#9.4	total input+maint = 32.425
+		coal 	=	3.55		# ~32+7.5
 	}
-	output_goods = timber 
-	#is_coastal = yes
-	value = 0.96		# 40
+	output_goods = cement
+	value = 3.125			# ~50	# PROFIT ~12.5
+}
+
+glass_factory = {       
+	template = tier_1_template		# 8
+	input_goods = {         
+		coal 	= 2.44		# 22
+		iron 	= 0.8		# 8
+		oil 	= 0.133		# 2		# TOTAL 32+8
+	}
+	output_goods = glass
+	value = 8.34			# ~50	# PROFIT ~10
+}
+
+liquor_factory = {       
+	template = tier_1_template		# 8
+	input_goods = {         
+		grain 	= 6.5	# 13
+		fruit 	= 6.5	# 13
+		glass 	= 1		# 6		# TOTAL 32 + 8
+	}
+	output_goods = liquor
+	value = 6.25				# 50	# PROFIT 10
+}
+
+paper_factory = {       
+	template = tier_1_template		# 8
+	input_goods = {         
+		timber = 5.2	# 26
+		sulphur = 0.25	# 3
+		oil = 0.2		# 3		# TOTAL 32 + 8
+	}
+	output_goods = paper
+	value = 7.143			# ~50	# PROFIT 10
+}
+
+canned_food_factory = {       
+	template = tier_0_template		# 7.5
+	input_goods = {         
+		grain = 4	# 8
+		cattle = 4	# 8
+		fruit = 4	# 8
+		fish = 4	# 8	# TOTAL 32 + 7.5
+	}
+	output_goods = canned_food
+	value = 5			# 50	# PROFIT 10
+}
+
+steel_factory = {       
+	template = tier_1_template		# 8
+	input_goods = {         
+		iron = 2			# 20
+		coal = 0.5			# 4.5
+		natural_gas = 0.625	# 7.5	# TOTAL 32 + 8
+	}
+	output_goods = steel
+	value = 2.78			# 50	# PROFIT 10
 }
 
 ### RGOs #####################################################################################
@@ -121,6 +202,34 @@ cattle_ranch = {
 	farm = yes
 }
 
+iron_mine = {
+	template = RGO_template_labourers
+	output_goods = iron
+	value = 4	# 40
+	mine = yes
+}
+
+colored_metals_mine = {
+	template = RGO_template_labourers
+	output_goods = colored_metals
+	value = 4	# 40
+	mine = yes
+}
+
+oil_rig = {
+	template = RGO_template_labourers
+	output_goods = oil 
+	value = 3	# 45
+	mine = yes
+}
+
+natural_gas_well = {
+	template = RGO_template_labourers
+	output_goods = natural_gas
+	value = 4	# 48
+	mine = yes
+}
+
 coal_mine = {
 	template = RGO_template_labourers
 	output_goods = coal 
@@ -155,20 +264,6 @@ grain_farm = {
 	output_goods = grain 
 	value = 5
 	farm = yes
-}
-
-iron_mine = {
-	template = RGO_template_labourers
-	output_goods = iron
-	value = 4
-	mine = yes
-}
-
-oil_rig = {
-	template = RGO_template_labourers
-	output_goods = oil 
-	value = 1
-	mine = yes
 }
 
 opium_plantation = {
@@ -229,13 +324,12 @@ tobacco_plantation = {
 
 ### Artisans #####################################################################################
 
-artisan_coffee = {
+artisan_cement = {
 	input_goods = {
-		coffee_beans = 1	#3.9988
-		paper = 1			#0.9996 total input+maint = 4.9984
+		coal = 4	# 36
 	}
-	output_goods = coffee
-	value = 2				#9.99
+	output_goods = cement
+	value = 2.875	# 46
 	owner = {
 		# Audax Validator "." Ignore_NEXT
 		poptype = artisan
@@ -245,4 +339,127 @@ artisan_coffee = {
 	workforce = 10000
 }
 
-############# BASIC FACTORIES 
+artisan_glass = {
+	input_goods = {
+		coal 	= 3			# 27
+		iron 	= 1			# 10	# TOTAL 37
+	}
+	output_goods = glass
+	value = 7.84	# 47
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_liquor = {
+	input_goods = {
+		grain 	= 7	# 14
+		fruit 	= 7	# 14
+		glass 	= 1	# 6		# 34
+	}
+	output_goods = liquor
+	value = 5.5		# 44
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_paper = {
+	input_goods = {
+		timber = 6		# 30
+		sulphur = 0.5	# 6	# TOTAL 36
+	}
+	output_goods = paper
+	value = 6.572		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_canned_food = {
+	input_goods = {
+		grain = 18	# 36
+	}
+	output_goods = canned_food
+	value = 4.6		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_canned_food2 = {
+	input_goods = {
+		cattle = 18	# 36
+	}
+	output_goods = canned_food
+	value = 4.6		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_canned_food3 = {
+	input_goods = {
+		fruit = 18	# 36
+	}
+	output_goods = canned_food
+	value = 4.6		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_canned_food4 = {
+	input_goods = {
+		fish = 18	# 36
+	}
+	output_goods = canned_food
+	value = 4.6		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_steel = {
+	input_goods = {
+		iron = 2.5	# 25
+		coal = 1	# 9	# 34
+	}
+	output_goods = steel
+	value = 2.45		# 44
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}

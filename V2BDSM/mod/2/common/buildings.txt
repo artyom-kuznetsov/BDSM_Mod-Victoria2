@@ -9,28 +9,143 @@
 # time = x #==> number of days to build.
 #
 
-clipper_shipyard = {
+cement_factory = {
 	type = factory
 	
-	sail = yes
+	#sail = yes
 
 	on_completion = factory
 	completion_size = 0.2
 	max_level = 99
 	goods_cost =
 	{
-		machine_parts = 300
-		steel = 300
-		cement = 300
-		coal = 400
+		iron = 800		# 800*10=8000
+		coal = 800		# 800*9=7200
+		timber = 1000	# 1000*5=5000	# 20200
 	}
-	time = 30
+	time = 60	# TIER 0
 	visibility = yes
 	onmap = no
 
-	production_type = clipper_shipyard
+	production_type = cement_factory
 	pop_build_factory = yes
-	default_enabled = yes	
+}
+
+
+### TIER 1 FACTORIES ###
+
+glass_factory = {
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		iron = 800		# 800*10=8000
+		cement = 800	# 800*16=12800
+		coal = 800		# 800*9=7200
+		lumber = 800	# 800*6=4800	# TOTAL 32800
+	}
+	time = 90	# TIER 1
+	visibility = yes
+	onmap = no
+
+	production_type = glass_factory
+	pop_build_factory = yes
+}
+
+liquor_factory = {
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		iron = 800		# 800*10=8000
+		cement = 800	# 800*16=12800
+		coal = 800		# 800*9=7200
+		lumber = 800	# 800*6=4800	# TOTAL 32800
+	}
+	time = 90	# TIER 1
+	visibility = yes
+	onmap = no
+
+	production_type = liquor_factory
+	pop_build_factory = yes
+}
+
+paper_factory = {
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		iron = 800		# 800*10=8000
+		cement = 800	# 800*16=12800
+		coal = 800		# 800*9=7200
+		lumber = 800	# 800*6=4800	# TOTAL 32800
+	}
+	time = 90	# TIER 1
+	visibility = yes
+	onmap = no
+
+	production_type = paper_factory
+	pop_build_factory = yes
+}
+
+canned_food_factory = {
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		iron = 800		# 800*10=8000
+		coal = 800		# 800*9=7200
+		timber = 1000	# 1000*5=5000	# 20200
+	}
+	time = 90	# TIER 0
+	visibility = yes
+	onmap = no
+
+	production_type = canned_food_factory
+	pop_build_factory = yes
+}
+
+steel_factory = {
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		iron = 800		# 800*10=8000
+		cement = 800	# 800*16=12800
+		coal = 800		# 800*9=7200
+		lumber = 800	# 800*6=4800	# TOTAL 32800
+	}
+	time = 90	# TIER 1
+	visibility = yes
+	onmap = no
+
+	production_type = steel_factory
+	pop_build_factory = yes
 }
 
 
