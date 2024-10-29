@@ -124,6 +124,7 @@ while popfiles != 0:
         lines = fp.readlines()
         
         for line in lines:
+            line = line.split('#')[0]
             if "life_needs = {" in line:
                 print ("found life_needs definition start")
                 life_needs_start = True
@@ -160,7 +161,6 @@ while popfiles != 0:
                             #file.write(str(good_price))
                             #file.write("\n        Good Definition: ")
                             #file.write(str(checkgood))
-                        
                         good_amount = float(sub(r'[^0-9.]', '', line))
 
                         #with open('Pop_Needs_Calculator_output.txt', 'a') as file:
@@ -185,6 +185,7 @@ while popfiles != 0:
 
                         print("found a good", checkgood,"in line:\n    ", line)
                         good_price = goods_list[checkgood]
+                        line = line.split('#')[0]
                         good_amount = float(sub(r'[^0-9.]', '', line))
                         total_luxury_needs_price = total_luxury_needs_price + good_amount * good_price
             
