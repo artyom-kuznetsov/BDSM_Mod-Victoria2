@@ -2,7 +2,7 @@
 ### Factories #####################################################################################
 
 tier_0_template = {
-	efficiency = { #1.2 saved
+	efficiency = {
 		timber 	= 0.5	# 2.5
 		iron 	= 0.5	# 5		# TOTAL 7.5
 	}
@@ -30,11 +30,43 @@ tier_0_template = {
 	type = factory
 	workforce = 10000 
 }
+
 tier_1_template = {
-	efficiency = { #1.2 saved
+	efficiency = {
 		cement 	= 0.2 	# 3.2	
 		coal	= 0.2	# 1.8 	
 		lumber 	= 0.5	# 3		# TOTAL 8
+	}
+	
+	owner =
+	{
+		poptype = capitalists 
+		effect = input
+		effect_multiplier = -2.5
+	}
+
+	employees = {		
+		{ 
+			poptype = craftsmen
+			effect = throughput
+			amount = 0.8
+		}		
+		{ 
+			poptype = clerks 
+			effect = output
+			effect_multiplier = 1.5
+			amount = 0.2
+		}
+	}
+	type = factory
+	workforce = 10000 
+}
+
+tier_2_template = {
+	efficiency = {
+		cement 	= 0.187			# 3
+		machine_parts	= 0.2	# 3
+		natural_gas	= 0.084		# 1	# TOTAL 7
 	}
 	
 	owner =
@@ -67,7 +99,7 @@ cement_factory = {
 		coal 	=	3.55		# ~32+7.5
 	}
 	output_goods = cement
-	value = 3.125			# ~50	# PROFIT ~12.5
+	value = 3.125			# ~50	# PROFIT ~10.5
 }
 
 glass_factory = {       
@@ -124,6 +156,160 @@ steel_factory = {
 	}
 	output_goods = steel
 	value = 2.78			# 50	# PROFIT 10
+}
+
+small_arms_factory = {       
+	template = tier_1_template		# 8
+	input_goods = {         
+		steel = 1.5			# 27
+		lumber = 1			# 6	# 33	# TOTAL 33 + 8 (41)
+		
+	}
+	output_goods = small_arms
+	value = 5.1			# 51	# PROFIT 10
+}
+
+lumber_factory = {       
+	template = tier_0_template		# 7.5
+	input_goods = {         
+		timber = 6.4	# 32 + 7.5
+		
+	}
+	output_goods = lumber
+	value = 8.34			# 50	# PROFIT ~10.5
+}
+
+coffee_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		tea_leaves = 3.1		# 12
+		coffee_leaves = 3.1		# 12
+		paper = 1.15			# 8		# TOTAL 33 + 7
+	}
+	output_goods = coffee
+	value = 8.34			# 50	# PROFIT ~10
+}
+
+tech_alloys_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		colored_metals = 2.8	# 28
+		fertilizer = 0.4		# 4	# TOTAL 32 + 7
+	}
+	output_goods = tech_alloys
+	value = 2.5					# 50	# PROFIT 11
+}
+
+machine_parts_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		steel		= 0.89	# 16
+		tech_alloys = 0.8 	# 16	# TOTAL 32 + 7
+	}
+	output_goods = machine_parts
+	value = 3.34			# 50	# PROFIT ~11
+}
+
+furniture_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		lumber = 5.34		# TOTAL 32 + 7
+	}
+	output_goods = furniture
+	value = 6.25			# 50	# PROFIT ~11
+}
+
+fabric_factory = {       
+	template = tier_1_template		# 8
+	input_goods = {         
+		cotton = 6.4				# 32 + 8
+	}
+	output_goods = fabric
+	value = 6.25			# 50	# PROFIT ~11
+}
+
+regular_clothes_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		fabric = 3.5	# 28
+		rubber = 0.34	# 4			# 32 + 7
+	}
+	output_goods = regular_clothes
+	value = 6.25			# 50	# PROFIT ~11
+}
+
+rubber_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		oil = 1.87		# 28
+		fertilizer = 0.4# 4		# TOTAL 32 + 7
+	}
+	output_goods = rubber
+	value = 4.167			# 50	# PROFIT ~11
+}
+
+fertilizer_factory = {       
+	template = tier_1_template		# 8
+	input_goods = {         
+		iron = 0.6		# 6
+		coal = 0.67		# 6
+		sulphur = 1.67	# 20	# TOTAL 32 + 8
+	}
+	output_goods = fertilizer
+	value = 5			# 50	# PROFIT 10
+}
+
+pharmaceuticals_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		fertilizer = 2.6	# 26
+		glass = 1			# 6		# TOTAL 32 + 7
+		
+	}
+	output_goods = pharmaceuticals
+	value = 5			# 50	# PROFIT 11
+}
+
+cigarettes_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		tobacco = 6.25	# 25
+		paper = 1		# 7	# TOTAL 32 + 7
+		
+	}
+	output_goods = cigarettes
+	value = 8.34			# 50	# PROFIT 11
+}
+
+electric_gear_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		tech_alloys = 1		# 20
+		steel 		= 0.67 	# 12	# TOTAL 32 + 7
+	}
+	output_goods = electric_gear
+	value = 3.125			# 50	# PROFIT 11
+}
+
+automobiles_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		steel = 0.5			# 9
+		electric_gear = 0.5	# 8
+		rubber = 0.5		# 6
+		machine_parts = 0.6	# 9	# TOTAL 32 + 7
+	}
+	output_goods = automobiles
+	value = 1.43			# 50	# PROFIT 11
+}
+
+fuel_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		oil = 2.14		# ~32	# TOTAL 32 + 7
+	}
+	output_goods = fuel
+	value = 2			# 50	# PROFIT 11
 }
 
 ### RGOs #####################################################################################
@@ -195,13 +381,6 @@ RGO_template_labourers = {
 	workforce = 20000
 }
 
-cattle_ranch = {
-	template = RGO_template_farmers
-	output_goods = cattle 
-	value = 5	# 10
-	farm = yes
-}
-
 iron_mine = {
 	template = RGO_template_labourers
 	output_goods = iron
@@ -252,16 +431,30 @@ cotton_plantation = {
 }
 
 
-fishing_wharf = {
+grain_farm = {
 	template = RGO_template_farmers
-	output_goods = fish 
+	output_goods = grain 
 	value = 5
 	farm = yes
 }
 
-grain_farm = {
+cattle_ranch = {
 	template = RGO_template_farmers
-	output_goods = grain 
+	output_goods = cattle 
+	value = 5	# 10
+	farm = yes
+}
+
+orchard = {
+	template = RGO_template_farmers
+	output_goods = fruit 
+	value = 5
+	farm = yes
+}
+
+fishing_wharf = {
+	template = RGO_template_farmers
+	output_goods = fish 
 	value = 5
 	farm = yes
 }
@@ -270,13 +463,6 @@ opium_plantation = {
 	template = RGO_template_farmers
 	output_goods = opium 
 	value = 2
-	farm = yes
-}
-
-orchard = {
-	template = RGO_template_farmers
-	output_goods = fruit 
-	value = 5
 	farm = yes
 }
 
@@ -390,52 +576,10 @@ artisan_paper = {
 
 artisan_canned_food = {
 	input_goods = {
-		grain = 18	# 36
-	}
-	output_goods = canned_food
-	value = 4.6		# 46
-	owner = {
-		# Audax Validator "." Ignore_NEXT
-		poptype = artisan
-		effect = output
-	}
-	type = artisan
-	workforce = 10000
-}
-
-artisan_canned_food2 = {
-	input_goods = {
-		cattle = 18	# 36
-	}
-	output_goods = canned_food
-	value = 4.6		# 46
-	owner = {
-		# Audax Validator "." Ignore_NEXT
-		poptype = artisan
-		effect = output
-	}
-	type = artisan
-	workforce = 10000
-}
-
-artisan_canned_food3 = {
-	input_goods = {
-		fruit = 18	# 36
-	}
-	output_goods = canned_food
-	value = 4.6		# 46
-	owner = {
-		# Audax Validator "." Ignore_NEXT
-		poptype = artisan
-		effect = output
-	}
-	type = artisan
-	workforce = 10000
-}
-
-artisan_canned_food4 = {
-	input_goods = {
-		fish = 18	# 36
+		grain = 4.5
+		cattle = 4.5
+		fruit = 4.5
+		fish = 4.5
 	}
 	output_goods = canned_food
 	value = 4.6		# 46
@@ -463,3 +607,178 @@ artisan_steel = {
 	type = artisan
 	workforce = 10000
 }
+
+artisan_small_arms = {
+	input_goods = {
+		steel = 1.5	# 27
+		lumber = 1	# 9	# 36
+	}
+	output_goods = small_arms
+	value = 4.6		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_lumber = {
+	input_goods = {
+		timber = 7	# 35
+	}
+	output_goods = lumber
+	value = 7.5		# 45
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_furniture = {
+	input_goods = {
+		lumber = 6	# 36
+	}
+	output_goods = furniture
+	value = 5.75		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_fabric = {
+	input_goods = {
+		cotton = 7	# 35
+	}
+	output_goods = fabric
+	value = 5.625		# 45
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_clothing = {
+	input_goods = {
+		fabric = 5	# 40
+	}
+	output_goods = regular_clothes
+	value = 5		# 50
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_fertilizer = {
+	input_goods = {
+		iron = 1		# 10
+		coal = 1		# 9
+		sulphur = 1.67	# 20	# 39
+	}
+	output_goods = fertilizer
+	value = 4.9		# 49
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_pharmaceuticals = {
+	input_goods = {
+		glass = 1		# 6
+		fertilizer = 3	# 30	# TOTAL 36
+	}
+	output_goods = pharmaceuticals
+	value = 4.6		# 46
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_cigarettes = {
+	input_goods = {
+		paper = 1			# 7
+		tobacco = 6			# 30	# TOTAL 37
+	}
+	output_goods = cigarettes
+	value = 7.834		# 47
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_electric_gear = {
+	input_goods = {
+		tech_alloys = 1	# 20
+		steel = 1		# 18	# 38
+	}
+	output_goods = electric_gear
+	value = 3		# 48
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_automobiles = {
+	input_goods = {
+		electric_gear = 1	# 16
+		rubber = 1			# 12
+		steel = 0.5			# 9		# 37
+	}
+	output_goods = automobiles
+	value = 1.35		# ~47
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_fuel = {
+	input_goods = {
+		oil = 2.5	# 37.5
+	}
+	output_goods = fuel
+	value = 1.5		# 49
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+
