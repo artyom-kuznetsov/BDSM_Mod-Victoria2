@@ -119,6 +119,20 @@ country_event = {
 			}
 		}
 		
+		META_RICH_MINE = {
+			limit = {
+				NOT = { has_province_modifier = rich_deposit_pmodifier }
+			}
+			add_province_modifier = { name = rich_deposit_pmodifier duration = -1 }
+		}
+		
+		META_SUPER_RICH_MINE = {
+			limit = {
+				NOT = { has_province_modifier = super_rich_deposit_pmodifier }
+			}
+			add_province_modifier = { name = super_rich_deposit_pmodifier duration = -1 }
+		}
+		
 		any_country = {
 			limit = {
 				part_of_sphere = yes
