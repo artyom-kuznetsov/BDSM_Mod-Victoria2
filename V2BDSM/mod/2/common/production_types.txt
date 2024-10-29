@@ -240,7 +240,7 @@ coffee_factory = {
 	template = tier_2_template		# 7
 	input_goods = {         
 		tea_leaves = 3.1		# 12
-		coffee_leaves = 3.1		# 12
+		coffee_beans = 3.1		# 12
 		paper = 1.15			# 8		# TOTAL 33 + 7
 	}
 	output_goods = coffee
@@ -450,7 +450,7 @@ RGO_template_farmers = {
 	}
 
 	type = rgo
-	workforce = 160000
+	workforce = 40000
 }
 
 RGO_template_gold = {
@@ -493,7 +493,7 @@ RGO_template_labourers = {
 	}
 
 	type = rgo
-	workforce = 20000
+	workforce = 10000
 }
 
 iron_mine = {
@@ -612,7 +612,7 @@ tea_plantation = {
 timber_lodge = {
 	template = RGO_template_farmers
 	output_goods = timber 
-	value = 2
+	value = 2	# 15
 	farm = yes
 }
 
@@ -671,6 +671,34 @@ artisan_liquor = {
 	}
 	type = artisan
 	workforce = 10000
+}
+
+artisan_coffee = {
+	input_goods = {
+		tea_leaves 	 = 2	# 8
+		coffee_beans = 2	# 8
+		paper 	= 	0.571	# 4		# 20
+	}
+	output_goods = coffee
+	value = 4.167		# 25
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+coffee_factory = {       
+	template = tier_2_template		# 7
+	input_goods = {         
+		tea_leaves = 3.1		# 12
+		coffee_beans = 3.1		# 12
+		paper = 1.15			# 8		# TOTAL 33 + 7
+	}
+	output_goods = coffee
+	value = 8.34			# 50	# PROFIT ~10
 }
 
 artisan_paper = {
