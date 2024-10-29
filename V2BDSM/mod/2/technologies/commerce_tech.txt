@@ -1,5 +1,5 @@
 #financial_institutions
-private_banks = {
+banking_1 = {
 	area = financial_institutions
 	year = 1992
 	cost = 3600
@@ -18,9 +18,9 @@ private_banks = {
 		}
 	}
 }
-stock_exchange = {
+banking_2 = {
 	area = financial_institutions
-	year = 2005
+	year = 1992
 	cost = 7200
 
 	tax_eff = 1
@@ -37,9 +37,9 @@ stock_exchange = {
 		}
 	}
 }
-business_banks = {
+banking_3 = {
 	area = financial_institutions
-	year = 2020
+	year = 2005
 	cost = 10800
 
 	tax_eff = 2
@@ -56,9 +56,9 @@ business_banks = {
 		}
 	}
 }
-investment_banks = {
+banking_4 = {
 	area = financial_institutions
-	year = 2035
+	year = 2020
 	cost = 14400
 
 	tax_eff = 2
@@ -74,9 +74,9 @@ investment_banks = {
 		}
 	}
 }
-bank_inspection_board = {
+banking_5 = {
 	area = financial_institutions
-	year = 2050
+	year = 2040
 	cost = 18000
 
 	tax_eff = 1
@@ -104,9 +104,9 @@ bank_inspection_board = {
 		}		
 	}
 }
-mutual_funds = {
+banking_6 = {
 	area = financial_institutions
-	year = 2075
+	year = 2060
 	cost = 21600
 
 	tax_eff = 0.5
@@ -126,9 +126,9 @@ mutual_funds = {
 		}
 	}
 }
-modern_financial_institutions = {
+banking_7 = {
 	area = financial_institutions
-	year = 2090
+	year = 2075
 	cost = 21600
 
 	tax_eff = 1
@@ -151,7 +151,7 @@ modern_financial_institutions = {
 
 
 #monetary_system
-no_standard = {
+governance_1 = {
 	area = monetary_system
 	year = 1992
 	cost = 3600
@@ -165,9 +165,9 @@ no_standard = {
 		}
 	}
 }
-ad_hoc_money_bill_printing = {
+governance_2 = {
 	area = monetary_system
-	year = 2005
+	year = 1992
 	cost = 7200
 	
 	administrative_efficiency = 0.05
@@ -191,9 +191,9 @@ ad_hoc_money_bill_printing = {
 		}
 	}
 }  
-private_bank_money_bill_printing = {
+governance_3 = {
 	area = monetary_system
-	year = 2020
+	year = 2005
 	cost = 10800
 
 	administrative_efficiency = 0.05
@@ -213,9 +213,9 @@ private_bank_money_bill_printing = {
 		}
 	}
 }
-central_bank_money_bill_printing = {
+governance_4 = {
 	area = monetary_system
-	year = 2035
+	year = 2020
 	cost = 14400
 
 	administrative_efficiency = 0.05
@@ -235,9 +235,9 @@ central_bank_money_bill_printing = {
 		}
 	}
 }
-modern_central_bank_system = {
+governance_5 = {
 	area = monetary_system
-	year = 2050
+	year = 2040
 	cost = 18000
 
 	administrative_efficiency = 0.05
@@ -265,9 +265,9 @@ modern_central_bank_system = {
 		}
 	}
 }
-market_determined_exchange_rates = {
+governance_6 = {
 	area = monetary_system
-	year = 2075
+	year = 2060
 	cost = 21600
 
 
@@ -288,9 +288,9 @@ market_determined_exchange_rates = {
 		}
 	}
 }
-fiat_based_monetary_system = {
+governance_7 = {
 	area = monetary_system
-	year = 2090
+	year = 2075
 	cost = 21600
 
 	administrative_efficiency = 0.05
@@ -313,20 +313,22 @@ fiat_based_monetary_system = {
 
 
 #economic_thought_and_critique
-early_classical_theory_and_critique = {
+economic_thought_1 = {
 	area = economic_thought_and_critique
 	year = 1992
-	cost = 1
+	cost = 3600
 	
 	activate_building = province_selector
 	
+	factory_throughput = 0.01
+	
 	ai_chance = {
-		factor = 0.5
+		factor = 5
 	}
 }
-late_classical_theory = {
+economic_thought_2 = {
 	area = economic_thought_and_critique
-	year = 2005
+	year = 1992
 	cost = 7200
 
 	farm_RGO_eff = 0.1
@@ -355,9 +357,9 @@ late_classical_theory = {
 		}
 	}
 }
-collectivist_theory = {
+economic_thought_3 = {
 	area = economic_thought_and_critique
-	year = 2020
+	year = 2005
 	cost = 10800
 
 	farm_RGO_eff = 0.1
@@ -386,9 +388,9 @@ collectivist_theory = {
 		}		
 	}
 }
-the_historical_theory = {
+economic_thought_4 = {
 	area = economic_thought_and_critique
-	year = 2035
+	year = 2020
 	cost = 14400
 
 	farm_RGO_eff = 0.1
@@ -417,9 +419,9 @@ the_historical_theory = {
 		}		
 	}
 }
-neoclassical_theory = {
+economic_thought_5 = {
 	area = economic_thought_and_critique
-	year = 2050
+	year = 2040
 	cost = 18000
 
 	farm_RGO_eff = 0.1
@@ -448,9 +450,9 @@ neoclassical_theory = {
 		}		
 	}
 }
-keynesian_economics = {
+economic_thought_6 = {
 	area = economic_thought_and_critique
-	year = 2075
+	year = 2060
 	cost = 21600
 
 	farm_RGO_eff = 0.1
@@ -479,9 +481,9 @@ keynesian_economics = {
 		}		
 	}
 }
-neoliberal_theory = {
+economic_thought_7 = {
 	area = economic_thought_and_critique
-	year = 2090
+	year = 2075
 	cost = 21600
 
 	farm_RGO_eff = 0.1
@@ -513,7 +515,7 @@ neoliberal_theory = {
 
 
 #market_functionality
-freedom_of_trade = {
+market_1 = {
 	area = market_functionality
 	year = 1992
 	cost = 3600
@@ -534,9 +536,9 @@ freedom_of_trade = {
 		}
 	}
 }
-market_structure = {
+market_2 = {
 	area = market_functionality
-	year = 2005
+	year = 1992
 	cost = 7200
 
 	influence = 0.1
@@ -567,9 +569,9 @@ market_structure = {
 	}	
 
 }
-business_regulations = {
+market_3 = {
 	area = market_functionality
-	year = 2020
+	year = 2005
 	cost = 10800
 
 	influence = 0.2
@@ -595,9 +597,9 @@ business_regulations = {
 	}	
 	
 }
-market_regulations = {
+market_4 = {
 	area = market_functionality
-	year = 2035
+	year = 2020
 	cost = 14400
 
 	influence = 0.2
@@ -622,9 +624,9 @@ market_regulations = {
 	}	
 	
 }
-economic_responsibility = {
+market_5 = {
 	area = market_functionality
-	year = 2050
+	year = 2040
 	cost = 18000
 
 	influence = 0.2
@@ -649,9 +651,9 @@ economic_responsibility = {
 	}	
 	
 }
-government_interventionism = {
+market_6 = {
 	area = market_functionality
-	year = 2075
+	year = 2060
 	cost = 21600
 
 	influence = 0.2
@@ -675,9 +677,9 @@ government_interventionism = {
 		}
 	}	
 }
-monetarism = {
+market_7 = {
 	area = market_functionality
-	year = 2090
+	year = 2075
 	cost = 21600
 
 	influence = 0.2
@@ -704,12 +706,11 @@ monetarism = {
 
 
 #tech_organization
-guild_based_production = {
+organization_1 = {
 	area = tech_organization
 	year = 1992
 	cost = 3600
 	
-	activate_building = lumber_factory
 	
 	factory_input = -0.02
 	ai_chance = {
@@ -740,9 +741,9 @@ guild_based_production = {
 		}
 	}	
 }
-organized_factories = {
+organization_2 = {
 	area = tech_organization
-	year = 2005
+	year = 1992
 	cost = 7200
 
 	factory_input = -0.02
@@ -778,9 +779,9 @@ organized_factories = {
 		}
 	}	
 }
-scientific_management = {
+organization_3 = {
 	area = tech_organization
-	year = 2020
+	year = 2005
 	cost = 10800
 
 	factory_input = -0.02
@@ -816,9 +817,9 @@ scientific_management = {
 		}
 	}	
 }
-time_saving_measures = {
+organization_4 = {
 	area = tech_organization
-	year = 2035
+	year = 2020
 	cost = 14400
 
 	factory_input = -0.02
@@ -842,9 +843,9 @@ time_saving_measures = {
 		}
 	}	
 }
-management_strategy = {
+organization_5 = {
 	area = tech_organization
-	year = 2050
+	year = 2040
 	cost = 18000
 
 	factory_input = -0.02
@@ -868,9 +869,9 @@ management_strategy = {
 		}
 	}	
 }
-organizational_development = {
+organization_6 = {
 	area = tech_organization
-	year = 2075
+	year = 2060
 	cost = 21600
 
 	factory_input = -0.02
@@ -894,9 +895,9 @@ organizational_development = {
 		}
 	}	
 }
-modern_business_management = {
+organization_7 = {
 	area = tech_organization
-	year = 2090
+	year = 2075
 	cost = 21600
 
 	factory_output = 0.02
