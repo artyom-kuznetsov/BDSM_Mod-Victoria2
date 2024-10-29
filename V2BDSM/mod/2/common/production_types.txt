@@ -31,6 +31,36 @@ tier_0_template = {
 	workforce = 10000 
 }
 
+electricity_template = {
+	efficiency = {
+		tech_alloys = 0.2		# 4
+		machine_parts = 0.267	# 4	# TOTAL # 8
+	}
+	
+	owner =
+	{
+		poptype = capitalists 
+		effect = input
+		effect_multiplier = -2.5
+	}
+
+	employees = {		
+		{ 
+			poptype = craftsmen
+			effect = throughput
+			amount = 0.8
+		}		
+		{ 
+			poptype = clerks 
+			effect = output
+			effect_multiplier = 1.5
+			amount = 0.2
+		}
+	}
+	type = factory
+	workforce = 10000 
+}
+
 tier_1_template = {
 	efficiency = {
 		cement 	= 0.2 	# 3.2	
@@ -91,6 +121,33 @@ tier_2_template = {
 	}
 	type = factory
 	workforce = 10000 
+}
+
+electricity_gas_factory = {       
+	template = electricity_template		# 8
+	input_goods = {         
+		natural_gas = 2.67
+	}
+	output_goods = electricity
+	value = 5			# 50	# PROFIT 10
+}
+
+electricity_fuel_factory = {       
+	template = electricity_template		# 8
+	input_goods = {         
+		fuel = 1.28
+	}
+	output_goods = electricity
+	value = 5			# 50	# PROFIT 10
+}
+
+electricity_coal_factory = {       
+	template = electricity_template		# 8
+	input_goods = {         
+		coal = 3.56
+	}
+	output_goods = electricity
+	value = 5			# 50	# PROFIT 10
 }
 
 cement_factory = {       
@@ -864,6 +921,21 @@ artisan_ammunition = {
 	}
 	output_goods = ammunition
 	value = 4.9		# 49
+	owner = {
+		# Audax Validator "." Ignore_NEXT
+		poptype = artisan
+		effect = output
+	}
+	type = artisan
+	workforce = 10000
+}
+
+artisan_electricity = {
+	input_goods = {
+		fuel = 1.5	# 37.5
+	}
+	output_goods = electricity
+	value = 4.75		# 47.5
 	owner = {
 		# Audax Validator "." Ignore_NEXT
 		poptype = artisan

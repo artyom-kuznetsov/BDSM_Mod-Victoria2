@@ -1,4 +1,58 @@
 
+electrification = {
+	limit = { economic_thought_1 = 1 }
+	chance = {
+		base = 5
+	}
+	effect = {
+		activate_building = electricity_coal_factory
+	}
+}
+
+oil_turbine = {
+	limit = { economic_thought_1 = 1 }
+	chance = {
+		base = 1
+		modifier = {
+			factor = -20
+			NOT = { chemistry_1 = 1 }
+		}
+		modifier = {
+			factor = 2
+			factories_1 = 1
+		}
+		modifier = {
+			factor = 2
+			organization_1 = 1
+		}
+	}
+	effect = {
+		activate_building = electricity_fuel_factory
+	}
+}
+
+gas_turbine = {
+	limit = { economic_thought_2 = 1 }
+	chance = {
+		base = 1
+		modifier = {
+			factor = -20
+			NOT = { chemistry_1 = 1 }
+		}
+		modifier = {
+			factor = 2
+			factories_2 = 1
+		}
+		modifier = {
+			factor = 2
+			organization_2 = 1
+		}
+	}
+	effect = {
+		activate_building = electricity_gas_factory
+	}
+}
+
 cheap_furniture = {
 	limit = { market_1 = 1 }
 	chance = {
