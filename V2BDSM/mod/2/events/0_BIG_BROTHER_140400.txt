@@ -15,19 +15,25 @@ country_event = {
 				limit = {
 					NOT = {
 						OR = {
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = grain
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = fruit
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = cattle
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = fish
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = cotton
-							trade_goods = dye
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = tea_leaves
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = coffee_beans
-							trade_goods = silk
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = timber
-							trade_goods = tropical_wood
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = rubber
-							trade_goods = opium
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = tobacco
 						}
 					}
@@ -47,12 +53,22 @@ country_event = {
 			any_owned = {
 				limit = {
 					OR = {
+						## Audax Validator "." Ignore_NEXT
 						trade_goods = coal
+						## Audax Validator "." Ignore_NEXT
 						trade_goods = iron
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = colored_metals
+						## Audax Validator "." Ignore_NEXT
 						trade_goods = sulphur
+						## Audax Validator "." Ignore_NEXT
 						trade_goods = market_goods
+						## Audax Validator "." Ignore_NEXT
 						trade_goods = precious_metal
+						## Audax Validator "." Ignore_NEXT
 						trade_goods = oil
+						## Audax Validator "." Ignore_NEXT
+						trade_goods = natural_gas
 					}
 				}
 				any_pop = {
@@ -66,12 +82,22 @@ country_event = {
 				limit = {
 					NOT = {
 						OR = {
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = coal
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = iron
+							## Audax Validator "." Ignore_NEXT
+							trade_goods = colored_metals
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = sulphur
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = market_goods
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = precious_metal
+							## Audax Validator "." Ignore_NEXT
 							trade_goods = oil
+							## Audax Validator "." Ignore_NEXT
+							trade_goods = natural_gas
 						}
 					}
 				}
@@ -753,25 +779,26 @@ province_event = {
 	}
 	option = {
 		name = "Selector_EvtOptChangeResource"
-		add_core = WBK
-		owner = {
-			random_owned = {
-				limit = {
-					is_core = WBK
-					OR = {
-						trade_goods = iron
-						trade_goods = coal
-						trade_goods = sulphur
-					}
-				}
-				province_event = { 
-					# Audax Validator "." Ignore_NEXT
-					id = 9565  
-					days = 0 
-				}
-			}
-		}
-		remove_core = WBK
+		#add_core = WBK
+		#owner = {
+		#	random_owned = {
+		#		limit = {
+		#			is_core = WBK
+		#			OR = {
+		#				trade_goods = iron
+		#				trade_goods = coal
+		#				trade_goods = sulphur
+		#			}
+		#		}
+		#		province_event = { 
+		#			# Audax Validator "." Ignore_NEXT
+		#			id = 9565  
+		#			days = 0 
+		#		}
+		#	}
+		#}
+		#remove_core = WBK
+		CUSTOM_TOOLTIP_OPTION_DISABLED = { }
 	}
 	
 	option = {
