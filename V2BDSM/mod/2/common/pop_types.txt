@@ -410,6 +410,8 @@ demotion_chance =
 					trade_goods= coal
 					trade_goods= iron
 					trade_goods= oil
+					trade_goods= colored_metals
+					trade_goods= natural_gas
 					trade_goods= precious_metal
 					trade_goods= market_goods
 					trade_goods= sulphur
@@ -426,6 +428,8 @@ demotion_chance =
 					trade_goods= coal
 					trade_goods= iron
 					trade_goods= oil
+					trade_goods= colored_metals
+					trade_goods= natural_gas
 					trade_goods= precious_metal
 					trade_goods= market_goods
 					trade_goods= sulphur
@@ -442,6 +446,8 @@ demotion_chance =
 					trade_goods= coal
 					trade_goods= iron
 					trade_goods= oil
+					trade_goods= colored_metals
+					trade_goods= natural_gas
 					trade_goods= precious_metal
 					trade_goods= market_goods
 					trade_goods= sulphur
@@ -457,19 +463,14 @@ demotion_chance =
 					trade_goods= coal
 					trade_goods= iron
 					trade_goods= oil
+					trade_goods= colored_metals
+					trade_goods= natural_gas
 					trade_goods= precious_metal
 					trade_goods= market_goods
 					trade_goods= sulphur
 				}
 			}
 		}
-	}
-	
-	# LARGE STATE
-	modifier = {
-		factor = -0.25
-		# Audax Validator "." Ignore_NEXT
-		total_pops = 1000000
 	}
 	
 	# MIDDLE STRATA
@@ -571,13 +572,6 @@ demotion_chance =
 		}
 	}
 
-	# DEMOTE QUICKER IF CONSCIOUS
-	modifier = {
-		factor = -0.1
-		not = { consciousness = 4 }
-		strata = poor
-	}
-	
 	modifier = {
 		factor = 0.5
 		strata = middle
@@ -748,9 +742,7 @@ migration_chance = {
 		location = {
 			OR = {
 				trade_goods= opium
-				trade_goods= silk
-				trade_goods= rubber
-				trade_goods= tropical_wood
+				trade_goods= tobacco
 				trade_goods= coffee
 				trade_goods= tea_leaves
 			}
