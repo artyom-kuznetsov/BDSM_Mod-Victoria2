@@ -81,7 +81,7 @@ liquor_factory = { ##
 	pop_build_factory = yes
 }
 
-paper_factory = {	##
+coffee_factory = {	##
 	type = factory
 	
 	#sail = yes
@@ -91,16 +91,16 @@ paper_factory = {	##
 	max_level = 99
 	goods_cost =
 	{
-		iron 	= 400	
-		cement 	= 400
-		coal 	= 400	
-		lumber 	= 400
+		steel 		= 400
+		cement 		= 600
+		glass 		= 800
+		fertilizer 	= 400
 	}
-	time = 90	# TIER 1
+	time = 120	# TIER 2
 	visibility = yes
 	onmap = no
 
-	production_type = paper_factory
+	production_type = coffee_factory
 	pop_build_factory = yes
 }
 
@@ -149,7 +149,7 @@ steel_factory = {	##
 	pop_build_factory = yes
 }
 
-small_arms_factory = { ##
+tech_alloys_factory = {	##
 	type = factory
 	
 	#sail = yes
@@ -159,16 +159,62 @@ small_arms_factory = { ##
 	max_level = 99
 	goods_cost =
 	{
-		iron 	= 400	
-		cement 	= 400
-		coal 	= 400	
-		lumber 	= 400
+		steel 		= 400
+		cement 		= 600
+		glass 		= 800
+		fertilizer 	= 400
 	}
-	time = 90	# TIER 1
+	time = 120	# TIER 2
 	visibility = yes
 	onmap = no
 
-	production_type = small_arms_factory
+	production_type = tech_alloys_factory
+	pop_build_factory = yes
+}
+
+machine_parts_factory = {	##
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		steel 		= 400
+		cement 		= 600
+		glass 		= 800
+		fertilizer 	= 400
+	}
+	time = 120	# TIER 2
+	visibility = yes
+	onmap = no
+
+	production_type = machine_parts_factory
+	pop_build_factory = yes
+}
+
+electric_gear_factory = {	##
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		steel 		= 400
+		cement 		= 600
+		glass 		= 800
+		fertilizer 	= 400
+	}
+	time = 120	# TIER 2
+	visibility = yes
+	onmap = no
+
+	production_type = electric_gear_factory
 	pop_build_factory = yes
 }
 
@@ -218,6 +264,29 @@ regular_clothes_factory = {	##
 	pop_build_factory = yes
 }
 
+paper_factory = {	##
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		iron 	= 400	
+		cement 	= 400
+		coal 	= 400	
+		lumber 	= 400
+	}
+	time = 90	# TIER 1
+	visibility = yes
+	onmap = no
+
+	production_type = paper_factory
+	pop_build_factory = yes
+}
+
 lumber_factory = {	##
 	type = factory
 	
@@ -237,75 +306,6 @@ lumber_factory = {	##
 	onmap = no
 
 	production_type = lumber_factory
-	pop_build_factory = yes
-}
-
-coffee_factory = {	##
-	type = factory
-	
-	#sail = yes
-
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		steel 		= 400
-		cement 		= 600
-		glass 		= 800
-		fertilizer 	= 400
-	}
-	time = 120	# TIER 2
-	visibility = yes
-	onmap = no
-
-	production_type = coffee_factory
-	pop_build_factory = yes
-}
-
-tech_alloys_factory = {	##
-	type = factory
-	
-	#sail = yes
-
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		steel 		= 400
-		cement 		= 600
-		glass 		= 800
-		fertilizer 	= 400
-	}
-	time = 120	# TIER 2
-	visibility = yes
-	onmap = no
-
-	production_type = tech_alloys_factory
-	pop_build_factory = yes
-}
-
-machine_parts_factory = {	##
-	type = factory
-	
-	#sail = yes
-
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		steel 		= 400
-		cement 		= 600
-		glass 		= 800
-		fertilizer 	= 400
-	}
-	time = 120	# TIER 2
-	visibility = yes
-	onmap = no
-
-	production_type = machine_parts_factory
 	pop_build_factory = yes
 }
 
@@ -375,6 +375,29 @@ fertilizer_factory = {	##
 	onmap = no
 
 	production_type = fertilizer_factory
+	pop_build_factory = yes
+}
+
+fuel_factory = {	##
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		steel 		= 400
+		cement 		= 600
+		glass 		= 800
+		fertilizer 	= 400
+	}
+	time = 120	# TIER 2
+	visibility = yes
+	onmap = no
+
+	production_type = fuel_factory
 	pop_build_factory = yes
 }
 
@@ -493,29 +516,6 @@ cigarettes_factory = {	##
 	pop_build_factory = yes
 }
 
-electric_gear_factory = {	##
-	type = factory
-	
-	#sail = yes
-
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		steel 		= 400
-		cement 		= 600
-		glass 		= 800
-		fertilizer 	= 400
-	}
-	time = 120	# TIER 2
-	visibility = yes
-	onmap = no
-
-	production_type = electric_gear_factory
-	pop_build_factory = yes
-}
-
 automobiles_factory = {	##
 	type = factory
 	
@@ -539,29 +539,6 @@ automobiles_factory = {	##
 	pop_build_factory = yes
 }
 
-fuel_factory = {	##
-	type = factory
-	
-	#sail = yes
-
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		steel 		= 400
-		cement 		= 600
-		glass 		= 800
-		fertilizer 	= 400
-	}
-	time = 120	# TIER 2
-	visibility = yes
-	onmap = no
-
-	production_type = fuel_factory
-	pop_build_factory = yes
-}
-
 radio_factory = {	##
 	type = factory
 	
@@ -582,6 +559,29 @@ radio_factory = {	##
 	onmap = no
 
 	production_type = radio_factory
+	pop_build_factory = yes
+}
+
+small_arms_factory = { ##
+	type = factory
+	
+	#sail = yes
+
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		iron 	= 400	
+		cement 	= 400
+		coal 	= 400	
+		lumber 	= 400
+	}
+	time = 90	# TIER 1
+	visibility = yes
+	onmap = no
+
+	production_type = small_arms_factory
 	pop_build_factory = yes
 }
 
