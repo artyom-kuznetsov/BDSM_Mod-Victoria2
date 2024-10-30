@@ -4,6 +4,12 @@ primary_culture = anglo_canadian
 culture = french_canadian
 religion = catholic # protestant
 government = hms_government
+govt_flag = 
+{
+	government = hms_government
+	flag = democracy
+}
+
 plurality = 50 #0.2
 nationalvalue = nv_order
 literacy = 0.99
@@ -13,7 +19,7 @@ is_releasable_vassal = no
 # Political reforms
 slavery = no_slavery
 upper_house_composition = appointed
-vote_franschise = wealth_weighted_voting
+vote_franschise = universal_voting
 public_meetings = yes_meeting
 press_rights = free_press
 trade_unions = no_trade_unions
@@ -41,7 +47,7 @@ penal_system = capital_punishment
 child_labor = child_labor_legal
 
 
-ruling_party = CAN_conservative
+ruling_party = party_gen_conservative
 upper_house = {
 	fascist = 0
 	liberal = 35
@@ -52,29 +58,43 @@ upper_house = {
 	communist = 0
 }
 
-# Technologies
-post_napoleonic_thought = 1
-flintlock_rifles = 1
-bronze_muzzle_loaded_artillery = 1
-military_staff_system = 1
-army_command_principle = 1
-post_nelsonian_thought = 1
-clipper_design = 1
-naval_design_bureaus = 1
-alphabetic_flag_signaling = 1
-the_command_principle = 1
+# MILITARY
+doctrine_1 = 1
+armament_1 = 1
+heavy_machinery_1 = 1
+military_science_1 = 1
+leadership_1 = 1
+
+# NAVY
+naval_bases_1 = 1
+shipbuilding_1 = 1
+upgrades_1 = 1
+naval_supply_1 = 1
+naval_organization_1 = 1
+
+# COMMERCE
+banking_1 = 1
+governance_1 = 1
+economic_thought_1 = 1
+market_1 = 1
+organization_1 = 1
+
+# CULTURE
 classicism_n_early_romanticism = 1
-late_enlightenment_philosophy = 1
+free_press = 1
 malthusian_thought = 1
 enlightenment_thought = 1
 introspectionism = 1
-private_banks = 1
-no_standard = 1
-early_classical_theory_and_critique = 1
-freedom_of_trade = 1
-guild_based_production = 1
-water_wheel_power = 1
-industrial_revolution = 1
-mechanized_mining = 1
-basic_chemistry = 1
-market_structure = 1
+
+# INDUSTRY
+agriculture_1 = 1 # = 1
+factories_1 = 1 # = 1
+metallurgy_1 = 1 # = 1
+infrastructure_1 = 1 # = 1
+chemistry_1 = 1 # = 1
+
+### INVENTIONS
+# COMMERCE
+improved_forest_haulers = yes
+
+# INDUSTRY
