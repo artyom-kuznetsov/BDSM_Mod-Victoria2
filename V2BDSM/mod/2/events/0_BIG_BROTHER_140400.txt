@@ -119,18 +119,44 @@ country_event = {
 			}
 		}
 		
+		# RICH GAS
 		META_RICH_MINE = {
-			limit = {
-				NOT = { has_province_modifier = rich_deposit_pmodifier }
-			}
-			add_province_modifier = { name = rich_deposit_pmodifier duration = -1 }
+			limit = { trade_goods = natural_gas NOT = { has_province_modifier = rich_gas_pmodifier  } }
+			add_province_modifier = { name = rich_gas_pmodifier duration = -1 }
+		}
+		META_SUPER_RICH_MINE = {
+			limit = { trade_goods = natural_gas NOT = { has_province_modifier = super_rich_gas_pmodifier  } }
+			add_province_modifier = { name = super_rich_gas_pmodifier duration = -1 }
 		}
 		
+		# RICH OIL
+		META_RICH_MINE = {
+			limit = { trade_goods = oil NOT = { has_province_modifier = rich_oil_pmodifier  } }
+			add_province_modifier = { name = rich_oil_pmodifier duration = -1 }
+		}
 		META_SUPER_RICH_MINE = {
-			limit = {
-				NOT = { has_province_modifier = super_rich_deposit_pmodifier }
-			}
-			add_province_modifier = { name = super_rich_deposit_pmodifier duration = -1 }
+			limit = { trade_goods = oil NOT = { has_province_modifier = super_rich_oil_pmodifier  } }
+			add_province_modifier = { name = super_rich_oil_pmodifier duration = -1 }
+		}
+		
+		# RICH PHOSPHATE
+		META_RICH_MINE = {
+			limit = { trade_goods = sulphur NOT = { has_province_modifier = rich_sulphur_pmodifier  } }
+			add_province_modifier = { name = rich_sulphur_pmodifier duration = -1 }
+		}
+		META_SUPER_RICH_MINE = {
+			limit = { trade_goods = sulphur NOT = { has_province_modifier = super_rich_sulphur_pmodifier  } }
+			add_province_modifier = { name = super_rich_sulphur_pmodifier duration = -1 }
+		}
+		
+		# RICH FISH
+		META_RICH_MINE = {
+			limit = { trade_goods = fish NOT = { has_province_modifier = rich_fish_pmodifier  } }
+			add_province_modifier = { name = rich_fish_pmodifier duration = -1 }
+		}
+		META_SUPER_RICH_MINE = {
+			limit = { trade_goods = fish NOT = { has_province_modifier = super_rich_fish_pmodifier  } }
+			add_province_modifier = { name = super_rich_fish_pmodifier duration = -1 }
 		}
 		
 		any_country = {
