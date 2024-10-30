@@ -81,36 +81,6 @@ country_event = {
 }
 
 country_event = {                   	
-	id = 110802
-	title = "WarCloseBorders_EvtName"               
-	desc = "WarCloseBorders_EvtDesc"   
-	picture = "Administration"
-	
-	trigger = {
-		war = yes
-		war_exhaustion = 20
-		NOT = { border_policy = closed_borders has_country_modifier = rejected_border_closure }
-	}
-
-	option = {
-		name = "WarCloseBorders_EvtOptYes"
-		social_reform = closed_borders
-		set_country_flag = temprorary_border_closure
-		ai_chance = {
-			factor = 100
-		}
-	}
-
-	option = {
-		name = "WarCloseBorders_EvtOptNo"
-		ai_chance = {
-			factor = 1
-		}
-		add_country_modifier = { name = rejected_border_closure duration = 180 }
-	}  
-}
-
-country_event = {                   	
 	id = 110803
 	title = "WarOpenBorders_EvtName"               
 	desc = "WarOpenBorders_EvtDesc"   
