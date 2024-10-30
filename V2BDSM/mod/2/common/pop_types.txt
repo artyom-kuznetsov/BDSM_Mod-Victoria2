@@ -263,30 +263,30 @@ promotion_chance =
 	group = {
 		modifier = {
 			factor = 0.1
-			life_needs = 0.4			
+			life_needs = 0.4
 		}
 		modifier = {
 			factor = 0.1
 			life_needs = 0.6		
 		}
 		modifier = {
-			factor = 0.15
+			factor = 0.1
 			life_needs = 0.8	
 		}
 		modifier = {
-			factor = -0.05
+			factor = -0.025
 			life_needs = 0.4
 			# Audax Validator "." Ignore_NEXT
 			total_pops = 4000000
 		}
 		modifier = {
-			factor = -0.05
+			factor = -0.025
 			life_needs = 0.6
 			# Audax Validator "." Ignore_NEXT
 			total_pops = 3000000
 		}
 		modifier = {
-			factor = -0.05
+			factor = -0.025
 			life_needs = 0.8
 			# Audax Validator "." Ignore_NEXT
 			total_pops = 3000000
@@ -295,19 +295,19 @@ promotion_chance =
 			factor = -0.025
 			life_needs = 0.4
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 3000000			
+			total_pops = 2000000			
 		}
 		modifier = {
 			factor = -0.025
 			life_needs = 0.6
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 3000000
+			total_pops = 2000000
 		}
 		modifier = {
 			factor = -0.025
 			life_needs = 0.8
 			# Audax Validator "." Ignore_NEXT
-			total_pops = 3000000
+			total_pops = 2000000
 		}
 	}
 
@@ -362,27 +362,10 @@ promotion_chance =
 	}
 	
 	modifier = {
-		factor = 0.2
+		factor = 0.1
 		country = {
 			ai = yes
 			has_global_flag = singleplayer_flag
-		}
-	}
-	
-	modifier = {
-		factor = 0.1
-		# Audax Validator "." Ignore_NEXT
-		NOT = { 
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 400000 } 
-		}
-	}	
-	modifier = {
-		factor = 0.05
-		# Audax Validator "." Ignore_NEXT
-		NOT = { 
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 200000 } 
 		}
 	}
 }
@@ -670,81 +653,66 @@ migration_chance = {
 	}
 	group = {
 		modifier = {
-			factor = 0.05
+			factor = 0.08
 			unemployment = 0.1
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.08
 			unemployment = 0.2
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.08
 			unemployment = 0.3
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.08
 			unemployment = 0.4
 			location = { controlled_by = owner }
 		}		
 		modifier = {
-			factor = 0.05
+			factor = 0.04
 			unemployment = 0.5
 			location = { controlled_by = owner }
 		}		
 		modifier = {
-			factor = 0.05
+			factor = 0.04
 			unemployment = 0.6
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.04
 			unemployment = 0.7
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.04
 			unemployment = 0.8
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.04
 			unemployment = 0.9
 			location = { controlled_by = owner }
 		}
 		modifier = {
-			factor = 0.05
+			factor = 0.04
 			unemployment = 0.99
 			location = { controlled_by = owner }
 		}
 	}
 	
 	modifier = {
-		factor = -1
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = { total_pops = 200000 }
-		}
-	}
-	modifier = {
-		factor = -0.5
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = { total_pops = 300000 }
-		}
-	}
-	modifier = {
 		factor = -0.5
 		NOT = { unemployment = 0.1 }
 		strata = poor
 		location = {
 			OR = {
-				trade_goods= opium
-				trade_goods= tobacco
-				trade_goods= coffee
-				trade_goods= tea_leaves
+				trade_goods = tobacco
+				trade_goods = coffee_beans
+				trade_goods = tea_leaves
 			}
 		}
 	}
