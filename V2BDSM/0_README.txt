@@ -14,3 +14,4 @@ Assets/ideas from the following mods were used in this mod:
 - Greater Flavor Mod
 - The Third Age
 - Bob's Cartography
+- Modern HIstory Mod
