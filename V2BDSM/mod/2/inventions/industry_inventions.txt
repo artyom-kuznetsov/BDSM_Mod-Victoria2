@@ -1,34 +1,57 @@
-#agriculture_1
-distillation = {
-	limit = { agriculture_1 = 1 }
+
+electrification = {
+	limit = { organization_1 = 1 }
 	chance = {
 		base = 5
 	}
 	effect = {
-		activate_building = liquor_factory
+		activate_building = electricity_coal_factory
 	}
 }
 
-packed_tobacco = {
-	limit = { agriculture_2 = 1 }
+oil_turbine = {
+	limit = { organization_2 = 1 }
 	chance = {
-		base = 5
+		base = 1
+		modifier = {
+			factor = -20
+			NOT = { chemistry_1 = 1 }
+		}
+		modifier = {
+			factor = 2
+			factories_1 = 1
+		}
+		modifier = {
+			factor = 2
+			organization_3 = 1
+		}
 	}
 	effect = {
-		activate_building = cigarettes_factory
+		activate_building = electricity_fuel_factory
 	}
 }
 
-packed_beverages = {
-	limit = { agriculture_2 = 1 }
+gas_turbine = {
+	limit = { organization_3 = 1 }
 	chance = {
-		base = 5
+		base = 1
+		modifier = {
+			factor = -20
+			NOT = { chemistry_2 = 1 }
+		}
+		modifier = {
+			factor = 2
+			factories_2 = 1
+		}
+		modifier = {
+			factor = 2
+			chemistry_3 = 1
+		}
 	}
 	effect = {
-		activate_building = coffee_factory
+		activate_building = electricity_gas_factory
 	}
 }
-
 
 cheap_textile = {
 	limit = { factories_2 = 1 }
