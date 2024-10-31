@@ -42,7 +42,6 @@ political_decisions = {
 		allow = { }
 		effect = {
 			any_country = { political_reform = interventionism_r social_reform = interventionism_r_crutch timber = 5000 coal = 2000 iron = 2000 }
-			timber = 50000
 			set_country_flag = wbk_tag_cflag
 			enable_canal = 4
 			enable_canal = 5
@@ -107,19 +106,6 @@ political_decisions = {
 				}
 				life_rating = 5
 				set_global_flag = AST_has_player
-			}
-			META_1 = {
-				limit = {
-					OR = {
-						## Audax Validator "." Ignore_NEXT
-						trade_goods = timber
-						## Audax Validator "." Ignore_NEXT
-						trade_goods = iron
-						## Audax Validator "." Ignore_NEXT
-						trade_goods = coal
-					}
-				}
-				add_province_modifier = { name = earlygame_buff_pmodifier duration = 730 }
 			}
 			META_1 = {
 				limit = {
