@@ -1,7 +1,44 @@
 # If you add types, and use those tags, do not change them without changing everywhere they are used.
 
-
-fascist_group = {
+conservative_group = {
+	reactionary = {
+		color = { 15 117 25 }
+		
+		# Audax Validator "." Ignore_NEXT
+		add_political_reform = {
+			base = 0
+			modifier = {
+				factor = 1
+				has_country_flag = force_reform
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		remove_political_reform = {
+			base = 1
+		}
+		# Audax Validator "." Ignore_NEXT
+		add_social_reform = {
+			base = 0
+			modifier = {
+				factor = 1
+				has_country_flag = force_reform
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		remove_social_reform = {
+			base = 1
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		add_military_reform = {
+			base = -1
+		}
+		
+		# Audax Validator "." Ignore_NEXT
+		add_economic_reform = {
+			base = -1
+		}
+	}
 	fascist = {
 		# Audax Validator "." Ignore_NEXT
 		#uncivilized = no
@@ -75,47 +112,6 @@ fascist_group = {
 		
 		
 		
-	}
-}	
-
-conservative_group = {
-	reactionary = {
-		color = { 30 30 100 }
-		
-		# Audax Validator "." Ignore_NEXT
-		add_political_reform = {
-			base = 0
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-		}
-		# Audax Validator "." Ignore_NEXT
-		remove_political_reform = {
-			base = 1
-		}
-		# Audax Validator "." Ignore_NEXT
-		add_social_reform = {
-			base = 0
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-		}
-		# Audax Validator "." Ignore_NEXT
-		remove_social_reform = {
-			base = 1
-		}
-		
-		# Audax Validator "." Ignore_NEXT
-		add_military_reform = {
-			base = -1
-		}
-		
-		# Audax Validator "." Ignore_NEXT
-		add_economic_reform = {
-			base = -1
-		}
 	}
 	
 	conservative = {
@@ -398,36 +394,6 @@ socialist_group = {
 			base = 0
 		}
 	}
-	
-	communist = {
-		# Audax Validator "." Ignore_NEXT
-		color = { 150 10 10 }
-		
-		# Audax Validator "." Ignore_NEXT
-		add_political_reform = {
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-			base = 0
-		}
-		# Audax Validator "." Ignore_NEXT
-		remove_political_reform = {
-			base = 1
-		}
-		# Audax Validator "." Ignore_NEXT
-		add_social_reform = {
-			base = 1
-		}
-		# Audax Validator "." Ignore_NEXT
-		remove_social_reform = {
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-			base = 0
-		}	
-	}
 }
 
 liberal_group = {
@@ -546,52 +512,5 @@ liberal_group = {
 		}
 	}
 	
-	anarcho_liberal = {
-		color = { 150 150 10 }
-		date = 2848.1.1
-		
-		# Audax Validator "." Ignore_NEXT
-		add_political_reform = {
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-			base = 0
-		}
-		# Audax Validator "." Ignore_NEXT
-		remove_political_reform = {
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-			base = 0
-		}
-		# Audax Validator "." Ignore_NEXT
-		add_social_reform = {
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-			base = 0
-		}
-		# Audax Validator "." Ignore_NEXT
-		remove_social_reform = {
-			modifier = {
-				factor = 1
-				has_country_flag = force_reform
-			}
-			base = 1
-		}
-		
-		# Audax Validator "." Ignore_NEXT
-		add_military_reform = {
-			base = -1
-		}
-		
-		# Audax Validator "." Ignore_NEXT
-		add_economic_reform = {
-			base = -1
-		}
-	}
 }
 	
