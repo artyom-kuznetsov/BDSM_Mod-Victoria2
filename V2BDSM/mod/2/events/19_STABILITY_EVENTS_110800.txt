@@ -22,13 +22,13 @@ country_event = {
 			factor = 0.7
 		}
 		modifier = { overlord = { NOT = { plurality = 12 } }
-			factor = 0.3
+			factor = 0.6
 		}
 		modifier = { overlord = { NOT = { plurality = 10 } }
-			factor = 0.15
+			factor = 0.5
 		}
 		modifier = { overlord = { NOT = { plurality = 5 } }
-			factor = 0.1
+			factor = 0.4
 		}
 		modifier = { militancy = 5
 			factor = 0.5
@@ -81,10 +81,10 @@ country_event = {
 		FROM = {
 			war = {
 				target = THIS
-				attacker_goal = {
+				defender_goal = {
 					casus_belli = make_puppet
 				}
-				defender_goal = {
+				attacker_goal = {
 					casus_belli = status_quo
 				}
 			}
