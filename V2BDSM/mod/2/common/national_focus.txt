@@ -7,6 +7,7 @@ rail_focus =
 		local_RGO_output = 0.1
 		local_factory_throughput = 0.25
 		
+		zbankers = 0.05
 		icon = 2
 		limit = {
 			# Audax Validator "." Ignore_NEXT
@@ -18,6 +19,7 @@ rail_focus =
 		movement_cost = -0.2
 		supply_limit = 3
 		icon = 33
+		zbankers = 0.05
 	}
 	
 	appeasement_focus = {
@@ -28,6 +30,7 @@ rail_focus =
 		# Audax Validator "." Ignore_NEXT
 		assimilation_rate = 0.5
 		icon = 34
+		zbankers = 0.05
 	}
 	
 	shipbuilding_focus = {
@@ -39,6 +42,7 @@ rail_focus =
 			}
 		}
 		icon = 35
+		zbankers = 0.05
 	}
 	
 	increase_tension =
@@ -55,6 +59,39 @@ rail_focus =
 				ai = no
 			}
 		}
+	}
+}
+
+promotion_focus = {
+	promote_bureaucrats = {
+		bureaucrats = 0.05
+		icon = 7
+		outliner_show_as_percent = yes
+	}
+	promote_clergymen = {
+		clergymen = 0.05
+		icon = 9
+		outliner_show_as_percent = yes
+	}
+	promote_craftsmen = {
+		craftsmen = 0.05
+		icon = 11
+		outliner_show_as_percent = yes
+	}
+	promote_clerks = {
+		clerks = 0.05
+		icon = 10
+		outliner_show_as_percent = yes
+	}
+	promote_soldiers = {
+		soldiers = 0.05
+		icon = 15
+		outliner_show_as_percent = yes
+	}
+	promote_officers = {
+		officers = 0.05
+		icon = 14
+		outliner_show_as_percent = yes
 	}
 }
 
