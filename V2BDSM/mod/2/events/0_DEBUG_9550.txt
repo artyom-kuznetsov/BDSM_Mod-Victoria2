@@ -56,6 +56,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9571
 		country_event = 9572
 		country_event = 9574
+		country_event = 9578
 		country_event = 57073
 		country_event = 57604
 		add_country_modifier = { name = revolution_happened_cmodifier duration = 1 }
@@ -550,5 +551,18 @@ country_event = {
     option = {
         name = "noloc"
 		government = colonial_company
+    }
+}
+
+country_event = { # LITERACY
+    id = 9578
+    title = "noloc"
+    desc = "noloc"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = "noloc"
+		840 = { add_province_modifier = { name = apache_raiders duration = 100 } }
     }
 }

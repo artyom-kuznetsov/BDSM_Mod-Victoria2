@@ -1367,6 +1367,27 @@ province_event = {
 	}
 	
 	option = {
+		name = "Selector_EvtOptColonize"
+		CUSTOM_TOOLTIP_COLONIZE = { }
+		CUSTOM_TOOLTIP_COLONIZE_REGION = { }
+		owner = {
+			any_owned = {
+				limit = {
+					# Audax Validator "." Ignore_NEXT
+					has_building = province_selector
+				}
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+		add_core = WBK
+		owner = {
+			country_event = 140416
+		}
+		remove_core = WBK
+	}
+	
+	option = {
 		name = "Selector_EvtOptRemAllSelectors"
 		owner = {
 			any_owned = {
@@ -4381,57 +4402,73 @@ country_event = {
 	}
 }
  
- # HISTORICAL SETUP
+
+
+## Audax Validator "." Ignore_NEXT
 country_event = {
-	id = 140413
-	title = "noloc"
-	desc = "noloc"
-	
+	id = 140414
+	title = "noloc"	# «¿ ŒÀŒÕ»«¿÷»ﬂ –≈√»ŒÕ¿ »« Ã≈“–ŒœŒÀ»»
+
 	is_triggered_only = yes
-	
+
+	## Audax Validator "." Ignore_NEXT
 	option = {
-		name = "noloc"
-		GRE = {
-			limit = {
-				is_vassal = yes
-			}
-			release_vassal = GRE
-		}
-		WAL = {
-			limit = {
-				is_vassal = yes
-			}
-			release_vassal = WAL
-		}
-		MOL = {
-			limit = {
-				is_vassal = yes
-			}
-			release_vassal = MOL
-		}
-		EIC = {
-			inherit = KUT
-			inherit = BIH
-			inherit = MEW
-			inherit = MUG
-			inherit = BNG
-			inherit = GWA
-			create_vassal = JAI
-			create_vassal = IND
-			create_vassal = BUN
-			create_vassal = NAG
-			create_vassal = BIH
-			create_vassal = AWA
-			create_vassal = BHO
-			JAI = { government = colonial_company }
-			IND = { government = colonial_company }
-			BUN = { government = colonial_company }
-			NAG = { government = colonial_company }
-			AWA = { government = colonial_company }
-			BHO = { government = colonial_company }
-			BIH = { government = colonial_company }
-		}
-		ENG = { inherit = SRI }
+		civilized = yes
+		civilized = no
+		## Audax Validator "." Ignore_NEXT
+		annex_to = FROM
 	}
 }
 
+country_event = {
+	id = 140415
+	title = "recolonize_region_EvtName"
+	desc = "recolonize_region_success_EvtDesc"
+	picture = "colonial_factory"
+
+	is_triggered_only = yes
+
+	immediate = {
+		CIV = { 
+			country_event = { id = 140414 days = 0 }
+		}
+	}
+	
+	option = {
+		name = "recolonize_region_EvtOptA"
+	}
+}
+
+country_event = {
+	id = 140416
+	title = "recolonize_region_EvtName"
+	desc = "recolonize_region_EvtDesc"
+	picture = "colonial_factory"
+
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned = {
+			limit = {
+				is_core = WBK
+				owner = { war = no }
+				NOT = { 
+					has_province_modifier = potato_blight
+					has_province_modifier = cholera_epidemic_small
+					has_province_modifier = cholera_epidemic_big
+					has_province_modifier = apache_raiders
+				}
+			}
+			owner = { country_event = { id = 140415 days = 0 } }
+			state_scope = { 
+				any_owned = { 
+					secede_province = CIV 
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "recolonize_region_EvtOptA"
+	}
+}
