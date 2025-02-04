@@ -476,9 +476,9 @@ futurism = {
 		permanent_prestige = 10
 	}
 }
-#idealism
+#associationism
 neokantian_idealism = {
-	limit = { idealism = 1 }
+	limit = { associationism = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -497,7 +497,7 @@ neokantian_idealism = {
 	}
 }
 hegelian_idealism = {
-	limit = { idealism = 1 }
+	limit = { associationism = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -515,9 +515,28 @@ hegelian_idealism = {
 		permanent_prestige = 0.5
 	}
 }
-#empiricism
+associative_psychology_inv = {
+	limit = { associationism = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			romanticism = 1
+		}
+		modifier = {
+			factor = 2
+			phenomenalism = 1
+		}
+	}
+	effect = {
+		shared_prestige = 5
+		permanent_prestige = 0.5
+	}
+}
+#phenomenalism
 pragmatism = {
-	limit = { empiricism = 1 }
+	limit = { phenomenalism = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -536,7 +555,7 @@ pragmatism = {
 	}
 }
 i_empiricism = {
-	limit = { empiricism = 1 }
+	limit = { phenomenalism = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -554,9 +573,9 @@ i_empiricism = {
 		permanent_prestige = 1
 	}
 }
-#analytic_philosophy
+#experimental_psychology
 i_analytic_philosophy = {
-	limit = { analytic_philosophy = 1 }
+	limit = { experimental_psychology = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -575,7 +594,7 @@ i_analytic_philosophy = {
 	}
 }
 modern_logics = {
-	limit = { analytic_philosophy = 1 }
+	limit = { experimental_psychology = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -594,7 +613,7 @@ modern_logics = {
 	}
 }
 logical_positivism = {
-	limit = { analytic_philosophy = 1 }
+	limit = { experimental_psychology = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -612,9 +631,9 @@ logical_positivism = {
 		permanent_prestige = 1.5
 	}
 }
-#phenomenology_n_hermeneutic
+#psychoanalysis
 phenomenology = {
-	limit = { phenomenology_n_hermeneutic = 1 }
+	limit = { psychoanalysis = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -633,7 +652,7 @@ phenomenology = {
 	}
 }
 hermeneutics = {
-	limit = { phenomenology_n_hermeneutic = 1 }
+	limit = { psychoanalysis = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -651,9 +670,9 @@ hermeneutics = {
 		permanent_prestige = 2
 	}
 }
-#anti__rationalism
+#behaviorism
 existentialism = {
-	limit = { anti__rationalism = 1 }
+	limit = { behaviorism = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -672,7 +691,7 @@ existentialism = {
 	}
 }
 nihilism_and_the_will = {
-	limit = { anti__rationalism = 1 }
+	limit = { behaviorism = 1 }
 	news = no
 	chance = {
 		base = 3
@@ -686,9 +705,9 @@ nihilism_and_the_will = {
 		permanent_prestige = 2.5
 	}
 }
-#quantum_mechanics
+#humanistic_psychology
 quantum_theory = {
-	limit = { quantum_mechanics = 1 }
+	limit = { humanistic_psychology = 1 }
 	news = no
 	chance = {
 		base = 2
