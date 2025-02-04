@@ -1019,6 +1019,28 @@ add_to_sphere = {
 			}
 		}
 		NOT = { tag = WBK }
+		
+		OR = {
+			neighbour = THIS
+			AND = {
+				num_of_ports = 1
+				THIS = {
+					num_of_ports = 1
+				}
+			}
+		}
+		
+		
+		OR = {
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { has_country_flag = severe_malaria_countered_country_flag }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { has_country_flag = severe_malaria_countered_cflag }
+			}
+		}
 	}
 	
 	is_valid = {
@@ -2234,6 +2256,15 @@ cut_down_to_size = {
 				NOT = { year = 1870 } 
 			}
 		}
+		OR = {
+			neighbour = THIS
+			AND = {
+				num_of_ports = 1
+				THIS = {
+					num_of_ports = 1
+				}
+			}
+		}
 	}
 	
 	on_add = {
@@ -3259,6 +3290,15 @@ humiliate = {
 			}
 		}
 		NOT = { tag = WBK }
+		OR = {
+			neighbour = THIS
+			AND = {
+				num_of_ports = 1
+				THIS = {
+					num_of_ports = 1
+				}
+			}
+		}
 	}	
 	on_add = {
 		move_issue_percentage = { 
@@ -3305,6 +3345,15 @@ demand_reparations = {
 			}
 		}
 		NOT = { tag = WBK }
+		OR = {
+			neighbour = THIS
+			AND = {
+				num_of_ports = 1
+				THIS = {
+					num_of_ports = 1
+				}
+			}
+		}
 	}
 	
 	on_add = {
