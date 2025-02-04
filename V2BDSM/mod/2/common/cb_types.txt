@@ -1034,12 +1034,14 @@ add_to_sphere = {
 		OR = {
 			AND = {
 				has_country_flag = malaria_blocked_country_flag
-				THIS = { has_country_flag = severe_malaria_countered_country_flag }
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
 			}
 			AND = {
 				has_country_flag = severe_malaria_blocked_country_flag
-				THIS = { has_country_flag = severe_malaria_countered_cflag }
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
 			}
+			
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
 		}
 	}
 	
@@ -2265,6 +2267,18 @@ cut_down_to_size = {
 				}
 			}
 		}
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+		}
 	}
 	
 	on_add = {
@@ -3018,6 +3032,19 @@ make_puppet = {
             neighbour = THIS
 			any_neighbor_country = { vassal_of = THIS }
 		}
+		
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+		}
 	}
 	
 	# THIS - us
@@ -3092,6 +3119,19 @@ make_puppet_small = {
             neighbour = THIS
 			any_neighbor_country = { vassal_of = THIS }
 		}
+		
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+		}
 	}
 	
 	# THIS - us
@@ -3164,6 +3204,19 @@ make_puppet_tiny = {
             }
             neighbour = THIS
 			any_neighbor_country = { vassal_of = THIS }
+		}
+		
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
 		}
 	}
 	
@@ -3299,6 +3352,19 @@ humiliate = {
 				}
 			}
 		}
+		
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+		}
 	}	
 	on_add = {
 		move_issue_percentage = { 
@@ -3353,6 +3419,19 @@ demand_reparations = {
 					num_of_ports = 1
 				}
 			}
+		}
+		
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
 		}
 	}
 	
@@ -3414,6 +3493,18 @@ demand_concession_casus_belli = {
 			any_neighbor_country = { vassal_of = THIS }
 		}
 		NOT = { has_country_flag = daimyo_flag tag = WBK }
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+		}
 	}
 	
 	allowed_states = {
@@ -3505,6 +3596,19 @@ establish_protectorate_casus_belli = {
 			any_neighbor_country = { vassal_of = THIS }
 		}
 		NOT = { has_country_flag = daimyo_flag }
+		
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+		}
 	}
 	
 	po_annex = yes
@@ -3579,6 +3683,23 @@ establish_small_protectorate_casus_belli = {
 			any_neighbor_country = { vassal_of = THIS }
 		}
 		NOT = { has_country_flag = daimyo_flag }
+		
+		OR = { # AFRICAN BLOCKS (MALARIA)
+			AND = {
+				has_country_flag = malaria_blocked_country_flag
+				THIS = {
+					OR = {
+						has_country_flag = malaria_countered_country_flag 
+						capital_scope = { continent = africa } 
+					} 
+				}
+			}
+			AND = {
+				has_country_flag = severe_malaria_blocked_country_flag
+				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			}
+			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+		}
 	}
 	
 	po_annex = yes
