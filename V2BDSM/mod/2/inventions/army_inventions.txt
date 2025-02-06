@@ -500,61 +500,7 @@ machine_gun_armament = {
 		}
 	}
 }
-colonial_negotiations = {
-	limit = { 
-		year = 1880
-		breech_loaded_rifles = 1
-	}
-	news = no
-	chance = {
-		base = 0
-		modifier = {
-			factor = 10
-			machine_guns = 1
-		}
-		modifier = {
-			factor = 10
-			military_logistics = 1
-		}
-		modifier = {
-			factor = 10
-			naval_logistics = 1 
-		}
-		modifier = {
-			factor = 10
-			iron_steamers = 1 
-		}
-		modifier = {
-			factor = 10
-			investment_banks = 1 
-		}
-		modifier = {
-			factor = 10
-			organic_chemistry = 1 
-		}
-		modifier = {
-			factor = 20
-			any_greater_power = {
-				invention = colonial_negotiations
-			}
-		}
-		modifier = {
-			factor = 15
-			any_neighbor_country = {
-				invention = colonial_negotiations
-			}
-		}
-		modifier = {
-			factor = -100
-			is_greater_power = no
-			ai = yes
-			NOT = { year = 1880 }
-		}
-	}
-	effect = {
-		colonial_life_rating = -5 
-	}
-}
+
 #bolt_action_rifles
 bolt_action_rifle_armament = {
 	limit = { bolt_action_rifles = 1 }

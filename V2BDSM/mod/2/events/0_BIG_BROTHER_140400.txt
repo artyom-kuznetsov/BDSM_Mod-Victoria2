@@ -4472,3 +4472,20 @@ country_event = {
 		name = "recolonize_region_EvtOptA"
 	}
 }
+
+country_event = {
+	id = 140417
+	title = "quinine_discovered_EvtName"
+	desc = "quinine_discovered_EvtDesc"
+	picture = "colonial_factory"
+
+	trigger = {
+		invention = quinine
+		NOT = { has_global_flag = quinine_allowed_gflag }
+	}
+	
+	option = {
+		name = "quinine_discovered_EvtOptA"
+		set_global_flag = quinine_allowed_gflag
+	}
+}

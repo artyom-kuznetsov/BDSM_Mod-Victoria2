@@ -476,6 +476,223 @@ futurism = {
 		permanent_prestige = 10
 	}
 }
+mission_to_civilize = { # TODO REMOVE
+	limit = { 
+		year = 1850 
+		state_n_government = 1
+	}
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 25
+			nationalism_n_imperialism = 1
+		}
+		modifier = {
+			factor = 25
+			market_regulations = 1
+		}
+		modifier = {
+			factor = 25
+			naval_statistics = 1
+		}
+		modifier = {
+			factor = 10
+			any_greater_power = {
+				invention = mission_to_civilize
+			}
+		}
+		modifier = {
+			factor = 10
+			any_neighbor_country = {
+				invention = mission_to_civilize
+			}
+		}
+	}
+	effect = {
+		colonial_prestige = 0.1
+		diplomatic_points = 0.2
+		colonial_life_rating = -10 
+	}
+}
+#colonialism_tech
+colonial_policy = {
+	limit = { colonialism_tech = 1 }
+	news = no
+	chance = {
+		base = 1
+		modifier = {
+			factor = 2
+			is_greater_power = yes
+		}
+		modifier = {
+			factor = 2
+			battleship_column_doctrine = 1
+		}
+	}
+	effect = {
+		
+	}
+}
+#nationalism_tech
+self_identification = {
+	limit = { nationalism_tech = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			literacy = 0.3
+		}
+		modifier = {
+			factor = 2
+			average_consciousness = 2
+		}
+	}
+	effect = {
+		rebel_org_gain = {
+			faction = nationalist_rebels 
+			value = 0.33
+		}
+	}
+	core_pop_consciousness_modifier = 0.03
+	core_pop_militancy_modifier = 0.01
+}
+
+separatism = {
+	limit = { nationalism_tech = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			average_militancy = 3
+		}
+		modifier = {
+			factor = 2
+			average_consciousness = 2
+		}
+	}
+	effect = {
+		seperatism = 0.5
+	}
+}
+
+meritocracy_vs._aristocracy = {
+	limit = { nationalism_tech = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 1
+			literacy = 0.4
+		}
+		modifier = {
+			factor = 2
+			nationalvalue = nv_liberty
+		}
+	}
+	effect = {
+		increase_research = 0.05
+	}
+}
+#colonial_offices_tech
+quinine = {
+	limit = { colonial_offices_tech = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = -30
+			NOT = { civilizing_mission_tech = 1 }
+		}
+		modifier = {
+			factor = 5
+			machine_guns = 1
+		}
+		modifier = {
+			factor = 5
+			military_logistics = 1
+		}
+		modifier = {
+			factor = 5
+			naval_logistics = 1 
+		}
+		modifier = {
+			factor = 5
+			investment_banks = 1 
+		}
+		modifier = {
+			factor = 5
+			organic_chemistry = 1 
+		}
+		modifier = {
+			factor = 70
+			has_country_flag = quinine_allowed_ñflag
+		}
+	}
+	effect = {
+		colonial_life_rating = -5
+	}
+}
+colonial_bureaucracy = {
+	limit = { colonial_offices_tech = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			nationalism_n_imperialism = 1
+		}
+		modifier = {
+			factor = 2
+			breech_loaded_rifles = 1
+		}
+	}
+	effect = {
+		core_pop_consciousness_modifier = -0.02
+	}
+}
+#pan_nationalism_tech
+biased_multiculturalism = {
+	limit = { pan_nationalism_tech = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 1
+			ruling_party_ideology = reactionary
+		}
+		modifier = {
+			factor = 2
+			ruling_party_ideology = conservative
+		}
+		modifier = {
+			factor = 1
+			NOT = { government = democracy }
+		}
+	}
+	effect = {
+		colonial_migration = 0.05
+	}
+}
+brother_peoples = {
+	limit = { pan_nationalism_tech = 1 }
+	news = no
+	chance = {
+		base = 1
+		modifier = {
+			factor = 1
+			literacy = 0.4
+		}
+		modifier = {
+			factor = 1
+			phenomenalism = 1
+		}
+	}
+	core_pop_consciousness_modifier = -0.01
+	core_pop_militancy_modifier = -0.01
+}
 #associationism
 neokantian_idealism = {
 	limit = { associationism = 1 }
@@ -852,7 +1069,8 @@ political_science = {
 			naval_directionism = 1
 		}
 	}
-	effect = { core_pop_consciousness_modifier = 0.01 }
+	
+	core_pop_consciousness_modifier = 0.01
 }
 social_anthropology = {
 	limit = { social_science = 1 }
@@ -1099,47 +1317,6 @@ clericalism_vs._anticlericalism = {
 		increase_research = 0.05
 	}
 }
-meritocracy_vs._aristocracy = {
-	limit = { state_n_government = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 1
-			literacy = 0.4
-		}
-		modifier = {
-			factor = 2
-			nationalvalue = nv_liberty
-		}
-	}
-	effect = {
-		increase_research = 0.05
-	}
-}
-#nationalism_n_imperialism
-biased_multiculturalism = {
-	limit = { nationalism_n_imperialism = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 1
-			ruling_party_ideology = reactionary
-		}
-		modifier = {
-			factor = 2
-			ruling_party_ideology = conservative
-		}
-		modifier = {
-			factor = 1
-			NOT = { government = democracy }
-		}
-	}
-	effect = {
-		colonial_migration = 0.05
-	}
-}
 manifest_destiny = {
 	limit = { nationalism_n_imperialism = 1 }
 	news = no
@@ -1159,68 +1336,6 @@ manifest_destiny = {
 		morale = 0.1
 	}
 }
-mission_to_civilize = {
-	limit = { 
-		year = 1850 
-		state_n_government = 1
-	}
-	news = no
-	chance = {
-		base = 0
-		modifier = {
-			factor = 25
-			nationalism_n_imperialism = 1
-		}
-		modifier = {
-			factor = 25
-			market_regulations = 1
-		}
-		modifier = {
-			factor = 25
-			naval_statistics = 1
-		}
-		modifier = {
-			factor = 10
-			any_greater_power = {
-				invention = mission_to_civilize
-			}
-		}
-		modifier = {
-			factor = 10
-			any_neighbor_country = {
-				invention = mission_to_civilize
-			}
-		}
-	}
-	effect = {
-		colonial_prestige = 0.1
-		diplomatic_points = 0.2
-		colonial_life_rating = -10 
-	}
-}
-separatism = {
-	limit = { nationalism_tech = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			average_militancy = 3
-		}
-		modifier = {
-			factor = 2
-			average_consciousness = 2
-		}
-	}
-	effect = {
-		seperatism = 0.5
-		rebel_org_gain = {
-			faction = nationalist_rebels 
-			value = 0.33
-		}
-	}
-}
-
 #revolution_n_counterrevolution
 dogma_of_violence = {
 	limit = { revolution_n_counterrevolution = 1 }
@@ -1346,6 +1461,10 @@ the_doctrine_of_fascism = {
 		modifier = {
 			factor = 1
 			literacy = 0.8
+		}
+		modifier = {
+			factor = -7
+			NOT = { pan_nationalism_tech = 1 }
 		}
 	}
 	effect = {
