@@ -1,4 +1,4 @@
-ЗАПУСК МОДА ЧЕРЕЗ БАТНИК "0_ЗАПУСК МОДА" В ПАПКЕ V2BDSM
+ЗАПУСК МОДА ЧЕРЕЗ 0_Launcher.exe В ПАПКЕ V2BDSM
 
 
 Привет, это так называемый мод базы.
@@ -8,12 +8,17 @@
 Создатель мода на YouTube										- 	https://www.youtube.com/channel/UCHt7fLn63yqC6gOXFI0dFUA
 
 
+N.B.! Файл запуска игры (v2game.exe) был модифицирован так, чтобы кубик в битве был не ниже 3 и не выше 7. 
+Если вы вдруг каким-то образом будете использовать или распространять этот файл, помните об этом. 
+Его использование в мультиплеере с игроками с ванильным файлом приведёт к рассинхронам и/или вылетам.
+
 Assets/ideas from the following mods were used in this mod:
 - Victoria Universalis
 - Mish Mash Map Mod
 - Divergences of Darkness
 - 2/3 Mod
 - The Grand Combination
+- The Greater Launcher
 - Greater Flavor Mod
 - The Third Age
 - Bob's Cartography
