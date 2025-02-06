@@ -99,7 +99,7 @@ economy = {
 	BANKRUPTCY_EXTERNAL_LOAN_YEARS	= 10,
 	BANKRUPTCY_FACTOR = 0.2,
 	SHADOWY_FINANCIERS_MAX_LOAN_AMOUNT = 1500,
-	MAX_LOAN_CAP_FROM_BANKS = 3, -- can loan max % of country tax base from single country
+	MAX_LOAN_CAP_FROM_BANKS = 100, -- can loan max % of country tax base from single country
 	GUNBOAT_LOW_TAX_CAP = 0.0,
 	GUNBOAT_HIGH_TAX_CAP = 1.0,
 	GUNBOAT_FLEET_SIZE_FACTOR = 100,
@@ -112,7 +112,7 @@ economy = {
 	SECOND_RANK_BASE_SHARE_FACTOR = 1,
 	CIV_BASE_SHARE_FACTOR = 1,
 	UNCIV_BASE_SHARE_FACTOR = 1,
-	FACTORY_PAYCHECKS_LEFTOVER_FACTOR = 0.8, -- % of how much we pay to the pops and capitalists, from the leftovers.
+	FACTORY_PAYCHECKS_LEFTOVER_FACTOR = 0.99, -- % of how much we pay to the pops and capitalists, from the leftovers.
 	MAX_FACTORY_MONEY_SAVE = 1000,	-- how much money is stored maximum in a factory.
 	SMALL_DEBT_LIMIT = 10000,
 	FACTORY_UPGRADE_EMPLOYEE_FACTOR = 0.8, -- determines how close to the employee limit we need to be before "upgrade all" will upgrade/expand a given factory (1 = 100%).
