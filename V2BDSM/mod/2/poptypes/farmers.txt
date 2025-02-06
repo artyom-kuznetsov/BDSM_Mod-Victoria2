@@ -939,6 +939,21 @@ promote_to =
 			luxury_needs = 1
 		}
 	}
+	slaves = 
+	{
+		factor = 0.01
+		
+		modifier = {
+			factor = -10
+			country = { slavery = no_slavery }
+		}
+	
+		modifier = {
+			factor = 10
+			country = { slavery = yes_slavery }
+			is_accepted_culture = no
+		}
+	}
 }
 
 
