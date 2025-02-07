@@ -796,3 +796,259 @@ country_event = {
         }
     }
 }
+
+# ÀŒ–≈Õ—”-Ã¿– »ÿ
+country_event = {
+    id = 57029
+    title = "Colony_Expands_EvtName"
+    desc = "Colony_Lorenzu_Expands_EvtDesc"
+    picture = "colonial_factory"
+
+	mean_time_to_happen = {
+		months = 18
+		modifier = {
+			factor = 0.5
+			colonial_offices_tech = 1
+		}
+	}
+
+    trigger = {
+        owns = 2049
+		NOT = { colonial_migration = ref_no_colonial_policy }
+		GAZ = {
+			OR = {
+				owns = 2050
+				owns = 2051
+				owns = 2052
+			}
+			NOT = { in_sphere = THIS }
+		}
+		war = no
+    }
+
+    option = {
+        name = "Colony_Expands_EvtOptA"
+		GAZ = {
+			random_owned = {
+				limit = {
+					OR = {
+						province_id = 2050 province_id = 2051 province_id = 2052
+					}
+					any_neighbor_province = { owned_by = THIS }
+				}
+				secede_province = THIS
+			}
+		}
+		relation = { who = GAZ value = -20 }
+		random_owned = {
+			limit = {
+				owner = {
+					is_greater_power = no
+				}
+			}
+			owner = {
+				badboy = 0.5
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					is_greater_power = yes
+				}
+			}
+			owner = {
+				badboy = 1.5
+			}
+		}
+    }
+	
+    option = {
+        name = "Colony_Expands_EvtOptB"
+		relation = { who = GAZ value = 5 }
+		diplomatic_influence = { who = GAZ value = 20 }
+    }
+	
+    option = {
+        name = "Colony_Expands_EvtOptC"
+		relation = { who = GAZ value = 30 }
+		diplomatic_influence = { who = GAZ value = 40 }
+		badboy = -2
+		any_owned = {
+			limit = {
+				state_id = 2049
+			}
+			secede_province = GAZ
+			add_core = GAZ
+		}
+    }
+}
+
+# «¿Ã¡≈«»ﬂ
+country_event = {
+    id = 57030
+    title = "Colony_Expands_EvtName"
+    desc = "Colony_Zambezia_Expands_EvtDesc"
+    picture = "colonial_factory"
+
+	mean_time_to_happen = {
+		months = 18
+		modifier = {
+			factor = 0.5
+			colonial_offices_tech = 1
+		}
+	}
+
+    trigger = {
+        owns = 2059
+		NOT = { colonial_migration = ref_no_colonial_policy }
+		GAZ = {
+			OR = {
+				owns = 2057
+				owns = 2058
+			}
+			NOT = { in_sphere = THIS }
+		}
+		war = no
+    }
+
+    option = {
+        name = "Colony_Expands_EvtOptA"
+		GAZ = {
+			random_owned = {
+				limit = {
+					OR = {
+						province_id = 2057 province_id = 2058
+					}
+					any_neighbor_province = { owned_by = THIS }
+				}
+				secede_province = THIS
+			}
+		}
+		relation = { who = GAZ value = -20 }
+		random_owned = {
+			limit = {
+				owner = {
+					is_greater_power = no
+				}
+			}
+			owner = {
+				badboy = 0.5
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					is_greater_power = yes
+				}
+			}
+			owner = {
+				badboy = 1.5
+			}
+		}
+    }
+	
+    option = {
+        name = "Colony_Expands_EvtOptB"
+		relation = { who = GAZ value = 5 }
+		diplomatic_influence = { who = GAZ value = 20 }
+    }
+	
+    option = {
+        name = "Colony_Expands_EvtOptC"
+		relation = { who = GAZ value = 30 }
+		diplomatic_influence = { who = GAZ value = 40 }
+		badboy = -2
+		any_owned = {
+			limit = {
+				state_id = 2049
+			}
+			secede_province = GAZ
+			add_core = GAZ
+		}
+    }
+}
+
+# ÃŒ«¿Ã¡» 
+country_event = {
+    id = 57031
+    title = "Colony_Expands_EvtName"
+    desc = "Colony_Mozambique_Expands_EvtDesc"
+    picture = "colonial_factory"
+
+	mean_time_to_happen = {
+		months = 18
+		modifier = {
+			factor = 0.5
+			colonial_offices_tech = 1
+		}
+	}
+
+    trigger = {
+        owns = 2059
+		NOT = { colonial_migration = ref_no_colonial_policy }
+		AGC = {
+			OR = {
+				owns = 2065
+				owns = 2061
+				owns = 2064
+			}
+			NOT = { in_sphere = THIS }
+		}
+		war = no
+    }
+
+    option = {
+        name = "Colony_Expands_EvtOptA"
+		AGC = {
+			random_neighbour_province = {
+				limit = {
+					OR = {
+						province_id = 2065 province_id = 2064 province_id = 2061
+					}
+				}
+				secede_province = THIS
+			}
+		}
+		relation = { who = AGC value = -20 }
+		random_owned = {
+			limit = {
+				owner = {
+					is_greater_power = no
+				}
+			}
+			owner = {
+				badboy = 0.5
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					is_greater_power = yes
+				}
+			}
+			owner = {
+				badboy = 1.5
+			}
+		}
+    }
+	
+    option = {
+        name = "Colony_Expands_EvtOptB"
+		relation = { who = GAZ value = 5 }
+		diplomatic_influence = { who = GAZ value = 20 }
+    }
+	
+    option = {
+        name = "Colony_Expands_EvtOptC"
+		relation = { who = GAZ value = 30 }
+		diplomatic_influence = { who = GAZ value = 40 }
+		badboy = -2
+		any_owned = {
+			limit = {
+				state_id = 2049
+			}
+			secede_province = GAZ
+			add_core = GAZ
+		}
+    }
+}

@@ -211,28 +211,42 @@ inflation_2_trmod = {
 
 inflation_3_trmod = {
 	trigger = {
-		money = 8500000
+		money = 8000000
 	}
 	tax_efficiency = -0.03
 }
 
 inflation_4_trmod = {
 	trigger = {
-		money = 10000000
+		money = 9000000
 	}
 	tax_efficiency = -0.03
 }
 
 inflation_5_trmod = {
 	trigger = {
-		money = 12000000
+		money = 10000000
 	}
 	tax_efficiency = -0.03
 }
 
 inflation_6_trmod = {
 	trigger = {
-		money = 15000000
+		money = 11000000
+	}
+	tax_efficiency = -0.03
+}
+
+inflation_7_trmod = {
+	trigger = {
+		money = 12000000
+	}
+	tax_efficiency = -0.03
+}
+
+inflation_8_trmod = {
+	trigger = {
+		money = 13000000
 	}
 	tax_efficiency = -0.03
 }
@@ -566,6 +580,18 @@ unciv_ai_debuff = {
 		civilized = no
 	}
 	research_points_modifier = -0.8
+}
+
+unciv_africa_ai_debuff = {
+	trigger = {
+		ai = yes
+		civilized = no
+		OR = {
+			has_country_flag = malaria_blocked_country_flag
+			has_country_flag = severe_malaria_blocked_country_flag
+		}
+	}
+	research_points_modifier = -2
 }
 
 # v4.3 Early Game War Encouragement
