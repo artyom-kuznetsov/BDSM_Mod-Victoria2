@@ -367,7 +367,14 @@ country_event = {
 				remove_province_modifier = war_shipbuilding_modifier
 			}
 		}
-
+		
+		### ECONOMIC SYSTEM CONS ###
+        any_country = {
+            limit = {
+                NOT = { economic_policy = planned_economy }
+            }
+            political_reform = yes_pop_construction
+        }
 
 		any_country = { # ткюц йнллсмхярнб
 			limit = {
