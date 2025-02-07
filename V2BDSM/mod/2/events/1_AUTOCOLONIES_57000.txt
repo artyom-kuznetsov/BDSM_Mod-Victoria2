@@ -1000,11 +1000,12 @@ country_event = {
     option = {
         name = "Colony_Expands_EvtOptA"
 		AGC = {
-			random_neighbour_province = {
+			random_owned = {
 				limit = {
 					OR = {
-						province_id = 2065 province_id = 2064 province_id = 2061
+						province_id = 2065 province_id = 2061 province_id = 2064
 					}
+					any_neighbor_province = { owned_by = THIS }
 				}
 				secede_province = THIS
 			}
