@@ -65,6 +65,12 @@ country_event = {
 	trigger = {
 		has_country_flag = liberal_revolution_in_progress
 		OR = {
+			any_neighbor_country = {
+				has_country_modifier = springtime_of_nations
+			}
+			invention = self_consciousness
+		}
+		OR = {
 			liberal = 10
 			any_owned_province = {
 				has_province_modifier = liberal_agitation
@@ -115,20 +121,20 @@ country_event = {
 			political_reform_want = 0.09
 		}
 		modifier = {
-			factor = 0.9
+			factor = 0.8
 			num_of_revolts = 1
 		}
 		modifier = {
 			factor = 0.8
-			num_of_revolts = 5
+			num_of_revolts = 2
 		}
 		modifier = {
 			factor = 0.8
-			num_of_revolts = 10
+			num_of_revolts = 3
 		}
 		modifier = {
-			factor = 0.4
-			num_of_revolts = 15
+			factor = 0.7
+			num_of_revolts = 4
 		}
 		modifier = {
 			factor = 1.1
