@@ -558,6 +558,7 @@ ai_singleplayer_buff_trmod = {
 	trigger = {
 		ai = yes
 		has_global_flag = singleplayer_flag
+		civilized = yes
 	}
 	mobilisation_size = 0.03
 	reinforce_speed = 0.1
@@ -568,7 +569,28 @@ ai_singleplayer_buff_trmod = {
 	badboy = -0.05
 	leadership_modifier = 0.25
 	influence_modifier = -0.5
-	education_efficiency_modifier = 0.5
+	education_efficiency_modifier = 0.2
+}
+
+
+ai_singleplayer_unciv_buff_trmod = {
+	trigger = {
+		ai = yes
+		has_global_flag = singleplayer_flag
+		civilized = no
+	}
+	reinforce_speed = 0.1
+	tax_efficiency = 0.1
+	rgo_output = 0.3
+	factory_output = 0.3
+	leadership_modifier = 0.25
+	education_efficiency_modifier = 0.2
+}
+
+ai_min_tax = {
+	trigger = {
+		ai = yes
+	}
 	min_tax = 0.99
 	min_tariff = 0.99
 }

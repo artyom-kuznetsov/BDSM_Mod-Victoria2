@@ -621,7 +621,7 @@ promote_to =
         }
 		modifier = {
             factor = -100
-            state_scope = { soldiers = 0.055 }
+            state_scope = { soldiers = 0.06 }
 			conscription = ref_professional_army
         }
 	}
@@ -915,26 +915,6 @@ promote_to =
 			clergymen = 0.04
 		}
 	}
-	aristocrats = 
-	{
-		factor = 0.01
-		
-		modifier = {
-			factor = -100
-			state_scope = {
-				aristocrats = 0.02
-			}
-		}
-
-		modifier = {
-			factor = -100
-			NOT = { luxury_needs = 0.10 }
-		}		
-		modifier = {
-			factor = 10
-			luxury_needs = 1
-		}
-	}
 	slaves = 
 	{
 		factor = 0.01
@@ -948,6 +928,72 @@ promote_to =
 			factor = 10
 			country = { slavery = yes_slavery }
 			is_accepted_culture = no
+		}
+	}
+	clerks = {
+		factor = 0.01
+		group = {
+			modifier = {
+				factor = -2
+				NOT = { literacy = 0.5 }
+			}
+			modifier = {
+				factor = -2
+				NOT = { literacy = 0.6 }
+			}
+			modifier = {
+				factor = -2
+				NOT = { literacy = 0.7 }
+			}
+			modifier = {
+				factor = -2
+				NOT = { literacy = 0.8 }
+			}
+		}
+		group = {
+			modifier = { factor = 2 state_scope = { craftsmen = 0.04 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.08 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.12 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.16 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.2 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.24 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.28 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.32 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.36 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.4 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.44 } }
+			modifier = { factor = 2 state_scope = { craftsmen = 0.48 } }
+		}
+		group = {
+			modifier = { factor = -2 state_scope = { clerks = 0.01 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.02 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.03 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.04 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.05 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.06 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.07 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.08 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.09 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.1 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.11 } }
+			modifier = { factor = -2 state_scope = { clerks = 0.12 } }
+		}
+		modifier = {
+			factor = -40
+			state_scope = {
+				has_factories = no
+			}
+			can_build_factory = no
+		}
+		modifier = {
+			factor = -100
+			NOT = {
+				location = {
+					work_available = {
+						worker = craftsmen
+					}
+				}
+			}
 		}
 	}
 }
