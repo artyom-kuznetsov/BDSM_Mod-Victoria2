@@ -1,0 +1,62 @@
+# v4.5.2 Colonization Events
+country_event = { # LEAVE SPHERE MALARIA
+	title = "noloc"
+	desc = "noloc"
+	id = 141001
+	
+	trigger = {
+		has_country_flag = malaria_blocked_country_flag
+		ai = yes
+		any_greater_power = {
+			diplomatic_influence = {
+				who = THIS
+				value = 50
+			}
+			NOT = { has_country_flag = malaria_countered_country_flag }
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+				NOT = { has_country_flag = malaria_countered_country_flag }
+			}
+			diplomatic_influence = {
+				who = THIS
+				value = -50
+			}
+		}
+	}
+}
+
+country_event = { # LEAVE SPHERE SEVERE
+	title = "noloc"
+	desc = "noloc"
+	id = 141002
+	
+	trigger = {
+		has_country_flag = severe_malaria_blocked_country_flag
+		ai = yes
+		any_greater_power = {
+			diplomatic_influence = {
+				who = THIS
+				value = 50
+			}
+			NOT = { has_country_flag = severe_malaria_countered_country_flag }
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+				NOT = { has_country_flag = severe_malaria_countered_country_flag }
+			}
+			diplomatic_influence = {
+				who = THIS
+				value = -50
+			}
+		}
+	}
+}
