@@ -170,8 +170,7 @@ political_decisions = {
 		}
 		
 		allow = {
-			nationalism_n_imperialism = 1
-			biologism = 1
+			revolution_n_counterrevolution = 1
 			owns = 783
 		}
 		
@@ -231,11 +230,11 @@ political_decisions = {
 		}
 		
 		allow = {
-			biologism = 1
+			pan_nationalism_tech = 1
 		}
 		
 		effect = {
-			plurality = -5
+			plurality = -10
 			add_accepted_culture = venetian
 			set_country_flag = eliminate_lom_ven_kingdom_flag
 			736 = {
@@ -298,6 +297,15 @@ political_decisions = {
 				country_event = 110421
 			}
 			set_country_flag = subjugate_south_germans_flag
+			
+			# NOTIFICATION
+			any_country = {
+				limit = {
+					ai = no
+					NOT = { tag = THIS }
+				}
+				country_event = 57624
+			}
 		}
 	}
 }
