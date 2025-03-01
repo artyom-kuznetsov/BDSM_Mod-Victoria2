@@ -1,4 +1,4 @@
-country_event = {
+country_event = { # MCL # MONTHLY CLEANUP
 	title = "noloc"
 	desc = "noloc"
 	id = 140400
@@ -9,6 +9,26 @@ country_event = {
 	option = {
 		name = "noloc"
 		
+		any_country = {
+			limit = {
+				has_country_flag = get_quinine_cflag
+				NOT = { 
+					has_country_modifier = quinine_cooldown_cmodifier
+					has_country_flag = malaria_countered_country_flag
+				}
+			}
+			set_country_flag = malaria_countered_country_flag
+		}
+		any_country = {
+			limit = {
+				has_country_flag = get_prevention_cflag
+				NOT = { 
+					has_country_modifier = prevention_cooldown_cmodifier
+					has_country_flag = severe_malaria_countered_country_flag
+				}
+			}
+			set_country_flag = severe_malaria_countered_country_flag
+		}
 		
 		any_country = {
 			any_owned = {
@@ -4495,22 +4515,5 @@ country_event = {
 	
 	option = {
 		name = "recolonize_region_EvtOptA"
-	}
-}
-
-country_event = {
-	id = 140417
-	title = "quinine_discovered_EvtName"
-	desc = "quinine_discovered_EvtDesc"
-	picture = "colonial_factory"
-
-	trigger = {
-		invention = quinine
-		NOT = { has_global_flag = quinine_allowed_gflag }
-	}
-	
-	option = {
-		name = "quinine_discovered_EvtOptA"
-		set_global_flag = quinine_allowed_gflag
 	}
 }

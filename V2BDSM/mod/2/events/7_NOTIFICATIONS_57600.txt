@@ -450,3 +450,43 @@ country_event = {
 		name = "SPole_ExpeditionAvailable_EvtOptA"
 	}
 }
+
+# N СТРАНА ПОЛУЧИЛА ХИНИН
+country_event = {
+	title = "Fromcountry_Got_Quinine_EvtName"
+	desc = "Fromcountry_Got_Quinine_EvtDesc"
+	picture = "SouthPole1"
+	
+	id = 57622
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = get_quinine_cflag
+		add_country_modifier = { name = quinine_cooldown_cmodifier duration = 90 }
+	}
+	
+	option = {
+		name = "Fromcountry_Got_Quinine_EvtOptA"
+	}
+}
+
+# N СТРАНА ПОЛУЧИЛА ПРОФИЛАКТИКУ МАЛЯРИИ
+country_event = {
+	title = "Fromcountry_Got_Quinine_EvtName"
+	desc = "Fromcountry_Got_Quinine_EvtDesc"
+	picture = "SouthPole1"
+	
+	id = 57623
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = get_prevention_cflag
+		add_country_modifier = { name = prevention_cooldown_cmodifier duration = 90 }
+	}
+	
+	option = {
+		name = "Fromcountry_Got_Quinine_EvtOptA"
+	}
+}

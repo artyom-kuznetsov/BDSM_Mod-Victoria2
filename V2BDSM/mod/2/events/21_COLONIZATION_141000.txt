@@ -60,3 +60,76 @@ country_event = { # LEAVE SPHERE SEVERE
 		}
 	}
 }
+
+country_event = {
+	id = 141003
+	title = "quinine_discovered_EvtName"
+	desc = "quinine_discovered_EvtDesc"
+	picture = "colonial_factory"
+
+	trigger = {
+		invention = quinine
+		NOT = { has_global_flag = quinine_allowed_gflag }
+		OR = {
+			is_greater_power = yes
+			is_secondary_power = yes
+		}
+	}
+	
+	option = {
+		name = "quinine_discovered_EvtOptA"
+		set_global_flag = quinine_allowed_gflag
+		set_country_flag = malaria_countered_country_flag
+		CUSTOM_TOOLTIP_COLONIZE_MALARIA = { }
+		
+		# NOTIFICATION
+		any_country = {
+			limit = {
+				ai = no
+				OR = {
+					is_greater_power = yes
+					is_secondary_power = yes
+				}
+			}
+			country_event = 57622
+		}
+	}
+}
+
+country_event = {
+	id = 141004
+	title = "prevention_discovered_EvtName"
+	desc = "prevention_discovered_EvtDesc"
+	picture = "colonial_factory"
+
+	trigger = {
+		invention = malaria_prevention_inv
+		NOT = { has_global_flag = prevention_allowed_gflag }
+		OR = {
+			is_greater_power = yes
+			is_secondary_power = yes
+		}
+	}
+	
+	immediate = {
+		# NOTIFICATION
+		any_country = {
+			limit = {
+				ai = no
+				OR = {
+					is_greater_power = yes
+					is_secondary_power = yes
+				}
+			}
+			country_event = { id = 57623 days = 7 }
+		}
+	}
+	
+	option = {
+		name = "quinine_discovered_EvtOptA"
+		set_global_flag = prevention_allowed_gflag
+		set_country_flag = severe_malaria_countered_country_flag
+		CUSTOM_TOOLTIP_COLONIZE_SEVERE_MALARIA = { }
+		
+	}
+}
