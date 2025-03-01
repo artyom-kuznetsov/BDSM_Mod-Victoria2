@@ -901,23 +901,30 @@ country_event = {
 			government = prussian_constitutionalism
 			government = hms_government
 		}
-		is_sphere_leader_of = HAN
 	}
 	
 	major = yes
 	fire_only_once = yes
 	
 	mean_time_to_happen = {
-		months = 6
+		months = 3
 	}
 	
 	option = {
 		name = "EVTOPTA36898"
 		plurality = 10
-		release_vassal = HAN
-		diplomatic_influence = {
-			who = HAN
-			value = -200
+		HAN = { clr_country_flag = vassal_annex_blocked }
+		random_owned = {
+			limit = {
+				owner = {
+					is_sphere_leader = HAN
+				}
+			}
+			release_vassal = HAN
+			diplomatic_influence = {
+				who = HAN
+				value = -200
+			}
 		}
 		PRU = {
 			diplomatic_influence = {
