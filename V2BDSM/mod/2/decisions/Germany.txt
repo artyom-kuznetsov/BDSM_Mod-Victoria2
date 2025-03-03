@@ -9,6 +9,7 @@ political_decisions = {
 			}
 		}	
 		allow = {
+			nationalism_tech = 1
 			OR = {
 				AND = {
 					NOT = { year = 1840 }
@@ -122,71 +123,58 @@ political_decisions = {
 		}
 		
 		allow = {
-			OR = {
-				AND = {
-					GER = {
-						all_core = {
-							OR = {
-								owned_by = THIS
-								owner = {
-									in_sphere = THIS
-								}
-							}
-						}
-					}
-					nationalism_n_imperialism = 1
-					NOT = { year = 1855 }
-				}
-				AND = { 
-					nationalism_n_imperialism = 1
-					year = 1855
-					549 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					369 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					534 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					599 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					589 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					586 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					558 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					544 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-					575 = { OR = {
-						owned_by = THIS
-						owner = { vassal_of = THIS }
-						owner = { in_sphere = THIS } }
-					}
-				}
+			OR = { CUSTOM_REQUIREMENT_FORMGERMANY = { } always = yes }
+			549 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
 			}
+			369 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			534 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			599 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			589 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			586 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			558 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			544 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			580 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			564 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			pan_nationalism_tech = 1
 		}
 		
 		effect = {
@@ -245,7 +233,7 @@ political_decisions = {
 				tag = NGF
 			}
 			exists = FRA
-			government = absolute_monarchy
+			#government = absolute_monarchy
 			owns = 570
 			NOT = { has_country_flag = hide_all_decs_flag }
 		}
