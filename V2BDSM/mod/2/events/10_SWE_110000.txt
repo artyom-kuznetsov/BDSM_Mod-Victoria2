@@ -847,3 +847,24 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	title = "Scandinavian_Nationalism_EvtName"
+	desc = "Scandinavian_Nationalism_EvtDesc"
+	picture = "Scandinavia"
+	
+	fire_only_once = yes
+	
+	id = 110018
+
+	trigger = {
+		tag = SWE
+		nationalism_tech = 1
+	}
+
+	option = {
+		name = "Scandinavian_Nationalism_EvtOptA"
+		set_country_flag = swedish_conquest_claim_flag
+		CUSTOM_TOOLTIP_SCA_NATIONALISM = { }
+	}
+}
