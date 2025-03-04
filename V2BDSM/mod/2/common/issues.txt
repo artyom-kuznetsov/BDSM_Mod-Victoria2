@@ -929,8 +929,7 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					#activate_technology = freedom_of_trade
-					#activate_technology = early_classical_theory_and_critique
+					activate_technology = freedom_of_trade
 					any_pop = {
 						scaled_militancy = {
 							ideology = liberal
@@ -963,8 +962,7 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					#activate_technology = enlightenment_thought
-					#activate_technology = ideological_thought
+					activate_technology = colonialism_tech
 					any_pop = {
 						scaled_militancy = {
 							ideology = liberal
@@ -1002,8 +1000,7 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					#activate_technology = private_banks
-					#activate_technology = stock_exchange
+					activate_technology = private_banks
 					any_pop = {
 						scaled_militancy = {
 							ideology = liberal
@@ -1037,8 +1034,7 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					#activate_technology = no_standard
-					#activate_technology = ad_hoc_money_bill_printing
+					activate_technology = no_standard
 					any_pop = {
 						scaled_militancy = {
 							ideology = liberal
@@ -1072,8 +1068,7 @@ economic_reforms = {
 			on_execute = {
 				effect = {
 					set_country_flag = education_reform
-					#activate_technology = malthusian_thought
-					#activate_technology = positivism
+					activate_technology = malthusian_thought
 					social_reform = compulsory_schools
 					any_pop = {
 						scaled_militancy = {
@@ -1111,8 +1106,7 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					#activate_technology = state_n_government
-					#activate_technology = market_structure
+					activate_technology = freedom_of_trade
 					any_pop = {
 						scaled_militancy = {
 							ideology = liberal
@@ -1146,7 +1140,7 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					#activate_technology = experimental_railroad
+					activate_technology = experimental_railroad
 					set_country_flag = yes_transport_improv
 					
 					build_railway_in_capital = {
@@ -1186,8 +1180,7 @@ economic_reforms = {
 			on_execute = {
 				effect = {
 					treasury = -10000
-					#activate_technology = mechanized_mining
-					#activate_technology = clean_coal
+					activate_technology = mechanized_mining
 					build_factory_in_capital_state = small_arms_factory
 
 					any_pop = {
@@ -1256,8 +1249,7 @@ economic_reforms = {
 			
 			on_execute = {
 				effect = {
-					#activate_technology = guild_based_production
-					#activate_technology = organized_factories
+					activate_technology = guild_based_production
 					treasury = -4000
 					build_factory_in_capital_state = canned_food_factory
 
@@ -1291,6 +1283,7 @@ economic_reforms = {
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
 			research_points_modifier = 0.2
+			activate_technology = industrial_revolution
 			allow = {
 				pre_indust = yes_pre_indust2
 				money = 7000 
