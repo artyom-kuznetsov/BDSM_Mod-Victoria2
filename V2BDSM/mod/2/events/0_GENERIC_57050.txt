@@ -47,20 +47,33 @@ country_event = {
 	option = { # ENABLE GRANTS
 		name = "Exchange_EvtOptEnable"
 		clr_country_flag = exchange_disallow_flag
+		clr_country_flag = exchange_non_allied_disallow_flag
 		CUSTOM_TOOLTIP_A_57052 = { }
 	}
 	option = { # DISABLE GRANTS
 		name = "Exchange_EvtOptDisable"
 		set_country_flag = exchange_disallow_flag
+		clr_country_flag = exchange_non_allied_disallow_flag
 		CUSTOM_TOOLTIP_B_57052 = { }
 	}
+	option = { # DISABLE NON ALLIED
+		name = "Exchange_EvtOptDisableNonAllied"
+		set_country_flag = exchange_non_allied_disallow_flag
+		clr_country_flag = exchange_disallow_flag
+		CUSTOM_TOOLTIP_ALLY_57052 = { }
+	}
+	# КОРСАР ХУЕСОС СЪЕБИ С ФАЙЛА САМ ПРИДУМАЙ КАК СДЕЛАТЬ
 	option = {
 		name = "Exchange_EvtOptRequest"
 		any_country = {
 			limit = {
 				ai = no
-				NOT = { 
-					has_country_flag = exchange_disallow_flag
+				OR = {
+					NOT = { has_country_flag = exchange_disallow_flag }
+					AND = {
+						alliance_with = THIS
+						has_country_flag = exchange_non_allied_disallow_flag
+					}
 				}
 			}
 			country_event = 57053 # GRANT MONEY EVENT
