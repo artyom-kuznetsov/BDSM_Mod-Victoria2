@@ -837,27 +837,22 @@ hegelian_idealism = {
 		}
 	}
 	effect = {
-		shared_prestige = 5
-		permanent_prestige = 0.5
+		shared_prestige = 10
+		permanent_prestige = 1
 	}
 }
 associative_psychology_inv = {
 	limit = { associationism = 1 }
 	news = no
 	chance = {
-		base = 2
+		base = 0
 		modifier = {
-			factor = 2
-			romanticism = 1
-		}
-		modifier = {
-			factor = 2
-			phenomenalism = 1
+			factor = 4
+			positivism = 1
 		}
 	}
 	effect = {
-		shared_prestige = 5
-		permanent_prestige = 0.5
+		education_efficiency = 0.05
 	}
 }
 #phenomenalism
@@ -876,27 +871,22 @@ pragmatism = {
 		}
 	}
 	effect = {
-		shared_prestige = 10
-		permanent_prestige = 1
+		shared_prestige = 20
+		permanent_prestige = 2
 	}
 }
 i_empiricism = {
 	limit = { phenomenalism = 1 }
 	news = no
 	chance = {
-		base = 2
+		base = 0
 		modifier = {
-			factor = 2
-			phenomenalism = 1
-		}
-		modifier = {
-			factor = 2
-			scientific_management = 1
+			factor = 4
+			functionalism = 1
 		}
 	}
 	effect = {
-		shared_prestige = 10
-		permanent_prestige = 1
+		education_efficiency = 0.05
 	}
 }
 #experimental_psychology
@@ -934,12 +924,12 @@ modern_logics = {
 		}
 	}
 	effect = {
-		shared_prestige = 15
-		permanent_prestige = 1.5
+		shared_prestige = 30
+		permanent_prestige = 3
 	}
 }
 logical_positivism = {
-	limit = { experimental_psychology = 1 }
+	limit = { biologism = 1 }
 	news = no
 	chance = {
 		base = 2
@@ -953,8 +943,7 @@ logical_positivism = {
 		}
 	}
 	effect = {
-		shared_prestige = 15
-		permanent_prestige = 1.5
+		education_efficiency = 0.05
 	}
 }
 #psychoanalysis
@@ -973,27 +962,22 @@ phenomenology = {
 		}
 	}
 	effect = {
-		shared_prestige = 20
-		permanent_prestige = 2
+		shared_prestige = 40
+		permanent_prestige = 4
 	}
 }
 hermeneutics = {
 	limit = { psychoanalysis = 1 }
 	news = no
 	chance = {
-		base = 2
+		base = 0
 		modifier = {
-			factor = 2
+			factor = 4
 			social_science = 1
-		}
-		modifier = {
-			factor = 2
-			invention = darwinism
 		}
 	}
 	effect = {
-		shared_prestige = 20
-		permanent_prestige = 2
+		education_efficiency = 0.05
 	}
 }
 #behaviorism
@@ -1001,19 +985,14 @@ existentialism = {
 	limit = { behaviorism = 1 }
 	news = no
 	chance = {
-		base = 2
+		base = 0
 		modifier = {
-			factor = 2
-			invention = expressionist_literature
-		}
-		modifier = {
-			factor = 2
-			invention = dogma_of_violence
+			factor = 4
+			social_alienation = 1
 		}
 	}
 	effect = {
-		shared_prestige = 25
-		permanent_prestige = 2.5
+		education_efficiency = 0.05
 	}
 }
 nihilism_and_the_will = {
@@ -1027,8 +1006,8 @@ nihilism_and_the_will = {
 		}
 	}
 	effect = {
-		shared_prestige = 25
-		permanent_prestige = 2.5
+		shared_prestige = 50
+		permanent_prestige = 5
 	}
 }
 #humanistic_psychology
