@@ -8,26 +8,14 @@ country_event = { # SOUTH GERMANS ANNEX TO NGF
 	}
 	
 	trigger = {
-		NGF = {
-			exists = yes
-		}
-		GER = {
-			exists = no
-		}
 		primary_culture = south_german
 		NOT = { tag = SGF tag = KUK tag = AUS tag = SWI }
-		OR = {
-			NGF = { owns = 43 }
-			NGF = { revolution_n_counterrevolution = 1 }
-		}
-		OR = {
-			part_of_sphere = no
-			in_sphere = NGF
-		}
-		is_greater_power = no
-		OR = {
-			is_secondary_power = no
-			in_sphere = NGF
+		sphere_owner = { 
+			OR = {
+				tag = GER
+				tag = NGF
+			}
+			pan_nationalism_tech = 1
 		}
 		ai = yes
 	}
@@ -42,47 +30,68 @@ country_event = { # SOUTH GERMANS ANNEX TO NGF
 			# Audax Validator "." Ignore_NEXT
 			province_selector = -1
 		}
-		annex_to = NGF
 	}
 	
 }
-country_event = { # SOUTH GERMANS ANNEX TO GER
-	title = "noloc"
-	desc = "noloc"
+
+
+country_event = { # AUTO ANNEX MINORS BDSM v4.0
 	id = 57401
+	title = "EVTNAME60120"
+	desc = "EVTDESC60120"
+	picture = "greatpowers"
 	
 	trigger = {
-		GER = {
-			exists = yes
-		}
-		primary_culture = south_german
-		NOT = { tag = SGF tag = KUK tag = AUS tag = SWI }
-		OR = {
-			part_of_sphere = no
-			in_sphere = GER
-		}
-		is_greater_power = no
-		is_secondary_power = no
 		ai = yes
+		war = no
+		part_of_sphere = yes
+		primary_culture = north_german
+		nationalism_tech = 1
+		sphere_owner = {
+			war = no
+			OR = { 
+				tag = NGF
+				tag = PRU
+				tag = GER
+			}
+		}
+		OR = { 
+			PRU = { 
+				neighbour = THIS 
+				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
+				nationalism_tech = 1
+			}
+			NGF = { 
+				neighbour = THIS 
+				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
+				nationalism_tech = 1
+			}
+			GER = { 
+				neighbour = THIS 
+				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
+				nationalism_tech = 1
+			}
+		}
+		NOT = {	
+			tag = ISR
+			tag = SWI
+		}
 	}
 	
 	mean_time_to_happen = {
-		months = 3
+		months = 6
 	}
 	
 	option = {
-		name = "noloc"
-		any_owned = {
-			limit = {
-				# Audax Validator "." Ignore_NEXT
-				has_building = province_selector
+		name = "EVTOPTA60120"
+		sphere_owner = {
+			country_event = { id=60130 days=0 }
+			add_country_modifier = {
+				name = annex_minor_cooldown_modifier
+				duration = 90
 			}
-			# Audax Validator "." Ignore_NEXT
-			province_selector = -1
 		}
-		annex_to = GER
 	}
-	
 }
 
 province_event = { # RUHR BOOM SAAR
@@ -353,6 +362,56 @@ province_event = { # RUHR BOOM EAST RHINE
 		state_scope = {
 			any_owned = {
 				add_province_modifier = { name = ruhr_boom duration = 1205 } 
+			}
+		}
+	}
+}
+
+country_event = { # SGF FORMED BY AUSTRIA
+	id = 160121
+	title = "AusSGF_EvtName"
+	desc = "AusSGF_EvtDesc"
+	picture = "greatpowers"
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		months = 8
+	}
+	
+	option = {
+		name = "AusSGF_EvtOptA"
+		prestige = -20
+		CUSTOM_TOOLTIP_SPHERE_WEAKENS = { }
+		add_country_modifier = { name = national_humiliation_cmodifier duration = 3650 }
+		any_country = {
+			limit = {
+				ai = yes
+			}
+			country_event = 160122
+		}
+	}
+}
+
+country_event = { # SGF FORMED BY AUSTRIA
+	id = 160122
+	title = "OverlordHumiliation_EvtName"
+	desc = "noloc"
+	picture = "greatpowers"
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		months = 8
+	}
+	
+	option = {
+		name = "noloc"
+		prestige = -20
+		FROM = {
+			diplomatic_influence = {
+				who = THIS
+				value = -50
 			}
 		}
 	}

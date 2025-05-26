@@ -10,48 +10,23 @@ political_decisions = {
 		}	
 		allow = {
 			nationalism_tech = 1
-			OR = {
-				AND = {
-					NOT = { year = 1840 }
-					GER = {
-						all_core = {
-							OR = {
+			
+			GER = {
+				all_core = {
+					OR = {
+						OR = {
+							owned_by = THIS
+							owner = {
 								OR = {
-									owned_by = THIS
-									owner = {
-										OR = {
-											in_sphere = THIS
-											vassal_of = THIS
-										}
-									}
-								}
-								NOT = {
-									culture = north_german
+									in_sphere = THIS
+									vassal_of = THIS
 								}
 							}
 						}
-					}
-				}
-				AND = {
-					year = 1840
-					GER = {
-						all_core = {
-							OR = {
-								OR = {
-									owned_by = THIS
-									owner = {
-										OR = {
-											in_sphere = THIS
-											vassal_of = THIS
-										}
-									}
-								}
-								NOT = {
-									culture = north_german
-								}
-								is_core = SCA
-							}
+						NOT = {
+							culture = north_german
 						}
+						is_core = SCA
 					}
 				}
 			}

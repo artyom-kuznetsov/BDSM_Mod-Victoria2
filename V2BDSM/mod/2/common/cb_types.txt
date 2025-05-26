@@ -2680,7 +2680,10 @@ release_puppet = {
             is_our_vassal = THIS
 			tag = WBK
 			has_country_flag = daimyo_flag
-			total_pops = 2000000
+			OR = {
+				total_pops = 2000000
+				NOT = { number_of_states = 2 }
+			}
         }
         war_with = THIS
     }
@@ -4275,7 +4278,7 @@ negotiated_transfer = {
 			not = { is_core = THIS }
 			is_colonial = no
 		}
-		is_independant = yes
+		#is_independant = yes
 	}
 	
 	allowed_states = {
