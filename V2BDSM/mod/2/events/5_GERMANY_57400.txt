@@ -49,6 +49,8 @@ country_event = { # AUTO ANNEX MINORS BDSM v4.0
 		nationalism_tech = 1
 		sphere_owner = {
 			war = no
+			nationalism_tech = 1
+			NOT = { has_country_modifier = annex_minor_cooldown_modifier }
 			OR = { 
 				tag = NGF
 				tag = PRU
@@ -58,18 +60,13 @@ country_event = { # AUTO ANNEX MINORS BDSM v4.0
 		OR = { 
 			PRU = { 
 				neighbour = THIS 
-				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
-				nationalism_tech = 1
+				
 			}
 			NGF = { 
 				neighbour = THIS 
-				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
-				nationalism_tech = 1
 			}
 			GER = { 
 				neighbour = THIS 
-				NOT = { has_country_modifier = annex_minor_cooldown_modifier }
-				nationalism_tech = 1
 			}
 		}
 		NOT = {	

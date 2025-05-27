@@ -1,4 +1,4 @@
-# v4.5.2 Colonization Events
+# v4.6 Colonization Events
 country_event = { # LEAVE SPHERE MALARIA
 	title = "noloc"
 	desc = "noloc"
@@ -131,5 +131,204 @@ country_event = {
 		set_country_flag = severe_malaria_countered_country_flag
 		CUSTOM_TOOLTIP_COLONIZE_SEVERE_MALARIA = { }
 		
+	}
+}
+
+
+country_event = { # ANNEX SPHERE ?
+	title = "Sphere_Colonize_EvtName"
+	desc = "Sphere_Colonize_EvtDesc"
+	id = 141005
+	picture = "africa_colonization"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Sphere_Colonize_EvtOptDecline"
+		relation = { who = FROM value = 20 }
+		diplomatic_influence = { who = FROM value = 5 }
+		FROM = { add_country_modifier = { name = annoyance_cooldown_modifier duration = 365 } }
+	}
+	
+	option = {
+		name = "Sphere_Colonize_EvtOptAccept"
+		random_owned = {
+			limit = {
+				owner = {
+					FROM = { NOT = { total_pops = 100000 } }
+				}
+			}
+			owner = {
+				badboy = 1.5
+				create_vassal = FROM
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					FROM = { total_pops = 100000 NOT = { total_pops = 200000 } }
+				}
+			}
+			owner = {
+				badboy = 2
+				create_vassal = FROM
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					FROM = { total_pops = 200000 NOT = { total_pops = 400000 } }
+				}
+			}
+			owner = {
+				badboy = 3
+				create_vassal = FROM
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					FROM = { total_pops = 400000 NOT = { total_pops = 600000 } }
+				}
+			}
+			owner = {
+				badboy = 4.5
+				create_vassal = FROM
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					FROM = { total_pops = 600000 }
+				}
+			}
+			owner = {
+				badboy = 7
+				create_vassal = FROM
+			}
+		}
+	}
+}
+
+
+## TODO »¬≈Õ“ Õ≈ ƒŒÀ∆≈Õ ¬€œ¿ƒ¿“‹ ¡≈«  ŒÀŒÕ»¿À‹ÕŒ… œŒÀ»“» »
+country_event = { # PUPPET // FIRST WAVE COLONIZATION
+	title = "noloc"
+	desc = "noloc"
+	id = 141006
+	
+	mean_time_to_happen = {
+		months = 12
+		modifier = {
+			factor = 0.5
+			year = 1865
+		}
+		modifier = {
+			factor = 0.2
+			sphere_owner = { civilizing_mission_tech = 1 }
+		}
+	}
+	
+	trigger = {
+		capital_scope = { continent = africa }
+		NOT = { 
+			has_country_flag = malaria_blocked_country_flag 
+			has_country_flag = severe_blocked_country_flag
+			has_country_modifier = annoyance_cooldown_modifier
+		}
+		ai = yes
+		civilized = no
+		is_independant = yes
+		sphere_owner = {
+			civilized = yes
+			colonial_offices_tech = 1
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		sphere_owner = {
+			country_event = 141005 
+		}
+	}
+}
+
+country_event = { # PUPPET // SECOND WAVE COLONIZATION
+	title = "noloc"
+	desc = "noloc"
+	id = 141007
+	
+	mean_time_to_happen = {
+		months = 12
+		modifier = {
+			factor = 0.5
+			year = 1885
+		}
+		modifier = {
+			factor = 0.2
+			sphere_owner = { invention = malaria_prevention_inv }
+		}
+	}
+	
+	trigger = {
+		capital_scope = { continent = africa }
+		has_country_flag = malaria_blocked_country_flag
+		NOT = {
+			has_country_modifier = annoyance_cooldown_modifier
+		}
+		ai = yes
+		civilized = no
+		is_independant = yes
+		sphere_owner = {
+			civilized = yes
+			has_country_flag = malaria_countered_country_flag
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		sphere_owner = {
+			country_event = 141005
+		}
+	}
+}
+
+country_event = { # PUPPET // SECOND WAVE COLONIZATION
+	title = "noloc"
+	desc = "noloc"
+	id = 141008
+	
+	mean_time_to_happen = {
+		months = 12
+		modifier = {
+			factor = 0.5
+			year = 1895
+		}
+		modifier = {
+			factor = 0.2
+			year = 1900
+		}
+	}
+	
+	trigger = {
+		capital_scope = { continent = africa }
+		has_country_flag = severe_malaria_blocked_country_flag
+		NOT = {
+			has_country_modifier = annoyance_cooldown_modifier
+		}
+		ai = yes
+		civilized = no
+		is_independant = yes
+		sphere_owner = {
+			civilized = yes
+			has_country_flag = severe_malaria_countered_country_flag
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		sphere_owner = {
+			country_event = 141005
+		}
 	}
 }

@@ -476,45 +476,6 @@ futurism = {
 		permanent_prestige = 10
 	}
 }
-mission_to_civilize = { # TODO REMOVE
-	limit = { 
-		year = 1850 
-		state_n_government = 1
-	}
-	news = no
-	chance = {
-		base = 0
-		modifier = {
-			factor = 25
-			nationalism_n_imperialism = 1
-		}
-		modifier = {
-			factor = 25
-			market_regulations = 1
-		}
-		modifier = {
-			factor = 25
-			naval_statistics = 1
-		}
-		modifier = {
-			factor = 10
-			any_greater_power = {
-				invention = mission_to_civilize
-			}
-		}
-		modifier = {
-			factor = 10
-			any_neighbor_country = {
-				invention = mission_to_civilize
-			}
-		}
-	}
-	effect = {
-		colonial_prestige = 0.1
-		diplomatic_points = 0.2
-		colonial_life_rating = -10 
-	}
-}
 #colonialism_tech
 colonial_policy = {
 	limit = { colonialism_tech = 1 }
@@ -732,6 +693,41 @@ brother_peoples = {
 	core_pop_militancy_modifier = -0.01
 }
 #civilizing_mission_tech
+mission_to_civilize = {
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 25
+			nationalism_n_imperialism = 1
+		}
+		modifier = {
+			factor = 25
+			market_regulations = 1
+		}
+		modifier = {
+			factor = 25
+			naval_statistics = 1
+		}
+		modifier = {
+			factor = 10
+			any_greater_power = {
+				invention = mission_to_civilize
+			}
+		}
+		modifier = {
+			factor = 10
+			any_neighbor_country = {
+				invention = mission_to_civilize
+			}
+		}
+	}
+	effect = {
+		colonial_prestige = 0.1
+		diplomatic_points = 0.2
+		colonial_life_rating = -10 
+	}
+}
 second_wave_colonization = {
 	limit = { civilizing_mission_tech = 1 }
 	news = no
