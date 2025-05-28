@@ -252,27 +252,26 @@ political_decisions = {
 	subjugate_south_germans_dec = {
 		potential = {
 			is_greater_power = yes
-			primary_culture = south_german
+			tag = AUS
 			NOT = { has_country_flag = hide_all_decs_flag has_country_flag = subjugate_south_germans_flag }
 			OR = {
 				BAV = {
 					exists = yes
-					NOT = { vassal_of = THIS }
+					vassal_of = THIS
 					ai = yes
 				}
 				BAD = {
-					exists = yes
-					NOT = { vassal_of = THIS }
+					vassal_of = THIS
 					ai = yes
 				}
 				WUR = {
 					exists = yes
-					NOT = { vassal_of = THIS }
+					vassal_of = THIS
 					ai = yes
 				}
 				SGF = {
 					exists = yes
-					NOT = { vassal_of = THIS }
+					vassal_of = THIS
 					ai = yes
 				}
 			}
@@ -283,7 +282,7 @@ political_decisions = {
 		}
 		
 		effect = {
-			badboy = 5
+			badboy = 5 # TODO ƒ¿¬¿“‹ ¡≈—◊≈—“‹≈ Œ“ƒ≈À‹ÕŒ «¿  ¿∆ƒ”ﬁ —“–¿Õ”
 			plurality = -10
 			CUSTOM_TOOLTIP_SUBJUGATE_SOUTHGERMANS = { }
 			SGF = { all_core = { add_core = THIS } }
