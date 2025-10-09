@@ -395,6 +395,7 @@ political_reforms = {
 			allow = {
 				NOT = {
 					has_country_flag = ref_serfdom_abolished_flag
+					has_country_flag = stagnant_army_cflag
 				}
 				is_mobilised = no
 			}
@@ -406,6 +407,7 @@ political_reforms = {
 			mobilisation_size = 0.01
 			allow = {
 				has_country_flag = ref_serfdom_abolished_flag
+				NOT = { has_country_flag = stagnant_army_cflag }
 				is_mobilised = no
 			}
 		}
@@ -418,6 +420,7 @@ political_reforms = {
 			allow = {
 				has_country_flag = army_professionalism_flag
 				has_country_flag = ref_serfdom_abolished_flag
+				NOT = { has_country_flag = stagnant_army_cflag }
 				is_mobilised = no
 			}
 		}

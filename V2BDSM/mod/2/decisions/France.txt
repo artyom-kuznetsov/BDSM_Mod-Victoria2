@@ -1,4 +1,51 @@
 political_decisions = {
+	france_reform_army_dec = {
+		potential = {
+			has_country_modifier = stagnant_army_cmod
+		}
+		
+		allow = {
+			OR = {
+				AND = {
+					NOT = { owns = 412 }
+					military_statistics = 1
+					money = 500000
+				}
+				AND = {
+					owns = 412
+					military_statistics = 1
+					army_decision_making = 1
+				}
+				ai = yes
+			}
+			NOT = { has_country_modifier = administrative_expenses_modifier }
+		}
+		
+		effect = {
+			clr_country_flag = stagnant_army_cflag
+			remove_country_modifier = stagnant_army_cmod
+			
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 1035
+			}
+			political_reform = ref_limited_military_budget
+			
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { owns = 412 }
+						ai = no
+					}
+				}
+				owner = {
+					money = -500000
+				}
+			}
+			
+		}
+	}
+	
 	liberty_enlightening_the_world = {
 		potential = {
 			NOT = {

@@ -468,7 +468,7 @@ promote_to =
 					# Audax Validator "." Ignore_NEXT
 					is_core = THIS 
 				}
-            }
+            }			
 		}
 		group = {
 			modifier = {
@@ -544,17 +544,18 @@ promote_to =
 				military_spending = 0.99
 			}
 		}
-		#modifier = {	# NO PROF ARMY BUFF FOR CRAFTSMEN
-		#	factor = 10
-		#	country = {
-		#		conscription = ref_professional_army
-		#	}
-		#}
+		modifier = {
+			factor = 10
+			country = {
+				conscription = ref_professional_army
+			}
+		}
 		modifier = {
 			factor = -10
 			location = {
 				is_colonial = yes
 			}
+			NOT = { country = { has_country_flag = french_foreign_legion_supported } }
 		}
 		
 		group = {
@@ -607,15 +608,20 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -100
-			state_scope = { soldiers = 0.05 }
-			NOT = { conscription = ref_professional_army }
-		}
+            factor = -100
+            state_scope = { soldiers = 0.04 }
+			conscription = ref_disarmed_nation
+        }
 		modifier = {
-			factor = -100
-			state_scope = { soldiers = 0.06 }
+            factor = -100
+            state_scope = { soldiers = 0.05 }
+			NOT = { conscription = ref_professional_army }
+        }
+		modifier = {
+            factor = -100
+            state_scope = { soldiers = 0.06 }
 			conscription = ref_professional_army
-		}
+        }
 	}
 	clerks = {
 		factor = 0.01

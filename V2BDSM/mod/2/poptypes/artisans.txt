@@ -296,13 +296,9 @@ promote_to =
 		factor = 0.01
 		
 		group = {
-			modifier = {
-                factor = -100
-                state_scope = { soldiers = 0.055 }
-            }
             modifier = {
                 factor = -100
-               state_scope = { soldiers = 0.060 }
+                state_scope = { soldiers = 0.060 }
             }
             modifier = {
                 factor = -100
@@ -436,7 +432,7 @@ promote_to =
 					# Audax Validator "." Ignore_NEXT
 					is_core = THIS 
 				}
-            }		
+            }			
 		}
 		group = {
 			modifier = {
@@ -519,7 +515,7 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -100
+			factor = -10
 			location = {
 				is_colonial = yes
 			}
@@ -556,16 +552,40 @@ promote_to =
 				NOT = { recruited_percentage = 0.25 }
 			}
 		}
+		
+		group = {
+			modifier = {
+				factor = -1.5
+				state_scope = { soldiers = 0.01 }
+			}
+			modifier = {
+				factor = -1.5
+				state_scope = { soldiers = 0.02 }
+			}
+			modifier = {
+				factor = -1.5
+				state_scope = { soldiers = 0.03 }
+			}
+			modifier = {
+				factor = -1.5
+				state_scope = { soldiers = 0.04 }
+			}
+		}
 		modifier = {
-			factor = -100
-			state_scope = { soldiers = 0.05 }
+            factor = -100
+            state_scope = { soldiers = 0.04 }
+			conscription = ref_disarmed_nation
+        }
+		modifier = {
+            factor = -100
+            state_scope = { soldiers = 0.05 }
 			NOT = { conscription = ref_professional_army }
-		}
+        }
 		modifier = {
-			factor = -100
-			state_scope = { soldiers = 0.06 }
+            factor = -100
+            state_scope = { soldiers = 0.06 }
 			conscription = ref_professional_army
-		}
+        }
 	}
 	bureaucrats =
 	{
