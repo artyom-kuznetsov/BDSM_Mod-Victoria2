@@ -270,14 +270,10 @@ political_decisions = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = FRA
-			OR = {
-				AND = {
-					exists = PRU
-					PRU = {
-						owns = 572
-						owns = 575
-					}
-				}
+			exists = PRU
+			PRU = {
+				owns = 572
+				owns = 575
 			}
 			NOT = {
 				has_country_flag = crisis_on_the_rhine

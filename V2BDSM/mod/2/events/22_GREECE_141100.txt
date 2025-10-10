@@ -1,0 +1,19 @@
+country_event = {
+	id = 141100
+	title = "constantinople_returned_EvtName"
+	desc = "constantinople_returned_EvtDesc"
+	picture = "Byzantium"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = GRE
+		owns = 860
+	}
+	
+	option = {
+		name = "constantinople_returned_EvtOptA"
+		TUR_860 = { assimilate = yes }
+		BUL = { all_core = { add_core = THIS } }
+	}
+}

@@ -51,63 +51,6 @@ political_decisions = {
 		}
 	}
 	
-	#integrate_greece_tur_dec = {
-	#	alert = yes
-	#	potential = {
-	#		NOT = { has_country_flag = hide_all_decs_flag }
-	#		NOT = { has_country_flag = tur_cit_law_flag }
-	#		tag = TUR
-	#		OR = {
-	#			owns = 823
-	#			owns = 822
-	#			owns = 831
-	#			owns = 834
-	#			owns = 847
-	#			owns = 855
-	#			owns = 827
-	#		}
-	#	}
-	#	
-	#	allow = {
-	#		state_n_government = 1
-	#		positivism = 1
-	#	}
-	#	
-	#	effect = {
-	#		add_accepted_culture = greek
-	#		set_country_flag = tur_cit_law_flag
-	#		any_state = {
-	#			any_pop = {
-	#				limit = {
-	#					has_pop_culture = greek
-	#				}
-	#				consciousness = 6.0
-	#			}
-	#		}
-	#	}
-	#}
-	#
-	#turkish_expansion_route_dec = {
-	#	alert = yes
-	#	potential = {
-	#		NOT = { has_country_flag = hide_all_decs_flag }
-	#		NOT = { has_country_flag = tur_expansion_route_selected }
-	#		tag = TUR
-	#		state_n_government = 1
-	#	}
-	#	
-	#	allow = {
-	#		nationalism_n_imperialism = 1
-	#		biologism = 1
-	#		breech_loaded_rifles = 1
-	#		iron_breech_loaded_artillery = 1
-	#	}
-	#	
-	#	effect = {
-	#		country_event = 57500
-	#		set_country_flag = tur_expansion_route_selected
-	#	}
-	#}
 	tanzimat_reforms = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
@@ -118,11 +61,17 @@ political_decisions = {
 		}
 		
 		allow = {
-			average_consciousness = 3
+			state_n_government = 1
+			associationism = 1
+			OR = { 
+				average_consciousness = 3
+				nationalism_tech = 1
+			}
 		}
 		
 		effect = {
 			plurality = 5
+			add_accepted_culture = bulgarian
 			any_pop = {
 				limit = {
 					NOT = {
@@ -187,7 +136,7 @@ political_decisions = {
 		}
 		
 		allow = {
-			nationalism_n_imperialism = 1
+			revolution_n_counterrevolution = 1
 		}
 		
 		effect = {

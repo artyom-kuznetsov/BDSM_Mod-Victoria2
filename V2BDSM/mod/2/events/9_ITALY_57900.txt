@@ -35,10 +35,11 @@ country_event = { # MINOR GOOD RELATION ANNEX
 	trigger = {
 		is_culture_group = italian
 		ai = yes
-		NOT = { has_global_flag = historical_flag }
+		nationalism_tech = 1
 		
 		OR = {
 			SAR = {
+				nationalism_tech = 1
 				OR = {
 					has_country_flag = is_ITA_player_flag
 					NOT = { has_global_flag = ITA_has_player_flag }
@@ -55,6 +56,7 @@ country_event = { # MINOR GOOD RELATION ANNEX
 				}
 			}
 			SIC = {
+				nationalism_tech = 1
 				OR = {
 					has_country_flag = is_ITA_player_flag
 					NOT = { has_global_flag = ITA_has_player_flag }
@@ -71,6 +73,7 @@ country_event = { # MINOR GOOD RELATION ANNEX
 				}
 			}
 			PAP = {
+				nationalism_tech = 1
 				OR = {
 					has_country_flag = is_ITA_player_flag
 					NOT = { has_global_flag = ITA_has_player_flag }
@@ -87,6 +90,7 @@ country_event = { # MINOR GOOD RELATION ANNEX
 				}
 			}
 			ITA = {
+				nationalism_tech = 1
 				OR = {
 					has_country_flag = is_ITA_player_flag
 					NOT = { has_global_flag = ITA_has_player_flag }
@@ -129,7 +133,6 @@ country_event = { # MINOR GOOD RELATION ANNEX
 					has_country_flag = is_ITA_player_flag
 					NOT = { has_global_flag = ITA_has_player_flag }
 				}
-				NOT = { has_global_flag = historical_flag }
 				is_culture_group = italian
 				OR = {
 					AND = {

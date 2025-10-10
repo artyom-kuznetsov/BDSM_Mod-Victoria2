@@ -29,6 +29,22 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = severe_malaria_countered_country_flag
 		}
+		any_country = {
+			limit = {
+				NOT = { nationalism_tech = 1 }
+				is_independant = no
+				overlord = { nationalism_tech = 1 }
+			}
+			activate_technology = nationalism_tech
+		}
+		any_country = {
+			limit = {
+				NOT = { pan_nationalism_tech = 1 }
+				is_independant = no
+				overlord = { pan_nationalism_tech = 1 }
+			}
+			activate_technology = pan_nationalism_tech
+		}
 		
 		any_country = {
 			any_owned = {

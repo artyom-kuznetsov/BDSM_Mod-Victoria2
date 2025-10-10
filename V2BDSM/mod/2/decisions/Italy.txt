@@ -1,4 +1,177 @@
 political_decisions = {
+	italian_nationalism_tip_dec = {
+		alert = no
+		potential = {
+			is_culture_group = italian
+			ai = no
+			NOT = { exists = ITA }
+		}
+		allow = { }
+		effect = {
+			random_owned = {
+				limit = {
+					SAR = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_SAR = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					SAR = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_SAR = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					PAR = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_PAR = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					PAR = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_PAR = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					LUC = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_LUC = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					LUC = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_LUC = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					MOD = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_MOD = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					MOD = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_MOD = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					PAP = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_PAP = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					PAP = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_PAP = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					VEN = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_VEN = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					VEN = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_VEN = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					LOM = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_LOM = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					LOM = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_LOM = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					TUS = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_TUS = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					TUS = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_TUS = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					SIC = {
+						exists = yes
+						nationalism_tech = 1
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_SIC = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_POSITIVE = { } }
+			}
+			random_owned = {
+				limit = {
+					SIC = {
+						exists = yes
+						NOT = { nationalism_tech = 1 }
+					}
+				}
+				owner = { CUSTOM_TOOLTIP_SIC = { } CUSTOM_TOOLTIP_ITALIAN_NATIONALISM_NEGATIVE = { } }
+			}
+		}
+	}
 	expedition_to_sicily = {
 		potential = {
 			tag = SAR
@@ -8,7 +181,7 @@ political_decisions = {
 		}
 
 		allow = {
-			ideological_thought = 1
+			nationalism_n_imperialism = 1
 		}
 
 		effect = {
@@ -429,6 +602,7 @@ political_decisions = {
 		
 		allow = {
 			nationalism_tech = 1
+			nationalism_n_imperialism = 1
 			OR = {
 				765 = { owned_by = THIS }
 				749 = { owned_by = THIS }
@@ -946,7 +1120,7 @@ political_decisions = {
 		}
 		
 		allow = {
-			ideological_thought = 1
+			nationalism_tech = 1
 		}
 		
 		effect = {
