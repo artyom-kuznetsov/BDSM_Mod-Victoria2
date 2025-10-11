@@ -30,23 +30,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 			set_country_flag = severe_malaria_countered_country_flag
 		}
 		any_country = {
-			limit = {
-				NOT = { nationalism_tech = 1 }
-				is_independant = no
-				overlord = { nationalism_tech = 1 }
-			}
-			activate_technology = nationalism_tech
-		}
-		any_country = {
-			limit = {
-				NOT = { pan_nationalism_tech = 1 }
-				is_independant = no
-				overlord = { pan_nationalism_tech = 1 }
-			}
-			activate_technology = pan_nationalism_tech
-		}
-		
-		any_country = {
 			any_owned = {
 				limit = {
 					state_scope = {
@@ -829,7 +812,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { has_country_modifier = western_influences } plurality = -0.15 }
 		any_country = { limit = { has_country_modifier = the_slavery_debate } plurality = -0.2 }
 		any_country = { limit = { has_country_modifier = uncivilized_isolationism } plurality = 0.1 }
-		any_country = { limit = { has_country_modifier = martial_law_modifier } plurality = 0.1 }
+		any_country = { limit = { has_country_modifier = martial_law_modifier } plurality = 0.15 }
 		any_country = { limit = { has_country_modifier = the_homestead_act } plurality = 0.02 }
 		any_country = { limit = { has_country_modifier = great_depression } plurality = -0.5 }
 		any_country = { limit = { has_country_modifier = revolution_happened_cmodifier } plurality = -0.1 }

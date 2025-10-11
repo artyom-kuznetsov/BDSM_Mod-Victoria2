@@ -43,6 +43,7 @@ country_event = {
 	
 	option = {
 		name = "austria_interferes_EvtOptAccept"
+		CUSTOM_TOOLTIP_RELEASE_POPE = { }
 		749 = { secede_province = PAP }
 		750 = { secede_province = PAP }
 		create_vassal = PAP
@@ -51,6 +52,7 @@ country_event = {
 			country_event = 141202
 		}
 		relation = { who = AUS value = 50 }
+		PAP = { set_country_flag = vassal_annex_blocked create_alliance = THIS }
 		
 		ai_chance = {
 			factor = 9

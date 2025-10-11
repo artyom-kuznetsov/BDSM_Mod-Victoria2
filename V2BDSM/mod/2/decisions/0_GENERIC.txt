@@ -121,6 +121,7 @@ political_decisions = {
 			OR = {
 				war = yes
 				average_militancy = 3
+				NOT = { plurality = 40 }
 			}
 			NOT = { has_country_modifier = martial_law_cooldown_modifier }
 		}
@@ -130,7 +131,6 @@ political_decisions = {
 				duration = -1
 			}
 			set_country_flag = martial_law_flag
-			CUSTOM_TOOLTIP_STABILITY_INCREASING = { }
 		}
 	}
 	martial_law_deactivate_dec = {
