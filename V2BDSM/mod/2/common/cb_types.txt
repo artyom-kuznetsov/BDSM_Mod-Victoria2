@@ -603,13 +603,13 @@ conquest = {
 			}
 		}
 		total_pops = 300000
-		OR = {	# ВОЗМОЖЕН CONQUEST СТРАНЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 400К ДО НАЦИЗМА ИЛИ МЕНЬШЕ 600К ПОСЛЕ НАЦИЗМА
+		OR = {	# ВОЗМОЖЕН CONQUEST СТРАНЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 300К ДО НАЦИЗМА ИЛИ МЕНЬШЕ 500К ПОСЛЕ НАЦИЗМА
 			NOT = { number_of_states = 2 }
 			
-			NOT = { total_pops = 400000 THIS = { nationalism_n_imperialism = 1 } }
+			NOT = { total_pops = 300000 THIS = { nationalism_n_imperialism = 1 } }
 			
 			AND = {
-				NOT = { total_pops = 600000 }
+				NOT = { total_pops = 500000 }
 				THIS = { nationalism_n_imperialism = 1 }
 			}
 		}

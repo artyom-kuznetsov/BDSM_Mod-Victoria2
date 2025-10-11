@@ -508,22 +508,29 @@ political_decisions = {
 		}
 		
 		allow = {
+			pan_nationalism_tech = 1
 			SAR_720 = { owned_by = THIS }
 			SAR_765 = { owned_by = THIS }
 			#AUS_726 = { owned_by = THIS }
 			EMILIA_STATE = { owned_by = THIS }
 			ROMAGNA_STATE = { owned_by = THIS }
 			TUS_744 = { owned_by = THIS }
-			PAP_749 = { owned_by = THIS }
 			SIC_754 = { owned_by = THIS }
 			SIC_753 = { owned_by = THIS }
 			SIC_755 = { owned_by = THIS }
 			SIC_763 = { owned_by = THIS }
+			749 = {
+				OR = {
+					owned_by = THIS
+					owner = { tag = PAP vassal_of = THIS }
+				}
+			}
 		}
 		
 		effect = {
 			plurality = 2
 			set_country_flag = law_of_guarantees
+			749 = { owner = { annex_to = THIS } }
 			capital = 749
 			prestige = 15
 			any_owned = {
@@ -574,9 +581,6 @@ political_decisions = {
 				add_core = ITA
 			}
 			2568 = {
-				add_core = ITA
-			}
-			609 = {
 				add_core = ITA
 			}
 			502 = {
@@ -834,6 +838,9 @@ political_decisions = {
 					GRE = { vassal_of = SIC }
 				}
 				create_vassal = GRE
+			}
+			609 = {
+				add_core = ITA
 			}
 		}
 	}

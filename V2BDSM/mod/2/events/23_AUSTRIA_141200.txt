@@ -1,0 +1,110 @@
+country_event = {
+	id = 141200
+	title = "pope_annexed_EvtName"
+	desc = "pope_annexed_EvtDesc"
+	picture = "garibaldi_raid"
+	
+	fire_only_once = yes
+	
+	trigger = {
+		749 = { owner = { is_culture_group = italian NOT = { tag = PAP } } }
+	}
+	
+	option = {
+		name = "pope_annexed_EvtOptA"
+		749 = {
+			owner = {
+				country_event = { id = 141201 days = 1 }
+			}
+		}
+		
+		ai_chance = {
+			factor = 9
+		}
+	}
+	
+	option = {
+		name = "pope_annexed_EvtOptB"
+		add_country_modifier = { name = national_humiliation_cmodifier days = 1825 }
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = 141201
+	title = "austria_interferes_EvtName"
+	desc = "austria_interferes_EvtDesc"
+	picture = "vatican"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "austria_interferes_EvtOptAccept"
+		749 = { secede_province = PAP }
+		750 = { secede_province = PAP }
+		create_vassal = PAP
+		AUS = { 
+			diplomatic_influence = { who = PAP  value = 500 } 
+			country_event = 141202
+		}
+		relation = { who = AUS value = 50 }
+		
+		ai_chance = {
+			factor = 9
+		}
+	}
+	
+	option = {
+		name = "pope_annexed_EvtOptDecline"
+		AUS = { 
+			country_event = 141203
+		}
+		prestige = -10
+		badboy = 4
+		plurality = -5
+		relation = { who = AUS value = -50 }
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+country_event = {
+	id = 141202
+	title = "italy_submits_EvtName"
+	desc = "italy_submits_EvtDesc"
+	picture = "vatican"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "italy_submits_EvtOptA"
+		prestige = 5
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+}
+
+country_event = {
+	id = 141203
+	title = "italy_declines_EvtName"
+	desc = "italy_declines_EvtDesc"
+	picture = "vatican"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "italy_declines_EvtOptA"
+		prestige = -5
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+}
