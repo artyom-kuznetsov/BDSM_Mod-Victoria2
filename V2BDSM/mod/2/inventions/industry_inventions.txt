@@ -1243,6 +1243,19 @@ pharmaceuticals = {
 		activate_building = pharmaceutical_plant 
 	}
 }
+first_health_reform_inv = {
+	limit = { medicine = 1 }
+	news = no
+	chance = {
+		base = 100
+	}
+	effect = {
+		factory_goods_output = {
+			pharmaceuticals = 0.01
+		}
+	}
+}
+
 combat_medicine = {
 	limit = { medicine = 1 }
 	chance = {
@@ -1322,6 +1335,19 @@ artificial_fertilizers = {
 		}
 	}
 }
+second_health_reform_inv = {
+	limit = { inorganic_chemistry = 1 }
+	news = no
+	chance = {
+		base = 100
+	}
+	effect = {
+		factory_goods_output = {
+			pharmaceuticals = 0.01
+		}
+	}
+}
+
 nitroglycerin = {
 	limit = { inorganic_chemistry = 1 }
 	chance = {
@@ -1595,6 +1621,19 @@ x_rays = {
 		land_attrition = -0.02 
 	}
 }
+second_health_reform_inv = {
+	limit = { electricity = 1 }
+	news = no
+	chance = {
+		base = 100
+	}
+	effect = {
+		factory_goods_output = {
+			pharmaceuticals = 0.01
+		}
+	}
+}
+
 edison_light_bulb = {
 	limit = { electricity = 1 }
 	chance = {

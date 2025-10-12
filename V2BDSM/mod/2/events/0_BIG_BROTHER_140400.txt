@@ -9,6 +9,498 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
+		# v4.6.2 COLONY RAIL DEBUFFS
+		any_country = {
+			# MIN BUILD 0
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { experimental_railroad = 1 } # LEVEL 1
+					OR = {
+						terrain = farmlands
+						terrain = farmlands_mine
+						terrain = woods
+						terrain = woods_mine
+						terrain = steppe
+						terrain = steppe_mine
+						terrain = terrain_strait_control_tile_plains
+						terrain = terrain_strait_control_tile_plains_mine
+						terrain = plains
+						terrain = plains_mine
+						terrain = urban
+						terrain = urban_mine
+						terrain = terrain_strait_control_tile_urban
+					}
+				}
+				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { early_railroad = 1 } # LEVEL 1
+					OR = {
+						terrain = farmlands
+						terrain = farmlands_mine
+						terrain = woods
+						terrain = woods_mine
+						terrain = steppe
+						terrain = steppe_mine
+						terrain = terrain_strait_control_tile_plains
+						terrain = terrain_strait_control_tile_plains_mine
+						terrain = plains
+						terrain = plains_mine
+						terrain = urban
+						terrain = urban_mine
+						terrain = terrain_strait_control_tile_urban
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				add_province_modifier = { name = colonial_railway_nerf_2_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { iron_railroad = 1 } # LEVEL 1
+					OR = {
+						terrain = farmlands
+						terrain = farmlands_mine
+						terrain = woods
+						terrain = woods_mine
+						terrain = steppe
+						terrain = steppe_mine
+						terrain = terrain_strait_control_tile_plains
+						terrain = terrain_strait_control_tile_plains_mine
+						terrain = plains
+						terrain = plains_mine
+						terrain = urban
+						terrain = urban_mine
+						terrain = terrain_strait_control_tile_urban
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				add_province_modifier = { name = colonial_railway_nerf_3_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { steel_railroad = 1 } # LEVEL 1
+					OR = {
+						terrain = farmlands
+						terrain = farmlands_mine
+						terrain = woods
+						terrain = woods_mine
+						terrain = steppe
+						terrain = steppe_mine
+						terrain = terrain_strait_control_tile_plains
+						terrain = terrain_strait_control_tile_plains_mine
+						terrain = plains
+						terrain = plains_mine
+						terrain = urban
+						terrain = urban_mine
+						terrain = terrain_strait_control_tile_urban
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				add_province_modifier = { name = colonial_railway_nerf_4_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { integral_rail_system = 1 } # LEVEL 1
+					OR = {
+						terrain = farmlands
+						terrain = farmlands_mine
+						terrain = woods
+						terrain = woods_mine
+						terrain = steppe
+						terrain = steppe_mine
+						terrain = terrain_strait_control_tile_plains
+						terrain = terrain_strait_control_tile_plains_mine
+						terrain = plains
+						terrain = plains_mine
+						terrain = urban
+						terrain = urban_mine
+						terrain = terrain_strait_control_tile_urban
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				remove_province_modifier = colonial_railway_nerf_4_pmod
+				add_province_modifier = { name = colonial_railway_nerf_5_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { limited_access_roads = 1 } # LEVEL 1
+					OR = {
+						terrain = farmlands
+						terrain = farmlands_mine
+						terrain = woods
+						terrain = woods_mine
+						terrain = steppe
+						terrain = steppe_mine
+						terrain = terrain_strait_control_tile_plains
+						terrain = terrain_strait_control_tile_plains_mine
+						terrain = plains
+						terrain = plains_mine
+						terrain = urban
+						terrain = urban_mine
+						terrain = terrain_strait_control_tile_urban
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				remove_province_modifier = colonial_railway_nerf_4_pmod
+				remove_province_modifier = colonial_railway_nerf_5_pmod
+				add_province_modifier = { name = colonial_railway_nerf_6_pmod duration = -1 }
+			}
+			
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { modern_infrastructure = 1 } # LEVEL 1
+					OR = {
+						terrain = farmlands
+						terrain = farmlands_mine
+						terrain = woods
+						terrain = woods_mine
+						terrain = steppe
+						terrain = steppe_mine
+						terrain = terrain_strait_control_tile_plains
+						terrain = terrain_strait_control_tile_plains_mine
+						terrain = plains
+						terrain = plains_mine
+						terrain = urban
+						terrain = urban_mine
+						terrain = terrain_strait_control_tile_urban
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				remove_province_modifier = colonial_railway_nerf_4_pmod
+				remove_province_modifier = colonial_railway_nerf_5_pmod
+				remove_province_modifier = colonial_railway_nerf_7_pmod
+				add_province_modifier = { name = colonial_railway_nerf_7_pmod duration = -1 }
+			}
+			
+			
+			# MIN BUILD 1
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { early_railroad = 1 } # LEVEL 2 (min_build_railroad = 1)
+					OR = {
+						terrain = forest
+						terrain = forest_mine
+						terrain = hills
+						terrain = hills_mine
+						terrain = terrain_strait_control_tile_hills
+						terrain = terrain_strait_control_tile_hills_mine
+						terrain = coastal_desert
+						terrain = coastal_desert_mine
+					}
+				}
+				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { iron_railroad = 1 } # LEVEL 2 (min_build_railroad = 1)
+					OR = {
+						terrain = forest
+						terrain = forest_mine
+						terrain = hills
+						terrain = hills_mine
+						terrain = terrain_strait_control_tile_hills
+						terrain = terrain_strait_control_tile_hills_mine
+						terrain = coastal_desert
+						terrain = coastal_desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				add_province_modifier = { name = colonial_railway_nerf_2_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { steel_railroad = 1 } # LEVEL 2 (min_build_railroad = 1)
+					OR = {
+						terrain = forest
+						terrain = forest_mine
+						terrain = hills
+						terrain = hills_mine
+						terrain = terrain_strait_control_tile_hills
+						terrain = terrain_strait_control_tile_hills_mine
+						terrain = coastal_desert
+						terrain = coastal_desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				add_province_modifier = { name = colonial_railway_nerf_3_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { integral_rail_system = 1 } # LEVEL 2 (min_build_railroad = 1)
+					OR = {
+						terrain = forest
+						terrain = forest_mine
+						terrain = hills
+						terrain = hills_mine
+						terrain = terrain_strait_control_tile_hills
+						terrain = terrain_strait_control_tile_hills_mine
+						terrain = coastal_desert
+						terrain = coastal_desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				add_province_modifier = { name = colonial_railway_nerf_4_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { limited_access_roads = 1 } # LEVEL 2 (min_build_railroad = 1)
+					OR = {
+						terrain = forest
+						terrain = forest_mine
+						terrain = hills
+						terrain = hills_mine
+						terrain = terrain_strait_control_tile_hills
+						terrain = terrain_strait_control_tile_hills_mine
+						terrain = coastal_desert
+						terrain = coastal_desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				remove_province_modifier = colonial_railway_nerf_4_pmod
+				add_province_modifier = { name = colonial_railway_nerf_5_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { modern_infrastructure = 1 } # LEVEL 2 (min_build_railroad = 1)
+					OR = {
+						terrain = forest
+						terrain = forest_mine
+						terrain = hills
+						terrain = hills_mine
+						terrain = terrain_strait_control_tile_hills
+						terrain = terrain_strait_control_tile_hills_mine
+						terrain = coastal_desert
+						terrain = coastal_desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				remove_province_modifier = colonial_railway_nerf_4_pmod
+				remove_province_modifier = colonial_railway_nerf_5_pmod
+				add_province_modifier = { name = colonial_railway_nerf_6_pmod duration = -1 }
+			}
+			
+			
+			
+			# MIN BUILD 2
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { iron_railroad = 1 } # LEVEL 3 (min_build_railroad = 2)
+					OR = {
+						terrain = terrain_strait_control_tile_mountain
+						terrain = terrain_strait_control_tile_mountain_mine
+						terrain = mountain
+						terrain = mountain_mine
+						terrain = marsh
+						terrain = marsh_mine
+					}
+				}
+				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { steel_railroad = 1 } # LEVEL 3 (min_build_railroad = 2)
+					OR = {
+						terrain = terrain_strait_control_tile_mountain
+						terrain = terrain_strait_control_tile_mountain_mine
+						terrain = mountain
+						terrain = mountain_mine
+						terrain = marsh
+						terrain = marsh_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				add_province_modifier = { name = colonial_railway_nerf_2_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { integral_rail_system = 1 } # LEVEL 3 (min_build_railroad = 2)
+					OR = {
+						terrain = terrain_strait_control_tile_mountain
+						terrain = terrain_strait_control_tile_mountain_mine
+						terrain = mountain
+						terrain = mountain_mine
+						terrain = marsh
+						terrain = marsh_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				add_province_modifier = { name = colonial_railway_nerf_3_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { limited_access_roads = 1 } # LEVEL 3 (min_build_railroad = 2)
+					OR = {
+						terrain = terrain_strait_control_tile_mountain
+						terrain = terrain_strait_control_tile_mountain_mine
+						terrain = mountain
+						terrain = mountain_mine
+						terrain = marsh
+						terrain = marsh_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				add_province_modifier = { name = colonial_railway_nerf_4_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { modern_infrastructure = 1 } # LEVEL 3 (min_build_railroad = 2)
+					OR = {
+						terrain = terrain_strait_control_tile_mountain
+						terrain = terrain_strait_control_tile_mountain_mine
+						terrain = mountain
+						terrain = mountain_mine
+						terrain = marsh
+						terrain = marsh_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				remove_province_modifier = colonial_railway_nerf_4_pmod
+				add_province_modifier = { name = colonial_railway_nerf_5_pmod duration = -1 }
+			}
+			
+			
+			
+			# MIN BUILD 3
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { steel_railroad = 1 } # LEVEL 4 (min_build_railroad = 3)
+					OR = {
+						terrain = jungle
+						terrain = jungle_mine
+						terrain = desert
+						terrain = desert_mine
+					}
+				}
+				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { integral_rail_system = 1 } # LEVEL 4 (min_build_railroad = 3)
+					OR = {
+						terrain = jungle
+						terrain = jungle_mine
+						terrain = desert
+						terrain = desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				add_province_modifier = { name = colonial_railway_nerf_2_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { limited_access_roads = 1 } # LEVEL 4 (min_build_railroad = 3)
+					OR = {
+						terrain = jungle
+						terrain = jungle_mine
+						terrain = desert
+						terrain = desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				add_province_modifier = { name = colonial_railway_nerf_3_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { modern_infrastructure = 1 } # LEVEL 4 (min_build_railroad = 3)
+					OR = {
+						terrain = jungle
+						terrain = jungle_mine
+						terrain = desert
+						terrain = desert_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				add_province_modifier = { name = colonial_railway_nerf_4_pmod duration = -1 }
+			}
+			
+			
+			
+			# MIN BUILD 4
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { integral_rail_system = 1 } # LEVEL 5 (min_build_railroad = 4)
+					OR = {
+						terrain = arctic
+						terrain = arctic_mine
+					}
+				}
+				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { limited_access_roads = 1 } # LEVEL 5 (min_build_railroad = 4)
+					OR = {
+						terrain = arctic
+						terrain = arctic_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				add_province_modifier = { name = colonial_railway_nerf_2_pmod duration = -1 }
+			}
+			any_owned = {
+				limit = {
+					is_colonial = yes
+					owner = { modern_infrastructure = 1 } # LEVEL 5 (min_build_railroad = 4)
+					OR = {
+						terrain = arctic
+						terrain = arctic_mine
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				add_province_modifier = { name = colonial_railway_nerf_3_pmod duration = -1 }
+			}
+		}
+		# v4.6 MALARIA
 		any_country = {
 			limit = {
 				has_country_flag = get_quinine_cflag
