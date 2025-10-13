@@ -42,4 +42,47 @@ political_decisions = {
 			create_vassal = WAL
 		}
 	}
+
+	consolidate_balkan_league_dec = {
+		potential = {
+			has_country_flag = call_balkan_league_cflag
+			NOT = { has_country_flag = consolidate_balkan_league_dec_cflag }
+			NOT = { exists = BLK }
+		}
+		
+		allow = {
+			nationalism = 1
+			ideological_thought = 1
+		}
+		
+		effect = {
+			set_country_flag = consolidate_balkan_league_dec_cflag
+			change_tag = BLK
+			prestige = 10
+			add_accepted_culture = romanian
+			add_accepted_culture = transylvanian
+			WAL = { all_core = { add_core = THIS } }
+			MOL = { all_core = { add_core = THIS } }
+			TUR_810 = { add_core = THIS }
+			MONTENEGRO_STATE = { add_core = THIS }
+			
+			any_country = {
+				limit = {
+					OR = {
+						primary_culture = romanian
+						primary_culture = serb
+					}
+					OR = {
+						in_sphere = THIS
+						alliance_with = THIS
+						relation = {
+							who = THIS
+							value = 149
+						}
+					}
+				}
+				country_event = 11101
+			}
+		}
+	}
 }

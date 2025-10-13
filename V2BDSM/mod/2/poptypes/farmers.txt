@@ -345,6 +345,18 @@ promote_to =
 		group = {
             modifier = {
                 factor = -100
+                state_scope = { soldiers = 0.04 }
+            }
+            modifier = {
+                factor = -100
+                state_scope = { soldiers = 0.05 }
+            }
+            modifier = {
+                factor = -100
+                state_scope = { soldiers = 0.055 }
+            }
+            modifier = {
+                factor = -100
                 state_scope = { soldiers = 0.060 }
             }
             modifier = {
@@ -383,8 +395,26 @@ promote_to =
 		group = {		
 			modifier = {
                 factor = 100
+                state_scope = { soldiers = 0.040 }
+				OR = {
+					NOT = { conscription = ref_disarmed_nation }
+					AND = {
+						revanchism = 0.05
+						conscription = ref_disarmed_nation
+					}
+				}
+            }
+			modifier = {
+                factor = 100
                 state_scope = { soldiers = 0.050 }
-                revanchism = 0.05
+                OR = { 
+					revanchism = 0.05 
+					conscription = ref_professional_army
+					AND = {
+						revanchism = 0.1
+						conscription = ref_disarmed_nation
+					}
+				}
 				location = { 
 					# Audax Validator "." Ignore_NEXT
 					is_core = THIS 
@@ -393,7 +423,17 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.055 }
-                revanchism = 0.10
+                OR = { 
+					conscription = ref_professional_army
+					AND = {
+						revanchism = 0.10 
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.15
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -403,7 +443,16 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.060 }
-                revanchism = 0.15
+                OR = { 
+					AND = {
+						revanchism = 0.15
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.20
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -413,7 +462,16 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.065 }
-                revanchism = 0.20
+                OR = { 
+					AND = {
+						revanchism = 0.20
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.25
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -423,7 +481,16 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.070 }
-                revanchism = 0.25
+                OR = { 
+					AND = {
+						revanchism = 0.25
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.30
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -433,7 +500,16 @@ promote_to =
 			modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.075 }
-                revanchism = 0.30
+                OR = { 
+					AND = {
+						revanchism = 0.30
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.35
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -443,7 +519,16 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.080 }
-                revanchism = 0.35
+                OR = { 
+					AND = {
+						revanchism = 0.35
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.4
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -453,7 +538,16 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.085 }
-                revanchism = 0.40
+                OR = { 
+					AND = {
+						revanchism = 0.4
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.45
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -463,7 +557,16 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.090 }
-                revanchism = 0.45
+                OR = { 
+					AND = {
+						revanchism = 0.45
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.50
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -473,7 +576,16 @@ promote_to =
             modifier = {
                 factor = 100
                 state_scope = { soldiers = 0.095 }
-                revanchism = 0.50
+                OR = { 
+					AND = {
+						revanchism = 0.5
+						NOT = { conscription = ref_disarmed_nation }
+					}
+					AND = {
+						revanchism = 0.55
+						conscription = ref_disarmed_nation
+					}
+				}
 				# Audax Validator "." Ignore_NEXT
 				location = { 
 					# Audax Validator "." Ignore_NEXT
@@ -618,21 +730,6 @@ promote_to =
 				state_scope = { soldiers = 0.04 }
 			}
 		}
-		modifier = {
-            factor = -100
-            state_scope = { soldiers = 0.04 }
-			conscription = ref_disarmed_nation
-        }
-		modifier = {
-            factor = -100
-            state_scope = { soldiers = 0.05 }
-			NOT = { conscription = ref_professional_army }
-        }
-		modifier = {
-            factor = -100
-            state_scope = { soldiers = 0.06 }
-			conscription = ref_professional_army
-        }
 	}
 	craftsmen = {
 		factor = 0.01
