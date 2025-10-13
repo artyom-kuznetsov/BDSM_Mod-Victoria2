@@ -1,4 +1,6 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.6.2.X (Standalone) \nОжидаемая чексумма: XXXX;X
+vassal_annex_cooldown_cmod;Откат: Интеграция вассала;X
+vassal_annex_cooldown_cmod_desc;Мы не можем аннексировать субъекты до конца действия этого модификатора.;X
 remove_sa_EvtName;Южная Америка;X
 remove_sa_EvtDesc;Оффлимит на южную америку? Колумбия, Эквадор и Венесуэла остаются на карте.;X
 remove_sa_EvtOptA;Оставить Южную Америку;X
@@ -294,6 +296,7 @@ ai_new_vassal_modifier;Новый вассал;X
 ai_new_vassal_modifier_desc;Только для ИИ;X
 CUSTOM_TOOLTIP_CANT_ANNEX_EIC;Нельзя аннексировать Ост-Индскую Компанию до исследования технологии §LРеволюция и контрреволюция§!.;X
 CUSTOM_TOOLTIP_CANT_BLOCKED_COUNTRY;§RНедоступно:§! Аннексия этой державы отключена модом.\n;X
+CUSTOM_TOOLTIP_CANT_COOLDOWN;§RНедоступно:§! Действует модификатор §YОткат: Интеграция вассала§!.\n;X
 high_pressure_boiler;Котлы высокого давления;X
 high_pressure_boiler_desc;Используя более точные способы изготовления и новые прочные материалы, можно изготавливать котлы, способные выдержать очень большое давление.;X
 steel_boiler;Стальные котлы;X
@@ -1434,7 +1437,7 @@ prof_army_trmod;Мобилизация;X
 vassal_interaction_EvtName;Взаимодействия с вассалами;X
 vassal_interaction_targeted_EvtName;Взаимодействия с $FROMCOUNTRY$;X
 vassal_interaction_targeted_EvtDesc;Взаимодействия с нашим субъектом $FROMCOUNTRY$.;X
-vassal_interaction_EvtDesc;Выбор второго варианта отправит вам столько ивентов, сколько у вас субъектов.\n\n§BМод позволяет вам:\n1) Аннексировать субъектов за бесчестье, размер которого зависит от населения субъекта\n2) Облагать налогом субъектов, накладывая на них репарации\n3) Даровать независимость субъектам§!;X
+vassal_interaction_EvtDesc;Выбор второго варианта отправит вам столько ивентов, сколько у вас субъектов.\n\n§BМод позволяет вам:\n1) Аннексировать субъектов за бесчестье, количество которого зависит от населения субъекта\n2) Облагать налогом субъектов, накладывая на них репарации\n3) Даровать независимость субъектам§!;X
 vassal_interaction_targeted_EvtOptA;Пропустить;X
 vassal_interaction_targeted_EvtRelease;Предоставить независимость субъекту.;X
 vassal_interaction_targeted_EvtAnnex;Аннексия субъекта;X
@@ -19878,7 +19881,7 @@ POP_LEAVE_INFO_ON_SEL;$WHERE$: на днях группу $WHO$ покинули $VAL$ чел.;X
 DOMINION;Доминион;X
 SATELLITE;Сателлит;X
 DOMINION_OF_NOCOLOR;Доминион державы;X
-SATELLITE_OF_NOCOLOR;Сателлит державы;X
+SATELLITE_OF_NOCOLOR;Субъект;X
 DIPLOMACY_CANNOT_SET_PRIO_MYVASSAL;Они являются нашим §Y$TYPE$ом§W, и потому всегда находятся в нашей §Yсфере влияния§W.;X
 DIPLOMACY_TRUCE_WITH;Перемирие:;X
 DIPLOMACY_CASUSBELLIS;Поводы:;X

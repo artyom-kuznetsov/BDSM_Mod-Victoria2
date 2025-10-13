@@ -65,6 +65,17 @@ political_decisions = {
 			country_event = 140403
 			set_global_flag = 1836_setup_complete_flag
 			
+			### ANNEX VASSAL INITIAL COOLDOWN
+			any_country = {
+				limit = {
+					num_of_vassals = 1
+				}
+				add_country_modifier = {
+					name = vassal_annex_cooldown_cmod
+					duration = 3650
+				}
+			}
+			
 			### AFRICA COLONIZATION BLOCKS
 			# MALARIA
 			CNG = { set_country_flag = malaria_blocked_country_flag }
