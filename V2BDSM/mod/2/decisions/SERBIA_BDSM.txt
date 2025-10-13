@@ -1,40 +1,45 @@
+political_decisions = {
+	unite_with_montenegro_dec = {
+		potential = {
+			primary_culture = serb
+			exists = MON
+			NOT = { has_country_flag = unite_with_montenegro_cflag }
+		}
+		
+		allow = {
+			owns = 797
+			MON = { owns = 804 }
+		}
+		
+		effect = {
+			set_country_flag = unite_with_montenegro_cflag
+			inherit = MON
+		}
+	}
 
-unite_with_montenegro_dec = {
-	potential = {
-		primary_culture = serb
-		exists = MON
-		NOT = { has_country_flag = unite_with_montenegro_cflag }
-	}
-	
-	allow = {
-		owns = 797
-		MON = { owns = 804 }
-	}
-	
-	effect = {
-		set_country_flag = unite_with_montenegro_cflag
-		inherit = MON
+	call_balkan_league_dec = {
+		potential = {
+			tag = SER
+			NOT = { has_country_flag = call_balkan_league_cflag }
+		}
+		
+		allow = {
+			relation = {
+				who = WAL
+				value = 120
+			}
+			relation = {
+				who = MOL
+				value = 120
+			}
+		}
+		
+		effect = {
+			set_country_flag = call_balkan_league_cflag
+			create_alliance = MOL
+			create_alliance = WAL
+			create_vassal = MOL
+			create_vassal = WAL
+		}
 	}
 }
-
-#call_balkan_league_dec = {
-#	potential = {
-#		tag = SER
-#		NOT = { has_country_flag = call_balkan_league_cflag }
-#	}
-#	
-#	allow = {
-#		relation = {
-#			who = WAL
-#			value = 150
-#		}
-#		relation = {
-#			who = MOL
-#			value = 150
-#		}
-#	}
-#	
-#	effect = {
-#		set_country_flag = call_balkan_league_cflag
-#	}
-#}
