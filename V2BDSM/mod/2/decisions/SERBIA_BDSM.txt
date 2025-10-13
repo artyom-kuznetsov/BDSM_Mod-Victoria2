@@ -53,6 +53,7 @@ political_decisions = {
 		allow = {
 			nationalism_tech = 1
 			ideological_thought = 1
+			war = no
 		}
 		
 		effect = {
@@ -82,6 +83,48 @@ political_decisions = {
 				}
 				country_event = 11101
 			}
+		}
+	}
+	
+	invite_bulgaria_to_league_dec = {
+		potential = {
+			tag = BLK
+			NOT = { has_country_flag = invite_bulgaria_to_league_cflag }
+		}
+		
+		allow = {
+			OR = {
+				exists = BUL
+				owns = 809
+			}
+		}
+		
+		effect = {
+			set_country_flag = invite_bulgaria_to_league_cflag
+			add_accepted_culture = bulgarian
+			inherit = BUL
+			BUL = { all_core = { add_core = THIS } }
+		}
+	}
+	
+	invite_albania_to_league_dec = {
+		potential = {
+			tag = BLK
+			NOT = { has_country_flag = invite_albania_to_league_cflag }
+		}
+		
+		allow = {
+			OR = {
+				exists = ALB
+				owns = 852
+			}
+		}
+		
+		effect = {
+			set_country_flag = invite_albania_to_league_cflag
+			add_accepted_culture = albanian
+			inherit = ALB
+			ALB = { all_core = { add_core = THIS } }
 		}
 	}
 	
