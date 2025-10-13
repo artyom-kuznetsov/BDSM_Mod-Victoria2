@@ -57,6 +57,7 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9572
 		country_event = 9574
 		country_event = 9578
+		country_event = 9579
 		country_event = 57073
 		country_event = 57604
 		add_country_modifier = { name = revolution_happened_cmodifier duration = 1 }
@@ -569,4 +570,57 @@ country_event = { # INDONESIA
 		inherit = BAL
 		inherit = PPA
     }
+}
+
+country_event = { # REMOVE SA
+    id = 9579
+    title = "remove_sa_EvtName"
+    desc = "remove_sa_EvtDesc"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = "remove_sa_EvtOptA"
+    }
+    option = {
+        name = "remove_sa_EvtOptB"
+		any_country = {
+			limit = {
+				capital_scope = { continent = south_america }
+				NOT = {
+					tag = CLM
+					tag = VNZ
+					tag = BRZ
+					tag = ECU
+					tag = UCA
+				}
+			}
+			annex_to = BRZ
+		}
+		BRZ = { set_country_flag = offlimit_cflag }
+    }
+}
+
+country_event = { # BRZ CLEAR DIPLO
+    id = 9580
+    title = "noloc"
+    desc = "noloc"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = "noloc"
+		any_country = { # ”¡»“‹ ¬—≈Ã Œ“ÕŒÿ≈Õ»ﬂ — ¡–¿«»À»≈…
+			limit = {
+				is_greater_power = yes
+			}
+			relation = { who = THIS value = -400 }
+			
+			diplomatic_influence = {
+				who = BRZ
+				value = -600
+			}
+			leave_alliance = BRZ
+		}
+	}
 }

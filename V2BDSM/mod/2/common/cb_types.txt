@@ -559,7 +559,11 @@ war_for_mil_access = {
 	#tws_battle_factor = 2.0
 	
 	can_use = {
-		NOT = { is_our_vassal = THIS war_with = THIS tag = WBK }
+		NOT = { is_our_vassal = THIS war_with = THIS }
+		NOT = { 
+			has_country_flag = offlimit_cflag
+			THIS = { has_country_flag = offlimit_cflag } 
+		}
 		THIS = { war = yes ai = no }
 	}
 	
@@ -583,7 +587,8 @@ conquest = {
 	crisis = no
 	
 	can_use = {
-		NOT = { tag = WBK is_our_vassal = THIS }
+		NOT = { is_our_vassal = THIS }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		OR = {
             AND = {
                 THIS = { num_of_ports = 1 }
@@ -697,7 +702,7 @@ conquest_claimed = {
 				tag = MOR
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 	}
 
 	badboy_factor = 0.9
@@ -876,7 +881,7 @@ conquest_small = {
 	crisis = no
 	
 	can_use = {
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { is_our_vassal = THIS }
 		civilized = yes
 		NOT = { total_pops = 300000 }
@@ -1019,7 +1024,7 @@ add_to_sphere = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		
 		OR = {
 			neighbour = THIS
@@ -1207,6 +1212,7 @@ acquire_core_state = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		number_of_states = 2 # annex if you want their last state
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		any_owned_province = {
 			is_core = THIS
 		}
@@ -1274,6 +1280,7 @@ acquire_core_state_AI = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		number_of_states = 2 # annex if you want their last state
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		any_owned_province = {
 			is_core = THIS
 		}
@@ -1340,6 +1347,7 @@ acquire_all_cores = {
 
 	can_use = {
 
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		any_owned_province = { is_core = THIS }
 		any_owned_province = { NOT = { is_core = THIS } }
 		THIS = { ai = no }
@@ -1617,6 +1625,7 @@ acquire_state_small = {
 		NOT = { has_country_flag = daimyo_flag }
 		NOT = { is_our_vassal = THIS }
 		number_of_states = 2 # annex if you want their last state
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		any_owned_province = {
 			not = { is_core = THIS }
 			is_colonial = no
@@ -1723,6 +1732,7 @@ acquire_state_medium = {
 		NOT = { has_country_flag = daimyo_flag }
 		NOT = { is_our_vassal = THIS }
 		number_of_states = 2 # annex if you want their last state
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		any_owned_province = {
 			not = { is_core = THIS }
 			is_colonial = no
@@ -1829,6 +1839,7 @@ acquire_state = {
 		NOT = { has_country_flag = daimyo_flag }
 		NOT = { is_our_vassal = THIS }
 		number_of_states = 2 # annex if you want their last state
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		any_owned_province = {
 			not = { is_core = THIS }
 			is_colonial = no
@@ -1938,6 +1949,7 @@ acquire_capital = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		any_owned_province = {
 			not = { is_core = THIS }
 			is_colonial = no
@@ -2049,7 +2061,7 @@ place_in_the_sun = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 	}
 	
 	allowed_states = {
@@ -2249,6 +2261,7 @@ cut_down_to_size = {
 	}
 	
 	can_use = {
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS
 			conscription = ref_huge_military_budget
@@ -2410,6 +2423,7 @@ free_peoples = {
 	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 	}
 
 	# THIS - us
@@ -2511,6 +2525,7 @@ liberate_country = {
 	
 	can_use = {
 		NOT = { is_our_vassal = THIS }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 	}
 
 	# THIS - us
@@ -2618,7 +2633,7 @@ dismantle_forts = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 	}
 
 	# THIS - us
@@ -3010,6 +3025,7 @@ make_puppet = {
 	can_use = {
 		ai = yes
 		total_pops = 350000
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS 
 			has_country_flag = daimyo_flag
@@ -3101,6 +3117,7 @@ make_puppet_small = {
 	can_use = {
 		ai = yes
 		total_pops = 200000
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS 
 			total_pops = 350000
@@ -3114,7 +3131,7 @@ make_puppet_small = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		OR = {
             AND = {
                 THIS = { num_of_ports = 1 }
@@ -3187,6 +3204,7 @@ make_puppet_tiny = {
 
 	can_use = {
 		ai = yes
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS 
 			total_pops = 200000
@@ -3200,7 +3218,7 @@ make_puppet_tiny = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		OR = {
             AND = {
                 THIS = { num_of_ports = 1 }
@@ -3346,7 +3364,7 @@ humiliate = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		OR = {
 			neighbour = THIS
 			AND = {
@@ -3414,7 +3432,7 @@ demand_reparations = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		OR = {
 			neighbour = THIS
 			AND = {
@@ -3476,6 +3494,7 @@ demand_concession_casus_belli = {
 	always = no
 
 	can_use = {
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { is_our_vassal = THIS }
 		THIS = {
 			civilized = yes
@@ -3569,7 +3588,7 @@ establish_protectorate_casus_belli = {
 	always = no
 	
 	can_use = {
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { is_our_vassal = THIS }
 		civilized = no
 		THIS = { civilized = yes }
@@ -3666,7 +3685,7 @@ establish_small_protectorate_casus_belli = {
 	always = no
 	
 	can_use = {
-		NOT = { tag = WBK }
+		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { is_our_vassal = THIS }
 		civilized = no
 		THIS = { civilized = yes }
