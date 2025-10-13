@@ -94,7 +94,12 @@ political_decisions = {
 		
 		allow = {
 			OR = {
-				exists = BUL
+				AND = { 
+					BUL = {
+						exists = yes
+						war = no
+					} 
+				}
 				owns = 809
 			}
 		}
@@ -115,7 +120,12 @@ political_decisions = {
 		
 		allow = {
 			OR = {
-				exists = ALB
+				AND = { 
+					ALB = {
+						exists = yes
+						war = no
+					} 
+				}
 				owns = 852
 			}
 		}
