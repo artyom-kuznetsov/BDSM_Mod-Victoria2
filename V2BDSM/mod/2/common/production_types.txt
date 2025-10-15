@@ -487,10 +487,6 @@ clipper_shipyard = {
 		trigger = { has_building = steel_factory }
 		value = 0.05
 	}
-	bonus = {
-		trigger = { has_building = lumber_mill }
-		value = 0.05
-	}
 }
 
 small_arms_factory = {       
@@ -504,10 +500,6 @@ small_arms_factory = {
 	bonus = {
 		trigger = { has_building = steel_factory }
 		value = 0.1
-	}
-	bonus = {
-		trigger = { has_building = lumber_mill }
-		value = 0.05
 	}
 }
 
@@ -874,13 +866,6 @@ sulphur_mine = {
 	output_goods = sulphur 
 	value = 1.2
 	mine = yes
-}
-
-tea_plantation = {
-	template = RGO_template_farmers
-	output_goods = tea_leaves
-	value = 1.7
-	farm = yes
 }
 
 timber_lodge = {
@@ -1642,38 +1627,6 @@ artisan_winery = {
 	}
 	output_goods = wine
 	value = 1					#10
-	owner = {
-		# Audax Validator "." Ignore_NEXT
-		poptype = artisan
-		effect = output
-	}
-	type = artisan
-	workforce = 10000
-}
-
-artisan_tea = {
-	input_goods = {
-		tea_leaves = 1.538		#3.9988
-		paper = 0.294			#0.9996 total input+maint = 4.9984
-	}
-	output_goods = tea
-	value = 2.22				#9.99
-	owner = {
-		# Audax Validator "." Ignore_NEXT
-		poptype = artisan
-		effect = output
-	}
-	type = artisan
-	workforce = 10000
-}
-
-artisan_coffee = {
-	input_goods = {
-		coffee_beans = 1.538	#3.9988
-		paper = 0.294			#0.9996 total input+maint = 4.9984
-	}
-	output_goods = coffee
-	value = 2.22				#9.99
 	owner = {
 		# Audax Validator "." Ignore_NEXT
 		poptype = artisan
