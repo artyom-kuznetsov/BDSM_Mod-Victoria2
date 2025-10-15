@@ -151,7 +151,6 @@ machine_parts_factory = {
 	max_level = 99
 	goods_cost =
 	{
-		lumber = 400
 		cement = 400
 		steel = 400
 		coal = 500
@@ -183,28 +182,6 @@ synthetic_oil_factory = {
 	onmap = no
 
 	production_type = synthetic_oil_factory
-	pop_build_factory = yes
-	strategic_factory = yes
-}
-
-fuel_refinery = {
-	type = factory
-
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		machine_parts = 400
-		steel = 400
-		cement = 600
-		coal = 600
-	}
-	time = 182
-	visibility = yes
-	onmap = no
-
-	production_type = fuel_refinery
 	pop_build_factory = yes
 	strategic_factory = yes
 }
@@ -598,46 +575,6 @@ pharmaceutical_plant = {
 
 ############# BASIC FACTORIES
 
-lumber_mill = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		iron = 600
-		timber = 2000
-		coal = 800
-	}
-	time = 182
-	visibility = yes
-	onmap = no
-
-	default_enabled = yes	
-	production_type = lumber_mill
-	pop_build_factory = yes
-}
-
-fabric_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		iron = 400
-		timber = 1000
-		cement = 200
-		coal = 600
-	}
-	time = 182
-	visibility = yes
-	onmap = no
-
-	default_enabled = yes	
-	production_type = fabric_factory
-	pop_build_factory = yes
-}
 
 cement_factory = {
 	type = factory
@@ -648,7 +585,6 @@ cement_factory = {
 	{
 		iron = 400
 		timber = 1000
-		lumber = 2000
 		coal = 1200
 	}
 	time = 182
@@ -772,7 +708,6 @@ naval_base = {
 	cost = 15000
 	goods_cost =
 	{
-		lumber = 5000
 		cement = 400
 		steel = 500
 		machine_parts = 1
@@ -797,7 +732,6 @@ railroad = {
 	type = infrastructure
 	goods_cost =
 	{
-		lumber = 400
 		cement = 150
 		steel = 150
 	}
@@ -820,7 +754,6 @@ fort = {
 	type = fort
 	goods_cost =
 	{
-		lumber = 500
 		cement = 50
 		explosives = 100
 		small_arms = 100
@@ -896,7 +829,6 @@ fort = {
 		{
 			cement = 200		#3200
 			iron = 400			#1880
-			lumber = 1000		#1000
 			machine_parts = 100	#1460
 		}
 
