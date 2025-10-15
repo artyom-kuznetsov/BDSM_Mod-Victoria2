@@ -703,41 +703,6 @@ cigarette_factory = {
 	}
 }
 
-tea_packaging_factory = {
-	template = cheap_factory_template	#3.7
-	input_goods = {   
-		tea_leaves = 8.57	#22.282
-		paper = 2			#6.8	total input+maint = 32.782
-	}
-	output_goods = tea
-	value = 8.9				#40.05
-	bonus = {
-		trigger = { trade_goods_in_state = tea_leaves }
-		value = 0.075
-	}
-	bonus = {
-		trigger = { has_building = paper_mill }
-		value = 0.075
-	}
-}
-
-coffee_packaging_factory = {
-	template = cheap_factory_template	#3.7
-	input_goods = {   
-		coffee_beans = 8.57	#22.282
-		paper = 2			#6.8	total input+maint = 32.782
-	}
-	output_goods = coffee
-	value = 8.9				#40.05
-	bonus = {
-		trigger = { trade_goods_in_state = coffee_beans }
-		value = 0.075
-	}
-	bonus = {
-		trigger = { has_building = paper_mill }
-		value = 0.075
-	}
-}
 
 
 ############# BASIC FACTORIES 
@@ -981,13 +946,6 @@ precious_metal_mine = {
 	template = RGO_template_gold
 	output_goods = precious_metal 
 	value = 11
-	mine = yes
-}
-
-trading_port = {
-	template = RGO_template_labourers
-	output_goods = market_goods 
-	value = 0.2
 	mine = yes
 }
 

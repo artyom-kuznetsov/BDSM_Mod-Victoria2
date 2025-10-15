@@ -405,7 +405,6 @@ demotion_chance =
 					trade_goods= iron
 					trade_goods= oil
 					trade_goods= precious_metal
-					trade_goods= market_goods
 					trade_goods= sulphur
 				}
 			}
@@ -421,7 +420,6 @@ demotion_chance =
 					trade_goods= iron
 					trade_goods= oil
 					trade_goods= precious_metal
-					trade_goods= market_goods
 					trade_goods= sulphur
 				}
 			}
@@ -437,7 +435,6 @@ demotion_chance =
 					trade_goods= iron
 					trade_goods= oil
 					trade_goods= precious_metal
-					trade_goods= market_goods
 					trade_goods= sulphur
 				}
 			}
@@ -452,7 +449,6 @@ demotion_chance =
 					trade_goods= iron
 					trade_goods= oil
 					trade_goods= precious_metal
-					trade_goods= market_goods
 					trade_goods= sulphur
 				}
 			}
@@ -817,21 +813,6 @@ migration_chance = {
 		state_scope = {
 			# Audax Validator "." Ignore_NEXT
 			NOT = { total_pops = 300000 }
-		}
-	}
-	modifier = {
-		factor = -0.5
-		NOT = { unemployment = 0.1 }
-		strata = poor
-		location = {
-			OR = {
-				trade_goods= opium
-				trade_goods= silk
-				trade_goods= rubber
-				trade_goods= tropical_wood
-				trade_goods= coffee
-				trade_goods= tea_leaves
-			}
 		}
 	}
 }
