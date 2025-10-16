@@ -1,0 +1,43 @@
+monitor = {
+	icon = 10
+	naval_icon = 7
+	
+	type = naval
+	sprite = Monitor
+	unit_type = light_ship
+	floating_flag = yes
+	active = no
+	move_sound = steam_move
+	select_sound = steam_selected
+	colonial_points = 12
+
+
+	#Core Abilities
+	priority = 30
+	max_strength = 100
+	default_organisation = 30
+	maximum_speed = 4
+	weighted_value = 10.0
+
+	#Building Costs
+	build_time = 360
+	build_cost = {
+		steamer_convoy = 150
+	}
+	min_port_level = 3
+	supply_consumption_score = 1
+	limit_per_port = -1 #10
+	
+	supply_consumption = 1.0
+	supply_cost = { # v4.0 CALCULATED MAINT 30.24
+		steamer_convoy = 0.453
+	}
+	
+	#Naval Abilties
+	hull = 12		# +4
+	gun_power = 10	# +4
+	fire_range = 0.5
+	evasion = 0.3
+	torpedo_attack = 1	# +2
+}
+

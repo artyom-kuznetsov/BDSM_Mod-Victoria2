@@ -1,0 +1,43 @@
+cuirassier = {
+	icon = 13
+	
+	type = land
+	sprite = Infantry
+	active = no
+	unit_type = infantry
+	floating_flag = no
+	
+	
+	#Core Abilities
+	priority = 30
+	max_strength = 3
+	default_organisation = 30
+	maximum_speed = 6.00
+	weighted_value = 8.0
+
+
+	#Building Costs
+	build_time = 40
+	build_cost = {
+		small_arms = 10
+		canned_food = 10
+		steel = 20
+	}
+	
+	supply_consumption = 1.0
+	supply_cost = {
+		small_arms = 0.15	# 1.5
+		canned_food = 0.15 	# 1.5
+		ammunition = 0.15	# 1.5 TOTAL 4.5
+	}
+	
+
+	#Land Abilties
+	reconnaissance = 0
+	attack = 5
+	defence = 5
+	discipline = 1.0
+	support = 0.0
+	maneuver = 2
+	
+}
