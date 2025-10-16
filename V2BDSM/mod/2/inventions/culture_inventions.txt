@@ -1,37 +1,15 @@
-# UNIQUE INVENTIONS
-
-tokugawa_infantry = {
-	limit = { ideological_thought = 1 has_country_flag = iron_discipline_flag }
-	
+#eary_classical_theory
+PS_unlocked = {
+	limit = { hidden_tech = 1 }
+	news = no
 	chance = {
-		base = 0
-		modifier = {
-			factor = 100
-			has_country_flag = iron_discipline_flag
-		}
+		base = 100	
 	}
-	
 	effect = {
-		irregular = {
-			attack = 1
-			defence = 1
-		}
-		infantry = {
-			attack = 1
-			defence = 1
-		}
-		guard = {
-			attack = 1
-			defence = 1
-		}
-		cuirassier = {
-			attack = 1
-			defence = 1
-		}
-		morale = 0.2
+		activate_building = farmland
+		max_farmland = 49
 	}
 }
-
 #romanticism
 romanticist_literature = {
 	limit = { romanticism = 1 }
@@ -142,6 +120,10 @@ realist_art = {
 		modifier = {
 			factor = 2
 			average_consciousness = 3
+		}
+		modifier = {
+			factor = 3
+			plurality = 55
 		}
 		modifier = {
 			factor = -2
@@ -988,6 +970,10 @@ hermeneutics = {
 			factor = 4
 			social_science = 1
 		}
+		modifier = {
+			factor = 2
+			invention = darwinism
+		}
 	}
 	effect = {
 		education_efficiency = 0.05
@@ -1000,8 +986,12 @@ existentialism = {
 	chance = {
 		base = 0
 		modifier = {
-			factor = 4
-			social_alienation = 1
+			factor = 2
+			invention = expressionist_literature
+		}
+		modifier = {
+			factor = 2
+			invention = dogma_of_violence
 		}
 	}
 	effect = {
@@ -1043,6 +1033,7 @@ quantum_theory = {
 		permanent_prestige = 5
 	}
 }
+
 #positivism
 irony = {
 	limit = { positivism = 1 }
@@ -1525,6 +1516,31 @@ vangaurd_party = {
 	}
 }
 #mass_politics
+the_police_state = {
+	limit = { mass_politics = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 3
+			OR = {
+				ruling_party_ideology = fascist
+				ruling_party_ideology = communist
+			}
+		}
+		modifier = {
+			factor = 2
+			industry_score = 600
+		}
+	}
+	effect = {
+		rebel_org_gain = {
+			faction = all
+			value = -0.25
+		}
+		suppression_points_modifier = 0.25
+	}
+}
 expansionism = {
 	limit = { revolution_n_counterrevolution = 1 }
 	news = no
@@ -1540,6 +1556,7 @@ expansionism = {
 		}
 	}
 	effect = {
+		# -0.05 BADBOY
 	}
 }
 the_doctrine_of_fascism = {
@@ -1552,20 +1569,16 @@ the_doctrine_of_fascism = {
 			ruling_party_ideology = fascist
 		}
 		modifier = {
-			factor = 1
-			NOT = { government = democracy }
-		}
-		modifier = {
 			factor = 3
 			average_militancy = 4
 		}
 		modifier = {
-			factor = 1
-			literacy = 0.8
-		}
-		modifier = {
 			factor = -7
 			NOT = { pan_nationalism_tech = 1 }
+		}
+		modifier = {
+			factor = 3
+			average_militancy = 4
 		}
 	}
 	effect = {

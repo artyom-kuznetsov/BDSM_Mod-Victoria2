@@ -1860,14 +1860,35 @@ electrical_lighting = {
 		factory_throughput = 0.05
 	}
 }
+
+#synthetic_polymers
+bakelite = {
+	limit = { synthetic_polymers = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			invention = bell_n_greys_telephones
+		}
+		modifier = {
+			factor = 2
+			time_saving_measures = 1
+		}
+	}
+	effect = {
+		factory_goods_output = {
+			glass  = 0.03
+		} 
+	}
+}
 #modern_chemistry
 haber_bosch_process = {
-	limit = { modern_chemistry = 1 }
+	limit = { organic_chemistry = 1 }
 	chance = {
 		base = 0
 		modifier = {
-			factor = 2
-			electrical_power_generation = 1
+			factor = 1
+			electricity = 1
 		}
 		modifier = {
 			factor = 2
@@ -1875,7 +1896,10 @@ haber_bosch_process = {
 		}
 	}
 	effect = {
-		activate_building = synthetic_nitrate_factory
+		farm_RGO_eff = 0.05
+		rgo_goods_output = {
+			silk = 0.2
+		}
 	}
 }
 bergius_process = {
@@ -1893,28 +1917,12 @@ bergius_process = {
 		}
 	}
 	effect = {
-		activate_building = synthetic_oil_factory
+		rgo_goods_output = { rubber = 0.05 }
+		factory_goods_output = { rubber = 0.05 }
 	}
 }
-pharmacology = {
-	limit = { modern_chemistry = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			organic_chemistry = 1
-		}
-	}
-	effect = {
-		factory_goods_output = {
-			pharmaceuticals = 0.1
-		} 
-	}
-}
-#synthetic_polymers
 rayon = {
-	limit = { synthetic_polymers = 1 }
+	limit = { modern_chemistry = 1 }
 	chance = {
 		base = 2
 		modifier = {
@@ -1923,45 +1931,9 @@ rayon = {
 		}
 		modifier = {
 			factor = 2
-			modern_chemistry = 1
+			mutual_funds = 1
 		}
 	}
 	effect = {
-		factory_goods_output = {
-			regular_clothes = 0.1
-			luxury_clothes = 0.1
-		}
-	}
-}
-neoprene = {
-	limit = { synthetic_polymers = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			organizational_development = 1
-		}
-		modifier = {
-			factor = 2
-			modern_chemistry = 1
-		}
-	}
-	effect = {
-		activate_building = synthetic_rubber_factory
-	}
-}
-bakelite = {
-	limit = { synthetic_polymers = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 4
-			modern_chemistry = 1
-		}
-	}
-	effect = {
-		factory_goods_output = {
-			glass  = 0.1
-		} 
 	}
 }
