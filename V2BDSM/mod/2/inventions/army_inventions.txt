@@ -844,7 +844,6 @@ mob1 = {
 		base = 5	
 	}
 	effect = {
-		mobilisation_economy_impact = 0.2
 		mobilisation_size = 0.02
 	}
 }
@@ -877,7 +876,7 @@ mob2 = {
 	chance = {
 		base = 2
 		modifier = {
-			factor = 1
+			factor = 2
 			invention = telegraph_coordination
 		}
 		modifier = {
@@ -886,7 +885,6 @@ mob2 = {
 		}	
 	}
 	effect = {
-		mobilisation_economy_impact = 0.1
 		mobilisation_size = 0.01
 	}
 }
@@ -896,12 +894,11 @@ mob3 = {
 	chance = {
 		base = 2
 		modifier = {
-			factor = 2
+			factor = 4
 			invention = mob2
 		}	
 	}
 	effect = {
-		mobilisation_economy_impact = 0.1
 		mobilisation_size = 0.01
 	}
 }
@@ -921,7 +918,6 @@ mob4 = {
 		}
 	}
 	effect = {
-		mobilisation_economy_impact = 0.1
 		mobilisation_size = 0.01
 	}	
 }
@@ -983,7 +979,6 @@ mob5 = {
 		}	
 	}
 	effect = {
-		mobilisation_economy_impact = 0.2
 		mobilisation_size = 0.01
 	}
 }
@@ -1270,7 +1265,7 @@ army_societal_status = {
 		}
 	}
 	effect = {
-		mobilisation_economy_impact = -0.05
+		morale = 0.05
 	}
 }
 
@@ -1288,7 +1283,7 @@ field_training = {
 		}
 	}
 	effect = {
-		morale = 0.15
+		morale = 0.1
 		army_base = {
 			supply_consumption = 0.05
 		}

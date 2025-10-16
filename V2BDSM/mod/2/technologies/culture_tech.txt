@@ -1,3 +1,16 @@
+#new_folder_test
+hidden_tech = {
+	area = hidden_tech_folder
+	year = 1937
+	cost = 1
+	
+	activate_building = province_selector
+
+	ai_chance = {
+		factor = 0
+	}
+}
+
 #aesthetics
 classicism_n_early_romanticism = {
 	area = aesthetics
@@ -7,6 +20,10 @@ classicism_n_early_romanticism = {
 	prestige = 0.1
 	ai_chance = {
 		factor = 1.01
+		modifier = {
+			factor = 1.1
+			tech_school = culture_tech_school
+		}
 		modifier = {
 			factor = 2
 			is_greater_power = yes
@@ -23,11 +40,16 @@ romanticism = {
 	year = 1836
 	cost = 4800
 	
+	influence = 0.1
 	prestige = 0.1
 
 
 	ai_chance = {
-		factor = 1.05
+		factor = 1.01
+		modifier = {
+			factor = 1.1
+			tech_school = culture_tech_school
+		}
 		modifier = {
 			factor = 100
 			continent = north_america
@@ -40,7 +62,6 @@ romanticism = {
 		modifier = {
 			factor = 0
 			not = { literacy = 0.5  }
-			is_greater_power = no
 		}
 		modifier = {
 			factor = 1.05
@@ -53,10 +74,14 @@ realism = {
 	area = aesthetics
 	year = 1836
 	cost = 6000
-
+	influence = 0.1
 	prestige = 0.1
 	ai_chance = {
-		factor = 1.05
+		factor = 1.01
+		modifier = {
+			factor = 1.1
+			tech_school = culture_tech_school
+		}
 		modifier = {
 			factor = 1.2
 			is_greater_power = yes
@@ -64,7 +89,6 @@ realism = {
 		modifier = {
 			factor = 0
 			not = { literacy = 0.5  }
-			is_greater_power = no
 		}
 		modifier = {
 			factor = 1.05
@@ -76,10 +100,14 @@ impressionism = {
 	area = aesthetics
 	year = 1850
 	cost = 7200
-
+	influence = 0.1
 	prestige = 0.1
 	ai_chance = {
-		factor = 1.05
+		factor = 1.01
+		modifier = {
+			factor = 1.1
+			tech_school = culture_tech_school
+		}
 		modifier = {
 			factor = 1.2
 			is_greater_power = yes
@@ -87,7 +115,6 @@ impressionism = {
 		modifier = {
 			factor = 0
 			not = { literacy = 0.5  }
-			is_greater_power = no
 		}
 		modifier = {
 			factor = 1.05
@@ -99,10 +126,14 @@ expressionism = {
 	area = aesthetics
 	year = 1870
 	cost = 8400
-
+	influence = 0.1
 	prestige = 0.1
 	ai_chance = {
-		factor = 1.05
+		factor = 1.01
+		modifier = {
+			factor = 1.1
+			tech_school = culture_tech_school
+		}
 		modifier = {
 			factor = 1.2
 			is_greater_power = yes
@@ -122,10 +153,14 @@ mass_culture_n_the_avant_garde = {
 	area = aesthetics
 	year = 1900
 	cost = 9600
-
+	influence = 0.1
 	prestige = 0.1
 	ai_chance = {
 		factor = 1.01
+		modifier = {
+			factor = 1.1
+			tech_school = culture_tech_school
+		}
 		modifier = {
 			factor = 1.2
 			is_greater_power = yes
@@ -133,7 +168,6 @@ mass_culture_n_the_avant_garde = {
 		modifier = {
 			factor = 0
 			not = { literacy = 0.5  }
-			is_greater_power = no
 		}
 		modifier = {
 			factor = 1.05
@@ -145,10 +179,14 @@ modernism = {
 	area = aesthetics
 	year = 1920
 	cost = 9600
-
+	influence = 0.1
 	prestige = 0.1
 	ai_chance = {
 		factor = 1.01
+		modifier = {
+			factor = 1.1
+			tech_school = culture_tech_school
+		}
 		modifier = {
 			factor = 1.2
 			is_greater_power = yes
@@ -156,7 +194,6 @@ modernism = {
 		modifier = {
 			factor = 0
 			not = { literacy = 0.5  }
-			is_greater_power = no
 		}
 		modifier = {
 			factor = 1.05
@@ -393,13 +430,18 @@ ideological_thought = {
 	year = 1836
 	cost = 4800
 
-	max_national_focus = 1 
+	max_national_focus = 1
 		
 	ai_chance = {
 		factor = 50
 		modifier = {
-			factor = 3
-			NOT = { literacy = 0.2 }
+			factor = 5
+			year = 1845
+		}
+		modifier = {
+			factor = 5
+			is_greater_power = yes
+			year = 1845
 		}
 	}
 }
@@ -410,23 +452,15 @@ state_n_government = {
 
 	max_national_focus = 1 
 	ai_chance = {
-		factor = 1.1
+		factor = 1.01
 		modifier = {
-			factor = 50
-			is_greater_power = yes
-		}
-		modifier = {
-			factor = 50
-			rank = 16
-			year = 1845
-		}
-		modifier = {
-			factor = 50
+			factor = 5
 			year = 1850
 		}
 		modifier = {
-			factor = 50
-			tag = SAR
+			factor = 5
+			is_greater_power = yes
+			year = 1850
 		}
 		
 	}	
@@ -440,23 +474,19 @@ nationalism_n_imperialism = {
 	cb_creation_speed = 0.1
 	
 	ai_chance = {
-		factor = 1.15
+		factor = 1.01
 		modifier = {
 			factor = 50
 			is_greater_power = yes
 		}
 		modifier = {
-			factor = 50
-			rank = 16
+			factor = 5
 			year = 1860
 		}
 		modifier = {
-			factor = 50
-			tag = SAR
-		}
-		modifier = {
-			factor = 50
-			year = 1870
+			factor = 5
+			is_greater_power = yes
+			year = 1860
 		}
 		modifier = {
 			factor = 1.5
@@ -472,7 +502,7 @@ revolution_n_counterrevolution = {
 	max_national_focus = 1
 	diplomatic_points = 0.25
 	ai_chance = {
-		factor = 1.1
+		factor = 1.01
 		modifier = {
 			factor = 1.5
 			is_greater_power = yes
@@ -490,7 +520,7 @@ mass_politics = {
 
 	max_national_focus = 1 
 	ai_chance = {
-		factor = 1.1
+		factor = 1.01
 		modifier = {
 			factor = 1.5
 			is_greater_power = yes
@@ -508,7 +538,7 @@ government_mobilization = {
 
 	max_national_focus = 1 
 	ai_chance = {
-		factor = 1.1
+		factor = 1.01
 		modifier = {
 			factor = 1.5
 			is_greater_power = yes
