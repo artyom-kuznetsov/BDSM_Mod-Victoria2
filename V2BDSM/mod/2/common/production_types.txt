@@ -1454,6 +1454,26 @@ rubber_factory = {
 	limit_by_local_supply = yes
 	output_goods = rubber
 	value = 5						#40
+	bonus = {
+		trigger = {
+			OR = {
+				state_id = 1384
+				state_id = 1385
+				state_id = 1389
+				state_id = 1394
+				state_id = 1426
+				state_id = 2600
+				state_id = 2402
+				state_id = 2403
+				state_id = 2550
+				state_id = 2321
+				state_id = 2320
+				state_id = 2301
+				state_id = 2317
+			}
+		}
+		value = 0.5
+	}
 }
 
 silk_factory = {       
@@ -1506,7 +1526,7 @@ tobacco_factory = {
 	value = 10						#40
 }
 
-tropical_wood_factory = {    
+tropical_wood_factory = {       
 	template = forestry_template	#10
 	input_goods = {    
 		raw_tropical_wood = 0.2		#20 total input+maint = 30
@@ -1514,4 +1534,5 @@ tropical_wood_factory = {
 	limit_by_local_supply = yes
 	output_goods = tropical_wood
 	value = 6.67					#40.0225
+	}
 }
