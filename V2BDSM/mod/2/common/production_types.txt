@@ -1076,4 +1076,526 @@ peasant_grain = {
 	workforce = 10000
 }
 
-############# BASIC FACTORIES 
+
+############# RGO FACTORIES
+
+cattle_factory = {       
+	template = cattle_template		#10
+	input_goods = {    
+		raw_cattle = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = cattle
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = agriculture_company
+					has_country_flag = united_fruit
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = bunge_born
+			}
+		}
+		value = 0.35
+	}
+}
+
+coal_factory = {       
+	template = mining_template		#10
+	input_goods = {    
+		raw_coal = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = coal
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = metalworks_company
+					has_country_flag = carnegie_steel
+					has_country_flag = manfred_weiss
+					has_country_flag = william_sandford
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = blockow_vaughan
+					has_country_flag = altos_vizcaya
+				}
+			}
+		}
+		value = 0.35
+	}
+}
+
+coffee_factory = {       
+	template = agriculture_template	#10
+	input_goods = {    
+		raw_coffee = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = coffee
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = plantation_company
+					has_country_flag = companhia_mocambique
+					has_country_flag = east_india_company
+					has_country_flag = ottoman_tobacco
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = fazenda_fortaleza
+			}
+		}
+		value = 0.35
+	}
+}
+
+cotton_factory = {       
+	template = agriculture_template	#10
+	input_goods = {    
+		raw_cotton = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = cotton
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = plantation_company
+					has_country_flag = east_india_company
+					has_country_flag = ottoman_tobacco
+					has_country_flag = fazenda_fortaleza
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = companhia_mocambique
+			}
+		}
+		value = 0.35
+	}
+}
+
+dye_factory = {       
+	template = dye_template			#10
+	input_goods = {    
+		raw_dye = 0.2					#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = dye
+	value = 5						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = plantation_company
+					has_country_flag = house_of_worth
+					has_country_flag = mitsui
+					has_country_flag = espana_industrial
+				}
+			}
+		}
+		value = 0.25
+	}
+}
+
+grain_factory = {       
+	template = agriculture_template	#10
+	input_goods = {    
+		raw_grain = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = grain
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = agriculture_company
+					has_country_flag = bunge_born
+					has_country_flag = united_fruit
+				}
+			}
+		}
+		value = 0.25
+	}
+}
+
+iron_factory = {       
+	template = mining_template		#10
+	input_goods = {    
+		raw_iron = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = iron
+	value = 8						#40
+	bonus = {
+		trigger = {
+			OR = {
+				state_id = 158
+				state_id = 177
+				state_id = 306
+				state_id = 320
+			}
+		}
+		value = 0.5
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = metalworks_company
+					has_country_flag = blockow_vaughan
+					has_country_flag = carnegie_steel
+					has_country_flag = manfred_weiss
+					has_country_flag = altos_vizcaya
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = william_sandford
+			}
+		}
+		value = 0.35
+	}
+}
+
+oil_factory = {       
+	template = mining_template		#10
+	input_goods = {    
+		raw_oil = 0.2					#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = oil
+	value = 1.6						#40
+	bonus = {
+		trigger = {
+			OR = {
+				state_id = 2264
+				state_id = 2270
+			}
+		}
+		value = 0.5
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = petroleum_company
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = persian_oil
+					has_country_flag = caribbean_petroleum
+					has_country_flag = aguila
+				}
+			}
+		}
+		value = 0.35
+	}
+}
+
+opium_factory = {       
+	template = agriculture_template	#10
+	input_goods = {    
+		raw_opium = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = opium
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = plantation_company
+					has_country_flag = companhia_mocambique
+					has_country_flag = ottoman_tobacco
+					has_country_flag = fazenda_fortaleza
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = east_india_company
+			}
+		}
+		value = 0.35
+	}
+}
+
+fruit_factory = {       
+	template = agriculture_template	#10
+	input_goods = {    
+		raw_fruit = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = fruit
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = agriculture_company
+					has_country_flag = bunge_born
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = united_fruit
+			}
+		}
+		value = 0.35
+	}
+}
+
+rubber_factory = {       
+	template = forestry_template	#10
+	input_goods = {    
+		raw_rubber = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = rubber
+	value = 5						#40
+	bonus = {
+		trigger = {
+			OR = {
+				state_id = 1384
+				state_id = 1385
+				state_id = 1389
+				state_id = 1394
+				state_id = 1426
+				state_id = 2600
+				state_id = 2402
+				state_id = 2403
+				state_id = 2550
+				state_id = 2321
+				state_id = 2320
+				state_id = 2301
+				state_id = 2317
+			}
+		}
+		value = 0.5
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = forestry_company
+					has_country_flag = macmillan_bloedel
+				}
+			}
+		}
+		value = 0.25
+	}
+}
+
+silk_factory = {       
+	template = dye_template			#10
+	input_goods = {    
+		raw_silk = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = silk
+	value = 3.33					#39.99
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = plantation_company
+					has_country_flag = companhia_mocambique
+					has_country_flag = east_india_company
+					has_country_flag = ottoman_tobacco
+					has_country_flag = fazenda_fortaleza
+				}
+			}
+		}
+		value = 0.25
+	}
+}
+
+sulphur_factory = {       
+	template = mining_template		#10
+	input_goods = {    
+		raw_sulphur = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = sulphur
+	value = 8						#40
+	bonus = {
+		trigger = {
+			any_owned_province = {
+				OR = {
+					province_id = 763
+					province_id = 2307
+					province_id = 2305
+					province_id = 2523
+				}
+			}
+		}
+		value = 0.5
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = nitrate_company
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = monopolio_del_salitre
+					has_country_flag = compania_de_salitres
+				}
+			}
+		}
+		value = 0.35
+	}
+}
+
+tea_factory = {       
+	template = agriculture_template	#10
+	input_goods = {    
+		raw_tea = 0.2					#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = tea
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = plantation_company
+					has_country_flag = companhia_mocambique
+					has_country_flag = east_india_company
+					has_country_flag = ottoman_tobacco
+					has_country_flag = fazenda_fortaleza
+				}
+			}
+		}
+		value = 0.25
+	}
+}
+
+timber_factory = {       
+	template = forestry_template	#10
+	input_goods = {    
+		raw_timber = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = timber
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = forestry_company
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = macmillan_bloedel
+			}
+		}
+		value = 0.35
+	}
+}
+
+tobacco_factory = {       
+	template = agriculture_template	#10
+	input_goods = {    
+		raw_tobacco = 0.2				#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = tobacco
+	value = 10						#40
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = plantation_company
+					has_country_flag = companhia_mocambique
+					has_country_flag = east_india_company
+					has_country_flag = fazenda_fortaleza
+				}
+			}
+		}
+		value = 0.25
+	}
+	bonus = {
+		trigger = {
+			owner = {
+				has_country_flag = ottoman_tobacco
+			}
+		}
+		value = 0.35
+	}
+}
+
+tropical_wood_factory = {       
+	template = forestry_template	#10
+	input_goods = {    
+		raw_tropical_wood = 0.2		#20 total input+maint = 30
+	}
+	limit_by_local_supply = yes
+	output_goods = tropical_wood
+	value = 6.67					#40.02
+	bonus = {
+		trigger = {
+			owner = {
+				OR = {
+					has_country_flag = forestry_company
+					has_country_flag = macmillan_bloedel
+				}
+			}
+		}
+		value = 0.25
+	}
+}
