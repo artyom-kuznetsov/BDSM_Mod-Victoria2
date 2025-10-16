@@ -1,15 +1,3 @@
-#eary_classical_theory
-PS_unlocked = {
-	limit = { hidden_tech = 1 }
-	news = no
-	chance = {
-		base = 100	
-	}
-	effect = {
-		activate_building = farmland
-		max_farmland = 49
-	}
-}
 #romanticism
 romanticist_literature = {
 	limit = { romanticism = 1 }
@@ -1530,7 +1518,7 @@ the_police_state = {
 		}
 		modifier = {
 			factor = 2
-			industry_score = 600
+			country = { industry_score = 600 }
 		}
 	}
 	effect = {
@@ -1575,10 +1563,6 @@ the_doctrine_of_fascism = {
 		modifier = {
 			factor = -7
 			NOT = { pan_nationalism_tech = 1 }
-		}
-		modifier = {
-			factor = 3
-			average_militancy = 4
 		}
 	}
 	effect = {
