@@ -172,7 +172,8 @@ fish_template = {
 
 cheap_template = {
 	efficiency = {
-		cement = 0.25			#4	total cost = 4
+		cement = 0.33			#6	
+		timber = 1				#4	# TOTAL 10
 	}
 	
 	owner =
@@ -200,7 +201,7 @@ cheap_template = {
 
 cement_template = {
 	efficiency = {
-		iron = 1.2				#6	total cost = 6
+		iron = 2				#10	
 	}
 	
 	owner =
@@ -229,7 +230,7 @@ cement_template = {
 factory_template = {
 	efficiency = { #1.2 saved
 		cement = 0.375			#6
-		machine_parts = 0.125	#2	total cost = 8
+		machine_parts = 0.25	#4	# TOTAL 10
 	}
 	
 	owner =
@@ -259,7 +260,7 @@ factory_template = {
 synthetics_template = {
 	efficiency = { #1.2 saved
 		cement = 0.375			#6
-		machine_parts = 0.125	#2	total cost = 8
+		machine_parts = 0.25	#4	# TOTAL 10
 	}
 	
 	owner =
@@ -350,15 +351,15 @@ aeroplane_factory = {
 	value = 0.4					#40
 	bonus = {
 		trigger = { has_building = machine_parts_factory }
-		value = 0.1
+		value = 0.0625
 	}
 	bonus = {
 		trigger = { has_building = electric_gear_factory }
-		value = 0.1
+		value = 0.0625
 	}
 	bonus = {
 		trigger = { has_building = timber_factory }
-		value = 0.05
+		value = 0.025
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -376,11 +377,11 @@ barrel_factory = {
 	value = 0.4				#40
 	bonus = {
 		trigger = { has_building = automobile_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = steel_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -400,11 +401,11 @@ automobile_factory = {
 	value = 1					#40
 	bonus = {
 		trigger = { has_building = machine_parts_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { has_building = electric_gear_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { has_building = steel_factory }
@@ -422,11 +423,11 @@ radio_factory = {
 	value = 1.25				#40
 	bonus = {
 		trigger = { has_building = electric_gear_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = glass_factory }
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -440,11 +441,11 @@ telephone_factory = {
 	value = 1.25				#40
 	bonus = {
 		trigger = { has_building = electric_gear_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = glass_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -467,11 +468,11 @@ electric_gear_factory = {
 				has_building = rubber_factory
 			}
 		}
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = steel_factory }
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -486,11 +487,11 @@ pharmaceutical_plant = {
 	value = 2					#40
 	bonus = {
 		trigger = { has_building = glass_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = opium_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -512,11 +513,11 @@ synthetic_dye_factory = {
 				has_building = synthetic_oil_factory
 			}
 		}
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -535,7 +536,7 @@ synthetic_oil_factory = {
 	value = 1.2					#30
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.15
+		value = 0.05
 	}
 	bonus = {
 		trigger = { has_building = iron_factory }
@@ -571,11 +572,11 @@ synthetic_rubber_factory = {
 				has_building = synthetic_oil_factory
 			}
 		}
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -589,11 +590,11 @@ synthetic_nitrate_factory = {
 	value = 6					#30
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = iron_factory }
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -608,11 +609,11 @@ steamer_shipyard = {
 	value = 0.6667				#40
 	bonus = {
 		trigger = { has_building = steel_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = machine_parts_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -639,15 +640,15 @@ artillery_factory = {
 	value = 1.33				#39.9
 	bonus = {
 		trigger = { has_building = explosives_factory }
-		value = 0.15
+		value = 0.05
 	}
 	bonus = {
 		trigger = { NOT = { has_building = explosives_factory } }
-		value = 0.15
+		value = 0.05
 	}
 	bonus = {
 		trigger = { has_building = steel_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -665,7 +666,7 @@ small_arms_factory = {
 	value = 2.22				#39.96
 	bonus = {
 		trigger = { has_building = timber_factory }
-		value = 0.15
+		value = 0.05
 	}
 	bonus = {
 		trigger = { has_building = steel_factory }
@@ -692,11 +693,11 @@ ammunition_factory = {
 				has_building = synthetic_nitrate_factory
 			}
 		}
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = iron_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -716,11 +717,11 @@ steel_factory = {
 	value = 4					#40
 	bonus = {
 		trigger = { has_building = iron_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -734,11 +735,11 @@ machine_parts_factory = {
 	value = 2.5					#40
 	bonus = {
 		trigger = { has_building = steel_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -752,11 +753,11 @@ liquor_distillery = {
 	value = 5					#40
 	bonus = {
 		trigger = { has_building = grain_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = glass_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -774,11 +775,11 @@ winery = {
 	value = 4					#40
 	bonus = {
 		trigger = { has_building = fruit_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = glass_factory }
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -800,7 +801,7 @@ fertilizer_factory = {
 				has_building = synthetic_nitrate_factory
 			}
 		}
-		value = 0.2
+		value = 0.15
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -817,7 +818,7 @@ furniture_factory = {
 	value = 4					#40
 	bonus = {
 		trigger = { has_building = timber_factory }
-		value = 0.2
+		value = 0.15
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -840,11 +841,11 @@ explosives_factory = {
 				has_building = synthetic_nitrate_factory
 			}
 		}
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = { has_building = ammunition_factory }
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -858,14 +859,14 @@ luxury_clothes_factory = {
 	value = 1					#40
 	bonus = {
 		trigger = { has_building = silk_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = {
 			has_building = dye_factory
 			has_building = synthetic_dye_factory
 		}
-		value = 0.1
+		value = 0.05
 	}
 }
 
@@ -880,14 +881,14 @@ luxury_furniture_factory = {
 	value = 0.67				#40.2
 	bonus = {
 		trigger = { has_building = tropical_wood_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = {
 			has_building = dye_factory
 			has_building = synthetic_dye_factory
 		}
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -905,7 +906,7 @@ cement_factory = {
 	value = 2.5					#40
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.2
+		value = 0.15
 	}
 }
 
@@ -918,7 +919,7 @@ glass_factory = {
 	value = 10					#40
 	bonus = {
 		trigger = { has_building = coal_factory }
-		value = 0.2
+		value = 0.15
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -935,7 +936,7 @@ paper_mill = {
 	value = 10					#40
 	bonus = {
 		trigger = { has_building = timber_factory }
-		value = 0.2
+		value = 0.15
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -953,7 +954,7 @@ fishery = {
 	value = 10						#40
 	bonus = {
 		trigger = { has_building = steamer_shipyard }
-		value = 0.2
+		value = 0.15
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -971,7 +972,7 @@ regular_clothes_factory = {
 	value = 4					#40
 	bonus = {
 		trigger = { has_building = cotton_factory }
-		value = 0.15
+		value = 0.1
 	}
 	bonus = {
 		trigger = {
@@ -980,7 +981,7 @@ regular_clothes_factory = {
 				has_building = synthetic_dye_factory
 			}
 		}
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
@@ -999,18 +1000,12 @@ canned_food_factory = {
 	output_goods = canned_food 
 	value = 5					#40
 	bonus = {
-		trigger = { has_building = grain_factory }
+		trigger = { OR = { has_building = grain_factory has_building = fishery has_building = cattle_factory } }
 		value = 0.1
 	}
 	bonus = {
 		trigger = {
 			has_building = cattle_factory
-		}
-		value = 0.1
-	}
-	bonus = {
-		trigger = {
-			has_building = fishery
 		}
 		value = 0.05
 	}
@@ -1219,7 +1214,7 @@ peasant_grain = {
 cattle_factory = {       
 	template = cattle_template		#10
 	input_goods = {    
-		raw_cattle = 0.2				#20 total input+maint = 30
+		raw_cattle = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = cattle
@@ -1229,7 +1224,7 @@ cattle_factory = {
 coal_factory = {       
 	template = mining_template		#10
 	input_goods = {    
-		raw_coal = 0.2				#20 total input+maint = 30
+		raw_coal = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = coal
@@ -1239,7 +1234,7 @@ coal_factory = {
 coffee_factory = {       
 	template = agriculture_template	#10
 	input_goods = {    
-		raw_coffee = 0.2				#20 total input+maint = 30
+		raw_coffee = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = coffee
@@ -1249,7 +1244,7 @@ coffee_factory = {
 cotton_factory = {       
 	template = agriculture_template	#10
 	input_goods = {    
-		raw_cotton = 0.2				#20 total input+maint = 30
+		raw_cotton = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = cotton
@@ -1259,7 +1254,7 @@ cotton_factory = {
 dye_factory = {       
 	template = dye_template			#10
 	input_goods = {    
-		raw_dye = 0.2					#20 total input+maint = 30
+		raw_dye = 0.22					#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = dye
@@ -1269,7 +1264,7 @@ dye_factory = {
 grain_factory = {       
 	template = agriculture_template	#10
 	input_goods = {    
-		raw_grain = 0.2				#20 total input+maint = 30
+		raw_grain = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = grain
@@ -1279,7 +1274,7 @@ grain_factory = {
 iron_factory = {       
 	template = mining_template		#10
 	input_goods = {    
-		raw_iron = 0.2				#20 total input+maint = 30
+		raw_iron = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = iron
@@ -1289,7 +1284,7 @@ iron_factory = {
 oil_factory = {       
 	template = mining_template		#10
 	input_goods = {    
-		raw_oil = 0.2					#20 total input+maint = 30
+		raw_oil = 0.22					#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = oil
@@ -1299,7 +1294,7 @@ oil_factory = {
 opium_factory = {       
 	template = agriculture_template	#10
 	input_goods = {    
-		raw_opium = 0.2				#20 total input+maint = 30
+		raw_opium = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = opium
@@ -1309,7 +1304,7 @@ opium_factory = {
 fruit_factory = {       
 	template = agriculture_template	#10
 	input_goods = {    
-		raw_fruit = 0.2				#20 total input+maint = 30
+		raw_fruit = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = fruit
@@ -1319,7 +1314,7 @@ fruit_factory = {
 rubber_factory = {       
 	template = forestry_template	#10
 	input_goods = {    
-		raw_rubber = 0.2				#20 total input+maint = 30
+		raw_rubber = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = rubber
@@ -1329,7 +1324,7 @@ rubber_factory = {
 silk_factory = {       
 	template = dye_template			#10
 	input_goods = {    
-		raw_silk = 0.2				#20 total input+maint = 30
+		raw_silk = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = silk
@@ -1339,7 +1334,7 @@ silk_factory = {
 sulphur_factory = {       
 	template = mining_template		#10
 	input_goods = {    
-		raw_sulphur = 0.2				#20 total input+maint = 30
+		raw_sulphur = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = sulphur
@@ -1349,7 +1344,7 @@ sulphur_factory = {
 tea_factory = {       
 	template = agriculture_template	#10
 	input_goods = {    
-		raw_tea = 0.2					#20 total input+maint = 30
+		raw_tea = 0.22					#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = tea
@@ -1359,7 +1354,7 @@ tea_factory = {
 timber_factory = {       
 	template = forestry_template	#10
 	input_goods = {    
-		raw_timber = 0.2				#20 total input+maint = 30
+		raw_timber = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = timber
@@ -1369,7 +1364,7 @@ timber_factory = {
 tobacco_factory = {       
 	template = agriculture_template	#10
 	input_goods = {    
-		raw_tobacco = 0.2				#20 total input+maint = 30
+		raw_tobacco = 0.22				#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = tobacco
@@ -1379,7 +1374,7 @@ tobacco_factory = {
 tropical_wood_factory = {     
 	template = forestry_template	#10
 	input_goods = {    
-		raw_tropical_wood = 0.2		#20 total input+maint = 30
+		raw_tropical_wood = 0.22		#20 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = tropical_wood
