@@ -73,10 +73,11 @@ country_event = { # GERMANY
 	
 	option = {
 		name = "noloc"
-		GER = { all_core = { secede_province = THIS } }
-		activate_technology = nationalism_n_imperialism
-		FRA_412 = {
-			secede_province = THIS
+		any_country = {
+			limit = {
+				is_culture_group = germanic
+			}
+			annex_to = THIS
 		}
 	}
 }
