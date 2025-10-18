@@ -848,17 +848,6 @@ explosives_factory = {
 	}
 }
 
-stock_exchange = {       
-	template = stock_exchange_template	#4
-	input_goods = {   
-		raw_stocks = 0.01				#1
-		paper = 2.5						#10 total input+maint = 15
-	}
-	limit_by_local_supply = yes
-	output_goods = stocks 
-	value = 1							#20
-}
-
 luxury_clothes_factory = {       
 	template = factory_template	#8
 	input_goods = {   
@@ -1208,13 +1197,6 @@ tropical_wood_lodge = {
 	farm = yes
 }
 
-financial_district = {
-	template = RGO_template_farmers
-	output_goods = raw_stocks 
-	value = 50
-	farm = yes
-}
-
 
 ### Artisans #####################################################################################
 peasant_grain = {
@@ -1242,25 +1224,6 @@ cattle_factory = {
 	limit_by_local_supply = yes
 	output_goods = cattle
 	value = 10						#40
-	bonus = {
-		trigger = {
-			owner = {
-				OR = {
-					has_country_flag = agriculture_company
-					has_country_flag = united_fruit
-				}
-			}
-		}
-		value = 0.25
-	}
-	bonus = {
-		trigger = {
-			owner = {
-				has_country_flag = bunge_born
-			}
-		}
-		value = 0.35
-	}
 }
 
 coal_factory = {       
@@ -1271,30 +1234,6 @@ coal_factory = {
 	limit_by_local_supply = yes
 	output_goods = coal
 	value = 10						#40
-	bonus = {
-		trigger = {
-			owner = {
-				OR = {
-					has_country_flag = metalworks_company
-					has_country_flag = carnegie_steel
-					has_country_flag = manfred_weiss
-					has_country_flag = william_sandford
-				}
-			}
-		}
-		value = 0.25
-	}
-	bonus = {
-		trigger = {
-			owner = {
-				OR = {
-					has_country_flag = blockow_vaughan
-					has_country_flag = altos_vizcaya
-				}
-			}
-		}
-		value = 0.35
-	}
 }
 
 coffee_factory = {       
@@ -1305,27 +1244,6 @@ coffee_factory = {
 	limit_by_local_supply = yes
 	output_goods = coffee
 	value = 10						#40
-	bonus = {
-		trigger = {
-			owner = {
-				OR = {
-					has_country_flag = plantation_company
-					has_country_flag = companhia_mocambique
-					has_country_flag = east_india_company
-					has_country_flag = ottoman_tobacco
-				}
-			}
-		}
-		value = 0.25
-	}
-	bonus = {
-		trigger = {
-			owner = {
-				has_country_flag = fazenda_fortaleza
-			}
-		}
-		value = 0.35
-	}
 }
 
 cotton_factory = {       
@@ -1336,27 +1254,6 @@ cotton_factory = {
 	limit_by_local_supply = yes
 	output_goods = cotton
 	value = 10						#40
-	bonus = {
-		trigger = {
-			owner = {
-				OR = {
-					has_country_flag = plantation_company
-					has_country_flag = east_india_company
-					has_country_flag = ottoman_tobacco
-					has_country_flag = fazenda_fortaleza
-				}
-			}
-		}
-		value = 0.25
-	}
-	bonus = {
-		trigger = {
-			owner = {
-				has_country_flag = companhia_mocambique
-			}
-		}
-		value = 0.35
-	}
 }
 
 dye_factory = {       
@@ -1387,17 +1284,6 @@ iron_factory = {
 	limit_by_local_supply = yes
 	output_goods = iron
 	value = 8						#40
-	bonus = {
-		trigger = {
-			OR = {
-				state_id = 158
-				state_id = 177
-				state_id = 306
-				state_id = 320
-			}
-		}
-		value = 0.5
-	}
 }
 
 oil_factory = {       
@@ -1438,26 +1324,6 @@ rubber_factory = {
 	limit_by_local_supply = yes
 	output_goods = rubber
 	value = 5						#40
-	bonus = {
-		trigger = {
-			OR = {
-				state_id = 1384
-				state_id = 1385
-				state_id = 1389
-				state_id = 1394
-				state_id = 1426
-				state_id = 2600
-				state_id = 2402
-				state_id = 2403
-				state_id = 2550
-				state_id = 2321
-				state_id = 2320
-				state_id = 2301
-				state_id = 2317
-			}
-		}
-		value = 0.5
-	}
 }
 
 silk_factory = {       
