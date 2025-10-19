@@ -764,7 +764,19 @@ malaria_prevention_inv = {
 	chance = {
 		base = 5
 		modifier = {
-			factor = 2 # TODO
+			factor = 2
+			modifier = {
+				factor = 10
+				any_greater_power = {
+					invention = malaria_prevention_inv
+				}
+			}
+			modifier = {
+				factor = 10
+				any_neighbor_country = {
+					invention = malaria_prevention_inv
+				}
+			}
 		}
 	}
 	effect = {
