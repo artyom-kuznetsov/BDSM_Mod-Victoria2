@@ -530,7 +530,14 @@ political_decisions = {
 		effect = {
 			plurality = 2
 			set_country_flag = law_of_guarantees
-			749 = { owner = { annex_to = THIS } }
+			749 = { 
+				limit = {
+					NOT = { owner = THIS }
+				}
+				owner = {
+					annex_to = THIS
+				}
+			}
 			capital = 749
 			prestige = 15
 			any_owned = {
