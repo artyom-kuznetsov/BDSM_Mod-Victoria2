@@ -1285,7 +1285,6 @@ economic_reforms = {
 			core_pop_militancy_modifier = -0.01
 			core_pop_consciousness_modifier = -0.01
 			research_points_modifier = 0.2
-			activate_technology = industrial_revolution
 			allow = {
 				pre_indust = yes_pre_indust2
 				money = 7000 
@@ -1294,8 +1293,7 @@ economic_reforms = {
 			on_execute = {
 				effect = {
 					treasury = -7000
-					#activate_technology = industrial_revolution
-					#activate_technology = mechanical_production
+					activate_technology = mechanized_mining
 					build_factory_in_capital_state = fabric_factory
 
 					any_pop = {

@@ -13,6 +13,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = {
 			limit = {
 				is_independant = no
+				NOT = { badboy = 24 }
 			}
 			# Audax Validator "." Ignore_NEXT
 			badboy = -100
@@ -1483,6 +1484,7 @@ country_event = { # YEARLY CLEANUP
 		META_1 = {
 			limit = {
 				continent = africa
+				## Audax Validator "." Ignore_NEXT
 				NOT = { life_rating = 15 }
 			}
 			add_province_modifier = { name = severe_malaria_pmodifier duration = -1 }
@@ -1490,7 +1492,9 @@ country_event = { # YEARLY CLEANUP
 		META_1 = {
 			limit = {
 				continent = africa
+				## Audax Validator "." Ignore_NEXT
 				life_rating = 15
+				## Audax Validator "." Ignore_NEXT
 				NOT = { life_rating = 20 }
 			}
 			add_province_modifier = { name = malaria_pmodifier duration = -1 }
