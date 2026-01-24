@@ -269,6 +269,7 @@ country_event = {
 		NOT = { 
 			invention = synthetic_polymers_research_project
 			has_country_modifier = { synthetic_polymers_research_project_cmodifier } 
+			has_country_flag = synthetic_polymers_researched_cflag
 		}
 		has_country_flag = synthetic_polymers_research_project_cflag
 	}
@@ -285,7 +286,7 @@ country_event = {
 
 country_event = {
 	id = 141303
-	title = "SyntheticPolymersBuyRequest_rproj_EvtName"
+	title = "BuyRequest_rproj_EvtName"
 	desc = 	"SyntheticPolymersBuyRequest_rproj_EvtDesc"
 	picture = "Invention"
 	
@@ -301,6 +302,7 @@ country_event = {
 		FROM = {
 			country_event = 141304
 		}
+		add_country_modifier = { name = administrative_expenses_modifier duration = 365 }
 	}
 }
 
