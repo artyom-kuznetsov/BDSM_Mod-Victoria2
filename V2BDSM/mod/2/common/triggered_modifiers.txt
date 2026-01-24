@@ -442,7 +442,7 @@ adaptive_war_exhaust_6 = {
 	mobilisation_levies_trmod = {
 		trigger = {
 			is_mobilised = yes
-			conscription = ref_disarmed_nation
+			conscription = peasant_militia_ref
 		}
 		
 		factory_throughput = -0.3
@@ -453,7 +453,7 @@ adaptive_war_exhaust_6 = {
 	mass_conscription_trmod = {
 		trigger = {
 			is_mobilised = yes
-			conscription = ref_sizeable_military_budget
+			conscription = mass_conscription_ref
 			NOT = {
 				has_country_flag = turkish_military_dec
 			}
@@ -466,7 +466,7 @@ adaptive_war_exhaust_6 = {
 	natguard_trmod = {
 		trigger = {
 			is_mobilised = yes
-			conscription = ref_limited_military_budget
+			conscription = national_guard_ref
 		}
 		
 		factory_throughput = -0.2
@@ -488,7 +488,7 @@ adaptive_war_exhaust_6 = {
 	disarmed_nation_trmod = {
 		trigger = {
 			is_mobilised = yes
-			conscription = ref_huge_military_budget
+			conscription = demilitarization_ref
 		}
 		
 		factory_throughput = -0.1
