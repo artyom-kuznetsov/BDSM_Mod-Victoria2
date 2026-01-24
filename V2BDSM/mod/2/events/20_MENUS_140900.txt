@@ -1847,6 +1847,76 @@ country_event = {
 			}
 		}
 	}
+
+	option = {
+		name = "ResearchProject_Menu_EvtOptChemicalWeapons"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = chemical_weapons_research_project_cflag
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_WEAPONS = { }
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = chemical_weapons_research_project_cflag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_NOT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_WEAPONS = { }
+				add_country_modifier = { name = research_project_spending_2 duration = 1825 }
+				set_country_flag = chemical_weapons_research_project_cflag
+			}
+		}
+	}
+	
+	option = {
+		name = "ResearchProject_Menu_EvtOptChemicalDefence"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = chemical_defence_research_project_cflag
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_DEFENCE = { }
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = chemical_defence_research_project_cflag }
+					war_countries = { invention = gas_attack_capability }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_NOT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_DEFENCE = { }
+				add_country_modifier = { name = research_project_spending_3 duration = 1825 }
+				set_country_flag = chemical_defence_research_project_cflag
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { war_countries = { invention = gas_attack_capability } }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_DEFENCE_ERROR = { }
+			}
+		}
+	}
 	
 	option = {
 		name = "Expedition_Menu_EvtOptCancel"

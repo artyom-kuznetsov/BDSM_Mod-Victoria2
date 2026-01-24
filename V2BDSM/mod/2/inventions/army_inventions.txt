@@ -543,13 +543,18 @@ bolt_action_rifle_armament = {
 gas_attack_capability = {
 	limit = { chemical_weapons = 1 }
 	chance = {
-		base = 0
+		base = 4
 		modifier = {
-			factor = 25
+			factor = -100
+			NOT = { has_country_flag = chemical_weapons_research_project_cflag }
+			ai = no
+		}
+		modifier = {
+			factor = 4
 			invention = cracking
 		}
 		modifier = {
-			factor = 25
+			factor = 4
 			invention = carbon_soil_enrichment
 		}		
 	}
@@ -565,10 +570,20 @@ gas_defense_capability = {
 	chance = {
 		base = 5
 		modifier = {
-			factor = 50
+			factor = -100
+			NOT = { has_country_flag = chemical_defence_research_project_cflag }
+			ai = no
+		}
+		modifier = {
+			factor = 5
 			war = yes
 			war_countries = { invention = gas_attack_capability }
-		}		
+		}
+		modifier = {
+			factor = 10
+			war = yes
+			war_countries = { invention = gas_defense_capability }
+		}
 	}
 	effect = {
 		gas_defence = yes
