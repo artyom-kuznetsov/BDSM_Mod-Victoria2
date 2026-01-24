@@ -1,0 +1,180 @@
+
+country_event = {
+	id = 141300
+	title = "ResearchProject_Menu_EvtName"
+	desc = "ResearchProject_Menu_EvtDesc"
+	picture = "Invention"
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = "ResearchProject_Menu_EvtOptSyntheticPolymers"
+		
+		country_event = 141301
+	}
+
+	option = {
+		name = "ResearchProject_Menu_EvtOptChemicalWeapons"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = chemical_weapons_research_project_cflag
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_WEAPONS = { }
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = chemical_weapons_research_project_cflag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_NOT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_WEAPONS = { }
+				add_country_modifier = { name = research_project_spending_2 duration = 1825 }
+				set_country_flag = chemical_weapons_research_project_cflag
+			}
+		}
+	}
+	
+	option = {
+		name = "ResearchProject_Menu_EvtOptChemicalDefence"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = chemical_defence_research_project_cflag
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_DEFENCE = { }
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = chemical_defence_research_project_cflag }
+					war_countries = { invention = gas_attack_capability }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_NOT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_DEFENCE = { }
+				add_country_modifier = { name = research_project_spending_3 duration = 1825 }
+				set_country_flag = chemical_defence_research_project_cflag
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { war_countries = { invention = gas_attack_capability } }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_CHEMICAL_DEFENCE_ERROR = { }
+			}
+		}
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptCancel"
+	}
+}
+
+country_event = {
+	id = 141301
+	title = "SyntheticPolymers_rproj_EvtName"
+	desc = 	"SyntheticPolymers_rproj_EvtDesc"
+	picture = "Invention"
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = synthetic_polymers_research_project_cflag
+					NOT = { invention = synthetic_polymers_research_project }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_IN_PROGRESS = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					invention = synthetic_polymers_research_project
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_IN_DONE = { }
+			}
+		}
+	}
+	
+	option = {
+		name = "SyntheticPolymers_rproj_EvtOptStartResearch"
+		
+		
+		# ALREADY RESEARCHED
+		random_owned = {
+			limit = {
+				owner = { 
+					invention = synthetic_polymers_research_project
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_RESEARCHED = { }
+			}
+		}
+		# START RESEARCH
+		random_owned = {
+			limit = {
+				owner = { 
+					money = 2000000
+					NOT = { invention = synthetic_polymers_research_project }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_RPROJ_COST_2M = { }
+				money = -1000000
+				money = -1000000
+				
+				add_country_modifier = { name = synthetic_polymers_research_project_cmodifier duration = 1085 }
+				set_country_flag = synthetic_polymers_research_project_cflag
+			}
+		}
+	}
+}
+
+country_event = {
+	id = 141302
+	title = "SyntheticPolymers_rproj_EvtName"
+	desc = 	"SyntheticPolymersDone_rproj_EvtDesc"
+	picture = "Invention"
+	
+	trigger = {
+		NOT = { 
+			invention = synthetic_polymers_research_project
+			has_country_modifier = { synthetic_polymers_research_project_cmodifier } 
+		}
+		has_country_flag = synthetic_polymers_research_project_cflag
+	}
+	
+	
+	option = {
+		name = "rproj_EvtOptResearchDone"
+		prestige = 10
+		years_of_research = 0.1
+		invention = synthetic_polymers_research_project
+	}
+}
