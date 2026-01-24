@@ -22,7 +22,8 @@ country_event = {
 	}
 }
 
-# ID 57051 FREE
+
+
 
 country_event = {
 	title = "Exchange_EvtName"
@@ -413,27 +414,6 @@ country_event = {
 				controlled_by = FROM
 			}
 			change_controller = THIS
-		}
-	}
-}
-
-province_event = {
-	title = "War_Shipbuilding_EvtName"
-	desc = "War_Shipbuilding_EvtDesc"
-	id = 57063
-	
-	trigger = {
-		has_country_flag = country_at_war_flag
-		NOT = {
-			has_province_modifier = war_shipbuilding_modifier
-		}
-	}
-	
-	option = {
-		name = "War_Shipbuilding_EvtOptA"
-		add_province_modifier = {
-			name = war_shipbuilding_modifier
-			duration = -1
 		}
 	}
 }
