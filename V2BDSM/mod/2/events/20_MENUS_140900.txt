@@ -1809,3 +1809,46 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = 140909
+	title = "ResearchProject_Menu_EvtName"
+	desc = "ResearchProject_Menu_EvtDesc"
+	picture = "SouthPole1"
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = "ResearchProject_Menu_EvtOptSyntheticPolymers"
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = synthetic_polymers_research_project_cflag
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_SYNTHETIC_POLYMERS = { }
+			}
+		}
+		
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = synthetic_polymers_research_project_cflag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_NOT_RESEARCHED = { }
+				CUSTOM_TOOLTIP_PROJECT_SYNTHETIC_POLYMERS = { }
+				add_country_modifier = { name = research_project_spending_1 duration = 1825 }
+				set_country_flag = synthetic_polymers_research_project_cflag
+			}
+		}
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptCancel"
+	}
+}

@@ -245,24 +245,6 @@ alternating_current = {
 		factory_throughput = 0.02
 	}
 }
-transformers = {
-	limit = { electrical_power_generation = 1 }
-	chance = {
-		base = 0
-		modifier = {
-			factor = 2
-			invention = alternating_current
-		}
-		modifier = {
-			factor = 2
-			invention = direct_current
-		}
-	}
-	effect = {
-		rgo_output = 0.05
-		factory_throughput = 0.05
-	}
-}
 national_radio_networks = {
 	limit = { electrical_power_generation = 1 }
 	chance = {
@@ -737,25 +719,6 @@ shift_schedule = {
 	}
 	effect = {
 		factory_throughput = 0.02
-	}
-}
-graveyard_shift = {
-	limit = { shift_work = 1 }
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			invention = edison_light_bulb
-		}
-		modifier = {
-			factor = 2
-			time_saving_measures = 1
-		}
-	}
-	effect = {
-		factory_throughput = 0.03
-		factory_goods_output = { radio = 0.03 }
-		factory_goods_output = { telephones = 0.03 }
 	}
 }
 #mechanized_manufacturing
@@ -1727,6 +1690,73 @@ bakelite = {
 		factory_goods_output = {
 			glass  = 0.03
 		} 
+	}
+}
+graveyard_shift = {
+	limit = { synthetic_polymers = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			invention = edison_light_bulb
+		}
+		modifier = {
+			factor = 2
+			time_saving_measures = 1
+		}
+	}
+	effect = {
+		factory_throughput = 0.03
+		factory_goods_output = { radio = 0.03 }
+		factory_goods_output = { telephones = 0.03 }
+	}
+}
+transformers = {
+	limit = { synthetic_polymers = 1 }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			invention = alternating_current
+		}
+		modifier = {
+			factor = 2
+			invention = direct_current
+		}
+	}
+	effect = {
+		rgo_output = 0.05
+		factory_throughput = 0.05
+	}
+}
+synthetic_polymers_research_project = {
+	limit = { synthetic_polymers = 1 }
+	chance = {
+		base = 2
+		modifier = {
+			factor = -100
+			has_country_flag = synthetic_polymers_research_project_cflag
+			ai = no
+		}
+		modifier = {
+			factor = 2
+			modern_chemistry = 1
+		}
+		modifier = {
+			factor = 2
+			integral_rail_system = 1
+		}
+		modifier = {
+			factor = 2
+			electrical_power_generation = 1
+		}
+		modifier = {
+			factor = 2
+			aeronautics = 1
+		}
+	}
+	effect = {
+		activate_building = synthetic_rubber_factory
 	}
 }
 bergius_process = {

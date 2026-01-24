@@ -337,13 +337,6 @@ promote_to =
 	{
 		factor = 0.01
 		
-		modifier = {
-			factor = -20
-			NOT = {
-				unemployment_by_type = { type = labourers value = 0.1 } 
-			}
-		}
-		
 		group = {
             modifier = {
                 factor = -100
@@ -597,75 +590,23 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = 1
-				military_spending = 0.04
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.09
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.14
-			}
-			modifier = {
-				factor = 1
+				factor = 4
 				military_spending = 0.19
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.24
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.29
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.34
-			}
-			modifier = {
-				factor = 1
+				factor = 4
 				military_spending = 0.39
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.44
+				factor = 3
+				military_spending = 0.59
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.49
+				factor = 3
+				military_spending = 0.79
 			}
 			modifier = {
-				factor = 1
-				military_spending = 0.54
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.64
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.69
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.74
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.84
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.89
-			}
-			modifier = {
-				factor = 1
-				military_spending = 0.94
-			}
-			modifier = {
-				factor = 1
+				factor = 3
 				military_spending = 0.99
 			}
 		}
@@ -676,7 +617,7 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -10
+			factor = -50
 			location = {
 				is_colonial = yes
 			}
@@ -709,27 +650,8 @@ promote_to =
 				NOT = { recruited_percentage = 0.33 }
 			}
 			modifier = {
-				factor = -10
+				factor = -3
 				NOT = { recruited_percentage = 0.25 }
-			}
-		}
-		
-		group = {
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.01 }
-			}
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.02 }
-			}
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.03 }
-			}
-			modifier = {
-				factor = -1.5
-				state_scope = { soldiers = 0.04 }
 			}
 		}
 	}
