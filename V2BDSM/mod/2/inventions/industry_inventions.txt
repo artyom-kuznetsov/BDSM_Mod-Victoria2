@@ -1733,6 +1733,10 @@ synthetic_polymers_research_project = {
 	limit = { synthetic_polymers = 1 }
 	chance = {
 		base = 0
+		modifier = {
+			has_country_flag = synthetic_polymers_researched_cflag
+			factor = 100
+		}
 	}
 	effect = {
 		activate_building = synthetic_rubber_factory
