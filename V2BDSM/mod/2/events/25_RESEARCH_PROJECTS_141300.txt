@@ -116,7 +116,17 @@ country_event = {
 				}
 			}
 			owner = {
-				CUSTOM_TOOLTIP_PROJECT_IN_DONE = { }
+				CUSTOM_TOOLTIP_PROJECT_DONE = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { invention = synthetic_polymers_research_project has_country_flag = synthetic_polymers_research_project_cflag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_NOT_DONE = { }
 			}
 		}
 	}
@@ -153,6 +163,99 @@ country_event = {
 				set_country_flag = synthetic_polymers_research_project_cflag
 			}
 		}
+		# NO MONEY
+		random_owned = {
+			limit = {
+				owner = { 
+					NOT = { money = 2000000 invention = synthetic_polymers_research_project }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_RPROJ_COST_2M = { }
+				CUSTOM_TOOLTIP_DONTHAVEMONEY = { }
+			}
+		}
+		country_event = 141301
+	}
+	
+	option = {
+		name = "SyntheticPolymers_rproj_EvtOptStartStopSelling"
+		
+		# NOT RESEARCHED ERROR
+		random_owned = {
+			limit = {
+				owner = { 
+					NOT = { invention = synthetic_polymers_research_project }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_NOT_RESEARCHED_ERROR = { }
+			}
+		}
+		# START SELLING
+		random_owned = {
+			limit = {
+				owner = { 
+					invention = synthetic_polymers_research_project
+					has_country_flag = synthetic_polymers_selling_cflag
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_RPROJ_IS_SELLING = { }
+				clr_country_flag = synthetic_polymers_selling_cflag
+			}
+		}
+		# STOP SELLING
+		random_owned = {
+			limit = {
+				owner = { 
+					invention = synthetic_polymers_research_project
+					NOT = { has_country_flag = synthetic_polymers_selling_cflag }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_RPROJ_IS_NOT_SELLING = { }
+				set_country_flag = synthetic_polymers_selling_cflag
+			}
+		}
+		country_event = 141301
+	}
+	
+	option = {
+		name = "SyntheticPolymers_rproj_EvtOptBuyRequest"
+		
+		# RESEARCHED ERROR
+		random_owned = {
+			limit = {
+				owner = { 
+					invention = synthetic_polymers_research_project
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_PROJECT_RESEARCHED = { }
+			}
+		}
+		# REQUEST
+		random_owned = {
+			limit = {
+				owner = { 
+					NOT = { invention = synthetic_polymers_research_project }
+				}
+			}
+			owner = {
+				any_country = {
+					limit = {
+						ai = no
+						has_country_flag = synthetic_polymers_selling_cflag
+					}
+					country_event = 141303
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptCancel"
 	}
 }
 
@@ -175,6 +278,42 @@ country_event = {
 		name = "rproj_EvtOptResearchDone"
 		prestige = 10
 		years_of_research = 0.1
+		invention = synthetic_polymers_research_project
+	}
+}
+
+country_event = {
+	id = 141303
+	title = "SyntheticPolymersBuyRequest_rproj_EvtName"
+	desc = 	"SyntheticPolymersBuyRequest_rproj_EvtDesc"
+	picture = "Invention"
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = "rproj_BuyRequest_EvtOptDeny"
+	}
+	option = {
+		name = "rproj_BuyRequest_EvtOptAccept"
+		
+		FROM = {
+			country_event = 141304
+		}
+	}
+}
+
+country_event = {
+	id = 141304
+	title = "SyntheticPolymersBuyRequest_rproj_EvtName"
+	desc = 	"SyntheticPolymersBuyRequestAccepted_rproj_EvtDesc"
+	picture = "Invention"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "rproj_BuyRequest_EvtOptA"
+		
 		invention = synthetic_polymers_research_project
 	}
 }
