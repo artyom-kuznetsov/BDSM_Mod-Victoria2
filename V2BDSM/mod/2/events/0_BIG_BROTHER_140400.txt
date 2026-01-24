@@ -1864,23 +1864,6 @@ province_event = {
 	}
 	
 	option = {
-		name = "Selector_EvtOptShipbuildingState"
-		owner = {
-			any_owned = { remove_province_modifier = shipbuilding_state_modifier }
-		}
-		state_scope = {
-			any_owned = {
-				limit = {
-					is_coastal = yes
-				}
-				add_province_modifier = { name = shipbuilding_state_modifier duration = -1 }
-			}
-		}
-		# Audax Validator "." Ignore_NEXT
-		province_selector = -1
-	}
-	
-	option = {
 		name = "Selector_EvtOptSupplyDepot"
 		owner = {
 			any_owned = {
