@@ -1742,7 +1742,11 @@ synthetic_polymers_research_project = {
 synthetic_polymers_research_project_2 = {
 	limit = { has_country_flag = synthetic_polymers_researched_cflag }
 	chance = {
-		base = 100
+		base = 0
+		modifier = {
+			factor = 100
+			has_country_flag = synthetic_polymers_researched_cflag
+		}
 	}
 	effect = {
 		activate_building = synthetic_rubber_factory

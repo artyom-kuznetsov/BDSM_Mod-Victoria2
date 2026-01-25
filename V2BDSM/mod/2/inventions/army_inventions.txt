@@ -562,9 +562,13 @@ gas_attack_capability = {
 }
 #chemical_weapons
 gas_attack_capability_2 = {
-	limit = { has_country_flag = chemical_defence_research_project_cflag }
+	limit = { has_country_flag = chemical_weapons_researched_cflag }
 	chance = {
-		base = 100	
+		base = 0
+		modifier = {
+			factor = 100
+			has_country_flag = chemical_weapons_researched_cflag
+		}
 	}
 	effect = {
 		gas_attack = yes
