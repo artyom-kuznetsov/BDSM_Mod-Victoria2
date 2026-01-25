@@ -555,10 +555,19 @@ gas_attack_capability = {
 		}		
 	}
 	effect = {
-		gas_attack = yes
 		army_base = {
 			supply_consumption = 0.2
 		}
+	}
+}
+#chemical_weapons
+gas_attack_capability_2 = {
+	limit = { has_country_flag = chemical_defence_research_project_cflag }
+	chance = {
+		base = 100	
+	}
+	effect = {
+		gas_attack = yes
 	}
 }
 gas_defense_capability = {
