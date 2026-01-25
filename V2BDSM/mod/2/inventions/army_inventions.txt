@@ -587,23 +587,34 @@ gas_defense_capability = {
 			factor = 5
 			war = yes
 			ai = yes
-			war_countries = { invention = gas_attack_capability }
+			war_countries = { invention = gas_attack_capability_2 }
 		}
 		modifier = {
 			factor = 10
 			war = yes
 			ai = yes
-			war_countries = { invention = gas_defense_capability }
+			war_countries = { invention = gas_defense_capability_2 }
 		}
 	}
 	effect = {
-		gas_defence = yes
 		army_base = {
 			supply_consumption = 0.2
 		}
 	}
 }
-
+gas_defense_capability_2 = {
+	limit = { has_country_flag = gasmask_researched_cflag }
+	chance = {
+		base = 0
+		modifier = {
+			factor = 100
+			has_country_flag = gasmask_researched_cflag
+		}
+	}
+	effect = {
+		gas_defence = yes
+	}
+}
 #modern_divisional_structure
 interwar_infantry = {
 	limit = { modern_divisional_structure = 1 }
