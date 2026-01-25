@@ -65,6 +65,17 @@ political_decisions = {
 			country_event = 140403
 			set_global_flag = 1836_setup_complete_flag
 			
+			### EVERYONE PAID FOR NAVAL BASES! # v4.6.3
+			any_country = {
+				limit = {
+					num_of_ports = 1
+				}
+				add_country_modifier = {
+					name = naval_bases_paid_cmodifier
+					duration = 730
+				}
+			}
+			
 			### ANNEX VASSAL INITIAL COOLDOWN
 			any_country = {
 				limit = {
