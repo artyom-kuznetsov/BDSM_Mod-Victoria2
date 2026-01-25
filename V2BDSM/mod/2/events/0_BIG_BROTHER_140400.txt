@@ -9,6 +9,16 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
+		# v4.6.3 AI PROJECTS
+		any_country = { 
+			limit = { ai = yes NOT = { has_country_flag = gasmask_researched_cflag } invention = gas_defense_capability }
+			set_country_flag = gasmask_researched_cflag 
+		}
+		any_country = { 
+			limit = { ai = yes NOT = { has_country_flag = chemical_weapons_researched_cflag } invention = gas_attack_capability }
+			set_country_flag = chemical_weapons_researched_cflag 
+		}
+		
 		# v4.6.2 SUBJECT BADBOY
 		any_country = {
 			limit = {
