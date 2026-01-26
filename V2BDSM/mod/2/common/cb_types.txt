@@ -45,7 +45,7 @@ peace_order = {
 	add_to_sphere 
 	take_from_sphere 
 	status_quo 
-	gunboat 
+	gunboat
 	conquest 
 	conquest_small
 	civil_war 
@@ -3404,6 +3404,8 @@ humiliate = {
 humiliate_speech = {
 	sprite_index = 11
 	is_triggered_only = yes
+	constructing_cb = no
+	crisis = no
 	months = 24
 
 	badboy_factor = 1.5
@@ -3420,17 +3422,14 @@ humiliate_speech = {
 	good_relation_infamy_factor = 1
 	good_relation_militancy_factor = 1
 	
-	constructing_cb = no
-	po_remove_prestige = yes
 
 	tws_battle_factor = 2.0
-	
-	war_name = WAR_HUMILIATE_NAME
 
 	can_use = {
 		always = yes
 		#has_country_modifier = give_hate_speech_cmodifier
-	}	
+	}
+	
 	on_add = {
 		move_issue_percentage = { 
 			from = jingoism 
@@ -3438,9 +3437,14 @@ humiliate_speech = {
 			value = 0.25
 		}
 	}
+	
 	on_po_accepted = {
 		plurality = -15
 	}
+	
+	po_remove_prestige = yes
+	
+	war_name = WAR_HUMILIATE_NAME
 }
 
 demand_reparations = {
