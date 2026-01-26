@@ -97,6 +97,7 @@ country_event = {
 			limit = {
 				owner = { 
 					money = 2000000
+					synthetic_polymers = 1
 					NOT = { 
 						has_country_modifier = research_project_cooldown 
 						invention = synthetic_polymers_research_project 
@@ -113,6 +114,16 @@ country_event = {
 				
 				add_country_modifier = { name = synthetic_polymers_research_project_cmodifier duration = 1085 }
 				set_country_flag = synthetic_polymers_research_project_cflag
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { synthetic_polymers = 1 }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_MISSING_TECH_SYNTHETIC_POLYMERS = { }
 			}
 		}
 		# ON COOLDOWN ERROR
@@ -371,7 +382,17 @@ country_event = {
 	option = {
 		name = "Generic_rproj_EvtOptStartResearch"
 		
-		
+		# MISSING TECH
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { synthetic_polymers = 1 }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_MISSING_TECH_CHEMICAL_WEAPONS = { }
+			}
+		}
 		# ALREADY RESEARCHED
 		random_owned = {
 			limit = {
@@ -691,6 +712,17 @@ country_event = {
 		name = "Generic_rproj_EvtOptStartResearch"
 		
 		
+		# MISSING TECH
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { synthetic_polymers = 1 }
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_MISSING_TECH_CHEMICAL_WEAPONS = { }
+			}
+		}
 		# ALREADY RESEARCHED
 		random_owned = {
 			limit = {
