@@ -1,0 +1,78 @@
+country_event = {
+	id = 141400
+	
+	title = "EVTNAME141400"
+	desc = "EVTDESC141400"
+
+
+	trigger = {
+		has_country_flag = ready_hate_speech_cflag
+		WBK = {
+			any_neighbor_country = {			
+				relation = { who = THIS value = -200 }
+
+				NOT = {
+					relation = { who = THIS value = -195 } 
+					has_country_modifier = take_hate_speech_cmodifier
+					truce_with = THIS
+				}	
+			}	
+		}
+		NOT = { has_country_modifier = give_hate_speech_cmodifier }
+	}
+	
+	option = {
+		clr_country_flag = ready_hate_speech_cflag
+	}
+
+	
+	option = {
+		country_event = 141401
+		clr_country_flag = ready_hate_speech_cflag
+	}
+
+}
+
+
+country_event = {
+	id = 141401
+	
+	title = "EVTNAME141401"
+	desc = "EVTDESC141401"
+	
+	is_triggered_only = yes
+
+	option = {
+		random_country = {
+			limit = {
+				NOT = { tag = WBK }
+				AND = {					
+					relation = { who = THIS value = -200 }
+					NOT = {relation = { who = THIS value = -199 }}
+				}
+			}	
+			country_event = 141402
+		}
+		add_country_modifier = { name = give_hate_speech_cmodifier duration = 1825 }	
+	}
+	
+}
+
+
+country_event = {
+	id = 141402
+	
+	is_triggered_only = yes
+
+	title = "EVTNAME141402"
+	desc = "EVTDESC141402"
+	
+	option = {
+		add_country_modifier = { name = take_hate_speech_cmodifier duration = 730 }		
+		prestige_factor = -0.05
+		add_casus_belli = {
+				target = FROM
+				type = humiliate_speech
+			}
+	}
+}

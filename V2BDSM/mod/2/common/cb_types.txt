@@ -79,6 +79,7 @@ peace_order = {
 	make_puppet_tiny
 	dismantle_forts
 	humiliate
+	humiliate_speech
 	demand_reparations
 	demand_concession_casus_belli
 	establish_protectorate_casus_belli
@@ -3356,37 +3357,79 @@ humiliate = {
 	war_name = WAR_HUMILIATE_NAME
 
 	can_use = {
-		NOT = { is_our_vassal = THIS }
-		has_recently_lost_war = no
-		NOT = {
-			AND = {
-				has_country_flag = chinese_warlord_flag
-				NOT = { year = 1870 } 
-			}
-		}
-		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
-		OR = {
-			neighbour = THIS
-			AND = {
-				num_of_ports = 1
-				THIS = {
-					num_of_ports = 1
+			NOT = { is_our_vassal = THIS }
+			has_recently_lost_war = no
+			NOT = {
+				AND = {
+					has_country_flag = chinese_warlord_flag
+					NOT = { year = 1870 } 
 				}
 			}
-		}
-		
-		
-		OR = { # AFRICAN BLOCKS (MALARIA)
-			AND = {
-				has_country_flag = malaria_blocked_country_flag
-				THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+			NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
+			OR = {
+				neighbour = THIS
+				AND = {
+					num_of_ports = 1
+					THIS = {
+						num_of_ports = 1
+					}
+				}
 			}
-			AND = {
-				has_country_flag = severe_malaria_blocked_country_flag
-				THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+			
+			
+			OR = { # AFRICAN BLOCKS (MALARIA)
+				AND = {
+					has_country_flag = malaria_blocked_country_flag
+					THIS = { OR = { has_country_flag = malaria_countered_country_flag capital_scope = { continent = africa } } }
+				}
+				AND = {
+					has_country_flag = severe_malaria_blocked_country_flag
+					THIS = { OR = { has_country_flag = severe_malaria_countered_country_flag capital_scope = { continent = africa } } }
+				}
+				NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
 			}
-			NOT = { has_country_flag = malaria_blocked_country_flag has_country_flag = severe_malaria_blocked_country_flag }
+	}	
+	on_add = {
+		move_issue_percentage = { 
+			from = jingoism 
+			to = pro_military
+			value = 0.25
 		}
+	}
+	on_po_accepted = {
+		plurality = -15
+	}
+}
+
+humiliate_speech = {
+	sprite_index = 11
+	is_triggered_only = yes
+	months = 24
+
+	badboy_factor = 1.5
+	prestige_factor = 1
+	peace_cost_factor = 15
+	penalty_factor = 1
+	
+	break_truce_prestige_factor = 1
+	break_truce_infamy_factor = 1
+	break_truce_militancy_factor = 1
+	truce_months = 48
+	
+	good_relation_prestige_factor = 1
+	good_relation_infamy_factor = 1
+	good_relation_militancy_factor = 1
+	
+	constructing_cb = no
+	po_remove_prestige = yes
+
+	tws_battle_factor = 2.0
+	
+	war_name = WAR_HUMILIATE_NAME
+
+	can_use = {
+		always = yes
+		#has_country_modifier = give_hate_speech_cmodifier
 	}	
 	on_add = {
 		move_issue_percentage = { 
