@@ -186,6 +186,23 @@ country_event = { # MOP ACTIONS
 	}
 	
 	option = {
+		name = "MopActions_EvtOptHateSpeech"
 		set_country_flag = ready_hate_speech_cflag
+		any_country = {
+			limit = {
+				ai = no
+				NOT = { tag = WBK }
+				NOT = {
+					has_country_modifier = take_hate_speech_cmodifier
+					truce_with = THIS
+					war_with = THIS
+
+				}
+				relation = { who = THIS value = -200 }
+				NOT = {relation = { who = THIS value = -190 }}
+			}	
+			relation = { who = THIS value = 10 }
+		}
+
 	}
 }
