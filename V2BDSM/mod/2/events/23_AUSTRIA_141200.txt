@@ -44,8 +44,9 @@ country_event = {
 	option = {
 		name = "austria_interferes_EvtOptAccept"
 		CUSTOM_TOOLTIP_RELEASE_POPE = { }
-		749 = { secede_province = PAP }
-		750 = { secede_province = PAP }
+		PAP = {
+			country_event = 141204
+		}
 		create_vassal = PAP
 		AUS = { 
 			diplomatic_influence = { who = PAP  value = 500 } 
@@ -107,6 +108,25 @@ country_event = {
 		ai_chance = {
 			factor = 1
 		}
+	}
+	
+}
+
+country_event = {
+	id = 141204
+	title = "noloc"
+	desc = "noloc"
+	picture = "vatican"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		ai_chance = {
+			factor = 1
+		}
+		749 = { secede_province = THIS }
+		750 = { secede_province = THIS }
 	}
 	
 }
