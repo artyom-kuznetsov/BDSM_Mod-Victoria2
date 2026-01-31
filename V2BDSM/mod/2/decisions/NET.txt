@@ -56,7 +56,12 @@ political_decisions = {
 		}
 		effect = {
 			set_country_flag = swe_economic_boom_flag
-			add_country_modifier = { name = swe_economic_boom_modifier duration = 2738 } # 7.5 Years
+			any_owned = {
+				limit = {
+					is_core = THIS
+				}
+				add_province_modifier = { name = net_economic_boom_pmodifier duration = 3650 }
+			}
 			money = -500000
 		}
 	}
