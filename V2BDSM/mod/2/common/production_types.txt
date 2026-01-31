@@ -3,8 +3,8 @@
 
 factory_template = {
 	efficiency = { #1.2 saved
-		cement = 0.5 			# 8
-		machine_parts = 0.14	# 2.044	# TOTAL 10
+		cement = 0.375 			# 6
+		machine_parts = 0.14	# 2.044	# TOTAL 8
 	}
 	
 	owner =
@@ -574,12 +574,12 @@ furniture_factory = {
 }
 
 paper_mill = {       
-	template = primitive_factory_template		#7.625
+	template = primitive_factory_template		#3.3
 	input_goods = { 
-		timber = 7.2		#24.64	total input+maint = 32.265
+		timber = 9		# ~28,7	# TOTAL 32
 	}
-	output_goods = paper 
-	value = 11.66			#40.018
+	output_goods = paper
+	value = 4			# 40	# PROFIT 8
 	bonus = {
 		trigger = { trade_goods_in_state = timber }
 		value = 0.15
@@ -600,13 +600,13 @@ regular_clothes_factory = {
 }
   
 explosives_factory = {       
-	template = factory_template		#7.625
+	template = factory_template		#8
 	input_goods = {   
-		fertilizer = 1.9	#19
-		paper = 1.645	#5.6	total input+maint = 32.225
+		fertilizer = 1.9	# 19
+		paper = 0.5			# 5		# TOTAL 24+8	# 32
 	}
 	output_goods = explosives 
-	value = 2				#40
+	value = 2				#40	# PROFIT 8
 	bonus = {
 		trigger = { has_building = fertilizer_factory }
 		value = 0.075
@@ -685,13 +685,13 @@ dye_factory = {
 }
 
 cigarette_factory = {
-	template = cheap_factory_template	#3.7
+	template = cheap_factory_template	# 5
 	input_goods = {   
-		tobacco = 12		#19.2
-		paper = 3			#9.6	total input+maint = 32.5
+		tobacco = 11.34		# 17
+		paper = 1			# 10	# 27+5	# TOTAL 32
 	}
 	output_goods = cigarettes 
-	value = 6.6 			#39.6
+	value = 6.6 			#39.6	# PROFIT 7.6
 	bonus = {
 		trigger = { trade_goods_in_state = tobacco }
 		value = 0.075
@@ -703,13 +703,13 @@ cigarette_factory = {
 }
 
 tea_packaging_factory = {
-	template = cheap_factory_template	#3.7
+	template = cheap_factory_template	# 5
 	input_goods = {   
-		tea_leaves = 8.57	#22.282
-		paper = 2			#6.8	total input+maint = 32.782
+		tea_leaves = 6.54	# 17
+		paper = 1			# 10	# 27+5	# TOTAL 32
 	}
 	output_goods = tea
-	value = 8.9				#40.05
+	value = 8.9				#40.05	# PROFIT 8.05
 	bonus = {
 		trigger = { trade_goods_in_state = tea_leaves }
 		value = 0.075
@@ -721,13 +721,13 @@ tea_packaging_factory = {
 }
 
 coffee_packaging_factory = {
-	template = cheap_factory_template	#3.7
+	template = cheap_factory_template	# 5
 	input_goods = {   
-		coffee_beans = 8.57	#22.282
-		paper = 2			#6.8	total input+maint = 32.782
+		coffee_beans = 6.54	# 17
+		paper = 1			# 10	total input+maint = 32
 	}
 	output_goods = coffee
-	value = 8.9				#40.05
+	value = 8.9				#40.05	# PROFIT 8.05
 	bonus = {
 		trigger = { trade_goods_in_state = coffee_beans }
 		value = 0.075
@@ -1770,7 +1770,7 @@ artisan_paper = {
 		lumber = 2.5			#5 total input+maint = 5
 	}
 	output_goods = paper
-	value = 2.94				#9.996
+	value = 1					# 10
 	owner = {
 		# Audax Validator "." Ignore_NEXT
 		poptype = artisan
@@ -1813,7 +1813,7 @@ artisan_regular_clothes = {
 
 artisan_cigarettes = {
 	input_goods = {
-		paper = 0.294			#0.9996
+		paper = 0.1				#1
 		tobacco = 2.667			#4.0005 total input+maint = 5.0001
 	}
 	output_goods = cigarettes
@@ -1864,7 +1864,7 @@ artisan_winery = {
 artisan_tea = {
 	input_goods = {
 		tea_leaves = 1.538		#3.9988
-		paper = 0.294			#0.9996 total input+maint = 4.9984
+		paper = 0.1				#1 	total input+maint = 4.9984
 	}
 	output_goods = tea
 	value = 2.22				#9.99
@@ -1880,7 +1880,7 @@ artisan_tea = {
 artisan_coffee = {
 	input_goods = {
 		coffee_beans = 1.538	#3.9988
-		paper = 0.294			#0.9996 total input+maint = 4.9984
+		paper = 0.1				#1	 total input+maint = 4.9984
 	}
 	output_goods = coffee
 	value = 2.22				#9.99
