@@ -1216,6 +1216,8 @@ emigration_chance =
 			OR = {
 				primary_culture = japanese
 				primary_culture = beifaren
+				primary_culture = taiping
+				primary_culture = cantonese
 				primary_culture = javan
 			}
 			NOT = { year = 1870 }
@@ -1325,6 +1327,15 @@ assimilation_chance =
     	factor = 1.25
 		year = 1870
 		location = { is_core = THIS }
+	}
+	
+	modifier = {
+    	factor = 1
+		OR = {
+			culture = taiping
+			culture = cantonese
+		}
+		country = { primary_culture = beifaren }
 	}
 	
 	modifier = {

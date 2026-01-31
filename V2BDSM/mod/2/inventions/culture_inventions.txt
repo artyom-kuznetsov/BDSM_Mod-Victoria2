@@ -1114,6 +1114,11 @@ darwinism = {
 			factor = 2
 			impressionism = 1
 		}
+		modifier = {
+			factor = -7
+			is_culture_group = east_asian
+			NOT = { year = 1860 }
+		}
 	}
 	effect = {
 		education_efficiency = 0.1
@@ -1147,8 +1152,13 @@ sociology = {
 			factor = 2
 			scientific_management = 1
 		}
+		modifier = {
+			factor = -6
+			is_culture_group = east_asian
+			NOT = { year = 1860 }
+		}
 	}
-	effect = { core_pop_militancy_modifier = 0.01 }
+	effect = { education_efficiency = 0.05 }
 }
 social_psychology = {
 	limit = { social_science = 1 }
@@ -1163,8 +1173,13 @@ social_psychology = {
 			factor = 2
 			behaviorism = 1
 		}
+		modifier = {
+			factor = -6
+			is_culture_group = east_asian
+			NOT = { year = 1860 }
+		}
 	}
-	effect = { }
+	effect = { education_efficiency = 0.05 }
 }
 political_science = {
 	limit = { social_science = 1 }
