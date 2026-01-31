@@ -415,51 +415,51 @@ political_decisions = {
 		}
 	}
 	
-	ban_opium_trade_dec = {
-		potential = {
-			primary_culture = beifaren
-			nationalism_n_imperialism = 1
-			OR = {
-				has_country_modifier = macau_exploitation_modifier_china
-				has_country_modifier = hongkong_exploitation_modifier_china
-				has_country_modifier = shanghai_exploitation_modifier_china
-				has_country_modifier = tsindao_exploitation_modifier_china
-				has_country_modifier = weihaiwei_exploitation_modifier_china
-				has_country_modifier = arthur_exploitation_modifier_china
-				has_country_modifier = tientsin_exploitation_modifier_china
-				has_country_modifier = guangjou_exploitation_modifier_china
-			}
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_global_flag = ban_opium_trade_flag }
-		}
-		
-		allow = {
-			money = 2000000
-		}
-		
-		effect = {
-			money = -2000000
-			plurality = 5
-			remove_country_modifier = macau_exploitation_modifier_china
-			remove_country_modifier = hongkong_exploitation_modifier_china
-			remove_country_modifier = shanghai_exploitation_modifier_china
-			remove_country_modifier = tsindao_exploitation_modifier_china
-			remove_country_modifier = weihaiwei_exploitation_modifier_china
-			remove_country_modifier = arthur_exploitation_modifier_china
-			remove_country_modifier = tientsin_exploitation_modifier_china
-			remove_country_modifier = guangjou_exploitation_modifier_china
-			set_global_flag = ban_opium_trade_flag
-			any_country = {
-				limit = {
-					ai = no
-					NOT = {
-						tag = THIS
-					}
-				}
-				country_event = 57605
-			}
-		}
-	}
+	#ban_opium_trade_dec = {
+	#	potential = {
+	#		primary_culture = beifaren
+	#		nationalism_n_imperialism = 1
+	#		OR = {
+	#			has_country_modifier = macau_exploitation_modifier_china
+	#			has_country_modifier = hongkong_exploitation_modifier_china
+	#			has_country_modifier = shanghai_exploitation_modifier_china
+	#			has_country_modifier = tsindao_exploitation_modifier_china
+	#			has_country_modifier = weihaiwei_exploitation_modifier_china
+	#			has_country_modifier = arthur_exploitation_modifier_china
+	#			has_country_modifier = tientsin_exploitation_modifier_china
+	#			has_country_modifier = guangjou_exploitation_modifier_china
+	#		}
+	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		NOT = { has_global_flag = ban_opium_trade_flag }
+	#	}
+	#	
+	#	allow = {
+	#		money = 2000000
+	#	}
+	#	
+	#	effect = {
+	#		money = -2000000
+	#		plurality = 5
+	#		remove_country_modifier = macau_exploitation_modifier_china
+	#		remove_country_modifier = hongkong_exploitation_modifier_china
+	#		remove_country_modifier = shanghai_exploitation_modifier_china
+	#		remove_country_modifier = tsindao_exploitation_modifier_china
+	#		remove_country_modifier = weihaiwei_exploitation_modifier_china
+	#		remove_country_modifier = arthur_exploitation_modifier_china
+	#		remove_country_modifier = tientsin_exploitation_modifier_china
+	#		remove_country_modifier = guangjou_exploitation_modifier_china
+	#		set_global_flag = ban_opium_trade_flag
+	#		any_country = {
+	#			limit = {
+	#				ai = no
+	#				NOT = {
+	#					tag = THIS
+	#				}
+	#			}
+	#			country_event = 57605
+	#		}
+	#	}
+	#}
 	
 	china_kickstart_industry_dec = {
 		potential = {
