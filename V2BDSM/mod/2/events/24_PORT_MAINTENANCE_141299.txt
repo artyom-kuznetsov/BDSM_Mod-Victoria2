@@ -8348,6 +8348,13 @@ country_event = {
 	option = {
 		name = "Port_Payment_Due_EvtOptB"
 		CUSTOM_TOOLTIP_PORT_ANTI_MAINTAINANCE = { }
+		any_owned = {
+			limit = {
+				has_building = naval_base
+			}
+			# Audax Validator "." Ignore_NEXT
+			naval_base = -1
+		}
 		add_country_modifier = { name = naval_bases_paid_cmodifier duration = 355 }
 	}
 }
