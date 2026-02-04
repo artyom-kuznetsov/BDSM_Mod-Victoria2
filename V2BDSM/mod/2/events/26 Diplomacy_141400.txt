@@ -8,7 +8,7 @@ country_event = {
 		CUSTOM_TOOLTIP_INSULT1 = { } 
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					has_country_modifier = take_hate_speech_cmodifier
@@ -54,7 +54,7 @@ country_event = {
 		
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					has_country_modifier = take_hate_speech_cmodifier
@@ -86,7 +86,7 @@ country_event = {
 		name = EVTDESC141401_opt1
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					has_country_modifier = take_hate_speech_cmodifier
@@ -106,7 +106,7 @@ country_event = {
 		name = EVTDESC141401_opt2
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					has_country_modifier = take_hate_speech_cmodifier
@@ -126,7 +126,7 @@ country_event = {
 		name = EVTDESC141401_opt3
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					has_country_modifier = take_hate_speech_cmodifier
@@ -138,6 +138,46 @@ country_event = {
 				NOT = {relation = { who = THIS value = -190 }}
 			}	
 			country_event = 141404
+		}
+		add_country_modifier = { name = give_hate_speech_cmodifier duration = 1825 }	
+	}	
+	
+	option = {
+		name = EVTDESC141401_opt4
+		random_country = {
+			limit = {
+				ai = no
+				NOT = { tag = WBK }
+				NOT = {
+					has_country_modifier = take_hate_speech_cmodifier
+					truce_with = THIS
+					war_with = THIS
+
+				}
+				relation = { who = THIS value = -200 }
+				NOT = {relation = { who = THIS value = -190 }}
+			}	
+			country_event = 141405
+		}
+		add_country_modifier = { name = give_hate_speech_cmodifier duration = 1825 }	
+	}	
+	
+	option = {
+		name = EVTDESC141401_opt5
+		random_country = {
+			limit = {
+				ai = no
+				NOT = { tag = WBK }
+				NOT = {
+					has_country_modifier = take_hate_speech_cmodifier
+					truce_with = THIS
+					war_with = THIS
+
+				}
+				relation = { who = THIS value = -200 }
+				NOT = {relation = { who = THIS value = -190 }}
+			}	
+			country_event = 141406
 		}
 		add_country_modifier = { name = give_hate_speech_cmodifier duration = 1825 }	
 	}
@@ -159,7 +199,7 @@ country_event = {
 		
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					war_with = THIS
@@ -193,7 +233,7 @@ country_event = {
 		
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					war_with = THIS
@@ -227,7 +267,75 @@ country_event = {
 		
 		random_country = {
 			limit = {
-				#ai = no
+				ai = no
+				NOT = { tag = WBK }
+				NOT = {
+					war_with = THIS
+					has_country_modifier = take_hate_speech_cmodifier
+					truce_with = THIS
+					war_with = THIS
+				}				
+				relation = { who = THIS value = -200 }
+				NOT = {relation = { who = THIS value = -190 }}
+			}	
+			add_casus_belli = {
+				target = THIS
+				type = humiliate_speech
+			}		
+		}	
+	}
+}
+
+country_event = {
+	id = 141405
+	
+	is_triggered_only = yes
+
+	title = "EVTNAME141405"
+	desc = "EVTDESC141405"
+	
+	option = {
+		name = EVTDESC141405_opt
+		add_country_modifier = { name = take_hate_speech_cmodifier duration = 730 }		
+		prestige_factor = -0.05
+		
+		random_country = {
+			limit = {
+				ai = no
+				NOT = { tag = WBK }
+				NOT = {
+					war_with = THIS
+					has_country_modifier = take_hate_speech_cmodifier
+					truce_with = THIS
+					war_with = THIS
+				}				
+				relation = { who = THIS value = -200 }
+				NOT = {relation = { who = THIS value = -190 }}
+			}	
+			add_casus_belli = {
+				target = THIS
+				type = humiliate_speech
+			}		
+		}	
+	}
+}
+
+country_event = {
+	id = 141406
+	
+	is_triggered_only = yes
+
+	title = "EVTNAME141406"
+	desc = "EVTDESC141406"
+	
+	option = {
+		name = EVTDESC141406_opt
+		add_country_modifier = { name = take_hate_speech_cmodifier duration = 730 }		
+		prestige_factor = -0.05
+		
+		random_country = {
+			limit = {
+				ai = no
 				NOT = { tag = WBK }
 				NOT = {
 					war_with = THIS
