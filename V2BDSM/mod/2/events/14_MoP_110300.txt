@@ -185,7 +185,7 @@ country_event = { # MOP ACTIONS
 		plurality = -1
 	}
 	
-	option = {
+	option = {	# INSULT
 		name = "MopActions_EvtOptHateSpeech"
 		set_country_flag = ready_hate_speech_cflag
 		any_country = {
@@ -198,10 +198,11 @@ country_event = { # MOP ACTIONS
 					war_with = THIS
 				}
 				relation = { who = THIS value = -200 }
-				NOT = {relation = { who = THIS value = -190 }}
+				NOT = { relation = { who = THIS value = -190 } }
 			}	
-			relation = { who = THIS value = 10 }
+			relation = { who = THIS value = 15 }
 		}
+		CUSTOM_TOOLTIP_MOP_INSULT = { }
 
 	}
 }
