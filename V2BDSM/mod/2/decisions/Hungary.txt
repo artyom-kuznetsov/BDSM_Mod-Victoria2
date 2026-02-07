@@ -1,0 +1,19 @@
+political_decisions = {
+	reclaim_croatia_dec = {
+		potential = {
+			tag = HUN
+			NOT = { has_country_flag = reclaim_croatia_cflag }
+		}
+		
+		allow = {
+			owns = 771
+			owns = 785
+		}
+		
+		effect = {
+			CRO = { all_core = { add_core = THIS } }
+			set_country_flag = reclaim_croatia_cflag
+			badboy = 3
+		}
+	}
+}

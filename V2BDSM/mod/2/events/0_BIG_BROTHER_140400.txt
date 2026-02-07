@@ -10,6 +10,18 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
+		# v4.7.0 MOB REGEN
+		any_country = {
+			limit = {
+				is_mobilised = yes
+				NOT = { has_country_flag = mobilized_regen_cflag }
+			}
+			
+		}
+		
+		
+		
+		
 		# v4.6.3 AI PROJECTS
 		any_country = { 
 			limit = { ai = yes NOT = { has_country_flag = gasmask_researched_cflag } invention = gas_defense_capability }
@@ -1820,6 +1832,7 @@ province_event = {
 				add_province_modifier = { name = scorched_earth_modifier duration = 130 }
 			}
 		}
+		war_exhaustion = 0.5
 		# Audax Validator "." Ignore_NEXT
 		province_selector = -1
 	}
