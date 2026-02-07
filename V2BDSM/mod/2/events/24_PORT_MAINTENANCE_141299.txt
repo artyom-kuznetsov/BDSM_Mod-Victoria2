@@ -7,6 +7,10 @@ country_event = {
 	
 	picture = "upperhouse"
 	
+	immediate = {
+		add_country_modifier = { name = naval_bases_paid_cmodifier duration = 720 }
+	}
+	
 	trigger = {
 		any_owned_province = {
 			has_building = naval_base
@@ -8340,7 +8344,6 @@ country_event = {
 		}
 		any_owned = { remove_province_modifier = port_payment_calculated_pmodifier }
 		clr_country_flag = hidden_tooltip_cflag
-		add_country_modifier = { name = naval_bases_paid_cmodifier duration = 720 }
 	}
 	
 	
@@ -8348,13 +8351,26 @@ country_event = {
 	option = {
 		name = "Port_Payment_Due_EvtOptB"
 		CUSTOM_TOOLTIP_PORT_ANTI_MAINTAINANCE = { }
-		any_owned = {
+		random_owned = {
 			limit = {
 				has_building = naval_base
 			}
 			# Audax Validator "." Ignore_NEXT
 			naval_base = -1
 		}
-		add_country_modifier = { name = naval_bases_paid_cmodifier duration = 355 }
+		random_owned = {
+			limit = {
+				has_building = naval_base
+			}
+			# Audax Validator "." Ignore_NEXT
+			naval_base = -1
+		}
+		random_owned = {
+			limit = {
+				has_building = naval_base
+			}
+			# Audax Validator "." Ignore_NEXT
+			naval_base = -1
+		}
 	}
 }
