@@ -16,4 +16,41 @@ political_decisions = {
 			badboy = 3
 		}
 	}
+	
+    croatian_compromise_dec = {
+        potential = {
+            tag = HUN
+            771 = { is_core = THIS }
+            NOT = { has_country_flag = croatian_compromise_cflag }
+        }
+
+        allow = {
+            owns = 771 #Zagreb
+            owns = 779 #Osijek
+            nationalism_tech = 1
+            war = no
+			OR = {
+				citizens_rights = culture_voting_only
+				citizens_rights = all_voting_pops
+			}
+        }
+
+        effect = {
+            set_country_flag = croatian_compromise_cflag
+            prestige = -10
+			plurality = -8
+            add_accepted_culture = croat
+            any_pop = {
+                limit = { has_pop_culture = croat }
+                militancy = -6
+                consciousness = -2
+            }
+            any_pop = {
+                limit = { has_pop_culture = hungarian }
+                militancy = 2
+                consciousness = 4
+            }
+        }
+    }
+
 }
