@@ -943,7 +943,7 @@ guiTypes = {
 			}	
 		}
 		
-		scrollbarType = {
+		scrollbarType = {	# EDUCATION SLIDER
 			name = "exp_0_slider"	
 			slider = "slider"
 			track= "track"
@@ -980,7 +980,7 @@ guiTypes = {
 			}		
 		}		
 		
-		scrollbarType = {
+		scrollbarType = {	# GOVERNMENT ADMIN SLIDER
 			name = "exp_1_slider"	
 			slider = "slider"
 			track= "track"
@@ -1017,7 +1017,7 @@ guiTypes = {
 			}		
 		}		
 
-		scrollbarType = {
+		scrollbarType = {	SOCIAL SLIDER
 			name = "exp_2_slider"	
 			slider = "slider"
 			track= "track"
@@ -1066,22 +1066,22 @@ guiTypes = {
 			iconType = {
 				name = "max"
 				spriteType = "GFX_scroll_limit2"
-				position = { x=0 y =0 }	
+				position = { x=-8 y =0 }	
 			}	
 		}	
 		
-		scrollbarType = {
+		scrollbarType = {	# MILITARY SLIDER
 			name = "exp_3_slider"	
 			slider = "slider"
 			track= "track"
 			leftbutton = "up"
 			rightbutton = "down"
-			size = {x = 220 y = 16 }
+			size = {x = 220 y = 24 }
 			position = {x= 655 y =372}
 			priority = 100			
-			minValue = 0
+			minValue = 20
 			maxValue = 100
-			stepSize =1
+			stepSize = 20
 			startValue = 20
 			horizontal = 1
 			useRangeLimit = yes
@@ -1097,7 +1097,7 @@ guiTypes = {
 			}
 			guiButtonType = {
 				name = "track"
-				quadTextureSprite = "GFX_bg_horizontal_slider_220wide"
+				quadTextureSprite = "GFX_bg_horizontal_slider_180_budget"
 				position = { x=0 y =0}	
 			}	
 			guiButtonType = {
@@ -1118,7 +1118,7 @@ guiTypes = {
 			iconType = {
 				name = "max"
 				spriteType = "GFX_scroll_limit2"
-				position = { x=0 y =0 }	
+				position = { x=-8 y =0 }	
 			}						
 		}		
 

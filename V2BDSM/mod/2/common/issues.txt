@@ -374,21 +374,19 @@ political_reforms = {
 	}
 	
 	conscription = {
-		ref_huge_military_budget = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
+		demilitarization_ref = { 	# ƒ≈Ã»À»“¿–»«¿÷»ﬂ
 			supply_consumption = -0.2
 			mobilisation_size = -0.02
 			global_immigrant_attract = 0.01
-			max_military_spending = 0.1
-			min_military_spending = 0.02
+			max_military_spending = 0.2
 			allow = {
 				war_policy = pacifism
 				is_mobilised = no
 			}
 		}
-		ref_disarmed_nation = {		#  –≈—“‹ﬂÕ— Œ≈
-			max_military_spending = 0.75
-			min_military_spending = 0.02
-			mobilisation_size = 0.02
+		peasant_militia_ref = {		#  –≈—“‹ﬂÕ— Œ≈
+			max_military_spending = 0.8
+			mobilisation_size = 0.01
 			land_unit_start_experience = -5
 			# +50% Mob Impact
 			
@@ -400,9 +398,8 @@ political_reforms = {
 				is_mobilised = no
 			}
 		}
-		ref_limited_military_budget = { # Õ¿÷√¬¿–ƒ»ﬂ
+		national_guard_ref = { # Õ¿÷√¬¿–ƒ»ﬂ
 			max_military_spending = 1
-			min_military_spending = 0.05
 			supply_consumption = -0.1
 			mobilisation_size = 0.01
 			allow = {
@@ -413,7 +410,6 @@ political_reforms = {
 		}
 		ref_professional_army = { # œ–Œ‘≈——»ŒÕ¿À‹Õ¿ﬂ
 			max_military_spending = 1.0
-			min_military_spending = 0.1
 			mobilisation_size = -0.01
 			land_unit_start_experience = 10
 			# -25% Mob Impact
@@ -424,9 +420,9 @@ political_reforms = {
 				is_mobilised = no
 			}
 		}
-		ref_sizeable_military_budget = { # Ã¿——  ŒÕ— –»œ“
+		mass_conscription_ref = { # Ã¿——  ŒÕ— –»œ“
 			max_military_spending = 1
-			min_military_spending = 0.15
+			min_military_spending = 0.4
 			mobilisation_size = 0.04
 			# +100% Mob Impact
 			allow = {
@@ -1071,7 +1067,7 @@ economic_reforms = {
 				effect = {
 					set_country_flag = education_reform
 					activate_technology = malthusian_thought
-					social_reform = compulsory_schools
+					social_reform = acceptable_schools
 					any_pop = {
 						scaled_militancy = {
 							ideology = liberal
@@ -1293,8 +1289,8 @@ economic_reforms = {
 			on_execute = {
 				effect = {
 					treasury = -7000
-					#activate_technology = industrial_revolution
-					#activate_technology = mechanical_production
+					activate_technology = mechanized_mining
+					build_factory_in_capital_state = fabric_factory
 
 					any_pop = {
 						scaled_militancy = {
@@ -1358,7 +1354,6 @@ military_reforms = {
 			supply_consumption = -0.05
 		}
 		yes_foreign_training = {
-			min_military_spending = 0.05
 			technology_cost = 3000
 			civilization_progress_modifier = 0.05
 			research_points_modifier = 0.1
@@ -1502,7 +1497,6 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_army_schools = {
-			min_military_spending = 0.05
 			technology_cost = 3000
 			research_points_modifier = 0.1
 			civilization_progress_modifier = 0.05

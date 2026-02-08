@@ -65,6 +65,17 @@ political_decisions = {
 			country_event = 140403
 			set_global_flag = 1836_setup_complete_flag
 			
+			### EVERYONE PAID FOR NAVAL BASES! # v4.6.3
+			any_country = {
+				limit = {
+					num_of_ports = 1
+				}
+				add_country_modifier = {
+					name = naval_bases_paid_cmodifier
+					duration = 730
+				}
+			}
+			
 			### ANNEX VASSAL INITIAL COOLDOWN
 			any_country = {
 				limit = {
@@ -988,6 +999,85 @@ political_decisions = {
 			}
 		}
 		ai_will_do = { factor = 1 }
+	}
+	
+	
+	1836_tech_groups_dec = {
+		potential = {
+			tag = WBK
+			NOT = { has_global_flag = 1836_techgroup_setup_complete }
+		}
+		
+		allow = { }
+		
+		effect = {
+			set_global_flag = 1836_techgroup_setup_complete
+			
+			any_country = {
+				limit = {
+					has_country_flag = normal_tech_group_cflag
+				}
+				# MILITARY 5
+					# C1
+					activate_technology = post_napoleonic_thought
+					# C2
+					activate_technology = flintlock_rifles
+					# C3
+					activate_technology = bronze_muzzle_loaded_artillery
+					# C4
+					activate_technology = military_staff_system
+					# C5
+					activate_technology = army_command_principle
+				
+				# NAVAL 5
+					# C1
+					activate_technology = post_nelsonian_thought
+					# C2
+					activate_technology = clipper_design
+					# C3
+					activate_technology = naval_design_bureaus
+					# C4
+					activate_technology = alphabetic_flag_signaling
+					# C5
+					activate_technology = the_command_principle
+				
+				# COMMERCE 5
+					# C1
+					activate_technology = private_banks
+					# C2
+					activate_technology = no_standard
+					# C3
+					activate_technology = early_classical_theory_and_critique
+					# C4
+					activate_technology = freedom_of_trade
+					# C5
+					activate_technology = guild_based_production
+				
+				# CULTURE 5
+					# C1
+					activate_technology = classicism_n_early_romanticism
+					# C2
+					activate_technology = colonialism_tech
+					# C3
+					activate_technology = malthusian_thought
+					# C4
+					activate_technology = enlightenment_thought
+					# C5
+					activate_technology = introspectionism
+				
+				# INDUSTRY 4
+					# C1
+					activate_technology = water_wheel_power
+					# C2
+					activate_technology = industrial_revolution
+					# C3
+					activate_technology = mechanized_mining
+					# C4
+					
+					# C5
+					activate_technology = basic_chemistry
+			}
+		}
 	}
 	
 }

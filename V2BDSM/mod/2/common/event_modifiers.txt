@@ -194,6 +194,7 @@
 		global_pop_militancy_modifier = 0.01
 		global_pop_consciousness_modifier = 0.01
 		prestige = -0.02
+		education_efficiency_modifier = -0.03
 		icon = 24
 	}
 	
@@ -208,6 +209,7 @@
 	hongkong_exploitation_modifier_china = {
 		tax_efficiency = -0.01
 		prestige = -0.02
+		education_efficiency_modifier = -0.03
 		icon = 24
 	}
 	
@@ -237,6 +239,7 @@
 	tsindao_exploitation_modifier_china = {
 		tax_efficiency = -0.01
 		prestige = -0.05
+		education_efficiency_modifier = -0.03
 		icon = 24
 	}
 	
@@ -251,6 +254,7 @@
 	weihaiwei_exploitation_modifier_china = {
 		rgo_output = -0.05
 		prestige = -0.02
+		education_efficiency_modifier = -0.03
 		icon = 24
 	}
 	
@@ -265,6 +269,7 @@
 	arthur_exploitation_modifier_china = {
 		rgo_output = -0.05
 		prestige = -0.02
+		education_efficiency_modifier = -0.03
 		icon = 24
 	}
 	
@@ -278,6 +283,7 @@
 	tientsin_exploitation_modifier_china = {
 		badboy = 0.02
 		prestige = -0.02
+		education_efficiency_modifier = -0.03
 		icon = 24
 	}
 	
@@ -291,6 +297,7 @@
 	guangjou_exploitation_modifier_china = {
 		administrative_efficiency_modifier = -0.05
 		prestige = -0.02
+		education_efficiency_modifier = -0.03
 		icon = 24
 	}
 	
@@ -360,6 +367,15 @@
 		max_tax = -0.5
 		leadership_modifier = -1
 		icon = 26
+	}
+
+
+#### 	 # NETHERLANDS #		####
+
+	net_economic_boom_pmodifier = {
+		population_growth = 0.002
+		local_factory_throughput = 0.05
+		icon = 19
 	}
 
 
@@ -674,11 +690,6 @@
 		icon = 21
 	}
 	
-	shipbuilding_state_modifier = {
-		local_ship_build = -0.4
-		icon = 25
-	}
-	
 	epidemy_cooldown_modifier = {
 		icon = 19
 	}
@@ -753,7 +764,7 @@
 	martial_law_modifier = {
 		global_pop_militancy_modifier = -0.03
 		tax_efficiency = -0.03
-		war_exhaustion = -0.25
+		war_exhaustion = -0.2
 		icon = 15
 	}
 	
@@ -765,17 +776,10 @@
 		icon = 30
 	}
 	
-	war_shipbuilding_modifier = { # Province Modifier
-		local_ship_build = 3
-		icon = 26
-	}
-	
 	scorched_earth_modifier = { # Province Modifier
 		supply_limit = -3
 		# Audax Validator "." Ignore_NEXT
 		attrition = 2
-		# Audax Validator "." Ignore_NEXT
-		max_attrition = 2
 		# Audax Validator "." Ignore_NEXT
 		movement_cost = 0.5
 		local_RGO_output = -0.5
@@ -853,8 +857,55 @@
 		icon = 37
 	}
 	
+	naval_bases_paid_cmodifier = {
+		icon = 23
+	}
+	
+	port_payment_calculated_pmodifier = {
+		icon = 25
+	}
+	
+	give_hate_speech_cmodifier = {
+		icon = 20
+	}
+	
+	take_hate_speech_cmodifier = {
+		icon = 19
+	}
 	
 ##### ^^^ GENERIC ^^^ #####
+
+
+##### RESEARCH PROJECTS #####
+
+	synthetic_polymers_research_project_cmodifier = {
+		factory_output = -0.15
+		icon = 3
+	}
+	
+	gas_attack_research_project_cmodifier = {
+		research_points = -0.05
+		factory_output = -0.1
+		
+		land_organisation = -0.15
+		org_regain = -0.25
+		
+		icon = 3
+	}
+	
+	gas_defence_research_project_cmodifier = {
+		research_points = -0.1
+		factory_output = -0.1
+		icon = 3
+	}
+	
+	research_menu_cooldown_cmodifier = {
+		icon = 20
+	}
+	
+	research_project_cooldown = {
+		icon = 20
+	}
 
 ### UNITED STATES ###
 	towngrow_modifier = {
