@@ -28,20 +28,20 @@ cattle_factory = {
 	default_enabled = yes
 }
 
-coal_factory = {
+grain_factory = {
 	type = factory
 	on_completion = factory
 	completion_size = 0.2
 	max_level = 5
 	goods_cost =
 	{
-		raw_coal = 100			#10000
+		raw_grain = 100			#10000
 	}
 	time = 30
 	visibility = yes
 	onmap = no
 
-	production_type = coal_factory
+	production_type = grain_factory
 	pop_build_factory = yes
 	default_enabled = yes
 }
@@ -60,6 +60,42 @@ coffee_factory = {
 	onmap = no
 
 	production_type = coffee_factory
+	pop_build_factory = yes
+	default_enabled = yes
+}
+
+tea_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 5
+	goods_cost =
+	{
+		raw_tea = 100			#10000
+	}
+	time = 30
+	visibility = yes
+	onmap = no
+
+	production_type = tea_factory
+	pop_build_factory = yes
+	default_enabled = yes
+}
+
+tobacco_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 5
+	goods_cost =
+	{
+		raw_tobacco = 100		#10000
+	}
+	time = 30
+	visibility = yes
+	onmap = no
+
+	production_type = tobacco_factory
 	pop_build_factory = yes
 	default_enabled = yes
 }
@@ -98,61 +134,6 @@ dye_factory = {
 	production_type = dye_factory
 	pop_build_factory = yes
 	default_enabled = yes
-}
-
-grain_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 5
-	goods_cost =
-	{
-		raw_grain = 100			#10000
-	}
-	time = 30
-	visibility = yes
-	onmap = no
-
-	production_type = grain_factory
-	pop_build_factory = yes
-	default_enabled = yes
-}
-
-iron_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 5
-	goods_cost =
-	{
-		raw_iron = 100			#10000
-	}
-	time = 30
-	visibility = yes
-	onmap = no
-
-	production_type = iron_factory
-	pop_build_factory = yes
-	default_enabled = yes
-}
-
-oil_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 5
-	goods_cost =
-	{
-		machine_parts = 500		#8000
-		raw_iron = 80			#8000
-		raw_coal = 80			#8000	total cost: 24000
-	}
-	time = 30
-	visibility = yes
-	onmap = no
-
-	production_type = oil_factory
-	pop_build_factory = yes
 }
 
 opium_factory = {
@@ -226,42 +207,6 @@ silk_factory = {
 	default_enabled = yes
 }
 
-sulphur_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 5
-	goods_cost =
-	{
-		raw_sulphur = 100		#10000
-	}
-	time = 30
-	visibility = yes
-	onmap = no
-
-	production_type = sulphur_factory
-	pop_build_factory = yes
-	default_enabled = yes
-}
-
-tea_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 5
-	goods_cost =
-	{
-		raw_tea = 100			#10000
-	}
-	time = 30
-	visibility = yes
-	onmap = no
-
-	production_type = tea_factory
-	pop_build_factory = yes
-	default_enabled = yes
-}
-
 timber_factory = {
 	type = factory
 	on_completion = factory
@@ -280,24 +225,6 @@ timber_factory = {
 	default_enabled = yes
 }
 
-tobacco_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 5
-	goods_cost =
-	{
-		raw_tobacco = 100		#10000
-	}
-	time = 30
-	visibility = yes
-	onmap = no
-
-	production_type = tobacco_factory
-	pop_build_factory = yes
-	default_enabled = yes
-}
-
 tropical_wood_factory = {
 	type = factory
 	on_completion = factory
@@ -312,6 +239,79 @@ tropical_wood_factory = {
 	onmap = no
 
 	production_type = tropical_wood_factory
+	pop_build_factory = yes
+	default_enabled = yes
+}
+
+iron_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 5
+	goods_cost =
+	{
+		raw_iron = 100			#10000
+	}
+	time = 30
+	visibility = yes
+	onmap = no
+
+	production_type = iron_factory
+	pop_build_factory = yes
+	default_enabled = yes
+}
+
+coal_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 5
+	goods_cost =
+	{
+		raw_coal = 100			#10000
+	}
+	time = 30
+	visibility = yes
+	onmap = no
+
+	production_type = coal_factory
+	pop_build_factory = yes
+	default_enabled = yes
+}
+
+oil_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 5
+	goods_cost =
+	{
+		machine_parts = 500		#8000
+		raw_iron = 80			#8000
+		raw_coal = 80			#8000	total cost: 24000
+	}
+	time = 30
+	visibility = yes
+	onmap = no
+
+	production_type = oil_factory
+	pop_build_factory = yes
+}
+
+sulphur_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 5
+	goods_cost =
+	{
+		raw_sulphur = 100		#10000
+	}
+	time = 30
+	visibility = yes
+	onmap = no
+
+	production_type = sulphur_factory
 	pop_build_factory = yes
 	default_enabled = yes
 }
