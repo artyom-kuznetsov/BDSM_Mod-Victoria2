@@ -6,13 +6,25 @@ country_event = { # MCL # MONTHLY CLEANUP
 	is_triggered_only = yes
 	
 	
+	
 	option = {
 		name = "noloc"
+		
+		# v4.6.3 AI PROJECTS
+		any_country = { 
+			limit = { ai = yes NOT = { has_country_flag = gasmask_researched_cflag } invention = gas_defense_capability }
+			set_country_flag = gasmask_researched_cflag 
+		}
+		any_country = { 
+			limit = { ai = yes NOT = { has_country_flag = chemical_weapons_researched_cflag } invention = gas_attack_capability }
+			set_country_flag = chemical_weapons_researched_cflag 
+		}
 		
 		# v4.6.2 SUBJECT BADBOY
 		any_country = {
 			limit = {
 				is_independant = no
+				NOT = { badboy = 24 }
 			}
 			# Audax Validator "." Ignore_NEXT
 			badboy = -100
@@ -862,36 +874,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 			clr_country_flag = ref_serfdom_abolished_flag
 		}
 		
-		#  Œ–¿¡À≈—“–Œ≈Õ»≈ ¬Œ≈ÕÕŒ√Œ ¬–≈Ã≈Õ»
-		any_country = {
-			limit = {
-				war = yes
-				NOT = {
-					has_country_flag = country_at_war_flag
-				}
-			}
-			any_owned = {
-				limit = {
-					is_coastal = yes
-				}
-				add_province_modifier = {
-					name = war_shipbuilding_modifier
-					duration = -1
-				}
-			}
-			set_country_flag = country_at_war_flag
-		}
-		any_country = {
-			limit = {
-				war = no
-				has_country_flag = country_at_war_flag
-			}
-			clr_country_flag = country_at_war_flag
-			any_owned = {
-				remove_province_modifier = war_shipbuilding_modifier
-			}
-		}
-		
 		### ECONOMIC SYSTEM CONS ###
         any_country = {
             limit = {
@@ -1477,6 +1459,7 @@ country_event = { # YEARLY CLEANUP
 		META_1 = {
 			limit = {
 				continent = africa
+				## Audax Validator "." Ignore_NEXT
 				NOT = { life_rating = 15 }
 			}
 			add_province_modifier = { name = severe_malaria_pmodifier duration = -1 }
@@ -1484,7 +1467,9 @@ country_event = { # YEARLY CLEANUP
 		META_1 = {
 			limit = {
 				continent = africa
+				## Audax Validator "." Ignore_NEXT
 				life_rating = 15
+				## Audax Validator "." Ignore_NEXT
 				NOT = { life_rating = 20 }
 			}
 			add_province_modifier = { name = malaria_pmodifier duration = -1 }
@@ -1829,6 +1814,7 @@ province_event = {
 				add_province_modifier = { name = scorched_earth_modifier duration = 130 }
 			}
 		}
+		war_exhaustion = 0.5
 		# Audax Validator "." Ignore_NEXT
 		province_selector = -1
 	}
@@ -1881,23 +1867,6 @@ province_event = {
 			}
 		}
 		remove_core = WBK
-	}
-	
-	option = {
-		name = "Selector_EvtOptShipbuildingState"
-		owner = {
-			any_owned = { remove_province_modifier = shipbuilding_state_modifier }
-		}
-		state_scope = {
-			any_owned = {
-				limit = {
-					is_coastal = yes
-				}
-				add_province_modifier = { name = shipbuilding_state_modifier duration = -1 }
-			}
-		}
-		# Audax Validator "." Ignore_NEXT
-		province_selector = -1
 	}
 	
 	option = {
@@ -1991,7 +1960,6 @@ province_event = {
 		name = "MonumentActions_EvtOptSpanishCarrack"
 		# Audax Validator "." Ignore_NEXT
 		province_event = { id = 140410 }
-		remove_core = WBK
 	}
 }
 

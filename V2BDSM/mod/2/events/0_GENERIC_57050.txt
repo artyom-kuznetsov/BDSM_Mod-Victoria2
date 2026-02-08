@@ -22,19 +22,8 @@ country_event = {
 	}
 }
 
-country_event = {
-	title = "Nationalize_EvtName"
-	desc = "Nationalize_EvtDesc"
-	id = 57051
-	
-	picture = "speedrecord"
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "Nationalize_EvtOptA"
-	}
-}
+
+
 
 country_event = {
 	title = "Exchange_EvtName"
@@ -425,27 +414,6 @@ country_event = {
 				controlled_by = FROM
 			}
 			change_controller = THIS
-		}
-	}
-}
-
-province_event = {
-	title = "War_Shipbuilding_EvtName"
-	desc = "War_Shipbuilding_EvtDesc"
-	id = 57063
-	
-	trigger = {
-		has_country_flag = country_at_war_flag
-		NOT = {
-			has_province_modifier = war_shipbuilding_modifier
-		}
-	}
-	
-	option = {
-		name = "War_Shipbuilding_EvtOptA"
-		add_province_modifier = {
-			name = war_shipbuilding_modifier
-			duration = -1
 		}
 	}
 }
@@ -859,7 +827,7 @@ country_event = {
 	is_triggered_only = yes
 	
 	immediate = {
-		political_reform = ref_huge_military_budget # DEMILITARIZE
+		political_reform = demilitarization_ref # DEMILITARIZE
 	}
 	
 	option = {

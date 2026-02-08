@@ -1,0 +1,522 @@
+
+country_event = {
+	title = "victoria_coronation_notification_EvtName"
+	desc = "victoria_coronation_notification_EvtDesc"
+	picture = "queenvictoria"
+	
+	id = 57600
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "victoria_coronation_notification_EvtOptA"
+	}
+}
+
+country_event = {
+	title = "industrial_revolution_notification_EvtName"
+	desc = "industrial_revolution_notification_EvtDesc"
+	picture = "iron"
+	
+	id = 57601
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "industrial_revolution_notification_OptA"
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = industrial_revolution_more_likely_flag }
+				}
+			}
+			owner = {
+				set_country_flag = industrial_revolution_more_likely_flag
+				CUSTOM_TOOLTIP_57601 = { }
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "north_german_federation_notification_EvtName"
+	desc = "north_german_federation_notification_EvtDesc"
+	picture = "bismarck"
+	
+	id = 57602
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "north_german_federation_notification_OptA"
+	}
+}
+
+country_event = {
+	title = "germany_notification_EvtName"
+	desc = "germany_notification_EvtDesc"
+	picture = "bismarck"
+	
+	id = 57603
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "germany_notification_OptA"
+	}
+}
+
+country_event = {
+	title = "chi_breakup_notification_EvtName"
+	desc = "chi_breakup_notification_EvtDesc"
+	picture = "Rebellion"
+	
+	id = 57604
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "chi_breakup_notification_OptA"
+	}
+}
+
+country_event = {
+	title = "chi_ban_opium_notification_EvtName"
+	desc = "chi_ban_opium_notification_EvtDesc"
+	picture = "patrol"
+	
+	id = 57605
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "chi_ban_opium_notification_OptA"
+		
+		remove_country_modifier = macau_exploitation_modifier
+		remove_country_modifier = hongkong_exploitation_modifier
+		remove_country_modifier = shanghai_exploitation_modifier
+		remove_country_modifier = tsindao_exploitation_modifier
+		remove_country_modifier = weihaiwei_exploitation_modifier
+		remove_country_modifier = arthur_exploitation_modifier
+		remove_country_modifier = tientsin_exploitation_modifier
+		remove_country_modifier = guangjou_exploitation_modifier
+	}
+}
+
+country_event = {
+	title = "SpawnMoney_EvtName"
+	desc = "SpawnMoney_EvtDesc"
+	picture = "weneedmoney"
+	
+	id = 57608
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SpawnMoney_EvtOptNo"
+	}
+	
+	option = {
+		name = "spawn_100k"
+		money = 100000
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57609
+				}
+			}
+		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
+	}
+	option = {
+		name = "spawn_200k"
+		money = 200000
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57610
+				}
+			}
+		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
+	}
+	option = {
+		name = "spawn_500k"
+		money = 500000
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57611
+				}
+			}
+		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
+	}
+	option = {
+		name = "spawn_1000k"
+		money = 1000000
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = { NOT = { tag = THIS } ai = no }
+					country_event = 57612
+				}
+			}
+		}
+		clr_country_flag = hidden_tooltip
+		
+		CUSTOM_TOOLTIP_EVERYONE_KNOWS_MONEY = { }
+	}
+}
+
+country_event = {
+	title = "host_spawned_money_EvtName"
+	desc = "host_spawned_money100_EvtDesc"
+	
+	id = 57609
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "sp_mode_on_notif_EvtOptA"
+	}
+}
+
+country_event = {
+	title = "host_spawned_money_EvtName"
+	desc = "host_spawned_money200_EvtDesc"
+	
+	id = 57610
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "sp_mode_on_notif_EvtOptA"
+	}
+}
+
+country_event = {
+	title = "host_spawned_money_EvtName"
+	desc = "host_spawned_money500_EvtDesc"
+	
+	id = 57611
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "sp_mode_on_notif_EvtOptA"
+	}
+}
+
+country_event = {
+	title = "host_spawned_money_EvtName"
+	desc = "host_spawned_money1000_EvtDesc"
+	
+	id = 57612
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "sp_mode_on_notif_EvtOptA"
+	}
+}
+
+country_event = {
+	title = "ita_form_notif_EvtName"
+	desc = "ita_form_notif_EvtDesc"
+	
+	picture = "italia"
+	
+	id = 57613
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "ita_form_notif_EvtOptA"
+	}
+}
+
+
+country_event = {
+	title = "host_player_selectedHimself_notif_EvtName"
+	desc = "host_player_selectedHimself_notif_EvtDesc"
+	
+	id = 57614
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+	}
+}
+
+
+country_event = {
+	title = "chi_form_notif_EvtName"
+	desc = "chi_form_notif_EvtDesc"
+	
+	picture = "chinese_unification"
+	
+	id = 57615
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "chi_form_notif_EvtOptA"
+	}
+}
+
+# НАСТРОЙКА СП РЕЖИМ
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	
+	id = 57616
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		set_global_flag = singleplayer_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = singleplayer_flag
+			}
+		}
+	}
+	option = {
+		name = "noloc"
+		clr_global_flag = singleplayer_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_global_flag = singleplayer_flag }
+			}
+		}
+	}
+
+}
+
+# НАСТРОЙКА ВЫБОР СТРАН
+country_event = {
+	title = "noloc"
+	desc = "noloc"
+	
+	id = 57617
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		set_global_flag = host_selectcountries_allow_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				has_global_flag = host_selectcountries_allow_flag
+			}
+		}
+	}
+	option = {
+		name = "noloc"
+		clr_global_flag = host_selectcountries_allow_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = { has_global_flag = host_selectcountries_allow_flag }
+			}
+		}
+	}
+}
+
+# ВЫДАЧА ОИ
+country_event = {
+	title = "ResearchGranted_EvtName"
+	desc = "ResearchGranted_EvtDesc"
+	
+	id = 57618
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "ResearchGranted_EvtOptNo"
+	}
+	option = {
+		name = "ResearchGranted_EvtYes"
+		years_of_research = 0.5
+	}
+}
+
+# ЭКСПЕДИЦИЯ К НИЛУ МОЖНО
+country_event = {
+	title = "ExpeditionAvailable_EvtName"
+	desc = "Nile_ExpeditionAvailable_EvtDesc"
+	picture = "Nile"
+	
+	id = 57619
+	
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_global_flag = NileDiscovered 
+		}
+		year = 1866
+	}
+	
+	option = {
+		name = "Nile_ExpeditionAvailable_EvtOptA"
+	}
+}
+
+# ЭКСПЕДИЦИЯ К СПОЛЮСУ МОЖНО
+country_event = {
+	title = "ExpeditionAvailable_EvtName"
+	desc = "NPole_ExpeditionAvailable_EvtDesc"
+	picture = "NorthPole1"
+	
+	id = 57620
+	
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_global_flag = NileDiscoveredNorthPoleDiscovered
+		}
+		year = 1895
+	}
+	
+	option = {
+		name = "NPole_ExpeditionAvailable_EvtOptA"
+	}
+}
+
+# ЭКСПЕДИЦИЯ К ЮПОЛЮСУ МОЖНО
+country_event = {
+	title = "ExpeditionAvailable_EvtName"
+	desc = "SPole_ExpeditionAvailable_EvtDesc"
+	picture = "SouthPole1"
+	
+	id = 57621
+	
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_global_flag = SouthPoleDiscovered
+		}
+		year = 1906
+	}
+	
+	option = {
+		name = "SPole_ExpeditionAvailable_EvtOptA"
+	}
+}
+
+# N СТРАНА ПОЛУЧИЛА ХИНИН
+country_event = {
+	title = "Fromcountry_Got_Quinine_EvtName"
+	desc = "Fromcountry_Got_Quinine_EvtDesc"
+	picture = "opium_war"
+	
+	id = 57622
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = get_quinine_cflag
+		add_country_modifier = { name = quinine_cooldown_cmodifier duration = 90 }
+	}
+	
+	option = {
+		name = "Fromcountry_Got_Quinine_EvtOptA"
+	}
+}
+
+# N СТРАНА ПОЛУЧИЛА ПРОФИЛАКТИКУ МАЛЯРИИ
+country_event = {
+	title = "Fromcountry_Got_Prevention_EvtName"
+	desc = "Fromcountry_Got_Prevention_EvtDesc"
+	picture = "flagstaffwar"
+	
+	id = 57623
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = get_prevention_cflag
+		add_country_modifier = { name = prevention_cooldown_cmodifier duration = 90 }
+	}
+	
+	option = {
+		name = "Fromcountry_Got_Quinine_EvtOptA"
+	}
+}
+
+# SUBJUGATE SOUTH GERMANS
+country_event = {
+	title = "SGF_Subjugated_EvtName"
+	desc = "SGF_Subjugated_EvtDesc"
+	picture = "austrians"
+	
+	id = 57624
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SGF_Subjugated_EvtOptA"
+	}
+}
+
+# SGF FORMED
+country_event = {
+	title = "SGF_Formed_EvtName"
+	desc = "SGF_Formed_EvtDesc"
+	picture = "austrians"
+	
+	id = 57625
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "SGF_Formed_EvtOptA"
+	}
+}
