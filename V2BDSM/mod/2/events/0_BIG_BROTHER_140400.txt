@@ -10,18 +10,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
-		# v4.7.0 MOB REGEN
-		any_country = {
-			limit = {
-				is_mobilised = yes
-				NOT = { has_country_flag = mobilized_regen_cflag }
-			}
-			
-		}
-		
-		
-		
-		
 		# v4.6.3 AI PROJECTS
 		any_country = { 
 			limit = { ai = yes NOT = { has_country_flag = gasmask_researched_cflag } invention = gas_defense_capability }
@@ -1978,7 +1966,6 @@ province_event = {
 		name = "MonumentActions_EvtOptSpanishCarrack"
 		# Audax Validator "." Ignore_NEXT
 		province_event = { id = 140410 }
-		remove_core = WBK
 	}
 }
 
