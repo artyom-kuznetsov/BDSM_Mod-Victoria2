@@ -296,10 +296,14 @@ country_event = {
 	trigger = {
 		primary_culture = spanish
 		MEX = { vassal_of = THIS }
-		any_owned_province = { OR = { continent = north_america continent = south_america } NOT = { is_core = CUB is_core = HAI is_core = THIS province_id = 2222 province_id = 2217 province_id = 2219 } }
+		any_owned_province = { 
+			OR = { 
+				continent = north_america
+				continent = south_america
+			} 
+			NOT = { is_core = CUB is_core = HAI is_core = THIS province_id = 2222 province_id = 2217 province_id = 2219 } 
+		}
 	}
-	
-	fire_only_once = yes
 	
 	option = {
 		name = "NewSpain_EvtOptA"

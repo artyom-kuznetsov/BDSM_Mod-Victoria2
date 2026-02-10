@@ -593,6 +593,9 @@ political_decisions = {
 			502 = {
 				add_core = ITA
 			}
+			473 = {
+				add_core = ITA
+			}
 		}
 	}
 
@@ -880,9 +883,7 @@ political_decisions = {
 			plurality = -5
 			prestige = 10
 			EGY_843 = { 
-				state_scope = {
-					add_core = THIS
-				}			
+				add_core = THIS	
 			}
 			any_pop = {
 				limit = {
@@ -1105,25 +1106,35 @@ political_decisions = {
 		allow = {
 			owns = 1725
 			owns = 1731
-			owns = 1741
-			owns = 1736
-			TUN_1726 = {
-				is_colonial = no
-			}
-			TRI_1743 = {
-				is_colonial = no
-			}				
-			EGY_1737 = {
-				is_colonial = no
-			}	
+			owns = 1735
+			colonial_offices_tech = 1
 		}
 		effect = {
-				set_country_flag = immigration_from_magrib_ITA_flag
-				set_country_flag = immigration_from_magrib_chek_flag
-				add_country_modifier = { 
-					name = from_magrib_imigration_modifier
-					duration = 1825
+			set_country_flag = immigration_from_magrib_ITA_flag
+			set_country_flag = immigration_from_magrib_chek_flag
+			add_country_modifier = { 
+				name = from_magrib_imigration_modifier
+				duration = 1825
+			}
+			CUSTOM_TOOLTIP_ITALIAN_NORTH_AFRICA = { }
+			set_country_flag = hidden_tooltip
+			random_owned = {
+				limit = {
+					owner = {
+						has_country_flag = hidden_tooltip
+					}
 				}
+				owner = {
+					EGY_1737 = {
+						limit = {
+							owned_by = THIS
+						}
+						secede_province = CIV
+					}
+					CIV = { country_event = { id = 140418 days = 0 } }
+				}
+			}
+			clr_country_flag = hidden_tooltip
 		}
 	}
 	italian_call_for_union_dec = {

@@ -462,7 +462,15 @@ country_event = {
 	option = {
 		name = "noloc"
 		inherit = TUN
-		TRI = { all_core = { secede_province = THIS } }
+		inherit = TRI
+		TUR = { 
+			any_owned = {
+				limit = {
+					is_core = TRI
+				}
+				secede_province = THIS
+			}
+		}
 	}
 }
 

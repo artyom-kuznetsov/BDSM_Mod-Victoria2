@@ -44,9 +44,21 @@ country_event = {
 	option = {
 		name = "austria_interferes_EvtOptAccept"
 		CUSTOM_TOOLTIP_RELEASE_POPE = { }
-		PAP = {
-			country_event = 141204
+		
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = { has_country_flag = hidden_tooltip }
+			}
+			# Audax Validator "." Ignore_NEXT
+			owner = {
+				PAP = {
+					country_event = 141204
+				}
+			}
 		}
+		clr_country_flag = hidden_tooltip
+		
 		create_vassal = PAP
 		AUS = { 
 			diplomatic_influence = { who = PAP  value = 500 } 

@@ -20,6 +20,15 @@ country_event = { # MCL # MONTHLY CLEANUP
 			set_country_flag = chemical_weapons_researched_cflag 
 		}
 		
+		META_SPAIN = {
+			limit = {
+				has_global_flag = SPA_has_player
+				year = 1870
+			}
+			life_rating = -3
+			clr_global_flag = SPA_has_player
+		}
+		
 		# v4.6.2 SUBJECT BADBOY
 		any_country = {
 			limit = {
@@ -5080,3 +5089,60 @@ country_event = {
 	}
 }
 
+
+country_event = {
+	id = 140418
+	title = "noloc"
+
+	is_triggered_only = yes
+	## Audax Validator "." Ignore_NEXT
+	option = {
+		civilized = no
+		civilized = yes
+		annex_to = FROM
+		ITA = {
+			TUN_1726 = {
+				limit = {
+					owned_by = ITA
+				}
+				secede_province = CIV
+			}
+			CIV = { country_event = { id = 140419 days = 0 } }
+		}
+	}
+}
+
+country_event = {
+	id = 140419
+	title = "noloc"
+
+	is_triggered_only = yes
+	## Audax Validator "." Ignore_NEXT
+	option = {
+		civilized = no
+		civilized = yes
+		annex_to = ITA
+		ITA = {
+			TRI_1743 = {
+				limit = {
+					owned_by = ITA
+				}
+				secede_province = CIV
+			}
+		}
+		country_event = { id = 140420 days = 0 }
+	}
+}
+
+country_event = {
+	id = 140420
+	title = "noloc"
+
+	is_triggered_only = yes
+	## Audax Validator "." Ignore_NEXT
+	option = {
+		civilized = no
+		civilized = yes
+		annex_to = ITA
+	}
+}
