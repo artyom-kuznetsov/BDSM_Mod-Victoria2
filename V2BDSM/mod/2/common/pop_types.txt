@@ -80,87 +80,87 @@ promotion_chance =
 	### TAXES ###
 	
 	group = {
-	
 		modifier = {
-			factor = 0.02
-			strata = middle
-			country = { NOT = { middle_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.02
-			strata = middle
-			country = { NOT = { middle_tax = 0.5 } }
-		}
-		modifier = {
-			factor = 0.02
-			strata = middle
-			country = { NOT = { middle_tax = 0.75 } }
-		}
-		modifier = {
-			factor = 0.02
+			factor = 0.01
 			strata = middle
 			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.02
-			literacy = 0.2
-			strata = middle
-			country = { NOT = { middle_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.2
-			strata = middle
-			country = { NOT = { middle_tax = 0.5 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.2
+			factor = 0.01
 			strata = middle
 			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.02
-			literacy = 0.2
-			strata = middle
-			country = { NOT = { middle_tax = 1 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.5
-			strata = middle
-			country = { NOT = { middle_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.5
+			factor = 0.01
 			strata = middle
 			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.02
-			literacy = 0.5
+			factor = 0.01
 			strata = middle
-			country = { NOT = { middle_tax = 0.75 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.5
-			strata = middle
-			country = { NOT = { middle_tax = 1 } }
+			country = { NOT = { middle_tax = 0.25 } }
 		}
 	}
-	group = {
 	
+	group = {
 		modifier = {
 			factor = 0.01
-			strata = poor
-			country = { NOT = { poor_tax = 0.25 } }
+			strata = middle
+			literacy = 0.2
+			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
 			factor = 0.01
+			strata = middle
+			literacy = 0.2
+			country = { NOT = { middle_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = middle
+			literacy = 0.2
+			country = { NOT = { middle_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = middle
+			literacy = 0.2
+			country = { NOT = { middle_tax = 0.25 } }
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 0.01
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 0.25 } }
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 0.01
 			strata = poor
-			country = { NOT = { poor_tax = 0.5 } }
+			country = { NOT = { poor_tax = 1 } }
 		}
 		modifier = {
 			factor = 0.01
@@ -170,55 +170,66 @@ promotion_chance =
 		modifier = {
 			factor = 0.01
 			strata = poor
-			country = { NOT = { poor_tax = 1 } }
-		}
-		modifier = {
-			factor = 0.01
-			literacy = 0.2
-			strata = poor
-			country = { NOT = { poor_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.01
-			literacy = 0.2
-			strata = poor
 			country = { NOT = { poor_tax = 0.5 } }
 		}
 		modifier = {
 			factor = 0.01
-			literacy = 0.2
 			strata = poor
-			country = { NOT = { poor_tax = 0.75 } }
+			country = { NOT = { poor_tax = 0.25 } }
 		}
+	}
+	
+	group = {
 		modifier = {
 			factor = 0.01
-			literacy = 0.2
 			strata = poor
+			literacy = 0.2
 			country = { NOT = { poor_tax = 1 } }
 		}
 		modifier = {
 			factor = 0.01
-			literacy = 0.5
 			strata = poor
-			country = { NOT = { poor_tax = 0.25 } }
+			literacy = 0.2
+			country = { NOT = { poor_tax = 0.75 } }
 		}
 		modifier = {
 			factor = 0.01
-			literacy = 0.5
 			strata = poor
+			literacy = 0.2
 			country = { NOT = { poor_tax = 0.5 } }
 		}
 		modifier = {
 			factor = 0.01
-			literacy = 0.5
 			strata = poor
+			literacy = 0.2
+			country = { NOT = { poor_tax = 0.25 } }
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 0.01
+			strata = poor
+			literacy = 0.5
+			country = { NOT = { poor_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = poor
+			literacy = 0.5
 			country = { NOT = { poor_tax = 0.75 } }
 		}
 		modifier = {
 			factor = 0.01
-			literacy = 0.5
 			strata = poor
-			country = { NOT = { poor_tax = 1 } }
+			literacy = 0.5
+			country = { NOT = { poor_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.01
+			strata = poor
+			literacy = 0.5
+			country = { NOT = { poor_tax = 0.25 } }
 		}
 	}
 	
