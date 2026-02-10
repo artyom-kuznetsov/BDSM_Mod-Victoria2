@@ -839,8 +839,8 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 	float2 vProvinceUV = v.vProvinceId + 0.5f;
     vProvinceUV /= PROVINCE_LOOKUP_SIZE;
   
-  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.7;
-	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.7;
+  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.9;
+	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.9;
 
 	float vColor = tex2D( StripesTexture, v.vTerrainTexCoord ).a;
 	float4 Color = Color2 * vColor + Color1 * ( 1.0 - vColor );
