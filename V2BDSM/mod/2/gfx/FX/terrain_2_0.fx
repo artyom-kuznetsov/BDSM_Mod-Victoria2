@@ -854,7 +854,7 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 	ColorHSV.y *= max(0.85, ColorHSV.z);
 	ColorHSV.z *= 1.6;
 	Color.rgb = HSVtoRGB(ColorHSV);
-	Color.rgb = lerp(Color.rgb, OverlayColor.rgb, 0.5);
+	Color.rgb = lerp(Color.rgb, OverlayColor.rgb, 0.52);
 	Color.rgb *= 1.17;
 	//Color.r *= 1.10;
 	//Color.g *= 1.05;
