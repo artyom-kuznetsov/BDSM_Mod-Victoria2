@@ -117,13 +117,6 @@ political_decisions = {
 			SEG = { set_country_flag = severe_malaria_blocked_country_flag }
 			KNG = { set_country_flag = severe_malaria_blocked_country_flag }
 			
-			FRA = {
-				add_country_modifier = { name = stagnant_army_cmod duration = -1 }
-			}
-			
-			USA = {
-				country_event = 16001
-			}
 			any_country = {
 				limit = { is_greater_power = yes }
 				diplomatic_influence = {
@@ -131,7 +124,6 @@ political_decisions = {
 					value = -50
 				}
 			}
-			EIC = { add_country_modifier = { name = ai_kill_research_modifier duration = -1 } }
 			any_country = {
 				add_country_modifier = {
 					name = force_reform_cooldown_modifier
@@ -151,24 +143,6 @@ political_decisions = {
 				}
 				badboy = 24
 			}
-			MUG = {
-				add_country_modifier = {
-					name = indian_unification_modifier
-					duration = 1825
-				}
-			}
-			RUS = { set_country_flag = is_russia_flag }
-			BLX = {
-				all_core = {
-					limit = {
-						OR = {
-							NET = { ai = no }
-							BEL = { ai = no }
-						}
-					}
-					life_rating = 5
-				}
-			}
 			any_country = {
 				limit = {
 					OR = {
@@ -180,84 +154,10 @@ political_decisions = {
 				}
 				set_country_flag = migration_magnet_cflag
 			}
-			USA = { 
-				limit = {
-					ai = no
-				}
-				set_country_flag = is_usa_flag
-			}
-			USA = { 
-				limit = {
-					ai = yes
-					has_country_flag = is_usa_flag
-				}
-				clr_country_flag = is_usa_flag
-			}
 			CIV = { money = 2000000 }
-			META_1 = {
-				limit = {
-					AST = { ai = no }
-					owned_by = AST
-				}
-				life_rating = 5
-				set_global_flag = AST_has_player
-			}
-			any_country = {
-				farmers = {
-					ideology = {
-						factor = 0.1
-						value = conservative
-					}
-				}
-				farmers = {
-					ideology = {
-						factor = 0.2
-						value = reactionary
-					}
-				}
-				farmers = {
-					ideology = {
-						factor = 0.2
-						value = liberal
-					}
-				}
-				labourers = {
-					ideology = {
-						factor = 0.2
-						value = conservative
-					}
-				}
-				labourers = {
-					ideology = {
-						factor = 0.2
-						value = reactionary
-					}
-				}
-				labourers = {
-					ideology = {
-						factor = 0.2
-						value = liberal
-					}
-				}
-			}
 			any_country = {
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 400000
 					}
 					## Audax Validator "." Ignore_NEXT
@@ -265,21 +165,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 350000
 						NOT = { total_pops = 400000 }
 					}
@@ -288,21 +173,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 300000
 						NOT = { total_pops = 350000 }
 					}
@@ -311,21 +181,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 260000
 						NOT = { total_pops = 300000 }
 					}
@@ -334,21 +189,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 220000
 						NOT = { total_pops = 260000 }
 					}
@@ -357,21 +197,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 180000
 						NOT = { total_pops = 220000 }
 					}
@@ -380,21 +205,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 130000
 						NOT = { total_pops = 180000 }
 					}
@@ -403,21 +213,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 80000
 						NOT = { total_pops = 130000 }
 					}
@@ -426,21 +221,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 40000
 						NOT = { total_pops = 80000 }
 					}
@@ -455,21 +235,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1600000
 					}
 					## Audax Validator "." Ignore_NEXT
@@ -477,21 +242,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1520000
 						NOT = { total_pops = 1600000 }
 					}
@@ -500,21 +250,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1440000
 						NOT = { total_pops = 1520000 }
 					}
@@ -523,21 +258,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1360000
 						NOT = { total_pops = 1440000 }
 					}
@@ -546,21 +266,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1280000
 						NOT = { total_pops = 1360000 }
 					}
@@ -569,21 +274,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1200000
 						NOT = { total_pops = 1280000 }
 					}
@@ -592,21 +282,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1120000
 						NOT = { total_pops = 1200000 }
 					}
@@ -615,21 +290,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 1040000
 						NOT = { total_pops = 1120000 }
 					}
@@ -638,21 +298,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 960000
 						NOT = { total_pops = 1040000 }
 					}
@@ -661,21 +306,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 880000
 						NOT = { total_pops = 960000 }
 					}
@@ -684,21 +314,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 800000
 						NOT = { total_pops = 880000 }
 					}
@@ -707,21 +322,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 720000
 						NOT = { total_pops = 800000 }
 					}
@@ -730,21 +330,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 640000
 						NOT = { total_pops = 720000 }
 					}
@@ -753,21 +338,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 560000
 						NOT = { total_pops = 640000 }
 					}
@@ -776,21 +346,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 480000
 						NOT = { total_pops = 560000 }
 					}
@@ -799,21 +354,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 400000
 						NOT = { total_pops = 480000 }
 					}
@@ -822,21 +362,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 320000
 						NOT = { total_pops = 400000 }
 					}
@@ -845,21 +370,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 240000
 						NOT = { total_pops = 320000 }
 					}
@@ -868,20 +378,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 160000
 						NOT = { total_pops = 240000 }
 					}
@@ -890,20 +386,6 @@ political_decisions = {
 				}
 				any_owned = {
 					limit = {
-						OR = {
-							trade_goods = grain
-							trade_goods = fruit
-							trade_goods = cattle
-							trade_goods = fish
-							trade_goods = cotton
-							trade_goods = dye
-							trade_goods = silk
-							trade_goods = timber
-							trade_goods = tropical_wood
-							trade_goods = rubber
-							trade_goods = opium
-							trade_goods = tobacco
-						}
 						total_pops = 80000
 						NOT = { total_pops = 160000 }
 					}
@@ -916,38 +398,6 @@ political_decisions = {
 			}
 			any_country = {
 				treasury = 200000
-			}
-			any_country = {
-				limit = {
-					tag = NET
-					ai = no
-				}
-				badboy = 12.5
-			}
-			AUS = {
-				any_pop = {
-					limit = {
-						OR = {
-							culture = north_italian
-							culture = venetian
-						}
-					}
-					literacy = 0.3
-				}
-				any_pop = {
-					limit = {
-						culture = czech
-					}
-					literacy = 0.14
-				}
-			}
-			ENG = {
-				any_pop = {
-					limit = {
-						culture = irish
-					}
-					literacy = 0.1
-				}
 			}
 			CIV = { 
 				# Audax Validator "." Ignore_NEXT
@@ -967,30 +417,6 @@ political_decisions = {
 					NOT = { has_country_flag = wealth_weighted_voting_flag }
 				}
 				set_country_flag = wealth_weighted_voting_flag
-			}
-			any_country = {
-				limit = {
-					OR = {
-						primary_culture = anglo_canadian
-						tag = EIC
-					}
-				}
-				add_country_modifier = { name = canadian_unifier_modifier duration = 3650 }
-			}
-			any_country = {
-				limit = {
-					primary_culture = anglo_canadian
-					ai = no
-				}
-				set_global_flag = canada_has_player_flag
-			}
-			META_1 = {
-				limit = {
-					has_global_flag = canada_has_player_flag
-					# Audax Validator "." Ignore_NEXT
-					is_core = CAN
-				}
-				life_rating = 5
 			}
 		}
 		ai_will_do = { factor = 1 }
