@@ -88,16 +88,10 @@ promotion_chance =
 	### TAXES ###
 	
 	group = {
-	
 		modifier = {
 			factor = 0.1
 			strata = middle
-			country = { NOT = { middle_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.1
-			strata = middle
-			country = { NOT = { middle_tax = 0.5 } }
+			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
 			factor = 0.1
@@ -107,128 +101,146 @@ promotion_chance =
 		modifier = {
 			factor = 0.1
 			strata = middle
-			country = { NOT = { middle_tax = 1 } }
+			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
 			factor = 0.1
-			literacy = 0.2
 			strata = middle
 			country = { NOT = { middle_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.2
-			strata = middle
-			country = { NOT = { middle_tax = 0.5 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.2
-			strata = middle
-			country = { NOT = { middle_tax = 0.75 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.2
-			strata = middle
-			country = { NOT = { middle_tax = 1 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.5
-			strata = middle
-			country = { NOT = { middle_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.5
-			strata = middle
-			country = { NOT = { middle_tax = 0.5 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.5
-			strata = middle
-			country = { NOT = { middle_tax = 0.75 } }
-		}
-		modifier = {
-			factor = 0.02
-			literacy = 0.5
-			strata = middle
-			country = { NOT = { middle_tax = 1 } }
 		}
 	}
+	
 	group = {
-	
 		modifier = {
-			factor = 0.01
-			strata = poor
-			country = { NOT = { poor_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.01
-			strata = poor
-			country = { NOT = { poor_tax = 0.5 } }
-		}
-		modifier = {
-			factor = 0.01
-			strata = poor
-			country = { NOT = { poor_tax = 0.75 } }
-		}
-		modifier = {
-			factor = 0.01
-			strata = poor
-			country = { NOT = { poor_tax = 1 } }
-		}
-		modifier = {
-			factor = 0.01
+			factor = 0.1
+			strata = middle
 			literacy = 0.2
-			strata = poor
-			country = { NOT = { poor_tax = 0.25 } }
+			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.1
+			strata = middle
 			literacy = 0.2
-			strata = poor
-			country = { NOT = { poor_tax = 0.5 } }
+			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.1
+			strata = middle
 			literacy = 0.2
-			strata = poor
-			country = { NOT = { poor_tax = 0.75 } }
+			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.1
+			strata = middle
 			literacy = 0.2
-			strata = poor
-			country = { NOT = { poor_tax = 1 } }
-		}
-		modifier = {
-			factor = 0.01
-			literacy = 0.5
-			strata = poor
-			country = { NOT = { poor_tax = 0.25 } }
-		}
-		modifier = {
-			factor = 0.01
-			literacy = 0.5
-			strata = poor
-			country = { NOT = { poor_tax = 0.5 } }
-		}
-		modifier = {
-			factor = 0.01
-			literacy = 0.5
-			strata = poor
-			country = { NOT = { poor_tax = 0.75 } }
-		}
-		modifier = {
-			factor = 0.01
-			literacy = 0.5
-			strata = poor
-			country = { NOT = { poor_tax = 1 } }
+			country = { NOT = { middle_tax = 0.25 } }
 		}
 	}
+	
+	group = {
+		modifier = {
+			factor = 0.1
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = middle
+			literacy = 0.5
+			country = { NOT = { middle_tax = 0.25 } }
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 0.1
+			strata = poor
+			country = { NOT = { poor_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			country = { NOT = { poor_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			country = { NOT = { poor_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			country = { NOT = { poor_tax = 0.25 } }
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.2
+			country = { NOT = { poor_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.2
+			country = { NOT = { poor_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.2
+			country = { NOT = { poor_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.2
+			country = { NOT = { poor_tax = 0.25 } }
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.5
+			country = { NOT = { poor_tax = 1 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.5
+			country = { NOT = { poor_tax = 0.75 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.5
+			country = { NOT = { poor_tax = 0.5 } }
+		}
+		modifier = {
+			factor = 0.1
+			strata = poor
+			literacy = 0.5
+			country = { NOT = { poor_tax = 0.25 } }
+		}
+	}
+	
 	
 	
 	modifier = {
@@ -262,66 +274,16 @@ promotion_chance =
 		}
 	}
 
-	
-	group = {
-		modifier = {
-			factor = 0.1
-			life_needs = 0.4			
-		}
-		modifier = {
-			factor = 0.1
-			life_needs = 0.6		
-		}
-		modifier = {
-			factor = 0.15
-			life_needs = 0.8	
-		}
-	}
-
-
-	group = {
-		modifier = {
-			factor = 0.1
-			everyday_needs = 0.9
-	
-		}
-		modifier = {
-			factor = 0.1
-			everyday_needs = 0.8 
-		}
-		modifier = {
-			factor = 0.1
-			everyday_needs = 0.7
-		}
-	}
-
-	modifier = {
-		factor = 0.5
-		strata = middle
-	}
-	
-	### COLONY
-	modifier = {
-		factor = -0.1
-		state_scope = { is_colonial = yes }
-	}
-	
-	### NON-ACCEPTED
-	modifier = {
-		factor = -0.1
-		not = { culture = this }
-	}
-	
 	### SLAVERY
 	modifier = {
-		factor = -0.1
+		factor = -10
 		country = {
 			slavery = yes_slavery 
 			NOT = { has_country_flag = the_slavery_debate }
 		}
 	}
 	modifier = {
-		factor = -0.05
+		factor = -5
 		country = { 
 			slavery = freedom_of_womb 
 			NOT = { has_country_flag = the_slavery_debate }
@@ -330,21 +292,13 @@ promotion_chance =
 	
 	# PENAL SYSTEM
 	modifier = {
-		factor = 0.03
+		factor = 2
 		country = { penal_system = incarceration }
 	}
 	modifier = {
-		factor = 0.06
+		factor = 4
 		country = { penal_system = rehabilitation }
 	}
-	
-	### SLAVE STATE
-	modifier = {
-		factor = -0.05
-		state_scope = {
-			is_slave = yes
-		}
-	}	
 	
 	### OCCUPATION
 	modifier = {
@@ -353,7 +307,7 @@ promotion_chance =
 	}
 	
 	modifier = {
-		factor = 0.2
+		factor = 2
 		country = {
 			ai = yes
 			has_global_flag = singleplayer_flag
@@ -361,33 +315,9 @@ promotion_chance =
 	}
 	
 	modifier = {
-		factor = 0.2
-		# Audax Validator "." Ignore_NEXT
-		NOT = { 
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 200000 } 
-		}
-	}	
-	modifier = {
-		factor = 0.1
-		# Audax Validator "." Ignore_NEXT
-		NOT = { 
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 100000 } 
-		}
-	}
-	
-	modifier = {
-		factor = 0.02
+		factor = 5
 		country = {
 			has_country_flag = industrial_revolution_flag
-		}
-	}
-	
-	modifier = {
-		factor = 0.2
-		country = {
-			has_country_flag = persian_centralization_ongoing_flag
 		}
 	}
 }
@@ -403,66 +333,38 @@ demotion_chance =
 		}
 	}
 	
-	### QUICKER IF FACTORY UNEMPLOYMENT ON A NICE TRADE GOOD
 	group = {
 		modifier = {
-			factor = 0.25
-			unemployment = 0.2
-			strata = poor
-			literacy = 0.5
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= sulphur
-				}
-			}
+			factor = 2
+			not = { life_needs = 0.3 }
+			not = { strata = poor }
 		}
 		modifier = {
-			factor = 0.5
-			unemployment = 0.2
-			strata = poor
-			literacy = 0.35
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= sulphur
-				}
-			}
+			factor = 2
+			not = { life_needs = 0.2 }
+			not = { strata = poor }
 		}
 		modifier = {
-			factor = 0.5
-			unemployment = 0.2
-			strata = poor
-			literacy = 0.25
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= sulphur
-				}
-			}
+			factor = 2
+			not = { life_needs = 0.1 }
+			not = { strata = poor }
+		}
+	}
+	group = {
+		modifier = {
+			factor = 0.1
+			not = { everyday_needs = 0.3 }
+			strata = rich
 		}
 		modifier = {
-			factor = 0.5
-			unemployment = 0.2
-			strata = poor
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= sulphur
-				}
-			}
+			factor = 0.1
+			not = { everyday_needs = 0.2 }
+			strata = rich
+		}
+		modifier = {
+			factor = 0.1
+			not = { everyday_needs = 0.1 }
+			strata = rich
 		}
 	}
 	
@@ -471,37 +373,6 @@ demotion_chance =
 		factor = -0.25
 		# Audax Validator "." Ignore_NEXT
 		total_pops = 1000000
-	}
-	
-	# MIDDLE STRATA
-	group = {
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.3
-		}
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.5
-		}
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.7
-		}
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.9
-		}
-	}
-	
-	### COLONIAL
-	modifier = {
-		factor = -0.1
-		state_scope = { is_colonial = yes }
-		strata = poor
 	}
 	
 	### SERFDOM 
