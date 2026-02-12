@@ -1,7 +1,7 @@
 #general promote mtth, same for all pops
 promotion_chance = 
 {
-	factor = 0.5
+	factor = 0.01
 	
 	modifier = {
 		factor = 0.05
@@ -10,95 +10,107 @@ promotion_chance =
 		}
 	}
 	
-	### LITERACY
+	#####LITERACY#####
 	group = {
 		modifier = {
-			factor = 0.04
-			literacy = 0.05		
+			factor = 0.4
+			literacy = 0.01
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.1			
+			factor = 0.4
+			literacy = 0.02
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.2		
+			factor = 0.4
+			literacy = 0.03
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.3			
+			factor = 0.4
+			literacy = 0.04
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.4			
+			factor = 0.4
+			literacy = 0.05
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.5			
+			factor = 2
+			literacy = 0.1
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.6			
+			factor = 4
+			literacy = 0.2
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.7			
+			factor = 4
+			literacy = 0.3
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.8			
+			factor = 4
+			literacy = 0.4
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.9			
+			factor = 4
+			literacy = 0.5
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.99			
+			factor = 4
+			literacy = 0.6
 		}
 		modifier = {
-			factor = 0.05
-			year = 1890
+			factor = 4
+			literacy = 0.7
+		}
+		modifier = {
+			factor = 4
 			literacy = 0.8
 		}
 		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.9			
+			factor = 4
+			literacy = 0.9
 		}
 		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.99			
+			factor = 4
+			literacy = 0.99
 		}
 	}
+	
+	#####SLAVERY#####
+	group = {
+		modifier = {
+			factor = -5
+			state_scope = {
+				is_slave = yes
+			}
+		}
+	}
+	
 	
 	### TAXES ###
 	
 	group = {
 	
 		modifier = {
-			factor = 0.02
+			factor = 0.1
 			strata = middle
 			country = { NOT = { middle_tax = 0.25 } }
 		}
 		modifier = {
-			factor = 0.02
+			factor = 0.1
 			strata = middle
 			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.02
+			factor = 0.1
 			strata = middle
 			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.02
+			factor = 0.1
 			strata = middle
 			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.02
+			factor = 0.1
 			literacy = 0.2
 			strata = middle
 			country = { NOT = { middle_tax = 0.25 } }
@@ -220,7 +232,7 @@ promotion_chance =
 	
 	
 	modifier = {
-		factor = -0.1
+		factor = -5
 		country = {
 			is_mobilised = yes
 		}
@@ -229,23 +241,23 @@ promotion_chance =
 	### MILITANCY
 	group = {
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 9
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 8
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 7
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 6
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 5
 		}
 	}
