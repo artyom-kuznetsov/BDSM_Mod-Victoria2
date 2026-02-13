@@ -283,15 +283,11 @@ country_event = {
 		name = "satsuma_start_EvtOptA"
 		set_country_flag = satsuma_ports_flag
 		1661 = {
-			add_province_modifier = {
-				name = satsuma_port_modifier
-				duration = -1
-			}
-		}
-		1662 = {
-			add_province_modifier = {
-				name = satsuma_port_modifier
-				duration = -1
+			state_scope = {
+				add_province_modifier = {
+					name = satsuma_port_modifier
+					duration = -1
+				}
 			}
 		}
 		add_country_modifier = {
@@ -311,17 +307,9 @@ country_event = {
 	trigger = {
 		has_country_flag = satsuma_ports_flag
 		owns = 1661
-		owns = 1662
-		OR = {
-			NOT = {
-				1661 = {
-					has_province_modifier = satsuma_port_modifier
-				}
-			}
-			NOT = {
-				1662 = {
-					has_province_modifier = satsuma_port_modifier
-				}
+		NOT = {
+			1661 = {
+				has_province_modifier = satsuma_port_modifier
 			}
 		}
 	}
@@ -329,15 +317,11 @@ country_event = {
 	option = {
 		name = "satsuma_ports_EvtOptA"
 		1661 = {
-			add_province_modifier = {
-				name = satsuma_port_modifier
-				duration = -1
-			}
-		}
-		1662 = {
-			add_province_modifier = {
-				name = satsuma_port_modifier
-				duration = -1
+			state_scope = {
+				add_province_modifier = {
+					name = satsuma_port_modifier
+					duration = -1
+				}
 			}
 		}
 	}
