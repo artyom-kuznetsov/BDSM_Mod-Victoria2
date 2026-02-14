@@ -65,6 +65,15 @@ political_decisions = {
 			country_event = 140403
 			set_global_flag = 1836_setup_complete_flag
 			
+			
+			any_country = {
+				limit = { early_classical_theory_and_critique = 1 }
+				set_country_flag = early_classical_theory_and_critique_invented
+				set_variable = {
+					which = economic_thought_level
+					value = 1
+				}
+			}
 			### EVERYONE PAID FOR NAVAL BASES! # v4.6.3
 			any_country = {
 				limit = {
