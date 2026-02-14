@@ -266,12 +266,6 @@ migration_target =
 			NOT = { total_pops = 800000 }
 		}
 	}
-	modifier = {
-		factor = 100
-		work_available = {
-			worker = labourers
-		}
-	}
 }
 
 
@@ -366,70 +360,6 @@ promote_to =
 				}
 				country = {
 					civilized = no
-				}
-			}
-		}
-	}
-	clerks = {
-		factor = 0.01
-		modifier = {
-			factor = -100
-			country = { has_country_flag = jan_mayen }
-		}
-		modifier = {
-			factor = -100
-			state_scope = {
-				NOT = { bureaucrats = 0.01 }
-			}
-		}
-		group = {
-			modifier = {
-				factor = 1
-				literacy = 0.3
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.4
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.5
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.6
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.7
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.8
-			}
-			modifier = {
-				factor = 2
-				literacy = 0.9
-			}
-			modifier = {
-				factor = 2
-				literacy = 1
-			}
-		}
-		modifier = {
-			factor = -40
-			state_scope = {
-				has_factories = no
-			}
-			can_build_factory = no
-		}
-		modifier = {
-			factor = -100
-			NOT = {
-				location = {
-					work_available = {
-						worker = craftsmen
-					}
 				}
 			}
 		}
@@ -663,10 +593,6 @@ promote_to =
 			}
 		}
 		modifier = {
-			factor = -100
-			location = { NOT = { has_pop_type = farmers } }
-		}
-		modifier = {
 			factor = 10
 			NOT = { everyday_needs = 0.10 }
 		}
@@ -674,28 +600,6 @@ promote_to =
 			factor = 10
 			NOT = { life_needs = 0.99 }
 		}	
-	}
-	labourers = 
-	{
-		factor = 0.01
-		modifier = {
-			factor = -100
-			country = { has_country_flag = jan_mayen }
-		}
-		modifier = {
-			factor = 10
-			location = { is_colonial = no }
-		}
-		modifier = {
-			factor = -100
-			state_scope = {
-				NOT = { bureaucrats = 0.01 }
-			}
-		}
-		modifier = {
-			factor = -100
-			location = { NOT = { has_pop_type = labourers } }
-		}
 	}
 }
 

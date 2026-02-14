@@ -240,101 +240,14 @@ migration_target =
 			NOT = { total_pops = 800000 }
 		}
 	}
-	modifier = {
-		factor = 100
-		work_available = {
-			worker = labourers
-		}
-		NOT = {
-			unemployment_by_type = { type = labourers value = 0.1 } 
-		}
-	}
 }
 
 promote_to =
 {
 	
-	bureaucrats =
-	{
-		factor = 0.01
-		modifier = {
-			factor = -100
-			NOT = { 
-				is_accepted_culture = yes 
-				is_primary_culture = yes
-			}
-		}
-		modifier = {
-			factor = 30
-			OR = {
-				is_accepted_culture = yes
-				is_primary_culture = yes
-			}
-			location = { is_colonial = yes }
-		}
-		group = {
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.008 } }
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.009 } }
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.010 } }
-			modifier = { factor = -3 state_scope = { bureaucrats = 0.011 } }
-			modifier = { factor = -3 state_scope = { bureaucrats = 0.012 } }
-			modifier = { factor = -5 state_scope = { bureaucrats = 0.014 } }
-			modifier = { factor = -5 state_scope = { bureaucrats = 0.016 } }
-			modifier = { factor = -100 state_scope = { bureaucrats = 0.018 } }		
-		}
-
-
-		group = {
-			modifier = { factor = 2 crime_fighting = 0.09 }
-			modifier = { factor = 2 crime_fighting = 0.19 }
-			modifier = { factor = 2 crime_fighting = 0.29 }
-			modifier = { factor = 2 crime_fighting = 0.39 }
-			modifier = { factor = 2 crime_fighting = 0.49 }
-			modifier = { factor = 2 crime_fighting = 0.59 }
-			modifier = { factor = 2 crime_fighting = 0.69 }
-			modifier = { factor = 2 crime_fighting = 0.79 }
-			modifier = { factor = 2 crime_fighting = 0.89 }
-			modifier = { factor = 2 crime_fighting = 0.99 }
-		}
-		
-		group = {
-			modifier = { factor = -6 penal_system = capital_punishment }
-			modifier = { factor = -4 penal_system = punitive_labour }
-			modifier = { factor = -2 penal_system = incarceration }
-		}
-		
-		group = {
-			modifier = { factor = 2 security = minimal_security }
-			modifier = { factor = 4 security = moderate_security }
-			modifier = { factor = 6 security = police_state }
-		}
-	}
-	
-	artisans = {
-		factor = 0.01
-		
-		modifier = {
-			factor = 5
-			state_scope = {
-				has_factories = no
-			}
-		}
-		
-		modifier = {
-			factor = -99
-			NOT = { unemployment_by_type = { type = labourers value = 0.2 } }
-		}
-	}
 	soldiers =
 	{
 		factor = 0.01
-		
-		modifier = {
-			factor = -20
-			NOT = {
-				unemployment_by_type = { type = labourers value = 0.1 } 
-			}
-		}
 		
 		group = {
             modifier = {
@@ -898,72 +811,6 @@ promote_to =
 			factor = 10
 			country = { slavery = yes_slavery }
 			is_accepted_culture = no
-		}
-	}
-	clerks = {
-		factor = 0.01
-		group = {
-			modifier = {
-				factor = -2
-				NOT = { literacy = 0.5 }
-			}
-			modifier = {
-				factor = -2
-				NOT = { literacy = 0.6 }
-			}
-			modifier = {
-				factor = -2
-				NOT = { literacy = 0.7 }
-			}
-			modifier = {
-				factor = -2
-				NOT = { literacy = 0.8 }
-			}
-		}
-		group = {
-			modifier = { factor = 2 state_scope = { craftsmen = 0.04 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.08 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.12 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.16 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.2 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.24 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.28 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.32 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.36 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.4 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.44 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.48 } }
-		}
-		group = {
-			modifier = { factor = -2 state_scope = { clerks = 0.01 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.02 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.03 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.04 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.05 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.06 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.07 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.08 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.09 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.1 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.11 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.12 } }
-		}
-		modifier = {
-			factor = -40
-			state_scope = {
-				has_factories = no
-			}
-			can_build_factory = no
-		}
-		modifier = {
-			factor = -100
-			NOT = {
-				location = {
-					work_available = {
-						worker = craftsmen
-					}
-				}
-			}
 		}
 	}
 }
