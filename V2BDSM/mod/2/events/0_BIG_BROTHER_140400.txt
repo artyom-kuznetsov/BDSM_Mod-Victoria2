@@ -9,7 +9,116 @@ country_event = { # MCL # MONTHLY CLEANUP
 	
 	option = {
 		name = "noloc"
-		# v4.D7.0 VICTORIA UNIVERSALIS VARIABLES
+		
+			# v4D7.0 ECONOMIC THOUGHT LEVEL FROM VICTORIA UNIVERSALIS
+		any_country = {
+			random_owned = {
+				limit = {
+					owner = {
+						early_classical_theory_and_critique = 1
+						NOT = { has_country_flag = early_classical_theory_and_critique_invented }
+					}
+				}
+				owner = {
+					set_country_flag = early_classical_theory_and_critique_invented
+					set_variable = {
+						which = economic_thought_level
+						value = 1
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						late_classical_theory = 1
+						NOT = { has_country_flag = late_classical_theory_invented }
+					}
+				}
+				owner = {
+					set_country_flag = late_classical_theory_invented
+					set_variable = {
+						which = economic_thought_level
+						value = 2
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						collectivist_theory = 1
+						NOT = { has_country_flag = collectivist_theory_invented }
+					}
+				}
+				owner = {
+					set_country_flag = collectivist_theory_invented
+					set_variable = {
+						which = economic_thought_level
+						value = 3
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						the_historical_theory = 1
+						NOT = { has_country_flag = the_historical_theory_invented }
+					}
+				}
+				owner = {
+					set_country_flag = the_historical_theory_invented
+					set_variable = {
+						which = economic_thought_level
+						value = 4
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						neoclassical_theory = 1
+						NOT = { has_country_flag = neoclassical_theory_invented }
+					}
+				}
+				owner = {
+					set_country_flag = neoclassical_theory_invented
+					set_variable = {
+						which = economic_thought_level
+						value = 5
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						keynesian_economics = 1
+						NOT = { has_country_flag = keynesian_economics_invented }
+					}
+				}
+				owner = {
+					set_country_flag = keynesian_economics_invented
+					set_variable = {
+						which = economic_thought_level
+						value = 6
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						neoliberal_theory = 1
+						NOT = { has_country_flag = neoliberal_theory_invented }
+					}
+				}
+				owner = {
+					set_country_flag = neoliberal_theory_invented
+					set_variable = {
+						which = economic_thought_level
+						value = 7
+					}
+				}
+			}
+		}
+		# v4D7.0 VICTORIA UNIVERSALIS VARIABLES
 		
 		any_country = {
 			set_variable = {
