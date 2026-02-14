@@ -2,7 +2,7 @@
 ### Factories #####################################################################################
 agriculture_template = {
 	efficiency = { #1.2 saved
-		fertilizer = 1		#10
+		fertilizer = 0.8		#8
 	}
 	
 	owner =
@@ -30,7 +30,7 @@ agriculture_template = {
 
 cattle_template = {
 	efficiency = { #1.2 saved
-		grain = 2.5			#10
+		grain = 2			#8
 	}
 	
 	owner =
@@ -58,8 +58,8 @@ cattle_template = {
 
 mining_template = {
 	efficiency = { #1.2 saved
-		explosives = 0.25	#5
-		iron = 1			#5
+		explosives = 0.2	#4
+		iron = 0.8			#4
 	}
 	
 	owner =
@@ -87,8 +87,8 @@ mining_template = {
 
 forestry_template = {
 	efficiency = { #1.2 saved
-		machine_parts = 0.3125	#5
-		iron = 1				#5
+		machine_parts = 0.25	#4
+		iron = 0.8				#4
 	}
 	
 	owner =
@@ -116,7 +116,7 @@ forestry_template = {
 
 dye_template = {
 	efficiency = { #1.2 saved
-		fruit = 2.5			#10
+		fruit = 2			#8
 	}
 	
 	owner =
@@ -144,7 +144,7 @@ dye_template = {
 
 fish_template = {
 	efficiency = { #1.2 saved
-		steamer_convoy = 0.166	#10
+		steamer_convoy = 0.08	#8
 	}
 	
 	owner =
@@ -172,8 +172,8 @@ fish_template = {
 
 cheap_template = {
 	efficiency = {
-		cement = 0.33			#6	
-		timber = 1				#4	# TOTAL 10
+		cement = 0.25			#4
+		timber = 1				#4	# TOTAL 8
 	}
 	
 	owner =
@@ -810,9 +810,9 @@ fertilizer_factory = {
 }
 
 furniture_factory = {       
-	template = cheap_template	#4
+	template = cheap_template	#8
 	input_goods = { 
-		timber = 6.5			#26	total input+maint = 30
+		timber = 6.25			#25	total input+maint = 33
 	}
 	output_goods = furniture 
 	value = 4					#40
@@ -945,9 +945,9 @@ paper_mill = {
 }
 
 fishery = {       
-	template = fish_template		#10
+	template = fish_template		#8
 	input_goods = {        
-		raw_grain = 0.2			#20 total input+maint = 30
+		raw_grain = 0.24			#24 total input+maint = 32
 	}
 	is_coastal = yes
 	output_goods = fish 
@@ -963,10 +963,10 @@ fishery = {
 }
 
 regular_clothes_factory = {       
-	template = cheap_template	#4
+	template = cheap_template	#8
 	input_goods = {  
-		cotton = 5				#20
-		dye = 0.75				#6	total input+maint = 30
+		cotton = 4.75			#19
+		dye = 0.75				#6	total input+maint = 33
 	}
 	output_goods = regular_clothes 
 	value = 4					#40
@@ -990,12 +990,12 @@ regular_clothes_factory = {
 }
 
 canned_food_factory = {       
-	template = cheap_template	#4
+	template = cheap_template	#8
 	input_goods = { 
 		grain = 2	 			#8
 		cattle = 2	 			#8
 		fish = 1.5				#6
-		iron = 0.8 				#4		total input+maint = 30
+		iron = 0.6 				#3		total input+maint = 33
 	}
 	output_goods = canned_food 
 	value = 5					#40
@@ -1192,12 +1192,12 @@ tropical_wood_lodge = {
 	farm = yes
 }
 
-financial_district = {
-	template = RGO_template_farmers
-	output_goods = raw_stocks 
-	value = 0.5
-	farm = yes
-}
+#financial_district = {
+#	template = RGO_template_farmers
+#	output_goods = raw_stocks 
+#	value = 0.5
+#	farm = yes
+#}
 
 
 ### Artisans #####################################################################################
@@ -1219,9 +1219,9 @@ peasant_grain = {
 ############# RGO FACTORIES
 
 cattle_factory = {       
-	template = cattle_template		#10
+	template = cattle_template		#8
 	input_goods = {    
-		raw_cattle = 0.22				#20 total input+maint = 33
+		raw_cattle = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = cattle
@@ -1229,9 +1229,9 @@ cattle_factory = {
 }
 
 coal_factory = {       
-	template = mining_template		#10
+	template = mining_template		#8
 	input_goods = {    
-		raw_coal = 0.22				#20 total input+maint = 33
+		raw_coal = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = coal
@@ -1239,9 +1239,9 @@ coal_factory = {
 }
 
 coffee_factory = {       
-	template = agriculture_template	#10
+	template = agriculture_template	#8
 	input_goods = {    
-		raw_coffee = 0.22				#20 total input+maint = 33
+		raw_coffee = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = coffee
@@ -1249,9 +1249,9 @@ coffee_factory = {
 }
 
 cotton_factory = {       
-	template = agriculture_template	#10
+	template = agriculture_template	#8
 	input_goods = {    
-		raw_cotton = 0.22				#20 total input+maint = 33
+		raw_cotton = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = cotton
@@ -1259,9 +1259,9 @@ cotton_factory = {
 }
 
 dye_factory = {       
-	template = dye_template			#10
+	template = dye_template			#8
 	input_goods = {    
-		raw_dye = 0.22					#20 total input+maint = 33
+		raw_dye = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = dye
@@ -1269,9 +1269,9 @@ dye_factory = {
 }
 
 grain_factory = {       
-	template = agriculture_template	#10
+	template = agriculture_template	#8
 	input_goods = {    
-		raw_grain = 0.22				#20 total input+maint = 33
+		raw_grain = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = grain
@@ -1279,9 +1279,9 @@ grain_factory = {
 }
 
 iron_factory = {       
-	template = mining_template		#10
+	template = mining_template		#8
 	input_goods = {    
-		raw_iron = 0.22				#20 total input+maint = 33
+		raw_iron = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = iron
@@ -1289,9 +1289,9 @@ iron_factory = {
 }
 
 oil_factory = {       
-	template = mining_template		#10
+	template = mining_template		#8
 	input_goods = {    
-		raw_oil = 0.22					#20 total input+maint = 33
+		raw_oil = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = oil
@@ -1299,9 +1299,9 @@ oil_factory = {
 }
 
 opium_factory = {       
-	template = agriculture_template	#10
+	template = agriculture_template	#8
 	input_goods = {    
-		raw_opium = 0.22				#20 total input+maint = 33
+		raw_opium = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = opium
@@ -1309,9 +1309,9 @@ opium_factory = {
 }
 
 fruit_factory = {       
-	template = agriculture_template	#10
+	template = agriculture_template	#8
 	input_goods = {    
-		raw_fruit = 0.22				#20 total input+maint = 33
+		raw_fruit = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = fruit
@@ -1319,9 +1319,9 @@ fruit_factory = {
 }
 
 rubber_factory = {       
-	template = forestry_template	#10
+	template = forestry_template	#8
 	input_goods = {    
-		raw_rubber = 0.22				#20 total input+maint = 33
+		raw_rubber = 0.25			#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = rubber
@@ -1329,9 +1329,9 @@ rubber_factory = {
 }
 
 silk_factory = {       
-	template = dye_template			#10
+	template = dye_template			#8
 	input_goods = {    
-		raw_silk = 0.22				#20 total input+maint = 33
+		raw_silk = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = silk
@@ -1339,9 +1339,9 @@ silk_factory = {
 }
 
 sulphur_factory = {       
-	template = mining_template		#10
+	template = mining_template		#8
 	input_goods = {    
-		raw_sulphur = 0.22				#20 total input+maint = 33
+		raw_sulphur = 0.25			#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = sulphur
@@ -1349,9 +1349,9 @@ sulphur_factory = {
 }
 
 tea_factory = {       
-	template = agriculture_template	#10
+	template = agriculture_template	#8
 	input_goods = {    
-		raw_tea = 0.22					#20 total input+maint = 33
+		raw_tea = 0.25					#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = tea
@@ -1359,9 +1359,9 @@ tea_factory = {
 }
 
 timber_factory = {       
-	template = forestry_template	#10
+	template = forestry_template	#8
 	input_goods = {    
-		raw_timber = 0.22				#20 total input+maint = 33
+		raw_timber = 0.25			#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = timber
@@ -1369,9 +1369,9 @@ timber_factory = {
 }
 
 tobacco_factory = {       
-	template = agriculture_template	#10
+	template = agriculture_template	#8
 	input_goods = {    
-		raw_tobacco = 0.22				#20 total input+maint = 33
+		raw_tobacco = 0.25				#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = tobacco
@@ -1379,9 +1379,9 @@ tobacco_factory = {
 }
 
 tropical_wood_factory = {     
-	template = forestry_template	#10
+	template = forestry_template	#8
 	input_goods = {    
-		raw_tropical_wood = 0.22		#20 total input+maint = 33
+		raw_tropical_wood = 0.25	#25 total input+maint = 33
 	}
 	limit_by_local_supply = yes
 	output_goods = tropical_wood
