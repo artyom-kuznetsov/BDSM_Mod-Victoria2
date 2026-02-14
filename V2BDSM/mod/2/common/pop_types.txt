@@ -1148,29 +1148,7 @@ emigration_chance =
 		factor = -0.3                             
 		country = { border_policy = closed_borders ai = yes }
 	}
-	
-	modifier = {
-		factor = -0.3
-		country = {
-			capital_scope = {
-				OR = {
-					continent = north_america
-					continent = south_america
-					continent = oceania
-				}
-			}
-			NOT = { 
-				year = 1900 
-				has_country_flag = NewSpain_cflag 
-			}
-		}
-	}
-	
-	modifier = {
-		factor = 0.3
-		culture = central_american
-		country = { has_country_flag = NewSpain_cflag }
-	}
+
 
 }
 
