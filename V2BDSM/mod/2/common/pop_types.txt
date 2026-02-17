@@ -35,7 +35,6 @@ promotion_chance =
 		modifier = {
 			factor = 0.04
 			literacy = 0.5		
-			NOT = { is_culture_group = east_asian }		
 		}
 		modifier = {
 			factor = 0.04
@@ -43,8 +42,7 @@ promotion_chance =
 		}
 		modifier = {
 			factor = 0.04
-			literacy = 0.7	
-			NOT = { is_culture_group = east_asian }			
+			literacy = 0.7			
 		}
 		modifier = {
 			factor = 0.04
@@ -58,22 +56,25 @@ promotion_chance =
 			factor = 0.04
 			literacy = 0.99			
 		}
+	}
+	
+	group = {
 		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.8
+			factor = -0.04
+			literacy = 0.2
+			is_culture_group = east_asian
 		}
+		
 		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.9
-			NOT = { is_culture_group = east_asian }	
+			factor = -0.05
+			literacy = 0.35
+			is_culture_group = east_asian
 		}
+		
 		modifier = {
-			factor = 0.05
-			year = 1890
-			literacy = 0.99
-			NOT = { is_culture_group = east_asian }	
+			factor = -0.06
+			literacy = 0.5
+			is_culture_group = east_asian
 		}
 	}
 	
