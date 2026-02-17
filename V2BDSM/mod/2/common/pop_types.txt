@@ -2,74 +2,66 @@
 promotion_chance = 
 {
 	factor = 0.01
-	
-	modifier = {
-		factor = 0.1
-		country = {
-			economic_policy = laissez_faire
-		}
-	}
-	
 	#####LITERACY#####
 	group = {
 		modifier = {
-			factor = 0.8
+			factor = 1
 			literacy = 0.01
 		}
 		modifier = {
-			factor = 0.8
+			factor = 1
 			literacy = 0.02
 		}
 		modifier = {
-			factor = 0.8
+			factor = 1
 			literacy = 0.03
 		}
 		modifier = {
-			factor = 0.8
+			factor = 1
 			literacy = 0.04
 		}
 		modifier = {
-			factor = 0.8
+			factor = 1
 			literacy = 0.05
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.1
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.2
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.3
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.4
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.5
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.6
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.7
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.8
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.9
 		}
 		modifier = {
-			factor = 2
+			factor = 4
 			literacy = 0.99
 		}
 	}
@@ -296,6 +288,21 @@ promotion_chance =
 	modifier = {
 		factor = 4
 		country = { penal_system = rehabilitation }
+	}
+	
+	modifier = {
+		factor = -4
+		country = { debt_law = serfdom }
+	}
+	
+	modifier = {
+		factor = -2
+		country = { debt_law = peonage }
+	}
+	
+	modifier = {
+		factor = -1
+		country = { debt_law = debtors_prisons }
 	}
 	
 	### OCCUPATION
@@ -761,6 +768,11 @@ emigration_chance =
 	modifier = {
 		factor = -0.2
 		NOT = { strata = poor }
+	}
+
+	modifier = {
+		factor = -0.2
+		strata = rich
 	}
 
 	group = {
