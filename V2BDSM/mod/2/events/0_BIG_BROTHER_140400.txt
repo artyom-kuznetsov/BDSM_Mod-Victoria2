@@ -10,7 +10,96 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
-			# v4D7.0 ECONOMIC THOUGHT LEVEL FROM VICTORIA UNIVERSALIS
+		# v4D7 COMMERCE 1 COLUMN LEVEL VARIABLE
+		
+		any_country = {
+			random_owned = {
+				limit = {
+					owner = {
+						invention = capital_for_investors
+						NOT = { has_country_flag = capital_for_investors_invented }
+					}
+				}
+				owner = {
+					set_country_flag = capital_for_investors_invented
+					set_variable = {
+						which = financial_institutions_level
+						value = 1
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						invention = industrial_rnd_investments
+						NOT = { has_country_flag = industrial_rnd_investments_invented }
+					}
+				}
+				owner = {
+					set_country_flag = industrial_rnd_investments_invented
+					set_variable = {
+						which = financial_institutions_level
+						value = 2
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						invention = private_bank_monitoring
+						NOT = { has_country_flag = private_bank_monitoring_invented }
+					}
+				}
+				owner = {
+					set_country_flag = private_bank_monitoring_invented
+					set_variable = {
+						which = financial_institutions_level
+						value = 3
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						invention = buying_on_margin
+						NOT = { has_country_flag = buying_on_margin_invented }
+					}
+				}
+				owner = {
+					set_country_flag = buying_on_margin_invented
+					set_variable = {
+						which = financial_institutions_level
+						value = 4
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						invention = venture_capital
+						NOT = { has_country_flag = venture_capital_invented }
+					}
+				}
+				owner = {
+					set_country_flag = venture_capital_invented
+					set_variable = {
+						which = financial_institutions_level
+						value = 5
+					}
+				}
+			}
+		}
+		
+		
+		###
+		any_country = {
+			limit = {
+				NOT = { has_country_flag = private_banks_invented }
+				private_banks = 1
+			}
+			set_country_flag = private_banks_invented
+		}
+		# v4D7.0 ECONOMIC THOUGHT LEVEL FROM VICTORIA UNIVERSALIS
 		any_country = {
 			random_owned = {
 				limit = {
@@ -118,21 +207,120 @@ country_event = { # MCL # MONTHLY CLEANUP
 				}
 			}
 		}
+		### COMMERCE 2 COLUMN TECH
+		any_country = {
+			random_owned = {
+				limit = {
+					owner = {
+						no_standard = 1
+						NOT = { has_country_flag = no_standard_invented }
+					}
+				}
+				owner = {
+					set_country_flag = no_standard_invented
+					set_variable = {
+						which = monetary_system_level
+						value = 1
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						ad_hoc_money_bill_printing = 1
+						NOT = { has_country_flag = ad_hoc_money_bill_printing_invented }
+					}
+				}
+				owner = {
+					set_country_flag = ad_hoc_money_bill_printing_invented
+					set_variable = {
+						which = monetary_system_level
+						value = 2
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						private_bank_money_bill_printing = 1
+						NOT = { has_country_flag = private_bank_money_bill_printing_invented }
+					}
+				}
+				owner = {
+					set_country_flag = private_bank_money_bill_printing_invented
+					set_variable = {
+						which = monetary_system_level
+						value = 3
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						central_bank_money_bill_printing = 1
+						NOT = { has_country_flag = central_bank_money_bill_printing_invented }
+					}
+				}
+				owner = {
+					set_country_flag = central_bank_money_bill_printing_invented
+					set_variable = {
+						which = monetary_system_level
+						value = 4
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						modern_central_bank_system = 1
+						NOT = { has_country_flag = modern_central_bank_system }
+					}
+				}
+				owner = {
+					set_country_flag = modern_central_bank_system_invented
+					set_variable = {
+						which = monetary_system_level
+						value = 5
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						market_determined_exchange_rates = 1
+						NOT = { has_country_flag = market_determined_exchange_rates_invented }
+					}
+				}
+				owner = {
+					set_country_flag = market_determined_exchange_rates_invented
+					set_variable = {
+						which = monetary_system_level
+						value = 6
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						fiat_based_monetary_system = 1
+						NOT = { has_country_flag = fiat_based_monetary_system_invented }
+					}
+				}
+				owner = {
+					set_country_flag = fiat_based_monetary_system_invented
+					set_variable = {
+						which = monetary_system_level
+						value = 7
+					}
+				}
+			}
+		}
 		# v4D7.0 VICTORIA UNIVERSALIS VARIABLES
 		
 		any_country = {
 			set_variable = {
 				which = bureaucracy_level
 				value = 0
-			}
-		}
-		any_country = {
-			limit = {
-				enlightenment_thought = 1
-			}
-			change_variable = {
-				which = bureaucracy_level
-				value = 1
 			}
 		}
 		any_country = {

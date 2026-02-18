@@ -549,43 +549,23 @@ political_reforms = {
 
 	centralization = {
 		regionalism = {
-			global_assimilation_rate = -0.25
-			administrative_efficiency_modifier = -0.05
-			diplomatic_points_modifier = -0.1
-			cb_generation_speed_modifier = -0.05
 			allow = {
-				NOT = { has_country_flag = is_totalitarian_flag }
+				always = no
 			}
 		}
 		federalism = {
-			core_pop_militancy_modifier = -0.01
-			suppression_points_modifier = -0.1
-			global_assimilation_rate = 0.05
 			allow = {
-				has_country_flag = has_rev_n_counterrev_flag
-				NOT = { has_country_flag = is_totalitarian_flag }
+				always = no
 			}
 		}
 		unitary = {
-			global_assimilation_rate = 0.2
-			non_accepted_pop_consciousness_modifier = 0.02
-			non_accepted_pop_militancy_modifier = 0.02
-			leadership_modifier = 0.1
-			cb_generation_speed_modifier = 0.1
 			allow = {
-				has_country_flag = has_rev_n_counterrev_flag
-				NOT = { has_country_flag = is_totalitarian_flag }
+				always = no
 			}
 		}
 		totalitarianism = {
-			tax_efficiency = 0.02
-			cb_generation_speed_modifier = 0.2
-			suppression_points_modifier = 0.2
-			global_pop_consciousness_modifier = -0.02
-			global_pop_militancy_modifier = 0.01
 			allow = {
-				has_country_flag = has_rev_n_counterrev_flag
-				has_country_flag = is_totalitarian_flag
+				always = no
 			}
 		}
 	}
