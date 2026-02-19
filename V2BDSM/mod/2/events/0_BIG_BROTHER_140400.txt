@@ -1917,6 +1917,11 @@ province_event = {
 				limit = {
 					# Audax Validator "." Ignore_NEXT
 					has_building = province_selector
+					NOT = {
+						has_province_modifier = potato_blight
+						has_province_modifier = cholera_epidemic_big
+						has_province_modifier = pandemic_influenza
+					}
 				}
 				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
@@ -4994,7 +4999,7 @@ country_event = {
 			limit = {
 				is_core = WBK
 				owner = { war = no }
-				NOT = { 
+				NOT = {
 					has_province_modifier = potato_blight
 					has_province_modifier = cholera_epidemic_small
 					has_province_modifier = cholera_epidemic_big
