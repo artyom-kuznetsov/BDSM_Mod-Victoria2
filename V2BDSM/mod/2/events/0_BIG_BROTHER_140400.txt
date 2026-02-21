@@ -2051,6 +2051,94 @@ country_event = { # YEARLY CLEANUP
 	}
 }
 
+# Audax Validator "." Ignore_NEXT
+province_event = {
+	title = "Selector_EvtName"
+	desc = "Selector_EvtDesc"
+	id = 140407
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Selector_EvtOptCancel"
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	option = {
+		name = "Selector_EvtOptScorch"
+		state_scope = {
+			any_owned = {
+				add_province_modifier = { name = scorched_earth_modifier duration = 130 }
+			}
+		}
+		# Audax Validator "." Ignore_NEXT
+		war_exhaustion = 0.5
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	option = {
+		name = "Selector_EvtOptAbandonCore"
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+		# Audax Validator "." Ignore_NEXT
+		province_event = { id = 140408 }
+	}
+	
+	option = {
+		name = "Selector_EvtOptDestroyNavalBase"
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+		naval_base = -7
+	}
+	
+	option = {
+		name = "Selector_EvtOptImmigration"
+		owner = {
+			any_owned = {
+				remove_province_modifier = immigrator_modifier
+			}
+		}
+		
+		add_province_modifier = { name = immigrator_modifier duration = -1 }
+
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	
+	option = {
+		name = "Selector_EvtOptSupplyDepot"
+		owner = {
+			any_owned = {
+				remove_province_modifier = generic_supply_depot_pmodifier
+			}
+		}
+		add_province_modifier = {
+			name = generic_supply_depot_pmodifier
+			duration = -1
+		}
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+	}
+	
+	option = {
+		name = "Selector_EvtOptMonumentActions"
+		add_core = WBK
+		# Audax Validator "." Ignore_NEXT
+		province_selector = -1
+		# Audax Validator "." Ignore_NEXT
+		province_event = { id = 140409 }
+	}
+	
+	option = {
+		name = "Selector_EvtOptRemAllSelectors"
+		owner = {
+			any_owned = {
+				# Audax Validator "." Ignore_NEXT
+				province_selector = -1
+			}
+		}
+	}
+}
 
 province_event = {
 	id = 140408
@@ -5029,71 +5117,3 @@ country_event = {	# WEATHER CLEANUP
 	}
 }
 
-## Audax Validator "." Ignore_NEXT
-country_event = {
-	id = 140414
-	title = "noloc"	# «¿ ŒÀŒÕ»«¿÷»ﬂ –≈√»ŒÕ¿ »« Ã≈“–ŒœŒÀ»»
-
-	is_triggered_only = yes
-
-	## Audax Validator "." Ignore_NEXT
-	option = {
-		civilized = yes
-		civilized = no
-		## Audax Validator "." Ignore_NEXT
-		annex_to = FROM
-	}
-}
-## Audax Validator "." Ignore_NEXT
-country_event = {
-	id = 140415
-	title = "recolonize_region_EvtName"
-	desc = "recolonize_region_success_EvtDesc"
-	picture = "colonial_factory"
-	## Audax Validator "." Ignore_NEXT
-	is_triggered_only = yes
-
-	immediate = {
-		CIV = { 
-			country_event = { id = 140414 days = 0 }
-		}
-	}
-	
-	option = {
-		name = "recolonize_region_EvtOptA"
-	}
-}
-
-country_event = {
-	id = 140416
-	title = "recolonize_region_EvtName"
-	desc = "recolonize_region_EvtDesc"
-	picture = "colonial_factory"
-
-	is_triggered_only = yes
-
-	immediate = {
-		random_owned = {
-			limit = {
-				is_core = WBK
-				owner = { war = no }
-				NOT = { 
-					has_province_modifier = potato_blight
-					has_province_modifier = cholera_epidemic_small
-					has_province_modifier = cholera_epidemic_big
-					has_province_modifier = apache_raiders
-				}
-			}
-			owner = { country_event = { id = 140415 days = 0 } }
-			state_scope = { 
-				any_owned = { 
-					secede_province = CIV 
-				}
-			}
-		}
-	}
-	
-	option = {
-		name = "recolonize_region_EvtOptA"
-	}
-}
