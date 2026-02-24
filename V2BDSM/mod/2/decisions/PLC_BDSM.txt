@@ -1,0 +1,112 @@
+political_decisions = {
+	lublin_union_dec = {
+		potential = {
+			tag = PLC
+			NOT = { has_country_flag = lublin_union_cflag }
+            OR = {
+                LIT = { vassal_of = PLC }
+                BYE = { vassal_of = PLC }
+                UKR = { vassal_of = PLC }
+                PRU = { vassal_of = PLC }
+            }
+		}
+		
+		allow = {
+			nationalism_tech = 1
+			nationalism_n_imperialism = 1
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+            any_country = {
+                limit = {
+                    OR = {
+                        tag = LIT
+                        tag = BYE
+                        tag = UKR
+                        tag = PRU
+                    }
+                    vassal_of = THIS
+                }
+                annex_to = THIS
+            }
+            any_pop = {
+                limit = {
+                    OR = {
+                        has_pop_culture = north_german
+                        has_pop_culture = russian
+                    }
+                }
+                militancy = 6
+            }
+			set_country_flag = lublin_union_cflag
+		}
+	}
+	
+	accept_estonian_plc_dec = {
+		potential = {
+			tag = PLC
+			NOT = {
+				has_country_flag = accept_estonian_plc_cflag
+			}
+		}
+		
+		allow = {
+			owns = 354
+			owns = 349
+			nationalism_n_imperialism = 1
+			nationalism_tech = 1
+			NOT = { government = absolute_monarchy }
+		}
+		
+		effect = {
+			prestige = 5
+            add_accepted_culture = latvian
+            add_accepted_culture = estonian
+			set_country_flag = accept_estonian_plc_cflag
+		}
+	}
+	
+	treaty_of_lubny_dec = {
+		potential = {
+			tag = PLC
+			NOT = {
+				has_country_flag = treaty_of_lubny_cflag
+			}
+			has_country_flag = lublin_union_cflag
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+			NOT = { government = absolute_monarchy }
+			owns = 958
+			owns = 718
+			owns = 956
+		}
+		
+		effect = {
+			set_country_flag = treaty_of_lubny_cflag
+			prestige = 10
+			add_accepted_culture = ruthenian
+            any_pop = {
+                limit = { culture = polish }
+                militancy = 3
+                consciousness = 3
+                ideology = {
+                    factor = 0.2
+                    value = reactionary
+                }
+            }
+            any_pop = {
+                limit = { culture = ruthenian }
+                consciousness = 1
+                militancy = -5
+                ideology = {
+                    factor = 0.1
+                    value = liberal
+                }
+            }
+		}
+	}
+}
