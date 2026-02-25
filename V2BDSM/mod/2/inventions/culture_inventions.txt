@@ -1622,3 +1622,25 @@ the_talkies = {
 	}
 	core_pop_consciousness_modifier = 0.01
 }
+
+modern_bureaucracy_inv = {
+	limit = { government_mobilization = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			critical_theory = 1
+		}
+		modifier = {
+			factor = 2
+			average_consciousness = 3
+		}
+	}
+	effect = {
+		shared_prestige = 50
+		permanent_prestige = 5
+		suppression_points_modifier = -0.05
+	}
+	core_pop_consciousness_modifier = 0.01
+}

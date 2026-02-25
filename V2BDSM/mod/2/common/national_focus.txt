@@ -58,51 +58,14 @@ rail_focus =
 	}
 }
 
-colonial_natfocus = {
-	bureaucrats_colonial_focus = {
-		bureaucrats = 0.2
+promotion_focus = {
+	promote_bureaucrats = {
+		artisans = 0.05
 		icon = 7
-		limit = {
-			state_scope = { is_colonial = yes }
-		}
 		outliner_show_as_percent = yes
 	}
-	clegymen_colonial_focus = {
-		clergymen = 0.2
-		icon = 9
-		limit = {
-			state_scope = { is_colonial = yes }
-		}
-		outliner_show_as_percent = yes
-	}
-	colonial_rail = 
-	{
-		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
-		
-		local_RGO_output = 0.5
-		pop_militancy_modifier = 0.02
-		
-		icon = 2
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { is_colonial = yes }
-		}
-	}
-	colonial_suppression_focus = 
-	{
-		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
-		
-		pop_consciousness_modifier = -0.1
-		pop_militancy_modifier = -0.1
-		
-		icon = 34
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { is_colonial = yes }
-		}
-	}
-	
 }
+
 
 
 party_loyalty_focus =

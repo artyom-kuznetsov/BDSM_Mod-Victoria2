@@ -10,6 +10,115 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
+		# v4D7.0 POLITICAL THOUGHT LEVEL
+		any_country = {
+			random_owned = {
+				limit = {
+					owner = {
+						enlightenment_thought = 1
+						NOT = { has_country_flag = enlightenment_thought_invented }
+					}
+				}
+				owner = {
+					set_country_flag = enlightenment_thought_invented
+					set_variable = {
+						which = political_thought_level
+						value = 1
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						ideological_thought = 1
+						NOT = { has_country_flag = ideological_thought_invented }
+					}
+				}
+				owner = {
+					set_country_flag = ideological_thought_invented
+					set_variable = {
+						which = political_thought_level
+						value = 2
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						collectivist_theory = 1
+						NOT = { has_country_flag = state_n_government_invented }
+					}
+				}
+				owner = {
+					set_country_flag = state_n_government_invented
+					set_variable = {
+						which = political_thought_level
+						value = 3
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						nationalism_n_imperialism = 1
+						NOT = { has_country_flag = nationalism_n_imperialism_invented }
+					}
+				}
+				owner = {
+					set_country_flag = nationalism_n_imperialism_invented
+					set_variable = {
+						which = political_thought_level
+						value = 4
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						revolution_n_counterrevolution = 1
+						NOT = { has_country_flag = revolution_n_counterrevolution_invented }
+					}
+				}
+				owner = {
+					set_country_flag = revolution_n_counterrevolution_invented
+					set_variable = {
+						which = political_thought_level
+						value = 5
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						mass_politics = 1
+						NOT = { has_country_flag = mass_politics_invented }
+					}
+				}
+				owner = {
+					set_country_flag = mass_politics_invented
+					set_variable = {
+						which = political_thought_level
+						value = 6
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						government_mobilization = 1
+						NOT = { has_country_flag = government_mobilization_invented }
+					}
+				}
+				owner = {
+					set_country_flag = government_mobilization_invented
+					set_variable = {
+						which = political_thought_level
+						value = 7
+					}
+				}
+			}
+		}
+		
 		# v4D7 COMMERCE 1 COLUMN LEVEL VARIABLE
 		
 		any_country = {
