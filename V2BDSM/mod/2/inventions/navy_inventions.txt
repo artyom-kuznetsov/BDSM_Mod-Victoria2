@@ -142,23 +142,6 @@ torpedo_boats = {
 		activate_unit = commerce_raider
 	}
 }
-submarines = {
-	limit = { steel_steamers = 1 }
-	chance = {
-		base = 1
-		modifier = {
-			factor = 2
-			cheap_iron = 1
-		}
-		modifier = {
-			factor = 3
-			main_armament = 1
-		}
-	}
-	effect = {
-		activate_unit = monitor 
-	}
-}
 #steel_steamers
 pre_dreadnought = {
 	limit = { steam_turbine_ships = 1 }
@@ -209,7 +192,24 @@ dreadnoughts = {
 		}
 	}
 	effect = {
-		activate_unit = dreadnought 
+		# BUFF
+	}
+}
+submarines = {
+	limit = { oil_driven_ships = 1 }
+	chance = {
+		base = 1
+		modifier = {
+			factor = 2
+			cheap_iron = 1
+		}
+		modifier = {
+			factor = 3
+			main_armament = 1
+		}
+	}
+	effect = {
+		activate_unit = monitor 
 	}
 }
 #light_cruisers = {
@@ -454,7 +454,7 @@ carriers = {
 		}
 	}
 	effect = {
-		activate_unit = carrier
+		# BUFF BATTLESHIPS
 	}
 }
 #fire_control_systems
@@ -509,6 +509,7 @@ destroyers = {
 	effect = {
 		commerce_raider = {
 			hull = 2
+			gun_power = 2
 		}
 	}
 }
