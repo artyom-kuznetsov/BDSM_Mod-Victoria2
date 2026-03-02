@@ -187,22 +187,38 @@ country_event = { # MOP ACTIONS
 	
 	option = {	# INSULT
 		name = "MopActions_EvtOptHateSpeech"
-		set_country_flag = ready_hate_speech_cflag
-		any_country = {
+		random_owned = {
 			limit = {
-				ai = no
-				NOT = { tag = WBK }
-				NOT = {
-					has_country_modifier = take_hate_speech_cmodifier
-					truce_with = THIS
-					war_with = THIS
+				owner = {
+					has_country_flag = ready_hate_speech_cflag
 				}
-				relation = { who = THIS value = -200 }
-				NOT = { relation = { who = THIS value = -190 } }
-			}	
-			relation = { who = THIS value = 15 }
+			}
+			clr_country_flag = ready_hate_speech_cflag
 		}
-		CUSTOM_TOOLTIP_MOP_INSULT = { }
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { has_country_flag = ready_hate_speech_cflag }
+				}
+			}
+			set_country_flag = ready_hate_speech_cflag
+			
+			any_country = {
+				limit = {
+					ai = no
+					NOT = { tag = WBK }
+					NOT = {
+						has_country_modifier = take_hate_speech_cmodifier
+						truce_with = THIS
+						war_with = THIS
+					}
+					relation = { who = THIS value = -200 }
+					NOT = { relation = { who = THIS value = -190 } }
+				}	
+				relation = { who = THIS value = 15 }
+			}
+			CUSTOM_TOOLTIP_MOP_INSULT = { }
+		}
 
 	}
 }
