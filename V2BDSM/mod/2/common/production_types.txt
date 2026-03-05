@@ -601,12 +601,13 @@ synthetic_nitrate_factory = {
 steamer_shipyard = {       
 	template = factory_template	#8
 	input_goods = { 
-		steel = 1.4				#14
-		machine_parts =	0.5		#8	total input+maint = 30
+		steel = 1.2				#12
+		timber = 1				#4
+		machine_parts =	0.5		#8	total input+maint = 32
 	}
 	output_goods = steamer_convoy
 	is_coastal = yes
-	value = 0.6667				#40
+	value = 0.8					#40
 	bonus = {
 		trigger = { has_building = steel_factory }
 		value = 0.1
@@ -637,7 +638,7 @@ artillery_factory = {
 		steel = 0.8				#8   total input+maint = 30
 	}
 	output_goods = artillery 
-	value = 1.33				#39.9
+	value = 4					#40
 	bonus = {
 		trigger = { has_building = explosives_factory }
 		value = 0.05
@@ -663,7 +664,7 @@ small_arms_factory = {
 		steel = 0.5				#5	total input+maint = 30
 	}
 	output_goods = small_arms 
-	value = 2.22				#39.96
+	value = 4					#40
 	bonus = {
 		trigger = { has_building = timber_factory }
 		value = 0.05
@@ -685,7 +686,7 @@ ammunition_factory = {
 		iron = 2.5				#12.5	total input+maint = 30
 	}
 	output_goods = ammunition 
-	value = 2.86				#40.04
+	value = 4					#40
 	bonus = {
 		trigger = {
 			OR = {
@@ -998,7 +999,7 @@ canned_food_factory = {
 		iron = 0.6 				#3		total input+maint = 33
 	}
 	output_goods = canned_food 
-	value = 5					#40
+	value = 4					#40
 	bonus = {
 		trigger = { OR = { has_building = grain_factory has_building = fishery has_building = cattle_factory } }
 		value = 0.1
