@@ -11,18 +11,21 @@ post_nelsonian_thought = {
 	ai_chance = {
 		factor = 1
 		modifier = {
-			factor = 100
+			factor = 10
 			OR = {
-				primary_culture = british
-				primary_culture = russian
-				primary_culture = japanese
-				is_culture_group = italian
-				is_culture_group = iberian
-				is_culture_group = neo_european_cultures
-				is_culture_group = beneluxian
-				is_culture_group = american_cultures
-				is_culture_group = germanic
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
 			}
+			year = 1851
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
 		}
 		# Land-locked countries don't research this
 		modifier = {
@@ -31,7 +34,7 @@ post_nelsonian_thought = {
 		}
 		# Low LIT countries should pay less attention here (0.2 = Craftsmen ceiling)
 		modifier = {
-			factor = 0.9
+			factor = 0.5
 			NOT = { literacy = 0.2 }
 		}
 		# Valuable to naval tech school countries (UK)
@@ -39,24 +42,17 @@ post_nelsonian_thought = {
 			factor = 1.05
 			tech_school = naval_tech_school
 		}
-		# Valuable for major producers of fish (+50% output invention)
-		modifier = {
-			factor = 1.03
-			big_producer = fish
-		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
 			factor = 1.5
 			total_num_of_ports = 9
 			is_greater_power = yes
-			post_nelsonian_thought = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
 			factor = 1.25
 			total_num_of_ports = 12
 			rank = 16
-			post_nelsonian_thought = 1
 		}
 		# Bigger navy, more weight
 		modifier = {
@@ -109,19 +105,21 @@ battleship_column_doctrine = {
 	ai_chance = {
 		factor = 1
 		modifier = {
-			factor = 100
+			factor = 10
 			OR = {
-				primary_culture = british
-				primary_culture = russian
-				primary_culture = japanese
-				is_culture_group = italian
-				is_culture_group = iberian
-				is_culture_group = neo_european_cultures
-				is_culture_group = beneluxian
-				is_culture_group = american_cultures
-				is_culture_group = germanic
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
 			}
 			year = 1851
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
 		}
 		# Land-locked countries don't research this
 		modifier = {
@@ -130,7 +128,7 @@ battleship_column_doctrine = {
 		}
 		# Low LIT countries should pay less attention here (0.2 = Craftsmen ceiling)
 		modifier = {
-			factor = 0.9
+			factor = 0.5
 			NOT = { literacy = 0.2 }
 		}
 		# Valuable to naval tech school countries (UK)
@@ -138,24 +136,17 @@ battleship_column_doctrine = {
 			factor = 1.05
 			tech_school = naval_tech_school
 		}
-		# Valuable for major producers of fish (+50% output invention)
-		modifier = {
-			factor = 1.03
-			big_producer = fish
-		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
 			factor = 1.5
 			total_num_of_ports = 9
 			is_greater_power = yes
-			post_nelsonian_thought = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
 			factor = 1.25
 			total_num_of_ports = 12
 			rank = 16
-			post_nelsonian_thought = 1
 		}
 		# Bigger navy, more weight
 		modifier = {
@@ -198,26 +189,26 @@ battleship_column_doctrine = {
 }
 raider_group_doctrine = {
 	area = naval_doctrine
-	year = 1855
+	year = 1850
 	cost = 6000
 	unciv_military = yes
 	max_naval_base = 1
-	
-	
 	ai_chance = {
 		factor = 1
 		modifier = {
-			factor = 100
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
+		modifier = {
+			factor = 10
 			OR = {
-				primary_culture = british
-				primary_culture = russian
-				primary_culture = japanese
-				is_culture_group = italian
-				is_culture_group = iberian
-				is_culture_group = neo_european_cultures
-				is_culture_group = beneluxian
-				is_culture_group = american_cultures
-				is_culture_group = germanic
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
 			}
 			year = 1861
 		}
@@ -289,29 +280,29 @@ raider_group_doctrine = {
 }
 blue_and_brown_water_schools = {
 	area = naval_doctrine
-	year = 1875
+	year = 1880
 	cost = 7200
 	unciv_military = yes
 	max_naval_base = 1
-	
-	
 	ai_chance = {
-		factor = 1
 		modifier = {
-			factor = 100
+			factor = 10
 			OR = {
-				primary_culture = british
-				primary_culture = russian
-				primary_culture = japanese
-				is_culture_group = italian
-				is_culture_group = iberian
-				is_culture_group = neo_european_cultures
-				is_culture_group = beneluxian
-				is_culture_group = american_cultures
-				is_culture_group = germanic
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
 			}
 			year = 1881
 		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
+		factor = 1
 		# Land-locked countries don't research this
 		modifier = {
 			factor = 0
@@ -381,7 +372,7 @@ blue_and_brown_water_schools = {
 
 high_sea_battle_fleet = {
 	area = naval_doctrine
-	year = 1895
+	year = 1900
 	cost = 7800
 	unciv_military = yes
 	max_naval_base = 1
@@ -389,19 +380,21 @@ high_sea_battle_fleet = {
 	ai_chance = {
 		factor = 1
 		modifier = {
-			factor = 100
+			factor = 10
 			OR = {
-				primary_culture = british
-				primary_culture = russian
-				primary_culture = japanese
-				is_culture_group = italian
-				is_culture_group = iberian
-				is_culture_group = neo_european_cultures
-				is_culture_group = beneluxian
-				is_culture_group = american_cultures
-				is_culture_group = germanic
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
 			}
 			year = 1901
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
 		}
 		# Land-locked countries don't research this
 		modifier = {
@@ -471,25 +464,27 @@ high_sea_battle_fleet = {
 }
 early_modern_naval_doctrine = {
 	area = naval_doctrine
-	year = 1905
+	year = 1910
 	cost = 8400
 	unciv_military = yes
 	max_naval_base = 1
 	ai_chance = {
 		modifier = {
-			factor = 100
+			factor = 10
 			OR = {
-				primary_culture = british
-				primary_culture = russian
-				primary_culture = japanese
-				is_culture_group = italian
-				is_culture_group = iberian
-				is_culture_group = neo_european_cultures
-				is_culture_group = beneluxian
-				is_culture_group = american_cultures
-				is_culture_group = germanic
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
 			}
 			year = 1916
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
 		}
 		factor = 1
 		# Land-locked countries don't research this
@@ -560,25 +555,27 @@ early_modern_naval_doctrine = {
 }
 modern_naval_doctrine = {
 	area = naval_doctrine
-	year = 1910
+	year = 1920
 	cost = 8400
 	unciv_military = yes
 	max_naval_base = 1
 	ai_chance = {
 		modifier = {
-			factor = 100
+			factor = 10
 			OR = {
-				primary_culture = british
-				primary_culture = russian
-				primary_culture = japanese
-				is_culture_group = italian
-				is_culture_group = iberian
-				is_culture_group = neo_european_cultures
-				is_culture_group = beneluxian
-				is_culture_group = american_cultures
-				is_culture_group = germanic
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
 			}
 			year = 1926
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
 		}
 		factor = 1
 		# Land-locked countries don't research this
@@ -655,9 +652,26 @@ clipper_design = {
 	year = 1836
 	cost = 3600
 	unciv_military = yes
-	activate_building = steamer_shipyard
+	activate_building = clipper_shipyard
 	ai_chance = {
 		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
+			}
+			year = 1852
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
 		# Land-locked countries don't research this
 		modifier = {
 			factor = 0
@@ -680,14 +694,14 @@ clipper_design = {
 		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
-			factor = 100
+			factor = 1.5
 			total_num_of_ports = 9
 			is_greater_power = yes
 			post_nelsonian_thought = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
-			factor = 2.5
+			factor = 1.25
 			total_num_of_ports = 12
 			rank = 16
 			post_nelsonian_thought = 1
@@ -736,8 +750,26 @@ steamers = {
 	year = 1836
 	cost = 4800
 	unciv_military = yes
+	activate_building = steamer_shipyard 
 	ai_chance = {
 		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
+			}
+			year = 1852
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
 		# Land-locked countries don't research this
 		modifier = {
 			factor = 0
@@ -760,14 +792,14 @@ steamers = {
 		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
-			factor = 100
+			factor = 1.5
 			total_num_of_ports = 9
 			is_greater_power = yes
 			battleship_column_doctrine = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
-			factor = 2.5
+			factor = 1.25
 			total_num_of_ports = 12
 			rank = 16
 			battleship_column_doctrine = 1
@@ -813,11 +845,24 @@ steamers = {
 }
 iron_steamers = {
 	area = ship_construction
-	year = 1855
+	year = 1850
 	cost = 6000
 	unciv_military = yes
 	ai_chance = {
 		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
+			}
+			year = 1862
+		}
 		modifier = {
 			factor = 0.1
 			NOT = { money = 100000 }
@@ -839,14 +884,14 @@ iron_steamers = {
 		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
-			factor = 100
+			factor = 1.5
 			total_num_of_ports = 9
 			is_greater_power = yes
 			raider_group_doctrine = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
-			factor = 2.5
+			factor = 1.25
 			total_num_of_ports = 12
 			rank = 16
 			raider_group_doctrine = 1
@@ -897,6 +942,23 @@ steel_steamers = {
 	unciv_military = yes
 	ai_chance = {
 		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
+			}
+			year = 1882
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
 		# Land-locked countries don't research this
 		modifier = {
 			factor = 0
@@ -914,14 +976,14 @@ steel_steamers = {
 		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
-			factor = 100
+			factor = 1.5
 			total_num_of_ports = 9
 			is_greater_power = yes
 			blue_and_brown_water_schools = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
-			factor = 2.5
+			factor = 1.25
 			total_num_of_ports = 12
 			rank = 16
 			blue_and_brown_water_schools = 1
@@ -972,6 +1034,23 @@ steam_turbine_ships = {
 	unciv_military = yes
 	ai_chance = {
 		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
+			}
+			year = 1902
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
 		# Land-locked countries don't research this
 		modifier = {
 			factor = 0
@@ -989,14 +1068,14 @@ steam_turbine_ships = {
 		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
-			factor = 100
+			factor = 1.5
 			total_num_of_ports = 9
 			is_greater_power = yes
 			high_sea_battle_fleet = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
-			factor = 2.5
+			factor = 1.25
 			total_num_of_ports = 12
 			rank = 16
 			high_sea_battle_fleet = 1
@@ -1048,6 +1127,23 @@ oil_driven_ships = {
 	navy_base = { maximum_speed = 2 } 
 	ai_chance = {
 		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
+			}
+			year = 1917
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
 		# Land-locked countries don't research this
 		modifier = {
 			factor = 0
@@ -1065,17 +1161,17 @@ oil_driven_ships = {
 		}
 		# GPs with 9 or more coastal provinces (Prussia+)
 		modifier = {
-			factor = 100
+			factor = 1.25
 			total_num_of_ports = 9
 			is_greater_power = yes
-			early_modern_naval_doctrine = 1
+			modern_naval_doctrine = 1
 		}
 		# GPs and SPs with more than 12 ports
 		modifier = {
-			factor = 2.5
+			factor = 1.1
 			total_num_of_ports = 12
 			rank = 16
-			early_modern_naval_doctrine = 1
+			modern_naval_doctrine = 1
 		}
 		# Bigger navy, more weight
 		modifier = {
@@ -1123,6 +1219,23 @@ aircraft_carriers = {
 	unciv_military = yes
 	ai_chance = {
 		factor = 1
+		modifier = {
+			factor = 10
+			OR = {
+				tag = ENG
+				tag = USA
+				tag = JAP
+				tag = FRA
+				tag = NET
+				tag = ITA
+				tag = GER
+			}
+			year = 1927
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { money = 100000 }
+		}
 		# Land-locked countries don't research this
 		modifier = {
 			factor = 0
@@ -1233,8 +1346,7 @@ fire_control_systems = {
 	year = 1836
 	cost = 4800
 	unciv_military = yes
-	manowar = { build_time = -30 }
-	frigate = { build_time = -10 }
+	
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1265,11 +1377,9 @@ fire_control_systems = {
 
 weapon_platforms = {
 	area = naval_engineering
-	year = 1865
+	year = 1850
 	cost = 6000
 	unciv_military = yes
-	commerce_raider = { build_time = -30 }
-	ironclad = { build_time = -45 }
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1302,8 +1412,7 @@ main_armament = {
 	year = 1880
 	cost = 7200
 	unciv_military = yes
-	ironclad = { build_time = -45 }
-	cruiser = { build_time = -60 }
+	
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1336,9 +1445,7 @@ advanced_naval_design = {
 	year = 1900
 	cost = 7800
 	unciv_military = yes
-	cruiser = { build_time = -60 }
-	monitor = { build_time = -60 }
-	battleship = { build_time = -90 }
+	
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1371,9 +1478,7 @@ early_modern_naval_design = {
 	year = 1910
 	cost = 8400
 	unciv_military = yes
-	monitor = { build_time = -30 }
-	battleship = { build_time = -60 }
-	dreadnought = { build_time = -90 }
+	
 	ai_chance = {
 		factor = 1
 		modifier = {
@@ -1406,10 +1511,9 @@ modern_naval_design = {
 	year = 1920
 	cost = 8400
 	unciv_military = yes
-	monitor = { build_time = -30 }
-	dreadnought = { build_time = -60 }
+	
 	carrier = {
-		hull = 10
+		hull = 15
 		build_time = -150
 	}
 	ai_chance = {
@@ -1477,7 +1581,7 @@ alphabetic_flag_signaling = {
 }
 naval_plans = {
 	area = naval_science
-	year = 1836
+	year = 1850
 	cost = 4800
 	unciv_military = yes
 	supply_range = 0.10
@@ -1511,7 +1615,7 @@ naval_plans = {
 }
 naval_statistics = {
 	area = naval_science
-	year = 1836
+	year = 1870
 	cost = 6000
 	unciv_military = yes
 	supply_range = 0.10
@@ -1545,7 +1649,7 @@ naval_statistics = {
 }
 naval_logistics = {
 	area = naval_science
-	year = 1870
+	year = 1880
 	cost = 7200
 	unciv_military = yes
 	supply_range = 0.10
@@ -1718,7 +1822,7 @@ the_command_principle = {
 }
 naval_professionalism = {
 	area = naval_leadership
-	year = 1836
+	year = 1850
 	cost = 4800
 	unciv_military = yes
 	navy_base = {
@@ -1754,7 +1858,7 @@ naval_professionalism = {
 }
 naval_decision_making = {
 	area = naval_leadership
-	year = 1850
+	year = 1870
 	cost = 6000
 	unciv_military = yes
 	navy_base = {
@@ -1789,7 +1893,7 @@ naval_decision_making = {
 }
 naval_risk_management = {
 	area = naval_leadership
-	year = 1870
+	year = 1880
 	cost = 7200
 	unciv_military = yes
 	navy_base = {

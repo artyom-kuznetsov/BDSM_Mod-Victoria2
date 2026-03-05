@@ -4,12 +4,13 @@ commerce_raider = {
 	
 	type = naval
 	sprite = Raider
+	capital = yes
 	active = no
 	unit_type = light_ship
 	move_sound = steam_move
 	select_sound = steam_selected
 	floating_flag = yes
-	colonial_points = 6
+	colonial_points = 9
 	
 	#Core Abilities
 	priority = 15
@@ -21,23 +22,23 @@ commerce_raider = {
 
 
 	#Building Costs
-	build_time = 240
+	build_time = 360
 	build_cost = {
-		steamer_convoy = 80
+		steamer_convoy = 40	# 2000
 	}
 	min_port_level = 2
 	supply_consumption_score = 1
 	limit_per_port = -1 #10
 	
-	supply_consumption = 1.0 # v4.0 CALCULATED MAINT 14.592
+	supply_consumption = 1.0
 	supply_cost = {
-		steamer_convoy = 0.224
+		steamer_convoy = 0.6	# 30
 	}
 	
 	#Naval Abilties
-	hull = 6	# +2
-	gun_power = 5
-	fire_range = 0.6
+	gun_power = 4
+	hull = 8
+	fire_range = 0.5
 	evasion = 0.25
 	torpedo_attack = 0	# +1
 }

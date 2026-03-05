@@ -882,6 +882,24 @@ i_empiricism = {
 	}
 }
 #experimental_psychology
+existentialism = {
+	limit = { experimental_psychology = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			invention = expressionist_literature
+		}
+		modifier = {
+			factor = 2
+			invention = dogma_of_violence
+		}
+	}
+	effect = {
+		education_efficiency = 0.05
+	}
+}
 i_analytic_philosophy = {
 	limit = { experimental_psychology = 1 }
 	news = no
@@ -977,24 +995,6 @@ hermeneutics = {
 	}
 }
 #behaviorism
-existentialism = {
-	limit = { behaviorism = 1 }
-	news = no
-	chance = {
-		base = 0
-		modifier = {
-			factor = 2
-			invention = expressionist_literature
-		}
-		modifier = {
-			factor = 2
-			invention = dogma_of_violence
-		}
-	}
-	effect = {
-		education_efficiency = 0.05
-	}
-}
 nihilism_and_the_will = {
 	limit = { behaviorism = 1 }
 	news = no
@@ -1597,7 +1597,7 @@ mass_advertising = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.25
+		education_efficiency = 0.05
 		suppression_points_modifier = -0.05
 	}
 }
