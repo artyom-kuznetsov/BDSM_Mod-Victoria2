@@ -498,9 +498,9 @@ float4 PixelShader_Far( VS_OUTPUT_WATER_FAR IN ) : COLOR
 	float4 overlay = tex2D( Overlay, IN.vWorldPos );
 	
 	float4 OutColor = lerp( color, overlay, 0.6);
-	OutColor.r += 0.30;
-	OutColor.g += 0.28;
-	OutColor.b += 0.35;
+	OutColor.r += 0.32;
+	OutColor.g += 0.33;
+	OutColor.b += 0.38;
 	OutColor.r /= 1.85;
 	OutColor.g /= 1.65;
 	OutColor.b /= 1.55;
