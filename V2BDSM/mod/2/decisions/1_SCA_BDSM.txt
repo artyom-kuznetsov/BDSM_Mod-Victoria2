@@ -1,0 +1,86 @@
+political_decisions = {
+    sca_baltic_domination_dec = {
+        potential = {
+            tag = SCA
+            NOT = { has_country_flag = baltic_claimed }
+        }
+
+        allow = {
+            owns = 354
+            owns = 546
+            OR = {
+                state_n_government = 1
+                war_with = PLC
+            }
+        }
+
+        effect = {
+            prestige = 10
+            badboy = 5
+            PRU = {
+                all_core = { add_core = SCA }
+            }
+            set_country_flag = baltic_claimed
+        }
+        ai_will_do = { factor = 1 }
+    }
+	
+	sca_integrate_germans_dec = {
+		potential = {
+			tag = SCA
+			NOT = { has_country_flag = sca_integrate_germans_cflag } 
+		}
+		
+		allow = {
+			citizens_rights = all_voting_pops
+			OR = {
+				AND = {
+					has_country_flag = baltic_claimed
+					nationalism_tech
+				}
+				pan_nationalism_tech = 1
+			}
+			
+            OR = {
+                549 = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { in_sphere = THIS }
+                        owner = { vassal_of = THIS }
+                    }
+                }
+                534 = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { in_sphere = THIS }
+                        owner = { vassal_of = THIS }
+                    }
+                }
+                695 = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { in_sphere = THIS }
+                        owner = { vassal_of = THIS }
+                    }
+                }
+            }
+		}
+		
+		effect = {
+			prestige = 20
+			badboy = 10
+			set_country_flag = sca_integrate_germans_cflag
+			add_accepted_culture = north_german
+            any_pop = {
+                limit = { culture = scandinavian }
+                militancy = 3
+                consciousness = 3
+                ideology = {
+                    factor = 0.2
+                    value = reactionary
+                }
+            }
+		}
+        ai_will_do = { factor = 1 }
+	}
+}
