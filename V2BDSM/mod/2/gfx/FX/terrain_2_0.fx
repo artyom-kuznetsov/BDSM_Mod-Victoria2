@@ -48,7 +48,8 @@ const float3 GREYIFY = float3( 0.212671, 0.715160, 0.072169 );
 float3 ApplyFOWColor( float3 c, float FOW ) 
 {
 	float Grey = dot( c.rgb, GREYIFY );
-	return lerp( Grey.rrr * 0.4, c.rgb, FOW > 0.8 ? 1.0 : 0.3 );
+	// return lerp( Grey.rrr * 0.4, c.rgb, FOW > 0.8 ? 1.0 : 0.3 );
+	return c;
 }
 
 sampler BaseTexture  =
@@ -787,26 +788,28 @@ float4 PixelShader_Map2_0_General( VS_MAP_OUTPUT v ) : COLOR
 {
 	
 	//The map is a flat plane with normal in the y direction. This is always the truth. Thus the TBN Matrix is always as follows:
-	float3x3 WorldMat3 = float3x3(WorldMatrix._11_12_13, WorldMatrix._21_22_23, WorldMatrix._31_32_33);
-	float3 viewPos = transpose(ViewMatrix)._41_42_43; //transpose is more than good enough when we scale the coordinate displacement by distance between the fragment and camera
-	float3 T = normalize(mul(WorldMat3, float3(1, 0, 0)));
-	float3 B = normalize(mul(WorldMat3, float3(0, 0, 1)));
-	float3 N = normalize(mul(WorldMat3, float3(0, 1, 0)));
-	float3x3 TBN = transpose(float3x3(T, B, N));
+	//float3x3 WorldMat3 = float3x3(WorldMatrix._11_12_13, WorldMatrix._21_22_23, WorldMatrix._31_32_33);
+	//float3 T = normalize(mul(WorldMat3, float3(1, 0, 0)));
+	//float3 B = normalize(mul(WorldMat3, float3(0, 0, 1)));
+	//float3 N = normalize(mul(WorldMat3, float3(0, 1, 0)));
+	//float3x3 TBN = transpose(float3x3(T, B, N));
 	
-	float3 TanLightPos = mul(TBN, LightDirection);
-	float3 TanViewPos = mul(TBN, viewPos);
-	float3 TanFragPos = mul(TBN, v.vPosTex);
+	//float3 TanLightPos = mul(TBN, float3(0.7, 0.7, 0.2));
+	//float3 TanViewPos = mul(TBN, CameraPosition);
+	//float3 TanFragPos = mul(TBN, v.vPosTex);
 	
-	float3 viewDir = TanViewPos - TanFragPos;
+	//float3 viewDir = TanViewPos - TanFragPos;
+	//float3 lightDir = TanLightPos - TanFragPos;
 	
-	TILE_STRUCT s;
+    TILE_STRUCT s;
     s.vTexCoord1 = v.vTexCoord1;
     s.vColorTexCoord = v.vColorTexCoord;
     s.vTerrainIndexColor = v.vTerrainIndexColor;
     s.vTexCoord0 = v.vTexCoord0.xy;
-
-	s = ParallaxMapping( s, viewDir );
+	
+	//s = ParallaxMapping( s, viewDir );
+	//float penumbraFactor = SelfShadow( s, lightDir, viewDir );
+	
 
     float4 TerrainColor = GenerateTiles( s );
 
@@ -839,8 +842,8 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 	float2 vProvinceUV = v.vProvinceId + 0.5f;
     vProvinceUV /= PROVINCE_LOOKUP_SIZE;
   
-  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.9;
-	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.9;
+  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.7;
+	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.7;
 
 	float vColor = tex2D( StripesTexture, v.vTerrainTexCoord ).a;
 	float4 Color = Color2 * vColor + Color1 * ( 1.0 - vColor );
@@ -854,7 +857,7 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 	ColorHSV.y *= max(0.85, ColorHSV.z);
 	ColorHSV.z *= 1.6;
 	Color.rgb = HSVtoRGB(ColorHSV);
-	Color.rgb = lerp(Color.rgb, OverlayColor.rgb, 0.52);
+	Color.rgb = lerp(Color.rgb, OverlayColor.rgb, 0.5);
 	Color.rgb *= 1.17;
 	//Color.r *= 1.10;
 	//Color.g *= 1.05;
