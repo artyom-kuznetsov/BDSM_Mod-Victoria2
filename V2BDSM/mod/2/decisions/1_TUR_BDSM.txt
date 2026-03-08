@@ -1,0 +1,41 @@
+political_decisions = {
+	serbian_annexation_dec = {
+		potential = {
+			tag = TUR
+			exists = SER
+			NOT = { has_country_flag = serbia_annexed_cflag }
+		}
+		allow = {
+			war = no
+			NOT = { any_owned_province = { controlled_by = REB } }
+			state_n_government = 1
+			neighbour = SER
+			SER = {
+				OR = {
+					in_sphere = THIS
+					vassal_of = THIS
+				}
+			}
+		}
+		effect = {
+			prestige = 10
+			badboy = 5
+			set_country_flag = hidden_tooltip
+			random_owned = {
+				limit = {
+					owner = {
+						has_country_flag = hidden_tooltip
+					}
+				}
+				owner = {
+					badboy = -9
+				}
+				SER = { any_owned = { add_core = THIS } }
+			}
+			inherit = SER
+			CUSTOM_TOOLTIP_ANNEX_SERBIA = { }
+			clr_country_flag = hidden_tooltip
+			set_country_flag = serbia_annexed_cflag
+		}
+	}
+}
