@@ -762,7 +762,7 @@ float4 PixelShader_Map2_0_General( VS_MAP_OUTPUT v ) : COLOR
 	float vColor = tex2D( StripesTexture, v.vTerrainTexCoord ).a;
 	float4 Color = lerp(Color1, Color2, vColor);
 	
-	Color.rgb = lerp(TerrainColor.rgb, Color.rgb, 0.32);
+	Color.rgb = lerp(TerrainColor.rgb, Color.rgb, 0.317);
 	Color.rgb *= 1.8;
 	
 	return Color;
