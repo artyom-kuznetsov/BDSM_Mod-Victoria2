@@ -756,14 +756,14 @@ float4 PixelShader_Map2_0_General( VS_MAP_OUTPUT v ) : COLOR
 	float2 vProvinceUV = v.vProvinceId + 0.5f;
     vProvinceUV /= PROVINCE_LOOKUP_SIZE;
   
-  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.7;
-	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.7;
+  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.8;
+	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.8;
 
 	float vColor = tex2D( StripesTexture, v.vTerrainTexCoord ).a;
 	float4 Color = lerp(Color1, Color2, vColor);
 	
-	Color.rgb = lerp(TerrainColor.rgb, Color.rgb, 0.3);
-	Color.rgb *= COLOR_LIGHTNESS;
+	Color.rgb = lerp(TerrainColor.rgb, Color.rgb, 0.32);
+	Color.rgb *= 1.8;
 	
 	return Color;
 }
@@ -812,8 +812,8 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 	float4 Color = Color2 * vColor + Color1 * ( 1.0 - vColor );
 	float4 ColorColor = tex2D( ColorTexture, v.vTexCoord1 ); //Coordinates for colormap
 	
-	Color.rgb = lerp(lerp(Color.rgb, ColorColor.rgb, 0.56), TerrainColor.rgb, 0.16);
-	Color.rgb *= 1.55;
+	Color.rgb = lerp(lerp(Color.rgb, ColorColor.rgb, 0.52), TerrainColor.rgb, 0.16);
+	Color.rgb *= 1.5;
 	
 	return Color;
 	

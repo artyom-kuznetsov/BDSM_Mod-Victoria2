@@ -363,7 +363,7 @@ const float WaveModTwo =  4.0;
 const float SpecValueOne = 8.0;
 const float SpecValueTwo =  2.0;
 
-const float vWaterTransparens = 0.8; //more transparance lets you see more of background
+const float vWaterTransparens = 0.9; //more transparance lets you see more of background
 const float vColorMapFactor = 2.5f; //how much colormap
 
 float4 PixelShader_HoiWater_2_0( VS_OUTPUT_WATER IN ) : COLOR
@@ -501,9 +501,9 @@ float4 PixelShader_Far( VS_OUTPUT_WATER_FAR IN ) : COLOR
 	float4 overlay = tex2D( Overlay, IN.vWorldPos );
 	
 	float4 OutColor = lerp( color, overlay, 0);
-	OutColor.r += 0.32;
-	OutColor.g += 0.36;
-	OutColor.b += 0.38;
+	OutColor.r += 0.24;
+	OutColor.g += 0.28;
+	OutColor.b += 0.39;
 	OutColor.r /= 1.85;
 	OutColor.g /= 1.65;
 	OutColor.b /= 1.55;
