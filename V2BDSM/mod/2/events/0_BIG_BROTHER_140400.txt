@@ -1368,62 +1368,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 			money = 250000
 		}
 		
-		any_country = {
-			any_owned = {
-				random_pop = {
-					limit = {
-						type = clergymen
-						location = {
-							clergymen = 0.045
-						}
-					}
-					pop_type = farmers
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 20000 }
-					is_colonial = no
-					total_pops = 10000
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_modifier
-					duration = 130
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 10000 }
-					is_colonial = no
-					total_pops = 5000
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_modifier
-					duration = 130
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 5000 }
-					is_colonial = no
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_2_modifier
-					duration = 130
-				}
-			}
-			random_owned = {
-				limit = {
-					NOT = { total_pops = 5000 }
-					is_colonial = no
-				}
-				add_province_modifier = {
-					name = selector_pop_boost_2_modifier
-					duration = 130
-				}
-			}
-		}
-		
 		any_pop = {
 			money = 2000000
 		}
