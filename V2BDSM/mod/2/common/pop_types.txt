@@ -673,7 +673,7 @@ demotion_chance =
 
 #general migration chance mtth, same for all pops
 migration_chance = {
-	factor = 0.5
+	factor = 0.25
 	
 	
 	### NO MIGRATION FROM COLONIAL
@@ -686,10 +686,8 @@ migration_chance = {
 		strata = rich
 	}
 	modifier = {
-		factor = 2.0
-		state_scope = { is_colonial = no }
-		culture = maghrebi
-		country = { has_country_flag = immigration_from_magrib_chek_flag }
+		factor = 1.0
+		country = { has_country_flag = immigrator_active_cflag }
 	}
 	group = {
 		modifier = {
