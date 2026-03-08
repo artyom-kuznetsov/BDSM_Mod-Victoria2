@@ -307,7 +307,7 @@ float4 PixelShader_Water_1_1( VS_OUTPUT_WATER IN ) : COLOR
 	
 	float4 TerraIncognita = tex2D( TerraIncognitaFiltered, IN.WorldTextureTI );
 	OutColor.rgba += ( TerraIncognita.g - 0.25 )*1.33;
-
+	OutColor.a = 0.1;
 	return OutColor;
 }
 
@@ -363,7 +363,7 @@ const float WaveModTwo =  4.0;
 const float SpecValueOne = 8.0;
 const float SpecValueTwo =  2.0;
 
-const float vWaterTransparens = 0.7; //more transparance lets you see more of background
+const float vWaterTransparens = 0.8; //more transparance lets you see more of background
 const float vColorMapFactor = 2.5f; //how much colormap
 
 float4 PixelShader_HoiWater_2_0( VS_OUTPUT_WATER IN ) : COLOR
@@ -421,9 +421,12 @@ float4 PixelShader_HoiWater_2_0( VS_OUTPUT_WATER IN ) : COLOR
 	FOW = saturate ( FOW / 2 - 1 ); // /2 because we do /4 then * 2
 	FOW = saturate ( FOW + 0.5 );
 	
-	OutColor.rgb = lerp(OutColor.rgb, OutColor.bbb, 0.3);
+	OutColor.r -= 0.4;
+	OutColor.g -= 0.4;
+	OutColor.b += 0.4;
 	
-	return float4( OutColor * FOW, vWaterTransparens );
+	
+	return float4( OutColor * FOW, vWaterTransparens);
 }
 
 
@@ -497,16 +500,16 @@ float4 PixelShader_Far( VS_OUTPUT_WATER_FAR IN ) : COLOR
 	float contour_darken = smoothstep(0.0, 0.08, abs(0.2 - alpha)) * smoothstep(0.0, 0.11, abs(0.525 - alpha)) * smoothstep(0.0, 0.06, abs(0.85 - alpha)) + step(0.6851, IN.vUV.x) + step(IN.vUV.x, 0.0001);
 	float4 overlay = tex2D( Overlay, IN.vWorldPos );
 	
-	float4 OutColor = lerp( color, overlay, 0.6);
+	float4 OutColor = lerp( color, overlay, 0);
 	OutColor.r += 0.32;
-	OutColor.g += 0.33;
+	OutColor.g += 0.36;
 	OutColor.b += 0.38;
 	OutColor.r /= 1.85;
 	OutColor.g /= 1.65;
 	OutColor.b /= 1.55;
-	OutColor.rgb *= 1.0;
+	OutColor.rgb *= 1.2;
 
-	return OutColor * saturate(contour_darken * 0.6 + 0.4);
+	return OutColor;
 }
 
 technique WaterShaderFar

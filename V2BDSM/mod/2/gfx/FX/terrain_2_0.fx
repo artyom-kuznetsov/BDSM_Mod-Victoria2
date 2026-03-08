@@ -28,7 +28,6 @@ float4x4 ViewMatrix		: View;
 float4x4 ProjectionMatrix	: Projection; 
 float4x4 AbsoluteWorldMatrix;
 float3	 LightDirection;
-float3	CameraPosition;
 float	 vAlpha;
 
 float	ColorMapHeight;
@@ -676,140 +675,77 @@ VS_MAP_OUTPUT VertexShader_Map(const VS_INPUT v )
 float4 White = float4( 1, 1, 1, 1 );
 
 TILE_STRUCT ParallaxMapping( TILE_STRUCT v, float3 viewDir ){
-
-	float cameraHeight = viewDir.y;
-	viewDir = normalize(viewDir);
-	const float numLayers = 10;
-	float layerHeight = 1.0 / numLayers;
-	float currentLayerHeight = 0.0;
-	float2 P = float2(viewDir.x, (viewDir.z - 1.0)*0.5) * 0.1;
-	float2 deltaTexCoords = P / numLayers;
+	//float height = GenerateHeight( v );
+	//float2 p = viewDir.xy * ( height * 0.1 );
+	//v.vColorTexCoord += p;
+	//return v;
+	
+	const float numLayers = 25;
+    // calculate the size of each layer
+    float layerHeight = 1.0 / numLayers;
+    // depth of current layer
+    float currentLayerHeight = 0.0;
+    // the amount to shift the texture coordinates per layer (from vector P)
+    float2 P = viewDir.xy / clamp(viewDir.z, 0.75, 1.0) * 0.085; 
+    float2 deltaTexCoords = P / numLayers;
+	float2 currentTexCoords = v.vColorTexCoord;
 	
 	// get initial values
-	float2 currentTexCoords = v.vColorTexCoord;
-	float currentHeightMapValue = GenerateHeight(v);
-	float deltaHeightMapValue = 0;
-	float layer = 1;
-	float refineRate = trunc(smoothstep(0, -300, cameraHeight) * 2 + 1);
-	float refine = trunc(2.0/refineRate);
+	float currentHeightMapValue = GenerateHeight( v );
   
-	while( refine )
+	while(currentLayerHeight < currentHeightMapValue)
 	{
-		while(currentLayerHeight < currentHeightMapValue)
-		{
-			// shift texture coordinates along direction of P
-			currentTexCoords += deltaTexCoords;
-			v.vColorTexCoord = currentTexCoords;
-			// get depthmap value at current texture coordinates
-			deltaHeightMapValue = GenerateHeight( v ) - currentHeightMapValue;
-			currentHeightMapValue += deltaHeightMapValue;
-			// get depth of next layer
-			currentLayerHeight += layerHeight;
-			layer+=1; 
-		}
-		currentTexCoords -= deltaTexCoords;
-		currentLayerHeight -= layerHeight;
-		currentHeightMapValue -= deltaHeightMapValue;
-		deltaTexCoords /= layer;
-		layerHeight /= layer;
-		refine--;
-		//layer = 1;
-	}
-	
-	return v;
-}
-
-float SelfShadow( TILE_STRUCT v, float3 lightDir, float3 viewDir )
-{
-	float numLayers = 10;
-	float layerHeight = 1.0 / 1000;
-	float currentLayerHeight = GenerateHeight(v);
-	float currentHeightMapValue = 0.0;
-	float2 P = normalize(lightDir).xy * 0.1;
-	float2 deltaTexCoords = P / numLayers;
-	float2 currentTexCoords = v.vColorTexCoord;
-	float penumbraFactor = 0.0;
-	float layerRate = clamp(length(viewDir)/200, 1.0, 10.0);
-	
-	while( step(0, numLayers)*step(layerRate, 10)  ){
 		// shift texture coordinates along direction of P
-		currentTexCoords += deltaTexCoords/(step(5.5, numLayers)*30 + step(numLayers, 5.5));
+		currentTexCoords += deltaTexCoords;
 		v.vColorTexCoord = currentTexCoords;
 		// get depthmap value at current texture coordinates
 		currentHeightMapValue = GenerateHeight( v );
-		currentLayerHeight += layerHeight;
-		penumbraFactor += step(currentLayerHeight, currentHeightMapValue)*(currentHeightMapValue - currentLayerHeight)/(11-numLayers) * 2;
 		// get depth of next layer
-		numLayers -= layerRate;
+		currentLayerHeight += layerHeight;  
 	}
 	
-	return clamp(penumbraFactor, 0.0, 0.65);
-}
+    // get texture coordinates before collision (reverse operations)
+    float2 prevTexCoords = currentTexCoords - deltaTexCoords;
 
-float3 Hue(float H)
-{
-    float R = abs(H * 6 - 3) - 1;
-    float G = 2 - abs(H * 6 - 2);
-    float B = 2 - abs(H * 6 - 4);
-    return saturate(float3(R,G,B));
-}
+    // get depth after and before collision for linear interpolation
+    float afterHeight = currentHeightMapValue - currentLayerHeight;
+	
+	v.vColorTexCoord = prevTexCoords;
+	
+    float beforeHeight = GenerateHeight( v ) + currentLayerHeight - layerHeight;
+ 
+    // interpolation of texture coordinates
+    float weight = afterHeight / (afterHeight - beforeHeight);
+    v.vColorTexCoord = prevTexCoords * weight + currentTexCoords * (1.0 - weight);
 
-float3 HSVtoRGB(float3 HSV)
-{
-    return ((Hue(HSV.x) - 1) * HSV.y + 1) * HSV.z;
-}
-
-float3 RGBtoHSV(float3 RGB)
-{
-    float3 HSV = 0;
-    
-	HSV.z = max(RGB.r, max(RGB.g, RGB.b));
-    float M = min(RGB.r, min(RGB.g, RGB.b));
-    float C = HSV.z - M;
-
-    if (C != 0)
-    {
-        HSV.y = C / HSV.z;
-        float3 Delta = (HSV.z - RGB) / C;
-        Delta.rgb -= Delta.brg;
-        Delta.rg += float2(2,4);
-        if (RGB.r >= HSV.z)
-            HSV.x = Delta.b;
-        else if (RGB.g >= HSV.z)
-            HSV.x = Delta.r;
-        else
-            HSV.x = Delta.g;
-        HSV.x = frac(HSV.x / 6);
-    }
-    return HSV;
+	return v;
 }
 
 float4 PixelShader_Map2_0_General( VS_MAP_OUTPUT v ) : COLOR
 {
-	
+	/*
 	//The map is a flat plane with normal in the y direction. This is always the truth. Thus the TBN Matrix is always as follows:
-	//float3x3 WorldMat3 = float3x3(WorldMatrix._11_12_13, WorldMatrix._21_22_23, WorldMatrix._31_32_33);
-	//float3 T = normalize(mul(WorldMat3, float3(1, 0, 0)));
-	//float3 B = normalize(mul(WorldMat3, float3(0, 0, 1)));
-	//float3 N = normalize(mul(WorldMat3, float3(0, 1, 0)));
-	//float3x3 TBN = transpose(float3x3(T, B, N));
+	float3x3 WorldMat3 = float3x3(WorldMatrix._11_12_13, WorldMatrix._21_22_23, WorldMatrix._31_32_33);
+	float3 viewPos = inverse(ViewMatrix)._41_42_43; //this is expensive but paradox doesn't give me the inverse so...
+	float3 T = normalize(mul(WorldMat3, float3(1, 0, 0)));
+	float3 B = normalize(mul(WorldMat3, float3(0, 0, 1)));
+	float3 N = normalize(mul(WorldMat3, float3(0, 1, 0)));
+	float3x3 TBN = transpose(float3x3(T, B, N));
 	
-	//float3 TanLightPos = mul(TBN, float3(0.7, 0.7, 0.2));
-	//float3 TanViewPos = mul(TBN, CameraPosition);
-	//float3 TanFragPos = mul(TBN, v.vPosTex);
+	float3 TanLightPos = mul(TBN, LightDirection);
+	float3 TanViewPos = mul(TBN, viewPos);
+	float3 TanFragPos = mul(TBN, v.vPosTex);
 	
-	//float3 viewDir = TanViewPos - TanFragPos;
-	//float3 lightDir = TanLightPos - TanFragPos;
+	float3 viewDir = normalize(TanViewPos - TanFragPos);
+	*/
 	
-    TILE_STRUCT s;
+	TILE_STRUCT s;
     s.vTexCoord1 = v.vTexCoord1;
     s.vColorTexCoord = v.vColorTexCoord;
     s.vTerrainIndexColor = v.vTerrainIndexColor;
     s.vTexCoord0 = v.vTexCoord0.xy;
-	
+
 	//s = ParallaxMapping( s, viewDir );
-	//float penumbraFactor = SelfShadow( s, lightDir, viewDir );
-	
 
     float4 TerrainColor = GenerateTiles( s );
 
@@ -828,7 +764,6 @@ float4 PixelShader_Map2_0_General( VS_MAP_OUTPUT v ) : COLOR
 	
 	Color.rgb = lerp(TerrainColor.rgb, Color.rgb, 0.3);
 	Color.rgb *= COLOR_LIGHTNESS;
-	//Color.rgb *= (1.0 - penumbraFactor/1.6);
 	
 	return Color;
 }
@@ -836,38 +771,50 @@ float4 PixelShader_Map2_0_General( VS_MAP_OUTPUT v ) : COLOR
 
 float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 {
+	/*
+	//The map is a flat plane with normal in the y direction. This is always the truth. Thus the TBN Matrix is always as follows:
+	float3x3 WorldMat3 = float3x3(WorldMatrix._11_12_13, WorldMatrix._21_22_23, WorldMatrix._31_32_33);
+	float3 viewPos = inverse(ViewMatrix)._41_42_43; //this is expensive but paradox doesn't give me the inverse so...
+	float3 T = normalize(mul(WorldMat3, float3(1, 0, 0)));
+	float3 B = normalize(mul(WorldMat3, float3(0, 0, 1)));
+	float3 N = normalize(mul(WorldMat3, float3(0, 1, 0)));
+	float3x3 TBN = transpose(float3x3(T, B, N));
 	
-	float4 OverlayColor = tex2D( OverlayTexture, v.vColorTexCoord );
+	float3 TanLightPos = mul(TBN, LightDirection);
+	float3 TanViewPos = mul(TBN, viewPos);
+	float3 TanFragPos = mul(TBN, v.vPosTex);
+	
+	float3 viewDir = normalize(TanViewPos - TanFragPos);
+	*/
+		
+	TILE_STRUCT s;
+    s.vTexCoord1 = v.vTexCoord1;
+    s.vColorTexCoord = mul( v.vColorTexCoord, 512.0/16.0 );
+    s.vTerrainIndexColor = v.vTerrainIndexColor;
+    s.vTexCoord0 = v.vTexCoord0.xy;
+	
+	//s = ParallaxMapping( s, viewDir );
+    
+    float4 TerrainColor = GenerateTiles( s );
+    //return float4(s.vTexCoord0.xy, 0, 1);
+
+    float Grey = dot( TerrainColor.rgb, GREYIFY ); 
+ 	TerrainColor.rgb = Grey;
+	TerrainColor *= White;
 	
 	float2 vProvinceUV = v.vProvinceId + 0.5f;
     vProvinceUV /= PROVINCE_LOOKUP_SIZE;
   
-  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.7;
-	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.7;
+  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.4;
+	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.4;
 
 	float vColor = tex2D( StripesTexture, v.vTerrainTexCoord ).a;
 	float4 Color = Color2 * vColor + Color1 * ( 1.0 - vColor );
 	float4 ColorColor = tex2D( ColorTexture, v.vTexCoord1 ); //Coordinates for colormap
 	
+	Color.rgb = lerp(lerp(Color.rgb, ColorColor.rgb, 0.56), TerrainColor.rgb, 0.16);
+	Color.rgb *= 1.55;
 	
-	Color.rgb = lerp(Color.rgb, ColorColor.rgb, 0.3);
-	//Color.rgb *= float3( 1.0, 0.95, 0.90 );
-	//Color.rgb *= COLOR_LIGHTNESS;
-	float3 ColorHSV = RGBtoHSV(Color.rgb);
-	ColorHSV.y *= max(0.85, ColorHSV.z);
-	ColorHSV.z *= 1.6;
-	Color.rgb = HSVtoRGB(ColorHSV);
-	Color.rgb = lerp(Color.rgb, OverlayColor.rgb, 0.5);
-	Color.rgb *= 1.17;
-	//Color.r *= 1.10;
-	//Color.g *= 1.05;
-	Color.rgb = lerp(Color.rgb, float3(0.83, 0.78, 0.44), 0.1);
-	Color.rgb = lerp(Color.rgb, Color.rrr, 0.15);
-	Color.g = lerp(Color.g, Color.r, 0.075);
-	Color.b = lerp(Color.b, 1.0 - Color.r, 0.1);
-	Color.r *= 1.03;
-	
-
 	return Color;
 	
 }
@@ -875,20 +822,21 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 
 float4 PixelShader_Map2_0( VS_MAP_OUTPUT v ) : COLOR
 {
-
+	/*
 	//The map is a flat plane with normal in the y direction. This is always the truth. Thus the TBN Matrix is always as follows:
-	//float3x3 WorldMat3 = float3x3(WorldMatrix._11_12_13, WorldMatrix._21_22_23, WorldMatrix._31_32_33);
-	//float3 T = normalize(mul(WorldMat3, float3(1, 0, 0)));
-	//float3 B = normalize(mul(WorldMat3, float3(0, 0, 1)));
-	//float3 N = normalize(mul(WorldMat3, float3(0, 1, 0)));
-	//float3x3 TBN = transpose(float3x3(T, B, N));
+	float3x3 WorldMat3 = float3x3(WorldMatrix._11_12_13, WorldMatrix._21_22_23, WorldMatrix._31_32_33);
+	float3 viewPos = inverse(ViewMatrix)._41_42_43; //this is expensive but paradox doesn't give me the inverse so...
+	float3 T = normalize(mul(WorldMat3, float3(1, 0, 0)));
+	float3 B = normalize(mul(WorldMat3, float3(0, 0, 1)));
+	float3 N = normalize(mul(WorldMat3, float3(0, 1, 0)));
+	float3x3 TBN = transpose(float3x3(T, B, N));
 	
-	//float3 TanLightPos = mul(TBN, float3(0.7, 0.7, 0.2));
-	//float3 TanViewPos = mul(TBN, CameraPosition);
-	//float3 TanFragPos = mul(TBN, v.vPosTex);
+	float3 TanLightPos = mul(TBN, LightDirection);
+	float3 TanViewPos = mul(TBN, viewPos);
+	float3 TanFragPos = mul(TBN, v.vPosTex);
 	
-	//float3 viewDir = TanViewPos - TanFragPos;
-	//float3 lightDir = TanLightPos - TanFragPos;
+	float3 viewDir = normalize(TanViewPos - TanFragPos);
+	*/
 	
     TILE_STRUCT s;
     s.vTexCoord1 = v.vTexCoord1;
@@ -897,7 +845,6 @@ float4 PixelShader_Map2_0( VS_MAP_OUTPUT v ) : COLOR
     s.vTexCoord0 = v.vTexCoord0.xy;
 	
 	//s = ParallaxMapping( s, viewDir );
-	//float penumbraFactor = SelfShadow( s, lightDir, viewDir );
 
     float4 OutColor = GenerateTiles( s );
 	OutColor.rgb *= LIGHTNESS;
@@ -916,7 +863,6 @@ float4 PixelShader_Map2_0( VS_MAP_OUTPUT v ) : COLOR
 	//OutColor.rgb *= lerp(0.4, 1.0, FogColor.r);
 	OutColor.rgb = ApplyFOWColor( OutColor.rgb, FogColor.r);
 	OutColor.rgb += FogColor.g;
-	//OutColor.rgb *= (1.0 - penumbraFactor/1.5);
 	///////////////////
 	
 	return OutColor;
@@ -1338,7 +1284,7 @@ technique BeachShader_General
 		//ALPHATESTENABLE = True;
 		//ALPHABLENDENABLE = True;
 		//SrcBlend = SRCALPHA;
-		//§DestBlend = INVSRCALPHA;
+		//Â§DestBlend = INVSRCALPHA;
 				
 		VertexShader = compile vs_1_1 VertexShader_Beach_General();
 		PixelShader = compile ps_2_0 PixelShader_Beach_General();
