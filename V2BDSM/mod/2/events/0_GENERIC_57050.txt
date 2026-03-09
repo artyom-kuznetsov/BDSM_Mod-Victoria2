@@ -836,36 +836,9 @@ country_event = {
 	}
 }
 
-country_event = {
-	title = "industrial_revolution_EvtName"
-	desc = "industrial_revolution_EvtDesc"
-	picture = "iron"
-	id = 57071
-	
-	trigger = {
-		invention = industrial_revolution_inv
-		NOT = { has_country_flag = industrial_revolution_flag }
-	}
-	
-	immediate = {
-		set_country_flag = industrial_revolution_flag
-	}
-	
-	option = {
-		name = "industrial_revolution_EvtOptA"
-		prestige = 5
-		years_of_research = 0.5
-		any_country = {
-			limit = {
-				NOT = {
-					tag = THIS
-				}
-				THIS = { ai = no }
-			}
-			country_event = 57601
-		}
-	}
-}
+### ID 57071 FREE
+
+
 
 #country_event = {
 #	title = "expansionism_inv_EvtName"

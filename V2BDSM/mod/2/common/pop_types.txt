@@ -404,20 +404,6 @@ promotion_chance =
 			has_global_flag = singleplayer_flag
 		}
 	}
-	
-	modifier = {
-		factor = 2
-		country = {
-			has_country_flag = industrial_revolution_flag
-		}
-	}
-	
-	modifier = {
-		factor = 2
-		country = {
-			has_country_flag = industrial_revolution_flag
-		}
-	}
 }
 
 demotion_chance = 
@@ -675,20 +661,15 @@ demotion_chance =
 migration_chance = {
 	factor = 0.25
 	
-	
-	### NO MIGRATION FROM COLONIAL
-	modifier = {
-		factor = -2.0
-		state_scope = { is_colonial = yes }
-	}
 	modifier = {
 		factor = -0.5
 		strata = rich
 	}
 	modifier = {
-		factor = 0.25
+		factor = 0.35
 		country = { has_country_flag = immigrator_active_cflag }
 		is_accepted_culture = yes
+		strata = poor
 	}
 	group = {
 		modifier = {
@@ -1213,12 +1194,7 @@ assimilation_chance =
 	}
 	
 	modifier = {
-    	factor = -0.5
-		always = yes
-	}
-	
-	modifier = {
-    	factor = 0.75
+    	factor = 0.1
 		location = { is_core = THIS }
 	}
 	
@@ -1327,7 +1303,7 @@ assimilation_chance =
 	}
 
 	modifier = {
-		factor = -0.2
+		factor = -0.5
 		is_accepted_culture = yes
 	}
 

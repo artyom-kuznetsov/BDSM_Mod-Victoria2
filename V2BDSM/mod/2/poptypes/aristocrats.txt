@@ -50,76 +50,6 @@ country_migration_target =
 	factor = 1
 
 	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1855 }
-	}
-	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1870 }
-	}
-	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1885 }
-	}
-	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1900 }
-	}
-	modifier = {
-		factor = 0.5
-		NOT = { has_country_flag = migration_magnet_cflag }
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1855 }
-	}
-	modifier = {
-		factor = 0.5
-		NOT = { has_country_flag = migration_magnet_cflag }
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1870 }
-	}
-	modifier = {
-		factor = 0.5
-		NOT = { has_country_flag = migration_magnet_cflag }
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1885 }
-	}
-	modifier = {
-		factor = 1.5
-		has_country_flag = is_usa_flag
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1900 }
-	}
-	modifier = {
-		factor = 1.1
-		has_country_flag = migration_magnet_cflag
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1900 }
-	}
-	modifier = {
 		factor = 0.9
 		OR = {
 			government = proletarian_dictatorship
@@ -164,7 +94,8 @@ country_migration_target =
 }
 
 
-migration_target = # POP SCOPE
+
+migration_target =
 {
 	factor = 0.1
 
@@ -181,39 +112,51 @@ migration_target = # POP SCOPE
     	has_culture_core = no
 	}
 	modifier = {
-		factor = 2
-		state_scope = {
-			has_factories = yes
-		}
-	}
-	modifier = {
 		factor = 1.5
 		any_core = { is_primary_culture = THIS }
-	}
-	modifier = {
-    	factor = 0.01
-    	state_scope = { is_colonial = yes }
-		NOT = { continent = south_america continent = north_america continent = oceania owner = { has_country_flag = magrib_imigration_check_flag } }
-	}
-	modifier = {
-		factor = 1.1
-		is_capital = yes
 	}
 	modifier = {
 		factor = 1.05
 		is_coastal = yes
 	}
 	modifier = {
-		factor = 1.25
+		factor = 1.1
+		life_rating = 38
+	}
+	modifier = {
+		factor = 1.2
 		life_rating = 40
 	}
 	modifier = {
-		factor = 1.5
+		factor = 1.3
 		life_rating = 45
 	}
 	modifier = {
-		factor = 2
+		factor = 1.5
 		life_rating = 50
+	}
+	modifier = {
+    	factor = 100
+    	has_province_modifier = immigrator_modifier
+		work_available = { worker = farmers }
+	}
+	modifier = {
+		factor = 0.5
+		OR = {
+			unemployment = 0.1
+            unemployment_by_type = {
+                type = farmers
+                value = 0.1
+            }
+		}
+	}
+	modifier = {
+		factor = 0.1
+		unemployment = 0.2
+        unemployment_by_type = {
+            type = farmers
+            value = 0.2
+        }
 	}
 }
 
