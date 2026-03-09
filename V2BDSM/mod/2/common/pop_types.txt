@@ -686,8 +686,9 @@ migration_chance = {
 		strata = rich
 	}
 	modifier = {
-		factor = 1.0
+		factor = 0.25
 		country = { has_country_flag = immigrator_active_cflag }
+		is_accepted_culture = yes
 	}
 	group = {
 		modifier = {
@@ -739,58 +740,6 @@ migration_chance = {
 			factor = 0.05
 			unemployment = 0.99
 			location = { controlled_by = owner }
-		}
-	}
-	
-	group = {
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 600000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 700000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 800000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 900000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 1000000
-			}
-		}
-	}
-	modifier = {
-		factor = -1
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = { total_pops = 200000 }
-		}
-	}
-	modifier = {
-		factor = -0.5
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = { total_pops = 300000 }
 		}
 	}
 }
@@ -854,8 +803,13 @@ colonialmigration_chance =
 #general emigration chance
 emigration_chance = 
 {
-	factor = 0 # 0.25
+	factor = 1 # 0.25
 
+	modifier = {
+		factor = -100
+		always = yes
+	}
+	
 	modifier = {
 		factor = -0.2
 		NOT = { strata = poor }
@@ -1259,6 +1213,11 @@ assimilation_chance =
 	}
 	
 	modifier = {
+    	factor = -0.5
+		always = yes
+	}
+	
+	modifier = {
     	factor = 0.75
 		location = { is_core = THIS }
 	}
@@ -1372,21 +1331,6 @@ assimilation_chance =
 		is_accepted_culture = yes
 	}
 
-	modifier = {
-		factor = 0.5
-		country = {
-			has_country_flag = choshu_flag
-		}
-	}
-
-	modifier = {
-    	factor = 2.5
-		culture = korean
-		country = {
-			has_country_flag = korean_integration_flag
-		}
-	}
-
 	group = {
 		modifier = {
 			factor = 0.05
@@ -1399,43 +1343,11 @@ assimilation_chance =
 	}
 	
 	modifier = {
-    	factor = 3
-		OR = {
-			culture = mongol
-			culture = crimean
-		}
-		country = {
-			has_country_flag = is_russia_flag
-		}
-	}
-	
-	modifier = {
 		factor = -100
 		country = {
 			primary_culture = no_accepted_culture
 		}
 	}
-	modifier = {
-		factor = 1.2
-		country = { has_country_flag = TUR_assimilation_flag }
-		location = { is_core = THIS }
-	}
-	
-	modifier = {
-		factor = 5
-		is_accepted_culture = no
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-	}
-	
-	modifier = {
-		factor = 25
-		culture = ainu
-	}
-	
 }
 
 #general conversion mtth, same for all pops

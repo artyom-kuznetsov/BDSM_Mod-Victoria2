@@ -32,76 +32,6 @@ country_migration_target =
 	factor = 1
 
 	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1855 }
-	}
-	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1870 }
-	}
-	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1885 }
-	}
-	modifier = {
-		factor = 1.3
-		OR = { 
-			continent = north_america
-			continent = south_america
-			continent = oceania
-		}
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1900 }
-	}
-	modifier = {
-		factor = 0.5
-		NOT = { has_country_flag = migration_magnet_cflag }
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1855 }
-	}
-	modifier = {
-		factor = 0.5
-		NOT = { has_country_flag = migration_magnet_cflag }
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1870 }
-	}
-	modifier = {
-		factor = 0.5
-		NOT = { has_country_flag = migration_magnet_cflag }
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1885 }
-	}
-	modifier = {
-		factor = 1.5
-		has_country_flag = is_usa_flag
-		NOT = { has_global_flag = singleplayer_flag }
-		NOT = { year = 1900 }
-	}
-	modifier = {
-		factor = 1.1
-		has_country_flag = migration_magnet_cflag
-		has_global_flag = singleplayer_flag
-		NOT = { year = 1900 }
-	}
-	modifier = {
 		factor = 0.9
 		OR = {
 			government = proletarian_dictatorship
@@ -164,17 +94,6 @@ migration_target =
     	has_culture_core = no
 	}
 	modifier = {
-    	factor = 0.5
-    	state_scope = { is_colonial = yes }
-		NOT = { continent = south_america continent = north_america continent = oceania owner = { has_country_flag = magrib_imigration_check_flag } }
-	}
-	modifier = {
-		factor = 2
-		state_scope = {
-			has_factories = yes
-		}
-	}
-	modifier = {
 		factor = 1.5
 		any_core = { is_primary_culture = THIS }
 	}
@@ -199,43 +118,27 @@ migration_target =
 		life_rating = 50
 	}
 	modifier = {
-		factor = 3
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = {
-				total_pops = 300000
-			}
-		}
-	}
-	modifier = {
-		factor = 1.3
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = { total_pops = 600000 }
-		}
-	}
-	modifier = {
-		factor = 1.2
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = { total_pops = 800000 }
-		}
-	}
-	modifier = {
     	factor = 100
     	has_province_modifier = immigrator_modifier
 		work_available = { worker = farmers }
 	}
 	modifier = {
-		factor = 2
-		NOT = { unemployment = 0.1 }
+		factor = 0.5
 		OR = {
-			trade_goods= opium
-			trade_goods= silk
-			trade_goods= rubber
-			trade_goods= tropical_wood
-			trade_goods= coffee
+			unemployment = 0.1
+            unemployment_by_type = {
+                type = farmers
+                value = 0.1
+            }
 		}
+	}
+	modifier = {
+		factor = 0.1
+		unemployment = 0.2
+        unemployment_by_type = {
+            type = farmers
+            value = 0.2
+        }
 	}
 }
 
