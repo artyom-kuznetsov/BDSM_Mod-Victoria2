@@ -2153,7 +2153,7 @@ province_event = {
 			set_country_flag = immigrator_active_cflag
 		}
 		
-		add_province_modifier = { name = immigrator_modifier duration = -1 }
+		state_scope = { any_owned = { add_province_modifier = { name = immigrator_modifier duration = -1 } } }
 
 		# Audax Validator "." Ignore_NEXT
 		province_selector = -1

@@ -134,7 +134,7 @@ migration_target =
 	modifier = {
     	factor = 100
     	has_province_modifier = immigrator_modifier
-		work_available = { worker = farmers }
+		work_available = { worker = craftsmen }
 	}
 	modifier = {
 		factor = 0.5
@@ -414,7 +414,7 @@ promote_to =
 		factor = 0.01
 		modifier = {
 			factor = -100
-			NOT = { craftsmen = 0.02 }
+			NOT = { state_scope = { craftsmen = 0.02 } }
 		}
 		modifier = {
 			factor = -100
