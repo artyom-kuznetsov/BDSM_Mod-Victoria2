@@ -501,15 +501,16 @@ float4 PixelShader_Far( VS_OUTPUT_WATER_FAR IN ) : COLOR
 	float4 overlay = tex2D( Overlay, IN.vWorldPos );
 	
 	float4 OutColor = lerp( color, overlay, 0);
-	OutColor.r += 0.24;
-	OutColor.g += 0.28;
-	OutColor.b += 0.39;
+	OutColor.r += 0.34;
+	OutColor.g += 0.3;
+	OutColor.b += 0.24;
 	OutColor.r /= 1.85;
 	OutColor.g /= 1.65;
 	OutColor.b /= 1.55;
+	OutColor.r *= 1.08;
 	OutColor.rgb *= 1.2;
 
-	return OutColor;
+	return OutColor * saturate(contour_darken * 0.6 + 0.4);
 }
 
 technique WaterShaderFar

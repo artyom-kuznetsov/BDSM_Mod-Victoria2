@@ -756,18 +756,56 @@ float4 PixelShader_Map2_0_General( VS_MAP_OUTPUT v ) : COLOR
 	float2 vProvinceUV = v.vProvinceId + 0.5f;
     vProvinceUV /= PROVINCE_LOOKUP_SIZE;
   
-  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.8;
-	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.8;
+  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.7;
+	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.7;
 
 	float vColor = tex2D( StripesTexture, v.vTerrainTexCoord ).a;
 	float4 Color = lerp(Color1, Color2, vColor);
 	
-	Color.rgb = lerp(TerrainColor.rgb, Color.rgb, 0.317);
-	Color.rgb *= 1.8;
+	Color.rgb = lerp(TerrainColor.rgb, Color.rgb, 0.31);
+	Color.rgb *= 1.6;
 	
 	return Color;
 }
 
+float3 Hue(float H)
+{
+    float R = abs(H * 6 - 3) - 1;
+    float G = 2 - abs(H * 6 - 2);
+    float B = 2 - abs(H * 6 - 4);
+    return saturate(float3(R,G,B));
+}
+
+
+float3 HSVtoRGB(float3 HSV)
+{
+    return ((Hue(HSV.x) - 1) * HSV.y + 1) * HSV.z;
+}
+
+float3 RGBtoHSV(float3 RGB)
+{
+    float3 HSV = 0;
+    
+	HSV.z = max(RGB.r, max(RGB.g, RGB.b));
+    float M = min(RGB.r, min(RGB.g, RGB.b));
+    float C = HSV.z - M;
+
+    if (C != 0)
+    {
+        HSV.y = C / HSV.z;
+        float3 Delta = (HSV.z - RGB) / C;
+        Delta.rgb -= Delta.brg;
+        Delta.rg += float2(2,4);
+        if (RGB.r >= HSV.z)
+            HSV.x = Delta.b;
+        else if (RGB.g >= HSV.z)
+            HSV.x = Delta.r;
+        else
+            HSV.x = Delta.g;
+        HSV.x = frac(HSV.x / 6);
+    }
+    return HSV;
+}
 
 float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 {
@@ -802,18 +840,40 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
  	TerrainColor.rgb = Grey;
 	TerrainColor *= White;
 	
+	
+	
+	float4 OverlayColor = tex2D( OverlayTexture, v.vColorTexCoord );
+	
 	float2 vProvinceUV = v.vProvinceId + 0.5f;
     vProvinceUV /= PROVINCE_LOOKUP_SIZE;
-  
-  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.4;
-	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.4;
-
+	
+  	float4 Color1 = tex2D( GeneralTexture, vProvinceUV ) - 0.7;
+	float4 Color2 = tex2D( GeneralTexture2, vProvinceUV ) - 0.7;
+	
 	float vColor = tex2D( StripesTexture, v.vTerrainTexCoord ).a;
 	float4 Color = Color2 * vColor + Color1 * ( 1.0 - vColor );
 	float4 ColorColor = tex2D( ColorTexture, v.vTexCoord1 ); //Coordinates for colormap
 	
-	Color.rgb = lerp(lerp(Color.rgb, ColorColor.rgb, 0.52), TerrainColor.rgb, 0.16);
-	Color.rgb *= 1.5;
+	Color.rgb = lerp(Color.rgb, ColorColor.rgb, 0.3);
+	
+	float relief = dot(TerrainColor.rgb, float3(0.299,0.587,0.114));
+	float shade = relief * 0.225 - 0.15;
+
+	Color.rgb += shade;
+	
+	//Color.rgb *= 0.5;
+	//Color.rgb = lerp(Color.rgb, ColorColor.rgb, 0.3);
+	float3 ColorHSV = RGBtoHSV(Color.rgb);
+	ColorHSV.y *= max(0.85, ColorHSV.z);
+	ColorHSV.z *= 1.6;
+	Color.rgb = HSVtoRGB(ColorHSV);
+	Color.rgb = lerp(Color.rgb, OverlayColor.rgb, 0.5);
+	Color.rgb *= 1.17;
+	Color.rgb = lerp(Color.rgb, float3(0.83, 0.78, 0.44), 0.1);
+	Color.rgb = lerp(Color.rgb, Color.rrr, 0.15);
+	Color.g = lerp(Color.g, Color.r, 0.075);
+	Color.b = lerp(Color.b, 1.0 - Color.r, 0.1);
+	Color.r *= 1.03;
 	
 	return Color;
 	
