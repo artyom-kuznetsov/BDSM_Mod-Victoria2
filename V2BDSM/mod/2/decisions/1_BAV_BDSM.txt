@@ -1,6 +1,5 @@
 political_decisions = {
     form_danube_federation_dec = {
-        picture = frankfurt_parliament
         potential = {
             primary_culture = south_german
             NOT = {
@@ -9,13 +8,13 @@ political_decisions = {
             }
         }
         allow = {
-            NOT = { part_of_sphere = yes }
-            NOT = { war = yes }
+            part_of_sphere = no
+            war = no
             BAV = {
                 all_core = {
                     OR = {
                         owned_by = THIS
-                        owner = { in_sphere = THIS }
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
             }
@@ -23,7 +22,7 @@ political_decisions = {
                 all_core = {
                     OR = {
                         owned_by = THIS
-                        owner = { in_sphere = THIS }
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
 						province_id = 767
 						province_id = 768
                     }
@@ -33,7 +32,7 @@ political_decisions = {
                 all_core = {
                     OR = {
                         owned_by = THIS
-                        owner = { in_sphere = THIS }
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
             }
@@ -41,14 +40,13 @@ political_decisions = {
                 all_core = {
                     OR = {
                         owned_by = THIS
-                        owner = { in_sphere = THIS }
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
             }
         }
 
         effect = {
-            primary_culture = south_german
             add_accepted_culture = rhenish
             prestige = 10
             any_country = {
@@ -57,25 +55,10 @@ political_decisions = {
                         primary_culture = south_german
                         primary_culture = rhenish
                     }
-                    in_sphere = THIS
-                    NOT = {
-                        tag = THIS
-                        tag = KRL
-                    }
-                }
-                annex_to = THIS
-            }
-            any_country = {
-                limit = {
-                    OR = {
-                        primary_culture = south_german
-                        primary_culture = rhenish
-                    }
-                    vassal_of = THIS
-                    NOT = {
-                        tag = THIS
-                        tag = KRL
-                    }
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
                 }
                 annex_to = THIS
             }
