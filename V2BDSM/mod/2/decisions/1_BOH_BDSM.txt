@@ -7,15 +7,7 @@ political_decisions = {
         allow  = {
             OR = {
                 AND = {
-                    HOL = {
-                        all_core = {
-                            OR = {
-                                owned_by = THIS
-                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                            }
-                        }
-                    }
-                    POM = {
+                    MEC = {
                         all_core = {
                             OR = {
                                 owned_by = THIS
@@ -31,7 +23,7 @@ political_decisions = {
                             }
                         }
                     }
-                    BRN = {
+                    BRA = {
                         all_core = {
                             OR = {
                                 owned_by = THIS
@@ -122,7 +114,6 @@ political_decisions = {
                         }
                     } 
                 }
-                BOH = { all_core = { owned_by = THIS } }
             }
         }
         
@@ -144,6 +135,27 @@ political_decisions = {
                 limit = { is_core = GER }
                 add_core = ELB
             }
+            #Pomerania
+            MEC = {
+                all_core = { add_core = ELB }
+            }
+            #Oldenburg
+            OLD = {
+                all_core = { add_core = ELB }
+            }
+            #Lippe-Detmold
+            LIP = {
+                all_core = { add_core = ELB }
+            }
+            #Osnabruk
+            538 = {
+                add_core = ELB
+            }
+            #Bremen
+            BRE = {
+                all_core = { add_core = ELB }
+            }
+            
         }
     }
 }
