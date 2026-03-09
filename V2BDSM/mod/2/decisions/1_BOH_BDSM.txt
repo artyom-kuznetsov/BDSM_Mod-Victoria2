@@ -1,0 +1,149 @@
+political_decisions = {
+    form_elbian_federation_dec = {
+        potential = {
+            tag = BOH
+        }
+        
+        allow  = {
+            OR = {
+                AND = {
+                    HOL = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    POM = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    HAN = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    BRN = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                }
+                AND = {
+                    HAN = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    THU = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    HES = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    HEK = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    OLD = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    BEG = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    BRE = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    MNR = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    LIP = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    }
+                    FRM = {
+                        all_core = {
+                            OR = {
+                                owned_by = THIS
+                                owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            }
+                        }
+                    } 
+                }
+                BOH = { all_core = { owned_by = THIS } }
+            }
+        }
+        
+        effect = {
+            prestige = 10
+            add_accepted_culture = north_german
+            any_country = {
+                limit = {
+                    primary_culture = north_german
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+                annex_to = THIS
+            }
+            change_tag = ELB
+            any_owned = {
+                limit = { is_core = GER }
+                add_core = ELB
+            }
+        }
+    }
+}
