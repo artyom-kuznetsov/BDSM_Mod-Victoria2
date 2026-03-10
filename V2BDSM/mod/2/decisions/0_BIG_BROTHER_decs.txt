@@ -75,6 +75,19 @@ political_decisions = {
 			
 			any_country = {
 				limit = {
+					OR = {
+						tag = BOH
+						primary_culture = south_german
+						primary_culture = north_german
+						primary_culture = rhenish
+					}
+				}
+				set_country_flag = hre_country_cflag
+			}
+			
+			
+			any_country = {
+				limit = {
 					positivism = 1
 				}
 				social_reform = low_schools

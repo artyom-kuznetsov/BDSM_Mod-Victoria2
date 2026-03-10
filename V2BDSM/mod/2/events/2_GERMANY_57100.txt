@@ -1,0 +1,32 @@
+country_event = {
+	id = 57100
+	
+	title = "HRE_LoseSphere_EvtName"
+	desc = "HRE_LoseSphere_EvtDesc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "HRE_LoseSphere_EvtOptA"
+		FROM = { badboy = 10 }
+	}
+}
+
+country_event = {	# FLAG HAS HRE SPHERE
+	id = 57101
+	
+	title = "noloc"
+	desc = "noloc"
+	
+	trigger = {
+		ai = yes
+		sphere_owner = {
+			NOT = { has_country_flag = has_hre_spherelings_cflag }
+		}
+	}
+	
+	option = {
+		name = "noloc"
+		sphere_owner = { set_country_flag = has_hre_spherelings_cflag }
+	}
+}
