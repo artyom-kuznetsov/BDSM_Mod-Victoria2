@@ -8,6 +8,7 @@ country_event = {	# LOST IMPERIAL SUPREMACY CB
 	
 	option = {
 		name = "HRE_LoseSphere_EvtOptA"
+		remove_country_modifier = has_hre_spherelings_cmodifier
 		FROM = {
 			add_country_modifier = {
 				name = debug_cmodifier
@@ -35,13 +36,13 @@ country_event = {	# FLAG HAS HRE SPHERE
 		ai = yes
 		has_country_flag = hre_country_cflag
 		sphere_owner = {
-			NOT = { has_country_flag = has_hre_spherelings_cflag }
+			NOT = { has_country_modifier = has_hre_spherelings_cmodifier }
 		}
 	}
 	
 	option = {
 		name = "noloc"
-		sphere_owner = { set_country_flag = has_hre_spherelings_cflag }
+		sphere_owner = { add_country_modifier = { name = has_hre_spherelings_cmodifier duration = 365 }
 	}
 }
 
