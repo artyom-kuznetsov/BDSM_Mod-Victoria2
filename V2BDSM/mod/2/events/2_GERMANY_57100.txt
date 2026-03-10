@@ -1,4 +1,4 @@
-country_event = {
+country_event = {	# LOST IMPERIAL SUPREMACY CB
 	id = 57100
 	
 	title = "HRE_LoseSphere_EvtName"
@@ -8,7 +8,20 @@ country_event = {
 	
 	option = {
 		name = "HRE_LoseSphere_EvtOptA"
-		FROM = { badboy = 10 }
+		FROM = {
+			add_country_modifier = {
+				name = debug_cmodifier
+				duration = 10
+			}
+		}
+		any_country = {
+			limit = {
+				has_country_flag = hre_country_cflag
+				in_sphere = THIS
+				ai = yes
+			}
+			country_event = 57102
+		}
 	}
 }
 
@@ -20,6 +33,7 @@ country_event = {	# FLAG HAS HRE SPHERE
 	
 	trigger = {
 		ai = yes
+		has_country_flag = hre_country_cflag
 		sphere_owner = {
 			NOT = { has_country_flag = has_hre_spherelings_cflag }
 		}
@@ -28,5 +42,27 @@ country_event = {	# FLAG HAS HRE SPHERE
 	option = {
 		name = "noloc"
 		sphere_owner = { set_country_flag = has_hre_spherelings_cflag }
+	}
+}
+
+country_event = {	# GIVE UP SPHERE TO WINNER
+	id = 57102
+	
+	title = "noloc"
+	desc = "noloc"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		random_country = {
+			limit = {
+				has_country_modifier = debug_cmodifier
+			}
+			diplomatic_influence = {
+				who = THIS
+				value = 400
+			}
+		}
 	}
 }
