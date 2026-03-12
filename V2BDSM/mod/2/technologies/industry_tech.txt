@@ -613,12 +613,12 @@ clean_coal = {
 	area = metallurgy
 	year = 1836
 	cost = 4500
-	
-	# Audax Validator "." Ignore_NEXT
-	max_iron_factory = 1
-	max_coal_factory = 1
-	max_sulphur_factory = 1
-	
+	factory_goods_output = {
+		sulphur = 0.05
+	}
+	factory_goods_throughput = {
+		sulphur = 0.05
+	}
 	
 	ai_chance = {
 		factor = 1.05
@@ -669,11 +669,6 @@ cheap_iron = {
 	year = 1845
 	cost = 5400
 
-	# Audax Validator "." Ignore_NEXT
-	max_iron_factory = 1
-	max_coal_factory = 1
-	max_sulphur_factory = 1
-	
 	ai_chance = {
 		factor = 1.05
 		modifier = {
@@ -723,11 +718,6 @@ cheap_steel = {
 	year = 1860
 	cost = 6400
 
-	# Audax Validator "." Ignore_NEXT
-	max_iron_factory = 1
-	max_coal_factory = 1
-	max_sulphur_factory = 1
-	
 	factory_goods_output = {
 		coal = 0.05
 		iron = 0.05
@@ -788,11 +778,6 @@ advanced_metallurgy = {
 	year = 1870
 	cost = 7200
 
-	# Audax Validator "." Ignore_NEXT
-	max_iron_factory = 1
-	max_coal_factory = 1
-	max_sulphur_factory = 1
-	
 	factory_goods_output = {
 		coal = 0.05
 		iron = 0.05
@@ -856,12 +841,12 @@ electric_furnace = {
 	factory_goods_output = {
 		coal = 0.05
 		iron = 0.05
-		sulphur = 0.1
+		sulphur = 0.05
 	}
 	factory_goods_throughput = {
 		coal = 0.05
 		iron = 0.05
-		sulphur = 0.1
+		sulphur = 0.05
 	}
 
 	ai_chance = {
