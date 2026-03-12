@@ -5,7 +5,7 @@ political_decisions = {
         }
         
         allow  = {
-			OR = { CUSTOM_REQUIREMENT_FORMELBIAN = { } always = yes }
+			OR = { always = yes CUSTOM_REQUIREMENT_FORMELBIAN = { } CUSTOM_REQUIREMENT_EXPLANATION = { } }
             nationalism_tech = 1
             OR = {
                 AND = {
@@ -160,4 +160,32 @@ political_decisions = {
             
         }
     }
+	
+	integrate_pomerania_boh_dec = {
+		potential = {
+			owns = 544
+			owns = 546
+			OR = {
+				544 = { is_core = SCA }
+				546 = { is_core = SCA }
+				544 = { is_core = NSE }
+				546 = { is_core = NSE }
+			}
+			OR = {
+				primary_culture = czech
+				primary_culture = rhenish
+				primary_culture = north_german
+				primary_culture = south_german
+			}
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+		}
+		
+		effect = {
+			544 = { state_scope = { remove_core = SCA remove_core = NSE add_core = THIS } }
+			546 = { state_scope = { remove_core = SCA remove_core = NSE add_core = THIS } }
+		}
+	}
 }

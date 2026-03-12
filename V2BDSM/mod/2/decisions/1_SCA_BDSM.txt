@@ -83,4 +83,25 @@ political_decisions = {
 		}
         ai_will_do = { factor = 1 }
 	}
+	
+	integrate_pomerania_sca_dec = {
+		potential = {
+			owns = 544
+			owns = 546
+			NOT = { 
+				544 = { is_core = THIS }
+				546 = { is_core = THIS }
+			}
+			primary_culture = swedish
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+		}
+		
+		effect = {
+			544 = { state_scope = { add_core = THIS } }
+			546 = { state_scope = { add_core = THIS } }
+		}
+	}
 }
