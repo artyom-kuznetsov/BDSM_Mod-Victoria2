@@ -184,33 +184,45 @@ political_decisions = {
 		}
 		
 		effect = {
-			PRU_544 = { 
-				add_core = THIS
+			PRU_544 = {
+				any_owned = {
+					add_core = THIS
+				}
 			}
 			PRU_680 = {
-				add_core = THIS
+				any_owned = {
+					add_core = THIS
+				}
 			}
 			PRU_544 = { 
 				limit = {
-					is_core = SCA
+					any_owned_province = {
+						is_core = SCA
+					}
 				}
 				remove_core = SCA
 			}
 			PRU_680 = { 
 				limit = {
-					is_core = SCA
+					any_owned_province = {
+						is_core = SCA
+					}
 				}
 				remove_core = SCA
 			}
 			PRU_544 = { 
 				limit = {
-					is_core = NSE
+					any_owned_province = {
+						is_core = NSE
+					}
 				}
 				remove_core = NSE
 			}
 			PRU_680 = { 
 				limit = {
-					is_core = NSE
+					any_owned_province = {
+						is_core = NSE
+					}
 				}
 				remove_core = NSE
 			}
