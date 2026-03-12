@@ -184,8 +184,36 @@ political_decisions = {
 		}
 		
 		effect = {
-			544 = { state_scope = { remove_core = SCA remove_core = NSE add_core = THIS } }
-			546 = { state_scope = { remove_core = SCA remove_core = NSE add_core = THIS } }
+			PRU_544 = { 
+				add_core = THIS
+			}
+			PRU_680 = {
+				add_core = THIS
+			}
+			PRU_544 = { 
+				limit = {
+					is_core = SCA
+				}
+				remove_core = SCA
+			}
+			PRU_680 = { 
+				limit = {
+					is_core = SCA
+				}
+				remove_core = SCA
+			}
+			PRU_544 = { 
+				limit = {
+					is_core = NSE
+				}
+				remove_core = NSE
+			}
+			PRU_680 = { 
+				limit = {
+					is_core = NSE
+				}
+				remove_core = NSE
+			}
 		}
 	}
 }
