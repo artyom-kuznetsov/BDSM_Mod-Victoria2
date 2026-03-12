@@ -59,9 +59,22 @@ rail_focus =
 }
 
 promotion_focus = {
-	promote_bureaucrats = {
+	promote_urbanism = {
 		artisans = 0.05
 		icon = 11
+		outliner_show_as_percent = yes
+		limit = {
+			NOT = {
+				debt_law = serfdom
+				debt_law = peonage
+			}
+		}
+	}
+	promote_bureaucrats = {
+		bureaucrats = 0.05
+		local_rgo_throughput = -0.2
+		local_factory_output = -0.2
+		icon = 7
 		outliner_show_as_percent = yes
 		limit = {
 			NOT = {
@@ -75,7 +88,7 @@ promotion_focus = {
 		pop_consciousness_modifier = -0.05
 		pop_militancy_modifier = 0.05
 		artisans = 0.02
-		icon = 7
+		icon = 12
 		outliner_show_as_percent = yes
 		limit = {
 			OR = {
