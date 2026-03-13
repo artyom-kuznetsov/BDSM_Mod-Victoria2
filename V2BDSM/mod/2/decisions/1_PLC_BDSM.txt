@@ -31,6 +31,10 @@ political_decisions = {
                 }
                 annex_to = THIS
             }
+			LIT = { all_core = { add_core = THIS } }
+			BYE = { all_core = { add_core = THIS } }
+			UKR = { all_core = { add_core = THIS } }
+			UKR = { all_core = { remove_core = UKR } }
             any_pop = {
                 limit = {
                     OR = {
@@ -41,6 +45,7 @@ political_decisions = {
                 militancy = 6
             }
 			set_country_flag = lublin_union_cflag
+			add_country_modifier = { name = unification_modifier duration = 365 }
 		}
 	}
 	
@@ -107,6 +112,7 @@ political_decisions = {
                     value = liberal
                 }
             }
+			add_country_modifier = { name = unification_modifier duration = 365 }
 		}
 	}
 }
