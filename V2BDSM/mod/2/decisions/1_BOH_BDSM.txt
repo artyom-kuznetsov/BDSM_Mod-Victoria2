@@ -120,6 +120,7 @@ political_decisions = {
         }
         
         effect = {
+			CUSTOM_TOOLTIP_LUBNY = { }
             prestige = 10
             add_accepted_culture = north_german
             any_country = {
@@ -242,6 +243,7 @@ political_decisions = {
 				exists = WSF
 				tag = GER
 				tag = ELB
+				has_country_flag = treaty_of_lubny_cflag
 			}
 			OR = {
 				primary_culture = czech
@@ -270,6 +272,26 @@ political_decisions = {
 		}
 		
 		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						tag = PLC
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_ZAPADOSLAVIA_POL = { }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						tag = BOH
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_ZAPADOSLAVIA_BOH = { }
+				}
+			}
 			change_tag = WSF
 			add_accepted_culture = slovak
 			add_accepted_culture = polish
