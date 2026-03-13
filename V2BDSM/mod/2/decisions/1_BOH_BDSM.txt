@@ -121,6 +121,7 @@ political_decisions = {
         
         effect = {
             prestige = 10
+            change_tag = ELB
             add_accepted_culture = north_german
             any_country = {
                 limit = {
@@ -134,34 +135,16 @@ political_decisions = {
 					# Audax Validator "." Ignore_NEXT
 					province_selector = -1
 				}
-                country_event = { id=11101 days=0 }
+                country_event = { id=11102 days=0 }
             }
-            change_tag = ELB
             any_owned = {
                 limit = { is_core = GER }
                 add_core = ELB
-            }
-            #Pomerania
-            MEC = {
-                all_core = { add_core = ELB }
-            }
-            #Oldenburg
-            OLD = {
-                all_core = { add_core = ELB }
-            }
-            #Lippe-Detmold
-            LIP = {
-                all_core = { add_core = ELB }
             }
             #Osnabruk
             538 = {
                 add_core = ELB
             }
-            #Bremen
-            BRE = {
-                all_core = { add_core = ELB }
-            }
-            
         }
     }
 	
@@ -234,8 +217,7 @@ political_decisions = {
 			badboy = 3
 		}
 	}
-	
-	
+    
 	form_zapadoslavia_dec = {
 		potential = {
 			NOT = {
@@ -289,4 +271,65 @@ political_decisions = {
 			plurality = -10
 		}
 	}
+    
+    integrate_german_rhine_dec = {
+        potential = {
+            tag = ELB
+			NOT = { has_country_flag = german_rhine_integrated } 
+        }
+        
+        allow = {
+			pan_nationalism_tech = 1
+            PRU_581 = {
+                OR = {
+                    owned_by = THIS
+                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                }
+            }
+            EAST_RHINE_STATE = {
+                OR = {
+                    owned_by = THIS
+                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                }
+            }
+            HES_564 = {
+                OR = {
+                    owned_by = THIS
+                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                }
+            }
+        }
+        
+        effect = {
+			set_country_flag = german_rhine_integrated
+            add_accepted_culture = rhenish
+            PRU_581 = {
+                add_cor = THIS
+            }
+            EAST_RHINE_STATE = {
+                add_cor = THIS
+            }
+            HES_564 = {
+                add_cor = THIS
+            }
+            any_country = {
+                limit = {
+                    primary_culture = rhenish
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+                country_event = { id=11102 days=0 }
+            }
+            any_owned = {
+                limit = { is_core = GER }
+                add_core = ELB
+            }
+        }
+    }
 }
