@@ -1426,24 +1426,6 @@ clinical_thermometers_and_binaural_stethoscopes = {
 		pop_growth = 0.0001
 	}
 }
-#inorganic_chemistry
-synthetic_dye = {
-	limit = { inorganic_chemistry = 1 }
-	chance = {
-		base = 1
-		modifier = {
-			factor = 2
-			clean_coal = 1
-		}
-		modifier = {
-			factor = 2
-			management_strategy = 1
-		}
-	}
-	effect = {
-		activate_building = synthetic_dye_factory
-	}
-}
 artificial_fertilizers = {
 	limit = { inorganic_chemistry = 1 }
 	chance = {
@@ -1724,6 +1706,24 @@ third_health_reform_inv = {
 	}
 }
 
+#inorganic_chemistry
+synthetic_dye = {
+	limit = { electricity = 1 }
+	chance = {
+		base = 1
+		modifier = {
+			factor = 2
+			assembly_line = 1
+		}
+		modifier = {
+			factor = 2
+			management_strategy = 1
+		}
+	}
+	effect = {
+		activate_building = synthetic_dye_factory
+	}
+}
 edison_light_bulb = {
 	limit = { electricity = 1 }
 	chance = {
