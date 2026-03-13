@@ -2659,7 +2659,7 @@ make_puppet = {
 
 	can_use = {
 		ai = yes
-		total_pops = 300000
+		total_pops = 200000
 		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS 
@@ -2667,8 +2667,8 @@ make_puppet = {
 		}
 		OR = {
 			NOT = { number_of_states = 2 }
-			NOT = { total_pops = 1000000 }
-			AND = { revolution_n_counterrevolution = 1 NOT = { total_pops = 1500000 } }
+			NOT = { total_pops = 500000 }
+			AND = { revolution_n_counterrevolution = 1 NOT = { total_pops = 1000000 } }
 		}
 		is_greater_power = no
 		is_vassal = no
@@ -2744,11 +2744,11 @@ make_puppet_small = {
 
 	can_use = {
 		ai = yes
-		total_pops = 100000
+		total_pops = 80000
 		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS 
-			total_pops = 300000
+			total_pops = 200000
 			has_country_flag = daimyo_flag
 		}
 		is_greater_power = no
@@ -2821,7 +2821,7 @@ make_puppet_tiny = {
 		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS 
-			total_pops = 100000
+			total_pops = 80000
 			has_country_flag = daimyo_flag
 		}
 		is_greater_power = no
