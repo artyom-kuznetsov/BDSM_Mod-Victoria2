@@ -133,6 +133,54 @@ country_event = {
 	}
 }
 
+# Event to Inherit CORE
+country_event = {
+	id = 11102
+	title = "EVTNAME11101"
+	desc = "EVTDESC11101"
+	picture = "Celebration"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "EVTOPTA11101"
+		any_owned = {
+			limit = {
+				# Audax Validator "." Ignore_NEXT
+				has_building = province_selector
+				owner = { has_country_flag = hidden_tooltip }
+			}
+			# Audax Validator "." Ignore_NEXT
+			province_selector = -1
+		}
+		any_owned = { add_core = FROM }
+		FROM = {
+			inherit = THIS
+		}
+		ai_chance = {
+			factor = 25
+		}
+	}
+
+	option = {
+		name = "EVTOPTB11101"
+		any_owned = { add_core = FROM }
+		
+		prestige = 1
+		relation = {
+			who = FROM
+			value = -100
+		}
+		any_pop = {
+			militancy = 3
+			consciousness = 2
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
 #Italian Red Shirt Unification
 country_event = {
 	title = "EVTNAME11103"
