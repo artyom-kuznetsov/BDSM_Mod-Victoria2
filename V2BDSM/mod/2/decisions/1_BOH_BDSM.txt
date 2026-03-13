@@ -130,7 +130,11 @@ political_decisions = {
 						vassal_of = THIS 
 					}
                 }
-                annex_to = THIS
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+                country_event = { id=11101 days=0 }
             }
             change_tag = ELB
             any_owned = {
@@ -227,6 +231,7 @@ political_decisions = {
 				}
 				remove_core = NSE
 			}
+			badboy = 3
 		}
 	}
 }
