@@ -120,6 +120,7 @@ political_decisions = {
         }
         
         effect = {
+			CUSTOM_TOOLTIP_LUBNY = { }
             prestige = 10
             change_tag = ELB
             add_accepted_culture = north_german
@@ -184,33 +185,25 @@ political_decisions = {
 			}
 			PRU_544 = { 
 				limit = {
-					any_owned_province = {
-						is_core = SCA
-					}
+					is_core = SCA
 				}
 				remove_core = SCA
 			}
 			PRU_680 = { 
 				limit = {
-					any_owned_province = {
-						is_core = SCA
-					}
+					is_core = SCA
 				}
 				remove_core = SCA
 			}
 			PRU_544 = { 
 				limit = {
-					any_owned_province = {
-						is_core = NSE
-					}
+					is_core = NSE
 				}
 				remove_core = NSE
 			}
 			PRU_680 = { 
 				limit = {
-					any_owned_province = {
-						is_core = NSE
-					}
+					is_core = NSE
 				}
 				remove_core = NSE
 			}
@@ -224,6 +217,7 @@ political_decisions = {
 				exists = WSF
 				tag = GER
 				tag = ELB
+				has_country_flag = treaty_of_lubny_cflag
 			}
 			OR = {
 				primary_culture = czech
@@ -252,6 +246,26 @@ political_decisions = {
 		}
 		
 		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						tag = PLC
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_ZAPADOSLAVIA_POL = { }
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						tag = BOH
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_ZAPADOSLAVIA_BOH = { }
+				}
+			}
 			change_tag = WSF
 			add_accepted_culture = slovak
 			add_accepted_culture = polish
