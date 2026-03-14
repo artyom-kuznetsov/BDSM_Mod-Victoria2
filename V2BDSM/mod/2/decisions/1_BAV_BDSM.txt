@@ -194,6 +194,8 @@ political_decisions = {
         
         effect = {
 			set_country_flag = german_rhine_integrated
+			prestige = 10
+			badboy = 3
             PRU_581 = {
                 add_core = THIS
             }
@@ -229,7 +231,7 @@ political_decisions = {
     dunau_slovenia_integration = {
         potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = slovenia_integrated } 
+			NOT = { has_country_flag = slovenia_integrated }
             primary_culture = south_german
         }
         
@@ -242,8 +244,10 @@ political_decisions = {
         effect = {
 			set_country_flag = slovenia_integrated
             add_accepted_culture = croat
+			badboy = 5
             add_core = 767
             add_core = 768
+			AUS_736 = { add_core = THIS }
         }
     }
 }
