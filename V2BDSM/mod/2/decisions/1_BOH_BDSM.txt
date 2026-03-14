@@ -286,30 +286,81 @@ political_decisions = {
 		}
 	}
     
-    integrate_german_rhine_dec = {
+    integrate_german_rhine_ELB_dec = {
         potential = {
             tag = ELB
 			NOT = { has_country_flag = german_rhine_integrated } 
         }
         
         allow = {
+            OR = { always = yes CUSTOM_REQUIREMENT_RHINEINTEGRATION = { } CUSTOM_REQUIREMENT_EXPLANATION = { } }
 			pan_nationalism_tech = 1
-            PRU_581 = {
-                OR = {
-                    owned_by = THIS
-                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+            AND = {
+                HES = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
                 }
-            }
-            EAST_RHINE_STATE = {
-                OR = {
-                    owned_by = THIS
-                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                HEK = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
                 }
-            }
-            HES_564 = {
-                OR = {
-                    owned_by = THIS
-                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                BEG = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                }
+                MNR = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            province_id = 538
+                        }
+                    }
+                }
+                MRK = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            province_id = 584
+                        }
+                    }
+                }
+                FRM = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                } 
+                NAS = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                }
+                FUL = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
                 }
             }
         }

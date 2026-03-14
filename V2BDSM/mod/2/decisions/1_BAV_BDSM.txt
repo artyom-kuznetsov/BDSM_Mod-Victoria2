@@ -50,6 +50,7 @@ political_decisions = {
 
         effect = {
             add_accepted_culture = rhenish
+            change_tag = SGF
             prestige = 10
             any_country = {
                 limit = {
@@ -105,8 +106,120 @@ political_decisions = {
 			FTB = {
                 all_core = { add_core = SGF }
             }
-            change_tag = SGF
         }
         ai_will_do = { factor = 1 }
+    }
+    
+    integrate_german_rhine_BAV_dec = {
+        potential = {
+            tag = SGF
+			NOT = { has_country_flag = german_rhine_integrated } 
+        }
+        
+        allow = {
+            OR = { always = yes CUSTOM_REQUIREMENT_RHINEINTEGRATION = { } CUSTOM_REQUIREMENT_EXPLANATION = { } }
+			pan_nationalism_tech = 1
+            AND = {
+                HES = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                }
+                HEK = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                }
+                BEG = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                }
+                MNR = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            province_id = 538
+                        }
+                    }
+                }
+                MRK = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                            province_id = 584
+                        }
+                    }
+                }
+                FRM = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                } 
+                NAS = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                }
+                FUL = {
+                    all_core = {
+                        OR = {
+                            owned_by = THIS
+                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        }
+                    }
+                }
+            }
+        }
+        
+        effect = {
+			set_country_flag = german_rhine_integrated
+            PRU_581 = {
+                add_core = THIS
+            }
+            EAST_RHINE_STATE = {
+                add_core = THIS
+            }
+            HES_564 = {
+                add_core = THIS
+            }
+            RHI = {
+                limit = {
+                    is_core = GER
+                }
+                all_core = { add_core = SGF }
+            }
+            any_country = {
+                limit = {
+                    primary_culture = rhenish
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+                country_event = { id=11102 days=0 }
+            }
+        }
     }
 }
