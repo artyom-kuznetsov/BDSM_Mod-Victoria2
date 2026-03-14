@@ -1,11 +1,14 @@
 political_decisions = {
     form_germania = {
         potential = {
-            primary_culture = south_german
-            primary_culture = north_german
-            primary_culture = rhenish
             NOT = {
                 exists = GER
+            }
+			NOT = { has_country_flag = hide_all_decs_flag }
+            OR = {
+                primary_culture = south_german
+                primary_culture = north_german
+                primary_culture = rhenish
             }
         }
         
