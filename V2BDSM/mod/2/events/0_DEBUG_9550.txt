@@ -111,14 +111,15 @@ country_event = { # IBERIA
 	
 	option = {
 		name = "noloc"
-		TUR_788 = { secede_province = THIS }
+		META_SPAIN = { secede_province = THIS }
 		activate_technology = nationalism_n_imperialism
-		PRU = { change_tag = GER }
-		SAR = { change_tag = ITA }
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
+		political_reform = all_voting_pops
 	}
 }
 
-country_event = { # CHINA
+country_event = { # ELBIAN
 	title = "noloc"
 	desc = "noloc"
 	id = 9556
@@ -127,24 +128,17 @@ country_event = { # CHINA
 	
 	option = {
 		name = "noloc"
-		any_country = {
-			limit = {
-				OR = {
-					is_culture_group = east_asian
-					primary_culture = mongol
-				}
-			}
+		activate_technology = nationalism_tech
+		BRG = { country_event = 57100 }
+		SCA = { country_event = 57100 }
+		SCA = { 
 			any_owned = {
 				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
+					is_core = MEC
 				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
+				secede_province = THIS
 			}
-			annex_to = THIS
 		}
-		activate_technology = nationalism_n_imperialism
 	}
 }
 

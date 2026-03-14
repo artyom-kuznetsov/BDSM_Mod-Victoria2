@@ -54,12 +54,13 @@ political_decisions = {
 	
 	reassert_aragonese_claims_dec = {
 		potential = {
+			tag = IBE
 			NOT = { 
+				has_country_flag = hide_all_decs_flag
 				has_country_flag = reassert_aragonese_claims_cflag
 				has_country_flag = hide_all_decs_flag 
 				primary_culture = catalan
 			}
-			tag = IBE
 		}
 		
 		allow = {
@@ -75,6 +76,39 @@ political_decisions = {
 			prestige = 5
 			SAR_765 = { add_core = THIS }
 			SIC_763 = { add_core = THIS }
+		}
+	}
+	
+	integrate_napoli_dec = {
+		potential = {
+			has_country_flag = reassert_aragonese_claims_cflag
+			NOT = { 
+				has_country_flag = hide_all_decs_flag
+				has_country_flag = integrate_napoli_cflag
+				has_country_flag = hide_all_decs_flag 
+				primary_culture = catalan
+			}
+			tag = IBE
+		}
+		
+		allow = {
+			NOT = { 
+				government = democracy
+			}
+			pan_nationalism_tech = 1
+			SIC = {
+				all_core = {
+					owned_by = THIS
+				}
+			}
+		}
+		
+		effect = {
+			set_country_flag = integrate_napoli_cflag
+			badboy = 5
+			plurality = -5
+			add_accepted_culture = south_italian
+			SIC = { all_core = { add_core = THIS } }
 		}
 	}
 }
