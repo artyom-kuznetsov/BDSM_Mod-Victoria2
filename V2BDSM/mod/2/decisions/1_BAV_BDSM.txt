@@ -228,6 +228,8 @@ political_decisions = {
     
     dunau_slovenia_integration = {
         potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = slovenia_integrated } 
             primary_culture = south_german
         }
         
@@ -238,6 +240,7 @@ political_decisions = {
         }
         
         effect = {
+			set_country_flag = slovenia_integrated
             add_accepted_culture = croat
             add_core = 767
             add_core = 768

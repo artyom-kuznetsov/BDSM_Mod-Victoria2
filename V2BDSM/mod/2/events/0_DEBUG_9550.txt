@@ -75,10 +75,18 @@ country_event = { # GERMANY
 		name = "noloc"
 		any_country = {
 			limit = {
-				is_culture_group = germanic
+                OR = {
+                    primary_culture = south_german
+                    primary_culture = north_german
+                    primary_culture = rhenish
+                    tag = BOH
+                }
 			}
 			annex_to = THIS
 		}
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
+		activate_technology = nationalism_n_imperialism
 	}
 }
 
