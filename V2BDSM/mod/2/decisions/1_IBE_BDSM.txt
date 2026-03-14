@@ -2,8 +2,17 @@ political_decisions = {
 	form_iberian_union_dec = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
-			is_culture_group = iberian
 			IBE = { exists = no }
+			OR = {
+				primary_culture = central_american
+				primary_culture = basque
+				primary_culture = portuguese
+				primary_culture = catalan
+				primary_culture = spanish
+			}
+			NOT = {
+				#tag = ARI
+			}
 		}
 		
 		allow = {
