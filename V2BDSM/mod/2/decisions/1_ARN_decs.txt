@@ -49,8 +49,9 @@ political_decisions = {
 		}
 		
 		effect = {
+			CUSTOM_TOOLTIP_WARN_ARI = { }
 			change_tag = ARI
-			prestige = 10
+			prestige = 30
 			plurality = -10
 			badboy = 10
 			add_accepted_culture = north_italian
@@ -80,6 +81,65 @@ political_decisions = {
                 limit = { is_core = ARA }
                 remove_core = ARA
             }
+		}
+	}
+	
+	integrate_venice_dec = {
+		potential = {
+			tag = ARI
+			NOT = {
+				has_country_flag = integrate_venice_cflag
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+			owns = 28
+			owns = 736
+			owns = 730
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			plurality = -5
+			add_accepted_culture = venetian
+			set_country_flag = integrate_venice_cflag
+			VENICE_STATE = { add_core = THIS }
+			AUS_729 = { add_core = THIS }
+			AUS_736 = { add_core = THIS }
+		}
+	}
+	
+	form_latin_empire_dec = {
+		potential = {
+			tag = ARN
+			NOT = {
+				exists = LEM
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+			owns = 834
+			owns = 852
+			owns = 805
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_WARN_LEM = { }
+			change_tag = LEM
+			prestige = 40
+			badboy = 10
+			plurality = -5
+			add_accepted_culture = greek
+			country_event = 111001
+			GRE = { all_core = { add_core = THIS } }
+			ALB = { all_core = { add_core = THIS } }
+			TUR_860 = { add_core = THIS }
+			TUR_869 = { add_core = THIS }
 		}
 	}
 }
