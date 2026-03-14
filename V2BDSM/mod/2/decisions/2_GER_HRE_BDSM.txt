@@ -3,12 +3,14 @@ political_decisions = {
         potential = {
             NOT = {
                 exists = GER
+                exists = HLR
             }
 			NOT = { has_country_flag = hide_all_decs_flag }
             OR = {
                 primary_culture = south_german
                 primary_culture = north_german
                 primary_culture = rhenish
+				tag = ELB
             }
         }
         
@@ -30,6 +32,14 @@ political_decisions = {
             add_accepted_culture = south_german
             change_tag = GER
             prestige = 20
+			random_owned = {
+				limit = {
+					owner = {
+						primary_culture = czech
+					}
+				}
+				owner = { primary_culture = czech CUSTOM_TOOLTIP_GER_BOH = { } }
+			}
             any_country = {
                 limit = {
                     OR = {
