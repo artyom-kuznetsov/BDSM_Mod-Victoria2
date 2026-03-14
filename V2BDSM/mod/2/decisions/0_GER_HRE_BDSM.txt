@@ -1,0 +1,51 @@
+political_decisions = {
+    form_germania = {
+        potential = {
+            primary_culture = south_german
+            primary_culture = north_german
+            primary_culture = rhenish
+            NOT = {
+                exists = GER
+            }
+        }
+        
+        allow = {
+            pan_nationalism_tech = 1
+            GER = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+        }
+
+        effect = {
+            add_accepted_culture = rhenish
+            add_accepted_culture = north_german
+            add_accepted_culture = south_german
+            change_tag = GER
+            prestige = 20
+            any_country = {
+                limit = {
+                    OR = {
+                        primary_culture = south_german
+                        primary_culture = rhenish
+                        primary_culture = north_german
+                    }
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+					add_core = THIS
+				}
+                country_event = { id=11101 days=0 }
+            }
+        }
+    }
+}
