@@ -4,6 +4,7 @@ political_decisions = {
 			NOT = { 
 				has_country_flag = hide_all_decs_flag 
 				tag = ARI
+				tag = LEM
 			}
 			IBE = { exists = no }
 			OR = {
@@ -22,6 +23,16 @@ political_decisions = {
 		}
 		
 		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						tag = ARN
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_WARN_IBE = { }
+				}
+			}
 			change_tag = IBE
 			badboy = 10
 			plurality = -10
