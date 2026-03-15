@@ -65,10 +65,108 @@ political_decisions = {
 					owns = 890				
 				}
 			}
+			colonial_offices_tech = 1
 		}
 		effect = {
 			add_accepted_culture = kurdish
 			set_country_flag = accept_kurdish_per_cflag
+		}
+	}
+	
+	form_kurdish_satelit_per_dec = {
+		potential = {
+			OR = {
+				tag = ZND
+				tag = PER	
+			}
+			NOT = {
+				has_country_flag = form_kurdish_satelit_per_cflag
+			}
+		}
+		
+		allow = {
+			war = no
+			891 = {
+				OR = {
+					owned_by = THIS
+					owner = {
+						vassal_of = THIS
+					}
+				}
+			}
+			
+			856 = {
+				OR = {
+					owned_by = THIS
+					owner = {
+						vassal_of = THIS
+					}
+				}
+			}
+			
+			890 = {
+				OR = {
+					owned_by = THIS
+					owner = {
+						vassal_of = THIS
+					}
+				}
+			}
+			
+			924 = {
+				OR = {
+					owned_by = THIS
+					owner = {
+						vassal_of = THIS
+					}
+				}
+			}
+			nationalism_tech = 1
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 2
+			any_country = {
+				limit = {
+					vassal_of = THIS
+					primary_culture = kurdish
+				}
+				annex_to = THIS
+			}
+			SRN = { all_core = { remove_core = SRN } }
+			MKN = { all_core = { remove_core = MKN } }
+			BHT = { all_core = { remove_core = BHT } }
+			BDN = { all_core = { remove_core = BDN } }
+			release_vassal = KDS
+			create_alliance = KDS
+			set_country_flag = form_kurdish_satelit_per_cflag
+		}
+	}
+	
+	remove_kebab_from_kurdish_per_dec = {
+		potential = {
+			has_country_flag = form_kurdish_satelit_per_cflag
+			TUR = {
+				any_owned_province = {
+					is_core = KDS
+				}
+			}
+		}
+		allow = {
+			NOT = { truce_with = TUR }
+			KDS = { vassal_of = THIS}
+		}
+		effect = {
+			KDS = {
+				war = {
+					target TUR
+					call_ally = yes
+					attacker_goal = {
+						casus_belli = acquire_all_cores
+					}
+				}
+			}
 		}
 	}
 	
@@ -86,13 +184,56 @@ political_decisions = {
 			NOT = {
 				exists = CAU
 			}
-			owns = ARMENIA_STATE
-			owns = PER_1112
-			owns = AZERBAIJAN_STATE
+			ARMENIA_STATE = { owned_by = THIS }
+			PER_1112 = { owned_by = THIS }
+			AZERBAIJAN_STATE = { owned_by = THIS }
 		}
 		effect = {
 			add_accepted_culture = armenian
 			set_country_flag = accept_armenian_per_cflag
 		}
 	}	
+	
+	accept_mashriqi_per_dec = {
+		potential = {
+			OR = {
+				tag = ZND
+				tag = PER	
+			}
+			NOT = {
+				has_country_flag = accept_mashriqi_per_cflag
+			}
+		}
+		
+		allow = {
+			IRQ = { all_core = { owned_by = THIS } }
+			colonial_offices_tech = 1
+		}
+		effect = {
+			set_country_flag = accept_mashriqi_per_cflag
+			add_accepted_culture = mashriqi
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
