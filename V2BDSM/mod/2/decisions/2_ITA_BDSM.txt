@@ -1,0 +1,63 @@
+political_decisions = {
+	avanti_italia_dec = {
+		potential = {
+			NOT = { 
+				exists = ITA 
+				tag = BYZ
+			}
+			OR = {
+				primary_culture = north_italian
+				primary_culture = south_italian
+				primary_culture = venetian
+			}
+		}
+		
+		allow = {
+			ITA = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						in_sphere = THIS
+						owner = { vassal_of = THIS }
+					}
+				}
+			}
+			nationalism_tech = 1
+		}
+		
+		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						tag = VEN
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_WARN_VEN_ITA = { }
+				}
+			}
+			prestige = 40
+			badboy = 10
+			change_tag = ITA
+			add_accepted_culture = north_italian
+			add_accepted_culture = south_italian
+			add_accepted_culture = venetian
+			
+			
+            any_country = {
+                limit = {
+                    primary_culture = north_german
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+                country_event = { id=11101 days=0 }
+            }
+		}
+	}
+}
