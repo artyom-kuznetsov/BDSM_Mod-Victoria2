@@ -1,0 +1,39 @@
+political_decisions = {
+	accept_lur_per_dec ={
+		potential = {
+			OR = {
+				tag = ZND
+				tag = PER	
+			}
+			NOT = {
+				has_country_flag = accept_lur_per_cflag
+			}
+		}
+		allow = {
+			war = no
+			nationalism_tech = 1
+		}
+		effect = {
+			add_accepted_culture = lurish
+			set_country_flag = accept_lur_per_cflag
+		}
+	}
+	
+	form_iran_per_dec = {
+		potential = {
+			tag = ZND
+		}
+		allow = {
+			PER = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						in_sphere = THIS
+						owner = { vassal_of = THIS }
+					}
+				}
+			}
+			nationalism_tech = 1
+		}
+	}
+}
