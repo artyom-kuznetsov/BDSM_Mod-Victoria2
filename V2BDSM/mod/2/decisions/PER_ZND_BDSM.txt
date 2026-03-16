@@ -1,4 +1,53 @@
 political_decisions = {
+	lost_legacy_dec = {
+		potential = {
+			tag = PER
+			civilized = yes
+			NOT = { has_country_flag = lost_legacy_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			civilized = yes
+			interchangeable_parts = 1
+			owns = 1144
+			owns = 1139
+			owns = 1142
+			industrial_score = 50
+		}
+		
+		effect = {
+			set_country_flag = lost_legacy_flag
+			prestige = 5
+			1140 = { add_province_modifier = { name = baby_boom duration = 150 } }
+			1143 = { add_province_modifier = { name = baby_boom duration = 180 } }
+			1145 = { add_province_modifier = { name = baby_boom duration = 90 } }
+		}
+	}
+	renovate_tehran_dec = {
+		potential = {
+			tag = PER
+			owns = 1121
+			NOT = { has_country_flag = renovate_tehran_flag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			civilized = yes
+			organic_chemistry = 1
+			NOT = { has_country_modifier = administrative_expenses_modifier }
+		}
+		
+		effect = {
+			set_country_flag = renovate_tehran_flag
+			prestige = 5
+			capital_scope = { add_province_modifier = { name = baby_boom duration = 365 } }
+			add_country_modifier = {
+				name = administrative_expenses_modifier
+				duration = 365
+			}
+		}
+	}
 	accept_lur_per_dec ={
 		potential = {
 			OR = {
