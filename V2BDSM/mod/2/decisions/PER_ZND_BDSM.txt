@@ -48,6 +48,7 @@ political_decisions = {
 			}
 		}
 	}
+	
 	accept_lur_per_dec ={
 		potential = {
 			OR = {
@@ -60,7 +61,7 @@ political_decisions = {
 		}
 		allow = {
 			war = no
-			nationalism_tech = 1
+			state_n_government = 1
 		}
 		effect = {
 			add_accepted_culture = lurish
@@ -90,6 +91,11 @@ political_decisions = {
 			nationalism_tech = 1
 			}
 		}
+		effect = {
+			prestige = 5
+			capital = 1008
+			change_tag = PER
+		}
 	}
 	
 	accept_kurdish_per_dec = {
@@ -98,20 +104,27 @@ political_decisions = {
 				tag = ZND
 				tag = PER	
 			}
-			#has_country_flag = accept_lur_per_cflag
+			has_country_flag = accept_lur_per_cflag
 			NOT = {
 				has_country_flag = accept_kurdish_per_cflag
 			}
 		}
 		allow = {
-			OR = {
-				AND = {
-					SRN = { vassal_of = THIS }
-					MKN = { vassal_of = THIS }
+			890 = {
+				OR = {
+					owned_by = THIS
+					owner = {
+						vassal_of = THIS
+					}
 				}
-				AND = {
-					owns = 924				
-					owns = 890				
+			}
+			
+			924 = {
+				OR = {
+					owned_by = THIS
+					owner = {
+						vassal_of = THIS
+					}
 				}
 			}
 			colonial_offices_tech = 1
@@ -128,6 +141,7 @@ political_decisions = {
 				tag = ZND
 				tag = PER	
 			}
+			has_country_flag = accept_lur_per_cflag
 			NOT = {
 				has_country_flag = form_kurdish_satelit_per_cflag
 			}
@@ -135,38 +149,40 @@ political_decisions = {
 		
 		allow = {
 			war = no
-			891 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						vassal_of = THIS
+			OR = {
+				891 = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							vassal_of = THIS
+						}
 					}
 				}
-			}
 			
-			856 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						vassal_of = THIS
+				856 = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							vassal_of = THIS
+						}
 					}
 				}
-			}
 			
-			890 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						vassal_of = THIS
+				890 = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							vassal_of = THIS
+						}
 					}
 				}
-			}
 			
-			924 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						vassal_of = THIS
+				924 = {
+					OR = {
+						owned_by = THIS
+						owner = {
+							vassal_of = THIS
+						}
 					}
 				}
 			}
@@ -208,13 +224,11 @@ political_decisions = {
 		}
 		effect = {
 			KDS = {
-				war = {
-					target TUR
-					call_ally = yes
-					attacker_goal = {
-						casus_belli = acquire_all_cores
-					}
-				}
+				country_event = { id =110900 days = 30 }
+			}
+			
+			TUR = {
+				country_event = { id = 120000  days = 0}
 			}
 		}
 	}
