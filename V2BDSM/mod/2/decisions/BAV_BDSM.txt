@@ -53,6 +53,7 @@ political_decisions = {
             add_accepted_culture = rhenish
             change_tag = SGF
             prestige = 10
+			plurality = -2
             any_country = {
                 limit = {
                     OR = {
@@ -196,6 +197,7 @@ political_decisions = {
 			set_country_flag = german_rhine_integrated
 			prestige = 10
 			badboy = 3
+			plurality = -2
             PRU_581 = {
                 add_core = THIS
             }
@@ -244,10 +246,22 @@ political_decisions = {
         effect = {
 			set_country_flag = slovenia_integrated
             add_accepted_culture = croat
+            prestige = -10
+			plurality = -8
 			badboy = 5
             add_core = 767
             add_core = 768
 			AUS_736 = { add_core = THIS }
+            any_pop = {
+                limit = { has_pop_culture = croat }
+                militancy = -6
+                consciousness = -2
+            }
+            any_pop = {
+                limit = { has_pop_culture = south_german }
+                militancy = 2
+                consciousness = 4
+            }
         }
     }
 }
