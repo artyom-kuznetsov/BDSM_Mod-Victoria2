@@ -115,7 +115,9 @@ political_decisions = {
     croatia_VEN_dec = {
         potential = {
             has_country_flag = dalmatia_cores_cflag
-            NOT = { has_country_flag = croatia_VEN_cflag }
+            NOT = { 
+				has_country_flag = croatia_VEN_cflag 
+			}
         }
 
         allow = {
@@ -124,6 +126,7 @@ political_decisions = {
         }
 
         effect = {
+			CUSTOM_TOOLTIP_WARN_VEN_CRO = { }
 			plurality = -5
 			badboy = 5
 			add_accepted_culture = croat
@@ -133,6 +136,35 @@ political_decisions = {
 				}
 				add_core = THIS
 			}
+            set_country_flag = croatia_VEN_cflag
+        }
+    }
+	
+    valley_of_kings_dec = {
+        potential = {
+            primary_culture = venetian
+            NOT = { 
+				has_country_flag = croatia_VEN_cflag 
+			}
+        }
+
+        allow = {
+            colonial_offices_tech = 1
+			OR = {
+				owns = 1745
+				owns = 1746
+			}
+		}
+
+        effect = {
+			CUSTOM_TOOLTIP_WARN_VEN_EGY = { }
+			plurality = -5
+			badboy = 5
+			add_accepted_culture = misri
+            EGY_1751 = { add_core = THIS }
+            EGY_1745 = { add_core = THIS }
+            EGY_1762 = { add_core = THIS }
+            EGY_1771 = { add_core = THIS }
             set_country_flag = croatia_VEN_cflag
         }
     }
