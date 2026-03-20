@@ -1,0 +1,47 @@
+political_decisions = {
+	unite_moldavia_wallachia = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			primary_culture = romanian
+			NOT = { exists = ROM }
+		}
+
+		allow = {
+			state_n_government = 1
+			
+			664 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+			670 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
+		}
+
+		effect = {
+			plurality = 10
+			prestige = 10
+			ROM = {
+				all_core = {
+					limit = {
+						OR = {
+							owner = { vassal_of = THIS }
+							owner = { in_sphere = THIS }
+						}
+					}
+					secede_province = THIS
+				}
+			}
+			capital = 664
+			add_accepted_culture = transylvanian
+			change_tag = ROM
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

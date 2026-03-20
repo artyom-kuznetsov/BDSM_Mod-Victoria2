@@ -1,0 +1,228 @@
+political_decisions = {
+
+	form_russia_dec = {
+		potential = {
+			is_culture_group = east_slavic
+			NOT = { exists = RUS }
+		}
+		
+		allow = {
+			nationalism_tech = 1
+			MUS = {
+				all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { in_sphere = THIS }
+                        owner = { vassal_of = THIS }
+                    }
+				}
+			}
+			NOV = {
+				all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { in_sphere = THIS }
+                        owner = { vassal_of = THIS }
+                    }
+				}
+			}
+		}
+		
+		effect = {
+			prestige = 25
+			change_tag = RUS
+			add_accepted_culture = russian
+			add_accepted_culture = ugrian
+            any_country = {
+                limit = {
+					OR = {
+						primary_culture = russian
+						primary_culture = ugrian
+					}
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS
+					}
+                }
+				any_owned = {
+					add_core = THIS
+				}
+                country_event = 11101
+            }
+		}
+	}
+
+
+	establish_the_sovnarkom = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = RUS
+			NOT = {
+				has_country_flag = big_brother_is_watching
+			}
+			government = proletarian_dictatorship
+		}
+		allow = {
+			mass_politics = 1
+		}
+		
+		effect = {
+			plurality = 1
+			any_pop = {
+				militancy = -1
+				consciousness = -1
+				ideology = {
+					value = socialist
+					factor = 0.05
+				}
+			}
+			prestige = 5
+			set_country_flag = big_brother_is_watching
+		}
+	}
+	
+	manifesto_on_unshakable_autocracy = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			tag = RUS
+			government = absolute_monarchy
+			NOT = {
+				has_country_flag = the_manifesto
+			}
+			nationalism_n_imperialism = 1
+		}
+		
+		allow = {
+			revolution_n_counterrevolution = 1
+		}
+		
+		effect = {
+			plurality = 5
+			prestige = 5
+			badboy = 3
+			any_pop = {
+				consciousness = -0.5
+				militancy = 0.5
+			}
+			set_country_flag = the_manifesto
+		}
+	}
+	
+	sovetization_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = sovetization_flag }
+			tag = RUS
+			OR = {
+				government = social_republic
+				government = proletarian_dictatorship
+			}
+			year = 1900
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_country_flag = sovetization_flag
+			clr_country_flag = decommunization_flag
+			975 = { change_province_name = "Сталино" }
+			972 = { change_province_name = "Днепропетровск" }
+			969 = { change_province_name = "Первомайск" }
+			1039 = { change_province_name = "Сталинград" }
+			1045 = { change_province_name = "Миллерово" }
+			1046 = { change_province_name = "Волгодонск" }
+			1048 = { change_province_name = "Краснодар" }
+			1051 = { change_province_name = "Майкоп" }
+			1028 = { change_province_name = "Киров" }
+			976 = { change_province_name = "Жданов" }
+			980 = { change_province_name = "Ворошиловград" }
+			1034 = { change_province_name = "Куйбышев" }
+			1020 = { change_province_name = "Горький" }
+			998 = { change_province_name = "Калинин" }
+			1044 = { change_province_name = "Чкалов" }
+			1026 = { change_province_name = "Молотов" }
+			1058 = { change_province_name = "Свердловск" }
+			994 = { change_province_name = "Ленинград" }
+			1026 = { change_province_name = "Устинов" }
+			349 = { change_province_name = "Таллинн" }
+			352 = { change_province_name = "Тарту" }
+			2644 = { limit = { 2644 = { owned_by = THIS } } change_province_name = "Сталинабад" }
+			1194 = { limit = { 1194 = { owned_by = THIS } } change_province_name = "Шевченко" }
+			1189 = { limit = { 1189 = { owned_by = THIS } } change_province_name = "Фрунзе" }
+			1099 = { limit = { 1099 = { owned_by = THIS } } change_province_name = "Ленинакан" }
+			1054 = { limit = { 1054 = { owned_by = THIS } } change_province_name = "Орджоникидзе" }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	decommunization_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			has_country_flag = sovetization_flag
+			NOT = { has_country_flag = decommunization_flag }
+			tag = RUS
+			NOT = {
+				government = social_republic
+				government = proletarian_dictatorship
+			}
+		}
+		
+		allow = {
+		}
+		
+		effect = {
+			set_country_flag = decommunization_flag
+			clr_country_flag = sovetization_flag
+			975 = { change_province_name = "Донецк" }
+			1039 = { change_province_name = "Волгоград" }
+			976 = { change_province_name = "Мариуполь" }
+			1034 = { change_province_name = "Самара" }
+			980 = { change_province_name = "Луганск" }
+			1020 = { change_province_name = "Нижний Новгород" }
+			998 = { change_province_name = "Тверь" }
+			1044 = { change_province_name = "Оренбург" }
+			1026 = { change_province_name = "Пермь" }
+			1058 = { change_province_name = "Екатеринбург" }
+			994 = { change_province_name = "Санкт-Петербург" }
+			1026 = { change_province_name = "Ижевск" }
+			2644 = { limit = { 2644 = { owned_by = THIS } } change_province_name = "Душанбе" }
+			1194 = { limit = { 1194 = { owned_by = THIS } } change_province_name = "Актау" }
+			1189 = { limit = { 1189 = { owned_by = THIS } } change_province_name = "Бишкек" }
+			1099 = { limit = { 1099 = { owned_by = THIS } } change_province_name = "Гюмри" }
+			1054 = { limit = { 1054 = { owned_by = THIS } } change_province_name = "Владикавказ" }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	volga_caspian_channel_dec = {
+		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			owns = 979
+			owns = 1040
+			owns = 1045
+			NOT = { has_global_flag = volgo_caspian_channel_gflag }
+			cheap_iron = 1
+		}
+		
+		allow = {
+			cheap_steel = 1
+			steam_turbine = 1
+			money = 250000
+		}
+		
+		effect = {
+			prestige = 10
+			CUSTOM_TOOLTIP_CASPIAN_CANAL = { }
+			enable_canal = 20
+			money = -250000
+			set_global_flag = volgo_caspian_channel_gflag
+		}
+		
+	}
+}

@@ -1,0 +1,209 @@
+political_decisions = {
+	ARI_form_dec = {
+		potential = {
+			tag = ARN
+			ARI = { exists = no }
+			ITA = { exists = no }
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			nationalism_tech = 1
+			nationalism_n_imperialism = 1
+			
+            OR = { always = yes CUSTOM_REQUIREMENT_ARI = { } CUSTOM_REQUIREMENT_EXPLANATION = { } }
+			
+			744 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { ai = no in_sphere = THIS } }
+			}
+			742 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { ai = no in_sphere = THIS } }
+			}
+			739 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { ai = no in_sphere = THIS } }
+			}
+			738 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { ai = no in_sphere = THIS } }
+			}
+			724 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { ai = no in_sphere = THIS } }
+			}
+			owns = 754
+			owns = 749
+            OR = {
+                government = absolute_monarchy
+                government = prussian_constitutionalism
+                government = hms_government
+            }
+			
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_WARN_ARI = { }
+			change_tag = ARI
+			prestige = 30
+			plurality = -10
+			badboy = 10
+			add_accepted_culture = north_italian
+			capital = 749
+			ITA = {
+				all_core = {
+					add_core = THIS
+				}
+			}
+			any_country = {
+				limit = {
+					OR = {
+						primary_culture = north_italian
+						primary_culture = south_italian
+						primary_culture = venetian
+					}
+					ai = yes
+					OR = {
+						vassal_of = THIS
+						in_sphere = THIS
+					}
+				}
+				country_event = 11101
+			}
+
+            any_owned = {
+                limit = { is_core = ARA }
+                remove_core = ARA
+            }
+		}
+	}
+	
+	integrate_venice_dec = {
+		potential = {
+			tag = ARI
+			NOT = {
+				has_country_flag = integrate_venice_cflag
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+			owns = 28
+			owns = 736
+			owns = 730
+		}
+		
+		effect = {
+			prestige = 10
+			badboy = 5
+			plurality = -5
+			add_accepted_culture = venetian
+			set_country_flag = integrate_venice_cflag
+			VENICE_STATE = { add_core = THIS }
+			AUS_729 = { add_core = THIS }
+			AUS_736 = { add_core = THIS }
+		}
+	}
+	
+	form_latin_empire_dec = {
+		potential = {
+			tag = ARN
+			NOT = {
+				exists = LEM
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+			owns = 834
+			owns = 852
+			owns = 805
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_WARN_LEM = { }
+			change_tag = LEM
+			prestige = 40
+			badboy = 10
+			plurality = -5
+			add_accepted_culture = greek
+			country_event = 111001
+			GRE = { all_core = { add_core = THIS } }
+			ALB = { all_core = { add_core = THIS } }
+			TUR_860 = { add_core = THIS }
+			TUR_869 = { add_core = THIS }
+		}
+	}
+	
+	freedom_of_conscience_lem_dec = {
+		potential = {
+			tag = LEM
+			NOT = {
+				has_country_flag = freedom_of_conscience_lem_cflag
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+			public_meetings = yes_meeting
+			citizens_rights = all_voting_pops
+			owns = 869
+			owns = 859
+			OR = {
+				owns = 875
+				owns = 865
+				owns = 860
+			}
+		}
+		
+		effect = {
+			set_country_flag = freedom_of_conscience_lem_cflag
+			prestige = 10
+			badboy = 10
+			plurality = -10
+			add_accepted_culture = turkish
+			add_accepted_culture = albanian
+			CONSTANTINOPLE_STATE = { add_core = THIS }
+		}
+	}
+	
+	western_mediterranean_dec = {
+		potential = {
+			tag = LEM
+			NOT = {
+				has_country_flag = western_mediterranean_cflag
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+			public_meetings = yes_meeting
+			citizens_rights = all_voting_pops
+			owns = 470
+			OR = {
+				owns = 453
+				owns = 461
+			}
+		}
+		
+		effect = {
+			set_country_flag = western_mediterranean_cflag
+			prestige = 10
+			badboy = 5
+			plurality = -5
+			add_accepted_culture = provencal
+			PRV = { all_core = { add_core = THIS } }
+			SOUTH_FRANCE_STATE = { add_core = THIS }
+		}
+	}
+}

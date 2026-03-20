@@ -1,0 +1,310 @@
+political_decisions = {
+	province_selector_event_dec = {
+		potential = {
+			tag = WBK
+			META_1 = {
+				owner = {
+					ai = no
+					any_owned_province = { has_building = province_selector }
+				}
+			}
+		}
+		allow = {
+		}
+		effect = {
+			any_country = {
+				limit = {
+					ai = no
+					any_owned_province = { has_building = province_selector }
+				}
+				random_owned = {
+					limit = {
+						has_building = province_selector
+					}
+					province_event = {
+						## Audax Validator "." Ignore_NEXT
+						id = 140407 days = 0
+					}
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+			}
+		}
+		
+		ai_will_do = { factor = 1 }
+	}
+	
+	1836_setup_dec = {
+		potential = {
+			tag = WBK
+			NOT = { has_global_flag = 1836_setup_complete_flag }
+		}
+		allow = { }
+		effect = {
+			set_country_flag = wbk_tag_cflag
+			enable_canal = 4
+			enable_canal = 5
+			enable_canal = 6
+			enable_canal = 7
+			enable_canal = 8
+			enable_canal = 9
+			enable_canal = 10
+			enable_canal = 11
+			enable_canal = 12
+			enable_canal = 13
+			enable_canal = 14
+			enable_canal = 15
+			enable_canal = 16
+			enable_canal = 17
+			enable_canal = 18
+			enable_canal = 19
+			set_variable = { which = season_randomizer value = 0 }
+			country_event = 140411
+			country_event = 140400
+			country_event = 140403
+			set_global_flag = 1836_setup_complete_flag
+			
+			META_SPAIN = {
+				add_core = IBE
+			}
+			
+			SCA = {
+				any_pop = {
+					limit = {
+						culture = north_german
+					}
+					literacy = 0.5
+				}
+			}
+			
+			any_country = {
+				limit = {
+					OR = {
+						tag = BOH
+						primary_culture = south_german
+						primary_culture = north_german
+						primary_culture = rhenish
+					}
+					NOT = { tag = COU }
+				}
+				set_country_flag = hre_country_cflag
+			}
+			
+			
+			any_country = {
+				limit = {
+					positivism = 1
+				}
+				social_reform = low_schools
+			}
+			any_country = {
+				activate_technology = hidden_tech
+				leadership = 60
+			}
+			any_country = {
+				limit = { early_classical_theory_and_critique = 1 }
+				set_country_flag = early_classical_theory_and_critique_invented
+				set_variable = {
+					which = economic_thought_level
+					value = 1
+				}
+			}
+			### EVERYONE PAID FOR NAVAL BASES! # v4.6.3
+			any_country = {
+				limit = {
+					num_of_ports = 1
+				}
+				add_country_modifier = {
+					name = naval_bases_paid_cmodifier
+					duration = 730
+				}
+			}
+			
+			### ANNEX VASSAL INITIAL COOLDOWN
+			any_country = {
+				limit = {
+					num_of_vassals = 1
+				}
+				add_country_modifier = {
+					name = vassal_annex_cooldown_cmod
+					duration = 3650
+				}
+			}
+			
+			META_1 = {
+				zbankers = {
+					pop_type = farmers
+				}
+			}
+			
+			### AFRICA COLONIZATION BLOCKS
+			# MALARIA
+			CNG = { set_country_flag = malaria_blocked_country_flag }
+			LOA = { set_country_flag = malaria_blocked_country_flag }
+			OYO = { set_country_flag = malaria_blocked_country_flag }
+			ASH = { set_country_flag = malaria_blocked_country_flag }
+			BEN = { set_country_flag = malaria_blocked_country_flag }
+			ARO = { set_country_flag = malaria_blocked_country_flag }
+			WRI = { set_country_flag = malaria_blocked_country_flag }
+			DAH = { set_country_flag = malaria_blocked_country_flag }
+			GBU = { set_country_flag = malaria_blocked_country_flag }
+			JAL = { set_country_flag = malaria_blocked_country_flag }
+			MAJ = { set_country_flag = malaria_blocked_country_flag }
+			GEL = { set_country_flag = malaria_blocked_country_flag }
+			MAD = { set_country_flag = malaria_blocked_country_flag }
+			GAZ = { set_country_flag = malaria_blocked_country_flag }
+			# SEVERE MALARIA
+			LUN = { set_country_flag = severe_malaria_blocked_country_flag }
+			KUB = { set_country_flag = severe_malaria_blocked_country_flag }
+			KZB = { set_country_flag = severe_malaria_blocked_country_flag }
+			RWA = { set_country_flag = severe_malaria_blocked_country_flag }
+			KGW = { set_country_flag = severe_malaria_blocked_country_flag }
+			TOR = { set_country_flag = severe_malaria_blocked_country_flag }
+			SOK = { set_country_flag = severe_malaria_blocked_country_flag }
+			DND = { set_country_flag = severe_malaria_blocked_country_flag }
+			MOS = { set_country_flag = severe_malaria_blocked_country_flag }
+			MAS = { set_country_flag = severe_malaria_blocked_country_flag }
+			SEG = { set_country_flag = severe_malaria_blocked_country_flag }
+			KNG = { set_country_flag = severe_malaria_blocked_country_flag }
+			
+			any_country = {
+				limit = { is_greater_power = yes }
+				diplomatic_influence = {
+					who = MOR
+					value = -50
+				}
+			}
+			any_country = {
+				add_country_modifier = {
+					name = force_reform_cooldown_modifier
+					duration = 3650
+				}
+				random_owned = {
+					limit = {
+						is_capital = yes
+						NOT = { has_province_modifier = capital_supply_depot_pmodifier }
+					}
+					add_province_modifier = { name = capital_supply_depot_pmodifier duration = -1 }
+				}
+			}
+			any_country = {
+				limit = {
+					is_independant = no
+				}
+				badboy = 24
+			}
+			any_country = {
+				limit = {
+					OR = {
+						continent = south_america
+						continent = north_america
+						continent = oceania
+					}
+					ai = no
+				}
+				set_country_flag = migration_magnet_cflag
+			}
+			CIV = { money = 2000000 }
+			any_country = {
+				any_owned = {
+					limit = {
+						total_pops = 400000
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 9
+				}
+				any_owned = {
+					limit = {
+						total_pops = 350000
+						NOT = { total_pops = 400000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 8
+				}
+				any_owned = {
+					limit = {
+						total_pops = 300000
+						NOT = { total_pops = 350000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 7
+				}
+				any_owned = {
+					limit = {
+						total_pops = 260000
+						NOT = { total_pops = 300000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 6
+				}
+				any_owned = {
+					limit = {
+						total_pops = 220000
+						NOT = { total_pops = 260000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 5
+				}
+				any_owned = {
+					limit = {
+						total_pops = 180000
+						NOT = { total_pops = 220000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 4
+				}
+				any_owned = {
+					limit = {
+						total_pops = 130000
+						NOT = { total_pops = 180000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 3
+				}
+				any_owned = {
+					limit = {
+						total_pops = 80000
+						NOT = { total_pops = 130000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 2
+				}
+				any_owned = {
+					limit = {
+						total_pops = 40000
+						NOT = { total_pops = 80000 }
+					}
+					## Audax Validator "." Ignore_NEXT
+					farmland = 1
+				}
+			}
+			any_pop = {
+				money = 2000000
+			}
+			any_country = {
+				treasury = 200000
+			}
+			CIV = { 
+				# Audax Validator "." Ignore_NEXT
+				annex_to = FROM 
+			}
+			
+			any_country = { # мер опюб цнкняю
+				limit = {
+					vote_franschise = none_voting
+					NOT = { has_country_flag = none_voting_flag }
+				}
+				set_country_flag = none_voting_flag
+			}
+			any_country = { # цнкнясчр анцюрше
+				limit = {
+					vote_franschise = wealth_weighted_voting
+					NOT = { has_country_flag = wealth_weighted_voting_flag }
+				}
+				set_country_flag = wealth_weighted_voting_flag
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+	
+}

@@ -1,0 +1,120 @@
+political_decisions = {
+	hellenic_parliament = {
+		potential = {
+			tag = GRE
+			government = absolute_monarchy
+			NOT = {
+				has_country_flag = voule_ton_ellinon
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+	
+		allow = {
+			plurality = 3
+			prestige = 1
+		}
+		
+		effect = {
+			plurality = 5
+			set_country_flag = voule_ton_ellinon
+			political_reform = wealth_weighted_voting
+			government = hms_government
+			any_pop = {
+				militancy = -2
+			}
+		}
+	}
+	
+	megali_idea = {
+		potential = {
+			tag = GRE
+			NOT = {
+				has_country_flag = greece_has_got_a_brand_new_bag
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			owns = 840
+			owns = 834
+			nationalism_tech = 1
+		}
+		
+		effect = {
+			prestige = 20
+			badboy = -5
+			TUR_860 = {
+				add_core = GRE
+			}
+			set_country_flag = greece_has_got_a_brand_new_bag
+		}
+	}
+	
+	northern_provinces_dec = {
+		potential = {
+			tag = GRE
+			NOT = {
+				has_country_flag = northern_provinces_flag
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+			owns = 831
+		}
+		
+		allow = {
+			nationalism_n_imperialism = 1
+		}
+		
+		effect = {
+			prestige = 5
+			TUR_853 = {
+				add_core = GRE
+			}
+			SKOPIA_STATE = {
+				add_core = GRE
+			}
+			set_country_flag = northern_provinces_flag
+			add_accepted_culture = albanian
+		}
+	}
+	
+	form_byzantine_empire = {
+		potential = {
+			tag = GRE		
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			owns = 869
+			owns = 863
+			owns = 860
+			owns = 822
+			owns = 831
+			owns = 840
+			owns = 834
+		}
+		
+		effect = {
+			plurality = 10
+			change_tag = BYZ
+			capital = 860
+			860 = {
+				change_province_name = "Константинополь"
+			}
+			any_owned = {
+				limit = {
+					is_colonial = no
+					OR = {
+						culture = greek
+						culture = turkish
+					}
+				}
+				add_core = BYZ
+			}
+			prestige = 40
+			badboy = -10
+			add_accepted_culture = turkish
+			add_accepted_culture = bulgarian
+			add_accepted_culture = serb
+		}
+	}
+}
