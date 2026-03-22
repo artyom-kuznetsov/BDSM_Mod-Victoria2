@@ -172,24 +172,21 @@ political_decisions = {
     north_italia_dec = {
         potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = north_italian_union }
+			NOT = { has_country_flag = north_italian_union_cflag }
             OR = {
                 primary_culture = north_italian
-                tag = VEN
+                primary_culture = venetian
             }
         }
         
         allow = {
 			OR = { always = yes CUSTOM_REQUIREMENT_FORMNOTRHITALIA = { } CUSTOM_REQUIREMENT_EXPLANATION = { } }
             nationalism_tech = 1
-            SAV = {
-                all_core = {
-                    OR = {
-                        owned_by = THIS
-                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                    }
-                }
-            }
+			720 = { OR = {
+				owned_by = THIS
+				owner = { vassal_of = THIS }
+				owner = { in_sphere = THIS } }
+			}
             LOM = {
                 all_core = {
                     OR = {
@@ -253,6 +250,16 @@ political_decisions = {
         }
         
         effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						primary_culture = venetian
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_WARN_VEN_ITA = { }
+				}
+			}
             prestige = 15
 			badboy = 5
             add_accepted_culture = north_italian
@@ -282,7 +289,7 @@ political_decisions = {
             EMILIA_STATE = { add_core = THIS }
             ROMAGNA_STATE = { add_core = THIS }
             TUS_744 = { add_core = THIS }
-            set_country_flag = north_italian_union
+            set_country_flag = north_italian_union_cflag
         }
     }
 }
