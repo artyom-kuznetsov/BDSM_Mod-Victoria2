@@ -79,4 +79,57 @@ political_decisions = {
 			PRU_581 = { add_core = THIS }
 		}
 	}
+	
+	brg_form_france_dec = {
+		potential = {
+			tag = BRG
+			NOT = {
+				exists = FRA
+			}
+		}	
+		
+		allow = {
+			colonial_offices_tech = 1
+			owns = 408
+			owns = 438
+			owns = 449
+			owns = 451
+			owns = 428
+		}
+		
+		effect = {
+			change_tag = FRA
+			prestige = 50
+			plurality = -10
+			badboy = 10
+			add_accepted_culture = french
+		}
+	}
+	
+	integrate_occitania_dua_fra_dec = {
+		potential = {
+			NOT = { accepted_culture = provencal }
+			OR = {
+				tag = FRA
+				AND = {
+					tag = DUA
+					has_country_flag = dua_stability_focus_cflag
+				}
+			}
+		}	
+		
+		allow = {
+			pan_nationalism_tech = 1
+			owns = 470
+			owns = 461
+			owns = 447
+		}
+		
+		effect = {
+			prestige = 10
+			plurality = -5
+			badboy = 5
+			add_accepted_culture = provencal
+		}
+	}
 }
