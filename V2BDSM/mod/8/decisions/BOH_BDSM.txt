@@ -1,6 +1,7 @@
 political_decisions = {
     form_elbian_federation_dec = {
         potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
             tag = BOH
         }
         
@@ -142,15 +143,32 @@ political_decisions = {
                 limit = { is_core = GER }
                 add_core = ELB
             }
-            #Osnabruk
-            538 = {
-                add_core = ELB
+            MEC = {
+                all_core = {
+                    add_core = THIS
+                }
             }
+            OLD = {
+                all_core = {
+                    add_core = THIS
+                }
+            }
+            LIP = {
+                all_core = {
+                    add_core = THIS
+                }
+            }
+            #Osnabruk
+            538 = { add_core = THIS }
+            HAN_534 = { add_core = THIS }
+            WESTFALEN_STATE = { add_core = THIS }
+            SAX_561 = { add_core = THIS }
         }
     }
 	
 	integrate_pomerania_boh_dec = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			owns = 544
 			owns = 546
 			OR = {
@@ -213,6 +231,7 @@ political_decisions = {
     
 	form_zapadoslavia_dec = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = {
 				exists = WSF
 				tag = GER
@@ -289,6 +308,7 @@ political_decisions = {
     
     integrate_german_rhine_ELB_dec = {
         potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
             tag = ELB
 			NOT = { has_country_flag = german_rhine_integrated } 
         }

@@ -168,4 +168,120 @@ political_decisions = {
             set_country_flag = croatia_VEN_cflag
         }
     }
+    
+    north_italia_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = north_italian_union }
+            OR = {
+                primary_culture = north_italian
+                tag = VEN
+            }
+        }
+        
+        allow = {
+            nationalism_tech = 1
+            SAV = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            LOM = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            TUS = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            PAR = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            MOD = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            LUC = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            RMG = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            730 = {
+                OR = {
+                    owned_by = THIS
+                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                }
+            }
+            724= {
+                OR = {
+                    owned_by = THIS
+                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                }
+            }
+        }
+        
+        effect = {
+            prestige = 15
+			badboy = 5
+            add_accepted_culture = north_italian
+            add_accepted_culture = venetian
+            any_country = {
+                limit = {
+                    primary_culture = north_italian
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+                country_event = { id=11101 days=0 }
+            }
+            SAV = {
+                all_core = {
+                    add_core = THIS
+                }
+            }
+            LIGURIA_STATE = { add_core = THIS }
+            AUS_726 = { add_core = THIS }
+            AUS_729 = { add_core = THIS }
+            EMILIA_STATE = { add_core = THIS }
+            ROMAGNA_STATE = { add_core = THIS }
+            TUS_744 = { add_core = THIS }
+            set_country_flag = north_italian_union
+        }
+    }
 }
