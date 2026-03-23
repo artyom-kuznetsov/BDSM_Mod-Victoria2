@@ -45,4 +45,101 @@ political_decisions = {
 			set_country_flag = serbia_annexed_cflag
 		}
 	}
+    
+    army_tanzimat_reform_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			has_country_modifier  = army_issues_tanzimat_cmodifier
+            tag = TUR
+        }
+        
+        allow = {
+            army_professionalism = 1
+            introspectionism = 1
+            literacy = 0.1
+        }
+        
+        effect = {
+            prestige = 2
+            plurality = 1
+            conscription = ref_professional_army
+            public_meetings = yes_meeting
+            remove_country_modifier = army_issues_tanzimat_cmodifier
+        }
+    }
+    
+    naval_tanzimat_reform_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			has_country_modifier  = naval_issues_tanzimat_cmodifier
+            tag = TUR
+        }
+        
+        allow = {
+            clipper_design = 1
+            freedom_of_trade = 1
+            literacy = 0.1
+            total_amount_of_ships = 50
+        }
+        
+        effect = {
+            prestige = 2
+            plurality = 1
+            add_core = 855
+            add_core = 857
+            remove_country_modifier = naval_issues_tanzimat_cmodifier
+        }
+    }
+    
+    admin_issues_tanzimat_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			has_country_modifier  = admin_issues_tanzimat_cmodifier
+            tag = TUR
+        }
+        
+        allow = {
+            functionalism = 1
+            state_n_government = 1
+            literacy = 0.15
+        }
+        
+        effect = {
+            prestige = 2
+            plurality = 1
+            press_rights = censored_press
+            centralization = unitary
+            debt_law = peonage
+            remove_country_modifier = admin_issues_tanzimat_cmodifier
+        }
+    }
+    
+    tanzimat_end_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = tanzimat_end_cflag }
+            tag = TUR
+        }
+        
+        allow = {
+			NOT = { has_country_modifier = admin_issues_tanzimat_cmodifier }
+			NOT = { has_country_modifier = naval_issues_tanzimat_cmodifier }
+			NOT = { has_country_modifier = army_issues_tanzimat_cmodifier }
+        }
+        
+        effect = {
+            prestige = 5
+            debt_law = debtors_prisons
+            research_points = 1000
+            plurality = 5
+            TUR = {
+                add_country_modifier = {
+                    name = tanzimat_final_cmodifier
+                    duration = 365
+                }
+            }
+            add_country_flag = tanzimat_end_cflag
+            citizens_rights = culture_voting_only
+        }
+    }
 }
