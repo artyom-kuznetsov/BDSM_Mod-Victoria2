@@ -623,18 +623,21 @@ country_event = { # FAST CB
 }
 
 
-country_event = { # CHECK FLAG
+country_event = { # RUS
     id = 9580
     title = "noloc"
     desc = "noloc"
 	
-	trigger = {
-		always = no
-		has_country_flag = hre_country_cflag
-	}
+	is_triggered_only = yes
 
     option = {
         name = "noloc"
+		META_1 = {
+			limit = {
+				is_core = RUS
+			}
+			secede_province = THIS
+		}
     }
 }
 
