@@ -62,6 +62,7 @@ political_decisions = {
         effect = {
             prestige = 2
             plurality = 1
+            research_points = 500
             conscription = ref_professional_army
             public_meetings = yes_meeting
             remove_country_modifier = army_issues_tanzimat_cmodifier
@@ -85,6 +86,7 @@ political_decisions = {
         effect = {
             prestige = 2
             plurality = 1
+            research_points = 500
             add_core = 855
             add_core = 857
             remove_country_modifier = naval_issues_tanzimat_cmodifier
@@ -107,6 +109,7 @@ political_decisions = {
         effect = {
             prestige = 2
             plurality = 1
+            research_points = 500
             press_rights = censored_press
             centralization = unitary
             debt_law = peonage
@@ -129,9 +132,9 @@ political_decisions = {
         
         effect = {
             prestige = 5
-            debt_law = debtors_prisons
-            research_points = 1000
             plurality = 5
+            research_points = 2000
+            debt_law = debtors_prisons
             TUR = {
                 add_country_modifier = {
                     name = tanzimat_final_cmodifier
@@ -140,6 +143,142 @@ political_decisions = {
             }
             add_country_flag = tanzimat_end_cflag
             citizens_rights = culture_voting_only
+        }
+    }
+    
+    balkan_after_tanzimat_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = balkan_after_tanzimat_cflag }
+            tag = TUR
+        }
+        
+        allow = {
+            has_country_modifier = army_issues_tanzimat_cmodifier
+            owns = 809
+            owns = 806
+            owns = 815
+			OR = {
+				citizens_rights = culture_voting_only
+				citizens_rights = all_voting_pops
+			}
+            military_plans = 1
+            positivism = 1
+            plurality = 60
+        }
+        
+        effect = {
+            add_country_modifier = balkan_after_tanzimat_cflag
+            prestige = 5
+            badboy = 5
+            plurality = -5
+            add_accepted_culture = albanian
+            add_accepted_culture = bulgarian
+            806 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            809 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            815 = { add_province_modifier = { name = baby_boom duration = 365 } }
+        }
+    }
+    
+    misri_after_tanzimat_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = misri_after_tanzimat_cflag }
+            tag = TUR
+        }
+        
+        allow = {
+            has_country_modifier = naval_issues_tanzimat_cmodifier
+            owns = 1745
+			OR = {
+				citizens_rights = culture_voting_only
+				citizens_rights = all_voting_pops
+			}
+            steamers = 1
+            market_structure = 1
+            plurality = 60
+        }
+        
+        effect = {
+            add_country_modifier = misri_after_tanzimat_cflag
+            prestige = 5
+            badboy = 4
+            plurality = -2
+            add_accepted_culture = misri
+            1745 = { add_province_modifier = { name = colonial_exploitation duration = 365 } }
+            1751 = { add_province_modifier = { name = colonial_exploitation duration = 365 } }
+            1746 = { add_province_modifier = { name = colonial_exploitation duration = 365 } }
+        }
+    }
+    
+    kurd_after_tanzimat_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = kurd_after_tanzimat_cflag }
+			NOT = { has_country_modifier = mashriqi_after_tanzimat_cflag }
+            tag = TUR
+        }
+        
+        allow = {
+            has_country_modifier = admin_issues_tanzimat_cmodifier
+            owns = 2
+            owns = 856
+            owns = 890
+            owns = 891
+            owns = 1781
+			OR = {
+				citizens_rights = culture_voting_only
+				citizens_rights = all_voting_pops
+			}
+            nationalism_n_imperialism = 1
+            clean_coal = 1
+            plurality = 60
+        }
+        
+        effect = {
+            add_country_modifier = kurd_after_tanzimat_cflag
+            prestige = 5
+            badboy = 3
+            plurality = -2
+            add_accepted_culture = kurdish
+            2 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            856 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            890 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            892 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            924 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            1781 = { add_province_modifier = { name = baby_boom duration = 365 } }
+        }
+    }
+    
+    mashriqi_after_tanzimat_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_modifier = kurd_after_tanzimat_cflag }
+			NOT = { has_country_modifier = mashriqi_after_tanzimat_cflag }
+            tag = TUR
+        }
+        
+        allow = {
+            has_country_modifier = admin_issues_tanzimat_cmodifier
+            owns = 905
+            owns = 916
+			OR = {
+				citizens_rights = culture_voting_only
+				citizens_rights = all_voting_pops
+			}
+            nationalism_n_imperialism = 1
+            practical_steam_engine = 1
+            plurality = 60
+        }
+        
+        effect = {
+            add_country_modifier = mashriqi_after_tanzimat_cflag
+            prestige = 5
+            badboy = 3
+            plurality = -2
+            add_accepted_culture = mashriqi
+            913 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            914 = { add_province_modifier = { name = baby_boom duration = 365 } }
         }
     }
 }
