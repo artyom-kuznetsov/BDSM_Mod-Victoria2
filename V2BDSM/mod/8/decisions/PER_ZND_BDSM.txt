@@ -1,6 +1,7 @@
 political_decisions = {
 	form_iran_per_dec = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			tag = ZND
 		}
 		
@@ -86,35 +87,39 @@ political_decisions = {
 	
 	accept_kurdish_per_dec = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = ZND
 				tag = PER	
 			}
-			NOT = {
-				has_country_flag = accept_kurdish_per_cflag
-			}
+			NOT = { has_country_flag = accept_kurdish_per_cflag }
 		}
+        
 		allow = {
-			890 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						vassal_of = THIS
-					}
-				}
-			}
-			
-			924 = {
-				OR = {
-					owned_by = THIS
-					owner = {
-						vassal_of = THIS
-					}
-				}
-			}
+			890 = { OR = { owned_by = THIS owner = { vassal_of = THIS } } }
+			924 = { OR = { owned_by = THIS owner = { vassal_of = THIS } } }
+            923 = { OR = { owned_by = THIS owner = { vassal_of = THIS } } }
+            1118 = { OR = { owned_by = THIS owner = { vassal_of = THIS } } }
 			colonial_offices_tech = 1
 		}
+        
 		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						NOT = { has_country_flag = kurd_boom_cflag }
+					}
+				}
+				2 = { add_province_modifier = { name = baby_boom duration = 365 } }
+				923 = { add_province_modifier = { name = baby_boom duration = 365 } }
+				924 = { add_province_modifier = { name = baby_boom duration = 365 } }
+				925 = { add_province_modifier = { name = baby_boom duration = 365 } }
+				928 = { add_province_modifier = { name = baby_boom duration = 365 } }
+				1118 = { add_province_modifier = { name = baby_boom duration = 365 } }
+                TUR = {
+                    set_country_flag = kurd_boom_cflag
+                }
+			}
 			add_accepted_culture = kurdish
 			plurality = -5
 			badboy = 5
@@ -198,6 +203,7 @@ political_decisions = {
 	
 	remove_kebab_from_kurdish_per_dec = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			has_country_flag = form_kurdish_satelit_per_cflag
 			TUR = {
 				any_owned_province = {
@@ -211,7 +217,7 @@ political_decisions = {
 		}
 		effect = {
 			KDS = {
-				country_event = { id =110900 days = 30 }
+				country_event = { id = 110900 days = 30 }
 			}
 			
 			TUR = {
@@ -222,6 +228,7 @@ political_decisions = {
 	
 	accept_armenian_per_dec = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = ZND
 				tag = PER	
@@ -248,13 +255,12 @@ political_decisions = {
 	
 	accept_mashriqi_per_dec = {
 		potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
 			OR = {
 				tag = ZND
 				tag = PER	
 			}
-			NOT = {
-				has_country_flag = accept_mashriqi_per_cflag
-			}
+			NOT = { has_country_flag = accept_mashriqi_per_cflag }
 		}
 		
 		allow = {
