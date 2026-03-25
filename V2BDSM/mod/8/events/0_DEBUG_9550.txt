@@ -64,6 +64,29 @@ country_event = { # «¿√À”ÿ ¿
 	}
 }
 
+country_event = { # RUSSIA
+	title = "noloc"
+	desc = "noloc"
+	id = 9551
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+                OR = {
+                    primary_culture = russian
+                    primary_culture = severorussian
+                }
+			}
+			annex_to = THIS
+		}
+		activate_technology = nationalism_tech
+		activate_technology = nationalism_n_imperialism
+	}
+}
+
 country_event = { # HUNGARY
 	title = "noloc"
 	desc = "noloc"
