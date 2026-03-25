@@ -634,10 +634,19 @@ country_event = { # RUS
         name = "noloc"
 		META_1 = {
 			limit = {
-				is_core = RUS
+				OR = {
+					is_core = RUS
+					is_core = EST
+					is_core = LAT
+					is_core = FIN
+				}
 			}
 			secede_province = THIS
 		}
+		activate_technology = nationalism_n_imperialism
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
+		activate_technology = colonial_offices_tech
     }
 }
 

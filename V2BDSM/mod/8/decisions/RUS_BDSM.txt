@@ -59,17 +59,51 @@ political_decisions = {
 	}
 
 
-	tsar_of_finland_dec = {
+	tsar_of_livonia_dec = {
 		potential = {
 			tag = RUS
 			primary_culture = russian
+			NOT = {
+				has_country_flag = tsar_of_livonia_cflag
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		allow = {
+			colonial_offices_tech = 1
+			EST = {
+				all_core = {
+					owned_by = THIS
+				}
+			}
+			LAT = {
+				all_core = {
+					owned_by = THIS
+				}
+			}
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_TSAR_LIVONIA = { }
+			CUSTOM_TOOLTIP_WARN_LIVONIA = { }
+			badboy = 3
+			add_accepted_culture = estonian
+			add_accepted_culture = latvian
+			plurality = -2
+			prestige = 5
+			set_country_flag = tsar_of_livonia_cflag
+		}
+	}
+	
+	tsar_of_finland_dec = {
+		potential = {
+			has_country_flag = tsar_of_livonia_cflag
 			NOT = {
 				has_country_flag = tsar_of_finland_cflag
 				has_country_flag = hide_all_decs_flag
 			}
 		}
 		allow = {
-			revolution_n_counterrevolution = 1
+			colonial_offices_tech = 1
 			FIN = {
 				all_core = {
 					owned_by = THIS
