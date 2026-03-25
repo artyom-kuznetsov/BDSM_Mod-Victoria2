@@ -1,4 +1,36 @@
 political_decisions = {
+	form_iran_per_dec = {
+		potential = {
+			tag = ZND
+		}
+		
+		allow = {
+			AND = {
+				OR = {
+					KAL = { vassal_of = THIS }
+					owns = 1221
+				}
+				PER = {
+					all_core = {
+						OR = {
+							owned_by = THIS
+							in_sphere = THIS
+							owner = { vassal_of = THIS }
+						}
+					}
+				}
+				nationalism_tech = 1
+			}
+		}
+		
+		effect = {
+			prestige = 20
+			plurality = 10
+			capital = 1121
+			change_tag = PER
+		}
+	}
+	
 	lost_legacy_dec = {
 		potential = {
 			tag = PER
@@ -21,9 +53,12 @@ political_decisions = {
 			prestige = 5
 			1140 = { add_province_modifier = { name = baby_boom duration = 150 } }
 			1143 = { add_province_modifier = { name = baby_boom duration = 180 } }
-			1145 = { add_province_modifier = { name = baby_boom duration = 90 } }
+			1145 = { add_province_modifier = { name = baby_boom duration = 90 } trade_goods = silk }
+			1141 = { trade_goods = silk }
+			1114 = { trade_goods = silk }
 		}
 	}
+	
 	renovate_tehran_dec = {
 		potential = {
 			tag = PER
@@ -49,62 +84,12 @@ political_decisions = {
 		}
 	}
 	
-	accept_lur_per_dec ={
-		potential = {
-			OR = {
-				tag = ZND
-				tag = PER	
-			}
-			NOT = {
-				has_country_flag = accept_lur_per_cflag
-			}
-		}
-		allow = {
-			war = no
-			state_n_government = 1
-		}
-		effect = {
-			add_accepted_culture = lurish
-			set_country_flag = accept_lur_per_cflag
-		}
-	}
-	
-	form_iran_per_dec = {
-		potential = {
-			tag = ZND
-		}
-		allow = {
-			AND = {
-				OR = {
-					KAL = { vassal_of = THIS }
-					owns = 1221
-				}
-				PER = {
-					all_core = {
-						OR = {
-							owned_by = THIS
-							in_sphere = THIS
-							owner = { vassal_of = THIS }
-						}
-					}
-				}
-			nationalism_tech = 1
-			}
-		}
-		effect = {
-			prestige = 5
-			capital = 1008
-			change_tag = PER
-		}
-	}
-	
 	accept_kurdish_per_dec = {
 		potential = {
 			OR = {
 				tag = ZND
 				tag = PER	
 			}
-			has_country_flag = accept_lur_per_cflag
 			NOT = {
 				has_country_flag = accept_kurdish_per_cflag
 			}
@@ -131,6 +116,8 @@ political_decisions = {
 		}
 		effect = {
 			add_accepted_culture = kurdish
+			plurality = -5
+			badboy = 5
 			set_country_flag = accept_kurdish_per_cflag
 		}
 	}
@@ -253,6 +240,8 @@ political_decisions = {
 		}
 		effect = {
 			add_accepted_culture = armenian
+			plurality = -5
+			badboy = 5
 			set_country_flag = accept_armenian_per_cflag
 		}
 	}	
@@ -274,29 +263,9 @@ political_decisions = {
 		}
 		effect = {
 			set_country_flag = accept_mashriqi_per_cflag
+			plurality = -5
+			badboy = 5
 			add_accepted_culture = mashriqi
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

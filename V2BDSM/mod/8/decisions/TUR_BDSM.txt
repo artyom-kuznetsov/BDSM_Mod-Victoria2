@@ -119,15 +119,19 @@ political_decisions = {
     
     tanzimat_end_dec = {
         potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = tanzimat_end_cflag }
             tag = TUR
+			NOT = { 
+				has_country_flag = tanzimat_end_cflag 
+				has_country_flag = hide_all_decs_flag 
+			}
         }
         
         allow = {
-			NOT = { has_country_modifier = admin_issues_tanzimat_cmodifier }
-			NOT = { has_country_modifier = naval_issues_tanzimat_cmodifier }
-			NOT = { has_country_modifier = army_issues_tanzimat_cmodifier }
+			NOT = { 
+				has_country_modifier = admin_issues_tanzimat_cmodifier
+				has_country_modifier = naval_issues_tanzimat_cmodifier
+				has_country_modifier = army_issues_tanzimat_cmodifier 
+			}
         }
         
         effect = {
@@ -141,16 +145,16 @@ political_decisions = {
                     duration = 365
                 }
             }
-            add_country_flag = tanzimat_end_cflag
+            set_country_flag = tanzimat_end_cflag
             citizens_rights = culture_voting_only
         }
     }
     
     balkan_after_tanzimat_dec = {
         potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_modifier = balkan_after_tanzimat_cflag }
             tag = TUR
+			NOT = { has_country_modifier = balkan_after_tanzimat_cflag }
+			NOT = { has_country_flag = hide_all_decs_flag }
         }
         
         allow = {
@@ -168,15 +172,15 @@ political_decisions = {
         }
         
         effect = {
-            add_country_modifier = balkan_after_tanzimat_cflag
+            set_country_flag = balkan_after_tanzimat_cflag
             prestige = 5
             badboy = 5
             plurality = -5
             add_accepted_culture = albanian
             add_accepted_culture = bulgarian
-            806 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            809 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            815 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            806 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            809 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            815 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
         }
     }
     
@@ -241,12 +245,12 @@ political_decisions = {
             badboy = 3
             plurality = -2
             add_accepted_culture = kurdish
-            2 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            856 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            890 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            892 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            924 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            1781 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            2 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            856 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            890 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            892 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            924 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            1781 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
         }
     }
     
@@ -277,8 +281,8 @@ political_decisions = {
             badboy = 3
             plurality = -2
             add_accepted_culture = mashriqi
-            913 = { add_province_modifier = { name = baby_boom duration = 365 } }
-            914 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            913 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            914 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
         }
     }
 }
