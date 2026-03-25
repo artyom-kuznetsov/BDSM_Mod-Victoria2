@@ -64,6 +64,50 @@ country_event = { # «¿√À”ÿ ¿
 	}
 }
 
+country_event = { # TURKEY
+	title = "noloc"
+	desc = "noloc"
+	id = 9551
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		any_country = {
+			limit = {
+                OR = {
+                    primary_culture = georgian
+                    primary_culture = azerbaijani
+                    primary_culture = north_caucasian
+                    primary_culture = kurdish
+                    tag = MAC
+                    tag = EGY
+                }
+			}
+			annex_to = THIS
+		}
+        any_pop = { literacy = 0.80 }
+        plurality = 90
+        set_country_flag = tanzimat_end_cflag
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
+		activate_technology = nationalism_n_imperialism
+		activate_technology = state_n_government
+        activate_technology = clipper_design
+        activate_technology = freedom_of_trade
+        activate_technology = military_plans
+        activate_technology = positivism
+        activate_technology = market_structure
+        activate_technology = clean_coal
+        activate_technology = steamers
+        activate_technology = practical_steam_engine
+        activate_technology = functionalism
+        activate_technology = army_professionalism
+        activate_technology = introspectionism
+		political_reform = all_voting_pops
+	}
+}
+
 country_event = { # HUNGARY
 	title = "noloc"
 	desc = "noloc"

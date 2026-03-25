@@ -301,4 +301,75 @@ political_decisions = {
             914 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
         }
     }
+    
+    sheki_conquest_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = sheki_conquest_cflag }
+            has_country_flag = tanzimat_end_cflag
+            tag = TUR
+        }
+        
+        allow = {
+            nationalism_n_imperialism = 1
+            CAU = { all_core = { owned_by = THIS } }
+            SAM = { all_core = { OR = { owned_by = THIS owner = { OR = { in_sphere = THIS vassal_of = THIS } } } } }
+            GEO = { all_core = { OR = { owned_by = THIS owner = { OR = { in_sphere = THIS vassal_of = THIS } } } } }
+            DAG = { all_core = { OR = { owned_by = THIS owner = { OR = { in_sphere = THIS vassal_of = THIS } } } } }
+        }
+        
+        effect = {
+            set_country_flag = sheki_conquest_cflag
+            CAU = { all_core = { add_core = TUR } }
+            SAM = { all_core = { add_core = TUR } }
+            GEO = { all_core = { add_core = TUR } }
+            DAG = { all_core = { add_core = TUR } }
+            badboy = 3
+            prestige = 8
+            any_country = {
+                limit = {
+                    OR = {
+                        tag = SAM
+                        tag = GEO
+                        tag = DAG
+                    }
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+                country_event = { id=11101 days=0 }
+            }
+        }
+    }
+    
+    bakin_resolution_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = bakin_resolution_cflag }
+			has_country_flag = sheki_conquest_cflag
+            tag = TUR
+        }
+        
+        allow = {
+            pan_nationalism_tech = 1
+            plurality = 60
+            CAU = { all_core = { owned_by = THIS} }
+        }
+        
+        effect = {
+            set_country_flag = bakin_resolution_cflag
+            add_accepted_culture = azerbaijani
+            add_accepted_culture = north_caucasian
+            badboy = 5
+            plurality = -3
+            1102 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            1098 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            1090 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+        }
+    }
 }
