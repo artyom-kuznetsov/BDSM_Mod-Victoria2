@@ -8,6 +8,10 @@ post_napoleonic_army_doctrine = {
 		infantry = {
 			defence = 1
 		}
+		cavalry = {
+			defence = 1
+			support = 0.05
+		}
 		dragoon = {
 			defence = 1
 		}
@@ -36,7 +40,7 @@ post_napoleonic_army_doctrine = {
 #	}
 #}
 hussar_activation = {
-	limit = { post_napoleonic_thought = 1 }
+	limit = { post_napoleonic_thought = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 100
 		modifier = {
@@ -65,6 +69,10 @@ signal_detachments = {
 	effect = {
 		infantry = {
 			defence = 1
+		}
+		cavalry = {
+			defence = 1
+			support = 0.05
 		}
 		dragoon = {
 			defence = 1
@@ -99,6 +107,9 @@ field_fortifications = {
 	effect = {
 		infantry = {
 			defence = 2
+		}
+		cavalry = {
+			defence = 1
 		}
 		cuirassier = {
 			defence = 2
@@ -361,6 +372,11 @@ flintlock_rifle_armament = {
 			attack = 1
 			supply_consumption = 0.05
 		}
+		cavalry = {
+			attack = 1
+			support = 0.05
+			supply_consumption = 0.05
+		}
 		dragoon = {
 			attack = 1.25
 			supply_consumption = 0.05
@@ -373,6 +389,16 @@ flintlock_rifle_armament = {
 			attack = 0.7
 			supply_consumption = 0.05
 		}
+	}
+}
+
+infantry_inv = {
+	limit = { flintlock_rifles = 1 NOT = { has_country_flag = is_nomadic_cflag } }
+	chance = {
+		base = 100
+	}
+	effect = {
+		activate_unit = infantry
 	}
 }
 
@@ -390,6 +416,11 @@ muzzle_loaded_rifle_armament = {
 	effect = {
 		infantry = {
 			attack = 1
+			supply_consumption = 0.05
+		}
+		cavalry = {
+			attack = 1
+			support = 0.05
 			supply_consumption = 0.05
 		}
 		dragoon = {
@@ -421,6 +452,11 @@ breech_loaded_rifle_armament = {
 	effect = {
 		infantry = {
 			attack = 1.5
+			supply_consumption = 0.1
+		}
+		cavalry = {
+			attack = 1.5
+			support = 0.05
 			supply_consumption = 0.1
 		}
 		cuirassier = {
@@ -457,6 +493,10 @@ machine_gun_armament = {
 		infantry = {
 			defence = 3.5
 			supply_consumption = 0.15
+		}
+		cavalry = {
+			attack = 2
+			supply_consumption = 0.1
 		}
 		cuirassier = {
 			defence = 3.75
@@ -643,6 +683,15 @@ interwar_cavalry = {
 	}
 }
 #bronze_muzzle_loaded_artillery
+engineer_inv = {
+	limit = { bronze_muzzle_loaded_artillery = 1 }
+	chance = {
+		base = 100
+	}
+	effect = {
+		activate_unit = engineer
+	}
+}
 synchronized_heavy_support = {
 	limit = { bronze_muzzle_loaded_artillery = 1 }
 	chance = {
@@ -696,6 +745,15 @@ flexible_firepower = {
 			support = 0.15
 			supply_consumption = 0.1
 		}
+	}
+}
+artillery_inv = {
+	limit = { iron_muzzle_loaded_artillery = 1 }
+	chance = {
+		base = 100
+	}
+	effect = {
+		activate_unit = artillery
 	}
 }
 #iron_breech_loaded_artillery
@@ -845,7 +903,7 @@ mob1 = {
 
 #military_plans
 telegraph_coordination = {
-	limit = { military_plans = 1 }
+	limit = { military_plans = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 2
 		modifier = {
@@ -1027,7 +1085,7 @@ logistical_calculations = {
 
 #barrel_experiments
 tank_experiments = {
-	limit = { barrel_experiments = 1 }
+	limit = { barrel_experiments = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -1079,7 +1137,7 @@ tank_exploits = {
 
 #aeronautics
 military_aviation = {
-	limit = { aeronautics = 1 }
+	limit = { aeronautics = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 10
 		modifier = {

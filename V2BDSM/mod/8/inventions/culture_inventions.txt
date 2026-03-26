@@ -11,6 +11,17 @@ PS_unlocked = {
 	}
 }
 
+is_nomad_inv = {
+	limit = { hidden_tech = 1 has_country_flag = is_nomadic_cflag }
+	news = no
+	chance = {
+		base = 100	
+	}
+	effect = {
+		activate_unit = cavalry
+	}
+}
+
 #romanticism
 romanticist_literature = {
 	limit = { romanticism = 1 }

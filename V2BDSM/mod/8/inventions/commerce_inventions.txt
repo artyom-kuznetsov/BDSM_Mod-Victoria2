@@ -499,8 +499,18 @@ hyperinflation = {
 	}
 }
 #early_classical_theory_and_critique
+luxury_clothes_inv = {
+	limit = { early_classical_theory_and_critique = 1 NOT = { has_country_flag = is_nomadic_cflag } }
+	news = no
+	chance = {
+		base = 6
+	}
+	effect = {
+		activate_building = luxury_clothes_factory
+	}
+}
 john_ramsay_mcculloch = {
-	limit = { early_classical_theory_and_critique = 1 }
+	limit = { early_classical_theory_and_critique = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 2
@@ -518,7 +528,7 @@ john_ramsay_mcculloch = {
 	}
 }
 nassau_william_sr = {
-	limit = { early_classical_theory_and_critique = 1 }
+	limit = { early_classical_theory_and_critique = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 2
@@ -536,7 +546,7 @@ nassau_william_sr = {
 	}
 }
 james_mill = {
-	limit = { early_classical_theory_and_critique = 1 }
+	limit = { early_classical_theory_and_critique = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 2
@@ -1570,8 +1580,26 @@ mixed_economy = {
 	}
 }
 #guild_based_production
+canned_food_inv = {
+	limit = { guild_based_production = 1 NOT = { has_country_flag = is_nomadic_cflag } }
+	news = no
+	chance = {
+		base = 10
+		modifier = {
+			factor = 5
+			economic_policy = laissez_faire
+		}
+		modifier = {
+			factor = 5
+			ruling_party_ideology = liberal
+		}
+	}
+	effect = {
+		activate_building = canned_food_factory 
+	}
+}
 liquor_production = {
-	limit = { guild_based_production = 1 }
+	limit = { guild_based_production = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 10
@@ -1589,7 +1617,7 @@ liquor_production = {
 	}
 }
 wine_production = {
-	limit = { guild_based_production = 1 }
+	limit = { guild_based_production = 1 NOT = { has_country_flag = is_nomadic_cflag }  }
 	news = no
 	chance = {
 		base = 10
@@ -1607,7 +1635,7 @@ wine_production = {
 	}
 }
 glass_production = {
-	limit = { guild_based_production = 1 }
+	limit = { guild_based_production = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 10

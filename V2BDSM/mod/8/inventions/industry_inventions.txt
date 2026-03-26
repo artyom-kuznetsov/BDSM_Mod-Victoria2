@@ -67,7 +67,7 @@ high_pressure_boiler = {
 }
 #combustion_engine
 daimlers_automobile = {
-	limit = { combustion_engine = 1 }
+	limit = { combustion_engine = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 0
 		modifier = {
@@ -96,7 +96,7 @@ daimlers_automobile = {
 	}
 }
 wright_n_langleys_aeroplanes = {
-	limit = { combustion_engine = 1 }
+	limit = { combustion_engine = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 0
 		modifier = {
@@ -204,7 +204,7 @@ transformers = {
 	}
 }
 national_radio_networks = {
-	limit = { electrical_power_generation = 1 }
+	limit = { electrical_power_generation = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 6
@@ -289,8 +289,26 @@ vacuum_tube = {
 	}
 }
 #industrial_revolution
+cement_inv = {
+	limit = { industrial_revolution = 1 NOT = { has_country_flag = is_nomadic_cflag } }
+	news = no
+	chance = {
+		base = 25
+		modifier = {
+			factor = 5
+			economic_policy = laissez_faire
+		}
+		modifier = {
+			factor = 5
+			ruling_party_ideology = liberal
+		}
+	}
+	effect = {
+		activate_building = cement_factory
+	}
+}
 regular_clothes_production = {
-	limit = { industrial_revolution = 1 }
+	limit = { industrial_revolution = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 10
@@ -308,7 +326,7 @@ regular_clothes_production = {
 	}
 }
 furniture_production = {
-	limit = { industrial_revolution = 1 }
+	limit = { industrial_revolution = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 10
@@ -326,7 +344,7 @@ furniture_production = {
 	}
 }
 precision_work = {
-	limit = { mechanical_production = 1 }
+	limit = { mechanical_production = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 3
 		modifier = {
@@ -744,8 +762,25 @@ factory_automation_infrastructure = {
 	}
 }
 #Metulurgy
+steel_inv = {
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = is_nomadic_cflag } }
+	chance = {
+		base = 25
+		modifier = {
+			factor = 5
+			invention = whitney_n_colts_standardized_small_arms
+		}
+		modifier = {
+			factor = 5
+			army_professionalism = 1
+		}
+	}
+	effect = {
+		activate_building = steel_factory
+	}
+}
 ammunition_production = {
-	limit = { mechanized_mining = 1 }
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -762,7 +797,7 @@ ammunition_production = {
 	}
 }
 small_arms_production = {
-	limit = { mechanized_mining = 1 }
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -779,7 +814,7 @@ small_arms_production = {
 	}
 }
 explosives_production = {
-	limit = { mechanized_mining = 1 }
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -1708,7 +1743,7 @@ third_health_reform_inv = {
 
 #inorganic_chemistry
 synthetic_dye = {
-	limit = { electricity = 1 }
+	limit = { electricity = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 1
 		modifier = {
@@ -1742,7 +1777,7 @@ edison_light_bulb = {
 	}
 }
 bell_n_greys_telephones = {
-	limit = { electricity = 1 }
+	limit = { electricity = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 1
 		modifier = {
@@ -1793,7 +1828,7 @@ electrical_lighting = {
 }
 #modern_chemistry
 haber_bosch_process = {
-	limit = { modern_chemistry = 1 }
+	limit = { modern_chemistry = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	chance = {
 		base = 0
 		modifier = {
@@ -1810,7 +1845,7 @@ haber_bosch_process = {
 	}
 }
 bergius_process = {
-	limit = { modern_chemistry = 1 }
+	limit = { modern_chemistry = 1 NOT = { has_country_flag = is_nomadic_cflag } }
 	news = no
 	chance = {
 		base = 2
