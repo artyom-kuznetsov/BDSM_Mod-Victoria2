@@ -68,6 +68,17 @@ political_decisions = {
 				add_core = IBE
 			}
 			
+			any_country = {
+				limit = {
+					government = khanate
+				}
+				set_country_flag = is_nomadic_cflag
+				national_value = nv_nomadic_society
+				add_country_modifier = {
+					name = nomad_mechanics_cmodifier duration = -1
+				}
+			}
+			
 			MAC = {
 				any_pop = {
 					limit = {
