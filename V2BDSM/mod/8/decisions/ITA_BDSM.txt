@@ -83,6 +83,8 @@ political_decisions = {
         }
         effect = {
             set_country_flag = greek_integration
+			prestige = 5
+			plurality = -5
             add_accepted_culture = greek
             GRE = {
                 all_core = { add_core = THIS }
@@ -109,6 +111,7 @@ political_decisions = {
         effect = {
             AUS_780 = { add_core = VEN }
             set_country_flag = dalmatia_cores_cflag
+			plurality = 2
         }
     }
 	
@@ -261,6 +264,7 @@ political_decisions = {
 				}
 			}
             prestige = 15
+			plurality = 5
 			badboy = 5
             add_accepted_culture = north_italian
             add_accepted_culture = venetian
@@ -292,4 +296,122 @@ political_decisions = {
             set_country_flag = north_italian_union_cflag
         }
     }
+	
+	
+	VEN_form_byzantine_empire_dec = {
+		potential = {
+			tag = VEN
+			NOT = {
+				exists = BYZ
+				has_country_flag = north_italian_union_cflag 
+				has_country_flag = hide_all_decs_flag 
+			}
+		}
+		
+		allow = {
+            GRE = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        province_id = 584
+                    }
+                }
+            }
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_WARN_VEN_BYZ = { }
+			change_tag = BYZ
+			capital = 834
+			any_owned = {
+				limit = {
+					OR = {
+						culture = greek
+						culture = turkish
+						culture = serb
+						culture = bulgarian
+					}
+				}
+				add_core = BYZ
+			}
+			prestige = 40
+			badboy = 10
+			plurality = -10
+			add_accepted_culture = bulgarian
+			add_accepted_culture = serb
+			set_country_flag = north_italian_union_cflag
+            any_country = {
+                limit = {
+					OR = {
+						primary_culture = greek
+						primary_culture = bulgarian
+						primary_culture = serb
+					}
+					OR = {
+						in_sphere = THIS
+						vassal_of = THIS 
+					}
+                }
+				any_owned = {
+					# Audax Validator "." Ignore_NEXT
+					province_selector = -1
+				}
+                country_event = { id=11101 days=0 }
+            }
+		}
+	}
+	
+	BYZ_anatolia_focus_dec = {
+		potential = {
+			tag = BYZ
+			NOT = {
+				has_country_flag = BYZ_focus_cflag
+				has_country_flag = hide_all_decs_flag 
+			}
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+			owns = 859
+			owns = 869
+			owns = 863
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_WARN_BYZ_ANATOLIA = { }
+			set_country_flag = BYZ_focus_cflag
+			prestige = 10
+			badboy = 10
+			plurality = -10
+			add_accepted_culture = turkish
+		}
+	}
+	
+	BYZ_italia_focus_dec = {
+		potential = {
+			tag = BYZ
+			NOT = {
+				has_country_flag = BYZ_focus_cflag
+				has_country_flag = hide_all_decs_flag 
+			}
+		}
+		
+		allow = {
+			colonial_offices_tech = 1
+			owns = 749
+			owns = 754
+			owns = 752
+			owns = 757
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_WARN_BYZ_ITALIA = { }
+			set_country_flag = BYZ_focus_cflag
+			prestige = 10
+			badboy = 5
+			plurality = 2
+			add_accepted_culture = south_italian
+		}
+	}
 }

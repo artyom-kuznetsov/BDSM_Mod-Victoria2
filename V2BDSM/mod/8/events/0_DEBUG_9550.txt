@@ -232,7 +232,7 @@ country_event = { # ELBIAN
 	}
 }
 
-country_event = { # INDIA
+country_event = { # BYZANTIUM
 	title = "noloc"
 	desc = "noloc"
 	id = 9557
@@ -241,12 +241,20 @@ country_event = { # INDIA
 	
 	option = {
 		name = "noloc"
-		HND = {
-			all_core = {
-				secede_province = THIS
+		META_1 = {
+			limit = {
+				OR = {
+					is_core = GRE
+					is_core = BUL
+					is_core = TUR
+				}
 			}
+			secede_province = THIS
 		}
 		activate_technology = nationalism_n_imperialism
+		activate_technology = colonial_offices_tech
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
 	}
 }
 
