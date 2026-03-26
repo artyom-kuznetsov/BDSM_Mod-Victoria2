@@ -58,17 +58,17 @@ political_decisions = {
 		}
 	}
 
-
+	
 	tsar_of_livonia_dec = {
 		potential = {
 			tag = RUS
-			primary_culture = russian
 			NOT = {
 				has_country_flag = tsar_of_livonia_cflag
 				has_country_flag = hide_all_decs_flag
 			}
 		}
 		allow = {
+			NOT = { primary_culture = severorussian }
 			colonial_offices_tech = 1
 			EST = {
 				all_core = {
@@ -119,6 +119,101 @@ political_decisions = {
 			set_country_flag = tsar_of_finland_cflag
 		}
 	}
+	
+    east_slavic_focus_dec = {
+        potential = {
+            tag = RUS
+            NOT = { has_country_flag = tsar_of_livonia_cflag }
+        }
+        allow = {
+            pan_nationalism_tech = 1
+            biologism = 1
+			owns = 945
+			owns = 958
+			owns = 962
+			owns = 944
+        }
+        effect = {
+			CUSTOM_TOOLTIP_WARN_RUTHENIA = { }
+			badboy = 10
+            prestige = 15
+            add_accepted_culture = ruthenian
+            set_country_flag = tsar_of_livonia_cflag
+        }
+        ai_will_do = { factor = 1 }
+    }
+	
+    rein_the_nomads_dec = {
+        potential = {
+            tag = RUS
+            NOT = { has_country_flag = tsar_of_livonia_cflag }
+        }
+        allow = {
+            colonial_offices_tech = 1
+			owns = 1034
+			owns = 1044
+			owns = 1036
+			owns = 1039
+        }
+        effect = {
+			CUSTOM_TOOLTIP_WARN_TATARIA = { }
+			badboy = 5
+            prestige = 5
+            add_accepted_culture = tatar
+            add_accepted_culture = crimean
+            set_country_flag = tsar_of_livonia_cflag
+            set_country_flag = rein_nomads_cflag
+			any_owned = {
+				limit = {
+					OR = {
+						is_core = NOG
+						is_core = ASK
+					}
+				}
+				add_core = THIS
+			}
+			any_pop = {
+				limit = {
+					culture = tatar
+				}
+				reduce_pop = 0.8
+			}
+        }
+        ai_will_do = { factor = 1 }
+    }
+	
+    ruler_of_caucasus_dec = {
+        potential = {
+            tag = RUS
+            has_country_flag = rein_nomads_cflag
+            NOT = { has_country_flag = ruler_of_caucasus_cflag }
+        }
+        allow = {
+            pan_nationalism_tech = 1
+			owns = 1090
+			owns = 1095
+			owns = 1098
+        }
+        effect = {
+			badboy = 5
+            prestige = 5
+            add_accepted_culture = armenian
+            add_accepted_culture = georgian
+            set_country_flag = ruler_of_caucasus_cflag
+			META_1 = {
+				limit = {
+					OR = {
+						is_core = GEO
+						is_core = CIR
+						is_core = ASK
+						is_core = DAG
+					}
+				}
+				add_core = THIS
+			}
+        }
+        ai_will_do = { factor = 1 }
+    }
 	
 	establish_the_sovnarkom = {
 		potential = {
