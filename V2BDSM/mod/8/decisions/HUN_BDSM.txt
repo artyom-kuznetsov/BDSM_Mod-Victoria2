@@ -42,6 +42,8 @@ political_decisions = {
             prestige = -10
 			plurality = -8
             add_accepted_culture = croat
+            771 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            779 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
             any_pop = {
                 limit = { has_pop_culture = croat }
                 militancy = -6
@@ -58,7 +60,6 @@ political_decisions = {
     carpatian_compromise_dec = {
         potential = {
             tag = HUN
-            652 = { owned_by = THIS } #Tishimora
             has_country_flag = croatian_compromise_cflag
             NOT = { has_country_flag = carpatian_compromise_cflag }
             NOT = { has_country_flag = balkan_march_cflag }
@@ -66,6 +67,7 @@ political_decisions = {
         }
 
         allow = {
+            652 = { owned_by = THIS } #Tishimora
             pan_nationalism_tech = 1
 			nationalism_n_imperialism = 1
             war = no
@@ -88,6 +90,9 @@ political_decisions = {
 			plurality = -8
             badboy = 7
             add_accepted_culture = romanian
+            652 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            664 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            670 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
             any_pop = {
                 limit = { has_pop_culture = romanian }
                 militancy = -1
@@ -108,7 +113,6 @@ political_decisions = {
     balkan_march_dec = {
         potential = {
             tag = HUN
-            2538 = { owned_by = THIS } #Novi-Sad
             has_country_flag = croatian_compromise_cflag
             NOT = { has_country_flag = carpatian_compromise_cflag }
             NOT = { has_country_flag = balkan_march_cflag }
@@ -116,6 +120,7 @@ political_decisions = {
         }
 
         allow = {
+            2538 = { owned_by = THIS } #Novi-Sad
             nationalism_tech = 1
 			nationalism_n_imperialism = 1
             war = no
@@ -133,6 +138,9 @@ political_decisions = {
 			plurality = -10
             badboy = 10
             add_accepted_culture = serb
+            2538 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            794 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            798 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
             any_pop = {
                 limit = { has_pop_culture = serb }
                 militancy = -2
