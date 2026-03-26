@@ -6,22 +6,20 @@ political_decisions = {
 		}
 		
 		allow = {
-			AND = {
-				OR = {
-					KAL = { vassal_of = THIS }
-					owns = 1221
-				}
-				PER = {
-					all_core = {
-						OR = {
-							owned_by = THIS
-							in_sphere = THIS
-							owner = { vassal_of = THIS }
-						}
+			OR = {
+				KAL = { vassal_of = THIS }
+				owns = 1221
+			}
+			PER = {
+				all_core = {
+					OR = {
+						owned_by = THIS
+						owner = { in_sphere = THIS }
+						owner = { vassal_of = THIS }
 					}
 				}
-				nationalism_tech = 1
 			}
+			nationalism_tech = 1
 		}
 		
 		effect = {

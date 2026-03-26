@@ -182,9 +182,11 @@ political_decisions = {
             add_accepted_culture = czech
             any_country = {
                 limit = {
-                    primary_culture = north_german
-                    primary_culture = south_german
-                    primary_culture = rhenish
+					OR = {
+						primary_culture = north_german
+						primary_culture = south_german
+						primary_culture = rhenish
+					}
 					OR = {
 						in_sphere = THIS
 						vassal_of = THIS 

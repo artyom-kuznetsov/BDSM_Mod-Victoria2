@@ -203,16 +203,18 @@ political_decisions = {
             add_accepted_culture = armenian
             add_accepted_culture = georgian
             set_country_flag = ruler_of_caucasus_cflag
-			META_1 = {
-				limit = {
-					OR = {
-						is_core = GEO
-						is_core = CIR
-						is_core = ASK
-						is_core = DAG
+			any_country = {
+				any_owned = {
+					limit = {
+						OR = {
+							is_core = GEO
+							is_core = CIR
+							is_core = ASK
+							is_core = DAG
+						}
 					}
+					add_core = THIS
 				}
-				add_core = THIS
 			}
         }
         ai_will_do = { factor = 1 }

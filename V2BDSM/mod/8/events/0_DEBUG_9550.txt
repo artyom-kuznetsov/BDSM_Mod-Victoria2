@@ -64,81 +64,6 @@ country_event = { # «¿√À”ÿ ¿
 	}
 }
 
-country_event = { # TURKEY
-	title = "noloc"
-	desc = "noloc"
-	id = 9551
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_country = {
-			limit = {
-                OR = {
-                    primary_culture = georgian
-                    primary_culture = azerbaijani
-                    primary_culture = north_caucasian
-                    primary_culture = kurdish
-                    tag = MAC
-                    tag = EGY
-                    tag = TUN
-                    tag = MOR
-                }
-			}
-			annex_to = THIS
-		}
-        any_pop = { literacy = 0.80 }
-        plurality = 90
-        set_country_flag = tanzimat_end_cflag
-        set_country_flag = misri_after_tanzimat_cflag
-        set_country_flag = turkish_magreb_cflag
-		activate_technology = nationalism_tech
-		activate_technology = pan_nationalism_tech
-		activate_technology = nationalism_n_imperialism
-		activate_technology = state_n_government
-        activate_technology = clipper_design
-        activate_technology = freedom_of_trade
-        activate_technology = military_plans
-        activate_technology = positivism
-        activate_technology = market_structure
-        activate_technology = clean_coal
-        activate_technology = steamers
-        activate_technology = practical_steam_engine
-        activate_technology = functionalism
-        activate_technology = army_professionalism
-        activate_technology = introspectionism
-        activate_technology = iron_steamers
-		political_reform = all_voting_pops
-	}
-}
-
-country_event = { # HUNGARY
-	title = "noloc"
-	desc = "noloc"
-	id = 9552
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "noloc"
-		any_country = {
-			limit = {
-                OR = {
-                    primary_culture = serb
-                    primary_culture = romanian
-                    primary_culture = croat
-                }
-			}
-			annex_to = THIS
-		}
-		activate_technology = nationalism_tech
-		activate_technology = pan_nationalism_tech
-		activate_technology = nationalism_n_imperialism
-		political_reform = all_voting_pops
-	}
-}
-
 country_event = { # GERMANY
 	title = "noloc"
 	desc = "noloc"
@@ -258,7 +183,7 @@ country_event = { # BYZANTIUM
 	}
 }
 
-country_event = { # ANNEX ARABS
+country_event = { # TURKEY
 	title = "noloc"
 	desc = "noloc"
 	id = 9558
@@ -268,31 +193,46 @@ country_event = { # ANNEX ARABS
 	option = {
 		name = "noloc"
 		any_country = {
-			any_owned = {
-				limit = {
-					OR = {
-						is_core = NEJ
-						is_core = YEM
-						is_core = HDJ
-						is_core = OMA
-						is_core = ABU
-						is_core = EGY
-						is_core = IRQ
-						is_core = TRI
-						is_core = TUN
-						is_core = ALD
-						is_core = MOR
-						is_core = BAH
-					}
-				}
-				secede_province = THIS
+			limit = {
+                OR = {
+                    primary_culture = georgian
+                    primary_culture = azerbaijani
+                    primary_culture = north_caucasian
+                    primary_culture = kurdish
+                    tag = MAC
+                    tag = EGY
+                    tag = TUN
+                    tag = MOR
+                }
 			}
+			annex_to = THIS
 		}
+        any_pop = { literacy = 0.80 }
+        plurality = 90
+        set_country_flag = tanzimat_end_cflag
+        set_country_flag = misri_after_tanzimat_cflag
+        set_country_flag = turkish_magreb_cflag
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
 		activate_technology = nationalism_n_imperialism
+		activate_technology = state_n_government
+        activate_technology = clipper_design
+        activate_technology = freedom_of_trade
+        activate_technology = military_plans
+        activate_technology = positivism
+        activate_technology = market_structure
+        activate_technology = clean_coal
+        activate_technology = steamers
+        activate_technology = practical_steam_engine
+        activate_technology = functionalism
+        activate_technology = army_professionalism
+        activate_technology = introspectionism
+        activate_technology = iron_steamers
+		political_reform = all_voting_pops
 	}
 }
 
-country_event = { # ANNEX TUR ACCEPTABLE BALKANS
+country_event = { # HUNGARY
 	title = "noloc"
 	desc = "noloc"
 	id = 9559
@@ -301,16 +241,20 @@ country_event = { # ANNEX TUR ACCEPTABLE BALKANS
 	
 	option = {
 		name = "noloc"
+		any_country = {
+			limit = {
+                OR = {
+                    primary_culture = serb
+                    primary_culture = romanian
+                    primary_culture = croat
+                }
+			}
+			annex_to = THIS
+		}
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
 		activate_technology = nationalism_n_imperialism
-		enable_ideology = communist
-		political_reform = all_trade_unions
 		political_reform = all_voting_pops
-		inherit = EGY
-		inherit = JAB
-		inherit = SER
-		inherit = WAL
-		inherit = MOL
-		inherit = MON
 	}
 }
 
@@ -689,12 +633,17 @@ country_event = { # RUS
 
     option = {
         name = "noloc"
+		# Audax Validator "." Ignore_NEXT
 		META_1 = {
 			limit = {
 				OR = {
+					# Audax Validator "." Ignore_NEXT
 					is_core = RUS
+					# Audax Validator "." Ignore_NEXT
 					is_core = EST
+					# Audax Validator "." Ignore_NEXT
 					is_core = LAT
+					# Audax Validator "." Ignore_NEXT
 					is_core = FIN
 				}
 			}

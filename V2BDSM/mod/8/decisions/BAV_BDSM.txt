@@ -123,71 +123,69 @@ political_decisions = {
         allow = {
             OR = { always = yes CUSTOM_REQUIREMENT_RHINEINTEGRATION = { } CUSTOM_REQUIREMENT_EXPLANATION = { } }
 			pan_nationalism_tech = 1
-            AND = {
-                HES = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                        }
+            HES = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
-                HEK = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                        }
+            }
+            HEK = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
-                BEG = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                        }
+            }
+            BEG = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
-                MNR = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                            province_id = 538
-                        }
+            }
+            MNR = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        province_id = 538
                     }
                 }
-                MRK = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                            province_id = 584
-                        }
+            }
+            MRK = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                        province_id = 584
                     }
                 }
-                FRM = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                        }
-                    }
-                } 
-                NAS = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                        }
+            }
+            FRM = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
-                FUL = {
-                    all_core = {
-                        OR = {
-                            owned_by = THIS
-                            owner = { OR = { in_sphere = THIS vassal_of = THIS } }
-                        }
+            } 
+            NAS = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                    }
+                }
+            }
+            FUL = {
+                all_core = {
+                    OR = {
+                        owned_by = THIS
+                        owner = { OR = { in_sphere = THIS vassal_of = THIS } }
                     }
                 }
             }
@@ -208,10 +206,12 @@ political_decisions = {
                 add_core = THIS
             }
             RHI = {
-                limit = {
-                    is_core = GER
-                }
-                all_core = { add_core = SGF }
+				any_owned = {
+					limit = {
+						is_core = GER
+					}
+					add_core = SGF
+				}
             }
             any_country = {
                 limit = {
