@@ -6,17 +6,15 @@
 				has_country_flag = mop_founded_flag 
 				has_country_flag = hide_all_decs_flag
 			}
-			year = 1845
 		}
 		
 		allow = {
 			associationism = 1
-			money = 50000
 		}
 		
 		effect = {
 			set_country_flag = mop_founded_flag
-			money = -50000
+			add_country_modifier = { name = administrative_expenses3_modifier duration = 365 }
 			CUSTOM_TOOLTIP_MOP = { }
 			plurality = 5
 		}
