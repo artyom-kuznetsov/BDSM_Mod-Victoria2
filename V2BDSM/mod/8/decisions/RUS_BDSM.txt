@@ -145,7 +145,10 @@ political_decisions = {
 	
     rein_the_nomads_dec = {
         potential = {
-            tag = RUS
+            OR = {
+				primary_culture = russian
+				primary_culture = severorussian
+			}
             NOT = { has_country_flag = tsar_of_livonia_cflag }
         }
         allow = {
@@ -184,7 +187,6 @@ political_decisions = {
 	
     ruler_of_caucasus_dec = {
         potential = {
-            tag = RUS
             has_country_flag = rein_nomads_cflag
             NOT = { has_country_flag = ruler_of_caucasus_cflag }
         }
