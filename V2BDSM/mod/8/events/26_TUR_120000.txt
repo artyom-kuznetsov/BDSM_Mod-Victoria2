@@ -11,3 +11,27 @@ country_event = {	#
 	}
 
 }
+country_event = {	# EGYPT ANNEXED
+	id = 120001
+	
+	title = "TUR_Egy_Won_EvtName"
+	desc = "TUR_Egy_Won_EvtDesc"
+
+	trigger = {
+		tag = TUR
+		exists = TUN
+		NOT = {
+			exists = EGY
+		}
+		owns = 1735
+		owns = 1745
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = "TUR_Egy_Won_EvtOptA"
+		EGY_1737 = { secede_province = TUN }
+	}
+
+}
