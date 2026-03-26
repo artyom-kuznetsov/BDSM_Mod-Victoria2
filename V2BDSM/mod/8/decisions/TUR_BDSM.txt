@@ -349,10 +349,10 @@ political_decisions = {
     
     bakin_resolution_dec = {
         potential = {
+            tag = TUR
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = bakin_resolution_cflag }
 			has_country_flag = sheki_conquest_cflag
-            tag = TUR
         }
         
         allow = {
@@ -370,6 +370,85 @@ political_decisions = {
             1102 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
             1098 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
             1090 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+        }
+    }
+    
+    turkish_magreb_dec = {
+        potential = {
+            tag = TUR
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = turkish_magreb_cflag }
+            has_country_flag = misri_after_tanzimat_cflag
+        }
+        
+        allow = {
+            owns = 1745
+            owns = 1735
+            nationalism_n_imperialism = 1
+            iron_steamers = 1
+            total_amount_of_ships = 80
+        }
+        
+        effect = {
+            badboy = 5
+            TUN = { all_core = { add_core = TUR } }
+            CONSTANTINE_STATE = { add_core = TUR }
+            TUGGURT_STATE = { add_core = TUR }
+            ORAN_STATE = { add_core = TUR }
+            set_country_flag = turkish_magreb_cflag
+        }
+    }
+    
+    magreb_turk_accept_dec = {
+        potential = {
+            tag = TUR
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = magreb_turk_accept_cflag }
+			NOT = { has_country_flag = crimean_turk_accept_cflag }
+            has_country_flag = turkish_magreb_cflag
+        }
+        
+        allow = {
+            TUN = { all_core = { owned_by = THIS} }
+            MOR = { all_core = { OR = { owned_by = THIS province_id = 1696 } } }
+            pan_nationalism_tech = 1
+            plurality = 65
+        }
+        
+        effect = {
+            prestige = 8
+            plurality = -5
+            badboy = 4
+            add_accepted_culture = maghrebi
+            MOR = { all_core = { add_core = TUR } }
+        }
+    }
+    
+    crimean_turk_accept_dec = {
+        potential = {
+            tag = TUR
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = crimean_turk_accept_cflag }
+			NOT = { has_country_flag = magreb_turk_accept_cflag }
+            has_country_flag = tanzimat_end_cflag
+        }
+        
+        allow = {
+            CRI = { all_core = { owned_by = THIS} }
+            pan_nationalism_tech = 1
+            plurality = 60
+        }
+        
+        effect = {
+            prestige = 6
+            plurality = -3
+            badboy = 4
+            add_accepted_culture = crimean
+            CRI = { all_core = { add_core = TUR } }
+            967 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            968 = { add_province_modifier = { name = baby_boom duration = 365 } }
+            967 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
+            976 = { add_province_modifier = { name = local_economic_boom_pmodifier duration = 365 } }
         }
     }
 }
