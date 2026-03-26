@@ -1,0 +1,92 @@
+
+country_event = {
+	id = 57700
+	title = "IBE_Capital_EvtName"
+	desc = "LEM_Capital_EvtDesc"
+	picture = "ministry"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "LEM_Capital_EvtOptA"
+	}
+	
+	option = {
+		name = "RUS_Capital_EvtOptMoscow"
+		capital = 1008
+	}
+	
+	option = {
+		name = "RUS_Capital_EvtOptNovgorod"
+		capital = 8
+	}
+	
+	option = {
+		name = "RUS_Capital_EvtOptSpb"
+		capital = 994
+		prestige = 5
+		plurality = 5
+		country_event = 57701
+	}
+}
+
+country_event = {
+	id = 57701
+	title = "RUS_Capital_EvtName"
+	desc = "RUS_Capital_EvtDesc"
+	picture = "ministry"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "RUS_Capital_EvtOptA"
+        994 = { change_province_name = "Невенбург" add_province_modifier = { name = new_capital_pmodifier duration = 1825 } }
+		add_country_modifier = { name = administrative_expenses_modifier duration = 365 }
+	}
+	
+	option = {
+		name = "RUS_Capital_EvtOptB"
+        994 = { change_province_name = "Невград" add_province_modifier = { name = new_capital_pmodifier duration = 1825 } }
+		add_country_modifier = { name = administrative_expenses_modifier duration = 365 }
+	}
+	
+	option = {
+		name = "RUS_Capital_EvtOptC"
+		random_owned = {
+			limit = {
+				owner = {
+					OR = {
+						government = absolute_monarchy
+						government = prussian_constitutionalism
+						government = hms_government
+					}
+				}
+			}
+			owner = {
+				994 = { change_province_name = "Царьград-на-Неве" add_province_modifier = { name = new_capital_pmodifier duration = 1825 } }
+				add_country_modifier = { name = administrative_expenses_modifier duration = 365 }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = {
+						government = absolute_monarchy
+						government = prussian_constitutionalism
+						government = hms_government
+					}
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_FAIL_MONARCHY_REQUIRED = { }
+				country_event = 57701
+			}
+		}
+	}
+	
+	option = {
+		name = "RUS_Capital_EvtOptD"
+        994 = { change_province_name = "Святопетровск" add_province_modifier = { name = new_capital_pmodifier duration = 1825 } }
+		add_country_modifier = { name = administrative_expenses_modifier duration = 365 }
+	}
+}
