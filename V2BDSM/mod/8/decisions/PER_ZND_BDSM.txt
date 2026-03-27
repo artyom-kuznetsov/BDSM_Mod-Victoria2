@@ -134,7 +134,6 @@ political_decisions = {
 				tag = ZND
 				tag = PER	
 			}
-			has_country_flag = accept_lur_per_cflag
 			NOT = {
 				has_country_flag = form_kurdish_satelit_per_cflag
 			}
@@ -196,9 +195,19 @@ political_decisions = {
 			MKN = { all_core = { remove_core = MKN } }
 			BHT = { all_core = { remove_core = BHT } }
 			BDN = { all_core = { remove_core = BDN } }
+			any_owned = {
+				limit = { is_core = KDS} 
+				remove_core = THIS
+			}
 			release_vassal = KDS
-			create_alliance = KDS
 			set_country_flag = form_kurdish_satelit_per_cflag
+			any_owned = {
+				limit = { 
+					is_core = KDS 
+				}
+				secede_province = KDS
+			}
+			country_event = { id = 110901 days = 1 }
 		}
 	}
 	
@@ -217,9 +226,8 @@ political_decisions = {
 			KDS = { vassal_of = THIS}
 		}
 		effect = {
-			KDS = {
-				country_event = { id = 110900 days = 30 }
-			}
+			country_event = { id = 110900 days = 30 }
+
 			
 			TUR = {
 				country_event = { id = 120000  days = 0}
