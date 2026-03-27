@@ -58,6 +58,8 @@ country_event = { # «¿√À”ÿ ¿
 		country_event = 9574
 		country_event = 9578
 		country_event = 9579
+		country_event = 9580
+		country_event = 9581
 		country_event = 57073
 		country_event = 57604
 		add_country_modifier = { name = revolution_happened_cmodifier duration = 1 }
@@ -648,6 +650,83 @@ country_event = { # RUS
 		activate_technology = nationalism_tech
 		activate_technology = pan_nationalism_tech
 		activate_technology = colonial_offices_tech
+    }
+}
+
+
+country_event = { # DUA
+    id = 9581
+    title = "noloc"
+    desc = "noloc"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = "noloc"
+		# Audax Validator "." Ignore_NEXT
+		META_1 = {
+			limit = {
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					is_core = SCO
+					is_core = PRV
+				}
+			}
+			secede_province = THIS
+		}
+		activate_technology = nationalism_n_imperialism
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
+		activate_technology = colonial_offices_tech
+		
+		add_accepted_culture = british
+		add_accepted_culture = welsh
+		add_accepted_culture = scottish
+    }
+	
+    option = {
+        name = "noloc"
+		# Audax Validator "." Ignore_NEXT
+		META_1 = {
+			limit = {
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					is_core = SCO
+					is_core = PRV
+				}
+			}
+			secede_province = THIS
+		}
+		activate_technology = nationalism_n_imperialism
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
+		activate_technology = colonial_offices_tech
+		
+		add_accepted_culture = french
+		add_accepted_culture = provencal
+    }
+	
+    option = {
+        name = "noloc"
+		# Audax Validator "." Ignore_NEXT
+		META_1 = {
+			limit = {
+				OR = {
+					# Audax Validator "." Ignore_NEXT
+					is_core = SCO
+					is_core = PRV
+				}
+			}
+			secede_province = THIS
+		}
+		activate_technology = nationalism_n_imperialism
+		activate_technology = nationalism_tech
+		activate_technology = pan_nationalism_tech
+		activate_technology = colonial_offices_tech
+		
+		add_accepted_culture = french
+		add_accepted_culture = british
+		add_accepted_culture = breton
     }
 }
 
