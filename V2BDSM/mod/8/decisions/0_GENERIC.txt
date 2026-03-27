@@ -113,13 +113,6 @@ political_decisions = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = martial_law_flag }
-			OR = {
-				ai = no
-				AND = {
-					ai = yes
-					NOT = { plurality = 40 }
-				}
-			}
 		}
 		allow = {
 			OR = {
@@ -136,18 +129,23 @@ political_decisions = {
 			}
 			set_country_flag = martial_law_flag
 		}
+		
+		
+		ai_will_do = {
+			factor = 1
+			
+			# Ai will do, if sphere owner has LESS than thrice our brigades.
+			modifier = {
+				factor = 0
+				plurality = 40
+				NOT = { war_exhaustion = 5 }
+			}
+		}
 	}
 	martial_law_deactivate_dec = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			has_country_flag = martial_law_flag
-			OR = {
-				ai = no
-				AND = {
-					ai = yes
-					plurality = 50
-				}
-			}
 		}
 		allow = {
 		}
@@ -158,6 +156,20 @@ political_decisions = {
 			}
 			remove_country_modifier = martial_law_modifier
 			clr_country_flag = martial_law_flag
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			# Ai will do, if sphere owner has LESS than thrice our brigades.
+			modifier = {
+				factor = 0
+				war_exhaustion = 5
+			}
+			modifier = {
+				factor = 0
+				NOT = { plurality = 50 }
+			}
 		}
 	}
 
