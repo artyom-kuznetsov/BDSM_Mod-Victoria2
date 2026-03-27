@@ -285,7 +285,7 @@ country_event = { # ANNEX TUR ACCEPTABLE EAST
 	}
 }
 
-country_event = { # JAPAN
+country_event = { # LITERACY
 	title = "noloc"
 	desc = "noloc"
 	id = 9561
@@ -294,13 +294,8 @@ country_event = { # JAPAN
 	
 	option = {
 		name = "noloc"
-		any_country = {
-			any_owned = {
-				limit = {
-					is_core = JAP
-				}
-				secede_province = THIS
-			}
+		any_pop = {
+			literacy = 0.5
 		}
 	}
 }

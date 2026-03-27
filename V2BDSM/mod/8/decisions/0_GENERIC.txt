@@ -161,17 +161,56 @@ political_decisions = {
 		}
 	}
 
-	med_reform_0_to_1_dec = {
+	med_reform_0_to_1_nomad_dec = {
 		alert = yes
 		potential = {
-			civilized = yes
 			health_care = no_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
+			government = khanate
 		}
 		
 		allow = {
 			medicine = 1
+			literacy = 0.15
+		}
+		
+		effect = {
+			social_reform = trinket_health_care
+			add_country_modifier = { name = trinket_health_care_nomad duration = -1 }
+		}
+	}
+	
+	med_reform_1_to_2_nomad_dec = {
+		alert = yes
+		potential = {
+			health_care = trinket_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+			government = khanate
+		}
+		
+		allow = {
+			inorganic_chemistry = 1
 			literacy = 0.25
+		}
+		
+		effect = {
+			social_reform = low_health_care
+			add_country_modifier = { name = low_health_care_nomad duration = -1 }
+			remove_country_modifier = trinket_health_care_nomad
+		}
+	}
+	
+	med_reform_0_to_1_dec = {
+		alert = yes
+		potential = {
+			health_care = no_health_care
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { government = khanate }
+		}
+		
+		allow = {
+			medicine = 1
+			literacy = 0.15
 		}
 		
 		effect = {
@@ -181,7 +220,6 @@ political_decisions = {
 	med_reform_1_to_0_dec = {
 		alert = no
 		potential = {
-			civilized = yes
 			health_care = trinket_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
 			ai = no
@@ -192,20 +230,30 @@ political_decisions = {
 		
 		effect = {
 			social_reform = no_health_care
+			random_owned = {
+				limit = {
+					owner = {
+						government = khanate
+					}
+				}
+				owner = {
+					remove_country_modifier = trinket_health_care_nomad
+				}
+			}
 		}
 	}
 	
 	med_reform_1_to_2_dec = {
 		alert = yes
 		potential = {
-			civilized = yes
 			health_care = trinket_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { government = khanate }
 		}
 		
 		allow = {
 			inorganic_chemistry = 1
-			literacy = 0.4
+			literacy = 0.25
 		}
 		
 		effect = {
@@ -215,7 +263,6 @@ political_decisions = {
 	med_reform_2_to_1_dec = {
 		alert = no
 		potential = {
-			civilized = yes
 			health_care = low_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
 			ai = no
@@ -226,20 +273,31 @@ political_decisions = {
 		
 		effect = {
 			social_reform = trinket_health_care
+			random_owned = {
+				limit = {
+					owner = {
+						government = khanate
+					}
+				}
+				owner = {
+					remove_country_modifier = low_health_care_nomad
+					add_country_modifier = { name = trinket_health_care_nomad duration = -1 }
+				}
+			}
 		}
 	}
 	
 	med_reform_2_to_3_dec = {
 		alert = yes
 		potential = {
-			civilized = yes
 			health_care = low_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { government = khanate }
 		}
 		
 		allow = {
 			electricity = 1
-			literacy = 0.6
+			literacy = 0.45
 		}
 		
 		effect = {
@@ -249,7 +307,6 @@ political_decisions = {
 	med_reform_3_to_2_dec = {
 		alert = no
 		potential = {
-			civilized = yes
 			health_care = acceptable_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
 			ai = no
@@ -266,14 +323,14 @@ political_decisions = {
 	med_reform_3_to_4_dec = {
 		alert = yes
 		potential = {
-			civilized = yes
 			health_care = acceptable_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { government = khanate }
 		}
 		
 		allow = {
 			antibiotics_tech = 1
-			literacy = 0.75
+			literacy = 0.7
 		}
 		
 		effect = {
@@ -283,7 +340,6 @@ political_decisions = {
 	med_reform_4_to_3_dec = {
 		alert = no
 		potential = {
-			civilized = yes
 			health_care = good_health_care
 			NOT = { has_country_flag = hide_all_decs_flag }
 			ai = no
@@ -414,7 +470,10 @@ political_decisions = {
 		}
 		
 		allow = {
-			NOT = { has_country_modifier = administrative_expenses_modifier }
+			NOT = {
+				government = khanate
+				has_country_modifier = administrative_expenses_modifier 
+			}
 			OR = {
 				AND = {
 					school_reforms = no_schools
@@ -498,4 +557,27 @@ political_decisions = {
 			set_country_flag = expeditions_menu_flag
 		}
 	}
+	
+	nomad_sedentarize_dec = {
+		alert = no
+		potential = {
+			government = khanate
+		}
+		
+		allow = {
+            NOT = { ruling_party_ideology = reactionary }
+			state_n_government = 1
+		}
+		
+		effect = {
+			clr_country_flag = is_nomadic_cflag
+            remove_country_modifier = nomad_mechanics_cmodifier
+			national_value = nv_order
+			government = absolute_monarchy
+			plurality = -10
+            political_reform = appointed
+            aristocrats = { militancy = 5 }
+		}
+	}
+	
 }
