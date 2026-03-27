@@ -235,6 +235,7 @@ political_decisions = {
         
         effect = {
             plurality = -5
+            change_tag = ENG
             add_accepted_culture = british
             add_accepted_culture = irish
             add_accepted_culture = scottish
@@ -320,12 +321,17 @@ political_decisions = {
                     limit = {
                         NOT = { owned_by = THIS }
                     }
-                    remove_core = DUA
+                    remove_core = THIS
                 }
             }
             IRE = {
                 all_core = {
-                    remove_core = DUA
+                    remove_core = THIS
+                }
+            }
+            SCO = {
+                all_core = {
+                    remove_core = THIS
                 }
             }
             set_country_flag = DUA_FRA_cflag
@@ -406,6 +412,7 @@ political_decisions = {
         potential = {
             tag = DUA
 			NOT = { has_country_flag = hide_all_decs_flag }
+            NOT = { has_country_flag = claim_savoy_DUA_dec_cflag }
             has_country_flag = PRV_con_dec_cflag
         }
         
@@ -419,6 +426,57 @@ political_decisions = {
             SAR_466 = {
                 add_core = DUA
             }
+            set_country_flag = claim_savoy_DUA_dec_cflag
         }
     }
+    
+    integrate_burgundia_dua_fra_dec = {
+		potential = {
+			NOT = { 
+				accepted_culture = burgundian
+				has_country_flag = DUA_brg_prv_path_chosen_cflag
+			}
+			OR = {
+				tag = FRA
+				AND = {
+					tag = DUA
+					has_country_flag = DUA_origin_dec_cflag
+				}
+			}
+		}	
+		
+		allow = {
+			pan_nationalism_tech = 1
+			owns = 3252
+			owns = 432
+			owns = 400
+			owns = 429
+		}
+		
+		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						tag = DUA
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_DUA_BURGUNDY = { }
+					set_country_flag = DUA_brg_prv_path_chosen_cflag
+				}
+			}
+            BRG = {
+                all_core = {
+                    limit = {
+                        owned_by = THIS
+                    }
+                    add_core = THIS
+                }
+            }
+			prestige = 10
+			plurality = -5
+			badboy = 7
+			add_accepted_culture = burgundian
+		}
+	}
 }
