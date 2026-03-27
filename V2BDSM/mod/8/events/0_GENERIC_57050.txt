@@ -123,6 +123,23 @@ country_event = {
 			duration = 30 
 		}
 		CUSTOM_TOOLTIP_C_57052 = { }
+	}	
+	option = {
+		name = "Exchange_EvtOptRequestCanned_food"
+		any_country = {
+			limit = {
+				ai = no
+				NOT = { 
+					has_country_flag = exchange_disallow_flag
+				}
+			}
+			country_event = 56999 # GRANT Canned_food EVENT
+		}
+		add_country_modifier = { 
+			name = grant_request_cooldown_modifier 
+			duration = 30 
+		}
+		CUSTOM_TOOLTIP_C_57052 = { }
 	}
 }
 
@@ -698,6 +715,18 @@ country_event = {
 }
 
 country_event = {
+	title = "aid_came_EvtName"
+	desc = "Canned_food_came_EvtDesc"
+	id = 56998
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "money_came_EvtOptA"
+	}
+}
+
+country_event = {
 	title = "Something_Requested_EvtName"
 	desc = "Ammo_Requested_EvtDesc"
 	id = 57069
@@ -813,6 +842,128 @@ country_event = {
 				FROM = {
 					ammunition = 5000
 					country_event = 57068
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "Something_Requested_EvtName"
+	desc = "Canned_food_Requested_EvtDesc"
+	id = 56999
+	picture = player_grants
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Something_Requested_EvtOptDecline"
+	}
+	
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food200" # 200
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 500 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 500
+				}
+			}
+			owner = {
+				canned_food = -500
+				FROM = {
+					canned_food = 500
+					country_event = 56998
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food500" # 500
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 1000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 1000
+				}
+			}
+			owner = {
+				canned_food = -1000
+				FROM = {
+					canned_food = 1000
+					country_event = 56998
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food1000" # 1000
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 2500 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 2500
+				}
+			}
+			owner = {
+				canned_food = -2500
+				FROM = {
+					canned_food = 2500
+					country_event = 56998
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food2000" # 2000
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 5000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 5000
+				}
+			}
+			owner = {
+				canned_food = -5000
+				FROM = {
+					canned_food = 5000
+					country_event = 56998
 				}
 			}
 		}
