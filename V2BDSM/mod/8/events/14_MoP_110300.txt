@@ -161,7 +161,7 @@ country_event = { # MOP ACTIONS
 					name = tax_cuts_modifer
 					duration = 730
 				}
-				plurality = 1
+				plurality = 3
 			}
 		}
 		random_owned = {
@@ -180,29 +180,60 @@ country_event = { # MOP ACTIONS
 			name = tax_lift_modifer
 			duration = 730
 		}
-		money = 60000
+		money = 80000
 		prestige = -10
-		plurality = -1
+		plurality = -2
 	}
 	
 	option = {	# INSULT
 		name = "MopActions_EvtOptHateSpeech"
-		set_country_flag = ready_hate_speech_cflag
-		any_country = {
+		random_owned = {
 			limit = {
-				ai = no
-				NOT = { tag = WBK }
-				NOT = {
-					has_country_modifier = take_hate_speech_cmodifier
-					truce_with = THIS
-					war_with = THIS
+				owner = {
+					NOT = {
+						has_country_modifier = give_hate_speech_cmodifier
+					}
 				}
-				relation = { who = THIS value = -200 }
-				NOT = { relation = { who = THIS value = -190 } }
-			}	
-			relation = { who = THIS value = 15 }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_MOP_INSULT = { }
+				set_country_flag = ready_hate_speech_cflag
+			}
 		}
-		CUSTOM_TOOLTIP_MOP_INSULT = { }
-
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_modifier = give_hate_speech_cmodifier
+				}
+			}
+			owner = {
+				CUSTOM_TOOLTIP_MOP_INSULT_COOLDOWN = { }
+			}
+		}
+		set_country_flag = hidden_tooltip
+		random_owned = {
+			limit = {
+				owner = {
+					has_country_flag = hidden_tooltip
+				}
+			}
+			owner = {
+				any_country = {
+					limit = {
+						ai = no
+						NOT = { tag = WBK }
+						NOT = {
+							has_country_modifier = take_hate_speech_cmodifier
+							truce_with = THIS
+							war_with = THIS
+						}
+						relation = { who = THIS value = -200 }
+						NOT = { relation = { who = THIS value = -190 } }
+					}	
+					relation = { who = THIS value = 15 }
+				}
+			}
+		}
+		clr_country_flag = hidden_tooltip
 	}
 }
