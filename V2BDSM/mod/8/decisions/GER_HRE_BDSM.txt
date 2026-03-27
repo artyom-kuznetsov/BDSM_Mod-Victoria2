@@ -201,4 +201,28 @@ political_decisions = {
 			country_event = 57103
         }
     }
+    
+    return_lowlands_dec = {
+        potential = {
+            tag = HLR
+			NOT = { has_country_flag = hide_all_decs_flag }
+            NOT = { primary_culture = dutch }
+        }
+        
+        allow = {
+            pan_nationalism_tech = 1
+            owns = 382
+        }
+        
+        effect = {
+            add_accepted_culture = dutch
+            prestige = 10
+            badboy = 8
+            NET = {
+                all_core = {
+                    add_core = THIS
+                }
+            }
+        }
+    }
 }
