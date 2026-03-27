@@ -128,12 +128,12 @@ political_decisions = {
     
     SCO_conq_dec = {
         potential = {
+			NOT = { has_country_flag = SCO_conq_cflag }
             OR = {
                 tag = DUA
-                tag = ENL
+                tag = ENG
             }
 			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = SCO_conq_cflag }
         }
         
         allow = {
@@ -235,8 +235,9 @@ political_decisions = {
         
         effect = {
             plurality = -5
-            change_tag = ENL
             add_accepted_culture = british
+            add_accepted_culture = irish
+            add_accepted_culture = scottish
             remove_country_modifier = DUA_lesser_cmodifier
             set_country_flag = DUA_ENG_cflag
             move_capital = 300
@@ -253,16 +254,21 @@ political_decisions = {
             DUA = {
                 all_core = {
                     limit = {
-                        NOT = { owned_by = THIS }
+                        NOT = { 
+							owned_by = THIS
+							is_core = IRE
+							is_core = ENL
+						}
                     }
-                    remove_core = DUA
+                    remove_core = THIS
                 }
             }
             OCC = {
                 all_core = {
-                    remove_core = DUA
+                    remove_core = THIS
                 }
             }
+            change_tag = ENG
         }
     }
     
@@ -329,9 +335,9 @@ political_decisions = {
     DUA_origin_dec = {
         potential = {
             tag = DUA
-			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = DUA_origin_dec_cflag }
 			has_country_flag = DUA_path_cflag
+			NOT = { has_country_flag = hide_all_decs_flag }
         }
         
         allow = {
@@ -339,10 +345,9 @@ political_decisions = {
             colonial_offices_tech = 1
             FRA = {
                 all_core = {
-                    OR = {
-                        NOT = { is_core = DUA }
-                        owned_by = THIS
-                    }
+					is_core = DUA
+					NOT = { is_core = BRG }
+					owned_by = THIS
                 }
             }
             ENL = {

@@ -30,4 +30,32 @@ political_decisions = {
             }
         }
     }
+	
+	integrate_occitania_sav_dec = {
+		potential = {
+			primary_culture = north_italian
+			NOT = { 
+				has_country_flag = integrate_occitania_sav_cflag
+				has_country_flag = hide_all_decs_flag 
+			}
+		}	
+		
+		allow = {
+			nationalism_tech = 1
+			owns = 470
+		}
+		
+		effect = {
+			prestige = 10
+			plurality = -5
+			badboy = 5
+			add_accepted_culture = provencal
+			set_country_flag = integrate_occitania_sav_cflag
+			PRV = {
+				all_core = {
+					add_core = THIS
+				}
+			}
+		}
+	}
 }
