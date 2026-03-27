@@ -108,12 +108,15 @@ political_decisions = {
 	
 	integrate_occitania_dua_fra_dec = {
 		potential = {
-			NOT = { accepted_culture = provencal }
+			NOT = { 
+				accepted_culture = provencal
+				has_country_flag = DUA_brg_prv_path_chosen_cflag
+			}
 			OR = {
 				tag = FRA
 				AND = {
 					tag = DUA
-					has_country_flag = dua_stability_focus_cflag
+					has_country_flag = DUA_origin_dec_cflag
 				}
 			}
 		}	
@@ -126,6 +129,17 @@ political_decisions = {
 		}
 		
 		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						tag = DUA
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_DUA_OCCITANIA = { }
+					set_country_flag = DUA_brg_prv_path_chosen_cflag
+				}
+			}
 			prestige = 10
 			plurality = -5
 			badboy = 5
