@@ -198,6 +198,11 @@ political_decisions = {
 				}
                 country_event = { id=11101 days=0 }
             }
+            GER = {
+                all_core = {
+                    add_core = THIS
+                }
+            }
 			country_event = 57103
         }
     }
@@ -206,7 +211,7 @@ political_decisions = {
         potential = {
             tag = HLR
 			NOT = { has_country_flag = hide_all_decs_flag }
-            NOT = { primary_culture = dutch }
+			NOT = { has_country_flag = return_lowlands_dec_flag }
         }
         
         allow = {
@@ -223,6 +228,7 @@ political_decisions = {
                     add_core = THIS
                 }
             }
+            set_country_flag = return_lowlands_dec_flag
         }
     }
 }
