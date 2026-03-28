@@ -256,4 +256,30 @@ political_decisions = {
 			}
 		}
 	}
+	
+	integrate_novgorod_sca_dec = {
+		potential = {
+			tag = SCA
+			NOT = { accepted_culture = severorussian }
+		}
+		
+		allow = {
+			owns = 1006
+			owns = 8
+			owns = 2587
+			owns = 981
+			owns = 989
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_INTEGRATE_NOV = { }
+			badboy = 10
+			any_owned = {
+				limit = {
+					is_core = NOV
+				}
+				add_core = THIS
+			}
+		}
+	}
 }
