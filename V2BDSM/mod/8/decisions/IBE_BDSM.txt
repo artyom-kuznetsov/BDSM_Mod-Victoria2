@@ -94,6 +94,7 @@ political_decisions = {
 			has_country_flag = reassert_aragonese_claims_cflag
 			NOT = { 
 				primary_culture = catalan
+				primary_culture = provencal
 				has_country_flag = integrate_napoli_cflag
 				has_country_flag = hide_all_decs_flag
 			}
@@ -120,4 +121,30 @@ political_decisions = {
 			SIC = { all_core = { add_core = THIS } }
 		}
 	}
+    
+    IBE_pereney_dec = {
+		potential = {
+			NOT = { 
+				primary_culture = provencal
+				primary_culture = catalan
+				has_country_flag = IBE_pereney_cflag
+				has_country_flag = hide_all_decs_flag
+			}
+			tag = IBE
+		}
+		
+		allow = {
+			pan_nationalism_tech = 1
+            owns = 455
+		}
+        
+        effect = {
+            set_country_flag = IBE_pereney_cflag
+			badboy = 5
+			plurality = -5
+			add_accepted_culture = provencal
+            SOUTH_FRANCE_STATE = { add_core = IBE }
+            FRA_458 = { add_core = IBE }
+        }
+    }
 }

@@ -510,4 +510,30 @@ political_decisions = {
 			TRI_1743 = { add_core = THIS }
 		}
 	}
+    
+    piemont_crown_dec = {
+        potential = {
+            tag = SAV
+			NOT = { 
+				has_country_flag = piemont_crown_cflag
+				has_country_flag = hide_all_decs_flag 
+			}
+        }
+        
+        allow = {
+            NOT = {
+                government = democracy
+            }
+            owns = 724
+            owns = 720
+            owns = 726
+        }
+        
+        effect = {
+            prestige = 5
+            badboy = 2
+            LIGURIA_STATE = { add_core = SAV }
+            AUS_726 = { add_core = SAV }
+        }
+    }
 }
