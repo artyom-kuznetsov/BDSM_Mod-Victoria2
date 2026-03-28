@@ -1301,27 +1301,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = severe_malaria_countered_country_flag
 		}
-		any_country = {
-			any_owned = {
-				limit = {
-					state_scope = {
-						is_colonial = yes
-					}
-					owner = { NOT = { has_country_flag = french_foreign_legion_supported } }
-				}
-				soldiers = {
-					pop_type = artisans
-				}
-			}
-			any_pop = {
-				limit = {
-					location = { owner = { OR = { year = 1845 NOT = { tag = CHI } } } }
-					type = bureaucrats
-					is_accepted_culture = no
-				}
-				pop_type = farmers
-			}
-		}
 		
 		any_country = {
 			limit = {

@@ -95,6 +95,15 @@ promotion_chance =
 		}
 	}
 	
+	### NON-ACCEPTED PROMOTE SLOWER
+	modifier = {
+		factor = -7
+		NOT = {
+			primary_culture = yes
+			is_accepted_culture = yes
+		}
+	}
+	
 	
 	### TAXES ###
 	
@@ -437,7 +446,10 @@ demotion_chance =
 	### NON-ACCEPTED DEMOTE SLOWER
 	modifier = {
 		factor = -0.1
-		not = { culture = this }
+		NOT = {
+			primary_culture = yes
+			is_accepted_culture = yes
+		}
 		strata = poor
 	}
 	
