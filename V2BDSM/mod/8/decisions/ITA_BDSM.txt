@@ -422,4 +422,92 @@ political_decisions = {
 			add_accepted_culture = south_italian
 		}
 	}
+	
+    burgundian_sav_dec = {
+        potential = {
+			NOT = { has_country_flag = hide_all_decs_flag }
+            OR = {
+                tag = SAV
+                tag = ITA
+            }
+            NOT = { has_country_flag = burg_sav_is_our }
+        }
+        
+        allow = {
+            owns = 607
+            nationalism_tech = 1
+        }
+        
+        effect = {
+            prestige = 10
+            badboy = 2
+            set_country_flag = burg_sav_is_our 
+            607 = {
+                add_core = SAV
+                add_core = ITA
+                remove_core = BRG
+            }
+            608 = {
+                add_core = SAV
+                add_core = ITA
+                remove_core = BRG
+            }
+        }
+    }
+	
+	integrate_occitania_sav_dec = {
+		potential = {
+			primary_culture = north_italian
+			NOT = { 
+				has_country_flag = integrate_occitania_sav_cflag
+				has_country_flag = hide_all_decs_flag 
+			}
+		}	
+		
+		allow = {
+			nationalism_tech = 1
+			owns = 470
+		}
+		
+		effect = {
+			prestige = 10
+			plurality = -5
+			badboy = 5
+			add_accepted_culture = provencal
+			set_country_flag = integrate_occitania_sav_cflag
+			PRV = {
+				all_core = {
+					add_core = THIS
+				}
+			}
+		}
+	}
+	
+	sav_maghreb_dec = {
+		potential = {
+			primary_culture = north_italian
+			NOT = { 
+				has_country_flag = sav_maghreb_cflag
+				has_country_flag = hide_all_decs_flag 
+			}
+		}	
+		
+		allow = {
+			colonial_offices_tech = 1
+			owns = 1725
+			owns = 1727
+			owns = 1708
+		}
+		
+		effect = {
+			prestige = 10
+			plurality = -5
+			badboy = 5
+			add_accepted_culture = maghrebi
+			set_country_flag = sav_maghreb_cflag
+			TUN_1726 = { add_core = THIS }
+			CONSTANTINE_STATE = { add_core = THIS }
+			TRI_1743 = { add_core = THIS }
+		}
+	}
 }
