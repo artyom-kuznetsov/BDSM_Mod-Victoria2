@@ -1,0 +1,30 @@
+political_decisions = {
+	form_turan_dec = {
+		potential = {
+			tag = CHG
+		}
+		allow = {
+			owns = 1182
+			owns = 1036
+			owns = 1204		
+			nationalism_tech = 1
+		}
+		effect = {
+			prestige = 20
+			plurality = 10
+			change_tag = TKS
+			any_owned = {
+				limit = { is_core = CHG} 
+				remove_core = CHG
+				add_core = TKS
+			}
+			add_accepted_culture = tatar
+			add_accepted_culture = crimean
+			add_accepted_culture = turkmen
+			RUS_1182 = { add_core = THIS }
+			RUS_1196 = { add_core = THIS }
+			ORYNBOR_STATE = { add_core = THIS }
+			1600 = { add_province_modifier = { name = baby_boom duration = 360 } }
+		}
+	}
+}
