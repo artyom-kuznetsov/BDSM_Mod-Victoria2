@@ -748,4 +748,33 @@ country_event = { # DUA
 		add_accepted_culture = welsh
     }
 }
+    
+    
+country_event = { # BRG
+    id = 9582
+    title = "noloc"
+    desc = "noloc"
+    
+    is_triggered_only = yes
+
+    option = {
+        name = "noloc"
+        # Audax Validator "." Ignore_NEXT
+        any_country = {
+            limit = {
+                OR = {
+                    primary_culture = rhenish
+                    primary_culture = dutch
+                    tag = DUA
+                    tag = PRV
+                }
+            }
+            annex_to = THIS
+        }
+        activate_technology = nationalism_n_imperialism
+        activate_technology = nationalism_tech
+        activate_technology = pan_nationalism_tech
+        activate_technology = colonial_offices_tech
+    }
+}
 
