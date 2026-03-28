@@ -2,18 +2,20 @@ political_decisions = {
     DUA_path_dec = {
         potential = {
             tag = DUA
-			NOT = { has_country_flag = DUA_path_cflag }
-			NOT = { has_country_flag = ENG_path_cflag }
-			NOT = { has_country_flag = FRA_path_cflag }
+			NOT = { 
+				has_country_flag = DUA_path_cflag
+				has_country_flag = ENG_path_cflag
+				has_country_flag = FRA_path_cflag
+			}
 			NOT = { has_country_flag = hide_all_decs_flag }
         }
         
         allow = {
             NOT = { any_owned_province = { controlled_by = REB } }
-            plurality = 50
+            plurality = 45
 			state_n_government = 1
             realism = 1
-            functionalism = 1
+            positivism = 1
         }
         
         effect = {
@@ -216,7 +218,6 @@ political_decisions = {
         }
         
         allow = {
-            plurality = 60
             colonial_offices_tech = 1
             ENL = {
                 all_core = {
@@ -282,7 +283,6 @@ political_decisions = {
         }
         
         allow = {
-            plurality = 60
             colonial_offices_tech = 1
             FRA = {
                 all_core = {
@@ -348,7 +348,7 @@ political_decisions = {
         }
         
         allow = {
-            plurality = 60
+            plurality = 50
             colonial_offices_tech = 1
             FRA = {
                 all_core = {
