@@ -102,11 +102,6 @@ political_decisions = {
                     }
                 }
             }
-            IRE = {
-                all_core = {
-                    remove_core = DUA
-                }
-            }
         }
         
         effect = {
@@ -121,6 +116,11 @@ political_decisions = {
                 limit = { has_pop_culture = british }
                 militancy = 1
                 consciousness = 2
+            }
+            IRE = {
+                all_core = {
+                    remove_core = DUA
+                }
             }
             set_country_flag = FRA_path_cflag
         }
@@ -240,7 +240,7 @@ political_decisions = {
             add_accepted_culture = scottish
             remove_country_modifier = DUA_lesser_cmodifier
             set_country_flag = DUA_ENG_cflag
-            move_capital = 300
+            capital = 300
             any_pop = {
                 limit = { has_pop_culture = british }
                 militancy = -6

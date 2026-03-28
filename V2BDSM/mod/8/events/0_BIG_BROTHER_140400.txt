@@ -1813,9 +1813,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { exists = yes ai = no security = police_state } plurality = 0.12 }
 		
 		### MODIFIERS ###
-		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }
-		any_country = { limit = { has_country_modifier = civil_war_aftermath_navy } plurality = -0.05 }
-		any_country = { limit = { has_country_modifier = civil_war_aftermath_economy } plurality = -0.1 }
 		any_country = { limit = { has_country_modifier = macau_exploitation_modifier_china } plurality = -0.005 }
 		any_country = { limit = { has_country_modifier = hongkong_exploitation_modifier_china } plurality = -0.005 }
 		any_country = { limit = { has_country_modifier = shanghai_exploitation_modifier_china } plurality = -0.005 }
@@ -1839,7 +1836,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { has_country_modifier = great_depression } plurality = -0.5 }
 		any_country = { limit = { has_country_modifier = revolution_happened_cmodifier } plurality = -0.1 }
 		any_country = { limit = { has_country_modifier = economic_boom } plurality = 0.1 }
-		any_country = { limit = { has_country_modifier = corn_laws_repealed } plurality = 0.05 }
 		any_country = { limit = { has_country_modifier = signed_the_geneva_convention } plurality = 0.02 }
 		any_country = { limit = { has_country_modifier = protector_of_eastern_christendom } plurality = 0.02 }
 		any_country = { limit = { has_country_modifier = national_humiliation_cmodifier } plurality = -0.1 }
@@ -2120,6 +2116,8 @@ province_event = {
 	}
 	option = {
 		name = "Selector_EvtOptScorch"
+		
+		
 		state_scope = {
 			any_owned = {
 				add_province_modifier = { name = scorched_earth_modifier duration = 130 }
@@ -2188,6 +2186,9 @@ province_event = {
 		name = "Selector_EvtOptRemAllSelectors"
 		owner = {
 			any_owned = {
+				limit = {
+					has_building = province_selector
+				}
 				# Audax Validator "." Ignore_NEXT
 				province_selector = -1
 			}
