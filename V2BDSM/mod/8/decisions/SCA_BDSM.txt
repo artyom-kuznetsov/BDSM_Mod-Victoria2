@@ -2,7 +2,7 @@ political_decisions = {
     sca_baltic_domination_dec = {
         potential = {
             tag = SCA
-            NOT = { has_country_flag = baltic_claimed }
+            NOT = { has_country_flag = baltic_claimed_cflag }
 			NOT = { has_country_flag = hide_all_decs_flag }
         }
 
@@ -21,16 +21,50 @@ political_decisions = {
             PRU = {
                 all_core = { add_core = SCA }
             }
-            set_country_flag = baltic_claimed
+            set_country_flag = baltic_claimed_cflag
         }
         ai_will_do = { factor = 1 }
+    }
+    
+    sca_baltic_dukes_dec = {
+        potential = {
+            tag = SCA
+            NOT = { has_country_flag = sca_baltic_dukes_cflag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+        }
+        
+        allow = {
+            plurality = 50
+            owns = 349
+            owns = 354
+            nationalism_tech = 1
+            state_n_government = 1
+        }
+        
+        effect = {
+            prestige = 5
+            plurality = -3
+            badboy = 3
+            add_accepted_culture = estonian
+            add_accepted_culture = latvian
+            EST = { all_core = { add_core = SCA } }
+            LAT = { all_core = { add_core = SCA } }
+            set_country_flag = sca_baltic_dukes_cflag
+        }
     }
 	
 	sca_integrate_germans_dec = {
 		potential = {
 			tag = SCA
 			NOT = { has_country_flag = sca_integrate_germans_cflag } 
+			NOT = { has_country_flag = celtic_union_cflag } 
 			NOT = { has_country_flag = hide_all_decs_flag }
+            NOT = {
+                AND = {
+                    accepted_culture = severorussian
+                    accepted_culture = lithuanian
+                }
+            }
 		}
 		
 		allow = {
@@ -106,13 +140,15 @@ political_decisions = {
 	
 	celtic_union_dec = {
 		potential = {
-			tag = SCA
-			NOT = { 
-				has_country_flag = celtic_union_cflag
-			}
+            NOT = { has_country_flag = celtic_union_cflag }
 			owns = 269
 			owns = 267
 			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = sca_integrate_germans_cflag }
+            OR = {
+                tag = SCA
+                tag = NSE
+            }
 		}
 		
 		allow = {
@@ -180,12 +216,15 @@ political_decisions = {
 	north_sea_empire_dec = {
 		potential = {
 			tag = SCA
-			NOT = { 
-				has_country_flag = celtic_union_cflag
-				exists = NSE
-			}
+			NOT = { exists = NSE }
 			NOT = { has_country_flag = sca_integrate_germans_cflag }
 			NOT = { has_country_flag = hide_all_decs_flag }
+            NOT = {
+                AND = {
+                    accepted_culture = severorussian
+                    accepted_culture = lithuanian
+                }
+            }
 		}
 		
 		allow = {
@@ -254,8 +293,27 @@ political_decisions = {
 	
 	integrate_novgorod_sca_dec = {
 		potential = {
-			tag = SCA
+            OR = {
+                tag = SCA
+                tag = NSE
+            }
 			NOT = { accepted_culture = severorussian }
+            NOT = {
+                OR = {
+                    AND = {
+                        accepted_culture = lithuanian
+                        has_country_flag = sca_integrate_germans_cflag
+                        tag = SCA
+                    }
+                    AND = {
+                        OR = {
+                            tag = NSE
+                            has_country_flag = celtic_union_cflag
+                        }
+                        accepted_culture = lithuanian
+                    }
+                }
+            }
 		}
 		
 		allow = {
@@ -278,4 +336,50 @@ political_decisions = {
 			}
 		}
 	}
+    
+    lithuania_sca_dec = {
+        potential = {
+            OR = {
+                tag = SCA
+                tag = NSE
+            }
+			NOT = { accepted_culture = lithuanian }
+            NOT = {
+                OR = {
+                    AND = {
+                        accepted_culture = severorussian
+                        has_country_flag = sca_integrate_germans_cflag
+                        tag = SCA
+                    }
+                    AND = {
+                        OR = {
+                            tag = NSE
+                            has_country_flag = celtic_union_cflag
+                        }
+                        accepted_culture = severorussian
+                    }
+                }
+            }
+        }
+        
+        allow = {
+            nationalism_n_imperialism = 1
+            360 = {
+                OR = {
+                    owned_by = THIS
+                    owner = { OR = { in_sphere = THIS vassal_of = THIS } }
+                }
+            }
+        }
+        
+        effect = {
+			CUSTOM_TOOLTIP_CONQUEST_LIT = { }
+            prestige = 5
+            badboy = 7
+            add_accepted_culture = lithuanian
+            RUS_360 = {
+                add_core = SCA
+            }
+        }
+    }
 }

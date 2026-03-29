@@ -778,3 +778,40 @@ country_event = { # BRG
     }
 }
 
+
+country_event = { # BRG
+    id = 9583
+    title = "noloc"
+    desc = "noloc"
+    
+    is_triggered_only = yes
+
+    option = {
+        name = "noloc"
+        # Audax Validator "." Ignore_NEXT
+        any_country = {
+            limit = {
+                OR = {
+                    primary_culture = rhenish
+                    primary_culture = dutch
+                    primary_culture = north_german
+                    primary_culture = rhenish
+                    tag = NOV
+                    tag = PSV
+                    tag = DUA
+                    tag = BRG
+                    tag = BOH
+                    tag = LIT
+                }
+            }
+            annex_to = THIS
+        }
+        activate_technology = nationalism_n_imperialism
+        activate_technology = nationalism_tech
+        activate_technology = pan_nationalism_tech
+        activate_technology = colonial_offices_tech
+        activate_technology = state_n_government
+		political_reform = all_voting_pops
+    }
+}
+
