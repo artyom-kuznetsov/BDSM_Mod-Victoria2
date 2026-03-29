@@ -170,6 +170,36 @@ fish_template = {
 	workforce = 10000
 }
 
+canned_food_template = {
+	efficiency = {
+		fish = 1.5				#6
+		cement = 0.25			#4
+		timber = 1				#4	# TOTAL 14
+	}
+	
+	owner =
+	{
+		poptype = capitalists 
+		effect = input
+		effect_multiplier = 2
+	}
+
+	employees = {	
+		{ 
+			poptype = craftsmen
+			effect = throughput
+			amount = 0.99
+		}
+		{ 
+			poptype = capitalists
+			effect = throughput
+			amount = 0.01
+		}
+	}
+	type = factory
+	workforce = 10000
+}
+
 cheap_template = {
 	efficiency = {
 		cement = 0.25			#4
@@ -991,11 +1021,10 @@ regular_clothes_factory = {
 }
 
 canned_food_factory = {       
-	template = cheap_template	#8
+	template = canned_food_template	#14
 	input_goods = { 
 		grain = 1.6	 			#8
 		cattle = 2	 			#8
-		fish = 1.5				#6
 		iron = 0.6 				#3		total input+maint = 33
 	}
 	output_goods = canned_food 
