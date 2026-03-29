@@ -7,7 +7,7 @@ country = {
 	YEARS_OF_NATIONALISM 	= 20,   -- Years of Nationalism
 	MONTHS_UNTIL_BROKEN 		= 3,    -- OBSOLETE! (Months until rebel held capital results in broken country.)
 	REBEL_ACCEPTANCE_MONTHS = 60,
-	BASE_COUNTRY_TAX_EFFICIENCY = 0.2, -- Basic efficiency for taxes without 'crats and tech
+	BASE_COUNTRY_TAX_EFFICIENCY = 0.25, -- Basic efficiency for taxes without 'crats and tech
 	BASE_COUNTRY_ADMIN_EFFICIENCY = 0.2,
 	GOLD_TO_CASH_RATE = 1, -- Amount of money generated per gold unit
 	GOLD_TO_WORKER_PAY_RATE = 0.1, -- Multiplier for how much money gold pays to pops
@@ -620,7 +620,7 @@ diplomacy = {
 pops = {
 	BASE_CLERGY_FOR_LITERACY = 0, 
 	MAX_CLERGY_FOR_LITERACY = 0.04, 
-	LITERACY_CHANGE_SPEED = 0.08,
+	LITERACY_CHANGE_SPEED = 0.1,
 
 
 	ASSIMILATION_SCALE = 0.004,
