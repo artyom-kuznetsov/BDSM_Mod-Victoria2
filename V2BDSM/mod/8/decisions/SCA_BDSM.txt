@@ -28,7 +28,7 @@ political_decisions = {
     
     sca_baltic_dukes_dec = {
         potential = {
-            tag = SCA
+            primary_culture = swedish
             NOT = { has_country_flag = sca_baltic_dukes_cflag }
 			NOT = { has_country_flag = hide_all_decs_flag }
         }
@@ -37,6 +37,7 @@ political_decisions = {
             plurality = 50
             owns = 349
             owns = 354
+            owns = 357
             nationalism_tech = 1
             state_n_government = 1
         }
@@ -46,8 +47,6 @@ political_decisions = {
             plurality = -3
             badboy = 3
             add_accepted_culture = estonian
-            add_accepted_culture = latvian
-            EST = { all_core = { add_core = SCA } }
             LAT = { all_core = { add_core = SCA } }
             set_country_flag = sca_baltic_dukes_cflag
         }
@@ -97,8 +96,9 @@ political_decisions = {
 		
 		effect = {
 			CUSTOM_TOOLTIP_WARN_SCA_NG_INTEGRATION = { }
-			prestige = 20
+			prestige = 10
 			badboy = 10
+			plurality = -8
 			set_country_flag = sca_integrate_germans_cflag
 			add_accepted_culture = north_german
             any_pop = {
