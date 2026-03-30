@@ -1,4 +1,5 @@
 political_decisions = {
+	### DUA PATH ###
     DUA_path_dec = {
         potential = {
             tag = DUA
@@ -11,6 +12,7 @@ political_decisions = {
         }
         
         allow = {
+			war = no
             NOT = { any_owned_province = { controlled_by = REB } }
             plurality = 45
 			state_n_government = 1
@@ -36,6 +38,130 @@ political_decisions = {
         }
     }
     
+    DUA_origin_dec = {
+        potential = {
+			has_country_flag = DUA_path_cflag
+			NOT = { has_country_flag = DUA_origin_dec_cflag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+        }
+        
+        allow = {
+            plurality = 50
+            functionalism_tech = 1
+            nationalism_n_imperialism = 1
+            FRA = {
+                all_core = {
+					is_core = DUA
+					NOT = { is_core = BRG }
+					owned_by = THIS
+                }
+            }
+            ENL = {
+                all_core = {
+                    owned_by = THIS
+                }
+            }
+        }
+        
+        effect = {
+            plurality = 4
+            add_accepted_culture = british
+            add_accepted_culture = french
+            remove_country_modifier = DUA_cmodifier
+            add_country_modifier = { name = DUA_lesser_cmodifier duration = -1 }
+            set_country_flag = DUA_FRA_cflag
+            any_pop = {
+                limit = { has_pop_culture = british }
+                militancy = -3
+                consciousness = -1
+            }
+            any_pop = {
+                limit = { has_pop_culture = french }
+                militancy = -3
+                consciousness = -1
+            }
+            set_country_flag = DUA_origin_dec_cflag
+        }
+    }
+    
+    DUA_origin_lame_dec = {
+        potential = {
+			has_country_flag = DUA_path_cflag
+			NOT = { has_country_flag = DUA_origin_dec_cflag }
+			NOT = { has_country_flag = hide_all_decs_flag }
+        }
+        
+        allow = {
+            colonial_offices_tech = 1
+        }
+        
+        effect = {
+			prestige = -10
+            plurality = -10
+            add_accepted_culture = british
+            add_accepted_culture = french
+            remove_country_modifier = DUA_cmodifier
+            add_country_modifier = { name = DUA_lesser_cmodifier duration = -1 }
+            add_country_modifier = { name = national_humiliation_cmodifier duration = 730 }
+            set_country_flag = DUA_FRA_cflag
+            any_pop = {
+				limit = {
+					culture = anglois
+				}
+                militancy = 3
+                consciousness = 1
+            }
+            set_country_flag = DUA_origin_dec_cflag
+        }
+    }
+    
+    integrate_burgundia_dua_dec = {
+		potential = {
+			has_country_flag = DUA_origin_dec_cflag
+            NOT = { has_country_flag = BRG_FRA_cflag }
+			NOT = { 
+				accepted_culture = burgundian
+				has_country_flag = DUA_brg_prv_path_chosen_cflag
+			}
+		}	
+		
+		allow = {
+			pan_nationalism_tech = 1
+			revolution_n_counterrevolution = 1
+			owns = 3252
+			owns = 432
+			owns = 400
+			owns = 429
+		}
+		
+		effect = {
+			random_owned = {
+				limit = {
+					owner = {
+						tag = DUA
+					}
+				}
+				owner = {
+					CUSTOM_TOOLTIP_DUA_BURGUNDY = { }
+					set_country_flag = DUA_brg_prv_path_chosen_cflag
+				}
+			}
+            BRG = {
+                all_core = {
+                    limit = {
+                        owned_by = THIS
+                    }
+                    add_core = THIS
+                }
+            }
+			prestige = 10
+			plurality = -5
+			badboy = 7
+			add_accepted_culture = burgundian
+		}
+	}
+	### ENG PATH ###
+	
     ENG_path_dec = {
         potential = {
             tag = DUA
@@ -157,13 +283,10 @@ political_decisions = {
         
     }
     
-    artua_conq_dec = {
+    artois_conquest_dec = {
         potential = {
             NOT = { has_country_flag = BRG_FRA_cflag }
-            OR = {
-                tag = DUA
-                tag = FRA
-            }
+            primary_culture = anglois
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = artua_conq_cflag }
         }
@@ -184,7 +307,7 @@ political_decisions = {
         }
     }
     
-    muden_conq_dec = {
+    dua_burgundy_gates_dec = {
         potential = {
             NOT = { has_country_flag = BRG_FRA_cflag }
             OR = {
@@ -339,111 +462,13 @@ political_decisions = {
         }
     }
     
-    DUA_origin_dec = {
-        potential = {
-            tag = DUA
-			NOT = { has_country_flag = DUA_origin_dec_cflag }
-			has_country_flag = DUA_path_cflag
-			NOT = { has_country_flag = hide_all_decs_flag }
-        }
-        
-        allow = {
-            plurality = 50
-            colonial_offices_tech = 1
-            FRA = {
-                all_core = {
-					is_core = DUA
-					NOT = { is_core = BRG }
-					owned_by = THIS
-                }
-            }
-            ENL = {
-                all_core = {
-                    owned_by = THIS
-                }
-            }
-        }
-        
-        effect = {
-            plurality = 4
-            add_accepted_culture = british
-            add_accepted_culture = french
-            remove_country_modifier = DUA_cmodifier
-            add_country_modifier = { name = DUA_lesser_cmodifier duration = -1 }
-            set_country_flag = DUA_FRA_cflag
-            any_pop = {
-                limit = { has_pop_culture = british }
-                militancy = -3
-                consciousness = -1
-            }
-            any_pop = {
-                limit = { has_pop_culture = french }
-                militancy = -3
-                consciousness = -1
-            }
-            set_country_flag = DUA_origin_dec_cflag
-        }
-    }
-    
-    PRV_con_dec = {
-        potential = {
-            tag = DUA
-			NOT = { has_country_flag = hide_all_decs_flag }
-			NOT = { has_country_flag = PRV_con_dec_cflag }
-        }
-        
-        allow = {
-            owns = 470
-            nationalism_n_imperialism = 1
-        }
-        
-        effect = {
-            prestige = 5
-            badboy = 2
-            PRV = {
-                all_core = {
-                    add_core = DUA
-                }
-            }
-            set_country_flag = PRV_con_dec_cflag
-        }
-    }
-    
-    claim_savoy_DUA_dec = {
-        potential = {
-            tag = DUA
-			NOT = { has_country_flag = hide_all_decs_flag }
-            NOT = { has_country_flag = claim_savoy_DUA_dec_cflag }
-            has_country_flag = PRV_con_dec_cflag
-        }
-        
-        allow = {
-            nationalism_tech = 1
-            nationalism_n_imperialism = 1
-        }
-        
-        effect = {
-            badboy = 9
-            SAR_466 = {
-                add_core = DUA
-            }
-            set_country_flag = claim_savoy_DUA_dec_cflag
-        }
-    }
-    
-    integrate_burgundia_dua_fra_dec = {
+    integrate_burgundia_fra_dec = {
 		potential = {
+			tag = FRA
             NOT = { has_country_flag = BRG_FRA_cflag }
 			NOT = { 
 				accepted_culture = burgundian
 				has_country_flag = DUA_brg_prv_path_chosen_cflag
-			}
-			OR = {
-				tag = FRA
-				AND = {
-					tag = DUA
-					has_country_flag = DUA_origin_dec_cflag
-				}
 			}
 		}	
 		
@@ -482,4 +507,51 @@ political_decisions = {
 			add_accepted_culture = burgundian
 		}
 	}
+    PRV_con_dec = {
+        potential = {
+            primary_culture = anglois
+			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { has_country_flag = PRV_con_dec_cflag }
+        }
+        
+        allow = {
+            owns = 470
+            nationalism_n_imperialism = 1
+        }
+        
+        effect = {
+            prestige = 5
+            badboy = 2
+            PRV = {
+                all_core = {
+                    add_core = DUA
+                }
+            }
+            set_country_flag = PRV_con_dec_cflag
+        }
+    }
+    
+    claim_savoy_DUA_dec = {
+        potential = {
+            has_country_flag = PRV_con_dec_cflag
+			OR = {
+				tag = FRA tag = DUA
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+            NOT = { has_country_flag = claim_savoy_DUA_dec_cflag }
+        }
+        
+        allow = {
+            nationalism_tech = 1
+            nationalism_n_imperialism = 1
+        }
+        
+        effect = {
+            badboy = 9
+            SAR_466 = {
+                add_core = DUA
+            }
+            set_country_flag = claim_savoy_DUA_dec_cflag
+        }
+    }
 }
