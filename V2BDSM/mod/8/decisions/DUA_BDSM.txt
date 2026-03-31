@@ -41,8 +41,10 @@ political_decisions = {
     DUA_origin_dec = {
         potential = {
 			has_country_flag = DUA_path_cflag
-			NOT = { has_country_flag = DUA_origin_dec_cflag }
-			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { 
+				has_country_flag = DUA_origin_dec_cflag
+				has_country_flag = hide_all_decs_flag 
+			}
         }
         
         allow = {
@@ -183,10 +185,13 @@ political_decisions = {
     ENG_path_dec = {
         potential = {
             tag = DUA
-			NOT = { has_country_flag = DUA_path_cflag }
-			NOT = { has_country_flag = ENG_path_cflag }
-			NOT = { has_country_flag = FRA_path_cflag }
-			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = { 
+				has_country_flag = DUA_path_cflag
+				has_country_flag = ENG_path_cflag
+				has_country_flag = FRA_path_cflag
+				exists = ENG
+				has_country_flag = hide_all_decs_flag
+			}
         }
         
         allow = {
@@ -414,6 +419,9 @@ political_decisions = {
                     owned_by = THIS
                 }
             }
+			NOT = {
+				exists = FRA
+			}
         }
         
         effect = {
@@ -467,6 +475,9 @@ political_decisions = {
             colonial_offices_tech = 1
 			nationalism_n_imperialism = 1
 			associationism = 1
+			NOT = {
+				exists = FRA
+			}
         }
         
         effect = {
@@ -685,4 +696,35 @@ political_decisions = {
             set_country_flag = claim_savoy_DUA_dec_cflag
         }
     }
+	
+	revert_path_dua_dec = {
+		potential = {
+			tag = DUA
+			OR = {
+				has_country_flag = DUA_path_cflag
+				has_country_flag = ENG_path_cflag
+				has_country_flag = FRA_path_cflag
+			}
+			NOT = { has_country_flag = hide_all_decs_flag }
+		}
+		
+		allow = {
+			war = no
+		}
+		
+		effect = {
+			prestige = -30
+			badboy = 5
+			plurality = -8
+			remove_accepted_culture = welsh
+			remove_accepted_culture = breton
+			any_pop = {
+				militancy = 2
+				consciousness = 2
+			}
+			clr_country_flag = DUA_path_cflag
+			clr_country_flag = ENG_path_cflag
+			clr_country_flag = FRA_path_cflag
+		}
+	}
 }
