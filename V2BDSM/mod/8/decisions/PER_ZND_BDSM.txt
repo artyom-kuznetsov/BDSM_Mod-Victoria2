@@ -130,10 +130,7 @@ political_decisions = {
 	
 	form_kurdish_satelit_per_dec = {
 		potential = {
-			OR = {
-				tag = ZND
-				tag = PER	
-			}
+			primary_culture = persian
 			NOT = {
 				has_country_flag = form_kurdish_satelit_per_cflag
 			}
@@ -240,10 +237,7 @@ political_decisions = {
 	accept_armenian_per_dec = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
-			OR = {
-				tag = ZND
-				tag = PER	
-			}
+			tag = PER
 			NOT = {
 				has_country_flag = accept_armenian_per_cflag
 			}
@@ -267,10 +261,7 @@ political_decisions = {
 	accept_mashriqi_per_dec = {
 		potential = {
 			NOT = { has_country_flag = hide_all_decs_flag }
-			OR = {
-				tag = ZND
-				tag = PER	
-			}
+			primary_culture = persian
 			NOT = { has_country_flag = accept_mashriqi_per_cflag }
 		}
 		

@@ -412,10 +412,12 @@ political_decisions = {
         allow = {
             colonial_offices_tech = 1
 			war = no
-            DUA = {
+            FRA = {
 				all_core = {
-					is_core = FRA
-					owned_by = THIS
+					OR = {
+						is_core = DUA
+						owned_by = THIS
+					}
 				}
 			}
             OCC = {
