@@ -2,7 +2,10 @@ political_decisions = {
 	form_iran_per_dec = {
 		potential = {
 			primary_culture = persian
-			NOT = { has_country_flag = hide_all_decs_flag }
+			NOT = {
+				exists = PER
+				has_country_flag = hide_all_decs_flag 
+			}
 		}
 		
 		allow = {
@@ -26,10 +29,10 @@ political_decisions = {
 			prestige = 20
 			plurality = 10
 			capital = 1121
-			change_tag = PER
 			add_accepted_culture = turkmen
 			PER_1112 = { add_core = THIS }
 			AZERBAIJAN_STATE = { add_core = THIS }
+			change_tag = PER
 		}
 	}
 	
