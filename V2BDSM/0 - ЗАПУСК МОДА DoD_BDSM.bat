@@ -1,0 +1,1 @@
+start v2game.exe -mod=mod/8.mod
