@@ -1,4 +1,32 @@
 political_decisions = {
+	ARN_step_from_madrid_dec = {
+		potential = {
+			tag = ARN
+			war = no
+			NOT = {
+				has_country_flag = ARN_step_from_madrid_cflag
+				has_country_flag = hide_all_decs_flag
+			}
+		}
+		
+		allow = {
+			strategic_mobility = 1
+			owns = 481
+			owns = 506
+			owns = 492
+		}
+		
+		effect = {
+			badboy = -5
+			prestige = 5
+			plurality = -5
+			
+			SPA_492 = { add_core = THIS }
+			GUADALAXARA_STATE = { add_core = THIS }
+			CARTAHENA_STATE = { add_core = THIS }
+		}
+	}
+	
 	form_iberian_union_dec = {
 		potential = {
 			NOT = { 
