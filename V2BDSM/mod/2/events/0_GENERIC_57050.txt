@@ -51,78 +51,323 @@ country_event = {
 		clr_country_flag = exchange_disallow_flag
 		CUSTOM_TOOLTIP_ALLY_57052 = { }
 	}
+	option = { # BANK CHECK
+		name = "Exchange_EvtOptBankCheck"
+		CUSTOM_TOOLTIP_PAYMENT_RECEIVED = { }
+		# 0
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 0 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 1 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_0 = { }
+		}
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 1 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 5 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_1_TO_5 = { }
+		}
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 5 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 10 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_5_TO_10 = { }
+		}
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 10 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 20 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_10_TO_20 = { }
+		}
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 20 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 30 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_20_TO_30 = { }
+		}
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 30 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 40 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_30_TO_40 = { }
+		}
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 40 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 60 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_40_TO_60 = { }
+		}
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 60 } 
+			NOT = { check_variable = { which = payment_received_cvar value = 100 } } } } 
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_60_TO_100 = { }
+		}
+		# 10M+
+		random_owned = { limit = { owner = { check_variable = { which = payment_received_cvar value = 100 }
+			CUSTOM_TOOLTIP_PAYMENT_RECEIVED_100 = { } } }
+		}
+		
+		# GRANT LIMITS
+		random_owned = {
+			limit = {
+				owner = { NOT = { no_standard = 1 } }
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_0 = { }
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					no_standard = 1 
+					NOT = { ad_hoc_money_bill_printing = 1 }
+				}
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_1 = { }
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					ad_hoc_money_bill_printing = 1 
+					NOT = { private_bank_money_bill_printing = 1 }
+				}
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_2 = { }
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					private_bank_money_bill_printing = 1 
+					NOT = { central_bank_money_bill_printing = 1 }
+				}
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_3 = { }
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					central_bank_money_bill_printing = 1 
+					NOT = { modern_central_bank_system = 1 }
+				}
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_4 = { }
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					modern_central_bank_system = 1 
+					NOT = { market_determined_exchange_rates = 1 }
+				}
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_5 = { }
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					market_determined_exchange_rates = 1 
+					NOT = { fiat_based_monetary_system = 1 }
+				}
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_6 = { }
+		}
+		random_owned = {
+			limit = {
+				owner = { 
+					fiat_based_monetary_system = 1 
+				}
+			}
+			CUSTOM_TOOLTIP_PAYMENT_COMMERCE_7 = { }
+		}
+		
+		# IF LIMIT REACHED
+		random_owned = {
+			limit = { owner = { 
+				NOT = { no_standard = 1 }
+				check_variable = { which = payment_received_cvar value = 4.9 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+	
+		random_owned = {
+			limit = { owner = { 
+					no_standard = 1 
+					NOT = { ad_hoc_money_bill_printing = 1 }
+				check_variable = { which = payment_received_cvar value = 9.9 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+		random_owned = {
+			limit = { owner = { 
+					ad_hoc_money_bill_printing = 1 
+					NOT = { private_bank_money_bill_printing = 1 }
+				check_variable = { which = payment_received_cvar value = 19.9 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+		random_owned = {
+			limit = { owner = { 
+					private_bank_money_bill_printing = 1 
+					NOT = { central_bank_money_bill_printing = 1 }
+				check_variable = { which = payment_received_cvar value = 29.9 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+		random_owned = {
+			limit = { owner = { 
+					central_bank_money_bill_printing = 1 
+					NOT = { modern_central_bank_system = 1 }
+				check_variable = { which = payment_received_cvar value = 39.9 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+		random_owned = {
+			limit = { owner = { 
+					modern_central_bank_system = 1 
+					NOT = { market_determined_exchange_rates = 1 }
+				check_variable = { which = payment_received_cvar value = 59 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+		random_owned = {
+			limit = { owner = { 
+					market_determined_exchange_rates = 1 
+					NOT = { fiat_based_monetary_system = 1 }
+				check_variable = { which = payment_received_cvar value = 98 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+		random_owned = {
+			limit = { owner = { 
+					fiat_based_monetary_system = 1 
+				check_variable = { which = payment_received_cvar value = 196 } } } CUSTOM_TOOLTIP_PAYMENT_LIMIT_REACHED = { } 
+		}
+		
+	}
 	# КОРСАР ХУЕСОС СЪЕБИ С ФАЙЛА САМ ПРИДУМАЙ КАК СДЕЛАТЬ
 	option = {
 		name = "Exchange_EvtOptRequest"
-		any_country = {
+		random_owned = {
 			limit = {
-				ai = no
-				OR = {
-					NOT = { has_country_flag = exchange_disallow_flag }
-					AND = {
-						alliance_with = THIS
-						has_country_flag = exchange_non_allied_disallow_flag
-					}
-				}
+				owner = { NOT = { has_country_modifier = grant_request_cooldown_modifier } }
 			}
-			country_event = 57053 # GRANT MONEY EVENT
+			owner = {
+				any_country = {
+					limit = {
+						ai = no
+						NOT = { tag = THIS }
+						OR = {
+							NOT = { has_country_flag = exchange_disallow_flag }
+							AND = {
+								alliance_with = THIS
+								has_country_flag = exchange_non_allied_disallow_flag
+							}
+						}
+					}
+					country_event = 57053 # GRANT MONEY EVENT
+				}
+				add_country_modifier = { 
+					name = grant_request_cooldown_modifier 
+					duration = 30 
+				}
+				CUSTOM_TOOLTIP_C_57052 = { }
+			}
 		}
-		add_country_modifier = { 
-			name = grant_request_cooldown_modifier 
-			duration = 30 
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = grant_request_cooldown_modifier }
+			}
+			CUSTOM_TOOLTIP_GRANT_REQUEST_COOLDOWN = { }
 		}
-		CUSTOM_TOOLTIP_C_57052 = { }
 	}
 	option = {
 		name = "Exchange_EvtOptRequestArty"
-		any_country = {
+		random_owned = {
 			limit = {
-				ai = no
-				NOT = { 
-					has_country_flag = exchange_disallow_flag
-				}
+				owner = { NOT = { has_country_modifier = arty_request_cooldown_modifier } }
 			}
-			country_event = 57064 # GRANT ARTY EVENT
+			owner = {
+				any_country = {
+					limit = {
+						ai = no
+						NOT = { 
+							has_country_flag = exchange_disallow_flag
+						}
+					}
+					country_event = 57064 # GRANT ARTY EVENT
+				}
+				add_country_modifier = { 
+					name = arty_request_cooldown_modifier 
+					duration = 30 
+				}
+				CUSTOM_TOOLTIP_C_57052 = { }
+			}
 		}
-		add_country_modifier = { 
-			name = grant_request_cooldown_modifier 
-			duration = 30 
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = arty_request_cooldown_modifier }
+			}
+			CUSTOM_TOOLTIP_ARTY_REQUEST_COOLDOWN = { }
 		}
-		CUSTOM_TOOLTIP_C_57052 = { }
 	}
 	option = {
 		name = "Exchange_EvtOptRequestArms"
-		any_country = {
+		random_owned = {
 			limit = {
-				ai = no
-				NOT = { 
-					has_country_flag = exchange_disallow_flag
-				}
+				owner = { NOT = { has_country_modifier = guns_request_cooldown_modifier } }
 			}
-			country_event = 57065 # GRANT ARMS EVENT
+			owner = {
+				any_country = {
+					limit = {
+						ai = no
+						NOT = { 
+							has_country_flag = exchange_disallow_flag
+						}
+					}
+					country_event = 57065 # GRANT ARMS EVENT
+				}
+				add_country_modifier = { 
+					name = guns_request_cooldown_modifier 
+					duration = 30 
+				}
+				CUSTOM_TOOLTIP_C_57052 = { }
+			}
 		}
-		add_country_modifier = { 
-			name = grant_request_cooldown_modifier 
-			duration = 30 
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = guns_request_cooldown_modifier }
+			}
+			CUSTOM_TOOLTIP_GUNS_REQUEST_COOLDOWN = { }
 		}
-		CUSTOM_TOOLTIP_C_57052 = { }
 	}
 	option = {
 		name = "Exchange_EvtOptRequestAmmo"
-		any_country = {
+		
+		random_owned = {
 			limit = {
-				ai = no
-				NOT = { 
-					has_country_flag = exchange_disallow_flag
-				}
+				owner = { NOT = { has_country_modifier = ammo_request_cooldown_modifier } }
 			}
-			country_event = 57069 # GRANT AMMO EVENT
+			owner = {
+				any_country = {
+					limit = {
+						ai = no
+						NOT = { 
+							has_country_flag = exchange_disallow_flag
+						}
+					}
+					country_event = 57069 # GRANT AMMO EVENT
+				}
+				add_country_modifier = { 
+					name = ammo_request_cooldown_modifier 
+					duration = 30 
+				}
+				CUSTOM_TOOLTIP_C_57052 = { }
+			}
 		}
-		add_country_modifier = { 
-			name = grant_request_cooldown_modifier 
-			duration = 30 
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = guns_request_cooldown_modifier }
+			}
+			CUSTOM_TOOLTIP_AMMO_REQUEST_COOLDOWN = { }
 		}
-		CUSTOM_TOOLTIP_C_57052 = { }
+	}
+	option = {
+		name = "Exchange_EvtOptRequestCanned_food"
+		random_owned = {
+			limit = {
+				owner = { NOT = { has_country_modifier = cfood_request_cooldown_modifier } }
+			}
+			owner = {
+				any_country = {
+					limit = {
+						ai = no
+						NOT = { 
+							has_country_flag = exchange_disallow_flag
+						}
+					}
+					country_event = 56999 # GRANT Canned_food EVENT
+				}
+				add_country_modifier = { 
+					name = grant_request_cooldown_modifier 
+					duration = 30 
+				}
+				CUSTOM_TOOLTIP_C_57052 = { }
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { has_country_modifier = cfood_request_cooldown_modifier }
+			}
+			CUSTOM_TOOLTIP_CFOOD_REQUEST_COOLDOWN = { }
+		}
 	}
 }
 
@@ -143,7 +388,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					NOT = { money = 50000 }
+					NOT = { money = 52500 }
 				}
 			}
 			owner = {
@@ -153,14 +398,55 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 50000
+					money = 52500
+					OR = {
+						FROM = {
+							NOT = { no_standard = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 4.6 } }
+						}
+						FROM = {
+							no_standard = 1 
+							NOT = { ad_hoc_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 9.6 } }
+						}
+						FROM = {
+							ad_hoc_money_bill_printing = 1 
+							NOT = { private_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 19.6 } }
+						}
+						FROM = {
+							private_bank_money_bill_printing = 1 
+							NOT = { central_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 29.6 } }
+						}
+						FROM = {
+							central_bank_money_bill_printing = 1 
+							NOT = { modern_central_bank_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 39.6 } }
+						}
+						FROM = {
+							modern_central_bank_system = 1 
+							NOT = { market_determined_exchange_rates = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 59.6 } }
+						}
+						FROM = {
+							market_determined_exchange_rates = 1 
+							NOT = { fiat_based_monetary_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 99.6 } }
+						}
+						FROM = {
+							fiat_based_monetary_system = 1 
+							NOT = { check_variable = { which = payment_received_cvar value = 199.6 } }
+						}
+					}
 				}
 			}
 			owner = {
-				money = -50000
+				money = -52500
 				FROM = {
 					money = 50000
 					country_event = 57055
+					change_variable = { which = payment_received_cvar value = 0.5 }
 				}
 			}
 		}
@@ -170,7 +456,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					NOT = { money = 100000 }
+					NOT = { money = 105000 }
 				}
 			}
 			owner = {
@@ -180,14 +466,56 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 100000
+					money = 105000
+					
+					OR = {
+						FROM = {
+							NOT = { no_standard = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 4.1 } }
+						}
+						FROM = {
+							no_standard = 1 
+							NOT = { ad_hoc_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 9.1 } }
+						}
+						FROM = {
+							ad_hoc_money_bill_printing = 1 
+							NOT = { private_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 19.1 } }
+						}
+						FROM = {
+							private_bank_money_bill_printing = 1 
+							NOT = { central_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 29.1 } }
+						}
+						FROM = {
+							central_bank_money_bill_printing = 1 
+							NOT = { modern_central_bank_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 39.1 } }
+						}
+						FROM = {
+							modern_central_bank_system = 1 
+							NOT = { market_determined_exchange_rates = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 59.1 } }
+						}
+						FROM = {
+							market_determined_exchange_rates = 1 
+							NOT = { fiat_based_monetary_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 99.1 } }
+						}
+						FROM = {
+							fiat_based_monetary_system = 1 
+							NOT = { check_variable = { which = payment_received_cvar value = 199.1 } }
+						}
+					}
 				}
 			}
 			owner = {
-				money = -100000
+				money = -105000
 				FROM = {
 					money = 100000
 					country_event = 57056
+					change_variable = { which = payment_received_cvar value = 1 }
 				}
 			}
 		}
@@ -197,7 +525,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					NOT = { money = 250000 }
+					NOT = { money = 262500 }
 				}
 			}
 			owner = {
@@ -207,14 +535,55 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 250000
+					money = 262500
+					OR = {
+						FROM = {
+							NOT = { no_standard = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 2.6 } }
+						}
+						FROM = {
+							no_standard = 1 
+							NOT = { ad_hoc_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 7.6 } }
+						}
+						FROM = {
+							ad_hoc_money_bill_printing = 1 
+							NOT = { private_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 17.6 } }
+						}
+						FROM = {
+							private_bank_money_bill_printing = 1 
+							NOT = { central_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 27.6 } }
+						}
+						FROM = {
+							central_bank_money_bill_printing = 1 
+							NOT = { modern_central_bank_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 37.6 } }
+						}
+						FROM = {
+							modern_central_bank_system = 1 
+							NOT = { market_determined_exchange_rates = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 57.6 } }
+						}
+						FROM = {
+							market_determined_exchange_rates = 1 
+							NOT = { fiat_based_monetary_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 97.6 } }
+						}
+						FROM = {
+							fiat_based_monetary_system = 1 
+							NOT = { check_variable = { which = payment_received_cvar value = 197.6 } }
+						}
+					}
 				}
 			}
 			owner = {
-				money = -250000
+				money = -262500
 				FROM = {
 					money = 250000
 					country_event = 57057
+					change_variable = { which = payment_received_cvar value = 2.5 }
 				}
 			}
 		}
@@ -224,7 +593,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					NOT = { money = 500000 }
+					NOT = { money = 525000 }
 				}
 			}
 			owner = {
@@ -234,14 +603,55 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 500000
+					money = 525000
+					OR = {
+						FROM = {
+							NOT = { no_standard = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 0.1 } }
+						}
+						FROM = {
+							no_standard = 1 
+							NOT = { ad_hoc_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 5.1 } }
+						}
+						FROM = {
+							ad_hoc_money_bill_printing = 1 
+							NOT = { private_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 15.1 } }
+						}
+						FROM = {
+							private_bank_money_bill_printing = 1 
+							NOT = { central_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 25.1 } }
+						}
+						FROM = {
+							central_bank_money_bill_printing = 1 
+							NOT = { modern_central_bank_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 35.1 } }
+						}
+						FROM = {
+							modern_central_bank_system = 1 
+							NOT = { market_determined_exchange_rates = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 55.1 } }
+						}
+						FROM = {
+							market_determined_exchange_rates = 1 
+							NOT = { fiat_based_monetary_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 95.1 } }
+						}
+						FROM = {
+							fiat_based_monetary_system = 1 
+							NOT = { check_variable = { which = payment_received_cvar value = 195.1 } }
+						}
+					}
 				}
 			}
 			owner = {
-				money = -500000
+				money = -525000
 				FROM = {
 					money = 500000
 					country_event = 57058
+					change_variable = { which = payment_received_cvar value = 5 }
 				}
 			}
 		}
@@ -251,7 +661,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					NOT = { money = 1000000 }
+					NOT = { money = 1050000 }
 				}
 			}
 			owner = {
@@ -261,14 +671,51 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 1000000
+					money = 1050000
+					OR = {
+						FROM = {
+							no_standard = 1 
+							NOT = { ad_hoc_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 0.1 } }
+						}
+						FROM = {
+							ad_hoc_money_bill_printing = 1 
+							NOT = { private_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 10.1 } }
+						}
+						FROM = {
+							private_bank_money_bill_printing = 1 
+							NOT = { central_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 20.1 } }
+						}
+						FROM = {
+							central_bank_money_bill_printing = 1 
+							NOT = { modern_central_bank_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 30.1 } }
+						}
+						FROM = {
+							modern_central_bank_system = 1 
+							NOT = { market_determined_exchange_rates = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 50.1 } }
+						}
+						FROM = {
+							market_determined_exchange_rates = 1 
+							NOT = { fiat_based_monetary_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 90.1 } }
+						}
+						FROM = {
+							fiat_based_monetary_system = 1 
+							NOT = { check_variable = { which = payment_received_cvar value = 190.1 } }
+						}
+					}
 				}
 			}
 			owner = {
-				money = -1000000
+				money = -1050000
 				FROM = {
 					money = 1000000
 					country_event = 57059
+					change_variable = { which = payment_received_cvar value = 10 }
 				}
 			}
 		}
@@ -278,7 +725,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					NOT = { money = 2000000 }
+					NOT = { money = 2100000 }
 				}
 			}
 			owner = {
@@ -288,14 +735,46 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					money = 2000000
+					money = 2100000
+					OR = {
+						FROM = {
+							ad_hoc_money_bill_printing = 1 
+							NOT = { private_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 0.1 } }
+						}
+						FROM = {
+							private_bank_money_bill_printing = 1 
+							NOT = { central_bank_money_bill_printing = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 10.1 } }
+						}
+						FROM = {
+							central_bank_money_bill_printing = 1 
+							NOT = { modern_central_bank_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 20.1 } }
+						}
+						FROM = {
+							modern_central_bank_system = 1 
+							NOT = { market_determined_exchange_rates = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 40.1 } }
+						}
+						FROM = {
+							market_determined_exchange_rates = 1 
+							NOT = { fiat_based_monetary_system = 1 }
+							NOT = { check_variable = { which = payment_received_cvar value = 80.1 } }
+						}
+						FROM = {
+							fiat_based_monetary_system = 1 
+							NOT = { check_variable = { which = payment_received_cvar value = 180.1 } }
+						}
+					}
 				}
 			}
 			owner = {
-				money = -2000000
+				money = -2100000
 				FROM = {
 					money = 2000000
 					country_event = 57060
+					change_variable = { which = payment_received_cvar value = 20 }
 				}
 			}
 		}
@@ -813,6 +1292,128 @@ country_event = {
 				FROM = {
 					ammunition = 5000
 					country_event = 57068
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	title = "Something_Requested_EvtName"
+	desc = "Canned_food_Requested_EvtDesc"
+	id = 56999
+	picture = player_grants
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "Something_Requested_EvtOptDecline"
+	}
+	
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food200" # 200
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 500 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 500
+				}
+			}
+			owner = {
+				canned_food = -500
+				FROM = {
+					canned_food = 500
+					country_event = 56998
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food500" # 500
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 1000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 1000
+				}
+			}
+			owner = {
+				canned_food = -1000
+				FROM = {
+					canned_food = 1000
+					country_event = 56998
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food1000" # 1000
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 2500 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 2500
+				}
+			}
+			owner = {
+				canned_food = -2500
+				FROM = {
+					canned_food = 2500
+					country_event = 56998
+				}
+			}
+		}
+	}
+	option = {
+		name = "Grant_Requested_EvtOptCanned_food2000" # 2000
+		random_owned = {
+			limit = {
+				owner = {
+					NOT = { canned_food = 5000 }
+				}
+			}
+			owner = {
+				country_event = 57054
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					canned_food = 5000
+				}
+			}
+			owner = {
+				canned_food = -5000
+				FROM = {
+					canned_food = 5000
+					country_event = 56998
 				}
 			}
 		}

@@ -1382,7 +1382,12 @@ country_event = { # YEARLY CLEANUP
 	#}
 	
 	option = {
-		name = "noloc"		
+		name = "noloc"
+		
+		any_country = {
+			set_variable = { which = payment_received_cvar value = 0 }
+		}
+		
 		any_country = {
 			limit = {
 				ai = no
