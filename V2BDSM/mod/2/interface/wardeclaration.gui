@@ -574,6 +574,19 @@ guiTypes = {
 
 			format = centre
 		}
+		instantTextBoxType = {
+			name = "MP_Warscore_Reminder"
+			text = "FE_WARSCORE_REMINDER"
+			position = { x = 313 y = 241 }
+			textureFile = ""
+			font = "cgothic_18"
+			borderSize = {x = 4 y = 4}
+			maxWidth = 230
+			maxHeight = 230	
+			fixedsize = yes
+			format = bottom
+		}
+		
 		
 		instantTextBoxType = {
 			name = "warscore_label"
@@ -795,12 +808,13 @@ guiTypes = {
 		
 	}
 	
+	### MAKE CB CREATE CB WARGOAL ???? ?????; ????
 	# Casus belli creation #############
 	eu3dialogtype = {
 		name = "MakeCBDialog"
 		backGround="Background"
-		position = { x=-52 y=-90 }
-		size = { x=550 y=440 }
+		position = { x=-252 y=-260 }
+		size = { x=550 y=540 }
 		Orientation = "CENTER"
 		moveable = 0
 		dontRender = ""
@@ -838,15 +852,28 @@ guiTypes = {
 			name = "Description"
 			position = { x = 248 y = 115 }
 			textureFile = ""
-			font = "vic_18"
+			font = "cgothic_18"
 			borderSize = {x = 4 y = 4}
 			text = ""	
+			maxWidth = 256
+			maxHeight = 330	
+			fixedsize = yes
+			format = centre
+		}
+		
+		instantTextBoxType = {
+			name = "MP_Warscore_Reminder"
+			text = "FE_WARSCORE_REMINDER"
+			position = { x = 248 y = 355 }
+			textureFile = ""
+			font = "cgothic_18"
+			borderSize = {x = 4 y = 4}
 			maxWidth = 256
 			maxHeight = 230	
 			fixedsize = yes
 			format = centre
 		}
-			
+		
 		
 		shieldtype = 
 		{
@@ -865,7 +892,7 @@ guiTypes = {
 		
 		guiButtonType = {
 			name = "AgreeButton"
-			position = { x=290 y =376}
+			position = { x=290 y =476}
 			quadTextureSprite ="GFX_button_standard_200"
 			buttonText = "PROCEED"
 			buttonFont = "vic_18_black"
@@ -875,7 +902,7 @@ guiTypes = {
 
 		guiButtonType = {
 			name = "DeclineButton"
-			position = { x=60 y =376}
+			position = { x=60 y =476}
 			quadTextureSprite ="GFX_button_standard_200"
 			buttonText = "CANCEL"
 			buttonFont = "vic_18_black"
@@ -886,7 +913,7 @@ guiTypes = {
 			name ="cb_list"
 			position = { x = 57 y = 115 }
 			backGround=""
-			size = { x=162 y =234 }
+			size = { x=162 y =334 }
 			Orientation = "UPPER_LEFT"
 			spacing = 1
 			scrollbartype = "standardlistbox_slider"

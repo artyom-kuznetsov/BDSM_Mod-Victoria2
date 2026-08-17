@@ -898,7 +898,7 @@ conquest_small = {
 
 	badboy_factor = 0.7
 	prestige_factor = 1.5
-	peace_cost_factor = 0.9
+	peace_cost_factor = 0.7
 	penalty_factor = 0.5
 	
 	break_truce_prestige_factor = 5
@@ -1001,7 +1001,7 @@ add_to_sphere = {
 
 	badboy_factor = 2
 	prestige_factor = 2
-	peace_cost_factor = 50
+	peace_cost_factor = 30
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 5
@@ -1197,7 +1197,7 @@ acquire_core_state = {
 	
 	badboy_factor = 0.4
 	prestige_factor = 5
-	peace_cost_factor = 0.7
+	peace_cost_factor = 0.004
 	penalty_factor = 1
 	#always = yes
 
@@ -1228,6 +1228,7 @@ acquire_core_state = {
 	}
 
 	po_demand_state = yes
+	po_gunboat = yes
 	
 	war_name = WAR_TAKE_CORE_NAME
 	
@@ -1548,21 +1549,7 @@ acquire_substate_region = {
 	good_relation_militancy_factor = 1
 
 	can_use = {
-		NOT = { is_our_vassal = THIS }
-		num_of_substates = 1 # if has any substate
-		any_substate = {
-			number_of_states = 1
-			any_owned_province = {
-				not = { is_core = THIS }
-				is_colonial = no
-			}
-		}
-		NOT = {
-			AND = {
-				has_country_flag = chinese_warlord_flag
-				NOT = { year = 1870 } 
-			}
-		}
+		always = no
 	}
 	
 	allowed_substate_regions = {
@@ -1610,7 +1597,7 @@ acquire_state_small = {
 	
 	badboy_factor = 0.8
 	prestige_factor = 1
-	peace_cost_factor = 1
+	peace_cost_factor = 0.0024
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -1682,6 +1669,7 @@ acquire_state_small = {
 	}		
 
 	po_demand_state = yes
+	po_gunboat = yes
 	
 	war_name = WAR_TAKE_NAME
 	
@@ -1717,7 +1705,7 @@ acquire_state_medium = {
 	
 	badboy_factor = 1.4
 	prestige_factor = 1.5
-	peace_cost_factor = 1
+	peace_cost_factor = 0.004
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -1824,7 +1812,7 @@ acquire_state = {
 	
 	badboy_factor = 2
 	prestige_factor = 2
-	peace_cost_factor = 1
+	peace_cost_factor = 0.006
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -1901,6 +1889,7 @@ acquire_state = {
 	}		
 
 	po_demand_state = yes
+	po_gunboat = yes
 	
 	war_name = WAR_TAKE_NAME
 	
@@ -1936,7 +1925,7 @@ acquire_capital = {
 	
 	badboy_factor = 2.5
 	prestige_factor = 2
-	peace_cost_factor = 1
+	peace_cost_factor = 0.01
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -2001,6 +1990,7 @@ acquire_capital = {
 	}
 	
 	po_demand_state = yes
+	po_gunboat = yes
 	
 	war_name = WAR_TAKE_NAME
 	
@@ -2035,7 +2025,7 @@ place_in_the_sun = {
 
 	badboy_factor = 1
 	prestige_factor = 2
-	peace_cost_factor = 0.9
+	peace_cost_factor = 0.002
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -2081,6 +2071,7 @@ place_in_the_sun = {
 	}
 
 	po_demand_state = yes
+	po_gunboat = yes
 
 	war_name = WAR_COLONIAL_NAME
 	
@@ -2115,7 +2106,7 @@ take_treaty_port = {
 	
 	badboy_factor = 0.6
 	prestige_factor = 1
-	peace_cost_factor = 1
+	peace_cost_factor = 0.004
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 0.5
@@ -2157,6 +2148,7 @@ take_treaty_port = {
 	}	
 
 	po_demand_state = yes
+	po_gunboat = yes
 	
 	war_name = WAR_TAKE_NAME
 	
@@ -2193,7 +2185,7 @@ colonial_competition = {
 
 	badboy_factor = 0
 	prestige_factor = 2
-	peace_cost_factor = 0.9
+	peace_cost_factor = 0.002
 	penalty_factor = 1
 
 	break_truce_prestige_factor = 1
@@ -2206,6 +2198,7 @@ colonial_competition = {
 	good_relation_militancy_factor = 1
 
 	po_colony = yes
+	po_gunboat = yes
 
 	war_name = WAR_COLONIAL_NAME
 	
@@ -2431,6 +2424,7 @@ free_peoples = {
 	# FROM - country scope is possible match?
 	# war target country of goal is scope
 	allowed_countries = {
+		ai = yes
 		OR = {
             AND = {
                 THIS = { num_of_ports = 1 }
@@ -2678,7 +2672,7 @@ release_puppet = {
 
     badboy_factor = 4
     prestige_factor = 1
-    peace_cost_factor = 50
+    peace_cost_factor = 30
     penalty_factor = 1
 
     break_truce_prestige_factor = 1
@@ -2736,7 +2730,7 @@ release_puppet_small = {
 
     badboy_factor = 2
     prestige_factor = 1
-    peace_cost_factor = 30
+    peace_cost_factor = 20
     penalty_factor = 1
 
     break_truce_prestige_factor = 1
@@ -2791,7 +2785,7 @@ release_puppet_tiny = {
 
     badboy_factor = 0.75
     prestige_factor = 1
-    peace_cost_factor = 20
+    peace_cost_factor = 10
     penalty_factor = 1
 
     break_truce_prestige_factor = 1
@@ -2846,7 +2840,7 @@ transfer_puppet = {
 
     badboy_factor = 6
     prestige_factor = 1
-    peace_cost_factor = 60
+    peace_cost_factor = 40
     penalty_factor = 1
 
     break_truce_prestige_factor = 1
@@ -2901,7 +2895,7 @@ transfer_puppet_small = {
 
     badboy_factor = 3
     prestige_factor = 1
-    peace_cost_factor = 60
+    peace_cost_factor = 30
     penalty_factor = 1
 
     break_truce_prestige_factor = 1
@@ -2956,7 +2950,7 @@ transfer_puppet_tiny = {
 
     badboy_factor = 1.25
     prestige_factor = 1
-    peace_cost_factor = 60
+    peace_cost_factor = 15
     penalty_factor = 1
 
     break_truce_prestige_factor = 1

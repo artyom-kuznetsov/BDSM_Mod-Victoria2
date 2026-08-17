@@ -538,7 +538,7 @@ diplomacy = {
 	GOOD_PEACE_REFUSAL_MILITANCY = 1.0, --Militancy hit from refusing a good peace offer
 	GOOD_PEACE_REFUSAL_WAREXH = 5.0, --War exhaustion hit from refusing a good peace offer
 	
-	PEACE_COST_GUNBOAT = 5, -- Cost of forcing a defaulting country to pay its debt
+	PEACE_COST_GUNBOAT = 5000, -- Cost of forcing a defaulting country to pay its debt
 	INFAMY_GUNBOAT = 0, -- Infamy cost for debt collection
 	BREAKTRUCE_INFAMY_GUNBOAT = 0, -- Truce breaking penalty for debt collection
 	BREAKTRUCE_PRESTIGE_GUNBOAT = 0,

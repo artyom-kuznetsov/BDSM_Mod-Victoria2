@@ -1,4 +1,10 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.6.4.1208 (Standalone) \nОжидаемая чексумма: CGVT;X
+FE_WARSCORE_REMINDER;В войне с игроком можно кинуть мир с военным счётом, не превышающим\n1836 - 25 счёта\n1850 - 40 счёта\n1870 - 60 счёта\n1890 - 100 счёта;X
+offlimit_cflag;Страна на офф-лимите;X
+malaria_blocked_country_flag;Зона малярии;X
+severe_malaria_blocked_country_flag;Зона тяжёлой малярии;X
+malaria_blocked_countered_flag;У нас есть лекарство от малярии;X
+severe_malaria_blocked_countered_flag;У нас есть лекарство от тяжёлой малярии;X
 treatyport_exploitation_ended_EvtName;Конец эксплуатации;X
 treatyport_exploitation_ended_EvtDesc;Мы больше не терпим условия неравного договора от одного из договорных портов.;X
 treatyport_exploitation_ended_EvtOptA;Удар!;X
@@ -5515,28 +5521,37 @@ conquest_claimed;Завоевание по претензии;X
 conquest_claimed_desc;Присоединение §Yдержавы§W, благодаря наличию претензий на них.;X
 conquest_claimed_setup;Присоединить державу $RECIPIENT$.;X
 conquest_claimed_short;Присоединение державы $RECIPIENT$;X
-conquest;§B20§! Завоевание;X
+conquest;Завоевание;X
 conquest_desc;Присоединение состоящей из одного региона §Yдержавы§W или §Yнецивилизованного государства§W.;X
-conquest_setup;§B20§! Присоединить державу $RECIPIENT$.;X
-conquest_short;§B20§! Присоединение державы $RECIPIENT$;X
+conquest_setup;Присоединить державу $RECIPIENT$.;X
+conquest_short;Присоединение державы $RECIPIENT$;X
 conquest_small;Небольшое завоевание;X
 conquest_small_desc;Присоединение мелкой §Yдержавы§W или небольшого §Yнецивилизованного государства§W.;X
 conquest_small_setup;Присоединить державу $RECIPIENT$.;X
 conquest_small_short;Присоединение державы $RECIPIENT$;X
-add_to_sphere;§B5§! Взять в сферу;X
-add_to_sphere_short;§B5§! Расширение сферы влияния на державу $RECIPIENT$;X
-add_to_sphere_setup;§B5§! Расширить сферу влияния на державу $RECIPIENT$.;X
-take_from_sphere;§B8§! Выбить из сферы;X
-take_from_sphere_short;§B8§! Исключение державы $THIRD$ из сферы влияния;X
-take_from_sphere_setup;§B8§! Исключить державу $THIRD$ из сферы влияния державы $RECIPIENT$.;X
-acquire_core_state_AI;§B10§! Захват нац. территории;X
-acquire_core_state_AI_short;§B10§! Присоединение региона $STATE$;X
-acquire_core_state_AI_setup;§B10§! Отобрать у державы $RECIPIENT$ наш национальный регион $STATE$.;X
+conquest_tiny;Крошечное завоевание;X
+conquest_tiny_desc;Присоединение мелкой §Yдержавы§W или небольшого §Yнецивилизованного государства§W.;X
+conquest_tiny_setup;Присоединить державу $RECIPIENT$.;X
+conquest_tiny_short;Присоединение державы $RECIPIENT$;X
+add_to_sphere;Взять в сферу;X
+add_to_sphere_short;Расширение сферы влияния на державу $RECIPIENT$;X
+add_to_sphere_setup;Расширить сферу влияния на державу $RECIPIENT$.;X
+take_from_sphere;Выбить из сферы;X
+take_from_sphere_short;Исключение державы $THIRD$ из сферы влияния;X
+take_from_sphere_setup;Исключить державу $THIRD$ из сферы влияния державы $RECIPIENT$.;X
+acquire_core_state_AI;Захват нац. территории;X
+acquire_core_state_AI_short;Присоединение региона $STATE$;X
+acquire_core_state_AI_setup;Отобрать у державы $RECIPIENT$ наш национальный регион $STATE$.;X
 acquire_core_state_AI_desc;Захват вражеского §Yрегиона§W, в котором находятся наши §Yнациональные провинции§W.;X
-acquire_core_state;§B10§! Захват нац. территории;X
-acquire_core_state_short;§B10§! Присоединение региона $STATE$;X
-acquire_core_state_setup;§B10§! Отобрать у державы $RECIPIENT$ наш национальный регион $STATE$.;X
+acquire_core_state;Захват нац. территории;X
+acquire_core_state_short;Присоединение региона $STATE$;X
+acquire_core_state_setup;Отобрать у державы $RECIPIENT$ наш национальный регион $STATE$.;X
 acquire_core_state_desc;Захват вражеского §Yрегиона§W, в котором находятся наши §Yнациональные провинции§W.;X
+;;X# IMPERIAL SUPREMACY
+imperial_supremacy_short;Имперское превосходство;X
+imperial_supremacy_setup;Передача сферы влияния;X
+imperial_supremacy;Имперское превосходство;X
+imperial_supremacy_desc;Цель войны, передающая сферу влияния над всеми странами Священной Римской Империи.;X
 ;;X# TAKE ALL CORES CB
 manifest_destiny_cb_short;Освобождение всех нац. территорий;X
 manifest_destiny_cb_setup;Освобождение всех нац. территорий;X
@@ -5552,24 +5567,24 @@ acquire_all_cores_AI_setup;Освобождение всех нац. территорий;X
 acquire_all_cores_AI;Захват всех нац. территорий;X
 acquire_all_cores_AI_desc;Цель войны, присоединяющая все национальные территории.;X
 ;;X#TAKE STATE CB
-acquire_state_medium;§B20§! Захват средн. региона;X
-acquire_state_medium_short;§B20§! Присоединение региона $STATE$;X
-acquire_state_medium_setup;§B20§! Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state_medium;Захват средн. региона;X
+acquire_state_medium_short;Присоединение региона $STATE$;X
+acquire_state_medium_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
 acquire_state_medium_desc;Захват среднего §Yрегиона§W, принадлежащего врагу.;X
 ;;X#TAKE STATE CB
-acquire_state_small;§B10§! Захват маленьк. региона;X
-acquire_state_small_short;§B10§! Присоединение региона $STATE$;X
-acquire_state_small_setup;§B10§! Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state_small;Захват маленьк. региона;X
+acquire_state_small_short;Присоединение региона $STATE$;X
+acquire_state_small_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
 acquire_state_small_desc;Захват маленького §Yрегиона§W, принадлежащего врагу.;X
 ;;X#TAKE STATE CB
-acquire_state;§B30§! Захват региона;X
-acquire_state_short;§B30§! Присоединение региона $STATE$;X
-acquire_state_setup;§B30§! Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state;Захват региона;X
+acquire_state_short;Присоединение региона $STATE$;X
+acquire_state_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
 acquire_state_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
 ;;X#CAPTURE SPANISH CARRACK CB
-capture_monument_spa_carrack_cb;§B15§! Монумент: Испанская Каракка;X
-capture_monument_spa_carrack_cb_short;§B15§! Захват монумента §YИспанская Каракка§!;X
-capture_monument_spa_carrack_cb_setup;§B15§! Захватить монумент §YИспанская Каракка§! у державы $RECIPIENT$.;X
+capture_monument_spa_carrack_cb;Монумент: Испанская Каракка;X
+capture_monument_spa_carrack_cb_short;Захват монумента §YИспанская Каракка§!;X
+capture_monument_spa_carrack_cb_setup;Захватить монумент §YИспанская Каракка§! у державы $RECIPIENT$.;X
 capture_monument_spa_carrack_cb_desc;Захват §Yмонумента§W, принадлежащего врагу, чтобы расположить его в нашей стране.;X
 ;;X#СЕНГОКУ
 sengoku;Сенгоку;X
@@ -5577,9 +5592,9 @@ sengoku_short;Присоединение страны $RECIPIENT$;X
 sengoku_setup;Захватить державу $RECIPIENT$.;X
 sengoku_desc;Война за объединение Японии. Аннексия Даймё.;X
 ;;X#TAKE TREATY PORT
-take_treaty_port;§B5§! Захват порта в Китае;X
-take_treaty_port_short;§B5§! Присоединение порта $STATE$;X
-take_treaty_port_setup;§B5§! Захватить порт $STATE$ у державы $RECIPIENT$.;X
+take_treaty_port;Захват порта в Китае;X
+take_treaty_port_short;Присоединение порта $STATE$;X
+take_treaty_port_setup;Захватить порт $STATE$ у державы $RECIPIENT$.;X
 take_treaty_port_desc;Захват §Yкитайского порта§W, принадлежащего врагу.;X
 ;;X#TAKE STATE CHINA WARLORD CB
 acquire_state_warlord_AI;Объединение Китая;X
@@ -5591,24 +5606,19 @@ acquire_state_warlord_short;Присоединение региона $STATE$;X
 acquire_state_warlord_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
 acquire_state_warlord_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
 ;;X#TAKE STATE CHINA INVASION CB
-acquire_state_invasion;§B20§! Вторжение в Китай;X
+acquire_state_invasion;Вторжение в Китай;X
 acquire_state_invasion_short;Присоединение региона $STATE$;X
 acquire_state_invasion_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
 acquire_state_invasion_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
-;;X#TAKE STATE CHINA JAPAN
-acquire_state_china_japan;§B14§! Экспансия;X
-acquire_state_china_japan_short;§B14§! Присоединение региона $STATE$;X
-acquire_state_china_japan_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
-acquire_state_china_japan_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
 ;;X# TAKE CAPITAL CB
-acquire_capital;§B50§! Захват столицы;X
-acquire_capital_short;§B50§! Присоединение столичного региона $STATE$;X
-acquire_capital_setup;§B50§! Захватить столицу $STATE$ у державы $RECIPIENT$.;X
+acquire_capital;Захват столицы;X
+acquire_capital_short;Присоединение столичного региона $STATE$;X
+acquire_capital_setup;Захватить столицу $STATE$ у державы $RECIPIENT$.;X
 acquire_capital_desc;Захват §Yстолицы§W врага.;X
 ;;X# WAR REPARATIONS CB
-demand_reparations_short;§B8§! Потреб. Репарац.;X
-demand_reparations;§B8§! Потребовать репараций;X
-demand_reparations_setup;§B8§! Требование Репараций;X
+demand_reparations_short;Потреб. Репарац.;X
+demand_reparations;Потребовать репараций;X
+demand_reparations_setup;Требование Репараций;X
 demand_reparations_desc;Потребовать 10-летние выплаты 10% их дохода;X
 ;;X# TAX VASSAL CB
 vassal_tax_short;Обложить налогами;X
@@ -5621,31 +5631,38 @@ negotiated_transfer_short;Фиктивка на регион $STATE$;X
 negotiated_transfer_desc;Передача региона по договорённости между странами;X
 negotiated_transfer_setup;$RECIPIENT$ добровольно передаёт регион $STATE$;X
 ;;X# MIL ACCESS CB
-war_for_mil_access;§B0§! Право прохода;X
-war_for_mil_access_short;§B0§! Статус-Кво;X
-war_for_mil_access_desc;Объявление войны для получения права прохода по территориям;X
-war_for_mil_access_setup;§B0§! Статус-Кво;X
+war_for_mil_access;Право прохода;X
+war_for_mil_access_short;Статус-Кво;X
+war_for_mil_access_desc;Объявление войны для получения права прохода по территориям.\n\n§RВнимание!\nНачав войну с этой цели, по правилам запрещено добавлять на игроков любые другие цели войны.;X
+war_for_mil_access_setup;Статус-Кво;X
 AGRESSION_WAR_MIL_ACCESS_NAME;$ORDER$$FIRST$-$SECOND$ война за право прохода;X
 NORMAL_WAR_MIL_ACCESS_NAME;$ORDER$$FIRST$-$SECOND$ война за право прохода;X
-place_in_the_sun;§B9§! Захват колонии;X
-place_in_the_sun_short;§B9§! Присоединение региона $STATE$;X
-place_in_the_sun_setup;§B9§! Захватить колониальную область $STATE$ у державы $RECIPIENT$.;X
-cut_down_to_size;§B12§! Демилитаризация;X
-cut_down_to_size_short;§B12§! Ограничение развития державы $RECIPIENT$;X
-cut_down_to_size_setup;§B12§! Ограничить развитие державы $RECIPIENT$.;X
-free_peoples;§I-25%§! Освобождение народа;X
-free_peoples_short;§I-25%§! Передача региона $STATE$ державе $THIRD$;X
-free_peoples_setup;§I-25%§! Отнять у державы $RECIPIENT$ регион $STATE$ и передать его обратно державе $THIRD$.;X
+place_in_the_sun;Захват колонии;X
+place_in_the_sun_short;Присоединение региона $STATE$;X
+place_in_the_sun_setup;Захватить колониальную область $STATE$ у державы $RECIPIENT$.;X
+cut_down_to_size;Демилитаризация;X
+cut_down_to_size_short;Ограничение развития державы $RECIPIENT$;X
+cut_down_to_size_setup;Ограничить развитие державы $RECIPIENT$.;X
+free_peoples;Освобождение народа;X
+free_peoples_short;Передача региона $STATE$ державе $THIRD$;X
+free_peoples_setup;Отнять у державы $RECIPIENT$ регион $STATE$ и передать его обратно державе $THIRD$.;X
 protect_minor;Защита слабого;X
 protect_minor_short;Передача региона $STATE$ державе $THIRD$;X
 protect_minor_setup;Заставить державу $RECIPIENT$ передать регион $STATE$ обратно державе $THIRD$.;X
-humiliate;§B10§! Унижение;X
-humiliate_short;§B10§! Унижение державы $RECIPIENT$;X
-humiliate_setup;§B10§! Унизить державу $RECIPIENT$.;X
-humiliate_speech;§B10§! Унижение;X
-humiliate_speech_short;§B10§! Унижение державы $RECIPIENT$;X
-humiliate_speech_setup;§B10§! Унизить державу $RECIPIENT$.;X
-humiliate_speech_desc;Демонстрация нашей превосходящей военной мощи с помощью унижения другой §Yдержавы§W. Это увеличит наш §Yпрестиж§W и понизит их, а также значительно подорвёт их §Rстабильность§!.;X
+humiliate;Опозорить;X
+humiliate_short;Опозорить державу $RECIPIENT$;X
+humiliate_setup;Опозорить державу $RECIPIENT$.;X
+humiliate_desc;ОПОЗОРИТЬ §Yарбуз§W. Это увеличит нашу §Yпомощь бедным§W и понизит их, а также значительно подорвёт их §Rуважение к старшим§!.;X
+;;X# DISMANTLE FORTS
+dismantle_forts_desc;Демонтаж крепостей и морских баз.;x
+dismantle_forts;Демонтаж крепостей;x
+dismantle_forts_short;Демонтаж построек в регионе $STATE$;x
+dismantle_forts_setup;Демонтаж крепостей и морских баз в регионе $STATE$;x
+;;X# LIBERATE COUNTRY
+liberate_country_desc;Освободить §Yвсе регионы страны§W от угнетателей;x
+liberate_country;Освободить страну;x
+liberate_country_short;Держава $THIRD$ получит регион $STATE$;x
+liberate_country_setup;Вернуть регион $STATE$ державе $THIRD$ от державы $RECIPIENT$;x
 WETARGET_DISCREDIT_LOG;Держава $ACTOR$ дискредитировала нас перед высшими лицами державы $RECIPIENT$.;X
 WETARGET_EXPELADVISORS_LOG;Держава $ACTOR$ убедила державу $RECIPIENT$ выслать всех наших советников!;X
 WETARGET_BANEMBASSY_LOG;Держава $ACTOR$ убедила державу $RECIPIENT$ закрыть наше посольство!;X
@@ -18927,14 +18944,6 @@ po_destroy_forts;Уничтожить все крепости в регионе $STATE$.;x
 po_destroy_naval_bases;Уничтожить морскую базу в регионе $STATE$.;x
 ALL_CORE_PROVINCES;все регионы с национальными провинциями;x
 ALL_SATES;все регионы ;x
-dismantle_forts_desc;Демонтаж крепостей и морских баз.;x
-dismantle_forts;§B5§! Демонтаж крепостей;x
-dismantle_forts_short;§B5§! Демонтаж построек в регионе $STATE$;x
-dismantle_forts_setup;§B5§! Демонтаж крепостей и морских баз в регионе $STATE$;x
-liberate_country_desc;Освободить §Yвсе регионы страны§W от угнетателей;x
-liberate_country;Освободить страну;x
-liberate_country_short;Держава $THIRD$ получит регион $STATE$;x
-liberate_country_setup;Вернуть регион $STATE$ державе $THIRD$ от державы $RECIPIENT$;x
 FIRE_RANGE;Дальнобойность;x
 EVASION;Уклонение;x
 SORT_BY;Сортировать по:;x
