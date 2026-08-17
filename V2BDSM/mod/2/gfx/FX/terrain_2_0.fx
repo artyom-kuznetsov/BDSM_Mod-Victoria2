@@ -813,7 +813,7 @@ float4 PixelShader_Map2_0_General_Low( VS_MAP_OUTPUT v ) : COLOR
 	float4 ColorColor = tex2D( ColorTexture, v.vTexCoord1 ); //Coordinates for colormap
 	
 	Color.rgb = lerp(lerp(Color.rgb, ColorColor.rgb, 0.56), TerrainColor.rgb, 0.22);
-	Color.rgb *= 1.5;
+	Color.rgb *= 1.6;
 	
 	return Color;
 	
