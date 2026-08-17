@@ -1,0 +1,367 @@
+rail_focus =
+{
+	encourage_rail = 
+	{
+		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
+		
+		local_RGO_output = 0.1
+		local_factory_throughput = 0.25
+		
+		icon = 2
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { is_colonial = no }
+		}
+	}
+	
+	supply_focus = {
+		movement_cost = -0.2
+		supply_limit = 3
+		icon = 33
+	}
+	
+	appeasement_focus = {
+		local_rgo_throughput = -0.1
+		local_factory_output = -0.1
+		pop_consciousness_modifier = -0.1
+		pop_militancy_modifier = -0.05
+		# Audax Validator "." Ignore_NEXT
+		assimilation_rate = 0.5
+		icon = 34
+	}
+	
+	shipbuilding_focus = {
+		local_repair = 0.1
+		local_ship_build = -0.05
+		limit = {
+			state_scope = {
+				any_owned_province = { is_coastal = yes }
+			}
+		}
+		icon = 35
+	}
+	
+	increase_tension =
+	{
+		icon = 4
+		has_flashpoint = yes
+		own_provinces = no
+		flashpoint_tension = 0.15
+
+		limit = {
+			is_core = THIS
+			THIS = {
+				is_greater_power = no
+				ai = no
+			}
+		}
+	}
+}
+
+promotion_focus = {
+	promote_bureaucrats = {
+		bureaucrats = 0.05
+		icon = 7
+		outliner_show_as_percent = yes
+	}
+	promote_clergymen = {
+		clergymen = 0.05
+		icon = 9
+		outliner_show_as_percent = yes
+	}
+	promote_craftsmen = {
+		craftsmen = 0.05
+		icon = 11
+		outliner_show_as_percent = yes
+	}
+	promote_clerks = {
+		clerks = 0.05
+		icon = 10
+		outliner_show_as_percent = yes
+	}
+	promote_soldiers = {
+		soldiers = 0.05
+		icon = 15
+		outliner_show_as_percent = yes
+	}
+	promote_officers = {
+		officers = 0.05
+		icon = 14
+		outliner_show_as_percent = yes
+	}
+}
+
+colonial_natfocus = {
+	bureaucrats_colonial_focus = {
+		bureaucrats = 0.2
+		icon = 7
+		limit = {
+			state_scope = { is_colonial = yes }
+		}
+		outliner_show_as_percent = yes
+	}
+	clegymen_colonial_focus = {
+		clergymen = 0.2
+		icon = 9
+		limit = {
+			state_scope = { is_colonial = yes }
+		}
+		outliner_show_as_percent = yes
+	}
+	colonial_rail = 
+	{
+		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
+		
+		local_RGO_output = 0.5
+		pop_militancy_modifier = 0.02
+		
+		icon = 2
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { is_colonial = yes }
+		}
+	}
+	colonial_suppression_focus = 
+	{
+		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
+		
+		pop_consciousness_modifier = -0.1
+		pop_militancy_modifier = -0.1
+		
+		icon = 34
+		limit = {
+			# Audax Validator "." Ignore_NEXT
+			state_scope = { is_colonial = yes }
+		}
+	}
+	
+}
+
+production_focus =
+{
+	automation_focus =
+	{
+		aeroplanes = 100
+		barrels = 100
+		automobiles = 100
+		icon = 16
+		limit = {
+			year = 1880
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	electrical_focus =
+	{
+		radio = 100
+		telephones = 80
+		electric_gear = 100
+		icon = 17
+		limit = {
+			year = 1880
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	chemical_focus =
+	{
+		fuel = 100
+		oil = 100
+		fertilizer = 100
+		sulphur = 100
+		rubber = 100
+		icon = 18
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	shipping_focus =
+	{
+		steamer_convoy = 100
+		clipper_convoy = 100
+		icon = 19
+		limit = { 
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	textile_focus =
+	{
+		luxury_clothes = 50
+		regular_clothes = 100
+		fabric = 100
+		dye = 100
+		icon = 20
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	wood_focus = 
+	{
+		paper = 75
+		luxury_furniture = 50
+		furniture = 100
+		lumber = 75
+		icon = 21
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	basic_industry_focus =
+	{
+		steel = 100
+		machine_parts = 100
+		cement = 75
+		icon = 22
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	armaments_focus = 
+	{
+		artillery = 100
+		small_arms = 100
+		ammunition = 100
+		explosives = 100
+		icon = 23
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	consumer_focus = 
+	{
+		glass = 75
+		canned_food = 100
+		cigarettes = 75
+		pharmaceuticals = 75
+		icon = 32
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+
+	beverages_focus = 
+	{
+		liquor = 100
+		wine = 100
+		tea = 75
+		coffee = 75
+		icon = 24
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+}
+
+party_loyalty_focus =
+{
+	fascist_focus =
+	{
+		ideology = fascist
+		loyalty_value = 0.03 # By that much pops will be more loyal
+		icon = 25
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+	
+	reactionary_focus =
+	{
+		ideology = reactionary
+		loyalty_value = 0.03 # By that much pops will be more loyal
+		icon = 26
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+	
+	conservative_focus =
+	{
+		ideology = conservative
+		loyalty_value = 0.03 # By that much pops will be more loyal
+		icon = 27
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+	
+	socialist_focus =
+	{
+		ideology = socialist
+		loyalty_value = 0.03 # By that much pops will be more loyal
+		icon = 28
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+	
+	communist_focus =
+	{
+		ideology = communist
+		loyalty_value = 0.03 # By that much pops will be more loyal
+		icon = 29
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+	
+	liberal_focus =
+	{
+		ideology = liberal
+		loyalty_value = 0.03 # By that much pops will be more loyal
+		icon = 30
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+	
+	anarcho_liberal_focus =
+	{
+		ideology = anarcho_liberal
+		loyalty_value = 0.03 # By that much pops will be more loyal
+		icon = 31
+		limit = {
+			owner = {
+				ai = no
+			}
+		}
+	}
+}
+
