@@ -13,5 +13,60 @@ political_decisions = {
 			inherit = CAM
 		}
 	}
+	
+	opium_king_dec = {
+		potential = {
+			NOT = {
+				capital_scope = { continent = asia }
+				capital_scope = { continent = east_indies }
+				capital_scope = { continent = africa }
+				capital_scope = { continent = polynesia }
+				capital_scope = { continent = oceania }
+			}
+			OR = {
+				owns = 1481
+				owns = 2659
+				owns = 1569
+				owns = 1566
+				owns = 1538
+				owns = 1496
+				owns = 1498
+				owns = 2615
+			}
+		}
+		
+		allow = {
+			OR = {
+				any_owned_province = { trade_goods = opium }
+				has_country_flag = has_opium_cflag
+			}
+			owns = 1481
+			owns = 2659
+			owns = 1569
+			owns = 1566
+			owns = 1538
+			owns = 1496
+			owns = 1498
+			owns = 2615
+		}
+		
+		effect = {
+			prestige = 25
+			money = 500000
+			add_country_modifier = {
+				name = opium_king_cmod duration = 7300
+			}
+			set_global_flag = opium_king_chosen_gflag
+			
+			# NOTIFICATION
+			any_country = {
+				limit = {
+					ai = no
+					NOT = { tag = THIS }
+				}
+				country_event = 57629
+			}
+		}
+	}
 }
 

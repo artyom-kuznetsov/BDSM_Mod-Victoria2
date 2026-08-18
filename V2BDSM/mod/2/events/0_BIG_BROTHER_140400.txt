@@ -9,6 +9,26 @@ country_event = { # MCL # MONTHLY CLEANUP
 	
 	option = {
 		name = "noloc"
+		# v4.7.0 Opium King cflag
+		any_country = {
+			limit = {
+				is_independant = no
+				any_owned_province = {
+					trade_goods = opium
+				}
+			}
+			overlord = {
+				set_country_flag = has_opium_cflag
+			}
+		}
+		
+		any_country = {
+			limit = {
+				has_country_flag = has_opium_cflag
+				NOT = { num_of_vassals = 1 }
+			}
+			clr_country_flag = has_opium_cflag
+		}
 		
 		# v4.6.3 AI PROJECTS
 		any_country = { 

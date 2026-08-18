@@ -568,3 +568,49 @@ country_event = {
 		name = "Research_Generic_Notif_EvtOptA"
 	}
 }
+
+# OPIUM KING
+country_event = {
+	title = "OpiumKing_Notif_EvtName"
+	desc = "OpiumKing_Notif_EvtDesc"
+	picture = "opium_war"
+	
+	id = 57629
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "OpiumKing_Notif_EvtOptA"
+	}
+	
+	option = {
+		name = "OpiumKing_Notif_EvtOptB"
+		prestige = -15
+		CUSTOM_TOOLTIP_OPIUMKING_PROTEST = { }
+		FROM = { country_event = 57630 }
+	}
+}
+
+country_event = {
+	title = "OpiumKing_DiplomaticProtest_EvtName"
+	desc = "OpiumKing_DiplomaticProtest_EvtDesc"
+	picture = "che_ti_visral"
+	
+	id = 57630
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "OpiumKing_DiplomaticProtest_EvtOptA"
+		badboy = 1
+		relation = { who = FROM value = -50 }
+	}
+	
+	option = {
+		name = "OpiumKing_DiplomaticProtest_EvtOptB"
+		badboy = 1
+		relation = { who = FROM value = -100 }
+		prestige = -10
+		money = 30000
+	}
+}
