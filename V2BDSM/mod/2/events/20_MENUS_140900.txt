@@ -238,6 +238,9 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
+		name = "TechSchool_EvtOptNone"
+	}
+	option = {
 		name = "TechSchool_EvtOptMIC"
 		random_owned = {
 			limit = {
@@ -249,8 +252,16 @@ country_event = {
 		}
 		random_owned = {
 			limit = {
+				owner = { civilized = no }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_FAIL_UNCIV = { }
+			}
+		}
+		random_owned = {
+			limit = {
 				NOT = { owner = { tech_school = army_tech_school } }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				tech_school = army_tech_school
@@ -269,7 +280,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = { tech_school = army_tech_school }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
@@ -278,6 +289,14 @@ country_event = {
 	}
 	option = {
 		name = "TechSchool_EvtOptNaval"
+		random_owned = {
+			limit = {
+				owner = { civilized = no }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_FAIL_UNCIV = { }
+			}
+		}
 		random_owned = {
 			limit = {
 				owner = { has_country_modifier = academic_confusion }
@@ -289,7 +308,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				NOT = { owner = { tech_school = naval_tech_school } }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				tech_school = naval_tech_school
@@ -308,7 +327,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = { tech_school = naval_tech_school }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
@@ -317,6 +336,14 @@ country_event = {
 	}
 	option = {
 		name = "TechSchool_EvtOptAvantgarde"
+		random_owned = {
+			limit = {
+				owner = { civilized = no }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_FAIL_UNCIV = { }
+			}
+		}
 		random_owned = {
 			limit = {
 				owner = { has_country_modifier = academic_confusion }
@@ -328,7 +355,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				NOT = { owner = { tech_school = culture_tech_school } }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				tech_school = culture_tech_school
@@ -347,7 +374,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = { tech_school = culture_tech_school }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
@@ -356,6 +383,14 @@ country_event = {
 	}
 	option = {
 		name = "TechSchool_EvtOptCommerce"
+		random_owned = {
+			limit = {
+				owner = { civilized = no }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_FAIL_UNCIV = { }
+			}
+		}
 		random_owned = {
 			limit = {
 				owner = { has_country_modifier = academic_confusion }
@@ -367,7 +402,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				NOT = { owner = { tech_school = commerce_tech_school } }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				tech_school = commerce_tech_school
@@ -386,7 +421,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = { tech_school = commerce_tech_school }
-				owner = { prestige = 25 NOT = { has_country_modifier = academic_confusion } }
+				owner = { civilized = yes prestige = 25 NOT = { has_country_modifier = academic_confusion } }
 			}
 			owner = {
 				CUSTOM_TOOLTIP_IS_CURRENT_TECH_SCHOOL = { }
