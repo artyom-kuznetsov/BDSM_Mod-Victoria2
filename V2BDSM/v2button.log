@@ -1,60 +1,39 @@
 ---- Install ----
 base   = 00990000
 onMake = 00C6CE10
-patch techview = 1, orig = 00D3BD70
+patch CTechnologyView: слот 11 = 1, orig = 00D3BD70
+patch CBudgetView: слот 10 = 1, orig = 00B96780
 patch decision = 1, orig = 00FC1490  (ожидаем 00FC1490)
 Install: done
 DllMain: attach, Install = 1
-MyUpdate: view=478FAA60 configured=00000000
-MyUpdate: новый вид 478FAA60
-SetupButton: begin, view=478FAA60
-SetupButton: container=6035E4E0, ищем окно
-SetupButton: window=6035F3F8, кнопок в таблице 2
-SetupButton: [0] ищем 'FE_ACADEMIES_BDSM'
-SetupButton: [0] 'FE_ACADEMIES_BDSM' подписана, button=603B5490
-SetupButton: [1] ищем 'FE_RPROJECTS_BDSM'
-SetupButton: [1] 'FE_RPROJECTS_BDSM' подписана, button=603B69A8
-SetupButton: готово, подписано 2
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_research_projects_dec' caller=00DB12AB (rva 4212AB) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB129E (rva 42129E) fromList=0
-IsValid: 'open_academy_decisions_dec' caller=00DB12AB (rva 4212AB) fromList=0
-MyUpdate: view=478FAA60 configured=478FAA60
-FireDecision: 'FE_RPROJECTS_BDSM' -> 'open_research_projects_dec'
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+Update[CTechnologyView]: вызван, view=5DD4B900 vt=013A7FA4
+Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана, button=6F61CAA0
+Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана, button=6F61C668
+Update[CBudgetView]: вызван, view=5E032788 vt=013959F0
+Setup[CBudgetView]: 'FE_BUDGET_DIPLO_BDSM' подписана, button=5E5CC608
+Update[CBudgetView]: вызван, view=5E032788 vt=013959F0
+Update[CBudgetView]: вызван, view=5E032788 vt=013959F0
+FireDecision: 'FE_BUDGET_DIPLO_BDSM' -> 'exchange_settings_dec'
+FireDecision: returned
+FireDecision: 'FE_BUDGET_DIPLO_BDSM' -> 'exchange_settings_dec'
 FireDecision: returned
