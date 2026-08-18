@@ -265,6 +265,7 @@ float4 PixelShader_Water_2_0( VS_OUTPUT_WATER IN ) : COLOR
 	
 	//OutColor = ( ( (color - noisy.y) * (1 - refr) )  + refr );
 	
+	OutColor.g -= 0.1;
 	OutColor.a = 0.8;//vAlpha;
 	
 	return OutColor;

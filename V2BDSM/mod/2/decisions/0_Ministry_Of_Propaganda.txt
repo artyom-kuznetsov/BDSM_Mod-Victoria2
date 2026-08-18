@@ -6,19 +6,34 @@
 				has_country_flag = mop_founded_flag 
 				has_country_flag = hide_all_decs_flag
 			}
-			year = 1845
 		}
 		
 		allow = {
 			associationism = 1
-			money = 50000
+			NOT = { has_country_modifier = administrative_expenses3_modifier }
 		}
 		
 		effect = {
-			set_country_flag = mop_founded_flag
-			money = -50000
-			CUSTOM_TOOLTIP_MOP = { }
-			plurality = 5
+			random_owned = {
+				limit = {
+					owner = { NOT = { has_country_modifier = administrative_expenses3_modifier } }
+				}
+				owner = {
+					set_country_flag = mop_founded_flag
+					add_country_modifier = { name = administrative_expenses3_modifier duration = 730 }
+					CUSTOM_TOOLTIP_MOP = { }
+					plurality = 5
+				}
+			}
+			
+			random_owned = {
+				limit = {
+					owner = { has_country_modifier = administrative_expenses3_modifier }
+				}
+				owner = {
+					CUSTOM_TOOLTIP_ADMIN_EXPENSES = { }
+				}
+			}
 		}
 	}
 
