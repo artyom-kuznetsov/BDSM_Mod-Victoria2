@@ -1387,7 +1387,7 @@ country_event = {
 	}
 }
 
-country_event = { # YEARLY CLEANUP
+country_event = { # YEARLY CLEANUP YCL
 	id = 140403
 	title = "noloc"
 	desc = "noloc"
@@ -1403,6 +1403,9 @@ country_event = { # YEARLY CLEANUP
 	
 	option = {
 		name = "noloc"
+		
+		# v4.7.0 STATE SIZE FLAG
+		country_event = 140421
 		
 		any_country = {
 			set_variable = { which = payment_received_cvar value = 0 }
@@ -1513,110 +1516,6 @@ country_event = { # YEARLY CLEANUP
 				NOT = { life_rating = 20 }
 			}
 			add_province_modifier = { name = malaria_pmodifier duration = -1 }
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					NOT = { year = 1860 is_core = SMA }
-					state_scope = { 
-						NOT = { 
-							# Audax Validator "." Ignore_NEXT
-							total_pops = 150000 
-						}
-					}
-				}
-				add_core = SMA
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					NOT = { year = 1860 }
-					is_core = SMA 
-					state_scope = { 
-					# Audax Validator "." Ignore_NEXT
-					total_pops = 150000 }
-				}
-				remove_core = SMA
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					year = 1880 NOT = { is_core = SMA }
-					state_scope = { NOT = { 
-					# Audax Validator "." Ignore_NEXT
-					total_pops = 250000 } }
-				}
-				add_core = SMA
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					year = 1880
-					is_core = SMA 
-					state_scope = { 
-					# Audax Validator "." Ignore_NEXT
-					total_pops = 250000 }
-				}
-				remove_core = SMA
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					NOT = { year = 1860 is_core = MST }
-					state_scope = { NOT = { 
-					# Audax Validator "." Ignore_NEXT
-					total_pops = 300000 } }
-				}
-				add_core = MST
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					NOT = { year = 1880 }
-					is_core = MST
-					state_scope = { 
-					# Audax Validator "." Ignore_NEXT
-					total_pops = 300000 }
-				}
-				remove_core = MST
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					year = 1880 NOT = { is_core = MST }
-					state_scope = { NOT = { 
-					# Audax Validator "." Ignore_NEXT
-					total_pops = 400000 } }
-				}
-				add_core = MST
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					year = 1880
-					is_core = MST
-					state_scope = { 
-					# Audax Validator "." Ignore_NEXT
-					total_pops = 400000 }
-				}
-				remove_core = MST
-			}
-		}
-		any_country = {
-			any_owned = {
-				limit = {
-					is_core = SMA
-					is_core = MST
-				}
-				remove_core = MST
-			}
 		}
 		country_event = { id = 140403 days = 365 }
 	}
@@ -5124,6 +5023,7 @@ country_event = {
 country_event = {
 	id = 140418
 	title = "noloc"
+	desc = "noloc"
 
 	is_triggered_only = yes
 	## Audax Validator "." Ignore_NEXT
@@ -5146,6 +5046,7 @@ country_event = {
 country_event = {
 	id = 140419
 	title = "noloc"
+	desc = "noloc"
 
 	is_triggered_only = yes
 	## Audax Validator "." Ignore_NEXT
@@ -5168,6 +5069,7 @@ country_event = {
 country_event = {
 	id = 140420
 	title = "noloc"
+	desc = "noloc"
 
 	is_triggered_only = yes
 	## Audax Validator "." Ignore_NEXT
@@ -5175,5 +5077,65 @@ country_event = {
 		civilized = no
 		civilized = yes
 		annex_to = ITA
+	}
+}
+
+country_event = {
+	id = 140421
+	title = "noloc"
+	desc = "noloc"
+
+	is_triggered_only = yes
+	## Audax Validator "." Ignore_NEXT
+	option = {
+		any_country = {
+			limit = {
+				OR = {
+					war = no
+					NOT = { year = 1837 }
+				}
+			}
+			any_owned = {
+				limit = {
+					state_scope = { 
+						NOT = { total_pops = 150000 } 
+					}
+				}
+				add_core = SMA
+				remove_core = MST
+				remove_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { total_pops = 150000 NOT = { total_pops = 300000 } }
+				}
+				remove_core = SMA
+				add_core = MST
+				remove_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { 
+						total_pops = 300000
+						NOT = { total_pops = 600000 } 
+					}
+				}
+				remove_core = SMA
+				remove_core = MST
+				add_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { total_pops = 600000 }
+				}
+				remove_core = SMA
+				remove_core = MST
+				remove_core = LRG
+				add_core = HUG
+			}
+		}
 	}
 }

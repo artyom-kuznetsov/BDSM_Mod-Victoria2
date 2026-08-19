@@ -5644,7 +5644,7 @@ conquest_small_short;Присоединение державы $RECIPIENT$;X
 add_to_sphere;§B25§! Взять в сферу;X
 add_to_sphere_short;Расширение сферы влияния на державу $RECIPIENT$;X
 add_to_sphere_setup;Расширить сферу влияния на державу $RECIPIENT$.;X
-take_from_sphere;§B20§! Выбить из сферы;X
+take_from_sphere;§B15§! Выбить из сферы;X
 take_from_sphere_short;Исключение державы $THIRD$ из сферы влияния;X
 take_from_sphere_setup;Исключить державу $THIRD$ из сферы влияния державы $RECIPIENT$.;X
 acquire_core_state_AI;Захват нац. территории;X
@@ -5670,6 +5670,16 @@ acquire_all_cores_AI_setup;Освобождение всех нац. территорий;X
 acquire_all_cores_AI;Захват всех нац. территорий;X
 acquire_all_cores_AI_desc;Цель войны, присоединяющая все национальные территории.;X
 ;;X#TAKE STATE CB
+acquire_state_huge;§B40§! Захват огромн. региона;X
+acquire_state_huge_short;Присоединение региона $STATE$;X
+acquire_state_huge_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state_huge_desc;Захват огромного §Yрегиона§W, принадлежащего врагу.;X
+;;X#TAKE STATE CB
+acquire_state_large;§B30§! Захват крупн. региона;X
+acquire_state_large_short;Присоединение региона $STATE$;X
+acquire_state_large_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
+acquire_state_large_desc;Захват крупного §Yрегиона§W, принадлежащего врагу.;X
+;;X#TAKE STATE CB
 acquire_state_medium;§B20§! Захват средн. региона;X
 acquire_state_medium_short;Присоединение региона $STATE$;X
 acquire_state_medium_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
@@ -5679,11 +5689,26 @@ acquire_state_small;§B10§! Захват маленьк. региона;X
 acquire_state_small_short;Присоединение региона $STATE$;X
 acquire_state_small_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
 acquire_state_small_desc;Захват маленького §Yрегиона§W, принадлежащего врагу.;X
-;;X#TAKE STATE CB
-acquire_state;§B30§! Захват региона;X
-acquire_state_short;Присоединение региона $STATE$;X
-acquire_state_setup;Захватить регион $STATE$ у державы $RECIPIENT$.;X
-acquire_state_desc;Захват §Yрегиона§W, принадлежащего врагу.;X
+;;X#TAKE COLONY CB
+place_in_the_sun_small;§B5§! Захват маленьк. колонии;X
+place_in_the_sun_small_short;Присоединение региона $STATE$;X
+place_in_the_sun_small_setup;Захватить колониальную область $STATE$ у державы $RECIPIENT$.;X
+place_in_the_sun_small_desc;Захват маленькой §Yколониальной области§W, принадлежащей врагу.;X
+;;X#TAKE COLONY CB
+place_in_the_sun_medium;§B10§! Захват средн. колонии;X
+place_in_the_sun_medium_short;Присоединение региона $STATE$;X
+place_in_the_sun_medium_setup;Захватить колониальную область $STATE$ у державы $RECIPIENT$.;X
+place_in_the_sun_medium_desc;Захват средней §Yколониальной области§W, принадлежащей врагу.;X
+;;X#TAKE COLONY CB
+place_in_the_sun_large;§B15§! Захват крупн. колонии;X
+place_in_the_sun_large_short;Присоединение региона $STATE$;X
+place_in_the_sun_large_setup;Захватить колониальную область $STATE$ у державы $RECIPIENT$.;X
+place_in_the_sun_large_desc;Захват крупной §Yколониальной области§W, принадлежащей врагу.;X
+;;X#TAKE COLONY CB
+place_in_the_sun_huge;§B20§! Захват огромн. колонии;X
+place_in_the_sun_huge_short;Присоединение региона $STATE$;X
+place_in_the_sun_huge_setup;Захватить колониальную область $STATE$ у державы $RECIPIENT$.;X
+place_in_the_sun_huge_desc;Захват огромной §Yколониальной области§W, принадлежащей врагу.;X
 ;;X#CAPTURE SPANISH CARRACK CB
 capture_monument_spa_carrack_cb;§B20§! Монумент: Испанская Каракка;X
 capture_monument_spa_carrack_cb_short;Захват монумента §YИспанская Каракка§!;X
@@ -5745,9 +5770,6 @@ war_for_mil_access_desc;Объявление войны для получения права прохода по территор
 war_for_mil_access_setup;Статус-Кво;X
 AGRESSION_WAR_MIL_ACCESS_NAME;$ORDER$$FIRST$-$SECOND$ война за право прохода;X
 NORMAL_WAR_MIL_ACCESS_NAME;$ORDER$$FIRST$-$SECOND$ война за право прохода;X
-place_in_the_sun;Захват колонии;X
-place_in_the_sun_short;Присоединение региона $STATE$;X
-place_in_the_sun_setup;Захватить колониальную область $STATE$ у державы $RECIPIENT$.;X
 cut_down_to_size;§B25§! Демилитаризация;X
 cut_down_to_size_short;Ограничение развития державы $RECIPIENT$;X
 cut_down_to_size_setup;Ограничить развитие державы $RECIPIENT$.;X
@@ -21979,7 +22001,6 @@ WARDIALOG_SELECT_STATE;Выберите §Yрегион§W из списка справа.;X
 status_quo_desc;Попытка вмешательства в войну, дабы не допустить достижения любой из сторон своих §Yвоенных целей§W.;X
 add_to_sphere_desc;Расширение свой §Yсферы влияния§W на эту державу.;X
 take_from_sphere_desc;Исключение страны из §Yсферы влияния§W другой державы с включением ее в нашу сферу.;X
-place_in_the_sun_desc;Захват §Yколониальной области§W, принадлежащей врагу.;X
 cut_down_to_size_desc;Заставить §Yдержаву§W выплатить нам репарации, а также установить "структуру армии" на уровень §Bдемилитаризация§!. Это не позволит ей поднимать солдат в провинциях. Это также значительно подорвёт их §Rстабильность§!.;X
 free_peoples_desc;Освобождение §Yстраны§W от власти её угнетателей.\n\n§YЭта цель войны снижает стоимость региона по ОП на 25%.§!;X
 protect_minor_desc;Выберите §Yрегион§W из списка справа.;X
@@ -25541,5 +25562,7 @@ EVTDESC36940_NEWS_SHORT;$COUNTRY$: Оформление договора с народом Новой Зеландии 
 EVTDESC36941_NEWS_LONG;$COUNTRY$: Разочаровавшись в отношениях с Британией, вождь маори Хон Хеке трижды срубал британский флаг с флагштока, что положило начало Первой войне маори. Очень стойкие ободренные первыми успехами, но ограниченные экономически, лишенные запасов продовольствия, туземцы быстро умирали в эпидемиях, и, в конечном итоге, вожди маори попросили прекращения огня. Британцы сохранили свою власть над Новой Зеландией, но мятежные вожди маори еще больше укрепили свои позиции, получив уважение других племен.;x
 EVTDESC36941_NEWS_MEDIUM;$COUNTRY$: Разочаровавшись в отношениях с Британией, вождь маори Хон Хеке трижды срубал британский флаг с флагштока, что положило начало Первой войне маори. Мятежные вожди заслужили уважение других племен, но не смогли одолеть британцев.;x
 EVTDESC36941_NEWS_SHORT;$COUNTRY$: Разочаровавшись в отношениях с Британией, вождь маори Хон Хеке трижды срубал британский флаг с флагштока, что положило начало Первой войне маори.;x
-MST;Средний регион\n§WПозволяет захватить регион по цели войны §GЗахват среднего региона§W, что даёт скидки по бесчестью и ОП.§!;X
-SMA;Маленький регион\n§WПозволяет захватить регион по цели войны §GЗахват маленького региона§W, что даёт скидки по бесчестью и ОП.§!;X
+SMA;Маленький регион\n§WРегион с населением ниже 150K;X
+MST;Средний регион\n§WРегион с населением между 150K и 300K§!;X
+LRG;Крупный регион\n§WРегион с населением между 300K и 600K§!;X
+HUG;Огромный регион\n§WРегион с населением выше 600К§!;X
