@@ -103,7 +103,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "administration_type"
 			position = { x = 859 y = 361 }
-			font = "cgothic_18"
+			font = "cgothic_18_black"
 			text = "administration_type"	
 			maxWidth = 236
 			maxHeight = 20
@@ -136,7 +136,7 @@ guiTypes = {
 		
 		instantTextBoxType = { 
 			name = "possible_inventions"
-			position = { x = 20 y = 317 }
+			position = { x = 28 y = 317 }
 			font = "cgothic_22"
 			text = "TECHNOLOGYVIEW_POSSIBLE_INVERTIONS"	
 			maxWidth = 280
@@ -147,7 +147,7 @@ guiTypes = {
 		iconType = {
 			name = "research_progress"
 			spriteType = "GFX_research_progress"
-			position = { x = 858 y = 316 }
+			position = { x = 858 y = 315 }
 		}
 		
 		instantTextBoxType = { 
@@ -232,15 +232,16 @@ guiTypes = {
 			
 			instantTextBoxType = { 
 				name = "title"
-				position = { x = 5 y = -48 }
+				position = { x = 68 y = -48 }
 				font = "cgothic_22"
 				text = "NO_TECH_SELECTED"	
-				maxWidth = 291
+				maxWidth = 400
 				maxHeight = 1
+				format = centre
 			}	
 			instantTextBoxType = { 
 				name = "effect"
-				position = { x = 5 y = 0 }
+				position = { x = 5 y = 10 }
 				font = "cgothic_18"
 				text = ""	
 				maxWidth = 291
@@ -248,7 +249,7 @@ guiTypes = {
 			}	
 			instantTextBoxType = { 
 				name = "desc"
-				position = { x = 22 y = 155 }
+				position = { x = 22 y = 175 }
 				font = "Arial12_black"
 				text = ""	
 				maxWidth = 408
@@ -257,13 +258,13 @@ guiTypes = {
 			iconType = {
 				name = "diff_icon"
 				spriteType = "GFX_topbar_researchpoints"
-				position = { x = 3 y = 277 }
+				position = { x = 3 y = -23 }
 				Orientation = "UPPER_LEFT"
 			}
 			iconType = {
 				name = "year_icon"
 				spriteType = "GFX_politics_maxwork"
-				position = { x = 148 y = 274 }
+				position = { x = 148 y = -26 }
 				Orientation = "UPPER_LEFT"
 			}
 			instantTextBoxType = { 
@@ -278,8 +279,8 @@ guiTypes = {
 			}
 			instantTextBoxType = { 
 				name = "diff"
-				position = { x = 25 y = 278 }
-				font = "cgothic_22_bold"
+				position = { x = 25 y = -22 }
+				font = "cgothic_22_bold_black"
 				text = ""	
 				maxWidth = 100
 				maxHeight = 20
@@ -297,18 +298,27 @@ guiTypes = {
 			}			
 			instantTextBoxType = { 
 				name = "year"
-				position = { x = 178 y = 278 }
-				font = "cgothic_22_bold"
+				position = { x = 178 y = -22 }
+				font = "cgothic_22_bold_black"
 				text = ""	
 				maxWidth = 100
 				maxHeight = 20
 				format = left
 			}		
 
+			instantTextBoxType = { 
+				name = "FE_TECH_INVENTIONS_LABEL"
+				position = { x = 318 y = -24 }
+				font = "cgothic_22_black"
+				text = "FE_TECH_INVENTIONS_LABEL"	
+				maxWidth = 200
+				maxHeight = 20
+				format = centre
+			}
 
 			listboxType = {
 				name ="inventions"
-				position = { x = 300 y = -50 }
+				position = { x = 298 y = -3 }
 				backGround=""
 				size = { x=238 y = 230 }
 				Orientation = "UPPER_LEFT"
@@ -383,7 +393,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "folder_category"
 			position = { x = 45 y = 6 }
-			font = "cgothic_22"
+			font = "cgothic_22_black"
 			text = "folder_category"	
 			maxWidth = 150
 			maxHeight = 20
@@ -474,7 +484,7 @@ guiTypes = {
 			font = "cgothic_18_black"
 			text = "tech_name"	
 			maxWidth = 210
-			maxHeight = 33
+			maxHeight = 10
 			fixedsize = yes
 			format = centre
 		}
