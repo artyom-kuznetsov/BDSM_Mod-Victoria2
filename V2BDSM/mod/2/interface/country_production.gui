@@ -1220,8 +1220,8 @@ guiTypes = {
 	windowType = {
 		name = "build_factory"
 		backGround =""
-		position = { x=-464 y=-189 }	
-		size = { x=304 y=368 }
+		position = { x=-464 y=-229 }	
+		size = { x=304 y=474 }
 		moveable = 0
 		dontRender = ""
 		horizontalBorder = "0"
@@ -1237,8 +1237,28 @@ guiTypes = {
 		}
 		
 		instantTextBoxType = { 
+			name = "FE_FACTORIES_LABEL"
+			position = { x = -195 y = 32 }
+			font = "cgothic_22"
+			text = "FE_FACTORIES_LABEL"	
+			maxWidth = 780
+			maxHeight = 16	
+			format = centre
+		}
+		
+		instantTextBoxType = { 
+			name = "FE_BUILDFACTORY_LABEL"
+			position = { x = 51 y = 32 }
+			font = "cgothic_22"
+			text = "FE_BUILDFACTORY_LABEL"	
+			maxWidth = 780
+			maxHeight = 16	
+			format = centre
+		}
+		
+		instantTextBoxType = { 
 			name = "state_name"
-			position = { x = 81 y = 32 }
+			position = { x = 241 y = 32 }
 			font = "cgothic_22"
 			text = "state_name"	
 			maxWidth = 780
@@ -1250,7 +1270,7 @@ guiTypes = {
 			name ="factory_type"
 			position = { x = 32 y = 70 }
 			backGround=""
-			size = { x=322 y = 338 }
+			size = { x=322 y = 496 }
 			Orientation = "UPPER_LEFT"
 			spacing = 2
 			scrollbartype = "standardlistbox_slider"
@@ -1272,7 +1292,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "input_0_amount"
 			position = { x = 430 y = 140 }
-			font = "cgothic_18"
+			font = "cgothic_18_black"
 			text = " "
 			maxWidth = 100
 			maxHeight = 16	
@@ -1281,7 +1301,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "input_1_amount"
 			position = { x = 556 y = 140 }
-			font = "cgothic_18"
+			font = "cgothic_18_black"
 			text = " "	
 			maxWidth = 100
 			maxHeight = 16	
@@ -1290,7 +1310,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "input_2_amount"
 			position = { x = 682 y = 140 }
-			font = "cgothic_18"
+			font = "cgothic_18_black"
 			text = " "	
 			maxWidth = 100
 			maxHeight = 16	
@@ -1299,7 +1319,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "input_3_amount"
 			position = { x = 808 y = 140 }
-			font = "cgothic_18"
+			font = "cgothic_18_black"
 			text = " "	
 			maxWidth = 100
 			maxHeight = 16	
@@ -1314,7 +1334,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "building_name"
 			position = { x = 468 y = 84 }
-			font = "cgothic_22_black"
+			font = "cgothic_22"
 			text = ""	
 			maxWidth = 300
 			maxHeight = 32	
@@ -1334,7 +1354,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "output_amount"
 			position = { x = 810 y = 92 }
-			font = "cgothic_22_black"
+			font = "cgothic_22"
 			text = " "	
 			maxWidth = 60
 			maxHeight = 16	
@@ -1364,8 +1384,8 @@ guiTypes = {
 		
 		instantTextBoxType = { 
 			name = "description_text"
-			position = { x = 420 y = 170 }
-			font = "Arial12_black"
+			position = { x = 412 y = 170 }
+			font = "Arial12"
 			text = ""	
 			maxWidth = 440
 			maxHeight = 100	
@@ -1374,7 +1394,7 @@ guiTypes = {
 
 		instantTextBoxType = { 
 			name = "needed_workers"
-			position = { x = 390 y = 292 }
+			position = { x = 390 y = 342 }
 			font = "cgothic_18"
 			text = "PRODUCTION_NEEDED_WORKERS"	
 			maxWidth = 140
@@ -1383,8 +1403,8 @@ guiTypes = {
 		}	
 		instantTextBoxType = { 
 			name = "needed_workers_count"
-			position = { x = 418 y = 314 }
-			font = "cgothic_18_black"
+			position = { x = 398 y = 364 }
+			font = "cgothic_18"
 			text = " "	
 			maxWidth = 100
 			maxHeight = 16	
@@ -1392,7 +1412,7 @@ guiTypes = {
 		}				
 		instantTextBoxType = { 
 			name = "available_workers"
-			position = { x = 390 y = 333 }
+			position = { x = 390 y = 383 }
 			font = "cgothic_18"
 			text = "PRODUCTION_AVAILABLE_WORKERS"	
 			maxWidth = 140
@@ -1402,7 +1422,7 @@ guiTypes = {
 
 		instantTextBoxType = { 
 			name = "resource_cost_label"
-			position = { x = 530 y = 292 }
+			position = { x = 530 y = 342 }
 			font = "cgothic_18"
 			text = "PRODUCTION_RESOURCE_COST"	
 			maxWidth = 140
@@ -1411,7 +1431,7 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "in_stockpile_label"
-			position = { x = 624 y = 292 }
+			position = { x = 624 y = 342 }
 			font = "cgothic_18"
 			text = "PRODUCTION_IN_STOCKPILE"	
 			maxWidth = 140
@@ -1424,7 +1444,7 @@ guiTypes = {
 			name = "employment_info"
 			backGround =""
 			size = { x=150  y=250 }
-			position = { x = 395 y = 357 }
+			position = { x = 390 y = 404 }
 			moveable = 0
 			dontRender = ""
 			horizontalBorder = "0"
@@ -1437,8 +1457,8 @@ guiTypes = {
 		windowType = {
 			name = "goods_cost_info"
 			backGround =""
-			size = { x=350  y=350 }
-			position = { x = 531 y = 311 }
+			size = { x=346 y=350 }
+			position = { x = 526 y = 361 }
 			moveable = 0
 			dontRender = ""
 			horizontalBorder = "0"
@@ -1450,8 +1470,8 @@ guiTypes = {
 		#### numbers to the right
 		instantTextBoxType = { 
 			name = "base_price_label"
-			position = { x = 727 y = 301 }
-			font = "Arial12_black"
+			position = { x = 727 y = 351 }
+			font = "Arial12"
 			text = "PRODUCTION_BASE_PRICE"	
 			maxWidth = 100
 			maxHeight = 20	
@@ -1459,8 +1479,8 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "input_price_label"
-			position = { x = 727 y = 326 }
-			font = "Arial12_black"
+			position = { x = 727 y = 376 }
+			font = "Arial12"
 			text = "PRODUCTION_INPUT_PRICE"	
 			maxWidth = 100
 			maxHeight = 20	
@@ -1468,8 +1488,8 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "total_label"
-			position = { x = 727 y = 359 }
-			font = "Arial12_black"
+			position = { x = 727 y = 409 }
+			font = "Arial12"
 			text = "PRODUCTION_TOTAL"	
 			maxWidth = 100
 			maxHeight = 20	
@@ -1477,8 +1497,8 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "current_funds_label"
-			position = { x = 730 y = 394 }
-			font = "Arial12_black"
+			position = { x = 726 y = 444 }
+			font = "Arial12"
 			text = "PRODUCTION_CURRENT_FUNDS"	
 			maxWidth = 120
 			maxHeight = 20	
@@ -1486,8 +1506,8 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "base_price"
-			position = { x = 828 y = 297 }
-			font = "cgothic_18_black"
+			position = { x = 828 y = 347 }
+			font = "cgothic_18"
 			text = " "	
 			maxWidth = 74
 			maxHeight = 16	
@@ -1495,8 +1515,8 @@ guiTypes = {
 		}	
 		instantTextBoxType = { 
 			name = "input_price"
-			position = { x = 828 y = 322 }
-			font = "cgothic_18_black"
+			position = { x = 828 y = 372 }
+			font = "cgothic_18"
 			text = " "	
 			maxWidth = 74
 			maxHeight = 16	
@@ -1504,8 +1524,8 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "total_price"
-			position = { x = 807 y = 351 }
-			font = "cgothic_22_black"
+			position = { x = 807 y = 401 }
+			font = "cgothic_22"
 			text = " "	
 			maxWidth = 96
 			maxHeight = 24	
@@ -1513,8 +1533,8 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "you_have"
-			position = { x = 798 y = 392 }
-			font = "cgothic_18_black"
+			position = { x = 798 y = 442 }
+			font = "cgothic_18"
 			text = " "	
 			maxWidth = 96
 			maxHeight = 24	
@@ -1523,8 +1543,8 @@ guiTypes = {
 		
 		instantTextBoxType = { 
 			name = "prod_label"
-			position = { x = 530 y = 398 }
-			font = "Arial12_black"
+			position = { x = 530 y = 448 }
+			font = "Arial12"
 			text = "PRODUCTION_STOCKPILE_LACK_COST"	
 			maxWidth = 120
 			maxHeight = 24	
@@ -1533,8 +1553,8 @@ guiTypes = {
 		}
 		instantTextBoxType = { 
 			name = "prod_cost"
-			position = { x = 630 y = 396 }
-			font = "cgothic_18_black"
+			position = { x = 630 y = 446 }
+			font = "cgothic_18"
 			text = " "	
 			maxWidth = 96
 			maxHeight = 24	
@@ -1543,18 +1563,29 @@ guiTypes = {
 		
 		guiButtonType = {
 			name = "Cancel"
-			position = { x=173 y =430}
+			position = { x=423 y =480}
 			quadTextureSprite ="GFX_button_standard_200"
 			tooltip = ""
 			tooltipText =""
 			delayedTooltipText = ""
-			buttonText = "CANCEL"
+			buttonText = "CANCEL_BUILDFACTORY"
 			buttonFont = "cgothic_22_black"
+			shortcut = "c"
 		}
 				
+		instantTextBoxType = { 
+			name = "FE_CORRUPTION_MODIFIER_BDSM"
+			position = { x = 11525 y = 490 }
+			font = "cgothic_18"
+			text = "FE_CORRUPTION_MODIFIER_BDSM"	
+			maxWidth = 96
+			maxHeight = 24	
+			format = centre
+		}
+		
 		guiButtonType = {
 			name = "Build"
-			position = { x=561 y =430}
+			position = { x=681 y =480}
 			quadTextureSprite ="GFX_button_standard_200"
 			tooltip = ""
 			tooltipText =""
@@ -1878,7 +1909,7 @@ guiTypes = {
 		instantTextBoxType = { 
 			name = "output"
 			position = { x = 27 y = 7 }
-			font = "Arial12_black"
+			font = "Arial12"
 			text = "134.5"	
 			maxWidth = 50
 			maxHeight = 32	

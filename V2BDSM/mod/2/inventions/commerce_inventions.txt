@@ -1553,7 +1553,38 @@ mixed_economy = {
 	}
 	non_accepted_pop_militancy_modifier = -0.02
 }
+#guild_based_production
+factory_optimization_tech1 = {
+	limit = { guild_based_production = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 15
+			industrial_revolution = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.05
+	}
+}
+
 #organized_factories
+factory_optimization_tech2 = {
+	limit = { organized_factories = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 15
+			mechanical_production = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.05
+	}
+}
+
 work_classification = {
 	limit = { organized_factories = 1 }
 	news = no
@@ -1617,6 +1648,21 @@ work_control_and_hierarchy = {
 	}
 }
 #scientific_management
+factory_optimization_tech3 = {
+	limit = { scientific_management = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 15
+			interchangeable_parts = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.1
+	}
+}
+
 sequence_planning = {
 	limit = { scientific_management = 1 }
 	news = no
@@ -1672,6 +1718,20 @@ quality_assurance_procedure = {
 	}
 }
 #time_saving_measures
+factory_optimization_tech4 = {
+	limit = { time_saving_measures = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 15
+			semi_automatization = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.12
+	}
+}
 time_studies = {
 	limit = { time_saving_measures = 1 }
 	news = no
@@ -1690,6 +1750,7 @@ time_studies = {
 		factory_output = 0.01
 	}
 }
+
 time_clock = {
 	limit = { time_saving_measures = 1 }
 	news = no
@@ -1727,6 +1788,20 @@ lighting = {
 	}
 }
 #management_strategy
+factory_optimization_tech5 = {
+	limit = { management_strategy = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 15
+			assembly_line = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.2
+	}
+}
 old_style_family_business = {
 	limit = { management_strategy = 1 }
 	news = no
@@ -1747,6 +1822,7 @@ old_style_family_business = {
 		factory_output = 0.01
 	}
 }
+
 anynomous_investor_business = {
 	limit = { management_strategy = 1 }
 	news = no
@@ -1784,6 +1860,21 @@ marketized_smallholder_business = {
 	}
 }
 #organizational_development
+factory_optimization_tech6 = {
+	limit = { organizational_development = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 15
+			shift_work = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.25
+	}
+}
+
 i_scientific_management = {
 	limit = { organizational_development = 1 }
 	news = no
@@ -1842,6 +1933,20 @@ supply_chain_management = {
 	}
 }
 #modern_business_management
+factory_optimization_tech7 = {
+	limit = { modern_business_management = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 15
+			mechanized_manufacturing = 1
+		}
+	}
+	effect = {
+		factory_cost = -0.3
+	}
+}
 lean_enterprise = {
 	limit = { modern_business_management = 1 }
 	news = no
@@ -1864,6 +1969,7 @@ lean_enterprise = {
 		factory_input = -0.01
 	}
 }
+
 just_in_time_manufacturing = {
 	limit = { modern_business_management = 1 }
 	news = no

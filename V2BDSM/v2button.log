@@ -3,42 +3,44 @@ base   = 00990000
 onMake = 00C6CE10
 patch CTechnologyView: слот 11 = 1, orig = 00D3BD70
 patch CBudgetView: слот 10 = 1, orig = 00B96780
+patch CProductionView: слот 10 = 1, orig = 00C910A0
+BfCtor: перехват встал, пещера 01CB0000, 25 байт
 patch decision = 1, orig = 00FC1490  (ожидаем 00FC1490)
 Patch 'always_add_wargoals': файл 137EFF -> rva 138AFF, было 00 
 Patch 'land_reinforce': файл 1C809B -> rva 1C8C9B, было 89 4C 24 20 
 Patch 'naval_reinforce': файл 1C7F1C -> rva 1C8B1C, было 89 
-PriceDelta: 25 сотых процента, множитель 163, пещера 008C0000, 50 байт
+PriceDelta: 25 сотых процента, множитель 163, пещера 01CC0000, 50 байт
 Install: done
 DllMain: attach, Install = 1
-Update[CTechnologyView]: вызван, view=46DBCD88 vt=013A7FA4
-Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана, button=5E2D7240
-Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана, button=5E2D7C18
-IsValid: 'exchange_settings_dec' rva=42129E fromList=0
-IsValid: 'exchange_settings_dec' rva=4212AB fromList=0
-IsValid: 'open_research_projects_dec' rva=42129E fromList=0
-IsValid: 'open_research_projects_dec' rva=4212AB fromList=0
-IsValid: 'open_academy_decisions_dec' rva=42129E fromList=0
-IsValid: 'open_academy_decisions_dec' rva=4212AB fromList=0
-IsValid: 'exchange_settings_dec' rva=42129E fromList=0
-IsValid: 'exchange_settings_dec' rva=4212AB fromList=0
-IsValid: 'open_research_projects_dec' rva=42129E fromList=0
-IsValid: 'open_research_projects_dec' rva=4212AB fromList=0
-IsValid: 'open_academy_decisions_dec' rva=42129E fromList=0
-IsValid: 'open_academy_decisions_dec' rva=4212AB fromList=0
-IsValid: 'exchange_settings_dec' rva=42129E fromList=0
-IsValid: 'exchange_settings_dec' rva=4212AB fromList=0
-IsValid: 'open_research_projects_dec' rva=42129E fromList=0
-IsValid: 'open_research_projects_dec' rva=4212AB fromList=0
-IsValid: 'open_academy_decisions_dec' rva=42129E fromList=0
-IsValid: 'open_academy_decisions_dec' rva=4212AB fromList=0
-IsValid: 'exchange_settings_dec' rva=42129E fromList=0
-IsValid: 'exchange_settings_dec' rva=4212AB fromList=0
-Update[CTechnologyView]: вызван, view=46DBCD88 vt=013A7FA4
-Update[CTechnologyView]: вызван, view=46DBCD88 vt=013A7FA4
-Update[CBudgetView]: вызван, view=381CE528 vt=013959F0
-Setup[CBudgetView]: 'FE_BUDGET_DIPLO_BDSM' подписана, button=5E071580
-Update[CBudgetView]: вызван, view=381CE528 vt=013959F0
-Update[CBudgetView]: вызван, view=381CE528 vt=013959F0
-Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана, button=49AE8F98
-Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана, button=49AEA078
-Setup[CBudgetView]: 'FE_BUDGET_DIPLO_BDSM' подписана, button=4B5266C8
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
+IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
+IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
+Update[CTechnologyView]: вызван, view=5DEC1D88 vt=013A7FA4
+Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана, button=607C7090
+Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана, button=607C6DC0
+Update[CProductionView]: вызван, view=4CF4C3A8 vt=0139FECC
+Update[CProductionView]: вызван, view=4CF4C3A8 vt=0139FECC
+Update[CProductionView]: вызван, view=4CF4C3A8 vt=0139FECC
+Indicator 'FE_CORRUPTION_MODIFIER_BDSM': element=60C7E400 country=334C89E8 eff=16049 (48.9%)
+Indicator 'FE_CORRUPTION_MODIFIER_BDSM': element=60C7E400 country=334C89E8 eff=16049 (48.9%)
+Indicator 'FE_CORRUPTION_MODIFIER_BDSM': element=60C7E400 country=334C89E8 eff=16049 (48.9%)
+Indicator 'FE_CORRUPTION_MODIFIER_BDSM': element=60C7E400 country=334C89E8 eff=16049 (48.9%)
+Indicator 'FE_CORRUPTION_MODIFIER_BDSM': element=60C7E400 country=334C89E8 eff=16049 (48.9%)
+Indicator 'FE_CORRUPTION_MODIFIER_BDSM': element=60C7E400 country=334C89E8 eff=16049 (48.9%)
