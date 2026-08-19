@@ -1,39 +1,22 @@
----- Install ---- версия 1.0
-base   = 00990000
-onMake = 00C6CE10
-patch CTechnologyView: слот 11 = 1, orig = 00D3BD70
-patch CBudgetView: слот 10 = 1, orig = 00B96780
-patch CProductionView: слот 10 = 1, orig = 00C910A0
-BfCtor: перехват встал, пещера 02050000, 25 байт
-patch decision = 1, orig = 00FC1490  (ожидаем 00FC1490)
-Patch 'always_add_wargoals': файл 137EFF -> rva 138AFF, было 00 
-Patch 'land_reinforce': файл 1C809B -> rva 1C8C9B, было 89 4C 24 20 
-Patch 'naval_reinforce': файл 1C7F1C -> rva 1C8B1C, было 89 
-PriceDelta: 25 сотых процента, множитель 163, пещера 02060000, 50 байт
+---- Install ---- версия 1.1
+base = 00990000
+patch CTechnologyView: слот 11 = 1
+patch CBudgetView: слот 10 = 1
+patch CProductionView: слот 10 = 1
+patch CDecision: слот 6 = 1
+Patch 'always_add_wargoals': применён на rva 138AFF
+Patch 'land_reinforce': применён на rva 1C8C9B
+Patch 'naval_reinforce': применён на rva 1C8B1C
+PriceDelta: 25 сотых процента, множитель 163
 Install: done
 DllMain: attach, Install = 1
-IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
-IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
-IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
-IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
-IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
-IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
-IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
-IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
-IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
-IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
-IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
-IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
-IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
-IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
-IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
-IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
-IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
-IsValid: 'open_academy_decisions_dec' rva=45D388 fromList=0
-IsValid: 'exchange_settings_dec' rva=45D388 fromList=0
-IsValid: 'open_research_projects_dec' rva=45D388 fromList=0
-Update[CTechnologyView]: вызван, view=58710B10 vt=013A7FA4
-Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана, button=590B0330
-Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана, button=590AF520
-Update[CTechnologyView]: вызван, view=58710B10 vt=013A7FA4
-Update[CTechnologyView]: вызван, view=58710B10 vt=013A7FA4
+Update[CTechnologyView]: вызван, view=50E10110
+Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+Update[CTechnologyView]: вызван, view=50E10110
+Update[CBudgetView]: вызван, view=510E6950
+Setup[CBudgetView]: 'FE_BUDGET_DIPLO_BDSM' подписана
+Update[CBudgetView]: вызван, view=510E6950
+Update[CProductionView]: вызван, view=4D1EC370
+Update[CProductionView]: вызван, view=4D1EC370
+Indicator 'FE_CORRUPTION_MODIFIER_BDSM': element=5ED343E8, ищем 'XXXXXXXX', вхождений 1, смещения DC 
