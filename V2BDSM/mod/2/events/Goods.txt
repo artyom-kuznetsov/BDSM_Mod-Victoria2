@@ -20,9 +20,14 @@ province_event = {
 			province_id = 2179			# Acapulco
 			province_id = 2500			# Kalgoorlie
 			province_id = 2255			# Barranquilla
-			province_id = 377			# Barranquilla
 			province_id = 840			# Corinth
 			province_id = 480			# Valladolid
+			province_id = 2084			# NAMIBIA
+			province_id = 2091			# CAPE COLONY
+			province_id = 1697			# MOROCCO
+			province_id = 2108			# TRANSVAAL
+			province_id = 1849			# ERITREA
+			province_id = 2076			# ZAMBEZIA
 		}
 		not = { trade_goods = precious_metal }
 		owner = {
@@ -142,7 +147,6 @@ province_event = {
 	trigger = {
 		year = 1896
 		or = {
-			province_id = 6			# Whitehorse
 			province_id = 7			# Dawson
 			province_id = 2599		# Fairbanks
 			province_id = 2630		# Cordova
@@ -165,65 +169,6 @@ province_event = {
 	}
 }
 
-################################
-#        DIAMOND EVENTS        #
-################################
-province_event = {
-	
-	id = 1105
-
-	trigger = {
-		year = 1870
-		or = {
-			province_id = 2084			# Angra Pequeña
-			province_id = 2091			# Mossel Bay
-			province_id = 1697			# Figuig
-			province_id = 2108			# Mosega
-		}
-		not = { trade_goods = precious_metal }
-	}
-
-	mean_time_to_happen =  {
-		months = 12
-
-	}
-
-	title = "EVTNAME1105"
-	desc = "EVTDESC1105"
-	picture = ""
-
-	option = {
-		name = "EVTOPTA1105"
-		trade_goods = precious_metal
-	}
-}
-
-province_event = {
-	
-	id = 1106
-
-	trigger = {
-		year = 1867
-		or = {
-			province_id = 2097			# Graaf Reinet
-			province_id = 1849			# Massawa
-		}
-		not = { trade_goods = precious_metal }
-	}
-
-	mean_time_to_happen =  {
-		months = 12
-
-	}
-
-	title = "EVTNAME1105"
-	desc = "EVTDESC1105"
-
-	option = {
-		name = "EVTOPTA1105"
-		trade_goods = precious_metal
-	}
-}
 
 ###############################
 #        RUBBER EVENTS        #
