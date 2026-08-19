@@ -785,7 +785,14 @@ country_event = {	# AI ANNEX SUBJECTS
 		overlord = {
 			ai = yes
 			war = no
-			NOT = { badboy = 0.8 }
+			NOT = { 
+				badboy = 0.8 
+				has_country_modifier = vassal_annex_cooldown_cmod
+			}
+		}
+		NOT = {
+			tag = AST
+			primary_culture = anglo_canadian
 		}
 		has_country_flag = old_vassal_flag
 	}
@@ -797,6 +804,7 @@ country_event = {	# AI ANNEX SUBJECTS
 		overlord = {
 			badboy = 5
 			inherit = THIS
+			add_country_modifier = { name = vassal_annex_cooldown_cmod duration = 1825 }
 		}
 	}
 }

@@ -7,7 +7,7 @@ country_event = {
 	
 	trigger = {
 		tag = USA
-		slavery = yes_slavery
+		#slavery = yes_slavery
 		NOT = {
 			has_global_flag = american_civil_war_has_happened
 		}
@@ -25,6 +25,38 @@ country_event = {
 	
 	mean_time_to_happen = {
 		months = 1
+		modifier = {
+			factor = 0.5
+			NOT = {
+				plurality = 30
+			}
+		}
+		modifier = {
+			factor = 0.4
+			NOT = {
+				plurality = 20
+			}
+		}
+		modifier = {
+			factor = 0.3
+			NOT = {
+				plurality = 15
+			}
+		}
+		modifier = {
+			factor = 0.1
+			NOT = {
+				plurality = 10
+			}
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 5
+		}
+		modifier = {
+			factor = 0.1
+			average_militancy = 7
+		}
 		modifier = {
 			factor = 20
 			NOT = {
@@ -47,9 +79,9 @@ country_event = {
 		}
 	}
 	
+	
 	option = {
 		name = "EVTOPTA16000"
-		plurality = -5
 		any_pop = {
 			consciousness = -7
 			militancy = -3
@@ -91,11 +123,19 @@ country_event = {
 		}
 		set_global_flag = american_civil_war_has_happened
 		clr_country_flag = the_slavery_debate
+		any_country = {
+			limit = {
+				NOT = {
+					tag = THIS
+				}
+			}
+			country_event = 57631
+		}
 	}
 	
 	option = {
 		name = "EVTOPTB16000"
-		plurality = -5
+		plurality = 10
 		any_pop = {
 			consciousness = -7
 			militancy = -3
@@ -174,7 +214,7 @@ country_event = {
 	
 	trigger = {
 		tag = USA
-		slavery = yes_slavery
+		has_country_flag = the_slavery_debate
 		NOT = {
 			has_country_flag = john_browns_raid
 			has_global_flag = american_civil_war_has_happened
@@ -186,28 +226,61 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 10
+		months = 1
 		modifier = {
-			factor = 3
+			factor = 0.5
+			NOT = {
+				plurality = 30
+			}
+		}
+		modifier = {
+			factor = 0.4
+			NOT = {
+				plurality = 20
+			}
+		}
+		modifier = {
+			factor = 0.3
+			NOT = {
+				plurality = 15
+			}
+		}
+		modifier = {
+			factor = 0.1
+			NOT = {
+				plurality = 10
+			}
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 5
+		}
+		modifier = {
+			factor = 0.1
+			average_militancy = 7
+		}
+		modifier = {
+			factor = 20
 			NOT = {
 				year = 1845
 			}
 		}
 		modifier = {
-			factor = 2
+			factor = 10
 			year = 1845
 			NOT = {
 				year = 1855
 			}
 		}
 		modifier = {
-			factor = 1
+			factor = 5
 			year = 1855
 			NOT = {
 				year = 1860
 			}
 		}
 	}
+	
 	
 	option = {
 		name = "EVTOPTA16010"
@@ -231,19 +304,50 @@ country_event = {
 	
 	trigger = {
 		tag = USA
-		slavery = yes_slavery
+		has_country_flag = the_slavery_debate
 		NOT = {
 			has_country_flag = dred_scott_decision
 			has_global_flag = american_civil_war_has_happened
 		}
 		any_state = {
-			is_slave = yes
 			average_consciousness = 3
 		}
 	}
 	
 	mean_time_to_happen = {
-		months = 10
+		months = 1
+		modifier = {
+			factor = 0.5
+			NOT = {
+				plurality = 30
+			}
+		}
+		modifier = {
+			factor = 0.4
+			NOT = {
+				plurality = 20
+			}
+		}
+		modifier = {
+			factor = 0.3
+			NOT = {
+				plurality = 15
+			}
+		}
+		modifier = {
+			factor = 0.1
+			NOT = {
+				plurality = 10
+			}
+		}
+		modifier = {
+			factor = 0.5
+			average_militancy = 5
+		}
+		modifier = {
+			factor = 0.1
+			average_militancy = 7
+		}
 		modifier = {
 			factor = 20
 			NOT = {
@@ -265,6 +369,7 @@ country_event = {
 			}
 		}
 	}
+	
 	
 	option = {
 		name = "EVTOPTA16020"
@@ -1980,6 +2085,7 @@ country_event = {
 	id = 16250
 	title = "EVTNAME16250"
 	desc = "EVTDESC16250"
+	picture = "CSA"
 	
 	trigger = {
 		tag = USA
