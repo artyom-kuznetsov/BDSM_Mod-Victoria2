@@ -40,6 +40,8 @@
 #define ENABLE_PRICE_DELTA     1   // процентный шаг изменения цен
 #define ENABLE_EXE_PATCHES     1   // подкрепления и цели войны
 #define ENABLE_INDICATORS      1   // текстовые индикаторы
+#define ENABLE_POP_DISPLAY     1   // общее население в верхней панели
+
 
 // 0 — переписывать строку внутри объекта элемента. Строка находится,
 //     но на экране не меняется: элемент кеширует разложенный текст.
@@ -585,6 +587,7 @@ static void OnTooltip(int viewIndex, void* retBuf, void* element)
 
     const char* name = GStrText(VCall0(element, VT_GET_NAME));
 
+
     for (int i = 0; i < INDICATOR_COUNT && i < MAX_INDICATORS; ++i)
     {
         if (INDICATORS[i].view != viewIndex)
@@ -914,10 +917,13 @@ static bool InstallPriceDelta()
 // Правки меняют симуляцию, поэтому DLL должна быть одинаковой у всех.
 // ---------------------------------------------------------------
 
+// Правка задаётся либо смещением в файле (как в exe-модах
+// ZombieFreak115), либо сразу RVA. Заполняется одно из двух.
 struct BytePatch
 {
     const char* name;
     DWORD         fileOffset;
+    DWORD         rva;
     int           len;
     unsigned char expect[8];
     unsigned char replace[8];
@@ -927,15 +933,15 @@ struct BytePatch
 static BytePatch EXE_PATCHES[] =
 {
     // Постоянно включённый debug alwaysaddwargoal.
-    { "always_add_wargoals", 0x137EFF, 1, { 0x00 }, { 0x02 }, true },
+    { "always_add_wargoals", 0x137EFF, 0, 1, { 0x00 }, { 0x02 }, true },
 
     // Было: mov [esp+20h], ecx — пересылка ослабленного снабжения
     // на следующую бригаду в стеке.
-    { "land_reinforce",      0x1C809B, 4, { 0x89, 0x4C, 0x24, 0x20 },
-                                          { 0x90, 0x90, 0x90, 0x90 }, true },
+    { "land_reinforce",      0x1C809B, 0, 4, { 0x89, 0x4C, 0x24, 0x20 },
+                                             { 0x90, 0x90, 0x90, 0x90 }, true },
 
-                                          // 89 -> 8B: направление пересылки меняется на обратное.
-                                          { "naval_reinforce",     0x1C7F1C, 1, { 0x89 }, { 0x8B }, true },
+                                             // 89 -> 8B: направление пересылки меняется на обратное.
+                                             { "naval_reinforce",     0x1C7F1C, 0, 1, { 0x89 }, { 0x8B }, true },
 };
 
 static const int EXE_PATCH_COUNT = sizeof(EXE_PATCHES) / sizeof(EXE_PATCHES[0]);
@@ -975,7 +981,7 @@ static void InstallExePatches()
         if (!bp.enabled)
             continue;
 
-        DWORD rva = FileOffsetToRVA(bp.fileOffset);
+        DWORD rva = bp.rva ? bp.rva : FileOffsetToRVA(bp.fileOffset);
         if (!rva)
         {
             Log("Patch '%s': смещение %06X вне секций", bp.name, bp.fileOffset);
@@ -1023,6 +1029,113 @@ static bool PatchSlot(DWORD rvaVtable, int slotIndex, void* replacement, void** 
 
     VirtualProtect(slot, sizeof(void*), oldProtect, &oldProtect);
     return true;
+}
+
+
+
+// ---------------------------------------------------------------
+// Общее население в индикаторе верхней панели
+//
+// Игра хранит в стране по +0x12E8 только взрослое мужское население
+// и показывает его в панели как есть. Общее получается умножением
+// на 4 — так же делает подсказка TOPBAR_POPULATION_VISUAL, где
+// умножение зашито в код инструкцией lea eax,[ebx*4].
+//
+// Умножаем на выводе, а не у источника: само поле участвует в
+// расчётах налогов, призыва и влияния, и трогать его нельзя.
+//
+// Подсказка "Наше взрослое мужское население сейчас" намеренно не
+// правится: там нужно исходное число.
+// ---------------------------------------------------------------
+
+static const int POP_MULTIPLIER_SHIFT = 2;   // сдвиг на 2 = умножение на 4
+
+// Места отрисовки. Каждое — чтение поля населения в регистр, сразу
+// за которым идёт форматирование числа. Шесть байт чтения меняем на
+// переход в пещеру: там читаем, сдвигаем и возвращаемся.
+//
+// Добавить новое место: найти в Ghidra чтение [reg+0x12E8] рядом с
+// подстановкой в текст, вписать RVA и байты. Реестр регистров в
+// сигнатуре: 8B 87 = EAX,[EDI]; 8B 81 = EAX,[ECX]; 8B 83 = EAX,[EBX].
+//
+// Важно: править только отрисовку. Само поле участвует в расчётах
+// налогов, призыва и влияния, и трогать его нельзя.
+struct PopSite
+{
+    const char* name;
+    DWORD         rva;
+    unsigned char sig[6];
+    bool          enabled;
+};
+
+static PopSite POP_SITES[] =
+{
+    { "topbar",    0x310A32, { 0x8B, 0x87, 0xE8, 0x12, 0x00, 0x00 }, true },
+    { "diplomacy", 0x22880F, { 0x8B, 0x81, 0xE8, 0x12, 0x00, 0x00 }, true },
+};
+
+static const int POP_SITE_COUNT = sizeof(POP_SITES) / sizeof(POP_SITES[0]);
+
+
+static bool InstallPopSite(const PopSite& site)
+{
+    unsigned char* hook = (unsigned char*)(g_base + site.rva);
+
+    if (memcmp(hook, site.sig, 6) != 0)
+    {
+        Log("PopDisplay '%s': сигнатура не совпала - не патчим", site.name);
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 64, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    int n = 0;
+
+    // Оригинальное чтение поля — как есть, вместе с регистром.
+    memcpy(cave + n, site.sig, 6);
+    n += 6;
+
+    // Умножение. Приёмник у всех сигнатур EAX, поэтому сдвигаем его.
+    // Флаги никому не нужны: следом идёт push.
+    cave[n++] = 0xC1; cave[n++] = 0xE0;
+    cave[n++] = (unsigned char)POP_MULTIPLIER_SHIFT;   // shl eax, N
+
+    cave[n++] = 0xE9;                                  // jmp обратно
+    *(DWORD*)(cave + n) = (g_base + site.rva + 6) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    // Шесть перекрываемых байт: пять под jmp и один nop.
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("PopDisplay '%s': rva %06X, пещера %08X",
+        site.name, site.rva, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+static void InstallPopDisplay()
+{
+    Log("PopDisplay: множитель %d", 1 << POP_MULTIPLIER_SHIFT);
+
+    for (int i = 0; i < POP_SITE_COUNT; ++i)
+    {
+        if (POP_SITES[i].enabled)
+            InstallPopSite(POP_SITES[i]);
+    }
 }
 
 
@@ -1075,6 +1188,10 @@ static bool Install()
 
 #if ENABLE_PRICE_DELTA
     InstallPriceDelta();
+#endif
+
+#if ENABLE_POP_DISPLAY
+    InstallPopDisplay();
 #endif
 
     Log("Install: done");
