@@ -317,3 +317,60 @@ country_event = {
 		}
 	}
 }
+
+# НЕСАНКЦИОНИРОВАННЫЙ МИТИНГ
+country_event = {
+	id = 110806
+	title = "BadMeeting_EvtName"               
+	desc = "BadMeeting_EvtDesc"   
+	picture = "communist_riot"
+	
+	trigger = {
+		NOT = {
+			plurality = 35
+		}
+		average_militancy = 1
+		#public_meetings = yes_meeting
+		#NOT = { press_rights = state_press }
+	}
+	
+	mean_time_to_happen = {
+		months = 120
+		modifier = {
+			factor = 0.5
+			average_militancy = 4
+		}
+		modifier = {
+			factor = 0.9
+			NOT = { average_consciousness = 3 }
+		}
+	}
+
+	option = {
+		name = "BadMeeting_EvtOptAllow"
+		plurality = -1
+		any_pop = { militancy = -0.5 consciousness = -0.5 }
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+
+	option = {
+		name = "BadMeeting_EvtOptForce"
+		plurality = 5
+		any_pop = { militancy = 1 consciousness = 1 }
+		random_owned = {
+			limit = {
+				is_colonial = no
+			}
+			any_pop = {
+				reduce_pop = 0.99
+			}
+		}
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+}

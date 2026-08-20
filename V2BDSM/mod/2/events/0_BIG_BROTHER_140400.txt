@@ -1294,6 +1294,24 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = {	limit = { NOT = { plurality = 4 } } any_pop = { limit = { agree_with_ruling_party = 0.5 } militancy = 0.125 } }
 		any_country = {	limit = { NOT = { plurality = 4 } } any_pop = { limit = { NOT = { agree_with_ruling_party = 0.5 }} militancy = 0.25 } }
 		
+		#Taxes
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.99 } } plurality = 0.04 }
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.74 } } plurality = 0.04 }
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.49 } } plurality = 0.04 }
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.24 } } plurality = 0.04 }
+		
+		#Taxes
+		any_country = { limit = { exists = yes NOT = { middle_tax = 0.99 } } plurality = 0.02 }
+		any_country = { limit = { exists = yes NOT = { middle_tax = 0.74 } } plurality = 0.02 }
+		any_country = { limit = { exists = yes NOT = { middle_tax = 0.49 } } plurality = 0.02 }
+		any_country = { limit = { exists = yes NOT = { middle_tax = 0.24 } } plurality = 0.02 }
+		
+		#Taxes
+		any_country = { limit = { exists = yes NOT = { rich_tax = 0.99 } } plurality = 0.01 }
+		any_country = { limit = { exists = yes NOT = { rich_tax = 0.74 } } plurality = 0.01 }
+		any_country = { limit = { exists = yes NOT = { rich_tax = 0.49 } } plurality = 0.01 }
+		any_country = { limit = { exists = yes NOT = { rich_tax = 0.24 } } plurality = 0.01 }
+		
 		#Administration
 		any_country = { limit = { exists = yes administration_spending = 0.99 } plurality = 0.04 }
 		any_country = { limit = { exists = yes administration_spending = 0.89 } plurality = 0.035 }

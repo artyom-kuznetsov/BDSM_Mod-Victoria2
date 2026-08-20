@@ -41,6 +41,13 @@
 #define ENABLE_EXE_PATCHES     1   // подкрепления и цели войны
 #define ENABLE_INDICATORS      1   // текстовые индикаторы
 
+// 0 — переписывать строку внутри объекта элемента. Строка находится,
+//     но на экране не меняется: элемент кеширует разложенный текст.
+// 1 — показывать значение подсказкой при наведении. Ничего угадывать
+//     не нужно: слот подсказки мы и так перехватываем, а элемент под
+//     курсором приходит туда аргументом.
+#define INDICATOR_MODE 1
+
 static bool g_logStarted = false;
 
 static void Log(const char* fmt, ...)
@@ -190,6 +197,7 @@ static const int VT_FIND_CHILD = 0x34;  // окно: найти кнопку п�
 static const int VT_FIND_TEXT = 0x3C;  // окно: найти текстовое поле
 static const int OFF_OBSERVABLE = 0x54;  // кнопка -> Observable
 static const int VT_ADD_OBSERVER = 0x04;  // Observable: AddObserver
+static const int VT_GET_NAME = 0x44;  // элемент: имя из .gui
 
 // Поддельный элемент для OnMakeDecisionClicked: функция читает у него
 // только +0x14 (данные std::string) и +0x28 (_Myres).
@@ -239,13 +247,58 @@ static void MakeStr(GStr* s, char* storage, unsigned storageSize, const char* te
 // используем __fastcall с фиктивным EDX — раскладка совпадает.
 // ---------------------------------------------------------------
 
+typedef void* (__fastcall* tCallNoArgs)(void* ecx, void* edx);
 typedef void* (__fastcall* tCallOneArg)(void* ecx, void* edx, void* arg);
+
+static void* VCall0(void* obj, int byteSlot)
+{
+    void** vt = *(void***)obj;
+    tCallNoArgs fn = (tCallNoArgs)vt[byteSlot / 4];
+    return fn(obj, 0);
+}
 
 static void* VCall1(void* obj, int byteSlot, void* arg)
 {
     void** vt = *(void***)obj;
     tCallOneArg fn = (tCallOneArg)vt[byteSlot / 4];
     return fn(obj, 0, arg);
+}
+
+
+// Содержимое std::string движка.
+static const char* GStrText(void* str)
+{
+    if (!str)
+        return "";
+
+    unsigned char* p = (unsigned char*)str;
+    unsigned res = *(unsigned*)(p + 0x14);
+
+    const char* data = (res > 15) ? *(const char**)p : (const char*)p;
+    return data ? data : "";
+}
+
+
+// Записать текст в существующую std::string, не превышая ёмкости.
+static void GStrSet(void* str, const char* text)
+{
+    if (!str)
+        return;
+
+    unsigned char* p = (unsigned char*)str;
+    unsigned res = *(unsigned*)(p + 0x14);
+    unsigned len = (unsigned)strlen(text);
+
+    if (len > res)
+        len = res;
+
+    char* data = (res > 15) ? *(char**)p : (char*)p;
+    if (!data)
+        return;
+
+    memcpy(data, text, len);
+    data[len] = 0;
+    *(unsigned*)(p + 0x10) = len;
 }
 
 
@@ -520,6 +573,38 @@ static void UpdateIndicators(int viewIndex, void* view)
 }
 
 
+// Подсказка над элементом. Вызывается после оригинала: тот кладёт
+// свой текст в retBuf, а мы подменяем его, если курсор над нашим
+// индикатором.
+static void OnTooltip(int viewIndex, void* retBuf, void* element)
+{
+    static int logged = 0;
+
+    if (!retBuf || !element)
+        return;
+
+    const char* name = GStrText(VCall0(element, VT_GET_NAME));
+
+    for (int i = 0; i < INDICATOR_COUNT && i < MAX_INDICATORS; ++i)
+    {
+        if (INDICATORS[i].view != viewIndex)
+            continue;
+
+        if (strcmp(name, INDICATORS[i].element) != 0)
+            continue;
+
+        const char* text = BuildIndicatorText(i);
+        GStrSet(retBuf, text);
+
+        if (logged < 3)
+        {
+            ++logged;
+            Log("Tooltip '%s': подставлено '%s'", name, text);
+        }
+    }
+}
+
+
 // ---------------------------------------------------------------
 // Подписка кнопок
 // ---------------------------------------------------------------
@@ -610,7 +695,7 @@ static void OnViewUpdate(int viewIndex, void* view)
             VIEWS[viewIndex].name, (DWORD)(DWORD_PTR)view);
     }
 
-#if ENABLE_INDICATORS
+#if ENABLE_INDICATORS && INDICATOR_MODE == 0
     // Каждый раз: значение меняется по ходу игры.
     UpdateIndicators(viewIndex, view);
 #endif
@@ -638,9 +723,11 @@ static void OnViewUpdate(int viewIndex, void* view)
     {                                                               \
         if (n < VIEW_COUNT)                                         \
             OnViewUpdate(n, view);                                  \
-        if (!g_origSlot[n])                                         \
-            return retBuf;                                          \
-        return ((tTooltip)g_origSlot[n])(view, 0, retBuf, element); \
+        void* result = g_origSlot[n]                                \
+            ? ((tTooltip)g_origSlot[n])(view, 0, retBuf, element)    \
+            : retBuf;                                               \
+        OnTooltip(n, result, element);                               \
+        return result;                                              \
     }
 
 VIEW_THUNKS(0) VIEW_THUNKS(1) VIEW_THUNKS(2) VIEW_THUNKS(3)
