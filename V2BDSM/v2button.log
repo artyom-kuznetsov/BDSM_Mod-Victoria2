@@ -1,5 +1,5 @@
 ---- Install ---- версия 1.1
-base = 00F40000
+base = 00450000
 patch CTechnologyView: слот 11 = 1
 patch CBudgetView: слот 10 = 1
 patch CProductionView: слот 10 = 1
@@ -9,18 +9,17 @@ Patch 'land_reinforce': применён на rva 1C8C9B
 Patch 'naval_reinforce': применён на rva 1C8B1C
 PriceDelta: 25 сотых процента, множитель 163
 PopDisplay: множитель 4
-PopDisplay 'topbar': rva 310A32, пещера 02010000
-PopDisplay 'diplomacy': rva 22880F, пещера 02020000
-PopDisplay 'lobby': rva 36DFBB, пещера 02030000
-VersionLabel: 'V2 v3.04 + V2DLL v1.1' (len=21), пещера 02040000
+PopDisplay 'topbar': rva 310A32, пещера 02100000
+PopDisplay 'diplomacy': rva 22880F, пещера 02110000
+PopDisplay 'lobby': rva 36DFBB, пещера 02120000
+VersionLabel: 'V2 v3.04 + V2DLL v1.1' (len=21), пещера 02130000
 Install: done
 DllMain: attach, Install = 1
-Update[CTechnologyView]: вызван, view=4A2D6450
+Update[CTechnologyView]: вызван, view=4BF0D318
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
-Update[CProductionView]: вызван, view=4D0F4B50
-Update[CProductionView]: вызван, view=4D0F4B50
-Update[CBudgetView]: вызван, view=4848BEB8
-Setup[CBudgetView]: 'FE_BUDGET_DIPLO_BDSM' подписана
-Update[CBudgetView]: вызван, view=4848BEB8
-Update[CTechnologyView]: вызван, view=4A2D6450
+Update[CProductionView]: вызван, view=4E800AB8
+Update[CProductionView]: вызван, view=4E800AB8
+Tooltip 'FE_CORRUPTION_MODIFIER_BDSM': подставлено '100.0%'
+Tooltip 'FE_CORRUPTION_MODIFIER_BDSM': подставлено '100.0%'
+Tooltip 'FE_CORRUPTION_MODIFIER_BDSM': подставлено '100.0%'
