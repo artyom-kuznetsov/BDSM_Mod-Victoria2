@@ -1195,10 +1195,15 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { ruling_party_ideology = fascist } set_country_flag = fascist_flag	}
 		
 		### TRADE POLICY CHECK ###
-		any_country = { limit = { trade_policy_rgroup = dependent_economy_ref } set_country_flag = dependent_economy_cflag	}
-		any_country = { limit = { trade_policy_rgroup = protectionism_ref } set_country_flag = protectionism_cflag	}
-		any_country = { limit = { trade_policy_rgroup = isolationism_ref } set_country_flag = isolationism_cflag	}
-		any_country = { limit = { trade_policy_rgroup = free_trade_ref } set_country_flag = free_trade_cflag	}
+		any_country = { limit = { trade_policy_rgroup = dependent_economy_ref 	} set_country_flag = dependent_economy_cflag	}
+		any_country = { limit = { trade_policy_rgroup = protectionism_ref 		} set_country_flag = protectionism_cflag		}
+		any_country = { limit = { trade_policy_rgroup = isolationism_ref 		} set_country_flag = isolationism_cflag			}
+		any_country = { limit = { trade_policy_rgroup = free_trade_ref 			} set_country_flag = free_trade_cflag			}
+		
+		any_country = { limit = { NOT = { trade_policy_rgroup = dependent_economy_ref 	} } clr_country_flag = dependent_economy_cflag	}
+		any_country = { limit = { NOT = { trade_policy_rgroup = protectionism_ref 		} } clr_country_flag = protectionism_cflag		}
+		any_country = { limit = { NOT = { trade_policy_rgroup = isolationism_ref 		} } clr_country_flag = isolationism_cflag		}
+		any_country = { limit = { NOT = { trade_policy_rgroup = free_trade_ref 			} } clr_country_flag = free_trade_cflag			}
 		
 		### ECONOMIC SYSTEM CHECK ###
 		any_country = { limit = { economic_system_rgroup = traditionalism_ref } set_country_flag = traditionalism_cflag	plurality = 0.1 }
@@ -1206,6 +1211,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { economic_system_rgroup = interventionism_ref } set_country_flag = interventionism_cflag	}
 		any_country = { limit = { economic_system_rgroup = laissez_faire_ref } set_country_flag = laissez_faire_cflag	}
 		any_country = { limit = { economic_system_rgroup = planned_economy_ref } set_country_flag = planned_economy_cflag	}
+		
+		any_country = { limit = { NOT = { economic_system_rgroup = traditionalism_ref	} 	}	clr_country_flag = traditionalism_cflag 	}
+		any_country = { limit = { NOT = { economic_system_rgroup = agrarianism_ref 		} 	}	clr_country_flag = agrarianism_cflag 		}
+		any_country = { limit = { NOT = { economic_system_rgroup = interventionism_ref 	}	}	clr_country_flag = interventionism_cflag	}
+		any_country = { limit = { NOT = { economic_system_rgroup = laissez_faire_ref 	} 	}	clr_country_flag = laissez_faire_cflag		}
+		any_country = { limit = { NOT = { economic_system_rgroup = planned_economy_ref 	}	}	clr_country_flag = planned_economy_cflag	}
 
 		
 		### STABILITY NULLIFIER ###
