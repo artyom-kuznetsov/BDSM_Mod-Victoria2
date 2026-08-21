@@ -9,7 +9,10 @@ country_event = {
 		NOT = { involved_in_crisis = yes }
 		constructing_cb_progress = 10 #10% progress
 		OR = {
-			constructing_cb_type = acquire_state
+			constructing_cb_type = acquire_state_small
+			constructing_cb_type = acquire_state_medium
+			constructing_cb_type = acquire_state_large
+			constructing_cb_type = acquire_state_huge
 			constructing_cb_type = conquest
 			constructing_cb_type = demand_concession_casus_belli
 			constructing_cb_type = establish_protectorate_casus_belli
@@ -58,8 +61,12 @@ country_event = {
 		NOT = { involved_in_crisis = yes }
 		constructing_cb_progress = 10 #10% progress
 		OR = {
-			constructing_cb_type = acquire_state
+			constructing_cb_type = acquire_state_small
+			constructing_cb_type = acquire_state_medium
+			constructing_cb_type = acquire_state_large
+			constructing_cb_type = acquire_state_huge
 			constructing_cb_type = conquest
+			constructing_cb_type = conquest_small
 			constructing_cb_type = demand_concession_casus_belli
 			constructing_cb_type = establish_protectorate_casus_belli
 			}
@@ -282,7 +289,7 @@ country_event = {
 	trigger = {
 		NOT = { involved_in_crisis = yes }
 		constructing_cb_progress = 10 #10% progress
-		constructing_cb_type = place_in_the_sun
+		constructing_cb_type = place_in_the_sun_large
 		NOT = {
 			OR = {	
 					has_country_modifier = CB_gen_plus
@@ -326,7 +333,7 @@ country_event = {
 	trigger = {
 		NOT = { involved_in_crisis = yes }
 		constructing_cb_progress = 10 #10% progress
-		constructing_cb_type = place_in_the_sun
+		constructing_cb_type = place_in_the_sun_large
 		NOT = {
 			OR = {	
 					has_country_modifier = CB_gen_plus

@@ -168,7 +168,7 @@ province_event = {
 		}
 		NOT = {
 			owner = {
-				economic_policy = laissez_faire
+				trade_policy_rgroup = free_trade_ref
 			}
 		}
 	}
@@ -176,21 +176,15 @@ province_event = {
 	mean_time_to_happen = {
 		months = 800
 		modifier = {
-			factor = 0.9
-			owner = {
-				economic_policy = interventionism
-			}
-		}
-		modifier = {
 			factor = 0.8
 			owner = {
-				economic_policy = state_capitalism
+				economic_system_rgroup = interventionism_ref
 			}
 		}
 		modifier = {
 			factor = 0.7
 			owner = {
-				economic_policy = planned_economy
+				economic_system_rgroup = planned_economy_ref
 			}
 		}
 		modifier = {
@@ -709,14 +703,14 @@ province_event = {
 		modifier = {
 			factor = 0.9
 			owner = {
-				economic_policy = laissez_faire
+				trade_policy_rgroup = free_trade_ref
 			}
 		}
 		modifier = {
 			factor = 1.5
 			NOT = {
 				owner = {
-					economic_policy = laissez_faire
+					trade_policy_rgroup = free_trade_ref
 				}
 			}
 		}
@@ -1079,13 +1073,13 @@ province_event = {
 		modifier = {
 			factor = 0.9
 			owner = {
-				economic_policy = planned_economy
+				economic_system_rgroup = planned_economy_ref
 			}
 		}
 		modifier = {
 			factor = 1.2
 			owner = {
-				economic_policy = laissez_faire
+				trade_policy_rgroup = free_trade_ref
 			}
 		}
 	}
@@ -1230,7 +1224,7 @@ province_event = {
 		modifier = {
 			factor = 1.5
 			owner = {
-				economic_policy = laissez_faire
+				trade_policy_rgroup = free_trade_ref
 			}
 		}
 	}

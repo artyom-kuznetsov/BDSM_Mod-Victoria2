@@ -1,4 +1,73 @@
 FE_CHECKSUMBDSM;BDSM Mod v4.7.0.X (Standalone) \nОжидаемая чексумма: XXXX;X
+invent_factories_blocked_cflag;Заблокировано изобретение фабрик;X
+clipper_shipyard_inv;Пароходы;X
+clipper_shipyard_inv_desc; ;X
+clipper_shipyard_inv;Кораблестроение;X
+clipper_shipyard_inv_desc; ;X
+steel_factory_inv;Цементация стали;X
+steel_factory_inv_desc; ;X
+luxury_clothes_factory_inv;Роскошная одежда;X
+luxury_clothes_factory_inv_desc; ;X
+cement_factory_inv;Смесь цемента;X
+cement_factory_inv_desc; ;X
+canned_food_factory_inv;Консервирование;X
+canned_food_factory_inv_desc; ;X
+conservative_flag;Консерваторы у власти;X
+reactionary_flag;Реакционеры у власти;X
+liberal_flag;Либералы у власти;X
+socialist_flag;Социалисты у власти;X
+communist_flag;Коммунисты у власти;X
+fascist_flag;Фашисты у власти;X
+economic_system_rgroup;Эконом. система;X
+;;X# PLANNED ECONOMY
+planned_economy_ref;Командная экономика;X
+planned_economy_ref_l;Командная экономика;X
+planned_economy_ref_desc;Изоляционистская интервенционистская экономика, при которой правительство напрямую управляет большинством производственных процессов.\n\nТребование §Yчиновников§!: §R+0.3%§!;X
+planned_economy_cflag;§YПлановая экономика§!;X
+;;X# LAISSEZ FAIRE
+laissez_faire_ref;Laissez-Faire;X
+laissez_faire_ref_l;Laissez-Faire;X
+laissez_faire_ref_desc;Либеральная экономика, основанная на принципах конкурентной борьбы и идее, что чем меньше вмешательство государства, тем выше рост.;X
+laissez_faire_cflag;§YLaissez-Faire§!;X
+;;X# INTERVENTIONISM
+interventionism_ref;Гос. вмешательство;X
+interventionism_ref_l;Гос. вмешательство;X
+interventionism_ref_desc;Ради национальной стабильности государство должно сдерживать эксцессы частного бизнеса.\nТребование §Yчиновников§!: §R+0.1%§!;X
+interventionism_cflag;§YГос. вмешательство§!;X
+;;X# TRADITIONALISM
+traditionalism_ref;Традиционализм;X
+traditionalism_ref_l;Традиционализм;X
+traditionalism_ref_desc;Доиндустриальное натуральное хозяйство с минимумом контроля со стороны государства.\n\nТребование §Yчиновников§!: §G-0.5%§!\nТехнологии открывают фабрики: §RНет§!\nРасходы на управление влияют на стабильность: §YНет§!;X
+traditionalism_cflag;§YТрадиционализм§!;X
+;;X# AGRARIANISM
+agrarianism_ref_l;Аграрианизм;X
+agrarianism_ref;Аграрианизм;X
+agrarianism_ref_desc;Сельская экономика с упором на развитие сельского хозяйства и общин.;X
+agrarianism_cflag;§YАграрианизм§!;X
+trade_policy_rgroup;Торговая политика;X
+;;X# FREE TRADE
+free_trade_ref;Свободная торговля;X
+free_trade_ref_desc;Торговля не контролируется.\n\n§WЗапрещает нахождение в сфере влияния: §GНет§!\nФактор повышения статуса: §G+0.05§!\nФактор понижения статуса: §G+0.1§!;X
+free_trade_ref_l;Свободная торговля;X
+free_trade_cflag;§YСвободная торговля§!;X
+;;X# PROTECTIONISM
+protectionism_ref;Протекционизм;X
+protectionism_ref_desc;Государство вмешивается в торговлю, если это связано с национальными интересами.\n\n§WЗапрещает нахождение в сфере влияния: §GНет§!;X
+protectionism_ref_l;Протекционизм;X
+protectionism_cflag;§YПротекционизм§!;X
+;;X# ISOLATIONISM
+isolationism_ref;Изоляционизм;X
+isolationism_ref_desc;Мы стараемся полагаться на собственные силы и внутреннее производство, а не международную торговлю.\n\n§WЗапрещает нахождение в сфере влияния: §RДа§!;X
+isolationism_ref_l;Изоляционизм;X
+isolationism_cflag;§YИзоляционизм§!;X
+;;X# DEPENDENT ECONOMY
+dependent_economy_ref;Зависимая экономика;X
+dependent_economy_ref_l;Зависимая экономика;X
+dependent_economy_ref_desc;Мы находимся в сфере влияния, и самой выгодной политикой для нас будет извлечение прибыли внутри страны, а не с иностранной торговли.\n\n§WЗапрещает нахождение в сфере влияния: §GНет§!\n§WРеформа откатывается при нахождении вне сферы влияния: §GДа§!;X
+dependent_economy_cflag;§YЗависимая экономика§!;X
+;;X
+protectionism_ref_l;Протекционизм;X
+isolationism_ref_l;Изоляционизм;X
 FE_TESTBTN_BDSM;Тест Регион;X
 BadMeeting_EvtName;Несанкционированный митинг;X
 BadMeeting_EvtDesc;Люди выходят на улицы, когда мы им не разрешали!;X
@@ -453,13 +522,13 @@ no_security_l;Нет служб безопасности;X
 no_security_desc;Нет служб безопасности\n\n§YЕжемесячная стабильность: §R-0.02§!;X
 minimal_security;Мин. безопасность;X
 minimal_security_l;Минимальная безопасность;X
-minimal_security_desc;Мы финансируем минимальные службы безопасности.\n\n§YТребование чиновников §R+0.1%§!\n§YЕжемесячная стабильность: §G+0.02§!;X
+minimal_security_desc;Мы финансируем минимальные службы безопасности.\n\nТребование §Yчиновников§!: §R+0.1%§!\n§YЕжемесячная стабильность: §G+0.02§!;X
 moderate_security;Общие службы;X
 moderate_security_l;Общие службы безопасности;X
-moderate_security_desc;Мы финансируем основные службы безопасности, такие как полиция и МВД.\n\n§YТребование чиновников §R+0.2%§!\n§YЕжемесячная стабильность: §G+0.05§!;X
+moderate_security_desc;Мы финансируем основные службы безопасности, такие как полиция и МВД.\n\nТребование §Yчиновников§!: §R+0.2%§!\n§YЕжемесячная стабильность: §G+0.05§!;X
 police_state;Полицейск. государство;X
 police_state_l;Полицейское государство;X
-police_state_desc;Мы выделяем как и большие деньги как на полицию, так и на прочие службы внутренней безопасности, чтобы контролировать каждый шаг граждан.\n\n§YТребование чиновников §R+0.3%§!\n§YЕжемесячная стабильность: §G+0.12§!;X
+police_state_desc;Мы выделяем как и большие деньги как на полицию, так и на прочие службы внутренней безопасности, чтобы контролировать каждый шаг граждан.\n\nТребование §Yчиновников§!: §R+0.3%§!\n§YЕжемесячная стабильность: §G+0.12§!;X
 NewSpain2_EvtName;Расширение колонии;X
 NewSpain_EvtOptA;Gloria De Espana!;X
 NewSpain_EvtName;Новая Испания;X
@@ -13169,7 +13238,7 @@ free_press_desc;Разрешена свободная пресса без государственного вмешательства.\n
 trade_unions;Профсоюзы;X
 no_trade_unions;Незаконны;X
 no_trade_unions_desc;Профсоюзы запрещены.;X
-state_controlled;Контролируемые;X
+state_controlled;Регулируемые;X
 state_controlled_desc;Разрешены только контролируемые государством профсоюзы.;X
 non_socialist;Не-социалисты;X
 non_socialist_desc;Разрешены только несоциалистические профсоюзы.;X

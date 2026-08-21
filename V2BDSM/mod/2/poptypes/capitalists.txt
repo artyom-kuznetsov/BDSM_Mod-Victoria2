@@ -84,7 +84,6 @@ migration_target =
 promote_to =
 {
 	
-	
 	bureaucrats =
 	{
 		factor = 0.01
@@ -104,14 +103,24 @@ promote_to =
 			location = { is_colonial = yes }
 		}
 		group = {
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.008 } }
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.009 } }
-			modifier = { factor = -4 state_scope = { bureaucrats = 0.010 } }
-			modifier = { factor = -3 state_scope = { bureaucrats = 0.011 } }
-			modifier = { factor = -3 state_scope = { bureaucrats = 0.012 } }
-			modifier = { factor = -5 state_scope = { bureaucrats = 0.014 } }
-			modifier = { factor = -5 state_scope = { bureaucrats = 0.016 } }
-			modifier = { factor = -100 state_scope = { bureaucrats = 0.018 } }		
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.008 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.009 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.010 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.011 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.012 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.013 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.014 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.015 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.016 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.017 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.018 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.019 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.02 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.021 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.022 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.023 } }
+			modifier = { factor = -2 state_scope = { bureaucrats = 0.024 } }
+			modifier = { factor = -100 state_scope = { bureaucrats = 0.025 } }
 		}
 
 
@@ -139,7 +148,12 @@ promote_to =
 			modifier = { factor = 4 security = moderate_security }
 			modifier = { factor = 6 security = police_state }
 		}
+		
+		modifier = { factor = -4 economic_system_rgroup = traditionalism_ref }
+		modifier = { factor = 2 economic_system_rgroup = interventionism_ref }
+		modifier = { factor = 6 economic_system_rgroup = planned_economy_ref }
 	}
+	
 	
 	clerks = {
 		factor = 0.01
@@ -949,27 +963,27 @@ issues =
 			NOT = {
 				life_needs = 1.0
 			}
-			country = { trade_policy = free_trade }
+			country = { trade_policy_rgroup = free_trade_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { trade_policy = protectionism }
+			country = { trade_policy_rgroup = protectionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { trade_policy = protectionism }
+			country = { trade_policy_rgroup = protectionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { trade_policy = protectionism }
+			country = { trade_policy_rgroup = protectionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1
-			country = { trade_policy = protectionism }
+			country = { trade_policy_rgroup = protectionism_ref }
 		}
 	}
 	free_trade = {
@@ -979,30 +993,30 @@ issues =
 			NOT = {
 				life_needs = 1.0
 			}
-			country = { trade_policy = protectionism }
+			country = { trade_policy_rgroup = protectionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { trade_policy = free_trade }
+			country = { trade_policy_rgroup = free_trade_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { trade_policy = free_trade }
+			country = { trade_policy_rgroup = free_trade_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { trade_policy = free_trade }
+			country = { trade_policy_rgroup = free_trade_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { trade_policy = free_trade }
+			country = { trade_policy_rgroup = free_trade_ref }
 		}
 	}
-	laissez_faire = {
+	laissez_faire_ref = {
 		factor = 0.9
 		modifier = {
 			factor = 0
@@ -1010,31 +1024,31 @@ issues =
 				life_needs = 1.0
 			}
 			country = {
-				economic_policy = laissez_faire
+				economic_system_rgroup = laissez_faire_ref
 			}
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { economic_policy = laissez_faire }
+			country = { economic_system_rgroup = laissez_faire_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { economic_policy = laissez_faire }
+			country = { economic_system_rgroup = laissez_faire_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { economic_policy = laissez_faire }
+			country = { economic_system_rgroup = laissez_faire_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { economic_policy = laissez_faire }
+			country = { economic_system_rgroup = laissez_faire_ref }
 		}
 	} 
-	interventionism = {
+	interventionism_ref = {
 		factor = 1
 		modifier = {
 			factor = 0
@@ -1042,63 +1056,31 @@ issues =
 				life_needs = 1.0
 			}
 			country = {
-				economic_policy = interventionism
+				economic_system_rgroup = interventionism_ref
 			}
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { economic_policy = interventionism }
+			country = { economic_system_rgroup = interventionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { economic_policy = interventionism }
+			country = { economic_system_rgroup = interventionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { economic_policy = interventionism }
+			country = { economic_system_rgroup = interventionism_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { economic_policy = interventionism }
+			country = { economic_system_rgroup = interventionism_ref }
 		}
 	} 
-	state_capitalism = {
-		factor = 1.2
-		modifier = {
-			factor = 0
-			NOT = {
-				life_needs = 1.0
-			}
-			country = {
-				economic_policy = state_capitalism
-			}
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 1.0
-			country = { economic_policy = state_capitalism }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.25
-			country = { economic_policy = state_capitalism }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.5
-			country = { economic_policy = state_capitalism }
-		}
-		modifier = {
-			factor = 1.1
-			everyday_needs = 0.75
-			country = { economic_policy = state_capitalism }
-		}
-	} 
-	planned_economy = {
+	planned_economy_ref = {
 		factor = 1
 		modifier = {
 			factor = 0
@@ -1106,28 +1088,28 @@ issues =
 				life_needs = 1.0
 			}
 			country = {
-				economic_policy = planned_economy
+				economic_system_rgroup = planned_economy_ref
 			}
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 1.0
-			country = { economic_policy = planned_economy }
+			country = { economic_system_rgroup = planned_economy_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.25
-			country = { economic_policy = planned_economy }
+			country = { economic_system_rgroup = planned_economy_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.5
-			country = { economic_policy = planned_economy }
+			country = { economic_system_rgroup = planned_economy_ref }
 		}
 		modifier = {
 			factor = 1.1
 			everyday_needs = 0.75
-			country = { economic_policy = planned_economy }
+			country = { economic_system_rgroup = planned_economy_ref }
 		}
 	} 
 	jingoism = {

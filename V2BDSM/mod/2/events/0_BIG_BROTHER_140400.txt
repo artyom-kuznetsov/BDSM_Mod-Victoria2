@@ -9,6 +9,22 @@ country_event = { # MCL # MONTHLY CLEANUP
 	
 	option = {
 		name = "noloc"
+		
+		any_country = {
+			limit = {
+				has_country_flag = traditionalism_cflag
+			}
+			set_country_flag = invent_factories_blocked_cflag
+		}
+		
+		any_country = {
+			limit = {
+				has_country_flag = invent_factories_blocked_cflag
+				NOT = { has_country_flag = traditionalism_cflag }
+			}
+			clr_country_flag = invent_factories_blocked_cflag
+		}
+		
 		# v4.7.0 Opium King cflag
 		any_country = {
 			limit = {
@@ -912,7 +928,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		### ECONOMIC SYSTEM CONS ###
         any_country = {
             limit = {
-                NOT = { economic_policy = planned_economy }
+                NOT = { economic_system_rgroup = planned_economy_ref }
             }
             social_reform = yes_pop_construction
         }
@@ -1177,7 +1193,22 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { ruling_party_ideology = communist } set_country_flag = communist_flag	}
 		any_country = { limit = { ruling_party_ideology = fascist } set_country_flag = fascist_flag	}
 		
-		### STABILITY NULLIFIER ###any_country = { limit = { average_consciousness = 0.5 } plurality = -0.011 set_country_flag = stability_adjusted }
+		### TRADE POLICY CHECK ###
+		any_country = { limit = { trade_policy_rgroup = dependent_economy_ref } set_country_flag = dependent_economy_cflag	}
+		any_country = { limit = { trade_policy_rgroup = protectionism_ref } set_country_flag = protectionism_cflag	}
+		any_country = { limit = { trade_policy_rgroup = isolationism_ref } set_country_flag = isolationism_cflag	}
+		any_country = { limit = { trade_policy_rgroup = free_trade_ref } set_country_flag = free_trade_cflag	}
+		
+		### ECONOMIC SYSTEM CHECK ###
+		any_country = { limit = { economic_system_rgroup = traditionalism_ref } set_country_flag = traditionalism_cflag	}
+		any_country = { limit = { economic_system_rgroup = agrarianism_ref } set_country_flag = agrarianism_cflag	}
+		any_country = { limit = { economic_system_rgroup = interventionism_ref } set_country_flag = interventionism_cflag	}
+		any_country = { limit = { economic_system_rgroup = laissez_faire_ref } set_country_flag = laissez_faire_cflag	}
+		any_country = { limit = { economic_system_rgroup = planned_economy_ref } set_country_flag = planned_economy_cflag	}
+
+		
+		### STABILITY NULLIFIER ###
+		any_country = { limit = { average_consciousness = 0.5 } plurality = -0.011 set_country_flag = stability_adjusted }
 		any_country = { limit = { average_consciousness = 1 } plurality = -0.022 set_country_flag = stability_adjusted }
 		any_country = { limit = { average_consciousness = 2 } plurality = -0.044 set_country_flag = stability_adjusted }
 		any_country = { limit = { average_consciousness = 3 } plurality = -0.066 set_country_flag = stability_adjusted }
@@ -1313,16 +1344,16 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { exists = yes NOT = { rich_tax = 0.24 } } plurality = 0.01 }
 		
 		#Administration
-		any_country = { limit = { exists = yes administration_spending = 0.99 } plurality = 0.04 }
-		any_country = { limit = { exists = yes administration_spending = 0.89 } plurality = 0.035 }
-		any_country = { limit = { exists = yes administration_spending = 0.79 } plurality = 0.025 }
-		any_country = { limit = { exists = yes administration_spending = 0.69 } plurality = 0.025 }
-		any_country = { limit = { exists = yes administration_spending = 0.59 } plurality = 0.025 }
+		any_country = { limit = { exists = yes administration_spending = 0.99 NOT = { has_country_flag = traditionalism_cflag } } plurality = 0.04 }
+		any_country = { limit = { exists = yes administration_spending = 0.89 NOT = { has_country_flag = traditionalism_cflag } } plurality = 0.035 }
+		any_country = { limit = { exists = yes administration_spending = 0.79 NOT = { has_country_flag = traditionalism_cflag } } plurality = 0.025 }
+		any_country = { limit = { exists = yes administration_spending = 0.69 NOT = { has_country_flag = traditionalism_cflag } } plurality = 0.025 }
+		any_country = { limit = { exists = yes administration_spending = 0.59 NOT = { has_country_flag = traditionalism_cflag } } plurality = 0.025 }
 
-		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.4 } } plurality = -0.005 }
-		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.3 } } plurality = -0.01 }
-		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.2 } } plurality = -0.025 }
-		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.1 } } plurality = -0.04 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.4 has_country_flag = traditionalism_cflag } } plurality = -0.005 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.3 has_country_flag = traditionalism_cflag } } plurality = -0.01 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.2 has_country_flag = traditionalism_cflag } } plurality = -0.025 }
+		any_country = { limit = { exists = yes ai = no NOT = { administration_spending = 0.1 has_country_flag = traditionalism_cflag } } plurality = -0.04 }
 		
 		#Policing
 		any_country = { limit = { exists = yes ai = no security = no_security } plurality = -0.02 }
@@ -5155,5 +5186,242 @@ country_event = {
 				add_core = HUG
 			}
 		}
+	}
+}
+
+# ECONOMIC SYSTEM SETUP
+country_event = {
+	id = 140421
+	title = "noloc"
+	desc = "noloc"
+
+	is_triggered_only = yes
+	
+	option = {
+		name = "noloc"
+		# TRADITIONALIST
+		CIR = { social_reform = traditionalism_ref }
+		DAG = { social_reform = traditionalism_ref }
+		JAB = { social_reform = traditionalism_ref }
+		BAH = { social_reform = traditionalism_ref }
+		SRN = { social_reform = traditionalism_ref }
+		BHT = { social_reform = traditionalism_ref }
+		BDN = { social_reform = traditionalism_ref }
+		KAZ = { social_reform = traditionalism_ref }
+		TKM = { social_reform = traditionalism_ref }
+		ARS = { social_reform = traditionalism_ref }
+		MKN = { social_reform = traditionalism_ref }
+		AIN = { social_reform = traditionalism_ref }
+		CHO = { social_reform = traditionalism_ref }
+		KAG = { social_reform = traditionalism_ref }
+		KYO = { social_reform = traditionalism_ref }
+		SAT = { social_reform = traditionalism_ref }
+		SEN = { social_reform = traditionalism_ref }
+		TKG = { social_reform = traditionalism_ref }
+		YNZ = { social_reform = traditionalism_ref }
+		USG = { social_reform = traditionalism_ref }
+		PPA = { social_reform = traditionalism_ref }
+		SUM = { social_reform = traditionalism_ref }
+		ASM = { social_reform = traditionalism_ref }
+		BIH = { social_reform = traditionalism_ref }
+		BNG = { social_reform = traditionalism_ref }
+		CRC = { social_reform = traditionalism_ref }
+		EIC = { social_reform = traditionalism_ref }
+		MAH = { social_reform = traditionalism_ref }
+		KRN = { social_reform = traditionalism_ref }
+		SRI = { social_reform = traditionalism_ref }
+		SUD = { social_reform = traditionalism_ref }
+		SOK = { social_reform = traditionalism_ref }
+		BEN = { social_reform = traditionalism_ref }
+		WOL = { social_reform = traditionalism_ref }
+		TOO = { social_reform = traditionalism_ref }
+		MAS = { social_reform = traditionalism_ref }
+		SEG = { social_reform = traditionalism_ref }
+		KNG = { social_reform = traditionalism_ref }
+		ASH = { social_reform = traditionalism_ref }
+		MOS = { social_reform = traditionalism_ref }
+		DND = { social_reform = traditionalism_ref }
+		DAH = { social_reform = traditionalism_ref }
+		OYO = { social_reform = traditionalism_ref }
+		ARO = { social_reform = traditionalism_ref }
+		WRI = { social_reform = traditionalism_ref }
+		GAZ = { social_reform = traditionalism_ref }
+		AGC = { social_reform = traditionalism_ref }
+		RWA = { social_reform = traditionalism_ref }
+		TOR = { social_reform = traditionalism_ref }
+		KGW = { social_reform = traditionalism_ref }
+		LOA = { social_reform = traditionalism_ref }
+		LUN = { social_reform = traditionalism_ref }
+		KUB = { social_reform = traditionalism_ref }
+		KZB = { social_reform = traditionalism_ref }
+		WRL = { social_reform = traditionalism_ref }
+		MAJ = { social_reform = traditionalism_ref }
+		GEL = { social_reform = traditionalism_ref }
+		RUS = { social_reform = traditionalism_ref }
+		SIC = { social_reform = traditionalism_ref }
+		TUR = { social_reform = traditionalism_ref }
+		ALD = { social_reform = traditionalism_ref }
+		CNG = { social_reform = traditionalism_ref }
+		ETH = { social_reform = traditionalism_ref }
+		MAD = { social_reform = traditionalism_ref }
+		LIB = { social_reform = traditionalism_ref }
+		MOR = { social_reform = traditionalism_ref }
+		NAL = { social_reform = traditionalism_ref }
+		ORA = { social_reform = traditionalism_ref }
+		RHO = { social_reform = traditionalism_ref }
+		TRN = { social_reform = traditionalism_ref }
+		TUN = { social_reform = traditionalism_ref }
+		ZAN = { social_reform = traditionalism_ref }
+		ZUL = { social_reform = traditionalism_ref }
+		ABU = { social_reform = traditionalism_ref }
+		AFG = { social_reform = traditionalism_ref }
+		BUK = { social_reform = traditionalism_ref }
+		HDJ = { social_reform = traditionalism_ref }
+		KHI = { social_reform = traditionalism_ref }
+		MUG = { social_reform = traditionalism_ref }
+		NEJ = { social_reform = traditionalism_ref }
+		OMA = { social_reform = traditionalism_ref }
+		PER = { social_reform = traditionalism_ref }
+		YEM = { social_reform = traditionalism_ref }
+		AWA = { social_reform = traditionalism_ref }
+		BAS = { social_reform = traditionalism_ref }
+		BER = { social_reform = traditionalism_ref }
+		BHO = { social_reform = traditionalism_ref }
+		BIK = { social_reform = traditionalism_ref }
+		BUN = { social_reform = traditionalism_ref }
+		GWA = { social_reform = traditionalism_ref }
+		HYD = { social_reform = traditionalism_ref }
+		IND = { social_reform = traditionalism_ref }
+		JAI = { social_reform = traditionalism_ref }
+		JAS = { social_reform = traditionalism_ref }
+		JOD = { social_reform = traditionalism_ref }
+		KAL = { social_reform = traditionalism_ref }
+		KAS = { social_reform = traditionalism_ref }
+		KUT = { social_reform = traditionalism_ref }
+		LAD = { social_reform = traditionalism_ref }
+		MAK = { social_reform = traditionalism_ref }
+		MEW = { social_reform = traditionalism_ref }
+		MYS = { social_reform = traditionalism_ref }
+		NAG = { social_reform = traditionalism_ref }
+		NEP = { social_reform = traditionalism_ref }
+		ORI = { social_reform = traditionalism_ref }
+		PAN = { social_reform = traditionalism_ref }
+		SHI = { social_reform = traditionalism_ref }
+		SIK = { social_reform = traditionalism_ref }
+		SIN = { social_reform = traditionalism_ref }
+		TRA = { social_reform = traditionalism_ref }
+		ATJ = { social_reform = traditionalism_ref }
+		BAL = { social_reform = traditionalism_ref }
+		BHU = { social_reform = traditionalism_ref }
+		BRU = { social_reform = traditionalism_ref }
+		BUR = { social_reform = traditionalism_ref }
+		CAM = { social_reform = traditionalism_ref }
+		CHI = { social_reform = traditionalism_ref }
+		DAI = { social_reform = traditionalism_ref }
+		JAV = { social_reform = traditionalism_ref }
+		KOR = { social_reform = traditionalism_ref }
+		LUA = { social_reform = traditionalism_ref }
+		JOH = { social_reform = traditionalism_ref }
+		SIA = { social_reform = traditionalism_ref }
+		TIB = { social_reform = traditionalism_ref }
+		MGL = { social_reform = traditionalism_ref }
+		WIA = { social_reform = traditionalism_ref }
+		
+		# INTERVENTIONIST
+		SPC = { social_reform = interventionism_ref }
+		PBC = { social_reform = interventionism_ref }
+		PRI = { social_reform = interventionism_ref }
+		GUY = { social_reform = interventionism_ref }
+		NBC = { social_reform = interventionism_ref }
+		UCD = { social_reform = interventionism_ref }
+		LWC = { social_reform = interventionism_ref }
+		ENG = { social_reform = interventionism_ref }
+		FRA = { social_reform = interventionism_ref }
+		PRU = { social_reform = interventionism_ref }
+		AUS = { social_reform = interventionism_ref }
+		USA = { social_reform = interventionism_ref }
+		DEN = { social_reform = interventionism_ref }
+		NOR = { social_reform = interventionism_ref }
+		SWE = { social_reform = interventionism_ref }
+		BEL = { social_reform = interventionism_ref }
+		NET = { social_reform = interventionism_ref }
+		SPA = { social_reform = interventionism_ref }
+		ANH = { social_reform = interventionism_ref }
+		BRA = { social_reform = interventionism_ref }
+		BRE = { social_reform = interventionism_ref }
+		COB = { social_reform = interventionism_ref }
+		FRM = { social_reform = interventionism_ref }
+		HAM = { social_reform = interventionism_ref }
+		HAN = { social_reform = interventionism_ref }
+		HES = { social_reform = interventionism_ref }
+		HEK = { social_reform = interventionism_ref }
+		HOL = { social_reform = interventionism_ref }
+		LIP = { social_reform = interventionism_ref }
+		LUB = { social_reform = interventionism_ref }
+		LUX = { social_reform = interventionism_ref }
+		MEC = { social_reform = interventionism_ref }
+		MEI = { social_reform = interventionism_ref }
+		NAS = { social_reform = interventionism_ref }
+		OLD = { social_reform = interventionism_ref }
+		SAX = { social_reform = interventionism_ref }
+		SCH = { social_reform = interventionism_ref }
+		WEI = { social_reform = interventionism_ref }
+		BAD = { social_reform = interventionism_ref }
+		BAV = { social_reform = interventionism_ref }
+		WUR = { social_reform = interventionism_ref }
+		KRA = { social_reform = interventionism_ref }
+		SWI = { social_reform = interventionism_ref }
+		SAR = { social_reform = interventionism_ref }
+		LUC = { social_reform = interventionism_ref }
+		MOD = { social_reform = interventionism_ref }
+		PAR = { social_reform = interventionism_ref }
+		TUS = { social_reform = interventionism_ref }
+		GRE = { social_reform = interventionism_ref }
+		ION = { social_reform = interventionism_ref }
+		CSA = { social_reform = interventionism_ref }
+		AST = { social_reform = interventionism_ref }
+		WBK = { social_reform = interventionism_ref }
+		
+		# AGRARIANIST
+		DEI = { social_reform = agrarianism_ref }
+		FIN = { social_reform = agrarianism_ref }
+		POR = { social_reform = agrarianism_ref }
+		PAP = { social_reform = agrarianism_ref }
+		MOL = { social_reform = agrarianism_ref }
+		WAL = { social_reform = agrarianism_ref }
+		EGY = { social_reform = agrarianism_ref }
+		CUB = { social_reform = agrarianism_ref }
+		UCA = { social_reform = agrarianism_ref }
+		TEX = { social_reform = agrarianism_ref }
+		ARG = { social_reform = agrarianism_ref }
+		BOL = { social_reform = agrarianism_ref }
+		BRZ = { social_reform = agrarianism_ref }
+		CHL = { social_reform = agrarianism_ref }
+		CLM = { social_reform = agrarianism_ref }
+		ECU = { social_reform = agrarianism_ref }
+		PEU = { social_reform = agrarianism_ref }
+		PRG = { social_reform = agrarianism_ref }
+		URU = { social_reform = agrarianism_ref }
+		VNZ = { social_reform = agrarianism_ref }
+		
+		# LAISSEZ FAIRE
+		HBC = { social_reform = laissez_faire_ref }
+	
+
+
+		any_country = {
+			limit = {
+				civilized = yes
+			}
+			social_reform = protectionism_ref
+		}
+		any_country = {
+			limit = {
+				civilized = no
+			}
+			social_reform = isolationism_ref
+		}
+		
+		
 	}
 }

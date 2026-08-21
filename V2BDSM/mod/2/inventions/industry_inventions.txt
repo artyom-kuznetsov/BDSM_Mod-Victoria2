@@ -118,7 +118,7 @@ high_pressure_boiler = {
 }
 #combustion_engine
 daimlers_automobile = {
-	limit = { combustion_engine = 1 }
+	limit = { combustion_engine = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 0
 		modifier = {
@@ -152,7 +152,7 @@ daimlers_automobile = {
 	}
 }
 wright_n_langleys_aeroplanes = {
-	limit = { combustion_engine = 1 }
+	limit = { combustion_engine = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 0
 		modifier = {
@@ -167,7 +167,7 @@ wright_n_langleys_aeroplanes = {
 		}
 		modifier = {
 			factor = 2
-			economic_policy = laissez_faire
+			economic_system_rgroup = laissez_faire_ref
 			year = 1903
 		}
 		modifier = {
@@ -201,7 +201,7 @@ tractors = {
 		}
 		modifier = { 
 			factor = 2
-			economic_policy = laissez_faire
+			economic_system_rgroup = laissez_faire_ref
 		}
 	}
 	effect = {
@@ -246,7 +246,7 @@ alternating_current = {
 	}
 }
 national_radio_networks = {
-	limit = { electrical_power_generation = 1 }
+	limit = { electrical_power_generation = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 6
 		modifier = {
@@ -411,7 +411,7 @@ hussey_n_mccormicks_reaping_machine = {
 }
 #interchangeable_parts
 precision_work = {
-	limit = { mechanical_production = 1 }
+	limit = { mechanical_production = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 3
 		modifier = {
@@ -758,7 +758,7 @@ factory_automation_infrastructure = {
 }
 #Metulurgy
 ammunition_production = {
-	limit = { mechanized_mining = 1 }
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -774,8 +774,25 @@ ammunition_production = {
 		activate_building = ammunition_factory 
 	}
 }
+steel_factory_inv = {
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
+	chance = {
+		base = 10
+		modifier = {
+			factor = 5
+			invention = whitney_n_colts_standardized_small_arms
+		}
+		modifier = {
+			factor = 5
+			army_professionalism = 1
+		}
+	}
+	effect = {
+		activate_building = steel_factory
+	}
+}
 small_arms_production = {
-	limit = { mechanized_mining = 1 }
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -792,7 +809,7 @@ small_arms_production = {
 	}
 }
 explosives_production = {
-	limit = { mechanized_mining = 1 }
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -809,7 +826,7 @@ explosives_production = {
 	}
 }
 artillery_production = {
-	limit = { mechanized_mining = 1 }
+	limit = { mechanized_mining = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -1191,9 +1208,22 @@ airport = {
 		}
 	}
 }
+#basic_chemistry
+luxury_clothes_factory_inv = {
+	limit = { basic_chemistry = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
+	news = no
+	chance = {
+		base = 25
+	}
+	effect = {
+		activate_building = fertilizer_factory 
+	}
+}
+
+
 #medicine
 pharmaceuticals = {
-	limit = { organic_chemistry = 1 }
+	limit = { organic_chemistry = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	news = no
 	chance = {
 		base = 6
@@ -1445,7 +1475,7 @@ smokeless_powder = {
 }
 #organic_chemistry
 synthetic_dye = {
-	limit = { organic_chemistry = 1 }
+	limit = { organic_chemistry = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -1499,7 +1529,7 @@ carbon_soil_enrichment = {
 	}
 }
 cracking = {
-	limit = { organic_chemistry = 1 }
+	limit = { organic_chemistry = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 2
 		modifier = {
@@ -1598,7 +1628,7 @@ third_health_reform_inv = {
 }
 
 edison_light_bulb = {
-	limit = { electricity = 1 }
+	limit = { electricity = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 10
 		modifier = {
@@ -1621,7 +1651,7 @@ edison_light_bulb = {
 	}
 }
 bell_n_greys_telephones = {
-	limit = { electricity = 1 }
+	limit = { electricity = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 4
 		modifier = {
@@ -1740,7 +1770,7 @@ synthetic_polymers_research_project = {
 	}
 }
 synthetic_polymers_research_project_2 = {
-	limit = { has_country_flag = synthetic_polymers_researched_cflag }
+	limit = { has_country_flag = synthetic_polymers_researched_cflag NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
 		base = 0
 		modifier = {

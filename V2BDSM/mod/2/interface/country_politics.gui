@@ -617,7 +617,7 @@ guiTypes = {
 		windowType = {
 			name = "citizens_rights"
 			backGround =""
-			position = { x = 843 y = 286 }
+			position = { x = 843 y = 258 }
 			size = { x=151 y= 100}
 			moveable = 0
 			dontRender = ""
@@ -787,7 +787,7 @@ guiTypes = {
 			windowType = {
 				name = "public_meetings"
 				backGround =""
-				position = { x = 843 y = 351 }
+				position = { x = 843 y = 323 }
 				size = { x=151 y=100 }
 				moveable = 0
 				dontRender = ""
@@ -815,7 +815,7 @@ guiTypes = {
 			windowType = {
 				name = "security"
 				backGround =""
-				position = { x = 843 y = 402 }
+				position = { x = 843 y = 374 }
 				size = { x=151 y=100 }
 				moveable = 0
 				dontRender = ""
@@ -843,7 +843,7 @@ guiTypes = {
 			windowType = {
 				name = "pop_construction"
 				backGround =""
-				position = { x = 843 y = 480 }
+				position = { x = 843 y = 452 }
 				size = { x=151 y=100 }
 				moveable = 0
 				dontRender = ""
@@ -854,6 +854,33 @@ guiTypes = {
 				iconType = {
 					name = "politics_industrial_construction"
 					spriteType = "GFX_politics_industrial_construction"
+					position = { x= 0 y = 12 } #WAS { x= 7 y = 8 }
+					Orientation = "UPPER_LEFT"
+				}
+				instantTextBoxType = { 
+					name = "reform_name"
+					position = { x = 30 y = 20 } #WAS { x = 40 y = 15 }
+					font = "vic_18" #WAS "vic_18"
+					text = "REFORM_NAME"
+					maxWidth = 100
+					maxHeight = 20	
+				}
+			}
+			
+			windowType = {
+				name = "economic_system_rgroup"
+				backGround =""
+				position = { x = 843 y = 504 }
+				size = { x=151 y=100 }
+				moveable = 0
+				dontRender = ""
+				horizontalBorder = "0"
+				verticalBorder = ""
+				fullScreen = no
+				
+				iconType = {
+					name = "politics_pre_industrialisation"
+					spriteType = "GFX_politics_pre_industrialisation"
 					position = { x= 0 y = 12 } #WAS { x= 7 y = 8 }
 					Orientation = "UPPER_LEFT"
 				}
@@ -926,7 +953,7 @@ guiTypes = {
 			windowType = {
 			name = "centralization"
 			backGround =""
-			position = { x = 843 y = 207 }
+			position = { x = 843 y = 179 }
 			
 			size = { x=151 y= 100}
 			moveable = 0
@@ -953,7 +980,7 @@ guiTypes = {
 			}
 			
 			windowType = {
-			name = "colonial_migration"
+			name = "trade_policy_rgroup"
 			backGround =""
 			position = { x = 691 y = 517 }
 			size = { x=151 y=92 }
@@ -964,14 +991,14 @@ guiTypes = {
 			fullScreen = no
 			
 				iconType = {
-				name = "colonial_migration_reform"
-				spriteType = "GFX_politics_colonial_migration"
-				position = { x= 0 y = 8 }
+				name = "politics_naval_training"
+				spriteType = "GFX_politics_naval_training"
+				position = { x= 0 y = 12 }
 				Orientation = "UPPER_LEFT"
 					}
 				instantTextBoxType = { 
 				name = "reform_name"
-				position = { x = 33 y = 22 } #WAS { x = 40 y = 15 }
+				position = { x = 29 y = 20 } #WAS { x = 40 y = 15 }
 				font = "vic_18"
 				text = "REFORM_NAME"	
 				maxWidth = 120
@@ -1011,7 +1038,7 @@ guiTypes = {
 			windowType = {
 				name = "trade_unions"
 				backGround =""
-				position = { x = 843 y = 128 }
+				position = { x = 843 y = 114 }
 				size = { x=151 y=92 }
 				moveable = 0
 				dontRender = ""

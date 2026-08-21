@@ -48,6 +48,17 @@ modern_naval_doctrine_increase_naval_maintainance = {
 	chance = { base = 100 }
 }
 #clipper_design
+clipper_shipyard_inv = {
+	limit = { clipper_design = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
+	news = no
+	chance = {
+		base = 25
+	}
+	effect = {
+		activate_building = clipper_shipyard
+	}
+}
+
 building_station_shipyards = {
 	limit = { clipper_design = 1 }
 	chance = {
@@ -68,6 +79,17 @@ building_station_shipyards = {
 	}
 }
 #steamers
+clipper_shipyard_inv = {
+	limit = { steamers = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
+	news = no
+	chance = {
+		base = 25
+	}
+	effect = {
+		activate_building = steamer_shipyard 
+	}
+}
+
 mechanized_fishing_vessels = {
 	limit = { steamers = 1 }
 	chance = {

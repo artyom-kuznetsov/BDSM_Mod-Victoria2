@@ -203,13 +203,11 @@ country_event = {
 			literacy = 0.40
 			OR = {
 				state_controlled = 10
-				non_socialist = 10
 				all_trade_unions = 10
 			}
 			any_neighbor_country = {
 				OR = {
 					trade_unions = state_controlled
-					trade_unions = non_socialist
 					trade_unions = all_trade_unions
 				}
 			}
@@ -241,12 +239,6 @@ country_event = {
 			dominant_issue = {
 				factor = 0.1
 				value = state_controlled
-			}
-		}
-		any_pop = {
-			dominant_issue = {
-				factor = 0.15
-				value = non_socialist
 			}
 		}
 		any_pop = {

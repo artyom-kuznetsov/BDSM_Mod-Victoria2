@@ -52,7 +52,7 @@ country_event = {
 	desc = "EVTDESC14000"
 
 	election = yes
-	issue_group = trade_policy
+	issue_group = trade_policy_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -63,10 +63,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.5
-				value = protectionism
+				value = protectionism_ref
 			}
 			scaled_militancy = {
-				issue = free_trade
+				issue = free_trade_ref
 				factor = 4
 			}
 		}
@@ -77,10 +77,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.5
-				value = protectionism
+				value = protectionism_ref
 			}
 			scaled_militancy = {
-				issue = free_trade
+				issue = free_trade_ref
 				factor = 3
 			}
 		}
@@ -93,7 +93,7 @@ country_event = {
 				any_pop = {
 					dominant_issue = {
 						factor = 0.2
-						value = free_trade
+						value = free_trade_ref
 					}
 				}
 			}
@@ -101,7 +101,7 @@ country_event = {
 				any_pop = {
 					dominant_issue = {
 						factor = 0.2
-						value = protectionism
+						value = protectionism_ref
 					}
 				}
 			}
@@ -113,10 +113,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = free_trade
+				value = free_trade_ref
 			}
 			scaled_militancy = {
-				issue = protectionism
+				issue = protectionism_ref
 				factor = 3
 			}
 		}
@@ -127,10 +127,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.5
-				value = free_trade
+				value = free_trade_ref
 			}
 			scaled_militancy = {
-				issue = protectionism
+				issue = protectionism_ref
 				factor = 2
 			}
 		}
@@ -144,7 +144,7 @@ country_event = {
 	desc = "EVTDESC14010"
 	
 	election = yes
-	issue_group = economic_policy
+	issue_group = economic_system_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -154,10 +154,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = laissez_faire
+				value = laissez_faire_ref
 			}
 			scaled_militancy = {
-				issue = planned_economy
+				issue = planned_economy_ref
 				factor = 0.2
 			}
 		}
@@ -168,10 +168,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = interventionism
+				value = interventionism_ref_ref
 			}
 			scaled_militancy = {
-				issue = state_capitalism
+				issue = laissez_faire_ref
 				factor = 0.2
 			}
 		}
@@ -182,10 +182,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = state_capitalism
+				value = agrarianism_ref
 			}
 			scaled_militancy = {
-				issue = interventionism
+				issue = interventionism_ref_ref
 				factor = 0.2
 			}
 		}
@@ -196,10 +196,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = planned_economy
+				value = planned_economy_ref
 			}
 			scaled_militancy = {
-				issue = laissez_faire
+				issue = laissez_faire_ref
 				factor = 0.2
 			}
 		}
@@ -406,7 +406,7 @@ country_event = {
 	desc = "EVTDESC14050"
 	
 	election = yes
-	issue_group = trade_policy
+	issue_group = trade_policy_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -416,10 +416,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = protectionism
+				value = protectionism_ref
 			}
 			scaled_militancy = {
-				issue = free_trade
+				issue = free_trade_ref
 				factor = 0.2
 			}
 		}
@@ -430,10 +430,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.5
-				value = protectionism
+				value = protectionism_ref
 			}
 			scaled_militancy = {
-				issue = free_trade
+				issue = free_trade_ref
 				factor = 0.2
 			}
 		}
@@ -444,7 +444,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = protectionism
+				value = protectionism_ref
 			}
 		}
 	}
@@ -454,7 +454,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = protectionism
+				value = protectionism_ref
 			}
 		}
 	}
@@ -464,7 +464,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.1
-				value = protectionism
+				value = protectionism_ref
 			}
 		}
 	}
@@ -477,7 +477,7 @@ country_event = {
 	desc = "EVTDESC14060"
 	
 	election = yes
-	issue_group = trade_policy
+	issue_group = trade_policy_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -487,10 +487,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.5
-				value = free_trade
+				value = free_trade_ref
 			}
 			scaled_militancy = {
-				issue = protectionism
+				issue = protectionism_ref
 				factor = 0.2
 			}
 		}
@@ -501,10 +501,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.35
-				value = free_trade
+				value = free_trade_ref
 			}
 			scaled_militancy = {
-				issue = protectionism
+				issue = protectionism_ref
 				factor = 0.2
 			}
 		}
@@ -515,7 +515,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = free_trade
+				value = free_trade_ref
 			}
 		}
 	}
@@ -525,7 +525,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.10
-				value = free_trade
+				value = free_trade_ref
 			}
 		}
 	}
@@ -535,7 +535,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.05
-				value = free_trade
+				value = free_trade_ref
 			}
 		}
 	}
@@ -548,7 +548,7 @@ country_event = {
 	desc = "EVTDESC14070"
 	
 	election = yes
-	issue_group = economic_policy
+	issue_group = economic_system_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -558,10 +558,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.30
-				value = laissez_faire
+				value = laissez_faire_ref
 			}
 			scaled_militancy = {
-				issue = planned_economy
+				issue = planned_economy_ref
 				factor = 0.2
 			}
 		}
@@ -572,10 +572,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.25
-				value = laissez_faire
+				value = laissez_faire_ref
 			}
 			scaled_militancy = {
-				issue = planned_economy
+				issue = planned_economy_ref
 				factor = 0.2
 			}
 		}
@@ -586,7 +586,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.15
-				value = laissez_faire
+				value = laissez_faire_ref
 			}
 		}
 	}
@@ -596,7 +596,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.10
-				value = laissez_faire
+				value = laissez_faire_ref
 			}
 		}
 	}
@@ -606,7 +606,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.05
-				value = laissez_faire
+				value = laissez_faire_ref
 			}
 		}
 	}
@@ -619,7 +619,7 @@ country_event = {
 	desc = "EVTDESC14080"
 	
 	election = yes
-	issue_group = economic_policy
+	issue_group = economic_system_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -629,10 +629,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = interventionism
+				value = interventionism_ref
 			}
 			scaled_militancy = {
-				issue = state_capitalism
+				issue = agrarianism_ref
 				factor = 0.2
 			}
 		}
@@ -643,10 +643,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = interventionism
+				value = interventionism_ref
 			}
 			scaled_militancy = {
-				issue = state_capitalism
+				issue = agrarianism_ref
 				factor = 0.2
 			}
 		}
@@ -657,7 +657,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.1
-				value = interventionism
+				value = interventionism_ref
 			}
 		}
 	}
@@ -667,7 +667,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.10
-				value = interventionism
+				value = interventionism_ref
 			}
 		}
 	}
@@ -677,7 +677,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.05
-				value = interventionism
+				value = interventionism_ref
 			}
 		}
 	}
@@ -690,7 +690,7 @@ country_event = {
 	desc = "EVTDESC14090"
 	
 	election = yes
-	issue_group = economic_policy
+	issue_group = economic_system_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -700,10 +700,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = state_capitalism
+				value = agrarianism_ref
 			}
 			scaled_militancy = {
-				issue = interventionism
+				issue = interventionism_ref
 				factor = 0.2
 			}
 		}
@@ -714,10 +714,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = state_capitalism
+				value = agrarianism_ref
 			}
 			scaled_militancy = {
-				issue = interventionism
+				issue = interventionism_ref
 				factor = 0.2
 			}
 		}
@@ -728,7 +728,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = state_capitalism
+				value = agrarianism_ref
 			}
 		}
 	}
@@ -738,7 +738,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.10
-				value = state_capitalism
+				value = agrarianism_ref
 			}
 		}
 	}
@@ -748,7 +748,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.05
-				value = state_capitalism
+				value = agrarianism_ref
 			}
 		}
 	}
@@ -761,7 +761,7 @@ country_event = {
 	desc = "EVTDESC14100"
 	
 	election = yes
-	issue_group = economic_policy
+	issue_group = economic_system_rgroup
 	# Audax Validator "." Ignore_NEXT
 	trigger = { has_country_modifier = will_influence_elections }
 	mean_time_to_happen = { months = 40 }
@@ -771,10 +771,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.5
-				value = planned_economy
+				value = planned_economy_ref
 			}
 			scaled_militancy = {
-				issue = laissez_faire
+				issue = laissez_faire_ref
 				factor = 0.2
 			}
 		}
@@ -785,10 +785,10 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.4
-				value = planned_economy
+				value = planned_economy_ref
 			}
 			scaled_militancy = {
-				issue = laissez_faire
+				issue = laissez_faire_ref
 				factor = 0.2
 			}
 		}
@@ -799,7 +799,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.3
-				value = planned_economy
+				value = planned_economy_ref
 			}
 		}
 	}
@@ -809,7 +809,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.2
-				value = planned_economy
+				value = planned_economy_ref
 			}
 		}
 	}
@@ -819,7 +819,7 @@ country_event = {
 		any_pop = {
 			dominant_issue = {
 				factor = 0.1
-				value = planned_economy
+				value = planned_economy_ref
 			}
 		}
 	}
