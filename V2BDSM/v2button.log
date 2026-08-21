@@ -1,4 +1,4 @@
----- Install ---- версия 1.1
+---- Install ---- версия 1.2
 base = 00F40000
 patch CTechnologyView: слот 11 = 1
 patch CBudgetView: слот 10 = 1
@@ -7,16 +7,12 @@ patch CDecision: слот 6 = 1
 Patch 'always_add_wargoals': применён на rva 138AFF
 Patch 'land_reinforce': применён на rva 1C8C9B
 Patch 'naval_reinforce': применён на rva 1C8B1C
+Patch 'max_relative_price': применён на rva A45C28
 PriceDelta: 25 сотых процента, множитель 163
 PopDisplay: множитель 4
-PopDisplay 'topbar': rva 310A32, пещера 02660000
-PopDisplay 'diplomacy': rva 22880F, пещера 02670000
-PopDisplay 'lobby': rva 36DFBB, пещера 02680000
-VersionLabel: 'V2 v3.04 + V2DLL v1.1' (len=21), пещера 02690000
+PopDisplay 'topbar': rva 310A32, пещера 020E0000
+PopDisplay 'diplomacy': rva 22880F, пещера 020F0000
+PopDisplay 'lobby': rva 36DFBB, пещера 02100000
+VersionLabel: 'V2 v3.04 + V2DLL v1.2' (len=21), пещера 02110000
 Install: done
 DllMain: attach, Install = 1
-Update[CTechnologyView]: вызван, view=512484E0
-Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
-Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
-Update[CProductionView]: вызван, view=54C4E020
-Update[CProductionView]: вызван, view=54C4E020
