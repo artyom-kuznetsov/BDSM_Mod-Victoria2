@@ -1896,60 +1896,6 @@ country_event = {
 
 country_event = {
 
-	id = 36923
-	
-	#news_desc_long = "EVTDESC36923_NEWS_LONG"
-	#news_desc_medium = "EVTDESC36923_NEWS_MEDIUM"
-	#news_desc_short = "EVTDESC36923_NEWS_SHORT"
-
-	trigger = {
-		tag = ENG 
-		functionalism = 1
-		year = 1858
-		NOT = {
-			year = 1862
-		}
-	}
-	
-	fire_only_once = yes
- 
-	mean_time_to_happen =  {
-		months = 6
-
-		modifier = {
-			factor = 0.75 #increase likelihood to happen
-			year = 1859
-		}
-		modifier = {
-			factor = 0.95 #increase likelihood to happen
-			year = 1860
-		}
-	}
-
-	title = "EVTNAME36923"
-	desc = "EVTDESC36923"
-	picture = "darwin"
-
-	option = {
-		name = "EVTOPTA36923" 
-		prestige = 25
-		clergymen = {
-			dominant_issue = {
-				value = secularized
-				factor = 0.25
-			}
-			dominant_issue = {
-				value = pro_atheism
-				factor = 0.1
-			}
-			consciousness = 2
-		}
-		set_country_flag = Darwin
-	}
-}
-
-country_event = {
-
 	id = 36924  
 
 	trigger = {

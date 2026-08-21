@@ -1185,6 +1185,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		#		
 		#	}
 		#}
+
 		### RULING PARTY CHECK ###
 		any_country = { limit = { ruling_party_ideology = reactionary } set_country_flag = reactionary_flag	}
 		any_country = { limit = { ruling_party_ideology = conservative } set_country_flag = conservative_flag	}
@@ -1200,8 +1201,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { trade_policy_rgroup = free_trade_ref } set_country_flag = free_trade_cflag	}
 		
 		### ECONOMIC SYSTEM CHECK ###
-		any_country = { limit = { economic_system_rgroup = traditionalism_ref } set_country_flag = traditionalism_cflag	}
-		any_country = { limit = { economic_system_rgroup = agrarianism_ref } set_country_flag = agrarianism_cflag	}
+		any_country = { limit = { economic_system_rgroup = traditionalism_ref } set_country_flag = traditionalism_cflag	plurality = 0.1 }
+		any_country = { limit = { economic_system_rgroup = agrarianism_ref } set_country_flag = agrarianism_cflag plurality = 0.05 }
 		any_country = { limit = { economic_system_rgroup = interventionism_ref } set_country_flag = interventionism_cflag	}
 		any_country = { limit = { economic_system_rgroup = laissez_faire_ref } set_country_flag = laissez_faire_cflag	}
 		any_country = { limit = { economic_system_rgroup = planned_economy_ref } set_country_flag = planned_economy_cflag	}
@@ -1360,6 +1361,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { exists = yes ai = no security = minimal_security } plurality = 0.02 }
 		any_country = { limit = { exists = yes ai = no security = moderate_security } plurality = 0.05 }
 		any_country = { limit = { exists = yes ai = no security = police_state } plurality = 0.12 }
+		
+		#Reforms
+		any_country = { limit = { exists = yes ai = no public_meetings = yes_meeting } plurality = -0.01 }
 		
 		### MODIFIERS ###
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }
