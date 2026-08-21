@@ -67,17 +67,6 @@ political_reforms = {
 			}
 		}
 		
-		freedom_of_womb = {
-			rules = { slavery_allowed = yes }
-			allow = {
-				OR = {
-					NOT = { has_country_flag = the_slavery_debate }
-					year = 1870
-				}
-				NOT = { has_country_flag = is_communist_flag }
-			}
-		}
-		
 		no_slavery = {
 			rules = { slavery_allowed = no }
 			allow = {
@@ -193,7 +182,6 @@ political_reforms = {
 		next_step_only = yes
 		state_press = {
 			ruling_party_support = 0.25
-			literacy_con_impact = -0.25
 			suppression_points_modifier = 0.25
 			global_immigrant_attract = -0.01
 		}
@@ -251,7 +239,7 @@ political_reforms = {
 	}
 	
 	conscription = {
-		demilitarization_ref = { 	# ÄÅÌÈËÈÒÀÐÈÇÀÖÈß
+		demilitarization_ref = { 	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			supply_consumption = -0.2
 			mobilisation_size = -0.02
 			global_immigrant_attract = 0.01
@@ -261,7 +249,7 @@ political_reforms = {
 				is_mobilised = no
 			}
 		}
-		peasant_militia_ref = {		# ÊÐÅÑÒÜßÍÑÊÎÅ
+		peasant_militia_ref = {		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			max_military_spending = 0.8
 			mobilisation_size = 0.01
 			land_unit_start_experience = -5
@@ -275,7 +263,7 @@ political_reforms = {
 				is_mobilised = no
 			}
 		}
-		national_guard_ref = { # ÍÀÖÃÂÀÐÄÈß
+		national_guard_ref = { # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			max_military_spending = 1
 			supply_consumption = -0.1
 			mobilisation_size = 0.01
@@ -285,7 +273,7 @@ political_reforms = {
 				is_mobilised = no
 			}
 		}
-		ref_professional_army = { # ÏÐÎÔÅÑÑÈÎÍÀËÜÍÀß
+		ref_professional_army = { # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			max_military_spending = 1.0
 			mobilisation_size = -0.01
 			land_unit_start_experience = 10
@@ -297,7 +285,7 @@ political_reforms = {
 				is_mobilised = no
 			}
 		}
-		mass_conscription_ref = { # ÌÀÑÑ ÊÎÍÑÊÐÈÏÒ
+		mass_conscription_ref = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			max_military_spending = 1
 			min_military_spending = 0.4
 			mobilisation_size = 0.04
@@ -752,6 +740,7 @@ social_reforms = {
     }
     
 	trade_policy_rgroup = {
+		administrative = yes
 		free_trade_ref = {
 			allow = {
 				NOT = { has_country_flag = dependent_economy_cflag }
@@ -760,8 +749,10 @@ social_reforms = {
 					has_country_flag = liberal_flag
 				}
 			}
-			max_tariff = 0.1
+			max_tariff = 0
 			min_tariff = -0.5
+			factory_owner_cost = -0.05
+			factory_cost = -0.2
 		}
 		protectionism_ref = {
 			allow = {
@@ -797,8 +788,6 @@ social_reforms = {
 			tax_efficiency = 0.03
 			rgo_output = 0.1
 			factory_output = 0.1
-			max_tariff = 0
-			min_tariff = 0
 		}
 	}
 
@@ -849,13 +838,13 @@ social_reforms = {
 			factory_owner_cost = 0.7
 			
 			rules = {
-				build_factory = no
-				expand_factory = no
-				open_factory = no
+				build_factory = yes
+				expand_factory = yes
+				open_factory = yes
 				destroy_factory = yes
 				build_railway = yes
 				factory_priority = no
-				can_subsidise = no
+				can_subsidise = yes
 				#pop_build_factory = yes
 				pop_expand_factory = yes
 				pop_open_factory = yes

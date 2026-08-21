@@ -1604,7 +1604,7 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					trade_policy_rgroup = isolationism_ref
+					trade_policy_rgroup = isolationism_ref NOT = { has_country_flag = chinese_warlord_flag }
 				}
 			}
 			any_country = {
@@ -1617,7 +1617,10 @@ country_event = {
 		random_owned = {
 			limit = {
 				owner = {
-					NOT = { trade_policy_rgroup = isolationism_ref }
+					OR = {
+						NOT = { trade_policy_rgroup = isolationism_ref }
+						has_country_flag = chinese_warlord_flag
+					}
 				}
 			}
 			social_reform = dependent_economy_ref

@@ -1,6 +1,6 @@
 #industrial revolution
 industrial_revolution_inv = {
-	limit = { ideological_thought = 1 }
+	limit = { early_railroad = 1 }
 	chance = {
 		base = 1
 		modifier = {
@@ -8,7 +8,7 @@ industrial_revolution_inv = {
 			literacy = 0.50
 		}
 		modifier = {
-			factor = -10
+			factor = -8
 			NOT = { 
 				literacy = 0.40
 			}
@@ -44,6 +44,10 @@ industrial_revolution_inv = {
 		modifier = {
 			factor = 1
 			mechanical_production = 1
+		}
+		modifier = {
+			factor = 1
+			interchangeable_parts = 1
 		}
 	}
 	effect = {

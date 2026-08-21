@@ -5195,7 +5195,7 @@ country_event = {
 
 # ECONOMIC SYSTEM SETUP
 country_event = {
-	id = 140421
+	id = 140422
 	title = "noloc"
 	desc = "noloc"
 
@@ -5427,5 +5427,113 @@ country_event = {
 		}
 		
 		
+	}
+}
+
+
+# UPPERHOUSE SUPPORT
+country_event = {
+	id = 140423
+	title = "noloc"
+	desc = "noloc"
+
+	trigger = {
+		tag = WBK
+		month = 0
+		NOT = { month = 1 has_country_modifier = upperhouse_support_tweak_cooldown }
+	}
+	
+	option = {
+		name = "noloc"
+		add_country_modifier = { name = upperhouse_support_tweak_cooldown duration = 100 }
+		
+		any_country = {
+			limit = {
+				upper_house_composition = appointed
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = reactionary } }
+				owner = { upper_house = { ideology = reactionary value = 0.1 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = conservative } }
+				owner = { upper_house = { ideology = conservative value = 0.1 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = liberal } }
+				owner = { upper_house = { ideology = liberal value = 0.1 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = socialist } }
+				owner = { upper_house = { ideology = socialist value = 0.1 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = communist } }
+				owner = { upper_house = { ideology = communist value = 0.1 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = fascist } }
+				owner = { upper_house = { ideology = fascist value = 0.1 } }
+			}
+		}
+		
+		any_country = {
+			limit = {
+				press_rights = state_press
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = reactionary } }
+				owner = { upper_house = { ideology = reactionary value = 0.05 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = conservative } }
+				owner = { upper_house = { ideology = conservative value = 0.05 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = liberal } }
+				owner = { upper_house = { ideology = liberal value = 0.05 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = socialist } }
+				owner = { upper_house = { ideology = socialist value = 0.05 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = communist } }
+				owner = { upper_house = { ideology = communist value = 0.05 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = fascist } }
+				owner = { upper_house = { ideology = fascist value = 0.05 } }
+			}
+		}
+		any_country = {
+			limit = {
+				press_rights = censored_press
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = reactionary } }
+				owner = { upper_house = { ideology = reactionary value = 0.03 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = conservative } }
+				owner = { upper_house = { ideology = conservative value = 0.03 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = liberal } }
+				owner = { upper_house = { ideology = liberal value = 0.03 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = socialist } }
+				owner = { upper_house = { ideology = socialist value = 0.03 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = communist } }
+				owner = { upper_house = { ideology = communist value = 0.03 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = fascist } }
+				owner = { upper_house = { ideology = fascist value = 0.03 } }
+			}
+		}
 	}
 }
