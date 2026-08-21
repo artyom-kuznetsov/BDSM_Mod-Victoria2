@@ -413,6 +413,7 @@ political_decisions = {
 		}
 		
 		allow = {
+			NOT = { economic_system_rgroup = traditionalism_ref }
 			OR = {
 				AND = {
 					school_reforms = no_schools
@@ -494,6 +495,32 @@ political_decisions = {
 		effect = {
 			country_event = 140905
 			set_country_flag = expeditions_menu_flag
+		}
+	}
+	
+	land_reform_dec = {
+		potential = {
+			economic_system_rgroup = traditionalism_ref
+		}
+		
+		allow = {
+			civilized = yes
+			plurality = 40
+			freedom_of_trade = 1
+			NOT = {
+				debt_law = serfdom
+				ruling_party_ideology = reactionary
+				ruling_party_ideology = fascist
+			}
+		}
+		
+		effect = {
+			social_reform = agrarianism_ref
+			add_country_modifier = {
+				name = administrative_expenses3_modifier
+				duration = 1825
+			}
+			plurality = -10
 		}
 	}
 }

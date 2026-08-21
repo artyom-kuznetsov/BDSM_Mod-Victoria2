@@ -2,16 +2,6 @@
 # Issues that parties have.
 ##########################################
 party_issues = {
-	trade_policy = {
-		protectionism = {
-			max_tariff = 1
-			min_tariff = 0
-		}
-		free_trade = {
-			max_tariff = 1
-			min_tariff = -0.5
-		}
-	}
 	religious_policy = {
 		pro_atheism = {
 			#no effect
@@ -850,7 +840,15 @@ social_reforms = {
 			}
 		}
 		agrarianism_ref = {
-			allow = { always = no }
+			allow = { 
+				NOT = { 
+					has_country_flag = traditionalism_cflag 
+				}
+				OR = {
+					has_country_flag = reactionary_flag
+					has_country_flag = fascist_flag
+				}
+			}
 			global_pop_consciousness_modifier = -0.02
 			rgo_output = 0.2
 			factory_throughput = -0.15
@@ -877,7 +875,20 @@ social_reforms = {
 			}
 		}
 		interventionism_ref = {
-			allow = { always = no }
+			allow = { 
+				OR = {
+					has_country_flag = conservative_flag
+					has_country_flag = fascist_flag
+					has_country_flag = communist_flag
+					has_country_flag = socialist_flag
+				}
+				NOT = {
+					OR = {
+						has_country_flag = communist_flag
+					}
+					has_country_flag = planned_economy_cflag
+				}
+			}
 			factory_owner_cost = 0.4
 			
 			rules = {
@@ -901,7 +912,12 @@ social_reforms = {
 			}
 		}
 		laissez_faire_ref = {
-			allow = { always = no }
+			allow = { 
+				OR = {
+					has_country_flag = conservative_flag
+					has_country_flag = liberal_flag
+				}
+			}
 			factory_owner_cost = 0.2
 			factory_maintenance = -0.05
 			factory_output = 0.05
@@ -928,7 +944,16 @@ social_reforms = {
 		}
 		planned_economy_ref = {
 			administrative_multiplier = 3
-			allow = { always = no }
+			allow = {
+				OR = {
+					has_country_flag = socialist_flag
+					has_country_flag = communist_flag
+				}
+				OR = {
+					upper_house_composition = party_appointed
+					has_country_flag = is_communist_flag
+				}
+			}
 			factory_owner_cost = 0.7
 			
 			rules = {
