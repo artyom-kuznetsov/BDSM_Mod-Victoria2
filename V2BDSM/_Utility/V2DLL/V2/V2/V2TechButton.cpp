@@ -41,6 +41,7 @@
 #define ENABLE_EXE_PATCHES     1   // подкрепления и цели войны
 #define ENABLE_INDICATORS      1   // текстовые индикаторы
 #define ENABLE_POP_DISPLAY     1   // общее население в верхней панели
+#define ENABLE_VERSION_LABEL   1   // версия мода в подписи главного меню
 
 
 // 0 — переписывать строку внутри объекта элемента. Строка находится,
@@ -1072,6 +1073,7 @@ static PopSite POP_SITES[] =
 {
     { "topbar",    0x310A32, { 0x8B, 0x87, 0xE8, 0x12, 0x00, 0x00 }, true },
     { "diplomacy", 0x22880F, { 0x8B, 0x81, 0xE8, 0x12, 0x00, 0x00 }, true },
+    { "lobby",     0x36DFBB, { 0x8B, 0x80, 0xE8, 0x12, 0x00, 0x00 }, true },
 };
 
 static const int POP_SITE_COUNT = sizeof(POP_SITES) / sizeof(POP_SITES[0]);
@@ -1139,6 +1141,108 @@ static void InstallPopDisplay()
 }
 
 
+
+
+// ---------------------------------------------------------------
+// Версия мода в подписи главного меню
+//
+// Проверено в Cheat Engine на живой памяти (декомпиляция путала
+// адреса — между двумя push оказалась ещё mov edi,0xF, а адрес
+// строки не совпадал со значением из декомпилятора):
+//
+//   233826  6A 08                  push 0x8
+//   233828  BF 0F 00 00 00         mov edi, 0xF        (не трогаем)
+//   23382D  68 4C 76 A0 4C         push адрес "V2 v3.04"
+//   233832  8D 4D B0               lea ecx,[ebp-0x50]
+//
+// Перекрываем все 12 байт (push + mov + push) переходом в пещеру,
+// где пушим длину и адрес своей строки, повторяем mov edi,0xF как
+// есть — на случай, если он используется дальше по функции — и
+// возвращаемся на lea ecx по 233832.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_VERLABEL_HOOK = 0x233826;
+static const DWORD RVA_VERLABEL_RESUME = 0x233832;
+
+// Первые 8 байт постоянны, дальше идёт push абсолютного адреса —
+// его нельзя зашивать константой: это база+RVA, а база меняется
+// от ASLR при каждом запуске. Проверяем отдельно, относительно
+// текущего g_base.
+static const unsigned char VERLABEL_SIG[8] =
+{
+    0x6A, 0x08,                          // push 0x8
+    0xBF, 0x0F, 0x00, 0x00, 0x00,        // mov edi, 0xF
+    0x68                                 // push imm32 (адрес — далее)
+};
+
+static const DWORD RVA_VERLABEL_ORIG_STR = 0xA0764C;
+
+static char g_versionLabel[128];
+
+static bool InstallVersionLabel()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_VERLABEL_HOOK);
+
+    if (memcmp(hook, VERLABEL_SIG, sizeof(VERLABEL_SIG)) != 0)
+    {
+        Log("VersionLabel: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5], hook[6], hook[7]);
+        return false;
+    }
+
+    DWORD origAddr = *(DWORD*)(hook + 8);
+    if (origAddr != g_base + RVA_VERLABEL_ORIG_STR)
+    {
+        Log("VersionLabel: адрес строки не совпал (%08X, ожидали %08X) - не патчим",
+            origAddr, g_base + RVA_VERLABEL_ORIG_STR);
+        return false;
+    }
+
+    sprintf_s(g_versionLabel, sizeof(g_versionLabel),
+        "V2 v3.04 + V2DLL v%s", MOD_VERSION);
+
+    unsigned len = (unsigned)strlen(g_versionLabel);
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 64, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    int n = 0;
+
+    cave[n++] = 0x68;                                  // push imm32 (длина)
+    *(DWORD*)(cave + n) = len; n += 4;
+
+    cave[n++] = 0x68;                                  // push imm32 (адрес)
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)g_versionLabel; n += 4;
+
+    // mov edi, 0xF — повторяем как есть, вдруг используется дальше.
+    cave[n++] = 0xBF;
+    *(DWORD*)(cave + n) = 0xF; n += 4;
+
+    cave[n++] = 0xE9;                                  // jmp обратно
+    *(DWORD*)(cave + n) = (g_base + RVA_VERLABEL_RESUME) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[12];
+    memset(patch, 0x90, sizeof(patch));
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)cave - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("VersionLabel: '%s' (len=%u), пещера %08X",
+        g_versionLabel, len, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
 static bool Install()
 {
     g_base = (DWORD)GetModuleHandleA(NULL);
@@ -1192,6 +1296,10 @@ static bool Install()
 
 #if ENABLE_POP_DISPLAY
     InstallPopDisplay();
+#endif
+
+#if ENABLE_VERSION_LABEL
+    InstallVersionLabel();
 #endif
 
     Log("Install: done");
