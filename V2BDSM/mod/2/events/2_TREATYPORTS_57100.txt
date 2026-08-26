@@ -10,19 +10,13 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
+			has_country_modifier = macau_exploitation_modifier
 		}
 		1498 = { # MACAU
 			controlled_by = THIS
 		}
-		NOT = { 
-			has_country_modifier = macau_exploitation_modifier
-		}
-		NOT = {
-			1493 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		1493 = {
+			owner = { is_culture_group = east_asian }
 		}
 	}
 	
@@ -32,6 +26,8 @@ country_event = {
 			name = macau_exploitation_modifier
 			duration = -1
 		}
+		
+		1493 = { owner = { country_event = 57103 } }
 	}
 }
 
@@ -44,15 +40,8 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = macau_exploitation_modifier
-		OR = {
-			NOT = { 
-				1498 = { controlled_by = THIS }
-			}
-			1493 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			1498 = { controlled_by = THIS }
 		}
 	}
 	
@@ -72,21 +61,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1493
-		1498 = {
-			NOT = {
-				owned_by = THIS
-				owner = {
-					primary_culture = beifaren
-				}
-			}
-		}
-		NOT = { 
-			has_country_modifier = macau_exploitation_modifier_china
-		}
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {
@@ -113,21 +88,14 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
-		}
-		1496 = { # HONKONG
-			controlled_by = THIS
-		}
-		NOT = { 
 			has_country_modifier = hongkong_exploitation_modifier
 		}
-		NOT = {
-			1493 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		1496 = { # HONGKONG
+			controlled_by = THIS
 		}
-		
+		1493 = {
+			owner = { is_culture_group = east_asian }
+		}
 	}
 	
 	option = {
@@ -136,6 +104,8 @@ country_event = {
 			name = hongkong_exploitation_modifier
 			duration = -1
 		}
+		
+		1493 = { owner = { country_event = 57106 } }
 	}
 }
 
@@ -148,17 +118,9 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = hongkong_exploitation_modifier
-		OR = {
-			NOT = { 
-				1496 = { controlled_by = THIS }
-			}
-			1493 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			1496 = { controlled_by = THIS }
 		}
-		
 	}
 	
 	option = {
@@ -177,22 +139,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1493
-		1496 = {
-			NOT = {
-				owned_by = THIS
-			}
-			NOT = {
-				owner = {
-					primary_culture = beifaren
-				}
-			}
-		}
-		NOT = { has_country_modifier = hongkong_exploitation_modifier_china }
-		
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {
@@ -219,21 +166,14 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
+			has_country_modifier = shanghai_exploitation_modifier
 		}
 		1538 = { # SHANGHAI
 			controlled_by = THIS
 		}
-		NOT = { 
-			has_country_modifier = shanghai_exploitation_modifier
+		1539 = {
+			owner = { is_culture_group = east_asian }
 		}
-		NOT = {
-			1539 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
-		}
-		
 	}
 	
 	option = {
@@ -242,6 +182,8 @@ country_event = {
 			name = shanghai_exploitation_modifier
 			duration = -1
 		}
+		
+		1539 = { owner = { country_event = 57109 } }
 	}
 }
 
@@ -254,17 +196,9 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = shanghai_exploitation_modifier
-		OR = {
-			NOT = { 
-				1538 = { controlled_by = THIS }
-			}
-			1539 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			1538 = { controlled_by = THIS }
 		}
-		
 	}
 	
 	option = {
@@ -283,22 +217,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1539
-		1538 = {
-			NOT = {
-				owned_by = THIS
-			}
-			NOT = {
-				owner = {
-					primary_culture = beifaren
-				}
-			}
-		}
-		NOT = { has_country_modifier = shanghai_exploitation_modifier_china }
-		
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {
@@ -324,29 +243,23 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
-		}
-		1566 = { # MACAU
-			controlled_by = THIS
-		}
-		NOT = { 
 			has_country_modifier = tsindao_exploitation_modifier
 		}
-		NOT = {
-			1565 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		1566 = { # TSINDAI
+			controlled_by = THIS
 		}
-		
+		1565 = {
+			owner = { is_culture_group = east_asian }
+		}
 	}
-	
 	option = {
 		name = "TreatyPort_macau_exploited_EvtOptA"
 		add_country_modifier = {
 			name = tsindao_exploitation_modifier
 			duration = -1
 		}
+		
+		1565 = { owner = { country_event = 57112 } }
 	}
 }
 
@@ -357,19 +270,12 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_nomore_EvtDesc"
 	picture = "opium_war"
 	
+	
 	trigger = {
 		has_country_modifier = tsindao_exploitation_modifier
-		OR = {
-			NOT = { 
-				1566 = { controlled_by = THIS }
-			}
-			1565 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			1566 = { controlled_by = THIS }
 		}
-		
 	}
 	
 	option = {
@@ -388,22 +294,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1565
-		1566 = {
-			NOT = {
-				owned_by = THIS
-			}
-			NOT = {
-				owner = {
-					primary_culture = beifaren
-				}
-			}
-		}
-		NOT = { has_country_modifier = tsindao_exploitation_modifier_china }
-		
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {
@@ -430,21 +321,14 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
-		}
-		1569 = { # MACAU
-			controlled_by = THIS
-		}
-		NOT = { 
 			has_country_modifier = weihaiwei_exploitation_modifier
 		}
-		NOT = {
-			1565 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		1569 = { # WEIHAIWEI
+			controlled_by = THIS
 		}
-		
+		1565 = {
+			owner = { is_culture_group = east_asian }
+		}
 	}
 	
 	option = {
@@ -453,6 +337,7 @@ country_event = {
 			name = weihaiwei_exploitation_modifier
 			duration = -1
 		}
+		1565 = { owner = { country_event = 57115 } }
 	}
 }
 
@@ -465,17 +350,9 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = weihaiwei_exploitation_modifier
-		OR = {
-			NOT = { 
-				1569 = { controlled_by = THIS }
-			}
-			1565 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			1569 = { controlled_by = THIS }
 		}
-		
 	}
 	
 	option = {
@@ -494,22 +371,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1565
-		1569 = {
-			NOT = {
-				owned_by = THIS
-			}
-			NOT = {
-				owner = {
-					primary_culture = beifaren
-				}
-			}
-		}
-		NOT = { has_country_modifier = weihaiwei_exploitation_modifier_china }
-		
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {
@@ -536,22 +398,16 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
-		}
-		1481 = { # PORT ARTHUR
-			controlled_by = THIS
-		}
-		NOT = { 
 			has_country_modifier = arthur_exploitation_modifier
 		}
-		NOT = {
-			1479 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		1481 = { # ARTHUR
+			controlled_by = THIS
 		}
-		
+		1479 = {
+			owner = { is_culture_group = east_asian }
+		}
 	}
+	
 	
 	option = {
 		name = "TreatyPort_macau_exploited_EvtOptA"
@@ -559,6 +415,7 @@ country_event = {
 			name = arthur_exploitation_modifier
 			duration = -1
 		}
+		1479 = { owner = { country_event = 57118 } }
 	}
 }
 
@@ -571,15 +428,8 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = arthur_exploitation_modifier
-		OR = {
-			NOT = { 
-				1481 = { controlled_by = THIS }
-			}
-			1479 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			1481 = { controlled_by = THIS }
 		}
 		
 	}
@@ -600,22 +450,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1479
-		1481 = {
-			NOT = {
-				owned_by = THIS
-			}
-			NOT = {
-				owner = {
-					primary_culture = beifaren
-				}
-			}
-		}
-		NOT = { has_country_modifier = arthur_exploitation_modifier_china }
-		
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {
@@ -642,29 +477,22 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
-		}
-		2659 = { # PORT ARTHUR
-			controlled_by = THIS
-		}
-		NOT = { 
 			has_country_modifier = tientsin_exploitation_modifier
 		}
-		NOT = {
-			1617 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		2659 = { # TIENTSIN
+			controlled_by = THIS
 		}
-		
+		1617 = {
+			owner = { is_culture_group = east_asian }
+		}
 	}
-	
 	option = {
 		name = "TreatyPort_macau_exploited_EvtOptA"
 		add_country_modifier = {
 			name = tientsin_exploitation_modifier
 			duration = -1
 		}
+		1617 = { owner = { country_event = 57121 } }
 	}
 }
 
@@ -677,17 +505,9 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = tientsin_exploitation_modifier
-		OR = {
-			NOT = { 
-				2659 = { controlled_by = THIS }
-			}
-			1617 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			2659 = { controlled_by = THIS }
 		}
-		
 	}
 	
 	option = {
@@ -706,21 +526,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1617
-		2569 = {
-			NOT = {
-				owned_by = THIS
-			}
-			owner = {
-				NOT = { primary_culture = beifaren }
-			}
-		}
-		NOT = { 
-			has_country_modifier = tientsin_exploitation_modifier_china
-		}
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {
@@ -747,21 +553,14 @@ country_event = {
 		NOT = { 
 			primary_culture = beifaren
 			primary_culture = manchu
-		}
-		2615 = { # PORT ARTHUR
-			controlled_by = THIS
-		}
-		NOT = { 
 			has_country_modifier = guangjou_exploitation_modifier
 		}
-		NOT = {
-			1495 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		2615 = { # GUANGJOU
+			controlled_by = THIS
 		}
-		
+		1495 = {
+			owner = { is_culture_group = east_asian }
+		}
 	}
 	
 	option = {
@@ -770,6 +569,7 @@ country_event = {
 			name = guangjou_exploitation_modifier
 			duration = -1
 		}
+		1493 = { owner = { country_event = 57124 } }
 	}
 }
 
@@ -782,17 +582,9 @@ country_event = {
 	
 	trigger = {
 		has_country_modifier = guangjou_exploitation_modifier
-		OR = {
-			NOT = { 
-				2615 = { controlled_by = THIS }
-			}
-			1495 = { 
-				owner = {
-					war_with = THIS
-				}
-			}
+		NOT = { 
+			2615 = { controlled_by = THIS }
 		}
-		
 	}
 	
 	option = {
@@ -811,22 +603,7 @@ country_event = {
 	desc = "TreatyPort_macau_exploited_china_EvtName"
 	picture = "opium_war"
 	
-	trigger = {
-		primary_culture = beifaren
-		owns = 1495
-		2615 = {
-			NOT = {
-				owned_by = THIS
-			}
-			NOT = {
-				owner = {
-					primary_culture = beifaren
-				}
-			}
-		}
-		NOT = { has_country_modifier = guangjou_exploitation_modifier_china }
-		
-	}
+	is_triggered_only = yes
 	
 	immediate = {
 		add_country_modifier = {

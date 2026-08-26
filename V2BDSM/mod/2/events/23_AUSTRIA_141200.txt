@@ -45,6 +45,8 @@ country_event = {
 	option = {
 		name = "austria_interferes_EvtOptAccept"
 		CUSTOM_TOOLTIP_RELEASE_POPE = { }
+		create_vassal = PAP
+		PAP = { set_country_flag = vassal_annex_blocked create_alliance = THIS }
 		
 		set_country_flag = hidden_tooltip
 		random_owned = {
@@ -60,13 +62,11 @@ country_event = {
 		}
 		clr_country_flag = hidden_tooltip
 		
-		create_vassal = PAP
 		AUS = { 
 			diplomatic_influence = { who = PAP  value = 500 } 
 			country_event = 141202
 		}
 		relation = { who = AUS value = 50 }
-		PAP = { set_country_flag = vassal_annex_blocked create_alliance = THIS }
 		
 		ai_chance = {
 			factor = 9
@@ -138,11 +138,11 @@ country_event = {
 		ai_chance = {
 			factor = 1
 		}
+		749 = { secede_province = THIS }
+		750 = { secede_province = THIS }
 		FROM = {
 			create_vassal = THIS
 		}
-		749 = { secede_province = THIS }
-		750 = { secede_province = THIS }
 	}
 	
 }
