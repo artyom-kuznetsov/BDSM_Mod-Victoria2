@@ -12,6 +12,17 @@ country_event = { # MCL # MONTHLY CLEANUP
 		
 		any_country = {
 			limit = {
+				has_country_flag = immigrator_active_cflag
+				NOT = {
+					any_owned_province = {
+						has_province_modifier = immigrator_modifier
+					}
+				}
+			}
+			clr_country_flag = immigrator_active_cflag
+		}
+		any_country = {
+			limit = {
 				has_country_flag = traditionalism_cflag
 			}
 			set_country_flag = invent_factories_blocked_cflag
@@ -1845,6 +1856,7 @@ province_event = {
 		}
 		
 		add_province_modifier = { name = immigrator_modifier duration = -1 }
+		set_country_flag = immigrator_active_cflag
 
 		# Audax Validator "." Ignore_NEXT
 		province_selector = -1
