@@ -236,7 +236,7 @@ promotion_chance =
 	
 	
 	modifier = {
-		factor = -0.1
+		factor = -0.05
 		country = {
 			is_mobilised = yes
 		}
@@ -394,7 +394,7 @@ demotion_chance =
 	factor = 1.25
 	
 	modifier = {
-		factor = 0.1
+		factor = 0.05
 		country = {
 			trade_policy_rgroup = free_trade_ref
 		}
@@ -842,11 +842,6 @@ emigration_chance =
 	factor = 0.5
 
 	modifier = {
-		factor = -0.2
-		NOT = { strata = poor }
-	}
-
-	modifier = {
 		factor = -10
 		strata = rich
 	}
@@ -888,11 +883,11 @@ emigration_chance =
 	group = {
 		modifier = {
 			factor = 0.05
-			country = { NOT = { plurality = 30 } }
+			country = { NOT = { plurality = 40 } }
 		}
 		modifier = {
 			factor = 0.05
-			country = { NOT = { plurality = 20 } }
+			country = { NOT = { plurality = 30 } }
 		}
 	}
 	
@@ -1145,6 +1140,20 @@ emigration_chance =
 	}
 
 	modifier = {
+		factor = 0.05
+		location = {
+			NOT = { controlled_by = owner }
+		}
+	}
+	
+	modifier = {
+		factor = 0.02
+		country = {
+			war = yes
+		}
+	}
+	
+	modifier = {
 		factor = -2.0
 		OR = { 
 			continent = north_america
@@ -1202,11 +1211,7 @@ emigration_chance =
 			NOT = { month = 2 year = 1837 }
 		}
 	}
-	modifier = {
-		factor = -0.2
-		strata = rich
-	}
-
+	
 	group = {
 		modifier = {
 			factor = -0.02
