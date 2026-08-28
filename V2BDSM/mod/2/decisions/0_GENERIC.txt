@@ -523,4 +523,54 @@ political_decisions = {
 			plurality = -10
 		}
 	}
+	
+	open_economy_dec = {
+		potential = {
+			civilized = yes
+			economic_system_rgroup = agrarianism_ref
+			in_sphere = yes
+			overlord = { 
+				OR = {
+					economic_system_rgroup = interventionism_ref
+					economic_system_rgroup = laissez_faire_ref
+				}
+			} 
+		}
+		
+		allow = {
+			NOT = {
+				trade_policy_rgroup = isolationism_ref
+			}
+		}
+		
+		effect = {
+			CUSTOM_TOOLTIP_OPEN_ECONOMY = { }
+			plurality = -5
+			
+			random_owned = {
+				limit = {
+					owner = {
+						sphere_owner = {
+							economic_system_rgroup = interventionism_ref
+						}
+					}
+				}
+				owner = {
+					social_reform = interventionism_ref
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						sphere_owner = {
+							economic_system_rgroup = laissez_faire_ref
+						}
+					}
+				}
+				owner = {
+					social_reform = laissez_faire_ref
+				}
+			}
+		}
+	}
 }
