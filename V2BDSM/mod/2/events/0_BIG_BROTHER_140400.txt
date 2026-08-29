@@ -24,6 +24,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = {
 			limit = {
 				has_country_flag = traditionalism_cflag
+				NOT = { has_country_flag = invent_factories_blocked_cflag }
 			}
 			set_country_flag = invent_factories_blocked_cflag
 		}
@@ -5357,5 +5358,53 @@ country_event = {
 				owner = { upper_house = { ideology = fascist value = 0.03 } }
 			}
 		}
+	}
+}
+
+# CIVILIZE KOREA FOR JAP
+country_event = {
+	id = 140424
+	title = "noloc"
+	desc = "noloc"
+
+	is_triggered_only = yes
+	## Audax Validator "." Ignore_NEXT
+	option = {
+		civilized = no
+		civilized = yes
+		annex_to = FROM
+		FROM = {
+			KOR_1624 = {
+				limit = {
+					is_colonial = yes
+				}
+				secede_province = CIV
+			}
+		}
+		civilized = no
+		civilized = yes
+		annex_to = FROM
+		FROM = {
+			KOR_1619 = {
+				limit = {
+					is_colonial = yes
+				}
+				secede_province = CIV
+			}
+		}
+		civilized = no
+		civilized = yes
+		annex_to = FROM
+		FROM = {
+			KOR_1627 = {
+				limit = {
+					is_colonial = yes
+				}
+				secede_province = CIV
+			}
+		}
+		civilized = no
+		civilized = yes
+		annex_to = FROM
 	}
 }

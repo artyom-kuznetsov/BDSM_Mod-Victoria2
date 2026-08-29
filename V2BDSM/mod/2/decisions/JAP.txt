@@ -168,7 +168,11 @@ political_decisions = {
 			NOT = { has_country_flag = hide_all_decs_flag }
 			NOT = { has_country_flag = korean_integration_flag }
 			tag = JAP
-			any_owned_province = { is_core = KOR }
+			KOR = {
+				all_core = {
+					owned_by = THIS
+				}
+			}
 		}
 		allow = {
 			money = 300000
@@ -176,15 +180,35 @@ political_decisions = {
 			owns = 1624
 			owns = 1625
 			owns = 1619
+			NOT = { has_country_modifier = administrative_expenses3_modifier }
 		}
 		effect = {
 			plurality = 2
-			money = -300000
+			add_country_modifier = { name = administrative_expenses3_modifier duration = 1460 }
 			set_country_flag = korean_integration_flag
 			KOR = {
 				all_core = { add_core = THIS }
 			}
 			CUSTOM_TOOLTIP_KOREAN = { }
+			
+			
+			set_country_flag = hidden_tooltip
+			random_owned = {
+				limit = {
+					owner = {
+						has_country_flag = hidden_tooltip
+					}
+				}
+				KOR_1635 = {
+					limit = {
+						is_colonial = yes
+					}
+					secede_province = CIV
+				}
+				
+				CIV = { country_event = { id = 140424 days = 0 } }
+			}
+			clr_country_flag = hidden_tooltip
 		}
 	}
 }
