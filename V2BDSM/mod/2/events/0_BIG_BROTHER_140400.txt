@@ -1349,10 +1349,10 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = {	limit = { NOT = { plurality = 4 } } any_pop = { limit = { NOT = { agree_with_ruling_party = 0.5 }} militancy = 0.25 } }
 		
 		#Taxes
-		any_country = { limit = { exists = yes NOT = { poor_tax = 0.99 } } plurality = 0.04 }
-		any_country = { limit = { exists = yes NOT = { poor_tax = 0.74 } } plurality = 0.04 }
-		any_country = { limit = { exists = yes NOT = { poor_tax = 0.49 } } plurality = 0.04 }
-		any_country = { limit = { exists = yes NOT = { poor_tax = 0.24 } } plurality = 0.04 }
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.99 } } plurality = 0.02 }
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.74 } } plurality = 0.02 }
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.49 } } plurality = 0.02 }
+		any_country = { limit = { exists = yes NOT = { poor_tax = 0.24 } } plurality = 0.02 }
 		
 		#Taxes
 		any_country = { limit = { exists = yes NOT = { middle_tax = 0.99 } } plurality = 0.02 }
@@ -1385,7 +1385,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { exists = yes ai = no security = police_state } plurality = 0.08 }
 		
 		#Reforms
-		any_country = { limit = { exists = yes ai = no public_meetings = yes_meeting } plurality = -0.01 }
+		any_country = { limit = { exists = yes ai = no public_meetings = yes_meeting } plurality = -0.02 }
 		
 		### MODIFIERS ###
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }
@@ -1440,6 +1440,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { any_owned_province = { has_province_modifier = dryzymalas_wagon } } plurality = -0.05 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = trustee_system } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = penal_colonies } } plurality = 0.02 }
+		any_country = { limit = { any_owned_province = { has_province_modifier = primary_culture_only } } plurality = 0.02 }
+		any_country = { limit = { any_owned_province = { has_province_modifier = all_voting_pops } } plurality = -0.03 }
 		
 		
 		
@@ -5262,6 +5264,36 @@ country_event = {
 			random_owned = {
 				limit = { owner = { ruling_party_ideology = fascist } }
 				owner = { upper_house = { ideology = fascist value = 0.1 } }
+			}
+		}
+		
+		any_country = {
+			limit = {
+				upper_house_composition = party_appointed
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = reactionary } }
+				owner = { upper_house = { ideology = reactionary value = 0.4 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = conservative } }
+				owner = { upper_house = { ideology = conservative value = 0.4 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = liberal } }
+				owner = { upper_house = { ideology = liberal value = 0.4 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = socialist } }
+				owner = { upper_house = { ideology = socialist value = 0.4 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = communist } }
+				owner = { upper_house = { ideology = communist value = 0.4 } }
+			}
+			random_owned = {
+				limit = { owner = { ruling_party_ideology = fascist } }
+				owner = { upper_house = { ideology = fascist value = 0.4 } }
 			}
 		}
 		
