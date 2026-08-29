@@ -1385,7 +1385,11 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { exists = yes ai = no security = police_state } plurality = 0.08 }
 		
 		#Reforms
-		any_country = { limit = { exists = yes ai = no public_meetings = yes_meeting } plurality = -0.02 }
+		any_country = { limit = { exists = yes ai = no public_meetings = yes_meeting } 		plurality = -0.02 }
+		any_country = { limit = { exists = yes citizens_rights = primary_culture_only } 	plurality = 0.02 }
+		any_country = { limit = { exists = yes citizens_rights = all_voting_pops }			plurality = -0.03 }
+		any_country = { limit = { exists = yes penal_system = incarceration }				plurality = -0.01 }
+		any_country = { limit = { exists = yes penal_system = rehabilitation }				plurality = 0.02 }
 		
 		### MODIFIERS ###
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }
@@ -1440,8 +1444,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { any_owned_province = { has_province_modifier = dryzymalas_wagon } } plurality = -0.05 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = trustee_system } } plurality = -0.02 }
 		any_country = { limit = { any_owned_province = { has_province_modifier = penal_colonies } } plurality = 0.02 }
-		any_country = { limit = { any_owned_province = { has_province_modifier = primary_culture_only } } plurality = 0.02 }
-		any_country = { limit = { any_owned_province = { has_province_modifier = all_voting_pops } } plurality = -0.03 }
 		
 		
 		
