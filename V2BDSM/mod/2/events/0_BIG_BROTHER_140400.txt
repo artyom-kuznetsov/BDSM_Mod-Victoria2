@@ -10,6 +10,14 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
+		
+		any_country = {
+			limit = {
+				has_country_flag = demilitarized_cflag
+				NOT = { has_country_modifier = demilitarized_cmodifier }
+			}
+			clr_country_flag = demilitarized_cflag
+		}
 		any_country = {
 			limit = {
 				has_country_flag = immigrator_active_cflag

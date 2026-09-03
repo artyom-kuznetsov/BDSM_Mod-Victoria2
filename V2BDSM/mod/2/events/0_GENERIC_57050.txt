@@ -1436,7 +1436,12 @@ country_event = {
 	
 	option = {
 		name = "disarmed_EvtOptA"
-		plurality = -15
+		plurality = -10
+		add_country_modifier = {
+			name = demilitarized_cmodifier
+			duration = 1825
+		}
+		set_country_flag = demilitarized_cflag
 	}
 }
 
