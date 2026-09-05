@@ -1,3 +1,15 @@
+PS_unlocked = {
+	limit = { hidden_tech = 1 }
+	news = no
+	chance = {
+		base = 100	
+	}
+	effect = {
+		activate_building = farmland
+		# Audax Validator "." Ignore_NEXT
+		max_farmland = 49
+	}
+}
 # UNIQUE INVENTIONS
 
 tokugawa_infantry = {
@@ -790,7 +802,16 @@ malaria_prevention_inv = {
 	chance = {
 		base = 5
 		modifier = {
-			factor = 2 # TODO
+			factor = 10
+			any_greater_power = {
+				invention = malaria_prevention_inv
+			}
+		}
+		modifier = {
+			factor = 10
+			any_neighbor_country = {
+				invention = malaria_prevention_inv
+			}
 		}
 	}
 	effect = {
@@ -909,6 +930,24 @@ i_empiricism = {
 	}
 }
 #experimental_psychology
+existentialism = {
+	limit = { experimental_psychology = 1 }
+	news = no
+	chance = {
+		base = 0
+		modifier = {
+			factor = 2
+			invention = expressionist_literature
+		}
+		modifier = {
+			factor = 2
+			invention = dogma_of_violence
+		}
+	}
+	effect = {
+		education_efficiency = 0.05
+	}
+}
 i_analytic_philosophy = {
 	limit = { experimental_psychology = 1 }
 	news = no
@@ -1525,6 +1564,27 @@ vangaurd_party = {
 	}
 }
 #mass_politics
+the_police_state = {
+	limit = { mass_politics = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 3
+			OR = {
+				ruling_party_ideology = fascist
+				ruling_party_ideology = communist
+			}
+		}
+	}
+	effect = {
+		rebel_org_gain = {
+			faction = all
+			value = -0.25
+		}
+		suppression_points_modifier = 0.25
+	}
+}
 expansionism = {
 	limit = { revolution_n_counterrevolution = 1 }
 	news = no
@@ -1540,6 +1600,7 @@ expansionism = {
 		}
 	}
 	effect = {
+		# -0.05 BADBOY
 	}
 }
 the_doctrine_of_fascism = {
@@ -1595,7 +1656,7 @@ mass_advertising = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.25
+		education_efficiency = 0.05
 		suppression_points_modifier = -0.05
 	}
 }
@@ -1607,6 +1668,28 @@ the_talkies = {
 		modifier = {
 			factor = 2
 			social_science = 1
+		}
+		modifier = {
+			factor = 2
+			average_consciousness = 3
+		}
+	}
+	effect = {
+		shared_prestige = 50
+		permanent_prestige = 5
+		suppression_points_modifier = -0.05
+	}
+	core_pop_consciousness_modifier = 0.01
+}
+
+modern_bureaucracy_inv = {
+	limit = { government_mobilization = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			critical_theory = 1
 		}
 		modifier = {
 			factor = 2
