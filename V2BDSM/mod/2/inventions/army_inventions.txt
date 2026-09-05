@@ -376,6 +376,16 @@ flintlock_rifle_armament = {
 	}
 }
 
+infantry_inv = {
+	limit = { flintlock_rifles = 1 NOT = { has_country_flag = is_nomadic_cflag } }
+	chance = {
+		base = 100
+	}
+	effect = {
+		activate_unit = infantry
+	}
+}
+
 #muzzle_loaded_rifles
 muzzle_loaded_rifle_armament = {
 	limit = { muzzle_loaded_rifles = 1 }
@@ -643,6 +653,15 @@ interwar_cavalry = {
 	}
 }
 #bronze_muzzle_loaded_artillery
+engineer_inv = {
+	limit = { bronze_muzzle_loaded_artillery = 1 }
+	chance = {
+		base = 100
+	}
+	effect = {
+		activate_unit = engineer
+	}
+}
 synchronized_heavy_support = {
 	limit = { bronze_muzzle_loaded_artillery = 1 }
 	chance = {
@@ -696,6 +715,15 @@ flexible_firepower = {
 			support = 0.15
 			supply_consumption = 0.1
 		}
+	}
+}
+artillery_inv = {
+	limit = { iron_muzzle_loaded_artillery = 1 }
+	chance = {
+		base = 100
+	}
+	effect = {
+		activate_unit = artillery
 	}
 }
 #iron_breech_loaded_artillery

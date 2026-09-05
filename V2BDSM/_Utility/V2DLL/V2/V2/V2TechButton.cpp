@@ -31,7 +31,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.33"
+#define MOD_VERSION "2.34"
 
 // Лог пишется в v2dll.log рядом с exe, очищается при запуске.
 // Для раздачи ставить 0: фильтр решений вызывается тысячами раз за тик.
@@ -1310,6 +1310,14 @@ static DWORD g_prodTypeGateResumeBlock = 0;
 // файла, и смотрим найденный по имени индекс в g_limitByLocalSupply -
 // НЕ читаем числовой индекс из самого объекта (см. комментарий у
 // объявления g_productionTypeNames: он не совпадает с файловым).
+// Точечные исключения сверх limit_by_local_supply: типы, которым
+// тоже нужно разрешить постройку в колонии, но заводить для них
+// целый отдельный флаг в production_types.txt не стали - patch
+// только по имени. Сейчас это fishery (is_coastal = yes).
+static const char* const PRODTYPE_EXTRA_WHITELIST[] = { "fishery" };
+static const int PRODTYPE_EXTRA_WHITELIST_COUNT =
+    sizeof(PRODTYPE_EXTRA_WHITELIST) / sizeof(PRODTYPE_EXTRA_WHITELIST[0]);
+
 static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
 {
     if (!typePtr)
@@ -1327,6 +1335,10 @@ static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
         name[i] = c;
     }
     name[i] = 0;
+
+    for (int e = 0; e < PRODTYPE_EXTRA_WHITELIST_COUNT; ++e)
+        if (strcmp(PRODTYPE_EXTRA_WHITELIST[e], name) == 0)
+            return 1;
 
     for (int t = 0; t < g_productionTypeCount; ++t)
     {
