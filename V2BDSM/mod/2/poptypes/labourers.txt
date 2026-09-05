@@ -9,7 +9,6 @@ everyday_needs = {
 	telephones = 0.4
 	automobiles = 0.16
 	radio = 0.3
-	cigarettes = 0.8
 	pharmaceuticals = 0.8
 	tea = 1.6
 	coffee = 1.2
@@ -17,13 +16,12 @@ everyday_needs = {
 	regular_clothes = 2.4
 	furniture = 2.2
 	wine = 1.2
-	canned_food = 0.9
+	canned_food = 0.72
 	explosives = 1.6
 }
 
 life_needs = {
 	cattle = 4.2
-	wool =  4.2
 	fish =  4.2
 	fruit =  8
 	grain =  14.4
@@ -34,7 +32,6 @@ luxury_needs = {
 	telephones = 0.8
 	automobiles = 0.32
 	radio = 0.6
-	cigarettes = 1.6
 	pharmaceuticals = 1.6
 	tea = 3.2
 	coffee = 2.4
@@ -42,7 +39,7 @@ luxury_needs = {
 	regular_clothes = 4.8
 	furniture = 4.4
 	wine = 2.4
-	canned_food = 1.8
+	canned_food = 1.44
 	explosives = 1.6
 	luxury_clothes = 0.16
 	luxury_furniture = 0.16
@@ -245,18 +242,6 @@ migration_target =
 	modifier = {
     	factor = 100
     	has_province_modifier = immigrator_modifier
-	}
-	modifier = {
-		factor = 2
-		NOT = { unemployment = 0.1 }
-		OR = {
-			trade_goods= opium
-			trade_goods= silk
-			trade_goods= rubber
-			trade_goods= tropical_wood
-			trade_goods= coffee
-			trade_goods= tea_leaves
-		}
 	}
 	modifier = {
 		factor = 0
@@ -1567,10 +1552,10 @@ ideologies = {
 
 issues =
 {
-	protectionism = {
+	protectionism_ref = {
 		factor = 0
 	}
-	free_trade = {
+	free_trade_ref = {
 		factor = 0
 	}
 	laissez_faire_ref = {

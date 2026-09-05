@@ -78,17 +78,27 @@ guiTypes = {
 			position = { x = 37 y = 22 }
 			font = "cgothic_18_bold"
 			text = "TRADE_RAW_MATERIALS"	
-			maxWidth = 200
+			maxWidth = 2000
 			maxHeight = 48	
 			format = left
 		}
 		
 		instantTextBoxType = { 
 			name = "headline_industrial_and_consumer_goods"
-			position = { x = 37 y = 109 }
+			position = { x = 37 y = 142 }
 			font = "cgothic_18_bold"
 			text = "TRADE_INDUSTRIAL_AND_CONSUMER_GOODS"	
 			maxWidth = 1000
+			maxHeight = 48	
+			format = left
+		}
+		
+		instantTextBoxType = { 
+			name = "headline_consumer_goods"
+			position = { x = 37 y =3098 }
+			font = "vic_18"
+			text = "TRADE_CONSUMER_GOODS"	
+			maxWidth = 200
 			maxHeight = 48	
 			format = left
 		}
@@ -113,7 +123,14 @@ guiTypes = {
 		
 		windowType = {
 			name = "group_industrial_and_consumer_goods"
-			position = { x = 30 y = 127 }	
+			position = { x = 30 y = 160 }	
+			size = { x=600 y=540 }
+			orientation="UPPER_LEFT"		
+		}
+		
+		windowType = {
+			name = "group_consumer_goods"
+			position = { x = 30 y = 3016 }	
 			size = { x=600 y=540 }
 			orientation="UPPER_LEFT"		
 		}

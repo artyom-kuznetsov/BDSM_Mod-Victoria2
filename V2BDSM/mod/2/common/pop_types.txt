@@ -393,73 +393,6 @@ demotion_chance =
 		}
 	}
 	
-	### QUICKER IF FACTORY UNEMPLOYMENT ON A NICE TRADE GOOD
-	group = {
-		modifier = {
-			factor = 0.25
-			unemployment = 0.2
-			strata = poor
-			literacy = 0.5
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= market_goods
-					trade_goods= sulphur
-				}
-			}
-		}
-		modifier = {
-			factor = 0.5
-			unemployment = 0.2
-			strata = poor
-			literacy = 0.35
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= market_goods
-					trade_goods= sulphur
-				}
-			}
-		}
-		modifier = {
-			factor = 0.5
-			unemployment = 0.2
-			strata = poor
-			literacy = 0.25
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= market_goods
-					trade_goods= sulphur
-				}
-			}
-		}
-		modifier = {
-			factor = 0.5
-			unemployment = 0.2
-			strata = poor
-			location = {
-				OR = {
-					trade_goods= coal
-					trade_goods= iron
-					trade_goods= oil
-					trade_goods= precious_metal
-					trade_goods= market_goods
-					trade_goods= sulphur
-				}
-			}
-		}
-	}
-	
 	# LARGE STATE
 	modifier = {
 		factor = -0.25
@@ -524,11 +457,6 @@ demotion_chance =
 	modifier = {
 		factor = -0.1
 		country = { slavery = yes_slavery }
-	}
-	
-	modifier = {
-		factor = -0.05
-		country = { slavery = freedom_of_womb }
 	}
 	
 	### SLAVE STATES DEMOTE SLOWER

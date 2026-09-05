@@ -59,224 +59,47 @@ rail_focus =
 }
 
 promotion_focus = {
-	promote_bureaucrats = {
-		bureaucrats = 0.05
-		icon = 7
-		outliner_show_as_percent = yes
-	}
-	promote_clergymen = {
-		clergymen = 0.05
-		icon = 9
-		outliner_show_as_percent = yes
-	}
-	promote_craftsmen = {
-		craftsmen = 0.05
+	promote_urbanism = {
+		artisans = 0.05
 		icon = 11
 		outliner_show_as_percent = yes
+		limit = {
+			NOT = {
+				debt_law = serfdom
+				debt_law = peonage
+			}
+		}
 	}
-	promote_clerks = {
-		clerks = 0.05
-		icon = 10
-		outliner_show_as_percent = yes
-	}
-	promote_soldiers = {
-		soldiers = 0.05
-		icon = 15
-		outliner_show_as_percent = yes
-	}
-	promote_officers = {
-		officers = 0.05
-		icon = 14
-		outliner_show_as_percent = yes
-	}
-}
-
-colonial_natfocus = {
-	bureaucrats_colonial_focus = {
-		bureaucrats = 0.2
+	promote_bureaucrats = {
+		bureaucrats = 0.03
+		local_rgo_throughput = -0.2
+		local_factory_output = -0.2
 		icon = 7
-		limit = {
-			state_scope = { is_colonial = yes }
-		}
 		outliner_show_as_percent = yes
-	}
-	clegymen_colonial_focus = {
-		clergymen = 0.2
-		icon = 9
 		limit = {
-			state_scope = { is_colonial = yes }
+			NOT = {
+				debt_law = serfdom
+				debt_law = peonage
+			}
 		}
+	}
+	promote_exploitation = {
+		local_rgo_throughput = 0.15
+		pop_consciousness_modifier = -0.05
+		pop_militancy_modifier = 0.05
+		artisans = 0.02
+		icon = 12
 		outliner_show_as_percent = yes
-	}
-	colonial_rail = 
-	{
-		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
-		
-		local_RGO_output = 0.5
-		pop_militancy_modifier = 0.02
-		
-		icon = 2
 		limit = {
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { is_colonial = yes }
-		}
-	}
-	colonial_suppression_focus = 
-	{
-		railroads = 0.5 #Capitalists 50% more likeley to choose railroads
-		
-		pop_consciousness_modifier = -0.1
-		pop_militancy_modifier = -0.1
-		
-		icon = 34
-		limit = {
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { is_colonial = yes }
-		}
-	}
-	
-}
-
-production_focus =
-{
-	automation_focus =
-	{
-		aeroplanes = 100
-		barrels = 100
-		automobiles = 100
-		icon = 16
-		limit = {
-			year = 1880
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	electrical_focus =
-	{
-		radio = 100
-		telephones = 80
-		electric_gear = 100
-		icon = 17
-		limit = {
-			year = 1880
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	chemical_focus =
-	{
-		fuel = 100
-		oil = 100
-		fertilizer = 100
-		sulphur = 100
-		rubber = 100
-		icon = 18
-		limit = {
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	shipping_focus =
-	{
-		steamer_convoy = 100
-		clipper_convoy = 100
-		icon = 19
-		limit = { 
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	textile_focus =
-	{
-		luxury_clothes = 50
-		regular_clothes = 100
-		fabric = 100
-		dye = 100
-		icon = 20
-		limit = {
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	wood_focus = 
-	{
-		paper = 75
-		luxury_furniture = 50
-		furniture = 100
-		lumber = 75
-		icon = 21
-		limit = {
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	basic_industry_focus =
-	{
-		steel = 100
-		machine_parts = 100
-		cement = 75
-		icon = 22
-		limit = {
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	armaments_focus = 
-	{
-		artillery = 100
-		small_arms = 100
-		ammunition = 100
-		explosives = 100
-		icon = 23
-		limit = {
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	consumer_focus = 
-	{
-		glass = 75
-		canned_food = 100
-		cigarettes = 75
-		pharmaceuticals = 75
-		icon = 32
-		limit = {
-			owner = {
-				ai = no
-			}
-		}
-	}
-
-	beverages_focus = 
-	{
-		liquor = 100
-		wine = 100
-		tea = 75
-		coffee = 75
-		icon = 24
-		limit = {
-			owner = {
-				ai = no
+			OR = {
+				debt_law = serfdom
+				debt_law = peonage
 			}
 		}
 	}
 }
+
+
 
 party_loyalty_focus =
 {
