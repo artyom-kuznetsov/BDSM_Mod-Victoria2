@@ -1,6 +1,34 @@
 
 ### Factories #####################################################################################
 
+agriculture_template = {
+	efficiency = { #1.2 saved
+		fertilizer = 0.8		#8
+	}
+	
+	owner =
+	{
+		poptype = capitalists 
+		effect = input
+		effect_multiplier = 2
+	}
+
+	employees = {	
+		{ 
+			poptype = craftsmen
+			effect = throughput
+			amount = 0.99
+		}
+		{ 
+			poptype = capitalists
+			effect = throughput
+			amount = 0.01
+		}
+	}
+	type = factory
+	workforce = 10000
+}
+
 factory_template = {
 	efficiency = { #1.2 saved
 		cement = 0.3125 			# 5
@@ -154,6 +182,17 @@ cement_template = {
 	}
 	type = factory
 	workforce = 10000 
+}
+############# RGO FACTORIES
+
+grain_factory = {       
+	template = agriculture_template	#8
+	input_goods = {    
+		grain = 0.25				#25 total input+maint = 33
+	}
+	limit_by_local_supply = yes
+	output_goods = grain
+	value = 10						#40
 }
 
 

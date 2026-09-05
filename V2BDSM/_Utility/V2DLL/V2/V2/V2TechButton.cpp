@@ -31,7 +31,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.10-debug"
+#define MOD_VERSION "2.19"
 
 // Лог пишется в v2dll.log рядом с exe, очищается при запуске.
 // Для раздачи ставить 0: фильтр решений вызывается тысячами раз за тик.
@@ -341,6 +341,9 @@ static void GStrSet(void* str, const char* text)
 
 static DWORD  g_base = 0;
 static void* g_fnOnMakeDecision = 0;
+
+typedef BOOL(WINAPI* tIsBadReadPtr)(const void*, UINT_PTR);
+static tIsBadReadPtr g_fnIsBadReadPtr = 0;
 
 static unsigned char g_glue[MAX_BUTTONS][GLUE_SIZE];
 static unsigned char g_fakeElem[MAX_BUTTONS][0x30];
@@ -1083,7 +1086,7 @@ static void ParseProductionTypes(const char* text, size_t len)
 
         if (c == '#')
         {
-            while (i < len && text[i] != '\n')
+            while (i < len && text[i] != '\n' && text[i] != '\r')
                 ++i;
             continue;
         }
@@ -1120,7 +1123,7 @@ static void ParseProductionTypes(const char* text, size_t len)
                         char cj = text[j];
                         if (cj == '#')
                         {
-                            while (j < len && text[j] != '\n')
+                            while (j < len && text[j] != '\n' && text[j] != '\r')
                                 ++j;
                             continue;
                         }
@@ -1155,14 +1158,22 @@ static void ParseProductionTypes(const char* text, size_t len)
 
                         // Ищем "limit_by_local_supply" ... "yes" внутри
                         // диапазона [blockStart, j) этого конкретного блока.
-                        for (size_t k = blockStart; k + 22 < j; ++k)
+                        // Длина "limit_by_local_supply" - 21 символ (без
+                        // учёта завершающего нуля strncmp здесь не нужен -
+                        // раньше тут стояло 22, что сравнивало ЕЩЁ И нуль-
+                        // терминатор литерала с реальным символом файла
+                        // (обычно пробелом), из-за чего strncmp никогда не
+                        // совпадал и флаг не находился ни разу).
+                        for (size_t k = blockStart; k + 21 < j; ++k)
                         {
-                            if (strncmp(text + k, "limit_by_local_supply", 22) != 0)
+                            if (strncmp(text + k, "limit_by_local_supply", 21) != 0)
                                 continue;
                             if (k > 0 && IsIdentChar(text[k - 1]))
                                 continue;
+                            if (IsIdentChar(text[k + 21]))
+                                continue;
 
-                            size_t r = k + 22;
+                            size_t r = k + 21;
                             while (r < j && (text[r] == ' ' || text[r] == '\t'))
                                 ++r;
                             if (r < j && text[r] == '=')
@@ -1170,7 +1181,8 @@ static void ParseProductionTypes(const char* text, size_t len)
                                 ++r;
                                 while (r < j && (text[r] == ' ' || text[r] == '\t'))
                                     ++r;
-                                if (r + 3 <= j && strncmp(text + r, "yes", 3) == 0)
+                                if (r + 3 <= j && strncmp(text + r, "yes", 3) == 0 &&
+                                    !IsIdentChar(text[r + 3]))
                                     hasLimitFlag = true;
                             }
                             break;
@@ -1178,6 +1190,9 @@ static void ParseProductionTypes(const char* text, size_t len)
 
                         if (index < MAX_PRODUCTION_TYPES)
                             g_limitByLocalSupply[index] = hasLimitFlag ? 1 : 0;
+
+                        Log("  [%d] %.*s limit=%d", index, (int)nameLen, text + nameStart,
+                            hasLimitFlag ? 1 : 0);
 
                         ++index;
                     }
@@ -1243,42 +1258,65 @@ static void LoadProductionTypeLimits()
     ParseProductionTypes(fileBuf, fileLen);
 }
 
-
-// Развилка внутри FUN_004d04b0 (абс. 0x4D04BC-0x4D04C8, RVA 0xD04BC):
-//   CMP dword ptr[ECX+0x84],0 ; JLE +8 (0xD04C6) ; else XOR AL,AL (0xD04C8, return false)
-// ECX = state. Патч build_confirm_ignore_colonial уже сделал JLE
-// безусловным (JMP), то есть колониальность сама по себе кнопку не
-// блокирует. Здесь добавляем полноценную замену: если состояние
-// колониальное - смотрим индекс типа производства (EBP+0xc -> +0x58)
-// в НАШЕЙ таблице g_limitByLocalSupply; если у типа нет
-// limit_by_local_supply = yes - блокируем (уходим на путь XOR AL,AL),
-// иначе - разрешаем, как обычно.
-static const DWORD RVA_PRODTYPE_GATE_HOOK = 0xD04C6;
+// Развилка внутри FUN_004d04b0 (абс. 0x4D04BC, RVA 0xD04BC):
+//   CMP dword ptr[ECX+0x84],0 ; PUSH EBX ; PUSH ESI ; PUSH EDI
+//   ; JLE +8 (0xD04C6, -> 0xD04D3 продолжение) ; иначе 0xD04C8: XOR AL,AL (return false)
+//
+// ВАЖНО: 0xD04C8 — это НЕ только цель нашей проверки. По всей
+// остальной функции ЕЩЁ ДЕСЯТОК разных условий (доступность товара,
+// разрешение правящей партии, лимит фабрик и т.д.) прыгают именно
+// туда как на общий "return false". Первая версия патча по ошибке
+// перезаписывала 8 байт НАЧИНАЯ С JLE — это стирало и сам 0xD04C8,
+// ломая вообще ВСЕ эти несвязанные проверки (крах при любом вызове
+// функции, что и объясняло вылет на загрузке партии). Правильный
+// патч ставится РАНЬШЕ, с самого CMP (10 байт до JLE включительно:
+// CMP+PUSH EBX+PUSH ESI+PUSH EDI), и НЕ трогает 0xD04C6+ вообще —
+// поэтому 0xD04C8 остаётся целым, и путь "заблокировано" просто
+// прыгает туда как обычно.
+static const DWORD RVA_PRODTYPE_GATE_HOOK = 0xD04BC;
 static const DWORD RVA_PRODTYPE_GATE_RESUME_ALLOW = 0xD04D3;
 static const DWORD RVA_PRODTYPE_GATE_RESUME_BLOCK = 0xD04C8;
-static const unsigned char PRODTYPE_GATE_SIG[2] = { 0x7E, 0x0B };
+static const unsigned char PRODTYPE_GATE_SIG[10] =
+    { 0x83, 0xB9, 0x84, 0x00, 0x00, 0x00, 0x00, 0x53, 0x56, 0x57 };
 static DWORD g_prodTypeGateResumeAllow = 0;
 static DWORD g_prodTypeGateResumeBlock = 0;
 
 __declspec(naked) static void ProdTypeGateThunk()
 {
     __asm {
+        // Воспроизводим переписанные байты (это НЕ цель прыжков извне,
+        // так что их можно спокойно исполнить здесь же).
+        cmp dword ptr [ecx + 0x84], 0
+        push ebx
+        push esi
+        push edi
         jle allow
         push edx
         push eax
         mov eax, dword ptr [ebp + 0x0c]
         test eax, eax
-        jz allow_pop
+        jz do_allow
+        push 0x5C
+        push eax
+        mov edx, g_fnIsBadReadPtr
+        test edx, edx
+        jz clean8_allow
+        call edx
+        test eax, eax
+        jnz do_allow
+        mov eax, dword ptr [ebp + 0x0c]
         mov eax, dword ptr [eax + 0x58]
         cmp eax, MAX_PRODUCTION_TYPES
-        jae allow_pop
+        jae do_allow
         movzx eax, byte ptr [g_limitByLocalSupply + eax]
         test al, al
-        jnz allow_pop
+        jnz do_allow
         pop eax
         pop edx
         jmp dword ptr [g_prodTypeGateResumeBlock]
-    allow_pop:
+    clean8_allow:
+        add esp, 8
+    do_allow:
         pop eax
         pop edx
     allow:
@@ -1289,6 +1327,10 @@ __declspec(naked) static void ProdTypeGateThunk()
 static bool InstallProdTypeGateHook()
 {
     LoadProductionTypeLimits();
+
+    g_fnIsBadReadPtr = (tIsBadReadPtr)GetProcAddress(GetModuleHandleA("kernel32.dll"), "IsBadReadPtr");
+    if (!g_fnIsBadReadPtr)
+        Log("ProdTypeGateHook: IsBadReadPtr не найден - защитная проверка указателя отключена");
 
     unsigned char* hook = (unsigned char*)(g_base + RVA_PRODTYPE_GATE_HOOK);
 
@@ -1301,12 +1343,11 @@ static bool InstallProdTypeGateHook()
     g_prodTypeGateResumeAllow = g_base + RVA_PRODTYPE_GATE_RESUME_ALLOW;
     g_prodTypeGateResumeBlock = g_base + RVA_PRODTYPE_GATE_RESUME_BLOCK;
 
-    unsigned char patch[8];
+    unsigned char patch[10];
     patch[0] = 0xE9;
     *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&ProdTypeGateThunk - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-    patch[6] = 0x90;
-    patch[7] = 0x90;
+    for (int i = 5; i < 10; ++i)
+        patch[i] = 0x90;
 
     DWORD oldProtect = 0;
     if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))

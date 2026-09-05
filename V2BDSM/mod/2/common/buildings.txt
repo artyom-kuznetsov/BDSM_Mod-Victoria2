@@ -8,6 +8,24 @@
 # cost = x #==> extra construction cost (added to goods cost estimations)
 # time = x #==> number of days to build.
 #
+############# RGO FACTORIES
+grain_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 5
+	goods_cost =
+	{
+		grain = 80
+	}
+	time = 30
+	visibility = yes
+	onmap = no
+
+	production_type = grain_factory
+	pop_build_factory = yes
+	default_enabled = yes
+}
 ############# PRIMITIVE FACTORIES ### 18K
 
 lumber_mill = {

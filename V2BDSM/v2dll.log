@@ -1,4 +1,4 @@
----- Install ---- версия 2.10-debug
+---- Install ---- версия 2.19
 base = 00200000
 patch CTechnologyView: слот 11 = 1
 patch CBudgetView: слот 10 = 1
@@ -14,216 +14,122 @@ Patch 'allied_reinforce_150': применён на rva 1D74BE
 Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
 Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
 Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
-Patch 'build_confirm_ignore_colonial': применён на rva 0D04C6
 ProdListVisibilityHook: установлен
-TypeDiagHook: установлен
+LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (34997 байт)
+  [0] primitive_factory_template limit=0
+  [1] grain_factory limit=1
+  [2] aeroplane_factory limit=0
+  [3] barrel_factory limit=0
+  [4] automobile_factory limit=0
+  [5] radio_factory limit=0
+  [6] telephone_factory limit=0
+  [7] electric_gear_factory limit=0
+  [8] machine_parts_factory limit=0
+  [9] synthetic_oil_factory limit=0
+  [10] synthetic_rubber_factory limit=0
+  [11] fuel_refinery limit=0
+  [12] steamer_shipyard limit=0
+  [13] luxury_clothes_factory limit=0
+  [14] luxury_furniture_factory limit=0
+  [15] pharmaceutical_plant limit=0
+  [16] steel_factory limit=0
+  [17] artillery_factory limit=0
+  [18] clipper_shipyard limit=0
+  [19] small_arms_factory limit=0
+  [20] ammunition_factory limit=0
+  [21] furniture_factory limit=0
+  [22] paper_mill limit=0
+  [23] regular_clothes_factory limit=0
+  [24] explosives_factory limit=0
+  [25] fabric_factory limit=0
+  [26] canned_food_factory limit=0
+  [27] dye_factory limit=0
+  [28] cigarette_factory limit=0
+  [29] tea_packaging_factory limit=0
+  [30] coffee_packaging_factory limit=0
+  [31] liquor_distillery limit=0
+  [32] winery limit=0
+  [33] lumber_mill limit=0
+  [34] cement_factory limit=0
+  [35] glass_factory limit=0
+  [36] fertilizer_factory limit=0
+  [37] cattle_ranch limit=0
+  [38] coal_mine limit=0
+  [39] coffee_plantation limit=0
+  [40] cotton_plantation limit=0
+  [41] dye_plantation limit=0
+  [42] fishing_wharf limit=0
+  [43] grain_farm limit=0
+  [44] iron_mine limit=0
+  [45] oil_rig limit=0
+  [46] opium_plantation limit=0
+  [47] orchard limit=0
+  [48] precious_metal_mine limit=0
+  [49] trading_port limit=0
+  [50] rubber_lodge limit=0
+  [51] sheep_ranch limit=0
+  [52] silkworm_ranch limit=0
+  [53] sulphur_mine limit=0
+  [54] tea_plantation limit=0
+  [55] timber_lodge limit=0
+  [56] tobacco_plantation limit=0
+  [57] tropical_wood_lodge limit=0
+  [58] artisan_electric_gear limit=0
+  [59] artisan_machine_parts limit=0
+  [60] artisan_fuel limit=0
+  [61] artisan_luxury_clothes limit=0
+  [62] artisan_luxury_furniture limit=0
+  [63] artisan_steel limit=0
+  [64] artisan_fertilizer limit=0
+  [65] artisan_explosives limit=0
+  [66] artisan_cement limit=0
+  [67] artisan_glass limit=0
+  [68] artisan_artillery limit=0
+  [69] artisan_artillery1 limit=0
+  [70] artisan_artillery2 limit=0
+  [71] artisan_artillery3 limit=0
+  [72] artisan_artillery4 limit=0
+  [73] artisan_artillery5 limit=0
+  [74] artisan_ammunition limit=0
+  [75] artisan_ammunition1 limit=0
+  [76] artisan_ammunition2 limit=0
+  [77] artisan_ammunition3 limit=0
+  [78] artisan_canned_food limit=0
+  [79] artisan_canned_food1 limit=0
+  [80] artisan_canned_food2 limit=0
+  [81] artisan_canned_food3 limit=0
+  [82] artisan_canned_food4 limit=0
+  [83] artisan_canned_food5 limit=0
+  [84] artisan_canned_food6 limit=0
+  [85] artisan_clipper limit=0
+  [86] artisan_clipper1 limit=0
+  [87] artisan_clipper2 limit=0
+  [88] artisan_clipper3 limit=0
+  [89] artisan_clipper4 limit=0
+  [90] artisan_clipper5 limit=0
+  [91] artisan_small_arms limit=0
+  [92] artisan_small_arms1 limit=0
+  [93] artisan_small_arms2 limit=0
+  [94] artisan_lumber limit=0
+  [95] artisan_furniture limit=0
+  [96] artisan_paper limit=0
+  [97] artisan_fabric limit=0
+  [98] artisan_regular_clothes limit=0
+  [99] artisan_cigarettes limit=0
+  [100] artisan_liquor limit=0
+  [101] artisan_winery limit=0
+  [102] artisan_tea limit=0
+  [103] artisan_coffee limit=0
+ParseProductionTypes: разобрано 104 типов производства (шаблонов пропущено: 58)
+ProdTypeGateHook: установлен
 PriceDelta: 25 сотых процента, множитель 163
-VersionLabel: 'V2 v3.04 + V2DLL v2.10-debug' (len=28), пещера 01CD0000
+VersionLabel: 'V2 v3.04 + V2DLL v2.19' (len=22), пещера 01CD0000
 Install: done
 DllMain: attach, Install = 1
-Update[CTechnologyView]: вызван, view=5091B960
+Update[CTechnologyView]: вызван, view=5099BB68
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
-DEBUG TypeCheck: state=499F1028 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3AEF0 param2=28B709F8 param3=0 field0=12573376(0xBFDAC0) field58=2(0x2)
-DEBUG TypeCheck: state=38F3CC28 param2=28B709F8 param3=0 field0=12573376(0xBFDAC0) field58=2(0x2)
-DEBUG TypeCheck: state=38F3DC18 param2=28B709F8 param3=0 field0=12573376(0xBFDAC0) field58=2(0x2)
-DEBUG TypeCheck: state=38F3C430 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3D178 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3DEC0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4C330 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F498B0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44900 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44900 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47B78 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47B78 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44658 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44658 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48618 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F490B8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F450F8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48618 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48B68 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48B68 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46B88 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46B88 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F488C0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F488C0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4D870 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4D870 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F51D80 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=38F51D80 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=38F4BDE0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4BDE0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44900 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47B78 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44658 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48618 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48B68 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46B88 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F488C0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4D870 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F51D80 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=38F4BDE0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=3BFB6B98 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3BFBB350 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3BFBB350 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3BF992C8 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3BF992C8 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=39547830 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3954D7D0 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3954D7D0 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=39271D40 param2=28B709F8 param3=0 field0=12573376(0xBFDAC0) field58=2(0x2)
-DEBUG TypeCheck: state=499EE5A8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=499EFD90 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=499EE5A8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4EB08 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F52D70 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F502F0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F50AE8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4EDB0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F51588 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5E4B8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5AF98 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5B240 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5BCE0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5D4C8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5BF88 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5D220 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F59260 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F59508 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F597B0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F59508 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F542B0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F552A0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F55548 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F59A58 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5A250 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5A7A0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F59D00 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F59FA8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5AA48 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F62720 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F631C0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F60C90 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F60740 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F60F38 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F609E8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F611E0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F61C80 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F61488 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F63468 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F63710 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F639B8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F61730 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5E760 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F60C90 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F43E60 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=3BFBB350 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3BF992C8 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=3954D7D0 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=499EE5A8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F59508 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F60C90 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F354A0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F36F30 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F371D8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F38718 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F37480 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F359F0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F37728 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F379D0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F37C78 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F38C68 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F381C8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F38470 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F38F10 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F389C0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F35F40 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F391B8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F33F60 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F34208 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F39C58 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F468E0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F478D0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48E10 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F453A0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F45648 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4DDC0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4E068 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F381C8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3B990 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3C980 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3CED0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4AB48 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4A0A8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4C088 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4AB48 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F39708 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3B440 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3AC48 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F399B0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3AC48 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F2A2A8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F34758 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44108 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F443B0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F458F0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4C880 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4B890 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4D320 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4D5C8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4E310 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F2A2A8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44BA8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44BA8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46E30 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F48370 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46E30 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46390 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46390 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3BC38 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3BC38 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F45E40 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F45E40 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47628 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47628 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47380 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47380 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F512E0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F512E0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F52578 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F52AC8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4F850 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F52578 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4FAF8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F50840 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5ECB0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F5EF58 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F64C50 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4FAF8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F51AD8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F51AD8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4DB18 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4A350 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4B098 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4ADF0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F43118 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4A350 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F55FE8 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=38F55FE8 param2=28B73818 param3=0 field0=12573376(0xBFDAC0) field58=29(0x1D)
-DEBUG TypeCheck: state=38F381C8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F4AB48 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3AC48 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F2A2A8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F44BA8 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46E30 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F46390 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F3BC38 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F45E40 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47628 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F47380 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-DEBUG TypeCheck: state=38F512E0 param2=2A8DAB28 param3=0 field0=12573376(0xBFDAC0) field58=35(0x23)
-Update[CProductionView]: вызван, view=3343C408
+Update[CProductionView]: вызван, view=48EBF850
 SetupHideColonialButton: подписана
-Update[CProductionView]: вызван, view=3343C408
+Update[CProductionView]: вызван, view=48EBF850
+HideColonialStates: включено
