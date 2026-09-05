@@ -1,4 +1,4 @@
----- Install ---- версия 2.20
+---- Install ---- версия 2.33
 base = 00200000
 patch CTechnologyView: слот 11 = 1
 patch CBudgetView: слот 10 = 1
@@ -14,8 +14,9 @@ Patch 'allied_reinforce_150': применён на rva 1D74BE
 Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
 Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
 Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
 ProdListVisibilityHook: установлен
-LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (25853 байт)
+LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (25846 байт)
   [0] machine_part_user_template limit=0
   [1] stock_exchange_template limit=0
   [2] aeroplane_factory limit=0
@@ -87,13 +88,12 @@ LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production
 ParseProductionTypes: разобрано 68 типов производства (шаблонов пропущено: 66)
 ProdTypeGateHook: установлен
 PriceDelta: 25 сотых процента, множитель 163
-VersionLabel: 'V2 v3.04 + V2DLL v2.20' (len=22), пещера 019D0000
+VersionLabel: 'V2 v3.04 + V2DLL v2.33' (len=22), пещера 01CD0000
 Install: done
 DllMain: attach, Install = 1
-Update[CTechnologyView]: вызван, view=6FA03768
+Update[CTechnologyView]: вызван, view=6F9A42F8
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
-Update[CProductionView]: вызван, view=4E57D1E0
+Update[CProductionView]: вызван, view=4A44EB40
 SetupHideColonialButton: подписана
-Update[CProductionView]: вызван, view=4E57D1E0
-HideColonialStates: включено
+Update[CProductionView]: вызван, view=4A44EB40

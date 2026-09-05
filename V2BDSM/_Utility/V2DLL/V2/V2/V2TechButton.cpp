@@ -31,7 +31,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.20"
+#define MOD_VERSION "2.33"
 
 // Лог пишется в v2dll.log рядом с exe, очищается при запуске.
 // Для раздачи ставить 0: фильтр решений вызывается тысячами раз за тик.
@@ -994,6 +994,19 @@ static const int MAX_PRODUCTION_TYPES = 512;
 static unsigned char g_limitByLocalSupply[MAX_PRODUCTION_TYPES];
 static bool g_productionTypesLoaded = false;
 
+// Игровой рантайм присваивает типам производства СВОЙ внутренний
+// номер (поле +0x58 у объекта типа), который НЕ совпадает с порядком
+// объявления в production_types.txt - подтверждено замером (cattle_factory
+// в файле идёт под номером 51, а в рантайме её же объект несёт [+0x58]=1).
+// Поэтому сверяемся не по индексу, а по имени: сохраняем имя каждого
+// типа при разборе файла и на рантайме ищем совпадение по строке,
+// которую движок хранит в самом объекте типа по смещению +0x20.
+static const int PRODTYPE_NAME_MAX = 32;
+static char g_productionTypeNames[MAX_PRODUCTION_TYPES][PRODTYPE_NAME_MAX];
+static int  g_productionTypeCount = 0;
+
+static const int OFF_PRODTYPE_NAME = 0x20;
+
 static void GetOwnDllDirectory(char* outDir, size_t outSize)
 {
     outDir[0] = 0;
@@ -1189,7 +1202,16 @@ static void ParseProductionTypes(const char* text, size_t len)
                         }
 
                         if (index < MAX_PRODUCTION_TYPES)
+                        {
                             g_limitByLocalSupply[index] = hasLimitFlag ? 1 : 0;
+
+                            size_t copyLen = nameLen < (size_t)(PRODTYPE_NAME_MAX - 1)
+                                ? nameLen : (size_t)(PRODTYPE_NAME_MAX - 1);
+                            memcpy(g_productionTypeNames[index], text + nameStart, copyLen);
+                            g_productionTypeNames[index][copyLen] = 0;
+
+                            g_productionTypeCount = index + 1;
+                        }
 
                         Log("  [%d] %.*s limit=%d", index, (int)nameLen, text + nameStart,
                             hasLimitFlag ? 1 : 0);
@@ -1281,9 +1303,80 @@ static const unsigned char PRODTYPE_GATE_SIG[10] =
 static DWORD g_prodTypeGateResumeAllow = 0;
 static DWORD g_prodTypeGateResumeBlock = 0;
 
+// Указатель param_2 ([EBP+0xC] внутри FUN_004d04b0) - это и есть
+// объект типа производства; имя типа (как в production_types.txt)
+// хранится в нём самом по смещению OFF_PRODTYPE_NAME в виде обычной
+// C-строки. Сверяем эту строку с именами, сохранёнными при разборе
+// файла, и смотрим найденный по имени индекс в g_limitByLocalSupply -
+// НЕ читаем числовой индекс из самого объекта (см. комментарий у
+// объявления g_productionTypeNames: он не совпадает с файловым).
+static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
+{
+    if (!typePtr)
+        return 0;
+
+    const char* src = (const char*)typePtr + OFF_PRODTYPE_NAME;
+    char name[PRODTYPE_NAME_MAX];
+
+    int i = 0;
+    for (; i < PRODTYPE_NAME_MAX - 1; ++i)
+    {
+        char c = src[i];
+        if (c == 0)
+            break;
+        name[i] = c;
+    }
+    name[i] = 0;
+
+    for (int t = 0; t < g_productionTypeCount; ++t)
+    {
+        if (strcmp(g_productionTypeNames[t], name) == 0)
+            return g_limitByLocalSupply[t] ? 1 : 0;
+    }
+    return 0;
+}
+
+static DWORD g_prodTypeGateWhitelisted = 0;
+
 __declspec(naked) static void ProdTypeGateThunk()
 {
     __asm {
+        // Сначала, ДО воспроизведения затёртых байт и ветвления,
+        // одним изолированным блоком считаем "разрешено ли по имени".
+        // ECX (состояние) сохраняем на всё время блока одной парой
+        // push/pop - так же, как это делала более ранняя диагностика,
+        // которая отработала без сбоев; вложенные push/pop вокруг
+        // вызова C-функции ПОСРЕДИ уже разветвлённой логики (предыдущая
+        // версия патча) на практике приводили к падению игры при
+        // загрузке партии - как именно, не установлено, но структура
+        // "один вызов - один save/restore - только потом ветвление"
+        // проверена и безопасна.
+        push ecx
+
+        mov eax, dword ptr [ebp + 0x0c]
+        test eax, eax
+        jz faulty_allow
+        push 0x5C
+        push eax
+        mov edx, g_fnIsBadReadPtr
+        test edx, edx
+        jz faulty_allow_clean8
+        call edx
+        test eax, eax
+        jnz faulty_allow
+        push dword ptr [ebp + 0x0c]
+        call IsProdTypeWhitelistedByName
+        add esp, 4
+        jmp store_result
+    faulty_allow_clean8:
+        add esp, 8
+    faulty_allow:
+        mov eax, 1   // указатель плохой/пуст - безопасный откат: разрешаем, как раньше
+    store_result:
+        mov dword ptr [g_prodTypeGateWhitelisted], eax
+
+        pop ecx
+
         // Воспроизводим переписанные байты (это НЕ цель прыжков извне,
         // так что их можно спокойно исполнить здесь же).
         cmp dword ptr [ecx + 0x84], 0
@@ -1291,34 +1384,9 @@ __declspec(naked) static void ProdTypeGateThunk()
         push esi
         push edi
         jle allow
-        push edx
-        push eax
-        mov eax, dword ptr [ebp + 0x0c]
-        test eax, eax
-        jz do_allow
-        push 0x5C
-        push eax
-        mov edx, g_fnIsBadReadPtr
-        test edx, edx
-        jz clean8_allow
-        call edx
-        test eax, eax
-        jnz do_allow
-        mov eax, dword ptr [ebp + 0x0c]
-        mov eax, dword ptr [eax + 0x58]
-        cmp eax, MAX_PRODUCTION_TYPES
-        jae do_allow
-        movzx eax, byte ptr [g_limitByLocalSupply + eax]
-        test al, al
-        jnz do_allow
-        pop eax
-        pop edx
+        cmp dword ptr [g_prodTypeGateWhitelisted], 0
+        jnz allow
         jmp dword ptr [g_prodTypeGateResumeBlock]
-    clean8_allow:
-        add esp, 8
-    do_allow:
-        pop eax
-        pop edx
     allow:
         jmp dword ptr [g_prodTypeGateResumeAllow]
     }
@@ -1697,6 +1765,23 @@ static BytePatch EXE_PATCHES[] =
     { "build_factory_button_enable_ignore_colonial", 0, 0x12E977, 2,
         { 0x7F, 0x5F },
         { 0x90, 0x90 }, true },
+
+    // FUN_004d0e70 (абс. 0x4D0E70) - отдельная, независимая от
+    // FUN_004d04b0 проверка, вызываемая ТОЛЬКО для production_type с
+    // заполненным полем +300 (привязка к "локальному источнику" -
+    // судя по всему заполняется именно у limit_by_local_supply=yes
+    // типов, поэтому обычные фабрики её вообще не проходят). Внутри:
+    // if (тип_источника == 2 && состояние.colonial > 0 && <совпадение
+    // владельца/тега>) return false. Это и есть настоящая причина
+    // "не могу построить collapsed-РГО-фабрику именно в колонии" -
+    // никак не связанная ни с нашим гейтом, ни с limit_by_local_supply
+    // как таковым. Меняем JLE (0x7E) на безусловный JMP (0xEB) на
+    // rva 0xD0E9D - переход на 0xD0ED4 (пропуск блокировки) теперь
+    // происходит всегда, независимо от colonial, а остальные условия
+    // функции (владелец/тег и т.д.) продолжают работать как раньше.
+    { "local_supply_factory_ignore_colonial", 0, 0xD0E9D, 2,
+        { 0x7E, 0x35 },
+        { 0xEB, 0x35 }, true },
 };
 
 static const int EXE_PATCH_COUNT = sizeof(EXE_PATCHES) / sizeof(EXE_PATCHES[0]);
