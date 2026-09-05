@@ -30,9 +30,9 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "1.3"
+#define MOD_VERSION "1.7"
 
-// Лог пишется в v2button.log рядом с exe, очищается при запуске.
+// Лог пишется в v2dll.log рядом с exe, очищается при запуске.
 // Для раздачи ставить 0: фильтр решений вызывается тысячами раз за тик.
 #define ENABLE_LOG 1
 
@@ -58,7 +58,7 @@ static void Log(const char* fmt, ...)
 {
 #if ENABLE_LOG
     FILE* f = 0;
-    if (fopen_s(&f, "v2button.log", g_logStarted ? "a" : "w") != 0 || !f)
+    if (fopen_s(&f, "v2dll.log", g_logStarted ? "a" : "w") != 0 || !f)
         return;
 
     g_logStarted = true;
@@ -106,7 +106,10 @@ static const ViewDef VIEWS[] =
     { "CTechnologyView", 0xA17FA4, 11, false, 0x60, 0x4C, "selected_tech_window" },
     { "CBudgetView",     0xA059F0, 10, true,  0x5C, 0x4C, 0                      },
     { "CProductionView", 0xA0FECC, 10, true,  0x00, 0x4C, 0                      },
+    { "CPoliticsView",   0xA0E458, 10, true,  0x00, 0x4C, 0                      },
 };
+
+static const int VIEW_POLITICS = 3;
 
 // Кнопки. view — номер строки в VIEWS, начиная с нуля.
 struct ButtonDef
@@ -485,6 +488,97 @@ static void WriteStringInPlace(void* object, int offset, const char* text)
 }
 
 
+// Строка тултипа "PLURALITY_CHANGE" в игре хардкожена в exe и всегда
+// добавляется как "<локализация>: <число>" — вырезать её сборку внутри
+// движка рискованно (рядом идут байты состояния раскрутки стека C++
+// исключений для временных std::string). Вместо этого текст локализации
+// уже очищен (localisation/*.csv), и от строки остаётся голое число
+// вида "0.00" на отдельной строке. Убираем такие строки уже из готового
+// текста тултипа, после того как оригинал его построил.
+static bool IsBareNumberLine(const char* s, size_t len)
+{
+    // Пустая метка в локализации хранится как один пробел (иначе игра
+    // подставляет вместо неё сырой ключ), поэтому строка выглядит как
+    // " : 0.00" — пропускаем ведущие пробелы/табы/двоеточие тоже.
+    while (len && (s[0] == ' ' || s[0] == '\t' || s[0] == ':'))
+    {
+        ++s;
+        --len;
+    }
+    while (len && (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\r'))
+        --len;
+
+    if (len == 0)
+        return false;
+
+    bool sawDigit = false;
+    size_t i = 0;
+    while (i < len)
+    {
+        unsigned char c = (unsigned char)s[i];
+
+        // Цветовой код Paradox: 0xA7 + один байт (например §G...§!) —
+        // невидим на экране, пропускаем как есть.
+        if (c == 0xA7 && i + 1 < len)
+        {
+            i += 2;
+            continue;
+        }
+
+        if (c >= '0' && c <= '9')
+        {
+            sawDigit = true;
+            ++i;
+            continue;
+        }
+        if (c == '.' || c == '-' || c == '+')
+        {
+            ++i;
+            continue;
+        }
+        return false;
+    }
+    return sawDigit;
+}
+
+static void StripBareNumberLines(void* retBuf)
+{
+    const char* text = GStrText(retBuf);
+    if (!text || !*text)
+        return;
+
+    char buf[1024];
+    size_t n = strlen(text);
+    if (n >= sizeof(buf))
+        n = sizeof(buf) - 1;
+    memcpy(buf, text, n);
+    buf[n] = 0;
+
+    char out[1024];
+    size_t o = 0;
+    size_t lineStart = 0;
+
+    for (size_t i = 0; i <= n; ++i)
+    {
+        if (i == n || buf[i] == '\n')
+        {
+            size_t lineLen = i - lineStart;
+            if (!IsBareNumberLine(buf + lineStart, lineLen))
+            {
+                memcpy(out + o, buf + lineStart, lineLen);
+                o += lineLen;
+                if (i < n)
+                    out[o++] = '\n';
+            }
+            lineStart = i + 1;
+        }
+    }
+    out[o] = 0;
+
+    GStrSet(retBuf, out);
+}
+
+
 // Контейнер окна постройки завода, взятый через поле вида.
 static void* BuildFactoryContainer(void* productionView)
 {
@@ -589,6 +683,8 @@ static void OnTooltip(int viewIndex, void* retBuf, void* element)
 
     const char* name = GStrText(VCall0(element, VT_GET_NAME));
 
+    if (viewIndex == VIEW_POLITICS && strcmp(name, "plurality") == 0)
+        StripBareNumberLines(retBuf);
 
     for (int i = 0; i < INDICATOR_COUNT && i < MAX_INDICATORS; ++i)
     {
@@ -951,6 +1047,14 @@ static BytePatch EXE_PATCHES[] =
     { "max_relative_price",  0, 0xA45C28, 8,
         { 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x04, 0x41 },
         { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x39, 0x41 }, true },
+
+    // Ежемесячный рост plurality от средней сознательности страны.
+    // Было: add eax,[ebx+0x1A8]  (eax = вклад от consciousness, [ebx+0x1A8] = plurality)
+    // Стало: mov eax,[ebx+0x1A8] — вклад отбрасывается, plurality не меняется
+    // от этой формулы; остальная часть функции (клампы, прочие поля) не тронута,
+    // второй писатель plurality (скриптовый эффект "plurality = X" из событий,
+    // rva 0x496470) тоже не тронут.
+    { "consciousness_plurality_growth", 0, 0x10C5DE, 1, { 0x03 }, { 0x8B }, true },
 };
 
 static const int EXE_PATCH_COUNT = sizeof(EXE_PATCHES) / sizeof(EXE_PATCHES[0]);

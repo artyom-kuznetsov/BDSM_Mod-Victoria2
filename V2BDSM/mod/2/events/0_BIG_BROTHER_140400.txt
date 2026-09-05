@@ -1239,19 +1239,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { NOT = { economic_system_rgroup = planned_economy_ref 	}	}	clr_country_flag = planned_economy_cflag	}
 
 		
-		### STABILITY NULLIFIER ###
-		any_country = { limit = { average_consciousness = 0.5 } plurality = -0.011 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 1 } plurality = -0.022 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 2 } plurality = -0.044 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 3 } plurality = -0.066 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 4 } plurality = -0.088 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 5 } plurality = -0.111 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 6 } plurality = -0.133 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 7 } plurality = -0.155 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 8 } plurality = -0.177 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 9 } plurality = -0.200 set_country_flag = stability_adjusted }
-		any_country = { limit = { average_consciousness = 10 } plurality = -0.222 set_country_flag = stability_adjusted }
-		
 		any_country = {
 			#Militancy Spread based on Stability
 			#Rich Strata Against the government
@@ -1403,6 +1390,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = { limit = { exists = yes wage_reform = good_minimum_wage }			plurality = 0.01 }
 		
 		### MODIFIERS ###
+		any_country = { limit = { has_country_modifier = choshu_modifier } plurality = 0.05 }
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_navy } plurality = -0.05 }
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_economy } plurality = -0.1 }
