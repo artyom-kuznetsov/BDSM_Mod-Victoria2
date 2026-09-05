@@ -1295,7 +1295,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 		
 		#Stability suffering from war
 		any_country = {	limit = { war = yes } plurality = -0.05 }
-		any_country = {	limit = { is_mobilised = yes } plurality = -0.1 }
+		any_country = {	limit = { is_mobilised = yes } plurality = -0.05 }
 		
 		#Stability increases with low militancy
 		any_country = {	limit = { NOT = { average_militancy = 2 } } plurality = 0.025 }
@@ -1308,10 +1308,10 @@ country_event = { # MCL # MONTHLY CLEANUP
 		any_country = {	limit = { average_militancy = 4 } plurality = -0.0125 }
 		any_country = {	limit = { average_militancy = 5 } plurality = -0.025 }
 		any_country = {	limit = { average_militancy = 6 } plurality = -0.025 }
-		any_country = {	limit = { average_militancy = 7 } plurality = -0.05 }
-		any_country = {	limit = { average_militancy = 8 } plurality = -0.075 }
-		any_country = {	limit = { average_militancy = 9 } plurality = -0.075 }
-		any_country = {	limit = { average_militancy = 10 } plurality = -0.1 }
+		any_country = {	limit = { average_militancy = 7 } plurality = -0.025 }
+		any_country = {	limit = { average_militancy = 8 } plurality = -0.025 }
+		any_country = {	limit = { average_militancy = 9 } plurality = -0.025 }
+		any_country = {	limit = { average_militancy = 10 } plurality = -0.025 }
 		
 		#Stability diminishing returns
 		any_country = {	limit = { plurality = 50 } plurality = -0.05 }
@@ -1396,9 +1396,11 @@ country_event = { # MCL # MONTHLY CLEANUP
 		#Reforms
 		any_country = { limit = { exists = yes ai = no public_meetings = yes_meeting } 		plurality = -0.02 }
 		any_country = { limit = { exists = yes citizens_rights = primary_culture_only } 	plurality = 0.02 }
-		any_country = { limit = { exists = yes citizens_rights = all_voting_pops }			plurality = -0.03 }
+		any_country = { limit = { exists = yes citizens_rights = all_voting_pops }			plurality = -0.01 }
+		any_country = { limit = { exists = yes penal_system = capital_punishment }			plurality = -0.01 }
 		any_country = { limit = { exists = yes penal_system = incarceration }				plurality = -0.01 }
-		any_country = { limit = { exists = yes penal_system = rehabilitation }				plurality = 0.02 }
+		any_country = { limit = { exists = yes penal_system = rehabilitation }				plurality = -0.02 }
+		any_country = { limit = { exists = yes wage_reform = good_minimum_wage }			plurality = 0.01 }
 		
 		### MODIFIERS ###
 		any_country = { limit = { has_country_modifier = civil_war_aftermath_army } plurality = -0.05 }

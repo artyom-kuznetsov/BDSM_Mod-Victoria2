@@ -1081,6 +1081,17 @@ nationalist_rebels = {
 			country = { civilized = no }
 		}
 		modifier = {
+			factor = 0
+			country = {
+				OR = {
+					tag = SMA
+					tag = MST
+					tag = LRG
+					tag = HUG
+				}
+			}
+		}
+		modifier = {
 			factor = 0.01
 			is_primary_culture = yes
 			location = { is_core = THIS }
