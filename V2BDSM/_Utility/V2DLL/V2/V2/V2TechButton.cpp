@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <intrin.h>
+#include <ctype.h>
 
 #include "lua51_exports.h"
 
@@ -30,7 +31,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "1.8"
+#define MOD_VERSION "2.10-debug"
 
 // Лог пишется в v2dll.log рядом с exe, очищается при запуске.
 // Для раздачи ставить 0: фильтр решений вызывается тысячами раз за тик.
@@ -105,7 +106,7 @@ static const ViewDef VIEWS[] =
 {
     { "CTechnologyView", 0xA17FA4, 11, false, 0x60, 0x4C, "selected_tech_window" },
     { "CBudgetView",     0xA059F0, 10, true,  0x5C, 0x4C, 0                      },
-    { "CProductionView", 0xA0FECC, 10, true,  0x00, 0x4C, 0                      },
+    { "CProductionView", 0xA0FECC, 10, true,  0x120, 0x4C, 0                     },
     { "CPoliticsView",   0xA0E458, 10, true,  0x00, 0x4C, 0                      },
 };
 
@@ -269,6 +270,31 @@ static void* VCall1(void* obj, int byteSlot, void* arg)
     void** vt = *(void***)obj;
     tCallOneArg fn = (tCallOneArg)vt[byteSlot / 4];
     return fn(obj, 0, arg);
+}
+
+
+// Имя класса объекта через RTTI (MSVC x86): перед таблицей виртуальных
+// функций лежит указатель на CompleteObjectLocator, у него 4-е поле —
+// указатель на TypeDescriptor, а в нём с +8 лежит "исковерканное" имя
+// вида ".?AVCProvinceView@@". Не работает для классов без RTTI/vtable.
+static const char* GetRTTIClassName(void* obj)
+{
+    if (!obj)
+        return "(null)";
+
+    void** vtable = *(void***)obj;
+    if (!vtable)
+        return "(no vtable)";
+
+    DWORD* completeObjectLocator = *(DWORD**)((unsigned char*)vtable - 4);
+    if (!completeObjectLocator)
+        return "(no RTTI)";
+
+    DWORD* typeDescriptor = (DWORD*)completeObjectLocator[3];
+    if (!typeDescriptor)
+        return "(no RTTI)";
+
+    return (const char*)typeDescriptor + 8;
 }
 
 
@@ -770,6 +796,531 @@ static bool SetupButtons(int viewIndex, void* view)
 
 
 // ---------------------------------------------------------------
+// Кнопка "Скрыть колонии" в окне производства (вкладка "Фабрики").
+//
+// Своя, отдельная от BUTTONS[]/THUNKS[] подписка: та система жмёт
+// на MakeDecision, а тут нужен обычный флаг + перерисовка списка.
+// Склейка берётся из offGlue (для CProductionView это 0x120 —
+// найдено в конструкторе FUN_006ee930: param_1[0x48] — единственный
+// там CButtonObserverGlue<CProductionView>, чей колбэк — сам
+// FUN_006f83b0, обработчик кликов по факторийным кнопкам), но
+// клонируется и патчится вручную, в стороне от g_glue[]/THUNKS[],
+// чтобы не задевать существующую систему решений.
+//
+// FUN_006f3e70 (обновление списка вкладки "Фабрики") читает "this"
+// не из ECX/стека, а из EDI, оставшегося от вызвавшей её функции
+// (FUN_006f83b0, обработчик кликов по кнопкам этой вкладки) — поэтому
+// вызываем её сами, выставив EDI вручную.
+// ---------------------------------------------------------------
+
+static bool          g_hideColonialStates = false;
+static void*         g_hideColonialView = 0;
+static void*         g_hideColonialConfiguredView = 0;
+static unsigned char g_hideColonialGlue[GLUE_SIZE];
+
+static const DWORD RVA_PRODUCTION_REFRESH_FACTORIES = 0x2F3E70;  // FUN_006f3e70
+
+static void __cdecl OnHideColonialClicked()
+{
+    g_hideColonialStates = !g_hideColonialStates;
+    Log("HideColonialStates: %s", g_hideColonialStates ? "включено" : "выключено");
+
+    if (!g_hideColonialView)
+        return;
+
+    void* view = g_hideColonialView;
+    void* fn = (void*)(g_base + RVA_PRODUCTION_REFRESH_FACTORIES);
+
+    __asm {
+        pushad
+        mov edi, view
+        call fn
+        popad
+    }
+}
+
+__declspec(naked) static void HideColonialThunk()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        pushad
+        call OnHideColonialClicked
+        popad
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+static bool SetupHideColonialButton(void* view)
+{
+    unsigned char* v = (unsigned char*)view;
+    const ViewDef& vd = VIEWS[2];  // CProductionView
+
+    void* container = *(void**)(v + vd.offContainer);
+    if (!container)
+        return false;
+
+    GStr sWindow;
+    MakeStr(&sWindow, g_nameStorage, sizeof(g_nameStorage), "factory_buttons");
+
+    void* host = VCall1(container, VT_FIND_WINDOW, &sWindow);
+    if (!host)
+    {
+        Log("SetupHideColonialButton: окно 'factory_buttons' не найдено");
+        return false;
+    }
+
+    GStr sButton;
+    MakeStr(&sButton, g_nameStorage, sizeof(g_nameStorage), "hide_colonial_states");
+
+    void* button = VCall1(host, VT_FIND_CHILD, &sButton);
+    if (!button)
+    {
+        Log("SetupHideColonialButton: кнопка 'hide_colonial_states' не найдена");
+        return false;
+    }
+
+    memcpy(g_hideColonialGlue, v + vd.offGlue, GLUE_SIZE);
+    *(void**)(g_hideColonialGlue + OFF_GLUE_METHOD) = HideColonialThunk;
+
+    void* observable = (unsigned char*)button + OFF_OBSERVABLE;
+    VCall1(observable, VT_ADD_OBSERVER, g_hideColonialGlue);
+
+    g_hideColonialView = view;
+
+    Log("SetupHideColonialButton: подписана");
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Видимость строк в списке вкладки "Фабрики" (FUN_006f3e70).
+//
+// Развилка (абс. 0x6F424B, RVA 0x2F424B):
+//   CMP dword ptr[ECX+0x84],0 ; JLE +8   (ECX = указатель на state,
+//   уже загружен вызывающим кодом чуть раньше)
+//   CMP ESI,EBX ; JZ <пропустить строку>  (ESI = кол-во уже
+//   построенных фабрик этой категории в регионе)
+// Ванильно: колониальный регион без построенных фабрик пропускается
+// безусловно, минуя даже обычную проверку "Скрыть свободные" (эта
+// часть уже нейтрализована — колониальность сама по себе перестала
+// быть отдельным условием). Добавляем сюда третий, наш собственный
+// флаг: если g_hideColonialStates включён, колониальный регион
+// скрывается всегда, независимо от "Скрыть свободные" и наличия
+// построенных фабрик — как и просил пользователь.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_PRODLIST_HOOK = 0x2F424B;
+static const DWORD RVA_PRODLIST_RESUME_SHOW = 0x2F4255;
+static const DWORD RVA_PRODLIST_RESUME_SKIP = 0x2F42DE;
+// Проверяем только первые 2 байта (JLE +8) — тот же якорь, что уже
+// подтверждён рабочим в версии 2.8 простым байт-патчем. Байты 3-10
+// (CMP ESI,EBX ; JZ) переписываются вслепую — их кодировка (39 DE
+// или 3B F3 для CMP регистр-регистр — не проверялось напрямую) нашей
+// логике не важна, старый код там больше не выполняется.
+static const unsigned char PRODLIST_SIG[2] = { 0x7E, 0x08 };
+static DWORD g_prodListResumeShow = 0;
+static DWORD g_prodListResumeSkip = 0;
+
+__declspec(naked) static void ProdListVisibilityThunk()
+{
+    __asm {
+        cmp byte ptr [g_hideColonialStates], 0
+        jz show
+        cmp dword ptr [ecx + 0x84], 0
+        jle show
+        jmp dword ptr [g_prodListResumeSkip]
+    show:
+        jmp dword ptr [g_prodListResumeShow]
+    }
+}
+
+static bool InstallProdListVisibilityHook()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_PRODLIST_HOOK);
+
+    if (memcmp(hook, PRODLIST_SIG, sizeof(PRODLIST_SIG)) != 0)
+    {
+        Log("ProdListVisibilityHook: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_prodListResumeShow = g_base + RVA_PRODLIST_RESUME_SHOW;
+    g_prodListResumeSkip = g_base + RVA_PRODLIST_RESUME_SKIP;
+
+    unsigned char patch[10];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&ProdListVisibilityThunk - ((DWORD)hook + 5);
+    for (int i = 5; i < 10; ++i)
+        patch[i] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("ProdListVisibilityHook: установлен");
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Запрет конкретных фабрик в колониях по limit_by_local_supply.
+//
+// FUN_004d04b0(param_1=state, param_2=тип_производства, param_3)
+// — единственная проверка, которая реально решает судьбу кнопки
+// "Построить" (см. build_confirm_ignore_colonial). Внутри неё
+// param_2+0x58 хранит порядковый номер типа производства из
+// production_types.txt — подтверждено вживую диагностикой:
+// живые значения 2/29/35 совпали с automobile_factory/
+// fertilizer_factory/fishing_wharf при подсчёте БЕЗ учёта
+// template-блоков (blocks, чьё имя встречается как значение
+// "template = X" где-то в файле).
+//
+// Читаем production_types.txt сами (рядом с DLL, с проверкой
+// mod\2\common\ как приоритетного оверрайда) и строим таблицу
+// "разрешено ли строить в колонии" по тому же индексу: разрешено,
+// если у типа явно указано limit_by_local_supply = yes.
+// ---------------------------------------------------------------
+
+static const int MAX_PRODUCTION_TYPES = 512;
+static unsigned char g_limitByLocalSupply[MAX_PRODUCTION_TYPES];
+static bool g_productionTypesLoaded = false;
+
+static void GetOwnDllDirectory(char* outDir, size_t outSize)
+{
+    outDir[0] = 0;
+
+    HMODULE hMod = 0;
+    if (!GetModuleHandleExA(
+            GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+            (LPCSTR)&GetOwnDllDirectory, &hMod))
+        return;
+
+    char path[MAX_PATH];
+    if (!GetModuleFileNameA(hMod, path, sizeof(path)))
+        return;
+
+    char* lastSlash = strrchr(path, '\\');
+    if (!lastSlash)
+        return;
+
+    *lastSlash = 0;
+    strncpy_s(outDir, outSize, path, _TRUNCATE);
+}
+
+static bool IsIdentChar(char c)
+{
+    return isalnum((unsigned char)c) || c == '_';
+}
+
+// Читает файл целиком в статический буфер. Возвращает false, если
+// файла нет или он не помещается.
+static bool ReadWholeFile(const char* path, char* buf, size_t bufSize, size_t* outLen)
+{
+    FILE* f = 0;
+    if (fopen_s(&f, path, "rb") != 0 || !f)
+        return false;
+
+    *outLen = fread(buf, 1, bufSize - 1, f);
+    buf[*outLen] = 0;
+    fclose(f);
+    return true;
+}
+
+static void ParseProductionTypes(const char* text, size_t len)
+{
+    // Проход 1: собрать имена блоков, использованных как "template = X"
+    // (они сами по себе не являются типами производства и не участвуют
+    // в нумерации).
+    static char templateNames[256][64];
+    int templateCount = 0;
+
+    for (size_t i = 0; i + 8 < len; ++i)
+    {
+        if (strncmp(text + i, "template", 8) != 0)
+            continue;
+        if (i > 0 && IsIdentChar(text[i - 1]))
+            continue;  // часть более длинного идентификатора
+        if (IsIdentChar(text[i + 8]))
+            continue;  // тоже часть более длинного идентификатора (с конца)
+
+        size_t p = i + 8;
+        while (p < len && (text[p] == ' ' || text[p] == '\t'))
+            ++p;
+        if (p >= len || text[p] != '=')
+            continue;
+        ++p;
+        while (p < len && (text[p] == ' ' || text[p] == '\t'))
+            ++p;
+
+        size_t nameStart = p;
+        while (p < len && IsIdentChar(text[p]))
+            ++p;
+        size_t nameLen = p - nameStart;
+
+        if (nameLen > 0 && nameLen < 64 && templateCount < 256)
+        {
+            memcpy(templateNames[templateCount], text + nameStart, nameLen);
+            templateNames[templateCount][nameLen] = 0;
+            ++templateCount;
+        }
+    }
+
+    // Проход 2: верхнеуровневые блоки "name = { ... }" по порядку;
+    // пропускаем комментарии (# до конца строки) и шаблоны.
+    int index = 0;
+    int depth = 0;
+    size_t i = 0;
+
+    while (i < len)
+    {
+        char c = text[i];
+
+        if (c == '#')
+        {
+            while (i < len && text[i] != '\n')
+                ++i;
+            continue;
+        }
+
+        if (depth == 0 && IsIdentChar(c) && (i == 0 || !IsIdentChar(text[i - 1])))
+        {
+            size_t nameStart = i;
+            size_t p = i;
+            while (p < len && IsIdentChar(text[p]))
+                ++p;
+            size_t nameLen = p - nameStart;
+
+            size_t q = p;
+            while (q < len && (text[q] == ' ' || text[q] == '\t' || text[q] == '\r' || text[q] == '\n'))
+                ++q;
+
+            if (q < len && text[q] == '=')
+            {
+                ++q;
+                while (q < len && (text[q] == ' ' || text[q] == '\t' || text[q] == '\r' || text[q] == '\n'))
+                    ++q;
+
+                if (q < len && text[q] == '{')
+                {
+                    // Нашли верхнеуровневый блок. Найдём конец (парную '}'),
+                    // попутно игнорируя комментарии, чтобы случайная '{'/'}'
+                    // в тексте комментария не сбила подсчёт глубины.
+                    size_t blockStart = q;
+                    size_t j = q;
+                    int localDepth = 0;
+
+                    while (j < len)
+                    {
+                        char cj = text[j];
+                        if (cj == '#')
+                        {
+                            while (j < len && text[j] != '\n')
+                                ++j;
+                            continue;
+                        }
+                        if (cj == '{')
+                            ++localDepth;
+                        else if (cj == '}')
+                        {
+                            --localDepth;
+                            if (localDepth == 0)
+                            {
+                                ++j;
+                                break;
+                            }
+                        }
+                        ++j;
+                    }
+
+                    bool isTemplate = false;
+                    for (int t = 0; t < templateCount; ++t)
+                    {
+                        size_t tlen = strlen(templateNames[t]);
+                        if (tlen == nameLen && strncmp(templateNames[t], text + nameStart, nameLen) == 0)
+                        {
+                            isTemplate = true;
+                            break;
+                        }
+                    }
+
+                    if (!isTemplate)
+                    {
+                        bool hasLimitFlag = false;
+
+                        // Ищем "limit_by_local_supply" ... "yes" внутри
+                        // диапазона [blockStart, j) этого конкретного блока.
+                        for (size_t k = blockStart; k + 22 < j; ++k)
+                        {
+                            if (strncmp(text + k, "limit_by_local_supply", 22) != 0)
+                                continue;
+                            if (k > 0 && IsIdentChar(text[k - 1]))
+                                continue;
+
+                            size_t r = k + 22;
+                            while (r < j && (text[r] == ' ' || text[r] == '\t'))
+                                ++r;
+                            if (r < j && text[r] == '=')
+                            {
+                                ++r;
+                                while (r < j && (text[r] == ' ' || text[r] == '\t'))
+                                    ++r;
+                                if (r + 3 <= j && strncmp(text + r, "yes", 3) == 0)
+                                    hasLimitFlag = true;
+                            }
+                            break;
+                        }
+
+                        if (index < MAX_PRODUCTION_TYPES)
+                            g_limitByLocalSupply[index] = hasLimitFlag ? 1 : 0;
+
+                        ++index;
+                    }
+
+                    i = j;
+                    continue;
+                }
+            }
+
+            i = p;
+            continue;
+        }
+
+        if (c == '{')
+            ++depth;
+        else if (c == '}')
+            --depth;
+
+        ++i;
+    }
+
+    Log("ParseProductionTypes: разобрано %d типов производства (шаблонов пропущено: %d)",
+        index, templateCount);
+}
+
+static void LoadProductionTypeLimits()
+{
+    if (g_productionTypesLoaded)
+        return;
+    g_productionTypesLoaded = true;
+
+    for (int i = 0; i < MAX_PRODUCTION_TYPES; ++i)
+        g_limitByLocalSupply[i] = 1;  // безопасный откат: неизвестный индекс - разрешаем
+
+    char dir[MAX_PATH];
+    GetOwnDllDirectory(dir, sizeof(dir));
+    if (!dir[0])
+    {
+        Log("LoadProductionTypeLimits: не удалось определить каталог DLL");
+        return;
+    }
+
+    static char fileBuf[1 << 20];
+    size_t fileLen = 0;
+    char path[MAX_PATH];
+
+    sprintf_s(path, sizeof(path), "%s\\mod\\2\\common\\production_types.txt", dir);
+    bool ok = ReadWholeFile(path, fileBuf, sizeof(fileBuf), &fileLen);
+
+    if (!ok)
+    {
+        sprintf_s(path, sizeof(path), "%s\\common\\production_types.txt", dir);
+        ok = ReadWholeFile(path, fileBuf, sizeof(fileBuf), &fileLen);
+    }
+
+    if (!ok)
+    {
+        Log("LoadProductionTypeLimits: production_types.txt не найден рядом с DLL");
+        return;
+    }
+
+    Log("LoadProductionTypeLimits: читаю '%s' (%u байт)", path, (unsigned)fileLen);
+    ParseProductionTypes(fileBuf, fileLen);
+}
+
+
+// Развилка внутри FUN_004d04b0 (абс. 0x4D04BC-0x4D04C8, RVA 0xD04BC):
+//   CMP dword ptr[ECX+0x84],0 ; JLE +8 (0xD04C6) ; else XOR AL,AL (0xD04C8, return false)
+// ECX = state. Патч build_confirm_ignore_colonial уже сделал JLE
+// безусловным (JMP), то есть колониальность сама по себе кнопку не
+// блокирует. Здесь добавляем полноценную замену: если состояние
+// колониальное - смотрим индекс типа производства (EBP+0xc -> +0x58)
+// в НАШЕЙ таблице g_limitByLocalSupply; если у типа нет
+// limit_by_local_supply = yes - блокируем (уходим на путь XOR AL,AL),
+// иначе - разрешаем, как обычно.
+static const DWORD RVA_PRODTYPE_GATE_HOOK = 0xD04C6;
+static const DWORD RVA_PRODTYPE_GATE_RESUME_ALLOW = 0xD04D3;
+static const DWORD RVA_PRODTYPE_GATE_RESUME_BLOCK = 0xD04C8;
+static const unsigned char PRODTYPE_GATE_SIG[2] = { 0x7E, 0x0B };
+static DWORD g_prodTypeGateResumeAllow = 0;
+static DWORD g_prodTypeGateResumeBlock = 0;
+
+__declspec(naked) static void ProdTypeGateThunk()
+{
+    __asm {
+        jle allow
+        push edx
+        push eax
+        mov eax, dword ptr [ebp + 0x0c]
+        test eax, eax
+        jz allow_pop
+        mov eax, dword ptr [eax + 0x58]
+        cmp eax, MAX_PRODUCTION_TYPES
+        jae allow_pop
+        movzx eax, byte ptr [g_limitByLocalSupply + eax]
+        test al, al
+        jnz allow_pop
+        pop eax
+        pop edx
+        jmp dword ptr [g_prodTypeGateResumeBlock]
+    allow_pop:
+        pop eax
+        pop edx
+    allow:
+        jmp dword ptr [g_prodTypeGateResumeAllow]
+    }
+}
+
+static bool InstallProdTypeGateHook()
+{
+    LoadProductionTypeLimits();
+
+    unsigned char* hook = (unsigned char*)(g_base + RVA_PRODTYPE_GATE_HOOK);
+
+    if (memcmp(hook, PRODTYPE_GATE_SIG, sizeof(PRODTYPE_GATE_SIG)) != 0)
+    {
+        Log("ProdTypeGateHook: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_prodTypeGateResumeAllow = g_base + RVA_PRODTYPE_GATE_RESUME_ALLOW;
+    g_prodTypeGateResumeBlock = g_base + RVA_PRODTYPE_GATE_RESUME_BLOCK;
+
+    unsigned char patch[8];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&ProdTypeGateThunk - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+    patch[7] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("ProdTypeGateHook: установлен");
+    return true;
+}
+
+
+// ---------------------------------------------------------------
 // Подменённые слоты видов
 // ---------------------------------------------------------------
 
@@ -809,6 +1360,12 @@ static void OnViewUpdate(int viewIndex, void* view)
     if (SetupButtons(viewIndex, view))
         g_configuredView[viewIndex] = view;
 #endif
+
+    if (viewIndex == 2 && view != g_hideColonialConfiguredView)
+    {
+        if (SetupHideColonialButton(view))
+            g_hideColonialConfiguredView = view;
+    }
 }
 
 #define VIEW_THUNKS(n)                                              \
@@ -908,6 +1465,8 @@ static char __fastcall MyDecisionIsValid(void* decision, void* edx)
 
     return fromList ? 0 : 1;
 }
+
+
 
 
 // ---------------------------------------------------------------
@@ -1065,6 +1624,38 @@ static BytePatch EXE_PATCHES[] =
     { "allied_reinforce_150", 0, 0x1D74BE, 5,
         { 0xB8, 0xE8, 0x03, 0x00, 0x00 },
         { 0xB8, 0xDC, 0x05, 0x00, 0x00 }, true },
+
+    // Разрешить строить фабрики в колониальных регионах.
+    // Обе функции чек-листа постройки (FUN_004d06a0 и FUN_0052e9f0)
+    // независимо инлайнят одну и ту же проверку "state+0x84 > 0" для
+    // пункта "Неколониальная область" (BUILD_COLONIAL). Проверено вживую
+    // (диагностический хук): для колониального региона +0x84 = 2, и
+    // результат SETZ = 0 передаётся в отрисовщик иконки как "крестик" —
+    // то есть 0 = крестик, 1 = галочка (обратно тому, что предполагалось
+    // изначально). Патчим SETZ так, чтобы результат был всегда 1.
+    // FUN_004d06a0 подтверждённо не вызывается для кнопки "+" (0
+    // попаданий), но правим и её для согласованности — вдруг
+    // используется в другом месте (чек-лист "Расширить"?).
+    { "build_factory_ignore_colonial_1", 0, 0xD0C57, 3,
+        { 0x0F, 0x94, 0xC1 },
+        { 0xB1, 0x01, 0x90 }, true },
+    { "build_factory_ignore_colonial_2", 0, 0x12FA4E, 3,
+        { 0x0F, 0x94, 0xC0 },
+        { 0xB0, 0x01, 0x90 }, true },
+
+    // Третья, независимая копия той же проверки — но эта единственная
+    // реально решает, активна ли кнопка "+" (FUN_0052e960, вызывается
+    // из FUN_0073f300 для виджета "build_factory_button" и напрямую
+    // определяет, какой из виртуальных методов включения/выключения
+    // кнопки будет вызван). Патчи _1/_2 выше правят только текст
+    // чек-листа, на саму кнопку не влияют.
+    // Было: CMP dword ptr [EAX+0x84],0 ; JG +0x5F (если колония — сразу
+    // возврат "выключено", минуя все остальные условия). NOP'аем JG,
+    // чтобы колониальность не мешала остальной цепочке проверок
+    // (цивилизованность / лимит фабрик / разрешение правящей партии).
+    { "build_factory_button_enable_ignore_colonial", 0, 0x12E977, 2,
+        { 0x7F, 0x5F },
+        { 0x90, 0x90 }, true },
 };
 
 static const int EXE_PATCH_COUNT = sizeof(EXE_PATCHES) / sizeof(EXE_PATCHES[0]);
@@ -1408,9 +1999,12 @@ static bool Install()
     }
 #endif
 
+
 #if ENABLE_EXE_PATCHES
     InstallExePatches();
 #endif
+    InstallProdListVisibilityHook();
+    InstallProdTypeGateHook();
 
 #if ENABLE_PRICE_DELTA
     InstallPriceDelta();
