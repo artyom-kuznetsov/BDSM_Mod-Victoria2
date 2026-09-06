@@ -55,7 +55,7 @@ clipper_shipyard_inv = {
 		base = 25
 	}
 	effect = {
-		activate_building = clipper_shipyard
+		activate_building = steamer_shipyard
 	}
 }
 
@@ -78,18 +78,6 @@ building_station_shipyards = {
 		}
 	}
 }
-#steamers
-clipper_shipyard_inv = {
-	limit = { steamers = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
-	news = no
-	chance = {
-		base = 25
-	}
-	effect = {
-		activate_building = steamer_shipyard 
-	}
-}
-
 mechanized_fishing_vessels = {
 	limit = { steamers = 1 }
 	chance = {

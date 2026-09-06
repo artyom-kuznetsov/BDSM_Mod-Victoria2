@@ -352,7 +352,7 @@ cement_inv = {
 		base = 25
 		modifier = {
 			factor = 5
-			economic_policy = laissez_faire
+			economic_system_rgroup = laissez_faire_ref
 		}
 		modifier = {
 			factor = 5
@@ -370,7 +370,7 @@ regular_clothes_production = {
 		base = 10
 		modifier = {
 			factor = 5
-			economic_policy = laissez_faire
+			economic_system_rgroup = laissez_faire_ref
 		}
 		modifier = {
 			factor = 5
@@ -388,7 +388,7 @@ furniture_production = {
 		base = 10
 		modifier = {
 			factor = 5
-			economic_policy = laissez_faire
+			economic_system_rgroup = laissez_faire_ref
 		}
 		modifier = {
 			factor = 5
@@ -1798,23 +1798,6 @@ third_health_reform_inv = {
 }
 
 #inorganic_chemistry
-synthetic_dye = {
-	limit = { electricity = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
-	chance = {
-		base = 1
-		modifier = {
-			factor = 2
-			assembly_line = 1
-		}
-		modifier = {
-			factor = 2
-			management_strategy = 1
-		}
-	}
-	effect = {
-		activate_building = synthetic_dye_factory
-	}
-}
 edison_light_bulb = {
 	limit = { electricity = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
 	chance = {
