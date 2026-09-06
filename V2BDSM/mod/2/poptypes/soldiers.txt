@@ -212,15 +212,15 @@ promote_to =
 		group = {
 			modifier = {
 				factor = 5
-				military_spending = 0.59
+				military_spending = 0.29
 			}
 			modifier = {
 				factor = 10
-				military_spending = 0.79
+				military_spending = 0.49
 			}
 			modifier = {
 				factor = 15
-				military_spending = 0.99
+				military_spending = 0.69
 			}
 		}
 	}
@@ -252,50 +252,25 @@ promote_to =
 		factor = 0.01
 		group = {
 			modifier = {
-				factor = 5
-				literacy = 0.3
+				factor = 10
 				NOT = { military_spending = 0.39 }
-			}
-			modifier = {
-				factor = 5
-				literacy = 0.3
-				NOT = { military_spending = 0.19 }
 			}
 		}
 		group = {
 			modifier = {
-				factor = -5
+				factor = -1
 				military_spending = 0.59
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
 			modifier = {
-				factor = -5
+				factor = -1
 				military_spending = 0.79
 				NOT = { state_scope = { soldiers = 0.05 } }
 			}
 			modifier = {
-				factor = -5
+				factor = -1
 				military_spending = 0.99
 				NOT = { state_scope = { soldiers = 0.05 } }
-			}
-		}
-	}
-	
-	labourers = 
-	{
-		factor = 0.01
-		modifier = {
-			factor = 5
-			state_scope = { soldiers = 0.052 }
-		}
-		modifier = {
-			factor = -1020
-			NOT = {
-				location = {
-					work_available = {
-						worker = labourers
-					}
-				}
 			}
 		}
 	}

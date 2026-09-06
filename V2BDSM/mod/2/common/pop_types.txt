@@ -1,7 +1,7 @@
 #general promote mtth, same for all pops
 promotion_chance = 
 {
-	factor = 0.3
+	factor = 0.01
 	
 	modifier = {
 		factor = 0.05
@@ -10,51 +10,86 @@ promotion_chance =
 		}
 	}
 	
-	### LITERACY
+	#####LITERACY#####
 	group = {
 		modifier = {
-			factor = 0.04
-			literacy = 0.05		
+			factor = 1.2
+			literacy = 0.01
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.1			
+			factor = 1.2
+			literacy = 0.02
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.2		
+			factor = 1.2
+			literacy = 0.03
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.3			
+			factor = 1.2
+			literacy = 0.04
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.4			
+			factor = 1.2
+			literacy = 0.05
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.5		
+			factor = 5
+			literacy = 0.1
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.6			
+			factor = 5
+			literacy = 0.2
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.7			
+			factor = 4
+			literacy = 0.3
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.8			
+			factor = 4
+			literacy = 0.4
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.9			
+			factor = 4
+			literacy = 0.5
 		}
 		modifier = {
-			factor = 0.04
-			literacy = 0.99			
+			factor = 4
+			literacy = 0.6
+		}
+		modifier = {
+			factor = 4
+			literacy = 0.7
+		}
+		modifier = {
+			factor = 4
+			literacy = 0.8
+		}
+		modifier = {
+			factor = 4
+			literacy = 0.9
+		}
+		modifier = {
+			factor = 4
+			literacy = 0.99
+		}
+	}
+	
+	group = {
+		modifier = {
+			factor = 2.4
+			life_needs = 0.1
+		}
+		modifier = {
+			factor = 2.4
+			life_needs = 0.3
+		}
+		modifier = {
+			factor = 2.4
+			life_needs = 0.5
+		}
+		modifier = {
+			factor = 2.4
+			life_needs = 0.7
 		}
 	}
 	
@@ -78,26 +113,46 @@ promotion_chance =
 		}
 	}
 	
+	#####SLAVERY#####
+	group = {
+		modifier = {
+			factor = -6
+			state_scope = {
+				is_slave = yes
+			}
+		}
+	}
+	
+	### NON-ACCEPTED PROMOTE SLOWER
+	modifier = {
+		factor = -7
+		NOT = {
+			primary_culture = yes
+			is_accepted_culture = yes
+		}
+	}
+	
+	
 	### TAXES ###
 	
 	group = {
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			country = { NOT = { middle_tax = 0.25 } }
 		}
@@ -105,25 +160,25 @@ promotion_chance =
 	
 	group = {
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.2
 			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.2
 			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.2
 			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.2
 			country = { NOT = { middle_tax = 0.25 } }
@@ -132,25 +187,25 @@ promotion_chance =
 	
 	group = {
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.5
 			country = { NOT = { middle_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.5
 			country = { NOT = { middle_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.5
 			country = { NOT = { middle_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = middle
 			literacy = 0.5
 			country = { NOT = { middle_tax = 0.25 } }
@@ -159,22 +214,22 @@ promotion_chance =
 	
 	group = {
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			country = { NOT = { poor_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			country = { NOT = { poor_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			country = { NOT = { poor_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			country = { NOT = { poor_tax = 0.25 } }
 		}
@@ -182,25 +237,25 @@ promotion_chance =
 	
 	group = {
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.2
 			country = { NOT = { poor_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.2
 			country = { NOT = { poor_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.2
 			country = { NOT = { poor_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.2
 			country = { NOT = { poor_tax = 0.25 } }
@@ -209,104 +264,109 @@ promotion_chance =
 	
 	group = {
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.5
 			country = { NOT = { poor_tax = 1 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.5
 			country = { NOT = { poor_tax = 0.75 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.5
 			country = { NOT = { poor_tax = 0.5 } }
 		}
 		modifier = {
-			factor = 0.01
+			factor = 0.5
 			strata = poor
 			literacy = 0.5
 			country = { NOT = { poor_tax = 0.25 } }
 		}
 	}
 	
+	
+	
+	modifier = {
+		factor = -5
+		country = {
+			is_mobilised = yes
+		}
+	}
 	
 	### MILITANCY
 	group = {
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 9
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 8
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 7
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 6
 		}
 		modifier = {
-			factor = -0.05
+			factor = -4
 			militancy = 5
 		}
 	}
-
 	
-	group = {
-		modifier = {
-			factor = 0.1
-			life_needs = 0.4			
-		}
-		modifier = {
-			factor = 0.1
-			life_needs = 0.6		
-		}
-		modifier = {
-			factor = 0.15
-			life_needs = 0.8	
-		}
-	}
 
-
-	group = {
-		modifier = {
-			factor = 0.1
-			everyday_needs = 0.9
-	
-		}
-		modifier = {
-			factor = 0.1
-			everyday_needs = 0.8 
-		}
-		modifier = {
-			factor = 0.1
-			everyday_needs = 0.7
-		}
-	}
-
+	### SLAVERY
 	modifier = {
-		factor = 0.5
-		strata = middle
+		factor = -4
+		country = {
+			slavery = yes_slavery 
+		}
 	}
 	
+	# PENAL SYSTEM
+	modifier = {
+		factor = 2
+		country = { penal_system = incarceration }
+	}
+	modifier = {
+		factor = 4
+		country = { penal_system = rehabilitation }
+	}
+	
+	modifier = {
+		factor = -4
+		country = { debt_law = serfdom }
+	}
+	
+	modifier = {
+		factor = -2
+		country = { debt_law = peonage }
+	}
+	
+	modifier = {
+		factor = -1
+		country = { debt_law = debtors_prisons }
+	}
+	
+	### OCCUPATION
+	modifier = {
+		factor = -100
+		location = { NOT = { controlled_by = owner } }
+	}
+	
+
 	### COLONY
 	modifier = {
-		factor = -0.1
+		factor = -5
 		state_scope = { is_colonial = yes }
-	}
-	
-	### NON-ACCEPTED
-	modifier = {
-		factor = -0.1
-		not = { culture = this }
 	}
 	
 	### SLAVERY
@@ -318,32 +378,8 @@ promotion_chance =
 		}
 	}
 	
-	# PENAL SYSTEM
 	modifier = {
-		factor = 0.03
-		country = { penal_system = incarceration }
-	}
-	modifier = {
-		factor = 0.06
-		country = { penal_system = rehabilitation }
-	}
-	
-	### SLAVE STATE
-	modifier = {
-		factor = -0.05
-		state_scope = {
-			is_slave = yes
-		}
-	}	
-	
-	### OCCUPATION
-	modifier = {
-		factor = -100
-		location = { NOT = { controlled_by = owner } }
-	}
-	
-	modifier = {
-		factor = 0.2
+		factor = 5
 		country = {
 			ai = yes
 			has_global_flag = singleplayer_flag
@@ -351,31 +387,7 @@ promotion_chance =
 	}
 	
 	modifier = {
-		factor = 0.2
-		# Audax Validator "." Ignore_NEXT
-		NOT = { 
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 200000 } 
-		}
-	}	
-	modifier = {
-		factor = 0.1
-		# Audax Validator "." Ignore_NEXT
-		NOT = { 
-			# Audax Validator "." Ignore_NEXT
-			state_scope = { total_pops = 100000 } 
-		}
-	}
-	
-	modifier = {
-		factor = 0.02
-		country = {
-			has_country_flag = industrial_revolution_flag
-		}
-	}
-	
-	modifier = {
-		factor = 0.2
+		factor = 5
 		country = {
 			has_country_flag = persian_centralization_ongoing_flag
 		}
@@ -393,35 +405,46 @@ demotion_chance =
 		}
 	}
 	
+	group = {
+		modifier = {
+			factor = 0.1
+			not = { life_needs = 0.3 }
+			not = { strata = poor }
+		}
+		modifier = {
+			factor = 0.1
+			not = { life_needs = 0.2 }
+			not = { strata = poor }
+		}
+		modifier = {
+			factor = 0.1
+			not = { life_needs = 0.1 }
+			not = { strata = poor }
+		}
+	}
+	group = {
+		modifier = {
+			factor = 0.1
+			not = { everyday_needs = 0.3 }
+			strata = rich
+		}
+		modifier = {
+			factor = 0.1
+			not = { everyday_needs = 0.2 }
+			strata = rich
+		}
+		modifier = {
+			factor = 0.1
+			not = { everyday_needs = 0.1 }
+			strata = rich
+		}
+	}
+	
 	# LARGE STATE
 	modifier = {
 		factor = -0.25
 		# Audax Validator "." Ignore_NEXT
 		total_pops = 1000000
-	}
-	
-	# MIDDLE STRATA
-	group = {
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.3
-		}
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.5
-		}
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.7
-		}
-		modifier = {
-			factor = 0.25
-			strata = middle
-			literacy = 0.9
-		}
 	}
 	
 	### COLONIAL
@@ -470,7 +493,10 @@ demotion_chance =
 	### NON-ACCEPTED DEMOTE SLOWER
 	modifier = {
 		factor = -0.1
-		not = { culture = this }
+		NOT = {
+			primary_culture = yes
+			is_accepted_culture = yes
+		}
 		strata = poor
 	}
 	
@@ -708,44 +734,6 @@ migration_chance = {
 			factor = 0.05
 			unemployment = 0.99
 			location = { controlled_by = owner }
-		}
-	}
-	
-	group = {
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 600000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 700000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 800000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 900000
-			}
-		}
-		modifier = {
-			factor = 0.2
-			# Audax Validator "." Ignore_NEXT
-			state_scope = {
-				total_pops = 1000000
-			}
 		}
 	}
 }
@@ -1337,7 +1325,7 @@ assimilation_chance =
 	}
 
 	modifier = {
-		factor = -0.2
+		factor = -0.5
 		is_accepted_culture = yes
 	}
 

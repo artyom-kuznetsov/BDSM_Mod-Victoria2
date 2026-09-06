@@ -3,8 +3,6 @@ unemployment = yes
 can_work_factory = yes
 color = { 12 157 162 }
 
-research_points = 0.75	#if max %, then 2 extra research points.
-research_optimum = 0.08	#1%
 
 strata = poor
 
@@ -171,6 +169,7 @@ country_migration_target =
 }
 
 
+
 migration_target =
 {
 	factor = 0.1
@@ -221,23 +220,9 @@ migration_target =
 		life_rating = 50
 	}
 	modifier = {
-		factor = 3
-		state_scope = {
-			# Audax Validator "." Ignore_NEXT
-			NOT = {
-				total_pops = 300000
-			}
-		}
-	}
-	modifier = {
-		factor = 0
-		NOT = { work_available = {
-			worker = craftsmen
-		} }
-	}
-	modifier = {
     	factor = 100
     	has_province_modifier = immigrator_modifier
+		work_available = { worker = craftsmen }
 	}
 	modifier = {
 		factor = 0
@@ -257,7 +242,7 @@ promote_to =
 	{
 		factor = 0.01
 		modifier = {
-			factor = -100
+			factor = -1000
 			NOT = { 
 				is_accepted_culture = yes 
 				is_primary_culture = yes
@@ -272,55 +257,427 @@ promote_to =
 			location = { is_colonial = yes }
 		}
 		group = {
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.008 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.009 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.010 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.011 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.012 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.013 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.014 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.015 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.016 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.017 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.018 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.019 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.02 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.021 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.022 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.023 } }
-			modifier = { factor = -2 state_scope = { bureaucrats = 0.024 } }
-			modifier = { factor = -100 state_scope = { bureaucrats = 0.025 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.005 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.006 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.007 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.008 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.009 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.01 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.011 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.012 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.013 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.014 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.015 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.016 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.017 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.018 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.019 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.020 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.021 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.022 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.023 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.024 } }
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.025 } }	
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.026 } }	
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.027 } }	
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.028 } }	
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.029 } }	
+			modifier = { factor = -10 state_scope = { bureaucrats = 0.03 } }
 		}
 
 
 		group = {
-			modifier = { factor = 2 crime_fighting = 0.09 }
-			modifier = { factor = 2 crime_fighting = 0.19 }
-			modifier = { factor = 2 crime_fighting = 0.29 }
-			modifier = { factor = 2 crime_fighting = 0.39 }
-			modifier = { factor = 2 crime_fighting = 0.49 }
-			modifier = { factor = 2 crime_fighting = 0.59 }
-			modifier = { factor = 2 crime_fighting = 0.69 }
-			modifier = { factor = 2 crime_fighting = 0.79 }
-			modifier = { factor = 2 crime_fighting = 0.89 }
-			modifier = { factor = 2 crime_fighting = 0.99 }
+			modifier = { factor = 5 crime_fighting = 0.09 }
+			modifier = { factor = 5 crime_fighting = 0.19 }
+			modifier = { factor = 5 crime_fighting = 0.29 }
+			modifier = { factor = 5 crime_fighting = 0.39 }
+			modifier = { factor = 5 crime_fighting = 0.49 }
+			modifier = { factor = 5 crime_fighting = 0.59 }
+			modifier = { factor = 5 crime_fighting = 0.69 }
+			modifier = { factor = 5 crime_fighting = 0.79 }
+			modifier = { factor = 5 crime_fighting = 0.89 }
+			modifier = { factor = 5 crime_fighting = 0.99 }
+		}
+		
+		
+		modifier = { factor = 10 security = minimal_security }
+		modifier = { factor = 20 security = moderate_security }
+		modifier = { factor = 30 security = police_state }
+		
+		modifier = { factor = -50 	economic_system_rgroup = traditionalism_ref }
+		modifier = { factor = 10 	economic_system_rgroup = interventionism_ref }
+		modifier = { factor = 30 	economic_system_rgroup = planned_economy_ref }
+		
+		modifier = { factor = -20 	penal_system = capital_punishment }
+		modifier = { factor = 10 	penal_system = incarceration }
+		modifier = { factor = 20 	penal_system = rehabilitation }
+		
+		group = {
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 1
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 2
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 3
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 4
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 5
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 6
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 7
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 8
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 9
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 10
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 11
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 12
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 13
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 14
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 15
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 16
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 17
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 18
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 19
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				country = {
+					check_variable = {
+						which = bureaucracy_level
+						value = 20
+					}
+				}
+			}
+		}
+	}
+	
+	capitalists = {
+		factor = 0.01
+		modifier = {
+			factor = -100
+			NOT = { state_scope = { craftsmen = 0.02 } }
+		}
+		modifier = {
+			factor = -100
+			state_scope = {
+				has_factories = no
+			}
+		}
+		modifier = {
+			factor = -100
+			country = {
+				NOT = { has_country_flag = private_banks_invented }
+			}
+		}
+		modifier = {
+			factor = -2
+			is_accepted_culture = no
+		}
+		group = {
+			modifier = {
+				factor = 1
+				luxury_needs = 0.2
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.4
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.6
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.8
+			}
+			modifier = {
+				factor = 1
+				luxury_needs = 0.99
+			}
+		}
+		group = {
+			modifier = {
+				factor = 1
+				country = {
+					check_variable = {
+						which = financial_institutions_level
+						value = 1
+					}
+				}
+			}
+			modifier = {
+				factor = 1
+				country = {
+					check_variable = {
+						which = financial_institutions_level
+						value = 2
+					}
+				}
+			}
+			modifier = {
+				factor = 1
+				country = {
+					check_variable = {
+						which = financial_institutions_level
+						value = 3
+					}
+				}
+			}
+			modifier = {
+				factor = 1
+				country = {
+					check_variable = {
+						which = financial_institutions_level
+						value = 4
+					}
+				}
+			}
+			modifier = {
+				factor = 1
+				country = {
+					check_variable = {
+						which = financial_institutions_level
+						value = 5
+					}
+				}
+			}
 		}
 		
 		group = {
-			modifier = { factor = -6 penal_system = capital_punishment }
-			modifier = { factor = -4 penal_system = punitive_labour }
-			modifier = { factor = -2 penal_system = incarceration }
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.001 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.002 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.003 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.004 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.005 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.006 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.007 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.008 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.009 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.01 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.011 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.012 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.013 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.014 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.015 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.016 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.017 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.018 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.019 }
+			}
+			modifier = {
+				factor = -1
+				state_scope = { capitalists = 0.02 }
+			}
 		}
-		
-		group = {
-			modifier = { factor = 2 security = minimal_security }
-			modifier = { factor = 4 security = moderate_security }
-			modifier = { factor = 6 security = police_state }
+	}
+	
+	craftsmen = {
+		factor = 0.01
+		modifier = {
+			factor = 20
+			type = craftsmen
 		}
-		
-		modifier = { factor = -4 economic_system_rgroup = traditionalism_ref }
-		modifier = { factor = 2 economic_system_rgroup = interventionism_ref }
-		modifier = { factor = 6 economic_system_rgroup = planned_economy_ref }
 	}
 	
 	soldiers =
@@ -580,32 +937,33 @@ promote_to =
 		}
 		group = {
 			modifier = {
-				factor = 4
+				factor = 8
 				military_spending = 0.19
 			}
 			modifier = {
-				factor = 4
+				factor = 8
 				military_spending = 0.39
 			}
 			modifier = {
-				factor = 3
+				factor = 8
 				military_spending = 0.59
 			}
 			modifier = {
-				factor = 3
+				factor = 8
 				military_spending = 0.79
 			}
 			modifier = {
-				factor = 3
+				factor = 8
 				military_spending = 0.99
 			}
 		}
 		modifier = {
-			factor = 10
+			factor = 5
 			country = {
 				conscription = ref_professional_army
 			}
 		}
+		
 		modifier = {
 			factor = -50
 			location = {
@@ -640,74 +998,27 @@ promote_to =
 				NOT = { recruited_percentage = 0.33 }
 			}
 			modifier = {
-				factor = -3
+				factor = -10
 				NOT = { recruited_percentage = 0.25 }
 			}
 		}
-	}
-	clerks = {
-		factor = 0.01
+		
 		group = {
 			modifier = {
-				factor = -2
-				NOT = { literacy = 0.5 }
+				factor = -1.5
+				state_scope = { soldiers = 0.01 }
 			}
 			modifier = {
-				factor = -2
-				NOT = { literacy = 0.6 }
+				factor = -1.5
+				state_scope = { soldiers = 0.02 }
 			}
 			modifier = {
-				factor = -2
-				NOT = { literacy = 0.7 }
+				factor = -1.5
+				state_scope = { soldiers = 0.03 }
 			}
 			modifier = {
-				factor = -2
-				NOT = { literacy = 0.8 }
-			}
-		}
-		group = {
-			modifier = { factor = 2 state_scope = { craftsmen = 0.04 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.08 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.12 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.16 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.2 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.24 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.28 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.32 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.36 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.4 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.44 } }
-			modifier = { factor = 2 state_scope = { craftsmen = 0.48 } }
-		}
-		group = {
-			modifier = { factor = -2 state_scope = { clerks = 0.01 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.02 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.03 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.04 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.05 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.06 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.07 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.08 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.09 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.1 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.11 } }
-			modifier = { factor = -2 state_scope = { clerks = 0.12 } }
-		}
-		modifier = {
-			factor = -40
-			state_scope = {
-				has_factories = no
-			}
-			can_build_factory = no
-		}
-		modifier = {
-			factor = -100
-			NOT = {
-				location = {
-					work_available = {
-						worker = craftsmen
-					}
-				}
+				factor = -1.5
+				state_scope = { soldiers = 0.04 }
 			}
 		}
 	}
@@ -905,41 +1216,6 @@ promote_to =
 		modifier = {
 			factor = -100
 			location = { NOT = { has_pop_type = farmers } }
-		}
-	}
-	labourers = 
-	{
-		factor = 0.01
-		modifier = {
-			factor = 100
-			location = { is_colonial = no }
-		}
-		modifier = {
-			factor = 100
-			location = { is_colonial = yes }
-			NOT = { is_accepted_culture = yes }
-			NOT = { is_primary_culture = yes }
-		}
-		modifier = {
-			factor = 10
-			OR = {
-				is_culture_group = east_asian
-				is_culture_group = south_asian
-			}
-		}
-		modifier = {
-			factor = -1000
-			location = { NOT = { has_pop_type = labourers } }
-		}
-		modifier = {
-			factor = -1020
-			NOT = {
-				location = {
-					work_available = {
-						worker = labourers
-					}
-				}
-			}
 		}
 	}
 }
