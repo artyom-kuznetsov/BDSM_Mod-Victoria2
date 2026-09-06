@@ -13,30 +13,7 @@ country_event = {
 	}
 }
 
-country_event = {
-	title = "industrial_revolution_notification_EvtName"
-	desc = "industrial_revolution_notification_EvtDesc"
-	picture = "iron"
-	
-	id = 57601
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = "industrial_revolution_notification_OptA"
-		random_owned = {
-			limit = {
-				owner = {
-					NOT = { has_country_flag = industrial_revolution_more_likely_flag }
-				}
-			}
-			owner = {
-				set_country_flag = industrial_revolution_more_likely_flag
-				CUSTOM_TOOLTIP_57601 = { }
-			}
-		}
-	}
-}
+# 57601 FREE
 
 country_event = {
 	title = "north_german_federation_notification_EvtName"
