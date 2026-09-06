@@ -2,6 +2,8 @@ sprite = 4
 color = { 18 129 10 }
 strata = rich
 state_capital_only = yes
+research_points = 1
+research_optimum = 0.01
 
 demote_migrant = yes
 
@@ -324,68 +326,6 @@ promote_to =
 	}
 	
 	
-	clerks = {
-		factor = 0.01
-		modifier = {
-			factor = -100
-			NOT = { 
-				state_scope = {
-					capitalists = 0.04
-				}
-			}
-		}
-		group = {
-			modifier = {
-				factor = 1
-				literacy = 0.3
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.4
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.5
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.6
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.7
-			}
-			modifier = {
-				factor = 1
-				literacy = 0.8
-			}
-			modifier = {
-				factor = 2
-				literacy = 0.9
-			}
-			modifier = {
-				factor = 2
-				literacy = 1
-			}
-		}
-		modifier = {
-			factor = -40
-			state_scope = {
-				has_factories = no
-			}
-			can_build_factory = no
-		}
-		modifier = {
-			factor = -100
-			NOT = {
-				location = {
-					work_available = {
-						worker = craftsmen
-					}
-				}
-			}
-		}
-	}
 	officers =
 	{
 		factor = 0.01
