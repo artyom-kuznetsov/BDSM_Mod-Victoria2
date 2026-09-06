@@ -493,16 +493,13 @@ electric_gear_factory = {
 	value = 2.5				#40
 	bonus = {
 		trigger = {
-			OR = {
-				has_building = synthetic_rubber_factory
-				has_building = rubber_factory
-			}
+			has_building = rubber_factory
 		}
-		value = 0.1
+		value = 0.05
 	}
 	bonus = {
 		trigger = { has_building = steel_factory }
-		value = 0.05
+		value = 0.1
 	}
 }
 
@@ -526,105 +523,6 @@ pharmaceutical_plant = {
 	bonus = {
 		trigger = { owner = { has_country_flag = war_econ } }
 		value = -0.25
-	}
-}
-
-synthetic_dye_factory = {       
-	template = factory_template	#8
-	input_goods = {
-		coal = 4				#16	total input+maint = 24
-	}
-	output_goods = dye 
-	value = 3.75				#30
-	bonus = {
-		trigger = { 
-			OR = {
-				has_building = oil_factory
-				has_building = synthetic_oil_factory
-			}
-		}
-		value = 0.1
-	}
-	bonus = {
-		trigger = { has_building = coal_factory }
-		value = 0.05
-	}
-	bonus = {
-		trigger = { owner = { has_country_flag = war_econ } }
-		value = -0.25
-	}
-}
-
-synthetic_oil_factory = {       
-	template = synthetics_template	#8
-	input_goods = {
-		coal = 5				#20
-		iron = 1.2				#6
-		sulphur = 1.2			#6	total input+maint = 40
-	}
-	output_goods = oil 
-	value = 1.2					#30
-	bonus = {
-		trigger = { has_building = coal_factory }
-		value = 0.05
-	}
-	bonus = {
-		trigger = { has_building = iron_factory }
-		value = 0.05
-	}
-	bonus = {
-		trigger = { 
-			OR = {
-				has_building = sulphur_factory
-				has_building = synthetic_nitrate_factory
-			}
-		}
-		value = 0.05
-	}
-	bonus = {
-		trigger = { owner = { has_country_flag = war_econ } }
-		value = 0.5
-	}
-}
-
-synthetic_rubber_factory = {       
-	template = synthetics_template	#8
-	input_goods = {
-		coal = 2				#8
-		oil = 0.56				#14		total input+maint = 30
-	}
-	output_goods = rubber 
-	value = 3.75				#30
-	bonus = {
-		trigger = { 
-			OR = {
-				has_building = oil_factory
-				has_building = synthetic_oil_factory
-			}
-		}
-		value = 0.1
-	}
-	bonus = {
-		trigger = { has_building = coal_factory }
-		value = 0.05
-	}
-}
-
-synthetic_nitrate_factory = {       
-	template = synthetics_template	#8
-	input_goods = { 
-		coal = 3				#12	
-		iron = 2				#10 	total input+maint = 30
-	}
-	output_goods = sulphur
-	value = 6					#30
-	bonus = {
-		trigger = { has_building = coal_factory }
-		value = 0.1
-	}
-	bonus = {
-		trigger = { has_building = iron_factory }
-		value = 0.05
 	}
 }
 
@@ -895,7 +793,6 @@ luxury_clothes_factory = {
 	bonus = {
 		trigger = {
 			has_building = dye_factory
-			has_building = synthetic_dye_factory
 		}
 		value = 0.05
 	}

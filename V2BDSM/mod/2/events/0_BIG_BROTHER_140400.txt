@@ -783,9 +783,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 			clr_country_flag = immigration_from_magrib_chek_flag
 		}
 
-		any_pop = {
-			money = 2000000
-		}
 		prestige = -100
 		
 		
@@ -1775,28 +1772,7 @@ province_event = {
 		# Audax Validator "." Ignore_NEXT
 		province_selector = -1
 	}
-	option = {
-		name = "Selector_EvtOptChangeResource"
-		add_core = WBK
-		owner = {
-			random_owned = {
-				limit = {
-					is_core = WBK
-					OR = {
-						trade_goods = iron
-						trade_goods = coal
-						trade_goods = sulphur
-					}
-				}
-				province_event = { 
-					# Audax Validator "." Ignore_NEXT
-					id = 9565  
-					days = 0 
-				}
-			}
-		}
-		remove_core = WBK
-	}
+	
 	
 	option = {
 		name = "Selector_EvtOptSupplyDepot"
