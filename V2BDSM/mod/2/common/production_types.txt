@@ -617,10 +617,7 @@ ammunition_factory = {
 	value = 4					#40
 	bonus = {
 		trigger = {
-			OR = {
-				has_building = sulphur_factory
-				has_building = synthetic_nitrate_factory
-			}
+			has_building = sulphur_factory
 		}
 		value = 0.1
 	}
@@ -725,10 +722,7 @@ fertilizer_factory = {
 	value = 4					#40
 	bonus = {
 		trigger = {
-			OR = {
-				has_building = sulphur_factory
-				has_building = synthetic_nitrate_factory
-			}
+			has_building = sulphur_factory
 		}
 		value = 0.15
 	}
@@ -765,10 +759,7 @@ explosives_factory = {
 	value = 2				#40
 	bonus = {
 		trigger = {
-			OR = {
-				has_building = sulphur_factory
-				has_building = synthetic_nitrate_factory
-			}
+			has_building = sulphur_factory
 		}
 		value = 0.1
 	}
@@ -814,7 +805,6 @@ luxury_furniture_factory = {
 	bonus = {
 		trigger = {
 			has_building = dye_factory
-			has_building = synthetic_dye_factory
 		}
 		value = 0.05
 	}
@@ -906,7 +896,6 @@ regular_clothes_factory = {
 		trigger = {
 			OR = {
 				has_building = dye_factory
-				has_building = synthetic_dye_factory
 			}
 		}
 		value = 0.05
@@ -1003,6 +992,13 @@ cattle_ranch = {
 coal_mine = {
 	template = RGO_template_farmers
 	output_goods = raw_coal
+	value = 0.5
+	farm = yes
+}
+
+gold_mine = {
+	template = RGO_template_farmers
+	output_goods = raw_precious_metal
 	value = 0.5
 	farm = yes
 }
