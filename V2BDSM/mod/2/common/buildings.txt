@@ -511,6 +511,46 @@ steel_factory = {
 }
 
 
+cement_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		raw_timber = 60			#6000
+		raw_coal = 40			#4000
+		raw_iron = 60			#6000	total cost: 16000
+	}
+	time = 90
+	visibility = yes
+	onmap = no
+
+	production_type = cement_factory
+	pop_build_factory = yes
+}
+
+glass_factory = {
+	type = factory
+	on_completion = factory
+	completion_size = 0.2
+	max_level = 99
+	goods_cost =
+	{
+		machine_parts = 125		#2000
+		raw_timber = 60			#6000
+		raw_coal = 60			#6000
+		raw_iron = 60			#6000	total cost: 20000
+	}
+	time = 90
+	visibility = yes
+	onmap = no
+	
+	production_type = glass_factory
+	pop_build_factory = yes
+}
+
+
 explosives_factory = {
 	type = factory
 	on_completion = factory
@@ -784,46 +824,6 @@ pharmaceutical_plant = {
 }
 
 ############# BASIC FACTORIES
-
-
-cement_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		raw_timber = 60			#6000
-		raw_coal = 40			#4000
-		raw_iron = 60			#6000	total cost: 16000
-	}
-	time = 90
-	visibility = yes
-	onmap = no
-
-	production_type = cement_factory
-	pop_build_factory = yes
-}
-
-glass_factory = {
-	type = factory
-	on_completion = factory
-	completion_size = 0.2
-	max_level = 99
-	goods_cost =
-	{
-		machine_parts = 125		#2000
-		raw_timber = 60			#6000
-		raw_coal = 60			#6000
-		raw_iron = 60			#6000	total cost: 20000
-	}
-	time = 90
-	visibility = yes
-	onmap = no
-	
-	production_type = glass_factory
-	pop_build_factory = yes
-}
 
 fertilizer_factory = {
 	type = factory
