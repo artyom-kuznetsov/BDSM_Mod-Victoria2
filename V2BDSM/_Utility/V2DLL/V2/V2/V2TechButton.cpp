@@ -31,7 +31,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.49"
+#define MOD_VERSION "2.50"
 
 // Лог пишется в v2dll.log рядом с exe, очищается при запуске.
 // Для раздачи ставить 0: фильтр решений вызывается тысячами раз за тик.
@@ -41,17 +41,8 @@
 #define ENABLE_DECISION_FILTER 1   // скрытие решений из окна политики
 #define ENABLE_PRICE_DELTA     1   // процентный шаг изменения цен
 #define ENABLE_EXE_PATCHES     1   // подкрепления и цели войны
-#define ENABLE_INDICATORS      1   // текстовые индикаторы
 #define ENABLE_POP_DISPLAY     0   // общее население в верхней панели (откачено: не смогли дописать сырое число в скобках без риска)
 #define ENABLE_VERSION_LABEL   1   // версия мода в подписи главного меню
-
-
-// 0 — переписывать строку внутри объекта элемента. Строка находится,
-//     но на экране не меняется: элемент кеширует разложенный текст.
-// 1 — показывать значение подсказкой при наведении. Ничего угадывать
-//     не нужно: слот подсказки мы и так перехватываем, а элемент под
-//     курсором приходит туда аргументом.
-#define INDICATOR_MODE 1
 
 static bool g_logStarted = false;
 
@@ -127,38 +118,13 @@ static const ButtonDef BUTTONS[] =
     { 1, "FE_BUDGET_DIPLO_BDSM",  "exchange_settings_dec"      },
 };
 
-// Текстовые индикаторы. host: 0 — контейнер вида, 1 — окно постройки.
-//
-// probe — текст, который элемент показывает до нашего вмешательства.
-// Именно по нему находится строка внутри объекта: движок хранит там
-// уже разрешённую локализацию, а не ключ. Задайте в localisation/*.csv
-// для этого элемента что-нибудь короткое и уникальное и впишите сюда
-// то же самое.
-struct IndicatorDef
-{
-    int         view;
-    int         host;
-    const char* element;
-    const char* probe;
-};
-
-static const int HOST_VIEW = 0;
-static const int HOST_BUILD_FACTORY = 1;
-
-static const IndicatorDef INDICATORS[] =
-{
-    { 2, HOST_BUILD_FACTORY, "FE_CORRUPTION_MODIFIER_BDSM", "XXXXXXXX" },
-};
-
 static const int VIEW_COUNT = sizeof(VIEWS) / sizeof(VIEWS[0]);
 static const int BUTTON_COUNT = sizeof(BUTTONS) / sizeof(BUTTONS[0]);
-static const int INDICATOR_COUNT = sizeof(INDICATORS) / sizeof(INDICATORS[0]);
 
 // Потолки: под каждый вид и каждую кнопку нужен свой переходник,
 // а их приходится объявлять заранее — см. макросы ниже.
 static const int MAX_VIEWS = 4;
 static const int MAX_BUTTONS = 8;
-static const int MAX_INDICATORS = 4;
 
 
 // ---------------------------------------------------------------
@@ -175,24 +141,6 @@ static const int VT_SLOT_ISVALID = 6;   // CDecision, смещение 0x18
 static const DWORD RVA_POLITICS_DRAW_BEGIN = 0x2DB2E0;
 static const DWORD RVA_POLITICS_DRAW_END = 0x2DC750;
 
-// Страна игрока: массив стран и индекс. Взято из кода самой игры.
-static const DWORD RVA_COUNTRY_ARRAY = 0xE587E4;
-static const DWORD RVA_GAME_STATE = 0xE588E8;
-
-static const int OFF_COUNTRY_LIST = 0x04;
-static const int OFF_PLAYER_INDEX = 0xB60;
-
-// Административная эффективность: int64, 15 бит дробной части.
-// Игра показывает её как value * 100 >> 15.
-static const int OFF_ADMIN_EFFICIENCY = 0xE70;
-
-// Окно постройки завода. CProductionView хранит его по +0x1C4,
-// сам контейнер лежит в окне по +0x28. Подтверждено замером.
-static const DWORD RVA_VTABLE_BUILDFACTORY = 0xA0FCF0;
-static const int   OFF_VIEW_BF_WINDOW = 0x1C4;
-static const int   OFF_BF_CONTAINER = 0x28;
-
-
 // ---------------------------------------------------------------
 // Смещения внутри объектов интерфейса
 // ---------------------------------------------------------------
@@ -202,7 +150,6 @@ static const int OFF_GLUE_METHOD = 0x08;  // склейка -> указател�
 
 static const int VT_FIND_WINDOW = 0x6C;  // контейнер: найти вложенное окно
 static const int VT_FIND_CHILD = 0x34;  // окно: найти кнопку по имени
-static const int VT_FIND_TEXT = 0x3C;  // окно: найти текстовое поле
 static const int OFF_OBSERVABLE = 0x54;  // кнопка -> Observable
 static const int VT_ADD_OBSERVER = 0x04;  // Observable: AddObserver
 static const int VT_GET_NAME = 0x44;  // элемент: имя из .gui
@@ -211,10 +158,6 @@ static const int VT_GET_NAME = 0x44;  // элемент: имя из .gui
 // только +0x14 (данные std::string) и +0x28 (_Myres).
 static const int ELEM_STRDATA = 0x14;
 static const int ELEM_STRRES = 0x28;
-
-// Глубина поиска строки внутри объекта элемента.
-static const int ELEMENT_SCAN_BYTES = 0x400;
-static const int MAX_TEXT_SLOTS = 6;
 
 
 // ---------------------------------------------------------------
@@ -349,13 +292,6 @@ static unsigned char g_glue[MAX_BUTTONS][GLUE_SIZE];
 static unsigned char g_fakeElem[MAX_BUTTONS][0x30];
 static char          g_decisionText[MAX_BUTTONS][128];
 static char          g_nameStorage[128];
-static char          g_indicatorText[64];
-
-// Смещения строк с ключом внутри объекта элемента. После первой
-// перезаписи искать по ключу нечего, поэтому запоминаем.
-static int g_textOffset[MAX_INDICATORS][MAX_TEXT_SLOTS];
-static int g_textCount[MAX_INDICATORS] = { 0 };
-static int g_textLogged[MAX_INDICATORS] = { 0 };
 
 
 // ---------------------------------------------------------------
@@ -411,110 +347,6 @@ static void* const THUNKS[MAX_BUTTONS] =
     (void*)&Thunk0, (void*)&Thunk1, (void*)&Thunk2, (void*)&Thunk3,
     (void*)&Thunk4, (void*)&Thunk5, (void*)&Thunk6, (void*)&Thunk7,
 };
-
-
-// ---------------------------------------------------------------
-// Страна игрока и текст индикатора
-// ---------------------------------------------------------------
-
-static unsigned char* PlayerCountry()
-{
-    DWORD* pList = *(DWORD**)(g_base + RVA_COUNTRY_ARRAY);
-    DWORD* pGame = *(DWORD**)(g_base + RVA_GAME_STATE);
-
-    if (!pList || !pGame)
-        return 0;
-
-    DWORD list = *(DWORD*)((unsigned char*)pList + OFF_COUNTRY_LIST);
-    DWORD index = *(DWORD*)((unsigned char*)pGame + OFF_PLAYER_INDEX);
-
-    if (!list)
-        return 0;
-
-    return *(unsigned char**)(list + index * 4);
-}
-
-
-// 100 минус административная эффективность, с одним знаком.
-static const char* BuildIndicatorText(int index)
-{
-    (void)index;
-
-    g_indicatorText[0] = 0;
-
-    unsigned char* country = PlayerCountry();
-    if (!country)
-        return g_indicatorText;
-
-    long long eff = *(long long*)(country + OFF_ADMIN_EFFICIENCY);
-    long long tenths = (eff * 1000) >> 15;
-    long long left = 1000 - tenths;
-
-    if (left < 0)
-        left = 0;
-
-    sprintf_s(g_indicatorText, sizeof(g_indicatorText), "%d.%d%%",
-        (int)(left / 10), (int)(left % 10));
-
-    return g_indicatorText;
-}
-
-
-// ---------------------------------------------------------------
-// Индикаторы
-//
-// Текст меняем перезаписью строки прямо внутри объекта элемента:
-// установка через методы (0x78 у элемента, 0x38 у контейнера) не
-// сработала — первая молча ничего не давала, вторая валила игру.
-// ---------------------------------------------------------------
-
-static int FindStringsInObject(void* object, const char* text,
-    int* offsets, int maxOffsets)
-{
-    unsigned char* base = (unsigned char*)object;
-    unsigned want = (unsigned)strlen(text);
-    int found = 0;
-
-    for (int off = 0; off + 0x18 <= ELEMENT_SCAN_BYTES && found < maxOffsets; off += 4)
-    {
-        unsigned char* p = base + off;
-
-        unsigned size = *(unsigned*)(p + 0x10);
-        unsigned res = *(unsigned*)(p + 0x14);
-
-        if (size != want || res < size || res > 0x1000)
-            continue;
-
-        const char* data = (res > 15) ? *(const char**)p : (const char*)p;
-        if (!data)
-            continue;
-
-        if (memcmp(data, text, want) == 0)
-            offsets[found++] = off;
-    }
-
-    return found;
-}
-
-
-// Длиннее прежней ёмкости не пишем, чтобы не трогать чужую кучу.
-static void WriteStringInPlace(void* object, int offset, const char* text)
-{
-    unsigned char* p = (unsigned char*)object + offset;
-
-    unsigned res = *(unsigned*)(p + 0x14);
-    unsigned len = (unsigned)strlen(text);
-
-    if (len > res)
-        return;
-
-    char* data = (res > 15) ? *(char**)p : (char*)p;
-    if (!data)
-        return;
-
-    memcpy(data, text, len + 1);
-    *(unsigned*)(p + 0x10) = len;
-}
 
 
 // Строка тултипа "PLURALITY_CHANGE" в игре хардкожена в exe и всегда
@@ -608,105 +440,10 @@ static void StripBareNumberLines(void* retBuf)
 }
 
 
-// Контейнер окна постройки завода, взятый через поле вида.
-static void* BuildFactoryContainer(void* productionView)
-{
-    if (!productionView)
-        return 0;
-
-    void* window =
-        *(void**)((unsigned char*)productionView + OFF_VIEW_BF_WINDOW);
-
-    if (!window)
-        return 0;   // окно ещё не открывали
-
-    // Окно уничтожается при закрытии — проверяем, что это всё ещё оно.
-    if (*(DWORD*)window != g_base + RVA_VTABLE_BUILDFACTORY)
-        return 0;
-
-    return *(void**)((unsigned char*)window + OFF_BF_CONTAINER);
-}
-
-
-static void UpdateIndicators(int viewIndex, void* view)
-{
-    const ViewDef& vd = VIEWS[viewIndex];
-
-    void* container = *(void**)((unsigned char*)view + vd.offContainer);
-    if (!container)
-        return;
-
-    for (int i = 0; i < INDICATOR_COUNT && i < MAX_INDICATORS; ++i)
-    {
-        if (INDICATORS[i].view != viewIndex)
-            continue;
-
-        void* host = container;
-
-        if (INDICATORS[i].host == HOST_BUILD_FACTORY)
-        {
-            host = BuildFactoryContainer(view);
-            if (!host)
-                continue;   // окно не открыто — это нормально
-        }
-        else if (vd.window)
-        {
-            GStr sWindow;
-            MakeStr(&sWindow, g_nameStorage, sizeof(g_nameStorage), vd.window);
-
-            host = VCall1(container, VT_FIND_WINDOW, &sWindow);
-            if (!host)
-                continue;
-        }
-
-        GStr sName;
-        MakeStr(&sName, g_nameStorage, sizeof(g_nameStorage), INDICATORS[i].element);
-
-        void* element = VCall1(host, VT_FIND_TEXT, &sName);
-        if (!element)
-            continue;
-
-        // Ключ может лежать в объекте не один раз: исходник и
-        // разрешённая копия. Ищем все вхождения один раз.
-        if (g_textCount[i] == 0)
-        {
-            g_textCount[i] = FindStringsInObject(
-                element, INDICATORS[i].probe,
-                g_textOffset[i], MAX_TEXT_SLOTS);
-
-            if (!g_textLogged[i])
-            {
-                g_textLogged[i] = 1;
-
-                char list[128] = { 0 };
-                for (int k = 0; k < g_textCount[i]; ++k)
-                {
-                    char one[16];
-                    sprintf_s(one, sizeof(one), "%X ", g_textOffset[i][k]);
-                    strcat_s(list, sizeof(list), one);
-                }
-
-                Log("Indicator '%s': element=%08X, ищем '%s', вхождений %d, смещения %s",
-                    INDICATORS[i].element, (DWORD)(DWORD_PTR)element,
-                    INDICATORS[i].probe, g_textCount[i], list);
-            }
-        }
-
-        const char* text = BuildIndicatorText(i);
-
-        for (int k = 0; k < g_textCount[i]; ++k)
-            WriteStringInPlace(element, g_textOffset[i][k], text);
-    }
-}
-
-
 // Подсказка над элементом. Вызывается после оригинала: тот кладёт
-// свой текст в retBuf, а мы подменяем его, если курсор над нашим
-// индикатором.
+// свой текст в retBuf.
 static void OnTooltip(int viewIndex, void* retBuf, void* element)
 {
-    static int logged = 0;
-
     if (!retBuf || !element)
         return;
 
@@ -714,24 +451,6 @@ static void OnTooltip(int viewIndex, void* retBuf, void* element)
 
     if (viewIndex == VIEW_POLITICS && strcmp(name, "plurality") == 0)
         StripBareNumberLines(retBuf);
-
-    for (int i = 0; i < INDICATOR_COUNT && i < MAX_INDICATORS; ++i)
-    {
-        if (INDICATORS[i].view != viewIndex)
-            continue;
-
-        if (strcmp(name, INDICATORS[i].element) != 0)
-            continue;
-
-        const char* text = BuildIndicatorText(i);
-        GStrSet(retBuf, text);
-
-        if (logged < 3)
-        {
-            ++logged;
-            Log("Tooltip '%s': подставлено '%s'", name, text);
-        }
-    }
 }
 
 
@@ -1467,11 +1186,6 @@ static void OnViewUpdate(int viewIndex, void* view)
         Log("Update[%s]: вызван, view=%08X",
             VIEWS[viewIndex].name, (DWORD)(DWORD_PTR)view);
     }
-
-#if ENABLE_INDICATORS && INDICATOR_MODE == 0
-    // Каждый раз: значение меняется по ходу игры.
-    UpdateIndicators(viewIndex, view);
-#endif
 
     // Указатель сменился — вид пересоздан, например новой партией.
     if (view == g_configuredView[viewIndex])
