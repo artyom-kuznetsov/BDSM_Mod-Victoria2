@@ -2155,7 +2155,10 @@ country_event = { # YEARLY CLEANUP YCL
 		
 		any_country = {
 			limit = {
-				ai = no
+				OR = {
+					ai = no
+					tag = EIC
+				}
 				year = 1841
 			}
 			any_pop = {
