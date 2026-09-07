@@ -5821,8 +5821,9 @@ country_event = {
 			}
 			any_owned = {
 				limit = {
-					state_scope = { 
-						NOT = { total_pops = 150000 } 
+					state_scope = {
+						NOT = { total_pops = 150000 }
+						is_colonial = no
 					}
 				}
 				add_core = SMA
@@ -5832,7 +5833,7 @@ country_event = {
 			}
 			any_owned = {
 				limit = {
-					state_scope = { total_pops = 150000 NOT = { total_pops = 400000 } }
+					state_scope = { total_pops = 150000 NOT = { total_pops = 400000 } is_colonial = no }
 				}
 				remove_core = SMA
 				add_core = MST
@@ -5844,6 +5845,7 @@ country_event = {
 					state_scope = { 
 						total_pops = 400000
 						NOT = { total_pops = 800000 } 
+						is_colonial = no
 					}
 				}
 				remove_core = SMA
@@ -5853,7 +5855,58 @@ country_event = {
 			}
 			any_owned = {
 				limit = {
-					state_scope = { total_pops = 800000 }
+					state_scope = { total_pops = 800000 is_colonial = no }
+				}
+				remove_core = SMA
+				remove_core = MST
+				remove_core = LRG
+				add_core = HUG
+			}
+		}
+		any_country = {
+			limit = {
+				OR = {
+					war = no
+					NOT = { year = 1837 }
+				}
+			}
+			any_owned = {
+				limit = {
+					state_scope = {
+						NOT = { total_pops = 250000 }
+						is_colonial = yes
+					}
+				}
+				add_core = SMA
+				remove_core = MST
+				remove_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { total_pops = 250000 NOT = { total_pops = 600000 } is_colonial = yes }
+				}
+				remove_core = SMA
+				add_core = MST
+				remove_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { 
+						total_pops = 600000
+						NOT = { total_pops = 1200000 } 
+						is_colonial = yes
+					}
+				}
+				remove_core = SMA
+				remove_core = MST
+				add_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { total_pops = 1200000 is_colonial = yes }
 				}
 				remove_core = SMA
 				remove_core = MST
