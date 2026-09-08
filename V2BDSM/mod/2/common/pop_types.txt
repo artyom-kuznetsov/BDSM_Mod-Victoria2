@@ -95,19 +95,19 @@ promotion_chance =
 	
 	group = {
 		modifier = {
-			factor = -0.04
+			factor = -4
 			literacy = 0.2
 			is_culture_group = east_asian
 		}
 		
 		modifier = {
-			factor = -0.05
+			factor = -5
 			literacy = 0.35
 			is_culture_group = east_asian
 		}
 		
 		modifier = {
-			factor = -0.06
+			factor = -6
 			literacy = 0.5
 			is_culture_group = east_asian
 		}
@@ -290,14 +290,6 @@ promotion_chance =
 	}
 	
 	
-	
-	modifier = {
-		factor = -5
-		country = {
-			is_mobilised = yes
-		}
-	}
-	
 	### MILITANCY
 	group = {
 		modifier = {
@@ -322,14 +314,6 @@ promotion_chance =
 		}
 	}
 	
-
-	### SLAVERY
-	modifier = {
-		factor = -4
-		country = {
-			slavery = yes_slavery 
-		}
-	}
 	
 	# PENAL SYSTEM
 	modifier = {
@@ -371,7 +355,7 @@ promotion_chance =
 	
 	### SLAVERY
 	modifier = {
-		factor = -0.1
+		factor = -4
 		country = {
 			slavery = yes_slavery 
 			NOT = { has_country_flag = the_slavery_debate }
@@ -391,6 +375,11 @@ promotion_chance =
 		country = {
 			has_country_flag = persian_centralization_ongoing_flag
 		}
+	}
+	
+	modifier = {
+		factor = 5
+		always = yes
 	}
 }
 
