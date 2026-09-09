@@ -113,8 +113,8 @@ economy = {
 	CIV_BASE_SHARE_FACTOR = 1,
 	UNCIV_BASE_SHARE_FACTOR = 1,
 	FACTORY_PAYCHECKS_LEFTOVER_FACTOR = 0.8, -- % of how much we pay to the pops and capitalists, from the leftovers.
-	MAX_FACTORY_MONEY_SAVE = 1000,	-- how much money is stored maximum in a factory.
-	SMALL_DEBT_LIMIT = 10000,
+	MAX_FACTORY_MONEY_SAVE = 5000,	-- how much money is stored maximum in a factory. Поднято x10 (было 1000) вслед за патчем max_relative_price (потолок цены поднят x10, с 10x до 100x базовой) - иначе "7*Costs > Budget" из-за подорожавшего сырья пробивает старый бюджет намного чаще, и фабрика уходит в неограниченный убыток (вынужденная минимальная зарплата платится даже в минус, без пола).
+	SMALL_DEBT_LIMIT = 1000,
 	FACTORY_UPGRADE_EMPLOYEE_FACTOR = 0.8, -- determines how close to the employee limit we need to be before "upgrade all" will upgrade/expand a given factory (1 = 100%).
 	RGO_SUPPLY_DEMAND_FACTOR_HIRE_HI = 0.15,	-- how fast pops are Hired when there is a high demand
 	RGO_SUPPLY_DEMAND_FACTOR_HIRE_LO = 0.1,	-- how fast pops are Hired when there is a medium demand
