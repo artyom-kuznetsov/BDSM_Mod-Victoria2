@@ -18,6 +18,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <intrin.h>
 #include <ctype.h>
 
@@ -31,24 +32,49 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.50"
+#define MOD_VERSION "2.64"
 
-// Лог пишется в v2dll.log рядом с exe, очищается при запуске.
-// Для раздачи ставить 0: фильтр решений вызывается тысячами раз за тик.
-#define ENABLE_LOG 1
+// Настройки ниже читаются из v2dll_settings.ini рядом с exe при
+// каждом запуске игры. Если файла ещё нет, он создаётся со
+// значениями по умолчанию (перечисленными здесь). Правка файла не
+// требует пересборки DLL - изменения применяются при следующем
+// запуске игры.
+struct Settings
+{
+    bool log            = true;   // лог в v2dll.log (много записей на тик, для раздачи ставить 0)
+    bool buttons        = true;   // кнопки, запускающие решения
+    bool decisionFilter = true;   // скрытие решений из окна политики
+    bool priceDelta     = false;  // процентный шаг изменения цен
+    bool popDisplay     = false;  // общее население в верхней панели (откачено: не смогли дописать сырое число в скобках без риска)
+    bool versionLabel   = true;   // версия мода в подписи главного меню
 
-#define ENABLE_BUTTONS         1   // кнопки, запускающие решения
-#define ENABLE_DECISION_FILTER 1   // скрытие решений из окна политики
-#define ENABLE_PRICE_DELTA     1   // процентный шаг изменения цен
-#define ENABLE_EXE_PATCHES     1   // подкрепления и цели войны
-#define ENABLE_POP_DISPLAY     0   // общее население в верхней панели (откачено: не смогли дописать сырое число в скобках без риска)
-#define ENABLE_VERSION_LABEL   1   // версия мода в подписи главного меню
+    // Байтовые патчи exe из таблицы EXE_PATCHES (см. ниже по файлу)
+    // управляются напрямую через BytePatch::enabled по ключам
+    // PATCH_<ИМЯ> в ini - здесь только патчи exe, не входящие в эту
+    // таблицу (каждый - отдельная функция со своим хуком).
+    bool patchOccupiedReinforceSplit = true;
+    bool patchAllyOwnerCheck         = true;
+    bool patchCivilizeNullCheck      = true;
+    bool patchGraphPointClamp        = true;
+    bool patchFactoryDumpScan        = true;
+    bool patchProdListVisibility     = true;
+    bool patchProdTypeGate           = true;
+};
+
+static Settings g_settings;
+
+// Загрузка/сохранение настроек (v2dll_settings.ini) реализовано
+// ниже по файлу, после таблицы EXE_PATCHES - подстановка значений
+// по ключам PATCH_<ИМЯ> ищет патч в этой таблице по имени.
+static void LoadSettings();
 
 static bool g_logStarted = false;
 
 static void Log(const char* fmt, ...)
 {
-#if ENABLE_LOG
+    if (!g_settings.log)
+        return;
+
     FILE* f = 0;
     if (fopen_s(&f, "v2dll.log", g_logStarted ? "a" : "w") != 0 || !f)
         return;
@@ -62,9 +88,6 @@ static void Log(const char* fmt, ...)
 
     fprintf(f, "\n");
     fclose(f);
-#else
-    (void)fmt;
-#endif
 }
 
 
@@ -1191,10 +1214,8 @@ static void OnViewUpdate(int viewIndex, void* view)
     if (view == g_configuredView[viewIndex])
         return;
 
-#if ENABLE_BUTTONS
-    if (SetupButtons(viewIndex, view))
+    if (g_settings.buttons && SetupButtons(viewIndex, view))
         g_configuredView[viewIndex] = view;
-#endif
 
     if (viewIndex == 2 && view != g_hideColonialConfiguredView)
     {
@@ -1564,6 +1585,162 @@ static BytePatch EXE_PATCHES[] =
 static const int EXE_PATCH_COUNT = sizeof(EXE_PATCHES) / sizeof(EXE_PATCHES[0]);
 
 
+// ---------------------------------------------------------------
+// Загрузка/сохранение настроек (v2dll_settings.ini)
+//
+// Ключи ENABLE_* и семь именованных PATCH_* правят поля g_settings.
+// Любой другой ключ PATCH_<ИМЯ> ищется (без учёта регистра) в
+// таблице EXE_PATCHES выше и правит BytePatch::enabled найденной
+// записи - поэтому весь блок объявлен здесь, после таблицы, а не
+// в начале файла.
+// ---------------------------------------------------------------
+
+static bool ParseBoolValue(const char* value)
+{
+    while (*value == ' ' || *value == '\t')
+        ++value;
+    return atoi(value) != 0;
+}
+
+static void ApplySetting(const char* key, const char* value)
+{
+    bool v = ParseBoolValue(value);
+
+    if (_stricmp(key, "ENABLE_LOG") == 0)                  { g_settings.log            = v; return; }
+    if (_stricmp(key, "ENABLE_BUTTONS") == 0)               { g_settings.buttons        = v; return; }
+    if (_stricmp(key, "ENABLE_DECISION_FILTER") == 0)       { g_settings.decisionFilter = v; return; }
+    if (_stricmp(key, "ENABLE_PRICE_DELTA") == 0)           { g_settings.priceDelta     = v; return; }
+    if (_stricmp(key, "ENABLE_POP_DISPLAY") == 0)           { g_settings.popDisplay     = v; return; }
+    if (_stricmp(key, "ENABLE_VERSION_LABEL") == 0)         { g_settings.versionLabel   = v; return; }
+
+    if (_stricmp(key, "PATCH_OCCUPIED_REINFORCE_SPLIT") == 0) { g_settings.patchOccupiedReinforceSplit = v; return; }
+    if (_stricmp(key, "PATCH_ALLY_OWNER_CHECK") == 0)          { g_settings.patchAllyOwnerCheck         = v; return; }
+    if (_stricmp(key, "PATCH_CIVILIZE_NULL_CHECK") == 0)       { g_settings.patchCivilizeNullCheck      = v; return; }
+    if (_stricmp(key, "PATCH_GRAPH_POINT_CLAMP") == 0)         { g_settings.patchGraphPointClamp        = v; return; }
+    if (_stricmp(key, "PATCH_FACTORY_DUMP_SCAN") == 0)         { g_settings.patchFactoryDumpScan        = v; return; }
+    if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
+    if (_stricmp(key, "PATCH_PROD_TYPE_GATE") == 0)            { g_settings.patchProdTypeGate           = v; return; }
+
+    if (_strnicmp(key, "PATCH_", 6) == 0)
+    {
+        const char* patchName = key + 6;
+        for (int i = 0; i < EXE_PATCH_COUNT; ++i)
+        {
+            if (_stricmp(EXE_PATCHES[i].name, patchName) == 0)
+            {
+                EXE_PATCHES[i].enabled = v;
+                return;
+            }
+        }
+    }
+}
+
+static void WriteDefaultSettings(const char* path)
+{
+    FILE* f = 0;
+    if (fopen_s(&f, path, "w") != 0 || !f)
+        return;
+
+    fprintf(f,
+        "; Настройки V2DLL. 1 = включено, 0 = выключено.\n"
+        "; Правится вручную, без пересборки DLL - изменения\n"
+        "; применяются при следующем запуске игры.\n"
+        "\n"
+        "ENABLE_LOG=%d                 ; лог в v2dll.log (много записей на тик, для раздачи ставить 0)\n"
+        "ENABLE_BUTTONS=%d             ; кнопки, запускающие решения\n"
+        "ENABLE_DECISION_FILTER=%d     ; скрытие решений из окна политики\n"
+        "ENABLE_PRICE_DELTA=%d         ; процентный шаг изменения цен\n"
+        "ENABLE_POP_DISPLAY=%d         ; общее население в верхней панели (экспериментально)\n"
+        "ENABLE_VERSION_LABEL=%d       ; версия мода в подписи главного меню\n",
+        (int)g_settings.log, (int)g_settings.buttons, (int)g_settings.decisionFilter,
+        (int)g_settings.priceDelta, (int)g_settings.popDisplay, (int)g_settings.versionLabel);
+
+    fprintf(f,
+        "\n"
+        "; --- Байтовые правки exe (список = таблица EXE_PATCHES в\n"
+        "; V2TechButton.cpp, там же подробное описание каждого патча) ---\n");
+
+    for (int i = 0; i < EXE_PATCH_COUNT; ++i)
+    {
+        char nameUpper[64];
+        size_t nlen = strlen(EXE_PATCHES[i].name);
+        if (nlen >= sizeof(nameUpper))
+            nlen = sizeof(nameUpper) - 1;
+        size_t j = 0;
+        for (; j < nlen; ++j)
+            nameUpper[j] = (char)toupper((unsigned char)EXE_PATCHES[i].name[j]);
+        nameUpper[j] = '\0';
+
+        fprintf(f, "PATCH_%s=%d\n", nameUpper, (int)EXE_PATCHES[i].enabled);
+    }
+
+    fprintf(f,
+        "\n"
+        "; --- Отдельные хуки exe (не из таблицы выше) ---\n"
+        "PATCH_OCCUPIED_REINFORCE_SPLIT=%d   ; своя ставка пополнения occupied vs allied (уточняет ALLIED_REINFORCE_150)\n"
+        "PATCH_ALLY_OWNER_CHECK=%d           ; своя ставка occupied-by-ally vs owned-by-ally (уточняет OCCUPIED_REINFORCE_SPLIT)\n"
+        "PATCH_GRAPH_POINT_CLAMP=%d          ; кламп точек графика бюджета - чинит краш переполнения буфера, выключать не рекомендуется\n"
+        "PATCH_FACTORY_DUMP_SCAN=%d          ; фоновый поток, дампящий в лог память отслеживаемых фабрик (диагностика, на геймплей не влияет)\n"
+        "PATCH_PROD_LIST_VISIBILITY=%d       ; видимость строк списка \"Фабрики\" (нужен кнопке \"скрыть колонии\")\n"
+        "PATCH_PROD_TYPE_GATE=%d             ; гейт по production_types.txt для PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL\n"
+        "\n"
+        "; ВАЖНО: если включён любой из PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_*\n"
+        "; выше, держите PATCH_CIVILIZE_NULL_CHECK тоже включённым - это патч,\n"
+        "; который чинит краш игры при цивилизации страны (0xc0000005), а не\n"
+        "; независимая настройка. Без него краш вернётся, как только\n"
+        "; нецивилизованная страна с построенной фабрикой цивилизуется.\n"
+        "PATCH_CIVILIZE_NULL_CHECK=%d\n",
+        (int)g_settings.patchOccupiedReinforceSplit,
+        (int)g_settings.patchAllyOwnerCheck,
+        (int)g_settings.patchGraphPointClamp,
+        (int)g_settings.patchFactoryDumpScan,
+        (int)g_settings.patchProdListVisibility,
+        (int)g_settings.patchProdTypeGate,
+        (int)g_settings.patchCivilizeNullCheck);
+
+    fclose(f);
+}
+
+// Формат строки: KEY=VALUE, необязательный "; комментарий" в
+// хвосте строки не мешает разбору (atoi останавливается на первой
+// нецифровой позиции). Строки без '=' (пустые, комментарии) пропускаются.
+static void LoadSettings()
+{
+    static const char* PATH = "v2dll_settings.ini";
+
+    FILE* f = 0;
+    if (fopen_s(&f, PATH, "r") != 0 || !f)
+    {
+        WriteDefaultSettings(PATH);
+        return;
+    }
+
+    char line[256];
+    while (fgets(line, sizeof(line), f))
+    {
+        char* eq = strchr(line, '=');
+        if (!eq)
+            continue;
+
+        *eq = '\0';
+        const char* value = eq + 1;
+
+        char key[64];
+        size_t klen = strlen(line);
+        if (klen >= sizeof(key))
+            klen = sizeof(key) - 1;
+        memcpy(key, line, klen);
+        key[klen] = '\0';
+        while (klen > 0 && (key[klen - 1] == ' ' || key[klen - 1] == '\t'))
+            key[--klen] = '\0';
+
+        ApplySetting(key, value);
+    }
+
+    fclose(f);
+}
+
+
 static DWORD FileOffsetToRVA(DWORD fileOffset)
 {
     IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)g_base;
@@ -1825,6 +2002,642 @@ static bool InstallAllyOwnerCheck()
 
 
 // ---------------------------------------------------------------
+// Краш при цивилизации страны (0xc0000005, fault offset 0x14248b).
+//
+// FUN_00542370 - обработчик "on_civilize": перебирает существующие
+// постройки страны (FUN_005c2ad0 - lookup по имени в хэш-таблице
+// "категория/товар -> слот") и раскладывает их по слотам для
+// последующей обработки. Раньше это падало только теоретически:
+// нецивилизованные страны не могли строить фабрики вообще, поэтому
+// до этого кода просто не доходило ни с чем, кроме RGO-построек,
+// для которых слот всегда существует. В этой сессии добавлены
+// патчи build_factory_ignore_uncivilized_* — теперь нецивилизованная
+// страна МОЖЕТ построить произвольную фабрику, и при её цивилизации
+// FUN_005c2ad0 не находит слот для такой постройки, возвращает 0
+// (не найдено), а вызывающий код разыменовывает результат без
+// проверки: mov esi,[eax+0x40] - EAX=0 -> чтение по 0x40 -> краш.
+//
+// Патчим ровно точку сразу после call FUN_005c2ad0 (rva 0x14248B,
+// 7 байт - перекрывает mov esi,[eax+0x40]; dec esi; shl esi,4).
+// Если EAX==0 - пропускаем текущую постройку целиком (прыжок на
+// rva 0x142555, штатная точка "next iteration" того же цикла,
+// уже присутствующая в оригинальном коде). Иначе - воспроизводим
+// три перекрытых инструкции и продолжаем как раньше (rva 0x142492).
+// ---------------------------------------------------------------
+
+static const DWORD RVA_CIVILIZE_NULLCHECK_HOOK   = 0x14248B;
+static const DWORD RVA_CIVILIZE_NULLCHECK_NORMAL = 0x142492;  // add esi,[ebp-0x48]
+static const DWORD RVA_CIVILIZE_NULLCHECK_SKIP   = 0x142555;  // mov eax,[ebp-0x18] (next iteration)
+
+static const unsigned char CIVILIZE_NULLCHECK_SIG[7] =
+{ 0x8B, 0x70, 0x40, 0x4E, 0xC1, 0xE6, 0x04 };
+
+static bool InstallCivilizeNullCheck()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_CIVILIZE_NULLCHECK_HOOK);
+
+    if (memcmp(hook, CIVILIZE_NULLCHECK_SIG, sizeof(CIVILIZE_NULLCHECK_SIG)) != 0)
+    {
+        Log("CivilizeNullCheck: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 32, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    int n = 0;
+
+    cave[n++] = 0x85; cave[n++] = 0xC0;                     // test eax,eax
+    int jzAt = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                     // jz null_case (адрес допишем ниже)
+
+    // EAX != 0: воспроизводим перекрытые байты и уходим обратно.
+    cave[n++] = 0x8B; cave[n++] = 0x70; cave[n++] = 0x40;   // mov esi,[eax+0x40]
+    cave[n++] = 0x4E;                                       // dec esi
+    cave[n++] = 0xC1; cave[n++] = 0xE6; cave[n++] = 0x04;   // shl esi,4
+
+    cave[n++] = 0xE9;                                       // jmp обратно (нормальный путь)
+    *(DWORD*)(cave + n) = (g_base + RVA_CIVILIZE_NULLCHECK_NORMAL) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    int nullAt = n;
+    cave[jzAt + 1] = (unsigned char)(nullAt - (jzAt + 2));
+
+    // EAX == 0: слот не найден - пропускаем эту постройку целиком,
+    // на следующую итерацию того же цикла (штатная точка выхода).
+    cave[n++] = 0xE9;
+    *(DWORD*)(cave + n) = (g_base + RVA_CIVILIZE_NULLCHECK_SKIP) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[7];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("CivilizeNullCheck: установлен на rva %06X, пещера %08X",
+        RVA_CIVILIZE_NULLCHECK_HOOK, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Переполнение буфера точек графика (0xc0000409 - сработала
+// GS-канарейка стека - сразу за ним 0xc0000005 по тому же адресу).
+//
+// FUN_009e0ef0 - отрисовка графика истории (открывается вместе с
+// окном бюджета). Для каждого сегмента истории код пишет ровно
+// [ESI] точек подряд в фиксированный локальный буфер, без проверки
+// [ESI] против вместимости буфера. Если у какого-то сегмента число
+// точек аномально велико (экономические значения ломают счётчик
+// записей истории - пользователь видел уходящие в минус числа
+// пошлин перед крахом), запись уходит за пределы буфера и разносит
+// стек.
+//
+// Патчим ровно точку первого чтения счётчика (rva 0x5E0FD6, 13
+// байт - перекрывает cmp dword[esi],1; mov [esp+0x20],esi; jl
+// rva 0x5E1159). Перед этим сравнением ограничиваем сам счётчик
+// в записи (dword [esi]) сверху безопасным значением GRAPH_CLAMP_MAX
+// - это временный UI-буфer графика, пересобираемый при каждом
+// обновлении окна, поэтому обрезка не влияет на реальную
+// экономическую статистику. Дальше воспроизводим оригинальные
+// cmp/mov/jl без изменений - работают уже с обрезанным значением.
+//
+// ВАЖНО (версия 2.54 всё равно упала с этим же клампом=150):
+// точный расчёт вместимости буфера по кадру стека функции -
+// SUB ESP,0x9BC в прологе, буфер начинается с ESP+0x90 (первая
+// запись пишет [ESI-4]..[ESI+0xB]), 3 push (EBX/ESI/EDI, 0xC байт)
+// уже вычтены из ESP до этого места. По 0x10 байт на точку
+// безопасный максимум = ((0x9BC-0xC) - 0x90) / 0x10 = 147 точек -
+// значение 150 переполняет буфер ровно на столько, чтобы
+// затереть сохранённый EBP/адрес возврата/параметры вызывающей
+// функции (ровно это и дало крах в MOV ECX,[EAX] на rva 5E1137,
+// где EAX = испорченный [EBP+0xC]). Взял 100 - заметный запас
+// от математического предела 147 на случай неточности в ручном
+// разборе кадра (выравнивание AND ESP,0xFFFFFFF8 даёт до 7 байт
+// неопределённости).
+// ---------------------------------------------------------------
+
+static const DWORD RVA_GRAPH_CLAMP_HOOK   = 0x5E0FD6;
+static const DWORD RVA_GRAPH_CLAMP_NORMAL = 0x5E0FE3;  // lea ecx,[esi+4]
+static const DWORD RVA_GRAPH_CLAMP_SKIP   = 0x5E1159;  // dec dword ptr[esp+0x28] (следующий сегмент)
+static const int   GRAPH_CLAMP_MAX = 100;
+
+static const unsigned char GRAPH_CLAMP_SIG[13] =
+{
+    0x83, 0x3E, 0x01,                   // cmp dword ptr[esi],1
+    0x89, 0x74, 0x24, 0x20,             // mov [esp+0x20],esi
+    0x0F, 0x8C, 0x76, 0x01, 0x00, 0x00  // jl rva 0x5E1159
+};
+
+static bool InstallGraphPointClamp()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_GRAPH_CLAMP_HOOK);
+
+    if (memcmp(hook, GRAPH_CLAMP_SIG, sizeof(GRAPH_CLAMP_SIG)) != 0)
+    {
+        Log("GraphPointClamp: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 48, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    int n = 0;
+
+    cave[n++] = 0x81; cave[n++] = 0x3E;                     // cmp dword ptr[esi], GRAPH_CLAMP_MAX
+    *(DWORD*)(cave + n) = (DWORD)GRAPH_CLAMP_MAX; n += 4;
+
+    int jleAt = n;
+    cave[n++] = 0x7E; cave[n++] = 0x00;                     // jle skip_clamp (адрес допишем ниже)
+
+    cave[n++] = 0xC7; cave[n++] = 0x06;                     // mov dword ptr[esi], GRAPH_CLAMP_MAX
+    *(DWORD*)(cave + n) = (DWORD)GRAPH_CLAMP_MAX; n += 4;
+
+    int skipClampAt = n;
+    cave[jleAt + 1] = (unsigned char)(skipClampAt - (jleAt + 2));
+
+    // Воспроизводим перекрытые байты - теперь со значением,
+    // ограниченным сверху GRAPH_CLAMP_MAX.
+    cave[n++] = 0x83; cave[n++] = 0x3E; cave[n++] = 0x01;   // cmp dword ptr[esi],1
+    cave[n++] = 0x89; cave[n++] = 0x74; cave[n++] = 0x24; cave[n++] = 0x20;  // mov [esp+0x20],esi
+
+    int jgeAt = n;
+    cave[n++] = 0x7D; cave[n++] = 0x00;                     // jge continue (адрес допишем ниже)
+
+    cave[n++] = 0xE9;                                       // jmp far_skip (rva GRAPH_CLAMP_SKIP)
+    *(DWORD*)(cave + n) = (g_base + RVA_GRAPH_CLAMP_SKIP) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    int continueAt = n;
+    cave[jgeAt + 1] = (unsigned char)(continueAt - (jgeAt + 2));
+
+    cave[n++] = 0xE9;                                       // jmp far_resume (rva GRAPH_CLAMP_NORMAL)
+    *(DWORD*)(cave + n) = (g_base + RVA_GRAPH_CLAMP_NORMAL) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[13];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
+    for (int i = 5; i < 13; ++i)
+        patch[i] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("GraphPointClamp: установлен на rva %06X, максимум %d точек, пещера %08X",
+        RVA_GRAPH_CLAMP_HOOK, GRAPH_CLAMP_MAX, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Диагностика краха экономики (временно, по запросу пользователя):
+// живой дамп памяти state_building для regular_clothes_factory и
+// canned_food_factory у России. У России именно эти два экземпляра
+// фабрик уходят в аномальные money/pops_paychecks/last_income -
+// цель дампа поймать момент/причину срыва по живым числам.
+//
+// Первая версия (2.53) вешала хук на FUN_004d04b0 ("можно ли
+// построить этот тип здесь") - за время игры (сейв Proebali.v2,
+// ~26 игровых дней от прошлого сейва) хук НИ РАЗУ не сработал.
+// Разобрались почему: все 3 вызывающих места FUN_004d04b0 - это
+// либо построение текста подсказки "почему нельзя строить"
+// (FUN_0052ca30/FUN_0052cac0/FUN_00858670), либо ИИ, выбирающий,
+// где построить новую фабрику (FUN_00857530/xref FUN_00858670) -
+// а Россия в этом сейве под игроком (player="RUS"), так что ИИ её
+// штаты вообще не оценивает, а нужные окна подсказок игрок не
+// держал открытыми. Функция ежедневного пересчёта денег фабрики
+// отдельная и не найдена (попытка через таблицу имён полей сейва
+// FUN_00c381c0 второй раз подтвердила тупик - это просто регистрация
+// имя<->индекс для сериализации, без офсетов/указателей на поля).
+//
+// Поэтому вместо хука - фоновый поток, который сам сканирует
+// закоммиченную приватную (кучу) память процесса в поисках указателя
+// на production_type с нужным именем (тот же struct-layout, что и
+// раньше: node+0x18 = указатель на тип, имя лежит по OFF_PRODTYPE_NAME
+// внутри объекта типа) - никакой зависимости от того, какая именно
+// игровая функция и когда обращается к узлу. Найденные узлы дальше
+// просто перечитываются раз в TRACK_INTERVAL_MS без нового скана.
+// ---------------------------------------------------------------
+static const char* const FACTORY_DUMP_NAMES[] = { "regular_clothes_factory", "canned_food_factory" };
+static const int FACTORY_DUMP_NAME_COUNT = sizeof(FACTORY_DUMP_NAMES) / sizeof(FACTORY_DUMP_NAMES[0]);
+static const int FACTORY_DUMP_MAX_NODES = 8;
+static const int FACTORY_DUMP_RANGE = 0x300;
+static const DWORD FACTORY_SCAN_INTERVAL_MS = 30000;  // полный скан памяти, пока не набрали узлов
+static const DWORD FACTORY_TRACK_INTERVAL_MS = 5000;  // лёгкий перечит уже найденных узлов
+static const DWORD FACTORY_RESCAN_INTERVAL_MS = 300000; // повторный полный скан на случай новых/пропавших фабрик
+
+static void* g_factoryNodes[FACTORY_DUMP_MAX_NODES] = { 0 };
+static char  g_factoryNodeNames[FACTORY_DUMP_MAX_NODES][64];
+static int   g_factoryNodeCount = 0;
+static HANDLE g_factoryScanThread = 0;
+
+// Читает имя типа по typePtr+OFF_PRODTYPE_NAME с проверкой на
+// печатность (иначе это почти наверняка не production_type, а
+// случайное совпадение битов). Сам вызов защищён SEH снаружи.
+static bool ReadPlausibleTypeName(void* typePtr, char* outName, int outSize)
+{
+    if (!typePtr)
+        return false;
+    // v2game.exe собран с LARGE_ADDRESS_AWARE - под WOW64 куча может
+    // легитимно лежать выше 2 ГБ, поэтому верхняя граница почти у
+    // самого потолка 32-битного адресного пространства, а не 0x7FFE0000.
+    UINT_PTR tv = (UINT_PTR)typePtr;
+    if (tv < 0x10000 || tv > 0xFFFE0000)
+        return false;
+
+    const char* src = (const char*)typePtr + OFF_PRODTYPE_NAME;
+    int i = 0;
+    for (; i < outSize - 1; ++i)
+    {
+        char c = src[i];
+        if (c == 0)
+            break;
+        if ((unsigned char)c < 0x20 || (unsigned char)c > 0x7e)
+            return false;
+        outName[i] = c;
+    }
+    if (i == 0 || i >= outSize - 1)
+        return false;
+    outName[i] = 0;
+    return true;
+}
+
+static bool __cdecl SafeCheckTypeName(void* typePtr, char* outName, int outSize)
+{
+    __try
+    {
+        return ReadPlausibleTypeName(typePtr, outName, outSize);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return false;
+    }
+}
+
+static void DumpFactoryNodeNow(void* node, const char* typeName)
+{
+    char line[4096];
+    int len = sprintf_s(line, sizeof(line), "FactoryDump node=%08X type=%s:",
+        (unsigned)(DWORD_PTR)node, typeName);
+    if (len < 0)
+        return;
+
+    __try
+    {
+        for (int off = 0; off < FACTORY_DUMP_RANGE; off += 8)
+        {
+            if (len >= (int)sizeof(line) - 64)
+                break;
+            double v = *(double*)((char*)node + off);
+            // %e - см. комментарий в DumpAnomalyContext: %.3f на
+            // экстремальном double разворачивается в сотни символов и
+            // может увести sprintf_s в отказ (-1), а слепое накопление
+            // len += -1 через несколько итераций уводит len в минус и
+            // запись начинает бить перед началом buffer - это и поймал
+            // /GS. Останавливаемся на первой же неудаче, не гадаем.
+            int written = sprintf_s(line + len, sizeof(line) - len, " %03X=%.3e", off, v);
+            if (written < 0)
+                break;
+            len += written;
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        if (len >= 0 && len < (int)sizeof(line) - 32)
+            sprintf_s(line + len, sizeof(line) - len, " <читать дальше нельзя>");
+    }
+
+    Log("%s", line);
+}
+
+// Диапазон "подозрительно больших" денежных значений: сломанные
+// фабрики в сейве показывали money/pops_paychecks/last_income
+// порядка -1.0e8..+1.2e8 - берём диапазон с запасом, но заведомо
+// выше любых нормальных чисел экономики отдельной фабрики.
+static const double FACTORY_ANOMALY_MIN = 1000000.0;
+static const double FACTORY_ANOMALY_MAX = 1.0e9;
+static const int FACTORY_ANOMALY_MAX_HITS = 25;
+
+// Дамп окна ВОКРУГ найденного аномального числа (а не от начала
+// узла, как DumpFactoryNodeNow - тут мы не знаем, с какого смещения
+// начинается сам объект, поэтому смотрим и назад, и вперёд).
+static void DumpAnomalyContext(void* addr)
+{
+    char line[4096];
+    int len = sprintf_s(line, sizeof(line), "FactoryScan-anomaly addr=%08X:", (unsigned)(DWORD_PTR)addr);
+    if (len < 0)
+        return;
+
+    __try
+    {
+        for (int off = -0x40; off < FACTORY_DUMP_RANGE; off += 8)
+        {
+            if (len >= (int)sizeof(line) - 64)
+                break;
+            double v = *(double*)((char*)addr + off);
+            // %e вместо %f: ширина результата ограничена независимо от
+            // величины числа. Окно вокруг addr - произвольные соседние
+            // байты кучи, НЕ проверенная структура (в отличие от
+            // DumpFactoryNodeNow) - среди них может попасться дикий
+            // битовый паттерн около DBL_MAX, а %.3f на таком разворачивает
+            // ~300-значную строку. Именно это один раз увело sprintf_s в
+            // отказ (-1), после чего len += -1 несколько раз подряд ушёл
+            // в минус и запись сама начала бить перед началом buffer -
+            // ровно то, что поймал /GS. Сейчас же ещё и не суммируем
+            // отрицательный результат вслепую - на первой же неудаче
+            // просто останавливаемся.
+            int written = sprintf_s(line + len, sizeof(line) - len, " %04X=%.3e", off & 0xFFFF, v);
+            if (written < 0)
+                break;
+            len += written;
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        if (len >= 0 && len < (int)sizeof(line) - 32)
+            sprintf_s(line + len, sizeof(line) - len, " <дальше нельзя>");
+    }
+
+    Log("%s", line);
+}
+
+static void RegisterFoundNode(void* node, const char* typeName)
+{
+    for (int i = 0; i < g_factoryNodeCount; ++i)
+        if (g_factoryNodes[i] == node)
+            return;
+    if (g_factoryNodeCount >= FACTORY_DUMP_MAX_NODES)
+        return;
+
+    int slot = g_factoryNodeCount++;
+    g_factoryNodes[slot] = node;
+    strcpy_s(g_factoryNodeNames[slot], typeName);
+    Log("FactoryScan: найден узел node=%08X type=%s (всего найдено %d)",
+        (unsigned)(DWORD_PTR)node, typeName, g_factoryNodeCount);
+    DumpFactoryNodeNow(node, typeName);
+}
+
+// Индекс читаемых регионов (любой committed+readable, не только
+// MEM_PRIVATE - в отличие от основного скана ниже, сюда попадает и
+// .data/.rdata и т.п., т.к. кандидат-указатель на production_type
+// в принципе может указывать куда угодно). Нужен, чтобы НЕ ловить
+// исключение на каждом мусорном "похожем на указатель" 4-байтовом
+// значении - сама обработка access violation на порядок дороже
+// самого сравнения диапазонов. VirtualQuery отдаёт регионы строго
+// по возрастанию адреса, поэтому можно сразу бинарным поиском.
+static const int FACTORY_SCAN_MAX_RANGES = 8192;
+struct AddrRange { UINT_PTR start, end; };
+static AddrRange g_readableRanges[FACTORY_SCAN_MAX_RANGES];
+static int g_readableRangeCount = 0;
+
+static void BuildReadableRangeIndex()
+{
+    g_readableRangeCount = 0;
+    MEMORY_BASIC_INFORMATION mbi;
+    BYTE* addr = 0;
+
+    while (VirtualQuery(addr, &mbi, sizeof(mbi)) == sizeof(mbi))
+    {
+        BYTE* regionEnd = (BYTE*)mbi.BaseAddress + mbi.RegionSize;
+
+        bool readable = (mbi.State == MEM_COMMIT)
+            && (mbi.Protect & (PAGE_READONLY | PAGE_READWRITE | PAGE_WRITECOPY
+                | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY)) != 0
+            && (mbi.Protect & PAGE_GUARD) == 0;
+
+        if (readable && g_readableRangeCount < FACTORY_SCAN_MAX_RANGES)
+        {
+            g_readableRanges[g_readableRangeCount].start = (UINT_PTR)mbi.BaseAddress;
+            g_readableRanges[g_readableRangeCount].end = (UINT_PTR)regionEnd;
+            g_readableRangeCount++;
+        }
+
+        if (regionEnd <= addr)
+            break;
+        addr = regionEnd;
+    }
+}
+
+// Бинарный поиск: лежит ли [start, start+len) целиком в одном уже
+// проверенном читаемом регионе.
+static bool IsRangeReadable(UINT_PTR start, UINT_PTR len)
+{
+    UINT_PTR endAddr = start + len;
+    int lo = 0, hi = g_readableRangeCount - 1, found = -1;
+    while (lo <= hi)
+    {
+        int mid = (lo + hi) / 2;
+        if (g_readableRanges[mid].start <= start) { found = mid; lo = mid + 1; }
+        else hi = mid - 1;
+    }
+    if (found < 0)
+        return false;
+    return g_readableRanges[found].end >= endAddr;
+}
+
+// Полный скан приватной read/write памяти процесса. Каждый регион
+// защищён одним SEH-блоком (страница могла исчезнуть за время скана
+// из-за параллельной работы игры) - это дешевле, чем оборачивать
+// каждое 4-байтовое чтение отдельно, а сами чтения внутри региона
+// не выходят за его проверенные границы. Кандидат-указатель сначала
+// проверяется по индексу читаемых регионов (IsRangeReadable) - это
+// быстрое сравнение чисел без обращения к памяти - и только если он
+// проходит, читаем его (ещё раз под SEH - индекс мог устареть за
+// время скана, но это уже редкий случай, а не почти каждый кандидат).
+static void FullMemoryScan()
+{
+    DWORD startTick = GetTickCount();
+    BuildReadableRangeIndex();
+    Log("FactoryScan: индекс читаемых регионов построен (%d%s), начинаю скан...",
+        g_readableRangeCount,
+        g_readableRangeCount >= FACTORY_SCAN_MAX_RANGES ? " - ДОСТИГНУТ ЛИМИТ, часть регионов пропущена" : "");
+
+    MEMORY_BASIC_INFORMATION mbi;
+    BYTE* addr = 0;
+
+    // Диагностика (временно): считаем совпадения по ВСЕМ известным
+    // именам типов производства (g_productionTypeNames, все 65 - не
+    // только наши 2 целевых), чтобы понять, работает ли сам механизм
+    // поиска в принципе, или дело именно в этих двух фабриках.
+    //
+    // ВАЖНО: регионы для СКАНИРОВАНИЯ (не индекс читаемости - тот
+    // по-прежнему смотрит всё) снова ограничены MEM_PRIVATE. В 2.58
+    // это ограничение снималось "на всякий случай", и практически
+    // сразу после этого пользователь получил "Failed to create a
+    // graphics device" при запуске игры - с MEM_PRIVATE-only (версии
+    // 2.55-2.57) такого не было ни разу за несколько прогонов. Точный
+    // механизм не доказан (вероятно, что-то вроде guard-страниц/
+    // внутренней сигнализации видеодрайвера в его MEM_MAPPED/MEM_IMAGE
+    // данных, потревоженное чтением из чужого потока), но раз риск
+    // подтверждён эмпirически - за пределы кучи процесса не выходим.
+    int diagAnyMatches = 0;
+    char diagExamples[5][64];
+    int diagExampleCount = 0;
+    int anomalyHits = 0;
+
+    while (VirtualQuery(addr, &mbi, sizeof(mbi)) == sizeof(mbi))
+    {
+        BYTE* regionEnd = (BYTE*)mbi.BaseAddress + mbi.RegionSize;
+
+        bool scannable = (mbi.State == MEM_COMMIT)
+            && (mbi.Type == MEM_PRIVATE)
+            && (mbi.Protect & (PAGE_READWRITE | PAGE_WRITECOPY)) != 0
+            && (mbi.Protect & PAGE_GUARD) == 0;
+
+        if (scannable)
+        {
+            __try
+            {
+                BYTE* p = (BYTE*)mbi.BaseAddress;
+                BYTE* end = regionEnd - sizeof(void*);
+                for (; p < end; p += 4)
+                {
+                    if (anomalyHits < FACTORY_ANOMALY_MAX_HITS && p + 8 <= regionEnd)
+                    {
+                        double v = *(double*)p;
+                        double av = v < 0 ? -v : v;
+                        if (av >= FACTORY_ANOMALY_MIN && av <= FACTORY_ANOMALY_MAX)
+                        {
+                            anomalyHits++;
+                            DumpAnomalyContext(p);
+                        }
+                    }
+
+                    void* candidate = *(void**)p;
+                    UINT_PTR cv = (UINT_PTR)candidate;
+                    if (cv < 0x10000 || cv > 0xFFFE0000)
+                        continue;
+                    if (!IsRangeReadable(cv + OFF_PRODTYPE_NAME, 64))
+                        continue;
+
+                    char name[64];
+                    if (!SafeCheckTypeName(candidate, name, sizeof(name)))
+                        continue;
+
+                    bool anyTypeMatch = false;
+                    for (int t = 0; t < g_productionTypeCount; ++t)
+                        if (strcmp(g_productionTypeNames[t], name) == 0) { anyTypeMatch = true; break; }
+                    if (anyTypeMatch)
+                    {
+                        diagAnyMatches++;
+                        if (diagExampleCount < 5)
+                        {
+                            strcpy_s(diagExamples[diagExampleCount], name);
+                            diagExampleCount++;
+                        }
+                    }
+
+                    bool match = false;
+                    for (int i = 0; i < FACTORY_DUMP_NAME_COUNT; ++i)
+                        if (strcmp(FACTORY_DUMP_NAMES[i], name) == 0) { match = true; break; }
+                    if (!match)
+                        continue;
+
+                    void* node = p - 0x18;
+                    RegisterFoundNode(node, name);
+                    if (g_factoryNodeCount >= FACTORY_DUMP_MAX_NODES)
+                        break;
+                }
+            }
+            __except (EXCEPTION_EXECUTE_HANDLER)
+            {
+                // регион пропал/перезащитился посреди скана - пропускаем его
+            }
+        }
+
+        if (g_factoryNodeCount >= FACTORY_DUMP_MAX_NODES)
+            break;
+        if (regionEnd <= addr)
+            break;
+        addr = regionEnd;
+    }
+
+    char examplesLine[400];
+    int el = 0;
+    examplesLine[0] = 0;
+    for (int i = 0; i < diagExampleCount; ++i)
+    {
+        int written = sprintf_s(examplesLine + el, sizeof(examplesLine) - el, "%s%s", i ? ", " : "", diagExamples[i]);
+        if (written < 0)
+            break;
+        el += written;
+    }
+
+    Log("FactoryScan: полный скан завершён за %u мс, узлов всего %d; совпадений по ЛЮБОМУ известному типу производства: %d (примеры: %s); аномальных чисел (%.0f..%.0f): %d",
+        GetTickCount() - startTick, g_factoryNodeCount, diagAnyMatches, examplesLine,
+        FACTORY_ANOMALY_MIN, FACTORY_ANOMALY_MAX, anomalyHits);
+}
+
+static DWORD WINAPI FactoryScanThreadProc(LPVOID)
+{
+    Sleep(15000); // дать игре загрузиться перед первым сканом
+
+    DWORD lastFullScan = 0;
+    for (;;)
+    {
+        DWORD now = GetTickCount();
+        bool needFullScan = (g_factoryNodeCount < FACTORY_DUMP_MAX_NODES)
+            ? (now - lastFullScan >= FACTORY_SCAN_INTERVAL_MS)
+            : (now - lastFullScan >= FACTORY_RESCAN_INTERVAL_MS);
+
+        if (needFullScan || lastFullScan == 0)
+        {
+            FullMemoryScan();
+            lastFullScan = GetTickCount();
+        }
+        else
+        {
+            for (int i = 0; i < g_factoryNodeCount; ++i)
+            {
+                char name[64];
+                if (!SafeCheckTypeName(*(void**)((char*)g_factoryNodes[i] + 0x18), name, sizeof(name)))
+                {
+                    Log("FactoryScan: узел node=%08X (%s) больше не читается - похоже, снесён",
+                        (unsigned)(DWORD_PTR)g_factoryNodes[i], g_factoryNodeNames[i]);
+                    continue;
+                }
+                DumpFactoryNodeNow(g_factoryNodes[i], g_factoryNodeNames[i]);
+            }
+        }
+
+        Sleep(FACTORY_TRACK_INTERVAL_MS);
+    }
+    return 0;
+}
+
+static bool InstallFactoryDumpScan()
+{
+    g_factoryScanThread = CreateThread(0, 0, FactoryScanThreadProc, 0, 0, 0);
+    if (!g_factoryScanThread)
+    {
+        Log("FactoryScan: не удалось создать поток");
+        return false;
+    }
+    Log("FactoryScan: поток запущен");
+    return true;
+}
+
+
+// ---------------------------------------------------------------
 // Установка
 // ---------------------------------------------------------------
 
@@ -2060,6 +2873,8 @@ static bool InstallVersionLabel()
 
 static bool Install()
 {
+    LoadSettings();
+
     g_base = (DWORD)GetModuleHandleA(NULL);
     if (!g_base)
         return false;
@@ -2093,34 +2908,56 @@ static bool Install()
         Log("patch %s: слот %d = %d", VIEWS[i].name, VIEWS[i].slot, (int)ok);
     }
 
-#if ENABLE_DECISION_FILTER
+    if (g_settings.decisionFilter)
     {
         bool ok = PatchSlot(RVA_VTABLE_DECISION, VT_SLOT_ISVALID,
             (void*)&MyDecisionIsValid, (void**)&g_origIsValid);
         Log("patch CDecision: слот %d = %d", VT_SLOT_ISVALID, (int)ok);
     }
-#endif
 
-
-#if ENABLE_EXE_PATCHES
+    // Каждая запись таблицы уважает своё собственное BytePatch::enabled
+    // (правится ключами PATCH_<ИМЯ> в ini), поэтому вызов сам по себе
+    // безусловный.
     InstallExePatches();
-    InstallOccupiedReinforceSplit();
-    InstallAllyOwnerCheck();
-#endif
-    InstallProdListVisibilityHook();
-    InstallProdTypeGateHook();
 
-#if ENABLE_PRICE_DELTA
-    InstallPriceDelta();
-#endif
+    if (g_settings.patchOccupiedReinforceSplit)
+        InstallOccupiedReinforceSplit();
 
-#if ENABLE_POP_DISPLAY
-    InstallPopDisplay();
-#endif
+    if (g_settings.patchAllyOwnerCheck)
+        InstallAllyOwnerCheck();
 
-#if ENABLE_VERSION_LABEL
-    InstallVersionLabel();
-#endif
+    if (g_settings.patchCivilizeNullCheck)
+        InstallCivilizeNullCheck();
+
+    if (g_settings.patchGraphPointClamp)
+        InstallGraphPointClamp();
+
+    if (g_settings.patchFactoryDumpScan)
+    {
+        // В 2.58 сканер временно ловил "Failed to create a graphics device"
+        // при запуске - подтверждено A/B тестом (2.58 с широким сканом всех
+        // типов памяти ловил ошибку, 2.59 без вызова этой функции - нет).
+        // Причина сужена до расширения скана за пределы MEM_PRIVATE (кучи
+        // процесса) на MEM_IMAGE/MEM_MAPPED, где могли жить внутренние
+        // данные видеодрайвера - в 2.60 это ограничение возвращено, снова
+        // сканируем только MEM_PRIVATE, как в безотказных 2.55-2.57.
+        InstallFactoryDumpScan();
+    }
+
+    if (g_settings.patchProdListVisibility)
+        InstallProdListVisibilityHook();
+
+    if (g_settings.patchProdTypeGate)
+        InstallProdTypeGateHook();
+
+    if (g_settings.priceDelta)
+        InstallPriceDelta();
+
+    if (g_settings.popDisplay)
+        InstallPopDisplay();
+
+    if (g_settings.versionLabel)
+        InstallVersionLabel();
 
     Log("Install: done");
     return true;

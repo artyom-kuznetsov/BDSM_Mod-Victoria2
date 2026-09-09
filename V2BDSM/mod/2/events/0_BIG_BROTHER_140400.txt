@@ -1612,7 +1612,10 @@ country_event = { # MCL # MONTHLY CLEANUP
 		### ECONOMIC SYSTEM CONS ###
         any_country = {
             limit = {
-                NOT = { economic_system_rgroup = planned_economy_ref }
+                NOT = { 
+					economic_system_rgroup = planned_economy_ref
+					economic_system_rgroup = interventionism_ref
+				}
             }
             social_reform = yes_pop_construction
         }

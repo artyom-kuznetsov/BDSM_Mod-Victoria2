@@ -849,7 +849,7 @@ social_reforms = {
 					has_country_flag = conservative_flag
 				}
 			}
-			max_tariff = 0.75
+			max_tariff = 0.5
 			min_tariff = -0.25
 			rules = {
 				allow_foreign_investment = yes
@@ -866,7 +866,7 @@ social_reforms = {
 					has_country_flag = planned_economy_cflag
 				}
 			}
-			max_tariff = 1
+			max_tariff = 0.7
 			min_tariff = 1
 		}
 		dependent_economy_ref = {
@@ -1472,38 +1472,10 @@ military_reforms = {
 		
 		no_foreign_training = {
 			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
-			supply_consumption = -0.05
 		}
 		yes_foreign_training = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
-			
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					activate_technology = classicism_n_early_romanticism
-					activate_technology = introspectionism
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}
 	foreign_weapons = {
@@ -1512,30 +1484,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_foreign_weapons = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
-
-			on_execute = {
-				effect = {
-					activate_technology = flintlock_rifles
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}
 	
@@ -1543,35 +1493,8 @@ military_reforms = {
 		no_military_constructions = {
 		}
 		yes_military_constructions = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					treasury = -2000
-					activate_technology = post_napoleonic_thought
-					build_fort_in_capital = {
-						in_whole_capital_state = no # no = just in main capital province.
-						limit_to_world_greatest_level = yes
-					}
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}	
 	foreign_officers = {
@@ -1580,33 +1503,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_foreign_officers = {
-			leadership_modifier = 0.1
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					activate_technology = military_staff_system
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}	
 	army_schools = {
@@ -1615,32 +1513,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_army_schools = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					activate_technology = army_command_principle
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}
 	foreign_naval_officers = {
@@ -1650,65 +1524,16 @@ military_reforms = {
 		}
 		yes_foreign_naval_officers = {
 			technology_cost = 3000
-			research_points_modifier = 0.1
-			civilization_progress_modifier = 0.05
-			core_pop_militancy_modifier = -0.01
-			core_pop_consciousness_modifier = -0.01
-			
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					activate_technology = alphabetic_flag_signaling
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			civilization_progress_modifier = 0.1
 		}
 	}
 	naval_schools = {
 		no_naval_schools = {
 		}
 		yes_naval_schools = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					activate_technology = the_command_principle
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
-		}	
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
+		}
 	}
 	foreign_navies = {
 		no_foreign_navies = {
@@ -1716,31 +1541,8 @@ military_reforms = {
 			core_pop_consciousness_modifier = -0.01
 		}
 		yes_foreign_navies = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					activate_technology = clipper_design
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}	
 	
@@ -1749,31 +1551,8 @@ military_reforms = {
 		}
 		
 		yes_western_shipyards = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			
-			allow = {
-			}
-			
-			on_execute = {
-				effect = {
-					activate_technology = post_nelsonian_thought
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}
 	
@@ -1781,29 +1560,8 @@ military_reforms = {
 		no_foreign_artillery = {
 		}
 		yes_foreign_artillery = {
-			technology_cost = 2000
-			civilization_progress_modifier = 0.05
-			
-			on_execute = {
-				effect = {
-					activate_technology = bronze_muzzle_loaded_artillery
-					
-					any_pop = {
-						scaled_militancy = {
-							ideology = liberal
-							factor = 0.25
-						}
-						scaled_militancy = {
-							ideology = conservative
-							factor = 0.5
-						}
-						scaled_militancy = {
-							ideology = reactionary
-							factor = 1.5
-						}
-					}
-				}
-			}
+			technology_cost = 3000
+			civilization_progress_modifier = 0.1
 		}
 	}
 }

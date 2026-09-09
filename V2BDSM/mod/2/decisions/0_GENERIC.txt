@@ -19,7 +19,10 @@ political_decisions = {
 		alert = no
 		potential = {
 			ai = no
-			economic_system_rgroup = planned_economy_ref
+			OR = {
+				economic_system_rgroup = planned_economy_ref
+				economic_system_rgroup = interventionism_ref
+			}
 		}
 		
 		allow = { }
