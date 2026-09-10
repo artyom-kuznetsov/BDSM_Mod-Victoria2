@@ -100,4 +100,5 @@ Enables patch for dice rolls in battle.
 Min and Max dice rolls in battle.  
   
   
-Russian Victoria 2 community: https://discord.gg/f3dpWFt2bR
+Russian Victoria 2 community: https://discord.gg/f3dpWFt2bR  
+Also check this out for reverse engineering findings: https://github.com/maxioten/Victoria2-Reverse-Engineering/tree/main  
