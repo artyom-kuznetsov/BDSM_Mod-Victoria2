@@ -63,8 +63,8 @@ reinforce rate will still be 150% in ally-occupied provinces, not just owned.
 12. PATCH_BUILD_FACTORY_IGNORE_COLONIAL_1=1 and PATCH_BUILD_FACTORY_IGNORE_COLONIAL_2=1  
 Allow construction of factories in colonial regions.  
 
-13. PATCH_BUILD_FACTORY_BUTTON_ENABLE_IGNORE_COLONIAL=1
-Button called "hide_colonial_states" in production menu will now toggle visibility of colonial regions in the menu.
+13. PATCH_BUILD_FACTORY_BUTTON_ENABLE_IGNORE_COLONIAL=1  
+Button called "hide_colonial_states" in production menu will now toggle visibility of colonial regions in the menu.  
 
 14. PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL=1  
 Allows only factories with "limit_by_local_supply = yes" attribute to be constructed in colonies (hi vic uni)  
