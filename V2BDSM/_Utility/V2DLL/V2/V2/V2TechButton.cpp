@@ -55,8 +55,8 @@ struct Settings
     bool patchOccupiedReinforceSplit = true;
     bool patchAllyOwnerCheck         = true;
     bool patchCivilizeNullCheck      = true;
-    bool patchGraphPointClamp        = true;
-    bool patchFactoryDumpScan        = true;
+    bool patchGraphPointClamp        = false;
+    bool patchFactoryDumpScan        = false;
     bool patchProdListVisibility     = true;
     bool patchProdTypeGate           = true;
 
