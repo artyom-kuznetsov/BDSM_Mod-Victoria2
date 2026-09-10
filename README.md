@@ -44,13 +44,13 @@ Changes version label in main menu to "V2 v3.04 + V2DLL v*"
 
 
 7. PATCH_ALWAYS_ADD_WARGOALS=1  
-Zombifreak's patch for enabling adding wargoals without having positive warscore.  
+Zombiefreak's patch for enabling adding wargoals without having positive warscore.  
 
 8. PATCH_LAND_REINFORCE=1 and PATCH_NAVAL_REINFORCE=1  
-Zombifreak's patches to make navies and brigades inside armies and fleets reinforce separately, fixing slower than intended reinforcement under insufficient supplies.  
+Zombiefreak's patches to make navies and brigades inside armies and fleets reinforce separately, fixing slower than intended reinforcement under insufficient supplies.  
 
 9. PATCH_MAX_RELATIVE_PRICE=1  
-Just sets the price ceiling from x5 of base price to x20 of it.   
+Just changes the price ceiling from x5 of base price to x20 of it.   
 Note: an overflow might occur that will break your game if prices of some factory inputs go beyond its max savings. I recommend increasing MAX_FACTORY_MONEY_SAVE define if you are using this.  
 
 10. PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=1  
@@ -60,38 +60,41 @@ Removes plurality growth from average consciousness. In-game tooltip says otherw
 Increases reinforce rate on allied land from 100% to 150%. Note, that without "PATCH_OCCUPIED_REINFORCE_SPLIT=1" patch,   
 reinforce rate will still be 150% in ally-occupied provinces, not just owned.  
 
-12. PATCH_BUILD_FACTORY_IGNORE_COLONIAL_1=1, PATCH_BUILD_FACTORY_IGNORE_COLONIAL_2=1 and PATCH_BUILD_FACTORY_BUTTON_ENABLE_IGNORE_COLONIAL=1  
+12. PATCH_BUILD_FACTORY_IGNORE_COLONIAL_1=1 and PATCH_BUILD_FACTORY_IGNORE_COLONIAL_2=1  
 Allow construction of factories in colonial regions.  
 
-13. PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL=1  
+13. PATCH_BUILD_FACTORY_BUTTON_ENABLE_IGNORE_COLONIAL=1
+Button called "hide_colonial_states" in production menu will now toggle visibility of colonial regions in the menu.
+
+14. PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL=1  
 Allows only factories with "limit_by_local_supply = yes" attribute to be constructed in colonies (hi vic uni)  
 Needs to be used together with "PATCH_PROD_TYPE_GATE=1"  
 
-14. PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_BUTTON=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OWN=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OTHER=1 and PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_CAN_BUILD=1  
+15. PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_BUTTON=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OWN=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OTHER=1 and PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_CAN_BUILD=1  
 Allows uncivilized countries to construct factories.  
 
 
 
 
-15. PATCH_OCCUPIED_REINFORCE_SPLIT=1 and PATCH_ALLY_OWNER_CHECK=1  
+16. PATCH_OCCUPIED_REINFORCE_SPLIT=1 and PATCH_ALLY_OWNER_CHECK=1  
 Splits reinforce rates on allied land into allied-owned and allied-occupied land. Allied-occupied reinforce rate is 100%, the same as if you occupy it yourself.  
 Needs to be used with "PATCH_ALLIED_REINFORCE_150=1" to achieve a total effect of just increasing reinforce rate in allied-owned land.  
 
-16. PATCH_GRAPH_POINT_CLAMP=0  
+17. PATCH_GRAPH_POINT_CLAMP=0  
 Prevents the game from crashing if overflow I talked about in 9. (doesn't prevent it from happening though. Just disable this one).  
 
-17. PATCH_FACTORY_DUMP_SCAN=0  
+18. PATCH_FACTORY_DUMP_SCAN=0  
 I used this to debug that overflow (didn't help much).  
 
-18. PATCH_PROD_LIST_VISIBILITY=1  
+19. PATCH_PROD_LIST_VISIBILITY=1  
 Needed for .13  
 
 
-19. PATCH_CIVILIZE_NULL_CHECK=1  
+20. PATCH_CIVILIZE_NULL_CHECK=1  
 Fixes a crash when a country that has factories civilizes. Idk if it's really required I use AI to make all of this lol  
 
-20. PATCH_COMBAT_ROLL=1  
+21. PATCH_COMBAT_ROLL=1  
 Enables patch for dice rolls in battle.  
 
-21. COMBAT_ROLL_MIN=0 and COMBAT_ROLL_MAX=4  
+22. COMBAT_ROLL_MIN=0 and COMBAT_ROLL_MAX=4  
 Min and Max dice rolls in battle.  
