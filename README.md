@@ -81,7 +81,7 @@ Splits reinforce rates on allied land into allied-owned and allied-occupied land
 Needs to be used with "PATCH_ALLIED_REINFORCE_150=1" to achieve a total effect of just increasing reinforce rate in allied-owned land.  
 
 17. PATCH_GRAPH_POINT_CLAMP=0  
-Prevents the game from crashing if overflow I talked about in 9. (doesn't prevent it from happening though. Just disable this one).  
+Prevents the game from crashing from overflow I talked about in 9. (doesn't prevent it from happening though. Just disable this one).  
 
 18. PATCH_FACTORY_DUMP_SCAN=0  
 I used this to debug that overflow (didn't help much).  
@@ -98,3 +98,6 @@ Enables patch for dice rolls in battle.
 
 22. COMBAT_ROLL_MIN=0 and COMBAT_ROLL_MAX=4  
 Min and Max dice rolls in battle.  
+  
+  
+Russian Victoria 2 community: https://discord.gg/f3dpWFt2bR
