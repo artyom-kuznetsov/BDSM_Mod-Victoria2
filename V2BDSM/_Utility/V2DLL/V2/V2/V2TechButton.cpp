@@ -32,7 +32,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.65"
+#define MOD_VERSION "2.69"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -59,6 +59,14 @@ struct Settings
     bool patchFactoryDumpScan        = true;
     bool patchProdListVisibility     = true;
     bool patchProdTypeGate           = true;
+
+    // Разброс броска в бою. Работает только если exe уже несёт
+    // "пещеру" от стороннего Vic2_Roll_Changer.py (см. комментарий
+    // у InstallCombatRoll ниже по файлу) - без неё сигнатура не
+    // совпадёт и патч тихо пропустится.
+    bool patchCombatRoll = true;
+    int  combatRollMin   = 0;   // минимум броска
+    int  combatRollMax   = 4;   // максимум броска
 };
 
 static Settings g_settings;
@@ -1457,15 +1465,19 @@ static BytePatch EXE_PATCHES[] =
                                              { "naval_reinforce",     0x1C7F1C, 0, 1, { 0x89 }, { 0x8B }, true },
 
     // Относительный максимум цены (double, значение хранится x16384):
-    // было ~10x базовой цены, ставим x20 (пробовали x100 - при таком
-    // потолке цена сырья могла вырасти настолько, что "7*Costs > Budget"
-    // у фабрики стабильно пробивало MAX_FACTORY_MONEY_SAVE и уводило её
-    // в неограниченный убыток без пола - см. историю правок этого файла
-    // и common/defines.lua). rva задан напрямую (адрес в Ghidra 0xE45C28
-    // минус imagebase 0x400000).
+    // было ~10x базовой цены, пробовали x100 (сломало экономику - см.
+    // историю правок и common/defines.lua) и x20 (в игре видимый потолок
+    // в Trade-окне всё равно остался x10 - разбирались через Ghidra,
+    // константа реально читается в двух местах в FUN_00482930/0082f430,
+    // но точную причину "почему всё равно x10" статическим анализом
+    // выяснить не удалось - функция слишком плотная). Ставим x40 как
+    // эмпирическую проверку: если видимый потолок сдвинется - константа
+    // всё же влияет, просто нелинейно/с обходным путём; если останется
+    // x10 - дело не в этой константе вообще. rva задан напрямую (адрес
+    // в Ghidra 0xE45C28 минус imagebase 0x400000).
     { "max_relative_price",  0, 0xA45C28, 8,
         { 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x04, 0x41 },
-        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x14, 0x41 }, true },
+        { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x24, 0x41 }, true },
 
     // Ежемесячный рост plurality от средней сознательности страны.
     // Было: add eax,[ebx+0x1A8]  (eax = вклад от consciousness, [ebx+0x1A8] = plurality)
@@ -1624,6 +1636,10 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_FACTORY_DUMP_SCAN") == 0)         { g_settings.patchFactoryDumpScan        = v; return; }
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
     if (_stricmp(key, "PATCH_PROD_TYPE_GATE") == 0)            { g_settings.patchProdTypeGate           = v; return; }
+    if (_stricmp(key, "PATCH_COMBAT_ROLL") == 0)                { g_settings.patchCombatRoll             = v; return; }
+
+    if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
+    if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
 
     if (_strnicmp(key, "PATCH_", 6) == 0)
     {
@@ -1701,6 +1717,23 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.patchProdListVisibility,
         (int)g_settings.patchProdTypeGate,
         (int)g_settings.patchCivilizeNullCheck);
+
+    fprintf(f,
+        "\n"
+        "; --- Разброс броска в бою ---\n"
+        "; Работает, только если exe уже несёт \"пещеру\" от стороннего\n"
+        "; Vic2_Roll_Changer.py (это ваш случай - вы уже запускали его\n"
+        "; раньше с 2-5, наш патч просто перезаписывает эти же байты\n"
+        "; на лету при каждом запуске игры). Если exe никогда не был\n"
+        "; пропатчен этим скриптом, сигнатура не совпадёт и PATCH_COMBAT_ROLL\n"
+        "; тихо пропустится - см. лог.\n"
+        "; COMBAT_ROLL_MIN должен быть 0..127, COMBAT_ROLL_MAX >= MIN.\n"
+        "PATCH_COMBAT_ROLL=%d\n"
+        "COMBAT_ROLL_MIN=%d\n"
+        "COMBAT_ROLL_MAX=%d\n",
+        (int)g_settings.patchCombatRoll,
+        g_settings.combatRollMin,
+        g_settings.combatRollMax);
 
     fclose(f);
 }
@@ -2875,6 +2908,87 @@ static bool InstallVersionLabel()
 }
 
 
+// ---------------------------------------------------------------
+// Разброс броска в бою (COMBAT_ROLL_MIN..COMBAT_ROLL_MAX).
+//
+// Формула броска раньше была константой прямо в точке вызова:
+// FUN_0059ca40 (разрешение раунда боя) 4 раза вызывает генератор
+// случайных чисел и берёт остаток от деления на 10. Сторонний
+// Vic2_Roll_Changer.py (скрипт лежит в V2BDSM, не часть нашего DLL)
+// статически переписал exe: все 4 места вызова теперь зовут общую
+// подпрограмму в неиспользуемом хвосте секции .text (RVA 0x889113),
+// которая делает mov ecx,<модуль>; idiv ecx; add edx,<минимум>; ret -
+// подтверждено в Ghidra (get_xrefs_to на адрес пещеры даёт ровно эти
+// 4 вызова из FUN_0059ca40, а её result сохраняется в +0x30 у каждой
+// из двух сторон боя). Этот exe уже был пропатчен так на диапазон
+// 2-5 - мы просто переписываем модуль/минимум в той же пещере на
+// лету при каждом запуске, без изменения файла.
+//
+// Если exe НИКОГДА не патчился этим скриптом (пещеры нет, все 4
+// вызова всё ещё делают "cdq; mov ecx,0Ah; idiv ecx" инлайном) -
+// сигнатура не совпадёт, и мы это НЕ чиним: создание новой пещеры и
+// переброс 4 вызовов - отдельная задача, которую можно сделать тем
+// же скриптом или отдельным патчем позже.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_COMBAT_ROLL_CAVE = 0x889113;
+
+// Байты 0-1 пещеры (изначально "F2 00") в сигнатуру не входят: это
+// хвост абсолютного адреса из ВАНИЛЬНОГО кода на этом месте (сам
+// скрипт-патчер его не трогал, начал писать только с байта 10 - B9),
+// и он остался под релокационной записью exe. Загрузчик Windows сам
+// правит эти 2 байта под дельту ASLR при каждом запуске (проверено
+// живьём: база 00FD0000 вместо предпочитаемой 00400000, дельта
+// 00BD0000 - и байты 0-1 стали AF 01 вместо F2 00, ровно на старшее
+// слово дельты). Байты 11..14 (модуль, mov ecx,imm32) и байт 19
+// (минимум, add edx,imm8) - тоже не в сигнатуре, но по другой причине:
+// это переменные данные, которые мы сами переписываем.
+static const unsigned char COMBAT_ROLL_PREFIX[9] =
+{ 0xE9, 0x96, 0x5C, 0xE9, 0xFF, 0x00, 0x00, 0x00, 0xB9 };
+static const unsigned char COMBAT_ROLL_MID[4] = { 0xF7, 0xF9, 0x83, 0xC2 };
+
+static bool InstallCombatRoll()
+{
+    if (g_settings.combatRollMin < 0 || g_settings.combatRollMin > 127 ||
+        g_settings.combatRollMax < g_settings.combatRollMin)
+    {
+        Log("CombatRoll: некорректный диапазон %d..%d - не патчим",
+            g_settings.combatRollMin, g_settings.combatRollMax);
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)(g_base + RVA_COMBAT_ROLL_CAVE);
+
+    if (memcmp(cave + 2, COMBAT_ROLL_PREFIX, sizeof(COMBAT_ROLL_PREFIX)) != 0 ||
+        memcmp(cave + 15, COMBAT_ROLL_MID, sizeof(COMBAT_ROLL_MID)) != 0 ||
+        cave[20] != 0xC3)
+    {
+        Log("CombatRoll: пещера не найдена (exe не пропатчен Vic2_Roll_Changer.py?) - не патчим. "
+            "base=%08X rva=%08X байты: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X "
+            "%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
+            g_base, RVA_COMBAT_ROLL_CAVE,
+            cave[0], cave[1], cave[2], cave[3], cave[4], cave[5], cave[6], cave[7], cave[8], cave[9], cave[10],
+            cave[11], cave[12], cave[13], cave[14], cave[15], cave[16], cave[17], cave[18], cave[19], cave[20]);
+        return false;
+    }
+
+    DWORD modulo = (DWORD)(g_settings.combatRollMax - g_settings.combatRollMin + 1);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(cave, 21, PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    *(DWORD*)(cave + 11) = modulo;
+    cave[19] = (unsigned char)g_settings.combatRollMin;
+
+    VirtualProtect(cave, 21, oldProtect, &oldProtect);
+
+    Log("CombatRoll: диапазон %d..%d (модуль=%u)",
+        g_settings.combatRollMin, g_settings.combatRollMax, modulo);
+    return true;
+}
+
+
 static bool Install()
 {
     LoadSettings();
@@ -2962,6 +3076,9 @@ static bool Install()
 
     if (g_settings.versionLabel)
         InstallVersionLabel();
+
+    if (g_settings.patchCombatRoll)
+        InstallCombatRoll();
 
     Log("Install: done");
     return true;
