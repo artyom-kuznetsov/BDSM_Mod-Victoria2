@@ -1,32 +1,97 @@
-ЗАПУСК МОДА ЧЕРЕЗ .bat ФАЙЛЫ В ПАПКЕ V2BDSM
-
-Репозиторий содержит моды BDSM Classic и DoD_BDSM.
-Первый - это классический сценарий 1836 года с некоторыми (или многими..) изменениями.
-Второй - мод, основанный на вселенной Divergences of Darkness - песочница с совершенно другой политической картой.
-
-
-Привет, это так называемый мод базы.
-Информацию по МП партиям на моде можно здесь					- 	https://discord.gg/r5hsaFXGxj
-Найти последние версии мода можно здесь							-	https://github.com/artyom-kuznetsov/BDSM_Mod-Victoria2/releases
-Официальный русскоязычный сервер OpenVic (ремейк Victoria 2)	- 	https://discord.gg/MxQRTq42Ga
-Создатель мода на YouTube										- 	https://www.youtube.com/channel/UCHt7fLn63yqC6gOXFI0dFUA
+V2DLL is a utility by balticšprott (me) that makes possible a handful of things that were considered impossible/hard to implement before, 
+and even make some previously existing .exe patches simpler to use - by reverse engineering.
+This is meant to be easy-for-use for other modders, so I'm not going into much detail here. If you want more insight, 
+or add some custom patches, or perhaps investigate v2dll under the hood to use for your own work - check the source code.
 
 
-N.B.! Файл запуска игры (v2game.exe) был модифицирован так, чтобы кубик в битве был не ниже 3 и не выше 7. 
-Если вы вдруг каким-то образом будете использовать или распространять этот файл, помните об этом. 
-Его использование в мультиплеере с игроками с ванильным файлом приведёт к рассинхронам и/или вылетам.
+It was made for my mod - https://github.com/artyom-kuznetsov/BDSM_Mod-Victoria2  
+Since, it has some mod-specific features. But most of them can be reused for any other mod.  
+Almost all of this was tested in MP - no stability effects noticed.
 
-Мод использует подмену .dll для расширения возможностей моддинга. Это наше собственное открытие. С помощью подмены .dll мы можем добавлять
-невозможные в ванили вещи, такие как добавление в интерфейс новых рабочих кнопок, или изменение механики ценообразования. 
-Подробнее почитать, и увидеть исходный код модификаций игры, можете в папке V2BDSM/Utility/V2DLL
+## How to install V2DLL
+1. Put all the files from V2DLL folder into the same folder where you have v2game.exe and lua51.dll
+2. Tweak v2dll_settings.ini for your liking - every patch is optional (some of them have to be ran in tandem though).
+3. Launch the game as usual, with any mod you like.
 
-Assets/ideas from the following mods were used in this mod:
-- Victoria Universalis
-- Mish Mash Map Mod
-- Divergences of Darkness
-- 2/3 Mod
-- The Grand Combination
-- The Greater Launcher
-- Greater Flavor Mod
-- The Third Age
-- Bob's Cartography
+## How does it work?
+Vanilla file lua51.dll is replaced by a brand new file, where the patches are coded.  
+The old file must still remain in the folder under name "lua51_real.dll" - 
+it's being called by the new file, so no vanilla code is lost and the game can still run.  
+
+# Feature overview
+### Explaining each option in the .ini file
+1. ENABLE_LOG=1  
+Just the log used for debugging the .dll
+
+2. ENABLE_BUTTONS=1  
+Adds support for a few new buttons:  
+- FE_ACADEMIES_BDSM; must be located in tech menu; triggers decision "open_academy_decisions_dec"  
+- FE_RPROJECTS_BDSM; must be located in tech menu; triggers decision "open_research_projects_dec"  
+- FE_BUDGET_DIPLO_BDSM; must be located in budget menu; triggers decision "exchange_settings_dec"  
+^ those decisions have to be available to be clicked for the country (potential and allow triggers have to be checked)  
+
+3. ENABLE_DECISION_FILTER=1  
+Hides abovementioned decisions from the regular decision menu (basically I'm decluttering dec menu by adding new buttons for some decs)  
+
+4. ENABLE_PRICE_DELTA=1  
+Prices shift by 0.25% of the base price instead of flat 0.01 per day.  
+
+5. ENABLE_POP_DISPLAY=1  
+Total population is displayed in some surface tooltips, instead of "grown male" population.  
+
+6. ENABLE_VERSION_LABEL=1  
+Changes version label in main menu to "V2 v3.04 + V2DLL v*"  
+
+
+7. PATCH_ALWAYS_ADD_WARGOALS=1  
+Zombifreak's patch for enabling adding wargoals without having positive warscore.  
+
+8. PATCH_LAND_REINFORCE=1 and PATCH_NAVAL_REINFORCE=1  
+Zombifreak's patches to make navies and brigades inside armies and fleets reinforce separately, fixing slower than intended reinforcement under insufficient supplies.  
+
+9. PATCH_MAX_RELATIVE_PRICE=1  
+Just sets the price ceiling from x5 of base price to x20 of it.   
+Note: an overflow might occur that will break your game if prices of some factory inputs go beyond its max savings. I recommend increasing MAX_FACTORY_MONEY_SAVE define if you are using this.  
+
+10. PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=1  
+Removes plurality growth from average consciousness. In-game tooltip says otherwise though. So this patch removes this tooltip too (hi tgc)  
+
+11. PATCH_ALLIED_REINFORCE_150=1  
+Increases reinforce rate on allied land from 100% to 150%. Note, that without "PATCH_OCCUPIED_REINFORCE_SPLIT=1" patch,   
+reinforce rate will still be 150% in ally-occupied provinces, not just owned.  
+
+12. PATCH_BUILD_FACTORY_IGNORE_COLONIAL_1=1, PATCH_BUILD_FACTORY_IGNORE_COLONIAL_2=1 and PATCH_BUILD_FACTORY_BUTTON_ENABLE_IGNORE_COLONIAL=1  
+Allow construction of factories in colonial regions.  
+
+13. PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL=1  
+Allows only factories with "limit_by_local_supply = yes" attribute to be constructed in colonies (hi vic uni)  
+Needs to be used together with "PATCH_PROD_TYPE_GATE=1"  
+
+14. PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_BUTTON=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OWN=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OTHER=1 and PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_CAN_BUILD=1  
+Allows uncivilized countries to construct factories.  
+
+
+
+
+15. PATCH_OCCUPIED_REINFORCE_SPLIT=1 and PATCH_ALLY_OWNER_CHECK=1  
+Splits reinforce rates on allied land into allied-owned and allied-occupied land. Allied-occupied reinforce rate is 100%, the same as if you occupy it yourself.  
+Needs to be used with "PATCH_ALLIED_REINFORCE_150=1" to achieve a total effect of just increasing reinforce rate in allied-owned land.  
+
+16. PATCH_GRAPH_POINT_CLAMP=0  
+Prevents the game from crashing if overflow I talked about in 9. (doesn't prevent it from happening though. Just disable this one).  
+
+17. PATCH_FACTORY_DUMP_SCAN=0  
+I used this to debug that overflow (didn't help much).  
+
+18. PATCH_PROD_LIST_VISIBILITY=1  
+Needed for .13  
+
+
+19. PATCH_CIVILIZE_NULL_CHECK=1  
+Fixes a crash when a country that has factories civilizes. Idk if it's really required I use AI to make all of this lol  
+
+20. PATCH_COMBAT_ROLL=1  
+Enables patch for dice rolls in battle.  
+
+21. COMBAT_ROLL_MIN=0 and COMBAT_ROLL_MAX=4  
+Min and Max dice rolls in battle.  

@@ -1,1 +1,0 @@
-start v2game.exe -mod=mod/2.mod
