@@ -55,9 +55,9 @@ You don't need this if you enable №9.
 Allows uncivilized countries to construct factories.
 #### 8. PATCH_PROD_TYPE_GATE
 Has to be enabled for №4, №5 and №6.
-####9. PROD_TYPE_GATE_ALLOW_ALL
+#### 9. PROD_TYPE_GATE_ALLOW_ALL
 Allows construction of all factories in colonial regions, not just whitelisted (see №10) and ones with "limit_by_local_supply = yes" attribute.
-####10. PROD_TYPE_GATE_EXTRA_WHITELIST=X
+#### 10. PROD_TYPE_GATE_EXTRA_WHITELIST=X
 Type in production types separated by comma to allow constructing them in colonial regions, if you do not intend allowing all factories.  
 Can work together with №6.  
   
