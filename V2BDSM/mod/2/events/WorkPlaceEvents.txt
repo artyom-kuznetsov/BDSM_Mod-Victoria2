@@ -16,19 +16,19 @@ country_event = {
 		
 		modifier = {
 			factor = 0.8
-			safety_regulations = trinket_safety
+			work_hours = fourteen_hours
 		}
 		modifier = {
 			factor = 1.5
-			safety_regulations = low_safety
+			work_hours = twelve_hours
 		}
 		modifier = {
 			factor = 3
-			safety_regulations = acceptable_safety
+			work_hours = ten_hours
 		}
 		modifier = {
 			factor = 4
-			safety_regulations = good_safety
+			work_hours = eight_hours
 		}		
 	}
 	
@@ -75,6 +75,11 @@ country_event = {
 			government = prussian_constitutionalism
 			government = democracy
 		}
+		NOT = {
+			work_hours = twelve_hours
+			work_hours = ten_hours
+			work_hours = eight_hours
+		}
 		
 	}
 	mean_time_to_happen = {
@@ -101,7 +106,7 @@ country_event = {
 			name = conservative_reaction
 			duration = 1825
 		}
-		social_reform = low_safety
+		social_reform = twelve_hours
 	}
 	
 	option = {
@@ -695,7 +700,7 @@ province_event = {
 	desc = "EVTDESC12130"
 		
 	trigger = {
-		produces = wool
+		produces = cattle
 	}
 	
 	mean_time_to_happen = {
@@ -805,13 +810,13 @@ province_event = {
 		modifier = {
 			factor = 1.3
 			owner = {
-				safety_regulations = acceptable_safety
+				work_hours = ten_hours
 			}
 		}
 		modifier = {
 			factor = 1.5
 			owner = {
-				safety_regulations = good_safety
+				work_hours = eight_hours
 			}
 		}
 		modifier = {
@@ -910,8 +915,8 @@ province_event = {
 			NOT = {
 				owner = {
 					OR = {
-						safety_regulations = no_safety
-						safety_regulations = trinket_safety
+						work_hours = no_work_hour_limit
+						work_hours = fourteen_hours
 					}
 				}
 			}
@@ -964,19 +969,19 @@ province_event = {
 		modifier = {
 			factor = 1.5
 			owner = {
-				safety_regulations = good_safety
+				work_hours = eight_hours
 			}
 		}
 		modifier = {
 			factor = 1.3
 			owner = {
-				safety_regulations = acceptable_safety
+				work_hours = ten_hours
 			}
 		}
 		modifier = {
 			factor = 0.9
 			owner = {
-				safety_regulations = no_safety
+				work_hours = no_work_hour_limit
 			}
 		}
 	}
@@ -1009,8 +1014,8 @@ province_event = {
 		produces = oil
 		owner = {
 			OR = {
-				safety_regulations = no_safety
-				safety_regulations = trinket_safety
+				work_hours = no_work_hour_limit
+				work_hours = fourteen_hours
 			}
 		}
 	}
@@ -1067,7 +1072,7 @@ province_event = {
 		modifier = {
 			factor = 0.9
 			owner = {
-				safety_regulations = no_safety
+				work_hours = no_work_hour_limit
 			}
 		}
 		modifier = {
@@ -1329,9 +1334,9 @@ province_event = {
 		modifier = {
 			factor = 1.3
 			OR = {
-				safety_regulations = low_safety
-				safety_regulations = good_safety
-				safety_regulations = acceptable_safety
+				work_hours = twelve_hours
+				work_hours = ten_hours
+				work_hours = eight_hours
 			}
 		}
 	}

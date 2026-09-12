@@ -2,9 +2,8 @@ political_decisions = {
 	turkish_military_dec = {
 		alert = yes
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = turkish_military_dec }
-			NOT = { has_global_flag = historical_flag }
 			primary_culture = turkish
 			ideological_thought = 1
 		}
@@ -32,7 +31,7 @@ political_decisions = {
 		potential = {
 			tag = TUR
 			NOT = { has_country_flag = religion_tax_tur_flag }
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -53,7 +52,7 @@ political_decisions = {
 	
 	tanzimat_reforms = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = TUR
 			NOT = {
 				has_country_flag = tanzimat_reforms_enacted
@@ -128,7 +127,7 @@ political_decisions = {
 	
 	kanun_i_esasi = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = TUR
 			NOT = {
 				has_country_flag = kanun_i_esasi_here
@@ -162,7 +161,7 @@ political_decisions = {
 	
 	form_israel = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			civilized = yes
 			NOT = {
 				has_global_flag = israel_has_her_cores
@@ -242,7 +241,7 @@ political_decisions = {
 	vassalize_egypt_dec = {
 		potential = {
 			tag = TUR
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = vassalize_egypt_flag }
 			EGY = {
 				exists = yes
@@ -282,7 +281,7 @@ political_decisions = {
 	#annex_egypt_dec = {
 	#	potential = {
 	#		tag = TUR
-	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		
 	#		NOT = { has_country_flag = annex_egypt_flag }
 	#		EGY = {
 	#			vassal_of = THIS
@@ -319,11 +318,11 @@ political_decisions = {
 	#				}
 	#			}
 	#		}
-	#		1748 = { state_scope = { change_region_name = "Каир (9 для TUR)" } }
-	#		1751 = { state_scope = { change_region_name = "Александрия (9 для TUR)" } }
-	#		1763 = { state_scope = { change_region_name = "Средний Египет (9 для TUR)" } }
-	#		737 = { state_scope = { change_region_name = "Синай (9 для TUR)" } }
-	#		1769 = { state_scope = { change_region_name = "Верхний Египет (9 для TUR)" } }
+	#		1748 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅ (9 пїЅпїЅпїЅ TUR)" } }
+	#		1751 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (9 пїЅпїЅпїЅ TUR)" } }
+	#		1763 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (9 пїЅпїЅпїЅ TUR)" } }
+	#		737 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅ (9 пїЅпїЅпїЅ TUR)" } }
+	#		1769 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (9 пїЅпїЅпїЅ TUR)" } }
 	#	}
 	#}
 	
@@ -331,7 +330,7 @@ political_decisions = {
 	establish_turkish_union_dec = {
 		alert = yes
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = establish_turkish_union_flag }
 			tag = TUR
 			OR = {
@@ -373,7 +372,7 @@ political_decisions = {
 	establish_turkish_federation_dec = {
 		alert = yes
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = establish_turkish_union_flag }
 			tag = TUR
 			OR = {
@@ -414,7 +413,7 @@ political_decisions = {
 	#integrate_wallachia_dec = {
 	#	potential = {
 	#		tag = TUR
-	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		
 	#		NOT = { has_country_flag = integrate_wallachia_flag }
 	#		WAL = {
 	#			vassal_of = THIS
@@ -446,7 +445,7 @@ political_decisions = {
 	#			tag = TUR
 	#			tag = BYZ
 	#		}
-	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		
 	#		NOT = { has_country_flag = integrate_moldavia_flag }
 	#		MOL = {
 	#			vassal_of = THIS
@@ -475,7 +474,7 @@ political_decisions = {
 	anatolia_triumph_dec = {
 		potential = {
 			tag = BYZ
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = anatolia_triumph_flag }
 		}
 
@@ -495,7 +494,7 @@ political_decisions = {
 	egypt_triumph_dec = {
 		potential = {
 			tag = BYZ
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = egypt_triumph_flag }
 		}
 
@@ -508,18 +507,18 @@ political_decisions = {
 			plurality = 3
 			prestige = 15
 			set_country_flag = egypt_triumph_flag
-			1745 = { state_scope = { change_region_name = "Каир" } }
-			1751 = { state_scope = { change_region_name = "Александрия" } }
-			1762 = { state_scope = { change_region_name = "Средний Египет" } }
-			1756 = { state_scope = { change_region_name = "Синай" } }
-			1771 = { state_scope = { change_region_name = "Верхний Египет" } }
+			1745 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅ" } }
+			1751 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" } }
+			1762 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" } }
+			1756 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅ" } }
+			1771 = { state_scope = { change_region_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" } }
 		}
 	}
 	# TRIUMPH OVER BALKANS
 	balkan_triumph_dec = {
 		potential = {
 			tag = BYZ
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = balkan_triumph_flag }
 		}
 

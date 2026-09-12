@@ -125,3 +125,958 @@ Install: done
 DllMain: attach, Install = 1
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
+[28240] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
+[28240] ---- Install ---- версия 3.21 pid=28240 tid=13756
+[28240] base = 00010000
+[28240] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[28240] Timer: timeBeginPeriod(1) = 0
+[28240] Timer: timeGetTime перехвачен
+[28240] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[28240] SleepIat: kernel32.Sleep exe (16-50мс кроме аудио 30/35 -> 1)
+[28240] Select: ws2_32.select перехвачен (таймаут >2мс -> 1мс, аудио нет)
+[28240] CPU: priority ABOVE_NORMAL
+[28240] CPU: power throttling off
+[28240] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[28240] FPU: CreateThread exe перехвачен
+[28240] FPU: GetTickCount - отложенный патч TBB/D3D
+[28240] FPU: пин на главном цикле rva 5DF550
+[28240] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[28240] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[28240] D3D9: Direct3DCreate9 перехвачен
+[28240] TBB: _beginthreadex перехвачен
+[28240] TBB: initialize капим на 4 потоков
+[28240] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=4 sleep0=1 noVsync=0 prio=1
+[28240] PopQuantize: FUN_00485E40, keep_bits=12
+[28240] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[28240] patch CTechnologyView: слот 11 = 1
+[28240] patch CBudgetView: слот 10 = 1
+[28240] patch CProductionView: слот 10 = 1
+[28240] patch CPoliticsView: слот 10 = 1
+[28240] patch CDecision: слот 6 = 1
+[28240] Patch 'always_add_wargoals': применён на rva 138AFF
+[28240] Patch 'land_reinforce': применён на rva 1C8C9B
+[28240] Patch 'naval_reinforce': применён на rva 1C8B1C
+[28240] Patch 'max_relative_price': применён на rva A45C28
+[28240] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[28240] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[28240] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[28240] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[28240] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[28240] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[28240] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[28240] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[28240] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[28240] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[28240] Patch 'checksum_drift_fix': применён на rva 1F8268
+[28240] OccupiedReinforceSplit: occupied=100.0%, пещера 01B20000
+[28240] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01B40000, ok=1
+[28240] CivilizeNullCheck: установлен на rva 14248B, пещера 01B50000
+[28240] NullVtableUi: установлен на rva 4A8E09, пещера 01B60000
+[28240] IdentityNullVtable: установлен на rva 1D0F07 -> dll 5FC46600
+[28240] IdentityLookupGuard: установлен на rva 1DF532 -> dll 5FC46010
+[28240] IdentitySlot84: установлен на rva 1B9670 -> dll 5FC463A0
+[28240] IdentityFieldE4: установлен на rva 1D1CC9 -> dll 5FC45C70
+[28240] IdentityFnD1BB0: установлен на rva 1D1BCD -> dll 5FC45D80
+[28240] IdentityFnD4420: установлен на rva 1D4423 -> dll 5FC45DB0
+[28240] IdentityFn113D50: установлен на rva 113D5C -> dll 5FC45CA0
+[28240] IdentityFn1CB230: установлен на rva 1CB230 -> dll 5FC45CE0
+[28240] IdentityFnD1890: установлен на rva 1D1890 + loop 1D18D0 -> dll 5FC45D20
+[28240] IdentityVtable: .?AVCSubUnit@@ = 00A129EC
+[28240] IdentityVtable: .?AVCRegiment@@ = 00A08884
+[28240] IdentityVtable: .?AVCRegiment@@ = 00A5B484
+[28240] IdentityVtable: .?AVCShip@@ = 00A12A64
+[28240] IdentityVtable: .?AVCWing@@ = 00A0C104
+[28240] IdentityVtable: .?AVCArmy@@ = 00A08970
+[28240] IdentityVtable: .?AVCArmy@@ = 00A088CC
+[28240] IdentityVtable: .?AVCNavy@@ = 00A13070
+[28240] IdentityVtable: .?AVCNavy@@ = 00A12FCC
+[28240] IdentityVtable: .?AVCUnit@@ = 00A12FA8
+[28240] IdentityVtable: .?AVCUnit@@ = 00A12F04
+[28240] IdentityVtable: .?AVCLeader@@ = 00A12694
+[28240] IdentityVtable: .?AVCSelectable@@ = 00A5A6E8
+[28240] IdentityVtable: .?AVCSelectable@@ = 00A0D604
+[28240] IdentityVtable: .?AVCFortressCombatant@@ = 00A122F4
+[28240] IdentityVtable: .?AVCNullLeader@@ = 00A126C0
+[28240] IdentityVtable: .?AVCCombatant@@ = 00A121B4
+[28240] IdentityVtable: .?AVCCombatant@@ = 00A60348
+[28240] IdentityHashFilter: FUN_005AB7F0 эпилог rva 1AB829 -> sentinel
+[28240] IdentityFnD5BC0: родитель 1CB230/1DADD0 rva 1D5BCC -> dll 5FC45DD0
+[28240] StringClearGuard: установлен на rva 5A63F0 -> dll 5FC4BC20
+[28240] IdentityTombstone: CSubUnit/CRegiment/CShip rva 0471B0
+[28240] IdentityTombstone: CArmy rva 1C6180
+[28240] IdentityTombstone: CNavy rva 1D7600
+[28240] ProdListVisibilityHook: установлен
+[28240] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (23536 байт)
+[28240]   [0] synthetics_template limit=0
+[28240]   [1] machine_part_user_template limit=0
+[28240]   [2] stock_exchange_template limit=0
+[28240]   [3] aeroplane_factory limit=0
+[28240]   [4] barrel_factory limit=0
+[28240]   [5] automobile_factory limit=0
+[28240]   [6] radio_factory limit=0
+[28240]   [7] telephone_factory limit=0
+[28240]   [8] electric_gear_factory limit=0
+[28240]   [9] pharmaceutical_plant limit=0
+[28240]   [10] steamer_shipyard limit=0
+[28240]   [11] artillery_factory limit=0
+[28240]   [12] small_arms_factory limit=0
+[28240]   [13] ammunition_factory limit=0
+[28240]   [14] steel_factory limit=0
+[28240]   [15] machine_parts_factory limit=0
+[28240]   [16] liquor_distillery limit=0
+[28240]   [17] winery limit=0
+[28240]   [18] fertilizer_factory limit=0
+[28240]   [19] furniture_factory limit=0
+[28240]   [20] explosives_factory limit=0
+[28240]   [21] luxury_clothes_factory limit=0
+[28240]   [22] luxury_furniture_factory limit=0
+[28240]   [23] cement_factory limit=0
+[28240]   [24] glass_factory limit=0
+[28240]   [25] paper_mill limit=0
+[28240]   [26] fishery limit=0
+[28240]   [27] regular_clothes_factory limit=0
+[28240]   [28] canned_food_factory limit=0
+[28240]   [29] cattle_ranch limit=0
+[28240]   [30] coal_mine limit=0
+[28240]   [31] coffee_plantation limit=0
+[28240]   [32] cotton_plantation limit=0
+[28240]   [33] dye_plantation limit=0
+[28240]   [34] grain_farm limit=0
+[28240]   [35] iron_mine limit=0
+[28240]   [36] oil_rig limit=0
+[28240]   [37] opium_plantation limit=0
+[28240]   [38] orchard limit=0
+[28240]   [39] precious_metal_mine limit=0
+[28240]   [40] rubber_lodge limit=0
+[28240]   [41] silkworm_ranch limit=0
+[28240]   [42] sulphur_mine limit=0
+[28240]   [43] tea_plantation limit=0
+[28240]   [44] timber_lodge limit=0
+[28240]   [45] tobacco_plantation limit=0
+[28240]   [46] tropical_wood_lodge limit=0
+[28240]   [47] peasant_grain limit=0
+[28240]   [48] cattle_factory limit=1
+[28240]   [49] coal_factory limit=1
+[28240]   [50] coffee_factory limit=1
+[28240]   [51] cotton_factory limit=1
+[28240]   [52] dye_factory limit=1
+[28240]   [53] grain_factory limit=1
+[28240]   [54] iron_factory limit=1
+[28240]   [55] oil_factory limit=1
+[28240]   [56] opium_factory limit=1
+[28240]   [57] fruit_factory limit=1
+[28240]   [58] rubber_factory limit=1
+[28240]   [59] silk_factory limit=1
+[28240]   [60] sulphur_factory limit=1
+[28240]   [61] tea_factory limit=1
+[28240]   [62] timber_factory limit=1
+[28240]   [63] tobacco_factory limit=1
+[28240]   [64] tropical_wood_factory limit=1
+[28240] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[28240] ProdTypeGateHook: установлен
+[28240] PriceDelta: 25 сотых процента, множитель 163
+[28240] VersionLabel: 'V2 v3.04 + V2DLL v3.21' (len=22), пещера 01B80000
+[28240] CombatRoll: диапазон 0..4 (модуль=5)
+[28240] OosWatch: FUN_00682EC0 rva 282EC0 -> Logs\v2dll_oos.log (checksum + ident_skip)
+[28240] Install: done
+[28240] DllMain: attach, Install = 1
+[28240] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[28240] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[28240] Present: tid=13756 23 кадр / 6633 мс (~3 fps), inside 1/22 мс, sleep 2/1000 мс, tgt=0 sel=0
+[28240] Present: tid=13756 134 кадр / 5003 мс (~26 fps), inside 11/23 мс, sleep 127/0 мс, tgt=254 sel=0
+[28240] Present: tid=13756 375 кадр / 5001 мс (~74 fps), inside 11/15 мс, sleep 375/0 мс, tgt=750 sel=0
+[28240] Present: tid=13756 375 кадр / 5012 мс (~74 fps), inside 12/18 мс, sleep 375/0 мс, tgt=750 sel=0
+[28240] Present: tid=13756 375 кадр / 5000 мс (~75 fps), inside 11/14 мс, sleep 375/0 мс, tgt=750 sel=0
+[28240] Present: tid=13756 375 кадр / 5001 мс (~74 fps), inside 12/14 мс, sleep 375/0 мс, tgt=750 sel=0
+[28240] Present: tid=13756 376 кадр / 5012 мс (~75 fps), inside 11/14 мс, sleep 376/0 мс, tgt=752 sel=0
+[28240] Select: rva 68B47D timeout 0.015000
+[27680] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
+[27680] ---- Install ---- версия 3.21 pid=27680 tid=9776
+[27680] base = 00010000
+[27680] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[27680] Timer: timeBeginPeriod(1) = 0
+[27680] Timer: timeGetTime перехвачен
+[27680] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[27680] SleepIat: kernel32.Sleep exe (16-50мс кроме аудио 30/35 -> 1)
+[27680] Select: ws2_32.select перехвачен (таймаут >2мс -> 1мс, аудио нет)
+[27680] CPU: priority ABOVE_NORMAL
+[27680] CPU: power throttling off
+[27680] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[27680] FPU: CreateThread exe перехвачен
+[27680] FPU: GetTickCount - отложенный патч TBB/D3D
+[27680] FPU: пин на главном цикле rva 5DF550
+[27680] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[27680] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[27680] D3D9: Direct3DCreate9 перехвачен
+[27680] TBB: _beginthreadex перехвачен
+[27680] TBB: initialize капим на 4 потоков
+[27680] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=4 sleep0=1 noVsync=0 prio=1
+[27680] PopQuantize: FUN_00485E40, keep_bits=12
+[27680] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[27680] patch CTechnologyView: слот 11 = 1
+[27680] patch CBudgetView: слот 10 = 1
+[27680] patch CProductionView: слот 10 = 1
+[27680] patch CPoliticsView: слот 10 = 1
+[27680] patch CDecision: слот 6 = 1
+[27680] Patch 'always_add_wargoals': применён на rva 138AFF
+[27680] Patch 'land_reinforce': применён на rva 1C8C9B
+[27680] Patch 'naval_reinforce': применён на rva 1C8B1C
+[27680] Patch 'max_relative_price': применён на rva A45C28
+[27680] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[27680] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[27680] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[27680] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[27680] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[27680] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[27680] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[27680] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[27680] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[27680] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[27680] Patch 'checksum_drift_fix': применён на rva 1F8268
+[27680] OccupiedReinforceSplit: occupied=100.0%, пещера 01B20000
+[27680] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01B30000, ok=1
+[27680] CivilizeNullCheck: установлен на rva 14248B, пещера 01B40000
+[27680] NullVtableUi: установлен на rva 4A8E09, пещера 01B50000
+[27680] IdentityNullVtable: установлен на rva 1D0F07 -> dll 5FC46600
+[27680] IdentityLookupGuard: установлен на rva 1DF532 -> dll 5FC46010
+[27680] IdentitySlot84: установлен на rva 1B9670 -> dll 5FC463A0
+[27680] IdentityFieldE4: установлен на rva 1D1CC9 -> dll 5FC45C70
+[27680] IdentityFnD1BB0: установлен на rva 1D1BCD -> dll 5FC45D80
+[27680] IdentityFnD4420: установлен на rva 1D4423 -> dll 5FC45DB0
+[27680] IdentityFn113D50: установлен на rva 113D5C -> dll 5FC45CA0
+[27680] IdentityFn1CB230: установлен на rva 1CB230 -> dll 5FC45CE0
+[27680] IdentityFnD1890: установлен на rva 1D1890 + loop 1D18D0 -> dll 5FC45D20
+[27680] IdentityVtable: .?AVCSubUnit@@ = 00A129EC
+[27680] IdentityVtable: .?AVCRegiment@@ = 00A08884
+[27680] IdentityVtable: .?AVCRegiment@@ = 00A5B484
+[27680] IdentityVtable: .?AVCShip@@ = 00A12A64
+[27680] IdentityVtable: .?AVCWing@@ = 00A0C104
+[27680] IdentityVtable: .?AVCArmy@@ = 00A08970
+[27680] IdentityVtable: .?AVCArmy@@ = 00A088CC
+[27680] IdentityVtable: .?AVCNavy@@ = 00A13070
+[27680] IdentityVtable: .?AVCNavy@@ = 00A12FCC
+[27680] IdentityVtable: .?AVCUnit@@ = 00A12FA8
+[27680] IdentityVtable: .?AVCUnit@@ = 00A12F04
+[27680] IdentityVtable: .?AVCLeader@@ = 00A12694
+[27680] IdentityVtable: .?AVCSelectable@@ = 00A5A6E8
+[27680] IdentityVtable: .?AVCSelectable@@ = 00A0D604
+[27680] IdentityVtable: .?AVCFortressCombatant@@ = 00A122F4
+[27680] IdentityVtable: .?AVCNullLeader@@ = 00A126C0
+[27680] IdentityVtable: .?AVCCombatant@@ = 00A121B4
+[27680] IdentityVtable: .?AVCCombatant@@ = 00A60348
+[27680] IdentityHashFilter: FUN_005AB7F0 эпилог rva 1AB829 -> sentinel
+[27680] IdentityFnD5BC0: родитель 1CB230/1DADD0 rva 1D5BCC -> dll 5FC45DD0
+[27680] StringClearGuard: установлен на rva 5A63F0 -> dll 5FC4BC20
+[27680] IdentityTombstone: CSubUnit/CRegiment/CShip rva 0471B0
+[27680] IdentityTombstone: CArmy rva 1C6180
+[27680] IdentityTombstone: CNavy rva 1D7600
+[27680] ProdListVisibilityHook: установлен
+[27680] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (23536 байт)
+[27680]   [0] synthetics_template limit=0
+[27680]   [1] machine_part_user_template limit=0
+[27680]   [2] stock_exchange_template limit=0
+[27680]   [3] aeroplane_factory limit=0
+[27680]   [4] barrel_factory limit=0
+[27680]   [5] automobile_factory limit=0
+[27680]   [6] radio_factory limit=0
+[27680]   [7] telephone_factory limit=0
+[27680]   [8] electric_gear_factory limit=0
+[27680]   [9] pharmaceutical_plant limit=0
+[27680]   [10] steamer_shipyard limit=0
+[27680]   [11] artillery_factory limit=0
+[27680]   [12] small_arms_factory limit=0
+[27680]   [13] ammunition_factory limit=0
+[27680]   [14] steel_factory limit=0
+[27680]   [15] machine_parts_factory limit=0
+[27680]   [16] liquor_distillery limit=0
+[27680]   [17] winery limit=0
+[27680]   [18] fertilizer_factory limit=0
+[27680]   [19] furniture_factory limit=0
+[27680]   [20] explosives_factory limit=0
+[27680]   [21] luxury_clothes_factory limit=0
+[27680]   [22] luxury_furniture_factory limit=0
+[27680]   [23] cement_factory limit=0
+[27680]   [24] glass_factory limit=0
+[27680]   [25] paper_mill limit=0
+[27680]   [26] fishery limit=0
+[27680]   [27] regular_clothes_factory limit=0
+[27680]   [28] canned_food_factory limit=0
+[27680]   [29] cattle_ranch limit=0
+[27680]   [30] coal_mine limit=0
+[27680]   [31] coffee_plantation limit=0
+[27680]   [32] cotton_plantation limit=0
+[27680]   [33] dye_plantation limit=0
+[27680]   [34] grain_farm limit=0
+[27680]   [35] iron_mine limit=0
+[27680]   [36] oil_rig limit=0
+[27680]   [37] opium_plantation limit=0
+[27680]   [38] orchard limit=0
+[27680]   [39] precious_metal_mine limit=0
+[27680]   [40] rubber_lodge limit=0
+[27680]   [41] silkworm_ranch limit=0
+[27680]   [42] sulphur_mine limit=0
+[27680]   [43] tea_plantation limit=0
+[27680]   [44] timber_lodge limit=0
+[27680]   [45] tobacco_plantation limit=0
+[27680]   [46] tropical_wood_lodge limit=0
+[27680]   [47] peasant_grain limit=0
+[27680]   [48] cattle_factory limit=1
+[27680]   [49] coal_factory limit=1
+[27680]   [50] coffee_factory limit=1
+[27680]   [51] cotton_factory limit=1
+[27680]   [52] dye_factory limit=1
+[27680]   [53] grain_factory limit=1
+[27680]   [54] iron_factory limit=1
+[27680]   [55] oil_factory limit=1
+[27680]   [56] opium_factory limit=1
+[27680]   [57] fruit_factory limit=1
+[27680]   [58] rubber_factory limit=1
+[27680]   [59] silk_factory limit=1
+[27680]   [60] sulphur_factory limit=1
+[27680]   [61] tea_factory limit=1
+[27680]   [62] timber_factory limit=1
+[27680]   [63] tobacco_factory limit=1
+[27680]   [64] tropical_wood_factory limit=1
+[27680] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[27680] ProdTypeGateHook: установлен
+[27680] PriceDelta: 25 сотых процента, множитель 163
+[27680] VersionLabel: 'V2 v3.04 + V2DLL v3.21' (len=22), пещера 01B70000
+[27680] CombatRoll: диапазон 0..4 (модуль=5)
+[27680] OosWatch: FUN_00682EC0 rva 282EC0 -> Logs\v2dll_oos.log (checksum + ident_skip)
+[27680] Install: done
+[27680] DllMain: attach, Install = 1
+[28240] Present: tid=13756 290 кадр / 5003 мс (~57 fps), inside 5/13 мс, sleep 292/0 мс, tgt=1360 sel=156
+[27680] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[27680] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[28240] Present: tid=13756 262 кадр / 5006 мс (~52 fps), inside 0/2 мс, sleep 262/0 мс, tgt=1834 sel=262
+[27680] Present: tid=9776 22 кадр / 5075 мс (~4 fps), inside 1/23 мс, sleep 1/1000 мс, tgt=0 sel=0
+[28240] Present: tid=13756 212 кадр / 5474 мс (~38 fps), inside 0/10 мс, sleep 212/0 мс, tgt=1483 sel=211
+[27680] Present: tid=9776 17 кадр / 5002 мс (~3 fps), inside 7/15 мс, sleep 10/0 мс, tgt=18 sel=0
+[28240] Present: tid=13756 178 кадр / 5001 мс (~35 fps), inside 0/11 мс, sleep 178/0 мс, tgt=1244 sel=176
+[27680] Present: tid=9776 376 кадр / 5012 мс (~75 fps), inside 11/19 мс, sleep 376/0 мс, tgt=752 sel=0
+[27680] Select: rva 68B47D timeout 0.020000
+[27680] SleepIat: Sleep(35) rva 663B48 -> 35
+[27680] SleepIat: Sleep(35) rva 663CA5 -> 35
+[27680] SleepIat: Sleep(30) rva 663E51 -> 30
+[28240] Present: tid=13756 253 кадр / 5013 мс (~50 fps), inside 0/2 мс, sleep 253/0 мс, tgt=1726 sel=259
+[27680] Present: tid=9776 185 кадр / 5038 мс (~36 fps), inside 7/15 мс, sleep 190/100 мс, tgt=671 sel=99
+[28240] Present: tid=13756 263 кадр / 5003 мс (~52 fps), inside 0/8 мс, sleep 263/0 мс, tgt=1589 sel=266
+[27680] Present: tid=9776 116 кадр / 5008 мс (~23 fps), inside 0/1 мс, sleep 116/0 мс, tgt=678 sel=150
+[28240] Present: tid=13756 274 кадр / 5005 мс (~54 fps), inside 0/5 мс, sleep 274/0 мс, tgt=1663 sel=281
+[27680] Present: tid=9776 124 кадр / 5024 мс (~24 fps), inside 0/1 мс, sleep 124/0 мс, tgt=716 sel=157
+[28240] Present: tid=13756 277 кадр / 5016 мс (~55 fps), inside 0/4 мс, sleep 277/0 мс, tgt=1675 sel=281
+[27680] Present: tid=9776 123 кадр / 5017 мс (~24 fps), inside 0/1 мс, sleep 123/0 мс, tgt=718 sel=159
+[28240] Present: tid=13756 277 кадр / 5013 мс (~55 fps), inside 0/2 мс, sleep 277/0 мс, tgt=1681 sel=284
+[27680] Present: tid=9776 119 кадр / 5020 мс (~23 fps), inside 0/3 мс, sleep 119/0 мс, tgt=694 sel=154
+[28240] Present: tid=13756 278 кадр / 5000 мс (~55 fps), inside 0/2 мс, sleep 278/0 мс, tgt=1760 sel=284
+[27680] Present: tid=9776 23 кадр / 5300 мс (~4 fps), inside 0/1 мс, sleep 23/0 мс, tgt=146 sel=32
+[28240] Present: tid=13756 197 кадр / 5919 мс (~33 fps), inside 0/7 мс, sleep 197/0 мс, tgt=1385 sel=197
+[12668] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
+[12668] ---- Install ---- версия 3.27 pid=12668 tid=33312
+[12668] base = 00010000
+[12668] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[12668] CrashGuards: выключены (identity/tombstone/null-vtable/civilize)
+[12668] Timer: timeBeginPeriod(1) = 0
+[12668] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[12668] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[12668] CPU: priority ABOVE_NORMAL
+[12668] CPU: power throttling off
+[12668] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[12668] FPU: CreateThread exe перехвачен
+[12668] FPU: GetTickCount - отложенный патч TBB/D3D
+[12668] FPU: пин на главном цикле rva 5DF550
+[12668] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[12668] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[12668] D3D9: Direct3DCreate9 перехвачен
+[12668] TBB: _beginthreadex перехвачен
+[12668] TBB: initialize капим на 4 потоков
+[12668] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=4 sleep0=1 noVsync=0 prio=1
+[12668] PopQuantize: FUN_00485E40, keep_bits=12
+[12668] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[12668] patch CTechnologyView: слот 11 = 1
+[12668] patch CBudgetView: слот 10 = 1
+[12668] patch CProductionView: слот 10 = 1
+[12668] patch CPoliticsView: слот 10 = 1
+[12668] patch CDecision: слот 6 = 1
+[12668] Patch 'always_add_wargoals': применён на rva 138AFF
+[12668] Patch 'land_reinforce': применён на rva 1C8C9B
+[12668] Patch 'naval_reinforce': применён на rva 1C8B1C
+[12668] Patch 'max_relative_price': применён на rva A45C28
+[12668] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[12668] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[12668] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[12668] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[12668] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[12668] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[12668] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[12668] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[12668] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[12668] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[12668] Patch 'checksum_drift_fix': применён на rva 1F8268
+[12668] OccupiedReinforceSplit: occupied=100.0%, пещера 01B20000
+[12668] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01B30000, ok=1
+[12668] ProdListVisibilityHook: установлен
+[12668] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (23536 байт)
+[12668]   [0] synthetics_template limit=0
+[12668]   [1] machine_part_user_template limit=0
+[12668]   [2] stock_exchange_template limit=0
+[12668]   [3] aeroplane_factory limit=0
+[12668]   [4] barrel_factory limit=0
+[12668]   [5] automobile_factory limit=0
+[12668]   [6] radio_factory limit=0
+[12668]   [7] telephone_factory limit=0
+[12668]   [8] electric_gear_factory limit=0
+[12668]   [9] pharmaceutical_plant limit=0
+[12668]   [10] steamer_shipyard limit=0
+[12668]   [11] artillery_factory limit=0
+[12668]   [12] small_arms_factory limit=0
+[12668]   [13] ammunition_factory limit=0
+[12668]   [14] steel_factory limit=0
+[12668]   [15] machine_parts_factory limit=0
+[12668]   [16] liquor_distillery limit=0
+[12668]   [17] winery limit=0
+[12668]   [18] fertilizer_factory limit=0
+[12668]   [19] furniture_factory limit=0
+[12668]   [20] explosives_factory limit=0
+[12668]   [21] luxury_clothes_factory limit=0
+[12668]   [22] luxury_furniture_factory limit=0
+[12668]   [23] cement_factory limit=0
+[12668]   [24] glass_factory limit=0
+[12668]   [25] paper_mill limit=0
+[12668]   [26] fishery limit=0
+[12668]   [27] regular_clothes_factory limit=0
+[12668]   [28] canned_food_factory limit=0
+[12668]   [29] cattle_ranch limit=0
+[12668]   [30] coal_mine limit=0
+[12668]   [31] coffee_plantation limit=0
+[12668]   [32] cotton_plantation limit=0
+[12668]   [33] dye_plantation limit=0
+[12668]   [34] grain_farm limit=0
+[12668]   [35] iron_mine limit=0
+[12668]   [36] oil_rig limit=0
+[12668]   [37] opium_plantation limit=0
+[12668]   [38] orchard limit=0
+[12668]   [39] precious_metal_mine limit=0
+[12668]   [40] rubber_lodge limit=0
+[12668]   [41] silkworm_ranch limit=0
+[12668]   [42] sulphur_mine limit=0
+[12668]   [43] tea_plantation limit=0
+[12668]   [44] timber_lodge limit=0
+[12668]   [45] tobacco_plantation limit=0
+[12668]   [46] tropical_wood_lodge limit=0
+[12668]   [47] peasant_grain limit=0
+[12668]   [48] cattle_factory limit=1
+[12668]   [49] coal_factory limit=1
+[12668]   [50] coffee_factory limit=1
+[12668]   [51] cotton_factory limit=1
+[12668]   [52] dye_factory limit=1
+[12668]   [53] grain_factory limit=1
+[12668]   [54] iron_factory limit=1
+[12668]   [55] oil_factory limit=1
+[12668]   [56] opium_factory limit=1
+[12668]   [57] fruit_factory limit=1
+[12668]   [58] rubber_factory limit=1
+[12668]   [59] silk_factory limit=1
+[12668]   [60] sulphur_factory limit=1
+[12668]   [61] tea_factory limit=1
+[12668]   [62] timber_factory limit=1
+[12668]   [63] tobacco_factory limit=1
+[12668]   [64] tropical_wood_factory limit=1
+[12668] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[12668] ProdTypeGateHook: установлен
+[12668] PriceDelta: 25 сотых процента, множитель 163
+[12668] VersionLabel: 'V2 v3.04 + V2DLL v3.27' (len=22), пещера 01B50000
+[12668] CombatRoll: диапазон 0..4 (модуль=5)
+[12668] OosWatch: FUN_00682EC0 rva 282EC0 -> Logs\v2dll_oos.log (checksum + ident_skip)
+[12668] Install: done
+[12668] DllMain: attach, Install = 1
+[12668] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[12668] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[12668] Present: caller rva 00595934
+[12668] Present: tid=33312 22 кадр / 5238 мс (~4 fps), inside 1/26 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 19 кадр / 5007 мс (~3 fps), inside 10/30 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Select: rva 68B47D timeout 0.015000 -> 1мс
+[12668] Present: tid=33312 361 кадр / 5013 мс (~72 fps), inside 10/22 мс, sleep 0/0 мс, tgt=0 sel=133/133/175 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
+[31824] ---- Install ---- версия 3.27 pid=31824 tid=33744
+[31824] base = 00010000
+[31824] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[31824] CrashGuards: выключены (identity/tombstone/null-vtable/civilize)
+[31824] Timer: timeBeginPeriod(1) = 0
+[31824] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[31824] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[31824] CPU: priority ABOVE_NORMAL
+[31824] CPU: power throttling off
+[31824] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[31824] FPU: CreateThread exe перехвачен
+[31824] FPU: GetTickCount - отложенный патч TBB/D3D
+[31824] FPU: пин на главном цикле rva 5DF550
+[31824] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[31824] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[31824] D3D9: Direct3DCreate9 перехвачен
+[31824] TBB: _beginthreadex перехвачен
+[31824] TBB: initialize капим на 4 потоков
+[31824] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=4 sleep0=1 noVsync=0 prio=1
+[31824] PopQuantize: FUN_00485E40, keep_bits=12
+[31824] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[31824] patch CTechnologyView: слот 11 = 1
+[31824] patch CBudgetView: слот 10 = 1
+[31824] patch CProductionView: слот 10 = 1
+[31824] patch CPoliticsView: слот 10 = 1
+[31824] patch CDecision: слот 6 = 1
+[31824] Patch 'always_add_wargoals': применён на rva 138AFF
+[31824] Patch 'land_reinforce': применён на rva 1C8C9B
+[31824] Patch 'naval_reinforce': применён на rva 1C8B1C
+[31824] Patch 'max_relative_price': применён на rva A45C28
+[31824] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[31824] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[31824] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[31824] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[31824] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[31824] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[31824] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[31824] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[31824] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[31824] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[31824] Patch 'checksum_drift_fix': применён на rva 1F8268
+[31824] OccupiedReinforceSplit: occupied=100.0%, пещера 032D0000
+[31824] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 032E0000, ok=1
+[31824] ProdListVisibilityHook: установлен
+[31824] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (23536 байт)
+[31824]   [0] synthetics_template limit=0
+[31824]   [1] machine_part_user_template limit=0
+[31824]   [2] stock_exchange_template limit=0
+[31824]   [3] aeroplane_factory limit=0
+[31824]   [4] barrel_factory limit=0
+[31824]   [5] automobile_factory limit=0
+[31824]   [6] radio_factory limit=0
+[31824]   [7] telephone_factory limit=0
+[31824]   [8] electric_gear_factory limit=0
+[31824]   [9] pharmaceutical_plant limit=0
+[31824]   [10] steamer_shipyard limit=0
+[31824]   [11] artillery_factory limit=0
+[31824]   [12] small_arms_factory limit=0
+[31824]   [13] ammunition_factory limit=0
+[31824]   [14] steel_factory limit=0
+[31824]   [15] machine_parts_factory limit=0
+[31824]   [16] liquor_distillery limit=0
+[31824]   [17] winery limit=0
+[31824]   [18] fertilizer_factory limit=0
+[31824]   [19] furniture_factory limit=0
+[31824]   [20] explosives_factory limit=0
+[31824]   [21] luxury_clothes_factory limit=0
+[31824]   [22] luxury_furniture_factory limit=0
+[31824]   [23] cement_factory limit=0
+[31824]   [24] glass_factory limit=0
+[31824]   [25] paper_mill limit=0
+[31824]   [26] fishery limit=0
+[31824]   [27] regular_clothes_factory limit=0
+[31824]   [28] canned_food_factory limit=0
+[31824]   [29] cattle_ranch limit=0
+[31824]   [30] coal_mine limit=0
+[31824]   [31] coffee_plantation limit=0
+[31824]   [32] cotton_plantation limit=0
+[31824]   [33] dye_plantation limit=0
+[31824]   [34] grain_farm limit=0
+[31824]   [35] iron_mine limit=0
+[31824]   [36] oil_rig limit=0
+[31824]   [37] opium_plantation limit=0
+[31824]   [38] orchard limit=0
+[31824]   [39] precious_metal_mine limit=0
+[31824]   [40] rubber_lodge limit=0
+[31824]   [41] silkworm_ranch limit=0
+[31824]   [42] sulphur_mine limit=0
+[31824]   [43] tea_plantation limit=0
+[31824]   [44] timber_lodge limit=0
+[31824]   [45] tobacco_plantation limit=0
+[31824]   [46] tropical_wood_lodge limit=0
+[31824]   [47] peasant_grain limit=0
+[31824]   [48] cattle_factory limit=1
+[31824]   [49] coal_factory limit=1
+[31824]   [50] coffee_factory limit=1
+[31824]   [51] cotton_factory limit=1
+[31824]   [52] dye_factory limit=1
+[31824]   [53] grain_factory limit=1
+[31824]   [54] iron_factory limit=1
+[31824]   [55] oil_factory limit=1
+[31824]   [56] opium_factory limit=1
+[31824]   [57] fruit_factory limit=1
+[31824]   [58] rubber_factory limit=1
+[31824]   [59] silk_factory limit=1
+[31824]   [60] sulphur_factory limit=1
+[31824]   [61] tea_factory limit=1
+[31824]   [62] timber_factory limit=1
+[31824]   [63] tobacco_factory limit=1
+[31824]   [64] tropical_wood_factory limit=1
+[31824] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[31824] ProdTypeGateHook: установлен
+[31824] PriceDelta: 25 сотых процента, множитель 163
+[31824] VersionLabel: 'V2 v3.04 + V2DLL v3.27' (len=22), пещера 03300000
+[31824] CombatRoll: диапазон 0..4 (модуль=5)
+[31824] OosWatch: FUN_00682EC0 rva 282EC0 -> Logs\v2dll_oos.log (checksum + ident_skip)
+[31824] Install: done
+[31824] DllMain: attach, Install = 1
+[12668] Present: tid=33312 374 кадр / 5012 мс (~74 fps), inside 8/12 мс, sleep 0/0 мс, tgt=0 sel=374/374/502 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[31824] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[31824] Present: caller rva 00595934
+[12668] Present: tid=33312 375 кадр / 5000 мс (~75 fps), inside 9/11 мс, sleep 0/0 мс, tgt=0 sel=375/375/441 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 22 кадр / 5040 мс (~4 fps), inside 1/21 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 358 кадр / 5003 мс (~71 fps), inside 5/15 мс, sleep 0/0 мс, tgt=0 sel=358/358/414 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 7 кадр / 5235 мс (~1 fps), inside 1/9 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Select: rva 68B47D timeout 0.020000 -> 1мс
+[12668] Present: tid=33312 372 кадр / 5010 мс (~74 fps), inside 6/11 мс, sleep 0/0 мс, tgt=0 sel=376/376/477 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 290 кадр / 5003 мс (~57 fps), inside 7/13 мс, sleep 0/0 мс, tgt=0 sel=135/135/292 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 350 кадр / 5192 мс (~67 fps), inside 7/16 мс, sleep 0/0 мс, tgt=0 sel=379/379/871 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Update[CTechnologyView]: вызван, view=66B2EC98
+[12668] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[12668] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[31824] Update[CTechnologyView]: вызван, view=86959568
+[31824] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[31824] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[12668] Present: tid=33312 2 кадр / 6823 мс (~0 fps), inside 0/1 мс, sleep 0/0 мс, tgt=0 sel=4/4/7 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 246 кадр / 10802 мс (~22 fps), inside 6/10 мс, sleep 0/0 мс, tgt=0 sel=260/260/442 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 302 кадр / 5012 мс (~60 fps), inside 2/10 мс, sleep 0/0 мс, tgt=0 sel=303/303/1084 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 271 кадр / 5010 мс (~54 fps), inside 0/11 мс, sleep 0/0 мс, tgt=0 sel=282/282/927 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 219 кадр / 5048 мс (~43 fps), inside 1/13 мс, sleep 0/0 мс, tgt=0 sel=268/268/906 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 232 кадр / 5001 мс (~46 fps), inside 1/9 мс, sleep 0/0 мс, tgt=0 sel=308/308/746 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 180 кадр / 5011 мс (~35 fps), inside 1/10 мс, sleep 0/0 мс, tgt=0 sel=267/267/510 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 217 кадр / 5036 мс (~43 fps), inside 0/19 мс, sleep 0/0 мс, tgt=0 sel=274/274/785 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 233 кадр / 5007 мс (~46 fps), inside 2/18 мс, sleep 0/0 мс, tgt=0 sel=274/274/717 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 218 кадр / 5076 мс (~42 fps), inside 1/23 мс, sleep 0/0 мс, tgt=0 sel=236/236/632 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 303 кадр / 5013 мс (~60 fps), inside 2/9 мс, sleep 0/0 мс, tgt=0 sel=355/355/341 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 100 кадр / 5404 мс (~18 fps), inside 0/13 мс, sleep 0/0 мс, tgt=0 sel=81/81/291 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 314 кадр / 5000 мс (~62 fps), inside 2/9 мс, sleep 0/0 мс, tgt=0 sel=383/383/368 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 92 кадр / 5011 мс (~18 fps), inside 0/6 мс, sleep 0/0 мс, tgt=0 sel=81/81/331 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 259 кадр / 5020 мс (~51 fps), inside 2/16 мс, sleep 0/0 мс, tgt=0 sel=310/310/382 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 96 кадр / 5007 мс (~19 fps), inside 0/1 мс, sleep 0/0 мс, tgt=0 sel=95/95/238 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 231 кадр / 5023 мс (~45 fps), inside 1/15 мс, sleep 0/0 мс, tgt=0 sel=263/263/310 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 96 кадр / 5039 мс (~19 fps), inside 0/1 мс, sleep 0/0 мс, tgt=0 sel=91/91/361 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 298 кадр / 5039 мс (~59 fps), inside 1/9 мс, sleep 0/0 мс, tgt=0 sel=365/365/335 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 92 кадр / 5065 мс (~18 fps), inside 0/1 мс, sleep 0/0 мс, tgt=0 sel=73/73/331 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 300 кадр / 5065 мс (~59 fps), inside 1/14 мс, sleep 0/0 мс, tgt=0 sel=334/334/338 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 90 кадр / 5008 мс (~17 fps), inside 0/7 мс, sleep 0/0 мс, tgt=0 sel=75/75/312 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 210 кадр / 5000 мс (~42 fps), inside 1/14 мс, sleep 0/0 мс, tgt=0 sel=226/226/398 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 134 кадр / 5016 мс (~26 fps), inside 0/8 мс, sleep 0/0 мс, tgt=0 sel=135/135/395 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 119 кадр / 5017 мс (~23 fps), inside 0/13 мс, sleep 0/0 мс, tgt=0 sel=140/140/325 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 160 кадр / 5033 мс (~31 fps), inside 0/4 мс, sleep 0/0 мс, tgt=0 sel=166/166/420 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 178 кадр / 5026 мс (~35 fps), inside 1/14 мс, sleep 0/0 мс, tgt=0 sel=193/193/480 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 158 кадр / 5011 мс (~31 fps), inside 0/8 мс, sleep 0/0 мс, tgt=0 sel=164/164/546 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 168 кадр / 5017 мс (~33 fps), inside 0/10 мс, sleep 0/0 мс, tgt=0 sel=180/180/495 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 101 кадр / 5035 мс (~20 fps), inside 0/14 мс, sleep 0/0 мс, tgt=0 sel=95/95/265 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 200 кадр / 5003 мс (~39 fps), inside 0/8 мс, sleep 0/0 мс, tgt=0 sel=255/255/368 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 170 кадр / 5001 мс (~33 fps), inside 1/7 мс, sleep 0/0 мс, tgt=0 sel=170/170/251 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 109 кадр / 5058 мс (~21 fps), inside 0/9 мс, sleep 0/0 мс, tgt=0 sel=117/117/614 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 248 кадр / 5013 мс (~49 fps), inside 0/6 мс, sleep 0/0 мс, tgt=0 sel=272/272/289 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 223 кадр / 5012 мс (~44 fps), inside 0/2 мс, sleep 0/0 мс, tgt=0 sel=241/241/284 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 45 кадр / 5017 мс (~8 fps), inside 0/14 мс, sleep 0/0 мс, tgt=0 sel=21/21/46 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 202 кадр / 5091 мс (~39 fps), inside 0/2 мс, sleep 0/0 мс, tgt=0 sel=256/256/441 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 110 кадр / 5006 мс (~21 fps), inside 0/14 мс, sleep 0/0 мс, tgt=0 sel=96/96/156 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[12668] Present: tid=33312 150 кадр / 5082 мс (~29 fps), inside 0/1 мс, sleep 0/0 мс, tgt=0 sel=148/148/889 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 261 кадр / 5004 мс (~52 fps), inside 0/7 мс, sleep 0/0 мс, tgt=0 sel=293/293/306 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[31824] Present: tid=33744 279 кадр / 5000 мс (~55 fps), inside 1/12 мс, sleep 0/0 мс, tgt=0 sel=297/297/495 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
+[28868] ---- Install ---- версия 3.27 pid=28868 tid=20112
+[28868] base = 00010000
+[28868] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[28868] CrashGuards: выключены (identity/tombstone/null-vtable/civilize)
+[28868] Timer: timeBeginPeriod(1) = 0
+[28868] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[28868] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[28868] CPU: priority ABOVE_NORMAL
+[28868] CPU: power throttling off
+[28868] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[28868] FPU: CreateThread exe перехвачен
+[28868] FPU: GetTickCount - отложенный патч TBB/D3D
+[28868] FPU: пин на главном цикле rva 5DF550
+[28868] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[28868] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[28868] D3D9: Direct3DCreate9 перехвачен
+[28868] TBB: _beginthreadex перехвачен
+[28868] TBB: initialize капим на 8 потоков
+[28868] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=8 sleep0=1 noVsync=0 prio=1
+[28868] PopQuantize: FUN_00485E40, keep_bits=12
+[28868] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[28868] patch CTechnologyView: слот 11 = 1
+[28868] patch CBudgetView: слот 10 = 1
+[28868] patch CProductionView: слот 10 = 1
+[28868] patch CPoliticsView: слот 10 = 1
+[28868] patch CDecision: слот 6 = 1
+[28868] Patch 'always_add_wargoals': применён на rva 138AFF
+[28868] Patch 'land_reinforce': применён на rva 1C8C9B
+[28868] Patch 'naval_reinforce': применён на rva 1C8B1C
+[28868] Patch 'max_relative_price': применён на rva A45C28
+[28868] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[28868] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[28868] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[28868] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[28868] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[28868] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[28868] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[28868] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[28868] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[28868] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[28868] Patch 'checksum_drift_fix': применён на rva 1F8268
+[28868] OccupiedReinforceSplit: occupied=100.0%, пещера 01B20000
+[28868] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01B30000, ok=1
+[28868] ProdListVisibilityHook: установлен
+[28868] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (23536 байт)
+[28868]   [0] synthetics_template limit=0
+[28868]   [1] machine_part_user_template limit=0
+[28868]   [2] stock_exchange_template limit=0
+[28868]   [3] aeroplane_factory limit=0
+[28868]   [4] barrel_factory limit=0
+[28868]   [5] automobile_factory limit=0
+[28868]   [6] radio_factory limit=0
+[28868]   [7] telephone_factory limit=0
+[28868]   [8] electric_gear_factory limit=0
+[28868]   [9] pharmaceutical_plant limit=0
+[28868]   [10] steamer_shipyard limit=0
+[28868]   [11] artillery_factory limit=0
+[28868]   [12] small_arms_factory limit=0
+[28868]   [13] ammunition_factory limit=0
+[28868]   [14] steel_factory limit=0
+[28868]   [15] machine_parts_factory limit=0
+[28868]   [16] liquor_distillery limit=0
+[28868]   [17] winery limit=0
+[28868]   [18] fertilizer_factory limit=0
+[28868]   [19] furniture_factory limit=0
+[28868]   [20] explosives_factory limit=0
+[28868]   [21] luxury_clothes_factory limit=0
+[28868]   [22] luxury_furniture_factory limit=0
+[28868]   [23] cement_factory limit=0
+[28868]   [24] glass_factory limit=0
+[28868]   [25] paper_mill limit=0
+[28868]   [26] fishery limit=0
+[28868]   [27] regular_clothes_factory limit=0
+[28868]   [28] canned_food_factory limit=0
+[28868]   [29] cattle_ranch limit=0
+[28868]   [30] coal_mine limit=0
+[28868]   [31] coffee_plantation limit=0
+[28868]   [32] cotton_plantation limit=0
+[28868]   [33] dye_plantation limit=0
+[28868]   [34] grain_farm limit=0
+[28868]   [35] iron_mine limit=0
+[28868]   [36] oil_rig limit=0
+[28868]   [37] opium_plantation limit=0
+[28868]   [38] orchard limit=0
+[28868]   [39] precious_metal_mine limit=0
+[28868]   [40] rubber_lodge limit=0
+[28868]   [41] silkworm_ranch limit=0
+[28868]   [42] sulphur_mine limit=0
+[28868]   [43] tea_plantation limit=0
+[28868]   [44] timber_lodge limit=0
+[28868]   [45] tobacco_plantation limit=0
+[28868]   [46] tropical_wood_lodge limit=0
+[28868]   [47] peasant_grain limit=0
+[28868]   [48] cattle_factory limit=1
+[28868]   [49] coal_factory limit=1
+[28868]   [50] coffee_factory limit=1
+[28868]   [51] cotton_factory limit=1
+[28868]   [52] dye_factory limit=1
+[28868]   [53] grain_factory limit=1
+[28868]   [54] iron_factory limit=1
+[28868]   [55] oil_factory limit=1
+[28868]   [56] opium_factory limit=1
+[28868]   [57] fruit_factory limit=1
+[28868]   [58] rubber_factory limit=1
+[28868]   [59] silk_factory limit=1
+[28868]   [60] sulphur_factory limit=1
+[28868]   [61] tea_factory limit=1
+[28868]   [62] timber_factory limit=1
+[28868]   [63] tobacco_factory limit=1
+[28868]   [64] tropical_wood_factory limit=1
+[28868] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[28868] ProdTypeGateHook: установлен
+[28868] PriceDelta: 25 сотых процента, множитель 163
+[28868] VersionLabel: 'V2 v3.04 + V2DLL v3.27' (len=22), пещера 03300000
+[28868] CombatRoll: диапазон 0..4 (модуль=5)
+[28868] OosWatch: FUN_00682EC0 rva 282EC0 -> Logs\v2dll_oos.log (checksum + ident_skip)
+[28868] Install: done
+[28868] DllMain: attach, Install = 1
+[28868] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[28868] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[28868] Present: caller rva 00595934
+[28868] Present: tid=20112 23 кадр / 6438 мс (~3 fps), inside 1/22 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
+[14884] ---- Install ---- версия 3.27 pid=14884 tid=30604
+[14884] base = 00010000
+[14884] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[14884] CrashGuards: выключены (identity/tombstone/null-vtable/civilize)
+[14884] Timer: timeBeginPeriod(1) = 0
+[14884] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[14884] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[14884] CPU: priority ABOVE_NORMAL
+[14884] CPU: power throttling off
+[14884] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[14884] FPU: CreateThread exe перехвачен
+[14884] FPU: GetTickCount - отложенный патч TBB/D3D
+[14884] FPU: пин на главном цикле rva 5DF550
+[14884] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[14884] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[14884] D3D9: Direct3DCreate9 перехвачен
+[14884] TBB: _beginthreadex перехвачен
+[14884] TBB: initialize капим на 8 потоков
+[14884] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=8 sleep0=1 noVsync=0 prio=1
+[14884] PopQuantize: FUN_00485E40, keep_bits=12
+[14884] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[14884] patch CTechnologyView: слот 11 = 1
+[14884] patch CBudgetView: слот 10 = 1
+[14884] patch CProductionView: слот 10 = 1
+[14884] patch CPoliticsView: слот 10 = 1
+[14884] patch CDecision: слот 6 = 1
+[14884] Patch 'always_add_wargoals': применён на rva 138AFF
+[14884] Patch 'land_reinforce': применён на rva 1C8C9B
+[14884] Patch 'naval_reinforce': применён на rva 1C8B1C
+[14884] Patch 'max_relative_price': применён на rva A45C28
+[14884] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[14884] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[14884] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[14884] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[14884] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[14884] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[14884] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[14884] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[14884] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[14884] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[14884] Patch 'checksum_drift_fix': применён на rva 1F8268
+[14884] OccupiedReinforceSplit: occupied=100.0%, пещера 01B20000
+[14884] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01B30000, ok=1
+[14884] ProdListVisibilityHook: установлен
+[14884] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (23536 байт)
+[14884]   [0] synthetics_template limit=0
+[14884]   [1] machine_part_user_template limit=0
+[14884]   [2] stock_exchange_template limit=0
+[14884]   [3] aeroplane_factory limit=0
+[14884]   [4] barrel_factory limit=0
+[14884]   [5] automobile_factory limit=0
+[14884]   [6] radio_factory limit=0
+[14884]   [7] telephone_factory limit=0
+[14884]   [8] electric_gear_factory limit=0
+[14884]   [9] pharmaceutical_plant limit=0
+[14884]   [10] steamer_shipyard limit=0
+[14884]   [11] artillery_factory limit=0
+[14884]   [12] small_arms_factory limit=0
+[14884]   [13] ammunition_factory limit=0
+[14884]   [14] steel_factory limit=0
+[14884]   [15] machine_parts_factory limit=0
+[14884]   [16] liquor_distillery limit=0
+[14884]   [17] winery limit=0
+[14884]   [18] fertilizer_factory limit=0
+[14884]   [19] furniture_factory limit=0
+[14884]   [20] explosives_factory limit=0
+[14884]   [21] luxury_clothes_factory limit=0
+[14884]   [22] luxury_furniture_factory limit=0
+[14884]   [23] cement_factory limit=0
+[14884]   [24] glass_factory limit=0
+[14884]   [25] paper_mill limit=0
+[14884]   [26] fishery limit=0
+[14884]   [27] regular_clothes_factory limit=0
+[14884]   [28] canned_food_factory limit=0
+[14884]   [29] cattle_ranch limit=0
+[14884]   [30] coal_mine limit=0
+[14884]   [31] coffee_plantation limit=0
+[14884]   [32] cotton_plantation limit=0
+[14884]   [33] dye_plantation limit=0
+[14884]   [34] grain_farm limit=0
+[14884]   [35] iron_mine limit=0
+[14884]   [36] oil_rig limit=0
+[14884]   [37] opium_plantation limit=0
+[14884]   [38] orchard limit=0
+[14884]   [39] precious_metal_mine limit=0
+[14884]   [40] rubber_lodge limit=0
+[14884]   [41] silkworm_ranch limit=0
+[14884]   [42] sulphur_mine limit=0
+[14884]   [43] tea_plantation limit=0
+[14884]   [44] timber_lodge limit=0
+[14884]   [45] tobacco_plantation limit=0
+[14884]   [46] tropical_wood_lodge limit=0
+[14884]   [47] peasant_grain limit=0
+[14884]   [48] cattle_factory limit=1
+[14884]   [49] coal_factory limit=1
+[14884]   [50] coffee_factory limit=1
+[14884]   [51] cotton_factory limit=1
+[14884]   [52] dye_factory limit=1
+[14884]   [53] grain_factory limit=1
+[14884]   [54] iron_factory limit=1
+[14884]   [55] oil_factory limit=1
+[14884]   [56] opium_factory limit=1
+[14884]   [57] fruit_factory limit=1
+[14884]   [58] rubber_factory limit=1
+[14884]   [59] silk_factory limit=1
+[14884]   [60] sulphur_factory limit=1
+[14884]   [61] tea_factory limit=1
+[14884]   [62] timber_factory limit=1
+[14884]   [63] tobacco_factory limit=1
+[14884]   [64] tropical_wood_factory limit=1
+[14884] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[14884] ProdTypeGateHook: установлен
+[14884] PriceDelta: 25 сотых процента, множитель 163
+[14884] VersionLabel: 'V2 v3.04 + V2DLL v3.27' (len=22), пещера 03300000
+[14884] CombatRoll: диапазон 0..4 (модуль=5)
+[14884] OosWatch: FUN_00682EC0 rva 282EC0 -> Logs\v2dll_oos.log (checksum + ident_skip)
+[14884] Install: done
+[14884] DllMain: attach, Install = 1
+[28868] Present: tid=20112 132 кадр / 5011 мс (~26 fps), inside 11/29 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[14884] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[14884] Present: caller rva 00595934
+[28868] Select: rva 68B47D timeout 0.015000 -> 1мс
+[28868] Present: tid=20112 361 кадр / 5002 мс (~72 fps), inside 9/14 мс, sleep 0/0 мс, tgt=0 sel=232/232/280 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 22 кадр / 5221 мс (~4 fps), inside 1/22 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 286 кадр / 5048 мс (~56 fps), inside 6/81 мс, sleep 0/0 мс, tgt=0 sel=285/285/342 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 9 кадр / 5092 мс (~1 fps), inside 3/19 мс, sleep 0/0 мс, tgt=0 sel=0/0/0 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Select: rva 68B47D timeout 0.020000 -> 1мс
+[28868] Present: tid=20112 258 кадр / 5005 мс (~51 fps), inside 7/19 мс, sleep 0/0 мс, tgt=0 sel=262/262/417 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 344 кадр / 5005 мс (~68 fps), inside 7/13 мс, sleep 0/0 мс, tgt=0 sel=187/187/449 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 375 кадр / 5011 мс (~74 fps), inside 8/16 мс, sleep 0/0 мс, tgt=0 sel=405/405/580 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 373 кадр / 5014 мс (~74 fps), inside 6/13 мс, sleep 0/0 мс, tgt=0 sel=380/380/761 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 335 кадр / 5088 мс (~65 fps), inside 6/25 мс, sleep 0/0 мс, tgt=0 sel=353/353/722 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 206 кадр / 5231 мс (~39 fps), inside 6/10 мс, sleep 0/0 мс, tgt=0 sel=222/222/477 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Update[CTechnologyView]: вызван, view=7F385070
+[28868] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[28868] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[14884] Update[CTechnologyView]: вызван, view=7F21B750
+[14884] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[14884] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[28868] Present: tid=20112 1 кадр / 6494 мс (~0 fps), inside 1/1 мс, sleep 0/0 мс, tgt=0 sel=4/4/19 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 17 кадр / 5001 мс (~3 fps), inside 2/9 мс, sleep 0/0 мс, tgt=0 sel=20/20/50 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 298 кадр / 5005 мс (~59 fps), inside 1/10 мс, sleep 0/0 мс, tgt=0 sel=302/302/1177 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 280 кадр / 5014 мс (~55 fps), inside 1/9 мс, sleep 0/0 мс, tgt=0 sel=290/290/970 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 275 кадр / 5006 мс (~54 fps), inside 2/11 мс, sleep 0/0 мс, tgt=0 sel=355/355/672 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 190 кадр / 5023 мс (~37 fps), inside 0/11 мс, sleep 0/0 мс, tgt=0 sel=215/215/602 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 347 кадр / 5006 мс (~69 fps), inside 3/10 мс, sleep 0/0 мс, tgt=0 sel=390/390/407 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 260 кадр / 5031 мс (~51 fps), inside 0/7 мс, sleep 0/0 мс, tgt=0 sel=254/254/623 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 350 кадр / 5009 мс (~69 fps), inside 3/9 мс, sleep 0/0 мс, tgt=0 sel=382/382/398 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 252 кадр / 5033 мс (~50 fps), inside 0/7 мс, sleep 0/0 мс, tgt=0 sel=243/243/639 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 349 кадр / 5005 мс (~69 fps), inside 3/8 мс, sleep 0/0 мс, tgt=0 sel=382/382/389 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 250 кадр / 5027 мс (~49 fps), inside 0/32 мс, sleep 0/0 мс, tgt=0 sel=237/237/649 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 339 кадр / 5012 мс (~67 fps), inside 2/9 мс, sleep 0/0 мс, tgt=0 sel=389/389/409 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 213 кадр / 5053 мс (~42 fps), inside 0/9 мс, sleep 0/0 мс, tgt=0 sel=199/199/773 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 268 кадр / 5008 мс (~53 fps), inside 1/9 мс, sleep 0/0 мс, tgt=0 sel=293/293/802 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 238 кадр / 5010 мс (~47 fps), inside 1/13 мс, sleep 0/0 мс, tgt=0 sel=249/249/924 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 285 кадр / 5002 мс (~56 fps), inside 1/17 мс, sleep 0/0 мс, tgt=0 sel=314/314/624 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 159 кадр / 5061 мс (~31 fps), inside 1/16 мс, sleep 0/0 мс, tgt=0 sel=158/158/625 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 236 кадр / 5016 мс (~47 fps), inside 1/18 мс, sleep 0/0 мс, tgt=0 sel=266/266/442 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 147 кадр / 5027 мс (~29 fps), inside 0/7 мс, sleep 0/0 мс, tgt=0 sel=142/142/396 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 334 кадр / 5000 мс (~66 fps), inside 1/10 мс, sleep 0/0 мс, tgt=0 sel=366/366/383 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 98 кадр / 5224 мс (~18 fps), inside 0/1 мс, sleep 0/0 мс, tgt=0 sel=84/84/400 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 334 кадр / 5000 мс (~66 fps), inside 1/7 мс, sleep 0/0 мс, tgt=0 sel=373/373/381 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 106 кадр / 5070 мс (~20 fps), inside 0/8 мс, sleep 0/0 мс, tgt=0 sel=88/88/454 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 298 кадр / 5011 мс (~59 fps), inside 1/14 мс, sleep 0/0 мс, tgt=0 sel=330/330/515 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 165 кадр / 5033 мс (~32 fps), inside 0/9 мс, sleep 0/0 мс, tgt=0 sel=155/155/513 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 199 кадр / 5003 мс (~39 fps), inside 2/31 мс, sleep 0/0 мс, tgt=0 sel=218/218/552 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 153 кадр / 5033 мс (~30 fps), inside 0/8 мс, sleep 0/0 мс, tgt=0 sel=157/157/567 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 229 кадр / 5008 мс (~45 fps), inside 2/33 мс, sleep 0/0 мс, tgt=0 sel=255/255/871 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 217 кадр / 5001 мс (~43 fps), inside 0/8 мс, sleep 0/0 мс, tgt=0 sel=223/223/861 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 231 кадр / 5009 мс (~46 fps), inside 2/28 мс, sleep 0/0 мс, tgt=0 sel=253/253/768 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 186 кадр / 5057 мс (~36 fps), inside 0/10 мс, sleep 0/0 мс, tgt=0 sel=188/188/713 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 205 кадр / 5052 мс (~40 fps), inside 2/20 мс, sleep 0/0 мс, tgt=0 sel=219/219/674 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 154 кадр / 5035 мс (~30 fps), inside 0/8 мс, sleep 0/0 мс, tgt=0 sel=154/154/546 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 213 кадр / 5006 мс (~42 fps), inside 1/15 мс, sleep 0/0 мс, tgt=0 sel=229/229/439 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 178 кадр / 5043 мс (~35 fps), inside 0/1 мс, sleep 0/0 мс, tgt=0 sel=191/191/422 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 308 кадр / 5021 мс (~61 fps), inside 1/15 мс, sleep 0/0 мс, tgt=0 sel=339/339/412 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 134 кадр / 5024 мс (~26 fps), inside 0/9 мс, sleep 0/0 мс, tgt=0 sel=128/128/618 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 222 кадр / 5012 мс (~44 fps), inside 1/19 мс, sleep 0/0 мс, tgt=0 sel=233/233/432 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[14884] Present: tid=30604 188 кадр / 5040 мс (~37 fps), inside 0/7 мс, sleep 0/0 мс, tgt=0 sel=192/192/367 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0
+[28868] Present: tid=20112 221 кадр / 5009 мс (~44 fps), inside 1/15 мс, sleep 0/0 мс, tgt=0 sel=238/238/640 recv=0/0 wfso=0/0 qpc=0 eu3=0/0 nudge=0/0 ing=0/0 gapI=0 gapP=0

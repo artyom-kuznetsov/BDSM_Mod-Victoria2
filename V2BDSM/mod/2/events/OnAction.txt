@@ -17,7 +17,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA70000"
-		is_slave = yes
+		any_owned = { limit = { state_scope = { is_slave = yes } } }
 		country = {
 			any_state = {
 				limit = {
@@ -103,7 +103,7 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTB70000"
-		is_slave = no
+		any_owned = { limit = { state_scope = { is_slave = no } } }
 		country = {
 			any_state = {
 				limit = {
@@ -173,7 +173,7 @@ country_event = {
 }
 
 #$STATE$ Joins $COUNTRY$!
-country_event = {
+province_event = {
 	id = 70001
 	title = "EVTNAME70001"
 	desc = "EVTDESC70001"

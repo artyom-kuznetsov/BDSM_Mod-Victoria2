@@ -177,7 +177,7 @@ political_decisions = {
 			tag = SAR
 			NOT = { exists = ITA owns = 754 }
 			NOT = { has_country_flag = expedition_to_sicily }
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 
 		allow = {
@@ -196,7 +196,7 @@ political_decisions = {
 				}
 				owner = {
 					define_general = {
-						name = "§RДжузеппе Гарибальди§W"
+						name = "пїЅRпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅW"
 						personality = org05mor40
 						background = 5a4d_1
 					}
@@ -327,7 +327,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = cavour_has_done_his
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			owns = 465
 			owns = 466
 			owns = 472
@@ -383,7 +383,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = order_awarded
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -404,7 +404,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = get_your_statuto_albertino_here
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -427,7 +427,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = vittoriano_built
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -451,7 +451,7 @@ political_decisions = {
 			}
 			year = 1858
 			owns = 741
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		allow = {
 			nationalism_tech = 1
@@ -476,7 +476,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = first_vatican_council_held
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -504,7 +504,7 @@ political_decisions = {
 		potential = {
 			tag = ITA
 			NOT = { has_country_flag = law_of_guarantees }
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -611,7 +611,7 @@ political_decisions = {
 				tag = MOD
 			}
 			NOT = { has_country_flag = embraced_south_italians }
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -669,6 +669,7 @@ political_decisions = {
 			prestige = 5
 			LUC = { all_core = { add_core = THIS } }
 			inherit = LUC
+			set_country_flag = lucca_annexed
 		}
 	}
 	
@@ -676,7 +677,7 @@ political_decisions = {
 		potential = {
 			NOT = { exists = ITA }
 			is_culture_group = italian
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			nationalism_tech = 1
 		}
 		
@@ -858,13 +859,12 @@ political_decisions = {
 	
 	recover_greece_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = ita_greece_recovered }
 			OR = {	
 				tag = SIC
 				tag = ITA
 			}
-			NOT = { has_global_flag = historical_flag }
 		}
 		allow = { 
 			realism = 1
@@ -899,7 +899,7 @@ political_decisions = {
 	
 	mare_nostrum_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = italian_tech_school_access_flag }
 			tag = ITA
 			year = 1850
@@ -929,7 +929,7 @@ political_decisions = {
 	}
 	construct_italy_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_global_flag = ITA_has_player_flag }
 			NOT = { 
 				exists = ITA
@@ -1052,7 +1052,7 @@ political_decisions = {
 	#annex_greece_dec = {
 	#	potential = {
 	#		GRE = { vassal_of = THIS }
-	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		
 	#		NOT = { has_country_flag = annex_greece_flag }
 	#		is_culture_group = italian
 	#	}
@@ -1077,7 +1077,7 @@ political_decisions = {
 	magrib_ITA_imigration_dec = {
 		potential = {
 			tag = ITA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = magrib_ITA_imigration_dec_flag }
 		}
 		allow = {
@@ -1099,7 +1099,7 @@ political_decisions = {
 	immigration_from_magrib_ITA_dec = {
 		potential = {
 			tag = ITA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = immigration_from_magrib_ITA_flag }
 			has_country_flag = magrib_ITA_imigration_dec_flag 
 		}
@@ -1142,7 +1142,7 @@ political_decisions = {
 			NOT = { has_global_flag = italian_call_for_union }
 			ITA = { exists = no }
 			is_culture_group = italian
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -1159,7 +1159,7 @@ political_decisions = {
 	italian_african_horn_dec = {
 		potential = {
 			tag = ITA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = east_italian_africa_step1_flag }
 		}
 		allow = {
@@ -1178,7 +1178,7 @@ political_decisions = {
 	ita_occupy_ethiopia_dec = {
 		potential = {
 			tag = ITA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = east_italian_africa_step2_flag }
 			has_country_flag = east_italian_africa_step1_flag
 			ETH = {
@@ -1211,7 +1211,7 @@ political_decisions = {
 	italian_east_africa_dec = {
 		potential = {
 			tag = ITA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = east_italian_africa_step3_flag }
 			has_country_flag = east_italian_africa_step1_flag
 		}

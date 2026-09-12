@@ -208,11 +208,6 @@ migration_target =
     	has_culture_core = no
 	}
 	modifier = {
-    	factor = 0.5
-    	state_scope = { is_colonial = yes }
-		NOT = { continent = south_america continent = north_america continent = oceania owner = { has_country_flag = magrib_imigration_check_flag } }
-	}
-	modifier = {
 		factor = 2
 		any_core = { is_primary_culture = THIS }
 	}
@@ -990,10 +985,6 @@ ideologies = {
 			country = { has_country_flag = conservative_propaganda_flag }
 		}
 		modifier = {
-			factor = 2
-			country = { has_country_flag = blanco_rebels }
-		}
-		modifier = {
 			factor = 0.5
 			militancy = 6
 		}
@@ -1195,10 +1186,6 @@ ideologies = {
 		modifier = {
 			factor = 2
 			country = { has_country_flag = liberal_propaganda_flag }
-		}
-		modifier = {
-			factor = 2
-			country = { has_country_flag = colorado_rebels }
 		}
 		modifier = {
 			factor = 1.2
@@ -3111,283 +3098,6 @@ issues =
 		}		
 	}
 	
-	trinket_safety = { 
-		factor = 1
-		modifier = {
-			factor = 0 
-			OR = {
-				NOT = { life_needs = 1.0 }
-				NOT = { consciousness = 6 }
-				NOT = {
-					is_next_reform = trinket_safety
-				}
-				# Audax Validator "." Ignore_NEXT
-				NOT = { is_ideology_enabled = socialist }
-			}	
-		}
-		modifier = {
-			factor = 0.25
-			country = {
-				civilized = no
-			}
-		}
-		modifier = {
-			factor = 0.25
-			NOT = { literacy = 0.20 }
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 7
-		}	
-		modifier = {
-			factor = 1.25
-			consciousness = 8
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 9
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 1
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 1
-		}
-	}
-	low_safety = { 
-		factor = 1
-		modifier = {
-			factor = 0 
-			OR = {
-				NOT = { life_needs = 1.0 }
-				NOT = { consciousness = 6 }
-				NOT = {
-					is_next_reform = low_safety
-				}
-				# Audax Validator "." Ignore_NEXT
-				NOT = { is_ideology_enabled = socialist }
-			}	
-		}
-		modifier = {
-			factor = 0.25
-			country = {
-				civilized = no
-			}
-		}
-		modifier = {
-			factor = 0.25
-			NOT = { literacy = 0.20 }
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 7
-		}	
-		modifier = {
-			factor = 1.25
-			consciousness = 8
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 9
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 1
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 1
-		}
-	}
-	acceptable_safety = { 
-		factor = 1
-		modifier = {
-			factor = 0 
-			OR = {
-				NOT = { life_needs = 1.0 }
-				NOT = { consciousness = 6 }
-				NOT = {
-					is_next_reform = acceptable_safety
-				}
-				# Audax Validator "." Ignore_NEXT
-				NOT = { is_ideology_enabled = socialist }
-			}	
-		}
-		modifier = {
-			factor = 0.25
-			country = {
-				civilized = no
-			}
-		}
-		modifier = {
-			factor = 0.25
-			NOT = { literacy = 0.20 }
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 7
-		}	
-		modifier = {
-			factor = 1.25
-			consciousness = 8
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 9
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 1
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 1
-		}
-
-	}
-	good_safety  = { 
-		factor = 1
-		modifier = {
-			factor = 0 
-			OR = {
-				NOT = { life_needs = 1.0 }
-				NOT = { consciousness = 6 }
-				NOT = {
-					is_next_reform = good_safety 
-				}
-				# Audax Validator "." Ignore_NEXT
-				NOT = { is_ideology_enabled = socialist }
-			}	
-		}
-			modifier = {
-			factor = 0.25
-			country = {
-				civilized = no
-			}
-		}
-		modifier = {
-			factor = 0.25
-			NOT = { literacy = 0.20 }
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 7
-		}	
-		modifier = {
-			factor = 1.25
-			consciousness = 8
-		}
-		modifier = {
-			factor = 1.25
-			consciousness = 9
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			everyday_needs = 1
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.25
-		}	
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.50
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 0.75
-		}
-		modifier = {
-			factor = 1.25
-			luxury_needs = 1
-		}
-	}
 	trinket_subsidies = { 
 		factor = 1
 		modifier = {
@@ -4094,30 +3804,6 @@ issues =
 				NOT = { is_ideology_enabled = socialist }
 		}
 		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = positivism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = functionalism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = biologism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = social_science_invented
-			}
-		}
-		modifier = {
 			factor = 0.25
 			country = { civilized = no }
 		}
@@ -4169,30 +3855,6 @@ issues =
 				country = { ai = yes }
 				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = positivism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = functionalism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = biologism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = social_science_invented
-			}
 		}
 		modifier = {
 			factor = 0.25
@@ -4248,30 +3910,6 @@ issues =
 				NOT = { is_ideology_enabled = socialist }
 		}
 		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = positivism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = functionalism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = biologism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = social_science_invented
-			}
-		}
-		modifier = {
 			factor = 0.25
 			country = { civilized = no }
 		}
@@ -4323,30 +3961,6 @@ issues =
 				country = { ai = yes }
 				# Audax Validator "." Ignore_NEXT
 				NOT = { is_ideology_enabled = socialist }
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = positivism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = functionalism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = biologism_invented
-			}
-		}
-		modifier = {
-			factor = 1.25
-			country = {
-				has_country_flag = social_science_invented
-			}
 		}
 		modifier = {
 			factor = 0.25

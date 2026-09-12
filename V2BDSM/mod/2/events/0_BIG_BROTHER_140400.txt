@@ -382,7 +382,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 				limit = {
 					owner = {
 						modern_central_bank_system = 1
-						NOT = { has_country_flag = modern_central_bank_system }
+						NOT = { has_country_flag = modern_central_bank_system_invented }
 					}
 				}
 				owner = {
@@ -862,17 +862,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { experimental_railroad = 1 } # LEVEL 1
 					OR = {
 						terrain = farmlands
-						terrain = farmlands_mine
 						terrain = woods
-						terrain = woods_mine
 						terrain = steppe
-						terrain = steppe_mine
 						terrain = terrain_strait_control_tile_plains
 						
 						terrain = plains
-						terrain = plains_mine
 						terrain = urban
-						terrain = urban_mine
 						terrain = terrain_strait_control_tile_urban
 					}
 				}
@@ -884,17 +879,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { early_railroad = 1 } # LEVEL 1
 					OR = {
 						terrain = farmlands
-						terrain = farmlands_mine
 						terrain = woods
-						terrain = woods_mine
 						terrain = steppe
-						terrain = steppe_mine
 						terrain = terrain_strait_control_tile_plains
 						
 						terrain = plains
-						terrain = plains_mine
 						terrain = urban
-						terrain = urban_mine
 						terrain = terrain_strait_control_tile_urban
 					}
 				}
@@ -907,17 +897,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { iron_railroad = 1 } # LEVEL 1
 					OR = {
 						terrain = farmlands
-						terrain = farmlands_mine
 						terrain = woods
-						terrain = woods_mine
 						terrain = steppe
-						terrain = steppe_mine
 						terrain = terrain_strait_control_tile_plains
 						
 						terrain = plains
-						terrain = plains_mine
 						terrain = urban
-						terrain = urban_mine
 						terrain = terrain_strait_control_tile_urban
 					}
 				}
@@ -931,17 +916,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { steel_railroad = 1 } # LEVEL 1
 					OR = {
 						terrain = farmlands
-						terrain = farmlands_mine
 						terrain = woods
-						terrain = woods_mine
 						terrain = steppe
-						terrain = steppe_mine
 						terrain = terrain_strait_control_tile_plains
 						
 						terrain = plains
-						terrain = plains_mine
 						terrain = urban
-						terrain = urban_mine
 						terrain = terrain_strait_control_tile_urban
 					}
 				}
@@ -956,17 +936,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { integral_rail_system = 1 } # LEVEL 1
 					OR = {
 						terrain = farmlands
-						terrain = farmlands_mine
 						terrain = woods
-						terrain = woods_mine
 						terrain = steppe
-						terrain = steppe_mine
 						terrain = terrain_strait_control_tile_plains
 						
 						terrain = plains
-						terrain = plains_mine
 						terrain = urban
-						terrain = urban_mine
 						terrain = terrain_strait_control_tile_urban
 					}
 				}
@@ -982,17 +957,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { limited_access_roads = 1 } # LEVEL 1
 					OR = {
 						terrain = farmlands
-						terrain = farmlands_mine
 						terrain = woods
-						terrain = woods_mine
 						terrain = steppe
-						terrain = steppe_mine
 						terrain = terrain_strait_control_tile_plains
 						
 						terrain = plains
-						terrain = plains_mine
 						terrain = urban
-						terrain = urban_mine
 						terrain = terrain_strait_control_tile_urban
 					}
 				}
@@ -1010,17 +980,12 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { modern_infrastructure = 1 } # LEVEL 1
 					OR = {
 						terrain = farmlands
-						terrain = farmlands_mine
 						terrain = woods
-						terrain = woods_mine
 						terrain = steppe
-						terrain = steppe_mine
 						terrain = terrain_strait_control_tile_plains
 						
 						terrain = plains
-						terrain = plains_mine
 						terrain = urban
-						terrain = urban_mine
 						terrain = terrain_strait_control_tile_urban
 					}
 				}
@@ -1041,13 +1006,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { early_railroad = 1 } # LEVEL 2 (min_build_railroad = 1)
 					OR = {
 						terrain = forest
-						terrain = forest_mine
 						terrain = hills
-						terrain = hills_mine
 						terrain = terrain_strait_control_tile_hills
-						terrain = terrain_strait_control_tile_hills_mine
 						terrain = coastal_desert
-						terrain = coastal_desert_mine
 					}
 				}
 				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
@@ -1058,13 +1019,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { iron_railroad = 1 } # LEVEL 2 (min_build_railroad = 1)
 					OR = {
 						terrain = forest
-						terrain = forest_mine
 						terrain = hills
-						terrain = hills_mine
 						terrain = terrain_strait_control_tile_hills
-						terrain = terrain_strait_control_tile_hills_mine
 						terrain = coastal_desert
-						terrain = coastal_desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1076,13 +1033,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { steel_railroad = 1 } # LEVEL 2 (min_build_railroad = 1)
 					OR = {
 						terrain = forest
-						terrain = forest_mine
 						terrain = hills
-						terrain = hills_mine
 						terrain = terrain_strait_control_tile_hills
-						terrain = terrain_strait_control_tile_hills_mine
 						terrain = coastal_desert
-						terrain = coastal_desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1095,13 +1048,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { integral_rail_system = 1 } # LEVEL 2 (min_build_railroad = 1)
 					OR = {
 						terrain = forest
-						terrain = forest_mine
 						terrain = hills
-						terrain = hills_mine
 						terrain = terrain_strait_control_tile_hills
-						terrain = terrain_strait_control_tile_hills_mine
 						terrain = coastal_desert
-						terrain = coastal_desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1115,13 +1064,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { limited_access_roads = 1 } # LEVEL 2 (min_build_railroad = 1)
 					OR = {
 						terrain = forest
-						terrain = forest_mine
 						terrain = hills
-						terrain = hills_mine
 						terrain = terrain_strait_control_tile_hills
-						terrain = terrain_strait_control_tile_hills_mine
 						terrain = coastal_desert
-						terrain = coastal_desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1136,13 +1081,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { modern_infrastructure = 1 } # LEVEL 2 (min_build_railroad = 1)
 					OR = {
 						terrain = forest
-						terrain = forest_mine
 						terrain = hills
-						terrain = hills_mine
 						terrain = terrain_strait_control_tile_hills
-						terrain = terrain_strait_control_tile_hills_mine
 						terrain = coastal_desert
-						terrain = coastal_desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1162,11 +1103,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { iron_railroad = 1 } # LEVEL 3 (min_build_railroad = 2)
 					OR = {
 						terrain = terrain_strait_control_tile_mountain
-						terrain = terrain_strait_control_tile_mountain_mine
 						terrain = mountain
-						terrain = mountain_mine
 						terrain = marsh
-						terrain = marsh_mine
 					}
 				}
 				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
@@ -1177,11 +1115,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { steel_railroad = 1 } # LEVEL 3 (min_build_railroad = 2)
 					OR = {
 						terrain = terrain_strait_control_tile_mountain
-						terrain = terrain_strait_control_tile_mountain_mine
 						terrain = mountain
-						terrain = mountain_mine
 						terrain = marsh
-						terrain = marsh_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1193,11 +1128,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { integral_rail_system = 1 } # LEVEL 3 (min_build_railroad = 2)
 					OR = {
 						terrain = terrain_strait_control_tile_mountain
-						terrain = terrain_strait_control_tile_mountain_mine
 						terrain = mountain
-						terrain = mountain_mine
 						terrain = marsh
-						terrain = marsh_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1210,11 +1142,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { limited_access_roads = 1 } # LEVEL 3 (min_build_railroad = 2)
 					OR = {
 						terrain = terrain_strait_control_tile_mountain
-						terrain = terrain_strait_control_tile_mountain_mine
 						terrain = mountain
-						terrain = mountain_mine
 						terrain = marsh
-						terrain = marsh_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1228,11 +1157,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { modern_infrastructure = 1 } # LEVEL 3 (min_build_railroad = 2)
 					OR = {
 						terrain = terrain_strait_control_tile_mountain
-						terrain = terrain_strait_control_tile_mountain_mine
 						terrain = mountain
-						terrain = mountain_mine
 						terrain = marsh
-						terrain = marsh_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1251,9 +1177,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { steel_railroad = 1 } # LEVEL 4 (min_build_railroad = 3)
 					OR = {
 						terrain = jungle
-						terrain = jungle_mine
 						terrain = desert
-						terrain = desert_mine
 					}
 				}
 				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
@@ -1264,9 +1188,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { integral_rail_system = 1 } # LEVEL 4 (min_build_railroad = 3)
 					OR = {
 						terrain = jungle
-						terrain = jungle_mine
 						terrain = desert
-						terrain = desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1278,9 +1200,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { limited_access_roads = 1 } # LEVEL 4 (min_build_railroad = 3)
 					OR = {
 						terrain = jungle
-						terrain = jungle_mine
 						terrain = desert
-						terrain = desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1293,9 +1213,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 					owner = { modern_infrastructure = 1 } # LEVEL 4 (min_build_railroad = 3)
 					OR = {
 						terrain = jungle
-						terrain = jungle_mine
 						terrain = desert
-						terrain = desert_mine
 					}
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
@@ -1311,10 +1229,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 				limit = {
 					is_colonial = yes
 					owner = { integral_rail_system = 1 } # LEVEL 5 (min_build_railroad = 4)
-					OR = {
-						terrain = arctic
-						terrain = arctic_mine
-					}
+					terrain = arctic
 				}
 				add_province_modifier = { name = colonial_railway_nerf_1_pmod duration = -1 }
 			}
@@ -1322,10 +1237,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 				limit = {
 					is_colonial = yes
 					owner = { limited_access_roads = 1 } # LEVEL 5 (min_build_railroad = 4)
-					OR = {
-						terrain = arctic
-						terrain = arctic_mine
-					}
+					terrain = arctic
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
 				add_province_modifier = { name = colonial_railway_nerf_2_pmod duration = -1 }
@@ -1334,10 +1246,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 				limit = {
 					is_colonial = yes
 					owner = { modern_infrastructure = 1 } # LEVEL 5 (min_build_railroad = 4)
-					OR = {
-						terrain = arctic
-						terrain = arctic_mine
-					}
+					terrain = arctic
 				}
 				remove_province_modifier = colonial_railway_nerf_1_pmod
 				remove_province_modifier = colonial_railway_nerf_2_pmod
@@ -1511,7 +1420,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 						is_culture_group = east_asian
 					}
 				}
-				1481 = { change_province_name = "Ëşéøóíü" }
+				1481 = { change_province_name = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" }
 			}
 			1481 = {
 				limit ={
@@ -1519,16 +1428,8 @@ country_event = { # MCL # MONTHLY CLEANUP
 						NOT = { is_culture_group = east_asian }
 					}
 				}
-				1481 = { change_province_name = "Ïîğò-Àğòóğ" }
+				1481 = { change_province_name = "ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½" }
 			}
-		}
-		
-		any_country = {
-			limit = {
-				has_country_flag = magrib_imigration_check_flag
-				NOT = { has_country_modifier = magrib_imigration_modifier }
-			}
-			clr_country_flag = magrib_imigration_check_flag
 		}
 		
 		any_country = {
@@ -1561,7 +1462,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			government = democracy
 		}
 		
-		# ÍÅÒ ÊĞÅÏÎÑÒÍÎÃÎ ÏĞÀÂÀ
+		# ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		any_country = {
 			limit = {
 				OR = {
@@ -1597,7 +1498,7 @@ country_event = { # MCL # MONTHLY CLEANUP
             social_reform = yes_pop_construction
         }
 
-		any_country = { # ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				OR = {
@@ -1608,7 +1509,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = is_communist_flag
 		}
-		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÊÎÌÌÓÍÈÑÒÎÂ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				NOT = { 
@@ -1620,7 +1521,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			clr_country_flag = is_communist_flag
 		}
 		
-		any_country = { # ÔËÀÃ ÔÀØÈÑÒÎÂ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				government = fascist_dictatorship
@@ -1628,7 +1529,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = is_fascist_flag
 		}
-		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÔÀØÈÑÒÎÂ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				NOT = { government = fascist_dictatorship }
@@ -1637,7 +1538,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			clr_country_flag = is_fascist_flag
 		}
 		
-		any_country = { # ÔËÀÃ ÒÎÒÀËÈÒÀĞÍÎÑÒÈ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				OR = {
@@ -1652,7 +1553,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = is_totalitarian_flag
 		}
-		any_country = { # ÓÁĞÀÒÜ ÔËÀÃ ÒÎÒÀËÈÒÀĞÍÎÑÒÈ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				NOT = { government = absolute_monarchy }
@@ -1664,7 +1565,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			clr_country_flag = is_totalitarian_flag
 		}
 		
-		any_country = { # ÓÁÈÒÜ ÂÑÅÌ ÎÒÍÎØÅÍÈß Ñ ÌÈĞÁÀÍÊÎÌ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				is_greater_power = yes
 			}
@@ -1701,7 +1602,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			annex_to = FROM
 		}
 		
-		any_country = { # ÔËÀÃ ÏÎÇÈÒÈÂÈÇÌÀ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				positivism = 1
 				exists = yes
@@ -1709,7 +1610,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = has_positivism_flag
 		}
-		any_country = { # ÔËÀÃ ÔÓÍÊÖÈÎÍÀËÈÇÌÀ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				functionalism = 1
 				exists = yes
@@ -1717,7 +1618,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = has_functionalism_flag
 		}
-		any_country = { # ÔËÀÃ ÁÈÎËÎÃÈÇÌÀ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				biologism = 1
 				exists = yes
@@ -1725,7 +1626,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = has_biologism_flag
 		}
-		any_country = { # ÔËÀÃ ÏĞÎÔ ÀĞÌÈÈ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				army_professionalism = 1
 				exists = yes
@@ -1733,7 +1634,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = army_professionalism_flag
 		}
-		any_country = { # ÔËÀÃ ÂÎÇÄÓÕÎÏËÀÂÀÍÜß
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				aeronautics = 1
 				exists = yes
@@ -1741,7 +1642,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = aeronautics_researched_flag
 		}
-		any_country = { # ÔËÀÃ ĞÅÂ È ÊÎÍÒĞĞÅÂ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				revolution_n_counterrevolution = 1
@@ -1749,7 +1650,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = has_rev_n_counterrev_flag
 		}
-		any_country = { # ÔËÀÃ İÊÑÏÀÍÑÈÎÍÈÇÌ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				invention = expansionism
@@ -1757,7 +1658,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = expansionism_flag
 		}
-		any_country = { # ÔËÀÃ ÔÀØÈÇÌ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				exists = yes
 				invention = the_doctrine_of_fascism
@@ -1766,7 +1667,7 @@ country_event = { # MCL # MONTHLY CLEANUP
 			set_country_flag = fascism_doctrine_flag
 		}
 		
-		any_country = { # ÎÒÊĞÛÒÜ ÃĞÀÍÈÖÛ Ó ÍÅ ÒÎÒÀËÈÒÀĞÍÛÕ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				NOT = { 
 					centralization = totalitarianism
@@ -1777,14 +1678,14 @@ country_event = { # MCL # MONTHLY CLEANUP
 			political_reform = open_borders
 		}
 		
-		any_country = { # ÍÅÒ ÏĞÀÂ ÃÎËÎÑÀ
+		any_country = { # ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				vote_franschise = none_voting
 				NOT = { has_country_flag = none_voting_flag }
 			}
 			set_country_flag = none_voting_flag
 		}
-		any_country = { # ÃÎËÎÑÓŞÒ ÁÎÃÀÒÛÅ
+		any_country = { # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			limit = {
 				vote_franschise = wealth_weighted_voting
 				NOT = { has_country_flag = wealth_weighted_voting_flag }
@@ -2376,7 +2277,6 @@ country_event = {
 		NOT = { year = 1845 }
 		NOT = { has_country_modifier = sphere_clear_cooldown_modifier }
 		is_culture_group = south_asian
-		NOT = { has_global_flag = historical_flag }
 		ai = yes
 	}
 	
@@ -5582,7 +5482,8 @@ country_event = {
 ## Audax Validator "." Ignore_NEXT
 country_event = {
 	id = 140414
-	title = "noloc"	# ÇÀÊÎËÎÍÈÇÀÖÈß ĞÅÃÈÎÍÀ ÈÇ ÌÅÒĞÎÏÎËÈÈ
+	title = "noloc"	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	desc = "noloc"
 
 	is_triggered_only = yes
 

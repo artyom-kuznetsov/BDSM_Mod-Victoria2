@@ -3,7 +3,7 @@ political_decisions = {
 		alert = no
 		potential = {
 			ai = no
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -56,7 +56,7 @@ political_decisions = {
 		potential = {
 			always = no
 			#ai = no
-			#NOT = { has_country_flag = hide_all_decs_flag }
+			#
 			#NOT = { has_country_flag = hide_guide_flag }
 			#NOT = { has_country_modifier = hide_guide_modifier }
 		}
@@ -71,7 +71,7 @@ political_decisions = {
 	exchange_settings_dec = {
 		alert = no
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			ai = no
 		}
 		allow = {
@@ -88,7 +88,7 @@ political_decisions = {
 	force_reform_dec = {
 		potential = {
 			civilized = yes
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			year = 1837
 		}
 		allow = {
@@ -112,7 +112,7 @@ political_decisions = {
 	
 	martial_law_activate_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = martial_law_flag }
 			OR = {
 				ai = no
@@ -140,7 +140,7 @@ political_decisions = {
 	}
 	martial_law_deactivate_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			has_country_flag = martial_law_flag
 			OR = {
 				ai = no
@@ -167,7 +167,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = no_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -184,7 +184,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = trinket_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			ai = no
 		}
 		
@@ -201,7 +201,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = trinket_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -218,7 +218,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = low_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			ai = no
 		}
 		
@@ -235,7 +235,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = low_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -252,7 +252,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = acceptable_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			ai = no
 		}
 		
@@ -269,7 +269,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = acceptable_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -286,7 +286,7 @@ political_decisions = {
 		potential = {
 			civilized = yes
 			health_care = good_health_care
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			ai = no
 		}
 		
@@ -307,7 +307,7 @@ political_decisions = {
 	#		NOT = {
 	#			has_country_modifier = recently_capitulated_modifier
 	#		}
-	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		
 	#	}
 	#	
 	#	allow = {
@@ -338,7 +338,7 @@ political_decisions = {
 	#		NOT = {
 	#			has_country_modifier = recently_deoccupied_modifier
 	#		}
-	#		NOT = { has_country_flag = hide_all_decs_flag }
+	#		
 	#		capital_scope = {
 	#			controller = {
 	#				ai = no
@@ -374,7 +374,7 @@ political_decisions = {
 			NOT = {
 				vote_franschise = none_voting
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		allow = {
 			NOT = { election = yes }
@@ -391,7 +391,7 @@ political_decisions = {
 		potential = {
 			num_of_vassals = 1
 			ai = no
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -409,7 +409,7 @@ political_decisions = {
 	education_schools_low_dec = {
 		alert = yes
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			civilized = yes
 			NOT = { school_reforms = compulsory_schools }
 			NOT = { has_country_modifier = administrative_expenses_modifier }
@@ -485,9 +485,9 @@ political_decisions = {
 			year = 1860
 			civilized = yes
 			OR = {
-				NOT = { has_country_flag = NileDiscovered }
-				NOT = { has_country_flag = NorthPoleDiscovered }
-				NOT = { has_country_flag = SouthPoleDiscovered }
+				NOT = { has_global_flag = NileDiscovered }
+				NOT = { has_global_flag = NorthPoleDiscovered }
+				NOT = { has_global_flag = SouthPoleDiscovered }
 			}
 			NOT = { has_country_flag = expeditions_menu_flag }
 		}

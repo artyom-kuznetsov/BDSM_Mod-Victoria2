@@ -1371,24 +1371,6 @@ country_event = {
 		}
 	}
 	
-	option = {
-		name = "EVTOPTA4101"
-		random_state = {
-			limit = {
-				NOT = {
-					is_colonial = yes
-				}
-			}
-			any_pop = {
-				militancy = 1
-				consciousness = 1
-				dominant_issue = {
-					value = state_equal_weight
-					factor = 0.5
-				}
-			}
-		}
-	}
 	
 	option = {
 		name = "EVTOPTB4101"
@@ -1421,7 +1403,7 @@ country_event = {
 	
 	trigger = {
 		civilized = yes
-		upper_house_composition = state_equal_weight
+		upper_house_composition = population_equal_weight
 		political_reform_want = 0.2
 		any_state = {
 			average_militancy = 6
@@ -2547,7 +2529,7 @@ country_event = {
 	
 	trigger = {
 		civilized = yes
-		protectionism = 15
+		protectionism_ref = 15
 	}
 	
 	mean_time_to_happen = {
@@ -2579,7 +2561,7 @@ country_event = {
 			any_pop = {
 				dominant_issue = {
 					factor = 0.1
-					value = protectionism
+					value = protectionism_ref
 				}
 			}
 		}
@@ -2613,7 +2595,7 @@ country_event = {
 	trigger = {
 		civilized = yes
 		trade_policy_rgroup = protectionism_ref
-		protectionism = 10
+		protectionism_ref = 10
 		free_trade_ref = 10
 	}
 	

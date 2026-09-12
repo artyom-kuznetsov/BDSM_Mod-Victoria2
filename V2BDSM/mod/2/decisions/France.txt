@@ -53,7 +53,7 @@ political_decisions = {
 			NOT = {
 				has_global_flag = statue_of_liberty_has_been_built
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = FRA
 			exists = USA
 			USA = {
@@ -93,7 +93,7 @@ political_decisions = {
 	support_french_foreign_legion = {
 		potential = {
 			tag = FRA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			owns = 1700
 			NOT = {
 				has_country_flag = french_foreign_legion_supported
@@ -120,7 +120,7 @@ political_decisions = {
 	
 	french_military_mission_to_japan = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = FRA
 			exists = JAP
 			JAP = {
@@ -154,7 +154,7 @@ political_decisions = {
 	
 	palais_garnier = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = {
 				has_country_flag = palais_garnier_built
 			}
@@ -174,7 +174,7 @@ political_decisions = {
 	
 	the_lambert_charter = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = {
 				has_country_flag = lambert_has_been_chartered
 			}
@@ -205,7 +205,7 @@ political_decisions = {
 	
 	end_the_merina_monarchy = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			OR = {
 				has_country_flag = lambert_has_been_chartered
 				MAD = {
@@ -245,7 +245,7 @@ political_decisions = {
 	
 	brazzas_expedition = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = FRA
 			owns = 1977
 			NOT = {
@@ -259,7 +259,7 @@ political_decisions = {
 		
 		effect = {
 			1977 = {
-				change_province_name = "Браззавиль"
+				change_province_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 			}
 			prestige = 5
 			set_global_flag = brazzaville_formed
@@ -268,7 +268,7 @@ political_decisions = {
 	
 	the_rhine_crisis = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = FRA
 			exists = PRU
 			PRU = {
@@ -345,7 +345,7 @@ political_decisions = {
 	
 	build_the_eiffel_tower = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = FRA
 			NOT = {
 				has_country_flag = the_eiffel_tower_was_built
@@ -372,7 +372,7 @@ political_decisions = {
 	
 	haussmanns_renovations = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			tag = FRA
 			owns = 425
 			NOT = {
@@ -403,7 +403,7 @@ political_decisions = {
 		potential = {
 			tag = FRA
 			state_n_government = 1
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = conquer_canada_france_flag }
 		}
 
@@ -427,7 +427,7 @@ political_decisions = {
 	magrib_FRA_imigration_dec = {
 		potential = {
 			tag = FRA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = magrib_FRA_imigration_dec_flag }
 		}
 		allow = {
@@ -447,7 +447,7 @@ political_decisions = {
 	immigration_from_magrib_FRA_dec = {
 		potential = {
 			tag = FRA
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = immigration_from_magrib_FRA_flag }
 			has_country_flag = magrib_FRA_imigration_dec_flag
 		}
@@ -455,9 +455,8 @@ political_decisions = {
 			owns = 1708
 			owns = 1707
 			owns = 1713
-			ALD_1708 = { is_colonial = no }
-			ALD_1704 = { is_colonial = no }				
 			FRA_1700 = { is_colonial = no }
+			CONSTANTINE_STATE = { is_colonial = no }
 		}
 		effect = {
 			set_country_flag = immigration_from_magrib_FRA_flag

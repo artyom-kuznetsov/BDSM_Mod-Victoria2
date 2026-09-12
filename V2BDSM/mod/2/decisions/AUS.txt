@@ -6,7 +6,6 @@ political_decisions = {
 				is_core = HUN
 			}
 			NOT = { 
-				has_country_flag = hide_all_decs_flag 
 				has_country_flag = subjugate_south_germans_flag 
 				exists = KUK
 			}
@@ -93,7 +92,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = czech_industrialism_flag
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 	
 		allow = {
@@ -131,7 +130,7 @@ political_decisions = {
 			NOT = {
 				has_country_flag = grunderzeit_we_have_done
 			}
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		allow = {
 			iron_railroad = 1
@@ -154,7 +153,6 @@ political_decisions = {
 	
 	subjugate_balkans_dec = {
 		potential = {
-			NOT = { has_global_flag = historical_flag }
 			OR = {
 				primary_culture = south_german
 				tag = HUN
@@ -166,7 +164,6 @@ political_decisions = {
 			}
 			NOT = {
 				has_country_flag = subjugate_balkans_flag
-				has_country_flag = hide_all_decs_flag
 			}
 		}
 		
@@ -188,7 +185,7 @@ political_decisions = {
 			owns = 714
 			exists = KRA
 			
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 		}
 		
 		allow = {
@@ -223,7 +220,7 @@ political_decisions = {
 	}
 	eliminate_lom_ven_kingdom_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			primary_culture = south_german
 			owns = 726
 			owns = 729
@@ -255,7 +252,7 @@ political_decisions = {
 		potential = {
 			is_greater_power = yes
 			tag = AUS
-			NOT = { has_country_flag = hide_all_decs_flag has_country_flag = subjugate_south_germans_flag }
+			NOT = { has_country_flag = subjugate_south_germans_flag }
 			OR = {
 				BAV = {
 					exists = yes

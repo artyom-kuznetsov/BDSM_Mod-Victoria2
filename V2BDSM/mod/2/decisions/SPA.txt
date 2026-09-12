@@ -1,7 +1,7 @@
 political_decisions = {
 	form_iberian_union_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			is_culture_group = iberian
 			IBE = { exists = no }
 		}
@@ -166,7 +166,7 @@ political_decisions = {
 	return_mexico_dec = {
 		potential = {
 			primary_culture = spanish
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = { has_country_flag = return_mexico_flag }
 			has_country_flag = aftermath_decs_available
 			MEX = {
@@ -191,7 +191,6 @@ political_decisions = {
 		potential = {
 			primary_culture = spanish
 			NOT = { 
-				has_country_flag = hide_all_decs_flag
 				has_country_flag = restore_colonial_spa_flag
 			}
 		}
@@ -213,7 +212,6 @@ political_decisions = {
 			capital_scope = { NOT = { continent = south_america continent = north_america } }
 			NOT = { 
 				has_country_flag = spa_move_capital_to_america_cflag
-				has_country_flag = hide_all_decs_flag
 			}
 			OR = {
 				owns = 2172
@@ -233,7 +231,7 @@ political_decisions = {
 	}
 	establish_la_guardia_civil = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			OR = {
 				tag = SPA
 				tag = IBE
@@ -269,7 +267,7 @@ political_decisions = {
 
 	confiscations_of_mendizabal = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			OR = {
 				tag = SPA
 				tag = IBE
@@ -302,7 +300,7 @@ political_decisions = {
 	}
 	citizenship_law_spa_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			NOT = {
 				has_country_flag = citizenship_law_spa_flag
 				tag = IBE
@@ -335,7 +333,7 @@ political_decisions = {
 	}
 	annex_portugal_dec = {
 		potential = {
-			NOT = { has_country_flag = hide_all_decs_flag }
+			
 			owns = 487
 			primary_culture = spanish
 			POR = { 
