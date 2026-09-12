@@ -89,20 +89,15 @@ Removes plurality growth from average consciousness. In-game tooltip says otherw
 Fixes a crash when a country that has factories civilizes. Idk if it's really required I use AI to make all of this lol
 #### 3. PATCH_GRAPH_POINT_CLAMP
 Prevents the game from crashing from overflow I talked about in Economic №2 (doesn't prevent it from happening though).
-#### 4. PATCH_CHECKSUM_DRIFT_FIX
-Beware! This feature causes desyncs right now, so there is no point in using it yet.
-Fixes checksum alteration after loading into a campaign. Useful for MP rehosting without need to restart the game for everyone.
-#### 5. PATCH_ALLOW_UNCIV_TECH_RESEARCH
+#### 4. PATCH_ALLOW_UNCIV_TECH_RESEARCH
 Allows non-ai uncivs to research tech. (made by maxioten).
-#### 6. PATCH_ARISTOCRAT_INCOME_SHARE
+#### 5. PATCH_ARISTOCRAT_INCOME_SHARE
 Doubles aristocrat income share from RGO (made by vesper).
   
 #### 5. ENABLE_LOG
 Just the log used for debugging the .dll
 #### 6. PATCH_FACTORY_DUMP_SCAN
 I used this to debug that overflow (didn't help much).
-#### 7. PATCH_CHECKSUM_DIAGNOSTIC
-Log entries that were used to find what writes the checksum.
 
   
 Russian Victoria 2 community: https://discord.gg/f3dpWFt2bR  
