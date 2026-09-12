@@ -32,7 +32,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.87"
+#define MOD_VERSION "2.90"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -41,6 +41,12 @@
 // запуске игры.
 struct Settings
 {
+    // Если true - после чтения этого же файла DLL определяет папку
+    // запущенного мода (по "-mod=" в командной строке) и перечитывает
+    // v2dll_settings.ini УЖЕ ОТТУДА, независимо от того, что здесь.
+    // См. ResolveModFolder/LoadSettings ниже по файлу.
+    bool localModConfig = false;
+
     bool log            = true;  // лог в v2dll.log (много записей на тик, для раздачи ставить 0)
     bool buttons        = true;   // кнопки, запускающие решения
     bool decisionFilter = true;   // скрытие решений из окна политики
@@ -1853,6 +1859,8 @@ static void ApplySetting(const char* key, const char* value)
 {
     bool v = ParseBoolValue(value);
 
+    if (_stricmp(key, "LOCAL_MOD_CONFIG") == 0)             { g_settings.localModConfig = v; return; }
+
     if (_stricmp(key, "ENABLE_LOG") == 0)                  { g_settings.log            = v; return; }
     if (_stricmp(key, "ENABLE_BUTTONS") == 0)               { g_settings.buttons        = v; return; }
     if (_stricmp(key, "ENABLE_DECISION_FILTER") == 0)       { g_settings.decisionFilter = v; return; }
@@ -1927,6 +1935,11 @@ static void WriteDefaultSettings(const char* path)
     FILE* f = 0;
     if (fopen_s(&f, path, "w") != 0 || !f)
         return;
+
+    fprintf(f,
+        "LOCAL_MOD_CONFIG=%d\n"
+        "\n",
+        (int)g_settings.localModConfig);
 
     fprintf(f,
         "PATCH_ALWAYS_ADD_WARGOALS=%d\n"
@@ -2030,16 +2043,23 @@ static void WriteDefaultSettings(const char* path)
 // Формат строки: KEY=VALUE, необязательный "; комментарий" в
 // хвосте строки не мешает разбору (atoi останавливается на первой
 // нецифровой позиции). Строки без '=' (пустые, комментарии) пропускаются.
-static void LoadSettings()
+// Если файла по path нет - создаёт его со значениями по умолчанию.
+static void LoadSettingsFrom(const char* path)
 {
-    static const char* PATH = "v2dll_settings.ini";
-
     FILE* f = 0;
-    if (fopen_s(&f, PATH, "r") != 0 || !f)
+    if (fopen_s(&f, path, "r") != 0 || !f)
     {
-        WriteDefaultSettings(PATH);
+        // Раньше это происходило молча. При поиске рассинхрона между
+        // двумя машинами с одинаковой DLL именно это - "файл пропал/не
+        // найден и пересоздался со значениями по умолчанию" - самая
+        // вероятная причина, и без этой строки в логе она никак не
+        // отличима от "файл был и просто совпал с дефолтами".
+        Log("LoadSettingsFrom: '%s' не найден - создаю со значениями по умолчанию", path);
+        WriteDefaultSettings(path);
         return;
     }
+
+    Log("LoadSettingsFrom: читаю '%s'", path);
 
     char line[256];
     while (fgets(line, sizeof(line), f))
@@ -2064,6 +2084,120 @@ static void LoadSettings()
     }
 
     fclose(f);
+}
+
+// Ищет "-mod=<путь>.mod" в командной строке процесса (так launcher-баты
+// этого мода запускают игру - "v2game.exe -mod=mod/2.mod"), открывает
+// этот .mod-файл и вытаскивает из него "path = "..."" - реальную папку
+// мода (например "mod/2"). Путь в командной строке и путь внутри
+// .mod-файла на практике совпадают по этому проекту, но читаем именно
+// .mod, а не угадываем по имени файла - так корректно и для чужих
+// модов с другой раскладкой.
+static bool ResolveModFolder(char* outFolder, size_t outSize)
+{
+    const char* cmdLine = GetCommandLineA();
+    const char* modArg = strstr(cmdLine, "-mod=");
+    if (!modArg)
+        return false;
+    modArg += 5;
+
+    char modFile[MAX_PATH] = { 0 };
+    size_t i = 0;
+    if (*modArg == '"')
+    {
+        ++modArg;
+        while (*modArg && *modArg != '"' && i < sizeof(modFile) - 1)
+            modFile[i++] = *modArg++;
+    }
+    else
+    {
+        // Путь к .mod не всегда в кавычках, а имена модов нередко
+        // содержат пробелы ("Victoria Universalis v1.02.mod") - режем
+        // только по границе "пробел + следующий флаг" (" -"), а не по
+        // первому же пробелу, иначе путь обрежется посреди имени.
+        while (*modArg && i < sizeof(modFile) - 1)
+        {
+            if (modArg[0] == ' ' && modArg[1] == '-')
+                break;
+            modFile[i++] = *modArg++;
+        }
+        while (i > 0 && modFile[i - 1] == ' ')
+            --i;
+    }
+    modFile[i] = '\0';
+
+    if (modFile[0] == '\0')
+        return false;
+
+    FILE* f = 0;
+    if (fopen_s(&f, modFile, "r") != 0 || !f)
+    {
+        Log("ResolveModFolder: не смог открыть %s (из командной строки)", modFile);
+        return false;
+    }
+
+    bool found = false;
+    char line[512];
+    while (fgets(line, sizeof(line), f))
+    {
+        char* p = strstr(line, "path");
+        if (!p)
+            continue;
+
+        char* eq = strchr(p, '=');
+        if (!eq)
+            continue;
+
+        char* q1 = strchr(eq, '"');
+        if (!q1)
+            continue;
+        char* q2 = strchr(q1 + 1, '"');
+        if (!q2)
+            continue;
+
+        size_t len = (size_t)(q2 - q1 - 1);
+        if (len >= outSize)
+            len = outSize - 1;
+        memcpy(outFolder, q1 + 1, len);
+        outFolder[len] = '\0';
+        found = true;
+        break;
+    }
+
+    fclose(f);
+    return found;
+}
+
+// Сначала всегда читаем общий v2dll_settings.ini рядом с exe - только
+// чтобы узнать LOCAL_MOD_CONFIG (создаётся с этим ключом по умолчанию,
+// если файла ещё не было). Если он включён - определяем папку
+// запущенного мода и ПЕРЕЧИТЫВАЕМ настройки уже оттуда (создавая там
+// свой отдельный v2dll_settings.ini при первом запуске) - все патчи и
+// категории ниже LOCAL_MOD_CONFIG в итоге берутся из мод-локального
+// файла, а не из общего.
+static void LoadSettings()
+{
+    static const char* ROOT_PATH = "v2dll_settings.ini";
+
+    LoadSettingsFrom(ROOT_PATH);
+
+    if (!g_settings.localModConfig)
+        return;
+
+    char modFolder[MAX_PATH];
+    if (!ResolveModFolder(modFolder, sizeof(modFolder)))
+    {
+        Log("LOCAL_MOD_CONFIG=1, но папку запущенного мода определить не "
+            "удалось (нет -mod= в командной строке или .mod не читается) - "
+            "использую %s", ROOT_PATH);
+        return;
+    }
+
+    char modPath[MAX_PATH];
+    _snprintf_s(modPath, sizeof(modPath), _TRUNCATE, "%s\\v2dll_settings.ini", modFolder);
+
+    Log("LOCAL_MOD_CONFIG=1: настройки берутся из %s", modPath);
+    LoadSettingsFrom(modPath);
 }
 
 
@@ -2099,7 +2233,16 @@ static void InstallExePatches()
         BytePatch& bp = EXE_PATCHES[i];
 
         if (!bp.enabled)
+        {
+            // Раньше отключённый патч просто пропускался без единой
+            // строки в логе - при поиске рассинхрона между двумя
+            // машинами с ОДНОЙ и той же DLL это ровно та разница,
+            // которую иначе не увидеть: сравнить два v2dll.log и не
+            // найти "не хватает" ни одной строки, потому что для
+            // выключенного патча строки не было ни у кого.
+            Log("Patch '%s': отключён в настройках", bp.name);
             continue;
+        }
 
         DWORD rva = bp.rva ? bp.rva : FileOffsetToRVA(bp.fileOffset);
         if (!rva)
@@ -3496,6 +3639,31 @@ static bool Install()
     Log("---- Install ---- версия %s", MOD_VERSION);
     Log("base = %08X", g_base);
 
+    // Полный дамп загруженных настроек - для поиска рассинхрона между
+    // двумя машинами с одинаковой DLL: если v2dll_settings.ini у кого-то
+    // отличается (или пересоздался с нуля со значениями по умолчанию,
+    // как бывает после удаления файла), это будет видно построчно при
+    // сравнении v2dll.log хоста и клиента, без необходимости лезть в
+    // сами ini-файлы на разных машинах.
+    Log("---- Settings ----");
+    Log("localModConfig=%d log=%d buttons=%d decisionFilter=%d",
+        (int)g_settings.localModConfig, (int)g_settings.log,
+        (int)g_settings.buttons, (int)g_settings.decisionFilter);
+    Log("priceDelta=%d patchExponentialPriceDelta=%d popDisplay=%d versionLabel=%d",
+        (int)g_settings.priceDelta, (int)g_settings.patchExponentialPriceDelta,
+        (int)g_settings.popDisplay, (int)g_settings.versionLabel);
+    Log("patchOccupiedReinforceSplit=%d patchAllyOwnerCheck=%d patchCivilizeNullCheck=%d",
+        (int)g_settings.patchOccupiedReinforceSplit, (int)g_settings.patchAllyOwnerCheck,
+        (int)g_settings.patchCivilizeNullCheck);
+    Log("patchGraphPointClamp=%d patchFactoryDumpScan=%d patchProdListVisibility=%d patchProdTypeGate=%d",
+        (int)g_settings.patchGraphPointClamp, (int)g_settings.patchFactoryDumpScan,
+        (int)g_settings.patchProdListVisibility, (int)g_settings.patchProdTypeGate);
+    Log("prodTypeGateAllowAll=%d patchCombatRoll=%d combatRollMin=%d combatRollMax=%d",
+        (int)g_settings.prodTypeGateAllowAll, (int)g_settings.patchCombatRoll,
+        g_settings.combatRollMin, g_settings.combatRollMax);
+    Log("patchChecksumDiagnostic=%d", (int)g_settings.patchChecksumDiagnostic);
+    Log("---- Settings конец ----");
+
     // Поддельные элементы: "POLITICSVIEW_DECISION" + имя решения.
     memset(g_fakeElem, 0, sizeof(g_fakeElem));
 
@@ -3562,15 +3730,28 @@ static bool Install()
     if (g_settings.patchProdTypeGate)
         InstallProdTypeGateHook();
 
-    // Оба патча целят один и тот же адрес - взаимоисключающе.
+    // Оба патча целят один и тот же адрес - взаимоисключающе. Логируем
+    // БЕЗУСЛОВНО, какой режим реально активен - это самая вероятная
+    // точка расхождения между двумя машинами с одинаковой DLL (у одной
+    // ini мог пересоздаться с нуля со значениями по умолчанию).
     if (g_settings.priceDelta && g_settings.patchExponentialPriceDelta)
         Log("PriceDelta: ENABLE_PRICE_DELTA и PATCH_EXPONENTIAL_PRICE_DELTA "
             "патчат один адрес - применяется только PATCH_EXPONENTIAL_PRICE_DELTA");
 
     if (g_settings.patchExponentialPriceDelta)
+    {
+        Log("PriceDelta: активен режим ExponentialPriceDelta");
         InstallExponentialPriceDelta();
+    }
     else if (g_settings.priceDelta)
+    {
+        Log("PriceDelta: активен режим PriceDelta (линейный)");
         InstallPriceDelta();
+    }
+    else
+    {
+        Log("PriceDelta: оба режима отключены - используется ванильный шаг цены");
+    }
 
     if (g_settings.popDisplay)
         InstallPopDisplay();

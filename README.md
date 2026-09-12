@@ -20,6 +20,11 @@ it's being called by the new file, so no vanilla code is lost and the game can s
   
 # Feature overview
 ## Explaining each option in the .ini file
+### Local Config
+#### LOCAL_MOD_CONFIG
+This option allows to use different configurations for different installed mods. All you need to do
+is copy the .ini file to a mod folder, and launch the mod as usual.
+
 ### Military
 #### 1. PATCH_ALWAYS_ADD_WARGOALS
 Zombiefreak's patch for enabling adding wargoals without having positive warscore.
@@ -28,12 +33,12 @@ Zombiefreak's patches to make navies and brigades inside armies and fleets reinf
 #### 3. PATCH_ALLIED_REINFORCE_150
 Increases reinforce rate on allied land from 100% to 150%. Note, that without "PATCH_OCCUPIED_REINFORCE_SPLIT" patch,  
 reinforce rate will still be 150% in ally-occupied provinces, not just owned.
-#### 4. PATCH_OCCUPIED_REINFORCE_SPLIT / PATCH_ALLY_OWNER_CHECK  
+#### 4. PATCH_OCCUPIED_REINFORCE_SPLIT / PATCH_ALLY_OWNER_CHECK
 Splits reinforce rates on allied land into allied-owned and allied-occupied land. Allied-occupied reinforce rate is 100%, the same as if you occupy it yourself.  
 Needs to be used with "PATCH_ALLIED_REINFORCE_150" to achieve a total effect of just increasing reinforce rate in allied-owned land.
 #### 5. PATCH_COMBAT_ROLL
 Enables patch for dice rolls in battle.
-#### 6. COMBAT_ROLL_MIN / COMBAT_ROLL_MAX=4  
+#### 6. COMBAT_ROLL_MIN / COMBAT_ROLL_MAX
 Min and Max dice rolls in battle.  
   
 ### Economic
@@ -85,9 +90,10 @@ Fixes a crash when a country that has factories civilizes. Idk if it's really re
 #### 3. PATCH_GRAPH_POINT_CLAMP
 Prevents the game from crashing from overflow I talked about in Economic №2 (doesn't prevent it from happening though).
 #### 4. PATCH_CHECKSUM_DRIFT_FIX
+Beware! This feature causes desyncs right now, so there is no point in using it yet.
 Fixes checksum alteration after loading into a campaign. Useful for MP rehosting without need to restart the game for everyone.
 #### 5. PATCH_ALLOW_UNCIV_TECH_RESEARCH
-Self-explanatory. Allows uncivs to research tech (made by maxioten).
+Allows non-ai uncivs to research tech. (made by maxioten).
 #### 6. PATCH_ARISTOCRAT_INCOME_SHARE
 Doubles aristocrat income share from RGO (made by vesper).
   
