@@ -17,10 +17,10 @@ Almost all of this was tested in MP - no stability effects noticed.
 Vanilla file lua51.dll is replaced by a brand new file, where the patches are coded.  
 The old file must still remain in the folder under name "lua51_real.dll" - 
 it's being called by the new file, so no vanilla code is lost and the game can still run.  
-
+  
 # Feature overview
-## Explaining each option in the .ini file
-### Military
+## Explaining each option in the .ini file  
+### Military  
 #### 1. PATCH_ALWAYS_ADD_WARGOALS=1  
 Zombiefreak's patch for enabling adding wargoals without having positive warscore.  
 #### 2. PATCH_LAND_REINFORCE=1 / PATCH_NAVAL_REINFORCE=1  
@@ -36,7 +36,7 @@ Enables patch for dice rolls in battle.
 #### 6. COMBAT_ROLL_MIN=0 / COMBAT_ROLL_MAX=4  
 Min and Max dice rolls in battle.  
   
-### Economic
+### Economic  
 #### 1. ENABLE_PRICE_DELTA=1  
 Prices shift by 0.25% of the base price instead of flat 0.01 per day.  
 #### 2. PATCH_MAX_RELATIVE_PRICE=1  
@@ -58,7 +58,7 @@ Allows construction of all factories in colonial regions, not just whitelisted (
 ####10. PROD_TYPE_GATE_EXTRA_WHITELIST=X
 Type in production types separated by comma to allow constructing them in colonial regions, if you do not intend allowing all factories.  
 Can work together with №6.  
-
+  
 ### UI
 #### 1. ENABLE_BUTTONS=1  
 Adds support for a few new buttons:  
@@ -74,7 +74,7 @@ Total population is displayed in some surface tooltips, instead of "grown male" 
 Changes version label in main menu to "V2 v3.04 + V2DLL v*"  
 #### 5. PATCH_PROD_LIST_VISIBILITY=1  
 Needed for Economic №4.
-
+  
 ### Miscellaneous and debug
 #### 1. PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=1  
 Removes plurality growth from average consciousness. In-game tooltip says otherwise though. So this patch removes this tooltip too (hi tgc)  
