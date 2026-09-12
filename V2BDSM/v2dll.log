@@ -1,6 +1,6 @@
 CrashWatch: v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
 LoadSettingsFrom: читаю 'v2dll_settings.ini'
----- Install ---- версия 2.98
+---- Install ---- версия 2.99
 base = 00010000
 ---- Settings ----
 localModConfig=0 log=1 buttons=1 decisionFilter=1
@@ -51,9 +51,9 @@ Patch 'aristocrat_income_share_patch_2': отключён в настройка�
 Patch 'aristocrat_income_share_patch_3': отключён в настройках
 Patch 'aristocrat_income_share_patch_4': отключён в настройках
 Patch 'aristocrat_income_share_patch_5': отключён в настройках
-OccupiedReinforceSplit: occupied=100.0%, пещера 01C80000
-AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 032B0000, ok=1
-CivilizeNullCheck: установлен на rva 14248B, пещера 032C0000
+OccupiedReinforceSplit: occupied=100.0%, пещера 017F0000
+AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01800000, ok=1
+CivilizeNullCheck: установлен на rva 14248B, пещера 01810000
 ProdListVisibilityHook: установлен
 LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21930 байт)
   [0] synthetics_template limit=0
@@ -125,15 +125,18 @@ ParseProductionTypes: разобрано 65 типов производства 
 ProdTypeGateHook: установлен
 PriceDelta: активен режим PriceDelta (линейный)
 PriceDelta: 25 сотых процента, множитель 163
-VersionLabel: 'V2 v3.04 + V2DLL v2.98' (len=22), пещера 032E0000
+VersionLabel: 'V2 v3.04 + V2DLL v2.99' (len=22), пещера 01830000
 CombatRoll: диапазон 0..4 (модуль=5)
 OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
 Install: done
 DllMain: attach, Install = 1
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
-Update[CTechnologyView]: вызван, view=7F335890
+Update[CTechnologyView]: вызван, view=817528C0
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
 ProdTypeGate: grain_factory -> result=1 (впервые)
 ProdTypeGate: fruit_factory -> result=1 (впервые)
+Update[CProductionView]: вызван, view=41385010
+SetupHideColonialButton: подписана
+Update[CProductionView]: вызван, view=41385010
