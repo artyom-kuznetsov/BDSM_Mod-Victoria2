@@ -46,11 +46,18 @@ Note: an overflow might occur that will break your game if prices of some factor
 Allow construction of factories in colonial regions. Needs to be used together with UI №5.  
 #### 5. PATCH_BUILD_FACTORY_BUTTON_ENABLE_IGNORE_COLONIAL=1  
 Button called "hide_colonial_states" in production menu will now toggle visibility of colonial regions in the menu.  
-#### 6. PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL=1 / PATCH_PROD_TYPE_GATE=1  
-Allows only factories with "limit_by_local_supply = yes" attribute to be constructed in colonies (hi vic uni)  
-These two need to be used simultaneously.  
+#### 6. PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL=1  
+Allows construction factories with "limit_by_local_supply = yes" attribute to be constructed in colonies (hi vic uni)  
+You don't need this if you enable №9.  
 #### 7. PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_BUTTON=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OWN=1, PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OTHER=1, PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_CAN_BUILD=1  
 Allows uncivilized countries to construct factories.  
+#### 8. PATCH_PROD_TYPE_GATE=1
+Has to be enabled for №4, №5 and №6.
+####9. PROD_TYPE_GATE_ALLOW_ALL=0
+Allows construction of all factories in colonial regions, not just whitelisted (see №10) and ones with "limit_by_local_supply = yes" attribute.
+####10. PROD_TYPE_GATE_EXTRA_WHITELIST=X
+Type in production types separated by comma to allow constructing them in colonial regions, if you do not intend allowing all factories.  
+Can work together with №6.  
 
 ### UI
 #### 1. ENABLE_BUTTONS=1  

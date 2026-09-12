@@ -32,7 +32,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.76"
+#define MOD_VERSION "2.77"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -59,6 +59,12 @@ struct Settings
     bool patchFactoryDumpScan        = false;
     bool patchProdListVisibility     = true;
     bool patchProdTypeGate           = true;
+
+    // Если true - PATCH_PROD_TYPE_GATE разрешает строить в колонии
+    // ЛЮБОЙ тип производства. Если false - только типы из белого
+    // списка (limit_by_local_supply=yes + PROD_TYPE_GATE_EXTRA_WHITELIST
+    // ниже, см. g_extraWhitelistNames).
+    bool prodTypeGateAllowAll = true;
 
     // Разброс броска в бою. Работает только если exe уже несёт
     // "пещеру" от стороннего Vic2_Roll_Changer.py (см. комментарий
@@ -1068,10 +1074,15 @@ static DWORD g_prodTypeGateResumeBlock = 0;
 // Точечные исключения сверх limit_by_local_supply: типы, которым
 // тоже нужно разрешить постройку в колонии, но заводить для них
 // целый отдельный флаг в production_types.txt не стали - patch
-// только по имени. Сейчас это fishery (is_coastal = yes).
-static const char* const PRODTYPE_EXTRA_WHITELIST[] = { "fishery" };
-static const int PRODTYPE_EXTRA_WHITELIST_COUNT =
-    sizeof(PRODTYPE_EXTRA_WHITELIST) / sizeof(PRODTYPE_EXTRA_WHITELIST[0]);
+// только по имени. По умолчанию это fishery (is_coastal = yes);
+// список редактируется из ini (PROD_TYPE_GATE_EXTRA_WHITELIST) без
+// пересборки DLL - см. ParseExtraWhitelist. Используется только когда
+// PROD_TYPE_GATE_ALLOW_ALL=0 (иначе разрешены все типы, до этого
+// списка дело не доходит).
+static const int MAX_EXTRA_WHITELIST = 16;
+static const int EXTRA_WHITELIST_NAME_MAX = 64;
+static char g_extraWhitelistNames[MAX_EXTRA_WHITELIST][EXTRA_WHITELIST_NAME_MAX] = { "fishery" };
+static int g_extraWhitelistCount = 1;
 
 static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
 {
@@ -1091,8 +1102,8 @@ static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
     }
     name[i] = 0;
 
-    for (int e = 0; e < PRODTYPE_EXTRA_WHITELIST_COUNT; ++e)
-        if (strcmp(PRODTYPE_EXTRA_WHITELIST[e], name) == 0)
+    for (int e = 0; e < g_extraWhitelistCount; ++e)
+        if (_stricmp(g_extraWhitelistNames[e], name) == 0)
             return 1;
 
     for (int t = 0; t < g_productionTypeCount; ++t)
@@ -1104,6 +1115,10 @@ static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
 }
 
 static DWORD g_prodTypeGateWhitelisted = 0;
+
+// Плоская копия g_settings.prodTypeGateAllowAll - в наked-asm проще
+// и безопаснее читать отдельный global bool, чем поле структуры.
+static unsigned char g_prodTypeGateAllowAll = 1;
 
 __declspec(naked) static void ProdTypeGateThunk()
 {
@@ -1120,6 +1135,15 @@ __declspec(naked) static void ProdTypeGateThunk()
         // проверена и безопасна.
         push ecx
 
+        // PROD_TYPE_GATE_ALLOW_ALL=1 - разрешаем любой тип, дальше по
+        // имени вообще не проверяем (белый список ниже используется
+        // только в противоположном режиме, ALLOW_ALL=0).
+        cmp byte ptr [g_prodTypeGateAllowAll], 0
+        jz check_by_name
+        mov eax, 1
+        jmp store_result
+
+    check_by_name:
         mov eax, dword ptr [ebp + 0x0c]
         test eax, eax
         jz faulty_allow
@@ -1162,6 +1186,8 @@ __declspec(naked) static void ProdTypeGateThunk()
 static bool InstallProdTypeGateHook()
 {
     LoadProductionTypeLimits();
+
+    g_prodTypeGateAllowAll = g_settings.prodTypeGateAllowAll ? 1 : 0;
 
     g_fnIsBadReadPtr = (tIsBadReadPtr)GetProcAddress(GetModuleHandleA("kernel32.dll"), "IsBadReadPtr");
     if (!g_fnIsBadReadPtr)
@@ -1648,6 +1674,37 @@ static bool ParseBoolValue(const char* value)
     return atoi(value) != 0;
 }
 
+// Формат значения: имена типов производства через запятую, например
+// "fishery,some_other_type". Пробелы вокруг имён и запятых игнорируются.
+static void ParseExtraWhitelist(const char* value)
+{
+    g_extraWhitelistCount = 0;
+    const char* p = value;
+
+    while (*p && g_extraWhitelistCount < MAX_EXTRA_WHITELIST)
+    {
+        while (*p == ' ' || *p == '\t' || *p == ',')
+            ++p;
+        if (!*p || *p == '\n' || *p == '\r')
+            break;
+
+        int i = 0;
+        while (*p && *p != ',' && *p != '\n' && *p != '\r' && i < EXTRA_WHITELIST_NAME_MAX - 1)
+            g_extraWhitelistNames[g_extraWhitelistCount][i++] = *p++;
+
+        while (i > 0 && (g_extraWhitelistNames[g_extraWhitelistCount][i - 1] == ' ' ||
+                         g_extraWhitelistNames[g_extraWhitelistCount][i - 1] == '\t'))
+            --i;
+        g_extraWhitelistNames[g_extraWhitelistCount][i] = '\0';
+
+        if (i > 0)
+            ++g_extraWhitelistCount;
+
+        while (*p && *p != ',')
+            ++p;
+    }
+}
+
 static void ApplySetting(const char* key, const char* value)
 {
     bool v = ParseBoolValue(value);
@@ -1666,11 +1723,14 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_FACTORY_DUMP_SCAN") == 0)         { g_settings.patchFactoryDumpScan        = v; return; }
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
     if (_stricmp(key, "PATCH_PROD_TYPE_GATE") == 0)            { g_settings.patchProdTypeGate           = v; return; }
+    if (_stricmp(key, "PROD_TYPE_GATE_ALLOW_ALL") == 0)         { g_settings.prodTypeGateAllowAll        = v; return; }
     if (_stricmp(key, "PATCH_COMBAT_ROLL") == 0)                { g_settings.patchCombatRoll             = v; return; }
     if (_stricmp(key, "PATCH_CHECKSUM_DIAGNOSTIC") == 0)        { g_settings.patchChecksumDiagnostic     = v; return; }
 
     if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
     if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
+
+    if (_stricmp(key, "PROD_TYPE_GATE_EXTRA_WHITELIST") == 0) { ParseExtraWhitelist(value); return; }
 
     if (_strnicmp(key, "PATCH_", 6) == 0)
     {
@@ -1724,6 +1784,14 @@ static void WriteDefaultSettings(const char* path)
         g_settings.combatRollMin,
         g_settings.combatRollMax);
 
+    char extraWhitelistJoined[MAX_EXTRA_WHITELIST * EXTRA_WHITELIST_NAME_MAX] = "";
+    for (int w = 0; w < g_extraWhitelistCount; ++w)
+    {
+        if (w > 0)
+            strcat_s(extraWhitelistJoined, sizeof(extraWhitelistJoined), ",");
+        strcat_s(extraWhitelistJoined, sizeof(extraWhitelistJoined), g_extraWhitelistNames[w]);
+    }
+
     fprintf(f,
         "ENABLE_PRICE_DELTA=%d\n"
         "PATCH_MAX_RELATIVE_PRICE=%d\n"
@@ -1736,6 +1804,8 @@ static void WriteDefaultSettings(const char* path)
         "PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OTHER=%d\n"
         "PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_CAN_BUILD=%d\n"
         "PATCH_PROD_TYPE_GATE=%d\n"
+        "PROD_TYPE_GATE_ALLOW_ALL=%d\n"
+        "PROD_TYPE_GATE_EXTRA_WHITELIST=%s\n"
         "\n",
         (int)g_settings.priceDelta,
         (int)FindExePatchEnabled("max_relative_price"),
@@ -1747,7 +1817,9 @@ static void WriteDefaultSettings(const char* path)
         (int)FindExePatchEnabled("build_factory_checklist_uncivilized_own"),
         (int)FindExePatchEnabled("build_factory_checklist_uncivilized_other"),
         (int)FindExePatchEnabled("build_factory_ignore_uncivilized_can_build"),
-        (int)g_settings.patchProdTypeGate);
+        (int)g_settings.patchProdTypeGate,
+        (int)g_settings.prodTypeGateAllowAll,
+        extraWhitelistJoined);
 
     fprintf(f,
         "ENABLE_BUTTONS=%d\n"
