@@ -32,7 +32,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.77"
+#define MOD_VERSION "2.78"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -59,6 +59,10 @@ struct Settings
     bool patchFactoryDumpScan        = false;
     bool patchProdListVisibility     = true;
     bool patchProdTypeGate           = true;
+
+    // Взаимоисключающе с priceDelta (ENABLE_PRICE_DELTA) - оба
+    // патчат один и тот же адрес. Если включены оба, побеждает этот.
+    bool patchExponentialPriceDelta = false;
 
     // Если true - PATCH_PROD_TYPE_GATE разрешает строить в колонии
     // ЛЮБОЙ тип производства. Если false - только типы из белого
@@ -1462,6 +1466,95 @@ static bool InstallPriceDelta()
 
 
 // ---------------------------------------------------------------
+// Экспоненциальный шаг изменения цены (альтернатива InstallPriceDelta)
+//
+// Та же самая точка перехвата (RVA_PRICE_HOOK/RVA_PRICE_RESUME,
+// PRICE_SIG), поэтому взаимоисключающе с ENABLE_PRICE_DELTA - см.
+// проверку в Install(). Получен готовым дизасмом (radare2), байты
+// сверены вручную побайтово с исходным дампом:
+//
+//   sar edx, 0xf              ; воспроизводим перекрытое
+//   mov edi, eax              ; воспроизводим перекрытое
+//   shrd edi, ecx, 8          ; НОВОЕ: EDI = (ECX:EAX) >> 8, младшие 32 бита
+//   mov [deltaLo], edi        ; записываем в младшее слово шага
+//   mov edi, ecx
+//   sar edi, 7                ; НОВОЕ: старшее слово = ECX >> 7 (не 8!)
+//   mov [deltaHi], edi        ; записываем в старшее слово шага
+//   mov edi, eax              ; воспроизводим перекрытое ещё раз
+//   sub edi, [deltaLo]        ; воспроизводим перекрытое (RVA_PRICE_RESUME)
+//   jmp RVA_PRICE_RESUME
+//
+// ECX:EAX на входе — текущая цена (см. комментарий у InstallPriceDelta).
+// Шаг (0x0125B9E0/E4, тот же int64, что и в InstallPriceDelta) отсюда
+// больше не константа, а производная от самой цены через сдвиги —
+// то есть шаг растёт вместе с ценой, а не остаётся фиксированным
+// абсолютным числом. Несимметричные сдвиги (8 для младшего слова,
+// 7 для старшего) взяты как есть из готового патча - самостоятельно
+// вывести точный процент из этого несоответствия не пытались, байты
+// просто перенесены без изменений на другой (нашей) адрес пещеры.
+// ---------------------------------------------------------------
+
+static bool InstallExponentialPriceDelta()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_PRICE_HOOK);
+
+    if (memcmp(hook, PRICE_SIG, sizeof(PRICE_SIG)) != 0)
+    {
+        Log("ExponentialPriceDelta: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 64, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    DWORD deltaLo = g_base + RVA_PRICE_DELTA;
+    DWORD deltaHi = deltaLo + 4;
+
+    int n = 0;
+
+    cave[n++] = 0xC1; cave[n++] = 0xFA; cave[n++] = 0x0F;   // sar edx, 0Fh
+    cave[n++] = 0x89; cave[n++] = 0xC7;                     // mov edi, eax
+
+    cave[n++] = 0x0F; cave[n++] = 0xAC; cave[n++] = 0xCF; cave[n++] = 0x08; // shrd edi, ecx, 8
+
+    cave[n++] = 0x89; cave[n++] = 0x3D;                     // mov [deltaLo], edi
+    *(DWORD*)(cave + n) = deltaLo; n += 4;
+
+    cave[n++] = 0x89; cave[n++] = 0xCF;                     // mov edi, ecx
+    cave[n++] = 0xC1; cave[n++] = 0xFF; cave[n++] = 0x07;   // sar edi, 7
+
+    cave[n++] = 0x89; cave[n++] = 0x3D;                     // mov [deltaHi], edi
+    *(DWORD*)(cave + n) = deltaHi; n += 4;
+
+    cave[n++] = 0x89; cave[n++] = 0xC7;                     // mov edi, eax
+
+    cave[n++] = 0x2B; cave[n++] = 0x3D;                     // sub edi, [deltaLo]
+    *(DWORD*)(cave + n) = deltaLo; n += 4;
+
+    cave[n++] = 0xE9;                                       // jmp обратно
+    *(DWORD*)(cave + n) = (g_base + RVA_PRICE_RESUME) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)cave - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("ExponentialPriceDelta: установлен, пещера %08X", (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+// ---------------------------------------------------------------
 // Байтовые правки exe
 //
 // Смещения заданы как в exe-модах ZombieFreak115 — как смещения в
@@ -1724,6 +1817,7 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
     if (_stricmp(key, "PATCH_PROD_TYPE_GATE") == 0)            { g_settings.patchProdTypeGate           = v; return; }
     if (_stricmp(key, "PROD_TYPE_GATE_ALLOW_ALL") == 0)         { g_settings.prodTypeGateAllowAll        = v; return; }
+    if (_stricmp(key, "PATCH_EXPONENTIAL_PRICE_DELTA") == 0)    { g_settings.patchExponentialPriceDelta  = v; return; }
     if (_stricmp(key, "PATCH_COMBAT_ROLL") == 0)                { g_settings.patchCombatRoll             = v; return; }
     if (_stricmp(key, "PATCH_CHECKSUM_DIAGNOSTIC") == 0)        { g_settings.patchChecksumDiagnostic     = v; return; }
 
@@ -1794,6 +1888,7 @@ static void WriteDefaultSettings(const char* path)
 
     fprintf(f,
         "ENABLE_PRICE_DELTA=%d\n"
+        "PATCH_EXPONENTIAL_PRICE_DELTA=%d\n"
         "PATCH_MAX_RELATIVE_PRICE=%d\n"
         "PATCH_BUILD_FACTORY_IGNORE_COLONIAL_1=%d\n"
         "PATCH_BUILD_FACTORY_IGNORE_COLONIAL_2=%d\n"
@@ -1808,6 +1903,7 @@ static void WriteDefaultSettings(const char* path)
         "PROD_TYPE_GATE_EXTRA_WHITELIST=%s\n"
         "\n",
         (int)g_settings.priceDelta,
+        (int)g_settings.patchExponentialPriceDelta,
         (int)FindExePatchEnabled("max_relative_price"),
         (int)FindExePatchEnabled("build_factory_ignore_colonial_1"),
         (int)FindExePatchEnabled("build_factory_ignore_colonial_2"),
@@ -3393,7 +3489,14 @@ static bool Install()
     if (g_settings.patchProdTypeGate)
         InstallProdTypeGateHook();
 
-    if (g_settings.priceDelta)
+    // Оба патча целят один и тот же адрес - взаимоисключающе.
+    if (g_settings.priceDelta && g_settings.patchExponentialPriceDelta)
+        Log("PriceDelta: ENABLE_PRICE_DELTA и PATCH_EXPONENTIAL_PRICE_DELTA "
+            "патчат один адрес - применяется только PATCH_EXPONENTIAL_PRICE_DELTA");
+
+    if (g_settings.patchExponentialPriceDelta)
+        InstallExponentialPriceDelta();
+    else if (g_settings.priceDelta)
         InstallPriceDelta();
 
     if (g_settings.popDisplay)
