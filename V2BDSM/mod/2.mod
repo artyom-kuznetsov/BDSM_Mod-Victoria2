@@ -1,4 +1,4 @@
-name = "BDSM Mod v4.7.0"
+name = "BDSM Mod v4.8.0"
 path = "mod/2"
 user_dir = "BDSMClassic"
 replace_path = history/pops/
