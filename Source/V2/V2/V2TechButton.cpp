@@ -32,7 +32,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.78"
+#define MOD_VERSION "2.87"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -41,10 +41,10 @@
 // запуске игры.
 struct Settings
 {
-    bool log            = false;  // лог в v2dll.log (много записей на тик, для раздачи ставить 0)
+    bool log            = true;  // лог в v2dll.log (много записей на тик, для раздачи ставить 0)
     bool buttons        = true;   // кнопки, запускающие решения
     bool decisionFilter = true;   // скрытие решений из окна политики
-    bool priceDelta     = false;  // процентный шаг изменения цен
+    bool priceDelta     = true;  // процентный шаг изменения цен
     bool popDisplay     = false;  // общее население в верхней панели (откачено: не смогли дописать сырое число в скобках без риска)
     bool versionLabel   = true;   // версия мода в подписи главного меню
 
@@ -68,7 +68,7 @@ struct Settings
     // ЛЮБОЙ тип производства. Если false - только типы из белого
     // списка (limit_by_local_supply=yes + PROD_TYPE_GATE_EXTRA_WHITELIST
     // ниже, см. g_extraWhitelistNames).
-    bool prodTypeGateAllowAll = true;
+    bool prodTypeGateAllowAll = false;
 
     // Разброс броска в бою. Работает только если exe уже несёт
     // "пещеру" от стороннего Vic2_Roll_Changer.py (см. комментарий
@@ -1570,8 +1570,8 @@ struct BytePatch
     DWORD         fileOffset;
     DWORD         rva;
     int           len;
-    unsigned char expect[8];
-    unsigned char replace[8];
+    unsigned char expect[16];
+    unsigned char replace[16];
     bool          enabled;
 };
 
@@ -1721,6 +1721,57 @@ static BytePatch EXE_PATCHES[] =
         { 0x75, 0x08 },
         { 0xEB, 0x08 }, true },
 
+    // Разрешить нецивилизованным странам исследовать технологии.
+    //
+    // human_player_patch, byte-в-byte как был дан изначально (адрес,
+    // длина, expect/replace - без изменений). ПО ЗАПРОСУ пользователя,
+    // несмотря на то, что этот конкретный адрес (0x3A9B57, как fileOffset)
+    // не резолвится в Ghidra как код в этой сборке - есть отдельная,
+    // самостоятельно найденная и рабочая альтернатива (xref на строку
+    // "UNCIV_CANT_RESEARCH" -> FUN_007a9950, rva 0x3A9F21, near jmp,
+    // см. историю правок этого файла), но её результат в игре не
+    // подтверждён (возможен второй, независимый гейт внутри
+    // FUN_00569920). Сигнатура ниже, вероятнее всего, не совпадёт при
+    // запуске - InstallExePatches просто пропустит эту запись и
+    // залогирует "сигнатура не совпала", без вреда.
+    { "allow_unciv_tech_research", 0x3A9B57, 0, 1,
+        { 0x75 },
+        { 0xEB }, false },
+
+    // Доля дохода РГО, уходящая владельцам/аристократам - меняет
+    // масштаб формулы в FUN_004ee990 (VA 0x4EE990). Проверено через
+    // Ghidra (decompile_function_by_address на VA 0x4EEA2B):
+    //
+    //   lVar10 = __alldiv(uVar1<<0x1f, uVar1>>1,           ; числитель:  uVar1 * 2^31 (64-бит)
+    //                      uVar5<<0xf,  sign(uVar5)<<0xf | uVar5>>0x11); ; знаменатель: (int64)uVar5 * 2^15
+    //   ; результат = (uVar1/uVar5) * 2^16, дальше клампится сверху
+    //   ; константой (DAT_0125d758/5c) - потолок этим патчем не трогается
+    //
+    // uVar1 - количество нужного типа попов (владельцы/аристократы),
+    // uVar5 - размер занятой рабочей силы (сравнение через отношение,
+    // не фиксированный процент из defines).
+    //
+    // Патч _1/_2 меняет сдвиг числителя 31->17 бит (owners<<0x1F
+    // -> owners<<0x11 в двух половинах 64-битного сдвига). Патчи
+    // _3/_4/_5 убирают сдвиг+маску знаменателя (15 бит) целиком -
+    // uVar5 входит в деление НЕмасштабированным.
+    //
+    // Итог: result = (uVar1/uVar5) * 2^17 - РОВНО в 2 раза (+100%)
+    // больше ванильного (uVar1/uVar5) * 2^16, при том же отношении
+    // владельцы/рабочие. Потолок (кламп) не меняется - там, где
+    // ванильное значение уже упиралось в потолок, эффекта не будет.
+    { "aristocrat_income_share_patch_1", 0, 0xEEA2B, 1, { 0x1F }, { 0x11 }, false },
+    { "aristocrat_income_share_patch_2", 0, 0xEEA2E, 1, { 0x1F }, { 0x11 }, false },
+    { "aristocrat_income_share_patch_3", 0, 0xEEA32, 4,
+        { 0x0F, 0xA4, 0xC2, 0x0F },
+        { 0x90, 0x90, 0x90, 0x90 }, false },
+    { "aristocrat_income_share_patch_4", 0, 0xEEA37, 3,
+        { 0xC1, 0xE0, 0x0F },
+        { 0x90, 0x90, 0x90 }, false },
+    { "aristocrat_income_share_patch_5", 0, 0xEEA3C, 6,
+        { 0x81, 0xE7, 0x00, 0x80, 0xFF, 0xFF },
+        { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }, false },
+
     // Чек-сумма (в углу экрана) уходит на +1 после каждого входа в
     // партию/лобби, из-за чего она не совпадает с той, что была при
     // запуске - и в мультиплеере приходится перезапускать клиент,
@@ -1825,6 +1876,26 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
 
     if (_stricmp(key, "PROD_TYPE_GATE_EXTRA_WHITELIST") == 0) { ParseExtraWhitelist(value); return; }
+
+    // Пять частей одного патча (числитель/знаменатель формулы доли
+    // аристократов) должны применяться только вместе - один ключ
+    // на все 5 записей таблицы, а не по одной.
+    if (_stricmp(key, "PATCH_ARISTOCRAT_INCOME_SHARE") == 0)
+    {
+        static const char* const names[] =
+        {
+            "aristocrat_income_share_patch_1",
+            "aristocrat_income_share_patch_2",
+            "aristocrat_income_share_patch_3",
+            "aristocrat_income_share_patch_4",
+            "aristocrat_income_share_patch_5",
+        };
+        for (int n = 0; n < 5; ++n)
+            for (int i = 0; i < EXE_PATCH_COUNT; ++i)
+                if (_stricmp(EXE_PATCHES[i].name, names[n]) == 0)
+                    EXE_PATCHES[i].enabled = v;
+        return;
+    }
 
     if (_strnicmp(key, "PATCH_", 6) == 0)
     {
@@ -1935,11 +2006,15 @@ static void WriteDefaultSettings(const char* path)
         "PATCH_CIVILIZE_NULL_CHECK=%d\n"
         "PATCH_GRAPH_POINT_CLAMP=%d\n"
         "PATCH_CHECKSUM_DRIFT_FIX=%d\n"
+        "PATCH_ALLOW_UNCIV_TECH_RESEARCH=%d\n"
+        "PATCH_ARISTOCRAT_INCOME_SHARE=%d\n"
         "\n",
         (int)FindExePatchEnabled("consciousness_plurality_growth"),
         (int)g_settings.patchCivilizeNullCheck,
         (int)g_settings.patchGraphPointClamp,
-        (int)FindExePatchEnabled("checksum_drift_fix"));
+        (int)FindExePatchEnabled("checksum_drift_fix"),
+        (int)FindExePatchEnabled("allow_unciv_tech_research"),
+        (int)FindExePatchEnabled("aristocrat_income_share_patch_1"));
 
     fprintf(f,
         "ENABLE_LOG=%d\n"
@@ -3407,8 +3482,6 @@ static bool InstallLobbyEntryHook()
     Log("LobbyEntry: установлен на rva %06X", RVA_LOBBY_ENTRY_HOOK);
     return true;
 }
-
-
 
 static bool Install()
 {
