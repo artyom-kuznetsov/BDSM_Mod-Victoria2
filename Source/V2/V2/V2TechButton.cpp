@@ -32,7 +32,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.69"
+#define MOD_VERSION "2.76"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -41,7 +41,7 @@
 // запуске игры.
 struct Settings
 {
-    bool log            = true;   // лог в v2dll.log (много записей на тик, для раздачи ставить 0)
+    bool log            = false;  // лог в v2dll.log (много записей на тик, для раздачи ставить 0)
     bool buttons        = true;   // кнопки, запускающие решения
     bool decisionFilter = true;   // скрытие решений из окна политики
     bool priceDelta     = false;  // процентный шаг изменения цен
@@ -67,6 +67,11 @@ struct Settings
     bool patchCombatRoll = true;
     int  combatRollMin   = 0;   // минимум броска
     int  combatRollMax   = 4;   // максимум броска
+
+    // Временная диагностика бага с чек-суммой (меняется при входе в
+    // партию) - логирует в v2dll.log каждое обращение к источнику
+    // чек-суммы. См. InstallChecksumDiagnostic ниже по файлу.
+    bool patchChecksumDiagnostic = false;
 };
 
 static Settings g_settings;
@@ -1596,6 +1601,31 @@ static BytePatch EXE_PATCHES[] =
     { "build_factory_ignore_uncivilized_can_build", 0, 0x12CA3E, 2,
         { 0x75, 0x08 },
         { 0xEB, 0x08 }, true },
+
+    // Чек-сумма (в углу экрана) уходит на +1 после каждого входа в
+    // партию/лобби, из-за чего она не совпадает с той, что была при
+    // запуске - и в мультиплеере приходится перезапускать клиент,
+    // чтобы чек-суммы у игроков снова совпали. Воспроизводится и на
+    // ванили. Найдено через живое логирование из нашего же DLL +
+    // подтверждено Cheat Engine ("find out what writes to this
+    // address" на адрес аккумулятора чек-суммы):
+    //
+    // Конструктор CBackEndIdler (FUN_005f8110, грузит
+    // interface/backend.gui - экран загрузки между меню и партией,
+    // т.е. срабатывает на каждый вход) в конце безусловно делает
+    // (*(int*)(param_4+0x30))++ - param_4 это тот же объект, чьё
+    // поле +0x30 отдельно читает FUN_006377a0 как итоговое целое
+    // чек-суммы перед тем, как построить текст "Checksum is X".
+    // Кроме этих двух мест (чтение в FUN_006377a0, инкремент здесь)
+    // поле нигде больше не встречается - похоже на посторонний
+    // счётчик загрузок, случайно заведённый в то же поле.
+    //
+    // Убираем ровно "INC EAX" (1 байт), оставляя чтение и запись
+    // того же значения обратно - безобидная no-op пара вместо
+    // инкремента, минимальное вмешательство.
+    { "checksum_drift_fix", 0, 0x1F8268, 1,
+        { 0x40 },
+        { 0x90 }, true },
 };
 
 static const int EXE_PATCH_COUNT = sizeof(EXE_PATCHES) / sizeof(EXE_PATCHES[0]);
@@ -1637,6 +1667,7 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
     if (_stricmp(key, "PATCH_PROD_TYPE_GATE") == 0)            { g_settings.patchProdTypeGate           = v; return; }
     if (_stricmp(key, "PATCH_COMBAT_ROLL") == 0)                { g_settings.patchCombatRoll             = v; return; }
+    if (_stricmp(key, "PATCH_CHECKSUM_DIAGNOSTIC") == 0)        { g_settings.patchChecksumDiagnostic     = v; return; }
 
     if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
     if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
@@ -1655,6 +1686,17 @@ static void ApplySetting(const char* key, const char* value)
     }
 }
 
+// Ищет запись в EXE_PATCHES по имени - используется здесь, чтобы
+// печатать записи таблицы в порядке категорий (Military/Economic/
+// UI/Miscellaneous), а не в порядке объявления в таблице.
+static bool FindExePatchEnabled(const char* name)
+{
+    for (int i = 0; i < EXE_PATCH_COUNT; ++i)
+        if (_stricmp(EXE_PATCHES[i].name, name) == 0)
+            return EXE_PATCHES[i].enabled;
+    return false;
+}
+
 static void WriteDefaultSettings(const char* path)
 {
     FILE* f = 0;
@@ -1662,78 +1704,82 @@ static void WriteDefaultSettings(const char* path)
         return;
 
     fprintf(f,
-        "; Настройки V2DLL. 1 = включено, 0 = выключено.\n"
-        "; Правится вручную, без пересборки DLL - изменения\n"
-        "; применяются при следующем запуске игры.\n"
-        "\n"
-        "ENABLE_LOG=%d                 ; лог в v2dll.log (много записей на тик, для раздачи ставить 0)\n"
-        "ENABLE_BUTTONS=%d             ; кнопки, запускающие решения\n"
-        "ENABLE_DECISION_FILTER=%d     ; скрытие решений из окна политики\n"
-        "ENABLE_PRICE_DELTA=%d         ; процентный шаг изменения цен\n"
-        "ENABLE_POP_DISPLAY=%d         ; общее население в верхней панели (экспериментально)\n"
-        "ENABLE_VERSION_LABEL=%d       ; версия мода в подписи главного меню\n",
-        (int)g_settings.log, (int)g_settings.buttons, (int)g_settings.decisionFilter,
-        (int)g_settings.priceDelta, (int)g_settings.popDisplay, (int)g_settings.versionLabel);
-
-    fprintf(f,
-        "\n"
-        "; --- Байтовые правки exe (список = таблица EXE_PATCHES в\n"
-        "; V2TechButton.cpp, там же подробное описание каждого патча) ---\n");
-
-    for (int i = 0; i < EXE_PATCH_COUNT; ++i)
-    {
-        char nameUpper[64];
-        size_t nlen = strlen(EXE_PATCHES[i].name);
-        if (nlen >= sizeof(nameUpper))
-            nlen = sizeof(nameUpper) - 1;
-        size_t j = 0;
-        for (; j < nlen; ++j)
-            nameUpper[j] = (char)toupper((unsigned char)EXE_PATCHES[i].name[j]);
-        nameUpper[j] = '\0';
-
-        fprintf(f, "PATCH_%s=%d\n", nameUpper, (int)EXE_PATCHES[i].enabled);
-    }
-
-    fprintf(f,
-        "\n"
-        "; --- Отдельные хуки exe (не из таблицы выше) ---\n"
-        "PATCH_OCCUPIED_REINFORCE_SPLIT=%d   ; своя ставка пополнения occupied vs allied (уточняет ALLIED_REINFORCE_150)\n"
-        "PATCH_ALLY_OWNER_CHECK=%d           ; своя ставка occupied-by-ally vs owned-by-ally (уточняет OCCUPIED_REINFORCE_SPLIT)\n"
-        "PATCH_GRAPH_POINT_CLAMP=%d          ; кламп точек графика бюджета - чинит краш переполнения буфера, выключать не рекомендуется\n"
-        "PATCH_FACTORY_DUMP_SCAN=%d          ; фоновый поток, дампящий в лог память отслеживаемых фабрик (диагностика, на геймплей не влияет)\n"
-        "PATCH_PROD_LIST_VISIBILITY=%d       ; видимость строк списка \"Фабрики\" (нужен кнопке \"скрыть колонии\")\n"
-        "PATCH_PROD_TYPE_GATE=%d             ; гейт по production_types.txt для PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL\n"
-        "\n"
-        "; ВАЖНО: если включён любой из PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_*\n"
-        "; выше, держите PATCH_CIVILIZE_NULL_CHECK тоже включённым - это патч,\n"
-        "; который чинит краш игры при цивилизации страны (0xc0000005), а не\n"
-        "; независимая настройка. Без него краш вернётся, как только\n"
-        "; нецивилизованная страна с построенной фабрикой цивилизуется.\n"
-        "PATCH_CIVILIZE_NULL_CHECK=%d\n",
-        (int)g_settings.patchOccupiedReinforceSplit,
-        (int)g_settings.patchAllyOwnerCheck,
-        (int)g_settings.patchGraphPointClamp,
-        (int)g_settings.patchFactoryDumpScan,
-        (int)g_settings.patchProdListVisibility,
-        (int)g_settings.patchProdTypeGate,
-        (int)g_settings.patchCivilizeNullCheck);
-
-    fprintf(f,
-        "\n"
-        "; --- Разброс броска в бою ---\n"
-        "; Работает, только если exe уже несёт \"пещеру\" от стороннего\n"
-        "; Vic2_Roll_Changer.py (это ваш случай - вы уже запускали его\n"
-        "; раньше с 2-5, наш патч просто перезаписывает эти же байты\n"
-        "; на лету при каждом запуске игры). Если exe никогда не был\n"
-        "; пропатчен этим скриптом, сигнатура не совпадёт и PATCH_COMBAT_ROLL\n"
-        "; тихо пропустится - см. лог.\n"
-        "; COMBAT_ROLL_MIN должен быть 0..127, COMBAT_ROLL_MAX >= MIN.\n"
+        "PATCH_ALWAYS_ADD_WARGOALS=%d\n"
+        "PATCH_LAND_REINFORCE=%d\n"
+        "PATCH_NAVAL_REINFORCE=%d\n"
+        "PATCH_ALLIED_REINFORCE_150=%d\n"
+        "PATCH_OCCUPIED_REINFORCE_SPLIT=%d\n"
+        "PATCH_ALLY_OWNER_CHECK=%d\n"
         "PATCH_COMBAT_ROLL=%d\n"
         "COMBAT_ROLL_MIN=%d\n"
-        "COMBAT_ROLL_MAX=%d\n",
+        "COMBAT_ROLL_MAX=%d\n"
+        "\n",
+        (int)FindExePatchEnabled("always_add_wargoals"),
+        (int)FindExePatchEnabled("land_reinforce"),
+        (int)FindExePatchEnabled("naval_reinforce"),
+        (int)FindExePatchEnabled("allied_reinforce_150"),
+        (int)g_settings.patchOccupiedReinforceSplit,
+        (int)g_settings.patchAllyOwnerCheck,
         (int)g_settings.patchCombatRoll,
         g_settings.combatRollMin,
         g_settings.combatRollMax);
+
+    fprintf(f,
+        "ENABLE_PRICE_DELTA=%d\n"
+        "PATCH_MAX_RELATIVE_PRICE=%d\n"
+        "PATCH_BUILD_FACTORY_IGNORE_COLONIAL_1=%d\n"
+        "PATCH_BUILD_FACTORY_IGNORE_COLONIAL_2=%d\n"
+        "PATCH_BUILD_FACTORY_BUTTON_ENABLE_IGNORE_COLONIAL=%d\n"
+        "PATCH_LOCAL_SUPPLY_FACTORY_IGNORE_COLONIAL=%d\n"
+        "PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_BUTTON=%d\n"
+        "PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OWN=%d\n"
+        "PATCH_BUILD_FACTORY_CHECKLIST_UNCIVILIZED_OTHER=%d\n"
+        "PATCH_BUILD_FACTORY_IGNORE_UNCIVILIZED_CAN_BUILD=%d\n"
+        "PATCH_PROD_TYPE_GATE=%d\n"
+        "\n",
+        (int)g_settings.priceDelta,
+        (int)FindExePatchEnabled("max_relative_price"),
+        (int)FindExePatchEnabled("build_factory_ignore_colonial_1"),
+        (int)FindExePatchEnabled("build_factory_ignore_colonial_2"),
+        (int)FindExePatchEnabled("build_factory_button_enable_ignore_colonial"),
+        (int)FindExePatchEnabled("local_supply_factory_ignore_colonial"),
+        (int)FindExePatchEnabled("build_factory_ignore_uncivilized_button"),
+        (int)FindExePatchEnabled("build_factory_checklist_uncivilized_own"),
+        (int)FindExePatchEnabled("build_factory_checklist_uncivilized_other"),
+        (int)FindExePatchEnabled("build_factory_ignore_uncivilized_can_build"),
+        (int)g_settings.patchProdTypeGate);
+
+    fprintf(f,
+        "ENABLE_BUTTONS=%d\n"
+        "ENABLE_DECISION_FILTER=%d\n"
+        "ENABLE_POP_DISPLAY=%d\n"
+        "ENABLE_VERSION_LABEL=%d\n"
+        "PATCH_PROD_LIST_VISIBILITY=%d\n"
+        "\n",
+        (int)g_settings.buttons,
+        (int)g_settings.decisionFilter,
+        (int)g_settings.popDisplay,
+        (int)g_settings.versionLabel,
+        (int)g_settings.patchProdListVisibility);
+
+    fprintf(f,
+        "PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=%d\n"
+        "PATCH_CIVILIZE_NULL_CHECK=%d\n"
+        "PATCH_GRAPH_POINT_CLAMP=%d\n"
+        "PATCH_CHECKSUM_DRIFT_FIX=%d\n"
+        "\n",
+        (int)FindExePatchEnabled("consciousness_plurality_growth"),
+        (int)g_settings.patchCivilizeNullCheck,
+        (int)g_settings.patchGraphPointClamp,
+        (int)FindExePatchEnabled("checksum_drift_fix"));
+
+    fprintf(f,
+        "ENABLE_LOG=%d\n"
+        "PATCH_FACTORY_DUMP_SCAN=%d\n"
+        "PATCH_CHECKSUM_DIAGNOSTIC=%d\n",
+        (int)g_settings.log,
+        (int)g_settings.patchFactoryDumpScan,
+        (int)g_settings.patchChecksumDiagnostic);
 
     fclose(f);
 }
@@ -2989,6 +3035,213 @@ static bool InstallCombatRoll()
 }
 
 
+// ---------------------------------------------------------------
+// Диагностика бага с чек-суммой (временный патч, не для релиза)
+//
+// Баг: чек-сумма в углу экрана меняется на одну букву после входа в
+// партию (одиночную или сетевую) - воспроизводится и на ванили, без
+// нашего мода. FUN_006377a0 (RVA 0x2377a0) считает "файловую"
+// чек-сумму; get_xrefs_to в Ghidra нашёл только один статический
+// вызов (из инициализации приложения, до главного меню) - но это не
+// исключает, что счётчик читается позже ещё раз кодом внутри этой же
+// функции при повторном входе, либо вызов идёт откуда-то косвенно.
+//
+// Первая попытка (хук на FUN_0076b4b0, копирование чек-суммы в
+// структуру лобби при входе в партию) дала raw=0 каждый раз - то
+// место читает поле ДО того, как оно реально заполнено, тупик.
+//
+// Вторая попытка (эта): реальный аккумулятор чек-суммы - раскрыт в
+// дизасме, прямо перед тем, как строится "Checksum is <value>":
+//   00638a4b: MOV EDX,[ECX+0x30]   ; ECX = param_1 (this), +0x30 -
+//                                    итоговое целое чек-суммы
+//   00638a4e: PUSH 0xe07d2c        ; "Checksum is "
+// Перехватываем блок из 3 инструкций перед этим чтением (11 байт,
+// rva 0x2384a0..0x2384ab: PUSH EBX; PUSH 0xC; MOV byte[ESP+0x3D4],0x30),
+// логируем ECX и *(ECX+0x30), затем воспроизводим эти 3 инструкции и
+// возвращаемся - "MOV EDX,[ECX+0x30]" после нас выполняется как есть,
+// нетронутой.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_CHECKSUM_HOOK   = 0x238A40;
+static const DWORD RVA_CHECKSUM_RESUME = 0x238A4B;
+
+static const unsigned char CHECKSUM_HOOK_SIG[11] =
+{
+    0x53,                                     // push ebx
+    0x6A, 0x0C,                               // push 0xC
+    0xC6, 0x84, 0x24, 0xD4, 0x03, 0x00, 0x00, 0x30  // mov byte ptr [esp+0x3D4],0x30
+};
+
+static DWORD g_checksumResumeAddr = 0;
+static int g_checksumHookHits = 0;
+
+// Сохраняем указатель "this" из ChecksumCompute, чтобы позже (при
+// входе в лобби) перечитать ТОТ ЖЕ +0x30 напрямую, без вызова функции
+// целиком - проверяем, не правится ли аккумулятор тихо, в обход
+// FUN_006377a0.
+static void* g_checksumAppPtr = 0;
+
+static void __cdecl LogChecksumCompute(void* param1)
+{
+    ++g_checksumHookHits;
+    g_checksumAppPtr = param1;
+
+    int checksum = 0;
+    __try
+    {
+        checksum = *(int*)((char*)param1 + 0x30);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("ChecksumCompute[%d]: param1=%08X - память +0x30 не читается",
+            g_checksumHookHits, (unsigned)(DWORD_PTR)param1);
+        return;
+    }
+
+    Log("ChecksumCompute[%d]: param1=%08X value=%d (%08X)",
+        g_checksumHookHits, (unsigned)(DWORD_PTR)param1, checksum, (unsigned)checksum);
+}
+
+__declspec(naked) static void ChecksumComputeThunk()
+{
+    __asm {
+        push ecx
+        push edx
+        push eax
+        push ecx
+        call LogChecksumCompute
+        add esp, 4
+        pop eax
+        pop edx
+        pop ecx
+        push ebx
+        push 0x0C
+        mov byte ptr [esp + 0x3D4], 0x30
+        jmp dword ptr [g_checksumResumeAddr]
+    }
+}
+
+static bool InstallChecksumDiagnostic()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_CHECKSUM_HOOK);
+
+    if (memcmp(hook, CHECKSUM_HOOK_SIG, sizeof(CHECKSUM_HOOK_SIG)) != 0)
+    {
+        Log("ChecksumCompute: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5], hook[6], hook[7], hook[8], hook[9], hook[10]);
+        return false;
+    }
+
+    g_checksumResumeAddr = g_base + RVA_CHECKSUM_RESUME;
+
+    unsigned char patch[11];
+    memset(patch, 0x90, sizeof(patch));
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&ChecksumComputeThunk - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("ChecksumCompute: установлен на rva %06X", RVA_CHECKSUM_HOOK);
+    return true;
+}
+
+// Третий хук: FUN_0076b4b0 (RVA 0x36b4b0) - подтверждено, срабатывает
+// при каждом входе в лобби/партию (3 раза на 3 входа в прошлом тесте).
+// На этот раз не просто читаем её собственный [EAX+0x130] (там всегда
+// 0 - уже проверено), а ЗАОДНО перечитываем аккумулятор чек-суммы из
+// ChecksumCompute напрямую по сохранённому g_checksumAppPtr - если он
+// меняется между входами, значит его правит что-то в обход
+// FUN_006377a0 (которая, как подтвердил ChecksumCompute, вызывается
+// только один раз за сессию).
+static const DWORD RVA_LOBBY_ENTRY_HOOK   = 0x36B4F6;
+static const DWORD RVA_LOBBY_ENTRY_RESUME = 0x36B4FC;
+
+static const unsigned char LOBBY_ENTRY_SIG[6] = { 0x8B, 0x80, 0x30, 0x01, 0x00, 0x00 };
+
+static DWORD g_lobbyEntryResumeAddr = 0;
+static int g_lobbyEntryHits = 0;
+
+static void __cdecl LogLobbyEntry(void* pObj)
+{
+    ++g_lobbyEntryHits;
+
+    DWORD raw = 0;
+    __try { raw = *(DWORD*)((char*)pObj + 0x130); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { raw = 0; }
+
+    if (g_checksumAppPtr == 0)
+    {
+        Log("LobbyEntry[%d]: pObj=%08X raw130=%08X (g_checksumAppPtr ещё не установлен)",
+            g_lobbyEntryHits, (unsigned)(DWORD_PTR)pObj, raw);
+        return;
+    }
+
+    int accum = 0;
+    __try { accum = *(int*)((char*)g_checksumAppPtr + 0x30); }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("LobbyEntry[%d]: pObj=%08X raw130=%08X, аккумулятор (%08X+0x30) не читается",
+            g_lobbyEntryHits, (unsigned)(DWORD_PTR)pObj, raw, (unsigned)(DWORD_PTR)g_checksumAppPtr);
+        return;
+    }
+
+    Log("LobbyEntry[%d]: pObj=%08X raw130=%08X, аккумулятор сейчас=%d (%08X)",
+        g_lobbyEntryHits, (unsigned)(DWORD_PTR)pObj, raw, accum, (unsigned)accum);
+}
+
+__declspec(naked) static void LobbyEntryThunk()
+{
+    __asm {
+        push eax
+        push ecx
+        push edx
+        push eax
+        call LogLobbyEntry
+        add esp, 4
+        pop edx
+        pop ecx
+        pop eax
+        mov eax, [eax + 0x130]
+        jmp dword ptr [g_lobbyEntryResumeAddr]
+    }
+}
+
+static bool InstallLobbyEntryHook()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_LOBBY_ENTRY_HOOK);
+
+    if (memcmp(hook, LOBBY_ENTRY_SIG, sizeof(LOBBY_ENTRY_SIG)) != 0)
+    {
+        Log("LobbyEntry: сигнатура не совпала (%02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5]);
+        return false;
+    }
+
+    g_lobbyEntryResumeAddr = g_base + RVA_LOBBY_ENTRY_RESUME;
+
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&LobbyEntryThunk - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("LobbyEntry: установлен на rva %06X", RVA_LOBBY_ENTRY_HOOK);
+    return true;
+}
+
+
+
 static bool Install()
 {
     LoadSettings();
@@ -3079,6 +3332,12 @@ static bool Install()
 
     if (g_settings.patchCombatRoll)
         InstallCombatRoll();
+
+    if (g_settings.patchChecksumDiagnostic)
+    {
+        InstallChecksumDiagnostic();
+        InstallLobbyEntryHook();
+    }
 
     Log("Install: done");
     return true;
