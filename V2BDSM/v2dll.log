@@ -1,6 +1,6 @@
 CrashWatch: v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
 LoadSettingsFrom: читаю 'v2dll_settings.ini'
----- Install ---- версия 2.94
+---- Install ---- версия 2.98
 base = 00010000
 ---- Settings ----
 localModConfig=0 log=1 buttons=1 decisionFilter=1
@@ -8,7 +8,7 @@ priceDelta=1 patchExponentialPriceDelta=0 popDisplay=0 versionLabel=1
 patchOccupiedReinforceSplit=1 patchAllyOwnerCheck=1 patchCivilizeNullCheck=1
 patchGraphPointClamp=0 patchFactoryDumpScan=0 patchProdListVisibility=1 patchProdTypeGate=1
 prodTypeGateAllowAll=0 patchCombatRoll=1 combatRollMin=0 combatRollMax=4
-enableOosLog=1 patchFpuFortress=1 patchD3dFpuPreserve=1 patchThreadFpuPin=1 patchHeapLfh=1 engineWorkerThreads=8
+enableOosLog=1 patchFpuFortress=1 patchD3dFpuPreserve=1 patchThreadFpuPin=1 patchHeapLfh=1 engineWorkerThreads=0
 patchPopQuantize=1 popQuantizeKeepBits=12 patchMpClientSleep=1 mpClientSleepMs=1
 patchMainLoopSleep0=1 mainLoopSleepMs=1 patchD3dNoVsync=0 patchHighPriority=1
 enableCrashLog=1
@@ -23,8 +23,7 @@ MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
 MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
 D3D9: Direct3DCreate9 перехвачен
 TBB: _beginthreadex перехвачен
-TBB: initialize капим на 8 потоков
-Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=8 sleep0=1 noVsync=0 prio=1
+Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
 PopQuantize: FUN_00485E40, keep_bits=12
 MpClientSleep: Sleep(40) -> Sleep(1) rva 71DD2C
 patch CTechnologyView: слот 11 = 1
@@ -52,11 +51,11 @@ Patch 'aristocrat_income_share_patch_2': отключён в настройка�
 Patch 'aristocrat_income_share_patch_3': отключён в настройках
 Patch 'aristocrat_income_share_patch_4': отключён в настройках
 Patch 'aristocrat_income_share_patch_5': отключён в настройках
-OccupiedReinforceSplit: occupied=100.0%, пещера 01B30000
-AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01B40000, ok=1
-CivilizeNullCheck: установлен на rva 14248B, пещера 01B50000
+OccupiedReinforceSplit: occupied=100.0%, пещера 01C80000
+AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 032B0000, ok=1
+CivilizeNullCheck: установлен на rva 14248B, пещера 032C0000
 ProdListVisibilityHook: установлен
-LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (23536 байт)
+LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21930 байт)
   [0] synthetics_template limit=0
   [1] machine_part_user_template limit=0
   [2] stock_exchange_template limit=0
@@ -126,15 +125,15 @@ ParseProductionTypes: разобрано 65 типов производства 
 ProdTypeGateHook: установлен
 PriceDelta: активен режим PriceDelta (линейный)
 PriceDelta: 25 сотых процента, множитель 163
-VersionLabel: 'V2 v3.04 + V2DLL v2.94' (len=22), пещера 01B70000
+VersionLabel: 'V2 v3.04 + V2DLL v2.98' (len=22), пещера 032E0000
 CombatRoll: диапазон 0..4 (модуль=5)
 OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
 Install: done
 DllMain: attach, Install = 1
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
-Update[CTechnologyView]: вызван, view=8196BF58
+Update[CTechnologyView]: вызван, view=7F335890
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
-Update[CPoliticsView]: вызван, view=41084D10
-Update[CPoliticsView]: вызван, view=41084D10
+ProdTypeGate: grain_factory -> result=1 (впервые)
+ProdTypeGate: fruit_factory -> result=1 (впервые)
