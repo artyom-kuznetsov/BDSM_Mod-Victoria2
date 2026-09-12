@@ -40,7 +40,7 @@ Min and Max dice rolls in battle.
 #### 1. ENABLE_PRICE_DELTA
 Prices shift by 0.25% of the base price instead of flat 0.01 per day.
 #### 2. PATCH_EXPONENTIAL_PRICE_DELTA
-Enables exponential price shifts instead of flat or percentual. INCOMPATIBLE with №1 (requested by maxioten).
+Enables exponential price shifts instead of flat or percentual. INCOMPATIBLE with №1 (made by vesper).
 #### 3. PATCH_MAX_RELATIVE_PRICE
 Just changes the price ceiling from x5 of base price to x20 of it.  
 Note: an overflow might occur that will break your game if prices of some factory inputs go beyond its max savings. I recommend increasing MAX_FACTORY_MONEY_SAVE define if you are using this.
@@ -87,9 +87,9 @@ Prevents the game from crashing from overflow I talked about in Economic №2 (d
 #### 4. PATCH_CHECKSUM_DRIFT_FIX
 Fixes checksum alteration after loading into a campaign. Useful for MP rehosting without need to restart the game for everyone.
 #### 5. PATCH_ALLOW_UNCIV_TECH_RESEARCH
-Self-explanatory. Allows uncivs to research tech (requested by maxioten).
+Self-explanatory. Allows uncivs to research tech (made by maxioten).
 #### 6. PATCH_ARISTOCRAT_INCOME_SHARE
-Doubles aristocrat income share from RGO (requested by maxioten).
+Doubles aristocrat income share from RGO (made by vesper).
   
 #### 5. ENABLE_LOG
 Just the log used for debugging the .dll
