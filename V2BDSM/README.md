@@ -26,7 +26,6 @@ Assets/ideas from the following mods were used in this mod:
 - Divergences of Darkness
 - 2/3 Mod
 - The Grand Combination
-- The Greater Launcher
 - Greater Flavor Mod
 - The Third Age
 - Bob's Cartography

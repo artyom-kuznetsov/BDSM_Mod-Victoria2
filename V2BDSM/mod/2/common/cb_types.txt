@@ -3837,7 +3837,10 @@ negotiated_transfer = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
-		ai = no
+		OR = {
+			ai = no
+			overlord = { ai = no }
+		}
 		THIS = { ai = no } 
 		any_owned_province = {
 			not = { is_core = THIS }

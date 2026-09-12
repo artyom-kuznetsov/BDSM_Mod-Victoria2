@@ -1542,29 +1542,6 @@ country_event = { # MCL # MONTHLY CLEANUP
 		prestige = -100
 		
 		
-		any_country = {
-			limit = {
-				tag = MEX
-				OR = { 
-					vassal_of = IBE
-					vassal_of = SPA
-				}
-			}
-			set_country_flag = NewSpain_cflag
-			overlord = { set_country_flag = OldSpain_cflag }
-		}
-		
-		any_country = {
-			limit = {
-				has_country_flag = NewSpain_cflag
-				NOT = { 
-					vassal_of = IBE
-					vassal_of = SPA
-				}
-			}
-			clr_country_flag = NewSpain_cflag
-			any_country = { clr_country_flag = OldSpain_cflag }
-		}
 		
 		any_country = {
 			limit = {
