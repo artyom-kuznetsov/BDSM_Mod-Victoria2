@@ -41,39 +41,75 @@ country_event = {
 	}
 }
 
-# UNIQUE MODIFIERS
-# SATSUMA
 country_event = {
-	title = "satsuma_start_EvtName"
-	desc = "satsuma_start_EvtDesc"
-	id = 57809
-	trigger = {
-		tag = SAT
-	}
+	title = "japan_support_house_EvtName"
+	desc = "japan_support_house_EvtDesc"
+	id = 57800
 	
 	picture = "navy_japan"
 	
-	mean_time_to_happen = {
-		months = 2
+	trigger = {
+		tag = TKG
+		war = no
+		ideological_thought = 1
 	}
 	
-	fire_only_once = yes
+	option = {
+		name = "japan_support_house_EvtOptTokugawa"
+		set_country_flag = tokugawa_flag
+		set_country_flag = iron_discipline_flag
+		CUSTOM_TOOLTIP_57811 = {}
+	}
 	
 	option = {
-		name = "satsuma_start_EvtOptA"
+		name = "japan_support_house_EvtOptSatsuma"
 		set_country_flag = satsuma_ports_flag
-		1661 = {
-			state_scope = {
-				add_province_modifier = {
-					name = satsuma_port_modifier
-					duration = -1
-				}
-			}
-		}
 		add_country_modifier = {
 			name = satsuma_modifier
 			duration = -1
 		}
+		CUSTOM_TOOLTIP_SATSUMA = { }
+	}
+	option = {
+		name = "japan_support_house_EvtOptKyoto"
+		set_country_flag = kyoto_flag
+		add_country_modifier = {
+			name = kyoto_modifier
+			duration = -1
+		}
+	}
+	option = {
+		name = "japan_support_house_EvtOptKaga"
+		set_country_flag = kaga_flag
+		add_country_modifier = {
+			name = kaga_modifier
+			duration = -1
+		}
+	}
+	option = {
+		name = "japan_support_house_EvtOptDate"
+		set_country_flag = sendai_flag
+		add_country_modifier = {
+			name = sendai_modifier
+			duration = -1
+		}
+	}
+	option = {
+		name = "japan_support_house_EvtOptUesugi"
+		set_country_flag = uesugi_flag
+		add_country_modifier = {
+			name = uesugi_modifier
+			duration = 3650бо
+		}
+	}
+	option = {
+		name = "japan_support_house_EvtOptChoshu"
+		set_country_flag = choshu_flag
+		add_country_modifier = {
+			name = choshu_modifier
+			duration = -1
+		}
+		CUSTOM_TOOLTIP_57817 = { }
 	}
 }
 
@@ -107,170 +143,3 @@ country_event = {
 	}
 	
 }
-
-# TOKUGAWA
-country_event = {
-	title = "tokugawa_start_EvtName"
-	desc = "tokugawa_start_EvtDesc"
-	id = 57811
-	trigger = {
-		tag = TKG
-	}
-	
-	picture = "samurai"
-	
-	mean_time_to_happen = {
-		months = 2
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = "tokugawa_start_EvtOptA"
-		set_country_flag = iron_discipline_flag
-		CUSTOM_TOOLTIP_57811 = {}
-	}
-}
-
-# KYOTO
-country_event = {
-	title = "kyoto_start_EvtName"
-	desc = "kyoto_start_EvtDesc"
-	id = 57812
-	trigger = {
-		tag = KYO
-	}
-	
-	picture = "industrial"
-	
-	mean_time_to_happen = {
-		months = 2
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = "kyoto_start_EvtOptA"
-		add_country_modifier = {
-			name = kyoto_modifier
-			duration = -1
-		}
-	}
-}
-
-# KAGA
-country_event = {
-	title = "kaga_start_EvtName"
-	desc = "kaga_start_EvtDesc"
-	id = 57813
-	trigger = {
-		tag = KAG
-	}
-	
-	picture = "royal_japan"
-	
-	mean_time_to_happen = {
-		months = 2
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = "kaga_start_EvtOptA"
-		add_country_modifier = {
-			name = kaga_modifier
-			duration = -1
-		}
-	}
-}
-
-# DATE
-country_event = {
-	title = "sendai_start_EvtName"
-	desc = "sendai_start_EvtDesc"
-	id = 57814
-	trigger = {
-		tag = SEN
-	}
-	
-	picture = "army_datte"
-	
-	mean_time_to_happen = {
-		months = 2
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = "sendai_start_EvtOptA"
-		add_country_modifier = {
-			name = sendai_modifier
-			duration = -1
-		}
-	}
-}
-
-# UESUGI
-country_event = {
-	title = "uesugi_start_EvtName"
-	desc = "uesugi_start_EvtDesc"
-	id = 57815
-	trigger = {
-		tag = USG
-		civilized = yes
-	}
-	
-	picture = "confucian"
-	
-	mean_time_to_happen = {
-		months = 2
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = "uesugi_start_EvtOptA"
-		set_country_flag = uesugi_flag
-		CUSTOM_TOOLTIP_57815 = { }
-		activate_technology = military_staff_system
-		activate_technology = army_command_principle
-		activate_technology = private_banks
-		activate_technology = no_standard
-		activate_technology = enlightenment_thought
-		activate_technology = malthusian_thought
-		activate_technology = water_wheel_power
-		activate_technology = basic_chemistry
-		activate_technology = post_nelsonian_thought
-		activate_technology = clipper_design
-	}
-}
-
-# CHOSHU
-country_event = {
-	title = "choshu_start_EvtName"
-	desc = "choshu_start_EvtDesc"
-	id = 57817
-	trigger = {
-		tag = CHO
-	}
-	
-	picture = "diplomacy"
-	
-	mean_time_to_happen = {
-		months = 2
-	}
-	
-	fire_only_once = yes
-	
-	option = {
-		name = "choshu_start_EvtOptA"
-		set_country_flag = choshu_flag
-		add_country_modifier = {
-			name = choshu_modifier
-			duration = -1
-		}
-		CUSTOM_TOOLTIP_57817 = { }
-	}
-}
-
-

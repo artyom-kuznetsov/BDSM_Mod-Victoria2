@@ -1,47 +1,22 @@
 political_decisions = {
-	the_meiji_restoration = {
+	form_japan = {
 		potential = {
-			
-			not = { has_country_modifier = meiji_restoration_boost }
-			NOT = {
-				JAP = {
-					exists = yes
+			primary_culture = japanese
+			NOT = { exists = JAP }
+		}
+		
+		allow = {
+			JAP = {
+				all_core = {
+					owned_by = THIS
 				}
 			}
-			NOT = {
-				has_country_flag = the_meiji_restoration_flag
-			}
-			primary_culture = japanese
 		}
-		allow = {
-			owns = 1661
-			owns = 1662
-			owns = 1638
-			owns = 1667
-			owns = 1657
-			owns = 1658
-			owns = 1675
-			owns = 1649
-			owns = 1646
-			owns = 1672
-			owns = 1653
-		}
+		
 		effect = {
 			plurality = 5
 			change_tag = JAP
-			years_of_research = 5
-			badboy = -5
 			prestige = 10
-			add_country_modifier = {
-				name = meiji_restoration_boost
-				duration = 3650
-			}
-			set_country_flag = the_meiji_restoration_flag
-			capital = 1649
-			
-			remove_country_modifier = sengoku_modifier
-			clr_country_flag = daimyo_flag
-			
 			any_country = {
 				clr_country_flag = daimyo_flag
 			}
@@ -60,6 +35,7 @@ political_decisions = {
 			}
 		}
 	}
+	
 	ainu_expedition_dec = {
 		potential = {
 			
