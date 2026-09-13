@@ -130,39 +130,6 @@ political_decisions = {
 			set_country_flag = ainu_expedition_flag
 		}
 	}
-	korean_conquest_dec = {
-		potential = {
-			
-			tag = JAP
-			NOT = {
-				has_country_flag = korean_conquest_flag
-			}
-			KOR = { 
-				exists = yes
-			}
-			NOT = {
-				war_with = KOR
-			}
-		}
-		allow = {
-			total_amount_of_ships = 10
-		}
-		effect = {
-			badboy = 10
-			JAP = {
-				war = {
-					target = KOR
-					attacker_goal = {
-						casus_belli = annex_core_country
-					}
-					defender_goal = {
-						casus_belli = demand_reparations
-					}
-				}
-			}
-			set_country_flag = korean_conquest_flag
-		}
-	}
 	korean_integration_dec = {
 		potential = {
 			
@@ -175,7 +142,6 @@ political_decisions = {
 			}
 		}
 		allow = {
-			money = 300000
 			owns = 1632
 			owns = 1624
 			owns = 1625

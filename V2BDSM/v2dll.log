@@ -1,7 +1,7 @@
 CrashWatch: v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
 LoadSettingsFrom: читаю 'v2dll_settings.ini'
 ---- Install ---- версия 3.21
-base = 002C0000
+base = 00F40000
 ---- Settings ----
 localModConfig=0 log=1 buttons=1 decisionFilter=1
 priceDelta=1 patchExponentialPriceDelta=0 popDisplay=0 versionLabel=1
@@ -51,9 +51,9 @@ Patch 'aristocrat_income_share_patch_2': отключён в настройка�
 Patch 'aristocrat_income_share_patch_3': отключён в настройках
 Patch 'aristocrat_income_share_patch_4': отключён в настройках
 Patch 'aristocrat_income_share_patch_5': отключён в настройках
-OccupiedReinforceSplit: occupied=100.0%, пещера 01DA0000
-AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01DB0000, ok=1
-CivilizeNullCheck: установлен на rva 14248B, пещера 03570000
+OccupiedReinforceSplit: occupied=100.0%, пещера 023B0000
+AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 023C0000, ok=1
+CivilizeNullCheck: установлен на rva 14248B, пещера 023D0000
 ProdListVisibilityHook: установлен
 LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21923 байт)
   [0] synthetics_template limit=0 good=-
@@ -129,18 +129,26 @@ LoadProvinceGoods: готово, 2706 провинций с trade_goods
 HideNoSupplyFactoriesHook: установлен
 PriceDelta: активен режим PriceDelta (линейный)
 PriceDelta: 25 сотых процента, множитель 163
-VersionLabel: 'V2 v3.04 + V2DLL v3.21' (len=22), пещера 03590000
+VersionLabel: 'V2 v3.04 + V2DLL v3.21' (len=22), пещера 02400000
 CombatRoll: диапазон 0..4 (модуль=5)
 OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
 Install: done
 DllMain: attach, Install = 1
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
-Update[CTechnologyView]: вызван, view=7ECF1F60
+Update[CTechnologyView]: вызван, view=838A4A60
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
 ProdTypeGate: grain_factory -> result=1 (впервые)
 ProdTypeGate: fruit_factory -> result=1 (впервые)
-Update[CProductionView]: вызван, view=7BDA4900
-SetupHideColonialButton: подписана
-Update[CProductionView]: вызван, view=7BDA4900
+Update[CTechnologyView]: вызван, view=834AD248
+Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+Update[CPoliticsView]: вызван, view=3C132050
+Update[CPoliticsView]: вызван, view=3C132050
+Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
