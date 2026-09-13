@@ -1,5 +1,6 @@
-V2DLL is a utility by balticšprott (me) that makes possible a handful of things that were considered impossible/hard to implement before, 
-and even make some previously existing .exe patches simpler to use - by reverse engineering.
+V2DLL is a reverse engineering project that makes possible a handful of things that were considered impossible/hard to implement before, 
+and even make some previously existing .exe patches simpler to use.
+Also it can improve performance and multiplayer stability.
 This is meant to be easy-for-use for other modders, so I'm not going into much detail here. If you want more insight, 
 or add some custom patches, or perhaps investigate v2dll under the hood to use for your own work - check the source code.
 
@@ -16,7 +17,10 @@ Almost all of this was tested in MP - no stability effects noticed.
 ## How does it work?
 Vanilla file lua51.dll is replaced by a brand new file, where the patches are coded.  
 The old file must still remain in the folder under name "lua51_real.dll" - 
-it's being called by the new file, so no vanilla code is lost and the game can still run.  
+it's being called by the new file, so no vanilla code is lost and the game can still run.
+  
+There are also d3d9.dll and dgVoodoo.conf files.  
+Those are needed for some performance patches.  
   
 # Feature overview
 ## Explaining each option in the .ini file
@@ -81,8 +85,10 @@ Total population is displayed in some surface tooltips, instead of "grown male" 
 Changes version label in main menu to "V2 v3.04 + V2DLL v*"
 #### 5. PATCH_PROD_LIST_VISIBILITY
 Needed for Economic №4.
+#### 6. HIDE_UNAVAILABLE_LIMIT_BY_SUPPLY_FACTORIES
+Hides factories with "limit_by_local_supply = yes" from factory construction menu if there is no required supply in the region.
   
-### Miscellaneous and debug
+### Miscellaneous
 #### 1. PATCH_CONSCIOUSNESS_PLURALITY_GROWTH
 Removes plurality growth from average consciousness. In-game tooltip says otherwise though. So this patch removes this tooltip too (hi tgc)
 #### 2. PATCH_CIVILIZE_NULL_CHECK
@@ -94,11 +100,39 @@ Allows non-ai uncivs to research tech. (made by maxioten).
 #### 5. PATCH_ARISTOCRAT_INCOME_SHARE
 Doubles aristocrat income share from RGO (made by vesper).
   
-#### 5. ENABLE_LOG
+### Stability and Performance
+#### 1. PATCH_FPU_FORTRESS / PATCH_D3D_FPU_PRESERVE
+Fixes some float math errors related to different GPU/Drivers (fixes some of desync cases) (made by av213238).
+#### 2. PATCH_THREAD_FPU_PIN
+Fixes some math errors related to multi-threading (fixes some of desync cases) (made by av213238).
+#### 3. PATCH_HEAP_LFH
+Decreases RAM fragmentation over long game sessions (might decrease RAM usage) (made by av213238).
+#### 4. ENGINE_WORKER_THREADS
+THEORETICAL! Makes the game use a specific number of threads. Might fix some desyncs (made by av213238).
+#### 5. PATCH_POP_QUANTIZE / POP_QUANTIZE_KEEP_BITS
+Rouns up microscopic pop attributes (money, savings, etc) that you would never even see in game. 
+Might decrease related desync probability and improve performance a bit (rounds up to 12 bits by default, vanilla is 15) (made by av213238).
+#### 6. PATCH_MP_CLIENT_SLEEP / MP_CLIENT_SLEEP_MS
+Removes sleepers, that reduce FPS. Experimental (made by av213238).
+#### 7. PATCH_MAIN_LOOP_SLEEP0 / MAIN_LOOP_SLEEP_MS
+In theory also improves performace of the host/singleplayer. Experimental (made by av213238).
+#### 8. PATCH_D3D_NO_VSYNC
+Force disables VSYNC. In theory it could improve performace, but no actual difference confirmed for now (made by av213238).
+#### 9. PATCH_HIGH_PRIORITY
+Prioritizes the game process. Supposed a marginal performance gain (made by av213238).
+  
+### Diagnostics
+#### 1. ENABLE_LOG
 Just the log used for debugging the .dll
-#### 6. PATCH_FACTORY_DUMP_SCAN
+#### 2. PATCH_FACTORY_DUMP_SCAN
 I used this to debug that overflow (didn't help much).
-
+#### 3. ENABLE_OOS_LOG
+Logs used for debugging multiplayer out-of-syncs (made by av213238).
+#### 4. ENABLE_CRASH_LOG
+Crash log :) (made by av213238).
+#### 5. HIDE_NO_SUPPLY_DRY_RUN
+Used for debugging Economic №6.
+  
   
 Russian Victoria 2 community: https://discord.gg/f3dpWFt2bR  
-Also check this out for reverse engineering findings: https://github.com/maxioten/Victoria2-Reverse-Engineering/tree/main  
+Also check this out for other reverse engineering findings: https://github.com/maxioten/Victoria2-Reverse-Engineering/tree/main  

@@ -21,6 +21,10 @@
 #include <stdlib.h>
 #include <intrin.h>
 #include <ctype.h>
+#include <float.h>
+#include <xmmintrin.h>
+#include <pmmintrin.h>
+#include <signal.h>
 
 #include "lua51_exports.h"
 
@@ -32,7 +36,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "2.92"
+#define MOD_VERSION "3.21"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -65,6 +69,8 @@ struct Settings
     bool patchFactoryDumpScan        = false;
     bool patchProdListVisibility     = true;
     bool patchProdTypeGate           = true;
+    bool patchHideNoSupplyFactories  = true;
+    bool hideNoSupplyDryRun          = false; // файловый подход подтверждён - см. комментарий у g_hideNoSupplyDryRun
 
     // Взаимоисключающе с priceDelta (ENABLE_PRICE_DELTA) - оба
     // патчат один и тот же адрес. Если включены оба, побеждает этот.
@@ -83,6 +89,31 @@ struct Settings
     bool patchCombatRoll = true;
     int  combatRollMin   = 0;   // минимум броска
     int  combatRollMax   = 4;   // максимум броска
+
+    // Категория Stability - устойчивость к рассинхрону в MP и общая
+    // стабильность движка. Портировано из более новой ветки того же
+    // проекта (V2\V2TechButton.cpp, версия 3.10) - адреса перепроверены
+    // напрямую по v2game.exe перед переносом.
+    bool patchFpuFortress    = true;  // control word=53 (near, FTZ/DAZ) + пин на главном цикле
+    bool patchD3dFpuPreserve = true;  // D3DCREATE_FPU_PRESERVE, чтобы D3D не сбивал control word
+    bool patchThreadFpuPin   = true;  // тот же пин на каждом новом потоке exe/TBB
+    bool patchHeapLfh        = true;  // Low Fragmentation Heap на кучах процесса
+    int  engineWorkerThreads = 4;     // потолок потоков TBB; 0 = не трогать
+
+    bool patchPopQuantize    = true;  // округление денег/нужд POP после дневного прохода, чтобы разные клиенты не расходились в младших битах
+    int  popQuantizeKeepBits = 12;    // сколько из 15 дробных бит сохранять (меньше = грубее округление)
+
+    bool patchMpClientSleep  = true;  // Sleep(40) в message pump не-хоста (потолок ~25 FPS) -> mpClientSleepMs
+    int  mpClientSleepMs     = 1;
+
+    bool patchMainLoopSleep0 = true;  // Sleep(0)/Sleep(100) главного цикла хоста/SP -> mainLoopSleepMs
+    int  mainLoopSleepMs     = 1;
+    bool patchD3dNoVsync     = false; // принудительный IMMEDIATE-режим Present (может рвать кадр при скролле списков)
+    bool patchHighPriority   = true;  // ABOVE_NORMAL + отключение power throttling
+
+    // Диагностика, не влияющая на геймплей - категория Diagnostics.
+    bool enableOosLog   = true; // отдельный v2dll_oos.log при каждом дневном сравнении чек-сумм MP
+    bool enableCrashLog = true; // v2dll_crash.log + v2dll_crash_*.dmp при необработанном исключении/abort
 };
 
 static Settings g_settings;
@@ -330,6 +361,7 @@ static void GStrSet(void* str, const char* text)
 // ---------------------------------------------------------------
 
 static DWORD  g_base = 0;
+static DWORD  g_imageSize = 0;
 static void* g_fnOnMakeDecision = 0;
 
 typedef BOOL(WINAPI* tIsBadReadPtr)(const void*, UINT_PTR);
@@ -771,7 +803,42 @@ static const int PRODTYPE_NAME_MAX = 32;
 static char g_productionTypeNames[MAX_PRODUCTION_TYPES][PRODTYPE_NAME_MAX];
 static int  g_productionTypeCount = 0;
 
+// Единственный товар из "input_goods = { raw_X = ... }" у типов
+// limit_by_local_supply=yes (у них ровно один вход - см. сами блоки в
+// production_types.txt) - имя товара ("raw_timber" и т.п.) совпадает
+// один в один с "trade_goods = raw_timber" в history/provinces/*.txt.
+// Используется для проверки "есть ли сырьё в регионе" напрямую по
+// файлам вместо ненадёжных внутренних структур движка (см. комментарий
+// у ShouldHideNoSupplyFactory).
+static const int GOOD_NAME_MAX = 32;
+static char g_productionTypeGood[MAX_PRODUCTION_TYPES][GOOD_NAME_MAX];
+
 static const int OFF_PRODTYPE_NAME = 0x20;
+
+// std::string движка (MSVC Dinkumware STL этой эпохи) хранит короткие
+// строки (длина < 16) прямо в 16-байтном буфере объекта (small string
+// optimization) - для НИХ typePtr+OFF_PRODTYPE_NAME действительно
+// указывает на первый символ, как обычный char-массив. Но для более
+// длинных строк буфер вместо символов хранит 4-байтный УКАЗАТЕЛЬ на
+// кучу, а фактическая длина лежит в поле _Mysize сразу после буфера
+// (offset+16 от начала строки). Раньше это место читалось "в лоб" как
+// char-массив всегда - для коротких имён (<=15 символов) это
+// случайно совпадало с раскладкой SSO-буфера и работало, а длинные
+// (например tropical_wood_factory, 21 символ) на деле хранят там
+// указатель, и мы читали его байты как "мусорные символы", из-за чего
+// имя никогда ни с чем не совпадало (ни с EXTRA_WHITELIST, ни с
+// production_types.txt). Отсюда баг: строится всё, кроме отдельных
+// длинных имён типов, и только там, где реально нужен наш whitelist
+// (для местных RGO-факторий это незаметно, т.к. проверка не доходит
+// до сравнения имени).
+static const char* ResolveProdTypeNamePtr(void* typePtr)
+{
+    char* strObj = (char*)typePtr + OFF_PRODTYPE_NAME;
+    unsigned int length = *(unsigned int*)(strObj + 16); // _Mysize
+    if (length < 16)
+        return strObj;              // короткая строка - лежит прямо в буфере (SSO)
+    return *(char**)strObj;         // длинная строка - буфер хранит указатель на кучу
+}
 
 static void GetOwnDllDirectory(char* outDir, size_t outSize)
 {
@@ -934,6 +1001,42 @@ static void ParseProductionTypes(const char* text, size_t len)
                     if (!isTemplate)
                     {
                         bool hasLimitFlag = false;
+                        char goodName[GOOD_NAME_MAX] = "";
+
+                        // Ищем "input_goods" ... "{" ... <первый идентификатор>
+                        // - для limit_by_local_supply=yes типов внутри ровно
+                        // один товар ("raw_X = количество"), нам нужно только
+                        // его имя.
+                        for (size_t k = blockStart; k + 11 < j; ++k)
+                        {
+                            if (strncmp(text + k, "input_goods", 11) != 0)
+                                continue;
+                            if (k > 0 && IsIdentChar(text[k - 1]))
+                                continue;
+                            if (IsIdentChar(text[k + 11]))
+                                continue;
+
+                            size_t r = k + 11;
+                            while (r < j && text[r] != '{' && text[r] != '}')
+                                ++r;
+                            if (r >= j || text[r] != '{')
+                                break;
+                            ++r;
+                            while (r < j && (text[r] == ' ' || text[r] == '\t' ||
+                                              text[r] == '\r' || text[r] == '\n'))
+                                ++r;
+
+                            size_t goodStart = r;
+                            while (r < j && IsIdentChar(text[r]))
+                                ++r;
+                            size_t goodLen = r - goodStart;
+                            if (goodLen > 0 && goodLen < (size_t)(GOOD_NAME_MAX - 1))
+                            {
+                                memcpy(goodName, text + goodStart, goodLen);
+                                goodName[goodLen] = 0;
+                            }
+                            break;
+                        }
 
                         // Ищем "limit_by_local_supply" ... "yes" внутри
                         // диапазона [blockStart, j) этого конкретного блока.
@@ -970,6 +1073,7 @@ static void ParseProductionTypes(const char* text, size_t len)
                         if (index < MAX_PRODUCTION_TYPES)
                         {
                             g_limitByLocalSupply[index] = hasLimitFlag ? 1 : 0;
+                            strcpy_s(g_productionTypeGood[index], goodName);
 
                             size_t copyLen = nameLen < (size_t)(PRODTYPE_NAME_MAX - 1)
                                 ? nameLen : (size_t)(PRODTYPE_NAME_MAX - 1);
@@ -979,8 +1083,8 @@ static void ParseProductionTypes(const char* text, size_t len)
                             g_productionTypeCount = index + 1;
                         }
 
-                        Log("  [%d] %.*s limit=%d", index, (int)nameLen, text + nameStart,
-                            hasLimitFlag ? 1 : 0);
+                        Log("  [%d] %.*s limit=%d good=%s", index, (int)nameLen, text + nameStart,
+                            hasLimitFlag ? 1 : 0, goodName[0] ? goodName : "-");
 
                         ++index;
                     }
@@ -1046,6 +1150,166 @@ static void LoadProductionTypeLimits()
     ParseProductionTypes(fileBuf, fileLen);
 }
 
+// ---------------------------------------------------------------
+// "Есть ли сырьё в регионе" - по файлам истории провинций, а не по
+// внутренним структурам движка.
+//
+// Причина: перепробовали несколько внутренних указателей (per-state
+// "supply block", per-type "local source" через typePtr+0x12c и
+// FUN_0052ca30) - структура читалась похоже на настоящую (та же, что
+// использует проверенная FUN_0052ca30), но на практике оказалась НЕ
+// про "физически есть ли товар в регионе", а про какой-то более узкий
+// колониальный кейс (судя по названиям патчей рядом -
+// local_supply_factory_ignore_colonial и соседи): почти все типы
+// читались как "разрешено" независимо от реального наличия сырья
+// (тестер подтвердил: из 15 типов доступен должен быть только
+// timber_factory, а патч не прятал ни одного).
+//
+// Вместо этого читаем сами: production_types.txt уже даёт нам
+// единственный входной товар лимитированных типов (input_goods,
+// например "raw_timber" у timber_factory - см. g_productionTypeGood
+// выше), а history/provinces/*.txt каждой провинции даёт её
+// "trade_goods = raw_timber" - то же самое имя. Совпадают один в
+// один, сравниваем строками. Список провинций региона (state+0x48/
+// +0x4c) - единственная часть прежнего подхода, которая на практике
+// давала правдоподобные данные (реальные id провинций), её оставляем.
+static const int MAX_PROVINCE_ID = 8192;
+static char g_provinceGood[MAX_PROVINCE_ID][GOOD_NAME_MAX];
+static bool g_provinceGoodsLoaded = false;
+
+static void ParseProvinceGoodFile(const char* filePath, const char* fileName)
+{
+    int id = 0;
+    int i = 0;
+    while (fileName[i] >= '0' && fileName[i] <= '9')
+    {
+        id = id * 10 + (fileName[i] - '0');
+        ++i;
+    }
+    if (i == 0 || id <= 0 || id >= MAX_PROVINCE_ID)
+        return;
+
+    static char fileBuf[1 << 15];
+    size_t fileLen = 0;
+    if (!ReadWholeFile(filePath, fileBuf, sizeof(fileBuf), &fileLen))
+        return;
+
+    for (size_t k = 0; k + 11 < fileLen; ++k)
+    {
+        if (strncmp(fileBuf + k, "trade_goods", 11) != 0)
+            continue;
+        if (k > 0 && IsIdentChar(fileBuf[k - 1]))
+            continue;
+        if (IsIdentChar(fileBuf[k + 11]))
+            continue;
+
+        size_t r = k + 11;
+        while (r < fileLen && (fileBuf[r] == ' ' || fileBuf[r] == '\t'))
+            ++r;
+        if (r < fileLen && fileBuf[r] == '=')
+        {
+            ++r;
+            while (r < fileLen && (fileBuf[r] == ' ' || fileBuf[r] == '\t'))
+                ++r;
+            size_t goodStart = r;
+            while (r < fileLen && IsIdentChar(fileBuf[r]))
+                ++r;
+            size_t goodLen = r - goodStart;
+            if (goodLen > 0 && goodLen < (size_t)(GOOD_NAME_MAX - 1))
+            {
+                memcpy(g_provinceGood[id], fileBuf + goodStart, goodLen);
+                g_provinceGood[id][goodLen] = 0;
+            }
+        }
+        break;
+    }
+}
+
+// Рекурсивный обход - структура history/provinces/<регион>/<id> - <имя>.txt
+// (плюс изредка файлы прямо в provinces/), глубина небольшая и
+// фиксированная, так что простая рекурсия безопасна.
+static void ScanProvinceGoodsInDir(const char* dirPath)
+{
+    char pattern[MAX_PATH];
+    sprintf_s(pattern, sizeof(pattern), "%s\\*", dirPath);
+
+    WIN32_FIND_DATAA fd;
+    HANDLE h = FindFirstFileA(pattern, &fd);
+    if (h == INVALID_HANDLE_VALUE)
+        return;
+
+    do
+    {
+        if (strcmp(fd.cFileName, ".") == 0 || strcmp(fd.cFileName, "..") == 0)
+            continue;
+
+        char fullPath[MAX_PATH];
+        sprintf_s(fullPath, sizeof(fullPath), "%s\\%s", dirPath, fd.cFileName);
+
+        if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+        {
+            ScanProvinceGoodsInDir(fullPath);
+        }
+        else
+        {
+            size_t nameLen = strlen(fd.cFileName);
+            if (nameLen > 4 && _stricmp(fd.cFileName + nameLen - 4, ".txt") == 0)
+                ParseProvinceGoodFile(fullPath, fd.cFileName);
+        }
+    } while (FindNextFileA(h, &fd));
+
+    FindClose(h);
+}
+
+// Ванильные файлы лежат прямо под каталогом DLL (та же папка, что и
+// v2game.exe - иначе lua51.dll не подхватился бы игрой), файлы мода -
+// в mod\2\history\provinces и ПЕРЕКРЫВАЮТ ванильные для тех же id
+// (обычная семантика мода Paradox: мод переопределяет только часть
+// провинций, остальные наследуются) - поэтому сканируем сначала
+// ванильную папку, потом модовую поверх.
+static void LoadProvinceGoods()
+{
+    if (g_provinceGoodsLoaded)
+        return;
+    g_provinceGoodsLoaded = true;
+
+    char dir[MAX_PATH];
+    GetOwnDllDirectory(dir, sizeof(dir));
+    if (!dir[0])
+    {
+        Log("LoadProvinceGoods: не удалось определить каталог DLL");
+        return;
+    }
+
+    char vanillaDir[MAX_PATH];
+    sprintf_s(vanillaDir, sizeof(vanillaDir), "%s\\history\\provinces", dir);
+    DWORD vanillaAttrs = GetFileAttributesA(vanillaDir);
+    if (vanillaAttrs != INVALID_FILE_ATTRIBUTES && (vanillaAttrs & FILE_ATTRIBUTE_DIRECTORY))
+    {
+        Log("LoadProvinceGoods: сканирую ванильную '%s'", vanillaDir);
+        ScanProvinceGoodsInDir(vanillaDir);
+    }
+    else
+    {
+        Log("LoadProvinceGoods: ванильная history\\provinces не найдена (%s)", vanillaDir);
+    }
+
+    char modDir[MAX_PATH];
+    sprintf_s(modDir, sizeof(modDir), "%s\\mod\\2\\history\\provinces", dir);
+    DWORD modAttrs = GetFileAttributesA(modDir);
+    if (modAttrs != INVALID_FILE_ATTRIBUTES && (modAttrs & FILE_ATTRIBUTE_DIRECTORY))
+    {
+        Log("LoadProvinceGoods: сканирую мод '%s' (перекрывает ванильные id)", modDir);
+        ScanProvinceGoodsInDir(modDir);
+    }
+
+    int count = 0;
+    for (int i = 0; i < MAX_PROVINCE_ID; ++i)
+        if (g_provinceGood[i][0])
+            ++count;
+    Log("LoadProvinceGoods: готово, %d провинций с trade_goods", count);
+}
+
 // Развилка внутри FUN_004d04b0 (абс. 0x4D04BC, RVA 0xD04BC):
 //   CMP dword ptr[ECX+0x84],0 ; PUSH EBX ; PUSH ESI ; PUSH EDI
 //   ; JLE +8 (0xD04C6, -> 0xD04D3 продолжение) ; иначе 0xD04C8: XOR AL,AL (return false)
@@ -1084,17 +1348,66 @@ static DWORD g_prodTypeGateResumeBlock = 0;
 // пересборки DLL - см. ParseExtraWhitelist. Используется только когда
 // PROD_TYPE_GATE_ALLOW_ALL=0 (иначе разрешены все типы, до этого
 // списка дело не доходит).
-static const int MAX_EXTRA_WHITELIST = 16;
+// Было 16 - слишком мало: полный список "RGO->фабрика" типов
+// (cattle_factory..tropical_wood_factory, limit=1 в логе
+// ParseProductionTypes) - это ровно 17 имён, и 17-е тихо
+// отбрасывалось в ParseExtraWhitelist (там `while (... &&
+// g_extraWhitelistCount < MAX_EXTRA_WHITELIST)`) - отсюда жалоба
+// "не могу построить последние" при таком ini. Подняли с запасом.
+static const int MAX_EXTRA_WHITELIST = 32;
 static const int EXTRA_WHITELIST_NAME_MAX = 64;
 static char g_extraWhitelistNames[MAX_EXTRA_WHITELIST][EXTRA_WHITELIST_NAME_MAX] = { "fishery" };
 static int g_extraWhitelistCount = 1;
+
+// Диагностика (временно, по запросу пользователя): жалоба, что
+// последний тип из PROD_TYPE_GATE_EXTRA_WHITELIST не строится в
+// одном конкретном штате, хотя строится в другом (и все остальные
+// типы из того же списка работают везде). Раз это единственная
+// функция, решающая "разрешено ли по имени" - и она НЕ получает
+// указатель на штат вообще (только typePtr) - логируем каждый
+// отличающийся результат: если для tropical_wood_factory здесь
+// всегда будет result=1, значит блокирует не эта проверка, а какая-то
+// из других (build_factory_ignore_colonial_*/build_factory_checklist_
+// uncivilized_*/build_factory_ignore_uncivilized_*) - они простые
+// байтовые патчи без места для лога, туда добавить log-хук не так
+// просто. Throttle по (имя,результат), чтобы не заспамить лог -
+// строка списка запрашивается на каждый кадр, пока открыто окно.
+static const int PROD_GATE_LOG_CACHE = 32;
+static char  g_prodGateLogName[PROD_GATE_LOG_CACHE][PRODTYPE_NAME_MAX];
+static int   g_prodGateLogResult[PROD_GATE_LOG_CACHE];
+static int   g_prodGateLogCount = 0;
+
+static void LogProdTypeGateResult(const char* name, int result)
+{
+    for (int i = 0; i < g_prodGateLogCount; ++i)
+    {
+        if (strcmp(g_prodGateLogName[i], name) == 0)
+        {
+            if (g_prodGateLogResult[i] == result)
+                return; // тот же результат уже логировали - не повторяем
+            g_prodGateLogResult[i] = result;
+            Log("ProdTypeGate: %s -> result=%d (изменился)", name, result);
+            return;
+        }
+    }
+
+    if (g_prodGateLogCount < PROD_GATE_LOG_CACHE)
+    {
+        strcpy_s(g_prodGateLogName[g_prodGateLogCount], name);
+        g_prodGateLogResult[g_prodGateLogCount] = result;
+        ++g_prodGateLogCount;
+    }
+    Log("ProdTypeGate: %s -> result=%d (впервые)", name, result);
+}
 
 static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
 {
     if (!typePtr)
         return 0;
 
-    const char* src = (const char*)typePtr + OFF_PRODTYPE_NAME;
+    const char* src = ResolveProdTypeNamePtr(typePtr);
+    if (!src)
+        return 0;
     char name[PRODTYPE_NAME_MAX];
 
     int i = 0;
@@ -1108,14 +1421,25 @@ static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
     name[i] = 0;
 
     for (int e = 0; e < g_extraWhitelistCount; ++e)
+    {
         if (_stricmp(g_extraWhitelistNames[e], name) == 0)
+        {
+            LogProdTypeGateResult(name, 1);
             return 1;
+        }
+    }
 
     for (int t = 0; t < g_productionTypeCount; ++t)
     {
         if (strcmp(g_productionTypeNames[t], name) == 0)
-            return g_limitByLocalSupply[t] ? 1 : 0;
+        {
+            int result = g_limitByLocalSupply[t] ? 1 : 0;
+            LogProdTypeGateResult(name, result);
+            return result;
+        }
     }
+
+    LogProdTypeGateResult(name, 0);
     return 0;
 }
 
@@ -1223,6 +1547,307 @@ static bool InstallProdTypeGateHook()
     VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
 
     Log("ProdTypeGateHook: установлен");
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Скрытие фабрик limit_by_local_supply=yes из списка постройки, если
+// в регионе нет нужного сырья.
+//
+// FUN_006f9920 (Ghidra 0x6F9920) заполняет листбокс "factory_type" -
+// список типов фабрик в окне постройки (найден по строке "factory_type"
+// из country_production.gui - однозначный xref, в отличие от двух
+// провалившихся попыток дойти до этого места через RTTI/vtable
+// конструкторов CFactoryInfoItem/CBuildFactoryWindow).
+//
+// Цикл функции на каждой итерации берёт кандидата typePtr = *(*[ESP+0x14]
+// + ESI*4), где ESI - индекс, а [ESP+0x14] (= DAT_0125ce80+0xc) не
+// меняется на всём протяжении цикла. Прямо перед местом создания
+// строки списка (operator_new(0x30) по адресу 0x00AAE9AF) родная игра
+// уже сама что-то проверяет через typePtr+0x12c/+0xbcc/+0x58 и
+// FUN_0052ca30 - но это оказалось НЕ про "физически есть ли товар в
+// регионе" (см. развёрнутый разбор в памяти проекта
+// project_hide_no_supply_factories и комментарий у
+// FindLimitByLocalSupplyIndex): тестер подтвердил, что из 15 типов
+// доступен должен быть только один, а то родное условие пропускало
+// все. Поэтому проверка сырья теперь полностью своя, по файлам
+// (production_types.txt + history/provinces/*.txt - см.
+// ShouldHideNoSupplyFactory/LoadProvinceGoods), state (из [EDI+0xD0]
+// окна постройки) нужен только чтобы получить список id провинций
+// региона. Если сырья нет - пропускаем кандидата целиком (как и
+// остальные "skip" переходы в этом цикле - на 0x6F9EB0, INC ESI).
+// Если хотим показать строку - воспроизводим затёртые "push 0x30;
+// call operator_new" один в один и продолжаем с 0x6F9E48, ровно как
+// было в оригинале.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_HIDE_NO_SUPPLY_HOOK        = 0x2F9E41;
+static const DWORD RVA_HIDE_NO_SUPPLY_RESUME_SHOW = 0x2F9E48;
+static const DWORD RVA_HIDE_NO_SUPPLY_RESUME_SKIP = 0x2F9EB0;
+static const DWORD RVA_OPERATOR_NEW_0X30          = 0x6AE9AF;
+
+// Проверяем "push 0x30" (6A 30) и первый байт "call" (E8) - опкод
+// call rel32 однозначен, а вот форму кодирования push imm8/imm32
+// напрямую через Ghidra MCP не смотрели (инструмент отдаёт только
+// мнемонику, не байты) - если сигнатура не совпадёт, патч тихо
+// пропустится и залогируется, как и остальные патчи в этом файле.
+static const unsigned char HIDE_NO_SUPPLY_SIG[3] = { 0x6A, 0x30, 0xE8 };
+
+static DWORD g_hideNoSupplyResumeShow = 0;
+static DWORD g_hideNoSupplyResumeSkip = 0;
+static DWORD g_operatorNewAddr        = 0;
+
+// Тестовый режим: считаем и логируем вердикт как обычно, но НИКОГДА
+// не прячем строку. Третий заход на эту фичу - весь подход к проверке
+// сырья переписан на чтение файлов (production_types.txt +
+// history/provinces/*.txt) вместо внутренних структур движка, которые
+// оказались не про то (см. комментарий у FindLimitByLocalSupplyIndex).
+// Подтверждено по логу (cattle/grain/timber -> 0, остальные 12 -> 1,
+// совпадает с реальными ресурсами региона) - выключено. Единственный
+// критерий скрытия - наличие сырья; "уже построено" НЕ считается
+// причиной скрытия (см. комментарий у SafeShouldHideNoSupplyFactory).
+static unsigned char g_hideNoSupplyDryRun = 0;
+
+// Тот же разбор имени, что и в IsProdTypeWhitelistedByName, но без
+// PROD_TYPE_GATE_EXTRA_WHITELIST - этот список только для патча
+// "разрешить строить в колонии", к видимости в списке не относится.
+// Возвращает индекс в g_productionTypeNames (и параллельных массивах
+// g_limitByLocalSupply/g_productionTypeGood), или -1, если тип
+// неизвестен.
+static int FindProductionTypeIndex(void* typePtr)
+{
+    if (!typePtr)
+        return -1;
+
+    const char* src = ResolveProdTypeNamePtr(typePtr);
+    if (!src)
+        return -1;
+
+    char name[PRODTYPE_NAME_MAX];
+    int i = 0;
+    for (; i < PRODTYPE_NAME_MAX - 1; ++i)
+    {
+        char c = src[i];
+        if (c == 0)
+            break;
+        name[i] = c;
+    }
+    name[i] = 0;
+
+    for (int t = 0; t < g_productionTypeCount; ++t)
+    {
+        if (strcmp(g_productionTypeNames[t], name) == 0)
+            return t;
+    }
+    return -1;
+}
+
+static int FindLimitByLocalSupplyIndex(void* typePtr)
+{
+    int t = FindProductionTypeIndex(typePtr);
+    return (t >= 0 && g_limitByLocalSupply[t]) ? t : -1;
+}
+
+// Второй заход на эту фичу: сначала пробовали читать "источник
+// снабжения" через внутренние структуры движка (typePtr+0x12c,
+// FUN_0052ca30 - см. память проекта project_hide_no_supply_factories)
+// - структура читалась похоже на настоящую (та же, что использует
+// проверенная FUN_0052ca30), но на практике оказалась НЕ про "физически
+// есть ли товар в регионе": тестер подтвердил, что из 15 типов в его
+// регионе доступен должен быть только timber_factory, а патч не прятал
+// НИ ОДНОГО - похоже, это другая, более узкая (колониальная) проверка.
+// Вместо гадания по памяти читаем сами: production_types.txt уже даёт
+// нам единственный входной товар лимитированных типов (input_goods,
+// см. g_productionTypeGood), а history/provinces/*.txt каждой
+// провинции - её "trade_goods" тем же именем (см. LoadProvinceGoods).
+// Сравниваем строками. Список провинций региона (state+0x48/+0x4c) -
+// единственная часть прежнего подхода, которая давала правдоподобные
+// данные (реальные id провинций), её и оставляем.
+// Лёгкий throttle-лог по имени типа - только чтобы подтвердить исход
+// на реальных данных этого тестового захода.
+static const int HIDE_NO_SUPPLY_LOG_CACHE = 32;
+static char g_hideNoSupplyLogName[HIDE_NO_SUPPLY_LOG_CACHE][PRODTYPE_NAME_MAX];
+static int  g_hideNoSupplyLogResult[HIDE_NO_SUPPLY_LOG_CACHE];
+static int  g_hideNoSupplyLogCount = 0;
+
+static void LogHideNoSupplyResult(const char* name, int result)
+{
+    for (int i = 0; i < g_hideNoSupplyLogCount; ++i)
+    {
+        if (strcmp(g_hideNoSupplyLogName[i], name) == 0)
+        {
+            if (g_hideNoSupplyLogResult[i] == result)
+                return;
+            g_hideNoSupplyLogResult[i] = result;
+            Log("HideNoSupply: %s -> hide=%d (изменился)", name, result);
+            return;
+        }
+    }
+    if (g_hideNoSupplyLogCount < HIDE_NO_SUPPLY_LOG_CACHE)
+    {
+        strcpy_s(g_hideNoSupplyLogName[g_hideNoSupplyLogCount], name);
+        g_hideNoSupplyLogResult[g_hideNoSupplyLogCount] = result;
+        ++g_hideNoSupplyLogCount;
+    }
+    Log("HideNoSupply: %s -> hide=%d (впервые)", name, result);
+}
+
+// Отдельная задача "скрыть fishery, если регион не прибрежный" (не
+// limit_by_local_supply, а is_coastal=yes) была опробована и брошена:
+// три независимых статических захода через Ghidra не нашли, где
+// движок хранит признак "этот регион прибрежный" -
+//   1) байты самого объекта state - все отличия между заведомо
+//      приморским и сухопутным регионом оказались просто "шумными"
+//      (население/экономика/уже построенные фабрики), без чистого
+//      флага 0/1;
+//   2) байты объектов провинций региона и указатель +0xC8 у них -
+//      похож на узел графа/пространственного индекса, а разница в
+//      диапазоне памяти между группами - похоже, случайность порядка
+//      выделения кучи, а не признак;
+//   3) typePtr+0x12c ("локальный источник", который для
+//      limit_by_local_supply типов бесполезен из-за их bypass-флага
+//      +0x130) - оказался ОДНИМ И ТЕМ ЖЕ объектом независимо от
+//      региона (это поле общее у типа в целом, не завязано на
+//      конкретный регион), так что в принципе не может нести
+//      региональную информацию.
+// Решение (см. память проекта project_hide_no_supply_factories):
+// оставить fishery как есть (всегда видна, как и в ванильном
+// поведении) и не тратить больше времени на RTTI/vtable-подобный
+// тупик - если понадобится вернуться, нужен live-инструмент
+// (Cheat Engine и т.п.), а не статический Ghidra.
+
+// Заворачиваем чтение списка провинций региона в SEH - state пришёл
+// из [EDI+0xD0] окна постройки (см. поток вызовов, подтверждённый на
+// province dump с реальными id), но перестраховка от битого указателя
+// дешева и уже стандартна для этого файла (см. SafeCheckTypeName).
+// (Пробовали ещё и доп. условие "уже построена - тоже скрыть" по
+// связному списку state+0x60, тестер сначала подтвердил это как
+// ожидаемое, потом уточнил обратное: "доступные, но уже построенные
+// скрывать не нужно" - убрано, единственный критерий скрытия -
+// наличие сырья в регионе.)
+static int SafeShouldHideNoSupplyFactory(void* typePtr, void* statePtr, const char* name, const char* goodName)
+{
+    void* idBeginRaw = 0;
+    void* idEndRaw = 0;
+
+    __try
+    {
+        if (!statePtr)
+            return 0;
+
+        int* idBegin = *(int**)((char*)statePtr + 0x48);
+        int* idEnd   = *(int**)((char*)statePtr + 0x4c);
+        idBeginRaw = idBegin;
+        idEndRaw = idEnd;
+
+        if (!idBegin || !idEnd || idEnd < idBegin || (idEnd - idBegin) > 64)
+            return 0; // подозрительный диапазон - безопасный откат, не трогаем
+
+        for (int* p = idBegin; p < idEnd; ++p)
+        {
+            int provinceId = *p;
+            if (provinceId > 0 && provinceId < MAX_PROVINCE_ID &&
+                g_provinceGood[provinceId][0] &&
+                strcmp(g_provinceGood[provinceId], goodName) == 0)
+                return 0; // нашли провинцию с нужным сырьём - показываем
+        }
+
+        return 1; // ни одна провинция региона не производит нужный товар - скрываем
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("HideNoSupply: %s -> исключение! typePtr=%p statePtr=%p idBegin=%p idEnd=%p, не трогаем",
+            name, typePtr, statePtr, idBeginRaw, idEndRaw);
+        return 0;
+    }
+}
+
+static int __cdecl ShouldHideNoSupplyFactory(void* typePtr, void* statePtr)
+{
+    int typeIndex = FindLimitByLocalSupplyIndex(typePtr);
+    if (typeIndex < 0)
+        return 0; // тип не привязан к местному сырью - не трогаем
+
+    const char* goodName = g_productionTypeGood[typeIndex];
+    if (!goodName[0])
+        return 0; // не смогли распарсить input_goods - безопасный откат
+
+    const char* name = g_productionTypeNames[typeIndex];
+    int result = SafeShouldHideNoSupplyFactory(typePtr, statePtr, name, goodName);
+    LogHideNoSupplyResult(name, result);
+    return result;
+}
+
+// Один изолированный push/call/cleanup блок ПЕРЕД любым ветвлением -
+// та же структура, что уже проверена на этом файле в ProdTypeGateThunk
+// (см. комментарий там: вложенные push/pop посреди уже разветвлённой
+// логики роняли игру на загрузке партии). ecx/eax/edx - единственные
+// регистры, которые здесь вообще нужны; esi/edi (индекс цикла и "this"
+// окна) и ebx/ebp не трогаем вовсе, поэтому даже не сохраняем.
+// state снова нужен (список провинций региона для файлового подхода) -
+// берём из [EDI+0xD0], как и раньше (правдоподобный, реальный список
+// провинций - см. ShouldHideNoSupplyFactory).
+__declspec(naked) static void HideNoSupplyFactoryThunk()
+{
+    __asm {
+        mov ecx, dword ptr [esp + 0x14]
+        mov eax, dword ptr [ecx]
+        mov eax, dword ptr [eax + esi * 4]   // eax = typePtr кандидата
+        mov edx, dword ptr [edi + 0xd0]      // edx = statePtr окна постройки
+
+        push edx
+        push eax
+        call ShouldHideNoSupplyFactory
+        add esp, 8
+        cmp byte ptr [g_hideNoSupplyDryRun], 0
+        jnz not_hidden   // тестовый режим - вердикт залогирован внутри вызова, но не применяем
+        test eax, eax
+        jnz hidden
+
+    not_hidden:
+        push 0x30
+        call dword ptr [g_operatorNewAddr]
+        jmp dword ptr [g_hideNoSupplyResumeShow]
+
+    hidden:
+        jmp dword ptr [g_hideNoSupplyResumeSkip]
+    }
+}
+
+static bool InstallHideNoSupplyFactoriesHook()
+{
+    LoadProductionTypeLimits();
+    LoadProvinceGoods();
+
+    g_hideNoSupplyDryRun = g_settings.hideNoSupplyDryRun ? 1 : 0;
+
+    unsigned char* hook = (unsigned char*)(g_base + RVA_HIDE_NO_SUPPLY_HOOK);
+
+    if (memcmp(hook, HIDE_NO_SUPPLY_SIG, sizeof(HIDE_NO_SUPPLY_SIG)) != 0)
+    {
+        Log("HideNoSupplyFactoriesHook: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_hideNoSupplyResumeShow = g_base + RVA_HIDE_NO_SUPPLY_RESUME_SHOW;
+    g_hideNoSupplyResumeSkip = g_base + RVA_HIDE_NO_SUPPLY_RESUME_SKIP;
+    g_operatorNewAddr        = g_base + RVA_OPERATOR_NEW_0X30;
+
+    unsigned char patch[7];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&HideNoSupplyFactoryThunk - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("HideNoSupplyFactoriesHook: установлен");
     return true;
 }
 
@@ -1856,12 +2481,30 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_FACTORY_DUMP_SCAN") == 0)         { g_settings.patchFactoryDumpScan        = v; return; }
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
     if (_stricmp(key, "PATCH_PROD_TYPE_GATE") == 0)            { g_settings.patchProdTypeGate           = v; return; }
+    if (_stricmp(key, "HIDE_UNAVAILABLE_LIMIT_BY_SUPPLY_FACTORIES") == 0) { g_settings.patchHideNoSupplyFactories = v; return; }
+    if (_stricmp(key, "HIDE_NO_SUPPLY_DRY_RUN") == 0)          { g_settings.hideNoSupplyDryRun          = v; return; }
     if (_stricmp(key, "PROD_TYPE_GATE_ALLOW_ALL") == 0)         { g_settings.prodTypeGateAllowAll        = v; return; }
     if (_stricmp(key, "PATCH_EXPONENTIAL_PRICE_DELTA") == 0)    { g_settings.patchExponentialPriceDelta  = v; return; }
     if (_stricmp(key, "PATCH_COMBAT_ROLL") == 0)                { g_settings.patchCombatRoll             = v; return; }
 
+    if (_stricmp(key, "ENABLE_OOS_LOG") == 0)              { g_settings.enableOosLog        = v; return; }
+    if (_stricmp(key, "ENABLE_CRASH_LOG") == 0)            { g_settings.enableCrashLog      = v; return; }
+    if (_stricmp(key, "PATCH_FPU_FORTRESS") == 0)          { g_settings.patchFpuFortress    = v; return; }
+    if (_stricmp(key, "PATCH_D3D_FPU_PRESERVE") == 0)      { g_settings.patchD3dFpuPreserve = v; return; }
+    if (_stricmp(key, "PATCH_THREAD_FPU_PIN") == 0)        { g_settings.patchThreadFpuPin   = v; return; }
+    if (_stricmp(key, "PATCH_HEAP_LFH") == 0)              { g_settings.patchHeapLfh        = v; return; }
+    if (_stricmp(key, "PATCH_POP_QUANTIZE") == 0)          { g_settings.patchPopQuantize    = v; return; }
+    if (_stricmp(key, "PATCH_MP_CLIENT_SLEEP") == 0)       { g_settings.patchMpClientSleep  = v; return; }
+    if (_stricmp(key, "PATCH_MAIN_LOOP_SLEEP0") == 0)      { g_settings.patchMainLoopSleep0 = v; return; }
+    if (_stricmp(key, "PATCH_D3D_NO_VSYNC") == 0)          { g_settings.patchD3dNoVsync     = v; return; }
+    if (_stricmp(key, "PATCH_HIGH_PRIORITY") == 0)         { g_settings.patchHighPriority   = v; return; }
+
     if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
     if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
+    if (_stricmp(key, "ENGINE_WORKER_THREADS") == 0)  { g_settings.engineWorkerThreads   = atoi(value); return; }
+    if (_stricmp(key, "POP_QUANTIZE_KEEP_BITS") == 0) { g_settings.popQuantizeKeepBits   = atoi(value); return; }
+    if (_stricmp(key, "MP_CLIENT_SLEEP_MS") == 0)     { g_settings.mpClientSleepMs       = atoi(value); return; }
+    if (_stricmp(key, "MAIN_LOOP_SLEEP_MS") == 0)     { g_settings.mainLoopSleepMs       = atoi(value); return; }
 
     if (_stricmp(key, "PROD_TYPE_GATE_EXTRA_WHITELIST") == 0) { ParseExtraWhitelist(value); return; }
 
@@ -1922,6 +2565,7 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.localModConfig);
 
     fprintf(f,
+        "; Military\n"
         "PATCH_ALWAYS_ADD_WARGOALS=%d\n"
         "PATCH_LAND_REINFORCE=%d\n"
         "PATCH_NAVAL_REINFORCE=%d\n"
@@ -1951,6 +2595,7 @@ static void WriteDefaultSettings(const char* path)
     }
 
     fprintf(f,
+        "; Economic\n"
         "ENABLE_PRICE_DELTA=%d\n"
         "PATCH_EXPONENTIAL_PRICE_DELTA=%d\n"
         "PATCH_MAX_RELATIVE_PRICE=%d\n"
@@ -1982,19 +2627,23 @@ static void WriteDefaultSettings(const char* path)
         extraWhitelistJoined);
 
     fprintf(f,
+        "; UI\n"
         "ENABLE_BUTTONS=%d\n"
         "ENABLE_DECISION_FILTER=%d\n"
         "ENABLE_POP_DISPLAY=%d\n"
         "ENABLE_VERSION_LABEL=%d\n"
         "PATCH_PROD_LIST_VISIBILITY=%d\n"
+        "HIDE_UNAVAILABLE_LIMIT_BY_SUPPLY_FACTORIES=%d\n"
         "\n",
         (int)g_settings.buttons,
         (int)g_settings.decisionFilter,
         (int)g_settings.popDisplay,
         (int)g_settings.versionLabel,
-        (int)g_settings.patchProdListVisibility);
+        (int)g_settings.patchProdListVisibility,
+        (int)g_settings.patchHideNoSupplyFactories);
 
     fprintf(f,
+        "; Miscellaneous\n"
         "PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=%d\n"
         "PATCH_CIVILIZE_NULL_CHECK=%d\n"
         "PATCH_GRAPH_POINT_CLAMP=%d\n"
@@ -2008,10 +2657,47 @@ static void WriteDefaultSettings(const char* path)
         (int)FindExePatchEnabled("aristocrat_income_share_patch_1"));
 
     fprintf(f,
+        "; Stability\n"
+        "PATCH_FPU_FORTRESS=%d\n"
+        "PATCH_D3D_FPU_PRESERVE=%d\n"
+        "PATCH_THREAD_FPU_PIN=%d\n"
+        "PATCH_HEAP_LFH=%d\n"
+        "ENGINE_WORKER_THREADS=%d\n"
+        "PATCH_POP_QUANTIZE=%d\n"
+        "POP_QUANTIZE_KEEP_BITS=%d\n"
+        "PATCH_MP_CLIENT_SLEEP=%d\n"
+        "MP_CLIENT_SLEEP_MS=%d\n"
+        "PATCH_MAIN_LOOP_SLEEP0=%d\n"
+        "MAIN_LOOP_SLEEP_MS=%d\n"
+        "PATCH_D3D_NO_VSYNC=%d\n"
+        "PATCH_HIGH_PRIORITY=%d\n"
+        "\n",
+        (int)g_settings.patchFpuFortress,
+        (int)g_settings.patchD3dFpuPreserve,
+        (int)g_settings.patchThreadFpuPin,
+        (int)g_settings.patchHeapLfh,
+        g_settings.engineWorkerThreads,
+        (int)g_settings.patchPopQuantize,
+        g_settings.popQuantizeKeepBits,
+        (int)g_settings.patchMpClientSleep,
+        g_settings.mpClientSleepMs,
+        (int)g_settings.patchMainLoopSleep0,
+        g_settings.mainLoopSleepMs,
+        (int)g_settings.patchD3dNoVsync,
+        (int)g_settings.patchHighPriority);
+
+    fprintf(f,
+        "; Diagnostics\n"
         "ENABLE_LOG=%d\n"
-        "PATCH_FACTORY_DUMP_SCAN=%d\n",
+        "PATCH_FACTORY_DUMP_SCAN=%d\n"
+        "ENABLE_OOS_LOG=%d\n"
+        "ENABLE_CRASH_LOG=%d\n"
+        "HIDE_NO_SUPPLY_DRY_RUN=%d\n",
         (int)g_settings.log,
-        (int)g_settings.patchFactoryDumpScan);
+        (int)g_settings.patchFactoryDumpScan,
+        (int)g_settings.enableOosLog,
+        (int)g_settings.enableCrashLog,
+        (int)g_settings.hideNoSupplyDryRun);
 
     fclose(f);
 }
@@ -2037,7 +2723,16 @@ static void LoadSettingsFrom(const char* path)
 
     Log("LoadSettingsFrom: читаю '%s'", path);
 
-    char line[256];
+    // Было 256 - слишком мало для длинных списков вроде
+    // PROD_TYPE_GATE_EXTRA_WHITELIST: fgets молча обрезает строку по
+    // границе буфера БЕЗ переноса строки, а хвост попадает в
+    // СЛЕДУЮЩИЙ вызов fgets уже без "=" - парсер такую "строку" просто
+    // пропускает (см. `if (!eq) continue;` ниже), и обрезанные с конца
+    // значения списка тихо теряются. Ровно так у пользователя терялись
+    // последние 2 имени из 17-элементного списка (292 символа против
+    // буфера в 256) - сам разбор списка (MAX_EXTRA_WHITELIST) был уже
+    // не при чём, строка до него в таком виде просто не доходила.
+    char line[4096];
     while (fgets(line, sizeof(line), f))
     {
         char* eq = strchr(line, '=');
@@ -2709,7 +3404,16 @@ static bool ReadPlausibleTypeName(void* typePtr, char* outName, int outSize)
     if (tv < 0x10000 || tv > 0xFFFE0000)
         return false;
 
-    const char* src = (const char*)typePtr + OFF_PRODTYPE_NAME;
+    const char* src = ResolveProdTypeNamePtr(typePtr);
+    if (!src)
+        return false;
+    // Длинные имена (std::string ушёл в кучу) - src теперь чужой
+    // указатель, а не typePtr+OFF_PRODTYPE_NAME, так что диапазон
+    // проверяем заново.
+    UINT_PTR sv = (UINT_PTR)src;
+    if (sv < 0x10000 || sv > 0xFFFE0000)
+        return false;
+
     int i = 0;
     for (; i < outSize - 1; ++i)
     {
@@ -3397,6 +4101,2345 @@ static bool InstallCombatRoll()
 }
 
 
+// ---------------------------------------------------------------
+// Категория Stability: устойчивость к рассинхрону в MP (OOS) и
+// общая стабильность движка (FPU/D3D/куча/TBB/квантование POP).
+// Портировано из ветки V2\V2TechButton.cpp (версия 3.10) того же
+// проекта - адреса перепроверены напрямую по v2game.exe перед
+// переносом. Диагностика ident_skip/vtable-guard из того файла
+// НЕ перенесена - это отдельная, не запрошенная сейчас подсистема
+// (PATCH_NULL_VTABLE_UI), сюда её специально не тянем.
+// ---------------------------------------------------------------
+
+// Замена запрещённого IsBadReadPtr: та же сигнатура (TRUE = память
+// плохая), но через SEH, без обхода PAGE_GUARD ядром.
+static BOOL WINAPI SafeIsBadReadPtr(const void* lp, UINT_PTR ucb)
+{
+    if (!lp || ucb == 0)
+        return TRUE;
+    __try
+    {
+        volatile const unsigned char* p = (const unsigned char*)lp;
+        (void)p[0];
+        if (ucb > 1)
+            (void)p[ucb - 1];
+        return FALSE;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return TRUE;
+    }
+}
+
+static void PinFpu()
+{
+    unsigned int ignored = 0;
+    _controlfp_s(&ignored, _PC_53, _MCW_PC);
+    _controlfp_s(&ignored, _RC_NEAR, _MCW_RC);
+    _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+    _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
+}
+
+static bool HookIat(HMODULE module, const char* dllName, const char* funcName, void* hook, void** orig)
+{
+    if (!module || !dllName || !funcName || !hook)
+        return false;
+
+    unsigned char* base = (unsigned char*)module;
+    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)base;
+    if (dos->e_magic != IMAGE_DOS_SIGNATURE)
+        return false;
+
+    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(base + dos->e_lfanew);
+    if (nt->Signature != IMAGE_NT_SIGNATURE)
+        return false;
+
+    DWORD importRva = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress;
+    if (!importRva)
+        return false;
+
+    IMAGE_IMPORT_DESCRIPTOR* desc = (IMAGE_IMPORT_DESCRIPTOR*)(base + importRva);
+    for (; desc->Name; ++desc)
+    {
+        const char* name = (const char*)(base + desc->Name);
+        if (_stricmp(name, dllName) != 0)
+            continue;
+
+        IMAGE_THUNK_DATA32* thunk = (IMAGE_THUNK_DATA32*)(base + desc->FirstThunk);
+        IMAGE_THUNK_DATA32* origThunk = desc->OriginalFirstThunk
+            ? (IMAGE_THUNK_DATA32*)(base + desc->OriginalFirstThunk)
+            : thunk;
+
+        for (; thunk->u1.Function; ++thunk, ++origThunk)
+        {
+            if (origThunk->u1.Ordinal & IMAGE_ORDINAL_FLAG32)
+                continue;
+
+            IMAGE_IMPORT_BY_NAME* byName = (IMAGE_IMPORT_BY_NAME*)(base + origThunk->u1.AddressOfData);
+            if (strcmp((const char*)byName->Name, funcName) != 0)
+                continue;
+
+            DWORD* slot = (DWORD*)&thunk->u1.Function;
+            if (*slot == (DWORD)(DWORD_PTR)hook)
+                return true;
+
+            HMODULE expected = GetModuleHandleA(dllName);
+            if (expected)
+            {
+                MEMORY_BASIC_INFORMATION mbi;
+                memset(&mbi, 0, sizeof(mbi));
+                if (!VirtualQuery((void*)(DWORD_PTR)*slot, &mbi, sizeof(mbi)))
+                    return false;
+                // Непривязанный IAT держит RVA на имя в нашем модуле.
+                // После bind указатель смотрит в чужой модуль (kernel32
+                // часто форвардит в kernelbase — это нормально).
+                if (mbi.AllocationBase == module)
+                    return false;
+            }
+
+            DWORD oldProtect = 0;
+            if (!VirtualProtect(slot, sizeof(DWORD), PAGE_EXECUTE_READWRITE, &oldProtect))
+                return false;
+
+            if (orig && !*orig)
+                *orig = (void*)(DWORD_PTR)*slot;
+            *slot = (DWORD)(DWORD_PTR)hook;
+            VirtualProtect(slot, sizeof(DWORD), oldProtect, &oldProtect);
+            return true;
+        }
+    }
+    return false;
+}
+
+static bool PatchVtableSlot(void* obj, int slot, void* hook, void** orig)
+{
+    if (!obj || !hook)
+        return false;
+
+    void** vtable = *(void***)obj;
+    if (!vtable)
+        return false;
+
+    if (vtable[slot] == hook)
+        return true;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(&vtable[slot], sizeof(void*), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    if (orig && !*orig)
+        *orig = vtable[slot];
+    vtable[slot] = hook;
+    VirtualProtect(&vtable[slot], sizeof(void*), oldProtect, &oldProtect);
+    return true;
+}
+
+typedef DWORD (WINAPI* tGetTickCount)(void);
+typedef HANDLE (WINAPI* tCreateThread)(LPSECURITY_ATTRIBUTES, SIZE_T, LPTHREAD_START_ROUTINE, LPVOID, DWORD, LPDWORD);
+typedef DWORD_PTR (__cdecl *tBeginThreadEx)(void*, unsigned, LPTHREAD_START_ROUTINE, void*, unsigned, unsigned*);
+typedef HMODULE (WINAPI* tLoadLibraryA)(LPCSTR);
+typedef HMODULE (WINAPI* tLoadLibraryW)(LPCWSTR);
+typedef void* (WINAPI* tDirect3DCreate9)(UINT);
+typedef HRESULT (WINAPI* tD3D9CreateDevice)(void*, UINT, UINT, HWND, DWORD, void*, void**);
+typedef HRESULT (WINAPI* tD3D9Reset)(void*, void*);
+typedef HRESULT (WINAPI* tD3D9Present)(void*, const void*, const void*, HWND, const void*);
+
+static const DWORD D3DCREATE_FPU_PRESERVE_FLAG = 0x00000002;
+static const DWORD D3DPRESENT_INTERVAL_IMMEDIATE = 0x80000000;
+static const int D3DPRESENT_INTERVAL_OFF = 52;
+static const int D3D9_VT_CREATEDEVICE = 16;
+static const int D3D9DEV_VT_RESET = 16;
+static const int D3D9DEV_VT_PRESENT = 17;
+
+static void TryPatchLateModules();
+static HMODULE WINAPI HookLoadLibraryA(LPCSTR name);
+static HMODULE WINAPI HookLoadLibraryW(LPCWSTR name);
+
+static tGetTickCount       g_realGetTickCount = 0;
+static tCreateThread       g_realCreateThread = 0;
+static tBeginThreadEx      g_realBeginThreadEx = 0;
+static tLoadLibraryA       g_realLoadLibraryA = 0;
+static tLoadLibraryW       g_realLoadLibraryW = 0;
+static tDirect3DCreate9    g_realDirect3DCreate9 = 0;
+static tD3D9CreateDevice   g_realCreateDevice = 0;
+static tD3D9Reset          g_realReset = 0;
+static tD3D9Present        g_realPresent = 0;
+static void*               g_realTbbInit = 0;
+
+static DWORD WINAPI HookGetTickCount(void)
+{
+    static LONG attempts = 0;
+    if (attempts < 256)
+    {
+        InterlockedIncrement(&attempts);
+        TryPatchLateModules();
+    }
+    return g_realGetTickCount ? g_realGetTickCount() : 0;
+}
+
+struct ThreadStartWrap
+{
+    LPTHREAD_START_ROUTINE orig;
+    LPVOID param;
+};
+
+static DWORD WINAPI PinnedThreadStart(LPVOID raw)
+{
+    ThreadStartWrap* wrap = (ThreadStartWrap*)raw;
+    LPTHREAD_START_ROUTINE orig = wrap->orig;
+    LPVOID param = wrap->param;
+    HeapFree(GetProcessHeap(), 0, wrap);
+    PinFpu();
+    return orig(param);
+}
+
+static HANDLE WINAPI HookCreateThread(
+    LPSECURITY_ATTRIBUTES sa, SIZE_T stack, LPTHREAD_START_ROUTINE start,
+    LPVOID param, DWORD flags, LPDWORD id)
+{
+    if (!g_realCreateThread)
+        return 0;
+
+    if (!start || start == PinnedThreadStart)
+        return g_realCreateThread(sa, stack, start, param, flags, id);
+
+    ThreadStartWrap* wrap = (ThreadStartWrap*)HeapAlloc(
+        GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(ThreadStartWrap));
+    if (!wrap)
+        return g_realCreateThread(sa, stack, start, param, flags, id);
+
+    wrap->orig = start;
+    wrap->param = param;
+
+    HANDLE h = g_realCreateThread(sa, stack, PinnedThreadStart, wrap, flags, id);
+    if (!h)
+        HeapFree(GetProcessHeap(), 0, wrap);
+    return h;
+}
+
+static DWORD_PTR __cdecl HookBeginThreadEx(
+    void* security, unsigned stack, LPTHREAD_START_ROUTINE start,
+    void* arg, unsigned flags, unsigned* id)
+{
+    if (!g_realBeginThreadEx)
+        return 0;
+
+    if (!start || start == PinnedThreadStart)
+        return g_realBeginThreadEx(security, stack, start, arg, flags, id);
+
+    ThreadStartWrap* wrap = (ThreadStartWrap*)HeapAlloc(
+        GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(ThreadStartWrap));
+    if (!wrap)
+        return g_realBeginThreadEx(security, stack, start, arg, flags, id);
+
+    wrap->orig = start;
+    wrap->param = arg;
+
+    DWORD_PTR h = g_realBeginThreadEx(security, stack, PinnedThreadStart, wrap, flags, id);
+    if (!h)
+        HeapFree(GetProcessHeap(), 0, wrap);
+    return h;
+}
+
+static HRESULT WINAPI HookPresent(void* device, const void* src, const void* dest, HWND wnd, const void* dirty)
+{
+    HRESULT hr = g_realPresent
+        ? g_realPresent(device, src, dest, wnd, dirty)
+        : E_FAIL;
+    PinFpu();
+    return hr;
+}
+
+static void ForceImmediatePresent(void* params)
+{
+    if (!params || !g_settings.patchD3dNoVsync)
+        return;
+    __try
+    {
+        *(DWORD*)((char*)params + D3DPRESENT_INTERVAL_OFF) = D3DPRESENT_INTERVAL_IMMEDIATE;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static HRESULT WINAPI HookReset(void* self, void* params)
+{
+    ForceImmediatePresent(params);
+    return g_realReset ? g_realReset(self, params) : E_FAIL;
+}
+
+static HRESULT WINAPI HookCreateDevice(
+    void* self, UINT adapter, UINT type, HWND hwnd, DWORD flags,
+    void* params, void** outDevice)
+{
+    if (g_settings.patchD3dFpuPreserve)
+        flags |= D3DCREATE_FPU_PRESERVE_FLAG;
+    ForceImmediatePresent(params);
+
+    HRESULT hr = g_realCreateDevice
+        ? g_realCreateDevice(self, adapter, type, hwnd, flags, params, outDevice)
+        : E_FAIL;
+
+    if (hr >= 0 && outDevice && *outDevice)
+    {
+        PatchVtableSlot(*outDevice, D3D9DEV_VT_RESET, (void*)HookReset, (void**)&g_realReset);
+        if (PatchVtableSlot(*outDevice, D3D9DEV_VT_PRESENT, (void*)HookPresent, (void**)&g_realPresent))
+            Log("D3D9: Present перехвачен, FPU_PRESERVE=%d noVsync=%d",
+                (int)g_settings.patchD3dFpuPreserve,
+                (int)g_settings.patchD3dNoVsync);
+    }
+    return hr;
+}
+
+static void* WINAPI HookDirect3DCreate9(UINT sdk)
+{
+    void* obj = g_realDirect3DCreate9 ? g_realDirect3DCreate9(sdk) : 0;
+    if (obj)
+        PatchVtableSlot(obj, D3D9_VT_CREATEDEVICE, (void*)HookCreateDevice, (void**)&g_realCreateDevice);
+    return obj;
+}
+
+static DWORD g_tbbMaxThreads = 8;
+
+__declspec(naked) static void HookTbbInit()
+{
+    __asm {
+        mov eax, g_tbbMaxThreads
+        cmp eax, 1
+        jl go_real
+        mov dword ptr [esp + 4], eax
+    go_real:
+        jmp dword ptr [g_realTbbInit]
+    }
+}
+
+static void HookTbbModule(HMODULE tbb)
+{
+    if (!tbb || !g_settings.patchThreadFpuPin)
+        return;
+
+    static LONG loggedCt = 0;
+    static LONG loggedBt = 0;
+    static LONG loggedFail = 0;
+
+    bool ct = HookIat(tbb, "kernel32.dll", "CreateThread",
+        (void*)HookCreateThread, (void**)&g_realCreateThread);
+    bool bt = HookIat(tbb, "MSVCR100.dll", "_beginthreadex",
+        (void*)HookBeginThreadEx, (void**)&g_realBeginThreadEx);
+
+    if (ct && InterlockedCompareExchange(&loggedCt, 1, 0) == 0)
+        Log("TBB: CreateThread перехвачен");
+    if (bt && InterlockedCompareExchange(&loggedBt, 1, 0) == 0)
+        Log("TBB: _beginthreadex перехвачен");
+    if (!ct && !bt && InterlockedCompareExchange(&loggedFail, 1, 0) == 0)
+        Log("TBB: ни CreateThread, ни _beginthreadex в IAT");
+}
+
+static const char TBB_INIT_MANGLE[] = "?initialize@task_scheduler_init@tbb@@QAEXHI@Z";
+
+static void HookTbbInitOnExe()
+{
+    if (g_settings.engineWorkerThreads < 1)
+        return;
+
+    static LONG hooked = 0;
+    if (hooked)
+        return;
+
+    HMODULE tbb = GetModuleHandleA("tbb.dll");
+    if (!tbb)
+        return;
+
+    g_tbbMaxThreads = g_settings.engineWorkerThreads;
+    if (!g_realTbbInit)
+        g_realTbbInit = (void*)GetProcAddress(tbb, TBB_INIT_MANGLE);
+
+    if (!g_realTbbInit)
+    {
+        Log("TBB: initialize не найден в tbb.dll");
+        hooked = 1;
+        return;
+    }
+
+    if (HookIat(GetModuleHandleA(NULL), "tbb.dll", TBB_INIT_MANGLE, (void*)HookTbbInit, &g_realTbbInit))
+    {
+        hooked = 1;
+        Log("TBB: initialize капим на %d потоков", g_tbbMaxThreads);
+    }
+}
+
+static bool NameHasTbbA(const char* name)
+{
+    if (!name)
+        return false;
+    for (const char* p = name; *p; ++p)
+    {
+        if ((p[0] == 't' || p[0] == 'T') &&
+            (p[1] == 'b' || p[1] == 'B') &&
+            (p[2] == 'b' || p[2] == 'B'))
+            return true;
+    }
+    return false;
+}
+
+static bool NameHasTbbW(const wchar_t* name)
+{
+    if (!name)
+        return false;
+    for (const wchar_t* p = name; *p; ++p)
+    {
+        if ((p[0] == L't' || p[0] == L'T') &&
+            (p[1] == L'b' || p[1] == L'B') &&
+            (p[2] == L'b' || p[2] == L'B'))
+            return true;
+    }
+    return false;
+}
+
+static HMODULE WINAPI HookLoadLibraryA(LPCSTR name)
+{
+    HMODULE m = g_realLoadLibraryA ? g_realLoadLibraryA(name) : 0;
+    if (m && NameHasTbbA(name))
+        HookTbbModule(m);
+    return m;
+}
+
+static HMODULE WINAPI HookLoadLibraryW(LPCWSTR name)
+{
+    HMODULE m = g_realLoadLibraryW ? g_realLoadLibraryW(name) : 0;
+    if (m && NameHasTbbW(name))
+        HookTbbModule(m);
+    return m;
+}
+
+static void TryPatchLateModules()
+{
+    HMODULE exe = GetModuleHandleA(NULL);
+
+    if (g_settings.patchThreadFpuPin)
+    {
+        HookIat(exe, "kernel32.dll", "CreateThread", (void*)HookCreateThread, (void**)&g_realCreateThread);
+        HookIat(exe, "kernel32.dll", "LoadLibraryA", (void*)HookLoadLibraryA, (void**)&g_realLoadLibraryA);
+        HookIat(exe, "kernel32.dll", "LoadLibraryW", (void*)HookLoadLibraryW, (void**)&g_realLoadLibraryW);
+        HookIat(exe, "kernel32.dll", "GetTickCount", (void*)HookGetTickCount, (void**)&g_realGetTickCount);
+    }
+
+    HMODULE d3d9 = GetModuleHandleA("d3d9.dll");
+    static LONG d3dHooked = 0;
+    if (g_settings.patchD3dFpuPreserve && d3d9 && d3dHooked == 0)
+    {
+        if (!g_realDirect3DCreate9)
+            g_realDirect3DCreate9 = (tDirect3DCreate9)GetProcAddress(d3d9, "Direct3DCreate9");
+        if (g_realDirect3DCreate9 &&
+            HookIat(exe, "d3d9.dll", "Direct3DCreate9", (void*)HookDirect3DCreate9, (void**)&g_realDirect3DCreate9))
+        {
+            d3dHooked = 1;
+            Log("D3D9: Direct3DCreate9 перехвачен");
+        }
+    }
+
+    HMODULE tbb = GetModuleHandleA("tbb.dll");
+    if (tbb)
+    {
+        HookTbbModule(tbb);
+        HookTbbInitOnExe();
+    }
+}
+
+static const DWORD RVA_MAIN_LOOP = 0x5DF550;
+static const unsigned char MAIN_LOOP_SIG[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+
+static DWORD g_mainLoopResume = 0;
+
+__declspec(naked) static void MainLoopThunk()
+{
+    __asm {
+        pushad
+        call PinFpu
+        call TryPatchLateModules
+        popad
+        push ebp
+        mov ebp, esp
+        push -1
+        jmp dword ptr [g_mainLoopResume]
+    }
+}
+
+static bool InstallMainLoopFpuPin()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_MAIN_LOOP);
+    if (memcmp(hook, MAIN_LOOP_SIG, sizeof(MAIN_LOOP_SIG)) != 0)
+    {
+        Log("FPU: сигнатура главного цикла не совпала (%02X %02X %02X %02X %02X)",
+            hook[0], hook[1], hook[2], hook[3], hook[4]);
+        return false;
+    }
+
+    g_mainLoopResume = g_base + RVA_MAIN_LOOP + 5;
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&MainLoopThunk - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("FPU: пин на главном цикле rva %06X", RVA_MAIN_LOOP);
+    return true;
+}
+
+static void InstallHeapLfh()
+{
+    HANDLE heaps[128];
+    DWORD n = GetProcessHeaps(128, heaps);
+    DWORD lfh = 2;
+    DWORD ok = 0;
+    for (DWORD i = 0; i < n; ++i)
+    {
+        if (HeapSetInformation(heaps[i], (HEAP_INFORMATION_CLASS)0, &lfh, sizeof(lfh)))
+            ++ok;
+    }
+    Log("Heap: LFH включён на %u из %u куч", ok, n);
+}
+
+static const DWORD RVA_SLEEP_IAT = 0x88A0EC;
+static const DWORD RVA_MAIN_SLEEP_A = 0x5DF2D5;
+static const DWORD RVA_MAIN_SLEEP_B = 0x5DF684;
+
+static bool PatchImm8Sleep(DWORD rvaPush, unsigned char expectMs, unsigned char newMs, const char* tag)
+{
+    unsigned char* p = (unsigned char*)(g_base + rvaPush);
+    DWORD iat = g_base + RVA_SLEEP_IAT;
+    if (p[0] != 0x6A || p[2] != 0xFF || p[3] != 0x15 || *(DWORD*)(p + 4) != iat)
+    {
+        Log("%s: сигнатура Sleep не совпала rva %06X (%02X %02X %02X %02X)",
+            tag, rvaPush, p[0], p[1], p[2], p[3]);
+        return false;
+    }
+    if (p[1] != expectMs && p[1] != newMs)
+    {
+        Log("%s: неожиданный imm Sleep(%u) rva %06X", tag, (unsigned)p[1], rvaPush);
+        return false;
+    }
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(p, 2, PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    p[1] = newMs;
+    VirtualProtect(p, 2, oldProtect, &oldProtect);
+    Log("%s: Sleep(%u) -> Sleep(%u) rva %06X", tag, (unsigned)expectMs, (unsigned)newMs, rvaPush);
+    return true;
+}
+
+static void PatchPushImm8(unsigned char* p, unsigned char newMs)
+{
+    if (p[0] != 0x6A)
+        return;
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(p, 2, PAGE_EXECUTE_READWRITE, &oldProtect))
+        return;
+    p[1] = newMs;
+    VirtualProtect(p, 2, oldProtect, &oldProtect);
+}
+
+static void InstallMainLoopSleep0()
+{
+    // 6A 00 EB 02 6A 64 FF 15 [Sleep IAT] — ветка Sleep(0) vs Sleep(100).
+    int ms = g_settings.mainLoopSleepMs;
+    if (ms < 0)
+        ms = 0;
+    if (ms > 127)
+        ms = 127;
+
+    unsigned char* a = (unsigned char*)(g_base + RVA_MAIN_SLEEP_A);
+    unsigned char* b = (unsigned char*)(g_base + RVA_MAIN_SLEEP_B);
+    if (a[-4] != 0x6A || a[-3] != 0x00 || a[-2] != 0xEB || a[-1] != 0x02 ||
+        b[-4] != 0x6A || b[-3] != 0x00 || b[-2] != 0xEB || b[-1] != 0x02)
+    {
+        Log("MainLoopSleep0: префикс 6A 00 EB 02 не совпал");
+        return;
+    }
+    PatchPushImm8(a - 4, (unsigned char)ms);
+    PatchPushImm8(b - 4, (unsigned char)ms);
+    PatchImm8Sleep(RVA_MAIN_SLEEP_A, 100, (unsigned char)ms, "MainLoopSleep0");
+    PatchImm8Sleep(RVA_MAIN_SLEEP_B, 100, (unsigned char)ms, "MainLoopSleep0");
+}
+
+static void InstallHighPriority()
+{
+    if (SetPriorityClass(GetCurrentProcess(), ABOVE_NORMAL_PRIORITY_CLASS))
+        Log("CPU: priority ABOVE_NORMAL");
+    else
+        Log("CPU: SetPriorityClass failed %u", GetLastError());
+
+    HMODULE k32 = GetModuleHandleA("kernel32.dll");
+    if (!k32)
+        return;
+
+    typedef BOOL (WINAPI* tSetProcessInformation)(HANDLE, int, LPVOID, DWORD);
+    tSetProcessInformation fn = (tSetProcessInformation)GetProcAddress(k32, "SetProcessInformation");
+    if (!fn)
+        return;
+
+    struct PowerThrottle
+    {
+        ULONG Version;
+        ULONG ControlMask;
+        ULONG StateMask;
+    } state;
+    state.Version = 1;
+    state.ControlMask = 0x1; // PROCESS_POWER_THROTTLING_EXECUTION_SPEED
+    state.StateMask = 0;
+    if (fn(GetCurrentProcess(), 4, &state, sizeof(state)))
+        Log("CPU: power throttling off");
+}
+
+static bool InstallEngineStability()
+{
+    PinFpu();
+
+    HMODULE exe = GetModuleHandleA(NULL);
+
+    if (g_settings.patchHighPriority)
+        InstallHighPriority();
+
+    if (g_settings.patchHeapLfh)
+        InstallHeapLfh();
+
+    HMODULE kernel32 = GetModuleHandleA("kernel32.dll");
+    if (g_settings.patchThreadFpuPin && kernel32)
+    {
+        g_realCreateThread = (tCreateThread)GetProcAddress(kernel32, "CreateThread");
+        g_realLoadLibraryA = (tLoadLibraryA)GetProcAddress(kernel32, "LoadLibraryA");
+        g_realLoadLibraryW = (tLoadLibraryW)GetProcAddress(kernel32, "LoadLibraryW");
+        g_realGetTickCount = (tGetTickCount)GetProcAddress(kernel32, "GetTickCount");
+
+        if (HookIat(exe, "kernel32.dll", "CreateThread", (void*)HookCreateThread, (void**)&g_realCreateThread))
+            Log("FPU: CreateThread exe перехвачен");
+        else
+            Log("FPU: CreateThread IAT не найден");
+
+        HookIat(exe, "kernel32.dll", "LoadLibraryA", (void*)HookLoadLibraryA, (void**)&g_realLoadLibraryA);
+        HookIat(exe, "kernel32.dll", "LoadLibraryW", (void*)HookLoadLibraryW, (void**)&g_realLoadLibraryW);
+        if (HookIat(exe, "kernel32.dll", "GetTickCount", (void*)HookGetTickCount, (void**)&g_realGetTickCount))
+            Log("FPU: GetTickCount - отложенный патч TBB/D3D");
+    }
+
+    if (g_settings.patchFpuFortress)
+        InstallMainLoopFpuPin();
+
+    if (g_settings.patchMainLoopSleep0)
+        InstallMainLoopSleep0();
+
+    TryPatchLateModules();
+
+    Log("Engine: FPU=%d D3D=%d LFH=%d threadPin=%d tbbCap=%d sleep0=%d noVsync=%d prio=%d",
+        (int)g_settings.patchFpuFortress,
+        (int)g_settings.patchD3dFpuPreserve,
+        (int)g_settings.patchHeapLfh,
+        (int)g_settings.patchThreadFpuPin,
+        g_settings.engineWorkerThreads,
+        (int)g_settings.patchMainLoopSleep0,
+        (int)g_settings.patchD3dNoVsync,
+        (int)g_settings.patchHighPriority);
+    return true;
+}
+
+// ---------------------------------------------------------------
+// Квантование POP после дневного прохода FUN_00485E40
+//
+// Сами поля CPop уже int64 с 15 дробными битами (не IEEE float).
+// 0x485E40 — координатор: три раза зовёт FUN_00484F90, где пишутся
+// money (+0x180) и savings (+0x250). После возврата обходим аргумент
+// как CPop / вектор / список и срезаем младшие биты.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_POP_DAILY = 0x85E40;
+static const unsigned char POP_DAILY_SIG[9] =
+    { 0x55, 0x8B, 0xEC, 0x64, 0xA1, 0x00, 0x00, 0x00, 0x00 };
+static const int POP_ID_TYPE = 46;
+static const int POP_STRIDE = 0x2A8;
+static const int POP_QUANTIZE_OFFS[] =
+{
+    0x118, 0x120, 0x128, 0x130, 0x138, 0x140,
+    0x180, 0x1B0, 0x1C8,
+    0x1D8, 0x1E0, 0x1E8, 0x1F0, 0x1F8, 0x200, 0x208, 0x210, 0x218,
+    0x250
+};
+static const int POP_QUANTIZE_OFFS_N = sizeof(POP_QUANTIZE_OFFS) / sizeof(POP_QUANTIZE_OFFS[0]);
+
+static DWORD g_popDailyRet = 0;
+static void* g_popDailyArg0 = 0;
+static void* g_popDailyEcx = 0;
+static void* g_popDailyTramp = 0;
+
+static void QuantizeFixed15(void* slot)
+{
+    int keep = g_settings.popQuantizeKeepBits;
+    if (keep >= 15)
+        return;
+    if (keep < 0)
+        keep = 0;
+
+    unsigned drop = (unsigned)(15 - keep);
+    __int64 v = *(__int64*)slot;
+    __int64 bias = 1i64 << (drop - 1);
+    if (v >= 0)
+        v = ((v + bias) >> drop) << drop;
+    else
+        v = ((v - bias) >> drop) << drop;
+    *(__int64*)slot = v;
+}
+
+static bool LooksLikePop(void* p)
+{
+    if (!p)
+        return false;
+    __try
+    {
+        return *(int*)((char*)p + 8) == POP_ID_TYPE;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return false;
+    }
+}
+
+static void QuantizeOnePop(void* pop)
+{
+    if (!LooksLikePop(pop))
+        return;
+    __try
+    {
+        for (int i = 0; i < POP_QUANTIZE_OFFS_N; ++i)
+            QuantizeFixed15((char*)pop + POP_QUANTIZE_OFFS[i]);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void QuantizePopObject(void* obj)
+{
+    if (!obj)
+        return;
+
+    if (LooksLikePop(obj))
+    {
+        int n = 0;
+        void* p = obj;
+        while (p && n < 400000)
+        {
+            QuantizeOnePop(p);
+            ++n;
+            __try { p = *(void**)((char*)p + 0x27C); }
+            __except (EXCEPTION_EXECUTE_HANDLER) { break; }
+            if (p == obj)
+                break;
+        }
+        return;
+    }
+
+    void** begin = 0;
+    void** end = 0;
+    __try
+    {
+        begin = *(void***)((char*)obj + 0x44);
+        end = *(void***)((char*)obj + 0x48);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+
+    if (!begin || !end || end < begin)
+        return;
+
+    int count = (int)(end - begin);
+    if (count > 0 && count < 500000 && LooksLikePop(*begin))
+    {
+        for (void** it = begin; it < end; ++it)
+            QuantizeOnePop(*it);
+        return;
+    }
+
+    int bytes = (int)((char*)end - (char*)begin);
+    if (bytes >= POP_STRIDE && (bytes % POP_STRIDE) == 0 && bytes / POP_STRIDE < 500000
+        && LooksLikePop(begin))
+    {
+        char* p = (char*)begin;
+        char* e = (char*)end;
+        for (; p < e; p += POP_STRIDE)
+            QuantizeOnePop(p);
+    }
+}
+
+static void AfterPopDaily()
+{
+    PinFpu();
+    QuantizePopObject(g_popDailyArg0);
+    if (g_popDailyEcx != g_popDailyArg0)
+        QuantizePopObject(g_popDailyEcx);
+}
+
+__declspec(naked) static void PopDailyAfterThunk()
+{
+    __asm {
+        pushad
+        call AfterPopDaily
+        popad
+        jmp dword ptr [g_popDailyRet]
+    }
+}
+
+__declspec(naked) static void PopDailyEntryThunk()
+{
+    __asm {
+        mov dword ptr [g_popDailyEcx], ecx
+        mov eax, dword ptr [esp + 4]
+        mov dword ptr [g_popDailyArg0], eax
+        pop dword ptr [g_popDailyRet]
+        push offset PopDailyAfterThunk
+        jmp dword ptr [g_popDailyTramp]
+    }
+}
+
+static bool InstallPopQuantize()
+{
+    if (g_settings.popQuantizeKeepBits >= 15)
+    {
+        Log("PopQuantize: KEEP_BITS>=15 - квантование выключено");
+        return false;
+    }
+
+    unsigned char* hook = (unsigned char*)(g_base + RVA_POP_DAILY);
+    if (memcmp(hook, POP_DAILY_SIG, sizeof(POP_DAILY_SIG)) != 0)
+    {
+        Log("PopQuantize: сигнатура FUN_00485E40 не совпала");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 32, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+    if (!cave)
+        return false;
+
+    memcpy(cave, hook, 9);
+    cave[9] = 0xE9;
+    *(DWORD*)(cave + 10) = (DWORD)(hook + 9) - (DWORD)(cave + 14);
+    g_popDailyTramp = cave;
+
+    unsigned char patch[9];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&PopDailyEntryThunk - ((DWORD)hook + 5);
+    memset(patch + 5, 0x90, 4);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("PopQuantize: FUN_00485E40, keep_bits=%d", g_settings.popQuantizeKeepBits);
+    return true;
+}
+
+// ---------------------------------------------------------------
+// MP-клиент: message pump со Sleep(40) → ~25 FPS (хост ~50).
+// Единственный 6A 28 + call Sleep в exe: rva 0x71DD2C.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_MP_CLIENT_SLEEP = 0x71DD2C;
+
+static bool InstallMpClientSleep()
+{
+    int ms = g_settings.mpClientSleepMs;
+    if (ms < 0)
+        ms = 0;
+    if (ms > 127)
+        ms = 127;
+
+    return PatchImm8Sleep(RVA_MP_CLIENT_SLEEP, 40, (unsigned char)ms, "MpClientSleep");
+}
+
+// ---------------------------------------------------------------
+// OOS: FUN_00682EC0 (RVA 0x282EC0) — единственный билдер диалога
+// "Games out of synch" / OOS_TITLE. Вызывается КАЖДЫЙ игровой день
+// в MP, не только при OOS: сверяет std::vector<dword> локальной
+// сессии (arg0+0xB74) с вектором пира (arg1 = packet+0x3C). При
+// совпадении диалог не строится - экономим лог, но лог факта
+// сверки (SYNC) всё равно пишем в отдельный v2dll_oos.log, чтобы
+// при десинке было видно, на какой именно день и на каком именно
+// слоте разошлось.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_OOS_REPORT = 0x282EC0;
+static const unsigned char OOS_POST_SEH[11] =
+    { 0x81, 0xEC, 0x40, 0x01, 0x00, 0x00, 0x53, 0x56, 0x8B, 0x75, 0x08 };
+
+static DWORD g_oosResume = 0;
+static int g_oosHits = 0;
+static int g_syncHits = 0;
+static char g_lastChecksumLine[256] = "none";
+
+static void RememberChecksum(const char* fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    _vsnprintf_s(g_lastChecksumLine, sizeof(g_lastChecksumLine), _TRUNCATE, fmt, ap);
+    va_end(ap);
+}
+
+static bool g_oosLogStarted = false;
+
+static void LogOosFile(const char* fmt, ...)
+{
+    FILE* f = 0;
+    if (fopen_s(&f, "v2dll_oos.log", g_oosLogStarted ? "a" : "w") != 0 || !f)
+        return;
+    g_oosLogStarted = true;
+
+    SYSTEMTIME st;
+    GetLocalTime(&st);
+    fprintf(f, "%04u-%02u-%02u %02u:%02u:%02u.%03u ",
+        (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
+        (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
+        (unsigned)st.wMilliseconds);
+
+    va_list ap;
+    va_start(ap, fmt);
+    vfprintf(f, fmt, ap);
+    va_end(ap);
+    fprintf(f, "\n");
+    fclose(f);
+}
+
+static void DumpPtrLine(const char* tag, void* p)
+{
+    unsigned d[8];
+    memset(d, 0, sizeof(d));
+    int ok = 0;
+    __try
+    {
+        memcpy(d, p, sizeof(d));
+        ok = 1;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        ok = 0;
+    }
+
+    if (!ok)
+    {
+        LogOosFile("  %s=%08X unreadable", tag, (unsigned)(DWORD_PTR)p);
+        return;
+    }
+    LogOosFile("  %s=%08X %08X %08X %08X %08X %08X %08X %08X %08X",
+        tag, (unsigned)(DWORD_PTR)p,
+        d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7]);
+}
+
+static const int OOS_VEC_OFF = 0xB74;
+static const int OOS_DATE_OFF = 0xB0C;
+static const int OOS_FLAG_OFF = 0xB20;
+static const int OOS_REC_OFF = 0xB84;
+static const int OOS_MAX_SLOTS = 256;
+static const int OOS_REC_MAX = 256;
+static const int OOS_DATE_EPOCH = 0x029C55C0;
+
+static const char* OosSlotLabel(int i)
+{
+    if (i == 0)
+        return "sum";
+    if (i == 1)
+        return "aux";
+    return "extra";
+}
+
+static void FormatVic2Date(int raw, char* buf, size_t bufsz)
+{
+    static const int kMDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int adj = raw - OOS_DATE_EPOCH;
+    int year = 0;
+    int month = 1;
+    int day = 1;
+    int hour = 0;
+    if (adj >= 0)
+    {
+        year = adj / 8760;
+        int rem = adj % 8760;
+        hour = rem % 24;
+        int doy = rem / 24;
+        month = 1;
+        for (int m = 0; m < 12; ++m)
+        {
+            if (doy < kMDays[m])
+            {
+                day = doy + 1;
+                break;
+            }
+            doy -= kMDays[m];
+            month++;
+        }
+        if (month > 12)
+        {
+            month = 12;
+            day = 31;
+        }
+    }
+    sprintf_s(buf, bufsz, "%04d-%02d-%02d %02d:00", year, month, day, hour);
+}
+
+static int CopyVecU32(void* vecObj, unsigned* out, int cap, int* outCount)
+{
+    *outCount = -1;
+    unsigned begin = 0;
+    unsigned end = 0;
+    __try
+    {
+        begin = *(unsigned*)vecObj;
+        end = *((unsigned*)vecObj + 1);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+
+    if (!begin)
+    {
+        *outCount = 0;
+        return 1;
+    }
+    if (end < begin)
+        return 0;
+
+    unsigned nbytes = end - begin;
+    if (nbytes % 4)
+        return 0;
+
+    int n = (int)(nbytes / 4);
+    *outCount = n;
+    int copy = n;
+    if (copy > cap)
+        copy = cap;
+    if (copy <= 0)
+        return 1;
+
+    __try
+    {
+        memcpy(out, (const void*)(DWORD_PTR)begin, (size_t)copy * 4);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    return 1;
+}
+
+static int  g_lastDateRaw = 0;
+static char g_lastDateBuf[32] = "-";
+static int  g_firstOosRaw = 0;
+static char g_firstOosBuf[32] = "-";
+static int  g_firstRealOosRaw = 0;
+static char g_firstRealOosBuf[32] = "-";
+
+static int DaysSinceFirstRealOos()
+{
+    if (!g_firstRealOosRaw || !g_lastDateRaw)
+        return -1;
+    int d = (g_lastDateRaw - g_firstRealOosRaw) / 24;
+    return d < 0 ? 0 : d;
+}
+
+static void RememberSessionClock(int raw, const char* buf)
+{
+    if (!raw || !buf || !buf[0])
+        return;
+    g_lastDateRaw = raw;
+    strcpy_s(g_lastDateBuf, buf);
+}
+
+static void NoteOosMilestones(int isDiff, int realDiff, int raw, const char* buf)
+{
+    RememberSessionClock(raw, buf);
+    if (isDiff && !g_firstOosRaw && raw)
+    {
+        g_firstOosRaw = raw;
+        strcpy_s(g_firstOosBuf, buf);
+        LogOosFile("FIRST OOS (любой DIFF, в т.ч. local=0) date=%s", buf);
+    }
+    if (realDiff && !g_firstRealOosRaw && raw)
+    {
+        g_firstRealOosRaw = raw;
+        strcpy_s(g_firstRealOosBuf, buf);
+        LogOosFile("FIRST real OOS (оба checksum ненулевые и разные) date=%s", buf);
+    }
+}
+
+static void TryLogPeerCmd(void* vecAt3C)
+{
+    if (!vecAt3C)
+        return;
+    char tmp[32];
+    memset(tmp, 0, sizeof(tmp));
+    unsigned size = 0;
+    unsigned cap = 0;
+    __try
+    {
+        char* obj = (char*)vecAt3C - 0x3C;
+        size = *(unsigned*)(obj + 0x1C);
+        cap = *(unsigned*)(obj + 0x20);
+        const char* s = obj + 8;
+        if (cap >= 16)
+            s = *(const char**)(obj + 8);
+        if (s && size > 0 && size < sizeof(tmp))
+            memcpy(tmp, s, size);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+    if (tmp[0] >= 32 && tmp[0] <= 126)
+        LogOosFile("  cmd=\"%s\"", tmp);
+}
+
+static int LooksLikeTag(const char* p)
+{
+    unsigned char a = (unsigned char)p[0];
+    unsigned char b = (unsigned char)p[1];
+    unsigned char c = (unsigned char)p[2];
+    if (a < 'A' || a > 'Z' || b < 'A' || b > 'Z')
+        return 0;
+    if (!((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')))
+        return 0;
+    return 1;
+}
+
+static void FillTag(char* out, void* obj)
+{
+    out[0] = 0;
+    if (!obj || SafeIsBadReadPtr(obj, 0x40))
+        return;
+    __try
+    {
+        static const int kOffs[] = { 4, 8, 0xC, 0x20, 0x24, 0x30, 0 };
+        for (int k = 0; k < 7; ++k)
+        {
+            const char* p = (const char*)obj + kOffs[k];
+            if (LooksLikeTag(p))
+            {
+                out[0] = p[0];
+                out[1] = p[1];
+                out[2] = p[2];
+                out[3] = (p[3] >= 'A' && p[3] <= 'Z') ? p[3] : 0;
+                out[4] = 0;
+                return;
+            }
+            if (SafeIsBadReadPtr(p, 4))
+                continue;
+            void* q = *(void**)p;
+            if (!q || SafeIsBadReadPtr(q, 4))
+                continue;
+            const char* t = (const char*)q;
+            if (LooksLikeTag(t))
+            {
+                out[0] = t[0];
+                out[1] = t[1];
+                out[2] = t[2];
+                out[3] = 0;
+                return;
+            }
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        out[0] = 0;
+    }
+}
+
+static void DumpLocalExtra(void* session, int verbose, int* outCount, unsigned* outXor)
+{
+    *outCount = -1;
+    *outXor = 0;
+    if (!session)
+        return;
+
+    unsigned begin = 0;
+    unsigned end = 0;
+    __try
+    {
+        begin = *(unsigned*)((char*)session + OOS_REC_OFF);
+        end = *(unsigned*)((char*)session + OOS_REC_OFF + 4);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+
+    if (!begin || end < begin)
+    {
+        *outCount = 0;
+        return;
+    }
+
+    unsigned nbytes = end - begin;
+    if (nbytes % 16)
+    {
+        *outCount = -2;
+        return;
+    }
+
+    int n = (int)(nbytes / 16);
+    *outCount = n;
+    int show = n;
+    if (show > OOS_REC_MAX)
+        show = OOS_REC_MAX;
+
+    unsigned x = 0;
+    for (int i = 0; i < show; ++i)
+    {
+        unsigned rec[4];
+        memset(rec, 0, sizeof(rec));
+        __try
+        {
+            memcpy(rec, (const void*)(DWORD_PTR)(begin + (unsigned)i * 16), 16);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            break;
+        }
+        x ^= rec[0] ^ rec[1] ^ rec[2] ^ rec[3];
+        if (verbose)
+        {
+            char tag[8];
+            FillTag(tag, (void*)(DWORD_PTR)rec[0]);
+            LogOosFile("  rec[%d] ptr=%08X a=%08X b=%08X c=%08X tag=%s",
+                i, rec[0], rec[1], rec[2], rec[3], tag[0] ? tag : "-");
+        }
+    }
+    *outXor = x;
+    if (verbose && n > OOS_REC_MAX)
+        LogOosFile("  rec truncated to %d / %d", OOS_REC_MAX, n);
+}
+
+static void __cdecl ReportOos(void* a0, void* a1)
+{
+    unsigned int cw = 0;
+    _controlfp_s(&cw, 0, 0);
+    unsigned int mxcsr = _mm_getcsr();
+
+    int dateRaw = 0;
+    int dateOk = 0;
+    char dateBuf[32];
+    dateBuf[0] = 0;
+    if (a0)
+    {
+        __try
+        {
+            dateRaw = *(int*)((char*)a0 + OOS_DATE_OFF);
+            dateOk = 1;
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            dateOk = 0;
+        }
+    }
+    if (dateOk)
+        FormatVic2Date(dateRaw, dateBuf, sizeof(dateBuf));
+
+    unsigned localBuf[OOS_MAX_SLOTS];
+    unsigned remoteBuf[OOS_MAX_SLOTS];
+    memset(localBuf, 0, sizeof(localBuf));
+    memset(remoteBuf, 0, sizeof(remoteBuf));
+    int nLocal = -1;
+    int nRemote = -1;
+    int localOk = 0;
+    int remoteOk = 0;
+    if (a0)
+        localOk = CopyVecU32((char*)a0 + OOS_VEC_OFF, localBuf, OOS_MAX_SLOTS, &nLocal);
+    if (a1)
+        remoteOk = CopyVecU32(a1, remoteBuf, OOS_MAX_SLOTS, &nRemote);
+
+    int nCmp = 0;
+    if (localOk && remoteOk && nLocal >= 0 && nRemote >= 0)
+        nCmp = nLocal < nRemote ? nLocal : nRemote;
+    if (nCmp > OOS_MAX_SLOTS)
+        nCmp = OOS_MAX_SLOTS;
+
+    int nDiff = 0;
+    int firstDiff = -1;
+    for (int i = 0; i < nCmp; ++i)
+    {
+        if (localBuf[i] != remoteBuf[i])
+        {
+            if (firstDiff < 0)
+                firstDiff = i;
+            ++nDiff;
+        }
+    }
+
+    char summary[192];
+    const int isDiff = (!localOk || !remoteOk || nLocal != nRemote || nDiff > 0);
+    unsigned sumL = (localOk && nLocal > 0) ? localBuf[0] : 0;
+    unsigned sumR = (remoteOk && nRemote > 0) ? remoteBuf[0] : 0;
+    unsigned auxL = (localOk && nLocal > 1) ? localBuf[1] : 0;
+    unsigned auxR = (remoteOk && nRemote > 1) ? remoteBuf[1] : 0;
+    const int realDiff = isDiff && sumL > 0 && sumR > 0 && sumL != sumR;
+    NoteOosMilestones(isDiff, realDiff, dateOk ? dateRaw : 0, dateOk ? dateBuf : "");
+
+    if (!isDiff)
+    {
+        ++g_syncHits;
+        int recN = -1;
+        unsigned recXor = 0;
+        DumpLocalExtra(a0, 0, &recN, &recXor);
+        LogOosFile("SYNC n=%d date=%s sum=%u/%u aux=%u/%u rec=%d xor=%08X",
+            g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, auxL, auxR, recN, recXor);
+        RememberChecksum("SYNC n=%d date=%s sum=%u/%u rec=%d xor=%08X",
+            g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, recN, recXor);
+        return;
+    }
+
+    ++g_oosHits;
+
+    if (!localOk || !remoteOk)
+        sprintf_s(summary, "vectors unreadable local_ok=%d remote_ok=%d", localOk, remoteOk);
+    else if (nLocal != nRemote)
+        sprintf_s(summary, "COUNT mismatch local=%d remote=%d", nLocal, nRemote);
+    else if (firstDiff >= 0)
+        sprintf_s(summary, "%d/%d DIFF Checksum:%d %s local=%u remote=%u delta=%d",
+            nDiff, nCmp, firstDiff, OosSlotLabel(firstDiff),
+            localBuf[firstDiff], remoteBuf[firstDiff],
+            (int)localBuf[firstDiff] - (int)remoteBuf[firstDiff]);
+    else
+        sprintf_s(summary, "%d/%d DIFF", nDiff, nCmp);
+
+    RememberChecksum("OOS hit=%d after %d sync date=%s %s",
+        g_oosHits, g_syncHits, dateOk ? dateBuf : "?", summary);
+
+    Log("OOS[%d]: %s date=%s",
+        g_oosHits, summary, dateOk ? dateBuf : "?");
+
+    LogOosFile("OOS hit=%d after %d sync days dll=%s tick=%u date=%s raw=%d a0=%08X a1=%08X fpu_cw=%08X mxcsr=%08X",
+        g_oosHits, g_syncHits, MOD_VERSION, GetTickCount(),
+        dateOk ? dateBuf : "?", dateOk ? dateRaw : 0,
+        (unsigned)(DWORD_PTR)a0, (unsigned)(DWORD_PTR)a1,
+        cw, mxcsr);
+    LogOosFile("  %s", summary);
+    {
+        int recN = -1;
+        unsigned recXor = 0;
+        DumpLocalExtra(a0, 1, &recN, &recXor);
+        LogOosFile("  local +0xB84 rec=%d xor=%08X (в пакет не входит — сравни с таким же блоком у пира)",
+            recN, recXor);
+    }
+    if (sumL == 0 && sumR > 100)
+        LogOosFile("  NOTE: local sum=0 после ненулевого remote — локальный аккумулятор сброшен (часто хвост после уже показанного OOS)");
+
+    if ((cw & _MCW_PC) != _PC_53)
+        LogOosFile("  NOTE: FPU precision != 53-bit (cw=%08X) — D3D/оверлей мог сбить хеш", cw);
+    if ((mxcsr & 0x8040) != 0x8040)
+        LogOosFile("  NOTE: MXCSR без FTZ/DAZ (mxcsr=%08X)", mxcsr);
+
+    DumpPtrLine("arg0", a0);
+    DumpPtrLine("arg1", a1);
+    if (a1)
+    {
+        void* peer = (char*)a1 - 0x3C;
+        DumpPtrLine("peer", peer);
+        TryLogPeerCmd(a1);
+    }
+
+    LogOosFile("  vector local @session+0xB74  count=%s%d  remote @peer+0x3C count=%s%d",
+        localOk ? "" : "ERR ", nLocal,
+        remoteOk ? "" : "ERR ", nRemote);
+    LogOosFile("  --- slots (это ровно то, что сверяет диалог: Checksum: i local : remote) ---");
+
+    if (!localOk && !remoteOk)
+        LogOosFile("  (оба вектора не прочитались)");
+    else
+    {
+        int nShow = nCmp;
+        if (nLocal > nShow)
+            nShow = nLocal;
+        if (nRemote > nShow)
+            nShow = nRemote;
+        if (nShow > OOS_MAX_SLOTS)
+            nShow = OOS_MAX_SLOTS;
+
+        for (int i = 0; i < nShow; ++i)
+        {
+            const int haveL = localOk && i < nLocal && i < OOS_MAX_SLOTS;
+            const int haveR = remoteOk && i < nRemote && i < OOS_MAX_SLOTS;
+            if (haveL && haveR)
+            {
+                const int diff = localBuf[i] != remoteBuf[i];
+                LogOosFile("  Checksum:%d %-8s  local=%d (%08X)  remote=%d (%08X)  %s",
+                    i, OosSlotLabel(i),
+                    (int)localBuf[i], localBuf[i],
+                    (int)remoteBuf[i], remoteBuf[i],
+                    diff ? "DIFF" : "MATCH");
+            }
+            else if (haveL)
+            {
+                LogOosFile("  Checksum:%d %-8s  local=%d (%08X)  remote=<missing>  DIFF",
+                    i, OosSlotLabel(i), (int)localBuf[i], localBuf[i]);
+            }
+            else if (haveR)
+            {
+                LogOosFile("  Checksum:%d %-8s  local=<missing>  remote=%d (%08X)  DIFF",
+                    i, OosSlotLabel(i), (int)remoteBuf[i], remoteBuf[i]);
+            }
+        }
+        if ((localOk && nLocal > OOS_MAX_SLOTS) || (remoteOk && nRemote > OOS_MAX_SLOTS))
+            LogOosFile("  (обрезано до %d слотов)", OOS_MAX_SLOTS);
+    }
+}
+
+__declspec(naked) static void OosReportThunk()
+{
+    __asm {
+        pushad
+        mov eax, dword ptr [esp + 36]
+        mov ecx, dword ptr [esp + 40]
+        push ecx
+        push eax
+        call ReportOos
+        add esp, 8
+        popad
+        push ebp
+        mov ebp, esp
+        push -1
+        jmp dword ptr [g_oosResume]
+    }
+}
+
+static bool InstallOosWatch()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_OOS_REPORT);
+    if (hook[0] != 0x55 || hook[1] != 0x8B || hook[2] != 0xEC ||
+        hook[3] != 0x6A || hook[4] != 0xFF)
+    {
+        Log("OosWatch: пролог не совпал (%02X %02X %02X %02X %02X)",
+            hook[0], hook[1], hook[2], hook[3], hook[4]);
+        return false;
+    }
+    if (memcmp(hook + 24, OOS_POST_SEH, sizeof(OOS_POST_SEH)) != 0)
+    {
+        Log("OosWatch: sub esp,0x140 не совпал");
+        return false;
+    }
+
+    g_oosResume = g_base + RVA_OOS_REPORT + 5;
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&OosReportThunk - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("OosWatch: FUN_00682EC0 rva %06X -> v2dll_oos.log", RVA_OOS_REPORT);
+    LogOosFile("armed dll=%s (SYNC/OOS)", MOD_VERSION);
+    return true;
+}
+
+// ---------------------------------------------------------------
+// Краш-репорт: необработанное исключение / abort -> v2dll_crash.log
+// и v2dll_crash_YYYYMMDD_HHMMSS_pid_tid_n.dmp (каждый отдельно), плюс
+// v2dll_crash_hint.txt - короткая "хлебная крошка", которую успевает
+// записать даже vectored-обработчик до полного логгера. Портировано
+// из V2\V2TechButton.cpp (версия 3.10), упрощено под плоские ANSI-пути
+// рядом с exe (там - Logs\ и wide-char, здесь такой папки нет, поэтому
+// не заводим). Диагностика ident_skip из ReportCrash не перенесена -
+// то же обоснование, что и для OOS-блока выше (отдельная, не
+// запрошенная подсистема PATCH_NULL_VTABLE_UI).
+// ---------------------------------------------------------------
+
+static HMODULE g_selfModule = 0;
+
+static LPTOP_LEVEL_EXCEPTION_FILTER g_prevUef = 0;
+typedef LPTOP_LEVEL_EXCEPTION_FILTER (WINAPI* tSetUnhandledExceptionFilter)(LPTOP_LEVEL_EXCEPTION_FILTER);
+static tSetUnhandledExceptionFilter g_realSetUEF = 0;
+static LONG g_inCrash = 0;
+
+static const char* CrashCodeName(DWORD code)
+{
+    switch (code)
+    {
+    case 0xC0000005: return "ACCESS_VIOLATION";
+    case 0xC0000006: return "IN_PAGE_ERROR";
+    case 0xC0000008: return "INVALID_HANDLE";
+    case 0xC000001D: return "ILLEGAL_INSTRUCTION";
+    case 0xC0000025: return "NONCONTINUABLE";
+    case 0xC0000026: return "INVALID_DISPOSITION";
+    case 0xC000008C: return "ARRAY_BOUNDS_EXCEEDED";
+    case 0xC000008D: return "FLOAT_DENORMAL";
+    case 0xC000008E: return "FLOAT_DIVIDE_BY_ZERO";
+    case 0xC000008F: return "FLOAT_INEXACT";
+    case 0xC0000090: return "FLOAT_INVALID";
+    case 0xC0000091: return "FLOAT_OVERFLOW";
+    case 0xC0000092: return "FLOAT_STACK_CHECK";
+    case 0xC0000093: return "FLOAT_UNDERFLOW";
+    case 0xC0000094: return "INTEGER_DIVIDE_BY_ZERO";
+    case 0xC0000096: return "PRIVILEGED_INSTRUCTION";
+    case 0xC00000FD: return "STACK_OVERFLOW";
+    case 0xC0000135: return "DLL_NOT_FOUND";
+    case 0xC0000139: return "ENTRYPOINT_NOT_FOUND";
+    case 0xC0000142: return "DLL_INIT_FAILED";
+    case 0xC0000374: return "HEAP_CORRUPTION";
+    case 0xC0000409: return "STACK_BUFFER_OVERRUN";
+    case 0xC0000417: return "INVALID_CRUNTIME_PARAMETER";
+    case 0x40000015: return "FATAL_APP_EXIT/abort";
+    case 0x80000003: return "BREAKPOINT";
+    case 0x80000004: return "SINGLE_STEP";
+    case 0xE06D7363: return "CPP_EXCEPTION";
+    default:         return "UNKNOWN";
+    }
+}
+
+static void CrashWrite(HANDLE h, const char* s)
+{
+    if (!h || h == INVALID_HANDLE_VALUE || !s)
+        return;
+    DWORD n = 0;
+    WriteFile(h, s, (DWORD)strlen(s), &n, NULL);
+}
+
+static void CrashPrintf(HANDLE h, const char* fmt, ...)
+{
+    char buf[768];
+    va_list ap;
+    va_start(ap, fmt);
+    int n = _vsnprintf_s(buf, sizeof(buf), _TRUNCATE, fmt, ap);
+    va_end(ap);
+    if (n > 0)
+        CrashWrite(h, buf);
+}
+
+static void CrashLogAddr(HANDLE h, const char* tag, DWORD addr)
+{
+    MEMORY_BASIC_INFORMATION mbi;
+    memset(&mbi, 0, sizeof(mbi));
+    char mod[MAX_PATH];
+    mod[0] = 0;
+    if (addr && VirtualQuery((const void*)(DWORD_PTR)addr, &mbi, sizeof(mbi)) && mbi.AllocationBase)
+    {
+        GetModuleFileNameA((HMODULE)mbi.AllocationBase, mod, sizeof(mod));
+        const char* base = strrchr(mod, '\\');
+        DWORD rva = addr - (DWORD)(DWORD_PTR)mbi.AllocationBase;
+        CrashPrintf(h, "  %s=%08X  %s+0x%X\n", tag, addr, base ? base + 1 : mod, rva);
+        return;
+    }
+    CrashPrintf(h, "  %s=%08X\n", tag, addr);
+}
+
+static void CrashDumpPtr(HANDLE h, const char* tag, DWORD addr)
+{
+    if (!addr)
+    {
+        CrashPrintf(h, "  %s=00000000\n", tag);
+        return;
+    }
+    if (SafeIsBadReadPtr((const void*)(DWORD_PTR)addr, 32))
+    {
+        CrashPrintf(h, "  %s=%08X unreadable\n", tag, addr);
+        return;
+    }
+
+    unsigned d[8];
+    memset(d, 0, sizeof(d));
+    __try
+    {
+        memcpy(d, (const void*)(DWORD_PTR)addr, sizeof(d));
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        CrashPrintf(h, "  %s=%08X faulted\n", tag, addr);
+        return;
+    }
+
+    CrashPrintf(h, "  %s=%08X %08X %08X %08X %08X %08X %08X %08X %08X\n",
+        tag, addr, d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7]);
+}
+
+static void CrashDumpNested(HANDLE h, const char* tag, DWORD base, int off)
+{
+    if (!base || SafeIsBadReadPtr((const void*)(DWORD_PTR)(base + (DWORD)off), 4))
+        return;
+    DWORD inner = 0;
+    __try
+    {
+        inner = *(DWORD*)(DWORD_PTR)(base + (DWORD)off);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+    char nested[40];
+    sprintf_s(nested, "[%s+%X]", tag, (unsigned)off);
+    CrashDumpPtr(h, nested, inner);
+}
+
+static void CrashDumpCode(HANDLE h, DWORD eip)
+{
+    if (!eip)
+        return;
+    DWORD start = (eip > 8) ? (eip - 8) : eip;
+    unsigned char b[24];
+    memset(b, 0, sizeof(b));
+    if (SafeIsBadReadPtr((const void*)(DWORD_PTR)start, sizeof(b)))
+    {
+        CrashPrintf(h, "  code_at_eip unreadable\n");
+        return;
+    }
+    __try
+    {
+        memcpy(b, (const void*)(DWORD_PTR)start, sizeof(b));
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        CrashPrintf(h, "  code_at_eip faulted\n");
+        return;
+    }
+    CrashPrintf(h,
+        "  code_eip-8 %02X %02X %02X %02X %02X %02X %02X %02X  %02X %02X %02X %02X %02X %02X %02X %02X\n",
+        b[0], b[1], b[2], b[3], b[4], b[5], b[6], b[7],
+        b[8], b[9], b[10], b[11], b[12], b[13], b[14], b[15]);
+}
+
+// Улики «откуда краш» без Ghidra: RTTI живых объектов, ключи
+// локализации/протокола на стеке, vtable в образе exe или куча.
+static int CrashInImage(DWORD p)
+{
+    return g_base && p >= g_base && p < g_base + g_imageSize;
+}
+
+static int CrashSeenAdd(DWORD* seen, int* n, int cap, DWORD v)
+{
+    if (!v)
+        return 0;
+    for (int i = 0; i < *n; ++i)
+    {
+        if (seen[i] == v)
+            return 0;
+    }
+    if (*n >= cap)
+        return 0;
+    seen[(*n)++] = v;
+    return 1;
+}
+
+static int CrashCopyKey(DWORD addr, char* out, int outCap)
+{
+    out[0] = 0;
+    if (!addr || outCap < 8)
+        return 0;
+    char tmp[64];
+    memset(tmp, 0, sizeof(tmp));
+    __try
+    {
+        memcpy(tmp, (const void*)(DWORD_PTR)addr, sizeof(tmp) - 1);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    int n = 0;
+    int letters = 0;
+    for (; n < (int)sizeof(tmp) - 1; ++n)
+    {
+        unsigned char c = (unsigned char)tmp[n];
+        if (c == 0)
+            break;
+        if (c == '$' || c == '_' ||
+            (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
+            (c >= '0' && c <= '9'))
+        {
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+                ++letters;
+            continue;
+        }
+        return 0;
+    }
+    if (n < 4 || letters < 3)
+        return 0;
+    if (n >= outCap)
+        n = outCap - 1;
+    memcpy(out, tmp, (size_t)n);
+    out[n] = 0;
+    return n;
+}
+
+static void CrashCopyNear(DWORD addr, char* out, int outCap)
+{
+    out[0] = 0;
+    if (!CrashInImage(addr) || outCap < 8)
+        return;
+    char raw[80];
+    memset(raw, 0, sizeof(raw));
+    __try
+    {
+        memcpy(raw, (const void*)(DWORD_PTR)addr, sizeof(raw) - 1);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+    int w = 0;
+    int gap = 0;
+    for (int i = 0; i < (int)sizeof(raw) - 1 && w < outCap - 1; ++i)
+    {
+        unsigned char c = (unsigned char)raw[i];
+        if (c >= 32 && c < 127)
+        {
+            out[w++] = (char)c;
+            gap = 0;
+        }
+        else if (w > 0 && gap == 0)
+        {
+            out[w++] = ' ';
+            gap = 1;
+        }
+    }
+    while (w > 0 && out[w - 1] == ' ')
+        --w;
+    out[w] = 0;
+}
+
+static int CrashCopyRtti(DWORD obj, char* out, int outCap)
+{
+    out[0] = 0;
+    if (!obj)
+        return 0;
+    DWORD vptr = 0;
+    __try
+    {
+        vptr = *(DWORD*)(DWORD_PTR)obj;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    if (!CrashInImage(vptr) || vptr < 4)
+        return 0;
+    DWORD col = 0;
+    __try
+    {
+        col = *(DWORD*)(DWORD_PTR)(vptr - 4);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    if (!CrashInImage(col))
+        return 0;
+    DWORD td = 0;
+    __try
+    {
+        td = *(DWORD*)(DWORD_PTR)(col + 12);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    if (!CrashInImage(td))
+        return 0;
+    char raw[80];
+    memset(raw, 0, sizeof(raw));
+    __try
+    {
+        memcpy(raw, (const void*)(DWORD_PTR)(td + 8), sizeof(raw) - 1);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    const char* s = raw;
+    if (s[0] == '.' && s[1] == '?' && s[2] == 'A')
+        s += 4;
+    if (s[0] == '?' && s[1] == '$')
+        return 0;
+    int n = 0;
+    while (s[n] && s[n] != '@' && n < 64)
+        ++n;
+    if (n < 2)
+        return 0;
+    if (n >= outCap)
+        n = outCap - 1;
+    memcpy(out, s, (size_t)n);
+    out[n] = 0;
+    return n;
+}
+
+static const char* CrashVptrKind(DWORD obj, DWORD* outVptr)
+{
+    *outVptr = 0;
+    if (!obj)
+        return "null";
+    DWORD vptr = 0;
+    __try
+    {
+        vptr = *(DWORD*)(DWORD_PTR)obj;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return "unreadable";
+    }
+    *outVptr = vptr;
+    if (!vptr)
+        return "null-vtable";
+    if (CrashInImage(vptr))
+        return "vtable-in-exe";
+    DWORD probe = 0;
+    __try
+    {
+        probe = *(DWORD*)(DWORD_PTR)vptr;
+        (void)probe;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return "dangling-vtable";
+    }
+    return "vtable-outside-exe";
+}
+
+static void CrashTryKey(HANDLE h, DWORD addr, DWORD* seen, int* nseen)
+{
+    if (*nseen >= 16)
+        return;
+    char key[48];
+    if (!CrashCopyKey(addr, key, sizeof(key)))
+        return;
+    if (!CrashSeenAdd(seen, nseen, 16, addr))
+        return;
+    if (CrashInImage(addr))
+    {
+        char nearBuf[80];
+        CrashCopyNear(addr, nearBuf, sizeof(nearBuf));
+        CrashPrintf(h, "    %s  va=%08X  near=%s\n", key, addr, nearBuf);
+    }
+    else
+        CrashPrintf(h, "    %s  va=%08X  (heap)\n", key, addr);
+}
+
+static void CrashTryObject(HANDLE h, const char* tag, DWORD addr, DWORD* seen, int* nseen, int fromStack)
+{
+    if (*nseen >= 16)
+        return;
+    DWORD vptr = 0;
+    const char* kind = CrashVptrKind(addr, &vptr);
+    char rtti[48];
+    rtti[0] = 0;
+    int hasRtti = CrashCopyRtti(addr, rtti, sizeof(rtti));
+    if (fromStack && !hasRtti)
+        return;
+    if (!CrashSeenAdd(seen, nseen, 16, addr))
+        return;
+    if (hasRtti)
+        CrashPrintf(h, "    %s=%08X  %s  vptr=%08X  %s\n", tag, addr, rtti, vptr, kind);
+    else
+        CrashPrintf(h, "    %s=%08X  vptr=%08X  %s\n", tag, addr, vptr, kind);
+}
+
+static void CrashScanPtrFields(HANDLE h, DWORD obj, DWORD* seen, int* nseen)
+{
+    if (!obj)
+        return;
+    unsigned d[16];
+    memset(d, 0, sizeof(d));
+    __try
+    {
+        memcpy(d, (const void*)(DWORD_PTR)obj, sizeof(d));
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+    for (int i = 0; i < 16; ++i)
+        CrashTryKey(h, d[i], seen, nseen);
+}
+
+static void CrashWriteKnownSite(HANDLE h, DWORD rva)
+{
+    const char* msg = 0;
+    if (rva >= 0x282EC0 && rva <= 0x283200)
+        msg = "FUN_00682EC0 daily MP checksum / OOS dialog";
+    if (msg)
+        CrashPrintf(h, "  known_site: %s\n", msg);
+    else
+        CrashPrintf(h, "  known_site: none (new rva %06X - смотреть keys/objects)\n", rva);
+}
+
+static void CrashDumpSource(HANDLE h, CONTEXT* ctx)
+{
+    if (!ctx)
+        return;
+
+    CrashWrite(h, "  source:\n");
+    DWORD rva = (g_base && ctx->Eip >= g_base && ctx->Eip < g_base + g_imageSize)
+        ? (ctx->Eip - g_base) : 0;
+    if (rva)
+        CrashWriteKnownSite(h, rva);
+
+    DWORD seenObj[16];
+    DWORD seenKey[16];
+    int nObj = 0;
+    int nKey = 0;
+    memset(seenObj, 0, sizeof(seenObj));
+    memset(seenKey, 0, sizeof(seenKey));
+
+    CrashWrite(h, "  source_objects:\n");
+    CrashTryObject(h, "eax", ctx->Eax, seenObj, &nObj, 0);
+    CrashTryObject(h, "ecx", ctx->Ecx, seenObj, &nObj, 0);
+    CrashTryObject(h, "esi", ctx->Esi, seenObj, &nObj, 0);
+    CrashTryObject(h, "edi", ctx->Edi, seenObj, &nObj, 0);
+    CrashTryObject(h, "ebx", ctx->Ebx, seenObj, &nObj, 0);
+    CrashTryObject(h, "edx", ctx->Edx, seenObj, &nObj, 0);
+
+    if (ctx->Esi)
+    {
+        DWORD field40 = 0;
+        DWORD field44 = 0;
+        __try
+        {
+            field40 = *(DWORD*)(DWORD_PTR)(ctx->Esi + 0x40);
+            field44 = *(DWORD*)(DWORD_PTR)(ctx->Esi + 0x44);
+            CrashPrintf(h, "    esi+40=%08X esi+44=%08X (часто id/тип identity)\n",
+                field40, field44);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+        }
+    }
+
+    CrashWrite(h, "  source_keys:\n");
+    CrashScanPtrFields(h, ctx->Eax, seenKey, &nKey);
+    CrashScanPtrFields(h, ctx->Ecx, seenKey, &nKey);
+    CrashScanPtrFields(h, ctx->Esi, seenKey, &nKey);
+    CrashScanPtrFields(h, ctx->Edi, seenKey, &nKey);
+
+    __try
+    {
+        for (int i = 0; i < 384; ++i)
+        {
+            DWORD* slot = (DWORD*)(DWORD_PTR)(ctx->Esp + (DWORD)i * 4);
+            if (SafeIsBadReadPtr(slot, 4))
+                break;
+            DWORD p = *slot;
+            CrashTryKey(h, p, seenKey, &nKey);
+            CrashTryObject(h, "stack", p, seenObj, &nObj, 1);
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        CrashWrite(h, "    (stack scan faulted)\n");
+    }
+
+    if (nKey == 0)
+        CrashWrite(h, "    (none)\n");
+}
+
+// MiniDumpNormal (0) - только стеки, без
+// MiniDumpWithIndirectlyReferencedMemory (0x40): из обработчика
+// он долго ходит по куче и может зависнуть. DataSegs + unloaded +
+// thread + memory-info.
+static const DWORD kDumpRich =
+    0x00000001 | 0x00000020 | 0x00000800 | 0x00001000;
+
+static LONG g_crashDumpSerial = 0;
+static char g_crashDumpWritten[MAX_PATH];
+
+static void CrashStampName(char* dst, size_t cap, const char* prefix, const char* ext)
+{
+    SYSTEMTIME st;
+    GetLocalTime(&st);
+    LONG n = InterlockedIncrement(&g_crashDumpSerial);
+    sprintf_s(dst, cap,
+        "%s_%04u%02u%02u_%02u%02u%02u_%u_%u_%ld%s",
+        prefix,
+        (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
+        (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
+        (unsigned)GetCurrentProcessId(), (unsigned)GetCurrentThreadId(),
+        n, ext);
+}
+
+static HANDLE CrashOpenLog()
+{
+    return CreateFileA(
+        "v2dll_crash.log",
+        FILE_APPEND_DATA,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+}
+
+static void CrashWriteRaw(const char* path, DWORD disp, const char* text, int len)
+{
+    HANDLE h = CreateFileA(
+        path, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL, disp, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (h == INVALID_HANDLE_VALUE)
+        return;
+    if (disp == OPEN_ALWAYS)
+        SetFilePointer(h, 0, NULL, FILE_END);
+    DWORD wr = 0;
+    if (text && len > 0)
+        WriteFile(h, text, (DWORD)len, &wr, NULL);
+    FlushFileBuffers(h);
+    CloseHandle(h);
+}
+
+static DWORD CrashWriteDumpTo(const char* path, PEXCEPTION_POINTERS ep)
+{
+    HMODULE dbg = GetModuleHandleA("dbghelp.dll");
+    if (!dbg)
+        dbg = LoadLibraryA("dbghelp.dll");
+    if (!dbg)
+        return 0;
+
+    typedef struct {
+        DWORD ThreadId;
+        PEXCEPTION_POINTERS ExceptionPointers;
+        BOOL ClientPointers;
+    } MiniDumpExceptionInfo;
+
+    typedef BOOL(WINAPI* tMiniDumpWriteDump)(
+        HANDLE, DWORD, HANDLE, DWORD, MiniDumpExceptionInfo*, void*, void*);
+
+    tMiniDumpWriteDump fn = (tMiniDumpWriteDump)GetProcAddress(dbg, "MiniDumpWriteDump");
+    if (!fn)
+        return 0;
+
+    HANDLE file = CreateFileA(
+        path, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file == INVALID_HANDLE_VALUE)
+        return 0;
+
+    MiniDumpExceptionInfo info;
+    info.ThreadId = GetCurrentThreadId();
+    info.ExceptionPointers = ep;
+    info.ClientPointers = FALSE;
+
+    DWORD used = kDumpRich;
+    BOOL ok = FALSE;
+    __try
+    {
+        ok = fn(GetCurrentProcess(), GetCurrentProcessId(), file, used, &info, 0, 0);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        ok = FALSE;
+    }
+
+    if (!ok)
+    {
+        SetFilePointer(file, 0, NULL, FILE_BEGIN);
+        SetEndOfFile(file);
+        used = 0;
+        __try
+        {
+            ok = fn(GetCurrentProcess(), GetCurrentProcessId(), file, used, &info, 0, 0);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            ok = FALSE;
+        }
+        if (!ok)
+            used = 0;
+    }
+
+    CloseHandle(file);
+    if (!ok)
+        DeleteFileA(path);
+    return ok ? used : 0;
+}
+
+static DWORD CrashWriteDump(PEXCEPTION_POINTERS ep)
+{
+    g_crashDumpWritten[0] = 0;
+    if (!ep || (ep->ExceptionRecord && ep->ExceptionRecord->ExceptionCode == 0xC00000FD))
+        return 0;
+
+    char path[MAX_PATH];
+    CrashStampName(path, MAX_PATH, "v2dll_crash", ".dmp");
+    DWORD used = CrashWriteDumpTo(path, ep);
+    if (used)
+        strcpy_s(g_crashDumpWritten, path);
+    return used;
+}
+
+static bool CrashCodeIsNoise(DWORD code)
+{
+    return code == 0x40010006 || code == 0x4001000A || code == 0x406D1388 ||
+        code == 0x80000003 || code == 0x80000004;
+}
+
+static bool CrashCodeIsFatal(DWORD code)
+{
+    return code == 0xC0000005 || code == 0xC0000006 || code == 0xC000001D ||
+        code == 0xC0000094 || code == 0xC00000FD || code == 0xC0000409 ||
+        code == 0xC0000374 || code == 0xC0000602 || code == 0xC0000417 ||
+        code == 0x40000015;
+}
+
+static bool CrashIpInSelf(DWORD addr)
+{
+    if (!g_selfModule || !addr)
+        return false;
+    DWORD base = (DWORD)(DWORD_PTR)g_selfModule;
+    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)g_selfModule;
+    if (dos->e_magic != IMAGE_DOS_SIGNATURE)
+        return addr >= base && addr < base + 0x80000;
+    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(base + dos->e_lfanew);
+    DWORD size = nt->OptionalHeader.SizeOfImage;
+    return addr >= base && addr < base + size;
+}
+
+static void CrashBreadcrumb(PEXCEPTION_POINTERS ep, const char* via, bool alsoV2log)
+{
+    DWORD code = 0, addr = 0, eip = 0;
+    if (ep && ep->ExceptionRecord)
+    {
+        code = ep->ExceptionRecord->ExceptionCode;
+        addr = (DWORD)(DWORD_PTR)ep->ExceptionRecord->ExceptionAddress;
+    }
+    if (ep && ep->ContextRecord)
+        eip = ep->ContextRecord->Eip;
+
+    SYSTEMTIME st;
+    GetLocalTime(&st);
+    char buf[512];
+    int n = sprintf_s(buf,
+        "%04u-%02u-%02u %02u:%02u:%02u.%03u dll=%s via=%s pid=%u tid=%u "
+        "code=%08X eip=%08X addr=%08X\r\n",
+        (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
+        (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
+        (unsigned)st.wMilliseconds,
+        MOD_VERSION, via ? via : "-",
+        (unsigned)GetCurrentProcessId(), (unsigned)GetCurrentThreadId(),
+        code, eip, addr);
+    if (n > 0)
+        CrashWriteRaw("v2dll_crash_hint.txt", CREATE_ALWAYS, buf, n);
+
+    if (alsoV2log && n > 0)
+        CrashWriteRaw("v2dll.log", OPEN_ALWAYS, buf, n);
+}
+
+static void ReportCrash(PEXCEPTION_POINTERS ep)
+{
+    if (!g_settings.enableCrashLog)
+        return;
+    if (ep && ep->ExceptionRecord)
+    {
+        if (CrashCodeIsNoise(ep->ExceptionRecord->ExceptionCode))
+            return;
+    }
+    if (InterlockedCompareExchange(&g_inCrash, 1, 0) != 0)
+        return;
+
+    CrashBreadcrumb(ep, "uef", true);
+
+    HANDLE h = CrashOpenLog();
+    if (h == INVALID_HANDLE_VALUE)
+        return;
+
+    DWORD dumpType = 0;
+
+    __try
+    {
+        SYSTEMTIME st;
+        GetLocalTime(&st);
+        CrashPrintf(h,
+            "\n======== CRASH %04u-%02u-%02u %02u:%02u:%02u.%03u dll=%s pid=%u tid=%u ========\n",
+            (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
+            (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
+            (unsigned)st.wMilliseconds,
+            MOD_VERSION, (unsigned)GetCurrentProcessId(), (unsigned)GetCurrentThreadId());
+
+        unsigned int cw = 0;
+        _controlfp_s(&cw, 0, 0);
+        CrashPrintf(h, "  fpu_cw=%08X mxcsr=%08X\n", cw, _mm_getcsr());
+        CrashPrintf(h, "  oos_hits=%d sync_hits=%d last=%s\n",
+            g_oosHits, g_syncHits, g_lastChecksumLine);
+
+        EXCEPTION_RECORD* rec = ep ? ep->ExceptionRecord : 0;
+        CONTEXT* ctx = ep ? ep->ContextRecord : 0;
+        DWORD code = rec ? rec->ExceptionCode : 0;
+        DWORD addr = rec ? (DWORD)(DWORD_PTR)rec->ExceptionAddress : 0;
+        CrashPrintf(h, "  code=%08X (%s)\n", code, CrashCodeName(code));
+        CrashLogAddr(h, "fault", addr);
+
+        if (rec && code == 0xC0000005 && rec->NumberParameters >= 2)
+        {
+            CrashPrintf(h, "  av_%s addr=%08X\n",
+                rec->ExceptionInformation[0] ? "write" : "read",
+                (DWORD)rec->ExceptionInformation[1]);
+        }
+
+        if (ctx)
+        {
+            CrashPrintf(h,
+                "  eax=%08X ebx=%08X ecx=%08X edx=%08X esi=%08X edi=%08X\n"
+                "  ebp=%08X esp=%08X eip=%08X eflags=%08X\n",
+                ctx->Eax, ctx->Ebx, ctx->Ecx, ctx->Edx, ctx->Esi, ctx->Edi,
+                ctx->Ebp, ctx->Esp, ctx->Eip, ctx->EFlags);
+            CrashLogAddr(h, "eip", ctx->Eip);
+            CrashDumpCode(h, ctx->Eip);
+
+            CrashWrite(h, "  pointed:\n");
+            CrashDumpPtr(h, "eax", ctx->Eax);
+            CrashDumpNested(h, "eax", ctx->Eax, 0x14);
+            CrashDumpNested(h, "eax", ctx->Eax, 0x18);
+            CrashDumpPtr(h, "ebx", ctx->Ebx);
+            CrashDumpPtr(h, "ecx", ctx->Ecx);
+            CrashDumpPtr(h, "edx", ctx->Edx);
+            CrashDumpPtr(h, "esi", ctx->Esi);
+            CrashDumpPtr(h, "edi", ctx->Edi);
+            CrashDumpPtr(h, "esp", ctx->Esp);
+
+            CrashWrite(h, "  stack:\n");
+            DWORD ebp = ctx->Ebp;
+            CrashLogAddr(h, "  [0]", ctx->Eip);
+            for (int i = 1; i <= 24; ++i)
+            {
+                if (SafeIsBadReadPtr((const void*)(DWORD_PTR)ebp, 8))
+                    break;
+                DWORD next = *(DWORD*)(DWORD_PTR)ebp;
+                DWORD ret = *(DWORD*)(DWORD_PTR)(ebp + 4);
+                char tag[16];
+                sprintf_s(tag, "  [%d]", i);
+                CrashLogAddr(h, tag, ret);
+                if (!next || next <= ebp)
+                    break;
+                ebp = next;
+            }
+
+            CrashDumpSource(h, ctx);
+        }
+
+        FlushFileBuffers(h);
+        dumpType = CrashWriteDump(ep);
+
+        DWORD dumpSize = 0;
+        if (g_crashDumpWritten[0])
+        {
+            HANDLE dumpFile = CreateFileA(
+                g_crashDumpWritten, GENERIC_READ,
+                FILE_SHARE_READ | FILE_SHARE_WRITE,
+                NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+            if (dumpFile != INVALID_HANDLE_VALUE)
+            {
+                dumpSize = GetFileSize(dumpFile, NULL);
+                CloseHandle(dumpFile);
+            }
+        }
+        CrashPrintf(h, "  dump=%s type=%08X size=%u\n",
+            g_crashDumpWritten[0] ? g_crashDumpWritten : "(none)", dumpType, dumpSize);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        CrashWrite(h, "  (crash logger itself faulted)\n");
+    }
+
+    FlushFileBuffers(h);
+    CloseHandle(h);
+}
+
+static LONG CALLBACK CrashVectored(EXCEPTION_POINTERS* ep)
+{
+    if (!ep || !ep->ExceptionRecord)
+        return EXCEPTION_CONTINUE_SEARCH;
+    DWORD code = ep->ExceptionRecord->ExceptionCode;
+    if (CrashCodeIsNoise(code) || !CrashCodeIsFatal(code))
+        return EXCEPTION_CONTINUE_SEARCH;
+    DWORD addr = (DWORD)(DWORD_PTR)ep->ExceptionRecord->ExceptionAddress;
+    if (CrashIpInSelf(addr))
+        return EXCEPTION_CONTINUE_SEARCH;
+    CrashBreadcrumb(ep, "veh", false);
+    return EXCEPTION_CONTINUE_SEARCH;
+}
+
+static LONG WINAPI CrashUnhandled(EXCEPTION_POINTERS* ep)
+{
+    ReportCrash(ep);
+    if (g_prevUef)
+        return g_prevUef(ep);
+    return EXCEPTION_CONTINUE_SEARCH;
+}
+
+static LPTOP_LEVEL_EXCEPTION_FILTER WINAPI HookSetUEF(LPTOP_LEVEL_EXCEPTION_FILTER p)
+{
+    if (p == CrashUnhandled)
+        return g_realSetUEF ? g_realSetUEF(p) : 0;
+    g_prevUef = p;
+    if (g_realSetUEF)
+        return g_realSetUEF(CrashUnhandled);
+    return 0;
+}
+
+static void CrashFromAbort(DWORD code)
+{
+    EXCEPTION_RECORD rec;
+    CONTEXT ctx;
+    EXCEPTION_POINTERS ep;
+    memset(&rec, 0, sizeof(rec));
+    memset(&ctx, 0, sizeof(ctx));
+    RtlCaptureContext(&ctx);
+    rec.ExceptionCode = code;
+    rec.ExceptionAddress = (void*)(DWORD_PTR)ctx.Eip;
+    ep.ExceptionRecord = &rec;
+    ep.ContextRecord = &ctx;
+    ReportCrash(&ep);
+}
+
+static void __cdecl CrashOnAbort(int)
+{
+    CrashFromAbort(0x40000015);
+    TerminateProcess(GetCurrentProcess(), 3);
+}
+
+static void __cdecl CrashOnInvalidParam(
+    const wchar_t*, const wchar_t*, const wchar_t*, unsigned int, uintptr_t)
+{
+    CrashFromAbort(0xC0000417);
+    TerminateProcess(GetCurrentProcess(), 3);
+}
+
+static void InstallCrashWatch()
+{
+    ULONG guarantee = 32768;
+    SetThreadStackGuarantee(&guarantee);
+
+    AddVectoredExceptionHandler(1, CrashVectored);
+
+    HMODULE k32 = GetModuleHandleA("kernel32.dll");
+    if (k32)
+        g_realSetUEF = (tSetUnhandledExceptionFilter)GetProcAddress(
+            k32, "SetUnhandledExceptionFilter");
+    if (g_realSetUEF)
+        g_prevUef = g_realSetUEF(CrashUnhandled);
+    else
+        g_prevUef = SetUnhandledExceptionFilter(CrashUnhandled);
+
+    HMODULE exe = GetModuleHandleA(NULL);
+    if (exe && g_realSetUEF)
+        HookIat(exe, "kernel32.dll", "SetUnhandledExceptionFilter",
+            (void*)HookSetUEF, (void**)&g_realSetUEF);
+
+    signal(SIGABRT, CrashOnAbort);
+    _set_invalid_parameter_handler(CrashOnInvalidParam);
+
+    Log("CrashWatch: v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt");
+}
+
+
 static bool Install()
 {
     LoadSettings();
@@ -3404,6 +6447,19 @@ static bool Install()
     g_base = (DWORD)GetModuleHandleA(NULL);
     if (!g_base)
         return false;
+
+    g_imageSize = 0;
+    {
+        IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)g_base;
+        if (dos->e_magic == IMAGE_DOS_SIGNATURE)
+        {
+            IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(g_base + dos->e_lfanew);
+            if (nt->Signature == IMAGE_NT_SIGNATURE)
+                g_imageSize = nt->OptionalHeader.SizeOfImage;
+        }
+        if (!g_imageSize)
+            g_imageSize = 0xC00000;
+    }
 
     g_fnOnMakeDecision = (void*)(g_base + RVA_ONMAKEDECISION);
 
@@ -3432,7 +6488,26 @@ static bool Install()
     Log("prodTypeGateAllowAll=%d patchCombatRoll=%d combatRollMin=%d combatRollMax=%d",
         (int)g_settings.prodTypeGateAllowAll, (int)g_settings.patchCombatRoll,
         g_settings.combatRollMin, g_settings.combatRollMax);
+    Log("enableOosLog=%d patchFpuFortress=%d patchD3dFpuPreserve=%d patchThreadFpuPin=%d patchHeapLfh=%d engineWorkerThreads=%d",
+        (int)g_settings.enableOosLog, (int)g_settings.patchFpuFortress,
+        (int)g_settings.patchD3dFpuPreserve, (int)g_settings.patchThreadFpuPin,
+        (int)g_settings.patchHeapLfh, g_settings.engineWorkerThreads);
+    Log("patchPopQuantize=%d popQuantizeKeepBits=%d patchMpClientSleep=%d mpClientSleepMs=%d",
+        (int)g_settings.patchPopQuantize, g_settings.popQuantizeKeepBits,
+        (int)g_settings.patchMpClientSleep, g_settings.mpClientSleepMs);
+    Log("patchMainLoopSleep0=%d mainLoopSleepMs=%d patchD3dNoVsync=%d patchHighPriority=%d",
+        (int)g_settings.patchMainLoopSleep0, g_settings.mainLoopSleepMs,
+        (int)g_settings.patchD3dNoVsync, (int)g_settings.patchHighPriority);
+    Log("enableCrashLog=%d", (int)g_settings.enableCrashLog);
     Log("---- Settings конец ----");
+
+    InstallEngineStability();
+
+    if (g_settings.patchPopQuantize)
+        InstallPopQuantize();
+
+    if (g_settings.patchMpClientSleep)
+        InstallMpClientSleep();
 
     // Поддельные элементы: "POLITICSVIEW_DECISION" + имя решения.
     memset(g_fakeElem, 0, sizeof(g_fakeElem));
@@ -3500,6 +6575,9 @@ static bool Install()
     if (g_settings.patchProdTypeGate)
         InstallProdTypeGateHook();
 
+    if (g_settings.patchHideNoSupplyFactories)
+        InstallHideNoSupplyFactoriesHook();
+
     // Оба патча целят один и тот же адрес - взаимоисключающе. Логируем
     // БЕЗУСЛОВНО, какой режим реально активен - это самая вероятная
     // точка расхождения между двумя машинами с одинаковой DLL (у одной
@@ -3532,6 +6610,9 @@ static bool Install()
     if (g_settings.patchCombatRoll)
         InstallCombatRoll();
 
+    if (g_settings.enableOosLog)
+        InstallOosWatch();
+
     Log("Install: done");
     return true;
 }
@@ -3542,6 +6623,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID)
     if (reason == DLL_PROCESS_ATTACH)
     {
         DisableThreadLibraryCalls(hModule);
+        g_selfModule = hModule;
+        InstallCrashWatch();
         Log("DllMain: attach, Install = %d", (int)Install());
     }
     return TRUE;
