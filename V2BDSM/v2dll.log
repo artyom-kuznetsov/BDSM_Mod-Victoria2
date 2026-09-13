@@ -1,7 +1,7 @@
 CrashWatch: v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt
 LoadSettingsFrom: читаю 'v2dll_settings.ini'
----- Install ---- версия 2.99
-base = 00010000
+---- Install ---- версия 3.21
+base = 002C0000
 ---- Settings ----
 localModConfig=0 log=1 buttons=1 decisionFilter=1
 priceDelta=1 patchExponentialPriceDelta=0 popDisplay=0 versionLabel=1
@@ -51,96 +51,96 @@ Patch 'aristocrat_income_share_patch_2': отключён в настройка�
 Patch 'aristocrat_income_share_patch_3': отключён в настройках
 Patch 'aristocrat_income_share_patch_4': отключён в настройках
 Patch 'aristocrat_income_share_patch_5': отключён в настройках
-OccupiedReinforceSplit: occupied=100.0%, пещера 017F0000
-AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01800000, ok=1
-CivilizeNullCheck: установлен на rva 14248B, пещера 01810000
+OccupiedReinforceSplit: occupied=100.0%, пещера 01DA0000
+AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01DB0000, ok=1
+CivilizeNullCheck: установлен на rva 14248B, пещера 03570000
 ProdListVisibilityHook: установлен
-LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21930 байт)
-  [0] synthetics_template limit=0
-  [1] machine_part_user_template limit=0
-  [2] stock_exchange_template limit=0
-  [3] aeroplane_factory limit=0
-  [4] barrel_factory limit=0
-  [5] automobile_factory limit=0
-  [6] radio_factory limit=0
-  [7] telephone_factory limit=0
-  [8] electric_gear_factory limit=0
-  [9] pharmaceutical_plant limit=0
-  [10] steamer_shipyard limit=0
-  [11] artillery_factory limit=0
-  [12] small_arms_factory limit=0
-  [13] ammunition_factory limit=0
-  [14] steel_factory limit=0
-  [15] machine_parts_factory limit=0
-  [16] liquor_distillery limit=0
-  [17] winery limit=0
-  [18] fertilizer_factory limit=0
-  [19] furniture_factory limit=0
-  [20] explosives_factory limit=0
-  [21] luxury_clothes_factory limit=0
-  [22] luxury_furniture_factory limit=0
-  [23] cement_factory limit=0
-  [24] glass_factory limit=0
-  [25] paper_mill limit=0
-  [26] fishery limit=0
-  [27] regular_clothes_factory limit=0
-  [28] canned_food_factory limit=0
-  [29] cattle_ranch limit=0
-  [30] coal_mine limit=0
-  [31] coffee_plantation limit=0
-  [32] cotton_plantation limit=0
-  [33] dye_plantation limit=0
-  [34] grain_farm limit=0
-  [35] iron_mine limit=0
-  [36] oil_rig limit=0
-  [37] opium_plantation limit=0
-  [38] orchard limit=0
-  [39] precious_metal_mine limit=0
-  [40] rubber_lodge limit=0
-  [41] silkworm_ranch limit=0
-  [42] sulphur_mine limit=0
-  [43] tea_plantation limit=0
-  [44] timber_lodge limit=0
-  [45] tobacco_plantation limit=0
-  [46] tropical_wood_lodge limit=0
-  [47] peasant_grain limit=0
-  [48] cattle_factory limit=1
-  [49] coal_factory limit=1
-  [50] coffee_factory limit=1
-  [51] cotton_factory limit=1
-  [52] dye_factory limit=1
-  [53] grain_factory limit=1
-  [54] iron_factory limit=1
-  [55] oil_factory limit=1
-  [56] opium_factory limit=1
-  [57] fruit_factory limit=1
-  [58] rubber_factory limit=1
-  [59] silk_factory limit=1
-  [60] sulphur_factory limit=1
-  [61] tea_factory limit=1
-  [62] timber_factory limit=1
-  [63] tobacco_factory limit=1
-  [64] tropical_wood_factory limit=1
+LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21923 байт)
+  [0] synthetics_template limit=0 good=-
+  [1] machine_part_user_template limit=0 good=-
+  [2] stock_exchange_template limit=0 good=-
+  [3] aeroplane_factory limit=0 good=electric_gear
+  [4] barrel_factory limit=0 good=automobiles
+  [5] automobile_factory limit=0 good=steel
+  [6] radio_factory limit=0 good=glass
+  [7] telephone_factory limit=0 good=glass
+  [8] electric_gear_factory limit=0 good=rubber
+  [9] pharmaceutical_plant limit=0 good=glass
+  [10] steamer_shipyard limit=0 good=steel
+  [11] artillery_factory limit=0 good=explosives
+  [12] small_arms_factory limit=0 good=timber
+  [13] ammunition_factory limit=0 good=sulphur
+  [14] steel_factory limit=0 good=iron
+  [15] machine_parts_factory limit=0 good=steel
+  [16] liquor_distillery limit=0 good=grain
+  [17] winery limit=0 good=fruit
+  [18] fertilizer_factory limit=0 good=sulphur
+  [19] furniture_factory limit=0 good=timber
+  [20] explosives_factory limit=0 good=sulphur
+  [21] luxury_clothes_factory limit=0 good=silk
+  [22] luxury_furniture_factory limit=0 good=tropical_wood
+  [23] cement_factory limit=0 good=coal
+  [24] glass_factory limit=0 good=coal
+  [25] paper_mill limit=0 good=timber
+  [26] fishery limit=0 good=raw_grain
+  [27] regular_clothes_factory limit=0 good=cotton
+  [28] canned_food_factory limit=0 good=grain
+  [29] cattle_ranch limit=0 good=-
+  [30] coal_mine limit=0 good=-
+  [31] coffee_plantation limit=0 good=-
+  [32] cotton_plantation limit=0 good=-
+  [33] dye_plantation limit=0 good=-
+  [34] grain_farm limit=0 good=-
+  [35] iron_mine limit=0 good=-
+  [36] oil_rig limit=0 good=-
+  [37] opium_plantation limit=0 good=-
+  [38] orchard limit=0 good=-
+  [39] precious_metal_mine limit=0 good=-
+  [40] rubber_lodge limit=0 good=-
+  [41] silkworm_ranch limit=0 good=-
+  [42] sulphur_mine limit=0 good=-
+  [43] tea_plantation limit=0 good=-
+  [44] timber_lodge limit=0 good=-
+  [45] tobacco_plantation limit=0 good=-
+  [46] tropical_wood_lodge limit=0 good=-
+  [47] peasant_grain limit=0 good=grain
+  [48] cattle_factory limit=1 good=raw_cattle
+  [49] coal_factory limit=1 good=raw_coal
+  [50] coffee_factory limit=1 good=raw_tea
+  [51] cotton_factory limit=1 good=raw_cotton
+  [52] dye_factory limit=1 good=raw_dye
+  [53] grain_factory limit=1 good=raw_grain
+  [54] iron_factory limit=1 good=raw_iron
+  [55] oil_factory limit=1 good=raw_oil
+  [56] opium_factory limit=1 good=raw_opium
+  [57] fruit_factory limit=1 good=raw_fruit
+  [58] rubber_factory limit=1 good=raw_rubber
+  [59] silk_factory limit=1 good=raw_silk
+  [60] sulphur_factory limit=1 good=raw_sulphur
+  [61] tea_factory limit=1 good=raw_tea
+  [62] timber_factory limit=1 good=raw_timber
+  [63] tobacco_factory limit=1 good=raw_tobacco
+  [64] tropical_wood_factory limit=1 good=raw_tropical_wood
 ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
 ProdTypeGateHook: установлен
+LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+LoadProvinceGoods: сканирую мод 'I:\Vic2_Dev\V2BDSM\mod\2\history\provinces' (перекрывает ванильные id)
+LoadProvinceGoods: готово, 2706 провинций с trade_goods
+HideNoSupplyFactoriesHook: установлен
 PriceDelta: активен режим PriceDelta (линейный)
 PriceDelta: 25 сотых процента, множитель 163
-VersionLabel: 'V2 v3.04 + V2DLL v2.99' (len=22), пещера 01830000
+VersionLabel: 'V2 v3.04 + V2DLL v3.21' (len=22), пещера 03590000
 CombatRoll: диапазон 0..4 (модуль=5)
 OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
 Install: done
 DllMain: attach, Install = 1
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
-Update[CTechnologyView]: вызван, view=817528C0
+Update[CTechnologyView]: вызван, view=7ECF1F60
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
 ProdTypeGate: grain_factory -> result=1 (впервые)
 ProdTypeGate: fruit_factory -> result=1 (впервые)
-Update[CProductionView]: вызван, view=41385010
+Update[CProductionView]: вызван, view=7BDA4900
 SetupHideColonialButton: подписана
-Update[CProductionView]: вызван, view=41385010
-Update[CTechnologyView]: вызван, view=813A7FF0
-Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
-Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
-SetupHideColonialButton: подписана
+Update[CProductionView]: вызван, view=7BDA4900

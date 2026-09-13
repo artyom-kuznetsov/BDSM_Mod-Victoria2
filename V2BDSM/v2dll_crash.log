@@ -1,0 +1,59 @@
+
+======== CRASH 2026-09-13 12:06:37.952 dll=3.07 pid=20980 tid=17656 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=6AE124A8  lua51.dll+0x24A8
+  av_read addr=76650C05
+  eax=76650909 ebx=2E8DE548 ecx=016FD901 edx=2E8DE500 esi=0000003F edi=2E8DE568
+  ebp=016FD98C esp=016FD93C eip=6AE124A8 eflags=00010206
+  eip=6AE124A8  lua51.dll+0x24A8
+  code_eip-8 30 01 00 00 85 C0 74 55  8B B0 FC 02 00 00 8B 50
+  pointed:
+  eax=76650909 unreadable
+  ebx=2E8DE548 00CBDAC0 0000018D 00000000 2FD34870 00000000 00000000 0000270F 00000D51
+  ecx=016FD901 00000000 00000000 00000000 48000000 0884DB0C 2C52D8C5 8C016FD9 00001A00
+  edx=2E8DE500 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  esi=0000003F unreadable
+  edi=2E8DE568 61626F74 5F6F6363 74636166 0079726F 0000000F 0000000F 00000000 302E7F28
+  esp=016FD93C 8467E868 0000000C 00000000 61626F74 5F6F6363 74636166 0079726F 84A0D168
+  stack:
+    [0]=6AE124A8  lua51.dll+0x24A8
+    [1]=6AE1252F  lua51.dll+0x252F
+    [2]=005B9759  v2game.exe+0x2F9759
+    [3]=005BE3D3  v2game.exe+0x2FE3D3
+    [4]=005FD6C7  v2game.exe+0x33D6C7
+    [5]=008B0162  v2game.exe+0x5F0162
+    [6]=00863E9F  v2game.exe+0x5A3E9F
+    [7]=00517D3F  v2game.exe+0x257D3F
+    [8]=005162D2  v2game.exe+0x2562D2
+    [9]=0089F966  v2game.exe+0x5DF966
+    [10]=0083E0CD  v2game.exe+0x57E0CD
+    [11]=00970F3E  v2game.exe+0x6B0F3E
+    [12]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [13]=774182AE  ntdll.dll+0x682AE
+    [14]=7741827E  ntdll.dll+0x6827E
+    [15]=00000000
+  source:
+  source_objects:
+    eax=76650909  vptr=00000000  unreadable
+    ecx=016FD901  vptr=00000000  null-vtable
+    esi=0000003F  vptr=00000000  unreadable
+    edi=2E8DE568  vptr=61626F74  vtable-outside-exe
+    ebx=2E8DE548  CBuilding  vptr=00CBDAC0  vtable-in-exe
+    edx=2E8DE500  vptr=00000000  null-vtable
+  source_keys:
+    stack=8467E868  CBuildFactoryWindow  vptr=00CCFCF0  vtable-in-exe
+    stack=84A0D168  CBuildingItem  vptr=00CCFFDC  vtable-in-exe
+    stack=5214E028  CInGameIdler  vptr=00CCA34C  vtable-in-exe
+    stack=3852D608  CCountry  vptr=00CBFACC  vtable-in-exe
+    stack=3E5142D8  CProductionView  vptr=00CCFECC  vtable-in-exe
+    backAdapter  va=6C697562  (heap)
+    stack=2F3C3110  CEU3Gui  vptr=00CC8A44  vtable-in-exe
+    stack=4AC9E4B0  CState  vptr=00CBD78C  vtable-in-exe
+    stack=7D41E0A0  CProvinceView  vptr=00CD3768  vtable-in-exe
+    stack=4AD0A900  CBattlePlanManager  vptr=00CAE08C  vtable-in-exe
+    stack=052AEE08  CEU3Application  vptr=00CC845C  vtable-in-exe
+    fe_buildfactory_label  va=4D0B12D8  (heap)
+    HalT  va=7FFEA000  (heap)
+  dump=v2dll_crash_20260913_120637_20980_17656_1.dmp type=00001821 size=24930779
