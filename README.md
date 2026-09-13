@@ -108,7 +108,8 @@ Fixes some math errors related to multi-threading (fixes some of desync cases) (
 #### 3. PATCH_HEAP_LFH
 Decreases RAM fragmentation over long game sessions (might decrease RAM usage) (made by av213238).
 #### 4. ENGINE_WORKER_THREADS
-THEORETICAL! Makes the game use a specific number of threads. Might fix some desyncs (made by av213238).
+Set to number of threads of your processor, this will improve performance. 
+In theory, might reduce desync probability if all lobby participants have the same setting (made by av213238).
 #### 5. PATCH_POP_QUANTIZE / POP_QUANTIZE_KEEP_BITS
 Rouns up microscopic pop attributes (money, savings, etc) that you would never even see in game. 
 Might decrease related desync probability and improve performance a bit (rounds up to 12 bits by default, vanilla is 15) (made by av213238).
