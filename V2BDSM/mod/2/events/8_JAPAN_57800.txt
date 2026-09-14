@@ -5,9 +5,15 @@ country_event = {
 	id = 57808
 	
 	trigger = {
-		tag = TKG
+		primary_culture = japanese
 		JAP = {
 			exists = no
+		}
+		TKG = {
+			OR = {
+				ai = yes
+				exists = no
+			}
 		}
 		ai = yes
 		year = 1850
@@ -54,6 +60,10 @@ country_event = {
 		tag = TKG
 		war = no
 		ideological_thought = 1
+	}
+	
+	immediate = {
+		set_country_flag = japan_house_supported_cflag
 	}
 	
 	option = {
@@ -115,6 +125,174 @@ country_event = {
 		CUSTOM_TOOLTIP_57817 = { }
 	}
 }
+
+country_event = {
+	title = "japan_revolution_EvtName"
+	desc = "japan_revolution_TKG_EvtDesc"
+	id = 57801
+	
+	picture = "shogun"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "EVTOPTA16250"
+		change_tag = JAP
+		random_owned = {
+			limit = {
+				owner = {
+					exists = SAT
+				}
+			}
+			owner = {
+				release_vassal = SAT
+				war = {
+					target = SAT
+					attacker_goal = {
+						casus_belli = civil_war
+					}
+					defender_goal = {
+						casus_belli = civil_war
+					}
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					exists = CHO
+				}
+			}
+			owner = {
+				release_vassal = CHO
+				war = {
+					target = CHO
+					attacker_goal = {
+						casus_belli = civil_war
+					}
+					defender_goal = {
+						casus_belli = civil_war
+					}
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					exists = KYO
+				}
+			}
+			owner = {
+				release_vassal = KYO
+				war = {
+					target = KYO
+					attacker_goal = {
+						casus_belli = civil_war
+					}
+					defender_goal = {
+						casus_belli = civil_war
+					}
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					exists = KAG
+				}
+			}
+			owner = {
+				release_vassal = KAG
+				war = {
+					target = KAG
+					attacker_goal = {
+						casus_belli = civil_war
+					}
+					defender_goal = {
+						casus_belli = civil_war
+					}
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					exists = USG
+				}
+			}
+			owner = {
+				release_vassal = USG
+				war = {
+					target = USG
+					attacker_goal = {
+						casus_belli = civil_war
+					}
+					defender_goal = {
+						casus_belli = civil_war
+					}
+				}
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = {
+					exists = SEN
+				}
+			}
+			owner = {
+				release_vassal = SEN
+				war = {
+					target = SEN
+					attacker_goal = {
+						casus_belli = civil_war
+					}
+					defender_goal = {
+						casus_belli = civil_war
+					}
+				}
+			}
+		}
+	}
+}
+
+
+country_event = {
+	title = "japan_revolution_EvtName"
+	desc = "japan_revolution_EvtDesc"
+	id = 57802
+	
+	picture = "shogun"
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "japan_revolution_EvtOptA"
+		change_tag = JAP
+		capital = 1649
+		any_country = {
+			limit = {
+				primary_culture = japanese
+				vassal_of = THIS
+			}
+			country_event = { id = 11101 days = 0 }
+			any_owned = { province_selector = -1 }
+		}
+		release_vassal = TKG
+		release_vassal = TKG
+		TKG = {
+			war = {
+				target = JAP
+				attacker_goal = {
+					casus_belli = civil_war
+				}
+				defender_goal = {
+					casus_belli = civil_war
+				}
+			}
+		}
+	}
+}
+
 
 country_event = {
 	title = "satsuma_ports_EvtName"

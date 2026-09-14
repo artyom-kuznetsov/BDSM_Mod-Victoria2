@@ -2,7 +2,7 @@ political_decisions = {
 	form_japan = {
 		potential = {
 			primary_culture = japanese
-			NOT = { exists = JAP }
+			NOT = { exists = JAP tag = TKG }
 		}
 		
 		allow = {
@@ -32,6 +32,35 @@ political_decisions = {
 					remove_core = KYO
 					remove_core = KAG
 				}
+			}
+		}
+	}
+	
+	centralize_japan = {
+		potential = {
+			has_country_flag = japan_house_supported_cflag
+			NOT = { exists = JAP }
+		}
+		
+		allow = {
+			nationalism_tech = 1
+			state_n_government = 1
+			war = no
+		}
+		
+		effect = {
+			plurality = 10
+			random_owned = {
+				limit = {
+					owner = { has_country_flag = tokugawa_flag }
+				}
+				owner = { country_event = 57801 }
+			}
+			random_owned = {
+				limit = {
+					owner = { NOT = { has_country_flag = tokugawa_flag } }
+				}
+				owner = { country_event = 57802 }
 			}
 		}
 	}

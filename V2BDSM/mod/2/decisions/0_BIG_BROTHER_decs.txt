@@ -98,6 +98,58 @@ political_decisions = {
 				set_country_flag = vassal_annex_blocked
 			}
 			
+			any_country = {
+				limit = {
+					primary_culture = japanese
+					ai = yes
+					NOT = { tag = TKG }
+				}
+				add_country_modifier = { name = japan_ai_modifier duration = -1 }
+			}
+			
+			SAT = {
+				set_country_flag = satsuma_ports_flag
+				add_country_modifier = {
+					name = satsuma_modifier
+					duration = -1
+				}
+			}
+			KYO = {
+				set_country_flag = kyoto_flag
+				add_country_modifier = {
+					name = kyoto_modifier
+					duration = -1
+				}
+			}
+			KAG = {
+				set_country_flag = kaga_flag
+				add_country_modifier = {
+					name = kaga_modifier
+					duration = -1
+				}
+			}
+			SEN = {
+				set_country_flag = sendai_flag
+				add_country_modifier = {
+					name = sendai_modifier
+					duration = -1
+				}
+			}
+			USG = {
+				set_country_flag = uesugi_flag
+				add_country_modifier = {
+					name = uesugi_modifier
+					duration = 5475
+				}
+			}
+			CHO = {
+				set_country_flag = choshu_flag
+				add_country_modifier = {
+					name = choshu_modifier
+					duration = -1
+				}
+			}
+			
 			### AFRICA COLONIZATION BLOCKS
 			# MALARIA
 			CNG = { set_country_flag = malaria_blocked_country_flag }
