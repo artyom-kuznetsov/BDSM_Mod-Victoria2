@@ -53,7 +53,6 @@ peace_order = {
 	acquire_core_state_AI
 	acquire_all_cores
 	acquire_all_cores_AI
-	sengoku 
 	annex_core_country
 	acquire_substate_region
 	take_treaty_port
@@ -304,7 +303,7 @@ acquire_state_china_japan = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
-		THIS = { has_country_flag = the_meiji_restoration_flag }
+		THIS = { primary_culture = japanese }
 		
 		has_country_flag = chinese_warlord_flag
 		
@@ -395,7 +394,7 @@ acquire_state_invasion = {
 	can_use = {
 		NOT = { is_our_vassal = THIS }
 		NOT = { THIS = { has_country_flag = chinese_warlord_flag } }
-		NOT = { THIS = { has_country_flag = the_meiji_restoration_flag } }
+		NOT = { THIS = { primary_culture = japanese } }
 		
 		has_country_flag = chinese_warlord_flag
 		NOT = { year = 1870 } 
@@ -614,7 +613,7 @@ conquest = {
 			}
 		}
 		total_pops = 300000
-		OR = {	# ВОЗМОЖЕН CONQUEST СТРАНЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 300К ДО НАЦИЗМА ИЛИ МЕНЬШЕ 500К ПОСЛЕ НАЦИЗМА
+		OR = {	# ВОЗМОЖЕН CONQUEST СТРННЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 300К ДО ННЦИЗМН ИЛИ МЕНЬШЕ 500К ПОСЛЕ ННЦИЗМН
 			NOT = { number_of_states = 2 }
 			
 			NOT = { total_pops = 300000 THIS = { nationalism_n_imperialism = 1 } }
@@ -631,7 +630,7 @@ conquest = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { has_country_flag = daimyo_flag }
+		
 	}
 
 	badboy_factor = 1.2
@@ -901,7 +900,7 @@ conquest_small = {
 				NOT = { year = 1870 } 
 			}
 		}
-		NOT = { has_country_flag = daimyo_flag }
+		
 	}
 
 	badboy_factor = 0.7
@@ -1135,65 +1134,6 @@ take_from_sphere = {
 	on_po_accepted = {
 		plurality = -2
 	}
-}
-
-# SENGOKU
-sengoku = {
-	sprite_index = 5
-	is_triggered_only = yes
-	months = 12
-	crisis = no
-	construction_speed = 1.5
-	
-	badboy_factor = 0.4
-	prestige_factor = 2
-	peace_cost_factor = 0.009
-	penalty_factor = 1
-	
-	break_truce_prestige_factor = 1
-	break_truce_infamy_factor = 1
-	break_truce_militancy_factor = 1
-	truce_months = 0
-	
-	good_relation_prestige_factor = 1
-	good_relation_infamy_factor = 1
-	good_relation_militancy_factor = 1
-	
-	can_use = {
-		NOT = { is_our_vassal = THIS }
-		is_independant = yes
-		has_country_flag = daimyo_flag
-		THIS = {
-			has_country_flag = daimyo_flag
-		}
-	}
-
-	
-	on_po_accepted = {
-		THIS = {
-			any_owned = {
-				limit = {
-					# Audax Validator "." Ignore_NEXT
-					has_building = province_selector
-				}
-				# Audax Validator "." Ignore_NEXT
-				province_selector = -1
-			}
-		}
-	}
-	
-	on_add = {
-		move_issue_percentage = { 
-			from = jingoism 
-			to = pro_military
-			value = 0.25
-		}
-	}
-	
-	po_annex = yes
-	po_gunboat = yes
-	
-	war_name = WAR_SENGOKU_NAME
 }
 
 # Acquire Core State
@@ -2193,7 +2133,6 @@ release_puppet = {
         NOT = {
             is_our_vassal = THIS
 			tag = WBK
-			has_country_flag = daimyo_flag
 			OR = {
 				total_pops = 2000000
 				NOT = { number_of_states = 2 }
@@ -2251,7 +2190,6 @@ release_puppet_small = {
         NOT = {
             is_our_vassal = THIS
 			tag = WBK
-			has_country_flag = daimyo_flag
 			total_pops = 400000
         }
         war_with = THIS
@@ -2305,7 +2243,6 @@ release_puppet_tiny = {
         NOT = {
             is_our_vassal = THIS
 			tag = WBK
-			has_country_flag = daimyo_flag
 			total_pops = 200000
         }
         war_with = THIS
@@ -2361,7 +2298,6 @@ transfer_puppet = {
         NOT = {
             is_our_vassal = THIS
 			tag = WBK
-			has_country_flag = daimyo_flag
 			total_pops = 2000000
         }
         war_with = THIS
@@ -2416,7 +2352,6 @@ transfer_puppet_small = {
         NOT = {
             is_our_vassal = THIS
 			tag = WBK
-			has_country_flag = daimyo_flag
 			total_pops = 400000
         }
         war_with = THIS
@@ -2470,7 +2405,6 @@ transfer_puppet_tiny = {
         NOT = {
             is_our_vassal = THIS
 			tag = WBK
-			has_country_flag = daimyo_flag
 			total_pops = 200000
         }
         war_with = THIS
@@ -2526,7 +2460,6 @@ make_puppet = {
 		NOT = { has_country_flag = offlimit_cflag THIS = { has_country_flag = offlimit_cflag } }
 		NOT = { 
 			is_our_vassal = THIS 
-			has_country_flag = daimyo_flag
 			tag = WBK
 		}
 		OR = {
@@ -2619,7 +2552,6 @@ make_puppet_small = {
 		NOT = { 
 			is_our_vassal = THIS 
 			total_pops = 350000
-			has_country_flag = daimyo_flag
 		}
 		is_greater_power = no
 		is_vassal = no
@@ -2706,7 +2638,6 @@ make_puppet_tiny = {
 		NOT = { 
 			is_our_vassal = THIS 
 			total_pops = 200000
-			has_country_flag = daimyo_flag
 		}
 		is_greater_power = no
 		is_vassal = no
@@ -3059,7 +2990,7 @@ demand_concession_casus_belli = {
             neighbour = THIS
 			any_neighbor_country = { vassal_of = THIS }
 		}
-		NOT = { has_country_flag = daimyo_flag tag = WBK }
+		NOT = { tag = WBK }
 		
 		OR = { # AFRICAN BLOCKS (MALARIA)
 			AND = {
@@ -3137,7 +3068,7 @@ establish_protectorate_casus_belli = {
 		civilized = no
 		THIS = { civilized = yes }
 		total_pops = 200000
-		OR = {	# ВОЗМОЖЕН CONQUEST СТРАНЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 400К ДО НАЦИЗМА ИЛИ МЕНЬШЕ 600К ПОСЛЕ НАЦИЗМА
+		OR = {	# ВОЗМОЖЕН CONQUEST СТРННЫ С 1 РЕГОМ ИЛИ МЕНЬШЕ 400К ДО ННЦИЗМН ИЛИ МЕНЬШЕ 600К ПОСЛЕ ННЦИЗМН
 			NOT = { number_of_states = 2 }
 			
 			NOT = { total_pops = 400000 THIS = { nationalism_n_imperialism = 1 } }
@@ -3162,7 +3093,7 @@ establish_protectorate_casus_belli = {
             neighbour = THIS
 			any_neighbor_country = { vassal_of = THIS }
 		}
-		NOT = { has_country_flag = daimyo_flag }
+		
 		
 		
 		OR = { # AFRICAN BLOCKS (MALARIA)
@@ -3249,7 +3180,7 @@ establish_small_protectorate_casus_belli = {
             neighbour = THIS
 			any_neighbor_country = { vassal_of = THIS }
 		}
-		NOT = { has_country_flag = daimyo_flag }
+		
 		
 		OR = { # AFRICAN BLOCKS (MALARIA)
 			AND = {
@@ -3928,7 +3859,7 @@ acquire_capital = {
 			}
 		}
 		is_independant = yes
-		NOT = { has_country_flag = daimyo_flag }
+		
 		number_of_states = 2
 	}
 	
@@ -4035,7 +3966,6 @@ acquire_state_small = {
 		number_of_states = 2 # annex if you want their last state
 		NOT = { 
 			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
 		}
 		NOT = { 
 			has_country_flag = offlimit_cflag 
@@ -4151,7 +4081,6 @@ acquire_state_medium = {
 		number_of_states = 2 # annex if you want their last state
 		NOT = { 
 			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
 		}
 		NOT = { 
 			has_country_flag = offlimit_cflag 
@@ -4266,7 +4195,6 @@ acquire_state_large = {
 		number_of_states = 2 # annex if you want their last state
 		NOT = { 
 			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
 		}
 		NOT = { 
 			has_country_flag = offlimit_cflag 
@@ -4382,7 +4310,6 @@ acquire_state_huge = {
 		number_of_states = 2 # annex if you want their last state
 		NOT = { 
 			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
 		}
 		NOT = { 
 			has_country_flag = offlimit_cflag 
@@ -4474,10 +4401,6 @@ place_in_the_sun_small = {
 		THIS = { civilized = yes }
 		
 		NOT = { 
-			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
-		}
-		NOT = { 
 			has_country_flag = offlimit_cflag 
 			THIS = { has_country_flag = offlimit_cflag } 
 		}
@@ -4561,13 +4484,11 @@ place_in_the_sun_medium = {
 			is_colonial = yes
 		}
 		
-		NOT = { is_our_vassal = THIS }
 		civilized = yes
 		THIS = { civilized = yes }
 		
 		NOT = { 
 			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
 		}
 		NOT = { 
 			has_country_flag = offlimit_cflag 
@@ -4653,13 +4574,11 @@ place_in_the_sun_large = {
 			is_colonial = yes
 		}
 		
-		NOT = { is_our_vassal = THIS }
 		civilized = yes
 		THIS = { civilized = yes }
 		
 		NOT = { 
 			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
 		}
 		NOT = { 
 			has_country_flag = offlimit_cflag 
@@ -4745,13 +4664,11 @@ place_in_the_sun_huge = {
 			is_colonial = yes
 		}
 		
-		NOT = { is_our_vassal = THIS }
 		civilized = yes
 		THIS = { civilized = yes }
 		
 		NOT = { 
 			is_our_vassal = THIS
-			has_country_flag = daimyo_flag
 		}
 		NOT = { 
 			has_country_flag = offlimit_cflag 

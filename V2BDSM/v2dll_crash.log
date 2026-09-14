@@ -57,3 +57,62 @@
     fe_buildfactory_label  va=4D0B12D8  (heap)
     HalT  va=7FFEA000  (heap)
   dump=v2dll_crash_20260913_120637_20980_17656_1.dmp type=00001821 size=24930779
+
+======== CRASH 2026-09-14 12:26:50.945 dll=3.21 pid=28860 tid=28872 ========
+  fpu_cw=0109001F mxcsr=00009FF9
+  oos_hits=0 sync_hits=0 last=none
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=010115EB  v2game.exe+0xD15EB
+  av_read addr=00000128
+  eax=303A40B0 ebx=00000000 ecx=00010000 edx=00000000 esi=00000001 edi=53FDA450
+  ebp=0233D7A4 esp=0233D628 eip=010115EB eflags=00010206
+  eip=010115EB  v2game.exe+0xD15EB
+  code_eip-8 47 18 8B 98 2C 01 00 00  8B 83 28 01 00 00 8B CA
+  pointed:
+  eax=303A40B0 0193DAF0 0000018D 00000000 30F5AFA0 0191D998 00000000 0000270F 00000D45
+  [eax+14]=00000000
+  [eax+18]=0000270F unreadable
+  ebx=00000000
+  ecx=00010000 unreadable
+  edx=00000000
+  esi=00000001 unreadable
+  edi=53FDA450 0193E1F8 4C2F7100 0193E21C 0000018D 00000000 30F5AFA0 303A40B0 82BF3C78
+  esp=0233D628 3C2D6A84 825C0BA8 00000220 00000002 00000000 53FDBB20 00004000 00000000
+  stack:
+    [0]=010115EB  v2game.exe+0xD15EB
+    [1]=010620BC  v2game.exe+0x1220BC
+    [2]=0117F076  v2game.exe+0x23F076
+    [3]=0113B5A6  v2game.exe+0x1FB5A6
+    [4]=0152E524  v2game.exe+0x5EE524
+    [5]=01530162  v2game.exe+0x5F0162
+    [6]=014E3E9F  v2game.exe+0x5A3E9F
+    [7]=01138703  v2game.exe+0x1F8703
+    [8]=0151F966  v2game.exe+0x5DF966
+    [9]=014BE0CD  v2game.exe+0x57E0CD
+    [10]=015F0F3E  v2game.exe+0x6B0F3E
+    [11]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [12]=774182AE  ntdll.dll+0x682AE
+    [13]=7741827E  ntdll.dll+0x6827E
+    [14]=00000000
+  source:
+  known_site: none (new rva 0D15EB - смотреть keys/objects)
+  source_objects:
+    eax=303A40B0  CNullBuilding  vptr=0193DAF0  vtable-in-exe
+    ecx=00010000  vptr=00000000  unreadable
+    esi=00000001  vptr=00000000  unreadable
+    edi=53FDA450  CStateBuilding  vptr=0193E1F8  vtable-in-exe
+  source_keys:
+    stack=53FDBB20  CStateBuilding  vptr=0193E1F8  vtable-in-exe
+    stack=53FDDBF0  CStateEmployment  vptr=0193D3EC  vtable-in-exe
+    stack=4C0D1180  CStateBuilding  vptr=0193E1F8  vtable-in-exe
+    stack=82BF0758  CState  vptr=0193D78C  vtable-in-exe
+    stack=301D0150  CCountry  vptr=0193FACC  vtable-in-exe
+    stack=35D15590  CTechnologyStatus  vptr=01940BC0  vtable-in-exe
+    stack=31446600  CProductionType  vptr=0193DBFC  vtable-in-exe
+    stack=3762D548  CMapProvince  vptr=0193D310  vtable-in-exe
+    stack=301DA288  CCountry  vptr=0193FACC  vtable-in-exe
+    stack=82BF3C78  CState  vptr=0193D78C  vtable-in-exe
+    stack=045CD3F8  CCurrentGameState  vptr=0194AE84  vtable-in-exe
+    stack=82BFE920  CState  vptr=0193D78C  vtable-in-exe
+    HalT  va=7FFEA000  (heap)
+  dump=v2dll_crash_20260914_122650_28860_28872_1.dmp type=00001821 size=25228854
