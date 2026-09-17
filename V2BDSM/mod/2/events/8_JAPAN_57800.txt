@@ -293,6 +293,44 @@ country_event = {
 	}
 }
 
+country_event = { # MOVE CAPITAL
+	title = "china_move_capital_EvtName"
+	desc = "china_move_capital_EvtDesc"
+	id = 57803
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = "japan_move_capital_EvtOptEdo"
+		random_owned = {
+			limit = {
+				owner = {
+					owns = 1649
+				}
+			}
+			owner = {
+				capital = 1649
+				clr_country_flag = japan_capital_cflag
+			}
+		}
+	}
+	option = {
+		name = "japan_move_capital_EvtOptKyoto"
+		
+		random_owned = {
+			limit = {
+				owner = {
+					owns = 1657
+				}
+			}
+			owner = {
+				capital = 1657
+				clr_country_flag = japan_capital_cflag
+			}
+		}
+	}
+}
+
 
 country_event = {
 	title = "satsuma_ports_EvtName"

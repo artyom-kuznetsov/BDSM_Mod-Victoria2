@@ -182,4 +182,22 @@ political_decisions = {
 			clr_country_flag = hidden_tooltip
 		}
 	}
+	japan_capital_dec = {
+		potential = {
+			tag = JAP
+			NOT = { has_country_flag = japan_capital_cflag }
+			NOT = {
+				capital = 1657
+				capital = 1649
+			}
+		}
+		allow = {
+			owns = 1657
+			owns = 1649
+		}
+		effect = {
+			country_event = 57803
+			set_country_flag = japan_capital_cflag
+		}
+	}
 }
