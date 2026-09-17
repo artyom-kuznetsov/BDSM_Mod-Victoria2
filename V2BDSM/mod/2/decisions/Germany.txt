@@ -650,4 +650,38 @@ political_decisions = {
 			plurality = -10
 		}
 	}
+	
+	buy_bavarian_rheinland = {
+		potential = {
+			primary_culture = north_german
+			is_greater_power = yes
+			owns = 574
+			NOT = { has_country_flag = buy_bavarian_rheinland }
+			BAV = { owns = 571 }
+		}
+		
+		allow = {
+			OR = {
+				AND = {
+					relation = {
+						who = BAV
+						value = 0
+					}
+					alliance_with = BAV
+				}
+				BAV = {
+					in_sphere = THIS
+				}
+			}
+		}
+		
+		effect = {
+			571 = { secede_province = THIS }
+			add_country_modifier = {
+				name = administrative_expenses3_modifier
+				duration = 730
+			}
+			set_country_flag = buy_bavarian_rheinland
+		}
+	}
 }
