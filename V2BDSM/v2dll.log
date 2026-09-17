@@ -7,7 +7,7 @@ localModConfig=0 log=1 buttons=1 decisionFilter=1
 priceDelta=1 patchExponentialPriceDelta=0 popDisplay=0 versionLabel=1
 patchOccupiedReinforceSplit=1 patchAllyOwnerCheck=1 patchCivilizeNullCheck=1 patchSupplySourceNullCheck=1 patchTechCompareNullCheck=1 patchTechFolderIconNullCheck=1
 patchGraphPointClamp=0 patchFactoryDumpScan=0 patchProdListVisibility=1 patchProdTypeGate=1
-prodTypeGateAllowAll=0 patchCombatRoll=1 combatRollMin=0 combatRollMax=4
+prodTypeGateAllowAll=0 patchCombatRoll=1 combatRollMin=2 combatRollMax=4
 enableOosLog=1 patchFpuFortress=1 patchD3dFpuPreserve=1 patchThreadFpuPin=1 patchHeapLfh=1 engineWorkerThreads=0
 patchPopQuantize=1 popQuantizeKeepBits=12 patchMpClientSleep=1 mpClientSleepMs=1
 patchMainLoopSleep0=1 mainLoopSleepMs=1 patchD3dNoVsync=0 patchHighPriority=1
@@ -51,12 +51,12 @@ Patch 'aristocrat_income_share_patch_2': отключён в настройка�
 Patch 'aristocrat_income_share_patch_3': отключён в настройках
 Patch 'aristocrat_income_share_patch_4': отключён в настройках
 Patch 'aristocrat_income_share_patch_5': отключён в настройках
-OccupiedReinforceSplit: occupied=100.0%, пещера 01F20000
-AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01F30000, ok=1
-CivilizeNullCheck: установлен на rva 14248B, пещера 01F40000
-SupplySourceNullCheck: установлен на rva 0D15EB, пещера 01F50000
-TechCompareNullCheck: установлен на rva 3A918A, пещера 01F60000
-TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 03590000
+OccupiedReinforceSplit: occupied=100.0%, пещера 01C20000
+AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01C30000, ok=1
+CivilizeNullCheck: установлен на rva 14248B, пещера 01C40000
+SupplySourceNullCheck: установлен на rva 0D15EB, пещера 01C50000
+TechCompareNullCheck: установлен на rva 3A918A, пещера 01C60000
+TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 01C70000
 ProdListVisibilityHook: установлен
 LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21923 байт)
   [0] synthetics_template limit=0 good=-
@@ -132,15 +132,17 @@ LoadProvinceGoods: готово, 2706 провинций с trade_goods
 HideNoSupplyFactoriesHook: установлен
 PriceDelta: активен режим PriceDelta (линейный)
 PriceDelta: 25 сотых процента, множитель 163
-VersionLabel: 'V2 v3.04 + V2DLL v3.25' (len=22), пещера 035B0000
-CombatRoll: диапазон 0..4 (модуль=5)
+VersionLabel: 'V2 v3.04 + V2DLL v3.25' (len=22), пещера 01C90000
+CombatRoll: диапазон 2..4 (модуль=3)
 OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
 Install: done
 DllMain: attach, Install = 1
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
 D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
-Update[CTechnologyView]: вызван, view=911F9B70
+Update[CTechnologyView]: вызван, view=828A0C88
 Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
 Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
 ProdTypeGate: grain_factory -> result=1 (впервые)
 ProdTypeGate: fruit_factory -> result=1 (впервые)
+Update[CPoliticsView]: вызван, view=3BB5C338
+Update[CPoliticsView]: вызван, view=3BB5C338

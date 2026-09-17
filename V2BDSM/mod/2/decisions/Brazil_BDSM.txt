@@ -1,0 +1,44 @@
+political_decisions = {
+	south_american_unity_dec = {
+		potential = {
+			capital_scope = {
+				continent = south_america
+			}
+			OR = { primary_culture = brazilian primary_culture = central_american }
+			NOT = { has_country_flag = south_american_unity_cflag }
+		}
+		
+		allow = {
+			owns = 2447
+			owns = 2344
+			owns = 2348
+			owns = 2339
+		}
+		
+		effect = {
+			prestige = 10
+			plurality = 5
+			random_owned = {
+				limit = {
+					owner = {
+						primary_culture = brazilian
+					}
+				}
+				owner = {
+					add_accepted_culture = central_american
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
+						primary_culture = central_american
+					}
+				}
+				owner = {
+					add_accepted_culture = brazilian
+				}
+			}
+			set_country_flag = south_american_unity_cflag
+		}
+	}
+}
