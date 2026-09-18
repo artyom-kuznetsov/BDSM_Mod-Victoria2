@@ -4,7 +4,7 @@ promotion_chance =
 	factor = 0.01
 	
 	modifier = {
-		factor = 0.05
+		factor = 1
 		country = {
 			trade_policy_rgroup = free_trade_ref
 		}
@@ -1181,6 +1181,13 @@ assimilation_chance =
     	factor = 1.25
 		year = 1870
 		location = { is_core = THIS }
+	}
+	
+	modifier = {
+    	factor = -1
+		year = 1870
+		location = { is_core = THIS }
+		country = { primary_culture = east_asian }
 	}
 	
 	modifier = {

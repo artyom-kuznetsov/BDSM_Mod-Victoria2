@@ -36,7 +36,7 @@ country_migration_target =
 		has_country_flag = offlimit_cflag
 	}
 	modifier = {
-		factor = 1.3
+		factor = 1.5
 		OR = { 
 			continent = north_america
 			continent = south_america
@@ -46,7 +46,7 @@ country_migration_target =
 		NOT = { year = 1855 }
 	}
 	modifier = {
-		factor = 1.3
+		factor = 1.5
 		OR = { 
 			continent = north_america
 			continent = south_america
@@ -56,7 +56,7 @@ country_migration_target =
 		NOT = { year = 1870 }
 	}
 	modifier = {
-		factor = 1.3
+		factor = 1.5
 		OR = { 
 			continent = north_america
 			continent = south_america
@@ -66,7 +66,7 @@ country_migration_target =
 		NOT = { year = 1885 }
 	}
 	modifier = {
-		factor = 1.3
+		factor = 1.5
 		OR = { 
 			continent = north_america
 			continent = south_america
@@ -74,6 +74,15 @@ country_migration_target =
 		}
 		has_global_flag = singleplayer_flag
 		NOT = { year = 1900 }
+	}
+	modifier = {
+		factor = 0.5
+		NOT = { 
+			continent = north_america
+			continent = south_america
+			continent = oceania
+		}
+		has_global_flag = singleplayer_flag
 	}
 	modifier = {
 		factor = 0.5
