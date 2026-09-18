@@ -10,6 +10,19 @@ country_event = { # MCL # MONTHLY CLEANUP
 	option = {
 		name = "noloc"
 		
+		any_country = {
+			limit = {
+				OR = {
+					primary_culture = beifaren
+					primary_culture = taiping
+					primary_culture = cantonese
+				}
+				NOT = { has_country_flag = unification_cflag exists = CHI }
+			}
+			add_country_modifier = { name = indian_unification_modifier duration = 3650 }
+			set_country_flag = unification_cflag
+		}
+		
 		# v4D7.0 POLITICAL THOUGHT LEVEL
 		any_country = {
 			random_owned = {

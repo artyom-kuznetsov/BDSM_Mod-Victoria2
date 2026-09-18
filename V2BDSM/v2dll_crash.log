@@ -116,3 +116,213 @@
     stack=82BFE920  CState  vptr=0193D78C  vtable-in-exe
     HalT  va=7FFEA000  (heap)
   dump=v2dll_crash_20260914_122650_28860_28872_1.dmp type=00001821 size=25228854
+
+======== CRASH 2026-09-18 15:48:10.781 dll=3.25 pid=17576 tid=31012 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=00953CB2  v2game.exe+0x243CB2
+  av_read addr=C1692F25
+  eax=00D41401 ebx=00000000 ecx=0C5A0C5A edx=C1692EC5 esi=322F3030 edi=3A2B42E8
+  ebp=01B3B674 esp=01B3B630 eip=00953CB2 eflags=00010293
+  eip=00953CB2  v2game.exe+0x243CB2
+  code_eip-8 8B 8E 84 00 00 00 8B 11  8B 42 60 6A 00 FF D0 8B
+  pointed:
+  eax=00D41401 000001B0 CCCCCCC3 CCCCCCCC 55CCCCCC FF6AEC8B E5160368 00A16400 50000000
+  [eax+14]=E5160368 unreadable
+  [eax+18]=00A16400 83003A85 45C704C4 FFFFFFFC D845C7FF 0000000F 00D445C7 C6000000 3900C445
+  ebx=00000000
+  ecx=0C5A0C5A C1692EC5 C16900C4 C16900C4 C16900C4 C16900C4 C16900C4 BB5D00C4 A43E6BBE
+  edx=C1692EC5 unreadable
+  esi=322F3030 0C5D0C5D 0C5D0C5D 0C5D0C5D 0C5D0C5D 0C5D0C5D 0C5D0C5D 0C5D0C5D 0C5D0C5D
+  edi=3A2B42E8 0110D310 0000018D 0110D338 00000000 00000000 00000000 00000000 00000000
+  esp=01B3B630 34740048 3A2B42E8 01B3B680 00000000 000003E8 007C38DB 3A2B6028 00000000
+  stack:
+    [0]=00953CB2  v2game.exe+0x243CB2
+    [1]=007C2586  v2game.exe+0xB2586
+    [2]=00997E97  v2game.exe+0x287E97
+    [3]=009733AD  v2game.exe+0x2633AD
+    [4]=00CEF9DF  v2game.exe+0x5DF9DF
+    [5]=00C8E0CD  v2game.exe+0x57E0CD
+    [6]=00DC0F3E  v2game.exe+0x6B0F3E
+    [7]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [8]=774182AE  ntdll.dll+0x682AE
+    [9]=7741827E  ntdll.dll+0x6827E
+    [10]=00000000
+  source:
+  known_site: none (new rva 243CB2 - смотреть keys/objects)
+  source_objects:
+    eax=00D41401  vptr=000001B0  vtable-outside-exe
+    ecx=0C5A0C5A  vptr=C1692EC5  vtable-outside-exe
+    esi=322F3030  vptr=0C5D0C5D  vtable-outside-exe
+    edi=3A2B42E8  CMapProvince  vptr=0110D310  vtable-in-exe
+    edx=C1692EC5  vptr=00000000  unreadable
+    esi+40=0C5D0C5D esi+44=0C5D0C5D (часто id/тип identity)
+  source_keys:
+    stack=3A2B6028  CMapProvince  vptr=0110D310  vtable-in-exe
+    stack=03D4D3F8  CCurrentGameState  vptr=0111AE84  vtable-in-exe
+    stack=04B212E8  CNullPop  vptr=0110D2E8  vtable-in-exe
+    stack=01B3B6A8  CEventScope  vptr=0113C904  vtable-in-exe
+    stack=5B4C0F18  CInGameIdler  vptr=0111A34C  vtable-in-exe
+    stack=38263AA8  CTechnologyStatus  vptr=01110BC0  vtable-in-exe
+    stack=04B014A8  CEU3Application  vptr=0111845C  vtable-in-exe
+    stack=4444C3E0  CCountry  vptr=0110FACC  vtable-in-exe
+    stack=39CF0FC0  CMapProvince  vptr=0110D310  vtable-in-exe
+    (none)
+  dump=v2dll_crash_20260918_154810_17576_31012_1.dmp type=00001821 size=25266370
+
+======== CRASH 2026-09-18 16:36:53.744 dll=3.25 pid=21128 tid=29600 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007C2758  v2game.exe+0xB2758
+  av_read addr=00000018
+  eax=00000000 ebx=000000B4 ecx=00000000 edx=00000000 esi=000000B4 edi=3933E128
+  ebp=01B3B8F8 esp=01B3B8C8 eip=007C2758 eflags=00010206
+  eip=007C2758  v2game.exe+0xB2758
+  code_eip-8 85 F6 7E 1F 8B 4C 24 14  8B 49 18 8B 87 9C 00 00
+  pointed:
+  eax=00000000
+  ebx=000000B4 unreadable
+  ecx=00000000
+  edx=00000000
+  esi=000000B4 unreadable
+  edi=3933E128 0110D310 0000018D 0110D338 00000000 00000000 00000000 00000000 00000000
+  esp=01B3B8C8 00000622 401A81A8 00000000 00000000 2CDDE500 00000000 0391BF60 00000000
+  stack:
+    [0]=007C2758  v2game.exe+0xB2758
+    [1]=00972723  v2game.exe+0x262723
+    [2]=00CEF9DF  v2game.exe+0x5DF9DF
+    [3]=00C8E0CD  v2game.exe+0x57E0CD
+    [4]=00DC0F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  known_site: none (new rva 0B2758 - смотреть keys/objects)
+  source_objects:
+    esi=000000B4  vptr=00000000  unreadable
+    edi=3933E128  CMapProvince  vptr=0110D310  vtable-in-exe
+  source_keys:
+    stack=401A81A8  CInGameIdler  vptr=0111A34C  vtable-in-exe
+    stack=04BDB3F0  CEU3Application  vptr=0111845C  vtable-in-exe
+    (none)
+  dump=v2dll_crash_20260918_163653_21128_29600_1.dmp type=00001821 size=25245582
+
+======== CRASH 2026-09-18 16:38:09.051 dll=3.25 pid=12852 tid=21124 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007C2758  v2game.exe+0xB2758
+  av_read addr=00000018
+  eax=00000000 ebx=000000B4 ecx=00000000 edx=00000000 esi=000000B4 edi=35B72FC8
+  ebp=006FBBB8 esp=006FBB88 eip=007C2758 eflags=00010206
+  eip=007C2758  v2game.exe+0xB2758
+  code_eip-8 85 F6 7E 1F 8B 4C 24 14  8B 49 18 8B 87 9C 00 00
+  pointed:
+  eax=00000000
+  ebx=000000B4 unreadable
+  ecx=00000000
+  edx=00000000
+  esi=000000B4 unreadable
+  edi=35B72FC8 0110D310 0000018D 0110D338 00000000 00000000 00000000 00000000 00000000
+  esp=006FBB88 00000622 528B6048 00000000 00000000 2C9D7098 00000000 0391BF60 00000000
+  stack:
+    [0]=007C2758  v2game.exe+0xB2758
+    [1]=00972723  v2game.exe+0x262723
+    [2]=00CEF9DF  v2game.exe+0x5DF9DF
+    [3]=00C8E0CD  v2game.exe+0x57E0CD
+    [4]=00DC0F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  known_site: none (new rva 0B2758 - смотреть keys/objects)
+  source_objects:
+    esi=000000B4  vptr=00000000  unreadable
+    edi=35B72FC8  CMapProvince  vptr=0110D310  vtable-in-exe
+  source_keys:
+    stack=528B6048  CInGameIdler  vptr=0111A34C  vtable-in-exe
+    stack=059AC410  CEU3Application  vptr=0111845C  vtable-in-exe
+    (none)
+  dump=v2dll_crash_20260918_163809_12852_21124_1.dmp type=00001821 size=25226287
+
+======== CRASH 2026-09-18 16:38:36.726 dll=3.25 pid=26232 tid=22472 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007C2758  v2game.exe+0xB2758
+  av_read addr=00000018
+  eax=00000000 ebx=000000B4 ecx=00000000 edx=00000000 esi=000000B4 edi=35B8F610
+  ebp=0063B8F8 esp=0063B8C8 eip=007C2758 eflags=00010206
+  eip=007C2758  v2game.exe+0xB2758
+  code_eip-8 85 F6 7E 1F 8B 4C 24 14  8B 49 18 8B 87 9C 00 00
+  pointed:
+  eax=00000000
+  ebx=000000B4 unreadable
+  ecx=00000000
+  edx=00000000
+  esi=000000B4 unreadable
+  edi=35B8F610 0110D310 0000018D 0110D338 00000000 00000000 00000000 00000000 00000000
+  esp=0063B8C8 00000622 53508080 00000000 00000000 2EFA9C18 00000000 0391BF60 00000000
+  stack:
+    [0]=007C2758  v2game.exe+0xB2758
+    [1]=00972723  v2game.exe+0x262723
+    [2]=00CEF9DF  v2game.exe+0x5DF9DF
+    [3]=00C8E0CD  v2game.exe+0x57E0CD
+    [4]=00DC0F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  known_site: none (new rva 0B2758 - смотреть keys/objects)
+  source_objects:
+    esi=000000B4  vptr=00000000  unreadable
+    edi=35B8F610  CMapProvince  vptr=0110D310  vtable-in-exe
+  source_keys:
+    stack=53508080  CInGameIdler  vptr=0111A34C  vtable-in-exe
+    stack=0536C600  CEU3Application  vptr=0111845C  vtable-in-exe
+    (none)
+  dump=v2dll_crash_20260918_163836_26232_22472_1.dmp type=00001821 size=25228247
+
+======== CRASH 2026-09-18 16:39:04.914 dll=3.25 pid=31240 tid=4452 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007C2758  v2game.exe+0xB2758
+  av_read addr=00000018
+  eax=00000000 ebx=000000B4 ecx=00000000 edx=00000000 esi=000000B4 edi=35A544D0
+  ebp=018ABD38 esp=018ABD08 eip=007C2758 eflags=00010206
+  eip=007C2758  v2game.exe+0xB2758
+  code_eip-8 85 F6 7E 1F 8B 4C 24 14  8B 49 18 8B 87 9C 00 00
+  pointed:
+  eax=00000000
+  ebx=000000B4 unreadable
+  ecx=00000000
+  edx=00000000
+  esi=000000B4 unreadable
+  edi=35A544D0 0110D310 0000018D 0110D338 00000000 00000000 00000000 00000000 00000000
+  esp=018ABD08 00000622 5131D018 00000000 00000000 2CAB6490 00000000 0391BF60 00000000
+  stack:
+    [0]=007C2758  v2game.exe+0xB2758
+    [1]=00972723  v2game.exe+0x262723
+    [2]=00CEF9DF  v2game.exe+0x5DF9DF
+    [3]=00C8E0CD  v2game.exe+0x57E0CD
+    [4]=00DC0F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  known_site: none (new rva 0B2758 - смотреть keys/objects)
+  source_objects:
+    esi=000000B4  vptr=00000000  unreadable
+    edi=35A544D0  CMapProvince  vptr=0110D310  vtable-in-exe
+  source_keys:
+    stack=5131D018  CInGameIdler  vptr=0111A34C  vtable-in-exe
+    stack=05A54408  CEU3Application  vptr=0111845C  vtable-in-exe
+    (none)
+  dump=v2dll_crash_20260918_163904_31240_4452_1.dmp type=00001821 size=25219455
