@@ -13,7 +13,7 @@ PS_unlocked = {
 # UNIQUE INVENTIONS
 
 tokugawa_infantry = {
-	limit = { hidden_tech = 1 has_country_flag = iron_discipline_flag year = 1870 }
+	limit = { hidden_tech = 1 has_country_flag = iron_discipline_flag}
 	
 	chance = {
 		base = 0
@@ -35,36 +35,6 @@ tokugawa_infantry = {
 		cuirassier = {
 			attack = 1
 			defence = 1
-		}
-	}
-}
-
-tokugawa_infantry_2 = {
-	limit = { hidden_tech = 1 has_country_flag = iron_discipline_flag }
-	
-	chance = {
-		base = 0
-		modifier = {
-			factor = 100
-			has_country_flag = iron_discipline_flag
-		}
-	}
-	
-	effect = {
-		irregular = {
-			attack = 1
-			defence = 1
-		}
-		infantry = {
-			attack = 1
-			defence = 1
-		}
-		cuirassier = {
-			attack = 1
-			defence = 1
-		}
-		army_base = {
-			supply_consumption = -0.1
 		}
 	}
 }
