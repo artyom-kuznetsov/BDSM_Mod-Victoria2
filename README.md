@@ -1,12 +1,13 @@
 V2DLL is a reverse engineering project that makes possible a handful of things that were considered impossible/hard to implement before, 
 and even make some previously existing .exe patches simpler to use.
-Also it can improve performance and multiplayer stability.
+Also it improves performance and multiplayer stability significantly.
 This is meant to be easy-for-use for other modders, so I'm not going into much detail here. If you want more insight, 
 or add some custom patches, or perhaps investigate v2dll under the hood to use for your own work - check the source code.
 
 
 It was made for my mod - https://github.com/artyom-kuznetsov/BDSM_Mod-Victoria2  
 Since, it has some mod-specific features. But most of them can be reused for any other mod.  
+Honestly, even if you play vanilla - there is no downside in using V2DLL (don't forget to configure it!)
 Almost all of this was tested in MP - no stability effects noticed.
 
 ## How to install V2DLL
@@ -108,7 +109,7 @@ Fixes some math errors related to multi-threading (fixes some of desync cases) (
 #### 3. PATCH_HEAP_LFH
 Decreases RAM fragmentation over long game sessions (might decrease RAM usage) (made by av213238).
 #### 4. ENGINE_WORKER_THREADS
-Set to number of threads of your processor, this will improve performance. 
+Set to 0 to automatically use all available threads. This will improve performance. 
 In theory, might reduce desync probability if all lobby participants have the same setting (made by av213238).
 #### 5. PATCH_POP_QUANTIZE / POP_QUANTIZE_KEEP_BITS
 Rouns up microscopic pop attributes (money, savings, etc) that you would never even see in game. 
@@ -119,18 +120,26 @@ Removes sleepers, that reduce FPS. Experimental (made by av213238).
 In theory also improves performace of the host/singleplayer. Experimental (made by av213238).
 #### 8. PATCH_D3D_NO_VSYNC
 Force disables VSYNC. In theory it could improve performace, but no actual difference confirmed for now (made by av213238).
-#### 9. PATCH_HIGH_PRIORITY
+#### 9. D3D_FPS_LIMIT
+FPS Limiter. Set to 0 to disable.
+#### 10. FIX_SFX_MIXER_LAG
+Fixes behaviour where game constantly tries to access sound mixer for no reason. Huge performance improvement,
+especially noticeable on non-host client in a MP lobby (made by av213238).
+#### 11. PATCH_HIGH_PRIORITY
 Prioritizes the game process. Supposed a marginal performance gain (made by av213238).
+
   
 ### Diagnostics
 #### 1. ENABLE_LOG
 Just the log used for debugging the .dll
 #### 2. PATCH_FACTORY_DUMP_SCAN
-I used this to debug that overflow (didn't help much).
+I used this to debug overflow related to Economic №3 (didn't help much).
 #### 3. ENABLE_OOS_LOG
 Logs used for debugging multiplayer out-of-syncs (made by av213238).
 #### 4. ENABLE_CRASH_LOG
 Crash log :) (made by av213238).
+#### 5. ENABLE_CRASH_DUMP
+Creates Windows memory dump on game crash (made by av213238).
 #### 5. HIDE_NO_SUPPLY_DRY_RUN
 Used for debugging Economic №6.
   

@@ -36,7 +36,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "3.21"
+#define MOD_VERSION "3.29"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -65,6 +65,9 @@ struct Settings
     bool patchOccupiedReinforceSplit = true;
     bool patchAllyOwnerCheck         = true;
     bool patchCivilizeNullCheck      = true;
+    bool patchSupplySourceNullCheck  = true;
+    bool patchTechCompareNullCheck   = true;
+    bool patchTechFolderIconNullCheck = true;
     bool patchGraphPointClamp        = false;
     bool patchFactoryDumpScan        = false;
     bool patchProdListVisibility     = true;
@@ -98,7 +101,7 @@ struct Settings
     bool patchD3dFpuPreserve = true;  // D3DCREATE_FPU_PRESERVE, чтобы D3D не сбивал control word
     bool patchThreadFpuPin   = true;  // тот же пин на каждом новом потоке exe/TBB
     bool patchHeapLfh        = true;  // Low Fragmentation Heap на кучах процесса
-    int  engineWorkerThreads = 4;     // потолок потоков TBB; 0 = не трогать
+    int  engineWorkerThreads = 0;     // потолок потоков TBB; 0 = не трогать (игра сама берёт по числу ядер)
 
     bool patchPopQuantize    = true;  // округление денег/нужд POP после дневного прохода, чтобы разные клиенты не расходились в младших битах
     int  popQuantizeKeepBits = 12;    // сколько из 15 дробных бит сохранять (меньше = грубее округление)
@@ -111,9 +114,23 @@ struct Settings
     bool patchD3dNoVsync     = false; // принудительный IMMEDIATE-режим Present (может рвать кадр при скролле списков)
     bool patchHighPriority   = true;  // ABOVE_NORMAL + отключение power throttling
 
+    // Категория Stability. Портировано из тестовой ветки (v3.65,
+    // "V2TechButton (1).cpp"). FIX_SFX_MIXER_LAG: select() "микшера"
+    // (вызов из 0x689C00-0x68C000, основной 0x68B47D) ждёт 14-20 мс на
+    // итерацию - режем до 1 мс копией timeval, структуру игры не трогаем.
+    // Независим от PATCH_MP_CLIENT_SLEEP/PATCH_MAIN_LOOP_SLEEP0.
+    bool fixSfxMixerLag      = true;
+    // Программный потолок FPS в Present: ждущий таймер + spin на хвосте.
+    // 0 = без лимита. При vsync смысла ниже частоты монитора не имеет.
+    int  d3dFpsLimit         = 70;
+
     // Диагностика, не влияющая на геймплей - категория Diagnostics.
     bool enableOosLog   = true; // отдельный v2dll_oos.log при каждом дневном сравнении чек-сумм MP
-    bool enableCrashLog = true; // v2dll_crash.log + v2dll_crash_*.dmp при необработанном исключении/abort
+    bool enableCrashLog = true; // v2dll_crash.log (+ v2dll_crash_hint.txt) при необработанном исключении/abort
+    // memory dump (v2dll_crash_*.dmp) при краше - отдельно от текстового лога,
+    // выключен по умолчанию: файл десятки МБ. Работает только вместе с
+    // ENABLE_CRASH_LOG=1 (дамп пишется из того же обработчика).
+    bool enableCrashDump = false;
 };
 
 static Settings g_settings;
@@ -125,16 +142,34 @@ static void LoadSettings();
 
 static bool g_logStarted = false;
 
+// Лог всегда дописывается, а не пересоздаётся: хост и клиент на одном ПК
+// иначе по очереди открывали бы файл на "w" и затирали строки друг друга.
+// Каждая строка начинается с [pid], чтобы их можно было различить.
+// Раздутый (>5 МБ) файл один раз обнуляем при старте процесса.
 static void Log(const char* fmt, ...)
 {
     if (!g_settings.log)
         return;
 
+    const char* mode = "a";
+    if (!g_logStarted)
+    {
+        WIN32_FILE_ATTRIBUTE_DATA fa;
+        if (GetFileAttributesExA("v2dll.log", GetFileExInfoStandard, &fa))
+        {
+            unsigned long long size = ((unsigned long long)fa.nFileSizeHigh << 32) | fa.nFileSizeLow;
+            if (size > 5ull * 1024ull * 1024ull)
+                mode = "w";
+        }
+    }
+
     FILE* f = 0;
-    if (fopen_s(&f, "v2dll.log", g_logStarted ? "a" : "w") != 0 || !f)
+    if (fopen_s(&f, "v2dll.log", mode) != 0 || !f)
         return;
 
     g_logStarted = true;
+
+    fprintf(f, "[%lu] ", (unsigned long)GetCurrentProcessId());
 
     va_list ap;
     va_start(ap, fmt);
@@ -2477,6 +2512,9 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_OCCUPIED_REINFORCE_SPLIT") == 0) { g_settings.patchOccupiedReinforceSplit = v; return; }
     if (_stricmp(key, "PATCH_ALLY_OWNER_CHECK") == 0)          { g_settings.patchAllyOwnerCheck         = v; return; }
     if (_stricmp(key, "PATCH_CIVILIZE_NULL_CHECK") == 0)       { g_settings.patchCivilizeNullCheck      = v; return; }
+    if (_stricmp(key, "PATCH_SUPPLY_SOURCE_NULL_CHECK") == 0)  { g_settings.patchSupplySourceNullCheck  = v; return; }
+    if (_stricmp(key, "PATCH_TECH_COMPARE_NULL_CHECK") == 0)   { g_settings.patchTechCompareNullCheck   = v; return; }
+    if (_stricmp(key, "PATCH_TECH_FOLDER_ICON_NULL_CHECK") == 0) { g_settings.patchTechFolderIconNullCheck = v; return; }
     if (_stricmp(key, "PATCH_GRAPH_POINT_CLAMP") == 0)         { g_settings.patchGraphPointClamp        = v; return; }
     if (_stricmp(key, "PATCH_FACTORY_DUMP_SCAN") == 0)         { g_settings.patchFactoryDumpScan        = v; return; }
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
@@ -2489,6 +2527,7 @@ static void ApplySetting(const char* key, const char* value)
 
     if (_stricmp(key, "ENABLE_OOS_LOG") == 0)              { g_settings.enableOosLog        = v; return; }
     if (_stricmp(key, "ENABLE_CRASH_LOG") == 0)            { g_settings.enableCrashLog      = v; return; }
+    if (_stricmp(key, "ENABLE_CRASH_DUMP") == 0)           { g_settings.enableCrashDump     = v; return; }
     if (_stricmp(key, "PATCH_FPU_FORTRESS") == 0)          { g_settings.patchFpuFortress    = v; return; }
     if (_stricmp(key, "PATCH_D3D_FPU_PRESERVE") == 0)      { g_settings.patchD3dFpuPreserve = v; return; }
     if (_stricmp(key, "PATCH_THREAD_FPU_PIN") == 0)        { g_settings.patchThreadFpuPin   = v; return; }
@@ -2497,6 +2536,13 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_MP_CLIENT_SLEEP") == 0)       { g_settings.patchMpClientSleep  = v; return; }
     if (_stricmp(key, "PATCH_MAIN_LOOP_SLEEP0") == 0)      { g_settings.patchMainLoopSleep0 = v; return; }
     if (_stricmp(key, "PATCH_D3D_NO_VSYNC") == 0)          { g_settings.patchD3dNoVsync     = v; return; }
+    if (_stricmp(key, "FIX_SFX_MIXER_LAG") == 0)           { g_settings.fixSfxMixerLag      = v; return; }
+    if (_stricmp(key, "D3D_FPS_LIMIT") == 0)
+    {
+        int n = atoi(value);
+        g_settings.d3dFpsLimit = n < 0 ? 0 : n;
+        return;
+    }
     if (_stricmp(key, "PATCH_HIGH_PRIORITY") == 0)         { g_settings.patchHighPriority   = v; return; }
 
     if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
@@ -2670,6 +2716,8 @@ static void WriteDefaultSettings(const char* path)
         "PATCH_MAIN_LOOP_SLEEP0=%d\n"
         "MAIN_LOOP_SLEEP_MS=%d\n"
         "PATCH_D3D_NO_VSYNC=%d\n"
+        "D3D_FPS_LIMIT=%d\n"
+        "FIX_SFX_MIXER_LAG=%d\n"
         "PATCH_HIGH_PRIORITY=%d\n"
         "\n",
         (int)g_settings.patchFpuFortress,
@@ -2684,6 +2732,8 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.patchMainLoopSleep0,
         g_settings.mainLoopSleepMs,
         (int)g_settings.patchD3dNoVsync,
+        g_settings.d3dFpsLimit,
+        (int)g_settings.fixSfxMixerLag,
         (int)g_settings.patchHighPriority);
 
     fprintf(f,
@@ -2692,11 +2742,13 @@ static void WriteDefaultSettings(const char* path)
         "PATCH_FACTORY_DUMP_SCAN=%d\n"
         "ENABLE_OOS_LOG=%d\n"
         "ENABLE_CRASH_LOG=%d\n"
+        "ENABLE_CRASH_DUMP=%d\n"
         "HIDE_NO_SUPPLY_DRY_RUN=%d\n",
         (int)g_settings.log,
         (int)g_settings.patchFactoryDumpScan,
         (int)g_settings.enableOosLog,
         (int)g_settings.enableCrashLog,
+        (int)g_settings.enableCrashDump,
         (int)g_settings.hideNoSupplyDryRun);
 
     fclose(f);
@@ -3227,6 +3279,467 @@ static bool InstallCivilizeNullCheck()
 
     Log("CivilizeNullCheck: установлен на rva %06X, пещера %08X",
         RVA_CIVILIZE_NULLCHECK_HOOK, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Диагностика для трёх null-check патчей ниже (SupplySource,
+// TechCompare, TechFolderIcon). Каждый из них перехватывает попытку
+// движка разыменовать null там, где должен быть указатель на объект
+// "статуса" (typeSourceRef / CTechnologyStatus-подобный объект) -
+// сами патчи это молча обходят, но не объясняют, ЗАКОНОМЕРНО ли тут
+// null (например, страна ещё не начинала эту конкретную технологию/
+// категорию - нормальное состояние) или это симптом отдельного бага
+// (объект должен был существовать, но не создался). Эти хелперы при
+// срабатывании null-ветки пишут в v2dll.log адрес и, по возможности,
+// имя связанного объекта (production type / invention) - по этим
+// записям в следующий раз можно будет проверить, легитимно ли
+// отсутствие статуса у конкретной технологии/категории.
+// ---------------------------------------------------------------
+
+static void EnsureIsBadReadPtrForDiag()
+{
+    if (!g_fnIsBadReadPtr)
+        g_fnIsBadReadPtr = (tIsBadReadPtr)GetProcAddress(GetModuleHandleA("kernel32.dll"), "IsBadReadPtr");
+}
+
+// typePtr - объект CProductionType (см. PATCH_SUPPLY_SOURCE_NULL_CHECK).
+static void __cdecl LogNullDiagProdType(void* typePtr)
+{
+    EnsureIsBadReadPtrForDiag();
+
+    const char* name = "?";
+    __try
+    {
+        if (typePtr && g_fnIsBadReadPtr && !g_fnIsBadReadPtr(typePtr, OFF_PRODTYPE_NAME + 20))
+        {
+            const char* resolved = ResolveProdTypeNamePtr(typePtr);
+            if (resolved && !g_fnIsBadReadPtr(resolved, 1))
+                name = resolved;
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        name = "?(exception)";
+    }
+
+    Log("NullStatusDiag[SupplySource]: typePtr=%08X name=%s",
+        (DWORD)(DWORD_PTR)typePtr, name);
+}
+
+// obj - объект CInvention/CTechnologyCategory (см. PATCH_TECH_COMPARE_
+// NULL_CHECK и PATCH_TECH_FOLDER_ICON_NULL_CHECK). Смещение +0x30 -
+// предположительное (взято из соседнего, рабочего кода той же функции
+// FUN_007adb70, где ровно это поле объекта передаётся как имя
+// изобретения в форматирование строки) - не проверено так же строго,
+// как ResolveProdTypeNamePtr для типов производства, поэтому вывод
+// диагностический, а не рабочая логика.
+static void __cdecl LogNullDiagTechObj(const char* site, void* obj)
+{
+    EnsureIsBadReadPtrForDiag();
+
+    DWORD vptr = 0;
+    char nameBuf[48] = { 0 };
+    const char* name = "?";
+
+    __try
+    {
+        if (obj && g_fnIsBadReadPtr && !g_fnIsBadReadPtr(obj, 0x34))
+        {
+            vptr = *(DWORD*)obj;
+            const char* namePtr = *(const char**)((unsigned char*)obj + 0x30);
+            if (namePtr && !g_fnIsBadReadPtr(namePtr, 1))
+            {
+                strncpy_s(nameBuf, sizeof(nameBuf), namePtr, _TRUNCATE);
+                name = nameBuf;
+            }
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        name = "?(exception)";
+    }
+
+    Log("NullStatusDiag[%s]: obj=%08X vptr=%08X name(+0x30,предпол.)=%s",
+        site, (DWORD)(DWORD_PTR)obj, vptr, name);
+}
+
+static const char g_siteTechCompareEdx[] = "TechCompare/A(edx)";
+static const char g_siteTechCompareEcx[] = "TechCompare/B(ecx)";
+static const char g_siteTechFolderIcon[] = "TechFolderIcon";
+
+
+// ---------------------------------------------------------------
+// Краш при пересчёте занятости/производства построек страны
+// (0xC0000005, av_read=0x00000128) - воспроизведён по
+// v2dll_crash.log (dll=3.21): падает не наш код, а FUN_004d1560 -
+// ванильный движковый обход построек штата (per-country economy
+// pass, вызывается лениво при обращении к данным страны - этим и
+// объясняется, почему падает именно при заходе на конкретную
+// страну/открытии её окна технологий, а не каждый тик у всех).
+//
+// Для текущей постройки в цикле код читает её тип производства
+// (EDI = здание, [EDI+0x18] = CProductionType*), а из него - тот же
+// typeSourceRef = *(typePtr+0x12c) ("источник локального сырья"),
+// что уже разбирался в PATCH_HIDE_NO_SUPPLY_FACTORIES - движок
+// заполняет его только для limit_by_local_supply=yes типов, и то
+// только если в регионе реально есть нужное сырьё. Здесь же движок
+// читает typeSourceRef+0x128 БЕЗУСЛОВНО (rva 0xD15EB), без проверки
+// на null - если в штате стоит здание такого типа без валидного
+// источника (постройка оказалась там, где сырья нет), это разыменование
+// нулевого указателя.
+//
+// Патчим точку чтения (rva 0xD15EB, 6 байт - mov eax,[ebx+0x128]).
+// Если EBX(typeSourceRef)==0 - пропускаем весь блок, использующий
+// typeSourceRef (три вызова FUN_004ee150/004ee300/004ee990, которым
+// он передаётся дальше как параметр и был бы разыменован уже там),
+// прыжком на rva 0xD1665 - независимый от typeSourceRef подсчёт
+// занятости той же постройки, штатная точка того же цикла. Иначе -
+// воспроизводим перекрытую инструкцию как есть (rva 0xD15F1).
+// ---------------------------------------------------------------
+
+static const DWORD RVA_SUPPLY_SOURCE_NULLCHECK_HOOK   = 0xD15EB;
+static const DWORD RVA_SUPPLY_SOURCE_NULLCHECK_NORMAL = 0xD15F1;  // mov ecx,edx
+static const DWORD RVA_SUPPLY_SOURCE_NULLCHECK_SKIP   = 0xD1665;  // mov eax,[edi+0xf4] (подсчёт занятости, следующий шаг цикла)
+
+static const unsigned char SUPPLY_SOURCE_NULLCHECK_SIG[6] =
+{ 0x8B, 0x83, 0x28, 0x01, 0x00, 0x00 };
+
+static bool InstallSupplySourceNullCheck()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_SUPPLY_SOURCE_NULLCHECK_HOOK);
+
+    if (memcmp(hook, SUPPLY_SOURCE_NULLCHECK_SIG, sizeof(SUPPLY_SOURCE_NULLCHECK_SIG)) != 0)
+    {
+        Log("SupplySourceNullCheck: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 64, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    int n = 0;
+
+    cave[n++] = 0x85; cave[n++] = 0xDB;                     // test ebx,ebx
+    int jzAt = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                     // jz null_case (адрес допишем ниже)
+
+    // EBX != 0: воспроизводим перекрытую инструкцию и уходим обратно.
+    cave[n++] = 0x8B; cave[n++] = 0x83;
+    cave[n++] = 0x28; cave[n++] = 0x01; cave[n++] = 0x00; cave[n++] = 0x00;  // mov eax,[ebx+0x128]
+
+    cave[n++] = 0xE9;                                       // jmp обратно (нормальный путь)
+    *(DWORD*)(cave + n) = (g_base + RVA_SUPPLY_SOURCE_NULLCHECK_NORMAL) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    int nullAt = n;
+    cave[jzAt + 1] = (unsigned char)(nullAt - (jzAt + 2));
+
+    // EBX == 0: у постройки нет источника локального сырья. Сначала
+    // (диагностика) логируем typePtr, который всё ещё лежит в EAX -
+    // см. LogNullDiagProdType выше; EAX/ECX свободны здесь, потому что
+    // ниже мы просто уходим на независимый от них шаг того же цикла.
+    cave[n++] = 0x50;                                       // push eax (typePtr)
+    cave[n++] = 0xB9;                                       // mov ecx, imm32
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)&LogNullDiagProdType;
+    n += 4;
+    cave[n++] = 0xFF; cave[n++] = 0xD1;                     // call ecx
+    cave[n++] = 0x83; cave[n++] = 0xC4; cave[n++] = 0x04;   // add esp,4
+
+    // ...затем пропускаем связанный с EBX блок целиком, на подсчёт
+    // занятости той же постройки.
+    cave[n++] = 0xE9;
+    *(DWORD*)(cave + n) = (g_base + RVA_SUPPLY_SOURCE_NULLCHECK_SKIP) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("SupplySourceNullCheck: установлен на rva %06X, пещера %08X",
+        RVA_SUPPLY_SOURCE_NULLCHECK_HOOK, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Краш в окне технологий (0xC0000005, av_read=0x00000310) - лог
+// v2dll_crash.log (dll=3.22), сразу после "Update[CTechnologyView]:
+// вызван" - т.е. именно при открытии/построении окна технологий.
+//
+// FUN_007a9070 - компаратор сортировки (используется при построении
+// списка технологий/изобретений для окна: на стеке в момент краша
+// видны CInvention/CTechnologyCategory/CTechnologyStatus/CCountry).
+// Для двух сравниваемых элементов он читает указатель "статуса"
+// каждого (object+0x430), а из него - ещё один указатель (+0x310) и
+// целое поле для сравнения (+0x40) - без проверки на null ни на одном
+// из двух object+0x430:
+//   mov edx,[esi+0x430]      ; статус объекта A
+//   mov ecx,[ecx+0x430]      ; статус объекта B
+//   mov eax,[edx+0x310]      ; rva 0x3A918A - краш, если edx==0
+//   mov edx,[ecx+0x310]      ; тем же путём упал бы и при ecx==0
+//   mov eax,[eax+0x40]
+//   cmp eax,[edx+0x40]
+//
+// Патчим точку чтения (rva 0x3A918A, 12 байт - две инструкции mov).
+// Если edx или ecx (указатель статуса A/B) равен 0 - у элемента нет
+// данных статуса (похоже на случай страны без прогресса ни по одной
+// технологии в этой категории) - вместо чтения возвращаем из функции
+// детерминированный результат "не меньше" (AL=0), воспроизводя
+// собственный эпилог функции (POP ESI, затем переход сразу после
+// SETL, минуя его - CMP выше не выполнялся, его флаги мусорны).
+// Иначе - воспроизводим обе перекрытые инструкции как есть.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_TECH_COMPARE_NULLCHECK_HOOK    = 0x3A918A;
+static const DWORD RVA_TECH_COMPARE_NULLCHECK_NORMAL  = 0x3A9196;  // mov eax,[eax+0x40]
+static const DWORD RVA_TECH_COMPARE_NULLCHECK_EPILOGUE = 0x3A91A2; // mov ecx,[ebp-0xc] (после SETL AL)
+
+static const unsigned char TECH_COMPARE_NULLCHECK_SIG[12] =
+{
+    0x8B, 0x82, 0x10, 0x03, 0x00, 0x00,   // mov eax,[edx+0x310]
+    0x8B, 0x91, 0x10, 0x03, 0x00, 0x00    // mov edx,[ecx+0x310]
+};
+
+static bool InstallTechCompareNullCheck()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_TECH_COMPARE_NULLCHECK_HOOK);
+
+    if (memcmp(hook, TECH_COMPARE_NULLCHECK_SIG, sizeof(TECH_COMPARE_NULLCHECK_SIG)) != 0)
+    {
+        Log("TechCompareNullCheck: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 128, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    int n = 0;
+
+    cave[n++] = 0x85; cave[n++] = 0xD2;                     // test edx,edx
+    int jz1At = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                     // jz null_edx (rel8, адрес допишем)
+
+    cave[n++] = 0x85; cave[n++] = 0xC9;                     // test ecx,ecx
+    int jz2At = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                     // jz null_ecx (rel8, адрес допишем)
+
+    // Оба указателя не null: воспроизводим перекрытые инструкции.
+    cave[n++] = 0x8B; cave[n++] = 0x82;
+    cave[n++] = 0x10; cave[n++] = 0x03; cave[n++] = 0x00; cave[n++] = 0x00;  // mov eax,[edx+0x310]
+    cave[n++] = 0x8B; cave[n++] = 0x91;
+    cave[n++] = 0x10; cave[n++] = 0x03; cave[n++] = 0x00; cave[n++] = 0x00;  // mov edx,[ecx+0x310]
+
+    cave[n++] = 0xE9;                                       // jmp обратно (нормальный путь)
+    *(DWORD*)(cave + n) = (g_base + RVA_TECH_COMPARE_NULLCHECK_NORMAL) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    // ESI - это param_3 (объект "A"), не тронут ни одной из перекрытых
+    // инструкций и переживает обе ветки ниже - используем его для
+    // диагностики в обоих случаях: в null_edx это и есть объект без
+    // статуса, в null_ecx - его "здоровый" оппонент по сравнению
+    // (сам объект B к этому моменту уже потерян - ecx перезаписан
+    // результатом чтения +0x430, которое и оказалось null).
+    int null1At = n;
+    cave[jz1At + 1] = (unsigned char)(null1At - (jz1At + 2));
+    cave[n++] = 0x56;                                       // push esi
+    cave[n++] = 0x68;                                       // push imm32 (site string)
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)g_siteTechCompareEdx;
+    n += 4;
+    cave[n++] = 0xB8;                                       // mov eax, imm32
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)&LogNullDiagTechObj;
+    n += 4;
+    cave[n++] = 0xFF; cave[n++] = 0xD0;                     // call eax
+    cave[n++] = 0x83; cave[n++] = 0xC4; cave[n++] = 0x08;   // add esp,8
+    cave[n++] = 0xE9;                                       // jmp finish_null
+    int jmpFinish1At = n;
+    n += 4;
+
+    int null2At = n;
+    cave[jz2At + 1] = (unsigned char)(null2At - (jz2At + 2));
+    cave[n++] = 0x56;                                       // push esi
+    cave[n++] = 0x68;                                       // push imm32 (site string)
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)g_siteTechCompareEcx;
+    n += 4;
+    cave[n++] = 0xB8;                                       // mov eax, imm32
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)&LogNullDiagTechObj;
+    n += 4;
+    cave[n++] = 0xFF; cave[n++] = 0xD0;                     // call eax
+    cave[n++] = 0x83; cave[n++] = 0xC4; cave[n++] = 0x08;   // add esp,8
+
+    int finishNullAt = n;
+    *(DWORD*)(cave + jmpFinish1At) = (DWORD)(finishNullAt - (jmpFinish1At + 4));
+
+    // Один из статусов отсутствует - CMP оригинала не выполняем (его
+    // операнды недостижимы), сами завершаем функцию: воспроизводим
+    // "pop esi" из общего эпилога (баланс стека под наш ранний выход),
+    // AL=0 ("не меньше" - нейтральный результат для strict-weak-order),
+    // и продолжаем с точки сразу после SETL AL в оригинале.
+    cave[n++] = 0x5E;                                       // pop esi
+    cave[n++] = 0x33; cave[n++] = 0xC0;                     // xor eax,eax
+    cave[n++] = 0xE9;
+    *(DWORD*)(cave + n) = (g_base + RVA_TECH_COMPARE_NULLCHECK_EPILOGUE) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[12];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
+    for (int i = 5; i < 12; ++i)
+        patch[i] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("TechCompareNullCheck: установлен на rva %06X, пещера %08X",
+        RVA_TECH_COMPARE_NULLCHECK_HOOK, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Третий краш той же природы (av_read=0x00000310), новый rva - лог
+// v2dll_crash.log (dll=3.23). FUN_007adb70 строит список папок
+// технологий для окна; для каждого изобретения в папке ищет элемент
+// "folder_icon" и берёт его иконку из ТОЙ ЖЕ цепочки status(+0x430)
+// -> +0x310 -> +0x40 (см. PATCH_TECH_COMPARE_NULL_CHECK выше - тот
+// же source-объект, другое место чтения), снова без проверки на null:
+//   mov ecx,[ecx+0x430]   ; статус изобретения для текущей страны
+//   mov ecx,[ecx+0x310]   ; rva 0x3ADE9E - краш, если предыдущий null
+//   mov ecx,[ecx+0x40]    ; сюда тоже можно упасть, если этот null
+//   ...
+//   push ecx              ; результат - char* с именем иконки
+//   call ...              ; передаётся в SetIcon-подобный вызов
+//
+// Патчим весь блок из трёх чтений (rva 0x3ADE98, 15 байт). Если
+// любое из двух промежуточных значений (после +0x430 или после
+// +0x310) равно 0 - подставляем указатель на статическую пустую
+// C-строку вместо чтения по несуществующему адресу (пустая строка,
+// а не 0/null, потому что нельзя утверждать, что вызываемый ниже
+// сеттер иконки сам защищён от null - есть все основания полагать,
+// что нет, раз соседний код в этой же функции падал без проверки).
+// Иначе - воспроизводим все три чтения как есть.
+// ---------------------------------------------------------------
+
+static const char g_emptyTechIconName[1] = { 0 };
+
+static const DWORD RVA_TECH_FOLDER_ICON_NULLCHECK_HOOK   = 0x3ADE98;
+static const DWORD RVA_TECH_FOLDER_ICON_NULLCHECK_NORMAL = 0x3ADEA7;  // mov edx,[eax]
+
+static const unsigned char TECH_FOLDER_ICON_NULLCHECK_SIG[15] =
+{
+    0x8B, 0x89, 0x30, 0x04, 0x00, 0x00,   // mov ecx,[ecx+0x430]
+    0x8B, 0x89, 0x10, 0x03, 0x00, 0x00,   // mov ecx,[ecx+0x310]
+    0x8B, 0x49, 0x40                      // mov ecx,[ecx+0x40]
+};
+
+static bool InstallTechFolderIconNullCheck()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_TECH_FOLDER_ICON_NULLCHECK_HOOK);
+
+    if (memcmp(hook, TECH_FOLDER_ICON_NULLCHECK_SIG, sizeof(TECH_FOLDER_ICON_NULLCHECK_SIG)) != 0)
+    {
+        Log("TechFolderIconNullCheck: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 96, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+    if (!cave)
+        return false;
+
+    int n = 0;
+
+    // ECX на входе - сам объект изобретения (ещё не статус) - EAX
+    // должен остаться нетронутым до самого конца (в нём "this" для
+    // вызова ниже по коду), а вот EDX здесь свободен вплоть до
+    // RVA_NORMAL (там он перезаписывается заново) - используем его,
+    // чтобы не потерять исходный указатель на изобретение для
+    // диагностики, раз ECX сейчас будет затёрт цепочкой +0x430/+0x310.
+    cave[n++] = 0x8B; cave[n++] = 0xD1;                     // mov edx,ecx
+
+    // mov ecx,[ecx+0x430]
+    cave[n++] = 0x8B; cave[n++] = 0x89;
+    cave[n++] = 0x30; cave[n++] = 0x04; cave[n++] = 0x00; cave[n++] = 0x00;
+
+    cave[n++] = 0x85; cave[n++] = 0xC9;                     // test ecx,ecx
+    int jz1At = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                     // jz null_case
+
+    // mov ecx,[ecx+0x310]
+    cave[n++] = 0x8B; cave[n++] = 0x89;
+    cave[n++] = 0x10; cave[n++] = 0x03; cave[n++] = 0x00; cave[n++] = 0x00;
+
+    cave[n++] = 0x85; cave[n++] = 0xC9;                     // test ecx,ecx
+    int jz2At = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                     // jz null_case
+
+    // mov ecx,[ecx+0x40]
+    cave[n++] = 0x8B; cave[n++] = 0x49; cave[n++] = 0x40;
+
+    cave[n++] = 0xE9;                                       // jmp обратно (нормальный путь)
+    *(DWORD*)(cave + n) = (g_base + RVA_TECH_FOLDER_ICON_NULLCHECK_NORMAL) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    int nullAt = n;
+    cave[jz1At + 1] = (unsigned char)(nullAt - (jz1At + 2));
+    cave[jz2At + 1] = (unsigned char)(nullAt - (jz2At + 2));
+
+    // Статус отсутствует - логируем изобретение (EDX, сохранённое выше)
+    // и подставляем адрес пустой C-строки вместо чтения по
+    // несуществующему адресу. EAX трогать нельзя (нужен дальше), ECX
+    // свободен для механики вызова.
+    cave[n++] = 0x52;                                       // push edx (invention ptr)
+    cave[n++] = 0x68;                                       // push imm32 (site string)
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)g_siteTechFolderIcon;
+    n += 4;
+    cave[n++] = 0xB9;                                       // mov ecx, imm32
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)&LogNullDiagTechObj;
+    n += 4;
+    cave[n++] = 0xFF; cave[n++] = 0xD1;                     // call ecx
+    cave[n++] = 0x83; cave[n++] = 0xC4; cave[n++] = 0x08;   // add esp,8
+
+    cave[n++] = 0xB9;                                       // mov ecx, imm32
+    *(DWORD*)(cave + n) = (DWORD)(DWORD_PTR)g_emptyTechIconName;
+    n += 4;
+    cave[n++] = 0xE9;
+    *(DWORD*)(cave + n) = (g_base + RVA_TECH_FOLDER_ICON_NULLCHECK_NORMAL) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[15];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
+    for (int i = 5; i < 15; ++i)
+        patch[i] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("TechFolderIconNullCheck: установлен на rva %06X, пещера %08X",
+        RVA_TECH_FOLDER_ICON_NULLCHECK_HOOK, (DWORD)(DWORD_PTR)cave);
     return true;
 }
 
@@ -4211,6 +4724,77 @@ static bool HookIat(HMODULE module, const char* dllName, const char* funcName, v
     return false;
 }
 
+// Как HookIat, но для импорта по ординалу (у ws2_32 нет имён в IAT
+// exe: select - ординал 18). Портировано из тестовой ветки.
+static bool HookIatOrdinal(HMODULE module, const char* dllName, WORD ordinal, void* hook, void** orig)
+{
+    if (!module || !dllName || !ordinal || !hook)
+        return false;
+
+    unsigned char* base = (unsigned char*)module;
+    __try
+    {
+        IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)base;
+        if (dos->e_magic != IMAGE_DOS_SIGNATURE)
+            return false;
+        IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(base + dos->e_lfanew);
+        if (nt->Signature != IMAGE_NT_SIGNATURE)
+            return false;
+
+        DWORD imageSize = nt->OptionalHeader.SizeOfImage;
+        DWORD importRva = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress;
+        DWORD importSize = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].Size;
+        if (!importRva || importRva >= imageSize)
+            return false;
+
+        IMAGE_IMPORT_DESCRIPTOR* desc = (IMAGE_IMPORT_DESCRIPTOR*)(base + importRva);
+        IMAGE_IMPORT_DESCRIPTOR* descEnd = importSize
+            ? (IMAGE_IMPORT_DESCRIPTOR*)(base + importRva + importSize)
+            : desc + 64;
+
+        for (; desc < descEnd && desc->Name; ++desc)
+        {
+            if (desc->Name >= imageSize || desc->FirstThunk >= imageSize)
+                continue;
+            if (!desc->OriginalFirstThunk || desc->OriginalFirstThunk >= imageSize)
+                continue;
+            const char* name = (const char*)(base + desc->Name);
+            if (_stricmp(name, dllName) != 0)
+                continue;
+
+            IMAGE_THUNK_DATA32* thunk = (IMAGE_THUNK_DATA32*)(base + desc->FirstThunk);
+            IMAGE_THUNK_DATA32* origThunk = (IMAGE_THUNK_DATA32*)(base + desc->OriginalFirstThunk);
+            for (; thunk->u1.Function; ++thunk, ++origThunk)
+            {
+                if ((unsigned char*)origThunk >= base + imageSize)
+                    break;
+                if (!(origThunk->u1.Ordinal & IMAGE_ORDINAL_FLAG32))
+                    continue;
+                if ((WORD)(origThunk->u1.Ordinal & 0xFFFF) != ordinal)
+                    continue;
+
+                DWORD* slot = (DWORD*)&thunk->u1.Function;
+                if (*slot == (DWORD)(DWORD_PTR)hook)
+                    return true;
+
+                DWORD oldProtect = 0;
+                if (!VirtualProtect(slot, sizeof(DWORD), PAGE_EXECUTE_READWRITE, &oldProtect))
+                    return false;
+                if (orig && !*orig)
+                    *orig = (void*)(DWORD_PTR)*slot;
+                *slot = (DWORD)(DWORD_PTR)hook;
+                VirtualProtect(slot, sizeof(DWORD), oldProtect, &oldProtect);
+                return true;
+            }
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return false;
+    }
+    return false;
+}
+
 static bool PatchVtableSlot(void* obj, int slot, void* hook, void** orig)
 {
     if (!obj || !hook)
@@ -4341,12 +4925,91 @@ static DWORD_PTR __cdecl HookBeginThreadEx(
     return h;
 }
 
+// Программный потолок FPS (D3D_FPS_LIMIT), портировано из тестовой
+// ветки. Ждём до следующей "границы кадра" высокоточным ждущим
+// таймером (недоспав ~0.3 мс), остаток докручиваем spin-ом. Если кадр
+// сильно опоздал (> 2 шагов) - сбрасываем график, а не догоняем.
+static HANDLE g_fpsTimer = 0;
+static LONGLONG g_fpsNextQpc = 0;
+
+static LONGLONG QpcNow()
+{
+    LARGE_INTEGER t;
+    QueryPerformanceCounter(&t);
+    return t.QuadPart;
+}
+
+static HANDLE FpsTimerHandle()
+{
+    if (g_fpsTimer)
+        return g_fpsTimer;
+
+    HMODULE k32 = GetModuleHandleW(L"kernel32.dll");
+    typedef HANDLE (WINAPI* tCreateWaitableTimerExW)(LPSECURITY_ATTRIBUTES, LPCWSTR, DWORD, DWORD);
+    tCreateWaitableTimerExW pEx = k32
+        ? (tCreateWaitableTimerExW)GetProcAddress(k32, "CreateWaitableTimerExW")
+        : 0;
+    if (pEx)
+        g_fpsTimer = pEx(0, 0, 0x00000002 /* CREATE_WAITABLE_TIMER_HIGH_RESOLUTION */, TIMER_ALL_ACCESS);
+    if (!g_fpsTimer)
+        g_fpsTimer = CreateWaitableTimerW(0, TRUE, 0);
+    return g_fpsTimer;
+}
+
+static void WaitFpsCap()
+{
+    int fps = g_settings.d3dFpsLimit;
+    if (fps < 1)
+        return;
+
+    static LARGE_INTEGER freq;
+    if (!freq.QuadPart)
+        QueryPerformanceFrequency(&freq);
+    if (!freq.QuadPart)
+        return;
+
+    LONGLONG step = freq.QuadPart / fps;
+    if (step < 1)
+        step = 1;
+
+    LONGLONG now = QpcNow();
+    if (g_fpsNextQpc == 0)
+    {
+        g_fpsNextQpc = now + step;
+        return;
+    }
+
+    if (now > g_fpsNextQpc + step * 2)
+        g_fpsNextQpc = now;
+    else if (now < g_fpsNextQpc)
+    {
+        LONGLONG remain = g_fpsNextQpc - now;
+        LONGLONG hundredNs = (remain * 10000000LL) / freq.QuadPart;
+        if (hundredNs > 8000)
+        {
+            HANDLE timer = FpsTimerHandle();
+            if (timer)
+            {
+                LARGE_INTEGER due;
+                due.QuadPart = -(hundredNs - 3000);
+                if (SetWaitableTimer(timer, &due, 0, 0, 0, FALSE))
+                    WaitForSingleObject(timer, 40);
+            }
+        }
+        while (QpcNow() < g_fpsNextQpc)
+            YieldProcessor();
+    }
+
+    g_fpsNextQpc += step;
+}
+
 static HRESULT WINAPI HookPresent(void* device, const void* src, const void* dest, HWND wnd, const void* dirty)
 {
     HRESULT hr = g_realPresent
         ? g_realPresent(device, src, dest, wnd, dirty)
         : E_FAIL;
     PinFpu();
+    WaitFpsCap();
     return hr;
 }
 
@@ -4698,11 +5361,125 @@ static void InstallHighPriority()
         Log("CPU: power throttling off");
 }
 
+// Разрешение системного таймера (портировано из тестовой ветки, без
+// ini-ключа). По наблюдению автора ветки Clausewitz зовёт
+// timeGetDevCaps/timeBeginPeriod(1) (rva 68B190), но разбирает
+// TIMECAPS как два байта вместо двух UINT: wPeriodMin=1 после сдвига
+// даёт "max != 1", и timeBeginPeriod не вызывается. Тогда любой
+// Sleep(1) - в том числе наши Sleep(100)/Sleep(40) -> Sleep(1) -
+// округляется до кванта ~15.6 мс. Вызываем сами. На симуляцию не
+// влияет - меняется только точность ожиданий.
+static void InstallTimerResolution()
+{
+    // Install() исполняется внутри DllMain (loader lock), поэтому
+    // LoadLibrary только если winmm ещё не загружен - обычно он уже
+    // подтянут импортами exe.
+    HMODULE winmm = GetModuleHandleA("winmm.dll");
+    if (!winmm)
+        winmm = LoadLibraryA("winmm.dll");
+    if (!winmm)
+    {
+        Log("Timer: winmm.dll не загрузился");
+        return;
+    }
+
+    typedef UINT (WINAPI* tTimeBeginPeriod)(UINT);
+    tTimeBeginPeriod beginPeriod = (tTimeBeginPeriod)GetProcAddress(winmm, "timeBeginPeriod");
+    if (beginPeriod)
+        Log("Timer: timeBeginPeriod(1) = %u", beginPeriod(1));
+    else
+        Log("Timer: timeBeginPeriod не найден");
+
+    HMODULE ntdll = GetModuleHandleA("ntdll.dll");
+    typedef LONG (NTAPI* tNtSetTimerResolution)(ULONG, BOOLEAN, ULONG*);
+    tNtSetTimerResolution ntSet = ntdll
+        ? (tNtSetTimerResolution)GetProcAddress(ntdll, "NtSetTimerResolution")
+        : 0;
+    if (ntSet)
+    {
+        ULONG cur = 0;
+        LONG st = ntSet(10000, TRUE, &cur); // 10000 * 100 нс = 1 мс
+        Log("Timer: NtSetTimerResolution(1ms) status=%08X cur=%u", (unsigned)st, (unsigned)cur);
+    }
+}
+
+// select() "микшера" (FIX_SFX_MIXER_LAG). Портировано из тестовой ветки:
+// по замерам её автора этот select ждёт по 14-20 мс на итерацию (автор
+// связывал это с потолком ~50-70 FPS клиента MP; опция названа по
+// симптому - лаг звуковых эффектов). Перехватываем ws2_32
+// select (ординал 18) в IAT exe; если вызов из 0x689C00-0x68C000
+// (основной 0x68B47D) и таймаут > 2 мс - подставляем локальную копию
+// timeval на 1 мс. Структуру игры не трогаем, остальные вызовы
+// select (другие адреса) идут как есть.
+struct SockTimeVal
+{
+    long tv_sec;
+    long tv_usec;
+};
+typedef int (WINAPI* tSelect)(int, void*, void*, void*, SockTimeVal*);
+static tSelect g_realSelect = 0;
+static DWORD g_seenSelectRva[12];
+static LONG g_seenSelectN = 0;
+
+static void NoteSelect(DWORD rva, long sec, long usec, int clamped)
+{
+    LONG n = g_seenSelectN;
+    for (LONG i = 0; i < n && i < (LONG)(sizeof(g_seenSelectRva) / sizeof(g_seenSelectRva[0])); ++i)
+    {
+        if (g_seenSelectRva[i] == rva)
+            return;
+    }
+    LONG idx = InterlockedIncrement(&g_seenSelectN) - 1;
+    if (idx < 0 || idx >= (LONG)(sizeof(g_seenSelectRva) / sizeof(g_seenSelectRva[0])))
+        return;
+    g_seenSelectRva[idx] = rva;
+    Log("Select: rva %06X timeout %ld.%06ld%s",
+        (unsigned)rva, sec, usec, clamped ? " -> 1мс" : "");
+}
+
+static int WINAPI HookSelect(int nfds, void* r, void* w, void* e, SockTimeVal* tv)
+{
+    DWORD ret = (DWORD)(DWORD_PTR)_ReturnAddress();
+    DWORD rva = (g_base && ret >= g_base && ret < g_base + g_imageSize) ? ret - g_base : 0;
+    long sec = tv ? tv->tv_sec : 0;
+    long usec = tv ? tv->tv_usec : 0;
+
+    SockTimeVal localTv;
+    SockTimeVal* useTv = tv;
+    bool mixer = rva >= 0x689C00 && rva < 0x68C000;
+    if (tv && mixer && (sec > 0 || usec > 2000))
+    {
+        NoteSelect(rva, sec, usec, 1);
+        localTv.tv_sec = 0;
+        localTv.tv_usec = 1000;
+        useTv = &localTv;
+    }
+    else if (tv && (sec || usec > 0))
+        NoteSelect(rva, sec, usec, 0);
+
+    return g_realSelect ? g_realSelect(nfds, r, w, e, useTv) : -1;
+}
+
+static void InstallSelectHook()
+{
+    HMODULE exe = GetModuleHandleA(NULL);
+    if (HookIatOrdinal(exe, "ws2_32.dll", 18, (void*)HookSelect, (void**)&g_realSelect) ||
+        HookIat(exe, "ws2_32.dll", "select", (void*)HookSelect, (void**)&g_realSelect))
+        Log("Select: ws2_32.select перехвачен (68B47D >2мс -> 1мс, копия timeval)");
+    else
+        Log("Select: IAT select не найден");
+}
+
 static bool InstallEngineStability()
 {
     PinFpu();
 
     HMODULE exe = GetModuleHandleA(NULL);
+
+    InstallTimerResolution();
+
+    if (g_settings.fixSfxMixerLag)
+        InstallSelectHook();
 
     if (g_settings.patchHighPriority)
         InstallHighPriority();
@@ -6164,6 +6941,8 @@ static DWORD CrashWriteDumpTo(const char* path, PEXCEPTION_POINTERS ep)
 static DWORD CrashWriteDump(PEXCEPTION_POINTERS ep)
 {
     g_crashDumpWritten[0] = 0;
+    if (!g_settings.enableCrashDump)
+        return 0;
     if (!ep || (ep->ExceptionRecord && ep->ExceptionRecord->ExceptionCode == 0xC00000FD))
         return 0;
 
@@ -6341,7 +7120,9 @@ static void ReportCrash(PEXCEPTION_POINTERS ep)
             }
         }
         CrashPrintf(h, "  dump=%s type=%08X size=%u\n",
-            g_crashDumpWritten[0] ? g_crashDumpWritten : "(none)", dumpType, dumpSize);
+            g_crashDumpWritten[0] ? g_crashDumpWritten
+                : (g_settings.enableCrashDump ? "(none)" : "(disabled: ENABLE_CRASH_DUMP=0)"),
+            dumpType, dumpSize);
     }
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
@@ -6436,7 +7217,8 @@ static void InstallCrashWatch()
     signal(SIGABRT, CrashOnAbort);
     _set_invalid_parameter_handler(CrashOnInvalidParam);
 
-    Log("CrashWatch: v2dll_crash.log + v2dll_crash_*.dmp + v2dll_crash_hint.txt");
+    Log("CrashWatch: v2dll_crash.log + v2dll_crash_hint.txt%s",
+        g_settings.enableCrashDump ? " + v2dll_crash_*.dmp" : " (memory dump выключен: ENABLE_CRASH_DUMP=0)");
 }
 
 
@@ -6479,9 +7261,10 @@ static bool Install()
     Log("priceDelta=%d patchExponentialPriceDelta=%d popDisplay=%d versionLabel=%d",
         (int)g_settings.priceDelta, (int)g_settings.patchExponentialPriceDelta,
         (int)g_settings.popDisplay, (int)g_settings.versionLabel);
-    Log("patchOccupiedReinforceSplit=%d patchAllyOwnerCheck=%d patchCivilizeNullCheck=%d",
+    Log("patchOccupiedReinforceSplit=%d patchAllyOwnerCheck=%d patchCivilizeNullCheck=%d patchSupplySourceNullCheck=%d patchTechCompareNullCheck=%d patchTechFolderIconNullCheck=%d",
         (int)g_settings.patchOccupiedReinforceSplit, (int)g_settings.patchAllyOwnerCheck,
-        (int)g_settings.patchCivilizeNullCheck);
+        (int)g_settings.patchCivilizeNullCheck, (int)g_settings.patchSupplySourceNullCheck,
+        (int)g_settings.patchTechCompareNullCheck, (int)g_settings.patchTechFolderIconNullCheck);
     Log("patchGraphPointClamp=%d patchFactoryDumpScan=%d patchProdListVisibility=%d patchProdTypeGate=%d",
         (int)g_settings.patchGraphPointClamp, (int)g_settings.patchFactoryDumpScan,
         (int)g_settings.patchProdListVisibility, (int)g_settings.patchProdTypeGate);
@@ -6498,7 +7281,10 @@ static bool Install()
     Log("patchMainLoopSleep0=%d mainLoopSleepMs=%d patchD3dNoVsync=%d patchHighPriority=%d",
         (int)g_settings.patchMainLoopSleep0, g_settings.mainLoopSleepMs,
         (int)g_settings.patchD3dNoVsync, (int)g_settings.patchHighPriority);
-    Log("enableCrashLog=%d", (int)g_settings.enableCrashLog);
+    Log("fixSfxMixerLag=%d d3dFpsLimit=%d",
+        (int)g_settings.fixSfxMixerLag, g_settings.d3dFpsLimit);
+    Log("enableCrashLog=%d enableCrashDump=%d",
+        (int)g_settings.enableCrashLog, (int)g_settings.enableCrashDump);
     Log("---- Settings конец ----");
 
     InstallEngineStability();
@@ -6553,6 +7339,15 @@ static bool Install()
 
     if (g_settings.patchCivilizeNullCheck)
         InstallCivilizeNullCheck();
+
+    if (g_settings.patchSupplySourceNullCheck)
+        InstallSupplySourceNullCheck();
+
+    if (g_settings.patchTechCompareNullCheck)
+        InstallTechCompareNullCheck();
+
+    if (g_settings.patchTechFolderIconNullCheck)
+        InstallTechFolderIconNullCheck();
 
     if (g_settings.patchGraphPointClamp)
         InstallGraphPointClamp();
