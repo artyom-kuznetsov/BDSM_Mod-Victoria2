@@ -18061,3 +18061,448 @@ ProdTypeGate: small_arms_factory -> result=0 (впервые)
 [32432] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
 [32432] ProdTypeGate: grain_factory -> result=1 (впервые)
 [32432] ProdTypeGate: fruit_factory -> result=1 (впервые)
+[30864] CrashWatch: v2dll_crash.log + v2dll_crash_hint.txt (memory dump выключен: ENABLE_CRASH_DUMP=0)
+[30864] LoadSettingsFrom: читаю 'v2dll_settings.ini'
+[30864] ---- Install ---- версия 3.31
+[30864] base = 00480000
+[30864] ---- Settings ----
+[30864] localModConfig=0 log=1 buttons=1 decisionFilter=1
+[30864] priceDelta=1 patchExponentialPriceDelta=0 popDisplay=0 versionLabel=1
+[30864] patchOccupiedReinforceSplit=1 patchAllyOwnerCheck=1 patchCivilizeNullCheck=1 patchSupplySourceNullCheck=1 patchTechCompareNullCheck=1 patchTechFolderIconNullCheck=1
+[30864] patchGraphPointClamp=0 patchFactoryDumpScan=0 patchProdListVisibility=1 patchProdTypeGate=1
+[30864] prodTypeGateAllowAll=0 patchCombatRoll=1 combatRollMin=0 combatRollMax=4
+[30864] enableOosLog=1 patchFpuFortress=1 patchD3dFpuPreserve=1 patchThreadFpuPin=1 patchHeapLfh=1 engineWorkerThreads=0
+[30864] patchPopQuantize=1 popQuantizeKeepBits=12 patchMpClientSleep=1 mpClientSleepMs=1
+[30864] patchMainLoopSleep0=1 mainLoopSleepMs=1 patchD3dNoVsync=0 patchHighPriority=1
+[30864] fixSfxMixerLag=1 d3dFpsLimit=70
+[30864] enableCrashLog=1 enableCrashDump=0
+[30864] ---- Settings конец ----
+[30864] Timer: timeBeginPeriod(1) = 0
+[30864] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[30864] Select: ws2_32.select перехвачен (68B47D >2мс -> 1мс, копия timeval)
+[30864] CPU: priority ABOVE_NORMAL
+[30864] CPU: power throttling off
+[30864] Heap: LFH включён на 2 из 2 куч
+[30864] FPU: CreateThread exe перехвачен
+[30864] FPU: GetTickCount - отложенный патч TBB/D3D
+[30864] FPU: пин на главном цикле rva 5DF550
+[30864] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[30864] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[30864] D3D9: Direct3DCreate9 перехвачен
+[30864] TBB: _beginthreadex перехвачен
+[30864] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
+[30864] PopQuantize: FUN_00485E40, keep_bits=12
+[30864] MpClientSleep: Sleep(40) -> Sleep(1) rva 71DD2C
+[30864] patch CTechnologyView: слот 11 = 1
+[30864] patch CBudgetView: слот 10 = 1
+[30864] patch CProductionView: слот 10 = 1
+[30864] patch CPoliticsView: слот 10 = 1
+[30864] patch CDecision: слот 6 = 1
+[30864] Patch 'always_add_wargoals': применён на rva 138AFF
+[30864] Patch 'land_reinforce': применён на rva 1C8C9B
+[30864] Patch 'naval_reinforce': применён на rva 1C8B1C
+[30864] Patch 'max_relative_price': применён на rva A45C28
+[30864] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[30864] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[30864] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[30864] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[30864] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[30864] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[30864] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[30864] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[30864] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[30864] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[30864] Patch 'allow_unciv_tech_research': отключён в настройках
+[30864] Patch 'aristocrat_income_share_patch_1': отключён в настройках
+[30864] Patch 'aristocrat_income_share_patch_2': отключён в настройках
+[30864] Patch 'aristocrat_income_share_patch_3': отключён в настройках
+[30864] Patch 'aristocrat_income_share_patch_4': отключён в настройках
+[30864] Patch 'aristocrat_income_share_patch_5': отключён в настройках
+[30864] OccupiedReinforceSplit: occupied=100.0%, пещера 01F60000
+[30864] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01F70000, ok=1
+[30864] CivilizeNullCheck: установлен на rva 14248B, пещера 01F80000
+[30864] SupplySourceNullCheck: установлен на rva 0D15EB, пещера 01F90000
+[30864] TechCompareNullCheck: установлен на rva 3A918A, пещера 01FA0000
+[30864] TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 01FB0000
+[30864] ProdListVisibilityHook: установлен
+[30864] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21830 байт)
+[30864]   [0] synthetics_template limit=0 good=-
+[30864]   [1] machine_part_user_template limit=0 good=-
+[30864]   [2] stock_exchange_template limit=0 good=-
+[30864]   [3] aeroplane_factory limit=0 good=electric_gear
+[30864]   [4] barrel_factory limit=0 good=automobiles
+[30864]   [5] automobile_factory limit=0 good=steel
+[30864]   [6] radio_factory limit=0 good=glass
+[30864]   [7] telephone_factory limit=0 good=glass
+[30864]   [8] electric_gear_factory limit=0 good=rubber
+[30864]   [9] pharmaceutical_plant limit=0 good=glass
+[30864]   [10] steamer_shipyard limit=0 good=steel
+[30864]   [11] artillery_factory limit=0 good=explosives
+[30864]   [12] small_arms_factory limit=0 good=timber
+[30864]   [13] ammunition_factory limit=0 good=sulphur
+[30864]   [14] steel_factory limit=0 good=iron
+[30864]   [15] machine_parts_factory limit=0 good=steel
+[30864]   [16] liquor_distillery limit=0 good=grain
+[30864]   [17] winery limit=0 good=fruit
+[30864]   [18] fertilizer_factory limit=0 good=sulphur
+[30864]   [19] furniture_factory limit=0 good=timber
+[30864]   [20] explosives_factory limit=0 good=sulphur
+[30864]   [21] luxury_clothes_factory limit=0 good=silk
+[30864]   [22] luxury_furniture_factory limit=0 good=tropical_wood
+[30864]   [23] cement_factory limit=0 good=coal
+[30864]   [24] glass_factory limit=0 good=coal
+[30864]   [25] paper_mill limit=0 good=timber
+[30864]   [26] fishery limit=0 good=raw_grain
+[30864]   [27] regular_clothes_factory limit=0 good=cotton
+[30864]   [28] canned_food_factory limit=0 good=grain
+[30864]   [29] cattle_ranch limit=0 good=-
+[30864]   [30] coal_mine limit=0 good=-
+[30864]   [31] coffee_plantation limit=0 good=-
+[30864]   [32] cotton_plantation limit=0 good=-
+[30864]   [33] dye_plantation limit=0 good=-
+[30864]   [34] grain_farm limit=0 good=-
+[30864]   [35] iron_mine limit=0 good=-
+[30864]   [36] oil_rig limit=0 good=-
+[30864]   [37] opium_plantation limit=0 good=-
+[30864]   [38] orchard limit=0 good=-
+[30864]   [39] precious_metal_mine limit=0 good=-
+[30864]   [40] rubber_lodge limit=0 good=-
+[30864]   [41] silkworm_ranch limit=0 good=-
+[30864]   [42] sulphur_mine limit=0 good=-
+[30864]   [43] tea_plantation limit=0 good=-
+[30864]   [44] timber_lodge limit=0 good=-
+[30864]   [45] tobacco_plantation limit=0 good=-
+[30864]   [46] tropical_wood_lodge limit=0 good=-
+[30864]   [47] peasant_grain limit=0 good=grain
+[30864]   [48] cattle_factory limit=1 good=raw_cattle
+[30864]   [49] coal_factory limit=1 good=raw_coal
+[30864]   [50] coffee_factory limit=1 good=raw_tea
+[30864]   [51] cotton_factory limit=1 good=raw_cotton
+[30864]   [52] dye_factory limit=1 good=raw_dye
+[30864]   [53] grain_factory limit=1 good=raw_grain
+[30864]   [54] iron_factory limit=1 good=raw_iron
+[30864]   [55] oil_factory limit=1 good=raw_oil
+[30864]   [56] opium_factory limit=1 good=raw_opium
+[30864]   [57] fruit_factory limit=1 good=raw_fruit
+[30864]   [58] rubber_factory limit=1 good=raw_rubber
+[30864]   [59] silk_factory limit=1 good=raw_silk
+[30864]   [60] sulphur_factory limit=1 good=raw_sulphur
+[30864]   [61] tea_factory limit=1 good=raw_tea
+[30864]   [62] timber_factory limit=1 good=raw_timber
+[30864]   [63] tobacco_factory limit=1 good=raw_tobacco
+[30864]   [64] tropical_wood_factory limit=1 good=raw_tropical_wood
+[30864] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[30864] ProdTypeGateHook: установлен
+[30864] LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+[30864] LoadProvinceGoods: сканирую мод 'I:\Vic2_Dev\V2BDSM\mod\2\history\provinces' (перекрывает ванильные id)
+[30864] LoadProvinceGoods: готово, 2708 провинций с trade_goods
+[30864] HideNoSupplyFactoriesHook: установлен
+[30864] PriceDelta: активен режим PriceDelta (линейный)
+[30864] PriceDelta: 25 сотых процента, множитель 163
+[30864] VersionLabel: 'V2 v3.04 + V2DLL v3.31' (len=22), пещера 01FD0000
+[30864] CombatRoll: диапазон 0..4 (модуль=5)
+[30864] OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
+[30864] Install: done
+[30864] DllMain: attach, Install = 1
+[30864] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
+[30864] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
+[30864] Update[CTechnologyView]: вызван, view=962A53A8
+[30864] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[30864] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[30864] ProdTypeGate: grain_factory -> result=1 (впервые)
+[30864] ProdTypeGate: fruit_factory -> result=1 (впервые)
+[13172] CrashWatch: v2dll_crash.log + v2dll_crash_hint.txt (memory dump выключен: ENABLE_CRASH_DUMP=0)
+[13172] LoadSettingsFrom: читаю 'v2dll_settings.ini'
+[13172] ---- Install ---- версия 3.31
+[13172] base = 00480000
+[13172] ---- Settings ----
+[13172] localModConfig=0 log=1 buttons=1 decisionFilter=1
+[13172] priceDelta=1 patchExponentialPriceDelta=0 popDisplay=0 versionLabel=1
+[13172] patchOccupiedReinforceSplit=1 patchAllyOwnerCheck=1 patchCivilizeNullCheck=1 patchSupplySourceNullCheck=1 patchTechCompareNullCheck=1 patchTechFolderIconNullCheck=1
+[13172] patchGraphPointClamp=0 patchFactoryDumpScan=0 patchProdListVisibility=1 patchProdTypeGate=1
+[13172] prodTypeGateAllowAll=0 patchCombatRoll=1 combatRollMin=0 combatRollMax=4
+[13172] enableOosLog=1 patchFpuFortress=1 patchD3dFpuPreserve=1 patchThreadFpuPin=1 patchHeapLfh=1 engineWorkerThreads=0
+[13172] patchPopQuantize=1 popQuantizeKeepBits=12 patchMpClientSleep=1 mpClientSleepMs=1
+[13172] patchMainLoopSleep0=1 mainLoopSleepMs=1 patchD3dNoVsync=0 patchHighPriority=1
+[13172] fixSfxMixerLag=1 d3dFpsLimit=70
+[13172] enableCrashLog=1 enableCrashDump=0
+[13172] ---- Settings конец ----
+[13172] Timer: timeBeginPeriod(1) = 0
+[13172] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[13172] Select: ws2_32.select перехвачен (68B47D >2мс -> 1мс, копия timeval)
+[13172] CPU: priority ABOVE_NORMAL
+[13172] CPU: power throttling off
+[13172] Heap: LFH включён на 2 из 2 куч
+[13172] FPU: CreateThread exe перехвачен
+[13172] FPU: GetTickCount - отложенный патч TBB/D3D
+[13172] FPU: пин на главном цикле rva 5DF550
+[13172] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[13172] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[13172] D3D9: Direct3DCreate9 перехвачен
+[13172] TBB: _beginthreadex перехвачен
+[13172] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
+[13172] PopQuantize: FUN_00485E40, keep_bits=12
+[13172] MpClientSleep: Sleep(40) -> Sleep(1) rva 71DD2C
+[13172] patch CTechnologyView: слот 11 = 1
+[13172] patch CBudgetView: слот 10 = 1
+[13172] patch CProductionView: слот 10 = 1
+[13172] patch CPoliticsView: слот 10 = 1
+[13172] patch CDecision: слот 6 = 1
+[13172] Patch 'always_add_wargoals': применён на rva 138AFF
+[13172] Patch 'land_reinforce': применён на rva 1C8C9B
+[13172] Patch 'naval_reinforce': применён на rva 1C8B1C
+[13172] Patch 'max_relative_price': применён на rva A45C28
+[13172] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[13172] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[13172] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[13172] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[13172] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[13172] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[13172] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[13172] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[13172] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[13172] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[13172] Patch 'allow_unciv_tech_research': отключён в настройках
+[13172] Patch 'aristocrat_income_share_patch_1': отключён в настройках
+[13172] Patch 'aristocrat_income_share_patch_2': отключён в настройках
+[13172] Patch 'aristocrat_income_share_patch_3': отключён в настройках
+[13172] Patch 'aristocrat_income_share_patch_4': отключён в настройках
+[13172] Patch 'aristocrat_income_share_patch_5': отключён в настройках
+[13172] OccupiedReinforceSplit: occupied=100.0%, пещера 01F60000
+[13172] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01F70000, ok=1
+[13172] CivilizeNullCheck: установлен на rva 14248B, пещера 01F80000
+[13172] SupplySourceNullCheck: установлен на rva 0D15EB, пещера 01F90000
+[13172] TechCompareNullCheck: установлен на rva 3A918A, пещера 01FA0000
+[13172] TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 01FB0000
+[13172] ProdListVisibilityHook: установлен
+[13172] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21830 байт)
+[13172]   [0] synthetics_template limit=0 good=-
+[13172]   [1] machine_part_user_template limit=0 good=-
+[13172]   [2] stock_exchange_template limit=0 good=-
+[13172]   [3] aeroplane_factory limit=0 good=electric_gear
+[13172]   [4] barrel_factory limit=0 good=automobiles
+[13172]   [5] automobile_factory limit=0 good=steel
+[13172]   [6] radio_factory limit=0 good=glass
+[13172]   [7] telephone_factory limit=0 good=glass
+[13172]   [8] electric_gear_factory limit=0 good=rubber
+[13172]   [9] pharmaceutical_plant limit=0 good=glass
+[13172]   [10] steamer_shipyard limit=0 good=steel
+[13172]   [11] artillery_factory limit=0 good=explosives
+[13172]   [12] small_arms_factory limit=0 good=timber
+[13172]   [13] ammunition_factory limit=0 good=sulphur
+[13172]   [14] steel_factory limit=0 good=iron
+[13172]   [15] machine_parts_factory limit=0 good=steel
+[13172]   [16] liquor_distillery limit=0 good=grain
+[13172]   [17] winery limit=0 good=fruit
+[13172]   [18] fertilizer_factory limit=0 good=sulphur
+[13172]   [19] furniture_factory limit=0 good=timber
+[13172]   [20] explosives_factory limit=0 good=sulphur
+[13172]   [21] luxury_clothes_factory limit=0 good=silk
+[13172]   [22] luxury_furniture_factory limit=0 good=tropical_wood
+[13172]   [23] cement_factory limit=0 good=coal
+[13172]   [24] glass_factory limit=0 good=coal
+[13172]   [25] paper_mill limit=0 good=timber
+[13172]   [26] fishery limit=0 good=raw_grain
+[13172]   [27] regular_clothes_factory limit=0 good=cotton
+[13172]   [28] canned_food_factory limit=0 good=grain
+[13172]   [29] cattle_ranch limit=0 good=-
+[13172]   [30] coal_mine limit=0 good=-
+[13172]   [31] coffee_plantation limit=0 good=-
+[13172]   [32] cotton_plantation limit=0 good=-
+[13172]   [33] dye_plantation limit=0 good=-
+[13172]   [34] grain_farm limit=0 good=-
+[13172]   [35] iron_mine limit=0 good=-
+[13172]   [36] oil_rig limit=0 good=-
+[13172]   [37] opium_plantation limit=0 good=-
+[13172]   [38] orchard limit=0 good=-
+[13172]   [39] precious_metal_mine limit=0 good=-
+[13172]   [40] rubber_lodge limit=0 good=-
+[13172]   [41] silkworm_ranch limit=0 good=-
+[13172]   [42] sulphur_mine limit=0 good=-
+[13172]   [43] tea_plantation limit=0 good=-
+[13172]   [44] timber_lodge limit=0 good=-
+[13172]   [45] tobacco_plantation limit=0 good=-
+[13172]   [46] tropical_wood_lodge limit=0 good=-
+[13172]   [47] peasant_grain limit=0 good=grain
+[13172]   [48] cattle_factory limit=1 good=raw_cattle
+[13172]   [49] coal_factory limit=1 good=raw_coal
+[13172]   [50] coffee_factory limit=1 good=raw_tea
+[13172]   [51] cotton_factory limit=1 good=raw_cotton
+[13172]   [52] dye_factory limit=1 good=raw_dye
+[13172]   [53] grain_factory limit=1 good=raw_grain
+[13172]   [54] iron_factory limit=1 good=raw_iron
+[13172]   [55] oil_factory limit=1 good=raw_oil
+[13172]   [56] opium_factory limit=1 good=raw_opium
+[13172]   [57] fruit_factory limit=1 good=raw_fruit
+[13172]   [58] rubber_factory limit=1 good=raw_rubber
+[13172]   [59] silk_factory limit=1 good=raw_silk
+[13172]   [60] sulphur_factory limit=1 good=raw_sulphur
+[13172]   [61] tea_factory limit=1 good=raw_tea
+[13172]   [62] timber_factory limit=1 good=raw_timber
+[13172]   [63] tobacco_factory limit=1 good=raw_tobacco
+[13172]   [64] tropical_wood_factory limit=1 good=raw_tropical_wood
+[13172] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[13172] ProdTypeGateHook: установлен
+[13172] LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+[13172] LoadProvinceGoods: сканирую мод 'I:\Vic2_Dev\V2BDSM\mod\2\history\provinces' (перекрывает ванильные id)
+[13172] LoadProvinceGoods: готово, 2708 провинций с trade_goods
+[13172] HideNoSupplyFactoriesHook: установлен
+[13172] PriceDelta: активен режим PriceDelta (линейный)
+[13172] PriceDelta: 25 сотых процента, множитель 163
+[13172] VersionLabel: 'V2 v3.04 + V2DLL v3.31' (len=22), пещера 01FD0000
+[13172] CombatRoll: диапазон 0..4 (модуль=5)
+[13172] OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
+[13172] Install: done
+[13172] DllMain: attach, Install = 1
+[13172] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
+[13172] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
+[33704] CrashWatch: v2dll_crash.log + v2dll_crash_hint.txt (memory dump выключен: ENABLE_CRASH_DUMP=0)
+[33704] LoadSettingsFrom: читаю 'v2dll_settings.ini'
+[33704] ---- Install ---- версия 3.31
+[33704] base = 00480000
+[33704] ---- Settings ----
+[33704] localModConfig=0 log=1 buttons=1 decisionFilter=1
+[33704] priceDelta=1 patchExponentialPriceDelta=0 popDisplay=0 versionLabel=1
+[33704] patchOccupiedReinforceSplit=1 patchAllyOwnerCheck=1 patchCivilizeNullCheck=1 patchSupplySourceNullCheck=1 patchTechCompareNullCheck=1 patchTechFolderIconNullCheck=1
+[33704] patchGraphPointClamp=0 patchFactoryDumpScan=0 patchProdListVisibility=1 patchProdTypeGate=1
+[33704] prodTypeGateAllowAll=0 patchCombatRoll=1 combatRollMin=0 combatRollMax=4
+[33704] enableOosLog=1 patchFpuFortress=1 patchD3dFpuPreserve=1 patchThreadFpuPin=1 patchHeapLfh=1 engineWorkerThreads=0
+[33704] patchPopQuantize=1 popQuantizeKeepBits=12 patchMpClientSleep=1 mpClientSleepMs=1
+[33704] patchMainLoopSleep0=1 mainLoopSleepMs=1 patchD3dNoVsync=0 patchHighPriority=1
+[33704] fixSfxMixerLag=1 d3dFpsLimit=70
+[33704] enableCrashLog=1 enableCrashDump=0
+[33704] ---- Settings конец ----
+[33704] Timer: timeBeginPeriod(1) = 0
+[33704] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[33704] Select: ws2_32.select перехвачен (68B47D >2мс -> 1мс, копия timeval)
+[33704] CPU: priority ABOVE_NORMAL
+[33704] CPU: power throttling off
+[33704] Heap: LFH включён на 2 из 2 куч
+[33704] FPU: CreateThread exe перехвачен
+[33704] FPU: GetTickCount - отложенный патч TBB/D3D
+[33704] FPU: пин на главном цикле rva 5DF550
+[33704] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[33704] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[33704] D3D9: Direct3DCreate9 перехвачен
+[33704] TBB: _beginthreadex перехвачен
+[33704] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
+[33704] PopQuantize: FUN_00485E40, keep_bits=12
+[33704] MpClientSleep: Sleep(40) -> Sleep(1) rva 71DD2C
+[33704] patch CTechnologyView: слот 11 = 1
+[33704] patch CBudgetView: слот 10 = 1
+[33704] patch CProductionView: слот 10 = 1
+[33704] patch CPoliticsView: слот 10 = 1
+[33704] patch CDecision: слот 6 = 1
+[33704] Patch 'always_add_wargoals': применён на rva 138AFF
+[33704] Patch 'land_reinforce': применён на rva 1C8C9B
+[33704] Patch 'naval_reinforce': применён на rva 1C8B1C
+[33704] Patch 'max_relative_price': применён на rva A45C28
+[33704] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[33704] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[33704] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[33704] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[33704] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[33704] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[33704] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[33704] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[33704] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[33704] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[33704] Patch 'allow_unciv_tech_research': отключён в настройках
+[33704] Patch 'aristocrat_income_share_patch_1': отключён в настройках
+[33704] Patch 'aristocrat_income_share_patch_2': отключён в настройках
+[33704] Patch 'aristocrat_income_share_patch_3': отключён в настройках
+[33704] Patch 'aristocrat_income_share_patch_4': отключён в настройках
+[33704] Patch 'aristocrat_income_share_patch_5': отключён в настройках
+[33704] OccupiedReinforceSplit: occupied=100.0%, пещера 01F60000
+[33704] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01F70000, ok=1
+[33704] CivilizeNullCheck: установлен на rva 14248B, пещера 01F80000
+[33704] SupplySourceNullCheck: установлен на rva 0D15EB, пещера 01F90000
+[33704] TechCompareNullCheck: установлен на rva 3A918A, пещера 01FA0000
+[33704] TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 01FB0000
+[33704] ProdListVisibilityHook: установлен
+[33704] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (21830 байт)
+[33704]   [0] synthetics_template limit=0 good=-
+[33704]   [1] machine_part_user_template limit=0 good=-
+[33704]   [2] stock_exchange_template limit=0 good=-
+[33704]   [3] aeroplane_factory limit=0 good=electric_gear
+[33704]   [4] barrel_factory limit=0 good=automobiles
+[33704]   [5] automobile_factory limit=0 good=steel
+[33704]   [6] radio_factory limit=0 good=glass
+[33704]   [7] telephone_factory limit=0 good=glass
+[33704]   [8] electric_gear_factory limit=0 good=rubber
+[33704]   [9] pharmaceutical_plant limit=0 good=glass
+[33704]   [10] steamer_shipyard limit=0 good=steel
+[33704]   [11] artillery_factory limit=0 good=explosives
+[33704]   [12] small_arms_factory limit=0 good=timber
+[33704]   [13] ammunition_factory limit=0 good=sulphur
+[33704]   [14] steel_factory limit=0 good=iron
+[33704]   [15] machine_parts_factory limit=0 good=steel
+[33704]   [16] liquor_distillery limit=0 good=grain
+[33704]   [17] winery limit=0 good=fruit
+[33704]   [18] fertilizer_factory limit=0 good=sulphur
+[33704]   [19] furniture_factory limit=0 good=timber
+[33704]   [20] explosives_factory limit=0 good=sulphur
+[33704]   [21] luxury_clothes_factory limit=0 good=silk
+[33704]   [22] luxury_furniture_factory limit=0 good=tropical_wood
+[33704]   [23] cement_factory limit=0 good=coal
+[33704]   [24] glass_factory limit=0 good=coal
+[33704]   [25] paper_mill limit=0 good=timber
+[33704]   [26] fishery limit=0 good=raw_grain
+[33704]   [27] regular_clothes_factory limit=0 good=cotton
+[33704]   [28] canned_food_factory limit=0 good=grain
+[33704]   [29] cattle_ranch limit=0 good=-
+[33704]   [30] coal_mine limit=0 good=-
+[33704]   [31] coffee_plantation limit=0 good=-
+[33704]   [32] cotton_plantation limit=0 good=-
+[33704]   [33] dye_plantation limit=0 good=-
+[33704]   [34] grain_farm limit=0 good=-
+[33704]   [35] iron_mine limit=0 good=-
+[33704]   [36] oil_rig limit=0 good=-
+[33704]   [37] opium_plantation limit=0 good=-
+[33704]   [38] orchard limit=0 good=-
+[33704]   [39] precious_metal_mine limit=0 good=-
+[33704]   [40] rubber_lodge limit=0 good=-
+[33704]   [41] silkworm_ranch limit=0 good=-
+[33704]   [42] sulphur_mine limit=0 good=-
+[33704]   [43] tea_plantation limit=0 good=-
+[33704]   [44] timber_lodge limit=0 good=-
+[33704]   [45] tobacco_plantation limit=0 good=-
+[33704]   [46] tropical_wood_lodge limit=0 good=-
+[33704]   [47] peasant_grain limit=0 good=grain
+[33704]   [48] cattle_factory limit=1 good=raw_cattle
+[33704]   [49] coal_factory limit=1 good=raw_coal
+[33704]   [50] coffee_factory limit=1 good=raw_tea
+[33704]   [51] cotton_factory limit=1 good=raw_cotton
+[33704]   [52] dye_factory limit=1 good=raw_dye
+[33704]   [53] grain_factory limit=1 good=raw_grain
+[33704]   [54] iron_factory limit=1 good=raw_iron
+[33704]   [55] oil_factory limit=1 good=raw_oil
+[33704]   [56] opium_factory limit=1 good=raw_opium
+[33704]   [57] fruit_factory limit=1 good=raw_fruit
+[33704]   [58] rubber_factory limit=1 good=raw_rubber
+[33704]   [59] silk_factory limit=1 good=raw_silk
+[33704]   [60] sulphur_factory limit=1 good=raw_sulphur
+[33704]   [61] tea_factory limit=1 good=raw_tea
+[33704]   [62] timber_factory limit=1 good=raw_timber
+[33704]   [63] tobacco_factory limit=1 good=raw_tobacco
+[33704]   [64] tropical_wood_factory limit=1 good=raw_tropical_wood
+[33704] ParseProductionTypes: разобрано 65 типов производства (шаблонов пропущено: 62)
+[33704] ProdTypeGateHook: установлен
+[33704] LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+[33704] LoadProvinceGoods: сканирую мод 'I:\Vic2_Dev\V2BDSM\mod\2\history\provinces' (перекрывает ванильные id)
+[33704] LoadProvinceGoods: готово, 2708 провинций с trade_goods
+[33704] HideNoSupplyFactoriesHook: установлен
+[33704] PriceDelta: активен режим PriceDelta (линейный)
+[33704] PriceDelta: 25 сотых процента, множитель 163
+[33704] VersionLabel: 'V2 v3.04 + V2DLL v3.31' (len=22), пещера 01FD0000
+[33704] CombatRoll: диапазон 0..4 (модуль=5)
+[33704] OosWatch: FUN_00682EC0 rva 282EC0 -> v2dll_oos.log
+[33704] Install: done
+[33704] DllMain: attach, Install = 1
+[33704] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
+[33704] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0
+[33704] Update[CTechnologyView]: вызван, view=8095FB50
+[33704] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[33704] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[33704] ProdTypeGate: grain_factory -> result=1 (впервые)
+[33704] ProdTypeGate: fruit_factory -> result=1 (впервые)
