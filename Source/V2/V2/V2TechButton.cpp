@@ -19,12 +19,13 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <wchar.h>
 #include <intrin.h>
 #include <ctype.h>
 #include <float.h>
 #include <xmmintrin.h>
 #include <pmmintrin.h>
-#include <signal.h>
 
 #include "lua51_exports.h"
 
@@ -36,7 +37,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "3.29"
+#define MOD_VERSION "4.02"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -51,7 +52,7 @@ struct Settings
     // См. ResolveModFolder/LoadSettings ниже по файлу.
     bool localModConfig = false;
 
-    bool log            = true;  // лог в v2dll.log (много записей на тик, для раздачи ставить 0)
+    bool log            = true;  // лог в Logs\v2dll.log (много записей на тик, для раздачи ставить 0)
     bool buttons        = true;   // кнопки, запускающие решения
     bool decisionFilter = true;   // скрытие решений из окна политики
     bool priceDelta     = true;  // процентный шаг изменения цен
@@ -64,10 +65,14 @@ struct Settings
     // таблицу (каждый - отдельная функция со своим хуком).
     bool patchOccupiedReinforceSplit = true;
     bool patchAllyOwnerCheck         = true;
-    bool patchCivilizeNullCheck      = true;
+    bool patchCivilizeNullCheck      = false;
     bool patchSupplySourceNullCheck  = true;
     bool patchTechCompareNullCheck   = true;
     bool patchTechFolderIconNullCheck = true;
+    // 3.27: антикраш identity/tombstone/null-vtable выключены — на 3.23–3.26
+    // OOS 1836-01-11 delta=1 при тех же патчах. Ini не включает обратно.
+    bool patchNullVtableUi           = false;
+    bool patchIdentityTombstone      = false;
     bool patchGraphPointClamp        = false;
     bool patchFactoryDumpScan        = false;
     bool patchProdListVisibility     = true;
@@ -93,44 +98,69 @@ struct Settings
     int  combatRollMin   = 0;   // минимум броска
     int  combatRollMax   = 4;   // максимум броска
 
-    // Категория Stability - устойчивость к рассинхрону в MP и общая
-    // стабильность движка. Портировано из более новой ветки того же
-    // проекта (V2\V2TechButton.cpp, версия 3.10) - адреса перепроверены
-    // напрямую по v2game.exe перед переносом.
-    bool patchFpuFortress    = true;  // control word=53 (near, FTZ/DAZ) + пин на главном цикле
-    bool patchD3dFpuPreserve = true;  // D3DCREATE_FPU_PRESERVE, чтобы D3D не сбивал control word
-    bool patchThreadFpuPin   = true;  // тот же пин на каждом новом потоке exe/TBB
-    bool patchHeapLfh        = true;  // Low Fragmentation Heap на кучах процесса
-    int  engineWorkerThreads = 0;     // потолок потоков TBB; 0 = не трогать (игра сама берёт по числу ядер)
+    // Временная диагностика бага с чек-суммой (меняется при входе в
+    // партию) - логирует в v2dll.log каждое обращение к источнику
+    // чек-суммы. См. InstallChecksumDiagnostic ниже по файлу.
+    bool patchChecksumDiagnostic = false;
 
-    bool patchPopQuantize    = true;  // округление денег/нужд POP после дневного прохода, чтобы разные клиенты не расходились в младших битах
-    int  popQuantizeKeepBits = 12;    // сколько из 15 дробных бит сохранять (меньше = грубее округление)
+    // Отдельный Logs\v2dll_oos.log: пишется при вызове FUN_00682EC0
+    // (диалог OOS_TITLE / "Games out of synch"). Не каждый тик.
+    bool enableOosLog = true;
 
-    bool patchMpClientSleep  = true;  // Sleep(40) в message pump не-хоста (потолок ~25 FPS) -> mpClientSleepMs
-    int  mpClientSleepMs     = 1;
-
-    bool patchMainLoopSleep0 = true;  // Sleep(0)/Sleep(100) главного цикла хоста/SP -> mainLoopSleepMs
-    int  mainLoopSleepMs     = 1;
-    bool patchD3dNoVsync     = false; // принудительный IMMEDIATE-режим Present (может рвать кадр при скролле списков)
-    bool patchHighPriority   = true;  // ABOVE_NORMAL + отключение power throttling
-
-    // Категория Stability. Портировано из тестовой ветки (v3.65,
-    // "V2TechButton (1).cpp"). FIX_SFX_MIXER_LAG: select() "микшера"
-    // (вызов из 0x689C00-0x68C000, основной 0x68B47D) ждёт 14-20 мс на
-    // итерацию - режем до 1 мс копией timeval, структуру игры не трогаем.
-    // Независим от PATCH_MP_CLIENT_SLEEP/PATCH_MAIN_LOOP_SLEEP0.
-    bool fixSfxMixerLag      = true;
-    // Программный потолок FPS в Present: ждущий таймер + spin на хвосте.
-    // 0 = без лимита. При vsync смысла ниже частоты монитора не имеет.
-    int  d3dFpsLimit         = 70;
-
-    // Диагностика, не влияющая на геймплей - категория Diagnostics.
-    bool enableOosLog   = true; // отдельный v2dll_oos.log при каждом дневном сравнении чек-сумм MP
-    bool enableCrashLog = true; // v2dll_crash.log (+ v2dll_crash_hint.txt) при необработанном исключении/abort
+    // Logs\v2dll_crash.log + Logs\v2dll_crash_*.dmp при необработанном
+    // исключении / abort. Не каждый тик. Каждый дамп — отдельный файл.
+    bool enableCrashLog = true;
     // memory dump (v2dll_crash_*.dmp) при краше - отдельно от текстового лога,
     // выключен по умолчанию: файл десятки МБ. Работает только вместе с
     // ENABLE_CRASH_LOG=1 (дамп пишется из того же обработчика).
     bool enableCrashDump = false;
+
+    // Стабильность симуляции / память / существующий TBB-пул игры.
+    // Все клиенты MP обязаны иметь одну DLL, поэтому эти правки
+    // считаются частью протокола, а не опциональным ускорением.
+    bool patchFpuFortress      = true;  // PC=53, near, FTZ/DAZ + пин на главном цикле
+    bool patchD3dFpuPreserve   = true;  // D3DCREATE_FPU_PRESERVE, чтобы D3D не сбивал CW
+    bool patchHeapLfh          = true;  // Low Fragmentation Heap на кучах процесса
+    bool patchThreadFpuPin     = true;  // PinFpu на старте потоков exe/tbb
+    int  engineWorkerThreads   = 0;     // потолок TBB; 0 = не трогать, игра сама берёт ядра
+
+    // После дневного прохода POP (FUN_00485E40) округляем int64/2^15
+    // поля денег/нужд, чтобы младшие биты не разъезжались между клиентами.
+    bool patchPopQuantize      = true;
+    int  popQuantizeKeepBits   = 12;    // из 15 дробных; 12 = шаг 8 единиц 2^-15
+
+    // MP FPS: select микшера RVA 0x68B47D (14–20 мс) → 1 мс, копия timeval.
+    // 3.24: без IAT Sleep/WFSO/QPC/recv/Idle и без записи в timeval игры.
+    // Аудио Sleep(30)/Sleep(35) не трогать. Подробно: Source2/FPS_MP_CLIENT.txt.
+    bool patchMpClientSleep    = true;
+    int  mpClientSleepMs       = 1;
+
+    // Хост/SP главный цикл: 6A 00 Sleep(0) / 6A 64 Sleep(100) по флагу.
+    // Sleep(0) не трогаем — это хост. Sleep(100) режем до MAIN_LOOP_SLEEP_MS.
+    bool patchMainLoopSleep0   = true;
+    int  mainLoopSleepMs       = 1;
+    // Наши значения: vsync включён (принудительный IMMEDIATE-режим может
+    // рвать кадр при скролле списков), мягкий потолок 70 FPS вместо него.
+    bool patchD3dNoVsync       = false;
+    int  d3dFpsLimit           = 70;
+    bool patchSkipSelProj      = false; // кольцо/mesh selection_projection; 3.32–3.34: не оно ест клик
+    bool patchReuseUnitView    = false; // 3.76: патч окна армии снят. Только таймеры 391BB0/393290.
+    bool patchSkipArmyIdle     = false; // idle 391BB0 нужен иконкам; skip только NeedRebuild.
+    bool patchReuseWindows     = false; // 3.46: Hide-keep GUI = UAF (ивент/диалог удалён, виджет жив)
+    bool patchHighPriority     = true;  // ABOVE_NORMAL + без power throttling
+    bool patchSkipNestedIdle   = false; // 3.56: не звать IdleInGame при nest; checksum/насос живы
+    bool patchSkipChkWin       = false; // 3.57 ОШИБКА: 2859C0 = дневной тик сессии, не окна. Не включать.
+    bool patchCamStill         = false; // 3.59 провал: 1e08-skip → лишние IdleInGame, FPS хуже. Не включать.
+
+    // FIX_SFX_MIXER_LAG: select() "микшера" (вызов из 0x689C00-0x68C000,
+    // основной 0x68B47D) ждёт 14-20 мс на итерацию - режем до 1 мс копией
+    // timeval, структуру игры не трогаем. Независим от PATCH_MP_CLIENT_SLEEP.
+    bool fixSfxMixerLag      = true;
+
+    // FIX_ARMY_WINDOW_LAG: алиас на patchSkipNestedIdle в HookIdleIngame
+    // (пропуск вложенного IdleInGame). Отдельный InstallFixArmyWindowLag
+    // НЕ ставим — LIVE уже хукает 254D80 через InstallWindowFps.
+    bool patchFixArmyWindowLag = true;
 };
 
 static Settings g_settings;
@@ -141,35 +171,75 @@ static Settings g_settings;
 static void LoadSettings();
 
 static bool g_logStarted = false;
+static bool g_oosLogStarted = false;
+static CRITICAL_SECTION g_logCs;
+static bool g_logCsInit = false;
 
-// Лог всегда дописывается, а не пересоздаётся: хост и клиент на одном ПК
-// иначе по очереди открывали бы файл на "w" и затирали строки друг друга.
-// Каждая строка начинается с [pid], чтобы их можно было различить.
-// Раздутый (>5 МБ) файл один раз обнуляем при старте процесса.
+static HMODULE g_selfModule = 0;
+static wchar_t g_logsDir[MAX_PATH];
+static wchar_t g_logFile[MAX_PATH];
+static wchar_t g_oosLogFile[MAX_PATH];
+static wchar_t g_crashLogFile[MAX_PATH];
+static wchar_t g_crashDumpFile[MAX_PATH];
+static bool g_logDirReady = false;
+
+static void InitLogDir()
+{
+    if (g_logDirReady)
+        return;
+
+    wchar_t exe[MAX_PATH];
+    exe[0] = 0;
+    DWORD n = GetModuleFileNameW(NULL, exe, MAX_PATH);
+    wchar_t* slash = (n && n < MAX_PATH) ? wcsrchr(exe, L'\\') : 0;
+    if (slash)
+    {
+        *slash = 0;
+        swprintf_s(g_logsDir, L"%s\\Logs", exe);
+    }
+    else
+    {
+        wcscpy_s(g_logsDir, L"Logs");
+    }
+
+    if (!CreateDirectoryW(g_logsDir, NULL))
+    {
+        DWORD err = GetLastError();
+        if (err != ERROR_ALREADY_EXISTS)
+            wcscpy_s(g_logsDir, L"Logs");
+        CreateDirectoryW(g_logsDir, NULL);
+    }
+
+    swprintf_s(g_logFile, L"%s\\v2dll.log", g_logsDir);
+    swprintf_s(g_oosLogFile, L"%s\\v2dll_oos.log", g_logsDir);
+    swprintf_s(g_crashLogFile, L"%s\\v2dll_crash.log", g_logsDir);
+    swprintf_s(g_crashDumpFile, L"%s\\v2dll_crash.dmp", g_logsDir);
+    g_logDirReady = true;
+}
+
 static void Log(const char* fmt, ...)
 {
     if (!g_settings.log)
         return;
 
-    const char* mode = "a";
-    if (!g_logStarted)
-    {
-        WIN32_FILE_ATTRIBUTE_DATA fa;
-        if (GetFileAttributesExA("v2dll.log", GetFileExInfoStandard, &fa))
-        {
-            unsigned long long size = ((unsigned long long)fa.nFileSizeHigh << 32) | fa.nFileSizeLow;
-            if (size > 5ull * 1024ull * 1024ull)
-                mode = "w";
-        }
-    }
+    InitLogDir();
+
+    if (g_logCsInit)
+        EnterCriticalSection(&g_logCs);
 
     FILE* f = 0;
-    if (fopen_s(&f, "v2dll.log", mode) != 0 || !f)
+    // Всегда дописываем: хост и клиент на одном ПК иначе по очереди
+    // открывают файл на "w" и затирают Install/Present друг друга.
+    if (_wfopen_s(&f, g_logFile, L"a") != 0 || !f)
+    {
+        if (g_logCsInit)
+            LeaveCriticalSection(&g_logCs);
         return;
+    }
 
     g_logStarted = true;
 
-    fprintf(f, "[%lu] ", (unsigned long)GetCurrentProcessId());
+    fprintf(f, "[%u] ", GetCurrentProcessId());
 
     va_list ap;
     va_start(ap, fmt);
@@ -178,6 +248,9 @@ static void Log(const char* fmt, ...)
 
     fprintf(f, "\n");
     fclose(f);
+
+    if (g_logCsInit)
+        LeaveCriticalSection(&g_logCs);
 }
 
 
@@ -401,6 +474,26 @@ static void* g_fnOnMakeDecision = 0;
 
 typedef BOOL(WINAPI* tIsBadReadPtr)(const void*, UINT_PTR);
 static tIsBadReadPtr g_fnIsBadReadPtr = 0;
+
+// Замена запрещённого IsBadReadPtr: та же сигнатура (TRUE = память
+// плохая), но через SEH, без обхода PAGE_GUARD ядром.
+static BOOL WINAPI SafeIsBadReadPtr(const void* lp, UINT_PTR ucb)
+{
+    if (!lp || ucb == 0)
+        return TRUE;
+    __try
+    {
+        volatile const unsigned char* p = (const unsigned char*)lp;
+        (void)p[0];
+        if (ucb > 1)
+            (void)p[ucb - 1];
+        return FALSE;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return TRUE;
+    }
+}
 
 static unsigned char g_glue[MAX_BUTTONS][GLUE_SIZE];
 static unsigned char g_fakeElem[MAX_BUTTONS][0x30];
@@ -839,40 +932,20 @@ static char g_productionTypeNames[MAX_PRODUCTION_TYPES][PRODTYPE_NAME_MAX];
 static int  g_productionTypeCount = 0;
 
 // Единственный товар из "input_goods = { raw_X = ... }" у типов
-// limit_by_local_supply=yes (у них ровно один вход - см. сами блоки в
-// production_types.txt) - имя товара ("raw_timber" и т.п.) совпадает
-// один в один с "trade_goods = raw_timber" в history/provinces/*.txt.
-// Используется для проверки "есть ли сырьё в регионе" напрямую по
-// файлам вместо ненадёжных внутренних структур движка (см. комментарий
-// у ShouldHideNoSupplyFactory).
+// limit_by_local_supply=yes — для HideNoSupplyFactories (файловый подход).
 static const int GOOD_NAME_MAX = 32;
 static char g_productionTypeGood[MAX_PRODUCTION_TYPES][GOOD_NAME_MAX];
 
 static const int OFF_PRODTYPE_NAME = 0x20;
 
-// std::string движка (MSVC Dinkumware STL этой эпохи) хранит короткие
-// строки (длина < 16) прямо в 16-байтном буфере объекта (small string
-// optimization) - для НИХ typePtr+OFF_PRODTYPE_NAME действительно
-// указывает на первый символ, как обычный char-массив. Но для более
-// длинных строк буфер вместо символов хранит 4-байтный УКАЗАТЕЛЬ на
-// кучу, а фактическая длина лежит в поле _Mysize сразу после буфера
-// (offset+16 от начала строки). Раньше это место читалось "в лоб" как
-// char-массив всегда - для коротких имён (<=15 символов) это
-// случайно совпадало с раскладкой SSO-буфера и работало, а длинные
-// (например tropical_wood_factory, 21 символ) на деле хранят там
-// указатель, и мы читали его байты как "мусорные символы", из-за чего
-// имя никогда ни с чем не совпадало (ни с EXTRA_WHITELIST, ни с
-// production_types.txt). Отсюда баг: строится всё, кроме отдельных
-// длинных имён типов, и только там, где реально нужен наш whitelist
-// (для местных RGO-факторий это незаметно, т.к. проверка не доходит
-// до сравнения имени).
+// std::string MSVC Dinkumware: SSO <16 в буфере, иначе указатель в буфере.
 static const char* ResolveProdTypeNamePtr(void* typePtr)
 {
     char* strObj = (char*)typePtr + OFF_PRODTYPE_NAME;
     unsigned int length = *(unsigned int*)(strObj + 16); // _Mysize
     if (length < 16)
-        return strObj;              // короткая строка - лежит прямо в буфере (SSO)
-    return *(char**)strObj;         // длинная строка - буфер хранит указатель на кучу
+        return strObj;
+    return *(char**)strObj;
 }
 
 static void GetOwnDllDirectory(char* outDir, size_t outSize)
@@ -1039,9 +1112,6 @@ static void ParseProductionTypes(const char* text, size_t len)
                         char goodName[GOOD_NAME_MAX] = "";
 
                         // Ищем "input_goods" ... "{" ... <первый идентификатор>
-                        // - для limit_by_local_supply=yes типов внутри ровно
-                        // один товар ("raw_X = количество"), нам нужно только
-                        // его имя.
                         for (size_t k = blockStart; k + 11 < j; ++k)
                         {
                             if (strncmp(text + k, "input_goods", 11) != 0)
@@ -1345,6 +1415,7 @@ static void LoadProvinceGoods()
     Log("LoadProvinceGoods: готово, %d провинций с trade_goods", count);
 }
 
+
 // Развилка внутри FUN_004d04b0 (абс. 0x4D04BC, RVA 0xD04BC):
 //   CMP dword ptr[ECX+0x84],0 ; PUSH EBX ; PUSH ESI ; PUSH EDI
 //   ; JLE +8 (0xD04C6, -> 0xD04D3 продолжение) ; иначе 0xD04C8: XOR AL,AL (return false)
@@ -1383,57 +1454,10 @@ static DWORD g_prodTypeGateResumeBlock = 0;
 // пересборки DLL - см. ParseExtraWhitelist. Используется только когда
 // PROD_TYPE_GATE_ALLOW_ALL=0 (иначе разрешены все типы, до этого
 // списка дело не доходит).
-// Было 16 - слишком мало: полный список "RGO->фабрика" типов
-// (cattle_factory..tropical_wood_factory, limit=1 в логе
-// ParseProductionTypes) - это ровно 17 имён, и 17-е тихо
-// отбрасывалось в ParseExtraWhitelist (там `while (... &&
-// g_extraWhitelistCount < MAX_EXTRA_WHITELIST)`) - отсюда жалоба
-// "не могу построить последние" при таком ini. Подняли с запасом.
-static const int MAX_EXTRA_WHITELIST = 32;
+static const int MAX_EXTRA_WHITELIST = 32; // наше значение, не 16 из тестовой ветки
 static const int EXTRA_WHITELIST_NAME_MAX = 64;
 static char g_extraWhitelistNames[MAX_EXTRA_WHITELIST][EXTRA_WHITELIST_NAME_MAX] = { "fishery" };
 static int g_extraWhitelistCount = 1;
-
-// Диагностика (временно, по запросу пользователя): жалоба, что
-// последний тип из PROD_TYPE_GATE_EXTRA_WHITELIST не строится в
-// одном конкретном штате, хотя строится в другом (и все остальные
-// типы из того же списка работают везде). Раз это единственная
-// функция, решающая "разрешено ли по имени" - и она НЕ получает
-// указатель на штат вообще (только typePtr) - логируем каждый
-// отличающийся результат: если для tropical_wood_factory здесь
-// всегда будет result=1, значит блокирует не эта проверка, а какая-то
-// из других (build_factory_ignore_colonial_*/build_factory_checklist_
-// uncivilized_*/build_factory_ignore_uncivilized_*) - они простые
-// байтовые патчи без места для лога, туда добавить log-хук не так
-// просто. Throttle по (имя,результат), чтобы не заспамить лог -
-// строка списка запрашивается на каждый кадр, пока открыто окно.
-static const int PROD_GATE_LOG_CACHE = 32;
-static char  g_prodGateLogName[PROD_GATE_LOG_CACHE][PRODTYPE_NAME_MAX];
-static int   g_prodGateLogResult[PROD_GATE_LOG_CACHE];
-static int   g_prodGateLogCount = 0;
-
-static void LogProdTypeGateResult(const char* name, int result)
-{
-    for (int i = 0; i < g_prodGateLogCount; ++i)
-    {
-        if (strcmp(g_prodGateLogName[i], name) == 0)
-        {
-            if (g_prodGateLogResult[i] == result)
-                return; // тот же результат уже логировали - не повторяем
-            g_prodGateLogResult[i] = result;
-            Log("ProdTypeGate: %s -> result=%d (изменился)", name, result);
-            return;
-        }
-    }
-
-    if (g_prodGateLogCount < PROD_GATE_LOG_CACHE)
-    {
-        strcpy_s(g_prodGateLogName[g_prodGateLogCount], name);
-        g_prodGateLogResult[g_prodGateLogCount] = result;
-        ++g_prodGateLogCount;
-    }
-    Log("ProdTypeGate: %s -> result=%d (впервые)", name, result);
-}
 
 static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
 {
@@ -1456,25 +1480,14 @@ static int __cdecl IsProdTypeWhitelistedByName(void* typePtr)
     name[i] = 0;
 
     for (int e = 0; e < g_extraWhitelistCount; ++e)
-    {
         if (_stricmp(g_extraWhitelistNames[e], name) == 0)
-        {
-            LogProdTypeGateResult(name, 1);
             return 1;
-        }
-    }
 
     for (int t = 0; t < g_productionTypeCount; ++t)
     {
         if (strcmp(g_productionTypeNames[t], name) == 0)
-        {
-            int result = g_limitByLocalSupply[t] ? 1 : 0;
-            LogProdTypeGateResult(name, result);
-            return result;
-        }
+            return g_limitByLocalSupply[t] ? 1 : 0;
     }
-
-    LogProdTypeGateResult(name, 0);
     return 0;
 }
 
@@ -1553,9 +1566,7 @@ static bool InstallProdTypeGateHook()
 
     g_prodTypeGateAllowAll = g_settings.prodTypeGateAllowAll ? 1 : 0;
 
-    g_fnIsBadReadPtr = (tIsBadReadPtr)GetProcAddress(GetModuleHandleA("kernel32.dll"), "IsBadReadPtr");
-    if (!g_fnIsBadReadPtr)
-        Log("ProdTypeGateHook: IsBadReadPtr не найден - защитная проверка указателя отключена");
+    g_fnIsBadReadPtr = SafeIsBadReadPtr;
 
     unsigned char* hook = (unsigned char*)(g_base + RVA_PRODTYPE_GATE_HOOK);
 
@@ -1585,36 +1596,6 @@ static bool InstallProdTypeGateHook()
     return true;
 }
 
-
-// ---------------------------------------------------------------
-// Скрытие фабрик limit_by_local_supply=yes из списка постройки, если
-// в регионе нет нужного сырья.
-//
-// FUN_006f9920 (Ghidra 0x6F9920) заполняет листбокс "factory_type" -
-// список типов фабрик в окне постройки (найден по строке "factory_type"
-// из country_production.gui - однозначный xref, в отличие от двух
-// провалившихся попыток дойти до этого места через RTTI/vtable
-// конструкторов CFactoryInfoItem/CBuildFactoryWindow).
-//
-// Цикл функции на каждой итерации берёт кандидата typePtr = *(*[ESP+0x14]
-// + ESI*4), где ESI - индекс, а [ESP+0x14] (= DAT_0125ce80+0xc) не
-// меняется на всём протяжении цикла. Прямо перед местом создания
-// строки списка (operator_new(0x30) по адресу 0x00AAE9AF) родная игра
-// уже сама что-то проверяет через typePtr+0x12c/+0xbcc/+0x58 и
-// FUN_0052ca30 - но это оказалось НЕ про "физически есть ли товар в
-// регионе" (см. развёрнутый разбор в памяти проекта
-// project_hide_no_supply_factories и комментарий у
-// FindLimitByLocalSupplyIndex): тестер подтвердил, что из 15 типов
-// доступен должен быть только один, а то родное условие пропускало
-// все. Поэтому проверка сырья теперь полностью своя, по файлам
-// (production_types.txt + history/provinces/*.txt - см.
-// ShouldHideNoSupplyFactory/LoadProvinceGoods), state (из [EDI+0xD0]
-// окна постройки) нужен только чтобы получить список id провинций
-// региона. Если сырья нет - пропускаем кандидата целиком (как и
-// остальные "skip" переходы в этом цикле - на 0x6F9EB0, INC ESI).
-// Если хотим показать строку - воспроизводим затёртые "push 0x30;
-// call operator_new" один в один и продолжаем с 0x6F9E48, ровно как
-// было в оригинале.
 // ---------------------------------------------------------------
 
 static const DWORD RVA_HIDE_NO_SUPPLY_HOOK        = 0x2F9E41;
@@ -1885,6 +1866,7 @@ static bool InstallHideNoSupplyFactoriesHook()
     Log("HideNoSupplyFactoriesHook: установлен");
     return true;
 }
+
 
 
 // ---------------------------------------------------------------
@@ -2432,18 +2414,39 @@ static BytePatch EXE_PATCHES[] =
     { "aristocrat_income_share_patch_5", 0, 0xEEA3C, 6,
         { 0x81, 0xE7, 0x00, 0x80, 0xFF, 0xFF },
         { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }, false },
-};
 
-// Патч "checksum_drift_fix" (RVA 0x1F8268, снимал лишний INC EAX,
-// из-за которого лобби-чек-сумма "Checksum is X" уходила на +1 при
-// каждом входе в партию) и диагностика ChecksumCompute/LobbyEntry
-// удалены целиком: патч действительно чинил дрейф ЭТОЙ чек-суммы,
-// но реальная посуточная сверка хода ("Games out of synch", отдельный
-// механизм в FUN_00682ec0 через DAT_012588e8+0xb74) от неё не зависит
-// и всё равно расходилась - патч просто маскировал несовместимость
-// вместо того, чтобы дать лобби честно отказать на входе. Решили
-// вернуть ванильное поведение (перезапуск обеих копий игры перед
-// сессией) вместо патча.
+    // Чек-сумма (в углу экрана) уходит на +1 после каждого входа в
+    // партию/лобби, из-за чего она не совпадает с той, что была при
+    // запуске - и в мультиплеере приходится перезапускать клиент,
+    // чтобы чек-суммы у игроков снова совпали. Воспроизводится и на
+    // ванили. Найдено через живое логирование из нашего же DLL +
+    // подтверждено Cheat Engine ("find out what writes to this
+    // address" на адрес аккумулятора чек-суммы):
+    //
+    // Конструктор CBackEndIdler (FUN_005f8110, грузит
+    // interface/backend.gui - экран загрузки между меню и партией,
+    // т.е. срабатывает на каждый вход) в конце безусловно делает
+    // (*(int*)(param_4+0x30))++ - param_4 это тот же объект, чьё
+    // поле +0x30 отдельно читает FUN_006377a0 как итоговое целое
+    // чек-суммы перед тем, как построить текст "Checksum is X".
+    // Кроме этих двух мест (чтение в FUN_006377a0, инкремент здесь)
+    // поле нигде больше не встречается - похоже на посторонний
+    // счётчик загрузок, случайно заведённый в то же поле.
+    //
+    // Убираем ровно "INC EAX" (1 байт), оставляя чтение и запись
+    // того же значения обратно - безобидная no-op пара вместо
+    // инкремента, минимальное вмешательство.
+    //
+    // Выключено по умолчанию (2026-09-24, наше прежнее решение): патч
+    // действительно чинит дрейф ЭТОЙ чек-суммы, но реальная посуточная
+    // сверка хода ("Games out of synch", FUN_00682ec0) от неё не зависит
+    // и всё равно расходится - патч просто маскирует несовместимость
+    // вместо того, чтобы дать лобби честно отказать на входе. Вместо
+    // патча - перезапуск обеих копий игры перед сессией.
+    { "checksum_drift_fix", 0, 0x1F8268, 1,
+        { 0x40 },
+        { 0x90 }, false },
+};
 
 static const int EXE_PATCH_COUNT = sizeof(EXE_PATCHES) / sizeof(EXE_PATCHES[0]);
 
@@ -2515,6 +2518,8 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_SUPPLY_SOURCE_NULL_CHECK") == 0)  { g_settings.patchSupplySourceNullCheck  = v; return; }
     if (_stricmp(key, "PATCH_TECH_COMPARE_NULL_CHECK") == 0)   { g_settings.patchTechCompareNullCheck   = v; return; }
     if (_stricmp(key, "PATCH_TECH_FOLDER_ICON_NULL_CHECK") == 0) { g_settings.patchTechFolderIconNullCheck = v; return; }
+    if (_stricmp(key, "PATCH_NULL_VTABLE_UI") == 0)            { g_settings.patchNullVtableUi           = v; return; }
+    if (_stricmp(key, "PATCH_IDENTITY_TOMBSTONE") == 0)         { g_settings.patchIdentityTombstone      = v; return; }
     if (_stricmp(key, "PATCH_GRAPH_POINT_CLAMP") == 0)         { g_settings.patchGraphPointClamp        = v; return; }
     if (_stricmp(key, "PATCH_FACTORY_DUMP_SCAN") == 0)         { g_settings.patchFactoryDumpScan        = v; return; }
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
@@ -2524,33 +2529,63 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PROD_TYPE_GATE_ALLOW_ALL") == 0)         { g_settings.prodTypeGateAllowAll        = v; return; }
     if (_stricmp(key, "PATCH_EXPONENTIAL_PRICE_DELTA") == 0)    { g_settings.patchExponentialPriceDelta  = v; return; }
     if (_stricmp(key, "PATCH_COMBAT_ROLL") == 0)                { g_settings.patchCombatRoll             = v; return; }
+    if (_stricmp(key, "PATCH_CHECKSUM_DIAGNOSTIC") == 0)        { g_settings.patchChecksumDiagnostic     = v; return; }
+    if (_stricmp(key, "ENABLE_OOS_LOG") == 0)                   { g_settings.enableOosLog                = v; return; }
+    if (_stricmp(key, "ENABLE_CRASH_LOG") == 0)                 { g_settings.enableCrashLog              = v; return; }
+    if (_stricmp(key, "ENABLE_CRASH_DUMP") == 0)                { g_settings.enableCrashDump             = v; return; }
 
-    if (_stricmp(key, "ENABLE_OOS_LOG") == 0)              { g_settings.enableOosLog        = v; return; }
-    if (_stricmp(key, "ENABLE_CRASH_LOG") == 0)            { g_settings.enableCrashLog      = v; return; }
-    if (_stricmp(key, "ENABLE_CRASH_DUMP") == 0)           { g_settings.enableCrashDump     = v; return; }
-    if (_stricmp(key, "PATCH_FPU_FORTRESS") == 0)          { g_settings.patchFpuFortress    = v; return; }
-    if (_stricmp(key, "PATCH_D3D_FPU_PRESERVE") == 0)      { g_settings.patchD3dFpuPreserve = v; return; }
-    if (_stricmp(key, "PATCH_THREAD_FPU_PIN") == 0)        { g_settings.patchThreadFpuPin   = v; return; }
-    if (_stricmp(key, "PATCH_HEAP_LFH") == 0)              { g_settings.patchHeapLfh        = v; return; }
-    if (_stricmp(key, "PATCH_POP_QUANTIZE") == 0)          { g_settings.patchPopQuantize    = v; return; }
-    if (_stricmp(key, "PATCH_MP_CLIENT_SLEEP") == 0)       { g_settings.patchMpClientSleep  = v; return; }
-    if (_stricmp(key, "PATCH_MAIN_LOOP_SLEEP0") == 0)      { g_settings.patchMainLoopSleep0 = v; return; }
-    if (_stricmp(key, "PATCH_D3D_NO_VSYNC") == 0)          { g_settings.patchD3dNoVsync     = v; return; }
-    if (_stricmp(key, "FIX_SFX_MIXER_LAG") == 0)           { g_settings.fixSfxMixerLag      = v; return; }
-    if (_stricmp(key, "D3D_FPS_LIMIT") == 0)
+    if (_stricmp(key, "PATCH_FPU_FORTRESS") == 0)               { g_settings.patchFpuFortress            = v; return; }
+    if (_stricmp(key, "PATCH_D3D_FPU_PRESERVE") == 0)           { g_settings.patchD3dFpuPreserve         = v; return; }
+    if (_stricmp(key, "PATCH_HEAP_LFH") == 0)                   { g_settings.patchHeapLfh                = v; return; }
+    if (_stricmp(key, "PATCH_THREAD_FPU_PIN") == 0)             { g_settings.patchThreadFpuPin           = v; return; }
+    if (_stricmp(key, "ENGINE_WORKER_THREADS") == 0)
     {
-        int n = atoi(value);
-        g_settings.d3dFpsLimit = n < 0 ? 0 : n;
+        g_settings.engineWorkerThreads = atoi(value);
+        if (g_settings.engineWorkerThreads < 0)
+            g_settings.engineWorkerThreads = 0;
+        if (g_settings.engineWorkerThreads > 32)
+            g_settings.engineWorkerThreads = 32;
         return;
     }
-    if (_stricmp(key, "PATCH_HIGH_PRIORITY") == 0)         { g_settings.patchHighPriority   = v; return; }
+    if (_stricmp(key, "PATCH_POP_QUANTIZE") == 0)               { g_settings.patchPopQuantize            = v; return; }
+    if (_stricmp(key, "POP_QUANTIZE_KEEP_BITS") == 0)
+    {
+        g_settings.popQuantizeKeepBits = atoi(value);
+        return;
+    }
+    if (_stricmp(key, "PATCH_MP_CLIENT_SLEEP") == 0)            { g_settings.patchMpClientSleep          = v; return; }
+    if (_stricmp(key, "MP_CLIENT_SLEEP_MS") == 0)
+    {
+        g_settings.mpClientSleepMs = atoi(value);
+        return;
+    }
+    if (_stricmp(key, "PATCH_MAIN_LOOP_SLEEP0") == 0)           { g_settings.patchMainLoopSleep0         = v; return; }
+    if (_stricmp(key, "MAIN_LOOP_SLEEP_MS") == 0)
+    {
+        g_settings.mainLoopSleepMs = atoi(value);
+        return;
+    }
+    if (_stricmp(key, "PATCH_D3D_NO_VSYNC") == 0)               { g_settings.patchD3dNoVsync             = v; return; }
+    if (_stricmp(key, "D3D_FPS_LIMIT") == 0)
+    {
+        g_settings.d3dFpsLimit = atoi(value);
+        if (g_settings.d3dFpsLimit < 0)
+            g_settings.d3dFpsLimit = 0;
+        return;
+    }
+    if (_stricmp(key, "PATCH_SKIP_SEL_PROJ") == 0)              { g_settings.patchSkipSelProj            = v; return; }
+    if (_stricmp(key, "PATCH_REUSE_UNIT_VIEW") == 0)            { g_settings.patchReuseUnitView          = v; return; }
+    if (_stricmp(key, "PATCH_SKIP_ARMY_IDLE") == 0)             { g_settings.patchSkipArmyIdle           = v; return; }
+    if (_stricmp(key, "PATCH_REUSE_WINDOWS") == 0)              { g_settings.patchReuseWindows           = v; return; }
+    if (_stricmp(key, "PATCH_HIGH_PRIORITY") == 0)              { g_settings.patchHighPriority           = v; return; }
+    if (_stricmp(key, "PATCH_SKIP_NESTED_IDLE") == 0)           { g_settings.patchSkipNestedIdle         = v; return; }
+    if (_stricmp(key, "PATCH_SKIP_CHK_WIN") == 0)               { g_settings.patchSkipChkWin             = v; return; }
+    if (_stricmp(key, "PATCH_CAM_STILL") == 0)                  { g_settings.patchCamStill               = v; return; }
+    if (_stricmp(key, "FIX_SFX_MIXER_LAG") == 0)                { g_settings.fixSfxMixerLag              = v; return; }
+    if (_stricmp(key, "FIX_ARMY_WINDOW_LAG") == 0)              { g_settings.patchFixArmyWindowLag       = v; return; }
 
     if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
     if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
-    if (_stricmp(key, "ENGINE_WORKER_THREADS") == 0)  { g_settings.engineWorkerThreads   = atoi(value); return; }
-    if (_stricmp(key, "POP_QUANTIZE_KEEP_BITS") == 0) { g_settings.popQuantizeKeepBits   = atoi(value); return; }
-    if (_stricmp(key, "MP_CLIENT_SLEEP_MS") == 0)     { g_settings.mpClientSleepMs       = atoi(value); return; }
-    if (_stricmp(key, "MAIN_LOOP_SLEEP_MS") == 0)     { g_settings.mainLoopSleepMs       = atoi(value); return; }
 
     if (_stricmp(key, "PROD_TYPE_GATE_EXTRA_WHITELIST") == 0) { ParseExtraWhitelist(value); return; }
 
@@ -2611,7 +2646,6 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.localModConfig);
 
     fprintf(f,
-        "; Military\n"
         "PATCH_ALWAYS_ADD_WARGOALS=%d\n"
         "PATCH_LAND_REINFORCE=%d\n"
         "PATCH_NAVAL_REINFORCE=%d\n"
@@ -2641,7 +2675,6 @@ static void WriteDefaultSettings(const char* path)
     }
 
     fprintf(f,
-        "; Economic\n"
         "ENABLE_PRICE_DELTA=%d\n"
         "PATCH_EXPONENTIAL_PRICE_DELTA=%d\n"
         "PATCH_MAX_RELATIVE_PRICE=%d\n"
@@ -2673,7 +2706,6 @@ static void WriteDefaultSettings(const char* path)
         extraWhitelistJoined);
 
     fprintf(f,
-        "; UI\n"
         "ENABLE_BUTTONS=%d\n"
         "ENABLE_DECISION_FILTER=%d\n"
         "ENABLE_POP_DISPLAY=%d\n"
@@ -2689,25 +2721,43 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.patchHideNoSupplyFactories);
 
     fprintf(f,
-        "; Miscellaneous\n"
         "PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=%d\n"
         "PATCH_CIVILIZE_NULL_CHECK=%d\n"
+        "PATCH_SUPPLY_SOURCE_NULL_CHECK=%d\n"
+        "PATCH_TECH_COMPARE_NULL_CHECK=%d\n"
+        "PATCH_TECH_FOLDER_ICON_NULL_CHECK=%d\n"
+        "PATCH_NULL_VTABLE_UI=%d\n"
+        "PATCH_IDENTITY_TOMBSTONE=%d\n"
         "PATCH_GRAPH_POINT_CLAMP=%d\n"
+        "PATCH_CHECKSUM_DRIFT_FIX=%d\n"
         "PATCH_ALLOW_UNCIV_TECH_RESEARCH=%d\n"
         "PATCH_ARISTOCRAT_INCOME_SHARE=%d\n"
         "\n",
         (int)FindExePatchEnabled("consciousness_plurality_growth"),
         (int)g_settings.patchCivilizeNullCheck,
+        (int)g_settings.patchSupplySourceNullCheck,
+        (int)g_settings.patchTechCompareNullCheck,
+        (int)g_settings.patchTechFolderIconNullCheck,
+        (int)g_settings.patchNullVtableUi,
+        (int)g_settings.patchIdentityTombstone,
         (int)g_settings.patchGraphPointClamp,
+        (int)FindExePatchEnabled("checksum_drift_fix"),
         (int)FindExePatchEnabled("allow_unciv_tech_research"),
         (int)FindExePatchEnabled("aristocrat_income_share_patch_1"));
 
     fprintf(f,
-        "; Stability\n"
+        "ENABLE_LOG=%d\n"
+        "PATCH_FACTORY_DUMP_SCAN=%d\n"
+        "PATCH_CHECKSUM_DIAGNOSTIC=%d\n"
+        "ENABLE_OOS_LOG=%d\n"
+        "ENABLE_CRASH_LOG=%d\n"
+        "ENABLE_CRASH_DUMP=%d\n"
+        "HIDE_NO_SUPPLY_DRY_RUN=%d\n"
+        "\n"
         "PATCH_FPU_FORTRESS=%d\n"
         "PATCH_D3D_FPU_PRESERVE=%d\n"
-        "PATCH_THREAD_FPU_PIN=%d\n"
         "PATCH_HEAP_LFH=%d\n"
+        "PATCH_THREAD_FPU_PIN=%d\n"
         "ENGINE_WORKER_THREADS=%d\n"
         "PATCH_POP_QUANTIZE=%d\n"
         "POP_QUANTIZE_KEEP_BITS=%d\n"
@@ -2717,13 +2767,27 @@ static void WriteDefaultSettings(const char* path)
         "MAIN_LOOP_SLEEP_MS=%d\n"
         "PATCH_D3D_NO_VSYNC=%d\n"
         "D3D_FPS_LIMIT=%d\n"
-        "FIX_SFX_MIXER_LAG=%d\n"
+        "PATCH_SKIP_SEL_PROJ=%d\n"
+        "PATCH_REUSE_UNIT_VIEW=%d\n"
+        "PATCH_SKIP_ARMY_IDLE=%d\n"
+        "PATCH_REUSE_WINDOWS=%d\n"
         "PATCH_HIGH_PRIORITY=%d\n"
-        "\n",
+        "PATCH_SKIP_NESTED_IDLE=%d\n"
+        "PATCH_SKIP_CHK_WIN=%d\n"
+        "PATCH_CAM_STILL=%d\n"
+        "FIX_SFX_MIXER_LAG=%d\n"
+        "FIX_ARMY_WINDOW_LAG=%d\n",
+        (int)g_settings.log,
+        (int)g_settings.patchFactoryDumpScan,
+        (int)g_settings.patchChecksumDiagnostic,
+        (int)g_settings.enableOosLog,
+        (int)g_settings.enableCrashLog,
+        (int)g_settings.enableCrashDump,
+        (int)g_settings.hideNoSupplyDryRun,
         (int)g_settings.patchFpuFortress,
         (int)g_settings.patchD3dFpuPreserve,
-        (int)g_settings.patchThreadFpuPin,
         (int)g_settings.patchHeapLfh,
+        (int)g_settings.patchThreadFpuPin,
         g_settings.engineWorkerThreads,
         (int)g_settings.patchPopQuantize,
         g_settings.popQuantizeKeepBits,
@@ -2733,23 +2797,16 @@ static void WriteDefaultSettings(const char* path)
         g_settings.mainLoopSleepMs,
         (int)g_settings.patchD3dNoVsync,
         g_settings.d3dFpsLimit,
+        (int)g_settings.patchSkipSelProj,
+        (int)g_settings.patchReuseUnitView,
+        (int)g_settings.patchSkipArmyIdle,
+        (int)g_settings.patchReuseWindows,
+        (int)g_settings.patchHighPriority,
+        (int)g_settings.patchSkipNestedIdle,
+        (int)g_settings.patchSkipChkWin,
+        (int)g_settings.patchCamStill,
         (int)g_settings.fixSfxMixerLag,
-        (int)g_settings.patchHighPriority);
-
-    fprintf(f,
-        "; Diagnostics\n"
-        "ENABLE_LOG=%d\n"
-        "PATCH_FACTORY_DUMP_SCAN=%d\n"
-        "ENABLE_OOS_LOG=%d\n"
-        "ENABLE_CRASH_LOG=%d\n"
-        "ENABLE_CRASH_DUMP=%d\n"
-        "HIDE_NO_SUPPLY_DRY_RUN=%d\n",
-        (int)g_settings.log,
-        (int)g_settings.patchFactoryDumpScan,
-        (int)g_settings.enableOosLog,
-        (int)g_settings.enableCrashLog,
-        (int)g_settings.enableCrashDump,
-        (int)g_settings.hideNoSupplyDryRun);
+        (int)g_settings.patchFixArmyWindowLag);
 
     fclose(f);
 }
@@ -2763,11 +2820,6 @@ static void LoadSettingsFrom(const char* path)
     FILE* f = 0;
     if (fopen_s(&f, path, "r") != 0 || !f)
     {
-        // Раньше это происходило молча. При поиске рассинхрона между
-        // двумя машинами с одинаковой DLL именно это - "файл пропал/не
-        // найден и пересоздался со значениями по умолчанию" - самая
-        // вероятная причина, и без этой строки в логе она никак не
-        // отличима от "файл был и просто совпал с дефолтами".
         Log("LoadSettingsFrom: '%s' не найден - создаю со значениями по умолчанию", path);
         WriteDefaultSettings(path);
         return;
@@ -2775,15 +2827,6 @@ static void LoadSettingsFrom(const char* path)
 
     Log("LoadSettingsFrom: читаю '%s'", path);
 
-    // Было 256 - слишком мало для длинных списков вроде
-    // PROD_TYPE_GATE_EXTRA_WHITELIST: fgets молча обрезает строку по
-    // границе буфера БЕЗ переноса строки, а хвост попадает в
-    // СЛЕДУЮЩИЙ вызов fgets уже без "=" - парсер такую "строку" просто
-    // пропускает (см. `if (!eq) continue;` ниже), и обрезанные с конца
-    // значения списка тихо теряются. Ровно так у пользователя терялись
-    // последние 2 имени из 17-элементного списка (292 символа против
-    // буфера в 256) - сам разбор списка (MAX_EXTRA_WHITELIST) был уже
-    // не при чём, строка до него в таком виде просто не доходила.
     char line[4096];
     while (fgets(line, sizeof(line), f))
     {
@@ -2809,13 +2852,6 @@ static void LoadSettingsFrom(const char* path)
     fclose(f);
 }
 
-// Ищет "-mod=<путь>.mod" в командной строке процесса (так launcher-баты
-// этого мода запускают игру - "v2game.exe -mod=mod/2.mod"), открывает
-// этот .mod-файл и вытаскивает из него "path = "..."" - реальную папку
-// мода (например "mod/2"). Путь в командной строке и путь внутри
-// .mod-файла на практике совпадают по этому проекту, но читаем именно
-// .mod, а не угадываем по имени файла - так корректно и для чужих
-// модов с другой раскладкой.
 static bool ResolveModFolder(char* outFolder, size_t outSize)
 {
     const char* cmdLine = GetCommandLineA();
@@ -2834,10 +2870,6 @@ static bool ResolveModFolder(char* outFolder, size_t outSize)
     }
     else
     {
-        // Путь к .mod не всегда в кавычках, а имена модов нередко
-        // содержат пробелы ("Victoria Universalis v1.02.mod") - режем
-        // только по границе "пробел + следующий флаг" (" -"), а не по
-        // первому же пробелу, иначе путь обрежется посреди имени.
         while (*modArg && i < sizeof(modFile) - 1)
         {
             if (modArg[0] == ' ' && modArg[1] == '-')
@@ -2891,13 +2923,8 @@ static bool ResolveModFolder(char* outFolder, size_t outSize)
     return found;
 }
 
-// Сначала всегда читаем общий v2dll_settings.ini рядом с exe - только
-// чтобы узнать LOCAL_MOD_CONFIG (создаётся с этим ключом по умолчанию,
-// если файла ещё не было). Если он включён - определяем папку
-// запущенного мода и ПЕРЕЧИТЫВАЕМ настройки уже оттуда (создавая там
-// свой отдельный v2dll_settings.ini при первом запуске) - все патчи и
-// категории ниже LOCAL_MOD_CONFIG в итоге берутся из мод-локального
-// файла, а не из общего.
+// Сначала общий v2dll_settings.ini рядом с exe (LOCAL_MOD_CONFIG).
+// Если включён - перечитываем из папки запущенного мода.
 static void LoadSettings()
 {
     static const char* ROOT_PATH = "v2dll_settings.ini";
@@ -2956,16 +2983,7 @@ static void InstallExePatches()
         BytePatch& bp = EXE_PATCHES[i];
 
         if (!bp.enabled)
-        {
-            // Раньше отключённый патч просто пропускался без единой
-            // строки в логе - при поиске рассинхрона между двумя
-            // машинами с ОДНОЙ и той же DLL это ровно та разница,
-            // которую иначе не увидеть: сравнить два v2dll.log и не
-            // найти "не хватает" ни одной строки, потому что для
-            // выключенного патча строки не было ни у кого.
-            Log("Patch '%s': отключён в настройках", bp.name);
             continue;
-        }
 
         DWORD rva = bp.rva ? bp.rva : FileOffsetToRVA(bp.fileOffset);
         if (!rva)
@@ -3281,7 +3299,6 @@ static bool InstallCivilizeNullCheck()
         RVA_CIVILIZE_NULLCHECK_HOOK, (DWORD)(DWORD_PTR)cave);
     return true;
 }
-
 
 // ---------------------------------------------------------------
 // Диагностика для трёх null-check патчей ниже (SupplySource,
@@ -3744,6 +3761,1665 @@ static bool InstallTechFolderIconNullCheck()
 }
 
 
+
+
+
+// ---------------------------------------------------------------
+// Краш UI-строки после OOS-диалога (0xc0000005, fault rva 0x4A8E0B).
+//
+// FUN_008A8DC0 подбирает текстовое поле: несколько fallback'ов
+// (объект+0x14, потом +0x18, индекс через session+0xACC). На первом
+// уже есть проверка «указатель == 0 → следующий fallback», но нет
+// проверки vtable. После разборки OOS-диалога объект ещё жив, а
+// vtable уже NULL → mov eax,[edx+0x20] читает 0x20 и падает.
+// lua51 на стеке не было: это ванильный exe, не наш хук.
+//
+// Патч только UI: если vtable или слот +0x20 нулевые — тот же
+// штатный переход на следующий fallback (rva 0x4A8E31), что и при
+// пустом указателе / ложном virtual-call. Симуляция и checksum
+// не затрагиваются, MP-безопасно.
+//
+// Сигнатура 16 байт с уникальным je +0x2B: голые 8B 11 8B 42 20 FF D0
+// встречаются в exe десятки раз.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_NULL_VTABLE_UI_SIG    = 0x4A8E00;
+static const DWORD RVA_NULL_VTABLE_UI_HOOK   = 0x4A8E09;
+static const DWORD RVA_NULL_VTABLE_UI_NORMAL = 0x4A8E10;  // test al,al
+static const DWORD RVA_NULL_VTABLE_UI_SKIP   = 0x4A8E31;  // next fallback
+
+static const unsigned char NULL_VTABLE_UI_SIG[16] =
+{
+    0x83, 0x78, 0x14, 0x00,             // cmp dword [eax+0x14], 0
+    0x74, 0x2B,                         // je  rva 0x4A8E31
+    0x8B, 0x48, 0x14,                   // mov ecx, [eax+0x14]
+    0x8B, 0x11,                         // mov edx, [ecx]
+    0x8B, 0x42, 0x20,                   // mov eax, [edx+0x20]
+    0xFF, 0xD0                          // call eax
+};
+
+static bool InstallNullVtableUi()
+{
+    unsigned char* sig = (unsigned char*)(g_base + RVA_NULL_VTABLE_UI_SIG);
+    unsigned char* hook = (unsigned char*)(g_base + RVA_NULL_VTABLE_UI_HOOK);
+
+    if (memcmp(sig, NULL_VTABLE_UI_SIG, sizeof(NULL_VTABLE_UI_SIG)) != 0)
+    {
+        Log("NullVtableUi: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* cave = (unsigned char*)VirtualAlloc(
+        0, 48, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+    if (!cave)
+        return false;
+
+    int n = 0;
+    cave[n++] = 0x8B; cave[n++] = 0x11;                 // mov edx,[ecx]
+    cave[n++] = 0x85; cave[n++] = 0xD2;                 // test edx,edx
+    int jzVt = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                 // jz skip
+    cave[n++] = 0x8B; cave[n++] = 0x42; cave[n++] = 0x20; // mov eax,[edx+0x20]
+    cave[n++] = 0x85; cave[n++] = 0xC0;                 // test eax,eax
+    int jzFn = n;
+    cave[n++] = 0x74; cave[n++] = 0x00;                 // jz skip
+    cave[n++] = 0xFF; cave[n++] = 0xD0;                 // call eax
+    cave[n++] = 0xE9;                                   // jmp test al,al
+    *(DWORD*)(cave + n) = (g_base + RVA_NULL_VTABLE_UI_NORMAL) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    int skipAt = n;
+    cave[jzVt + 1] = (unsigned char)(skipAt - (jzVt + 2));
+    cave[jzFn + 1] = (unsigned char)(skipAt - (jzFn + 2));
+
+    cave[n++] = 0xE9;
+    *(DWORD*)(cave + n) = (g_base + RVA_NULL_VTABLE_UI_SKIP) - (DWORD)(cave + n + 4);
+    n += 4;
+
+    unsigned char patch[7];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("NullVtableUi: установлен на rva %06X, пещера %08X",
+        RVA_NULL_VTABLE_UI_HOOK, (DWORD)(DWORD_PTR)cave);
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Второй UI-краш после OOS (хост, 2.98): ACCESS_VIOLATION на
+// rva 0x1D0F09 / FUN_005D0EB0. Один caller (FUN_005DF4B0 rva
+// 0x1DF56B) — цикл identity/localised-string через session+0xACC.
+// На стеке краша: "identity" "synchronous" "MONARCHTITLE"/"TITLE".
+// Это отрисовка подписи, не симуляция.
+//
+// esi жив, но [esi] — не vtable exe, а висячий heap (B1EB3650).
+// FUN_005AB7F0 (кэш identity в this+0x3C) вернул этот указатель,
+// caller сразу делает mov esi,eax и зовёт виртуальные методы.
+// Штатный выход xor al,al; ret 4 (rva 0x1D0F3F) — тот же,
+// что при [esi+0x40] < 1. Caller делает test al / jz next item.
+//
+// Причина, которую можно закрыть из DLL: не кормить identity
+// мёртвым узлом и не оставлять его в кэше +0x3C. Сам пул
+// (кто освободил узел, пока армия ещё держит id) — граф
+// объектов движка, его из прокси не чинят без риска MP.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_IDENT_VT_SIG    = 0x1D0EFF;
+static const DWORD RVA_IDENT_VT_HOOK   = 0x1D0F07;
+static const DWORD RVA_IDENT_VT_RESUME = 0x1D0F14;  // test al,al
+static const DWORD RVA_IDENT_VT_SKIP   = 0x1D0F3E;  // xor al,al; epilogue
+
+static const unsigned char IDENT_VT_SIG[16] =
+{
+    0x8B, 0x46, 0x40,                   // mov eax, [esi+0x40]
+    0x83, 0xF8, 0x01,                   // cmp eax, 1
+    0x7C, 0x37,                         // jl  rva 0x1D0F3F
+    0x8B, 0x06,                         // mov eax, [esi]
+    0x8B, 0x90, 0x88, 0x00, 0x00, 0x00  // mov edx, [eax+0x88]
+};
+
+static DWORD g_identVtResume = 0;
+static DWORD g_identVtSkip = 0;
+static DWORD g_identLookupResume = 0;
+static DWORD g_identLookupSkip = 0;
+
+// Диагностика OOS→UAF (3.02): только счётчики, симуляцию не трогают.
+// Хост часто не видит DIFF (oos_hits=0) — тогда first_real остаётся "-"
+// и days_real=-1, а ident_skip на SYNC-строках всё равно растёт.
+static LONG g_identSkipVt = 0;
+static LONG g_identSkipLookup = 0;
+static LONG g_identSkipSlot84 = 0;
+static LONG g_identSkipE4 = 0;
+static LONG g_identSkipFn = 0;
+static LONG g_identSkipFn2 = 0;
+static LONG g_identSkipFn3 = 0;
+static LONG g_identSkipStr = 0;
+static LONG g_identSkipW74 = 0;
+static LONG g_identSkipList = 0;
+static LONG g_identSkipHash = 0;
+static LONG g_identSkipParent = 0;
+static LONG g_identTombstone = 0;
+static LONG g_identTombstoneDup = 0;
+static LONG g_identSkipLogged = 0;
+static char g_lastIdentSkipLine[192] = "-";
+static int  g_lastDateRaw = 0;
+static char g_lastDateBuf[32] = "-";
+static int  g_firstOosRaw = 0;
+static char g_firstOosBuf[32] = "-";
+static int  g_firstRealOosRaw = 0;
+static char g_firstRealOosBuf[32] = "-";
+
+static void LogOosFile(const char* fmt, ...);
+
+static int DaysSinceFirstRealOos()
+{
+    if (!g_firstRealOosRaw || !g_lastDateRaw)
+        return -1;
+    int d = (g_lastDateRaw - g_firstRealOosRaw) / 24;
+    return d < 0 ? 0 : d;
+}
+
+static void RememberSessionClock(int raw, const char* buf)
+{
+    if (!raw || !buf || !buf[0])
+        return;
+    g_lastDateRaw = raw;
+    strcpy_s(g_lastDateBuf, buf);
+}
+
+static LONG IdentSkipTotal()
+{
+    return g_identSkipVt + g_identSkipLookup + g_identSkipSlot84 +
+        g_identSkipE4 + g_identSkipFn + g_identSkipFn2 + g_identSkipFn3 +
+        g_identSkipStr + g_identSkipW74 + g_identSkipList +
+        g_identSkipHash + g_identSkipParent;
+}
+
+static void FormatIdentDiag(char* buf, size_t cap)
+{
+    sprintf_s(buf, cap,
+        "ident_skip vt=%d lookup=%d slot84=%d e4=%d fn=%d fn2=%d fn3=%d str=%d w74=%d l4c=%d hash=%d par=%d tomb=%d/%d first_oos=%s first_real=%s days_real=%d last_skip=%s",
+        (int)g_identSkipVt, (int)g_identSkipLookup, (int)g_identSkipSlot84,
+        (int)g_identSkipE4, (int)g_identSkipFn, (int)g_identSkipFn2,
+        (int)g_identSkipFn3, (int)g_identSkipStr, (int)g_identSkipW74,
+        (int)g_identSkipList, (int)g_identSkipHash, (int)g_identSkipParent,
+        (int)g_identTombstone, (int)g_identTombstoneDup,
+        g_firstOosBuf, g_firstRealOosBuf,
+        DaysSinceFirstRealOos(), g_lastIdentSkipLine);
+}
+
+static void __stdcall IdentNoteSkip(int site, void* self)
+{
+    LONG* counter = &g_identSkipVt;
+    const char* siteName = "vtable";
+    if (site == 1)
+    {
+        counter = &g_identSkipLookup;
+        siteName = "lookup";
+    }
+    else if (site == 2)
+    {
+        counter = &g_identSkipSlot84;
+        siteName = "slot84";
+    }
+    else if (site == 3)
+    {
+        counter = &g_identSkipE4;
+        siteName = "fieldE4";
+    }
+    else if (site == 4)
+    {
+        counter = &g_identSkipFn;
+        siteName = "fnD1BB0";
+    }
+    else if (site == 6)
+    {
+        counter = &g_identSkipFn2;
+        siteName = "fnD4420";
+    }
+    else if (site == 7)
+    {
+        counter = &g_identSkipFn3;
+        siteName = "fn113D50";
+    }
+    else if (site == 5)
+    {
+        counter = &g_identSkipStr;
+        siteName = "strClear";
+    }
+    else if (site == 8)
+    {
+        counter = &g_identSkipW74;
+        siteName = "fn1CB230";
+    }
+    else if (site == 9)
+    {
+        counter = &g_identSkipList;
+        siteName = "list4C";
+    }
+    else if (site == 10)
+    {
+        counter = &g_identSkipHash;
+        siteName = "hash";
+    }
+    else if (site == 11)
+    {
+        counter = &g_identSkipParent;
+        siteName = "fnD5BC0";
+    }
+    InterlockedIncrement(counter);
+    LONG total = IdentSkipTotal();
+
+    DWORD vptr = 0;
+    DWORD id40 = 0;
+    __try
+    {
+        vptr = *(DWORD*)self;
+        id40 = *(DWORD*)((char*)self + 0x40);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        vptr = 0;
+        id40 = 0;
+    }
+
+    _snprintf_s(g_lastIdentSkipLine, sizeof(g_lastIdentSkipLine), _TRUNCATE,
+        "n=%d site=%s date=%s self=%08X vptr=%08X id40=%08X",
+        (int)total, siteName, g_lastDateBuf,
+        (unsigned)(DWORD_PTR)self, vptr, id40);
+
+    if (total > 20 && (total % 50) != 0)
+        return;
+    if (!g_settings.enableOosLog)
+        return;
+
+    LogOosFile("IDENT skip %s days_real=%d first_real=%s",
+        g_lastIdentSkipLine, DaysSinceFirstRealOos(), g_firstRealOosBuf);
+}
+
+static int __stdcall IdentVtableOk(void* self)
+{
+    if (!self)
+        return 0;
+    DWORD vptr = 0;
+    DWORD fn = 0;
+    __try
+    {
+        vptr = *(DWORD*)self;
+        if (!vptr)
+            return 0;
+        // Живой C++-объект Vic2: vtable в образе exe (.rdata).
+        // Куча / освобождённый буфер строки сюда не попадает — это и было
+        // B1EB3650 на хосте (первый dword = висячий heap, не vtable).
+        if (!g_base || vptr < g_base || vptr >= g_base + g_imageSize)
+            return 0;
+        fn = *(DWORD*)(vptr + 0x88);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    return fn ? 1 : 0;
+}
+
+// this / элемент списка: куча, не образ exe и не vtable. Stub tombstone
+// отсекает IdentVtableOk (vptr в DLL).
+static int __stdcall IdentHeapThisOk(void* p)
+{
+    if (!p)
+        return 0;
+    DWORD a = (DWORD)(DWORD_PTR)p;
+    if (g_base && a >= g_base && a < g_base + g_imageSize)
+        return 0;
+    return IdentVtableOk(p);
+}
+
+static int __stdcall IdentVtableCheck(void* self, int site)
+{
+    if (IdentVtableOk(self))
+        return 1;
+    if (self)
+        IdentNoteSkip(site, self);
+    return 0;
+}
+
+__declspec(naked) static void IdentVtableCave()
+{
+    __asm {
+        push 0
+        push esi
+        call IdentVtableCheck
+        test eax, eax
+        jz skip
+        mov eax, dword ptr [esi]
+        mov edx, dword ptr [eax + 0x88]
+        push edi
+        mov ecx, esi
+        call edx
+        jmp dword ptr [g_identVtResume]
+    skip:
+        jmp dword ptr [g_identVtSkip]
+    }
+}
+
+static const DWORD RVA_IDENT_LOOKUP_SIG    = 0x1DF532;
+static const DWORD RVA_IDENT_LOOKUP_RESUME = 0x1DF537;  // mov [esp+0x10], 0
+static const DWORD RVA_IDENT_LOOKUP_SKIP   = 0x1DF581;  // pop edi; al=1; ret
+
+static const unsigned char IDENT_LOOKUP_SIG[13] =
+{
+    0x8B, 0xF0,                         // mov esi, eax
+    0xC1, 0xFB, 0x02,                   // sar ebx, 2
+    0xC7, 0x44, 0x24, 0x10, 0x00, 0x00, 0x00, 0x00
+};
+
+__declspec(naked) static void IdentLookupCave()
+{
+    __asm {
+        mov esi, eax
+        sar ebx, 2
+        push 1
+        push esi
+        call IdentVtableCheck
+        test eax, eax
+        jz bad
+        jmp dword ptr [g_identLookupResume]
+    bad:
+        mov dword ptr [edi + 0x3C], 0
+        xor esi, esi
+        jmp dword ptr [g_identLookupSkip]
+    }
+}
+
+static bool InstallIdentityLookupGuard()
+{
+    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_LOOKUP_SIG);
+    unsigned char* hook = sig;
+
+    if (memcmp(sig, IDENT_LOOKUP_SIG, sizeof(IDENT_LOOKUP_SIG)) != 0)
+    {
+        Log("IdentityLookupGuard: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_identLookupResume = g_base + RVA_IDENT_LOOKUP_RESUME;
+    g_identLookupSkip = g_base + RVA_IDENT_LOOKUP_SKIP;
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentLookupCave - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityLookupGuard: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_LOOKUP_SIG, (DWORD)(DWORD_PTR)&IdentLookupCave);
+    return true;
+}
+
+static bool InstallIdentityNullVtable()
+{
+    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_VT_SIG);
+    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_VT_HOOK);
+
+    if (memcmp(sig, IDENT_VT_SIG, sizeof(IDENT_VT_SIG)) != 0)
+    {
+        Log("IdentityNullVtable: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X %02X) - не патчим",
+            sig[0], sig[1], sig[2], sig[3], sig[4], sig[5], sig[6], sig[7]);
+        return false;
+    }
+
+    g_identVtResume = g_base + RVA_IDENT_VT_RESUME;
+    g_identVtSkip = g_base + RVA_IDENT_VT_SKIP;
+
+    unsigned char patch[8];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentVtableCave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+    patch[7] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityNullVtable: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_VT_HOOK, (DWORD)(DWORD_PTR)&IdentVtableCave);
+    return true;
+}
+
+// Тот же мёртвый identity, другой слот vtable (+0x84).
+// Хост 3.02, 1914-06-23: lookup уже skip'нул 44384B90, через 31 мс
+// FUN_005B9670 всё равно сделал mov eax,[vtable+0x84] и упал.
+// Нет прямых E8 — виртуальный метод. Штатный отказ: xor eax,eax; ret 12
+// (как setnz после неуспешного call).
+static const DWORD RVA_IDENT_84_SIG = 0x1B9670;
+static const unsigned char IDENT_84_SIG[16] =
+{
+    0x55, 0x8B, 0xEC, 0x8B, 0x4D, 0x08, 0x8B, 0x01,
+    0x8B, 0x55, 0x10, 0x8B, 0x80, 0x84, 0x00, 0x00
+};
+
+__declspec(naked) static void IdentSlot84Cave()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push 2
+        push dword ptr [ebp + 8]
+        call IdentVtableCheck
+        test eax, eax
+        jz fail
+        mov ecx, dword ptr [ebp + 8]
+        mov eax, dword ptr [ecx]
+        mov edx, dword ptr [ebp + 0x10]
+        mov eax, dword ptr [eax + 0x84]
+        push edx
+        call eax
+        test al, al
+        setnz al
+        pop ebp
+        ret 12
+    fail:
+        xor eax, eax
+        pop ebp
+        ret 12
+    }
+}
+
+static bool InstallIdentitySlot84()
+{
+    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_84_SIG);
+    unsigned char* hook = sig;
+
+    if (memcmp(sig, IDENT_84_SIG, sizeof(IDENT_84_SIG)) != 0)
+    {
+        Log("IdentitySlot84: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentSlot84Cave - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentitySlot84: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_84_SIG, (DWORD)(DWORD_PTR)&IdentSlot84Cave);
+    return true;
+}
+
+// Клиент 3.03, 1914-06-23: lookup+slot84 уже skip'нули esi=43610990,
+// через 58 мс FUN_005D1BB0 всё равно делает
+//   mov ecx, [esi+0xE4] ; cmp [eax], [ecx]
+// На мёртвом узле +0xE4 — мелкое целое (00001D6F), не указатель.
+// Штатный «не совпало» — xorps xmm0 (rva 0x1D1CD5), но дальше
+// функция всё равно пишет [esi+0xF8]/[+0x100]/[+0xE4] и зовёт
+// аллокатор. На мёртвом this это куча без лога (клиент 3.05:
+// fieldE4 skip, crash.log пуст). Прыгаем на эпилог SEH
+// (rva 0x1D1E49, ret 8) — тот же выход, что jz после пустого
+// списка в хвосте функции.
+//
+// 3.04 на запуске: IdentVtableCheck оставляет eax=1, resume
+// `mov edx,[eax]` читает 00000001. Живой this (CNavy) сюда тоже
+// заходит — eax ДО вызова надо сохранить.
+static const DWORD RVA_IDENT_E4_SIG    = 0x1D1CC9;
+static const DWORD RVA_IDENT_E4_HOOK   = 0x1D1CC9;
+static const DWORD RVA_IDENT_E4_RESUME = 0x1D1CCF;  // mov edx,[eax]
+static const DWORD RVA_IDENT_E4_SKIP   = 0x1D1E49;  // mov ecx,[ebp-0xC]; pop edi/esi; ret 8
+static const unsigned char IDENT_E4_EPI[8] =
+{
+    0x8B, 0x4D, 0xF4, 0x5F, 0x5E, 0x64, 0x89, 0x0D
+};
+
+static const unsigned char IDENT_E4_SIG[12] =
+{
+    0x8B, 0x8E, 0xE4, 0x00, 0x00, 0x00, // mov ecx, [esi+0xE4]
+    0x8B, 0x10,                         // mov edx, [eax]
+    0x3B, 0x11,                         // cmp edx, [ecx]
+    0x74, 0x3E
+};
+
+static DWORD g_identE4Resume = 0;
+static DWORD g_identE4Skip = 0;
+
+__declspec(naked) static void IdentFieldE4Cave()
+{
+    __asm {
+        push eax
+        push 3
+        push esi
+        call IdentVtableCheck
+        test eax, eax
+        jz skip
+        pop eax
+        mov ecx, dword ptr [esi + 0xE4]
+        jmp dword ptr [g_identE4Resume]
+    skip:
+        pop eax
+        jmp dword ptr [g_identE4Skip]
+    }
+}
+
+static bool InstallIdentityFieldE4()
+{
+    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_E4_SIG);
+    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_E4_HOOK);
+
+    if (memcmp(sig, IDENT_E4_SIG, sizeof(IDENT_E4_SIG)) != 0)
+    {
+        Log("IdentityFieldE4: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_E4_SKIP);
+    if (memcmp(epi, IDENT_E4_EPI, sizeof(IDENT_E4_EPI)) != 0)
+    {
+        Log("IdentityFieldE4: эпилог rva %06X не совпал - не патчим", RVA_IDENT_E4_SKIP);
+        return false;
+    }
+
+    g_identE4Resume = g_base + RVA_IDENT_E4_RESUME;
+    g_identE4Skip = g_base + RVA_IDENT_E4_SKIP;
+
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFieldE4Cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityFieldE4: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_E4_HOOK, (DWORD)(DWORD_PTR)&IdentFieldE4Cave);
+    return true;
+}
+
+// Клиент 3.07, 1914-07-21: fieldE4 skip 40 раз, краш всё равно в
+// FUN_005A63F0 (rva 0x5A63F7) — очистка «строки» по [esi+0xE4].
+// Хук fieldE4 стоит только на cmp; путь `[esi+0xEC]==0` делает
+// xorps и всё равно `lea edi,[esi+0xE4]; call 5A63F0`.
+// Охрана всего FUN_005D1BB0 сразу после mov esi,ecx.
+// 3.08: хук стоял на 1D1BCC (push esi) — сигнатура не совпала, пролог
+// не встал, клиент дошёл до [vtable+0x70] в FUN_005D4420.
+// Верно: 1D1BCD = mov esi,ecx; mov ecx,[esi+0x74]. Эпилог ждёт
+// push edi — его ещё нет, поэтому перед jmp кладём.
+static const DWORD RVA_IDENT_D1_HOOK   = 0x1D1BCD;
+static const DWORD RVA_IDENT_D1_RESUME = 0x1D1BD2;  // xor ebx, ebx
+static const unsigned char IDENT_D1_SIG[5] =
+{
+    0x8B, 0xF1,       // mov esi, ecx
+    0x8B, 0x4E, 0x74  // mov ecx, [esi+0x74]
+};
+
+static DWORD g_identD1Resume = 0;
+static DWORD g_identD1Skip = 0;
+
+__declspec(naked) static void IdentFnD1Cave()
+{
+    __asm {
+        mov esi, ecx
+        push eax
+        push 4
+        push esi
+        call IdentVtableCheck
+        test eax, eax
+        jz bad
+        pop eax
+        mov ecx, dword ptr [esi + 0x74]
+        jmp dword ptr [g_identD1Resume]
+    bad:
+        pop eax
+        push edi
+        jmp dword ptr [g_identD1Skip]
+    }
+}
+
+static bool InstallIdentityFnD1BB0()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_D1_HOOK);
+    if (memcmp(hook, IDENT_D1_SIG, sizeof(IDENT_D1_SIG)) != 0)
+    {
+        Log("IdentityFnD1BB0: сигнатура не совпала (%02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4]);
+        return false;
+    }
+
+    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_E4_SKIP);
+    if (memcmp(epi, IDENT_E4_EPI, sizeof(IDENT_E4_EPI)) != 0)
+    {
+        Log("IdentityFnD1BB0: эпилог не совпал - не патчим");
+        return false;
+    }
+
+    g_identD1Resume = g_base + RVA_IDENT_D1_RESUME;
+    g_identD1Skip = g_base + RVA_IDENT_E4_SKIP;
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFnD1Cave - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityFnD1BB0: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_D1_HOOK, (DWORD)(DWORD_PTR)&IdentFnD1Cave);
+    return true;
+}
+
+// Клиент 3.08, 1914-07-23: пролог 5D1BB0 не встал, дошли до
+// FUN_005D4420 rva 0x1D4445: mov edx,[esi]; mov edx,[edx+0x70].
+// Два caller'а (1D20C5 из 1D1FC0 и 1D384E). this уже в esi.
+// Хук после push ebp / mov ebp,esp, на mov eax,[esi+0xDC].
+// Skip: leave; ret — push ebx/edi ещё не было.
+static const DWORD RVA_IDENT_D4420_HOOK   = 0x1D4423;
+static const DWORD RVA_IDENT_D4420_RESUME = 0x1D4429;  // sub esp, 0x18
+static const unsigned char IDENT_D4420_SIG[6] =
+{
+    0x8B, 0x86, 0xDC, 0x00, 0x00, 0x00  // mov eax, [esi+0xDC]
+};
+
+static DWORD g_identD4420Resume = 0;
+
+__declspec(naked) static void IdentFnD4420Cave()
+{
+    __asm {
+        push 6
+        push esi
+        call IdentVtableCheck
+        test eax, eax
+        jz skip
+        mov eax, dword ptr [esi + 0xDC]
+        jmp dword ptr [g_identD4420Resume]
+    skip:
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+static bool InstallIdentityFnD4420()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_D4420_HOOK);
+    if (memcmp(hook, IDENT_D4420_SIG, sizeof(IDENT_D4420_SIG)) != 0)
+    {
+        Log("IdentityFnD4420: сигнатура не совпала (%02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5]);
+        return false;
+    }
+
+    g_identD4420Resume = g_base + RVA_IDENT_D4420_RESUME;
+
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFnD4420Cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityFnD4420: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_D4420_HOOK, (DWORD)(DWORD_PTR)&IdentFnD4420Cave);
+    return true;
+}
+
+static int __stdcall IdentPtrReadable(void* p, int n)
+{
+    if (!p || n <= 0)
+        return 0;
+    __try
+    {
+        volatile unsigned char sum = 0;
+        unsigned char* b = (unsigned char*)p;
+        sum = (unsigned char)(sum ^ b[0]);
+        sum = (unsigned char)(sum ^ b[n - 1]);
+        (void)sum;
+        return 1;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+}
+
+// Клиент 3.09, 1914-08-18: пролог 5D1BB0 и 5D4420 стояли, lookup
+// уже skip'нул тот же узел 4598FAD0 (1914-08-04). Через 14 дней
+// FUN rva 0x113D50: eax=контейнер, ebx=[eax] identity,
+// mov edx,[ebx]; mov eax,[edx+0x38] — vptr=B5BDF9FE вне exe.
+// Четыре caller'а (719AC, 1E1D27, 2559C1, 426A10). Штатный выход
+// пустого списка: pop edi; pop esi; mov al,1; pop ebx; leave; ret
+// (rva 0x113D8B). На хуке edi ещё не push — без pop edi.
+static const DWORD RVA_IDENT_113D_HOOK   = 0x113D5C;
+static const DWORD RVA_IDENT_113D_RESUME = 0x113D63;  // push edi
+static const unsigned char IDENT_113D_SIG[7] =
+{
+    0x8B, 0x18,             // mov ebx, [eax]
+    0x8B, 0x13,             // mov edx, [ebx]
+    0x8B, 0x42, 0x38        // mov eax, [edx+0x38]
+};
+
+static DWORD g_ident113DResume = 0;
+
+__declspec(naked) static void IdentFn113DCave()
+{
+    __asm {
+        test eax, eax
+        jz skip
+        push eax
+        push 4
+        push eax
+        call IdentPtrReadable
+        test eax, eax
+        pop eax
+        jz skip
+        mov ebx, dword ptr [eax]
+        push 7
+        push ebx
+        call IdentVtableCheck
+        test eax, eax
+        jz skip
+        mov edx, dword ptr [ebx]
+        mov eax, dword ptr [edx + 0x38]
+        jmp dword ptr [g_ident113DResume]
+    skip:
+        pop esi
+        mov al, 1
+        pop ebx
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+static bool InstallIdentityFn113D50()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_113D_HOOK);
+    if (memcmp(hook, IDENT_113D_SIG, sizeof(IDENT_113D_SIG)) != 0)
+    {
+        Log("IdentityFn113D50: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5], hook[6]);
+        return false;
+    }
+
+    g_ident113DResume = g_base + RVA_IDENT_113D_RESUME;
+
+    unsigned char patch[7];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFn113DCave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityFn113D50: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_113D_HOOK, (DWORD)(DWORD_PTR)&IdentFn113DCave);
+    return true;
+}
+
+// Клиент 3.10, 1914-07-28: lookup/fnD1BB0 уже skip'нули мёртвый edi,
+// FUN rva 0x1CB230 всё равно сделала mov [ebx+0x74],0. ebx оказался
+// vtable CPop в образе exe (запись в .rdata → AV). this в EDI,
+// arg0 = контейнер. 14 caller'ов, все stdcall ret 4, возврат не
+// проверяют. Skip = эпилог без записи (отказ), не al=1.
+static const DWORD RVA_IDENT_1CB_HOOK   = 0x1CB230;
+static const DWORD RVA_IDENT_1CB_RESUME = 0x1CB237;  // push ebx
+static const unsigned char IDENT_1CB_SIG[12] =
+{
+    0x55, 0x8B, 0xEC, 0x51, 0x8B, 0x47, 0x38,
+    0x53, 0x8B, 0x5D, 0x08, 0x56
+};
+
+static DWORD g_ident1CBResume = 0;
+static void* g_identStubVtable[80];
+static unsigned char g_identSentinel[0x200];
+static DWORD g_identVtables[64];
+static int g_nIdentVtables = 0;
+
+static int __stdcall IdentWritableObj(void* p)
+{
+    if (!p)
+        return 0;
+    DWORD a = (DWORD)(DWORD_PTR)p;
+    if (g_base && a >= g_base && a < g_base + g_imageSize)
+        return 0;
+    if (p >= (void*)&g_identStubVtable[0] && p < (void*)&g_identStubVtable[80])
+        return 0;
+    if (p >= (void*)g_identSentinel && p < (void*)(g_identSentinel + sizeof(g_identSentinel)))
+        return 0;
+    return IdentPtrReadable((char*)p + 0x74, 4);
+}
+
+__declspec(naked) static void IdentFn1CBCave()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push ecx
+        push 8
+        push edi
+        call IdentVtableCheck
+        test eax, eax
+        jz fail
+        push dword ptr [ebp + 8]
+        call IdentWritableObj
+        test eax, eax
+        jnz ok
+        push dword ptr [ebp + 8]
+        push 8
+        call IdentNoteSkip
+        jmp fail
+    ok:
+        mov eax, dword ptr [edi + 0x38]
+        jmp dword ptr [g_ident1CBResume]
+    fail:
+        pop ecx
+        pop ebp
+        ret 4
+    }
+}
+
+static bool InstallIdentityFn1CB230()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_1CB_HOOK);
+    if (memcmp(hook, IDENT_1CB_SIG, sizeof(IDENT_1CB_SIG)) != 0)
+    {
+        Log("IdentityFn1CB230: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5], hook[6]);
+        return false;
+    }
+
+    g_ident1CBResume = g_base + RVA_IDENT_1CB_RESUME;
+
+    unsigned char patch[7];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFn1CBCave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityFn1CB230: установлен на rva %06X -> dll %08X",
+        RVA_IDENT_1CB_HOOK, (DWORD)(DWORD_PTR)&IdentFn1CBCave);
+    return true;
+}
+
+// Клиент 3.12, 1914-07-15: lookup уже skip'нул 7C933FD8, FUN rva 0x1D1890
+// обошла список this+0x4C: mov ecx,[esi]; mov esi,[esi+8]; call себя.
+// esi=CE000008 — мёртвая нода. 11 caller'ов, thiscall без аргументов.
+// Skip this = ret до SEH (отказ). Битая нода = esi=0, как пустой список,
+// дальше функция чистит живой this. Не al=1.
+static const DWORD RVA_IDENT_D1890_HOOK   = 0x1D1890;
+static const DWORD RVA_IDENT_D1890_RESUME = 0x1D1896;  // mov eax, fs:[0]
+static const DWORD RVA_IDENT_D1890_BODY   = 0x1D18B5;  // mov ebx, ecx; unique
+static const DWORD RVA_IDENT_D1890_LOOP   = 0x1D18D0;
+static const DWORD RVA_IDENT_D1890_CALL   = 0x1D18D5;  // call self
+static const DWORD RVA_IDENT_D1890_CMP    = 0x1D18DA;  // cmp esi, edi
+static const unsigned char IDENT_D1890_HEAD[6] =
+{
+    0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8
+};
+static const unsigned char IDENT_D1890_BODY[8] =
+{
+    0x8B, 0xD9, 0x8B, 0x73, 0x4C, 0x57, 0x33, 0xFF
+};
+static const unsigned char IDENT_D1890_LOOP[5] =
+{
+    0x8B, 0x0E, 0x8B, 0x76, 0x08
+};
+
+static DWORD g_identD1890Resume = 0;
+static DWORD g_identD1890Call = 0;
+static DWORD g_identD1890Cmp = 0;
+
+static int __stdcall IdentListNodeOk(void* node)
+{
+    if (!IdentPtrReadable(node, 12))
+        return 0;
+    void* child = 0;
+    __try
+    {
+        child = *(void**)node;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    return IdentHeapThisOk(child);
+}
+
+__declspec(naked) static void IdentFnD1890Cave()
+{
+    __asm {
+        push ecx
+        push ecx
+        call IdentHeapThisOk
+        test eax, eax
+        pop ecx
+        jz fail
+        push ebp
+        mov ebp, esp
+        and esp, -8
+        jmp dword ptr [g_identD1890Resume]
+    fail:
+        push ecx
+        push 9
+        call IdentNoteSkip
+        xor eax, eax
+        ret
+    }
+}
+
+__declspec(naked) static void IdentFnD1890LoopCave()
+{
+    __asm {
+        push esi
+        call IdentListNodeOk
+        test eax, eax
+        jz bad
+        mov ecx, dword ptr [esi]
+        mov esi, dword ptr [esi + 8]
+        jmp dword ptr [g_identD1890Call]
+    bad:
+        push esi
+        push 9
+        call IdentNoteSkip
+        xor esi, esi
+        jmp dword ptr [g_identD1890Cmp]
+    }
+}
+
+static bool InstallIdentityFnD1890()
+{
+    unsigned char* head = (unsigned char*)(g_base + RVA_IDENT_D1890_HOOK);
+    unsigned char* body = (unsigned char*)(g_base + RVA_IDENT_D1890_BODY);
+    unsigned char* loop = (unsigned char*)(g_base + RVA_IDENT_D1890_LOOP);
+    if (memcmp(head, IDENT_D1890_HEAD, sizeof(IDENT_D1890_HEAD)) != 0 ||
+        memcmp(body, IDENT_D1890_BODY, sizeof(IDENT_D1890_BODY)) != 0 ||
+        memcmp(loop, IDENT_D1890_LOOP, sizeof(IDENT_D1890_LOOP)) != 0)
+    {
+        Log("IdentityFnD1890: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_identD1890Resume = g_base + RVA_IDENT_D1890_RESUME;
+    g_identD1890Call = g_base + RVA_IDENT_D1890_CALL;
+    g_identD1890Cmp = g_base + RVA_IDENT_D1890_CMP;
+
+    unsigned char patchHead[6];
+    patchHead[0] = 0xE9;
+    *(DWORD*)(patchHead + 1) = (DWORD)(DWORD_PTR)&IdentFnD1890Cave - ((DWORD)head + 5);
+    patchHead[5] = 0x90;
+
+    unsigned char patchLoop[5];
+    patchLoop[0] = 0xE9;
+    *(DWORD*)(patchLoop + 1) = (DWORD)(DWORD_PTR)&IdentFnD1890LoopCave - ((DWORD)loop + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(head, sizeof(patchHead), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(head, patchHead, sizeof(patchHead));
+    VirtualProtect(head, sizeof(patchHead), oldProtect, &oldProtect);
+
+    if (!VirtualProtect(loop, sizeof(patchLoop), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(loop, patchLoop, sizeof(patchLoop));
+    VirtualProtect(loop, sizeof(patchLoop), oldProtect, &oldProtect);
+
+    Log("IdentityFnD1890: установлен на rva %06X + loop %06X -> dll %08X",
+        RVA_IDENT_D1890_HOOK, RVA_IDENT_D1890_LOOP, (DWORD)(DWORD_PTR)&IdentFnD1890Cave);
+    return true;
+}
+
+// Tombstone: CSubUnit / CRegiment / CShip / CWing делят scalar deleting
+// dtor rva 0x471B0. Краши 3.07–3.10: после HeapFree первые 8 байт — куча,
+// по +0x08 остаётся vtable CRegiment (0x9F8884). Тело dtor (списки армии,
+// checksum) оставляем; HeapFree не зовём; vptr → заглушка в DLL.
+// Тот же трюк для CArmy (0x1C6180) и CNavy (0x1D7600).
+// 3.11: повторный delete снова гонял тело → C0000374. 3.12: если vptr
+// уже stub — сразу ret. Poison после первого тела даже при flags&1==0.
+static const DWORD RVA_TOMB_SUB_HOOK = 0x0471B0;
+static const DWORD RVA_TOMB_SUB_DTOR = 0x1BE2B0;
+static const DWORD RVA_TOMB_ARMY_HOOK = 0x1C6180;
+static const DWORD RVA_TOMB_ARMY_DTOR = 0x1C61B0;
+static const DWORD RVA_TOMB_NAVY_HOOK = 0x1D7600;
+static const DWORD RVA_TOMB_NAVY_DTOR = 0x1D7630;
+
+static const unsigned char TOMB_SUB_SIG[17] =
+{
+    0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1, 0xE8, 0xF5, 0x70, 0x17, 0x00,
+    0xF6, 0x45, 0x08, 0x01, 0x74, 0x09
+};
+static const unsigned char TOMB_ARMY_SIG[22] =
+{
+    0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1, 0xE8, 0x25, 0x00, 0x00, 0x00,
+    0xF6, 0x45, 0x08, 0x01, 0x74, 0x09, 0x56, 0xE8, 0x84, 0x87, 0x4E
+};
+static const unsigned char TOMB_NAVY_SIG[22] =
+{
+    0x55, 0x8B, 0xEC, 0x57, 0x8B, 0xF9, 0xE8, 0x25, 0x00, 0x00, 0x00,
+    0xF6, 0x45, 0x08, 0x01, 0x74, 0x09, 0x57, 0xE8, 0x04, 0x73, 0x4D
+};
+
+static DWORD g_tombSubDtor = 0;
+static DWORD g_tombArmyDtor = 0;
+static DWORD g_tombNavyDtor = 0;
+
+__declspec(naked) static void IdentStubRet0()
+{
+    __asm {
+        xor eax, eax
+        ret
+    }
+}
+
+__declspec(naked) static void IdentStubDtor()
+{
+    __asm {
+        mov eax, ecx
+        ret 4
+    }
+}
+
+static void IdentInitStubAndSentinel()
+{
+    for (int i = 0; i < 80; ++i)
+        g_identStubVtable[i] = (void*)&IdentStubRet0;
+    g_identStubVtable[0] = (void*)&IdentStubDtor;
+    memset(g_identSentinel, 0, sizeof(g_identSentinel));
+    *(void**)g_identSentinel = g_identStubVtable;
+}
+
+static DWORD IdentFindCString(const char* s)
+{
+    if (!g_base || !s)
+        return 0;
+    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)(DWORD_PTR)g_base;
+    if (dos->e_magic != IMAGE_DOS_SIGNATURE)
+        return 0;
+    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(DWORD_PTR)(g_base + dos->e_lfanew);
+    if (nt->Signature != IMAGE_NT_SIGNATURE)
+        return 0;
+    IMAGE_SECTION_HEADER* sec = IMAGE_FIRST_SECTION(nt);
+    size_t n = strlen(s);
+    for (unsigned i = 0; i < nt->FileHeader.NumberOfSections; i++)
+    {
+        DWORD p = g_base + sec[i].VirtualAddress;
+        DWORD sz = sec[i].Misc.VirtualSize;
+        if (sz < n)
+            continue;
+        DWORD end = p + sz - (DWORD)n;
+        for (; p < end; p++)
+        {
+            if (*(const char*)(DWORD_PTR)p == s[0] &&
+                memcmp((const void*)(DWORD_PTR)p, s, n) == 0)
+                return p;
+        }
+    }
+    return 0;
+}
+
+static void IdentAddVtable(DWORD vt, const char* name)
+{
+    if (!vt)
+        return;
+    for (int i = 0; i < g_nIdentVtables; i++)
+    {
+        if (g_identVtables[i] == vt)
+            return;
+    }
+    if (g_nIdentVtables >= (int)(sizeof(g_identVtables) / sizeof(g_identVtables[0])))
+    {
+        Log("IdentityVtable: %s = %08X (таблица полна)", name, vt);
+        return;
+    }
+    g_identVtables[g_nIdentVtables++] = vt;
+    Log("IdentityVtable: %s = %08X", name, vt);
+}
+
+static void IdentCollectUnitVtables()
+{
+    g_nIdentVtables = 0;
+    static const char* names[] = {
+        ".?AVCSubUnit@@",
+        ".?AVCRegiment@@",
+        ".?AVCShip@@",
+        ".?AVCWing@@",
+        ".?AVCArmy@@",
+        ".?AVCNavy@@",
+        ".?AVCUnit@@",
+        ".?AVCLeader@@",
+        ".?AVCSelectable@@",
+        ".?AVCFortressCombatant@@",
+        ".?AVCNullLeader@@",
+        ".?AVCCombatant@@",
+        0
+    };
+
+    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)(DWORD_PTR)g_base;
+    if (!dos || dos->e_magic != IMAGE_DOS_SIGNATURE)
+        return;
+    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(DWORD_PTR)(g_base + dos->e_lfanew);
+    if (nt->Signature != IMAGE_NT_SIGNATURE)
+        return;
+    IMAGE_SECTION_HEADER* sec = IMAGE_FIRST_SECTION(nt);
+    DWORD r0 = 0, r1 = 0;
+    for (unsigned i = 0; i < nt->FileHeader.NumberOfSections; i++)
+    {
+        if (memcmp(sec[i].Name, ".rdata", 6) == 0)
+        {
+            r0 = g_base + sec[i].VirtualAddress;
+            r1 = r0 + sec[i].Misc.VirtualSize;
+            break;
+        }
+    }
+    if (!r0 || r1 <= r0)
+        return;
+
+    for (int ni = 0; names[ni]; ni++)
+    {
+        DWORD nameVa = IdentFindCString(names[ni]);
+        if (!nameVa)
+        {
+            Log("IdentityVtable: %s не найден", names[ni]);
+            continue;
+        }
+        DWORD td = nameVa - 8;
+        int found = 0;
+        for (DWORD q = r0; q + 16 < r1; q += 4)
+        {
+            if (*(DWORD*)(DWORD_PTR)(q + 12) != td)
+                continue;
+            for (DWORD p = r0; p + 4 < r1; p += 4)
+            {
+                if (*(DWORD*)(DWORD_PTR)p == q)
+                {
+                    IdentAddVtable(p + 4, names[ni]);
+                    found = 1;
+                }
+            }
+        }
+        if (!found)
+            Log("IdentityVtable: %s vtable не найден", names[ni]);
+    }
+}
+
+static int __stdcall IdentIsLiveUnit(void* p)
+{
+    if (!p)
+        return 0;
+    DWORD a = (DWORD)(DWORD_PTR)p;
+    if (g_base && a >= g_base && a < g_base + g_imageSize)
+        return 0;
+    if (p == (void*)g_identSentinel)
+        return 0;
+    DWORD vptr = 0;
+    __try
+    {
+        vptr = *(DWORD*)p;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    if (!vptr || vptr == (DWORD)(DWORD_PTR)g_identStubVtable)
+        return 0;
+    for (int i = 0; i < g_nIdentVtables; i++)
+    {
+        if (g_identVtables[i] == vptr)
+            return 1;
+    }
+    return 0;
+}
+
+static void* __stdcall IdentHashFilter(void* obj)
+{
+    if (!obj)
+        return 0;
+    if (IdentIsLiveUnit(obj))
+        return obj;
+    IdentNoteSkip(10, obj);
+    return g_identSentinel;
+}
+
+static const DWORD RVA_IDENT_HASH_EPI = 0x1AB829;
+static const unsigned char IDENT_HASH_EPI[9] =
+{
+    0x83, 0xC0, 0xF8, 0x89, 0x06, 0x8B, 0xE5, 0x5D, 0xC3
+};
+
+__declspec(naked) static void IdentHashFilterCave()
+{
+    __asm {
+        add eax, -8
+        push eax
+        call IdentHashFilter
+        mov dword ptr [esi], eax
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+static bool InstallIdentityHashFilter()
+{
+    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_HASH_EPI);
+    if (memcmp(epi, IDENT_HASH_EPI, sizeof(IDENT_HASH_EPI)) != 0)
+    {
+        Log("IdentityHashFilter: эпилог не совпал - не патчим");
+        return false;
+    }
+
+    unsigned char patch[9];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentHashFilterCave - ((DWORD)epi + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+    patch[7] = 0x90;
+    patch[8] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(epi, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(epi, patch, sizeof(patch));
+    VirtualProtect(epi, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityHashFilter: FUN_005AB7F0 эпилог rva %06X -> sentinel", RVA_IDENT_HASH_EPI);
+    return true;
+}
+
+static const DWORD RVA_IDENT_PAR_HOOK   = 0x1D5BCC;
+static const DWORD RVA_IDENT_PAR_RESUME = 0x1D5BD3;
+static const DWORD RVA_IDENT_PAR_EPI    = 0x1D5E20;
+static const unsigned char IDENT_PAR_SIG[16] =
+{
+    0x55, 0x8B, 0xEC, 0x83, 0xEC, 0x08, 0x53, 0x8B,
+    0x5D, 0x08, 0x56, 0x57, 0x8B, 0xF8, 0xB0, 0x01
+};
+static const unsigned char IDENT_PAR_EPI[9] =
+{
+    0x5F, 0x5E, 0x5B, 0x8B, 0xE5, 0x5D, 0xC2, 0x04, 0x00
+};
+
+static DWORD g_identParResume = 0;
+static DWORD g_identParEpi = 0;
+
+static int __stdcall IdentParentPairOk(void* ident, void* container)
+{
+    if (!IdentIsLiveUnit(ident))
+        return 0;
+    if (!IdentWritableObj(container))
+        return 0;
+    return 1;
+}
+
+__declspec(naked) static void IdentFnD5BC0Cave()
+{
+    __asm {
+        mov edi, eax
+        push ebx
+        push edi
+        call IdentParentPairOk
+        test eax, eax
+        jz fail
+        mov al, 1
+        mov byte ptr [ebx + 0x48], al
+        jmp dword ptr [g_identParResume]
+    fail:
+        push edi
+        push 11
+        call IdentNoteSkip
+        xor eax, eax
+        jmp dword ptr [g_identParEpi]
+    }
+}
+
+static bool InstallIdentityFnD5BC0()
+{
+    unsigned char* head = (unsigned char*)(g_base + 0x1D5BC0);
+    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_PAR_HOOK);
+    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_PAR_EPI);
+    if (memcmp(head, IDENT_PAR_SIG, sizeof(IDENT_PAR_SIG)) != 0 ||
+        memcmp(epi, IDENT_PAR_EPI, sizeof(IDENT_PAR_EPI)) != 0)
+    {
+        Log("IdentityFnD5BC0: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_identParResume = g_base + RVA_IDENT_PAR_RESUME;
+    g_identParEpi = g_base + RVA_IDENT_PAR_EPI;
+
+    unsigned char patch[7];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFnD5BC0Cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("IdentityFnD5BC0: родитель 1CB230/1DADD0 rva %06X -> dll %08X",
+        RVA_IDENT_PAR_HOOK, (DWORD)(DWORD_PTR)&IdentFnD5BC0Cave);
+    return true;
+}
+
+static void __stdcall IdentTombstoneNote(void* self)
+{
+    LONG n = InterlockedIncrement(&g_identTombstone);
+    if (n > 20 && (n % 50) != 0)
+        return;
+    if (!g_settings.enableOosLog)
+        return;
+    DWORD vptr = 0;
+    __try
+    {
+        vptr = *(DWORD*)self;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        vptr = 0;
+    }
+    LogOosFile("IDENT tombstone n=%d date=%s self=%08X vptr=%08X",
+        (int)n, g_lastDateBuf, (unsigned)(DWORD_PTR)self, vptr);
+}
+
+static int __stdcall IdentAlreadyTombstoned(void* self)
+{
+    if (!self)
+        return 1;
+    DWORD vptr = 0;
+    __try
+    {
+        vptr = *(DWORD*)self;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 1;
+    }
+    if (vptr != (DWORD)(DWORD_PTR)g_identStubVtable)
+        return 0;
+    LONG n = InterlockedIncrement(&g_identTombstoneDup);
+    if (n > 20 && (n % 50) != 0)
+        return 1;
+    if (!g_settings.enableOosLog)
+        return 1;
+    LogOosFile("IDENT tombstone-dup n=%d date=%s self=%08X",
+        (int)n, g_lastDateBuf, (unsigned)(DWORD_PTR)self);
+    return 1;
+}
+
+static void __stdcall IdentTombAfterDtor(void* self, unsigned flags)
+{
+    if (flags & 1)
+        IdentTombstoneNote(self);
+    __try
+    {
+        DWORD* d = (DWORD*)self;
+        d[0x38 / 4] = 0;
+        d[0x3C / 4] = 0;
+        d[0x4C / 4] = 0;
+        d[0x74 / 4] = 0;
+        d[0xE4 / 4] = 0;
+        *(void**)self = g_identStubVtable;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static bool PatchJmp6(unsigned char* hook, void* cave)
+{
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+    return true;
+}
+
+__declspec(naked) static void IdentTombSubCave()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push esi
+        mov esi, ecx
+        push esi
+        call IdentAlreadyTombstoned
+        test eax, eax
+        jnz already
+        mov ecx, esi
+        call dword ptr [g_tombSubDtor]
+        push dword ptr [ebp + 8]
+        push esi
+        call IdentTombAfterDtor
+    already:
+        mov eax, esi
+        pop esi
+        pop ebp
+        ret 4
+    }
+}
+
+__declspec(naked) static void IdentTombArmyCave()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push esi
+        mov esi, ecx
+        push esi
+        call IdentAlreadyTombstoned
+        test eax, eax
+        jnz already
+        mov ecx, esi
+        call dword ptr [g_tombArmyDtor]
+        push dword ptr [ebp + 8]
+        push esi
+        call IdentTombAfterDtor
+    already:
+        mov eax, esi
+        pop esi
+        pop ebp
+        ret 4
+    }
+}
+
+__declspec(naked) static void IdentTombNavyCave()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push edi
+        mov edi, ecx
+        push edi
+        call IdentAlreadyTombstoned
+        test eax, eax
+        jnz already
+        mov ecx, edi
+        call dword ptr [g_tombNavyDtor]
+        push dword ptr [ebp + 8]
+        push edi
+        call IdentTombAfterDtor
+    already:
+        mov eax, edi
+        pop edi
+        pop ebp
+        ret 4
+    }
+}
+
+static bool InstallIdentityTombstone()
+{
+    IdentInitStubAndSentinel();
+
+    int ok = 0;
+    unsigned char* sub = (unsigned char*)(g_base + RVA_TOMB_SUB_HOOK);
+    if (memcmp(sub, TOMB_SUB_SIG, sizeof(TOMB_SUB_SIG)) == 0)
+    {
+        g_tombSubDtor = g_base + RVA_TOMB_SUB_DTOR;
+        if (PatchJmp6(sub, (void*)&IdentTombSubCave))
+        {
+            Log("IdentityTombstone: CSubUnit/CRegiment/CShip rva %06X", RVA_TOMB_SUB_HOOK);
+            ++ok;
+        }
+    }
+    else
+    {
+        Log("IdentityTombstone: CSubUnit сигнатура не совпала - не патчим");
+    }
+
+    unsigned char* army = (unsigned char*)(g_base + RVA_TOMB_ARMY_HOOK);
+    if (memcmp(army, TOMB_ARMY_SIG, sizeof(TOMB_ARMY_SIG)) == 0)
+    {
+        g_tombArmyDtor = g_base + RVA_TOMB_ARMY_DTOR;
+        if (PatchJmp6(army, (void*)&IdentTombArmyCave))
+        {
+            Log("IdentityTombstone: CArmy rva %06X", RVA_TOMB_ARMY_HOOK);
+            ++ok;
+        }
+    }
+    else
+    {
+        Log("IdentityTombstone: CArmy сигнатура не совпала - не патчим");
+    }
+
+    unsigned char* navy = (unsigned char*)(g_base + RVA_TOMB_NAVY_HOOK);
+    if (memcmp(navy, TOMB_NAVY_SIG, sizeof(TOMB_NAVY_SIG)) == 0)
+    {
+        g_tombNavyDtor = g_base + RVA_TOMB_NAVY_DTOR;
+        if (PatchJmp6(navy, (void*)&IdentTombNavyCave))
+        {
+            Log("IdentityTombstone: CNavy rva %06X", RVA_TOMB_NAVY_HOOK);
+            ++ok;
+        }
+    }
+    else
+    {
+        Log("IdentityTombstone: CNavy сигнатура не совпала - не патчим");
+    }
+
+    return ok > 0;
+}
+
+// std::string/buffer dtor: mov eax,[edi]; mov esi,[eax+8]; free.
+// Клиент 3.07: edi жив, [edi]=EDE8F0C3 не страница. Пустой путь —
+// mov [edi],0 ... ret (rva 0x5A640A), без push esi.
+static const DWORD RVA_STR_CLR_HOOK  = 0x5A63F0;
+static const DWORD RVA_STR_CLR_CONT  = 0x5A63F6;  // push esi
+static const DWORD RVA_STR_CLR_EMPTY = 0x5A640A;  // mov [edi],0
+static const unsigned char STR_CLR_SIG[6] =
+{
+    0x8B, 0x07, 0x85, 0xC0, 0x74, 0x14
+};
+
+static DWORD g_strClrCont = 0;
+static DWORD g_strClrEmpty = 0;
+
+__declspec(naked) static void StrClearCave()
+{
+    __asm {
+        push 12
+        push edi
+        call IdentPtrReadable
+        test eax, eax
+        jz ret_only
+        mov eax, dword ptr [edi]
+        test eax, eax
+        jz empty
+        push 12
+        push eax
+        call IdentPtrReadable
+        test eax, eax
+        jz badbuf
+        mov eax, dword ptr [edi]
+        jmp dword ptr [g_strClrCont]
+    badbuf:
+        push edi
+        push 5
+        call IdentNoteSkip
+    empty:
+        jmp dword ptr [g_strClrEmpty]
+    ret_only:
+        ret
+    }
+}
+
+static bool InstallStringClearGuard()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_STR_CLR_HOOK);
+    if (memcmp(hook, STR_CLR_SIG, sizeof(STR_CLR_SIG)) != 0)
+    {
+        Log("StringClearGuard: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_strClrCont = g_base + RVA_STR_CLR_CONT;
+    g_strClrEmpty = g_base + RVA_STR_CLR_EMPTY;
+
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&StrClearCave - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("StringClearGuard: установлен на rva %06X -> dll %08X",
+        RVA_STR_CLR_HOOK, (DWORD)(DWORD_PTR)&StrClearCave);
+    return true;
+}
+
+
 // ---------------------------------------------------------------
 // Переполнение буфера точек графика (0xc0000409 - сработала
 // GS-канарейка стека - сразу за ним 0xc0000005 по тому же адресу).
@@ -3917,16 +5593,7 @@ static bool ReadPlausibleTypeName(void* typePtr, char* outName, int outSize)
     if (tv < 0x10000 || tv > 0xFFFE0000)
         return false;
 
-    const char* src = ResolveProdTypeNamePtr(typePtr);
-    if (!src)
-        return false;
-    // Длинные имена (std::string ушёл в кучу) - src теперь чужой
-    // указатель, а не typePtr+OFF_PRODTYPE_NAME, так что диапазон
-    // проверяем заново.
-    UINT_PTR sv = (UINT_PTR)src;
-    if (sv < 0x10000 || sv > 0xFFFE0000)
-        return false;
-
+    const char* src = (const char*)typePtr + OFF_PRODTYPE_NAME;
     int i = 0;
     for (; i < outSize - 1; ++i)
     {
@@ -4615,34 +6282,967 @@ static bool InstallCombatRoll()
 
 
 // ---------------------------------------------------------------
-// Категория Stability: устойчивость к рассинхрону в MP (OOS) и
-// общая стабильность движка (FPU/D3D/куча/TBB/квантование POP).
-// Портировано из ветки V2\V2TechButton.cpp (версия 3.10) того же
-// проекта - адреса перепроверены напрямую по v2game.exe перед
-// переносом. Диагностика ident_skip/vtable-guard из того файла
-// НЕ перенесена - это отдельная, не запрошенная сейчас подсистема
-// (PATCH_NULL_VTABLE_UI), сюда её специально не тянем.
+// Диагностика бага с чек-суммой (временный патч, не для релиза)
+//
+// Баг: чек-сумма в углу экрана меняется на одну букву после входа в
+// партию (одиночную или сетевую) - воспроизводится и на ванили, без
+// нашего мода. FUN_006377a0 (RVA 0x2377a0) считает "файловую"
+// чек-сумму; get_xrefs_to в Ghidra нашёл только один статический
+// вызов (из инициализации приложения, до главного меню) - но это не
+// исключает, что счётчик читается позже ещё раз кодом внутри этой же
+// функции при повторном входе, либо вызов идёт откуда-то косвенно.
+//
+// Первая попытка (хук на FUN_0076b4b0, копирование чек-суммы в
+// структуру лобби при входе в партию) дала raw=0 каждый раз - то
+// место читает поле ДО того, как оно реально заполнено, тупик.
+//
+// Вторая попытка (эта): реальный аккумулятор чек-суммы - раскрыт в
+// дизасме, прямо перед тем, как строится "Checksum is <value>":
+//   00638a4b: MOV EDX,[ECX+0x30]   ; ECX = param_1 (this), +0x30 -
+//                                    итоговое целое чек-суммы
+//   00638a4e: PUSH 0xe07d2c        ; "Checksum is "
+// Перехватываем блок из 3 инструкций перед этим чтением (11 байт,
+// rva 0x2384a0..0x2384ab: PUSH EBX; PUSH 0xC; MOV byte[ESP+0x3D4],0x30),
+// логируем ECX и *(ECX+0x30), затем воспроизводим эти 3 инструкции и
+// возвращаемся - "MOV EDX,[ECX+0x30]" после нас выполняется как есть,
+// нетронутой.
 // ---------------------------------------------------------------
 
-// Замена запрещённого IsBadReadPtr: та же сигнатура (TRUE = память
-// плохая), но через SEH, без обхода PAGE_GUARD ядром.
-static BOOL WINAPI SafeIsBadReadPtr(const void* lp, UINT_PTR ucb)
+static const DWORD RVA_CHECKSUM_HOOK   = 0x238A40;
+static const DWORD RVA_CHECKSUM_RESUME = 0x238A4B;
+
+static const unsigned char CHECKSUM_HOOK_SIG[11] =
 {
-    if (!lp || ucb == 0)
-        return TRUE;
+    0x53,                                     // push ebx
+    0x6A, 0x0C,                               // push 0xC
+    0xC6, 0x84, 0x24, 0xD4, 0x03, 0x00, 0x00, 0x30  // mov byte ptr [esp+0x3D4],0x30
+};
+
+static DWORD g_checksumResumeAddr = 0;
+static int g_checksumHookHits = 0;
+
+// Сохраняем указатель "this" из ChecksumCompute, чтобы позже (при
+// входе в лобби) перечитать ТОТ ЖЕ +0x30 напрямую, без вызова функции
+// целиком - проверяем, не правится ли аккумулятор тихо, в обход
+// FUN_006377a0.
+static void* g_checksumAppPtr = 0;
+
+static void __cdecl LogChecksumCompute(void* param1)
+{
+    ++g_checksumHookHits;
+    g_checksumAppPtr = param1;
+
+    int checksum = 0;
     __try
     {
-        volatile const unsigned char* p = (const unsigned char*)lp;
-        (void)p[0];
-        if (ucb > 1)
-            (void)p[ucb - 1];
-        return FALSE;
+        checksum = *(int*)((char*)param1 + 0x30);
     }
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
-        return TRUE;
+        Log("ChecksumCompute[%d]: param1=%08X - память +0x30 не читается",
+            g_checksumHookHits, (unsigned)(DWORD_PTR)param1);
+        return;
+    }
+
+    Log("ChecksumCompute[%d]: param1=%08X value=%d (%08X)",
+        g_checksumHookHits, (unsigned)(DWORD_PTR)param1, checksum, (unsigned)checksum);
+}
+
+__declspec(naked) static void ChecksumComputeThunk()
+{
+    __asm {
+        push ecx
+        push edx
+        push eax
+        push ecx
+        call LogChecksumCompute
+        add esp, 4
+        pop eax
+        pop edx
+        pop ecx
+        push ebx
+        push 0x0C
+        mov byte ptr [esp + 0x3D4], 0x30
+        jmp dword ptr [g_checksumResumeAddr]
     }
 }
+
+static bool InstallChecksumDiagnostic()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_CHECKSUM_HOOK);
+
+    if (memcmp(hook, CHECKSUM_HOOK_SIG, sizeof(CHECKSUM_HOOK_SIG)) != 0)
+    {
+        Log("ChecksumCompute: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5], hook[6], hook[7], hook[8], hook[9], hook[10]);
+        return false;
+    }
+
+    g_checksumResumeAddr = g_base + RVA_CHECKSUM_RESUME;
+
+    unsigned char patch[11];
+    memset(patch, 0x90, sizeof(patch));
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&ChecksumComputeThunk - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("ChecksumCompute: установлен на rva %06X", RVA_CHECKSUM_HOOK);
+    return true;
+}
+
+// Третий хук: FUN_0076b4b0 (RVA 0x36b4b0) - подтверждено, срабатывает
+// при каждом входе в лобби/партию (3 раза на 3 входа в прошлом тесте).
+// На этот раз не просто читаем её собственный [EAX+0x130] (там всегда
+// 0 - уже проверено), а ЗАОДНО перечитываем аккумулятор чек-суммы из
+// ChecksumCompute напрямую по сохранённому g_checksumAppPtr - если он
+// меняется между входами, значит его правит что-то в обход
+// FUN_006377a0 (которая, как подтвердил ChecksumCompute, вызывается
+// только один раз за сессию).
+static const DWORD RVA_LOBBY_ENTRY_HOOK   = 0x36B4F6;
+static const DWORD RVA_LOBBY_ENTRY_RESUME = 0x36B4FC;
+
+static const unsigned char LOBBY_ENTRY_SIG[6] = { 0x8B, 0x80, 0x30, 0x01, 0x00, 0x00 };
+
+static DWORD g_lobbyEntryResumeAddr = 0;
+static int g_lobbyEntryHits = 0;
+
+static void __cdecl LogLobbyEntry(void* pObj)
+{
+    ++g_lobbyEntryHits;
+
+    DWORD raw = 0;
+    __try { raw = *(DWORD*)((char*)pObj + 0x130); }
+    __except (EXCEPTION_EXECUTE_HANDLER) { raw = 0; }
+
+    if (g_checksumAppPtr == 0)
+    {
+        Log("LobbyEntry[%d]: pObj=%08X raw130=%08X (g_checksumAppPtr ещё не установлен)",
+            g_lobbyEntryHits, (unsigned)(DWORD_PTR)pObj, raw);
+        return;
+    }
+
+    int accum = 0;
+    __try { accum = *(int*)((char*)g_checksumAppPtr + 0x30); }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("LobbyEntry[%d]: pObj=%08X raw130=%08X, аккумулятор (%08X+0x30) не читается",
+            g_lobbyEntryHits, (unsigned)(DWORD_PTR)pObj, raw, (unsigned)(DWORD_PTR)g_checksumAppPtr);
+        return;
+    }
+
+    Log("LobbyEntry[%d]: pObj=%08X raw130=%08X, аккумулятор сейчас=%d (%08X)",
+        g_lobbyEntryHits, (unsigned)(DWORD_PTR)pObj, raw, accum, (unsigned)accum);
+}
+
+__declspec(naked) static void LobbyEntryThunk()
+{
+    __asm {
+        push eax
+        push ecx
+        push edx
+        push eax
+        call LogLobbyEntry
+        add esp, 4
+        pop edx
+        pop ecx
+        pop eax
+        mov eax, [eax + 0x130]
+        jmp dword ptr [g_lobbyEntryResumeAddr]
+    }
+}
+
+static bool InstallLobbyEntryHook()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_LOBBY_ENTRY_HOOK);
+
+    if (memcmp(hook, LOBBY_ENTRY_SIG, sizeof(LOBBY_ENTRY_SIG)) != 0)
+    {
+        Log("LobbyEntry: сигнатура не совпала (%02X %02X %02X %02X %02X %02X) - не патчим",
+            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5]);
+        return false;
+    }
+
+    g_lobbyEntryResumeAddr = g_base + RVA_LOBBY_ENTRY_RESUME;
+
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&LobbyEntryThunk - ((DWORD)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("LobbyEntry: установлен на rva %06X", RVA_LOBBY_ENTRY_HOOK);
+    return true;
+}
+
+// ---------------------------------------------------------------
+// OOS: FUN_00682EC0 (RVA 0x282EC0) — единственный билдер диалога
+// "Games out of synch" / OOS_TITLE. Один caller (0072ECF0):
+//   mov eax, [g_session]; add ecx, 0x3C; push ecx; push eax;
+//   call FUN_00682EC0; ret
+// После DIFF нет паузы и нет дисконнекта — caller сразу ret.
+// В прологе функции: mov byte [session+0xB20], 1 (каждый день,
+// до сравнения). Дальше call сверки векторов; jz ~+0x8D8
+// пропускает ~2 КБ билдера диалога при MATCH. Игра тикает дальше.
+// Пишем Logs\v2dll_oos.log на каждый дневной вызов (SYNC и DIFF).
+// Пролог 55 8B EC 6A FF + уникальный sub esp,0x140.
+//
+// Игра сверяет std::vector<dword> локальной сессии (arg0+0xB74) с
+// вектором пира (arg1 = packet+0x3C, команда "ingame_session").
+// FUN_00682EC0 вызывается КАЖДЫЙ игровой день в MP, не только при
+// OOS: при совпадении диалог не строится. Слотов обычно два
+// (resize(2)): слот 0 — аддитивная сумма/счётчик (растёт ~тысячи
+// за день), слот 1 в этом билде всегда 0. Дата в +0xB0C — часы,
+// эпоха 0x29C55C0 = 5000*365*24.
+// Рядом session+0xB84 — вектор 16-байтных записей (ptr + 3 dword).
+// В пакет MP он не входит; при OOS пишем локальный дамп, чтобы
+// два клиента сверили его между собой.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_OOS_REPORT = 0x282EC0;
+static const unsigned char OOS_POST_SEH[11] =
+    { 0x81, 0xEC, 0x40, 0x01, 0x00, 0x00, 0x53, 0x56, 0x8B, 0x75, 0x08 };
+
+static DWORD g_oosResume = 0;
+static void* g_realOosReport = 0;
+__declspec(align(16)) static unsigned char g_trampOosReport[32];
+static int g_oosHits = 0;
+static int g_syncHits = 0;
+static char g_lastChecksumLine[256] = "none";
+
+static void RememberChecksum(const char* fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    _vsnprintf_s(g_lastChecksumLine, sizeof(g_lastChecksumLine), _TRUNCATE, fmt, ap);
+    va_end(ap);
+}
+
+static void LogOosFile(const char* fmt, ...)
+{
+    InitLogDir();
+
+    if (g_logCsInit)
+        EnterCriticalSection(&g_logCs);
+
+    FILE* f = 0;
+    if (_wfopen_s(&f, g_oosLogFile, g_oosLogStarted ? L"a" : L"w") != 0 || !f)
+    {
+        if (g_logCsInit)
+            LeaveCriticalSection(&g_logCs);
+        return;
+    }
+    g_oosLogStarted = true;
+
+    SYSTEMTIME st;
+    GetLocalTime(&st);
+    fprintf(f, "%04u-%02u-%02u %02u:%02u:%02u.%03u ",
+        (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
+        (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
+        (unsigned)st.wMilliseconds);
+
+    va_list ap;
+    va_start(ap, fmt);
+    vfprintf(f, fmt, ap);
+    va_end(ap);
+    fprintf(f, "\n");
+    fclose(f);
+
+    if (g_logCsInit)
+        LeaveCriticalSection(&g_logCs);
+}
+
+static void DumpPtrLine(const char* tag, void* p)
+{
+    unsigned d[8];
+    memset(d, 0, sizeof(d));
+    int ok = 0;
+    __try
+    {
+        memcpy(d, p, sizeof(d));
+        ok = 1;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        ok = 0;
+    }
+
+    if (!ok)
+    {
+        LogOosFile("  %s=%08X unreadable", tag, (unsigned)(DWORD_PTR)p);
+        return;
+    }
+    LogOosFile("  %s=%08X %08X %08X %08X %08X %08X %08X %08X %08X",
+        tag, (unsigned)(DWORD_PTR)p,
+        d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7]);
+}
+
+static const int OOS_VEC_OFF = 0xB74;
+static const int OOS_DATE_OFF = 0xB0C;
+static const int OOS_FLAG_OFF = 0xB20;
+static const int OOS_REC_OFF = 0xB84;
+static const int OOS_MAX_SLOTS = 256;
+static const int OOS_REC_MAX = 256;
+static const int OOS_DATE_EPOCH = 0x029C55C0;
+
+static const char* OosSlotLabel(int i)
+{
+    if (i == 0)
+        return "sum";
+    if (i == 1)
+        return "aux";
+    return "extra";
+}
+
+static void FormatVic2Date(int raw, char* buf, size_t bufsz)
+{
+    static const int kMDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int adj = raw - OOS_DATE_EPOCH;
+    int year = 0;
+    int month = 1;
+    int day = 1;
+    int hour = 0;
+    if (adj >= 0)
+    {
+        year = adj / 8760;
+        int rem = adj % 8760;
+        hour = rem % 24;
+        int doy = rem / 24;
+        month = 1;
+        for (int m = 0; m < 12; ++m)
+        {
+            if (doy < kMDays[m])
+            {
+                day = doy + 1;
+                break;
+            }
+            doy -= kMDays[m];
+            month++;
+        }
+        if (month > 12)
+        {
+            month = 12;
+            day = 31;
+        }
+    }
+    sprintf_s(buf, bufsz, "%04d-%02d-%02d %02d:00", year, month, day, hour);
+}
+
+static int CopyVecU32(void* vecObj, unsigned* out, int cap, int* outCount)
+{
+    *outCount = -1;
+    unsigned begin = 0;
+    unsigned end = 0;
+    __try
+    {
+        begin = *(unsigned*)vecObj;
+        end = *((unsigned*)vecObj + 1);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+
+    if (!begin)
+    {
+        *outCount = 0;
+        return 1;
+    }
+    if (end < begin)
+        return 0;
+
+    unsigned nbytes = end - begin;
+    if (nbytes % 4)
+        return 0;
+
+    int n = (int)(nbytes / 4);
+    *outCount = n;
+    int copy = n;
+    if (copy > cap)
+        copy = cap;
+    if (copy <= 0)
+        return 1;
+
+    __try
+    {
+        memcpy(out, (const void*)(DWORD_PTR)begin, (size_t)copy * 4);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+    return 1;
+}
+
+static void LogIdentDayTail()
+{
+    LONG total = IdentSkipTotal();
+    LONG delta = total - g_identSkipLogged;
+    g_identSkipLogged = total;
+    char diag[320];
+    FormatIdentDiag(diag, sizeof(diag));
+    LogOosFile("  %s today_delta=%d", diag, (int)delta);
+}
+
+static void NoteOosMilestones(int isDiff, int realDiff, int raw, const char* buf)
+{
+    RememberSessionClock(raw, buf);
+    if (isDiff && !g_firstOosRaw && raw)
+    {
+        g_firstOosRaw = raw;
+        strcpy_s(g_firstOosBuf, buf);
+        LogOosFile("FIRST OOS (любой DIFF, в т.ч. local=0) date=%s", buf);
+    }
+    if (realDiff && !g_firstRealOosRaw && raw)
+    {
+        g_firstRealOosRaw = raw;
+        strcpy_s(g_firstRealOosBuf, buf);
+        LogOosFile("FIRST real OOS (оба checksum ненулевые и разные) date=%s", buf);
+    }
+}
+
+static void TryLogCStringField(const char* tag, void* p)
+{
+    char tmp[64];
+    memset(tmp, 0, sizeof(tmp));
+    int ok = 0;
+    __try
+    {
+        const char* s = *(const char**)p;
+        if (s)
+        {
+            memcpy(tmp, s, sizeof(tmp) - 1);
+            ok = 1;
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        ok = 0;
+    }
+    if (!ok || tmp[0] < 32 || tmp[0] > 126)
+        return;
+    for (int i = 0; tmp[i]; ++i)
+    {
+        if ((unsigned char)tmp[i] < 32 || (unsigned char)tmp[i] > 126)
+        {
+            tmp[i] = 0;
+            break;
+        }
+    }
+    if (tmp[0])
+        LogOosFile("  %s=\"%s\"", tag, tmp);
+}
+
+static void TryLogPeerCmd(void* vecAt3C)
+{
+    if (!vecAt3C)
+        return;
+    char tmp[32];
+    memset(tmp, 0, sizeof(tmp));
+    unsigned size = 0;
+    unsigned cap = 0;
+    __try
+    {
+        char* obj = (char*)vecAt3C - 0x3C;
+        size = *(unsigned*)(obj + 0x1C);
+        cap = *(unsigned*)(obj + 0x20);
+        const char* s = obj + 8;
+        if (cap >= 16)
+            s = *(const char**)(obj + 8);
+        if (s && size > 0 && size < sizeof(tmp))
+            memcpy(tmp, s, size);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+    if (tmp[0] >= 32 && tmp[0] <= 126)
+        LogOosFile("  cmd=\"%s\"", tmp);
+}
+
+static int LooksLikeTag(const char* p)
+{
+    unsigned char a = (unsigned char)p[0];
+    unsigned char b = (unsigned char)p[1];
+    unsigned char c = (unsigned char)p[2];
+    if (a < 'A' || a > 'Z' || b < 'A' || b > 'Z')
+        return 0;
+    if (!((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')))
+        return 0;
+    return 1;
+}
+
+static void FillTag(char* out, void* obj)
+{
+    out[0] = 0;
+    if (!obj || SafeIsBadReadPtr(obj, 0x40))
+        return;
+    __try
+    {
+        static const int kOffs[] = { 4, 8, 0xC, 0x20, 0x24, 0x30, 0 };
+        for (int k = 0; k < 7; ++k)
+        {
+            const char* p = (const char*)obj + kOffs[k];
+            if (LooksLikeTag(p))
+            {
+                out[0] = p[0];
+                out[1] = p[1];
+                out[2] = p[2];
+                out[3] = (p[3] >= 'A' && p[3] <= 'Z') ? p[3] : 0;
+                out[4] = 0;
+                return;
+            }
+            if (SafeIsBadReadPtr(p, 4))
+                continue;
+            void* q = *(void**)p;
+            if (!q || SafeIsBadReadPtr(q, 4))
+                continue;
+            const char* t = (const char*)q;
+            if (LooksLikeTag(t))
+            {
+                out[0] = t[0];
+                out[1] = t[1];
+                out[2] = t[2];
+                out[3] = 0;
+                return;
+            }
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        out[0] = 0;
+    }
+}
+
+static void DumpLocalExtra(void* session, int verbose, int* outCount, unsigned* outXor)
+{
+    *outCount = -1;
+    *outXor = 0;
+    if (!session)
+        return;
+
+    unsigned begin = 0;
+    unsigned end = 0;
+    __try
+    {
+        begin = *(unsigned*)((char*)session + OOS_REC_OFF);
+        end = *(unsigned*)((char*)session + OOS_REC_OFF + 4);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+
+    if (!begin || end < begin)
+    {
+        *outCount = 0;
+        return;
+    }
+
+    unsigned nbytes = end - begin;
+    if (nbytes % 16)
+    {
+        *outCount = -2;
+        return;
+    }
+
+    int n = (int)(nbytes / 16);
+    *outCount = n;
+    int show = n;
+    if (show > OOS_REC_MAX)
+        show = OOS_REC_MAX;
+
+    unsigned x = 0;
+    for (int i = 0; i < show; ++i)
+    {
+        unsigned rec[4];
+        memset(rec, 0, sizeof(rec));
+        __try
+        {
+            memcpy(rec, (const void*)(DWORD_PTR)(begin + (unsigned)i * 16), 16);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            break;
+        }
+        x ^= rec[0] ^ rec[1] ^ rec[2] ^ rec[3];
+        if (verbose)
+        {
+            char tag[8];
+            FillTag(tag, (void*)(DWORD_PTR)rec[0]);
+            LogOosFile("  rec[%d] ptr=%08X a=%08X b=%08X c=%08X tag=%s",
+                i, rec[0], rec[1], rec[2], rec[3], tag[0] ? tag : "-");
+        }
+    }
+    *outXor = x;
+    if (verbose && n > OOS_REC_MAX)
+        LogOosFile("  rec truncated to %d / %d", OOS_REC_MAX, n);
+
+    if (verbose)
+    {
+        unsigned d[16];
+        memset(d, 0, sizeof(d));
+        __try
+        {
+            memcpy(d, (char*)session + 0xB00, sizeof(d));
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+        }
+        LogOosFile("  session+B00 %08X %08X %08X %08X %08X %08X %08X %08X",
+            d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7]);
+        LogOosFile("  session+B20 %08X %08X %08X %08X %08X %08X %08X %08X",
+            d[8], d[9], d[10], d[11], d[12], d[13], d[14], d[15]);
+
+        void* p24 = 0;
+        __try
+        {
+            p24 = *(void**)((char*)session + 0xB24);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            p24 = 0;
+        }
+        if (p24)
+            DumpPtrLine("session+B24obj", p24);
+    }
+}
+
+static void __cdecl ReportOos(void* a0, void* a1)
+{
+
+    unsigned int cw = 0;
+    _controlfp_s(&cw, 0, 0);
+    unsigned int mxcsr = _mm_getcsr();
+
+    int fileCs = 0;
+    int fileCsOk = 0;
+    if (g_checksumAppPtr)
+    {
+        __try
+        {
+            fileCs = *(int*)((char*)g_checksumAppPtr + 0x30);
+            fileCsOk = 1;
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            fileCsOk = 0;
+        }
+    }
+
+    int dateRaw = 0;
+    int dateOk = 0;
+    char dateBuf[32];
+    dateBuf[0] = 0;
+    if (a0)
+    {
+        __try
+        {
+            dateRaw = *(int*)((char*)a0 + OOS_DATE_OFF);
+            dateOk = 1;
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            dateOk = 0;
+        }
+    }
+    if (dateOk)
+        FormatVic2Date(dateRaw, dateBuf, sizeof(dateBuf));
+
+    unsigned char oosFlag = 0;
+    int oosFlagOk = 0;
+    if (a0)
+    {
+        __try
+        {
+            oosFlag = *((unsigned char*)a0 + OOS_FLAG_OFF);
+            oosFlagOk = 1;
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            oosFlagOk = 0;
+        }
+    }
+
+    unsigned localBuf[OOS_MAX_SLOTS];
+    unsigned remoteBuf[OOS_MAX_SLOTS];
+    memset(localBuf, 0, sizeof(localBuf));
+    memset(remoteBuf, 0, sizeof(remoteBuf));
+    int nLocal = -1;
+    int nRemote = -1;
+    int localOk = 0;
+    int remoteOk = 0;
+    if (a0)
+        localOk = CopyVecU32((char*)a0 + OOS_VEC_OFF, localBuf, OOS_MAX_SLOTS, &nLocal);
+    if (a1)
+        remoteOk = CopyVecU32(a1, remoteBuf, OOS_MAX_SLOTS, &nRemote);
+
+    int nCmp = 0;
+    if (localOk && remoteOk && nLocal >= 0 && nRemote >= 0)
+        nCmp = nLocal < nRemote ? nLocal : nRemote;
+    if (nCmp > OOS_MAX_SLOTS)
+        nCmp = OOS_MAX_SLOTS;
+
+    int nDiff = 0;
+    int firstDiff = -1;
+    for (int i = 0; i < nCmp; ++i)
+    {
+        if (localBuf[i] != remoteBuf[i])
+        {
+            if (firstDiff < 0)
+                firstDiff = i;
+            ++nDiff;
+        }
+    }
+
+    char summary[192];
+    const int isDiff = (!localOk || !remoteOk || nLocal != nRemote || nDiff > 0);
+    unsigned sumL = (localOk && nLocal > 0) ? localBuf[0] : 0;
+    unsigned sumR = (remoteOk && nRemote > 0) ? remoteBuf[0] : 0;
+    unsigned auxL = (localOk && nLocal > 1) ? localBuf[1] : 0;
+    unsigned auxR = (remoteOk && nRemote > 1) ? remoteBuf[1] : 0;
+    const int realDiff = isDiff && sumL > 0 && sumR > 0 && sumL != sumR;
+    NoteOosMilestones(isDiff, realDiff, dateOk ? dateRaw : 0, dateOk ? dateBuf : "");
+
+    if (!isDiff)
+    {
+        ++g_syncHits;
+        int recN = -1;
+        unsigned recXor = 0;
+        DumpLocalExtra(a0, 0, &recN, &recXor);
+        LogOosFile("SYNC n=%d date=%s sum=%u/%u aux=%u/%u rec=%d xor=%08X",
+            g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, auxL, auxR, recN, recXor);
+        RememberChecksum("SYNC n=%d date=%s sum=%u/%u rec=%d xor=%08X",
+            g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, recN, recXor);
+        LogIdentDayTail();
+        return;
+    }
+
+    ++g_oosHits;
+
+    if (!localOk || !remoteOk)
+        sprintf_s(summary, "vectors unreadable local_ok=%d remote_ok=%d", localOk, remoteOk);
+    else if (nLocal != nRemote)
+        sprintf_s(summary, "COUNT mismatch local=%d remote=%d", nLocal, nRemote);
+    else if (firstDiff >= 0)
+        sprintf_s(summary, "%d/%d DIFF Checksum:%d %s local=%u remote=%u delta=%d",
+            nDiff, nCmp, firstDiff, OosSlotLabel(firstDiff),
+            localBuf[firstDiff], remoteBuf[firstDiff],
+            (int)localBuf[firstDiff] - (int)remoteBuf[firstDiff]);
+    else
+        sprintf_s(summary, "%d/%d DIFF", nDiff, nCmp);
+
+    RememberChecksum("OOS hit=%d after %d sync date=%s %s",
+        g_oosHits, g_syncHits, dateOk ? dateBuf : "?", summary);
+
+    Log("OOS[%d]: %s date=%s",
+        g_oosHits, summary, dateOk ? dateBuf : "?");
+
+    LogOosFile("OOS hit=%d after %d sync days dll=%s tick=%u date=%s raw=%d a0=%08X a1=%08X fpu_cw=%08X mxcsr=%08X",
+        g_oosHits, g_syncHits, MOD_VERSION, GetTickCount(),
+        dateOk ? dateBuf : "?", dateOk ? dateRaw : 0,
+        (unsigned)(DWORD_PTR)a0, (unsigned)(DWORD_PTR)a1,
+        cw, mxcsr);
+    LogOosFile("  %s", summary);
+    LogIdentDayTail();
+    {
+        int recN = -1;
+        unsigned recXor = 0;
+        DumpLocalExtra(a0, 1, &recN, &recXor);
+        LogOosFile("  local +0xB84 rec=%d xor=%08X (в пакет не входит — сравни с таким же блоком у пира)",
+            recN, recXor);
+    }
+    if (sumL == 0 && sumR > 100)
+        LogOosFile("  NOTE: local sum=0 после ненулевого remote — локальный аккумулятор сброшен (часто хвост после уже показанного OOS)");
+    if (oosFlagOk)
+        LogOosFile("  session+0xB20 oos_flag=%u (в прологе ещё 0, флаг ставит сама функция)", (unsigned)oosFlag);
+    if (fileCsOk)
+        LogOosFile("  lobby_file_checksum=%d (%08X)  (это лобби-файлы, не lockstep)", fileCs, (unsigned)fileCs);
+
+    if ((cw & _MCW_PC) != _PC_53)
+        LogOosFile("  NOTE: FPU precision != 53-bit (cw=%08X) — D3D/оверлей мог сбить хеш", cw);
+    if ((mxcsr & 0x8040) != 0x8040)
+        LogOosFile("  NOTE: MXCSR без FTZ/DAZ (mxcsr=%08X)", mxcsr);
+
+    DumpPtrLine("arg0", a0);
+    DumpPtrLine("arg1", a1);
+    if (a1)
+    {
+        void* peer = (char*)a1 - 0x3C;
+        DumpPtrLine("peer", peer);
+        TryLogPeerCmd(a1);
+    }
+
+    LogOosFile("  vector local @session+0xB74  count=%s%d  remote @peer+0x3C count=%s%d",
+        localOk ? "" : "ERR ", nLocal,
+        remoteOk ? "" : "ERR ", nRemote);
+    LogOosFile("  --- slots (это ровно то, что сверяет диалог: Checksum: i local : remote) ---");
+
+    if (!localOk && !remoteOk)
+        LogOosFile("  (оба вектора не прочитались)");
+    else
+    {
+        int nShow = nCmp;
+        if (nLocal > nShow)
+            nShow = nLocal;
+        if (nRemote > nShow)
+            nShow = nRemote;
+        if (nShow > OOS_MAX_SLOTS)
+            nShow = OOS_MAX_SLOTS;
+
+        for (int i = 0; i < nShow; ++i)
+        {
+            const int haveL = localOk && i < nLocal && i < OOS_MAX_SLOTS;
+            const int haveR = remoteOk && i < nRemote && i < OOS_MAX_SLOTS;
+            if (haveL && haveR)
+            {
+                const int diff = localBuf[i] != remoteBuf[i];
+                LogOosFile("  Checksum:%d %-8s  local=%d (%08X)  remote=%d (%08X)  %s",
+                    i, OosSlotLabel(i),
+                    (int)localBuf[i], localBuf[i],
+                    (int)remoteBuf[i], remoteBuf[i],
+                    diff ? "DIFF" : "MATCH");
+            }
+            else if (haveL)
+            {
+                LogOosFile("  Checksum:%d %-8s  local=%d (%08X)  remote=<missing>  DIFF",
+                    i, OosSlotLabel(i), (int)localBuf[i], localBuf[i]);
+            }
+            else if (haveR)
+            {
+                LogOosFile("  Checksum:%d %-8s  local=<missing>  remote=%d (%08X)  DIFF",
+                    i, OosSlotLabel(i), (int)remoteBuf[i], remoteBuf[i]);
+            }
+        }
+        if ((localOk && nLocal > OOS_MAX_SLOTS) || (remoteOk && nRemote > OOS_MAX_SLOTS))
+            LogOosFile("  (обрезано до %d слотов)", OOS_MAX_SLOTS);
+    }
+}
+
+static void __stdcall AccChkEnter(void* a0, void* a1);
+static void __stdcall AccChk(LONGLONG t0);
+static LONGLONG __stdcall DiagNow();
+
+// 282EC0: stdcall 2, ret 8. Единственный E8: 32ECFA. Не ESI-скрытый
+// (arg0/arg1 на стеке). C++-обёртка затрёт ESI на время ReportOos —
+// naked сохраняет ESI/EDI/EBX/ECX. chk= — wall original, включая
+// вложенный idle из насоса; в leftover не вычитаем.
+__declspec(naked) static void HookOosReport()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        sub esp, 8
+        push ecx
+        push esi
+        push edi
+        push ebx
+        push dword ptr [ebp + 12]
+        push dword ptr [ebp + 8]
+        call AccChkEnter
+        call DiagNow
+        mov dword ptr [ebp - 8], eax
+        mov dword ptr [ebp - 4], edx
+        pop ebx
+        pop edi
+        pop esi
+        pop ecx
+        push dword ptr [ebp + 12]
+        push dword ptr [ebp + 8]
+        call dword ptr [g_realOosReport]
+        push eax
+        push dword ptr [ebp - 4]
+        push dword ptr [ebp - 8]
+        call AccChk
+        pop eax
+        mov esp, ebp
+        pop ebp
+        ret 8
+    }
+}
+
+static bool InstallOosWatch()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_OOS_REPORT);
+    if (hook[0] != 0x55 || hook[1] != 0x8B || hook[2] != 0xEC ||
+        hook[3] != 0x6A || hook[4] != 0xFF)
+    {
+        Log("OosWatch: пролог не совпал (%02X %02X %02X %02X %02X)",
+            hook[0], hook[1], hook[2], hook[3], hook[4]);
+        return false;
+    }
+    if (memcmp(hook + 24, OOS_POST_SEH, sizeof(OOS_POST_SEH)) != 0)
+    {
+        Log("OosWatch: sub esp,0x140 не совпал");
+        return false;
+    }
+
+    const unsigned steal = 5;
+    DWORD old = 0;
+    if (!VirtualProtect(g_trampOosReport, sizeof(g_trampOosReport), PAGE_EXECUTE_READWRITE, &old))
+        return false;
+    memcpy(g_trampOosReport, hook, steal);
+    g_trampOosReport[steal] = 0xE9;
+    *(DWORD*)(g_trampOosReport + steal + 1) =
+        (DWORD)(hook + steal) - ((DWORD)(g_trampOosReport + steal + 5));
+    g_realOosReport = g_trampOosReport;
+    g_oosResume = g_base + RVA_OOS_REPORT + steal;
+
+    if (!VirtualProtect(hook, steal, PAGE_EXECUTE_READWRITE, &old))
+        return false;
+    unsigned char jmp[5];
+    jmp[0] = 0xE9;
+    *(DWORD*)(jmp + 1) = (DWORD)(DWORD_PTR)&HookOosReport - ((DWORD)hook + 5);
+    memcpy(hook, jmp, steal);
+    VirtualProtect(hook, steal, old, &old);
+    FlushInstructionCache(GetCurrentProcess(), hook, steal);
+    FlushInstructionCache(GetCurrentProcess(), g_trampOosReport, sizeof(g_trampOosReport));
+
+    Log("OosWatch: FUN_00682EC0 rva %06X chk= + Logs\\v2dll_oos.log", RVA_OOS_REPORT);
+    if (g_settings.enableOosLog)
+        LogOosFile("armed dll=%s (SYNC/OOS, ident_skip, days since first real OOS)", MOD_VERSION);
+    return true;
+}
+
+// ---------------------------------------------------------------
+// Стабильность движка: FPU, D3D, куча, TBB
+//
+// Цены в перехваченном UpdatePrice уже int64 (фикс. точка 2^15) —
+// переводить их на float незачем. Деньги фабрик в дампах ещё double,
+// x87 держит 80-битные промежуточные, а D3D9 без FPU_PRESERVE сбивает
+// control word в 24 бита. Отсюда десинк между машинами с разным GPU
+// и оверлеями.
+//
+// Параллель в exe уже есть: Intel TBB (task_scheduler_init). Второй
+// пул поверх него не ставим — капим TBB на фиксированное N (ini) и
+// пиним FPU на старте каждого потока. N одинаково у всех с этой DLL.
+//
+// LAA у текущего v2game.exe уже включён (Characteristics 0x20).
+// ---------------------------------------------------------------
+
+static const DWORD RVA_MAIN_LOOP = 0x5DF550;
+static const unsigned char MAIN_LOOP_SIG[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+static const DWORD D3DCREATE_FPU_PRESERVE_FLAG = 0x00000002;
+static const DWORD D3DPRESENT_INTERVAL_IMMEDIATE = 0x80000000;
+static const int D3DPRESENT_INTERVAL_OFF = 52;
+static const int D3D9_VT_CREATEDEVICE = 16;
+static const int D3D9DEV_VT_RESET = 16;
+static const int D3D9DEV_VT_PRESENT = 17;
+static const char TBB_INIT_MANGLE[] = "?initialize@task_scheduler_init@tbb@@QAEXHI@Z";
+
+static DWORD g_mainLoopResume = 0;
+static int g_tbbMaxThreads = 8;
 
 static void PinFpu()
 {
@@ -4659,73 +7259,93 @@ static bool HookIat(HMODULE module, const char* dllName, const char* funcName, v
         return false;
 
     unsigned char* base = (unsigned char*)module;
-    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)base;
-    if (dos->e_magic != IMAGE_DOS_SIGNATURE)
-        return false;
-
-    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(base + dos->e_lfanew);
-    if (nt->Signature != IMAGE_NT_SIGNATURE)
-        return false;
-
-    DWORD importRva = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress;
-    if (!importRva)
-        return false;
-
-    IMAGE_IMPORT_DESCRIPTOR* desc = (IMAGE_IMPORT_DESCRIPTOR*)(base + importRva);
-    for (; desc->Name; ++desc)
+    bool ok = false;
+    __try
     {
-        const char* name = (const char*)(base + desc->Name);
-        if (_stricmp(name, dllName) != 0)
-            continue;
+        IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)base;
+        if (dos->e_magic != IMAGE_DOS_SIGNATURE)
+            return false;
 
-        IMAGE_THUNK_DATA32* thunk = (IMAGE_THUNK_DATA32*)(base + desc->FirstThunk);
-        IMAGE_THUNK_DATA32* origThunk = desc->OriginalFirstThunk
-            ? (IMAGE_THUNK_DATA32*)(base + desc->OriginalFirstThunk)
-            : thunk;
+        IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(base + dos->e_lfanew);
+        if (nt->Signature != IMAGE_NT_SIGNATURE)
+            return false;
 
-        for (; thunk->u1.Function; ++thunk, ++origThunk)
+        DWORD imageSize = nt->OptionalHeader.SizeOfImage;
+        DWORD importRva = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress;
+        DWORD importSize = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].Size;
+        if (!importRva || importRva >= imageSize)
+            return false;
+
+        IMAGE_IMPORT_DESCRIPTOR* desc = (IMAGE_IMPORT_DESCRIPTOR*)(base + importRva);
+        IMAGE_IMPORT_DESCRIPTOR* descEnd = importSize
+            ? (IMAGE_IMPORT_DESCRIPTOR*)(base + importRva + importSize)
+            : desc + 64;
+
+        for (; desc < descEnd && desc->Name; ++desc)
         {
-            if (origThunk->u1.Ordinal & IMAGE_ORDINAL_FLAG32)
+            if (desc->Name >= imageSize || desc->FirstThunk >= imageSize)
+                continue;
+            // Без OriginalFirstThunk FirstThunk уже адреса функций, не RVA имён.
+            if (!desc->OriginalFirstThunk || desc->OriginalFirstThunk >= imageSize)
                 continue;
 
-            IMAGE_IMPORT_BY_NAME* byName = (IMAGE_IMPORT_BY_NAME*)(base + origThunk->u1.AddressOfData);
-            if (strcmp((const char*)byName->Name, funcName) != 0)
+            const char* name = (const char*)(base + desc->Name);
+            if (_stricmp(name, dllName) != 0)
                 continue;
 
-            DWORD* slot = (DWORD*)&thunk->u1.Function;
-            if (*slot == (DWORD)(DWORD_PTR)hook)
-                return true;
+            IMAGE_THUNK_DATA32* thunk = (IMAGE_THUNK_DATA32*)(base + desc->FirstThunk);
+            IMAGE_THUNK_DATA32* origThunk = (IMAGE_THUNK_DATA32*)(base + desc->OriginalFirstThunk);
 
-            HMODULE expected = GetModuleHandleA(dllName);
-            if (expected)
+            for (; thunk->u1.Function; ++thunk, ++origThunk)
             {
-                MEMORY_BASIC_INFORMATION mbi;
-                memset(&mbi, 0, sizeof(mbi));
-                if (!VirtualQuery((void*)(DWORD_PTR)*slot, &mbi, sizeof(mbi)))
+                if ((unsigned char*)origThunk >= base + imageSize)
+                    break;
+                if (origThunk->u1.Ordinal & IMAGE_ORDINAL_FLAG32)
+                    continue;
+
+                DWORD aod = origThunk->u1.AddressOfData;
+                if (!aod || aod >= imageSize)
+                    continue;
+
+                IMAGE_IMPORT_BY_NAME* byName = (IMAGE_IMPORT_BY_NAME*)(base + aod);
+                if (strcmp((const char*)byName->Name, funcName) != 0)
+                    continue;
+
+                DWORD* slot = (DWORD*)&thunk->u1.Function;
+                if (*slot == (DWORD)(DWORD_PTR)hook)
+                    return true;
+
+                HMODULE expected = GetModuleHandleA(dllName);
+                if (expected)
+                {
+                    MEMORY_BASIC_INFORMATION mbi;
+                    memset(&mbi, 0, sizeof(mbi));
+                    if (!VirtualQuery((void*)(DWORD_PTR)*slot, &mbi, sizeof(mbi)))
+                        return false;
+                    if (mbi.AllocationBase == module)
+                        return false;
+                }
+
+                DWORD oldProtect = 0;
+                if (!VirtualProtect(slot, sizeof(DWORD), PAGE_EXECUTE_READWRITE, &oldProtect))
                     return false;
-                // Непривязанный IAT держит RVA на имя в нашем модуле.
-                // После bind указатель смотрит в чужой модуль (kernel32
-                // часто форвардит в kernelbase — это нормально).
-                if (mbi.AllocationBase == module)
-                    return false;
+
+                if (orig && !*orig)
+                    *orig = (void*)(DWORD_PTR)*slot;
+                *slot = (DWORD)(DWORD_PTR)hook;
+                VirtualProtect(slot, sizeof(DWORD), oldProtect, &oldProtect);
+                ok = true;
+                return true;
             }
-
-            DWORD oldProtect = 0;
-            if (!VirtualProtect(slot, sizeof(DWORD), PAGE_EXECUTE_READWRITE, &oldProtect))
-                return false;
-
-            if (orig && !*orig)
-                *orig = (void*)(DWORD_PTR)*slot;
-            *slot = (DWORD)(DWORD_PTR)hook;
-            VirtualProtect(slot, sizeof(DWORD), oldProtect, &oldProtect);
-            return true;
         }
     }
-    return false;
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return false;
+    }
+    return ok;
 }
 
-// Как HookIat, но для импорта по ординалу (у ws2_32 нет имён в IAT
-// exe: select - ординал 18). Портировано из тестовой ветки.
 static bool HookIatOrdinal(HMODULE module, const char* dllName, WORD ordinal, void* hook, void** orig)
 {
     if (!module || !dllName || !ordinal || !hook)
@@ -4828,13 +7448,6 @@ typedef HRESULT (WINAPI* tD3D9CreateDevice)(void*, UINT, UINT, HWND, DWORD, void
 typedef HRESULT (WINAPI* tD3D9Reset)(void*, void*);
 typedef HRESULT (WINAPI* tD3D9Present)(void*, const void*, const void*, HWND, const void*);
 
-static const DWORD D3DCREATE_FPU_PRESERVE_FLAG = 0x00000002;
-static const DWORD D3DPRESENT_INTERVAL_IMMEDIATE = 0x80000000;
-static const int D3DPRESENT_INTERVAL_OFF = 52;
-static const int D3D9_VT_CREATEDEVICE = 16;
-static const int D3D9DEV_VT_RESET = 16;
-static const int D3D9DEV_VT_PRESENT = 17;
-
 static void TryPatchLateModules();
 static HMODULE WINAPI HookLoadLibraryA(LPCSTR name);
 static HMODULE WINAPI HookLoadLibraryW(LPCWSTR name);
@@ -4849,6 +7462,309 @@ static tD3D9CreateDevice   g_realCreateDevice = 0;
 static tD3D9Reset          g_realReset = 0;
 static tD3D9Present        g_realPresent = 0;
 static void*               g_realTbbInit = 0;
+typedef void (WINAPI* tSleep)(DWORD);
+static tSleep              g_realSleep = 0;
+typedef BOOL (WINAPI* tPeekMessageA)(LPMSG, HWND, UINT, UINT, UINT);
+typedef LRESULT (WINAPI* tDispatchMessageA)(const MSG*);
+static tPeekMessageA       g_realPeekMessageA = 0;
+static tDispatchMessageA   g_realDispatchMessageA = 0;
+static DWORD               g_seenSleepRva[24];
+static DWORD               g_seenSleepMs[24];
+static LONG                g_seenSleepN = 0;
+static volatile LONG       g_presentFrames = 0;
+static volatile LONG       g_presentWaitMs = 0;
+static volatile LONG       g_presentWaitMax = 0;
+static volatile LONG       g_sleepCalls = 0;
+static volatile LONG       g_sleepSumMs = 0;
+static volatile LONG       g_tgtCalls = 0;
+static volatile LONG       g_selectCalls = 0;
+static volatile LONG       g_recvCalls = 0;
+static volatile LONG       g_recvSumMs = 0;
+static volatile LONG       g_wfsoCalls = 0;
+static volatile LONG       g_wfsoSumMs = 0;
+static volatile LONG       g_qpcCalls = 0;
+static volatile LONG       g_idleEu3N = 0;
+static volatile LONG       g_idleEu3Ms = 0;
+static volatile LONG       g_idleNudgeN = 0;
+static volatile LONG       g_idleNudgeMs = 0;
+static volatile LONG       g_idleIngameN = 0;
+static volatile LONG       g_idleIngameMs = 0;
+static volatile LONG       g_idleIngameMax = 0;
+static volatile LONG       g_selMainN = 0;
+static volatile LONG       g_selMainMs = 0;
+static volatile LONG       g_gapToIdleMs = 0;
+static volatile LONG       g_gapToPresentMs = 0;
+static volatile LONG       g_stallSumMs = 0;
+static volatile LONG       g_stallMaxMs = 0;
+static volatile LONG       g_dirtyN = 0;
+static volatile LONG       g_dirtyUs = 0;
+static volatile LONG       g_dirtyMax = 0;
+static volatile LONG       g_pickN = 0;
+static volatile LONG       g_pickUs = 0;
+static volatile LONG       g_moveN = 0;
+static volatile LONG       g_moveUs = 0;
+static volatile LONG       g_projSkipN = 0;
+static volatile LONG       g_uvN = 0;
+static volatile LONG       g_uvUs = 0;
+static volatile LONG       g_uvReuseN = 0;
+static volatile LONG       g_uvPoolLive = 0;
+static volatile LONG       g_uvPoolBusy = 0;
+static volatile LONG       g_projN = 0;
+static volatile LONG       g_projUs = 0;
+static volatile LONG       g_ntfN = 0;
+static volatile LONG       g_ntfUs = 0;
+static volatile LONG       g_uvSkipRebuildN = 0;
+static volatile LONG       g_uvSkipLocN = 0;
+static volatile LONG       g_evtN = 0;
+static volatile LONG       g_evtUs = 0;
+static volatile LONG       g_dlgN = 0;
+static volatile LONG       g_dlgUs = 0;
+static volatile LONG       g_infN = 0;
+static volatile LONG       g_infUs = 0;
+static volatile LONG       g_mapN = 0;
+static volatile LONG       g_mapUs = 0;
+static volatile LONG       g_winReuseN = 0;
+static volatile LONG       g_ovlN = 0;
+static volatile LONG       g_ovlUs = 0;
+static volatile LONG       g_ovlMax = 0;
+static volatile LONG       g_camN = 0;
+static volatile LONG       g_camUs = 0;
+static volatile LONG       g_camMax = 0;
+static volatile LONG       g_mtxN = 0;
+static volatile LONG       g_mtxUs = 0;
+static volatile LONG       g_mtxMax = 0;
+static volatile LONG       g_vwN = 0;
+static volatile LONG       g_vwUs = 0;
+static volatile LONG       g_vwMax = 0;
+static volatile LONG       g_icoN = 0;
+static volatile LONG       g_icoUs = 0;
+static volatile LONG       g_icoMax = 0;
+static volatile LONG       g_gfxN = 0;
+static volatile LONG       g_gfxUs = 0;
+static volatile LONG       g_gfxMax = 0;
+static volatile LONG       g_preN = 0;
+static volatile LONG       g_preUs = 0;
+static volatile LONG       g_preMax = 0;
+static volatile LONG       g_gui2N = 0;
+static volatile LONG       g_gui2Us = 0;
+static volatile LONG       g_gui2Max = 0;
+static volatile LONG       g_clnN = 0;
+static volatile LONG       g_clnUs = 0;
+static volatile LONG       g_clnMax = 0;
+static volatile LONG       g_tailN = 0;
+static volatile LONG       g_tailUs = 0;
+static volatile LONG       g_tailMax = 0;
+static volatile LONG       g_hdN = 0;
+static volatile LONG       g_hdUs = 0;
+static volatile LONG       g_hdMax = 0;
+static volatile LONG       g_aftN = 0;
+static volatile LONG       g_aftUs = 0;
+static volatile LONG       g_aftMax = 0;
+static volatile LONG       g_lkpN = 0;
+static volatile LONG       g_lkpUs = 0;
+static volatile LONG       g_lkpMax = 0;
+static volatile LONG       g_spikeLogs = 0;
+static LONG                g_idleDepth = 0;
+static LONGLONG            g_idleQ0 = 0;
+static LONG                g_idleHeadMark = 0;
+static LONG                g_idleOvlMark = 0;
+static LONG                g_idleCamLoc = 0;
+static LONG                g_idleOvlLoc = 0;
+static LONG                g_idleIcoLoc = 0;
+static LONG                g_idlePreLoc = 0;
+static LONG                g_idleGui2Loc = 0;
+static LONG                g_idleStrLoc = 0;
+static LONG                g_idleCluLoc = 0;
+static LONG                g_idleCamN = 0;
+static LONG                g_idleOvlN = 0;
+static LONG                g_idleCamLeave0 = 0;
+static LONG                g_idleCamLeave1 = 0;
+static LONG                g_idleOvlEnter0 = 0;
+static LONG                g_idleOvlEnter1 = 0;
+static LONG                g_idleOvlLeave0 = 0;
+static LONG                g_idleOvlLeave1 = 0;
+static LONG                g_idleOvlGapMax = 0;
+static LONG                g_idleNestN = 0;
+static LONG                g_idleDepthMax = 0;
+static LONG                g_idleInCam = 0;
+static LONG                g_idleInOvl = 0;
+static LONG                g_idlePresCam = 0;
+static LONG                g_idlePresOvl = 0;
+static LONG                g_idlePresElse = 0;
+static LONG                g_idlePeekN = 0;
+static LONG                g_idlePeekUs = 0;
+static LONG                g_idleDispN = 0;
+static LONG                g_idleDispUs = 0;
+static DWORD               g_idleTid = 0;
+static DWORD               g_idlePeekRva = 0;
+static DWORD               g_idleDispRva = 0;
+static DWORD               g_idlePresStk[4] = { 0, 0, 0, 0 };
+static LONG                g_idlePresStkN = 0;
+static LONG                g_idlePumpLoc = 0;
+static LONG                g_idlePumpN = 0;
+static LONG                g_idlePumpCam = 0;
+static LONG                g_idlePumpNest = 0;
+static DWORD               g_idlePumpRva = 0;
+static DWORD               g_idlePumpStk[4] = { 0, 0, 0, 0 };
+static LONG                g_idlePumpStkN = 0;
+static LONG                g_idleChkLoc = 0;
+static LONG                g_idleChkN = 0;
+static LONG                g_idleWckLoc = 0;
+static LONG                g_idleWckN = 0;
+static LONG                g_idleWckSkip = 0;
+static LONG                g_pumpDepth = 0;
+static volatile LONG       g_strN = 0;
+static volatile LONG       g_strUs = 0;
+static volatile LONG       g_strMax = 0;
+static volatile LONG       g_cluN = 0;
+static volatile LONG       g_cluUs = 0;
+static volatile LONG       g_cluMax = 0;
+static volatile LONG       g_pumpN = 0;
+static volatile LONG       g_pumpUs = 0;
+static volatile LONG       g_pumpMax = 0;
+static volatile LONG       g_chkN = 0;
+static volatile LONG       g_chkUs = 0;
+static volatile LONG       g_chkMax = 0;
+static volatile LONG       g_wckN = 0;
+static volatile LONG       g_wckUs = 0;
+static volatile LONG       g_wckMax = 0;
+static volatile LONG       g_wckSkipN = 0;
+static volatile LONG       g_camSkipN = 0;
+static volatile LONG       g_bb0N = 0;
+static volatile LONG       g_bb0Us = 0;
+static volatile LONG       g_bb0Max = 0;
+static volatile LONG       g_bb0hN = 0;
+static volatile LONG       g_bb0hUs = 0;
+static volatile LONG       g_bb0hMax = 0;
+static volatile LONG       g_bb0tN = 0;
+static volatile LONG       g_bb0tUs = 0;
+static volatile LONG       g_bb0tMax = 0;
+static volatile LONG       g_rorgN = 0;
+static volatile LONG       g_rorgUs = 0;
+static volatile LONG       g_rorgMax = 0;
+static volatile LONG       g_rbldN = 0;
+static volatile LONG       g_rbldUs = 0;
+static volatile LONG       g_rbldMax = 0;
+static volatile LONG       g_bb0sN = 0;
+static volatile LONG       g_bb0sUs = 0;
+static volatile LONG       g_bb0sMax = 0;
+static volatile LONG       g_bb0fN = 0;
+static volatile LONG       g_bb0fUs = 0;
+static volatile LONG       g_bb0fMax = 0;
+static volatile LONG       g_bb0lN = 0;
+static volatile LONG       g_bb0lUs = 0;
+static volatile LONG       g_bb0lMax = 0;
+static volatile LONG       g_bb0gN = 0;
+static volatile LONG       g_bb0gUs = 0;
+static volatile LONG       g_bb0gMax = 0;
+static volatile LONG       g_bb0oN = 0;
+static volatile LONG       g_bb0oUs = 0;
+static volatile LONG       g_bb0oMax = 0;
+static volatile LONG       g_bb0uN = 0;
+static volatile LONG       g_bb0uUs = 0;
+static volatile LONG       g_bb0uMax = 0;
+static volatile LONG       g_bb0chN = 0;
+static volatile LONG       g_bb0chUs = 0;
+static volatile LONG       g_bb0chMax = 0;
+static volatile LONG       g_bb0c1N = 0;
+static volatile LONG       g_bb0c1Us = 0;
+static volatile LONG       g_bb0c1Max = 0;
+static volatile LONG       g_bb0c2N = 0;
+static volatile LONG       g_bb0c2Us = 0;
+static volatile LONG       g_bb0c2Max = 0;
+static volatile LONG       g_bb0c3N = 0;
+static volatile LONG       g_bb0c3Us = 0;
+static volatile LONG       g_bb0c3Max = 0;
+static volatile LONG       g_bb0c4N = 0;
+static volatile LONG       g_bb0c4Us = 0;
+static volatile LONG       g_bb0c4Max = 0;
+static volatile LONG       g_bb0cxN = 0;
+static volatile LONG       g_bb0cxUs = 0;
+static volatile LONG       g_bb0cxMax = 0;
+static volatile LONG       g_bb0rbN = 0;
+static volatile LONG       g_bb0rbUs = 0;
+static volatile LONG       g_bb0rbMax = 0;
+static volatile LONG       g_bb0eqAN = 0;
+static volatile LONG       g_bb0eqAUs = 0;
+static volatile LONG       g_bb0eqAMax = 0;
+static volatile LONG       g_bb0eqBN = 0;
+static volatile LONG       g_bb0eqBUs = 0;
+static volatile LONG       g_bb0eqBMax = 0;
+static volatile LONG       g_bb0eqHN = 0;
+static volatile LONG       g_bb0eqHUs = 0;
+static volatile LONG       g_bb0eqHMax = 0;
+static volatile LONG       g_bb0eqVN = 0;
+static volatile LONG       g_bb0eqVUs = 0;
+static volatile LONG       g_bb0eqVMax = 0;
+static volatile LONG       g_bb0eqVpN = 0;
+static volatile LONG       g_bb0eqVpUs = 0;
+static volatile LONG       g_bb0eqVpMax = 0;
+static volatile LONG       g_bb0eqVvN = 0;
+static volatile LONG       g_bb0eqVvUs = 0;
+static volatile LONG       g_bb0eqVvMax = 0;
+static volatile LONG       g_bb0eqVlN = 0;
+static volatile LONG       g_bb0eqVlUs = 0;
+static volatile LONG       g_bb0eqVlMax = 0;
+static volatile LONG       g_bb0eqTaN = 0;
+static volatile LONG       g_bb0eqTaUs = 0;
+static volatile LONG       g_bb0eqTaMax = 0;
+static volatile LONG       g_bb0eqTbN = 0;
+static volatile LONG       g_bb0eqTbUs = 0;
+static volatile LONG       g_bb0eqTbMax = 0;
+static volatile LONG       g_bb0eqTbCN = 0;
+static volatile LONG       g_bb0eqTbCUs = 0;
+static volatile LONG       g_bb0eqTbCMax = 0;
+static volatile LONG       g_bb0eqTbNstN = 0;
+static volatile LONG       g_bb0eqTbNstUs = 0;
+static volatile LONG       g_bb0eqTbNstMax = 0;
+static volatile LONG       g_bb0eqNstAN = 0;
+static volatile LONG       g_bb0eqNstAUs = 0;
+static volatile LONG       g_bb0eqNstAMax = 0;
+static volatile LONG       g_bb0eqNstBN = 0;
+static volatile LONG       g_bb0eqNstBUs = 0;
+static volatile LONG       g_bb0eqNstBMax = 0;
+static volatile LONG       g_tbCntN = 0;
+static volatile LONG       g_tbCntSum = 0;
+static volatile LONG       g_tbCntMax = 0;
+static volatile LONG       g_tbEarlyN = 0;
+static volatile LONG       g_tbFullN = 0;
+static volatile LONG       g_nstSkipN = 0;
+static volatile LONG       g_nstWorkN = 0;
+static volatile LONG       g_nstCheapN = 0;
+static volatile LONG       g_bb0eqTcN = 0;
+static volatile LONG       g_bb0eqTcUs = 0;
+static volatile LONG       g_bb0eqTcMax = 0;
+static volatile LONG       g_bb0eqTdN = 0;
+static volatile LONG       g_bb0eqTdUs = 0;
+static volatile LONG       g_bb0eqTdMax = 0;
+static volatile LONG       g_bb0eqVwN = 0;
+static volatile LONG       g_bb0eqVwUs = 0;
+static volatile LONG       g_bb0eqVwMax = 0;
+static volatile LONG       g_bb0eqVxN = 0;
+static volatile LONG       g_bb0eqVxUs = 0;
+static volatile LONG       g_bb0eqVxMax = 0;
+static volatile LONG       g_bb0eqVxHit = 0;
+static volatile LONG       g_bb0eqSN = 0;
+static volatile LONG       g_bb0eqSUs = 0;
+static volatile LONG       g_bb0eqSMax = 0;
+static volatile LONG       g_bb0eqRN = 0;
+static volatile LONG       g_bb0eqRUs = 0;
+static volatile LONG       g_bb0eqRMax = 0;
+static volatile LONG       g_syncMissN = 0;
+static volatile LONG       g_eqVSkipN = 0;
+static volatile LONG       g_uvFlushExN = 0;
+static void*               g_uvLastIdler = 0;
+static volatile DWORD      g_presentTid = 0;
+static void UvFlushSinglePanel();
+static DWORD               g_lastPresentEnd = 0;
+static DWORD               g_lastIdleEnd = 0;
+static DWORD               g_presentStamp = 0;
+static DWORD               g_seenPresentRva = 0;
+typedef DWORD (WINAPI* tTimeGetTime)(void);
+static tTimeGetTime        g_timeGetTime = 0;
+
+static void HookSleepOnModule(HMODULE m);
+static volatile LONG g_dllReady = 0;
 
 static DWORD WINAPI HookGetTickCount(void)
 {
@@ -4925,19 +7841,257 @@ static DWORD_PTR __cdecl HookBeginThreadEx(
     return h;
 }
 
-// Программный потолок FPS (D3D_FPS_LIMIT), портировано из тестовой
-// ветки. Ждём до следующей "границы кадра" высокоточным ждущим
-// таймером (недоспав ~0.3 мс), остаток докручиваем spin-ом. Если кадр
-// сильно опоздал (> 2 шагов) - сбрасываем график, а не догоняем.
-static HANDLE g_fpsTimer = 0;
-static LONGLONG g_fpsNextQpc = 0;
+static DWORD NowMs()
+{
+    if (g_timeGetTime)
+        return g_timeGetTime();
+    return g_realGetTickCount ? g_realGetTickCount() : GetTickCount();
+}
 
 static LONGLONG QpcNow()
 {
-    LARGE_INTEGER t;
-    QueryPerformanceCounter(&t);
-    return t.QuadPart;
+    LARGE_INTEGER v;
+    v.QuadPart = 0;
+    QueryPerformanceCounter(&v);
+    return v.QuadPart;
 }
+
+static DWORD QpcUs(LONGLONG t0)
+{
+    static LARGE_INTEGER freq;
+    if (!freq.QuadPart)
+        QueryPerformanceFrequency(&freq);
+    LARGE_INTEGER v;
+    v.QuadPart = 0;
+    QueryPerformanceCounter(&v);
+    if (!freq.QuadPart)
+        return 0;
+    LONGLONG dt = v.QuadPart - t0;
+    if (dt < 0)
+        dt = 0;
+    return (DWORD)((dt * 1000000) / freq.QuadPart);
+}
+
+static void AccUsVal(volatile LONG* n, volatile LONG* us, volatile LONG* mx, LONG dt)
+{
+    if (dt < 0)
+        dt = 0;
+    InterlockedIncrement(n);
+    InterlockedExchangeAdd(us, dt);
+    if (!mx)
+        return;
+    LONG cur = *mx;
+    while (dt > cur)
+    {
+        LONG prev = InterlockedCompareExchange(mx, dt, cur);
+        if (prev == cur)
+            break;
+        cur = prev;
+    }
+}
+
+static void AccUs(volatile LONG* n, volatile LONG* us, volatile LONG* mx, LONGLONG t0)
+{
+    AccUsVal(n, us, mx, (LONG)QpcUs(t0));
+}
+
+static void AccUsIdle(volatile LONG* n, volatile LONG* us, volatile LONG* mx, LONGLONG t0, LONG* loc)
+{
+    LONG dt = (LONG)QpcUs(t0);
+    AccUsVal(n, us, mx, dt);
+    if (loc && g_idleDepth > 0)
+        *loc += dt;
+}
+
+static LONG IdleMarkNow()
+{
+    if (g_idleDepth <= 0 || !g_idleQ0)
+        return 0;
+    return (LONG)QpcUs(g_idleQ0);
+}
+
+static LONGLONG __stdcall DiagNow()
+{
+    return QpcNow();
+}
+
+static void __stdcall AccStr(LONGLONG t0)
+{
+    LONG dt = (LONG)QpcUs(t0);
+    AccUsVal(&g_strN, &g_strUs, &g_strMax, dt);
+    if (g_idleDepth > 0)
+        g_idleStrLoc += dt;
+}
+
+static void __stdcall AccClu(LONGLONG t0)
+{
+    LONG dt = (LONG)QpcUs(t0);
+    AccUsVal(&g_cluN, &g_cluUs, &g_cluMax, dt);
+    if (g_idleDepth > 0)
+        g_idleCluLoc += dt;
+}
+
+static DWORD ExeRvaOf(DWORD addr)
+{
+    if (g_base && addr >= g_base && addr < g_base + g_imageSize)
+        return addr - g_base;
+    return 0;
+}
+
+static bool IdleOnThisThread()
+{
+    return g_idleDepth > 0 && g_idleTid && GetCurrentThreadId() == g_idleTid;
+}
+
+typedef USHORT (WINAPI* tCSBT)(ULONG, ULONG, PVOID*, PULONG);
+static tCSBT GetCsbt()
+{
+    static tCSBT csbt = 0;
+    static int tried = 0;
+    if (!tried)
+    {
+        tried = 1;
+        HMODULE k32 = GetModuleHandleA("kernel32.dll");
+        if (k32)
+        {
+            csbt = (tCSBT)GetProcAddress(k32, "RtlCaptureStackBackTrace");
+            if (!csbt)
+                csbt = (tCSBT)GetProcAddress(k32, "CaptureStackBackTrace");
+        }
+    }
+    return csbt;
+}
+
+static void IdleAddStkRva(DWORD rva)
+{
+    if (!rva || g_idlePresStkN >= 4)
+        return;
+    if (rva >= 0x595900 && rva < 0x595980)
+        return;
+    for (LONG i = 0; i < g_idlePresStkN; i++)
+    {
+        if (g_idlePresStk[i] == rva)
+            return;
+    }
+    g_idlePresStk[g_idlePresStkN++] = rva;
+}
+
+static void IdleAddPumpRva(DWORD rva)
+{
+    if (!rva || g_idlePumpStkN >= 4)
+        return;
+    if (rva >= 0x5DF2B0 && rva < 0x5DF550)
+        return;
+    if (rva >= 0x285620 && rva < 0x285780)
+        return;
+    if (rva >= 0x595900 && rva < 0x595980)
+        return;
+    for (LONG i = 0; i < g_idlePumpStkN; i++)
+    {
+        if (g_idlePumpStk[i] == rva)
+            return;
+    }
+    g_idlePumpStk[g_idlePumpStkN++] = rva;
+}
+
+static void __stdcall PumpEnter(DWORD retaddr)
+{
+    if (IdleOnThisThread())
+    {
+        if (g_pumpDepth > 0)
+            g_idlePumpNest++;
+        if (!g_idlePumpRva)
+            g_idlePumpRva = ExeRvaOf(retaddr);
+    }
+    g_pumpDepth++;
+}
+
+static void __stdcall AccPump(LONGLONG t0)
+{
+    LONG dt = (LONG)QpcUs(t0);
+    AccUsVal(&g_pumpN, &g_pumpUs, &g_pumpMax, dt);
+    if (g_pumpDepth > 0)
+        g_pumpDepth--;
+    if (!IdleOnThisThread())
+        return;
+    g_idlePumpLoc += dt;
+    g_idlePumpN++;
+    if (g_idleInCam)
+        g_idlePumpCam++;
+    if (g_idlePumpStkN >= 4)
+        return;
+    tCSBT csbt = GetCsbt();
+    if (!csbt)
+        return;
+    void* stk[12];
+    USHORT n = csbt(1, 12, stk, 0);
+    for (USHORT i = 0; i < n && g_idlePumpStkN < 4; i++)
+        IdleAddPumpRva(ExeRvaOf((DWORD)(DWORD_PTR)stk[i]));
+}
+
+static void __stdcall AccChkEnter(void* a0, void* a1)
+{
+    if (g_settings.enableOosLog)
+        ReportOos(a0, a1);
+}
+
+static void __stdcall AccChk(LONGLONG t0)
+{
+    LONG dt = (LONG)QpcUs(t0);
+    AccUsVal(&g_chkN, &g_chkUs, &g_chkMax, dt);
+    if (!IdleOnThisThread())
+        return;
+    g_idleChkLoc += dt;
+    g_idleChkN++;
+}
+
+static int __stdcall WckEnter(DWORD retaddr)
+{
+    DWORD rva = ExeRvaOf(retaddr);
+    if (g_settings.patchSkipChkWin && IdleOnThisThread() && rva == 0x283AB6)
+    {
+        InterlockedIncrement(&g_wckSkipN);
+        if (IdleOnThisThread())
+            g_idleWckSkip++;
+        return 1;
+    }
+    return 0;
+}
+
+static void __stdcall AccWck(LONGLONG t0)
+{
+    LONG dt = (LONG)QpcUs(t0);
+    AccUsVal(&g_wckN, &g_wckUs, &g_wckMax, dt);
+    if (!IdleOnThisThread())
+        return;
+    g_idleWckLoc += dt;
+    g_idleWckN++;
+}
+
+static void IdleNotePresent()
+{
+    if (!IdleOnThisThread())
+        return;
+    if (g_idleInCam)
+        g_idlePresCam++;
+    else if (g_idleInOvl)
+        g_idlePresOvl++;
+    else
+        g_idlePresElse++;
+    if (g_idlePresStkN >= 4)
+        return;
+    tCSBT csbt = GetCsbt();
+    IdleAddStkRva(ExeRvaOf((DWORD)(DWORD_PTR)_ReturnAddress()));
+    if (!csbt)
+        return;
+    void* stk[12];
+    USHORT n = csbt(1, 12, stk, 0);
+    for (USHORT i = 0; i < n && g_idlePresStkN < 4; i++)
+        IdleAddStkRva(ExeRvaOf((DWORD)(DWORD_PTR)stk[i]));
+}
+
+static HANDLE g_fpsTimer = 0;
+static LONGLONG g_fpsNextQpc = 0;
 
 static HANDLE FpsTimerHandle()
 {
@@ -4950,7 +8104,7 @@ static HANDLE FpsTimerHandle()
         ? (tCreateWaitableTimerExW)GetProcAddress(k32, "CreateWaitableTimerExW")
         : 0;
     if (pEx)
-        g_fpsTimer = pEx(0, 0, 0x00000002 /* CREATE_WAITABLE_TIMER_HIGH_RESOLUTION */, TIMER_ALL_ACCESS);
+        g_fpsTimer = pEx(0, 0, 0x00000002, TIMER_ALL_ACCESS);
     if (!g_fpsTimer)
         g_fpsTimer = CreateWaitableTimerW(0, TRUE, 0);
     return g_fpsTimer;
@@ -5005,10 +8159,410 @@ static void WaitFpsCap()
 
 static HRESULT WINAPI HookPresent(void* device, const void* src, const void* dest, HWND wnd, const void* dirty)
 {
+    g_presentTid = GetCurrentThreadId();
+    UvFlushSinglePanel();
+    DWORD t0 = NowMs();
+    if (g_lastPresentEnd)
+    {
+        DWORD stall = t0 - g_lastPresentEnd;
+        if (stall < 4000)
+        {
+            InterlockedExchangeAdd(&g_stallSumMs, (LONG)stall);
+            LONG oldMax = g_stallMaxMs;
+            while ((LONG)stall > oldMax)
+            {
+                LONG prev = InterlockedCompareExchange(&g_stallMaxMs, (LONG)stall, oldMax);
+                if (prev == oldMax)
+                    break;
+                oldMax = prev;
+            }
+        }
+    }
+    if (g_lastIdleEnd)
+    {
+        DWORD gap = t0 - g_lastIdleEnd;
+        if (gap < 200)
+            InterlockedExchangeAdd(&g_gapToPresentMs, (LONG)gap);
+    }
     HRESULT hr = g_realPresent
         ? g_realPresent(device, src, dest, wnd, dirty)
         : E_FAIL;
+    DWORD wait = NowMs() - t0;
     PinFpu();
+    g_lastPresentEnd = t0 + wait;
+
+    InterlockedExchangeAdd(&g_presentWaitMs, (LONG)wait);
+    LONG oldMax = g_presentWaitMax;
+    while ((LONG)wait > oldMax)
+    {
+        LONG prev = InterlockedCompareExchange(&g_presentWaitMax, (LONG)wait, oldMax);
+        if (prev == oldMax)
+            break;
+        oldMax = prev;
+    }
+
+    InterlockedIncrement(&g_presentFrames);
+    IdleNotePresent();
+    DWORD now = t0 + wait;
+    DWORD stamp = g_presentStamp;
+    if (!g_seenPresentRva)
+    {
+        DWORD ret = (DWORD)(DWORD_PTR)_ReturnAddress();
+        DWORD rva = (g_base && ret >= g_base && ret < g_base + g_imageSize) ? ret - g_base : ret;
+        g_seenPresentRva = rva;
+        Log("Present: caller rva %08X", rva);
+    }
+    if (!stamp)
+    {
+        g_presentStamp = now;
+    }
+    else if (now - stamp >= 5000)
+    {
+        g_presentStamp = now;
+        LONG frames = InterlockedExchange(&g_presentFrames, 0);
+        LONG waitSum = InterlockedExchange(&g_presentWaitMs, 0);
+        LONG waitMax = InterlockedExchange(&g_presentWaitMax, 0);
+        LONG sleepN = InterlockedExchange(&g_sleepCalls, 0);
+        LONG sleepMs = InterlockedExchange(&g_sleepSumMs, 0);
+        LONG tgtN = InterlockedExchange(&g_tgtCalls, 0);
+        LONG selN = InterlockedExchange(&g_selectCalls, 0);
+        LONG recvN = InterlockedExchange(&g_recvCalls, 0);
+        LONG recvMs = InterlockedExchange(&g_recvSumMs, 0);
+        LONG wfsoN = InterlockedExchange(&g_wfsoCalls, 0);
+        LONG wfsoMs = InterlockedExchange(&g_wfsoSumMs, 0);
+        LONG qpcN = InterlockedExchange(&g_qpcCalls, 0);
+        LONG eu3N = InterlockedExchange(&g_idleEu3N, 0);
+        LONG eu3Ms = InterlockedExchange(&g_idleEu3Ms, 0);
+        LONG nudgeN = InterlockedExchange(&g_idleNudgeN, 0);
+        LONG nudgeMs = InterlockedExchange(&g_idleNudgeMs, 0);
+        LONG ingN = InterlockedExchange(&g_idleIngameN, 0);
+        LONG ingMs = InterlockedExchange(&g_idleIngameMs, 0);
+        LONG ingMax = InterlockedExchange(&g_idleIngameMax, 0);
+        LONG selMainN = InterlockedExchange(&g_selMainN, 0);
+        LONG selMainMs = InterlockedExchange(&g_selMainMs, 0);
+        LONG gapIdle = InterlockedExchange(&g_gapToIdleMs, 0);
+        LONG gapPres = InterlockedExchange(&g_gapToPresentMs, 0);
+        LONG stallSum = InterlockedExchange(&g_stallSumMs, 0);
+        LONG stallMax = InterlockedExchange(&g_stallMaxMs, 0);
+        LONG dirtyN = InterlockedExchange(&g_dirtyN, 0);
+        LONG dirtyUs = InterlockedExchange(&g_dirtyUs, 0);
+        LONG dirtyMax = InterlockedExchange(&g_dirtyMax, 0);
+        LONG pickN = InterlockedExchange(&g_pickN, 0);
+        LONG pickUs = InterlockedExchange(&g_pickUs, 0);
+        LONG moveN = InterlockedExchange(&g_moveN, 0);
+        LONG moveUs = InterlockedExchange(&g_moveUs, 0);
+        LONG projSkip = InterlockedExchange(&g_projSkipN, 0);
+        LONG uvN = InterlockedExchange(&g_uvN, 0);
+        LONG uvUs = InterlockedExchange(&g_uvUs, 0);
+        LONG uvReuse = InterlockedExchange(&g_uvReuseN, 0);
+        LONG projN = InterlockedExchange(&g_projN, 0);
+        LONG projUs = InterlockedExchange(&g_projUs, 0);
+        LONG ntfN = InterlockedExchange(&g_ntfN, 0);
+        LONG ntfUs = InterlockedExchange(&g_ntfUs, 0);
+        LONG skipRb = InterlockedExchange(&g_uvSkipRebuildN, 0);
+        LONG skipLoc = InterlockedExchange(&g_uvSkipLocN, 0);
+        LONG evtN = InterlockedExchange(&g_evtN, 0);
+        LONG evtUs = InterlockedExchange(&g_evtUs, 0);
+        LONG dlgN = InterlockedExchange(&g_dlgN, 0);
+        LONG dlgUs = InterlockedExchange(&g_dlgUs, 0);
+        LONG infN = InterlockedExchange(&g_infN, 0);
+        LONG infUs = InterlockedExchange(&g_infUs, 0);
+        LONG mapN = InterlockedExchange(&g_mapN, 0);
+        LONG mapUs = InterlockedExchange(&g_mapUs, 0);
+        LONG winReuse = InterlockedExchange(&g_winReuseN, 0);
+        LONG ovlN = InterlockedExchange(&g_ovlN, 0);
+        LONG ovlUs = InterlockedExchange(&g_ovlUs, 0);
+        LONG ovlMax = InterlockedExchange(&g_ovlMax, 0);
+        LONG camN = InterlockedExchange(&g_camN, 0);
+        LONG camUs = InterlockedExchange(&g_camUs, 0);
+        LONG camMax = InterlockedExchange(&g_camMax, 0);
+        LONG mtxN = InterlockedExchange(&g_mtxN, 0);
+        LONG mtxUs = InterlockedExchange(&g_mtxUs, 0);
+        LONG mtxMax = InterlockedExchange(&g_mtxMax, 0);
+        LONG vwN = InterlockedExchange(&g_vwN, 0);
+        LONG vwUs = InterlockedExchange(&g_vwUs, 0);
+        LONG vwMax = InterlockedExchange(&g_vwMax, 0);
+        LONG icoN = InterlockedExchange(&g_icoN, 0);
+        LONG icoUs = InterlockedExchange(&g_icoUs, 0);
+        LONG icoMax = InterlockedExchange(&g_icoMax, 0);
+        LONG gfxN = InterlockedExchange(&g_gfxN, 0);
+        LONG gfxUs = InterlockedExchange(&g_gfxUs, 0);
+        LONG gfxMax = InterlockedExchange(&g_gfxMax, 0);
+        LONG preN = InterlockedExchange(&g_preN, 0);
+        LONG preUs = InterlockedExchange(&g_preUs, 0);
+        LONG preMax = InterlockedExchange(&g_preMax, 0);
+        LONG gui2N = InterlockedExchange(&g_gui2N, 0);
+        LONG gui2Us = InterlockedExchange(&g_gui2Us, 0);
+        LONG gui2Max = InterlockedExchange(&g_gui2Max, 0);
+        LONG clnN = InterlockedExchange(&g_clnN, 0);
+        LONG clnUs = InterlockedExchange(&g_clnUs, 0);
+        LONG clnMax = InterlockedExchange(&g_clnMax, 0);
+        LONG tailN = InterlockedExchange(&g_tailN, 0);
+        LONG tailUs = InterlockedExchange(&g_tailUs, 0);
+        LONG tailMax = InterlockedExchange(&g_tailMax, 0);
+        LONG hdN = InterlockedExchange(&g_hdN, 0);
+        LONG hdUs = InterlockedExchange(&g_hdUs, 0);
+        LONG hdMax = InterlockedExchange(&g_hdMax, 0);
+        LONG aftN = InterlockedExchange(&g_aftN, 0);
+        LONG aftUs = InterlockedExchange(&g_aftUs, 0);
+        LONG aftMax = InterlockedExchange(&g_aftMax, 0);
+        LONG lkpN = InterlockedExchange(&g_lkpN, 0);
+        LONG lkpUs = InterlockedExchange(&g_lkpUs, 0);
+        LONG lkpMax = InterlockedExchange(&g_lkpMax, 0);
+        LONG strN = InterlockedExchange(&g_strN, 0);
+        LONG strUs = InterlockedExchange(&g_strUs, 0);
+        LONG strMax = InterlockedExchange(&g_strMax, 0);
+        LONG cluN = InterlockedExchange(&g_cluN, 0);
+        LONG cluUs = InterlockedExchange(&g_cluUs, 0);
+        LONG cluMax = InterlockedExchange(&g_cluMax, 0);
+        LONG pmpN = InterlockedExchange(&g_pumpN, 0);
+        LONG pmpUs = InterlockedExchange(&g_pumpUs, 0);
+        LONG pmpMax = InterlockedExchange(&g_pumpMax, 0);
+        LONG chkN = InterlockedExchange(&g_chkN, 0);
+        LONG chkUs = InterlockedExchange(&g_chkUs, 0);
+        LONG chkMax = InterlockedExchange(&g_chkMax, 0);
+        LONG wckN = InterlockedExchange(&g_wckN, 0);
+        LONG wckUs = InterlockedExchange(&g_wckUs, 0);
+        LONG wckMax = InterlockedExchange(&g_wckMax, 0);
+        LONG wckSkip = InterlockedExchange(&g_wckSkipN, 0);
+        LONG camSkip = InterlockedExchange(&g_camSkipN, 0);
+        LONG bb0N = InterlockedExchange(&g_bb0N, 0);
+        LONG bb0Us = InterlockedExchange(&g_bb0Us, 0);
+        LONG bb0Max = InterlockedExchange(&g_bb0Max, 0);
+        LONG bb0hN = InterlockedExchange(&g_bb0hN, 0);
+        LONG bb0hUs = InterlockedExchange(&g_bb0hUs, 0);
+        LONG bb0hMax = InterlockedExchange(&g_bb0hMax, 0);
+        LONG bb0tN = InterlockedExchange(&g_bb0tN, 0);
+        LONG bb0tUs = InterlockedExchange(&g_bb0tUs, 0);
+        LONG bb0tMax = InterlockedExchange(&g_bb0tMax, 0);
+        LONG rorgN = InterlockedExchange(&g_rorgN, 0);
+        LONG rorgUs = InterlockedExchange(&g_rorgUs, 0);
+        LONG rorgMax = InterlockedExchange(&g_rorgMax, 0);
+        LONG rbldN = InterlockedExchange(&g_rbldN, 0);
+        LONG rbldUs = InterlockedExchange(&g_rbldUs, 0);
+        LONG rbldMax = InterlockedExchange(&g_rbldMax, 0);
+        LONG bb0sN = InterlockedExchange(&g_bb0sN, 0);
+        LONG bb0sUs = InterlockedExchange(&g_bb0sUs, 0);
+        LONG bb0sMax = InterlockedExchange(&g_bb0sMax, 0);
+        LONG bb0fN = InterlockedExchange(&g_bb0fN, 0);
+        LONG bb0fUs = InterlockedExchange(&g_bb0fUs, 0);
+        LONG bb0fMax = InterlockedExchange(&g_bb0fMax, 0);
+        LONG bb0lN = InterlockedExchange(&g_bb0lN, 0);
+        LONG bb0lUs = InterlockedExchange(&g_bb0lUs, 0);
+        LONG bb0lMax = InterlockedExchange(&g_bb0lMax, 0);
+        LONG bb0gN = InterlockedExchange(&g_bb0gN, 0);
+        LONG bb0gUs = InterlockedExchange(&g_bb0gUs, 0);
+        LONG bb0gMax = InterlockedExchange(&g_bb0gMax, 0);
+        LONG bb0oN = InterlockedExchange(&g_bb0oN, 0);
+        LONG bb0oUs = InterlockedExchange(&g_bb0oUs, 0);
+        LONG bb0oMax = InterlockedExchange(&g_bb0oMax, 0);
+        LONG bb0uN = InterlockedExchange(&g_bb0uN, 0);
+        LONG bb0uUs = InterlockedExchange(&g_bb0uUs, 0);
+        LONG bb0uMax = InterlockedExchange(&g_bb0uMax, 0);
+        LONG bb0chN = InterlockedExchange(&g_bb0chN, 0);
+        LONG bb0chUs = InterlockedExchange(&g_bb0chUs, 0);
+        LONG bb0chMax = InterlockedExchange(&g_bb0chMax, 0);
+        LONG bb0c1N = InterlockedExchange(&g_bb0c1N, 0);
+        LONG bb0c1Us = InterlockedExchange(&g_bb0c1Us, 0);
+        LONG bb0c1Max = InterlockedExchange(&g_bb0c1Max, 0);
+        LONG bb0c2N = InterlockedExchange(&g_bb0c2N, 0);
+        LONG bb0c2Us = InterlockedExchange(&g_bb0c2Us, 0);
+        LONG bb0c2Max = InterlockedExchange(&g_bb0c2Max, 0);
+        LONG bb0c3N = InterlockedExchange(&g_bb0c3N, 0);
+        LONG bb0c3Us = InterlockedExchange(&g_bb0c3Us, 0);
+        LONG bb0c3Max = InterlockedExchange(&g_bb0c3Max, 0);
+        LONG bb0c4N = InterlockedExchange(&g_bb0c4N, 0);
+        LONG bb0c4Us = InterlockedExchange(&g_bb0c4Us, 0);
+        LONG bb0c4Max = InterlockedExchange(&g_bb0c4Max, 0);
+        LONG bb0cxN = InterlockedExchange(&g_bb0cxN, 0);
+        LONG bb0cxUs = InterlockedExchange(&g_bb0cxUs, 0);
+        LONG bb0cxMax = InterlockedExchange(&g_bb0cxMax, 0);
+        LONG bb0rbN = InterlockedExchange(&g_bb0rbN, 0);
+        LONG bb0rbUs = InterlockedExchange(&g_bb0rbUs, 0);
+        LONG bb0rbMax = InterlockedExchange(&g_bb0rbMax, 0);
+        LONG bb0eqAN = InterlockedExchange(&g_bb0eqAN, 0);
+        LONG bb0eqAUs = InterlockedExchange(&g_bb0eqAUs, 0);
+        LONG bb0eqAMax = InterlockedExchange(&g_bb0eqAMax, 0);
+        LONG bb0eqBN = InterlockedExchange(&g_bb0eqBN, 0);
+        LONG bb0eqBUs = InterlockedExchange(&g_bb0eqBUs, 0);
+        LONG bb0eqBMax = InterlockedExchange(&g_bb0eqBMax, 0);
+        LONG bb0eqHN = InterlockedExchange(&g_bb0eqHN, 0);
+        LONG bb0eqHUs = InterlockedExchange(&g_bb0eqHUs, 0);
+        LONG bb0eqHMax = InterlockedExchange(&g_bb0eqHMax, 0);
+        LONG bb0eqVN = InterlockedExchange(&g_bb0eqVN, 0);
+        LONG bb0eqVUs = InterlockedExchange(&g_bb0eqVUs, 0);
+        LONG bb0eqVMax = InterlockedExchange(&g_bb0eqVMax, 0);
+        LONG bb0eqVpN = InterlockedExchange(&g_bb0eqVpN, 0);
+        LONG bb0eqVpUs = InterlockedExchange(&g_bb0eqVpUs, 0);
+        LONG bb0eqVpMax = InterlockedExchange(&g_bb0eqVpMax, 0);
+        LONG bb0eqVvN = InterlockedExchange(&g_bb0eqVvN, 0);
+        LONG bb0eqVvUs = InterlockedExchange(&g_bb0eqVvUs, 0);
+        LONG bb0eqVvMax = InterlockedExchange(&g_bb0eqVvMax, 0);
+        LONG bb0eqVlN = InterlockedExchange(&g_bb0eqVlN, 0);
+        LONG bb0eqVlUs = InterlockedExchange(&g_bb0eqVlUs, 0);
+        LONG bb0eqVlMax = InterlockedExchange(&g_bb0eqVlMax, 0);
+        LONG bb0eqTaN = InterlockedExchange(&g_bb0eqTaN, 0);
+        LONG bb0eqTaUs = InterlockedExchange(&g_bb0eqTaUs, 0);
+        LONG bb0eqTaMax = InterlockedExchange(&g_bb0eqTaMax, 0);
+        LONG bb0eqTbN = InterlockedExchange(&g_bb0eqTbN, 0);
+        LONG bb0eqTbUs = InterlockedExchange(&g_bb0eqTbUs, 0);
+        LONG bb0eqTbMax = InterlockedExchange(&g_bb0eqTbMax, 0);
+        LONG bb0eqTbCN = InterlockedExchange(&g_bb0eqTbCN, 0);
+        LONG bb0eqTbCUs = InterlockedExchange(&g_bb0eqTbCUs, 0);
+        LONG bb0eqTbCMax = InterlockedExchange(&g_bb0eqTbCMax, 0);
+        LONG bb0eqTbNstN = InterlockedExchange(&g_bb0eqTbNstN, 0);
+        LONG bb0eqTbNstUs = InterlockedExchange(&g_bb0eqTbNstUs, 0);
+        LONG bb0eqTbNstMax = InterlockedExchange(&g_bb0eqTbNstMax, 0);
+        LONG bb0eqNstAN = InterlockedExchange(&g_bb0eqNstAN, 0);
+        LONG bb0eqNstAUs = InterlockedExchange(&g_bb0eqNstAUs, 0);
+        LONG bb0eqNstAMax = InterlockedExchange(&g_bb0eqNstAMax, 0);
+        LONG bb0eqNstBN = InterlockedExchange(&g_bb0eqNstBN, 0);
+        LONG bb0eqNstBUs = InterlockedExchange(&g_bb0eqNstBUs, 0);
+        LONG bb0eqNstBMax = InterlockedExchange(&g_bb0eqNstBMax, 0);
+        LONG tbCntN = InterlockedExchange(&g_tbCntN, 0);
+        LONG tbCntSum = InterlockedExchange(&g_tbCntSum, 0);
+        LONG tbCntMax = InterlockedExchange(&g_tbCntMax, 0);
+        LONG tbEarly = InterlockedExchange(&g_tbEarlyN, 0);
+        LONG tbFull = InterlockedExchange(&g_tbFullN, 0);
+        LONG nstSkip = InterlockedExchange(&g_nstSkipN, 0);
+        LONG nstWork = InterlockedExchange(&g_nstWorkN, 0);
+        LONG nstCheap = InterlockedExchange(&g_nstCheapN, 0);
+        LONG bb0eqTcN = InterlockedExchange(&g_bb0eqTcN, 0);
+        LONG bb0eqTcUs = InterlockedExchange(&g_bb0eqTcUs, 0);
+        LONG bb0eqTcMax = InterlockedExchange(&g_bb0eqTcMax, 0);
+        LONG bb0eqTdN = InterlockedExchange(&g_bb0eqTdN, 0);
+        LONG bb0eqTdUs = InterlockedExchange(&g_bb0eqTdUs, 0);
+        LONG bb0eqTdMax = InterlockedExchange(&g_bb0eqTdMax, 0);
+        LONG bb0eqVwN = InterlockedExchange(&g_bb0eqVwN, 0);
+        LONG bb0eqVwUs = InterlockedExchange(&g_bb0eqVwUs, 0);
+        LONG bb0eqVwMax = InterlockedExchange(&g_bb0eqVwMax, 0);
+        LONG bb0eqVxN = InterlockedExchange(&g_bb0eqVxN, 0);
+        LONG bb0eqVxUs = InterlockedExchange(&g_bb0eqVxUs, 0);
+        LONG bb0eqVxMax = InterlockedExchange(&g_bb0eqVxMax, 0);
+        LONG bb0eqVxHit = InterlockedExchange(&g_bb0eqVxHit, 0);
+        LONG bb0eqSN = InterlockedExchange(&g_bb0eqSN, 0);
+        LONG bb0eqSUs = InterlockedExchange(&g_bb0eqSUs, 0);
+        LONG bb0eqSMax = InterlockedExchange(&g_bb0eqSMax, 0);
+        LONG bb0eqRN = InterlockedExchange(&g_bb0eqRN, 0);
+        LONG bb0eqRUs = InterlockedExchange(&g_bb0eqRUs, 0);
+        LONG bb0eqRMax = InterlockedExchange(&g_bb0eqRMax, 0);
+        LONG syncm = InterlockedExchange(&g_syncMissN, 0);
+        LONG eqVskip = InterlockedExchange(&g_eqVSkipN, 0);
+        LONG flx = InterlockedExchange(&g_uvFlushExN, 0);
+        DWORD da8 = 0;
+        int hasReorg = 0;
+        if (g_uvLastIdler)
+        {
+            __try
+            {
+                da8 = *(DWORD*)((char*)g_uvLastIdler + 0xDA8);
+                hasReorg = *(void**)((char*)g_uvLastIdler + 0x1644) ? 1 : 0;
+            }
+            __except (EXCEPTION_EXECUTE_HANDLER)
+            {
+            }
+        }
+        InterlockedExchange(&g_spikeLogs, 0);
+        DWORD dt = now - stamp;
+        if (dt == 0)
+            dt = 1;
+        if (frames < 1)
+            frames = 1;
+        Log("Present: tid=%u %d кадр / %u мс (~%u fps), inside %u/%u мс, sleep %d/%d мс, tgt=%d sel=%d/%d/%d "
+            "recv=%d/%d wfso=%d/%d qpc=%d eu3=%d/%d nudge=%d/%d ing=%d/%d/%d stall=%u/%u dirty=%d/%d/%d pick=%d/%d move=%d/%d proj=%d/%d projskip=%d uv=%d/%d reuse=%d pool=%d/%d ntf=%d/%d skiprb=%d skiploc=%d "
+            "evt=%d/%d dlg=%d/%d inf=%d/%d map=%d/%d winreuse=%d ovl=%d/%d/%d cam=%d/%d/%d mtx=%d/%d/%d vw=%d/%d/%d ico=%d/%d/%d gfx=%d/%d/%d pre=%d/%d/%d gui2=%d/%d/%d cln=%d/%d/%d tail=%d/%d/%d hd=%d/%d/%d aft=%d/%d/%d lkp=%d/%d/%d str=%d/%d/%d clu=%d/%d/%d pump=%d/%d/%d chk=%d/%d/%d wck=%d/%d/%d wskip=%d cskip=%d "
+            "da8=%u rw=%d bb0=%d/%d/%d bb0h=%d/%d/%d bb0t=%d/%d/%d rorg=%d/%d/%d rbld=%d/%d/%d "
+            "bb0s=%d/%d/%d bb0f=%d/%d/%d bb0l=%d/%d/%d bb0g=%d/%d/%d bb0o=%d/%d/%d "
+            "bb0u=%d/%d/%d bb0ch=%d/%d/%d "
+            "bb0c1=%d/%d/%d bb0c2=%d/%d/%d bb0c3=%d/%d/%d bb0c4=%d/%d/%d bb0cx=%d/%d/%d "
+            "bb0rb=%d/%d/%d bb0eqA=%d/%d/%d bb0eqB=%d/%d/%d "
+            "bb0eqH=%d/%d/%d bb0eqV=%d/%d/%d bb0eqVp=%d/%d/%d bb0eqVv=%d/%d/%d bb0eqVl=%d/%d/%d "
+            "bb0eqTa=%d/%d/%d bb0eqTb=%d/%d/%d bb0eqTbC=%d/%d/%d bb0eqTbNst=%d/%d/%d "
+            "nstA=%d/%d/%d nstB=%d/%d/%d tbCnt=%d/%d/%d tbEF=%d/%d nstSWC=%d/%d/%d "
+            "bb0eqTc=%d/%d/%d bb0eqTd=%d/%d/%d "
+            "bb0eqVw=%d/%d/%d bb0eqVx=%d/%d/%d/%d bb0eqS=%d/%d/%d bb0eqR=%d/%d/%d "
+            "eqVskip=%d syncm=%d flx=%d",
+            GetCurrentThreadId(),
+            frames, dt, (unsigned)((frames * 1000u) / dt),
+            (unsigned)(waitSum / frames), (unsigned)waitMax,
+            sleepN, sleepMs, tgtN, selN, selMainN, selMainMs,
+            recvN, recvMs, wfsoN, wfsoMs, qpcN,
+            eu3N, eu3Ms, nudgeN, nudgeMs, ingN, (int)(ingMs / 1000), (int)(ingMax / 1000),
+            (unsigned)(stallSum / frames), (unsigned)stallMax,
+            dirtyN, (int)(dirtyUs / 1000), (int)(dirtyMax / 1000),
+            pickN, (int)(pickUs / 1000),
+            moveN, (int)(moveUs / 1000),
+            projN, (int)(projUs / 1000),
+            projSkip, uvN, (int)(uvUs / 1000), uvReuse,
+            (int)g_uvPoolBusy, (int)g_uvPoolLive,
+            ntfN, (int)(ntfUs / 1000), (int)skipRb, (int)skipLoc,
+            evtN, (int)(evtUs / 1000),
+            dlgN, (int)(dlgUs / 1000),
+            infN, (int)(infUs / 1000),
+            mapN, (int)(mapUs / 1000),
+            (int)winReuse,
+            ovlN, (int)(ovlUs / 1000), (int)(ovlMax / 1000),
+            camN, (int)(camUs / 1000), (int)(camMax / 1000),
+            mtxN, (int)(mtxUs / 1000), (int)(mtxMax / 1000),
+            vwN, (int)(vwUs / 1000), (int)(vwMax / 1000),
+            icoN, (int)(icoUs / 1000), (int)(icoMax / 1000),
+            gfxN, (int)(gfxUs / 1000), (int)(gfxMax / 1000),
+            preN, (int)(preUs / 1000), (int)(preMax / 1000),
+            gui2N, (int)(gui2Us / 1000), (int)(gui2Max / 1000),
+            clnN, (int)(clnUs / 1000), (int)(clnMax / 1000),
+            tailN, (int)(tailUs / 1000), (int)(tailMax / 1000),
+            hdN, (int)(hdUs / 1000), (int)(hdMax / 1000),
+            aftN, (int)(aftUs / 1000), (int)(aftMax / 1000),
+            lkpN, (int)(lkpUs / 1000), (int)(lkpMax / 1000),
+            strN, (int)(strUs / 1000), (int)(strMax / 1000),
+            cluN, (int)(cluUs / 1000), (int)(cluMax / 1000),
+            pmpN, (int)(pmpUs / 1000), (int)(pmpMax / 1000),
+            chkN, (int)(chkUs / 1000), (int)(chkMax / 1000),
+            wckN, (int)(wckUs / 1000), (int)(wckMax / 1000),
+            (int)wckSkip, (int)camSkip,
+            da8, hasReorg,
+            bb0N, (int)(bb0Us / 1000), (int)(bb0Max / 1000),
+            bb0hN, (int)(bb0hUs / 1000), (int)(bb0hMax / 1000),
+            bb0tN, (int)(bb0tUs / 1000), (int)(bb0tMax / 1000),
+            rorgN, (int)(rorgUs / 1000), (int)(rorgMax / 1000),
+            rbldN, (int)(rbldUs / 1000), (int)(rbldMax / 1000),
+            bb0sN, (int)(bb0sUs / 1000), (int)(bb0sMax / 1000),
+            bb0fN, (int)(bb0fUs / 1000), (int)(bb0fMax / 1000),
+            bb0lN, (int)(bb0lUs / 1000), (int)(bb0lMax / 1000),
+            bb0gN, (int)(bb0gUs / 1000), (int)(bb0gMax / 1000),
+            bb0oN, (int)(bb0oUs / 1000), (int)(bb0oMax / 1000),
+            bb0uN, (int)(bb0uUs / 1000), (int)(bb0uMax / 1000),
+            bb0chN, (int)(bb0chUs / 1000), (int)(bb0chMax / 1000),
+            bb0c1N, (int)(bb0c1Us / 1000), (int)(bb0c1Max / 1000),
+            bb0c2N, (int)(bb0c2Us / 1000), (int)(bb0c2Max / 1000),
+            bb0c3N, (int)(bb0c3Us / 1000), (int)(bb0c3Max / 1000),
+            bb0c4N, (int)(bb0c4Us / 1000), (int)(bb0c4Max / 1000),
+            bb0cxN, (int)(bb0cxUs / 1000), (int)(bb0cxMax / 1000),
+            bb0rbN, (int)(bb0rbUs / 1000), (int)(bb0rbMax / 1000),
+            bb0eqAN, (int)(bb0eqAUs / 1000), (int)(bb0eqAMax / 1000),
+            bb0eqBN, (int)(bb0eqBUs / 1000), (int)(bb0eqBMax / 1000),
+            bb0eqHN, (int)(bb0eqHUs / 1000), (int)(bb0eqHMax / 1000),
+            bb0eqVN, (int)(bb0eqVUs / 1000), (int)(bb0eqVMax / 1000),
+            bb0eqVpN, (int)(bb0eqVpUs / 1000), (int)(bb0eqVpMax / 1000),
+            bb0eqVvN, (int)(bb0eqVvUs / 1000), (int)(bb0eqVvMax / 1000),
+            bb0eqVlN, (int)(bb0eqVlUs / 1000), (int)(bb0eqVlMax / 1000),
+            bb0eqTaN, (int)(bb0eqTaUs / 1000), (int)(bb0eqTaMax / 1000),
+            bb0eqTbN, (int)(bb0eqTbUs / 1000), (int)(bb0eqTbMax / 1000),
+            bb0eqTbCN, (int)(bb0eqTbCUs / 1000), (int)(bb0eqTbCMax / 1000),
+            bb0eqTbNstN, (int)(bb0eqTbNstUs / 1000), (int)(bb0eqTbNstMax / 1000),
+            bb0eqNstAN, (int)(bb0eqNstAUs / 1000), (int)(bb0eqNstAMax / 1000),
+            bb0eqNstBN, (int)(bb0eqNstBUs / 1000), (int)(bb0eqNstBMax / 1000),
+            (int)tbCntN, (int)tbCntSum, (int)tbCntMax,
+            (int)tbEarly, (int)tbFull,
+            (int)nstSkip, (int)nstWork, (int)nstCheap,
+            bb0eqTcN, (int)(bb0eqTcUs / 1000), (int)(bb0eqTcMax / 1000),
+            bb0eqTdN, (int)(bb0eqTdUs / 1000), (int)(bb0eqTdMax / 1000),
+            bb0eqVwN, (int)(bb0eqVwUs / 1000), (int)(bb0eqVwMax / 1000),
+            bb0eqVxN, (int)(bb0eqVxUs / 1000), (int)(bb0eqVxMax / 1000), (int)bb0eqVxHit,
+            bb0eqSN, (int)(bb0eqSUs / 1000), (int)(bb0eqSMax / 1000),
+            bb0eqRN, (int)(bb0eqRUs / 1000), (int)(bb0eqRMax / 1000),
+            (int)eqVskip, (int)syncm, (int)flx);
+    }
     WaitFpsCap();
     return hr;
 }
@@ -5048,9 +8602,15 @@ static HRESULT WINAPI HookCreateDevice(
     {
         PatchVtableSlot(*outDevice, D3D9DEV_VT_RESET, (void*)HookReset, (void**)&g_realReset);
         if (PatchVtableSlot(*outDevice, D3D9DEV_VT_PRESENT, (void*)HookPresent, (void**)&g_realPresent))
-            Log("D3D9: Present перехвачен, FPU_PRESERVE=%d noVsync=%d",
+        {
+            DWORD interval = 0;
+            if (params)
+                interval = *(DWORD*)((char*)params + D3DPRESENT_INTERVAL_OFF);
+            Log("D3D9: Present перехвачен, FPU_PRESERVE=%d noVsync=%d interval=%08X",
                 (int)g_settings.patchD3dFpuPreserve,
-                (int)g_settings.patchD3dNoVsync);
+                (int)g_settings.patchD3dNoVsync,
+                interval);
+        }
     }
     return hr;
 }
@@ -5062,8 +8622,6 @@ static void* WINAPI HookDirect3DCreate9(UINT sdk)
         PatchVtableSlot(obj, D3D9_VT_CREATEDEVICE, (void*)HookCreateDevice, (void**)&g_realCreateDevice);
     return obj;
 }
-
-static DWORD g_tbbMaxThreads = 8;
 
 __declspec(naked) static void HookTbbInit()
 {
@@ -5099,12 +8657,15 @@ static void HookTbbModule(HMODULE tbb)
         Log("TBB: ни CreateThread, ни _beginthreadex в IAT");
 }
 
-static const char TBB_INIT_MANGLE[] = "?initialize@task_scheduler_init@tbb@@QAEXHI@Z";
-
 static void HookTbbInitOnExe()
 {
     if (g_settings.engineWorkerThreads < 1)
+    {
+        static LONG loggedOff = 0;
+        if (InterlockedCompareExchange(&loggedOff, 1, 0) == 0)
+            Log("TBB: кап снят (ENGINE_WORKER_THREADS=0), initialize не трогаем");
         return;
+    }
 
     static LONG hooked = 0;
     if (hooked)
@@ -5130,6 +8691,41 @@ static void HookTbbInitOnExe()
         hooked = 1;
         Log("TBB: initialize капим на %d потоков", g_tbbMaxThreads);
     }
+}
+
+static void TryPatchLateModules()
+{
+    HMODULE exe = GetModuleHandleA(NULL);
+
+    if (g_settings.patchThreadFpuPin)
+    {
+        HookIat(exe, "kernel32.dll", "CreateThread", (void*)HookCreateThread, (void**)&g_realCreateThread);
+        HookIat(exe, "kernel32.dll", "LoadLibraryA", (void*)HookLoadLibraryA, (void**)&g_realLoadLibraryA);
+        HookIat(exe, "kernel32.dll", "LoadLibraryW", (void*)HookLoadLibraryW, (void**)&g_realLoadLibraryW);
+        HookIat(exe, "kernel32.dll", "GetTickCount", (void*)HookGetTickCount, (void**)&g_realGetTickCount);
+    }
+
+    HMODULE d3d9 = GetModuleHandleA("d3d9.dll");
+    static LONG d3dHooked = 0;
+    if (g_settings.patchD3dFpuPreserve && d3d9 && d3dHooked == 0)
+    {
+        if (!g_realDirect3DCreate9)
+            g_realDirect3DCreate9 = (tDirect3DCreate9)GetProcAddress(d3d9, "Direct3DCreate9");
+        if (g_realDirect3DCreate9 &&
+            HookIat(exe, "d3d9.dll", "Direct3DCreate9", (void*)HookDirect3DCreate9, (void**)&g_realDirect3DCreate9))
+        {
+            d3dHooked = 1;
+            Log("D3D9: Direct3DCreate9 перехвачен");
+        }
+    }
+
+    HMODULE tbb = GetModuleHandleA("tbb.dll");
+    if (tbb)
+    {
+        HookTbbModule(tbb);
+        HookTbbInitOnExe();
+    }
+
 }
 
 static bool NameHasTbbA(const char* name)
@@ -5175,45 +8771,6 @@ static HMODULE WINAPI HookLoadLibraryW(LPCWSTR name)
         HookTbbModule(m);
     return m;
 }
-
-static void TryPatchLateModules()
-{
-    HMODULE exe = GetModuleHandleA(NULL);
-
-    if (g_settings.patchThreadFpuPin)
-    {
-        HookIat(exe, "kernel32.dll", "CreateThread", (void*)HookCreateThread, (void**)&g_realCreateThread);
-        HookIat(exe, "kernel32.dll", "LoadLibraryA", (void*)HookLoadLibraryA, (void**)&g_realLoadLibraryA);
-        HookIat(exe, "kernel32.dll", "LoadLibraryW", (void*)HookLoadLibraryW, (void**)&g_realLoadLibraryW);
-        HookIat(exe, "kernel32.dll", "GetTickCount", (void*)HookGetTickCount, (void**)&g_realGetTickCount);
-    }
-
-    HMODULE d3d9 = GetModuleHandleA("d3d9.dll");
-    static LONG d3dHooked = 0;
-    if (g_settings.patchD3dFpuPreserve && d3d9 && d3dHooked == 0)
-    {
-        if (!g_realDirect3DCreate9)
-            g_realDirect3DCreate9 = (tDirect3DCreate9)GetProcAddress(d3d9, "Direct3DCreate9");
-        if (g_realDirect3DCreate9 &&
-            HookIat(exe, "d3d9.dll", "Direct3DCreate9", (void*)HookDirect3DCreate9, (void**)&g_realDirect3DCreate9))
-        {
-            d3dHooked = 1;
-            Log("D3D9: Direct3DCreate9 перехвачен");
-        }
-    }
-
-    HMODULE tbb = GetModuleHandleA("tbb.dll");
-    if (tbb)
-    {
-        HookTbbModule(tbb);
-        HookTbbInitOnExe();
-    }
-}
-
-static const DWORD RVA_MAIN_LOOP = 0x5DF550;
-static const unsigned char MAIN_LOOP_SIG[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
-
-static DWORD g_mainLoopResume = 0;
 
 __declspec(naked) static void MainLoopThunk()
 {
@@ -5266,7 +8823,10 @@ static void InstallHeapLfh()
         if (HeapSetInformation(heaps[i], (HEAP_INFORMATION_CLASS)0, &lfh, sizeof(lfh)))
             ++ok;
     }
-    Log("Heap: LFH включён на %u из %u куч", ok, n);
+    Log("Heap: LFH включён на %u из %u куч (LAA exe=%d)",
+        ok, n,
+        (((IMAGE_NT_HEADERS32*)((unsigned char*)g_base +
+            ((IMAGE_DOS_HEADER*)g_base)->e_lfanew))->FileHeader.Characteristics & IMAGE_FILE_LARGE_ADDRESS_AWARE) ? 1 : 0);
 }
 
 static const DWORD RVA_SLEEP_IAT = 0x88A0EC;
@@ -5298,20 +8858,53 @@ static bool PatchImm8Sleep(DWORD rvaPush, unsigned char expectMs, unsigned char 
     return true;
 }
 
-static void PatchPushImm8(unsigned char* p, unsigned char newMs)
+static DWORD WINAPI HookTimeGetTime(void)
 {
-    if (p[0] != 0x6A)
+    InterlockedIncrement(&g_tgtCalls);
+    return g_timeGetTime ? g_timeGetTime() : 0;
+}
+
+static void InstallTimerResolution()
+{
+    // Clausewitz зовёт timeGetDevCaps и timeBeginPeriod(1) в rva 68B190,
+    // но разбирает TIMECAPS как два байта, а не два UINT. На Win32
+    // wPeriodMin=1 → после shr 8 проверка max==1 всегда ложна, Begin
+    // не вызывается. Sleep(1) тогда округляется до кванта ~15.6 мс.
+    HMODULE winmm = LoadLibraryA("winmm.dll");
+    if (!winmm)
+    {
+        Log("Timer: winmm.dll не загрузился");
         return;
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(p, 2, PAGE_EXECUTE_READWRITE, &oldProtect))
+    }
+    typedef UINT (WINAPI* tTimeBeginPeriod)(UINT);
+    tTimeBeginPeriod fn = (tTimeBeginPeriod)GetProcAddress(winmm, "timeBeginPeriod");
+    if (!fn)
+    {
+        Log("Timer: timeBeginPeriod не найден");
         return;
-    p[1] = newMs;
-    VirtualProtect(p, 2, oldProtect, &oldProtect);
+    }
+    UINT err = fn(1);
+    Log("Timer: timeBeginPeriod(1) = %u", err);
+
+    g_timeGetTime = (tTimeGetTime)GetProcAddress(winmm, "timeGetTime");
+
+    HMODULE ntdll = GetModuleHandleA("ntdll.dll");
+    if (!ntdll)
+        return;
+    typedef LONG (NTAPI* tNtSetTimerResolution)(ULONG, BOOLEAN, ULONG*);
+    tNtSetTimerResolution ntSet = (tNtSetTimerResolution)GetProcAddress(ntdll, "NtSetTimerResolution");
+    if (!ntSet)
+        return;
+    ULONG cur = 0;
+    LONG st = ntSet(10000, TRUE, &cur);
+    Log("Timer: NtSetTimerResolution(1ms) status=%08X cur=%u", st, cur);
 }
 
 static void InstallMainLoopSleep0()
 {
     // 6A 00 EB 02 6A 64 FF 15 [Sleep IAT] — ветка Sleep(0) vs Sleep(100).
+    // 3.15: Sleep(0) оставляем хосту. Раньше оба плеча ставили в 1 мс,
+    // и без рабочего timeBeginPeriod это давало потолок ~40 FPS.
     int ms = g_settings.mainLoopSleepMs;
     if (ms < 0)
         ms = 0;
@@ -5326,8 +8919,6 @@ static void InstallMainLoopSleep0()
         Log("MainLoopSleep0: префикс 6A 00 EB 02 не совпал");
         return;
     }
-    PatchPushImm8(a - 4, (unsigned char)ms);
-    PatchPushImm8(b - 4, (unsigned char)ms);
     PatchImm8Sleep(RVA_MAIN_SLEEP_A, 100, (unsigned char)ms, "MainLoopSleep0");
     PatchImm8Sleep(RVA_MAIN_SLEEP_B, 100, (unsigned char)ms, "MainLoopSleep0");
 }
@@ -5361,56 +8952,143 @@ static void InstallHighPriority()
         Log("CPU: power throttling off");
 }
 
-// Разрешение системного таймера (портировано из тестовой ветки, без
-// ini-ключа). По наблюдению автора ветки Clausewitz зовёт
-// timeGetDevCaps/timeBeginPeriod(1) (rva 68B190), но разбирает
-// TIMECAPS как два байта вместо двух UINT: wPeriodMin=1 после сдвига
-// даёт "max != 1", и timeBeginPeriod не вызывается. Тогда любой
-// Sleep(1) - в том числе наши Sleep(100)/Sleep(40) -> Sleep(1) -
-// округляется до кванта ~15.6 мс. Вызываем сами. На симуляцию не
-// влияет - меняется только точность ожиданий.
-static void InstallTimerResolution()
+static void NoteSleep(DWORD rva, DWORD ret, DWORD origMs, DWORD newMs)
 {
-    // Install() исполняется внутри DllMain (loader lock), поэтому
-    // LoadLibrary только если winmm ещё не загружен - обычно он уже
-    // подтянут импортами exe.
-    HMODULE winmm = GetModuleHandleA("winmm.dll");
-    if (!winmm)
-        winmm = LoadLibraryA("winmm.dll");
-    if (!winmm)
+    LONG n = g_seenSleepN;
+    for (LONG i = 0; i < n && i < (LONG)(sizeof(g_seenSleepRva) / sizeof(g_seenSleepRva[0])); ++i)
     {
-        Log("Timer: winmm.dll не загрузился");
+        if (g_seenSleepRva[i] == rva && g_seenSleepMs[i] == origMs)
+            return;
+    }
+    LONG idx = InterlockedIncrement(&g_seenSleepN) - 1;
+    if (idx < 0 || idx >= (LONG)(sizeof(g_seenSleepRva) / sizeof(g_seenSleepRva[0])))
         return;
-    }
-
-    typedef UINT (WINAPI* tTimeBeginPeriod)(UINT);
-    tTimeBeginPeriod beginPeriod = (tTimeBeginPeriod)GetProcAddress(winmm, "timeBeginPeriod");
-    if (beginPeriod)
-        Log("Timer: timeBeginPeriod(1) = %u", beginPeriod(1));
+    g_seenSleepRva[idx] = rva;
+    g_seenSleepMs[idx] = origMs;
+    if (rva)
+        Log("SleepIat: Sleep(%u) rva %06X -> %u", origMs, rva, newMs);
     else
-        Log("Timer: timeBeginPeriod не найден");
-
-    HMODULE ntdll = GetModuleHandleA("ntdll.dll");
-    typedef LONG (NTAPI* tNtSetTimerResolution)(ULONG, BOOLEAN, ULONG*);
-    tNtSetTimerResolution ntSet = ntdll
-        ? (tNtSetTimerResolution)GetProcAddress(ntdll, "NtSetTimerResolution")
-        : 0;
-    if (ntSet)
-    {
-        ULONG cur = 0;
-        LONG st = ntSet(10000, TRUE, &cur); // 10000 * 100 нс = 1 мс
-        Log("Timer: NtSetTimerResolution(1ms) status=%08X cur=%u", (unsigned)st, (unsigned)cur);
-    }
+        Log("SleepIat: Sleep(%u) from %08X -> %u", origMs, ret, newMs);
 }
 
-// select() "микшера" (FIX_SFX_MIXER_LAG). Портировано из тестовой ветки:
-// по замерам её автора этот select ждёт по 14-20 мс на итерацию (автор
-// связывал это с потолком ~50-70 FPS клиента MP; опция названа по
-// симптому - лаг звуковых эффектов). Перехватываем ws2_32
-// select (ординал 18) в IAT exe; если вызов из 0x689C00-0x68C000
-// (основной 0x68B47D) и таймаут > 2 мс - подставляем локальную копию
-// timeval на 1 мс. Структуру игры не трогаем, остальные вызовы
-// select (другие адреса) идут как есть.
+static bool ShouldClampSleep(DWORD ms)
+{
+    // 30/35 — аудио около 00A63Bxx. Остальное 16..50 мс: кадровая
+    // пауза часто Sleep(40-elapsed), не ровно 40.
+    if (ms < 16 || ms > 50)
+        return false;
+    if (ms == 30 || ms == 35)
+        return false;
+    return true;
+}
+
+static void WINAPI HookSleep(DWORD ms)
+{
+    DWORD orig = ms;
+    DWORD ret = (DWORD)(DWORD_PTR)_ReturnAddress();
+    DWORD rva = (g_base && ret >= g_base && ret < g_base + g_imageSize) ? ret - g_base : 0;
+    if (g_settings.patchMpClientSleep && ShouldClampSleep(ms))
+    {
+        int nms = g_settings.mpClientSleepMs;
+        if (nms < 0)
+            nms = 0;
+        if (nms > 127)
+            nms = 127;
+        ms = (DWORD)nms;
+    }
+    if (orig >= 1 && orig <= 80)
+        NoteSleep(rva, ret, orig, ms);
+    InterlockedIncrement(&g_sleepCalls);
+    InterlockedExchangeAdd(&g_sleepSumMs, (LONG)ms);
+    if (g_realSleep)
+        g_realSleep(ms);
+}
+
+static BOOL WINAPI HookPeekMessageA(LPMSG msg, HWND wnd, UINT min, UINT max, UINT remove)
+{
+    bool acc = IdleOnThisThread();
+    LONGLONG t0 = 0;
+    if (acc)
+        t0 = QpcNow();
+    BOOL r = g_realPeekMessageA ? g_realPeekMessageA(msg, wnd, min, max, remove) : FALSE;
+    if (acc)
+    {
+        g_idlePeekN++;
+        g_idlePeekUs += (LONG)QpcUs(t0);
+        if (!g_idlePeekRva)
+            g_idlePeekRva = ExeRvaOf((DWORD)(DWORD_PTR)_ReturnAddress());
+    }
+    return r;
+}
+
+static LRESULT WINAPI HookDispatchMessageA(const MSG* msg)
+{
+    bool acc = IdleOnThisThread();
+    LONGLONG t0 = 0;
+    if (acc)
+        t0 = QpcNow();
+    LRESULT r = g_realDispatchMessageA ? g_realDispatchMessageA(msg) : 0;
+    if (acc)
+    {
+        g_idleDispN++;
+        g_idleDispUs += (LONG)QpcUs(t0);
+        if (!g_idleDispRva)
+            g_idleDispRva = ExeRvaOf((DWORD)(DWORD_PTR)_ReturnAddress());
+    }
+    return r;
+}
+
+static bool SleepHookModuleUnsafe(HMODULE m)
+{
+    if (!m)
+        return true;
+    wchar_t path[MAX_PATH];
+    path[0] = 0;
+    if (!GetModuleFileNameW(m, path, MAX_PATH))
+        return true;
+    const wchar_t* slash = wcsrchr(path, L'\\');
+    const wchar_t* base = slash ? slash + 1 : path;
+    return !_wcsicmp(base, L"ntdll.dll") ||
+           !_wcsicmp(base, L"kernel32.dll") ||
+           !_wcsicmp(base, L"KERNELBASE.dll") ||
+           !_wcsicmp(base, L"kernelbase.dll") ||
+           !_wcsicmp(base, L"user32.dll") ||
+           !_wcsicmp(base, L"gdi32.dll") ||
+           !_wcsicmp(base, L"winmm.dll") ||
+           !_wcsicmp(base, L"lua51.dll") ||
+           !_wcsicmp(base, L"lua51_real.dll");
+}
+
+static void HookSleepOnModule(HMODULE m)
+{
+    if (!m || !g_settings.patchMpClientSleep || SleepHookModuleUnsafe(m))
+        return;
+    if (!g_realSleep)
+    {
+        HMODULE k32 = GetModuleHandleA("kernel32.dll");
+        if (k32)
+            g_realSleep = (tSleep)GetProcAddress(k32, "Sleep");
+    }
+    HookIat(m, "kernel32.dll", "Sleep", (void*)HookSleep, (void**)&g_realSleep);
+    HookIat(m, "KERNELBASE.dll", "Sleep", (void*)HookSleep, (void**)&g_realSleep);
+}
+
+static void InstallSleepIatHook()
+{
+    if (!g_realSleep)
+    {
+        HMODULE k32 = GetModuleHandleA("kernel32.dll");
+        if (k32)
+            g_realSleep = (tSleep)GetProcAddress(k32, "Sleep");
+    }
+    HMODULE exe = GetModuleHandleA(NULL);
+    if (HookIat(exe, "kernel32.dll", "Sleep", (void*)HookSleep, (void**)&g_realSleep))
+        Log("SleepIat: kernel32.Sleep exe (16-50мс кроме аудио 30/35 -> %d)",
+            g_settings.mpClientSleepMs);
+    else
+        Log("SleepIat: IAT Sleep exe не найден");
+}
+
 struct SockTimeVal
 {
     long tv_sec;
@@ -5434,19 +9112,29 @@ static void NoteSelect(DWORD rva, long sec, long usec, int clamped)
         return;
     g_seenSelectRva[idx] = rva;
     Log("Select: rva %06X timeout %ld.%06ld%s",
-        (unsigned)rva, sec, usec, clamped ? " -> 1мс" : "");
+        rva, sec, usec, clamped ? " -> 1мс" : "");
 }
 
 static int WINAPI HookSelect(int nfds, void* r, void* w, void* e, SockTimeVal* tv)
 {
+    InterlockedIncrement(&g_selectCalls);
     DWORD ret = (DWORD)(DWORD_PTR)_ReturnAddress();
     DWORD rva = (g_base && ret >= g_base && ret < g_base + g_imageSize) ? ret - g_base : 0;
     long sec = tv ? tv->tv_sec : 0;
     long usec = tv ? tv->tv_usec : 0;
-
+    DWORD tid = GetCurrentThreadId();
+    bool onPresent = g_presentTid && tid == g_presentTid;
+    bool mixer = rva >= 0x689C00 && rva < 0x68C000;
     SockTimeVal localTv;
     SockTimeVal* useTv = tv;
-    bool mixer = rva >= 0x689C00 && rva < 0x68C000;
+    if (!tv)
+    {
+        static LONG loggedNull = 0;
+        if (InterlockedCompareExchange(&loggedNull, 1, 0) == 0)
+            Log("Select: NULL timeout (блокирующий) rva %06X", rva);
+    }
+    // 3.24: только микшер 0x68B47D / диапазон 689C00-68C000.
+    // Таймаут копируем — поле timeval в объекте игры не трогаем.
     if (tv && mixer && (sec > 0 || usec > 2000))
     {
         NoteSelect(rva, sec, usec, 1);
@@ -5456,29 +9144,3523 @@ static int WINAPI HookSelect(int nfds, void* r, void* w, void* e, SockTimeVal* t
     }
     else if (tv && (sec || usec > 0))
         NoteSelect(rva, sec, usec, 0);
-
-    return g_realSelect ? g_realSelect(nfds, r, w, e, useTv) : -1;
+    DWORD t0 = NowMs();
+    int rr = g_realSelect ? g_realSelect(nfds, r, w, e, useTv) : -1;
+    DWORD dt = NowMs() - t0;
+    if (onPresent)
+    {
+        InterlockedIncrement(&g_selMainN);
+        InterlockedExchangeAdd(&g_selMainMs, (LONG)dt);
+    }
+    return rr;
 }
 
 static void InstallSelectHook()
 {
     HMODULE exe = GetModuleHandleA(NULL);
     if (HookIatOrdinal(exe, "ws2_32.dll", 18, (void*)HookSelect, (void**)&g_realSelect) ||
-        HookIat(exe, "ws2_32.dll", "select", (void*)HookSelect, (void**)&g_realSelect))
-        Log("Select: ws2_32.select перехвачен (68B47D >2мс -> 1мс, копия timeval)");
+        HookIatOrdinal(exe, "WS2_32.dll", 18, (void*)HookSelect, (void**)&g_realSelect))
+        Log("Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)");
     else
         Log("Select: IAT select не найден");
 }
 
+typedef int (WINAPI* tRecv)(UINT s, char* buf, int len, int flags);
+typedef DWORD (WINAPI* tWaitForSingleObject)(HANDLE, DWORD);
+typedef BOOL (WINAPI* tQueryPerformanceCounter)(LARGE_INTEGER*);
+typedef void (__thiscall* tIdlerIdle)(void* self, int arg);
+
+static tRecv g_realRecv = 0;
+static tWaitForSingleObject g_realWFSO = 0;
+static tQueryPerformanceCounter g_realQpc = 0;
+static tIdlerIdle g_realIdleEu3 = 0;
+static tIdlerIdle g_realIdleNudge = 0;
+static tIdlerIdle g_realIdleIngame = 0;
+static DWORD g_seenWfsoMs[16];
+static DWORD g_seenWfsoRva[16];
+static LONG g_seenWfsoN = 0;
+static DWORD g_seenRecvRva[8];
+static LONG g_seenRecvN = 0;
+
+__declspec(align(16)) static unsigned char g_trampIdleEu3[32];
+__declspec(align(16)) static unsigned char g_trampIdleNudge[32];
+__declspec(align(16)) static unsigned char g_trampIdleIngame[32];
+
+static void NoteWfso(DWORD rva, DWORD origMs, DWORD newMs)
+{
+    LONG n = g_seenWfsoN;
+    for (LONG i = 0; i < n && i < (LONG)(sizeof(g_seenWfsoRva) / sizeof(g_seenWfsoRva[0])); ++i)
+    {
+        if (g_seenWfsoRva[i] == rva && g_seenWfsoMs[i] == origMs)
+            return;
+    }
+    LONG idx = InterlockedIncrement(&g_seenWfsoN) - 1;
+    if (idx < 0 || idx >= (LONG)(sizeof(g_seenWfsoRva) / sizeof(g_seenWfsoRva[0])))
+        return;
+    g_seenWfsoRva[idx] = rva;
+    g_seenWfsoMs[idx] = origMs;
+    Log("WFSO: timeout %u rva %06X -> %u", origMs, rva, newMs);
+}
+
+static DWORD WINAPI HookWaitForSingleObject(HANDLE h, DWORD ms)
+{
+    DWORD orig = ms;
+    DWORD ret = (DWORD)(DWORD_PTR)_ReturnAddress();
+    DWORD rva = (g_base && ret >= g_base && ret < g_base + g_imageSize) ? ret - g_base : 0;
+    if (g_settings.patchMpClientSleep && ms != INFINITE && ShouldClampSleep(ms))
+    {
+        int nms = g_settings.mpClientSleepMs;
+        if (nms < 0)
+            nms = 0;
+        if (nms > 127)
+            nms = 127;
+        ms = (DWORD)nms;
+    }
+    if (orig != INFINITE && orig <= 2000)
+        NoteWfso(rva, orig, ms);
+    DWORD t0 = NowMs();
+    DWORD r = g_realWFSO ? g_realWFSO(h, ms) : WAIT_FAILED;
+    DWORD dt = NowMs() - t0;
+    InterlockedIncrement(&g_wfsoCalls);
+    InterlockedExchangeAdd(&g_wfsoSumMs, (LONG)dt);
+    return r;
+}
+
+// WFSO IAT: часть PATCH_MP_CLIENT_SLEEP (ожидания pump через WFSO).
+// Использует уже существующий HookWaitForSingleObject / g_realWFSO.
+static void InstallWfsoHook()
+{
+    HMODULE exe = GetModuleHandleA(NULL);
+    HMODULE k32 = GetModuleHandleA("kernel32.dll");
+    if (k32 && !g_realWFSO)
+        g_realWFSO = (tWaitForSingleObject)GetProcAddress(k32, "WaitForSingleObject");
+    if (HookIat(exe, "kernel32.dll", "WaitForSingleObject", (void*)HookWaitForSingleObject, (void**)&g_realWFSO))
+        Log("WFSO: WaitForSingleObject exe перехвачен (16-50мс -> %d, INFINITE не трогаем)",
+            g_settings.mpClientSleepMs);
+    else
+        Log("WFSO: IAT WaitForSingleObject не найден");
+}
+
+static void NoteRecv(DWORD rva, DWORD dt, int result)
+{
+    LONG n = g_seenRecvN;
+    for (LONG i = 0; i < n && i < (LONG)(sizeof(g_seenRecvRva) / sizeof(g_seenRecvRva[0])); ++i)
+    {
+        if (g_seenRecvRva[i] == rva)
+            return;
+    }
+    LONG idx = InterlockedIncrement(&g_seenRecvN) - 1;
+    if (idx < 0 || idx >= (LONG)(sizeof(g_seenRecvRva) / sizeof(g_seenRecvRva[0])))
+        return;
+    g_seenRecvRva[idx] = rva;
+    Log("Recv: rva %06X dt=%u ret=%d", rva, dt, result);
+}
+
+static int WINAPI HookRecv(UINT s, char* buf, int len, int flags)
+{
+    DWORD ret = (DWORD)(DWORD_PTR)_ReturnAddress();
+    DWORD rva = (g_base && ret >= g_base && ret < g_base + g_imageSize) ? ret - g_base : 0;
+    DWORD t0 = NowMs();
+    int r = g_realRecv ? g_realRecv(s, buf, len, flags) : -1;
+    DWORD dt = NowMs() - t0;
+    InterlockedIncrement(&g_recvCalls);
+    InterlockedExchangeAdd(&g_recvSumMs, (LONG)dt);
+    if (dt >= 2)
+        NoteRecv(rva, dt, r);
+    return r;
+}
+
+static BOOL WINAPI HookQpc(LARGE_INTEGER* v)
+{
+    InterlockedIncrement(&g_qpcCalls);
+    return g_realQpc ? g_realQpc(v) : FALSE;
+}
+
+static void AccountIdle(volatile LONG* n, volatile LONG* ms, DWORD t0)
+{
+    DWORD dt = NowMs() - t0;
+    InterlockedIncrement(n);
+    InterlockedExchangeAdd(ms, (LONG)dt);
+}
+
+static void MarkGapToIdle(DWORD t0)
+{
+    if (!g_lastPresentEnd)
+        return;
+    DWORD gap = t0 - g_lastPresentEnd;
+    if (gap < 200)
+        InterlockedExchangeAdd(&g_gapToIdleMs, (LONG)gap);
+}
+
+static void __fastcall HookIdleEu3(void* self, void* edx, int arg)
+{
+    (void)edx;
+    DWORD t0 = NowMs();
+    MarkGapToIdle(t0);
+    if (g_realIdleEu3)
+        g_realIdleEu3(self, arg);
+    AccountIdle(&g_idleEu3N, &g_idleEu3Ms, t0);
+    g_lastIdleEnd = NowMs();
+}
+
+static void __fastcall HookIdleNudge(void* self, void* edx, int arg)
+{
+    (void)edx;
+    DWORD t0 = NowMs();
+    MarkGapToIdle(t0);
+    if (g_realIdleNudge)
+        g_realIdleNudge(self, arg);
+    AccountIdle(&g_idleNudgeN, &g_idleNudgeMs, t0);
+    g_lastIdleEnd = NowMs();
+}
+
+static LONG UsDelta(LONG after, LONG before)
+{
+    LONG d = after - before;
+    return d > 0 ? d : 0;
+}
+
+static void __fastcall HookIdleIngame(void* self, void* edx, int arg)
+{
+    (void)edx;
+    g_uvLastIdler = self;
+    UvFlushSinglePanel();
+    bool outer = (g_idleDepth == 0);
+    if (!outer)
+        g_idleNestN++;
+    g_idleDepth++;
+    if (g_idleDepth > g_idleDepthMax)
+        g_idleDepthMax = g_idleDepth;
+    if (!outer && (g_settings.patchSkipNestedIdle || g_settings.patchFixArmyWindowLag))
+    {
+        g_idleDepth--;
+        return;
+    }
+    LONGLONG q0 = QpcNow();
+    if (outer)
+    {
+        g_idleQ0 = q0;
+        g_idleHeadMark = 0;
+        g_idleOvlMark = 0;
+        g_idleCamLoc = 0;
+        g_idleOvlLoc = 0;
+        g_idleIcoLoc = 0;
+        g_idlePreLoc = 0;
+        g_idleGui2Loc = 0;
+        g_idleStrLoc = 0;
+        g_idleCluLoc = 0;
+        g_idleCamN = 0;
+        g_idleOvlN = 0;
+        g_idleCamLeave0 = 0;
+        g_idleCamLeave1 = 0;
+        g_idleOvlEnter0 = 0;
+        g_idleOvlEnter1 = 0;
+        g_idleOvlLeave0 = 0;
+        g_idleOvlLeave1 = 0;
+        g_idleOvlGapMax = 0;
+        g_idleNestN = 0;
+        g_idleDepthMax = g_idleDepth;
+        g_idleInCam = 0;
+        g_idleInOvl = 0;
+        g_idlePresCam = 0;
+        g_idlePresOvl = 0;
+        g_idlePresElse = 0;
+        g_idlePeekN = 0;
+        g_idlePeekUs = 0;
+        g_idleDispN = 0;
+        g_idleDispUs = 0;
+        g_idlePeekRva = 0;
+        g_idleDispRva = 0;
+        g_idlePresStk[0] = 0;
+        g_idlePresStk[1] = 0;
+        g_idlePresStk[2] = 0;
+        g_idlePresStk[3] = 0;
+        g_idlePresStkN = 0;
+        g_idlePumpLoc = 0;
+        g_idlePumpN = 0;
+        g_idlePumpCam = 0;
+        g_idlePumpNest = 0;
+        g_idlePumpRva = 0;
+        g_idlePumpStk[0] = 0;
+        g_idlePumpStk[1] = 0;
+        g_idlePumpStk[2] = 0;
+        g_idlePumpStk[3] = 0;
+        g_idlePumpStkN = 0;
+        g_idleChkLoc = 0;
+        g_idleChkN = 0;
+        g_idleWckLoc = 0;
+        g_idleWckN = 0;
+        g_idleWckSkip = 0;
+        g_idleTid = GetCurrentThreadId();
+    }
+    DWORD t0 = NowMs();
+    MarkGapToIdle(t0);
+    LONG dirty0 = g_dirtyUs;
+    LONG cln0 = g_clnUs;
+    LONG tail0 = g_tailUs;
+    LONG lkp0 = g_lkpUs;
+    LONG dlg0 = g_dlgUs;
+    LONG inf0 = g_infUs;
+    LONG map0 = g_mapUs;
+    LONG evt0 = g_evtUs;
+    LONG sleep0 = g_sleepSumMs;
+    LONG wfso0 = g_wfsoSumMs;
+    LONG pres0 = g_presentFrames;
+    if (g_realIdleIngame)
+        g_realIdleIngame(self, arg);
+    DWORD us = QpcUs(q0);
+    AccUs(&g_idleIngameN, &g_idleIngameMs, &g_idleIngameMax, q0);
+    g_lastIdleEnd = NowMs();
+    LONG head = 0;
+    LONG aft = 0;
+    if (outer)
+    {
+        head = g_idleHeadMark > 0 ? g_idleHeadMark : (LONG)us;
+        if (g_idleOvlMark > 0)
+        {
+            aft = (LONG)us - g_idleOvlMark;
+            if (aft < 0)
+                aft = 0;
+        }
+        AccUsVal(&g_hdN, &g_hdUs, &g_hdMax, head);
+        AccUsVal(&g_aftN, &g_aftUs, &g_aftMax, aft);
+        g_idleQ0 = 0;
+        g_idleTid = 0;
+    }
+    g_idleDepth--;
+    if (us < 80000 || !outer)
+        return;
+    LONG cam = g_idleCamLoc;
+    LONG ovl = g_idleOvlLoc;
+    LONG ico = g_idleIcoLoc;
+    LONG pre = g_idlePreLoc;
+    LONG gui2 = g_idleGui2Loc;
+    LONG str = g_idleStrLoc;
+    LONG clu = g_idleCluLoc;
+    LONG dirty = UsDelta(g_dirtyUs, dirty0);
+    LONG cln = UsDelta(g_clnUs, cln0);
+    LONG tail = UsDelta(g_tailUs, tail0);
+    LONG lkp = UsDelta(g_lkpUs, lkp0);
+    LONG dlg = UsDelta(g_dlgUs, dlg0);
+    LONG inf = UsDelta(g_infUs, inf0);
+    LONG map = UsDelta(g_mapUs, map0);
+    LONG evt = UsDelta(g_evtUs, evt0);
+    LONG accounted = cam + ovl + pre + gui2 + clu + cln + tail + lkp;
+    LONG leftover = (LONG)us - accounted;
+    if (leftover < 0)
+        leftover = 0;
+    if (InterlockedIncrement(&g_spikeLogs) > 8)
+        return;
+    LONG camL0 = g_idleCamLeave0;
+    LONG ovlE0 = g_idleOvlEnter0;
+    LONG gapCO = 0;
+    LONG midOvl = 0;
+    if (ovlE0 > 0 && camL0 > 0)
+        gapCO = ovlE0 - camL0;
+    if (g_idleOvlN >= 2 && g_idleOvlEnter1 > 0 && g_idleOvlLeave0 > 0)
+        midOvl = g_idleOvlEnter1 - g_idleOvlLeave0;
+    if (gapCO < 0)
+        gapCO = 0;
+    if (midOvl < 0)
+        midOvl = 0;
+    Log("IdleSpike: %u мс leftover=%d head=%d aft=%d cam=%d ovl=%d ico=%d pre=%d str=%d clu=%d gui2=%d "
+        "lkp=%d cln=%d tail=%d dirty=%d dlg=%d inf=%d map=%d evt=%d sleep=%d wfso=%d present=%d "
+        "camN=%d ovlN=%d gapCO=%d midOvl=%d camL=%d ovlE=%d "
+        "nest=%d dmax=%d pCam=%d pOvl=%d pElse=%d ovlGap=%d peek=%d/%d disp=%d/%d "
+        "stk=%06X,%06X,%06X,%06X peekR=%06X dispR=%06X "
+        "pump=%d/%d pCamP=%d pNest=%d pumpR=%06X pstk=%06X,%06X,%06X,%06X chk=%d/%d wck=%d/%d wskip=%d",
+        us / 1000, leftover / 1000, head / 1000, aft / 1000,
+        cam / 1000, ovl / 1000, ico / 1000, pre / 1000, str / 1000, clu / 1000, gui2 / 1000,
+        lkp / 1000, cln / 1000, tail / 1000, dirty / 1000,
+        dlg / 1000, inf / 1000, map / 1000, evt / 1000,
+        (int)UsDelta(g_sleepSumMs, sleep0),
+        (int)UsDelta(g_wfsoSumMs, wfso0),
+        (int)UsDelta(g_presentFrames, pres0),
+        (int)g_idleCamN, (int)g_idleOvlN,
+        gapCO / 1000, midOvl / 1000, camL0 / 1000, ovlE0 / 1000,
+        (int)g_idleNestN, (int)g_idleDepthMax,
+        (int)g_idlePresCam, (int)g_idlePresOvl, (int)g_idlePresElse,
+        g_idleOvlGapMax / 1000,
+        (int)g_idlePeekN, g_idlePeekUs / 1000,
+        (int)g_idleDispN, g_idleDispUs / 1000,
+        g_idlePresStk[0], g_idlePresStk[1], g_idlePresStk[2], g_idlePresStk[3],
+        g_idlePeekRva, g_idleDispRva,
+        (int)g_idlePumpN, g_idlePumpLoc / 1000,
+        (int)g_idlePumpCam, (int)g_idlePumpNest, g_idlePumpRva,
+        g_idlePumpStk[0], g_idlePumpStk[1], g_idlePumpStk[2], g_idlePumpStk[3],
+        (int)g_idleChkN, g_idleChkLoc / 1000,
+        (int)g_idleWckN, g_idleWckLoc / 1000, (int)g_idleWckSkip);
+}
+
+static bool StealToTrampoline(DWORD rva, unsigned steal, unsigned char* tramp, int trampSize,
+    const unsigned char* expect, void* hook, void** orig, const char* tag)
+{
+    unsigned char* src = (unsigned char*)(g_base + rva);
+    if (steal < 5 || steal > 16 || trampSize < (int)(steal + 5))
+        return false;
+    if (memcmp(src, expect, steal) != 0)
+    {
+        Log("%s: сигнатура не совпала rva %06X (%02X %02X %02X %02X)",
+            tag, rva, src[0], src[1], src[2], src[3]);
+        return false;
+    }
+
+    DWORD old = 0;
+    if (!VirtualProtect(tramp, trampSize, PAGE_EXECUTE_READWRITE, &old))
+        return false;
+    memcpy(tramp, src, steal);
+    tramp[steal] = 0xE9;
+    *(DWORD*)(tramp + steal + 1) = (DWORD)(src + steal) - ((DWORD)(tramp + steal + 5));
+    *orig = tramp;
+
+    if (!VirtualProtect(src, steal, PAGE_EXECUTE_READWRITE, &old))
+        return false;
+    unsigned char jmp[16];
+    memset(jmp, 0x90, steal);
+    jmp[0] = 0xE9;
+    *(DWORD*)(jmp + 1) = (DWORD)(DWORD_PTR)hook - ((DWORD)src + 5);
+    memcpy(src, jmp, steal);
+    VirtualProtect(src, steal, old, &old);
+    FlushInstructionCache(GetCurrentProcess(), src, steal);
+    FlushInstructionCache(GetCurrentProcess(), tramp, trampSize);
+    Log("%s: idle rva %06X", tag, rva);
+    return true;
+}
+
+// Mid-CALL wrap: jmp на хук, который сам вызывает оригинал и возвращается
+// на src+n. Нельзя StealToTrampoline — tramp с E8+jmp-after не возвращает.
+static bool PlantMidJump(DWORD rva, unsigned n, const unsigned char* expect, void* hook, const char* tag)
+{
+    unsigned char* src = (unsigned char*)(g_base + rva);
+    if (n < 5 || n > 16)
+        return false;
+    if (memcmp(src, expect, n) != 0)
+    {
+        Log("%s: сигнатура не совпала rva %06X (%02X %02X %02X %02X)",
+            tag, rva, src[0], src[1], src[2], src[3]);
+        return false;
+    }
+    DWORD old = 0;
+    if (!VirtualProtect(src, n, PAGE_EXECUTE_READWRITE, &old))
+        return false;
+    unsigned char jmp[16];
+    memset(jmp, 0x90, n);
+    jmp[0] = 0xE9;
+    *(DWORD*)(jmp + 1) = (DWORD)(DWORD_PTR)hook - ((DWORD)src + 5);
+    memcpy(src, jmp, n);
+    VirtualProtect(src, n, old, &old);
+    FlushInstructionCache(GetCurrentProcess(), src, n);
+    Log("%s: mid rva %06X n=%u", tag, rva, n);
+    return true;
+}
+
+// Выбор/ход армии: не single_unitpanel (3.28 panel=0 при реальных кликах).
+// Звук army_selected / navy_selected + selection_projection: rva 1CC530.
+// Приказ хода army_move + legal/illegal projection: rva 1CCEC0.
+static const DWORD RVA_PROV_DIRTY = 0x3FC360;
+static const DWORD RVA_ARMY_PICK  = 0x1CC530;
+static const DWORD RVA_ARMY_MOVE  = 0x1CCEC0;
+static const DWORD RVA_SEL_PROJ   = 0x1D4540;
+
+typedef void (__stdcall* tProvDirty)(void* a, int b, void* c);
+typedef void (__thiscall* tArmyPick)(void* self, DWORD a);
+typedef void (__thiscall* tArmyMove)(void* self, DWORD a, DWORD b);
+typedef void (__stdcall* tSelProj)(void* mgr, void* obj130);
+
+static tProvDirty g_realProvDirty = 0;
+static tArmyPick  g_realArmyPick = 0;
+static tArmyMove  g_realArmyMove = 0;
+static tSelProj   g_realSelProj = 0;
+typedef void* (__thiscall* tUnitViewCtor)(void* idler, void* buf, void* army, int z, void* extra);
+typedef void (__cdecl* tGameDelete)(void*);
+typedef void (__thiscall* tIdlerNotify)(void* idler, void* army);
+static tUnitViewCtor g_realUnitViewCtor = 0;
+static tGameDelete   g_gameDelete = 0;
+static tIdlerNotify  g_realIdlerNotify = 0;
+
+// Пул CUnitView: игра на каждый клик делала new(0x320)+разбор unitpanel.gui.
+// Держим до 10 живых панелей (UI only, checksum не трогаем). Свободный слот
+// перевязывает army на +0x28 вместо ctor. На deselect — Hide unitpanel
+// (vfunc +0x38 у token+0x18), не destroy: иначе карточки и «Выбрать»
+// залипают сбоку. Больше 10 одновременных — родной ctor/dtor. Смену idler
+// (выход в меню) забываем без dtor: родительский GUI уже разобран.
+static const int UV_POOL_MAX = 10;
+static const DWORD RVA_CUNITVIEW_VT = 0xA16850;
+struct UnitViewSlot
+{
+    void* view;
+    bool  inUse;
+};
+static UnitViewSlot g_uvPool[UV_POOL_MAX];
+static void*        g_uvOwner = 0;
+static void*        g_uvPendingPanel = 0;
+static void*        g_uvSingleArmy = 0;
+static bool         g_uvNeedRebuild = false;
+static void*        g_real393510 = 0;
+static void*        g_real393290 = 0;
+static void*        g_real391BB0 = 0;
+static void*        g_real391C6E = 0;
+static void*        g_real3810A0 = 0;
+static void*        g_realListClear = 0;
+static void*        g_afterListClear = 0;
+static void*        g_uvLastList = 0;
+static void*        g_bb0Epilogue = 0;
+static int          g_uvSkipListTail = 0;
+static LONGLONG     g_bb0TailMark = 0;
+static LONGLONG     g_bb0sT0 = 0;
+static LONGLONG     g_bb0fT0 = 0;
+static LONGLONG     g_bb0lT0 = 0;
+static LONGLONG     g_bb0gT0 = 0;
+static LONG         g_bb0sThis = 0;
+static LONG         g_bb0fThis = 0;
+static LONG         g_bb0lThis = 0;
+static LONG         g_bb0gThis = 0;
+static void*        g_fn009350 = 0;
+static void*        g_fn19C160 = 0;
+static void*        g_bb0ContStr = 0;
+static void*        g_bb0ContFind = 0;
+static void*        g_bb0ContList = 0;
+static void*        g_bb0ContHash = 0;
+static void*        g_bb0ContChild = 0;
+static void*        g_real5B2750 = 0;
+static void*        g_fn38B4C0 = 0;
+static void*        g_bb0ContSync = 0;
+static void*        g_fn38B2E0 = 0;
+static void*        g_fn38B140 = 0;
+static void*        g_fn731C00 = 0;
+static void*        g_fn008ED0 = 0;
+static void*        g_fn38A4D0 = 0;
+static void*        g_bb0ContEqA = 0;
+static void*        g_bb0ContEqB = 0;
+static void*        g_bb0ContEqH = 0;
+static void*        g_bb0ContEqV = 0;
+static void*        g_bb0ContEqS = 0;
+static void*        g_bb0ContEqR = 0;
+static void*        g_bb0ContEqVp = 0;
+static void*        g_bb0ContEqVv = 0;
+static void*        g_bb0ContEqVl = 0;
+static void*        g_bb0ContEqTb = 0;
+static void*        g_bb0ContEqTc = 0;
+static void*        g_bb0ContEqTd = 0;
+static void*        g_bb0ContEqTbC = 0;
+static void*        g_bb0ContEqVw = 0;
+static void*        g_bb0ContEqVx = 0;
+static LONGLONG     g_bb0eqAT0 = 0;
+static LONGLONG     g_bb0rbT0 = 0;
+static LONGLONG     g_bb0eqBT0 = 0;
+static LONGLONG     g_bb0eqHT0 = 0;
+static LONGLONG     g_bb0eqVT0 = 0;
+static LONGLONG     g_bb0eqST0 = 0;
+static LONGLONG     g_bb0eqRT0 = 0;
+static LONGLONG     g_eqVSliceT0 = 0;
+static int          g_eqVSlice = -1;
+static LONG         g_eqVSlicesOn = 0;
+static LONG         g_eqVActive = 0;
+static LONG         g_eqVSkipShow = 0;
+static LONG         g_eqVArmed = 0;
+static void*        g_eqVFpList = 0;
+static DWORD        g_eqVFpCount = 0;
+static DWORD        g_eqVFpHash = 0;
+static LONG         g_list7cLogged = 0;
+static LONG         g_syncDiagN = 0;
+static DWORD        g_child24Seen[8];
+static DWORD        g_eqVSeen[8];
+static DWORD        g_tbFnSeen[8];
+static DWORD        g_tbVtSeen[8];
+static DWORD        g_tbNstFnSeen[8];
+static DWORD        g_tbNstVtSeen[8];
+static DWORD        g_nstASeen[4];
+static DWORD        g_nstBSeen[4];
+static LONGLONG     g_bb0chT0 = 0;
+static DWORD        g_bb0chRva = 0;
+static BYTE*        g_uvLocContinue = 0;
+static BYTE*        g_uvLocEpilogue = 0;
+
+static void UvRecount()
+{
+    LONG live = 0, busy = 0;
+    for (int i = 0; i < UV_POOL_MAX; i++)
+    {
+        if (!g_uvPool[i].view)
+            continue;
+        live++;
+        if (g_uvPool[i].inUse)
+            busy++;
+    }
+    InterlockedExchange(&g_uvPoolLive, live);
+    InterlockedExchange(&g_uvPoolBusy, busy);
+}
+
+static void WinPoolReset();
+
+static void UvPoolReset()
+{
+    memset(g_uvPool, 0, sizeof(g_uvPool));
+    g_uvOwner = 0;
+    g_uvLastIdler = 0;
+    g_uvPendingPanel = 0;
+    g_uvSingleArmy = 0;
+    g_uvNeedRebuild = false;
+    g_uvSkipListTail = 0;
+    g_uvLastList = 0;
+    g_eqVSkipShow = 0;
+    g_eqVArmed = 0;
+    g_eqVFpList = 0;
+    g_eqVFpCount = 0;
+    g_eqVFpHash = 0;
+    UvRecount();
+    WinPoolReset();
+}
+
+static bool UvViewAlive(void* view)
+{
+    if (!view || !g_base)
+        return false;
+    __try
+    {
+        return *(DWORD*)view == (g_base + RVA_CUNITVIEW_VT);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return false;
+    }
+}
+
+static int UvFind(void* view)
+{
+    if (!view)
+        return -1;
+    for (int i = 0; i < UV_POOL_MAX; i++)
+    {
+        if (g_uvPool[i].view == view)
+            return i;
+    }
+    return -1;
+}
+
+static void UvDropDead()
+{
+    for (int i = 0; i < UV_POOL_MAX; i++)
+    {
+        if (g_uvPool[i].view && !UvViewAlive(g_uvPool[i].view))
+            memset(&g_uvPool[i], 0, sizeof(g_uvPool[i]));
+    }
+    UvRecount();
+}
+
+// token = CUnitView+0x20 ("unitpanel"), inner CGuiObject = token+0x18.
+// Игра прячет так: add ecx,0x18; call [vtable+0x38] (dtor 39D646, layout 26A7C6).
+// Show — соседний слот +0x34 (26A8F8, без лишних аргументов).
+static void UvCallGui(void* view, unsigned voff)
+{
+    if (!view)
+        return;
+    __try
+    {
+        void* tok = *(void**)((char*)view + 0x20);
+        if (!tok)
+            return;
+        void* gui = (char*)tok + 0x18;
+        void** vt = *(void***)gui;
+        if (!vt)
+            return;
+        typedef void (__thiscall* tFn)(void*);
+        tFn fn = (tFn)vt[voff / 4];
+        if (fn)
+            fn(gui);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void UvHide(void* view)
+{
+    UvCallGui(view, 0x38);
+}
+
+static void UvShow(void* view)
+{
+    UvCallGui(view, 0x34);
+}
+
+// Токен GUI: объект+0x18. Hide +0x38, Show +0x34 (393570 / 393510).
+static void UvCallGuiToken(void* tok, unsigned voff)
+{
+    if (!tok)
+        return;
+    __try
+    {
+        void* gui = (char*)tok + 0x18;
+        void** vt = *(void***)gui;
+        if (!vt)
+            return;
+        typedef void (__thiscall* tFn)(void*);
+        tFn fn = (tFn)vt[voff / 4];
+        if (fn)
+            fn(gui);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void UvHideGuiToken(void* tok)
+{
+    UvCallGuiToken(tok, 0x38);
+}
+
+static void UvCallGuiObj(void* gui, unsigned voff)
+{
+    if (!gui)
+        return;
+    __try
+    {
+        void** vt = *(void***)gui;
+        if (!vt)
+            return;
+        typedef void (__thiscall* tFn)(void*);
+        tFn fn = (tFn)vt[voff / 4];
+        if (fn)
+            fn(gui);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void UvHideGuiObj(void* gui)
+{
+    UvCallGuiObj(gui, 0x38);
+}
+
+static void UvShowGuiObj(void* gui)
+{
+    UvCallGuiObj(gui, 0x34);
+}
+
+static void UvLayoutGui(void* gui)
+{
+    UvCallGuiObj(gui, 0x6C);
+}
+
+static void UvShowGuiToken(void* tok)
+{
+    UvCallGuiToken(tok, 0x34);
+}
+
+static void UvShowDetail(void* panel)
+{
+    if (!panel)
+        return;
+    __try
+    {
+        UvShowGuiToken(*(void**)((char*)panel + 4));
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void UvFinishPanelLayout()
+{
+    if (!g_uvLastList)
+        return;
+    UvShowGuiObj(g_uvLastList);
+    UvLayoutGui(g_uvLastList);
+    UvLayoutGui(g_uvLastList);
+}
+
+// 39332D: дети list в this+0x60 (5B2750). +0x64/+0x68 — layout (3.71).
+// 3.73 только обнулил голову — старые виджеты остались наверху, реорг
+// мёртв из‑за skip 391BB0. NeedRebuild: Hide детей, голова = 0, размер нет.
+static void __stdcall UvUnlinkListHead(void* list)
+{
+    if (!list)
+        return;
+    void* node = 0;
+    __try
+    {
+        node = *(void**)((char*)list + 0x60);
+        *(void**)((char*)list + 0x60) = 0;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return;
+    }
+    DWORD uvVt = g_base ? (g_base + RVA_CUNITVIEW_VT) : 0;
+    int n = 0;
+    while (node && n++ < 256)
+    {
+        void* child = 0;
+        void* next = 0;
+        __try
+        {
+            child = *(void**)node;
+            next = *(void**)((char*)node + 8);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            break;
+        }
+        if (child)
+        {
+            __try
+            {
+                DWORD vt0 = *(DWORD*)child;
+                if (uvVt && vt0 == uvVt)
+                    UvHide(child);
+                else
+                    UvHideGuiObj(child);
+            }
+            __except (EXCEPTION_EXECUTE_HANDLER)
+            {
+            }
+        }
+        node = next;
+    }
+}
+
+// 393570 ванили: Hide + vfunc +0x5C (чистка детей list) + Hide по вектору.
+// Чистка убивает окно бригад — в 3.40 после skip 393290 показывать было нечего.
+// Оставляем виджеты, только прячем.
+static void __stdcall UvHideDetailKeep(void* panel)
+{
+    if (!panel)
+        return;
+    __try
+    {
+        // Hide +0x38 не рекурсивный: прятать panel+4 сносит рамку, строки
+        // списка остаются и едут на карту. Прячем list и vector.
+        if (g_uvLastList)
+            UvHideGuiObj(g_uvLastList);
+        void** begin = *(void***)((char*)panel + 0x10);
+        void** end = *(void***)((char*)panel + 0x14);
+        if (begin && end && end > begin)
+        {
+            for (void** p = begin; p < end; p++)
+                UvHideGuiToken(*p);
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void UvInvalidateBrigadePanel()
+{
+    g_uvSingleArmy = 0;
+    g_uvNeedRebuild = true;
+}
+
+static void UvHideDetailIfMulti(void* idler)
+{
+    if (!idler)
+        return;
+    __try
+    {
+        DWORD n = *(DWORD*)((char*)idler + 0xDA8);
+        if (n == 1)
+            return;
+        UvInvalidateBrigadePanel();
+        void* panel = *(void**)((char*)idler + 0x1640);
+        if (n <= 1)
+            return;
+        if (panel)
+            UvHideDetailKeep(panel);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void __stdcall UvDeferPanelRefresh(void* panel)
+{
+    g_uvPendingPanel = panel;
+}
+
+static void UvCall393510(void* panel)
+{
+    void* fn = g_real393510;
+    if (!fn || !panel)
+        return;
+    __asm {
+        mov eax, panel
+        call fn
+    }
+}
+
+static void __stdcall UvOn393510(void* panel)
+{
+    // Не звать 393510 на стеке pick: 3.68 NeedRebuild+сразу → +0x5C
+    // по строке "status" (eax=stat), eip в windows.storage.
+    g_uvPendingPanel = panel;
+}
+
+// Рамка/клики: 393510 при da8==1 на ПЕРВОЙ армии, окно потом прячут.
+// Копим вызов до idle/Present: если к кадру уже >1 — не собираем.
+static void UvFlushSinglePanel()
+{
+    void* idler = g_uvLastIdler;
+    if (!idler || !g_real393510)
+        return;
+    __try
+    {
+        if (!g_uvNeedRebuild && g_uvOwner && idler != g_uvOwner)
+            return;
+        if (*(DWORD*)((char*)idler + 0xDA8) != 1)
+            return;
+        void* live = *(void**)((char*)idler + 0x1640);
+        void* panel = g_uvPendingPanel;
+        if (!panel && g_uvNeedRebuild)
+            panel = live;
+        if (!panel)
+            return;
+        if (live)
+            panel = live;
+        g_uvPendingPanel = 0;
+        UvShowDetail(panel);
+        UvCall393510(panel);
+        UvShowDetail(panel);
+        UvFinishPanelLayout();
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_uvPendingPanel = 0;
+        InterlockedIncrement(&g_uvFlushExN);
+    }
+}
+
+// 3.98: 393290 из 391C6E не скипаем (dirty split/newunit).
+// 4.00: coop skip 393290@393510 откатан — только таймер.
+static int __stdcall UvOnPanelRebuild(void* panel, DWORD retaddr)
+{
+    (void)panel;
+    (void)retaddr;
+    return 0;
+}
+
+static void __stdcall UvNoteRebuildArmy(void* panel)
+{
+    if (!panel)
+        return;
+    __try
+    {
+        g_uvSingleArmy = *(void**)((char*)panel + 8);
+        g_uvNeedRebuild = false;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_uvSingleArmy = 0;
+    }
+}
+
+static void __stdcall UvTimeCall393290(void* panel, DWORD retaddr)
+{
+    DWORD rva = ExeRvaOf(retaddr);
+    static LONG logged = 0;
+    LONG n = InterlockedIncrement(&logged);
+    if (n <= 16)
+        Log("ArmySelect: 393290 run ret=%06X", rva);
+    LONGLONG t0 = QpcNow();
+    void* fn = g_real393290;
+    __asm {
+        mov esi, panel
+        call fn
+    }
+    AccUs(&g_rbldN, &g_rbldUs, &g_rbldMax, t0);
+}
+
+static void __stdcall UvBb0SliceEnter(LONGLONG* t0)
+{
+    *t0 = QpcNow();
+}
+
+static void __stdcall UvBb0SliceLeave(LONGLONG t0, volatile LONG* n, volatile LONG* us, volatile LONG* mx, LONG* thisCall)
+{
+    LONG dt = (LONG)QpcUs(t0);
+    *thisCall = dt;
+    AccUsVal(n, us, mx, dt);
+}
+
+static void __stdcall UvBb0sEnter() { UvBb0SliceEnter(&g_bb0sT0); }
+static void __stdcall UvBb0sLeave() { UvBb0SliceLeave(g_bb0sT0, &g_bb0sN, &g_bb0sUs, &g_bb0sMax, &g_bb0sThis); }
+static void __stdcall UvBb0fEnter() { UvBb0SliceEnter(&g_bb0fT0); }
+static void __stdcall UvBb0fLeave() { UvBb0SliceLeave(g_bb0fT0, &g_bb0fN, &g_bb0fUs, &g_bb0fMax, &g_bb0fThis); }
+static void __stdcall UvBb0lEnter() { UvBb0SliceEnter(&g_bb0lT0); }
+static void __stdcall UvBb0lLeave() { UvBb0SliceLeave(g_bb0lT0, &g_bb0lN, &g_bb0lUs, &g_bb0lMax, &g_bb0lThis); }
+static void __stdcall UvBb0gEnter() { UvBb0SliceEnter(&g_bb0gT0); }
+static void __stdcall UvBb0gLeave() { UvBb0SliceLeave(g_bb0gT0, &g_bb0gN, &g_bb0gUs, &g_bb0gMax, &g_bb0gThis); }
+
+static void __stdcall UvNoteList7c(void* fn)
+{
+    if (InterlockedCompareExchange(&g_list7cLogged, 1, 0) != 0)
+        return;
+    Log("ArmySelect: list +0x7C rva %06X (ждём 5B2750 = Update детей listbox)",
+        ExeRvaOf((DWORD)(DWORD_PTR)fn));
+}
+
+static void __stdcall UvNoteChild24(void* fn)
+{
+    DWORD rva = ExeRvaOf((DWORD)(DWORD_PTR)fn);
+    for (int i = 0; i < 8; i++)
+    {
+        if (g_child24Seen[i] == rva)
+            return;
+        if (g_child24Seen[i] == 0)
+        {
+            g_child24Seen[i] = rva;
+            const char* tag = "other";
+            if (rva == 0x3993B0)
+                tag = "thunk";
+            else if (rva == 0x38C550)
+                tag = "supply/kph/speed";
+            else if (rva == 0x38E820)
+                tag = "attach/detach";
+            else if (rva == 0x38AF00)
+                tag = "list-sync";
+            Log("ArmySelect: list child +0x24 rva %06X (%s)", rva, tag);
+            return;
+        }
+    }
+}
+
+static void __stdcall UvBb0chEnter(void* fn)
+{
+    UvNoteChild24(fn);
+    g_bb0chRva = ExeRvaOf((DWORD)(DWORD_PTR)fn);
+    g_bb0chT0 = QpcNow();
+}
+
+static void __stdcall UvBb0chLeave()
+{
+    LONG dt = (LONG)QpcUs(g_bb0chT0);
+    AccUsVal(&g_bb0chN, &g_bb0chUs, &g_bb0chMax, dt);
+    switch (g_bb0chRva)
+    {
+    case 0x3993B0:
+        AccUsVal(&g_bb0c1N, &g_bb0c1Us, &g_bb0c1Max, dt);
+        break;
+    case 0x38C550:
+        AccUsVal(&g_bb0c2N, &g_bb0c2Us, &g_bb0c2Max, dt);
+        break;
+    case 0x38E820:
+        AccUsVal(&g_bb0c3N, &g_bb0c3Us, &g_bb0c3Max, dt);
+        break;
+    case 0x38AF00:
+        AccUsVal(&g_bb0c4N, &g_bb0c4Us, &g_bb0c4Max, dt);
+        break;
+    default:
+        AccUsVal(&g_bb0cxN, &g_bb0cxUs, &g_bb0cxMax, dt);
+        break;
+    }
+}
+
+static void __stdcall UvTime5B2750(void* self)
+{
+    LONGLONG t0 = QpcNow();
+    void* fn = g_real5B2750;
+    __asm {
+        mov ecx, self
+        call fn
+    }
+    AccUs(&g_bb0uN, &g_bb0uUs, &g_bb0uMax, t0);
+}
+
+// 38AF3A: call 38B4C0 после push esi. Не StealToTrampoline на 38B4C0 —
+// 3.80 портил ESI во вложенном вызове из 393290 → AV [esi+8]+0x74.
+static void UvEqVInvalidateShow()
+{
+    g_eqVSkipShow = 0;
+    g_eqVArmed = 0;
+    g_eqVFpList = 0;
+    g_eqVFpCount = 0;
+    g_eqVFpHash = 0;
+}
+
+static int UvEqVHashList(void* list, DWORD* countOut, DWORD* hashOut)
+{
+    if (!list || !countOut || !hashOut)
+        return 0;
+    __try
+    {
+        DWORD n = *(DWORD*)((char*)list + 0x58);
+        DWORD* arr = *(DWORD**)((char*)list + 0x5C);
+        *countOut = n;
+        DWORD h = n;
+        DWORD lim = n;
+        if (lim > 64)
+            lim = 64;
+        if (arr)
+        {
+            for (DWORD i = 0; i < lim; i++)
+                h ^= arr[i] + (i * 0x9E3779B9u);
+            if (n > 64)
+                h ^= arr[n - 1];
+        }
+        *hashOut = h;
+        return 1;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+}
+
+static void __stdcall UvTimeSyncMissEnter(void* outer)
+{
+    UvEqVInvalidateShow();
+    InterlockedIncrement(&g_syncMissN);
+    LONG n = InterlockedIncrement(&g_syncDiagN);
+    if (n <= 8 && outer)
+    {
+        __try
+        {
+            unsigned char* inner = (unsigned char*)outer + 0x1C;
+            DWORD begin = *(DWORD*)(inner + 0x50);
+            DWORD end = *(DWORD*)(inner + 0x54);
+            DWORD parent = *(DWORD*)(inner + 0x0C);
+            DWORD cached = parent ? *(DWORD*)(parent + 0x40) : 0;
+            DWORD count = (end >= begin) ? ((end - begin) / 40u) : 0;
+            Log("ArmySelect: sync-miss #%d vec=%u cached=%u delta=%d outer=%p parent=%p",
+                (int)n, count, cached, (int)count - (int)cached, outer, (void*)parent);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            Log("ArmySelect: sync-miss #%d (read AV)", (int)n);
+        }
+    }
+    g_bb0rbT0 = QpcNow();
+}
+
+static void __stdcall UvTimeSyncMissLeave()
+{
+    AccUs(&g_bb0rbN, &g_bb0rbUs, &g_bb0rbMax, g_bb0rbT0);
+}
+
+// 38AF41 equal-path: call 38B2E0 (scrollbar) затем 38B140 (per-row refresh).
+static void __stdcall UvBb0eqAEnter()
+{
+    g_bb0eqAT0 = QpcNow();
+}
+
+static void __stdcall UvBb0eqALeave()
+{
+    AccUs(&g_bb0eqAN, &g_bb0eqAUs, &g_bb0eqAMax, g_bb0eqAT0);
+}
+
+static void __stdcall UvBb0eqBEnter(void* list)
+{
+    g_bb0eqBT0 = QpcNow();
+    g_eqVSkipShow = 0;
+    DWORD count = 0, hash = 0;
+    if (list && UvEqVHashList(list, &count, &hash)
+        && g_eqVArmed
+        && list == g_eqVFpList
+        && count == g_eqVFpCount
+        && hash == g_eqVFpHash
+        && count > 0)
+        g_eqVSkipShow = 1;
+    g_eqVFpList = list;
+}
+
+static void __stdcall UvBb0eqBLeave()
+{
+    AccUs(&g_bb0eqBN, &g_bb0eqBUs, &g_bb0eqBMax, g_bb0eqBT0);
+    if (!g_eqVSkipShow && g_eqVFpList)
+    {
+        DWORD count = 0, hash = 0;
+        if (UvEqVHashList(g_eqVFpList, &count, &hash) && count > 0)
+        {
+            g_eqVFpCount = count;
+            g_eqVFpHash = hash;
+            g_eqVArmed = 1;
+        }
+    }
+    g_eqVSkipShow = 0;
+}
+
+static void __stdcall UvBb0eqHEnter()
+{
+    g_bb0eqHT0 = QpcNow();
+}
+
+static void __stdcall UvBb0eqHLeave()
+{
+    AccUs(&g_bb0eqHN, &g_bb0eqHUs, &g_bb0eqHMax, g_bb0eqHT0);
+}
+
+static void __stdcall UvBb0eqVEnter()
+{
+    g_bb0eqVT0 = QpcNow();
+}
+
+static void __stdcall UvBb0eqVLeave()
+{
+    AccUs(&g_bb0eqVN, &g_bb0eqVUs, &g_bb0eqVMax, g_bb0eqVT0);
+}
+
+// Срезы 5E4490 только пока g_eqVActive (army list path). Иначе 5E4490 — общий Show.
+static void __stdcall UvEqVSliceTo(int next)
+{
+    if (!g_eqVActive)
+    {
+        g_eqVSlice = -1;
+        return;
+    }
+    if (g_eqVSlice >= 0)
+    {
+        LONG dt = (LONG)QpcUs(g_eqVSliceT0);
+        if (dt < 0)
+            dt = 0;
+        switch (g_eqVSlice)
+        {
+        case 0:
+            AccUsVal(&g_bb0eqVpN, &g_bb0eqVpUs, &g_bb0eqVpMax, dt);
+            break;
+        case 1:
+            AccUsVal(&g_bb0eqVvN, &g_bb0eqVvUs, &g_bb0eqVvMax, dt);
+            break;
+        case 2:
+            AccUsVal(&g_bb0eqVlN, &g_bb0eqVlUs, &g_bb0eqVlMax, dt);
+            break;
+        case 3:
+            AccUsVal(&g_bb0eqTaN, &g_bb0eqTaUs, &g_bb0eqTaMax, dt);
+            break;
+        case 4:
+            AccUsVal(&g_bb0eqTbN, &g_bb0eqTbUs, &g_bb0eqTbMax, dt);
+            break;
+        case 5:
+            AccUsVal(&g_bb0eqTcN, &g_bb0eqTcUs, &g_bb0eqTcMax, dt);
+            break;
+        case 6:
+            AccUsVal(&g_bb0eqTdN, &g_bb0eqTdUs, &g_bb0eqTdMax, dt);
+            break;
+        case 7:
+            AccUsVal(&g_bb0eqVwN, &g_bb0eqVwUs, &g_bb0eqVwMax, dt);
+            break;
+        case 8:
+            AccUsVal(&g_bb0eqVxN, &g_bb0eqVxUs, &g_bb0eqVxMax, dt);
+            break;
+        }
+    }
+    g_eqVSlice = next;
+    g_eqVSliceT0 = QpcNow();
+}
+
+// 3.92 эмулировал Show через vt+0x34 — на rebuild 38B4C0 это AV в кучу.
+// 3.93: skip только equal-path (флаг [self+8]=1, без Show). Иначе ванильный
+// 5B1FA0 в EAX. Срезы 5E4490 по-прежнему вокруг этого вызова.
+static void __stdcall UvTimeEqVInner(void* self, void* thunk)
+{
+    __try
+    {
+        if (g_eqVSkipShow)
+        {
+            *((BYTE*)self + 8) = 1;
+            InterlockedIncrement(&g_eqVSkipN);
+            return;
+        }
+        if (!self || !thunk)
+            return;
+        DWORD rva = ExeRvaOf((DWORD)(DWORD_PTR)thunk);
+        for (int i = 0; i < 8; i++)
+        {
+            if (g_eqVSeen[i] == rva)
+                break;
+            if (g_eqVSeen[i] == 0)
+            {
+                g_eqVSeen[i] = rva;
+                Log("ArmySelect: eqV thunk rva %06X (ванильный 5B1FA0)", rva);
+                break;
+            }
+        }
+        g_eqVActive = 1;
+        g_eqVSlice = 0;
+        g_eqVSliceT0 = QpcNow();
+        LONGLONG t0 = QpcNow();
+        void* s = self;
+        void* fn = thunk;
+        __asm {
+            mov ecx, s
+            mov eax, fn
+            call eax
+        }
+        UvEqVSliceTo(-1);
+        g_eqVActive = 0;
+        AccUs(&g_bb0eqVN, &g_bb0eqVUs, &g_bb0eqVMax, t0);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_eqVActive = 0;
+        g_eqVSlice = -1;
+        Log("ArmySelect: eqV inner AV");
+    }
+}
+
+static void __stdcall UvNoteEqVxHit()
+{
+    if (g_eqVActive)
+        InterlockedIncrement(&g_bb0eqVxHit);
+}
+
+static void __stdcall UvNoteTbCount(int n)
+{
+    if (!g_eqVActive || n < 0)
+        return;
+    InterlockedIncrement(&g_tbCntN);
+    InterlockedExchangeAdd(&g_tbCntSum, n);
+    for (;;)
+    {
+        LONG cur = g_tbCntMax;
+        if (n <= cur)
+            break;
+        if (InterlockedCompareExchange(&g_tbCntMax, n, cur) == cur)
+            break;
+    }
+}
+
+// Tb loop: call child vt[+0x34]. 5C43C0 — тонкий Show: early [+0xF6] иначе
+// [self+0x94].vt[+0x34] (nested).
+static void __stdcall UvTimeTbChild(void* self, void* fn)
+{
+    if (!self || !fn)
+        return;
+
+    if (!g_eqVActive)
+    {
+        __asm {
+            mov ecx, self
+            call fn
+        }
+        return;
+    }
+
+    DWORD frva = ExeRvaOf((DWORD)(DWORD_PTR)fn);
+    DWORD vrva = 0;
+    __try
+    {
+        vrva = ExeRvaOf(*(DWORD*)self);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        vrva = 0;
+    }
+    for (int i = 0; i < 8; i++)
+    {
+        if (g_tbFnSeen[i] == frva)
+            break;
+        if (g_tbFnSeen[i] == 0)
+        {
+            g_tbFnSeen[i] = frva;
+            Log("ArmySelect: Tb child +0x34 rva %06X%s", frva,
+                frva == 0x5E4490 ? " (Show 5E4490 recurse!)" : "");
+            break;
+        }
+    }
+    for (int i = 0; i < 8; i++)
+    {
+        if (g_tbVtSeen[i] == vrva)
+            break;
+        if (g_tbVtSeen[i] == 0)
+        {
+            g_tbVtSeen[i] = vrva;
+            Log("ArmySelect: Tb child vt rva %06X", vrva);
+            break;
+        }
+    }
+
+    LONGLONG t0 = QpcNow();
+    if (frva == 0x5C43C0)
+    {
+        __try
+        {
+            if (*((BYTE*)self + 0xF6) != 0)
+            {
+                InterlockedIncrement(&g_tbEarlyN);
+                AccUs(&g_bb0eqTbCN, &g_bb0eqTbCUs, &g_bb0eqTbCMax, t0);
+                return;
+            }
+            InterlockedIncrement(&g_tbFullN);
+            *((BYTE*)self + 0x4F) = 1;
+            *(float*)((char*)self + 0xB8) = 0.0f;
+            void* nest = *(void**)((char*)self + 0x94);
+            if (!nest)
+            {
+                AccUs(&g_bb0eqTbCN, &g_bb0eqTbCUs, &g_bb0eqTbCMax, t0);
+                return;
+            }
+            void** nvt = *(void***)nest;
+            void* nfn = nvt[0x34 / 4];
+            DWORD nfrva = ExeRvaOf((DWORD)(DWORD_PTR)nfn);
+            DWORD nvrva = ExeRvaOf(*(DWORD*)nest);
+            for (int i = 0; i < 8; i++)
+            {
+                if (g_tbNstFnSeen[i] == nfrva)
+                    break;
+                if (g_tbNstFnSeen[i] == 0)
+                {
+                    g_tbNstFnSeen[i] = nfrva;
+                    Log("ArmySelect: Tb nested +0x34 rva %06X (via [child+0x94])", nfrva);
+                    break;
+                }
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                if (g_tbNstVtSeen[i] == nvrva)
+                    break;
+                if (g_tbNstVtSeen[i] == 0)
+                {
+                    g_tbNstVtSeen[i] = nvrva;
+                    Log("ArmySelect: Tb nested vt rva %06X", nvrva);
+                    break;
+                }
+            }
+            LONGLONG t1 = QpcNow();
+            if (nfrva == 0x5F9200)
+            {
+                // cheap: mov [ecx+0x29], 1; ret
+                InterlockedIncrement(&g_nstCheapN);
+                *((BYTE*)nest + 0x29) = 1;
+            }
+            else if (nfrva == 0x62F020)
+            {
+                // Show: if [+0x29] already set — skip body (vt+0x3C == 3D9710).
+                if (*((BYTE*)nest + 0x29) != 0)
+                {
+                    InterlockedIncrement(&g_nstSkipN);
+                    *((BYTE*)nest + 0x29) = 1;
+                }
+                else
+                {
+                    InterlockedIncrement(&g_nstWorkN);
+                    void* obj150 = *(void**)((char*)nest + 0x150);
+                    if (obj150)
+                    {
+                        void** vt150 = *(void***)obj150;
+                        void* fnA = vt150[0x2C / 4];
+                        DWORD arva = ExeRvaOf((DWORD)(DWORD_PTR)fnA);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (g_nstASeen[i] == arva)
+                                break;
+                            if (g_nstASeen[i] == 0)
+                            {
+                                g_nstASeen[i] = arva;
+                                Log("ArmySelect: nstA [+0x150]+0x2C rva %06X", arva);
+                                break;
+                            }
+                        }
+                        LONGLONG ta = QpcNow();
+                        __asm {
+                            mov ecx, obj150
+                            call fnA
+                        }
+                        AccUs(&g_bb0eqNstAN, &g_bb0eqNstAUs, &g_bb0eqNstAMax, ta);
+                    }
+                    void** nestVt = *(void***)nest;
+                    void* fnB = nestVt[0xCC / 4];
+                    DWORD brva = ExeRvaOf((DWORD)(DWORD_PTR)fnB);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (g_nstBSeen[i] == brva)
+                            break;
+                        if (g_nstBSeen[i] == 0)
+                        {
+                            g_nstBSeen[i] = brva;
+                            Log("ArmySelect: nstB self vt+0xCC rva %06X", brva);
+                            break;
+                        }
+                    }
+                    int pt[2];
+                    pt[0] = 0;
+                    pt[1] = 0;
+                    __try
+                    {
+                        pt[0] = (int)*(float*)((char*)nest + 0xFC);
+                        pt[1] = (int)*(float*)((char*)nest + 0x100);
+                    }
+                    __except (EXCEPTION_EXECUTE_HANDLER)
+                    {
+                    }
+                    LONGLONG tb = QpcNow();
+                    void* pPt = pt;
+                    __asm {
+                        push pPt
+                        mov ecx, nest
+                        call fnB
+                    }
+                    AccUs(&g_bb0eqNstBN, &g_bb0eqNstBUs, &g_bb0eqNstBMax, tb);
+                    *((BYTE*)nest + 0x29) = 1;
+                }
+            }
+            else
+            {
+                __asm {
+                    mov ecx, nest
+                    call nfn
+                }
+            }
+            AccUs(&g_bb0eqTbNstN, &g_bb0eqTbNstUs, &g_bb0eqTbNstMax, t1);
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            Log("ArmySelect: Tb 5C43C0 expand AV");
+        }
+        AccUs(&g_bb0eqTbCN, &g_bb0eqTbCUs, &g_bb0eqTbCMax, t0);
+        return;
+    }
+
+    __asm {
+        mov ecx, self
+        call fn
+    }
+    AccUs(&g_bb0eqTbCN, &g_bb0eqTbCUs, &g_bb0eqTbCMax, t0);
+}
+
+static void __stdcall UvBb0eqSEnter()
+{
+    g_bb0eqST0 = QpcNow();
+}
+
+static void __stdcall UvBb0eqSLeave()
+{
+    AccUs(&g_bb0eqSN, &g_bb0eqSUs, &g_bb0eqSMax, g_bb0eqST0);
+}
+
+static void __stdcall UvBb0eqREnter()
+{
+    g_bb0eqRT0 = QpcNow();
+}
+
+static void __stdcall UvBb0eqRLeave()
+{
+    AccUs(&g_bb0eqRN, &g_bb0eqRUs, &g_bb0eqRMax, g_bb0eqRT0);
+}
+
+static void __stdcall UvRun391BB0(void* panel)
+{
+    g_bb0TailMark = 0;
+    g_bb0sThis = 0;
+    g_bb0fThis = 0;
+    g_bb0lThis = 0;
+    g_bb0gThis = 0;
+    LONGLONG t0 = QpcNow();
+    void* fn = g_real391BB0;
+    __asm {
+        push panel
+        call fn
+    }
+    LONG total = (LONG)QpcUs(t0);
+    AccUsVal(&g_bb0N, &g_bb0Us, &g_bb0Max, total);
+    LONG tail = 0;
+    if (g_bb0TailMark)
+    {
+        tail = (LONG)QpcUs(g_bb0TailMark);
+        if (tail < 0)
+            tail = 0;
+        if (tail > total)
+            tail = total;
+        AccUsVal(&g_bb0tN, &g_bb0tUs, &g_bb0tMax, tail);
+        AccUsVal(&g_bb0hN, &g_bb0hUs, &g_bb0hMax, total - tail);
+    }
+    LONG other = total - g_bb0sThis - g_bb0fThis - g_bb0lThis - g_bb0gThis - tail;
+    if (other < 0)
+        other = 0;
+    AccUsVal(&g_bb0oN, &g_bb0oUs, &g_bb0oMax, other);
+    g_uvSkipListTail = 0;
+}
+
+static void __stdcall UvStampBb0Tail()
+{
+    g_bb0TailMark = QpcNow();
+}
+
+static void __stdcall UvRun3810A0(void* panel)
+{
+    LONGLONG t0 = QpcNow();
+    void* fn = g_real3810A0;
+    if (!fn)
+        return;
+    __asm {
+        push panel
+        call fn
+    }
+    AccUs(&g_rorgN, &g_rorgUs, &g_rorgMax, t0);
+}
+
+__declspec(naked) static void Hook393510()
+{
+    __asm {
+        push eax
+        call UvOn393510
+        ret
+    }
+}
+
+__declspec(naked) static void Hook393290()
+{
+    __asm {
+        push dword ptr [esp]
+        push esi
+        call UvOnPanelRebuild
+        test eax, eax
+        jnz skip_rebuild
+        push dword ptr [esp]
+        push esi
+        call UvTimeCall393290
+        push esi
+        call UvNoteRebuildArmy
+        ret
+    skip_rebuild:
+        ret
+    }
+}
+
+static int __stdcall UvOnIdleBrigadeRefresh(void* panel, DWORD retaddr)
+{
+    g_uvSkipListTail = 0;
+    if (!g_settings.patchReuseUnitView || !panel)
+        return 0;
+    if (ExeRvaOf(retaddr) != 0x25418C)
+        return 0;
+    __try
+    {
+        // Пока 393290 после роспуска/смены армии не отработал — не ходить
+        // по старым CUnitStatusEntry. Сам idle 391BB0 иначе нужен иконкам.
+        if (g_uvNeedRebuild)
+        {
+            InterlockedIncrement(&g_uvSkipRebuildN);
+            return 1;
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_uvSkipListTail = 0;
+    }
+    return 0;
+}
+
+__declspec(naked) static void Hook391BB0()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push dword ptr [ebp + 4]
+        push dword ptr [ebp + 8]
+        call UvOnIdleBrigadeRefresh
+        test eax, eax
+        jnz bb0_skip
+        push dword ptr [ebp + 8]
+        call UvRun391BB0
+        mov esp, ebp
+        pop ebp
+        ret 4
+    bb0_skip:
+        mov dword ptr [g_uvSkipListTail], 0
+        mov esp, ebp
+        pop ebp
+        ret 4
+    }
+}
+
+__declspec(naked) static void Hook3810A0()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push dword ptr [ebp + 8]
+        call UvRun3810A0
+        mov esp, ebp
+        pop ebp
+        ret 4
+    }
+}
+
+// После 393290 (391C6E): цикл CUnitStatusEntry / unit_icon. Реорг это не делает.
+// Кнопки split/reorg в голове 391BB0 (FindChild list + hash + 393290).
+__declspec(naked) static void Hook391C6E()
+{
+    __asm {
+        cmp dword ptr [g_uvSkipListTail], 0
+        je bb0_tail_real
+        mov dword ptr [g_uvSkipListTail], 0
+        mov byte ptr [ebx], 0
+        jmp dword ptr [g_bb0Epilogue]
+    bb0_tail_real:
+        pushad
+        pushfd
+        call UvStampBb0Tail
+        popfd
+        popad
+        jmp dword ptr [g_real391C6E]
+    }
+}
+
+// 3.77: wrap CALL внутри головы 391BB0. pushad сохраняет ecx/eax/esi.
+__declspec(naked) static void Hook391BEE_Str()
+{
+    __asm {
+        pushad
+        pushfd
+        call UvBb0sEnter
+        popfd
+        popad
+        call dword ptr [g_fn009350]
+        pushad
+        pushfd
+        call UvBb0sLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContStr]
+    }
+}
+
+__declspec(naked) static void Hook391BFE_Find()
+{
+    __asm {
+        lea edx, [ebp - 0x30]
+        push edx
+        pushad
+        pushfd
+        call UvBb0fEnter
+        popfd
+        popad
+        call eax
+        pushad
+        pushfd
+        call UvBb0fLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContFind]
+    }
+}
+
+__declspec(naked) static void Hook391C2D_List()
+{
+    __asm {
+        mov edx, [esi]
+        mov eax, [edx + 0x7C]
+        mov ecx, esi
+        pushad
+        pushfd
+        push eax
+        call UvNoteList7c
+        call UvBb0lEnter
+        popfd
+        popad
+        call eax
+        pushad
+        pushfd
+        call UvBb0lLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContList]
+    }
+}
+
+__declspec(naked) static void Hook391C44_Hash()
+{
+    __asm {
+        pushad
+        pushfd
+        call UvBb0gEnter
+        popfd
+        popad
+        call dword ptr [g_fn19C160]
+        pushad
+        pushfd
+        call UvBb0gLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContHash]
+    }
+}
+
+__declspec(naked) static void Hook5B2750()
+{
+    __asm {
+        push ecx
+        call UvTime5B2750
+        ret
+    }
+}
+
+// 38AF39 уже сделал push esi (outer). 38B4C0 живёт в ESI — не звать из C++
+// (3.80 steal / 3.92–3.93 C++ call: AV в кучу на первом sync-miss).
+__declspec(naked) static void Hook38AF3A_Sync()
+{
+    __asm {
+        pushad
+        pushfd
+        push dword ptr [esp + 36]
+        call UvTimeSyncMissEnter
+        popfd
+        popad
+        call dword ptr [g_fn38B4C0]
+        pushad
+        pushfd
+        call UvTimeSyncMissLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContSync]
+    }
+}
+
+// 38AF44: call 38B2E0 (EDI=list). Регистры this — через pushad вокруг call.
+__declspec(naked) static void Hook38AF44_EqA()
+{
+    __asm {
+        pushad
+        pushfd
+        call UvBb0eqAEnter
+        popfd
+        popad
+        call dword ptr [g_fn38B2E0]
+        pushad
+        pushfd
+        call UvBb0eqALeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContEqA]
+    }
+}
+
+// 38AF49: call 38B140 (ESI=list).
+__declspec(naked) static void Hook38AF49_EqB()
+{
+    __asm {
+        pushad
+        pushfd
+        push dword ptr [esp + 8]
+        call UvBb0eqBEnter
+        popfd
+        popad
+        call dword ptr [g_fn38B140]
+        pushad
+        pushfd
+        call UvBb0eqBLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContEqB]
+    }
+}
+
+// 38B152: push ebx; push edi; call edx; call 731C00 — шапка 38B140.
+__declspec(naked) static void Hook38B152_EqH()
+{
+    __asm {
+        push ebx
+        push edi
+        pushad
+        pushfd
+        call UvBb0eqHEnter
+        popfd
+        popad
+        call edx
+        call dword ptr [g_fn731C00]
+        pushad
+        pushfd
+        call UvBb0eqHLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContEqH]
+    }
+}
+
+// 38B183: add ecx,0x1C; call eax(=5B1FA0). Skip Show только equal-path;
+// иначе EAX как в ванили (rebuild 38B4C0 не эмулировать).
+__declspec(naked) static void Hook38B183_EqV()
+{
+    __asm {
+        add ecx, 0x1C
+        pushad
+        pushfd
+        push eax
+        push ecx
+        call UvTimeEqVInner
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContEqV]
+    }
+}
+
+// Срезы 5E4490: p→v @4507, v→l @4595, l→t @4672.
+__declspec(naked) static void Hook5E4507_EqVp()
+{
+    __asm {
+        pushad
+        pushfd
+        push 1
+        call UvEqVSliceTo
+        popfd
+        popad
+        mov ebx, dword ptr [esi + 0x258]
+        jmp dword ptr [g_bb0ContEqVp]
+    }
+}
+
+__declspec(naked) static void Hook5E4595_EqVv()
+{
+    __asm {
+        pushad
+        pushfd
+        push 2
+        call UvEqVSliceTo
+        popfd
+        popad
+        mov edi, dword ptr [esi + 0x41c]
+        jmp dword ptr [g_bb0ContEqVv]
+    }
+}
+
+__declspec(naked) static void Hook5E4672_EqTa()
+{
+    __asm {
+        pushad
+        pushfd
+        push 3
+        call UvEqVSliceTo
+        popfd
+        popad
+        mov ebx, dword ptr [esi + 0x2d8]
+        jmp dword ptr [g_bb0ContEqVl]
+    }
+}
+
+__declspec(naked) static void Hook5E46A5_EqTb()
+{
+    __asm {
+        pushad
+        pushfd
+        push 4
+        call UvEqVSliceTo
+        mov eax, dword ptr [esi + 0x298]
+        sub eax, dword ptr [esi + 0x294]
+        sar eax, 2
+        push eax
+        call UvNoteTbCount
+        popfd
+        popad
+        mov ebx, dword ptr [esi + 0x298]
+        jmp dword ptr [g_bb0ContEqTb]
+    }
+}
+
+// 5E46C9: mov edx,[ecx]; mov eax,[edx+0x34]; call eax — Tb child Show.
+__declspec(naked) static void Hook5E46C9_TbC()
+{
+    __asm {
+        mov edx, dword ptr [ecx]
+        mov eax, dword ptr [edx + 0x34]
+        pushad
+        pushfd
+        push eax
+        push ecx
+        call UvTimeTbChild
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContEqTbC]
+    }
+}
+
+__declspec(naked) static void Hook5E46D5_EqTc()
+{
+    __asm {
+        pushad
+        pushfd
+        push 5
+        call UvEqVSliceTo
+        popfd
+        popad
+        mov ebx, dword ptr [esi + 0x2f8]
+        jmp dword ptr [g_bb0ContEqTc]
+    }
+}
+
+__declspec(naked) static void Hook5E4705_EqTd()
+{
+    __asm {
+        pushad
+        pushfd
+        push 6
+        call UvEqVSliceTo
+        popfd
+        popad
+        mov ebx, dword ptr [esi + 0x318]
+        jmp dword ptr [g_bb0ContEqTd]
+    }
+}
+
+// 5E4735: linked list перед спецблоком — bb0eqVw.
+__declspec(naked) static void Hook5E4735_EqVw()
+{
+    __asm {
+        pushad
+        pushfd
+        push 7
+        call UvEqVSliceTo
+        popfd
+        popad
+        mov edi, dword ptr [esi + 0x46c]
+        jmp dword ptr [g_bb0ContEqVw]
+    }
+}
+
+// 5E4762: спецблок (possible alloc) — bb0eqVx.
+__declspec(naked) static void Hook5E4762_EqVx()
+{
+    __asm {
+        pushad
+        pushfd
+        push 8
+        call UvEqVSliceTo
+        call UvNoteEqVxHit
+        popfd
+        popad
+        or ebx, 0xffffffff
+        cmp dword ptr [esi + 0x490], ebx
+        jmp dword ptr [g_bb0ContEqVx]
+    }
+}
+
+// 38B1C2: call 008ED0 — copy string на стек.
+__declspec(naked) static void Hook38B1C2_EqS()
+{
+    __asm {
+        pushad
+        pushfd
+        call UvBb0eqSEnter
+        popfd
+        popad
+        call dword ptr [g_fn008ED0]
+        pushad
+        pushfd
+        call UvBb0eqSLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContEqS]
+    }
+}
+
+// 38B1CD: call 38A4D0 — применить строку к child.
+__declspec(naked) static void Hook38B1CD_EqR()
+{
+    __asm {
+        pushad
+        pushfd
+        call UvBb0eqREnter
+        popfd
+        popad
+        call dword ptr [g_fn38A4D0]
+        pushad
+        pushfd
+        call UvBb0eqRLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContEqR]
+    }
+}
+
+// 5B275C: mov edx,[eax+0x24]; call edx — Update одной строки listbox.
+__declspec(naked) static void Hook5B275C_Child()
+{
+    __asm {
+        mov edx, [eax + 0x24]
+        pushad
+        pushfd
+        push edx
+        call UvBb0chEnter
+        popfd
+        popad
+        call edx
+        pushad
+        pushfd
+        call UvBb0chLeave
+        popfd
+        popad
+        jmp dword ptr [g_bb0ContChild]
+    }
+}
+
+static void __stdcall UvOn393570(void* panel, DWORD retaddr)
+{
+    UvHideDetailKeep(panel);
+    // 2557E1 каждый idle при da8!=1. Invalidate оттуда → NeedRebuild
+    // ещё до первого клика; 3.73 ещё и skip 391BB0 — реорг/роспуск мертвы.
+    if (ExeRvaOf(retaddr) != 0x2557E6)
+        UvInvalidateBrigadePanel();
+}
+
+__declspec(naked) static void Hook393570()
+{
+    __asm {
+        push dword ptr [esp]
+        push esi
+        call UvOn393570
+        ret
+    }
+}
+
+// 39332D: list +0x5C. После роспуска дети UAF — пропускаем зачистку,
+// 393290 навешивает новые виджеты.
+__declspec(naked) static void Hook393ListClear()
+{
+    __asm {
+        mov dword ptr [g_uvLastList], edi
+        cmp byte ptr [g_uvNeedRebuild], 0
+        je vanilla_clear
+        pushad
+        push edi
+        call UvUnlinkListHead
+        popad
+        jmp dword ptr [g_afterListClear]
+    vanilla_clear:
+        jmp dword ptr [g_realListClear]
+    }
+}
+
+__declspec(align(16)) static unsigned char g_trampProvDirty[32];
+__declspec(align(16)) static unsigned char g_trampArmyPick[32];
+__declspec(align(16)) static unsigned char g_trampArmyMove[32];
+__declspec(align(16)) static unsigned char g_trampSelProj[32];
+__declspec(align(16)) static unsigned char g_trampUnitViewCtor[32];
+__declspec(align(16)) static unsigned char g_trampIdlerNotify[32];
+__declspec(align(16)) static unsigned char g_trampPanelRefresh[32];
+__declspec(align(16)) static unsigned char g_trampPanelRebuild[32];
+__declspec(align(16)) static unsigned char g_trampBb0[32];
+__declspec(align(16)) static unsigned char g_trampBb0Tail[32];
+__declspec(align(16)) static unsigned char g_trampListUpd[32];
+__declspec(align(16)) static unsigned char g_trampRorg[32];
+__declspec(align(16)) static unsigned char g_trampListClear[32];
+__declspec(align(16)) static unsigned char g_trampPanelHide[32];
+__declspec(align(16)) static unsigned char g_trampDlgCtor[32];
+__declspec(align(16)) static unsigned char g_trampInflate[32];
+__declspec(align(16)) static unsigned char g_trampMapFn[32];
+__declspec(align(16)) static unsigned char g_trampEvtCreate4[32];
+__declspec(align(16)) static unsigned char g_trampOverlay[32];
+__declspec(align(16)) static unsigned char g_trampCam[32];
+__declspec(align(16)) static unsigned char g_trampMtx[32];
+__declspec(align(16)) static unsigned char g_trampVw[32];
+__declspec(align(16)) static unsigned char g_trampIco[32];
+__declspec(align(16)) static unsigned char g_trampGfx[32];
+__declspec(align(16)) static unsigned char g_trampPre[32];
+__declspec(align(16)) static unsigned char g_trampGui2[32];
+__declspec(align(16)) static unsigned char g_trampCln[32];
+__declspec(align(16)) static unsigned char g_trampTail[32];
+__declspec(align(16)) static unsigned char g_trampLkp[32];
+__declspec(align(16)) static unsigned char g_trampStr[32];
+__declspec(align(16)) static unsigned char g_trampClu[32];
+__declspec(align(16)) static unsigned char g_trampPump[32];
+__declspec(align(16)) static unsigned char g_trampWck[32];
+
+static void __fastcall MaybeDeleteUnitView(void* view)
+{
+    int slot = UvFind(view);
+    if (slot >= 0)
+    {
+        UvHide(view);
+        g_uvPool[slot].inUse = false;
+        UvRecount();
+        return;
+    }
+    if (!view)
+        return;
+    void** vt = *(void***)view;
+    if (!vt || !vt[0])
+        return;
+    typedef void (__thiscall* tDtor)(void*, int);
+    ((tDtor)vt[0])(view, 1);
+}
+
+static void* __fastcall HookUnitViewCtor(void* idler, void* edx, void* buf, void* army, int z, void* extra)
+{
+    (void)edx;
+    LONGLONG t0 = QpcNow();
+    void* result = 0;
+
+    if (idler != g_uvOwner)
+        UvPoolReset();
+    g_uvOwner = idler;
+    UvDropDead();
+
+    if (g_settings.patchReuseUnitView && buf && army && z == 0)
+    {
+        for (int i = 0; i < UV_POOL_MAX; i++)
+        {
+            void* view = g_uvPool[i].view;
+            if (!view || g_uvPool[i].inUse || !UvViewAlive(view))
+                continue;
+            bool rebound = false;
+            __try
+            {
+                *(void**)((char*)view + 0x28) = army;
+                *(void**)((char*)view + 0x2C) = idler;
+                rebound = true;
+            }
+            __except (EXCEPTION_EXECUTE_HANDLER)
+            {
+                memset(&g_uvPool[i], 0, sizeof(g_uvPool[i]));
+            }
+            if (!rebound)
+                continue;
+            UvShow(view);
+            if (buf != view && g_gameDelete)
+                g_gameDelete(buf);
+            g_uvPool[i].inUse = true;
+            UvRecount();
+            InterlockedIncrement(&g_uvReuseN);
+            InterlockedIncrement(&g_uvN);
+            InterlockedExchangeAdd(&g_uvUs, (LONG)QpcUs(t0));
+            return view;
+        }
+    }
+
+    if (g_realUnitViewCtor)
+        result = g_realUnitViewCtor(idler, buf, army, z, extra);
+
+    if (z == 0 && result && UvViewAlive(result))
+    {
+        int freeSlot = -1;
+        if (UvFind(result) < 0)
+        {
+            for (int i = 0; i < UV_POOL_MAX; i++)
+            {
+                if (!g_uvPool[i].view)
+                {
+                    freeSlot = i;
+                    break;
+                }
+            }
+            if (freeSlot >= 0)
+            {
+                g_uvPool[freeSlot].view = result;
+                g_uvPool[freeSlot].inUse = true;
+                UvRecount();
+            }
+        }
+        else
+        {
+            int i = UvFind(result);
+            if (i >= 0)
+                g_uvPool[i].inUse = true;
+            UvRecount();
+        }
+    }
+
+    InterlockedIncrement(&g_uvN);
+    InterlockedExchangeAdd(&g_uvUs, (LONG)QpcUs(t0));
+    return result;
+}
+
+static void __stdcall HookProvDirty(void* a, int b, void* c)
+{
+    LONGLONG t0 = QpcNow();
+    if (g_realProvDirty)
+        g_realProvDirty(a, b, c);
+    AccUs(&g_dirtyN, &g_dirtyUs, &g_dirtyMax, t0);
+}
+
+static void __stdcall HookSelProj(void* mgr, void* obj130)
+{
+    LONGLONG t0 = QpcNow();
+    if (!g_settings.patchSkipSelProj && g_realSelProj)
+        g_realSelProj(mgr, obj130);
+    else
+        InterlockedIncrement(&g_projSkipN);
+    InterlockedIncrement(&g_projN);
+    InterlockedExchangeAdd(&g_projUs, (LONG)QpcUs(t0));
+}
+
+static void __fastcall HookArmyPick(void* self, void* edx, DWORD a)
+{
+    (void)edx;
+    UvEqVInvalidateShow();
+    LONGLONG t0 = QpcNow();
+    if (g_realArmyPick)
+        g_realArmyPick(self, a);
+    InterlockedIncrement(&g_pickN);
+    InterlockedExchangeAdd(&g_pickUs, (LONG)QpcUs(t0));
+}
+
+static void __fastcall HookArmyMove(void* self, void* edx, DWORD a, DWORD b)
+{
+    (void)edx;
+    LONGLONG t0 = QpcNow();
+    if (g_realArmyMove)
+        g_realArmyMove(self, a, b);
+    InterlockedIncrement(&g_moveN);
+    InterlockedExchangeAdd(&g_moveUs, (LONG)QpcUs(t0));
+}
+
+static void __fastcall HookIdlerNotify(void* idler, void* edx, void* army)
+{
+    (void)edx;
+    LONGLONG t0 = QpcNow();
+    if (g_realIdlerNotify)
+        g_realIdlerNotify(idler, army);
+    g_uvLastIdler = idler;
+    if (g_settings.patchReuseUnitView)
+    {
+        UvHideDetailIfMulti(idler);
+        __try
+        {
+            if (g_uvNeedRebuild && *(DWORD*)((char*)idler + 0xDA8) == 1)
+            {
+                void* panel = *(void**)((char*)idler + 0x1640);
+                if (panel)
+                    UvDeferPanelRefresh(panel);
+            }
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+        }
+    }
+    InterlockedIncrement(&g_ntfN);
+    InterlockedExchangeAdd(&g_ntfUs, (LONG)QpcUs(t0));
+}
+
+static void __stdcall UvNoteLocSkip()
+{
+    InterlockedIncrement(&g_uvSkipLocN);
+}
+
+// 26A958: GetLoc ARMIES/NAVIES + sprintf на каждый add. При рамке из N
+// армий это N раз за один клик. После da8==2 заголовок уже показан.
+__declspec(naked) static void HookLocGate()
+{
+    __asm {
+        mov eax, dword ptr [edi + 0x0DA8]
+        cmp eax, 2
+        jg skip_loc
+        jmp dword ptr [g_uvLocContinue]
+    skip_loc:
+        call UvNoteLocSkip
+        jmp dword ptr [g_uvLocEpilogue]
+    }
+}
+
+// 3.44: ивенты / DefaultDialog (инфо, мобилизация) / карта.
+// UI only: checksum и симуляцию не трогаем. Как unitpanel — Hide
+// вместо Destroy, повторно отдаём уже собранное GUI.
+// CEventWindow 4A8F30 грузит Event_*_Window через vfunc +0x2C.
+// CEU3Dialog 240680 → inflate 240B90 (new 0x568 + разбор .gui).
+// Оба dtor зовут vfunc +0x50 Destroy у GUI; подменяем на Hide,
+// только если указатель лежит в нашем пуле.
+static const int WIN_POOL = 8;
+struct WinSlot
+{
+    void* gui;
+    char  name[48];
+    bool  busy;
+};
+static WinSlot g_evtGui[WIN_POOL];
+static WinSlot g_dlgGui[WIN_POOL];
+static char    g_pendingDlgName[48];
+
+typedef void* (__thiscall* tDlgCtor)(void* factory, void* self, void* name);
+typedef void* (__stdcall* tInflate)(void* a, void* b, void* c);
+typedef void (__stdcall* tMapFn)(void* a);
+typedef void (__stdcall* tMapIdle1)(void* a);
+typedef void (__stdcall* tMapIco4)(void* a, void* b, void* c, void* d);
+typedef unsigned char (__stdcall* tMapGfx1)(void* a);
+typedef void (__thiscall* tPreCam)(void* self);
+typedef void (__stdcall* tGui2)(void* a, unsigned b);
+typedef void (__thiscall* tIdleTail)(void* self, void* a);
+typedef void* (__stdcall* tLkp3)(void* a, void* b, void* c);
+static tDlgCtor g_realDlgCtor = 0;
+static tInflate g_realInflate = 0;
+static tMapFn   g_realMapFn = 0;
+static tMapIdle1 g_realOverlay = 0;
+static tMapIdle1 g_realCam = 0;
+static tMapIdle1 g_realMtx = 0;
+static tMapIdle1 g_realVw = 0;
+static tMapIco4  g_realIco = 0;
+static tMapGfx1  g_realGfx = 0;
+static tPreCam   g_realPre = 0;
+static tGui2     g_realGui2 = 0;
+static tMapIdle1 g_realCln = 0;
+static tIdleTail g_realTail = 0;
+static tLkp3     g_realLkp = 0;
+static void*     g_realStr = 0;
+static void*     g_realClu = 0;
+static void*     g_realPump = 0;
+static void*     g_realWck = 0;
+
+static bool GuiPtrAlive(void* p)
+{
+    if (!p || !g_base)
+        return false;
+    __try
+    {
+        DWORD vt = *(DWORD*)p;
+        if (g_imageSize && vt >= g_base && vt < g_base + g_imageSize)
+            return true;
+        vt = *(DWORD*)((char*)p + 0x18);
+        return g_imageSize && vt >= g_base && vt < g_base + g_imageSize;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return false;
+    }
+}
+
+static void GuiCallVfunc(void* obj, unsigned voff)
+{
+    if (!obj)
+        return;
+    __try
+    {
+        void** vt = *(void***)obj;
+        if (!vt)
+            return;
+        typedef void (__thiscall* tFn)(void*);
+        tFn fn = (tFn)vt[voff / 4];
+        if (fn)
+            fn(obj);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+}
+
+static void GuiHideTree(void* gui)
+{
+    GuiCallVfunc(gui, 0x38);
+    GuiCallVfunc((char*)gui + 0x18, 0x38);
+}
+
+static void GuiShowTree(void* gui)
+{
+    GuiCallVfunc(gui, 0x34);
+    GuiCallVfunc((char*)gui + 0x18, 0x34);
+}
+
+static void ReadStdName(void* s, char* out, int cap)
+{
+    if (!out || cap < 2)
+        return;
+    out[0] = 0;
+    if (!s)
+        return;
+    __try
+    {
+        unsigned size = *(unsigned*)((char*)s + 0x10);
+        unsigned capa = *(unsigned*)((char*)s + 0x14);
+        const char* p = (capa < 0x10) ? (const char*)s : *(const char**)s;
+        if (!p)
+            return;
+        if (size > 80)
+            size = 80;
+        if ((int)size >= cap)
+            size = (unsigned)(cap - 1);
+        memcpy(out, p, size);
+        out[size] = 0;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        out[0] = 0;
+    }
+}
+
+static void WinPoolReset()
+{
+    memset(g_evtGui, 0, sizeof(g_evtGui));
+    memset(g_dlgGui, 0, sizeof(g_dlgGui));
+    g_pendingDlgName[0] = 0;
+}
+
+static bool WinMarkFree(WinSlot* pool, void* gui)
+{
+    if (!gui)
+        return false;
+    bool hit = false;
+    for (int i = 0; i < WIN_POOL; i++)
+    {
+        if (pool[i].gui == gui)
+        {
+            pool[i].busy = false;
+            hit = true;
+        }
+    }
+    return hit;
+}
+
+static void WinStore(WinSlot* pool, const char* name, void* gui)
+{
+    if (!gui || !name || !name[0])
+        return;
+    int empty = -1;
+    for (int i = 0; i < WIN_POOL; i++)
+    {
+        if (pool[i].gui == gui)
+        {
+            strncpy_s(pool[i].name, sizeof(pool[i].name), name, _TRUNCATE);
+            pool[i].busy = true;
+            return;
+        }
+        if (pool[i].gui && !GuiPtrAlive(pool[i].gui))
+            memset(&pool[i], 0, sizeof(pool[i]));
+        if (!pool[i].gui && empty < 0)
+            empty = i;
+    }
+    if (empty < 0)
+        return;
+    pool[empty].gui = gui;
+    strncpy_s(pool[empty].name, sizeof(pool[empty].name), name, _TRUNCATE);
+    pool[empty].busy = true;
+}
+
+static void* WinTake(WinSlot* pool, const char* name)
+{
+    if (!name || !name[0])
+        return 0;
+    for (int i = 0; i < WIN_POOL; i++)
+    {
+        if (!pool[i].gui || pool[i].busy)
+            continue;
+        if (_stricmp(pool[i].name, name) != 0)
+            continue;
+        if (!GuiPtrAlive(pool[i].gui))
+        {
+            memset(&pool[i], 0, sizeof(pool[i]));
+            continue;
+        }
+        pool[i].busy = true;
+        return pool[i].gui;
+    }
+    return 0;
+}
+
+static bool PatchBytes(DWORD rva, const void* expect, const void* neu, unsigned n, const char* tag)
+{
+    unsigned char* p = (unsigned char*)(g_base + rva);
+    if (memcmp(p, expect, n) != 0)
+    {
+        Log("%s: сигнатура не совпала rva %06X (%02X %02X %02X %02X)",
+            tag, rva, p[0], p[1], p[2], p[3]);
+        return false;
+    }
+    DWORD old = 0;
+    if (!VirtualProtect(p, n, PAGE_EXECUTE_READWRITE, &old))
+        return false;
+    memcpy(p, neu, n);
+    VirtualProtect(p, n, old, &old);
+    FlushInstructionCache(GetCurrentProcess(), p, n);
+    return true;
+}
+
+static bool PatchE8(DWORD rva, const unsigned char* expect5, void* dest, const char* tag)
+{
+    unsigned char neu[5];
+    neu[0] = 0xE8;
+    *(DWORD*)(neu + 1) = (DWORD)(DWORD_PTR)dest - (g_base + rva + 5);
+    return PatchBytes(rva, expect5, neu, 5, tag);
+}
+
+static void* __fastcall EvtCreateOrReuse(void* obj, void* edx, void* name, void* extra)
+{
+    (void)edx;
+    LONGLONG t0 = QpcNow();
+    char key[48];
+    ReadStdName(name, key, 48);
+    if (g_settings.patchReuseWindows)
+    {
+        void* cached = WinTake(g_evtGui, key);
+        if (cached)
+        {
+            GuiShowTree(cached);
+            InterlockedIncrement(&g_winReuseN);
+            InterlockedIncrement(&g_evtN);
+            InterlockedExchangeAdd(&g_evtUs, (LONG)QpcUs(t0));
+            return cached;
+        }
+    }
+
+    void* r = 0;
+    __try
+    {
+        void** vt = *(void***)obj;
+        typedef void* (__thiscall* tCreate)(void*, void*, void*);
+        r = ((tCreate)vt[0x2C / 4])(obj, name, extra);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        r = 0;
+    }
+    if (r)
+        WinStore(g_evtGui, key, r);
+    InterlockedIncrement(&g_evtN);
+    InterlockedExchangeAdd(&g_evtUs, (LONG)QpcUs(t0));
+    return r;
+}
+
+__declspec(naked) static void EvtCreateStub_m1c()
+{
+    __asm {
+        mov ecx, dword ptr [ebp - 0x1c]
+        jmp EvtCreateOrReuse
+    }
+}
+
+__declspec(naked) static void EvtCreateStub_m10()
+{
+    __asm {
+        mov ecx, dword ptr [ebp - 0x10]
+        jmp EvtCreateOrReuse
+    }
+}
+
+static void __fastcall HideGuiKeep(void* gui)
+{
+    if (!gui)
+        return;
+    bool kept = WinMarkFree(g_evtGui, gui) | WinMarkFree(g_dlgGui, gui);
+    if (!kept)
+    {
+        GuiCallVfunc(gui, 0x50);
+        return;
+    }
+    GuiHideTree(gui);
+}
+
+static void* __fastcall HookDlgCtor(void* factory, void* edx, void* self, void* name)
+{
+    (void)edx;
+    ReadStdName(name, g_pendingDlgName, sizeof(g_pendingDlgName));
+    LONGLONG t0 = QpcNow();
+    void* r = g_realDlgCtor ? g_realDlgCtor(factory, self, name) : 0;
+    g_pendingDlgName[0] = 0;
+    InterlockedIncrement(&g_dlgN);
+    InterlockedExchangeAdd(&g_dlgUs, (LONG)QpcUs(t0));
+    return r;
+}
+
+// 240B90: stdcall 3 аргумента + живой ESI (шаблон GUI). C++-обёртка
+// 3.44 затирала ESI → AV [esi+0xA0] на первом DefaultDialog.
+__declspec(naked) static void* __stdcall CallInflateTramp(void* esiObj, void* a, void* b, void* c)
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push esi
+        mov esi, dword ptr [ebp + 8]
+        push dword ptr [ebp + 20]
+        push dword ptr [ebp + 16]
+        push dword ptr [ebp + 12]
+        call dword ptr [g_realInflate]
+        pop esi
+        pop ebp
+        ret 16
+    }
+}
+
+static void* __fastcall HookInflateCore(void* esiObj, void* edx, void* a, void* b, void* c)
+{
+    (void)edx;
+    LONGLONG t0 = QpcNow();
+    void* r = g_realInflate ? CallInflateTramp(esiObj, a, b, c) : 0;
+    InterlockedIncrement(&g_infN);
+    InterlockedExchangeAdd(&g_infUs, (LONG)QpcUs(t0));
+    return r;
+}
+
+__declspec(naked) static void HookInflate()
+{
+    __asm {
+        mov ecx, esi
+        jmp HookInflateCore
+    }
+}
+
+static void __stdcall HookMapFn(void* a)
+{
+    LONGLONG t0 = QpcNow();
+    if (g_realMapFn)
+        g_realMapFn(a);
+    InterlockedIncrement(&g_mapN);
+    InterlockedExchangeAdd(&g_mapUs, (LONG)QpcUs(t0));
+}
+
+// 257B60: stdcall 1 аргумент (push ebx; call), ret 4. Ввод/оверлей
+// карты внутри IdleInGame. 3.47 только таймер.
+static void __stdcall HookOverlay(void* a)
+{
+    LONG tMark = IdleMarkNow();
+    if (tMark)
+    {
+        if (g_idleOvlLeave1 > 0)
+        {
+            LONG gap = tMark - g_idleOvlLeave1;
+            if (gap > g_idleOvlGapMax)
+                g_idleOvlGapMax = gap;
+        }
+        if (g_idleOvlEnter0 == 0)
+            g_idleOvlEnter0 = tMark;
+        g_idleOvlEnter1 = tMark;
+        g_idleOvlN++;
+    }
+    g_idleInOvl++;
+    LONGLONG t0 = QpcNow();
+    if (g_realOverlay)
+        g_realOverlay(a);
+    AccUsIdle(&g_ovlN, &g_ovlUs, &g_ovlMax, t0, &g_idleOvlLoc);
+    g_idleInOvl--;
+    tMark = IdleMarkNow();
+    if (tMark)
+    {
+        if (g_idleOvlLeave0 == 0)
+            g_idleOvlLeave0 = tMark;
+        g_idleOvlLeave1 = tMark;
+        g_idleOvlMark = tMark;
+    }
+}
+
+// 2592F0: stdcall 1 аргумент, тот же call site. Копия камеры/view
+// (alloca 0x4294). 3.47 только таймер. 254530 (ProvDirty-кластер)
+// не хукаем: живой ESI.
+//
+// 3.59: не skip всей 2592F0 (пустая карта). Ваниль уже умеет не
+// рисовать 3D: [CInGameIdler+0x1e08] > 0 → после иконок 3F7CE0
+// прыжок на 260F0C. Load ставит 3. Мы ставим 1, если поза камеры
+// (gfx+0x114, 48 байт) не менялась, нет дня/dirty/pick, и не каждый
+// 8-й кадр. Иконки остаются.
+static const int CAM_STILL_FULL_EVERY = 8;
+static DWORD g_camPose[12];
+static int   g_camPoseOk = 0;
+static int   g_camStillStreak = 0;
+static LONG  g_camLastDirtyN = 0;
+static LONG  g_camLastPickN = 0;
+static LONG  g_camLastMoveN = 0;
+
+static void CamStillMaybeSkipDraw(void* idler)
+{
+    if (!g_settings.patchCamStill || !idler)
+        return;
+    __try
+    {
+        DWORD gfx = *(DWORD*)((char*)idler + 0x17E0);
+        if (!gfx || gfx < 0x10000)
+            return;
+        DWORD cur[12];
+        memcpy(cur, (void*)(gfx + 0x114), sizeof(cur));
+        int slot = *(int*)((char*)idler + 0x1E08);
+        LONG dirtyN = g_dirtyN;
+        LONG pickN = g_pickN;
+        LONG moveN = g_moveN;
+        bool needFull = false;
+        if (!g_camPoseOk)
+            needFull = true;
+        else if (memcmp(cur, g_camPose, sizeof(cur)) != 0)
+            needFull = true;
+        else if (g_idleChkN > 0 || g_idleWckN > 0)
+            needFull = true;
+        else if (dirtyN != g_camLastDirtyN || pickN != g_camLastPickN || moveN != g_camLastMoveN)
+            needFull = true;
+        memcpy(g_camPose, cur, sizeof(cur));
+        g_camPoseOk = 1;
+        g_camLastDirtyN = dirtyN;
+        g_camLastPickN = pickN;
+        g_camLastMoveN = moveN;
+        if (slot > 0)
+        {
+            g_camStillStreak = 0;
+            return;
+        }
+        if (needFull)
+        {
+            g_camStillStreak = 0;
+            return;
+        }
+        g_camStillStreak++;
+        if (g_camStillStreak % CAM_STILL_FULL_EVERY == 0)
+            return;
+        *(int*)((char*)idler + 0x1E08) = 1;
+        InterlockedIncrement(&g_camSkipN);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_camPoseOk = 0;
+        g_camStillStreak = 0;
+    }
+}
+
+static void __stdcall HookCam(void* a)
+{
+    LONG tMark = IdleMarkNow();
+    if (tMark && g_idleHeadMark == 0)
+        g_idleHeadMark = tMark;
+    if (tMark)
+        g_idleCamN++;
+    g_idleInCam++;
+    CamStillMaybeSkipDraw(a);
+    LONGLONG t0 = QpcNow();
+    if (g_realCam)
+        g_realCam(a);
+    AccUsIdle(&g_camN, &g_camUs, &g_camMax, t0, &g_idleCamLoc);
+    g_idleInCam--;
+    tMark = IdleMarkNow();
+    if (tMark)
+    {
+        if (g_idleCamLeave0 == 0)
+            g_idleCamLeave0 = tMark;
+        g_idleCamLeave1 = tMark;
+    }
+}
+
+// 5AE320 / 5EB7C0: stdcall 1, матрицы камеры внутри 2592F0.
+static void __stdcall HookMtx(void* a)
+{
+    LONGLONG t0 = QpcNow();
+    if (g_realMtx)
+        g_realMtx(a);
+    AccUs(&g_mtxN, &g_mtxUs, &g_mtxMax, t0);
+}
+
+static void __stdcall HookVw(void* a)
+{
+    LONGLONG t0 = QpcNow();
+    if (g_realVw)
+        g_realVw(a);
+    AccUs(&g_vwN, &g_vwUs, &g_vwMax, t0);
+}
+
+// 3F7CE0: stdcall 4 (push×4; call из 259459), карта/иконки при graphics on.
+static void __stdcall HookIco(void* a, void* b, void* c, void* d)
+{
+    LONGLONG t0 = QpcNow();
+    if (g_realIco)
+        g_realIco(a, b, c, d);
+    AccUsIdle(&g_icoN, &g_icoUs, &g_icoMax, t0, &g_idleIcoLoc);
+}
+
+// 59C370: stdcall 1, возвращает al. Не void.
+static unsigned char __stdcall HookGfx(void* a)
+{
+    LONGLONG t0 = QpcNow();
+    unsigned char r = g_realGfx ? g_realGfx(a) : 0;
+    AccUs(&g_gfxN, &g_gfxUs, &g_gfxMax, t0);
+    return r;
+}
+
+// 254620: thiscall, 0 стековых. До камеры, mov ecx,ebx; call.
+static void __fastcall HookPreCam(void* self, void* edx)
+{
+    (void)edx;
+    LONGLONG t0 = QpcNow();
+    if (g_realPre)
+        g_realPre(self);
+    AccUsIdle(&g_preN, &g_preUs, &g_preMax, t0, &g_idlePreLoc);
+}
+
+// 248460: stdcall 2 (push al, push ebx), ret 8. После overlay.
+static void __stdcall HookGui2(void* a, unsigned b)
+{
+    LONGLONG t0 = QpcNow();
+    if (g_realGui2)
+        g_realGui2(a, b);
+    AccUsIdle(&g_gui2N, &g_gui2Us, &g_gui2Max, t0, &g_idleGui2Loc);
+}
+
+// 1F7A50: stdcall 1, затем operator delete. Хвост idle.
+static void __stdcall HookCln(void* a)
+{
+    LONGLONG t0 = QpcNow();
+    if (g_realCln)
+        g_realCln(a);
+    AccUs(&g_clnN, &g_clnUs, &g_clnMax, t0);
+}
+
+// 24F350: thiscall + 1 стековый, ret 4. Конец IdleInGame.
+static void __fastcall HookTail(void* self, void* edx, void* a)
+{
+    (void)edx;
+    LONGLONG t0 = QpcNow();
+    if (g_realTail)
+        g_realTail(self, a);
+    AccUs(&g_tailN, &g_tailUs, &g_tailMax, t0);
+}
+
+// 055290: единственный call 256455, stdcall 3 (два push + eax из 054EC0
+// cdecl getter), ret 0xC. ESI локальный. Обход контейнера, стек 0x9e8.
+static void* __stdcall HookLkp(void* a, void* b, void* c)
+{
+    LONGLONG t0 = QpcNow();
+    void* r = g_realLkp ? g_realLkp(a, b, c) : 0;
+    AccUs(&g_lkpN, &g_lkpUs, &g_lkpMax, t0);
+    return r;
+}
+
+// 588F20: stdcall 1 + живые ESI (dest std::string) и ECX. 28 вызовов из 2592F0.
+__declspec(naked) static void HookStr()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        sub esp, 8
+        push ecx
+        push esi
+        call DiagNow
+        mov dword ptr [ebp - 8], eax
+        mov dword ptr [ebp - 4], edx
+        pop esi
+        pop ecx
+        push dword ptr [ebp + 8]
+        call dword ptr [g_realStr]
+        push eax
+        push dword ptr [ebp - 4]
+        push dword ptr [ebp - 8]
+        call AccStr
+        pop eax
+        mov esp, ebp
+        pop ebp
+        ret 4
+    }
+}
+
+// 254530: call 2555E8 mov esi,ebx; ret. Живой ESI = idler, стека нет.
+__declspec(naked) static void HookClu()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        sub esp, 8
+        push ecx
+        push esi
+        call DiagNow
+        mov dword ptr [ebp - 8], eax
+        mov dword ptr [ebp - 4], edx
+        pop esi
+        pop ecx
+        call dword ptr [g_realClu]
+        push eax
+        push dword ptr [ebp - 4]
+        push dword ptr [ebp - 8]
+        call AccClu
+        pop eax
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+// 5DF2B0: stdcall 1 + живой ESI (объект насоса). Peek/Dispatch + хвост до 5DF543.
+// Единственный E8: 285727 внутри 285620 (EDI+XMM — 285620 не хукаем).
+__declspec(naked) static void HookPump()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        sub esp, 8
+        push ecx
+        push esi
+        push edi
+        push ebx
+        push dword ptr [ebp + 4]
+        call PumpEnter
+        call DiagNow
+        mov dword ptr [ebp - 8], eax
+        mov dword ptr [ebp - 4], edx
+        pop ebx
+        pop edi
+        pop esi
+        pop ecx
+        push dword ptr [ebp + 8]
+        call dword ptr [g_realPump]
+        push eax
+        push dword ptr [ebp - 4]
+        push dword ptr [ebp - 8]
+        call AccPump
+        pop eax
+        mov esp, ebp
+        pop ebp
+        ret 4
+    }
+}
+
+// 2859C0: stdcall 1, ДНЕВНОЙ ТИК СЕССИИ (~7 КБ): 2840F0 команды,
+// POP, товары, войны, газеты. 11×285620 внутри — только насос UI.
+// Три E8: 283AB1 (каждый день из 282EC0), 263234/26339D (load 262010).
+// PATCH_SKIP_CHK_WIN=1 глушит все расчёты после входа на карту.
+// Не skip. Карта: Source2/EXE_RVA_MAP.txt §0a.
+__declspec(naked) static void HookWck()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        sub esp, 8
+        push ecx
+        push esi
+        push edi
+        push ebx
+        push dword ptr [ebp + 4]
+        call WckEnter
+        test eax, eax
+        jnz wck_skip
+        call DiagNow
+        mov dword ptr [ebp - 8], eax
+        mov dword ptr [ebp - 4], edx
+        pop ebx
+        pop edi
+        pop esi
+        pop ecx
+        push dword ptr [ebp + 8]
+        call dword ptr [g_realWck]
+        push eax
+        push dword ptr [ebp - 4]
+        push dword ptr [ebp - 8]
+        call AccWck
+        pop eax
+        mov esp, ebp
+        pop ebp
+        ret 4
+    wck_skip:
+        pop ebx
+        pop edi
+        pop esi
+        pop ecx
+        mov esp, ebp
+        pop ebp
+        ret 4
+    }
+}
+
+static void InstallDestroyHide(DWORD rva, const char* tag)
+{
+    static const unsigned char expect[10] =
+        { 0x8B, 0x4E, 0x04, 0x8B, 0x01, 0x8B, 0x50, 0x50, 0xFF, 0xD2 };
+    unsigned char neu[10];
+    neu[0] = 0x8B;
+    neu[1] = 0x4E;
+    neu[2] = 0x04;
+    neu[3] = 0xE8;
+    *(DWORD*)(neu + 4) = (DWORD)(DWORD_PTR)HideGuiKeep - (g_base + rva + 3 + 5);
+    neu[8] = 0x90;
+    neu[9] = 0x90;
+    if (PatchBytes(rva, expect, neu, 10, tag))
+        Log("WinReuse: %s rva %06X Destroy GUI -> Hide", tag, rva);
+}
+
+static void InstallWindowFps()
+{
+    static const unsigned char sigDlg[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+    static const unsigned char sigInf[8] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8, 0x6A, 0xFF };
+    static const unsigned char sigMap[6] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+
+    if (StealToTrampoline(0x240680, 5, g_trampDlgCtor, sizeof(g_trampDlgCtor),
+        sigDlg, (void*)HookDlgCtor, (void**)&g_realDlgCtor, "DlgCtorTime"))
+        Log("WinReuse: таймер CEU3Dialog ctor rva 240680");
+    if (StealToTrampoline(0x240B90, 8, g_trampInflate, sizeof(g_trampInflate),
+        sigInf, (void*)HookInflate, (void**)&g_realInflate, "InflateTime"))
+        Log("WinReuse: таймер inflate DefaultDialog rva 240B90");
+    if (StealToTrampoline(0x41A450, 6, g_trampMapFn, sizeof(g_trampMapFn),
+        sigMap, (void*)HookMapFn, (void**)&g_realMapFn, "MapTime"))
+        Log("WinReuse: таймер map follow-up rva 41A450");
+
+    static const unsigned char sigIdle[6] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+    if (StealToTrampoline(0x254D80, 6, g_trampIdleIngame, sizeof(g_trampIdleIngame),
+        sigIdle, (void*)HookIdleIngame, (void**)&g_realIdleIngame, "IdleInGame"))
+        Log("MapScroll: таймер IdleInGame rva 254D80 (ing= QPC мкс)");
+
+    static const unsigned char sigOvl[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+    if (StealToTrampoline(0x257B60, 5, g_trampOverlay, sizeof(g_trampOverlay),
+        sigOvl, (void*)HookOverlay, (void**)&g_realOverlay, "MapOverlay"))
+        Log("MapScroll: таймер overlay/input rva 257B60 (ovl=)");
+    if (StealToTrampoline(0x2592F0, 5, g_trampCam, sizeof(g_trampCam),
+        sigOvl, (void*)HookCam, (void**)&g_realCam, "MapCamera"))
+            Log("MapScroll: таймер camera/view rva 2592F0 (cam=) PATCH_CAM_STILL=%d",
+                (int)g_settings.patchCamStill);
+
+    static const unsigned char sigMtx[6] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+    if (StealToTrampoline(0x5AE320, 6, g_trampMtx, sizeof(g_trampMtx),
+        sigMtx, (void*)HookMtx, (void**)&g_realMtx, "MapMtx"))
+        Log("MapScroll: таймер matrix rva 5AE320 (mtx=)");
+    static const unsigned char sigVw[9] =
+        { 0x55, 0x8B, 0xEC, 0x81, 0xEC, 0x08, 0x01, 0x00, 0x00 };
+    if (StealToTrampoline(0x5EB7C0, 9, g_trampVw, sizeof(g_trampVw),
+        sigVw, (void*)HookVw, (void**)&g_realVw, "MapView"))
+        Log("MapScroll: таймер view rva 5EB7C0 (vw=)");
+    if (StealToTrampoline(0x3F7CE0, 5, g_trampIco, sizeof(g_trampIco),
+        sigOvl, (void*)HookIco, (void**)&g_realIco, "MapIcons"))
+        Log("MapScroll: таймер map objects rva 3F7CE0 (ico=)");
+    if (StealToTrampoline(0x59C370, 6, g_trampGfx, sizeof(g_trampGfx),
+        sigMtx, (void*)HookGfx, (void**)&g_realGfx, "MapGfx"))
+        Log("MapScroll: таймер gfx tick rva 59C370 (gfx=)");
+
+    static const unsigned char sigPre[9] =
+        { 0x55, 0x8B, 0xEC, 0x64, 0xA1, 0x00, 0x00, 0x00, 0x00 };
+    if (StealToTrampoline(0x254620, 9, g_trampPre, sizeof(g_trampPre),
+        sigPre, (void*)HookPreCam, (void**)&g_realPre, "IdlePre"))
+        Log("MapScroll: таймер pre-cam rva 254620 (pre=)");
+    if (StealToTrampoline(0x248460, 9, g_trampGui2, sizeof(g_trampGui2),
+        sigPre, (void*)HookGui2, (void**)&g_realGui2, "IdleGui2"))
+        Log("MapScroll: таймер post-ovl GUI rva 248460 (gui2=)");
+    if (StealToTrampoline(0x1F7A50, 5, g_trampCln, sizeof(g_trampCln),
+        sigOvl, (void*)HookCln, (void**)&g_realCln, "IdleCln"))
+        Log("MapScroll: таймер idle cleanup rva 1F7A50 (cln=)");
+    if (StealToTrampoline(0x24F350, 5, g_trampTail, sizeof(g_trampTail),
+        sigOvl, (void*)HookTail, (void**)&g_realTail, "IdleTail"))
+        Log("MapScroll: таймер idle tail rva 24F350 (tail=)");
+    static const unsigned char sigLkp[9] =
+        { 0x55, 0x8B, 0xEC, 0x81, 0xEC, 0xE8, 0x09, 0x00, 0x00 };
+    if (StealToTrampoline(0x055290, 9, g_trampLkp, sizeof(g_trampLkp),
+        sigLkp, (void*)HookLkp, (void**)&g_realLkp, "IdleLkp"))
+        Log("MapScroll: таймер lookup rva 055290 (lkp=)");
+    static const unsigned char sigStr[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+    if (StealToTrampoline(0x588F20, 5, g_trampStr, sizeof(g_trampStr),
+        sigStr, (void*)HookStr, (void**)&g_realStr, "CamStr"))
+        Log("MapScroll: таймер string rva 588F20 ESI (str=)");
+    static const unsigned char sigClu[7] =
+        { 0x51, 0x8B, 0x86, 0xB4, 0x0D, 0x00, 0x00 };
+    if (StealToTrampoline(0x254530, 7, g_trampClu, sizeof(g_trampClu),
+        sigClu, (void*)HookClu, (void**)&g_realClu, "IdleClu"))
+        Log("MapScroll: таймер dirty-кластер rva 254530 ESI (clu=)");
+    {
+        unsigned char sigPump[8];
+        memcpy(sigPump, (void*)(g_base + 0x5DF2B0), 8);
+        if (sigPump[0] == 0x55 && sigPump[1] == 0x8B && sigPump[2] == 0xEC && sigPump[3] == 0xA1)
+        {
+            if (StealToTrampoline(0x5DF2B0, 8, g_trampPump, sizeof(g_trampPump),
+                sigPump, (void*)HookPump, (void**)&g_realPump, "IdlePump"))
+                Log("MapScroll: таймер насоса Peek/Dispatch rva 5DF2B0 ESI (pump=)");
+        }
+        else
+            Log("MapScroll: насос 5DF2B0 сигнатура не совпала (%02X %02X %02X %02X)",
+                sigPump[0], sigPump[1], sigPump[2], sigPump[3]);
+    }
+    {
+        static const unsigned char sigWck[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+        if (StealToTrampoline(0x2859C0, 5, g_trampWck, sizeof(g_trampWck),
+            sigWck, (void*)HookWck, (void**)&g_realWck, "IdleWck"))
+            Log("MapScroll: таймер 2859C0 дневной тик (wck=); skip выкл");
+    }
+    if (HookIat(GetModuleHandleA(NULL), "user32.dll", "PeekMessageA",
+        (void*)HookPeekMessageA, (void**)&g_realPeekMessageA))
+        Log("MapScroll: PeekMessageA IAT, счёт только внутри IdleInGame");
+    else
+        Log("MapScroll: PeekMessageA IAT не найден");
+    if (HookIat(GetModuleHandleA(NULL), "user32.dll", "DispatchMessageA",
+        (void*)HookDispatchMessageA, (void**)&g_realDispatchMessageA))
+        Log("MapScroll: DispatchMessageA IAT, счёт только внутри IdleInGame");
+    else
+        Log("MapScroll: DispatchMessageA IAT не найден");
+    Log("MapScroll: IdleSpike pump 5DF2B0. 285620 EDI+XMM не хукаем. 2592F0 skip только через +0x1e08");
+
+    // 3.45: Hide GUI + delete C++ = UAF в тике CEU3Gui (5C3758 / 241BA6).
+    // Пул как у unitpanel можно вернуть только вместе с C++-объектом диалога.
+    Log("WinReuse: пул GUI выключен (таймеры dlg/inf/map живы, Hide-keep нет)");
+}
+
+static void InstallArmySelectDiag()
+{
+    static const unsigned char sigDirtyHead[6] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF, 0x68 };
+    static const unsigned char sigThis[6] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+    unsigned char* dirty = (unsigned char*)(g_base + RVA_PROV_DIRTY);
+    if (memcmp(dirty, sigDirtyHead, sizeof(sigDirtyHead)) != 0)
+        Log("ProvDirtyTime: сигнатура не совпала rva %06X (%02X %02X %02X %02X)",
+            RVA_PROV_DIRTY, dirty[0], dirty[1], dirty[2], dirty[3]);
+    else if (StealToTrampoline(RVA_PROV_DIRTY, 10, g_trampProvDirty, sizeof(g_trampProvDirty),
+        dirty, (void*)HookProvDirty, (void**)&g_realProvDirty, "ProvDirtyTime"))
+        Log("ArmySelect: таймер FUN_007FC360 rva %06X", RVA_PROV_DIRTY);
+    if (StealToTrampoline(RVA_ARMY_PICK, 6, g_trampArmyPick, sizeof(g_trampArmyPick),
+        sigThis, (void*)HookArmyPick, (void**)&g_realArmyPick, "ArmyPickTime"))
+        Log("ArmySelect: таймер army_selected rva %06X", RVA_ARMY_PICK);
+    if (StealToTrampoline(RVA_ARMY_MOVE, 6, g_trampArmyMove, sizeof(g_trampArmyMove),
+        sigThis, (void*)HookArmyMove, (void**)&g_realArmyMove, "ArmyMoveTime"))
+        Log("ArmySelect: таймер army_move rva %06X", RVA_ARMY_MOVE);
+    if (StealToTrampoline(0x26A7F0, 6, g_trampIdlerNotify, sizeof(g_trampIdlerNotify),
+        sigThis, (void*)HookIdlerNotify, (void**)&g_realIdlerNotify, "IdlerNotifyTime"))
+        Log("ArmySelect: таймер CInGameIdler notify rva 26A7F0");
+    if (StealToTrampoline(RVA_SEL_PROJ, 6, g_trampSelProj, sizeof(g_trampSelProj),
+        sigThis, (void*)HookSelProj, (void**)&g_realSelProj, "SelProjTime"))
+        Log("ArmySelect: таймер mesh selection_projection rva %06X (skip=%d)",
+            RVA_SEL_PROJ, (int)g_settings.patchSkipSelProj);
+
+    // 3.32 skip 1D4540 не убрал хитч: pick всё ещё 24–65 мс, stall max ~200–280 мс.
+    // На клике 3E08E0 каждый раз делает operator new(0x14C) + ctor и вешает
+    // проекцию в список отрисовки (крутилка/кольцо). 20 кликов = 20 объектов
+    // на кадр. 3.34–3.35: кольцо не оно (pick без него всё равно 20+ мс).
+    // 3.36: круги/анимация снова родные. PATCH_SKIP_SEL_PROJ=1 только для отладки.
+    if (g_settings.patchSkipSelProj)
+    {
+        unsigned char* p = (unsigned char*)(g_base + 0x1CC5B0);
+        unsigned char* tail = (unsigned char*)(g_base + 0x1CCA3B);
+        static const unsigned char expect[6] = { 0x8B, 0x71, 0x58, 0x8B, 0x8B, 0x08 };
+        static const unsigned char expectTail[2] = { 0x80, 0x3D };
+        if (memcmp(p, expect, 6) != 0 || memcmp(tail, expectTail, 2) != 0)
+        {
+            Log("ArmySelect: GFX-jump сигнатура не совпала rva 1CC5B0/1CCA3B (%02X %02X / %02X %02X)",
+                p[0], p[1], tail[0], tail[1]);
+        }
+        else
+        {
+            DWORD old = 0;
+            if (VirtualProtect(p, 6, PAGE_EXECUTE_READWRITE, &old))
+            {
+                p[0] = 0xE9;
+                DWORD rel = (g_base + 0x1CCA3B) - ((DWORD)(p + 5));
+                memcpy(p + 1, &rel, 4);
+                p[5] = 0x90;
+                VirtualProtect(p, 6, old, &old);
+                FlushInstructionCache(GetCurrentProcess(), p, 6);
+                Log("ArmySelect: GFX-jump rva 1CC5B0 -> 1CCA3B (без 3E08E0, хвост notify/звук)");
+            }
+        }
+    }
+
+    // 3.35: vfunc +0x78 = CInGameIdler 26A7F0 каждый клик new(0x320)+CUnitView
+    // 398A50 (unitpanel.gui). Одиночная смена: перевязать army на +0x28.
+    if (g_settings.patchReuseUnitView)
+    {
+        static const unsigned char sigUv[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+        if (StealToTrampoline(0x398A50, 5, g_trampUnitViewCtor, sizeof(g_trampUnitViewCtor),
+            sigUv, (void*)HookUnitViewCtor, (void**)&g_realUnitViewCtor, "UnitViewReuse"))
+            Log("ArmySelect: reuse CUnitView rva 398A50 (пул %d, Hide/Show unitpanel)", UV_POOL_MAX);
+
+        unsigned char* loc = (unsigned char*)(g_base + 0x26A958);
+        static const unsigned char expectLoc[6] = { 0x8B, 0x87, 0xA8, 0x0D, 0x00, 0x00 };
+        if (memcmp(loc, expectLoc, 6) != 0)
+        {
+            Log("ArmySelect: skip-loc сигнатура не совпала rva 26A958 (%02X %02X %02X %02X)",
+                loc[0], loc[1], loc[2], loc[3]);
+        }
+        else
+        {
+            g_uvLocContinue = (BYTE*)(g_base + 0x26A95E);
+            g_uvLocEpilogue = (BYTE*)(g_base + 0x26AE09);
+            DWORD old = 0;
+            if (VirtualProtect(loc, 6, PAGE_EXECUTE_READWRITE, &old))
+            {
+                loc[0] = 0xE9;
+                DWORD rel = (DWORD)(DWORD_PTR)HookLocGate - ((DWORD)(loc + 5));
+                memcpy(loc + 1, &rel, 4);
+                loc[5] = 0x90;
+                VirtualProtect(loc, 6, old, &old);
+                FlushInstructionCache(GetCurrentProcess(), loc, 6);
+                Log("ArmySelect: skip GetLoc ARMIES/NAVIES при da8>2");
+            }
+        }
+
+        unsigned char* del = (unsigned char*)(g_base + 0x6AE91B);
+        if (del[0] == 0x8B && del[1] == 0xFF && del[2] == 0x55 && del[3] == 0x8B && del[4] == 0xEC)
+            g_gameDelete = (tGameDelete)del;
+        else
+            Log("ArmySelect: operator delete rva 6AE91B не совпал (%02X %02X)", del[0], del[1]);
+
+        unsigned char* dtor = (unsigned char*)(g_base + 0x26AE98);
+        static const unsigned char expectDtor[10] =
+            { 0x8B, 0x07, 0x8B, 0x10, 0x6A, 0x01, 0x8B, 0xCF, 0xFF, 0xD2 };
+        if (memcmp(dtor, expectDtor, 10) != 0)
+        {
+            Log("ArmySelect: UnitView dtor-skip сигнатура не совпала rva 26AE98 (%02X %02X %02X %02X)",
+                dtor[0], dtor[1], dtor[2], dtor[3]);
+        }
+        else
+        {
+            DWORD old = 0;
+            if (VirtualProtect(dtor, 10, PAGE_EXECUTE_READWRITE, &old))
+            {
+                dtor[0] = 0x8B;
+                dtor[1] = 0xCF;
+                dtor[2] = 0xE8;
+                DWORD rel = (DWORD)(DWORD_PTR)MaybeDeleteUnitView - ((DWORD)(dtor + 7));
+                memcpy(dtor + 3, &rel, 4);
+                dtor[7] = 0x90;
+                dtor[8] = 0x90;
+                dtor[9] = 0x90;
+                VirtualProtect(dtor, 10, old, &old);
+                FlushInstructionCache(GetCurrentProcess(), dtor, 10);
+                Log("ArmySelect: UnitView dtor-skip rva 26AE98 (кэш панели не destroy)");
+            }
+        }
+
+        static const unsigned char sigRefresh[5] = { 0x51, 0x56, 0x57, 0x8B, 0xF0 };
+        if (StealToTrampoline(0x393510, 5, g_trampPanelRefresh, sizeof(g_trampPanelRefresh),
+            sigRefresh, (void*)Hook393510, &g_real393510, "PanelRefresh"))
+            Log("ArmySelect: 393510 отложен до idle/Present (не на стеке pick)");
+
+        static const unsigned char sigRebuild[9] =
+            { 0x55, 0x8B, 0xEC, 0x64, 0xA1, 0x00, 0x00, 0x00, 0x00 };
+        if (StealToTrampoline(0x393290, 9, g_trampPanelRebuild, sizeof(g_trampPanelRebuild),
+            sigRebuild, (void*)Hook393290, &g_real393290, "PanelRebuild"))
+            Log("ArmySelect: 393290 хук (reuse; skip выключен)");
+
+        g_afterListClear = (void*)(g_base + 0x393336);
+        {
+            static const unsigned char sigListClr[9] =
+                { 0x8B, 0x17, 0x8B, 0x42, 0x5C, 0x8B, 0xCF, 0xFF, 0xD0 };
+            if (StealToTrampoline(0x39332D, 9, g_trampListClear, sizeof(g_trampListClear),
+                sigListClr, (void*)Hook393ListClear, &g_realListClear, "ListClearSkip"))
+                Log("ArmySelect: Hide list не panel+4; после 393510 Show+layout list");
+        }
+
+        static const unsigned char sigBb0[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+        if (StealToTrampoline(0x391BB0, 5, g_trampBb0, sizeof(g_trampBb0),
+            sigBb0, (void*)Hook391BB0, &g_real391BB0, "IdleBrigade"))
+            Log("ArmySelect: 391BB0 жив (иконки); skip только NeedRebuild; таймер bb0/bb0h/bb0t");
+
+        {
+            static const unsigned char sigRorg[6] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+            if (StealToTrampoline(0x3810A0, 6, g_trampRorg, sizeof(g_trampRorg),
+                sigRorg, (void*)Hook3810A0, &g_real3810A0, "ReorgIdlePanel"))
+                Log("ArmySelect: 3810A0 таймер (idle при окне реорга 1644)");
+        }
+
+        g_bb0Epilogue = (void*)(g_base + 0x39240C);
+        {
+            unsigned char* at = (unsigned char*)(g_base + 0x391C6E);
+            unsigned char sigTail[6];
+            memcpy(sigTail, at, 6);
+            if (sigTail[0] == 0x8B && sigTail[1] == 0x15 &&
+                StealToTrampoline(0x391C6E, 6, g_trampBb0Tail, sizeof(g_trampBb0Tail),
+                    sigTail, (void*)Hook391C6E, &g_real391C6E, "IdleBrigadeTail"))
+                Log("ArmySelect: skip CUnitStatusEntry 391C6E -> 39240C (как reorg/1644)");
+        }
+
+        static const unsigned char sigHide[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+        static void* unusedHide = 0;
+        if (StealToTrampoline(0x393570, 5, g_trampPanelHide, sizeof(g_trampPanelHide),
+            sigHide, (void*)Hook393570, &unusedHide, "PanelHideKeep"))
+            Log("ArmySelect: 393570 Hide без destroy детей list");
+    }
+
+    // 3.76: окно ванильное. Таймеры 391BB0 / 393290 / 3810A0 без skip.
+    {
+        static const unsigned char sigRebuild[9] =
+            { 0x55, 0x8B, 0xEC, 0x64, 0xA1, 0x00, 0x00, 0x00, 0x00 };
+        if (!g_real393290 &&
+            StealToTrampoline(0x393290, 9, g_trampPanelRebuild, sizeof(g_trampPanelRebuild),
+            sigRebuild, (void*)Hook393290, &g_real393290, "PanelRebuildTime"))
+            Log("ArmySelect: таймер 393290 (ваниль, без skip)");
+
+        static const unsigned char sigBb0[5] = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+        if (!g_real391BB0 &&
+            StealToTrampoline(0x391BB0, 5, g_trampBb0, sizeof(g_trampBb0),
+            sigBb0, (void*)Hook391BB0, &g_real391BB0, "IdleBrigadeTime"))
+            Log("ArmySelect: таймер 391BB0 bb0/bb0h/bb0t (ваниль, без skip)");
+
+        static const unsigned char sigRorg[6] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+        if (!g_real3810A0 &&
+            StealToTrampoline(0x3810A0, 6, g_trampRorg, sizeof(g_trampRorg),
+            sigRorg, (void*)Hook3810A0, &g_real3810A0, "ReorgIdlePanelTime"))
+            Log("ArmySelect: таймер 3810A0 (реорг)");
+
+        g_bb0Epilogue = (void*)(g_base + 0x39240C);
+        if (!g_real391C6E)
+        {
+            unsigned char* at = (unsigned char*)(g_base + 0x391C6E);
+            unsigned char sigTail[6];
+            memcpy(sigTail, at, 6);
+            if (sigTail[0] == 0x8B && sigTail[1] == 0x15 &&
+                StealToTrampoline(0x391C6E, 6, g_trampBb0Tail, sizeof(g_trampBb0Tail),
+                    sigTail, (void*)Hook391C6E, &g_real391C6E, "IdleBrigadeTailTime"))
+                Log("ArmySelect: таймер хвоста 391C6E (без skip)");
+        }
+
+        if (!g_fn009350)
+        {
+            g_fn009350 = (void*)(g_base + 0x009350);
+            g_fn19C160 = (void*)(g_base + 0x19C160);
+            g_bb0ContStr = (void*)(g_base + 0x391BF3);
+            g_bb0ContFind = (void*)(g_base + 0x391C04);
+            g_bb0ContList = (void*)(g_base + 0x391C36);
+            g_bb0ContHash = (void*)(g_base + 0x391C49);
+            static const unsigned char sigStr[5] = { 0xE8, 0x5D, 0x77, 0xC7, 0xFF };
+            static const unsigned char sigFind[6] = { 0x8D, 0x55, 0xD0, 0x52, 0xFF, 0xD0 };
+            static const unsigned char sigList[9] =
+                { 0x8B, 0x16, 0x8B, 0x42, 0x7C, 0x8B, 0xCE, 0xFF, 0xD0 };
+            static const unsigned char sigHash[5] = { 0xE8, 0x17, 0xA5, 0xE0, 0xFF };
+            int n = 0;
+            if (PlantMidJump(0x391BEE, 5, sigStr, (void*)Hook391BEE_Str, "Bb0Str009350"))
+                n++;
+            if (PlantMidJump(0x391BFE, 6, sigFind, (void*)Hook391BFE_Find, "Bb0FindChild"))
+                n++;
+            if (PlantMidJump(0x391C2D, 9, sigList, (void*)Hook391C2D_List, "Bb0ListVfunc"))
+                n++;
+            if (PlantMidJump(0x391C44, 5, sigHash, (void*)Hook391C44_Hash, "Bb0Hash19C160"))
+                n++;
+            Log("ArmySelect: split-таймеры 391BB0 %d/4 (s=009350 f=FindChild l=list+7C g=hash o=остаток)", n);
+        }
+
+        if (!g_real5B2750)
+        {
+            static const unsigned char sigUpd[6] = { 0x56, 0x8B, 0x71, 0x60, 0x85, 0xF6 };
+            if (StealToTrampoline(0x5B2750, 6, g_trampListUpd, sizeof(g_trampListUpd),
+                sigUpd, (void*)Hook5B2750, &g_real5B2750, "ListboxUpdate5B2750"))
+                Log("ArmySelect: таймер 5B2750 listbox Update детей (bb0u)");
+            static const unsigned char sigCh[5] = { 0x8B, 0x50, 0x24, 0xFF, 0xD2 };
+            g_bb0ContChild = (void*)(g_base + 0x5B2761);
+            if (PlantMidJump(0x5B275C, 5, sigCh, (void*)Hook5B275C_Child, "ListboxChild24"))
+                Log("ArmySelect: таймер child +0x24 внутри 5B2750 (bb0ch)");
+        }
+
+        if (!g_fn38B4C0)
+        {
+            g_fn38B4C0 = (void*)(g_base + 0x38B4C0);
+            g_bb0ContSync = (void*)(g_base + 0x38AF3F);
+            // E8 rel32 к 38B4C0: rel = 0x38B4C0 - (0x38AF3A+5) = 0x581
+            static const unsigned char sigSync[5] = { 0xE8, 0x81, 0x05, 0x00, 0x00 };
+            if (PlantMidJump(0x38AF3A, 5, sigSync, (void*)Hook38AF3A_Sync, "ListSyncCall38AF3A"))
+                Log("ArmySelect: call 38B4C0 @38AF3A с ESI (bb0rb/syncm), без C++ wrap");
+        }
+        if (!g_fn38B2E0)
+        {
+            g_fn38B2E0 = (void*)(g_base + 0x38B2E0);
+            g_bb0ContEqA = (void*)(g_base + 0x38AF49);
+            // E8 rel32 к 38B2E0: rel = 0x38B2E0 - (0x38AF44+5) = 0x397
+            static const unsigned char sigEqA[5] = { 0xE8, 0x97, 0x03, 0x00, 0x00 };
+            if (PlantMidJump(0x38AF44, 5, sigEqA, (void*)Hook38AF44_EqA, "ListEqCall38B2E0"))
+                Log("ArmySelect: таймер call 38B2E0 @38AF44 (bb0eqA scrollbar)");
+        }
+        if (!g_fn38B140)
+        {
+            g_fn38B140 = (void*)(g_base + 0x38B140);
+            g_bb0ContEqB = (void*)(g_base + 0x38AF4E);
+            // E8 rel32 к 38B140: rel = 0x38B140 - (0x38AF49+5) = 0x1F2
+            static const unsigned char sigEqB[5] = { 0xE8, 0xF2, 0x01, 0x00, 0x00 };
+            if (PlantMidJump(0x38AF49, 5, sigEqB, (void*)Hook38AF49_EqB, "ListEqCall38B140"))
+                Log("ArmySelect: skip Show на equal-path (eqVskip); rebuild = ванильный 5B1FA0");
+        }
+        if (!g_fn731C00)
+        {
+            g_fn731C00 = (void*)(g_base + 0x731C00);
+            g_bb0ContEqH = (void*)(g_base + 0x38B15B);
+            // push ebx; push edi; call edx; call 731C00
+            static const unsigned char sigEqH[9] = {
+                0x53, 0x57, 0xFF, 0xD2, 0xE8, 0xA5, 0x6A, 0x3A, 0x00
+            };
+            if (PlantMidJump(0x38B152, 9, sigEqH, (void*)Hook38B152_EqH, "ListEqHead38B152"))
+                Log("ArmySelect: таймер head 38B140 @38B152 (bb0eqH)");
+        }
+        if (!g_bb0ContEqV)
+        {
+            g_bb0ContEqV = (void*)(g_base + 0x38B188);
+            static const unsigned char sigEqV[5] = { 0x83, 0xC1, 0x1C, 0xFF, 0xD0 };
+            if (PlantMidJump(0x38B183, 5, sigEqV, (void*)Hook38B183_EqV, "ListEqVcall38B183"))
+                Log("ArmySelect: eqV @38B183 skip или call EAX=5B1FA0 (bb0eqV)");
+        }
+        if (!g_eqVSlicesOn)
+        {
+            g_bb0ContEqVp = (void*)(g_base + 0x5E450D);
+            g_bb0ContEqVv = (void*)(g_base + 0x5E459B);
+            g_bb0ContEqVl = (void*)(g_base + 0x5E4678);
+            g_bb0ContEqTb = (void*)(g_base + 0x5E46AB);
+            g_bb0ContEqTc = (void*)(g_base + 0x5E46DB);
+            g_bb0ContEqTd = (void*)(g_base + 0x5E470B);
+            g_bb0ContEqVw = (void*)(g_base + 0x5E473B);
+            g_bb0ContEqVx = (void*)(g_base + 0x5E476B);
+            static const unsigned char sigVp[6] = { 0x8B, 0x9E, 0x58, 0x02, 0x00, 0x00 };
+            static const unsigned char sigVv[6] = { 0x8B, 0xBE, 0x1C, 0x04, 0x00, 0x00 };
+            static const unsigned char sigTa[6] = { 0x8B, 0x9E, 0xD8, 0x02, 0x00, 0x00 };
+            static const unsigned char sigTb[6] = { 0x8B, 0x9E, 0x98, 0x02, 0x00, 0x00 };
+            static const unsigned char sigTc[6] = { 0x8B, 0x9E, 0xF8, 0x02, 0x00, 0x00 };
+            static const unsigned char sigTd[6] = { 0x8B, 0x9E, 0x18, 0x03, 0x00, 0x00 };
+            static const unsigned char sigVw[6] = { 0x8B, 0xBE, 0x6C, 0x04, 0x00, 0x00 };
+            static const unsigned char sigVx[9] = {
+                0x83, 0xCB, 0xFF, 0x39, 0x9E, 0x90, 0x04, 0x00, 0x00
+            };
+            int n = 0;
+            if (PlantMidJump(0x5E4507, 6, sigVp, (void*)Hook5E4507_EqVp, "EqVSlice4507"))
+                n++;
+            if (PlantMidJump(0x5E4595, 6, sigVv, (void*)Hook5E4595_EqVv, "EqVSlice4595"))
+                n++;
+            // 4672 starts Ta; Vl marker was renamed — still ends lists at 4595→4672
+            if (PlantMidJump(0x5E4672, 6, sigTa, (void*)Hook5E4672_EqTa, "EqVSlice4672"))
+                n++;
+            if (PlantMidJump(0x5E46A5, 6, sigTb, (void*)Hook5E46A5_EqTb, "EqVSlice46A5"))
+                n++;
+            if (PlantMidJump(0x5E46D5, 6, sigTc, (void*)Hook5E46D5_EqTc, "EqVSlice46D5"))
+                n++;
+            if (PlantMidJump(0x5E4705, 6, sigTd, (void*)Hook5E4705_EqTd, "EqVSlice4705"))
+                n++;
+            if (PlantMidJump(0x5E4735, 6, sigVw, (void*)Hook5E4735_EqVw, "EqVSlice4735"))
+                n++;
+            if (PlantMidJump(0x5E4762, 9, sigVx, (void*)Hook5E4762_EqVx, "EqVSlice4762"))
+                n++;
+            if (n == 8)
+            {
+                g_eqVSlicesOn = 1;
+                Log("ArmySelect: срезы 5E4490 p/v/l/Ta-Td/w/x gated");
+            }
+            else
+                Log("ArmySelect: срезы 5E4490 частичные %d/8", n);
+        }
+        if (!g_bb0ContEqTbC)
+        {
+            g_bb0ContEqTbC = (void*)(g_base + 0x5E46D0);
+            static const unsigned char sigTbC[7] = {
+                0x8B, 0x11, 0x8B, 0x42, 0x34, 0xFF, 0xD0
+            };
+            if (PlantMidJump(0x5E46C9, 7, sigTbC, (void*)Hook5E46C9_TbC, "EqVTbChild34"))
+                Log("ArmySelect: таймер Tb child vt+0x34 @46C9 (bb0eqTbC/tbCnt)");
+        }
+        if (!g_fn008ED0)
+        {
+            g_fn008ED0 = (void*)(g_base + 0x008ED0);
+            g_bb0ContEqS = (void*)(g_base + 0x38B1C7);
+            static const unsigned char sigEqS[5] = { 0xE8, 0x09, 0xDD, 0xC7, 0xFF };
+            if (PlantMidJump(0x38B1C2, 5, sigEqS, (void*)Hook38B1C2_EqS, "ListEqStr38B1C2"))
+                Log("ArmySelect: таймер call 008ED0 @38B1C2 (bb0eqS)");
+        }
+        if (!g_fn38A4D0)
+        {
+            g_fn38A4D0 = (void*)(g_base + 0x38A4D0);
+            g_bb0ContEqR = (void*)(g_base + 0x38B1D2);
+            static const unsigned char sigEqR[5] = { 0xE8, 0xFE, 0xF2, 0xFF, 0xFF };
+            if (PlantMidJump(0x38B1CD, 5, sigEqR, (void*)Hook38B1CD_EqR, "ListEqRow38B1CD"))
+                Log("ArmySelect: таймер call 38A4D0 @38B1CD (bb0eqR)");
+        }
+        Log("ArmySelect: патч окна СНЯТ — ищем утечку FPS на ванили");
+    }
+    InstallWindowFps();
+}
+
+static void InstallWaitDiagHooks()
+{
+    HMODULE exe = GetModuleHandleA(NULL);
+    HMODULE k32 = GetModuleHandleA("kernel32.dll");
+    if (k32 && !g_realWFSO)
+        g_realWFSO = (tWaitForSingleObject)GetProcAddress(k32, "WaitForSingleObject");
+    if (k32 && !g_realQpc)
+        g_realQpc = (tQueryPerformanceCounter)GetProcAddress(k32, "QueryPerformanceCounter");
+
+    if (HookIat(exe, "kernel32.dll", "WaitForSingleObject", (void*)HookWaitForSingleObject, (void**)&g_realWFSO))
+        Log("WFSO: WaitForSingleObject exe (16-50мс -> %d, INFINITE не трогаем)",
+            g_settings.mpClientSleepMs);
+    else
+        Log("WFSO: IAT не найден");
+
+    if (HookIatOrdinal(exe, "ws2_32.dll", 16, (void*)HookRecv, (void**)&g_realRecv) ||
+        HookIatOrdinal(exe, "WS2_32.dll", 16, (void*)HookRecv, (void**)&g_realRecv))
+        Log("Recv: ws2_32.recv перехвачен");
+    else
+        Log("Recv: IAT recv не найден");
+
+    if (HookIat(exe, "kernel32.dll", "QueryPerformanceCounter", (void*)HookQpc, (void**)&g_realQpc))
+        Log("QPC: QueryPerformanceCounter перехвачен");
+
+    static const unsigned char sigEu3[5]   = { 0x55, 0x8B, 0xEC, 0x6A, 0xFF };
+    static const unsigned char sigNudge[6] = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+    static const unsigned char sigIn[6]    = { 0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8 };
+    StealToTrampoline(0x2481D0, 5, g_trampIdleEu3, sizeof(g_trampIdleEu3),
+        sigEu3, (void*)HookIdleEu3, (void**)&g_realIdleEu3, "IdleEU3");
+    StealToTrampoline(0x2B70A0, 6, g_trampIdleNudge, sizeof(g_trampIdleNudge),
+        sigNudge, (void*)HookIdleNudge, (void**)&g_realIdleNudge, "IdleNudge");
+    StealToTrampoline(0x254D80, 6, g_trampIdleIngame, sizeof(g_trampIdleIngame),
+        sigIn, (void*)HookIdleIngame, (void**)&g_realIdleIngame, "IdleInGame");
+}
+
 static bool InstallEngineStability()
 {
+    g_fnIsBadReadPtr = SafeIsBadReadPtr;
     PinFpu();
 
     HMODULE exe = GetModuleHandleA(NULL);
 
     InstallTimerResolution();
 
-    if (g_settings.fixSfxMixerLag)
+    // fixSfxMixerLag и patchMpClientSleep независимы; оба могут звать select.
+    if (g_settings.fixSfxMixerLag || g_settings.patchMpClientSleep)
         InstallSelectHook();
 
     if (g_settings.patchHighPriority)
@@ -5726,621 +12908,279 @@ static bool InstallPopQuantize()
 }
 
 // ---------------------------------------------------------------
-// MP-клиент: message pump со Sleep(40) → ~25 FPS (хост ~50).
-// Единственный 6A 28 + call Sleep в exe: rva 0x71DD2C.
+// MP-клиент: UI-поток (CreateThread → rva 71DC90) при пустой очереди
+// делал Sleep(40). WndProc (71DB70) Present не вызывает — только
+// WM 0x445 и DefWindowProc. Кадры идут из главного цикла, поэтому
+// патч pump не поднимает FPS сам по себе. 3.18: idle снова Sleep(1)
+// (MsgWait+Peek(hwnd) крутит QS и жрёт CPU), Sleep 16-50 мс режется
+// во всех модулях, Present пишет, сколько мс занял сам Present.
+// Звук Sleep(35)/Sleep(30) не трогаем.
 // ---------------------------------------------------------------
 
 static const DWORD RVA_MP_CLIENT_SLEEP = 0x71DD2C;
 
-static bool InstallMpClientSleep()
+static void MpClientPumpIdle()
 {
-    int ms = g_settings.mpClientSleepMs;
-    if (ms < 0)
+    DWORD ms = (DWORD)g_settings.mpClientSleepMs;
+    if ((int)ms < 0)
         ms = 0;
     if (ms > 127)
-        ms = 127;
-
-    return PatchImm8Sleep(RVA_MP_CLIENT_SLEEP, 40, (unsigned char)ms, "MpClientSleep");
-}
-
-// ---------------------------------------------------------------
-// OOS: FUN_00682EC0 (RVA 0x282EC0) — единственный билдер диалога
-// "Games out of synch" / OOS_TITLE. Вызывается КАЖДЫЙ игровой день
-// в MP, не только при OOS: сверяет std::vector<dword> локальной
-// сессии (arg0+0xB74) с вектором пира (arg1 = packet+0x3C). При
-// совпадении диалог не строится - экономим лог, но лог факта
-// сверки (SYNC) всё равно пишем в отдельный v2dll_oos.log, чтобы
-// при десинке было видно, на какой именно день и на каком именно
-// слоте разошлось.
-// ---------------------------------------------------------------
-
-static const DWORD RVA_OOS_REPORT = 0x282EC0;
-static const unsigned char OOS_POST_SEH[11] =
-    { 0x81, 0xEC, 0x40, 0x01, 0x00, 0x00, 0x53, 0x56, 0x8B, 0x75, 0x08 };
-
-static DWORD g_oosResume = 0;
-static int g_oosHits = 0;
-static int g_syncHits = 0;
-static char g_lastChecksumLine[256] = "none";
-
-static void RememberChecksum(const char* fmt, ...)
-{
-    va_list ap;
-    va_start(ap, fmt);
-    _vsnprintf_s(g_lastChecksumLine, sizeof(g_lastChecksumLine), _TRUNCATE, fmt, ap);
-    va_end(ap);
-}
-
-static bool g_oosLogStarted = false;
-
-static void LogOosFile(const char* fmt, ...)
-{
-    FILE* f = 0;
-    if (fopen_s(&f, "v2dll_oos.log", g_oosLogStarted ? "a" : "w") != 0 || !f)
-        return;
-    g_oosLogStarted = true;
-
-    SYSTEMTIME st;
-    GetLocalTime(&st);
-    fprintf(f, "%04u-%02u-%02u %02u:%02u:%02u.%03u ",
-        (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
-        (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
-        (unsigned)st.wMilliseconds);
-
-    va_list ap;
-    va_start(ap, fmt);
-    vfprintf(f, fmt, ap);
-    va_end(ap);
-    fprintf(f, "\n");
-    fclose(f);
-}
-
-static void DumpPtrLine(const char* tag, void* p)
-{
-    unsigned d[8];
-    memset(d, 0, sizeof(d));
-    int ok = 0;
-    __try
-    {
-        memcpy(d, p, sizeof(d));
-        ok = 1;
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        ok = 0;
-    }
-
-    if (!ok)
-    {
-        LogOosFile("  %s=%08X unreadable", tag, (unsigned)(DWORD_PTR)p);
-        return;
-    }
-    LogOosFile("  %s=%08X %08X %08X %08X %08X %08X %08X %08X %08X",
-        tag, (unsigned)(DWORD_PTR)p,
-        d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7]);
-}
-
-static const int OOS_VEC_OFF = 0xB74;
-static const int OOS_DATE_OFF = 0xB0C;
-static const int OOS_FLAG_OFF = 0xB20;
-static const int OOS_REC_OFF = 0xB84;
-static const int OOS_MAX_SLOTS = 256;
-static const int OOS_REC_MAX = 256;
-static const int OOS_DATE_EPOCH = 0x029C55C0;
-
-static const char* OosSlotLabel(int i)
-{
-    if (i == 0)
-        return "sum";
-    if (i == 1)
-        return "aux";
-    return "extra";
-}
-
-static void FormatVic2Date(int raw, char* buf, size_t bufsz)
-{
-    static const int kMDays[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    int adj = raw - OOS_DATE_EPOCH;
-    int year = 0;
-    int month = 1;
-    int day = 1;
-    int hour = 0;
-    if (adj >= 0)
-    {
-        year = adj / 8760;
-        int rem = adj % 8760;
-        hour = rem % 24;
-        int doy = rem / 24;
-        month = 1;
-        for (int m = 0; m < 12; ++m)
-        {
-            if (doy < kMDays[m])
-            {
-                day = doy + 1;
-                break;
-            }
-            doy -= kMDays[m];
-            month++;
-        }
-        if (month > 12)
-        {
-            month = 12;
-            day = 31;
-        }
-    }
-    sprintf_s(buf, bufsz, "%04d-%02d-%02d %02d:00", year, month, day, hour);
-}
-
-static int CopyVecU32(void* vecObj, unsigned* out, int cap, int* outCount)
-{
-    *outCount = -1;
-    unsigned begin = 0;
-    unsigned end = 0;
-    __try
-    {
-        begin = *(unsigned*)vecObj;
-        end = *((unsigned*)vecObj + 1);
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return 0;
-    }
-
-    if (!begin)
-    {
-        *outCount = 0;
-        return 1;
-    }
-    if (end < begin)
-        return 0;
-
-    unsigned nbytes = end - begin;
-    if (nbytes % 4)
-        return 0;
-
-    int n = (int)(nbytes / 4);
-    *outCount = n;
-    int copy = n;
-    if (copy > cap)
-        copy = cap;
-    if (copy <= 0)
-        return 1;
-
-    __try
-    {
-        memcpy(out, (const void*)(DWORD_PTR)begin, (size_t)copy * 4);
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return 0;
-    }
-    return 1;
-}
-
-static int  g_lastDateRaw = 0;
-static char g_lastDateBuf[32] = "-";
-static int  g_firstOosRaw = 0;
-static char g_firstOosBuf[32] = "-";
-static int  g_firstRealOosRaw = 0;
-static char g_firstRealOosBuf[32] = "-";
-
-static int DaysSinceFirstRealOos()
-{
-    if (!g_firstRealOosRaw || !g_lastDateRaw)
-        return -1;
-    int d = (g_lastDateRaw - g_firstRealOosRaw) / 24;
-    return d < 0 ? 0 : d;
-}
-
-static void RememberSessionClock(int raw, const char* buf)
-{
-    if (!raw || !buf || !buf[0])
-        return;
-    g_lastDateRaw = raw;
-    strcpy_s(g_lastDateBuf, buf);
-}
-
-static void NoteOosMilestones(int isDiff, int realDiff, int raw, const char* buf)
-{
-    RememberSessionClock(raw, buf);
-    if (isDiff && !g_firstOosRaw && raw)
-    {
-        g_firstOosRaw = raw;
-        strcpy_s(g_firstOosBuf, buf);
-        LogOosFile("FIRST OOS (любой DIFF, в т.ч. local=0) date=%s", buf);
-    }
-    if (realDiff && !g_firstRealOosRaw && raw)
-    {
-        g_firstRealOosRaw = raw;
-        strcpy_s(g_firstRealOosBuf, buf);
-        LogOosFile("FIRST real OOS (оба checksum ненулевые и разные) date=%s", buf);
-    }
-}
-
-static void TryLogPeerCmd(void* vecAt3C)
-{
-    if (!vecAt3C)
-        return;
-    char tmp[32];
-    memset(tmp, 0, sizeof(tmp));
-    unsigned size = 0;
-    unsigned cap = 0;
-    __try
-    {
-        char* obj = (char*)vecAt3C - 0x3C;
-        size = *(unsigned*)(obj + 0x1C);
-        cap = *(unsigned*)(obj + 0x20);
-        const char* s = obj + 8;
-        if (cap >= 16)
-            s = *(const char**)(obj + 8);
-        if (s && size > 0 && size < sizeof(tmp))
-            memcpy(tmp, s, size);
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return;
-    }
-    if (tmp[0] >= 32 && tmp[0] <= 126)
-        LogOosFile("  cmd=\"%s\"", tmp);
-}
-
-static int LooksLikeTag(const char* p)
-{
-    unsigned char a = (unsigned char)p[0];
-    unsigned char b = (unsigned char)p[1];
-    unsigned char c = (unsigned char)p[2];
-    if (a < 'A' || a > 'Z' || b < 'A' || b > 'Z')
-        return 0;
-    if (!((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')))
-        return 0;
-    return 1;
-}
-
-static void FillTag(char* out, void* obj)
-{
-    out[0] = 0;
-    if (!obj || SafeIsBadReadPtr(obj, 0x40))
-        return;
-    __try
-    {
-        static const int kOffs[] = { 4, 8, 0xC, 0x20, 0x24, 0x30, 0 };
-        for (int k = 0; k < 7; ++k)
-        {
-            const char* p = (const char*)obj + kOffs[k];
-            if (LooksLikeTag(p))
-            {
-                out[0] = p[0];
-                out[1] = p[1];
-                out[2] = p[2];
-                out[3] = (p[3] >= 'A' && p[3] <= 'Z') ? p[3] : 0;
-                out[4] = 0;
-                return;
-            }
-            if (SafeIsBadReadPtr(p, 4))
-                continue;
-            void* q = *(void**)p;
-            if (!q || SafeIsBadReadPtr(q, 4))
-                continue;
-            const char* t = (const char*)q;
-            if (LooksLikeTag(t))
-            {
-                out[0] = t[0];
-                out[1] = t[1];
-                out[2] = t[2];
-                out[3] = 0;
-                return;
-            }
-        }
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        out[0] = 0;
-    }
-}
-
-static void DumpLocalExtra(void* session, int verbose, int* outCount, unsigned* outXor)
-{
-    *outCount = -1;
-    *outXor = 0;
-    if (!session)
-        return;
-
-    unsigned begin = 0;
-    unsigned end = 0;
-    __try
-    {
-        begin = *(unsigned*)((char*)session + OOS_REC_OFF);
-        end = *(unsigned*)((char*)session + OOS_REC_OFF + 4);
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return;
-    }
-
-    if (!begin || end < begin)
-    {
-        *outCount = 0;
-        return;
-    }
-
-    unsigned nbytes = end - begin;
-    if (nbytes % 16)
-    {
-        *outCount = -2;
-        return;
-    }
-
-    int n = (int)(nbytes / 16);
-    *outCount = n;
-    int show = n;
-    if (show > OOS_REC_MAX)
-        show = OOS_REC_MAX;
-
-    unsigned x = 0;
-    for (int i = 0; i < show; ++i)
-    {
-        unsigned rec[4];
-        memset(rec, 0, sizeof(rec));
-        __try
-        {
-            memcpy(rec, (const void*)(DWORD_PTR)(begin + (unsigned)i * 16), 16);
-        }
-        __except (EXCEPTION_EXECUTE_HANDLER)
-        {
-            break;
-        }
-        x ^= rec[0] ^ rec[1] ^ rec[2] ^ rec[3];
-        if (verbose)
-        {
-            char tag[8];
-            FillTag(tag, (void*)(DWORD_PTR)rec[0]);
-            LogOosFile("  rec[%d] ptr=%08X a=%08X b=%08X c=%08X tag=%s",
-                i, rec[0], rec[1], rec[2], rec[3], tag[0] ? tag : "-");
-        }
-    }
-    *outXor = x;
-    if (verbose && n > OOS_REC_MAX)
-        LogOosFile("  rec truncated to %d / %d", OOS_REC_MAX, n);
-}
-
-static void __cdecl ReportOos(void* a0, void* a1)
-{
-    unsigned int cw = 0;
-    _controlfp_s(&cw, 0, 0);
-    unsigned int mxcsr = _mm_getcsr();
-
-    int dateRaw = 0;
-    int dateOk = 0;
-    char dateBuf[32];
-    dateBuf[0] = 0;
-    if (a0)
-    {
-        __try
-        {
-            dateRaw = *(int*)((char*)a0 + OOS_DATE_OFF);
-            dateOk = 1;
-        }
-        __except (EXCEPTION_EXECUTE_HANDLER)
-        {
-            dateOk = 0;
-        }
-    }
-    if (dateOk)
-        FormatVic2Date(dateRaw, dateBuf, sizeof(dateBuf));
-
-    unsigned localBuf[OOS_MAX_SLOTS];
-    unsigned remoteBuf[OOS_MAX_SLOTS];
-    memset(localBuf, 0, sizeof(localBuf));
-    memset(remoteBuf, 0, sizeof(remoteBuf));
-    int nLocal = -1;
-    int nRemote = -1;
-    int localOk = 0;
-    int remoteOk = 0;
-    if (a0)
-        localOk = CopyVecU32((char*)a0 + OOS_VEC_OFF, localBuf, OOS_MAX_SLOTS, &nLocal);
-    if (a1)
-        remoteOk = CopyVecU32(a1, remoteBuf, OOS_MAX_SLOTS, &nRemote);
-
-    int nCmp = 0;
-    if (localOk && remoteOk && nLocal >= 0 && nRemote >= 0)
-        nCmp = nLocal < nRemote ? nLocal : nRemote;
-    if (nCmp > OOS_MAX_SLOTS)
-        nCmp = OOS_MAX_SLOTS;
-
-    int nDiff = 0;
-    int firstDiff = -1;
-    for (int i = 0; i < nCmp; ++i)
-    {
-        if (localBuf[i] != remoteBuf[i])
-        {
-            if (firstDiff < 0)
-                firstDiff = i;
-            ++nDiff;
-        }
-    }
-
-    char summary[192];
-    const int isDiff = (!localOk || !remoteOk || nLocal != nRemote || nDiff > 0);
-    unsigned sumL = (localOk && nLocal > 0) ? localBuf[0] : 0;
-    unsigned sumR = (remoteOk && nRemote > 0) ? remoteBuf[0] : 0;
-    unsigned auxL = (localOk && nLocal > 1) ? localBuf[1] : 0;
-    unsigned auxR = (remoteOk && nRemote > 1) ? remoteBuf[1] : 0;
-    const int realDiff = isDiff && sumL > 0 && sumR > 0 && sumL != sumR;
-    NoteOosMilestones(isDiff, realDiff, dateOk ? dateRaw : 0, dateOk ? dateBuf : "");
-
-    if (!isDiff)
-    {
-        ++g_syncHits;
-        int recN = -1;
-        unsigned recXor = 0;
-        DumpLocalExtra(a0, 0, &recN, &recXor);
-        LogOosFile("SYNC n=%d date=%s sum=%u/%u aux=%u/%u rec=%d xor=%08X",
-            g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, auxL, auxR, recN, recXor);
-        RememberChecksum("SYNC n=%d date=%s sum=%u/%u rec=%d xor=%08X",
-            g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, recN, recXor);
-        return;
-    }
-
-    ++g_oosHits;
-
-    if (!localOk || !remoteOk)
-        sprintf_s(summary, "vectors unreadable local_ok=%d remote_ok=%d", localOk, remoteOk);
-    else if (nLocal != nRemote)
-        sprintf_s(summary, "COUNT mismatch local=%d remote=%d", nLocal, nRemote);
-    else if (firstDiff >= 0)
-        sprintf_s(summary, "%d/%d DIFF Checksum:%d %s local=%u remote=%u delta=%d",
-            nDiff, nCmp, firstDiff, OosSlotLabel(firstDiff),
-            localBuf[firstDiff], remoteBuf[firstDiff],
-            (int)localBuf[firstDiff] - (int)remoteBuf[firstDiff]);
-    else
-        sprintf_s(summary, "%d/%d DIFF", nDiff, nCmp);
-
-    RememberChecksum("OOS hit=%d after %d sync date=%s %s",
-        g_oosHits, g_syncHits, dateOk ? dateBuf : "?", summary);
-
-    Log("OOS[%d]: %s date=%s",
-        g_oosHits, summary, dateOk ? dateBuf : "?");
-
-    LogOosFile("OOS hit=%d after %d sync days dll=%s tick=%u date=%s raw=%d a0=%08X a1=%08X fpu_cw=%08X mxcsr=%08X",
-        g_oosHits, g_syncHits, MOD_VERSION, GetTickCount(),
-        dateOk ? dateBuf : "?", dateOk ? dateRaw : 0,
-        (unsigned)(DWORD_PTR)a0, (unsigned)(DWORD_PTR)a1,
-        cw, mxcsr);
-    LogOosFile("  %s", summary);
-    {
-        int recN = -1;
-        unsigned recXor = 0;
-        DumpLocalExtra(a0, 1, &recN, &recXor);
-        LogOosFile("  local +0xB84 rec=%d xor=%08X (в пакет не входит — сравни с таким же блоком у пира)",
-            recN, recXor);
-    }
-    if (sumL == 0 && sumR > 100)
-        LogOosFile("  NOTE: local sum=0 после ненулевого remote — локальный аккумулятор сброшен (часто хвост после уже показанного OOS)");
-
-    if ((cw & _MCW_PC) != _PC_53)
-        LogOosFile("  NOTE: FPU precision != 53-bit (cw=%08X) — D3D/оверлей мог сбить хеш", cw);
-    if ((mxcsr & 0x8040) != 0x8040)
-        LogOosFile("  NOTE: MXCSR без FTZ/DAZ (mxcsr=%08X)", mxcsr);
-
-    DumpPtrLine("arg0", a0);
-    DumpPtrLine("arg1", a1);
-    if (a1)
-    {
-        void* peer = (char*)a1 - 0x3C;
-        DumpPtrLine("peer", peer);
-        TryLogPeerCmd(a1);
-    }
-
-    LogOosFile("  vector local @session+0xB74  count=%s%d  remote @peer+0x3C count=%s%d",
-        localOk ? "" : "ERR ", nLocal,
-        remoteOk ? "" : "ERR ", nRemote);
-    LogOosFile("  --- slots (это ровно то, что сверяет диалог: Checksum: i local : remote) ---");
-
-    if (!localOk && !remoteOk)
-        LogOosFile("  (оба вектора не прочитались)");
+        ms = 1;
+    if (g_realSleep)
+        g_realSleep(ms);
     else
     {
-        int nShow = nCmp;
-        if (nLocal > nShow)
-            nShow = nLocal;
-        if (nRemote > nShow)
-            nShow = nRemote;
-        if (nShow > OOS_MAX_SLOTS)
-            nShow = OOS_MAX_SLOTS;
-
-        for (int i = 0; i < nShow; ++i)
-        {
-            const int haveL = localOk && i < nLocal && i < OOS_MAX_SLOTS;
-            const int haveR = remoteOk && i < nRemote && i < OOS_MAX_SLOTS;
-            if (haveL && haveR)
-            {
-                const int diff = localBuf[i] != remoteBuf[i];
-                LogOosFile("  Checksum:%d %-8s  local=%d (%08X)  remote=%d (%08X)  %s",
-                    i, OosSlotLabel(i),
-                    (int)localBuf[i], localBuf[i],
-                    (int)remoteBuf[i], remoteBuf[i],
-                    diff ? "DIFF" : "MATCH");
-            }
-            else if (haveL)
-            {
-                LogOosFile("  Checksum:%d %-8s  local=%d (%08X)  remote=<missing>  DIFF",
-                    i, OosSlotLabel(i), (int)localBuf[i], localBuf[i]);
-            }
-            else if (haveR)
-            {
-                LogOosFile("  Checksum:%d %-8s  local=<missing>  remote=%d (%08X)  DIFF",
-                    i, OosSlotLabel(i), (int)remoteBuf[i], remoteBuf[i]);
-            }
-        }
-        if ((localOk && nLocal > OOS_MAX_SLOTS) || (remoteOk && nRemote > OOS_MAX_SLOTS))
-            LogOosFile("  (обрезано до %d слотов)", OOS_MAX_SLOTS);
+        HMODULE k32 = GetModuleHandleA("kernel32.dll");
+        tSleep s = k32 ? (tSleep)GetProcAddress(k32, "Sleep") : 0;
+        if (s)
+            s(ms);
     }
 }
 
-__declspec(naked) static void OosReportThunk()
+static bool InstallMpClientSleep()
 {
-    __asm {
-        pushad
-        mov eax, dword ptr [esp + 36]
-        mov ecx, dword ptr [esp + 40]
-        push ecx
-        push eax
-        call ReportOos
-        add esp, 8
-        popad
-        push ebp
-        mov ebp, esp
-        push -1
-        jmp dword ptr [g_oosResume]
-    }
-}
-
-static bool InstallOosWatch()
-{
-    unsigned char* hook = (unsigned char*)(g_base + RVA_OOS_REPORT);
-    if (hook[0] != 0x55 || hook[1] != 0x8B || hook[2] != 0xEC ||
-        hook[3] != 0x6A || hook[4] != 0xFF)
+    if (!g_realSleep)
     {
-        Log("OosWatch: пролог не совпал (%02X %02X %02X %02X %02X)",
-            hook[0], hook[1], hook[2], hook[3], hook[4]);
-        return false;
+        HMODULE k32 = GetModuleHandleA("kernel32.dll");
+        if (k32)
+            g_realSleep = (tSleep)GetProcAddress(k32, "Sleep");
     }
-    if (memcmp(hook + 24, OOS_POST_SEH, sizeof(OOS_POST_SEH)) != 0)
+    unsigned char* p = (unsigned char*)(g_base + RVA_MP_CLIENT_SLEEP);
+    DWORD iat = g_base + RVA_SLEEP_IAT;
+    if (p[0] != 0x6A || (p[1] != 40 && p[1] != (unsigned char)g_settings.mpClientSleepMs) ||
+        p[2] != 0xFF || p[3] != 0x15 || *(DWORD*)(p + 4) != iat)
     {
-        Log("OosWatch: sub esp,0x140 не совпал");
+        Log("MpClientSleep: сигнатура Sleep не совпала rva %06X (%02X %02X %02X %02X)",
+            RVA_MP_CLIENT_SLEEP, p[0], p[1], p[2], p[3]);
         return false;
     }
 
-    g_oosResume = g_base + RVA_OOS_REPORT + 5;
-
-    unsigned char patch[5];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&OosReportThunk - ((DWORD)hook + 5);
+    unsigned char expectMs = p[1];
+    unsigned char patch[8];
+    patch[0] = 0xE8;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&MpClientPumpIdle - ((DWORD)(DWORD_PTR)p + 5);
+    patch[5] = 0x90;
+    patch[6] = 0x90;
+    patch[7] = 0x90;
 
     DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+    if (!VirtualProtect(p, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
         return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+    memcpy(p, patch, sizeof(patch));
+    VirtualProtect(p, sizeof(patch), oldProtect, &oldProtect);
 
-    Log("OosWatch: FUN_00682EC0 rva %06X -> v2dll_oos.log", RVA_OOS_REPORT);
-    LogOosFile("armed dll=%s (SYNC/OOS)", MOD_VERSION);
+    Log("MpClientSleep: pump Sleep(%u) -> Sleep(%d) rva %06X",
+        (unsigned)expectMs, g_settings.mpClientSleepMs, RVA_MP_CLIENT_SLEEP);
     return true;
 }
 
-// ---------------------------------------------------------------
-// Краш-репорт: необработанное исключение / abort -> v2dll_crash.log
-// и v2dll_crash_YYYYMMDD_HHMMSS_pid_tid_n.dmp (каждый отдельно), плюс
-// v2dll_crash_hint.txt - короткая "хлебная крошка", которую успевает
-// записать даже vectored-обработчик до полного логгера. Портировано
-// из V2\V2TechButton.cpp (версия 3.10), упрощено под плоские ANSI-пути
-// рядом с exe (там - Logs\ и wide-char, здесь такой папки нет, поэтому
-// не заводим). Диагностика ident_skip из ReportCrash не перенесена -
-// то же обоснование, что и для OOS-блока выше (отдельная, не
-// запрошенная подсистема PATCH_NULL_VTABLE_UI).
-// ---------------------------------------------------------------
+static bool Install()
+{
+    LoadSettings();
+    g_settings.patchNullVtableUi = false;
+    g_settings.patchIdentityTombstone = false;
+    g_settings.patchCivilizeNullCheck = false;
+    // 3.57 skip 2859C0 из 282EC0 глушил дневной тик (POP/войны/газеты).
+    g_settings.patchSkipChkWin = false;
+    g_settings.patchCamStill = false;
+    // 3.42–3.75 ломали окно бригад. Ваниль + таймеры bb0/rbld/rorg.
+    g_settings.patchReuseUnitView = false;
 
-static HMODULE g_selfModule = 0;
+    g_base = (DWORD)GetModuleHandleA(NULL);
+    if (!g_base)
+        return false;
+
+    g_imageSize = 0;
+    {
+        IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)g_base;
+        if (dos->e_magic == IMAGE_DOS_SIGNATURE)
+        {
+            IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(g_base + dos->e_lfanew);
+            if (nt->Signature == IMAGE_NT_SIGNATURE)
+                g_imageSize = nt->OptionalHeader.SizeOfImage;
+        }
+        if (!g_imageSize)
+            g_imageSize = 0xC00000;
+    }
+
+    g_fnOnMakeDecision = (void*)(g_base + RVA_ONMAKEDECISION);
+
+    Log("---- Install ---- версия %s pid=%u tid=%u",
+        MOD_VERSION, GetCurrentProcessId(), GetCurrentThreadId());
+    Log("base = %08X", g_base);
+    Log("logs = Logs\\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)");
+    Log("localModConfig=%d fixSfxMixerLag=%d patchFixArmyWindowLag=%d enableCrashDump=%d",
+        (int)g_settings.localModConfig, (int)g_settings.fixSfxMixerLag,
+        (int)g_settings.patchFixArmyWindowLag, (int)g_settings.enableCrashDump);
+    Log("CrashGuards: выключены (identity/tombstone/null-vtable/civilize)");
+    Log("ChkWinSkip: принудительно выкл (2859C0 = дневной тик, не GUI)");
+    Log("CamStill: принудительно выкл (3.59: idle-шторм, FPS хуже)");
+    if (g_settings.patchD3dNoVsync)
+        Log("D3D9: vsync снят (PresentationInterval=IMMEDIATE), fps cap=%d",
+            g_settings.d3dFpsLimit);
+
+    InstallEngineStability();
+    InstallArmySelectDiag();
+
+    if (g_settings.patchPopQuantize)
+        InstallPopQuantize();
+
+    if (g_settings.patchMpClientSleep)
+    {
+        InstallMpClientSleep();
+        InstallWfsoHook();
+    }
+
+    // Поддельные элементы: "POLITICSVIEW_DECISION" + имя решения.
+    memset(g_fakeElem, 0, sizeof(g_fakeElem));
+
+    for (int i = 0; i < BUTTON_COUNT && i < MAX_BUTTONS; ++i)
+    {
+        strcpy_s(g_decisionText[i], sizeof(g_decisionText[i]),
+            "POLITICSVIEW_DECISION");
+        strcat_s(g_decisionText[i], sizeof(g_decisionText[i]),
+            BUTTONS[i].decision);
+
+        *(char**)(g_fakeElem[i] + ELEM_STRDATA) = g_decisionText[i];
+        *(unsigned*)(g_fakeElem[i] + ELEM_STRRES) = sizeof(g_decisionText[i]) - 1;
+    }
+
+    for (int i = 0; i < VIEW_COUNT && i < MAX_VIEWS; ++i)
+    {
+        void* thunk = VIEWS[i].tooltipSlot ? TOOLTIP_THUNKS[i] : UPDATE_THUNKS[i];
+
+        bool ok = PatchSlot(VIEWS[i].rvaVtable, VIEWS[i].slot,
+            thunk, &g_origSlot[i]);
+
+        Log("patch %s: слот %d = %d", VIEWS[i].name, VIEWS[i].slot, (int)ok);
+    }
+
+    if (g_settings.decisionFilter)
+    {
+        bool ok = PatchSlot(RVA_VTABLE_DECISION, VT_SLOT_ISVALID,
+            (void*)&MyDecisionIsValid, (void**)&g_origIsValid);
+        Log("patch CDecision: слот %d = %d", VT_SLOT_ISVALID, (int)ok);
+    }
+
+    // Каждая запись таблицы уважает своё собственное BytePatch::enabled
+    // (правится ключами PATCH_<ИМЯ> в ini), поэтому вызов сам по себе
+    // безусловный.
+    InstallExePatches();
+
+    if (g_settings.patchOccupiedReinforceSplit)
+        InstallOccupiedReinforceSplit();
+
+    if (g_settings.patchAllyOwnerCheck)
+        InstallAllyOwnerCheck();
+
+    if (g_settings.patchCivilizeNullCheck)
+        InstallCivilizeNullCheck();
+
+    if (g_settings.patchSupplySourceNullCheck)
+        InstallSupplySourceNullCheck();
+
+    if (g_settings.patchTechCompareNullCheck)
+        InstallTechCompareNullCheck();
+
+    if (g_settings.patchTechFolderIconNullCheck)
+        InstallTechFolderIconNullCheck();
+
+    if (g_settings.patchNullVtableUi)
+    {
+        InstallNullVtableUi();
+        InstallIdentityNullVtable();
+        InstallIdentityLookupGuard();
+        InstallIdentitySlot84();
+        InstallIdentityFieldE4();
+        InstallIdentityFnD1BB0();
+        InstallIdentityFnD4420();
+        InstallIdentityFn113D50();
+        InstallIdentityFn1CB230();
+        InstallIdentityFnD1890();
+        IdentInitStubAndSentinel();
+        IdentCollectUnitVtables();
+        if (g_nIdentVtables > 0)
+        {
+            InstallIdentityHashFilter();
+            InstallIdentityFnD5BC0();
+        }
+        else
+        {
+            Log("IdentityHashFilter: нет unit vtable - hash/parent не патчим");
+        }
+        InstallStringClearGuard();
+    }
+
+    if (g_settings.patchIdentityTombstone)
+        InstallIdentityTombstone();
+
+    if (g_settings.patchGraphPointClamp)
+        InstallGraphPointClamp();
+
+    if (g_settings.patchFactoryDumpScan)
+    {
+        // В 2.58 сканер временно ловил "Failed to create a graphics device"
+        // при запуске - подтверждено A/B тестом (2.58 с широким сканом всех
+        // типов памяти ловил ошибку, 2.59 без вызова этой функции - нет).
+        // Причина сужена до расширения скана за пределы MEM_PRIVATE (кучи
+        // процесса) на MEM_IMAGE/MEM_MAPPED, где могли жить внутренние
+        // данные видеодрайвера - в 2.60 это ограничение возвращено, снова
+        // сканируем только MEM_PRIVATE, как в безотказных 2.55-2.57.
+        InstallFactoryDumpScan();
+    }
+
+    if (g_settings.patchProdListVisibility)
+        InstallProdListVisibilityHook();
+
+    if (g_settings.patchProdTypeGate)
+        InstallProdTypeGateHook();
+
+    if (g_settings.patchHideNoSupplyFactories)
+        InstallHideNoSupplyFactoriesHook();
+
+    // Оба патча целят один и тот же адрес - взаимоисключающе.
+    if (g_settings.priceDelta && g_settings.patchExponentialPriceDelta)
+        Log("PriceDelta: ENABLE_PRICE_DELTA и PATCH_EXPONENTIAL_PRICE_DELTA "
+            "патчат один адрес - применяется только PATCH_EXPONENTIAL_PRICE_DELTA");
+
+    if (g_settings.patchExponentialPriceDelta)
+        InstallExponentialPriceDelta();
+    else if (g_settings.priceDelta)
+        InstallPriceDelta();
+
+    if (g_settings.popDisplay)
+        InstallPopDisplay();
+
+    if (g_settings.versionLabel)
+        InstallVersionLabel();
+
+    if (g_settings.patchCombatRoll)
+        InstallCombatRoll();
+
+    if (g_settings.patchChecksumDiagnostic)
+    {
+        InstallChecksumDiagnostic();
+        InstallLobbyEntryHook();
+    }
+
+    InstallOosWatch();
+    Log("IdleSkipNested: PATCH_SKIP_NESTED_IDLE=%d FIX_ARMY_WINDOW_LAG=%d PATCH_SKIP_CHK_WIN=%d PATCH_CAM_STILL=%d",
+        (int)g_settings.patchSkipNestedIdle, (int)g_settings.patchFixArmyWindowLag,
+        (int)g_settings.patchSkipChkWin, (int)g_settings.patchCamStill);
+
+    Log("Install: done");
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// Краш: необработанное исключение / abort → Logs\v2dll_crash.log
+// и Logs\v2dll_crash_YYYYMMDD_HHMMSS_pid_tid_n.dmp (каждый отдельно).
+// Если v2dll_crash.log занят — тот же штамп .log рядом.
+// VectoredContinue + UEF: игра может сама поставить фильтр после нас,
+// поэтому IAT SetUnhandledExceptionFilter оставляем обёрткой.
+// Не глотаем исключение — Windows Error Reporting как был.
+// ---------------------------------------------------------------
 
 static LPTOP_LEVEL_EXCEPTION_FILTER g_prevUef = 0;
 typedef LPTOP_LEVEL_EXCEPTION_FILTER (WINAPI* tSetUnhandledExceptionFilter)(LPTOP_LEVEL_EXCEPTION_FILTER);
@@ -6494,6 +13334,8 @@ static void CrashDumpCode(HANDLE h, DWORD eip)
 
 // Улики «откуда краш» без Ghidra: RTTI живых объектов, ключи
 // локализации/протокола на стеке, vtable в образе exe или куча.
+// Это не сюжет («ход спросил титул»), а то, что раньше руками
+// вытаскивали из minidump / .rdata. Сюжет по-прежнему пишет человек.
 static int CrashInImage(DWORD p)
 {
     return g_base && p >= g_base && p < g_base + g_imageSize;
@@ -6747,12 +13589,46 @@ static void CrashScanPtrFields(HANDLE h, DWORD obj, DWORD* seen, int* nseen)
 static void CrashWriteKnownSite(HANDLE h, DWORD rva)
 {
     const char* msg = 0;
-    if (rva >= 0x282EC0 && rva <= 0x283200)
+    if (rva >= 0x4A8E00 && rva <= 0x4A8E40)
+        msg = "NullVtableUi string fallback (rva 4A8E0B, patched 2.98)";
+    else if (rva >= 0x1D0F00 && rva <= 0x1D0F3F)
+        msg = "FUN_005D0EB0 identity node, virtual [vtable+0x88] (patched 2.99/3.03)";
+    else if (rva >= 0x1D1CC0 && rva <= 0x1D1CE0)
+        msg = "FUN_005D1BB0 identity [esi+0xE4] cmp (patched 3.04, eax-save 3.05, epilogue-skip 3.06)";
+    else if (rva >= 0x1D1BB0 && rva <= 0x1D1BD8)
+        msg = "FUN_005D1BB0 prologue (guard 3.08/3.09)";
+    else if (rva >= 0x1D4420 && rva <= 0x1D4540)
+        msg = "FUN_005D4420 identity [vtable+0x70] (patched 3.09)";
+    else if (rva >= 0x113D50 && rva <= 0x113E20)
+        msg = "FUN 0x113D50 identity [vtable+0x38] (patched 3.10)";
+    else if (rva >= 0x1CB230 && rva <= 0x1CB2C0)
+        msg = "FUN 0x1CB230 write [ebx+0x74] (fail-guard 3.12)";
+    else if (rva >= 0x1D1890 && rva <= 0x1D18E0)
+        msg = "FUN 0x1D1890 list this+0x4C (fail-guard 3.13)";
+    else if (rva >= 0x1D5BC0 && rva <= 0x1D5E28)
+        msg = "FUN 0x1D5BC0 parent of 1CB230/1DADD0 (fail-guard 3.14)";
+    else if (rva >= 0x1DADD0 && rva <= 0x1DAE20)
+        msg = "FUN 0x1DADD0 list compare [edi] (parent 3.14)";
+    else if (rva >= 0x1AB7F0 && rva <= 0x1AB838)
+        msg = "FUN_005AB7F0 identity hash (sentinel 3.14)";
+    else if (rva >= 0x0471B0 && rva <= 0x0471D0)
+        msg = "CSubUnit scalar deleting dtor (tombstone 3.11/3.12)";
+    else if (rva >= 0x1C6180 && rva <= 0x1C61B0)
+        msg = "CArmy scalar deleting dtor (tombstone 3.11/3.12)";
+    else if (rva >= 0x1D7600 && rva <= 0x1D7630)
+        msg = "CNavy scalar deleting dtor (tombstone 3.11/3.12)";
+    else if (rva >= 0x5A63F0 && rva <= 0x5A6418)
+        msg = "FUN_005A63F0 string/buffer clear [edi] (patched 3.08)";
+    else if (rva >= 0x1B9670 && rva <= 0x1B968C)
+        msg = "FUN_005B9670 identity [vtable+0x84] (patched 3.03)";
+    else if (rva >= 0x1DF4B0 && rva <= 0x1DF590)
+        msg = "FUN_005DF4B0 identity lookup / CMoveCommand+0x38 (guard 3.00)";
+    else if (rva >= 0x282EC0 && rva <= 0x283200)
         msg = "FUN_00682EC0 daily MP checksum / OOS dialog";
     if (msg)
         CrashPrintf(h, "  known_site: %s\n", msg);
     else
-        CrashPrintf(h, "  known_site: none (new rva %06X - смотреть keys/objects)\n", rva);
+        CrashPrintf(h, "  known_site: none (new rva %06X — смотреть keys/objects)\n", rva);
 }
 
 static void CrashDumpSource(HANDLE h, CONTEXT* ctx)
@@ -6824,42 +13700,50 @@ static void CrashDumpSource(HANDLE h, CONTEXT* ctx)
         CrashWrite(h, "    (none)\n");
 }
 
-// MiniDumpNormal (0) - только стеки, без
-// MiniDumpWithIndirectlyReferencedMemory (0x40): из обработчика
-// он долго ходит по куче и может зависнуть. DataSegs + unloaded +
-// thread + memory-info.
+// MiniDumpNormal (2.95) = 0 — только стеки.
+// Без MiniDumpWithIndirectlyReferencedMemory (0x40): из обработчика
+// он долго ходит по куче и может зависнуть — тогда 3.06 не доходил
+// до v2dll_crash.log. DataSegs + unloaded + thread + memory-info.
 static const DWORD kDumpRich =
     0x00000001 | 0x00000020 | 0x00000800 | 0x00001000;
 
 static LONG g_crashDumpSerial = 0;
-static char g_crashDumpWritten[MAX_PATH];
+static wchar_t g_crashDumpWritten[MAX_PATH];
+static wchar_t g_crashLogWritten[MAX_PATH];
 
-static void CrashStampName(char* dst, size_t cap, const char* prefix, const char* ext)
+static void CrashStampName(wchar_t* dst, size_t cap, const wchar_t* dir,
+    const wchar_t* prefix, const wchar_t* ext)
 {
     SYSTEMTIME st;
     GetLocalTime(&st);
     LONG n = InterlockedIncrement(&g_crashDumpSerial);
-    sprintf_s(dst, cap,
-        "%s_%04u%02u%02u_%02u%02u%02u_%u_%u_%ld%s",
-        prefix,
+    swprintf_s(dst, cap,
+        L"%s\\%s_%04u%02u%02u_%02u%02u%02u_%u_%u_%ld%s",
+        dir, prefix,
         (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
         (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
         (unsigned)GetCurrentProcessId(), (unsigned)GetCurrentThreadId(),
         n, ext);
 }
 
-static HANDLE CrashOpenLog()
+static HANDLE CrashCreateFileRetry(const wchar_t* path, DWORD access, DWORD share, DWORD disp)
 {
-    return CreateFileA(
-        "v2dll_crash.log",
-        FILE_APPEND_DATA,
-        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-        NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    return CreateFileW(path, access, share, NULL, disp, FILE_ATTRIBUTE_NORMAL, NULL);
 }
 
-static void CrashWriteRaw(const char* path, DWORD disp, const char* text, int len)
+static void CrashPathToUtf8(const wchar_t* src, char* dst, size_t cap)
 {
-    HANDLE h = CreateFileA(
+    dst[0] = 0;
+    if (!src || !src[0] || cap < 2)
+        return;
+    int n = WideCharToMultiByte(CP_UTF8, 0, src, -1, dst, (int)cap, NULL, NULL);
+    if (n <= 0)
+        dst[0] = 0;
+}
+
+static void CrashWriteRaw(const wchar_t* path, DWORD disp, const char* text, int len)
+{
+    HANDLE h = CreateFileW(
         path, GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, disp, FILE_ATTRIBUTE_NORMAL, NULL);
     if (h == INVALID_HANDLE_VALUE)
@@ -6873,11 +13757,130 @@ static void CrashWriteRaw(const char* path, DWORD disp, const char* text, int le
     CloseHandle(h);
 }
 
-static DWORD CrashWriteDumpTo(const char* path, PEXCEPTION_POINTERS ep)
+static bool CrashCodeIsNoise(DWORD code)
 {
-    HMODULE dbg = GetModuleHandleA("dbghelp.dll");
+    return code == 0x40010006 || code == 0x4001000A || code == 0x406D1388 ||
+        code == 0x80000003 || code == 0x80000004;
+}
+
+static bool CrashCodeIsFatal(DWORD code)
+{
+    return code == 0xC0000005 || code == 0xC0000006 || code == 0xC000001D ||
+        code == 0xC0000094 || code == 0xC00000FD || code == 0xC0000409 ||
+        code == 0xC0000374 || code == 0xC0000602 || code == 0xC0000417 ||
+        code == 0x40000015;
+}
+
+static bool CrashIpInSelf(DWORD addr)
+{
+    if (!g_selfModule || !addr)
+        return false;
+    DWORD base = (DWORD)(DWORD_PTR)g_selfModule;
+    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)g_selfModule;
+    if (dos->e_magic != IMAGE_DOS_SIGNATURE)
+        return addr >= base && addr < base + 0x80000;
+    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(base + dos->e_lfanew);
+    DWORD size = nt->OptionalHeader.SizeOfImage;
+    return addr >= base && addr < base + size;
+}
+
+static void CrashBreadcrumb(PEXCEPTION_POINTERS ep, const char* via, bool alsoV2log)
+{
+    InitLogDir();
+    wchar_t path[MAX_PATH];
+    swprintf_s(path, L"%s\\v2dll_crash_hint.txt", g_logsDir);
+
+    DWORD code = 0, addr = 0, eip = 0;
+    if (ep && ep->ExceptionRecord)
+    {
+        code = ep->ExceptionRecord->ExceptionCode;
+        addr = (DWORD)(DWORD_PTR)ep->ExceptionRecord->ExceptionAddress;
+    }
+    if (ep && ep->ContextRecord)
+        eip = ep->ContextRecord->Eip;
+
+    SYSTEMTIME st;
+    GetLocalTime(&st);
+    char buf[512];
+    CONTEXT* ctx = ep ? ep->ContextRecord : 0;
+    DWORD p0 = 0, p1 = 0, npar = 0;
+    if (ep && ep->ExceptionRecord)
+    {
+        npar = ep->ExceptionRecord->NumberParameters;
+        if (npar >= 1)
+            p0 = (DWORD)ep->ExceptionRecord->ExceptionInformation[0];
+        if (npar >= 2)
+            p1 = (DWORD)ep->ExceptionRecord->ExceptionInformation[1];
+    }
+    int n = sprintf_s(buf,
+        "%04u-%02u-%02u %02u:%02u:%02u.%03u dll=%s via=%s pid=%u tid=%u "
+        "code=%08X eip=%08X addr=%08X npar=%u p0=%08X p1=%08X",
+        (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
+        (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
+        (unsigned)st.wMilliseconds,
+        MOD_VERSION, via ? via : "-",
+        (unsigned)GetCurrentProcessId(), (unsigned)GetCurrentThreadId(),
+        code, eip, addr, npar, p0, p1);
+    if (n > 0 && ctx && n < (int)sizeof(buf) - 120)
+    {
+        n += sprintf_s(buf + n, sizeof(buf) - n,
+            " eax=%08X ebx=%08X ecx=%08X edx=%08X esi=%08X edi=%08X "
+            "ebp=%08X esp=%08X\r\n",
+            ctx->Eax, ctx->Ebx, ctx->Ecx, ctx->Edx, ctx->Esi, ctx->Edi,
+            ctx->Ebp, ctx->Esp);
+    }
+    else if (n > 0)
+    {
+        buf[n++] = '\r';
+        buf[n++] = '\n';
+        buf[n] = 0;
+    }
+    if (n > 0)
+        CrashWriteRaw(path, OPEN_ALWAYS, buf, n);
+
+    if (alsoV2log && g_logFile[0] && n > 0)
+        CrashWriteRaw(g_logFile, OPEN_ALWAYS, buf, n);
+}
+
+static HANDLE CrashOpenLog()
+{
+    InitLogDir();
+    wcscpy_s(g_crashLogWritten, g_crashLogFile);
+    HANDLE h = CrashCreateFileRetry(
+        g_crashLogFile,
+        FILE_APPEND_DATA,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        OPEN_ALWAYS);
+    if (h != INVALID_HANDLE_VALUE)
+        return h;
+
+    CrashStampName(g_crashLogWritten, MAX_PATH, g_logsDir, L"v2dll_crash", L".log");
+    h = CrashCreateFileRetry(
+        g_crashLogWritten,
+        FILE_APPEND_DATA,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        OPEN_ALWAYS);
+    if (h != INVALID_HANDLE_VALUE)
+        return h;
+
+    wchar_t exeDir[MAX_PATH];
+    wcscpy_s(exeDir, g_logsDir);
+    wchar_t* slash = wcsrchr(exeDir, L'\\');
+    if (slash && _wcsicmp(slash, L"\\Logs") == 0)
+        *slash = 0;
+    CrashStampName(g_crashLogWritten, MAX_PATH, exeDir, L"v2dll_crash", L".log");
+    return CrashCreateFileRetry(
+        g_crashLogWritten,
+        FILE_APPEND_DATA,
+        FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+        OPEN_ALWAYS);
+}
+
+static DWORD CrashWriteDumpTo(const wchar_t* path, PEXCEPTION_POINTERS ep)
+{
+    HMODULE dbg = GetModuleHandleW(L"dbghelp.dll");
     if (!dbg)
-        dbg = LoadLibraryA("dbghelp.dll");
+        dbg = LoadLibraryW(L"dbghelp.dll");
     if (!dbg)
         return 0;
 
@@ -6894,8 +13897,8 @@ static DWORD CrashWriteDumpTo(const char* path, PEXCEPTION_POINTERS ep)
     if (!fn)
         return 0;
 
-    HANDLE file = CreateFileA(
-        path, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    HANDLE file = CrashCreateFileRetry(
+        path, GENERIC_WRITE, FILE_SHARE_READ, CREATE_ALWAYS);
     if (file == INVALID_HANDLE_VALUE)
         return 0;
 
@@ -6934,7 +13937,7 @@ static DWORD CrashWriteDumpTo(const char* path, PEXCEPTION_POINTERS ep)
 
     CloseHandle(file);
     if (!ok)
-        DeleteFileA(path);
+        DeleteFileW(path);
     return ok ? used : 0;
 }
 
@@ -6946,69 +13949,24 @@ static DWORD CrashWriteDump(PEXCEPTION_POINTERS ep)
     if (!ep || (ep->ExceptionRecord && ep->ExceptionRecord->ExceptionCode == 0xC00000FD))
         return 0;
 
-    char path[MAX_PATH];
-    CrashStampName(path, MAX_PATH, "v2dll_crash", ".dmp");
+    InitLogDir();
+
+    wchar_t path[MAX_PATH];
+    CrashStampName(path, MAX_PATH, g_logsDir, L"v2dll_crash", L".dmp");
     DWORD used = CrashWriteDumpTo(path, ep);
-    if (used)
-        strcpy_s(g_crashDumpWritten, path);
-    return used;
-}
-
-static bool CrashCodeIsNoise(DWORD code)
-{
-    return code == 0x40010006 || code == 0x4001000A || code == 0x406D1388 ||
-        code == 0x80000003 || code == 0x80000004;
-}
-
-static bool CrashCodeIsFatal(DWORD code)
-{
-    return code == 0xC0000005 || code == 0xC0000006 || code == 0xC000001D ||
-        code == 0xC0000094 || code == 0xC00000FD || code == 0xC0000409 ||
-        code == 0xC0000374 || code == 0xC0000602 || code == 0xC0000417 ||
-        code == 0x40000015;
-}
-
-static bool CrashIpInSelf(DWORD addr)
-{
-    if (!g_selfModule || !addr)
-        return false;
-    DWORD base = (DWORD)(DWORD_PTR)g_selfModule;
-    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)g_selfModule;
-    if (dos->e_magic != IMAGE_DOS_SIGNATURE)
-        return addr >= base && addr < base + 0x80000;
-    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(base + dos->e_lfanew);
-    DWORD size = nt->OptionalHeader.SizeOfImage;
-    return addr >= base && addr < base + size;
-}
-
-static void CrashBreadcrumb(PEXCEPTION_POINTERS ep, const char* via, bool alsoV2log)
-{
-    DWORD code = 0, addr = 0, eip = 0;
-    if (ep && ep->ExceptionRecord)
+    if (!used)
     {
-        code = ep->ExceptionRecord->ExceptionCode;
-        addr = (DWORD)(DWORD_PTR)ep->ExceptionRecord->ExceptionAddress;
+        wchar_t exeDir[MAX_PATH];
+        wcscpy_s(exeDir, g_logsDir);
+        wchar_t* slash = wcsrchr(exeDir, L'\\');
+        if (slash && _wcsicmp(slash, L"\\Logs") == 0)
+            *slash = 0;
+        CrashStampName(path, MAX_PATH, exeDir, L"v2dll_crash", L".dmp");
+        used = CrashWriteDumpTo(path, ep);
     }
-    if (ep && ep->ContextRecord)
-        eip = ep->ContextRecord->Eip;
-
-    SYSTEMTIME st;
-    GetLocalTime(&st);
-    char buf[512];
-    int n = sprintf_s(buf,
-        "%04u-%02u-%02u %02u:%02u:%02u.%03u dll=%s via=%s pid=%u tid=%u "
-        "code=%08X eip=%08X addr=%08X\r\n",
-        (unsigned)st.wYear, (unsigned)st.wMonth, (unsigned)st.wDay,
-        (unsigned)st.wHour, (unsigned)st.wMinute, (unsigned)st.wSecond,
-        (unsigned)st.wMilliseconds,
-        MOD_VERSION, via ? via : "-",
-        (unsigned)GetCurrentProcessId(), (unsigned)GetCurrentThreadId(),
-        code, eip, addr);
-    if (n > 0)
-        CrashWriteRaw("v2dll_crash_hint.txt", CREATE_ALWAYS, buf, n);
-
-    if (alsoV2log && n > 0)
-        CrashWriteRaw("v2dll.log", OPEN_ALWAYS, buf, n);
+    if (used)
+        wcscpy_s(g_crashDumpWritten, path);
+    return used;
 }
 
 static void ReportCrash(PEXCEPTION_POINTERS ep)
@@ -7023,6 +13981,7 @@ static void ReportCrash(PEXCEPTION_POINTERS ep)
     if (InterlockedCompareExchange(&g_inCrash, 1, 0) != 0)
         return;
 
+    InitLogDir();
     CrashBreadcrumb(ep, "uef", true);
 
     HANDLE h = CrashOpenLog();
@@ -7047,6 +14006,11 @@ static void ReportCrash(PEXCEPTION_POINTERS ep)
         CrashPrintf(h, "  fpu_cw=%08X mxcsr=%08X\n", cw, _mm_getcsr());
         CrashPrintf(h, "  oos_hits=%d sync_hits=%d last=%s\n",
             g_oosHits, g_syncHits, g_lastChecksumLine);
+        {
+            char ident[320];
+            FormatIdentDiag(ident, sizeof(ident));
+            CrashPrintf(h, "  %s\n", ident);
+        }
 
         EXCEPTION_RECORD* rec = ep ? ep->ExceptionRecord : 0;
         CONTEXT* ctx = ep ? ep->ContextRecord : 0;
@@ -7060,6 +14024,16 @@ static void ReportCrash(PEXCEPTION_POINTERS ep)
             CrashPrintf(h, "  av_%s addr=%08X\n",
                 rec->ExceptionInformation[0] ? "write" : "read",
                 (DWORD)rec->ExceptionInformation[1]);
+        }
+        if (rec && rec->NumberParameters)
+        {
+            CrashPrintf(h, "  params n=%u", rec->NumberParameters);
+            DWORD lim = rec->NumberParameters;
+            if (lim > 4)
+                lim = 4;
+            for (DWORD i = 0; i < lim; ++i)
+                CrashPrintf(h, " p%u=%08X", i, (DWORD)rec->ExceptionInformation[i]);
+            CrashWrite(h, "\n");
         }
 
         if (ctx)
@@ -7104,12 +14078,13 @@ static void ReportCrash(PEXCEPTION_POINTERS ep)
         }
 
         FlushFileBuffers(h);
-        dumpType = CrashWriteDump(ep);
+        if (code != 0xC0000374)
+            dumpType = CrashWriteDump(ep);
 
         DWORD dumpSize = 0;
         if (g_crashDumpWritten[0])
         {
-            HANDLE dumpFile = CreateFileA(
+            HANDLE dumpFile = CreateFileW(
                 g_crashDumpWritten, GENERIC_READ,
                 FILE_SHARE_READ | FILE_SHARE_WRITE,
                 NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -7119,10 +14094,17 @@ static void ReportCrash(PEXCEPTION_POINTERS ep)
                 CloseHandle(dumpFile);
             }
         }
-        CrashPrintf(h, "  dump=%s type=%08X size=%u\n",
-            g_crashDumpWritten[0] ? g_crashDumpWritten
-                : (g_settings.enableCrashDump ? "(none)" : "(disabled: ENABLE_CRASH_DUMP=0)"),
-            dumpType, dumpSize);
+        char dumpUtf8[MAX_PATH * 3];
+        CrashPathToUtf8(g_crashDumpWritten, dumpUtf8, sizeof(dumpUtf8));
+        if (!dumpUtf8[0])
+            strcpy_s(dumpUtf8, g_settings.enableCrashDump ? "(none)" : "(disabled: ENABLE_CRASH_DUMP=0)");
+        CrashPrintf(h, "  dump=%s type=%08X size=%u\n", dumpUtf8, dumpType, dumpSize);
+        if (g_crashLogWritten[0] && _wcsicmp(g_crashLogWritten, g_crashLogFile) != 0)
+        {
+            char logUtf8[MAX_PATH * 3];
+            CrashPathToUtf8(g_crashLogWritten, logUtf8, sizeof(logUtf8));
+            CrashPrintf(h, "  crash_log_fallback=%s\n", logUtf8[0] ? logUtf8 : "(none)");
+        }
     }
     __except (EXCEPTION_EXECUTE_HANDLER)
     {
@@ -7143,7 +14125,11 @@ static LONG CALLBACK CrashVectored(EXCEPTION_POINTERS* ep)
     DWORD addr = (DWORD)(DWORD_PTR)ep->ExceptionRecord->ExceptionAddress;
     if (CrashIpInSelf(addr))
         return EXCEPTION_CONTINUE_SEARCH;
-    CrashBreadcrumb(ep, "veh", false);
+    CrashBreadcrumb(ep, "veh", code == 0xC0000374);
+    // C0000374 часто FastFail: UEF не зовут, MiniDump по мёртвой куче
+    // виснет. Пишем crash.log из VEH, без дампа.
+    if (code == 0xC0000374)
+        ReportCrash(ep);
     return EXCEPTION_CONTINUE_SEARCH;
 }
 
@@ -7195,6 +14181,8 @@ static void __cdecl CrashOnInvalidParam(
 
 static void InstallCrashWatch()
 {
+    InitLogDir();
+
     ULONG guarantee = 32768;
     SetThreadStackGuarantee(&guarantee);
 
@@ -7217,201 +14205,9 @@ static void InstallCrashWatch()
     signal(SIGABRT, CrashOnAbort);
     _set_invalid_parameter_handler(CrashOnInvalidParam);
 
-    Log("CrashWatch: v2dll_crash.log + v2dll_crash_hint.txt%s",
+    Log("CrashWatch: Logs\\v2dll_crash.log + v2dll_crash_hint.txt%s",
         g_settings.enableCrashDump ? " + v2dll_crash_*.dmp" : " (memory dump выключен: ENABLE_CRASH_DUMP=0)");
 }
-
-
-static bool Install()
-{
-    LoadSettings();
-
-    g_base = (DWORD)GetModuleHandleA(NULL);
-    if (!g_base)
-        return false;
-
-    g_imageSize = 0;
-    {
-        IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)g_base;
-        if (dos->e_magic == IMAGE_DOS_SIGNATURE)
-        {
-            IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(g_base + dos->e_lfanew);
-            if (nt->Signature == IMAGE_NT_SIGNATURE)
-                g_imageSize = nt->OptionalHeader.SizeOfImage;
-        }
-        if (!g_imageSize)
-            g_imageSize = 0xC00000;
-    }
-
-    g_fnOnMakeDecision = (void*)(g_base + RVA_ONMAKEDECISION);
-
-    Log("---- Install ---- версия %s", MOD_VERSION);
-    Log("base = %08X", g_base);
-
-    // Полный дамп загруженных настроек - для поиска рассинхрона между
-    // двумя машинами с одинаковой DLL: если v2dll_settings.ini у кого-то
-    // отличается (или пересоздался с нуля со значениями по умолчанию,
-    // как бывает после удаления файла), это будет видно построчно при
-    // сравнении v2dll.log хоста и клиента, без необходимости лезть в
-    // сами ini-файлы на разных машинах.
-    Log("---- Settings ----");
-    Log("localModConfig=%d log=%d buttons=%d decisionFilter=%d",
-        (int)g_settings.localModConfig, (int)g_settings.log,
-        (int)g_settings.buttons, (int)g_settings.decisionFilter);
-    Log("priceDelta=%d patchExponentialPriceDelta=%d popDisplay=%d versionLabel=%d",
-        (int)g_settings.priceDelta, (int)g_settings.patchExponentialPriceDelta,
-        (int)g_settings.popDisplay, (int)g_settings.versionLabel);
-    Log("patchOccupiedReinforceSplit=%d patchAllyOwnerCheck=%d patchCivilizeNullCheck=%d patchSupplySourceNullCheck=%d patchTechCompareNullCheck=%d patchTechFolderIconNullCheck=%d",
-        (int)g_settings.patchOccupiedReinforceSplit, (int)g_settings.patchAllyOwnerCheck,
-        (int)g_settings.patchCivilizeNullCheck, (int)g_settings.patchSupplySourceNullCheck,
-        (int)g_settings.patchTechCompareNullCheck, (int)g_settings.patchTechFolderIconNullCheck);
-    Log("patchGraphPointClamp=%d patchFactoryDumpScan=%d patchProdListVisibility=%d patchProdTypeGate=%d",
-        (int)g_settings.patchGraphPointClamp, (int)g_settings.patchFactoryDumpScan,
-        (int)g_settings.patchProdListVisibility, (int)g_settings.patchProdTypeGate);
-    Log("prodTypeGateAllowAll=%d patchCombatRoll=%d combatRollMin=%d combatRollMax=%d",
-        (int)g_settings.prodTypeGateAllowAll, (int)g_settings.patchCombatRoll,
-        g_settings.combatRollMin, g_settings.combatRollMax);
-    Log("enableOosLog=%d patchFpuFortress=%d patchD3dFpuPreserve=%d patchThreadFpuPin=%d patchHeapLfh=%d engineWorkerThreads=%d",
-        (int)g_settings.enableOosLog, (int)g_settings.patchFpuFortress,
-        (int)g_settings.patchD3dFpuPreserve, (int)g_settings.patchThreadFpuPin,
-        (int)g_settings.patchHeapLfh, g_settings.engineWorkerThreads);
-    Log("patchPopQuantize=%d popQuantizeKeepBits=%d patchMpClientSleep=%d mpClientSleepMs=%d",
-        (int)g_settings.patchPopQuantize, g_settings.popQuantizeKeepBits,
-        (int)g_settings.patchMpClientSleep, g_settings.mpClientSleepMs);
-    Log("patchMainLoopSleep0=%d mainLoopSleepMs=%d patchD3dNoVsync=%d patchHighPriority=%d",
-        (int)g_settings.patchMainLoopSleep0, g_settings.mainLoopSleepMs,
-        (int)g_settings.patchD3dNoVsync, (int)g_settings.patchHighPriority);
-    Log("fixSfxMixerLag=%d d3dFpsLimit=%d",
-        (int)g_settings.fixSfxMixerLag, g_settings.d3dFpsLimit);
-    Log("enableCrashLog=%d enableCrashDump=%d",
-        (int)g_settings.enableCrashLog, (int)g_settings.enableCrashDump);
-    Log("---- Settings конец ----");
-
-    InstallEngineStability();
-
-    if (g_settings.patchPopQuantize)
-        InstallPopQuantize();
-
-    if (g_settings.patchMpClientSleep)
-        InstallMpClientSleep();
-
-    // Поддельные элементы: "POLITICSVIEW_DECISION" + имя решения.
-    memset(g_fakeElem, 0, sizeof(g_fakeElem));
-
-    for (int i = 0; i < BUTTON_COUNT && i < MAX_BUTTONS; ++i)
-    {
-        strcpy_s(g_decisionText[i], sizeof(g_decisionText[i]),
-            "POLITICSVIEW_DECISION");
-        strcat_s(g_decisionText[i], sizeof(g_decisionText[i]),
-            BUTTONS[i].decision);
-
-        *(char**)(g_fakeElem[i] + ELEM_STRDATA) = g_decisionText[i];
-        *(unsigned*)(g_fakeElem[i] + ELEM_STRRES) = sizeof(g_decisionText[i]) - 1;
-    }
-
-    for (int i = 0; i < VIEW_COUNT && i < MAX_VIEWS; ++i)
-    {
-        void* thunk = VIEWS[i].tooltipSlot ? TOOLTIP_THUNKS[i] : UPDATE_THUNKS[i];
-
-        bool ok = PatchSlot(VIEWS[i].rvaVtable, VIEWS[i].slot,
-            thunk, &g_origSlot[i]);
-
-        Log("patch %s: слот %d = %d", VIEWS[i].name, VIEWS[i].slot, (int)ok);
-    }
-
-    if (g_settings.decisionFilter)
-    {
-        bool ok = PatchSlot(RVA_VTABLE_DECISION, VT_SLOT_ISVALID,
-            (void*)&MyDecisionIsValid, (void**)&g_origIsValid);
-        Log("patch CDecision: слот %d = %d", VT_SLOT_ISVALID, (int)ok);
-    }
-
-    // Каждая запись таблицы уважает своё собственное BytePatch::enabled
-    // (правится ключами PATCH_<ИМЯ> в ini), поэтому вызов сам по себе
-    // безусловный.
-    InstallExePatches();
-
-    if (g_settings.patchOccupiedReinforceSplit)
-        InstallOccupiedReinforceSplit();
-
-    if (g_settings.patchAllyOwnerCheck)
-        InstallAllyOwnerCheck();
-
-    if (g_settings.patchCivilizeNullCheck)
-        InstallCivilizeNullCheck();
-
-    if (g_settings.patchSupplySourceNullCheck)
-        InstallSupplySourceNullCheck();
-
-    if (g_settings.patchTechCompareNullCheck)
-        InstallTechCompareNullCheck();
-
-    if (g_settings.patchTechFolderIconNullCheck)
-        InstallTechFolderIconNullCheck();
-
-    if (g_settings.patchGraphPointClamp)
-        InstallGraphPointClamp();
-
-    if (g_settings.patchFactoryDumpScan)
-    {
-        // В 2.58 сканер временно ловил "Failed to create a graphics device"
-        // при запуске - подтверждено A/B тестом (2.58 с широким сканом всех
-        // типов памяти ловил ошибку, 2.59 без вызова этой функции - нет).
-        // Причина сужена до расширения скана за пределы MEM_PRIVATE (кучи
-        // процесса) на MEM_IMAGE/MEM_MAPPED, где могли жить внутренние
-        // данные видеодрайвера - в 2.60 это ограничение возвращено, снова
-        // сканируем только MEM_PRIVATE, как в безотказных 2.55-2.57.
-        InstallFactoryDumpScan();
-    }
-
-    if (g_settings.patchProdListVisibility)
-        InstallProdListVisibilityHook();
-
-    if (g_settings.patchProdTypeGate)
-        InstallProdTypeGateHook();
-
-    if (g_settings.patchHideNoSupplyFactories)
-        InstallHideNoSupplyFactoriesHook();
-
-    // Оба патча целят один и тот же адрес - взаимоисключающе. Логируем
-    // БЕЗУСЛОВНО, какой режим реально активен - это самая вероятная
-    // точка расхождения между двумя машинами с одинаковой DLL (у одной
-    // ini мог пересоздаться с нуля со значениями по умолчанию).
-    if (g_settings.priceDelta && g_settings.patchExponentialPriceDelta)
-        Log("PriceDelta: ENABLE_PRICE_DELTA и PATCH_EXPONENTIAL_PRICE_DELTA "
-            "патчат один адрес - применяется только PATCH_EXPONENTIAL_PRICE_DELTA");
-
-    if (g_settings.patchExponentialPriceDelta)
-    {
-        Log("PriceDelta: активен режим ExponentialPriceDelta");
-        InstallExponentialPriceDelta();
-    }
-    else if (g_settings.priceDelta)
-    {
-        Log("PriceDelta: активен режим PriceDelta (линейный)");
-        InstallPriceDelta();
-    }
-    else
-    {
-        Log("PriceDelta: оба режима отключены - используется ванильный шаг цены");
-    }
-
-    if (g_settings.popDisplay)
-        InstallPopDisplay();
-
-    if (g_settings.versionLabel)
-        InstallVersionLabel();
-
-    if (g_settings.patchCombatRoll)
-        InstallCombatRoll();
-
-    if (g_settings.enableOosLog)
-        InstallOosWatch();
-
-    Log("Install: done");
-    return true;
-}
-
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID)
 {
@@ -7419,8 +14215,22 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID)
     {
         DisableThreadLibraryCalls(hModule);
         g_selfModule = hModule;
+        InitLogDir();
+        InitializeCriticalSection(&g_logCs);
+        g_logCsInit = true;
         InstallCrashWatch();
-        Log("DllMain: attach, Install = %d", (int)Install());
+        PinFpu();
+        bool ok = false;
+        __try
+        {
+            ok = Install();
+        }
+        __except (EXCEPTION_EXECUTE_HANDLER)
+        {
+            ok = false;
+        }
+        Log("DllMain: attach, Install = %d", (int)ok);
+        InterlockedExchange(&g_dllReady, 1);
     }
     return TRUE;
 }

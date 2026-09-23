@@ -119,13 +119,15 @@ Removes sleepers, that reduce FPS. Experimental (made by av213238).
 #### 7. PATCH_MAIN_LOOP_SLEEP0 / MAIN_LOOP_SLEEP_MS
 In theory also improves performace of the host/singleplayer. Experimental (made by av213238).
 #### 8. PATCH_D3D_NO_VSYNC
-Force disables VSYNC. In theory it could improve performace, but no actual difference confirmed for now (made by av213238).
+Force disables VSYNC. Experimental. (made by av213238).
 #### 9. D3D_FPS_LIMIT
 FPS Limiter. Set to 0 to disable.
 #### 10. FIX_SFX_MIXER_LAG
 Fixes behaviour where game constantly tries to access sound mixer for no reason. Huge performance improvement,
-especially noticeable on non-host client in a MP lobby (made by av213238).
-#### 11. PATCH_HIGH_PRIORITY
+especially noticeable on non-host client in a MP lobby. Enable sleeper patches above. (made by av213238).
+#### 11. FIX_ARMY_WINDOW_LAG
+Fixes stutters while army/armies are selected.
+#### 12. PATCH_HIGH_PRIORITY
 Prioritizes the game process. Supposed a marginal performance gain (made by av213238).
 
   
