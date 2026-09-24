@@ -127,7 +127,7 @@ promotion_chance =
 	modifier = {
 		factor = -7
 		NOT = {
-			primary_culture = THIS
+			is_primary_culture = yes
 			is_accepted_culture = yes
 		}
 	}
@@ -478,7 +478,7 @@ demotion_chance =
 	modifier = {
 		factor = -0.1
 		NOT = {
-			primary_culture = THIS
+			is_primary_culture = yes
 			is_accepted_culture = yes
 		}
 		strata = poor
@@ -1185,9 +1185,14 @@ assimilation_chance =
 	
 	modifier = {
     	factor = -1
-		year = 1870
+		NOT = { year = 1870 }
+		country = { is_culture_group = east_asian }
+	}
+	
+	modifier = {
+    	factor = -0.5
 		location = { is_core = THIS }
-		country = { primary_culture = east_asian }
+		country = { OR = { continent = north_america continent = south_america } }
 	}
 	
 	modifier = {

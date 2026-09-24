@@ -1,0 +1,127 @@
+
+======== CRASH 2026-09-24 01:54:57.594 dll=4.04 pid=29200 tid=19812 ========
+  fpu_cw=0009001F mxcsr=00001FA0
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=60858D88  lua51.dll+0x8D88
+  av_write addr=608F228C
+  params n=2 p0=00000001 p1=608F228C
+  eax=00000000 ebx=608F228C ecx=00000002 edx=00000000 esi=00000002 edi=00000002
+  ebp=0193D208 esp=0193D1F8 eip=60858D88 eflags=00010202
+  eip=60858D88  lua51.dll+0x8D88
+  code_eip-8 8C 22 8F 60 8B CE 8B C2  F0 0F B1 0B 3B C2 74 06
+  pointed:
+  eax=00000000
+  ebx=608F228C 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  ecx=00000002 unreadable
+  edx=00000000
+  esi=00000002 unreadable
+  edi=00000002 unreadable
+  esp=0193D1F8 0000000F 0193D248 00000000 0193D844 0193D224 60861A4A E60B9D72 0000085A
+  stack:
+    [0]=60858D88  lua51.dll+0x8D88
+    [1]=60861A4A  lua51.dll+0x11A4A
+    [2]=00AB22E0  v2game.exe+0x5D22E0
+    [3]=00A5A476  v2game.exe+0x57A476
+    [4]=00B90F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  source_objects:
+    ecx=00000002  vptr=00000000  unreadable
+    ebx=608F228C  vptr=00000000  null-vtable
+  source_keys:
+    (none)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-24 01:55:26.351 dll=4.04 pid=21612 tid=32656 ========
+  fpu_cw=0009001F mxcsr=00001FA0
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=73C78D88  lua51.dll+0x8D88
+  av_write addr=73D1228C
+  params n=2 p0=00000001 p1=73D1228C
+  eax=00000000 ebx=73D1228C ecx=00000003 edx=00000000 esi=00000003 edi=00000003
+  ebp=0193D360 esp=0193D350 eip=73C78D88 eflags=00010206
+  eip=73C78D88  lua51.dll+0x8D88
+  code_eip-8 8C 22 D1 73 8B CE 8B C2  F0 0F B1 0B 3B C2 74 06
+  pointed:
+  eax=00000000
+  ebx=73D1228C 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  ecx=00000003 unreadable
+  edx=00000000
+  esi=00000003 unreadable
+  edi=00000003 unreadable
+  esp=0193D350 0000000F 0193D3A0 00000000 0193D99C 0193D37C 73C81A4A F72ED4B5 0000085A
+  stack:
+    [0]=73C78D88  lua51.dll+0x8D88
+    [1]=73C81A4A  lua51.dll+0x11A4A
+    [2]=00AB22E0  v2game.exe+0x5D22E0
+    [3]=00A5A476  v2game.exe+0x57A476
+    [4]=00B90F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  source_objects:
+    ecx=00000003  vptr=00000000  unreadable
+    ebx=73D1228C  vptr=00000000  null-vtable
+  source_keys:
+    (none)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-24 02:29:20.744 dll=4.07 pid=23324 tid=34096 ========
+  fpu_cw=0109001F mxcsr=00009FF1
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=34A62034  +0x512034
+  av_write addr=34A62034
+  params n=2 p0=00000008 p1=34A62034
+  eax=00380021 ebx=00000000 ecx=8724E910 edx=34A62034 esi=8724E910 edi=794FEA98
+  ebp=0167BD24 esp=0167BB78 eip=34A62034 eflags=00010212
+  eip=34A62034  +0x512034
+  code_eip-8 F7 04 35 BF F0 04 35 BF  00 00 80 3F 51 47 5C 37
+  pointed:
+  eax=00380021 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  [eax+14]=00000000
+  [eax+18]=00000000
+  ebx=00000000
+  ecx=8724E910 00F1C0D8 00000000 00000000 00000000 00000000 00000000 00F1C1A8 00000000
+  edx=34A62034 3F800000 375C4751 BF3504F7 BF3504EF 3F800000 375C4752 BF800000 00000000
+  esi=8724E910 00F1C0D8 00000000 00000000 00000000 00000000 00000000 00F1C1A8 00000000
+  edi=794FEA98 00EEFECC 87A7B800 00000000 00000000 00000000 00000020 0000002F 00000000
+  esp=0167BB78 007D1C39 00380021 7944E6C0 794FEA98 00000000 74636100 5F79726F 74747562
+  stack:
+    [0]=34A62034  +0x512034
+    [1]=007CF102  v2game.exe+0x2EF102
+    [2]=00741995  v2game.exe+0x261995
+    [3]=00743F79  v2game.exe+0x263F79
+    [4]=00ABF9DF  v2game.exe+0x5DF9DF
+    [5]=00A5E0CD  v2game.exe+0x57E0CD
+    [6]=00B90F3E  v2game.exe+0x6B0F3E
+    [7]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [8]=774182AE  ntdll.dll+0x682AE
+    [9]=7741827E  ntdll.dll+0x6827E
+    [10]=00000000
+  source:
+  source_objects:
+    eax=00380021  vptr=00000000  null-vtable
+    ecx=8724E910  vptr=00F1C0D8  vtable-in-exe
+    edi=794FEA98  CProductionView  vptr=00EEFECC  vtable-in-exe
+    edx=34A62034  vptr=3F800000  vtable-outside-exe
+    esi+40=0000000F esi+44=00000000 (часто id/тип identity)
+  source_keys:
+    stack=7944E6C0  CInvestProject  vptr=00ED835C  vtable-in-exe
+    hNrS  va=870C0BDC  (heap)
+    stack=5D51D028  CInGameIdler  vptr=00EEA34C  vtable-in-exe
+    produced_by_listbox  va=5372B510  (heap)
+    vic_18  va=8777DEFC  (heap)
+    stack=0507B6F8  CEU3Application  vptr=00EE845C  vtable-in-exe
+    _GFX  va=0167BF54  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
