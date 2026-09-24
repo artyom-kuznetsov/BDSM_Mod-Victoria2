@@ -37,7 +37,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "4.02"
+#define MOD_VERSION "4.19"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -79,6 +79,17 @@ struct Settings
     bool patchProdTypeGate           = true;
     bool patchHideNoSupplyFactories  = true;
     bool hideNoSupplyDryRun          = false; // файловый подход подтверждён - см. комментарий у g_hideNoSupplyDryRun
+    // Окно фабрик: не показывать в верхнем ряду фильтров кнопки товаров,
+    // чьё имя начинается на "raw_" (см. ComputeGoodsFilterPos).
+    bool hideRawGoodsFilter          = true;
+    // Окно фабрик: если в регионе есть фабрика, прошедшая фильтр товаров,
+    // показывать ВСЕ фабрики региона, а не только прошедшие фильтр
+    // (см. InstallFilterShowAllInState).
+    bool filterShowAllInState        = true;
+    // Окно фабрик: фильтр товара срабатывает только на фабрики, которые
+    // ПРОИЗВОДЯТ выбранный товар (оригинал засчитывал и потребителей
+    // сырья) - регионы, где товар только потребляют, не показываются.
+    bool filterProducersOnly         = true;
 
     // Взаимоисключающе с priceDelta (ENABLE_PRICE_DELTA) - оба
     // патчат один и тот же адрес. Если включены оба, побеждает этот.
@@ -894,6 +905,618 @@ static bool InstallProdListVisibilityHook()
 
     Log("ProdListVisibilityHook: установлен");
     return true;
+}
+
+
+// ---------------------------------------------------------------
+// Скрытие кнопок-фильтров товаров с именем на "raw_" в окне фабрик.
+//
+// FUN_006e2770 (rva 0x2E2770) - конструктор одной иконки-кнопки
+// "goods_filter_template" (верхний ряд фильтров в окне "Фабрики").
+// Единственный содержательный вход - ECX = порядковый индекс товара
+// (goodIndex); подтверждено дизасмом байт-в-байт, что сама игра
+// достаёт указатель на объект товара так:
+//   mgrPtr  = *(int*)(DAT_012587f0)          ; DAT_012587f0 = rva 0xE587F0
+//   arrBase = *(int*)(mgrPtr + 0xc)
+//   goodPtr = *(int*)(arrBase + goodIndex*4)
+// Имя товара - обычный MSVC std::string (Dinkumware) по смещению
+// goodPtr+0xC: буфер SSO на 16 байт, длина - следующие 4 байта
+// (goodPtr+0x1C), вместимость - ещё 4 (goodPtr+0x20). Тот же приём,
+// что и в ResolveProdTypeNamePtr для производственных типов, только
+// база смещения другая. Подтверждено живым пробником 2026-09-24:
+// idx=46..61 в текущей игре - ровно raw_cattle..raw_tobacco.
+//
+// v4.04 пробовал звать оригинал через трамплин с угаданной сигнатурой
+// (3 стековых аргумента) - уронил игру на старте (испорченный
+// param_3/"creator" -> виртуальный вызов по мусорному указателю).
+// Больше НЕ вызываем оригинал сами - см. пробник v2 ниже
+// (GoodsFilterCtorTailThunk), который вместо этого подсматривает
+// в САМОМ КОНЦЕ уже выполняющегося оригинала, ничего не переисполняя.
+static const DWORD RVA_GOODS_MANAGER = 0xE587F0;
+
+static const char* ResolveGoodNameByIndex(int goodIndex)
+{
+    __try
+    {
+        int** mgrSlot = (int**)(g_base + RVA_GOODS_MANAGER);
+        if (SafeIsBadReadPtr(mgrSlot, 4))
+            return 0;
+        int* mgrPtr = *mgrSlot;
+        if (!mgrPtr || SafeIsBadReadPtr((char*)mgrPtr + 0xc, 4))
+            return 0;
+        int* arrBase = *(int**)((char*)mgrPtr + 0xc);
+        if (!arrBase || SafeIsBadReadPtr((char*)arrBase + goodIndex * 4, 4))
+            return 0;
+        void* goodPtr = *(void**)((char*)arrBase + goodIndex * 4);
+        if (!goodPtr || SafeIsBadReadPtr(goodPtr, 0x24))
+            return 0;
+
+        char* strObj = (char*)goodPtr + 0xC;
+        unsigned int length = *(unsigned int*)(strObj + 16);
+        const char* name = (length < 16) ? strObj : *(char**)strObj;
+        if (!name || SafeIsBadReadPtr((void*)name, 1))
+            return 0;
+        return name;
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        return 0;
+    }
+}
+
+// Живой пробник v2 (2026-09-24, после краша v4.04 - см. память
+// feedback_live_probe_hook/project_hide_raw_goods_filter): БЕЗ
+// call-through. Вместо честного вызова оригинала с угаданной
+// сигнатурой - mid-function jump в САМОМ КОНЦЕ оригинального
+// FUN_006e2770, ровно как ProdListVisibilityHook/HideNoSupplyFactory
+// Thunk делают в других местах файла. Оригинал выполняется полностью
+// без единого изменения; мы лишь подсматриваем ESI (= self, param_2)
+// в точке, где он ещё гарантированно жив (PUSH ESI в начале функции,
+// POP ESI только на самом выходе - между этим ESI не трогается).
+//
+// Хвост оригинала (подтверждено дизасмом и байтами обоих exe):
+//   006e28bf: MOV ECX,[EBP-0xC]
+//   006e28c2: POP EDI
+//   006e28c3: POP ESI
+//   006e28c4: POP EBX
+//   ...
+//   RET 0xC
+// Первые 3 инструкции - ровно 5 байт (8B 4D F4 5F 5E), без остатка
+// под E9 rel32.
+static const DWORD RVA_GOODS_FILTER_CTOR_TAIL = 0x2E28BF;
+static const unsigned char GOODS_FILTER_CTOR_TAIL_SIG[5] = { 0x8B, 0x4D, 0xF4, 0x5F, 0x5E };
+static DWORD g_goodsFilterCtorTailResume = 0;
+
+static void __cdecl LogGoodsFilterConstructed(void* self)
+{
+    __try
+    {
+        if (!self || SafeIsBadReadPtr(self, 0x14))
+            return;
+
+        int goodIndex = *(int*)((char*)self + 8);
+        const char* name = ResolveGoodNameByIndex(goodIndex);
+        if (!name || _strnicmp(name, "raw_", 4) != 0)
+            return;
+
+        void* winPtr = *(void**)((char*)self + 4);
+        Log("GoodsFilterRaw: idx=%d name=%s self=%p winPtr=%p", goodIndex, name, self, winPtr);
+        if (!winPtr || SafeIsBadReadPtr(winPtr, 0x60))
+            return;
+
+        unsigned char buf[0x60];
+        memcpy(buf, winPtr, sizeof(buf));
+        char hex[0x60 * 3 + 1] = "";
+        for (int i = 0; i < 0x60; ++i)
+        {
+            char tmp[4];
+            sprintf_s(tmp, "%02X ", buf[i]);
+            strcat_s(hex, sizeof(hex), tmp);
+        }
+        Log("GoodsFilterRaw:   win hex=%s", hex);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("GoodsFilterRaw: исключение при чтении self=%p", self);
+    }
+}
+
+// Изолированный push/call/cleanup блок ДО репликации оригинальных
+// инструкций - см. feedback_naked_asm_hook_structure. ESI (self)
+// только читается (push отправляет значение, не портит регистр),
+// поэтому реплицированный "pop esi" ниже восстанавливает ровно то,
+// что восстановил бы оригинал.
+__declspec(naked) static void GoodsFilterCtorTailThunk()
+{
+    __asm {
+        push esi
+        call LogGoodsFilterConstructed
+        add esp, 4
+        mov ecx, dword ptr [ebp - 0xC]
+        pop edi
+        pop esi
+        jmp dword ptr [g_goodsFilterCtorTailResume]
+    }
+}
+
+static bool InstallGoodsFilterProbe()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_GOODS_FILTER_CTOR_TAIL);
+    if (memcmp(hook, GOODS_FILTER_CTOR_TAIL_SIG, sizeof(GOODS_FILTER_CTOR_TAIL_SIG)) != 0)
+    {
+        Log("GoodsFilterProbe: сигнатура не совпала - не патчим");
+        return false;
+    }
+
+    g_goodsFilterCtorTailResume = g_base + RVA_GOODS_FILTER_CTOR_TAIL + 5;
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&GoodsFilterCtorTailThunk - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("GoodsFilterProbe: установлен (диагностика размера дочернего окна для raw_, безопасный вариант)");
+    return true;
+}
+
+// Раунд 3 живого пробника (2026-09-24): дамп из InstallGoodsFilterProbe
+// показал, что дочернее окно в конце FUN_006e2770 ещё полностью
+// пустое (только 2-3 общих указателя на vtable, ни размера, ни
+// позиции) - значит их выставляет НЕ конструктор, а вызывающий цикл
+// FUN_006efdb0 уже ПОСЛЕ возврата. Сразу за CALL 0x006e2770 (вызов 1,
+// rva 0x2F1B80) этот цикл считает номер строки/столбца по счётчику
+// цикла, дважды виртуально вызывает объект из массива [EDI+0x5c] -
+// похоже на получение размера спрайта фона кнопки (слот вида vt+0x60,
+// читает word[+0]/word[+2] - ширина/высота) и, судя по всему, кладёт
+// вычисленные X/Y в один упакованный DWORD (low16=X, high16=Y - обе
+// половины signed 16-бит) и вызывает vt+0x18 на ТОМ ЖЕ объекте -
+// SetPosition(x,y), подтверждено живыми данными 2026-09-24
+// (packedXY=0x0038007E -> x=126 y=56 для raw_timber).
+//
+// Патч подменяет ровно это значение для raw_-товаров на координаты
+// далеко за пределами видимой области окна - сама кнопка продолжает
+// существовать и нормально строится (риск нулевой, ничего в
+// оригинальном коде не меняется, кроме одного пуш-аргумента),
+// но рисуется/кликается вне экрана, то есть визуально не отображается.
+// Перехватываем ровно "mov eax,[esp+0x64]; push eax" (5 байт, без
+// остатка) прямо перед CALL EDX.
+static const DWORD RVA_GOODS_FILTER_POS_HOOK = 0x2F1C30;
+static const unsigned char GOODS_FILTER_POS_SIG[5] = { 0x8B, 0x44, 0x24, 0x64, 0x50 };
+static DWORD g_goodsFilterPosResume = 0;
+
+// РАЗГАДАНО в раунде 4 (v4.11): значение, которое читалось как
+// "goodIndex" ([ESP+0x50] в исходной точке 0x6f1b88), на самом деле -
+// БАЙТОВОЕ СМЕЩЕНИЕ в массиве с шагом 20 байт (= trueIndex*20), а не
+// сам индекс. Подтверждено живыми данными: hit#1..4 дали 0/20/40/60,
+// что совпало с РЕАЛЬНЫМИ товарами по этим "смещениям" как индексам
+// (ammunition/glass/luxury_clothes/raw_timber) только потому что они
+// ещё меньше 64 (реального числа товаров) - начиная с hit#5 (80)
+// смещение уже вышло за границы массива и ResolveGoodNameByIndex
+// читал мусор. Именно поэтому v4.09 сломал canned_food: для настоящей
+// итерации trueIndex=3 (canned_food) код искал имя по индексу 3*20=60,
+// находил "raw_timber" (совпадает с "raw_") и прятал ЭТУ итерацию -
+// то есть визуально пропадал canned_food, а не raw_timber.
+// Исправление - просто делить смещение на 20 (шаг совпадает с ADD
+// dword ptr[ESP+0x50],0x14 в конце тела цикла, см. дизасм 0x6f1cdf).
+//
+// Подтверждено в раунде 5 (v4.12, 2026-09-24, живой лог): после деления
+// на 20 ровно 64 срабатывания, индексы 0..63 подряд, имена совпадают
+// (3=canned_food, 46..63=raw_cattle..raw_precious_metal). Сетка - 24
+// кнопок в ряд (шаг x=31), ряды y=56/83/110 (шаг 27); все 18 raw_ лежат
+// в самом хвосте (конец 2-го ряда + почти весь 3-й), поэтому скрытие
+// не оставляет дыр посередине.
+//
+// v4.13 - скрытие включено (HIDE_RAW_GOODS_FILTER, по умолчанию 1).
+static LONG g_goodsFilterPosHits = 0;
+static LONG g_goodsFilterHideLogged = 0;
+
+static DWORD __cdecl ComputeGoodsFilterPos(DWORD packedXY, int byteOffset)
+{
+    __try
+    {
+        if (!g_settings.hideRawGoodsFilter)
+            return packedXY;
+
+        InterlockedIncrement(&g_goodsFilterPosHits);
+        int goodIndex = byteOffset / 20;
+        const char* name = ResolveGoodNameByIndex(goodIndex);
+        if (name && _strnicmp(name, "raw_", 4) == 0)
+        {
+            if (InterlockedIncrement(&g_goodsFilterHideLogged) <= 40)
+                Log("HideRawGoodsFilter: idx=%d %s спрятан (был x=%d y=%d)",
+                    goodIndex, name, (int)(short)(packedXY & 0xFFFF),
+                    (int)(short)((packedXY >> 16) & 0xFFFF));
+            unsigned short hiddenX = (unsigned short)(short)-2000;
+            unsigned short hiddenY = (unsigned short)(short)-2000;
+            return ((DWORD)hiddenY << 16) | hiddenX;
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("HideRawGoodsFilter: исключение byteOffset=%d", byteOffset);
+    }
+    return packedXY;
+}
+
+// Второй цикл (call site 2, rva 0x2F1E10) - структурно идентичен
+// первому (те же слоты [ESP+0x44]/[ESP+0x50]/[ESP+0x54]/[ESP+0x64],
+// массив [EDI+0x6c] вместо [EDI+0x5c]), скорее всего вторая вкладка
+// окна. Пока ТОЛЬКО наблюдение - смотрим, в какой момент срабатывает
+// и те ли индексы, прежде чем что-то в нём менять.
+static LONG g_goodsFilterPos2Hits = 0;
+
+static DWORD __cdecl ObserveGoodsFilterPos2(DWORD packedXY, int byteOffset)
+{
+    __try
+    {
+        LONG hit = InterlockedIncrement(&g_goodsFilterPos2Hits);
+        if (hit <= 70)
+        {
+            int goodIndex = byteOffset / 20;
+            const char* name = ResolveGoodNameByIndex(goodIndex);
+            Log("GoodsFilterPos2: hit#%d idx=%d name=%s x=%d y=%d",
+                (int)hit, goodIndex, name ? name : "?",
+                (int)(short)(packedXY & 0xFFFF), (int)(short)((packedXY >> 16) & 0xFFFF));
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+    return packedXY;
+}
+
+// ИСПРАВЛЕНО после краша v4.07: EDX в этой точке уже держит указатель
+// на функцию для оригинального "CALL EDX" чуть ниже (SetPosition) -
+// предыдущая версия использовала EDX как временный регистр под
+// goodIndex и затирала его, поэтому оригинальный CALL улетал по
+// мусору. Теперь EDX явно сохраняется push'ем ДО блока и
+// восстанавливается pop'ом ПОСЛЕ - вообще не участвует в передаче
+// аргументов (они читаются прямыми push'ами из памяти, со сдвигом
+// смещений на каждый push). EAX получает готовый (возможно
+// подменённый) packedXY прямо из возврата функции - повторно читать
+// [esp+0x64] не нужно. ECX безопасно не сохранять - целиком
+// перезаписывается сразу после точки возврата ("mov ecx,esi").
+__declspec(naked) static void GoodsFilterPosThunk()
+{
+    __asm {
+        push edx                        // сохранить - нужен оригиналу ниже
+        push dword ptr [esp + 0x54]     // goodIndex: 0x50 + 4 (push edx)
+        push dword ptr [esp + 0x6C]     // packedXY: 0x64 + 4 + 4 (два push выше)
+        call ComputeGoodsFilterPos      // eax = packedXY (тот же или подменённый)
+        add esp, 8
+        pop edx                         // восстановить
+        push eax
+        jmp dword ptr [g_goodsFilterPosResume]
+    }
+}
+
+// Тот же thunk для второго цикла (0x2F1EC0): байты и смещения на стеке
+// в дизасме идентичны первому, регистры EDX/ECX/EAX ведут себя так же
+// (EDX - vtable[0x18] загружен в 0x6f1eb1..b3, CALL EDX в 0x6f1ec7,
+// ECX перезаписывается "mov ecx,esi" в 0x6f1ec5).
+static const DWORD RVA_GOODS_FILTER_POS_HOOK2 = 0x2F1EC0;
+static DWORD g_goodsFilterPosResume2 = 0;
+
+__declspec(naked) static void GoodsFilterPosThunk2()
+{
+    __asm {
+        push edx
+        push dword ptr [esp + 0x54]
+        push dword ptr [esp + 0x6C]
+        call ObserveGoodsFilterPos2
+        add esp, 8
+        pop edx
+        push eax
+        jmp dword ptr [g_goodsFilterPosResume2]
+    }
+}
+
+static bool PlantGoodsFilterPosHook(DWORD rva, void* thunk, const char* tag)
+{
+    unsigned char* hook = (unsigned char*)(g_base + rva);
+    if (memcmp(hook, GOODS_FILTER_POS_SIG, sizeof(GOODS_FILTER_POS_SIG)) != 0)
+    {
+        Log("%s: сигнатура не совпала rva %06X - не патчим", tag, rva);
+        return false;
+    }
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)thunk - ((DWORD)hook + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+    Log("%s: установлен rva %06X", tag, rva);
+    return true;
+}
+
+static bool InstallGoodsFilterPosProbe()
+{
+    g_goodsFilterPosResume  = g_base + RVA_GOODS_FILTER_POS_HOOK + 5;
+    g_goodsFilterPosResume2 = g_base + RVA_GOODS_FILTER_POS_HOOK2 + 5;
+
+    bool ok = PlantGoodsFilterPosHook(RVA_GOODS_FILTER_POS_HOOK,
+        (void*)&GoodsFilterPosThunk, "HideRawGoodsFilter");
+    PlantGoodsFilterPosHook(RVA_GOODS_FILTER_POS_HOOK2,
+        (void*)&GoodsFilterPosThunk2, "GoodsFilterPos2(наблюдение)");
+    return ok;
+}
+
+// ---------------------------------------------------------------
+// FILTER_SHOW_ALL_FACTORIES_IN_STATE - фильтры окна фабрик: если в
+// регионе есть хотя бы одна фабрика, прошедшая фильтр, показываем ВСЕ
+// фабрики региона, а не только прошедшие.
+//
+// Ванильно (FUN_006f3e70 - список вкладки 0, FUN_006f7140 - вкладки 1)
+// обе функции ходят по регионам и по цепочке "узлов" фабрик региона:
+// state+0x60 - первый узел, next = узел+0x224, узел+0x1c - регион,
+// узел+0x18 - УКАЗАТЕЛЬ на объект фабрики X (X+300 = тип производства).
+// Для каждого узла вызывается предикат FUN_006f7f80 (rva 0x2F7F80;
+// соглашение: EAX = окно, ECX = X = *(узел+0x18) - ЗАГРУЗКА значения
+// ("mov ecx,[eax+0x18]"), не адрес; результат в AL; сохраняет
+// EBX/ESI/EDI). Предикат true, если у фабрики выход ИЛИ входное сырьё
+// совпадает с товаром включённой кнопки фильтра (массив кнопок окна:
+// view+0x5c / +0x6c, элементы по 0x14, +8=индекс товара, +0xC=включён).
+// Регион попадает в список, только если прошла хотя бы одна фабрика
+// (либо включён показ пустых).
+//
+// ОШИБКА v4.14-v4.17: считал, что ECX = узел+0x18 (LEA) и восстанавливал
+// узел как ECX-0x18 - на деле это разыменование, поэтому "цепочки"
+// брались из мусорной памяти и подмена не попадала в настоящие фабрики
+// региона. Теперь сам узел берётся из стека вызывающей функции, где он
+// сохранён перед call: вкладка 0 - [ESP+0x6c] (мимо "mov [esp+6ch],eax"
+// в 0x6f41ed), вкладка 1 - [ESP+0x24] (0x6f746b); в thunk'е это
+// [esp+0x70] и [esp+0x28] (+4 на адрес возврата).
+//
+// Подмена: меняем 4 байта смещения в двух "call 0x6f7f80" (rva
+// 0x2F41F7 и 0x2F7471; после них "test al,al" - смотрят только AL) на
+// свои thunk'и с тем же контрактом регистров (клобберим только
+// EAX/ECX/EDX, EBX/ESI/EDI сохраняет обычная cdecl-функция). Обёртка,
+// увидев ПЕРВЫЙ узел региона (state+0x60 == узел), заранее проходит всю
+// цепочку региона ОРИГИНАЛЬНЫМ предикатом; если хоть одна фабрика
+// прошла - для всех узлов региона отвечаем "да" (кроме структурно
+// невалидных - условия предиката "DAT_01258734 != 0 && тип !=
+// DAT_01258734+0x10 && тип != 0" повторяем как есть, чтобы не показывать
+// то, что игра не показывала никогда). Иначе - зовём оригинал.
+static const DWORD RVA_FILTER_PRED       = 0x2F7F80;
+static const DWORD RVA_FILTER_PRED_CALL0 = 0x2F41F7;
+static const DWORD RVA_FILTER_PRED_CALL1 = 0x2F7471;
+static const DWORD RVA_FILTER_SENTINEL   = 0xE58734; // DAT_01258734
+
+static DWORD g_filterPredAddr = 0;
+static int   g_filterForce = 0;
+static LONG  g_filterRegionLogged = 0;
+static DWORD g_filterLastTick = 0;
+static LONG  g_filterGroup = 0;
+
+static int CallOrigFilterPred(void* view, void* arg)
+{
+    int r = 0;
+    DWORD fn = g_filterPredAddr;
+    __asm {
+        mov eax, view
+        mov ecx, arg
+        call fn
+        movzx eax, al
+        mov r, eax
+    }
+    return r;
+}
+
+static int FilterFactoryValid(void* arg)
+{
+    DWORD sentinel = *(DWORD*)(g_base + RVA_FILTER_SENTINEL);
+    DWORD type = *(DWORD*)((char*)arg + 300);
+    return sentinel != 0 && type != sentinel + 0x10 && type != 0;
+}
+
+// FILTER_PRODUCERS_ONLY: вместо оригинального критерия (выход ИЛИ
+// входное сырьё совпадает с включённым фильтром) - только ВЫХОД.
+// Читаем те же данные, что оригинал: выходной товар фабрики =
+// *(*(X+300)+0x80)+8 (индекс товара), кнопки фильтра - вектор
+// view+0x5c (вкладка 0) / +0x6c (вкладка 1), элементы по 0x14,
+// +8 = индекс товара, +0xC = включена. Структурную валидность (тип не
+// нулевой и не служебный) проверяем тем же условием, что и оригинал.
+static int FilterPassProducer(void* view, void* arg)
+{
+    if (!FilterFactoryValid(arg))
+        return 0;
+    DWORD type = *(DWORD*)((char*)arg + 300);
+    DWORD outGood = *(DWORD*)(type + 0x80);
+    if (!outGood)
+        return 0;
+    int outIdx = *(int*)(outGood + 8);
+
+    int mode = *(int*)((char*)view + 0x1c8);
+    char* vec = (char*)view + (mode == 1 ? 0x6c : 0x5c);
+    char* b = *(char**)vec;
+    char* e = *(char**)(vec + 4);
+    for (char* el = b; b && el + 0x14 <= e; el += 0x14)
+    {
+        if (el[0xC] && *(int*)(el + 8) == outIdx)
+            return 1;
+    }
+    return 0;
+}
+
+// Критерий "фабрика проходит фильтр": оригинальный или только-производители.
+static int FilterPass(void* view, void* arg)
+{
+    return g_settings.filterProducersOnly ? FilterPassProducer(view, arg)
+                                          : CallOrigFilterPred(view, arg);
+}
+
+// Имя выходного товара фабрики - только для диагностики в логе.
+static const char* FilterOutName(void* arg)
+{
+    if (!arg)
+        return "?";
+    DWORD type = *(DWORD*)((char*)arg + 300);
+    if (!type || SafeIsBadReadPtr((void*)(DWORD_PTR)type, 0x84))
+        return "?";
+    DWORD outGood = *(DWORD*)(type + 0x80);
+    if (!outGood || SafeIsBadReadPtr((void*)(DWORD_PTR)outGood, 12))
+        return "?";
+    const char* nm = ResolveGoodNameByIndex(*(int*)(outGood + 8));
+    return nm ? nm : "?";
+}
+
+// Диагностика: на старте каждой "перестройки списка" (пауза между
+// вызовами предиката > 300 мс) пишем, какие кнопки-фильтры включены.
+static void FilterLogRebuildStart(void* view)
+{
+    LONG grp = InterlockedIncrement(&g_filterGroup);
+    if (grp > 40)
+        return;
+    int mode = *(int*)((char*)view + 0x1c8);
+    char* vec = (char*)view + (mode == 1 ? 0x6c : 0x5c);
+    char* b = *(char**)vec;
+    char* e = *(char**)(vec + 4);
+    int n = (b && e >= b) ? (int)((e - b) / 0x14) : 0;
+    char names[600] = "";
+    int on = 0;
+    for (int i = 0; i < n && i < 64; ++i)
+    {
+        char* el = b + i * 0x14;
+        if (el[0xC])
+        {
+            ++on;
+            const char* nm = ResolveGoodNameByIndex(*(int*)(el + 8));
+            if (nm && strlen(names) + strlen(nm) + 2 < sizeof(names))
+            {
+                strcat_s(names, sizeof(names), nm);
+                strcat_s(names, sizeof(names), ",");
+            }
+        }
+    }
+    Log("FilterShowAll: перестройка #%d mode=%d кнопок=%d включено=%d [%s]",
+        (int)grp, mode, n, on, names);
+}
+
+static int __cdecl FilterPredHook(void* view, void* factoryArg, char* node)
+{
+    if (!g_settings.filterShowAllInState && !g_settings.filterProducersOnly)
+        return CallOrigFilterPred(view, factoryArg);
+
+    __try
+    {
+        DWORD now = GetTickCount();
+        if (now - g_filterLastTick > 300)
+            FilterLogRebuildStart(view);
+        g_filterLastTick = now;
+
+        if (!g_settings.filterShowAllInState)
+            return FilterPass(view, factoryArg);
+
+        char* state = *(char**)(node + 0x1c);
+        if (!state || *(char**)(state + 0x60) == node)
+        {
+            // первый узел региона - заранее проходим всю цепочку
+            g_filterForce = 0;
+            if (state)
+            {
+                int n = 0, pass = 0, origPass = 0, valid = 0, guard = 0;
+                char det[400] = "";
+                for (char* p = node; p && guard < 4096; p = *(char**)(p + 0x224), ++guard)
+                {
+                    void* a = *(void**)(p + 0x18);
+                    ++n;
+                    int pr = FilterPass(view, a);
+                    if (CallOrigFilterPred(view, a))
+                        ++origPass;
+                    if (pr)
+                        ++pass;
+                    if (FilterFactoryValid(a))
+                        ++valid;
+                    if (g_filterGroup >= 3 && guard < 8)
+                    {
+                        char one[64];
+                        sprintf_s(one, "%s%s;", FilterOutName(a), pr ? "+" : "-");
+                        strcat_s(det, sizeof(det), one);
+                    }
+                }
+                g_filterForce = pass > 0;
+                if (g_filterGroup >= 3 && InterlockedIncrement(&g_filterRegionLogged) <= 120)
+                    Log("FilterShowAll: регион state=%p фабрик=%d прошло=%d (оригинал=%d) валидных=%d force=%d [%s]",
+                        state, n, pass, origPass, valid, g_filterForce, det);
+            }
+        }
+
+        if (g_filterForce)
+            return FilterFactoryValid(factoryArg);
+        return FilterPass(view, factoryArg);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_filterForce = 0;
+    }
+    return CallOrigFilterPred(view, factoryArg);
+}
+
+// Тот же контракт, что у подменяемой функции: на входе EAX=окно,
+// ECX=X (указатель на объект фабрики), результат в AL; вызывающий код
+// ждёт EBX/ESI/EDI/EBP нетронутыми - их сохраняет FilterPredHook как
+// обычная cdecl-функция. Узел цепочки берётся прямым push'ем из стека
+// вызывающего кода ДО остальных push'ей (иначе смещения съедут).
+__declspec(naked) static void FilterPredThunk0()
+{
+    __asm {
+        push dword ptr [esp + 0x70]     // узел: [ESP+0x6c] вызывающего + 4 (адрес возврата)
+        push ecx
+        push eax
+        call FilterPredHook
+        add esp, 12
+        ret
+    }
+}
+
+__declspec(naked) static void FilterPredThunk1()
+{
+    __asm {
+        push dword ptr [esp + 0x28]     // узел: [ESP+0x24] вызывающего + 4
+        push ecx
+        push eax
+        call FilterPredHook
+        add esp, 12
+        ret
+    }
+}
+
+static bool PatchFilterPredCall(DWORD rva, void* thunk, const char* tag)
+{
+    unsigned char* p = (unsigned char*)(g_base + rva);
+    DWORD expectRel = (g_base + RVA_FILTER_PRED) - ((DWORD)(DWORD_PTR)p + 5);
+    if (p[0] != 0xE8 || *(DWORD*)(p + 1) != expectRel)
+    {
+        Log("%s: сигнатура call предиката не совпала rva %06X (%02X %02X %02X %02X %02X)",
+            tag, rva, p[0], p[1], p[2], p[3], p[4]);
+        return false;
+    }
+
+    DWORD rel = (DWORD)(DWORD_PTR)thunk - ((DWORD)(DWORD_PTR)p + 5);
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(p + 1, 4, PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    *(DWORD*)(p + 1) = rel;
+    VirtualProtect(p + 1, 4, oldProtect, &oldProtect);
+    Log("%s: call предиката подменён rva %06X", tag, rva);
+    return true;
+}
+
+static bool InstallFilterShowAllInState()
+{
+    g_filterPredAddr = g_base + RVA_FILTER_PRED;
+    bool a = PatchFilterPredCall(RVA_FILTER_PRED_CALL0, (void*)&FilterPredThunk0, "FilterShowAll(вкладка 0)");
+    bool b = PatchFilterPredCall(RVA_FILTER_PRED_CALL1, (void*)&FilterPredThunk1, "FilterShowAll(вкладка 1)");
+    return a || b;
 }
 
 
@@ -2583,6 +3206,9 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_CAM_STILL") == 0)                  { g_settings.patchCamStill               = v; return; }
     if (_stricmp(key, "FIX_SFX_MIXER_LAG") == 0)                { g_settings.fixSfxMixerLag              = v; return; }
     if (_stricmp(key, "FIX_ARMY_WINDOW_LAG") == 0)              { g_settings.patchFixArmyWindowLag       = v; return; }
+    if (_stricmp(key, "HIDE_RAW_GOODS_FILTER") == 0)            { g_settings.hideRawGoodsFilter          = v; return; }
+    if (_stricmp(key, "FILTER_SHOW_ALL_FACTORIES_IN_STATE") == 0) { g_settings.filterShowAllInState      = v; return; }
+    if (_stricmp(key, "FILTER_PRODUCERS_ONLY") == 0)            { g_settings.filterProducersOnly         = v; return; }
 
     if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
     if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
@@ -2712,13 +3338,19 @@ static void WriteDefaultSettings(const char* path)
         "ENABLE_VERSION_LABEL=%d\n"
         "PATCH_PROD_LIST_VISIBILITY=%d\n"
         "HIDE_UNAVAILABLE_LIMIT_BY_SUPPLY_FACTORIES=%d\n"
+        "HIDE_RAW_GOODS_FILTER=%d\n"
+        "FILTER_SHOW_ALL_FACTORIES_IN_STATE=%d\n"
+        "FILTER_PRODUCERS_ONLY=%d\n"
         "\n",
         (int)g_settings.buttons,
         (int)g_settings.decisionFilter,
         (int)g_settings.popDisplay,
         (int)g_settings.versionLabel,
         (int)g_settings.patchProdListVisibility,
-        (int)g_settings.patchHideNoSupplyFactories);
+        (int)g_settings.patchHideNoSupplyFactories,
+        (int)g_settings.hideRawGoodsFilter,
+        (int)g_settings.filterShowAllInState,
+        (int)g_settings.filterProducersOnly);
 
     fprintf(f,
         "PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=%d\n"
@@ -13131,6 +13763,28 @@ static bool Install()
 
     if (g_settings.patchProdListVisibility)
         InstallProdListVisibilityHook();
+
+    // HIDE_RAW_GOODS_FILTER: скрытие кнопок-фильтров товаров на "raw_"
+    // в окне фабрик. v4.04 уронил игру на старте (call-through с
+    // угаданной сигнатурой - см. историю у ResolveGoodNameByIndex),
+    // v4.07 уронил игру повторно (затёртый EDX в этом же хуке) - обе
+    // причины разобраны и исправлены, см. GoodsFilterPosThunk и память
+    // project_hide_raw_goods_filter/feedback_live_probe_hook.
+    // InstallGoodsFilterProbe() (дамп конца конструктора) свою задачу
+    // выполнил - подтвердил, что размер/позиция ставятся не в нём, а
+    // здесь, в InstallGoodsFilterPosProbe - оставлен отключённым, чтобы
+    // не засорять лог.
+    // InstallGoodsFilterProbe();
+    // v4.09 подменял позицию по "goodIndex", который на деле был
+    // байтовым смещением (индекс*20) - пропадала canned_food вместо
+    // raw_. Разобрано в раундах 4-5 (см. память
+    // project_hide_raw_goods_filter), v4.13 - скрытие включено с
+    // правильным индексом, ini: HIDE_RAW_GOODS_FILTER.
+    if (g_settings.hideRawGoodsFilter)
+        InstallGoodsFilterPosProbe();
+
+    if (g_settings.filterShowAllInState || g_settings.filterProducersOnly)
+        InstallFilterShowAllInState();
 
     if (g_settings.patchProdTypeGate)
         InstallProdTypeGateHook();

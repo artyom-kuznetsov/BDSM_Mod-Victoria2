@@ -88,6 +88,12 @@ Changes version label in main menu to "V2 v3.04 + V2DLL v*"
 Needed for Economic №4.
 #### 6. HIDE_UNAVAILABLE_LIMIT_BY_SUPPLY_FACTORIES
 Hides factories with "limit_by_local_supply = yes" from factory construction menu if there is no required supply in the region.
+#### 7. HIDE_RAW_GOODS_FILTER
+Hides filter buttons (in production tab) for goods that name starts with "raw_"
+#### 8. FILTER_SHOW_ALL_FACTORIES_IN_STATE
+Production tab filters will now show all factories in a state with filtered factory.
+#### 9. FILTER_PRODUCERS_ONLY
+Production tab filters will show only producing factories of selected good, not both producers and consumers.
   
 ### Miscellaneous
 #### 1. PATCH_CONSCIOUSNESS_PLURALITY_GROWTH
