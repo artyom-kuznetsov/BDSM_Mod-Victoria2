@@ -875,7 +875,7 @@ mob1 = {
 telegraph_coordination = {
 	limit = { military_plans = 1 }
 	chance = {
-		base = 2
+		base = 3
 		modifier = {
 			factor = 3
 			army_professionalism = 1
@@ -899,13 +899,17 @@ mob2 = {
 	chance = {
 		base = 2
 		modifier = {
-			factor = 1
+			factor = 3
 			invention = telegraph_coordination
 		}
 		modifier = {
 			factor = 2
 			strategic_mobility = 1
-		}	
+		}
+		modifier = {
+			factor = 2
+			army_professionalism = 1
+		}
 	}
 	effect = {
 		mobilisation_economy_impact = 0.1
