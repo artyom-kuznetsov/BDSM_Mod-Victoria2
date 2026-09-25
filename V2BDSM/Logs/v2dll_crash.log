@@ -125,3 +125,53 @@
     stack=0507B6F8  CEU3Application  vptr=00EE845C  vtable-in-exe
     _GFX  va=0167BF54  (heap)
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-25 20:55:06.033 dll=4.19 pid=31632 tid=18260 ========
+  fpu_cw=0109001F mxcsr=00009FF1
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=00A0747F  v2game.exe+0x27747F
+  av_read addr=BDFC4008
+  params n=2 p0=00000000 p1=BDFC4008
+  eax=E0ED20E0 ebx=00000000 ecx=4DDEBD20 edx=3A47BC88 esi=50EC65A8 edi=53490090
+  ebp=0068D714 esp=0068D508 eip=00A0747F eflags=00010287
+  eip=00A0747F  v2game.exe+0x27747F
+  code_eip-8 15 E4 87 5E 01 8B 52 04  8B 04 82 8B 50 1C 8B 40
+  pointed:
+  eax=E0ED20E0 unreadable
+  ebx=00000000
+  ecx=4DDEBD20 011C92F0 00000000 00000000 00000000 53221700 53221100 53221800 011C9320
+  edx=3A47BC88 36F46030 370E1038 3719E010 34A5C008 34A5D618 36F81008 36F82B68 36F846C8
+  esi=50EC65A8 011D1F10 00000000 00000000 00000000 00000000 00000000 00000000 0000000F
+  edi=53490090 0119A34C 000000C8 00000700 00000000 00000000 00000000 00000700 04A532D0
+  esp=0068D508 4290A8E8 4C783EC0 4C76E7A0 4DDEBD20 4DDEBD20 4DDEBD20 00000000 007615C8
+  stack:
+    [0]=00A0747F  v2game.exe+0x27747F
+    [1]=00D840FC  v2game.exe+0x5F40FC
+    [2]=00D3FD32  v2game.exe+0x5AFD32
+    [3]=009E50D9  v2game.exe+0x2550D9
+    [4]=61E5DB69  lua51.dll+0xDB69
+    [5]=00D6F966  v2game.exe+0x5DF966
+    [6]=00D0E0CD  v2game.exe+0x57E0CD
+    [7]=00E40F3E  v2game.exe+0x6B0F3E
+    [8]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [9]=774182AE  ntdll.dll+0x682AE
+    [10]=7741827E  ntdll.dll+0x6827E
+    [11]=00000000
+  source:
+  known_site: none (new rva 27747F — смотреть keys/objects)
+  source_objects:
+    eax=E0ED20E0  vptr=00000000  unreadable
+    ecx=4DDEBD20  vptr=011C92F0  vtable-in-exe
+    esi=50EC65A8  vptr=011D1F10  vtable-in-exe
+    edi=53490090  CInGameIdler  vptr=0119A34C  vtable-in-exe
+    edx=3A47BC88  vptr=36F46030  vtable-outside-exe
+    esi+40=3F800000 esi+44=3F800000 (часто id/тип identity)
+  source_keys:
+    shield  va=4C270410  (heap)
+    stack=1BF188E0  CEU3BitmapFont  vptr=011A9A8C  vtable-in-exe
+    stack=056BEE18  CEU3Application  vptr=0119845C  vtable-in-exe
+    HalT  va=7FFEA000  (heap)
+    cgothic_18_black  va=4C2706B8  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
