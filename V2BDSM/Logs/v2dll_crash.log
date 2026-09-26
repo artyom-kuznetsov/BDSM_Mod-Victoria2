@@ -175,3 +175,468 @@
     HalT  va=7FFEA000  (heap)
     cgothic_18_black  va=4C2706B8  (heap)
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:14:26.341 dll=4.19 pid=8952 tid=17464 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=009D3CB2  v2game.exe+0x243CB2
+  av_read addr=00000060
+  params n=2 p0=00000000 p1=00000060
+  eax=0091CF00 ebx=00000000 ecx=FF555555 edx=00000000 esi=20236369 edi=3742F360
+  ebp=019BC2FC esp=019BC2B8 eip=009D3CB2 eflags=00010246
+  eip=009D3CB2  v2game.exe+0x243CB2
+  code_eip-8 8B 8E 84 00 00 00 8B 11  8B 42 60 6A 00 FF D0 8B
+  pointed:
+  eax=0091CF00 8B5E4056 08C25DE5 CCCCCC00 CCCCCCCC 6AEC8B55 160368FF A16400ED 00000000
+  [eax+14]=160368FF unreadable
+  [eax+18]=A16400ED unreadable
+  ebx=00000000
+  ecx=FF555555 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  edx=00000000
+  esi=20236369 7D18C219 FFF5A9E9 000000FF C3000000 78002018 FFE0E078 000000FF 20000000
+  edi=3742F360 0118D310 0000018D 0118D338 00000000 00000000 00000000 00000000 00000000
+  esp=019BC2B8 3742F360 3F356020 019BC3EC 019BC2FC 0050414A 019BC2DC 002D2D2D 00000000
+  stack:
+    [0]=009D3CB2  v2game.exe+0x243CB2
+    [1]=0084570A  v2game.exe+0xB570A
+    [2]=00839B60  v2game.exe+0xA9B60
+    [3]=00D32B27  v2game.exe+0x5A2B27
+    [4]=00A124EE  v2game.exe+0x2824EE
+    [5]=00D32B27  v2game.exe+0x5A2B27
+    [6]=00A0F63B  v2game.exe+0x27F63B
+    [7]=00A0F3ED  v2game.exe+0x27F3ED
+    [8]=00AFF8B8  v2game.exe+0x36F8B8
+    [9]=00AE80C1  v2game.exe+0x3580C1
+    [10]=00AE555B  v2game.exe+0x35555B
+    [11]=00D6F966  v2game.exe+0x5DF966
+    [12]=00D0E0CD  v2game.exe+0x57E0CD
+    [13]=00E40F3E  v2game.exe+0x6B0F3E
+    [14]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [15]=774182AE  ntdll.dll+0x682AE
+    [16]=7741827E  ntdll.dll+0x6827E
+    [17]=00000000
+  source:
+  known_site: none (new rva 243CB2 — смотреть keys/objects)
+  source_objects:
+    eax=0091CF00  vptr=8B5E4056  vtable-outside-exe
+    ecx=FF555555  vptr=00000000  null-vtable
+    esi=20236369  vptr=7D18C219  vtable-outside-exe
+    edi=3742F360  CMapProvince  vptr=0118D310  vtable-in-exe
+    esi+40=55000000 esi+44=FF555555 (часто id/тип identity)
+  source_keys:
+    stack=499AA718  CPartyLoyalty  vptr=011C6AB8  vtable-in-exe
+    stack=30952CA8  CPopType  vptr=011C65F8  vtable-in-exe
+    stack=4FB05030  CPop  vptr=011C6428  vtable-in-exe
+    stack=04C61478  CNullPopType  vptr=011C6618  vtable-in-exe
+    stack=04C2FB60  CNullCulture  vptr=0119003C  vtable-in-exe
+    stack=04D0FF00  CNullReligion  vptr=01190368  vtable-in-exe
+    owner  va=019BCEEC  (heap)
+    stack=03D8B3E8  CCurrentGameState  vptr=0119AE84  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:14:48.236 dll=4.19 pid=20408 tid=17608 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=009D4A7D  v2game.exe+0x244A7D
+  av_read addr=09202030
+  params n=2 p0=00000000 p1=09202030
+  eax=09202020 ebx=00000000 ecx=7CC80368 edx=00000CB5 esi=530B2920 edi=523B6010
+  ebp=019BD9BC esp=019BD964 eip=009D4A7D eflags=00010202
+  eip=009D4A7D  v2game.exe+0x244A7D
+  code_eip-8 F8 83 EC 54 80 7D 10 00  8B 48 10 53 8B 5D 0C 8B
+  pointed:
+  eax=09202020 unreadable
+  ebx=00000000
+  ecx=7CC80368 011CCB38 00000000 00000000 00000000 00000000 00000000 00000000 0000000F
+  edx=00000CB5 unreadable
+  esi=530B2920 99999999 99999999 345B24E8 36FDF098 53101DE8 00000000 00000000 00000000
+  edi=523B6010 06428048 3D951C60 00000000 011C78E8 65722020 50B15020 00000000 74616320
+  esp=019BD964 00000000 00000000 3F800000 019BD9C4 00DAE05D 530B2920 00000000 3F800000
+  stack:
+    [0]=009D4A7D  v2game.exe+0x244A7D
+    [1]=009D3A94  v2game.exe+0x243A94
+    [2]=00B815A8  v2game.exe+0x3F15A8
+    [3]=00AE6F11  v2game.exe+0x356F11
+    [4]=00D6F9DF  v2game.exe+0x5DF9DF
+    [5]=00D0E0CD  v2game.exe+0x57E0CD
+    [6]=00E40F3E  v2game.exe+0x6B0F3E
+    [7]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [8]=774182AE  ntdll.dll+0x682AE
+    [9]=7741827E  ntdll.dll+0x6827E
+    [10]=00000000
+  source:
+  known_site: none (new rva 244A7D — смотреть keys/objects)
+  source_objects:
+    eax=09202020  vptr=00000000  unreadable
+    ecx=7CC80368  vptr=011CCB38  vtable-in-exe
+    esi=530B2920  vptr=99999999  vtable-outside-exe
+    edi=523B6010  vptr=06428048  vtable-outside-exe
+    edx=00000CB5  vptr=00000000  unreadable
+    esi+40=530DE378 esi+44=00000000 (часто id/тип identity)
+  source_keys:
+    stack=523B80CC  CProvinceManager  vptr=011AB508  vtable-in-exe
+    stack=36FDF098  CMapProvince  vptr=0118D310  vtable-in-exe
+    stack=3D9518E0  CFrontEnd  vptr=011A3DBC  vtable-in-exe
+    stack=0604E410  CEU3Application  vptr=0119845C  vtable-in-exe
+    HalT  va=7FFEA000  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:17:18.699 dll=4.19 pid=16156 tid=26792 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=00D8906D  v2game.exe+0x5F906D
+  av_write addr=E4249D60
+  params n=2 p0=00000001 p1=E4249D60
+  eax=008000BA ebx=702589B8 ecx=E4249C88 edx=00000000 esi=702589B8 edi=70258A8C
+  ebp=0073D40C esp=0073D408 eip=00D8906D eflags=00010286
+  eip=00D8906D  v2game.exe+0x5F906D
+  code_eip-8 E0 00 00 00 85 C9 74 23  89 B1 D8 00 00 00 8B 88
+  pointed:
+  eax=008000BA 9424B439 72000000 248C8B10 00000080 E84BE851 C4830063 24BC8904 00000094
+  [eax+14]=C4830063 unreadable
+  [eax+18]=24BC8904 B2C92AC9 3F800000 3F800000 BA022F9C B2C92AC7 3F7FFFFE 3F800000 00000000
+  ebx=702589B8 011CCB38 00000000 00000000 00000000 00000000 00000000 00000000 0000000F
+  ecx=E4249C88 unreadable
+  edx=00000000
+  esi=702589B8 011CCB38 00000000 00000000 00000000 00000000 00000000 00000000 0000000F
+  edi=70258A8C 00000000 00000000 00000000 00000000 00000000 4D91D660 FFFFFFFF 00000100
+  esp=0073D408 0073D478 0073D47C 009D4B1E 008000BA 4D91C010 530124B8 00000000 00000000
+  stack:
+    [0]=00D8906D  v2game.exe+0x5F906D
+    [1]=009D4B1E  v2game.exe+0x244B1E
+    [2]=009D3A94  v2game.exe+0x243A94
+    [3]=00B815A8  v2game.exe+0x3F15A8
+    [4]=00AE6F11  v2game.exe+0x356F11
+    [5]=00D6F9DF  v2game.exe+0x5DF9DF
+    [6]=00D0E0CD  v2game.exe+0x57E0CD
+    [7]=00E40F3E  v2game.exe+0x6B0F3E
+    [8]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [9]=774182AE  ntdll.dll+0x682AE
+    [10]=7741827E  ntdll.dll+0x6827E
+    [11]=00000000
+  source:
+  known_site: none (new rva 5F906D — смотреть keys/objects)
+  source_objects:
+    eax=008000BA  vptr=9424B439  vtable-outside-exe
+    ecx=E4249C88  vptr=00000000  unreadable
+    esi=702589B8  vptr=011CCB38  vtable-in-exe
+    edi=70258A8C  vptr=00000000  null-vtable
+    esi+40=3F800000 esi+44=3F800000 (часто id/тип identity)
+  source_keys:
+    stack=4D91E0CC  CProvinceManager  vptr=011AB508  vtable-in-exe
+    stack=36D171A8  CMapProvince  vptr=0118D310  vtable-in-exe
+    stack=3D8DB348  CFrontEnd  vptr=011A3DBC  vtable-in-exe
+    stack=0526BC38  CEU3Application  vptr=0119845C  vtable-in-exe
+    HalT  va=7FFEA000  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:17:52.903 dll=4.19 pid=28996 tid=28812 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=009D3B34  v2game.exe+0x243B34
+  av_read addr=00000084
+  params n=2 p0=00000000 p1=00000084
+  eax=0073C41C ebx=00000000 ecx=4D9BE008 edx=00000000 esi=00000000 edi=4D9BE008
+  ebp=0073C3DC esp=0073C398 eip=009D3B34 eflags=00010246
+  eip=009D3B34  v2game.exe+0x243B34
+  code_eip-8 56 8B F2 33 DB 57 8B F9  39 9E 84 00 00 00 0F 85
+  pointed:
+  eax=0073C41C 0073C774 00F3200B FFFFFFFF 0073C780 00839B60 0073C4CC 0073C464 00000000
+  [eax+14]=0073C4CC 0050414A 00000071 0047524C 00000151 F2EEE000 E900F3EE EDFFE7F6 00E800FC
+  [eax+18]=0073C464 029C77F8 029C77F8 6D726100 00737265 0073006E 00000000 00000000 0000000F
+  ebx=00000000
+  ecx=4D9BE008 05F51030 3D9229A0 00000000 011C78E8 30303034 52AC89B0 000007C0 74207265
+  edx=00000000
+  esi=00000000
+  edi=4D9BE008 05F51030 3D9229A0 00000000 011C78E8 30303034 52AC89B0 000007C0 74207265
+  esp=0073C398 36C6DD60 4DBBB010 0073C4CC 0073C3DC 0050414A 0073C3BC 002D2D2D 00000000
+  stack:
+    [0]=009D3B34  v2game.exe+0x243B34
+    [1]=0084570A  v2game.exe+0xB570A
+    [2]=00839B60  v2game.exe+0xA9B60
+    [3]=00D32B27  v2game.exe+0x5A2B27
+    [4]=00A124EE  v2game.exe+0x2824EE
+    [5]=00D32B27  v2game.exe+0x5A2B27
+    [6]=00A0F63B  v2game.exe+0x27F63B
+    [7]=00A0F3ED  v2game.exe+0x27F3ED
+    [8]=00AFF8B8  v2game.exe+0x36F8B8
+    [9]=00AE80C1  v2game.exe+0x3580C1
+    [10]=00AE555B  v2game.exe+0x35555B
+    [11]=00D6F966  v2game.exe+0x5DF966
+    [12]=00D0E0CD  v2game.exe+0x57E0CD
+    [13]=00E40F3E  v2game.exe+0x6B0F3E
+    [14]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [15]=774182AE  ntdll.dll+0x682AE
+    [16]=7741827E  ntdll.dll+0x6827E
+    [17]=00000000
+  source:
+  known_site: none (new rva 243B34 — смотреть keys/objects)
+  source_objects:
+    eax=0073C41C  vptr=0073C774  vtable-outside-exe
+    ecx=4D9BE008  vptr=05F51030  vtable-outside-exe
+  source_keys:
+    stack=36C6DD60  CMapProvince  vptr=0118D310  vtable-in-exe
+    stack=4F09C7A0  CPartyLoyalty  vptr=011C6AB8  vtable-in-exe
+    stack=30058470  CPopType  vptr=011C65F8  vtable-in-exe
+    stack=49A26810  CPop  vptr=011C6428  vtable-in-exe
+    stack=04A011F8  CNullPopType  vptr=011C6618  vtable-in-exe
+    stack=049CFB60  CNullCulture  vptr=0119003C  vtable-in-exe
+    stack=04AB1D78  CNullReligion  vptr=01190368  vtable-in-exe
+    owner  va=0073CFCC  (heap)
+    stack=03AFB3E8  CCurrentGameState  vptr=0119AE84  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:18:13.943 dll=4.19 pid=7812 tid=15772 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007E6A9B  v2game.exe+0x56A9B
+  av_read addr=00000000
+  params n=2 p0=00000000 p1=00000000
+  eax=00000001 ebx=3826BCA8 ecx=005CBEAC edx=03B20000 esi=00000000 edi=34F4B550
+  ebp=005CBEB8 esp=005CBE40 eip=007E6A9B eflags=00010202
+  eip=007E6A9B  v2game.exe+0x56A9B
+  code_eip-8 84 C0 74 7A 8B 74 24 54  8B 06 8B 4F 58 8B 3D 0C
+  pointed:
+  eax=00000001 unreadable
+  ebx=3826BCA8 01189F18 38538D18 00000000 371ADA40 00000003 00000000 41ECADC0 41ECADD0
+  ecx=005CBEAC 005CDEB4 00EE1E18 00000000 005CDEC0 009F3796 05B8C420 539A5760 05B8C514
+  edx=03B20000 967914E7 01002D92 FFEEFFEE 00000002 04900010 03B200A4 03B20000 03B20000
+  esi=00000000
+  edi=34F4B550 0118D310 0000018D 0118D338 00000000 00000000 00000000 00000000 00000000
+  esp=005CBE40 36F1A098 38538D18 539A5760 00000000 01000003 03B2B3E8 00000190 00151A58
+  stack:
+    [0]=007E6A9B  v2game.exe+0x56A9B
+    [1]=009F3796  v2game.exe+0x263796
+    [2]=00D6F9DF  v2game.exe+0x5DF9DF
+    [3]=00D0E0CD  v2game.exe+0x57E0CD
+    [4]=00E40F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  known_site: none (new rva 056A9B — смотреть keys/objects)
+  source_objects:
+    eax=00000001  vptr=00000000  unreadable
+    ecx=005CBEAC  vptr=005CDEB4  vtable-outside-exe
+    edi=34F4B550  CMapProvince  vptr=0118D310  vtable-in-exe
+    ebx=3826BCA8  CColonialDistanceTracker  vptr=01189F18  vtable-in-exe
+    edx=03B20000  vptr=967914E7  vtable-outside-exe
+  source_keys:
+    stack=38538D18  CCountry  vptr=0118FACC  vtable-in-exe
+    stack=539A5760  CInGameIdler  vptr=0119A34C  vtable-in-exe
+    stack=03B2B3E8  CCurrentGameState  vptr=0119AE84  vtable-in-exe
+    stack=05B8C420  CEU3Application  vptr=0119845C  vtable-in-exe
+    stack=365BEC18  CMapProvince  vptr=0118D310  vtable-in-exe
+    (none)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:21:18.177 dll=4.19 pid=20212 tid=27840 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=009D3B34  v2game.exe+0x243B34
+  av_read addr=00000084
+  params n=2 p0=00000000 p1=00000084
+  eax=0053BA6C ebx=00000000 ecx=522BC018 edx=00000000 esi=00000000 edi=522BC018
+  ebp=0053B9B4 esp=0053B970 eip=009D3B34 eflags=00010246
+  eip=009D3B34  v2game.exe+0x243B34
+  code_eip-8 56 8B F2 33 DB 57 8B F9  39 9E 84 00 00 00 0F 85
+  pointed:
+  eax=0053BA6C 0053DA74 00F48948 FFFFFFFF 0053DA90 009F33AD 0518C600 52C6E048 0518C6F4
+  [eax+14]=0518C600 0119845C 0000018D 01198484 00000000 00000000 00000000 EEF22000 EE20E500
+  [eax+18]=52C6E048 0119A34C 000000C8 2CD49800 00000000 00000000 00000000 51B78000 0494E3F0
+  ebx=00000000
+  ecx=522BC018 05D5CF18 52C6F9CC 00000000 011C78E8 00000000 52678738 000007C0 00000000
+  edx=00000000
+  esi=00000000
+  edi=522BC018 05D5CF18 52C6F9CC 00000000 011C78E8 00000000 52678738 000007C0 00000000
+  esp=0053B970 4D3B4020 369B0D00 0053B9C0 00000000 000003E8 008438DB 369B38E0 00000000
+  stack:
+    [0]=009D3B34  v2game.exe+0x243B34
+    [1]=00842586  v2game.exe+0xB2586
+    [2]=00A17E97  v2game.exe+0x287E97
+    [3]=009F33AD  v2game.exe+0x2633AD
+    [4]=00D6F9DF  v2game.exe+0x5DF9DF
+    [5]=00D0E0CD  v2game.exe+0x57E0CD
+    [6]=00E40F3E  v2game.exe+0x6B0F3E
+    [7]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [8]=774182AE  ntdll.dll+0x682AE
+    [9]=7741827E  ntdll.dll+0x6827E
+    [10]=00000000
+  source:
+  known_site: none (new rva 243B34 — смотреть keys/objects)
+  source_objects:
+    eax=0053BA6C  vptr=0053DA74  vtable-outside-exe
+    ecx=522BC018  vptr=05D5CF18  vtable-outside-exe
+  source_keys:
+    stack=369B0D00  CMapProvince  vptr=0118D310  vtable-in-exe
+    stack=369B38E0  CMapProvince  vptr=0118D310  vtable-in-exe
+    stack=03ABB3E8  CCurrentGameState  vptr=0119AE84  vtable-in-exe
+    stack=047911F8  CNullPop  vptr=0118D2E8  vtable-in-exe
+    stack=0053B9E8  CEventScope  vptr=011BC904  vtable-in-exe
+    stack=52C6E048  CInGameIdler  vptr=0119A34C  vtable-in-exe
+    stack=39224848  CTechnologyStatus  vptr=01190BC0  vtable-in-exe
+    stack=0518C600  CEU3Application  vptr=0119845C  vtable-in-exe
+    stack=3BF18390  CCountry  vptr=0118FACC  vtable-in-exe
+    stack=3643B710  CMapProvince  vptr=0118D310  vtable-in-exe
+    list_start  va=0053BDE8  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:23:46.155 dll=4.19 pid=10360 tid=20700 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007E6A9B  v2game.exe+0x56A9B
+  av_read addr=00000000
+  params n=2 p0=00000000 p1=00000000
+  eax=00000001 ebx=3823A0E0 ecx=003FBD6C edx=037A0000 esi=00000000 edi=34EB44C8
+  ebp=003FBD78 esp=003FBD00 eip=007E6A9B eflags=00010202
+  eip=007E6A9B  v2game.exe+0x56A9B
+  code_eip-8 84 C0 74 7A 8B 74 24 54  8B 06 8B 4F 58 8B 3D 0C
+  pointed:
+  eax=00000001 unreadable
+  ebx=3823A0E0 01189F18 384AAE40 00000000 36CE9AD8 00000003 00000000 84A6FEE8 84A6FEF8
+  ecx=003FBD6C 003FDD74 00EE1E18 00000000 003FDDA8 009F3796 05B041B8 3F358028 05B042AC
+  edx=037A0000 27B25CA8 01007969 FFEEFFEE 00000002 04740010 037A00A4 037A0000 037A0000
+  esi=00000000
+  edi=34EB44C8 0118D310 0000018D 0118D338 00000000 00000000 00000000 00000000 00000000
+  esp=003FBD00 36D135E0 384AAE40 3F358028 00000000 01000003 037AB3E8 00000190 00151A58
+  stack:
+    [0]=007E6A9B  v2game.exe+0x56A9B
+    [1]=009F3796  v2game.exe+0x263796
+    [2]=00D6F9DF  v2game.exe+0x5DF9DF
+    [3]=00D0E0CD  v2game.exe+0x57E0CD
+    [4]=00E40F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  known_site: none (new rva 056A9B — смотреть keys/objects)
+  source_objects:
+    eax=00000001  vptr=00000000  unreadable
+    ecx=003FBD6C  vptr=003FDD74  vtable-outside-exe
+    edi=34EB44C8  CMapProvince  vptr=0118D310  vtable-in-exe
+    ebx=3823A0E0  CColonialDistanceTracker  vptr=01189F18  vtable-in-exe
+    edx=037A0000  vptr=27B25CA8  vtable-outside-exe
+  source_keys:
+    stack=384AAE40  CCountry  vptr=0118FACC  vtable-in-exe
+    stack=3F358028  CInGameIdler  vptr=0119A34C  vtable-in-exe
+    stack=037AB3E8  CCurrentGameState  vptr=0119AE84  vtable-in-exe
+    stack=05B041B8  CEU3Application  vptr=0119845C  vtable-in-exe
+    stack=36500878  CMapProvince  vptr=0118D310  vtable-in-exe
+    entry_bg  va=84525C00  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:30:50.599 dll=4.19 pid=12868 tid=32520 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=009D3B34  v2game.exe+0x243B34
+  av_read addr=00000084
+  params n=2 p0=00000000 p1=00000084
+  eax=0057BCEC ebx=00000000 ecx=4E14E010 edx=00000000 esi=00000000 edi=4E14E010
+  ebp=0057BC34 esp=0057BBF0 eip=009D3B34 eflags=00010246
+  eip=009D3B34  v2game.exe+0x243B34
+  code_eip-8 56 8B F2 33 DB 57 8B F9  39 9E 84 00 00 00 0F 85
+  pointed:
+  eax=0057BCEC 0057DCF4 00F48948 FFFFFFFF 0057DD0C 009F33AD 04823FF0 6635D038 048240E4
+  [eax+14]=04823FF0 0119845C 0000018D 01198484 00000000 00000000 00000000 F0E5EF00 F0EEF200
+  [eax+18]=6635D038 0119A34C 000000F0 00000000 00000000 00000000 00000000 00000000 048EED78
+  ebx=00000000
+  ecx=4E14E010 05DAF090 6635E9BC 00000000 011C78E8 30303034 52B2A9A8 000007C0 74207265
+  edx=00000000
+  esi=00000000
+  edi=4E14E010 05DAF090 6635E9BC 00000000 011C78E8 30303034 52B2A9A8 000007C0 74207265
+  esp=0057BBF0 53295268 36B7B8E8 0057BC40 00000000 000003E8 008438DB 36B7CED8 00000000
+  stack:
+    [0]=009D3B34  v2game.exe+0x243B34
+    [1]=00842586  v2game.exe+0xB2586
+    [2]=00A17E97  v2game.exe+0x287E97
+    [3]=009F33AD  v2game.exe+0x2633AD
+    [4]=00D6F9DF  v2game.exe+0x5DF9DF
+    [5]=00D0E0CD  v2game.exe+0x57E0CD
+    [6]=00E40F3E  v2game.exe+0x6B0F3E
+    [7]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [8]=774182AE  ntdll.dll+0x682AE
+    [9]=7741827E  ntdll.dll+0x6827E
+    [10]=00000000
+  source:
+  known_site: none (new rva 243B34 — смотреть keys/objects)
+  source_objects:
+    eax=0057BCEC  vptr=0057DCF4  vtable-outside-exe
+    ecx=4E14E010  vptr=05DAF090  vtable-outside-exe
+  source_keys:
+    stack=36B7B8E8  CMapProvince  vptr=0118D310  vtable-in-exe
+    stack=36B7CED8  CMapProvince  vptr=0118D310  vtable-in-exe
+    stack=03A5B3E8  CCurrentGameState  vptr=0119AE84  vtable-in-exe
+    stack=048311F8  CNullPop  vptr=0118D2E8  vtable-in-exe
+    stack=0057BC68  CEventScope  vptr=011BC904  vtable-in-exe
+    stack=6635D038  CInGameIdler  vptr=0119A34C  vtable-in-exe
+    stack=392EAFA8  CTechnologyStatus  vptr=01190BC0  vtable-in-exe
+    stack=04823FF0  CEU3Application  vptr=0119845C  vtable-in-exe
+    stack=3C1C89B8  CCountry  vptr=0118FACC  vtable-in-exe
+    stack=3637E018  CMapProvince  vptr=0118D310  vtable-in-exe
+    list_start  va=0057C068  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 04:32:02.826 dll=4.19 pid=17136 tid=31908 ========
+  fpu_cw=0109001F mxcsr=00009FE0
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007E6A9B  v2game.exe+0x56A9B
+  av_read addr=00000000
+  params n=2 p0=00000000 p1=00000000
+  eax=00000001 ebx=38A91678 ecx=019BB7EC edx=03FE0000 esi=00000000 edi=34C74DF0
+  ebp=019BB7F8 esp=019BB780 eip=007E6A9B eflags=00010202
+  eip=007E6A9B  v2game.exe+0x56A9B
+  code_eip-8 84 C0 74 7A 8B 74 24 54  8B 06 8B 4F 58 8B 3D 0C
+  pointed:
+  eax=00000001 unreadable
+  ebx=38A91678 01189F18 38A20E48 746E756F 37A70168 00000003 2F65706F 83A3F750 83A3F760
+  ecx=019BB7EC 019BD7F4 00EE1E18 00000000 019BD820 009F3796 05FC2418 538C60B0 05FC250C
+  edx=03FE0000 291BCE82 01001C3E FFEEFFEE 00000002 04D80010 03FE00A4 03FE0000 03FE0000
+  esi=00000000
+  edi=34C74DF0 0118D310 0000018D 0118D338 00000000 00000000 00000000 00000000 00000000
+  esp=019BB780 3765E1D0 38A20E48 538C60B0 00000000 01000003 03FEB3E8 00000190 00151A58
+  stack:
+    [0]=007E6A9B  v2game.exe+0x56A9B
+    [1]=009F3796  v2game.exe+0x263796
+    [2]=00D6F9DF  v2game.exe+0x5DF9DF
+    [3]=00D0E0CD  v2game.exe+0x57E0CD
+    [4]=00E40F3E  v2game.exe+0x6B0F3E
+    [5]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [6]=774182AE  ntdll.dll+0x682AE
+    [7]=7741827E  ntdll.dll+0x6827E
+    [8]=00000000
+  source:
+  known_site: none (new rva 056A9B — смотреть keys/objects)
+  source_objects:
+    eax=00000001  vptr=00000000  unreadable
+    ecx=019BB7EC  vptr=019BD7F4  vtable-outside-exe
+    edi=34C74DF0  CMapProvince  vptr=0118D310  vtable-in-exe
+    ebx=38A91678  CColonialDistanceTracker  vptr=01189F18  vtable-in-exe
+    edx=03FE0000  vptr=291BCE82  vtable-outside-exe
+  source_keys:
+    stack=38A20E48  CCountry  vptr=0118FACC  vtable-in-exe
+    stack=538C60B0  CInGameIdler  vptr=0119A34C  vtable-in-exe
+    stack=03FEB3E8  CCurrentGameState  vptr=0119AE84  vtable-in-exe
+    stack=05FC2418  CEU3Application  vptr=0119845C  vtable-in-exe
+    stack=36E4E4D0  CMapProvince  vptr=0118D310  vtable-in-exe
+    (none)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0

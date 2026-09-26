@@ -686,3 +686,33 @@ country_event = { # SPAIN
     }
 }
 
+country_event = { # SOUTH GERMAN FEDERATION
+    id = 9583
+    title = "noloc"
+    desc = "noloc"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = "noloc"
+		594 = { secede_province = THIS }
+		diplomatic_influence = {
+			who = BAV
+			value = 400
+		}
+		diplomatic_influence = {
+			who = WUR
+			value = 400
+		}
+		diplomatic_influence = {
+			who = BAD
+			value = 400
+		}
+		activate_technology = nationalism_tech
+		BAV = { activate_technology = nationalism_tech }
+		WUR = { activate_technology = nationalism_tech }
+		BAD = { activate_technology = nationalism_tech }
+		
+    }
+}
+
