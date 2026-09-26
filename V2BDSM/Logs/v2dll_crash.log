@@ -640,3 +640,69 @@
     stack=36E4E4D0  CMapProvince  vptr=0118D310  vtable-in-exe
     (none)
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-09-26 13:50:34.094 dll=4.19 pid=4356 tid=34792 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  ident_skip vt=0 lookup=0 slot84=0 e4=0 fn=0 fn2=0 fn3=0 str=0 w74=0 l4c=0 hash=0 par=0 tomb=0/0 first_oos=- first_real=- days_real=-1 last_skip=-
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=0070FD17  v2game.exe+0x32FD17
+  av_read addr=00000000
+  params n=2 p0=00000000 p1=00000000
+  eax=018FCEA0 ebx=4EFA2398 ecx=00000001 edx=00000000 esi=00000000 edi=018FCEA0
+  ebp=018FCEE4 esp=018FCE94 eip=0070FD17 eflags=00010287
+  eip=0070FD17  v2game.exe+0x32FD17
+  code_eip-8 F8 C7 45 FC 00 00 00 00  8B 06 8B 50 18 8D 4D D8
+  pointed:
+  eax=018FCEA0 FFE8E7C0 00000000 018FCEC8 003E8F8C 00000004 0000000F 00000004 300D2D20
+  [eax+14]=0000000F unreadable
+  [eax+18]=00000004 unreadable
+  ebx=4EFA2398 00000000 2FCE4738 00000000 2FCE4540 00000000 2FCE4770 00000000 2FCE49A0
+  ecx=00000001 unreadable
+  edx=00000000
+  esi=00000000
+  edi=018FCEA0 FFE8E7C0 00000000 018FCEC8 003E8F8C 00000004 0000000F 00000004 300D2D20
+  esp=018FCE94 4EFA22A8 4EFA2380 4EFA2398 FFE8E7C0 00000000 018FCEC8 003E8F8C 00000004
+  stack:
+    [0]=0070FD17  v2game.exe+0x32FD17
+    [1]=0071A039  v2game.exe+0x33A039
+    [2]=007188D5  v2game.exe+0x3388D5
+    [3]=00715897  v2game.exe+0x335897
+    [4]=00714EB0  v2game.exe+0x334EB0
+    [5]=00713B65  v2game.exe+0x333B65
+    [6]=0068A8E7  v2game.exe+0x2AA8E7
+    [7]=009D0162  v2game.exe+0x5F0162
+    [8]=00983E9F  v2game.exe+0x5A3E9F
+    [9]=00637D3F  v2game.exe+0x257D3F
+    [10]=60E018DE  lua51.dll+0x118DE
+    [11]=006362D2  v2game.exe+0x2562D2
+    [12]=60DFDB69  lua51.dll+0xDB69
+    [13]=009BF966  v2game.exe+0x5DF966
+    [14]=0095E0CD  v2game.exe+0x57E0CD
+    [15]=00A90F3E  v2game.exe+0x6B0F3E
+    [16]=76A4FCC9  KERNEL32.DLL+0x1FCC9
+    [17]=774182AE  ntdll.dll+0x682AE
+    [18]=7741827E  ntdll.dll+0x6827E
+    [19]=00000000
+  source:
+  known_site: none (new rva 32FD17 — смотреть keys/objects)
+  source_objects:
+    eax=018FCEA0  vptr=FFE8E7C0  vtable-outside-exe
+    ecx=00000001  vptr=00000000  unreadable
+    ebx=4EFA2398  vptr=00000000  null-vtable
+  source_keys:
+    stack=300D2D20  CContinent  vptr=00DDC1DC  vtable-in-exe
+    stack=51DC8220  CPop  vptr=00E16428  vtable-in-exe
+    stack=3885C7F8  CSubUnitDefinition  vptr=00DE0AB0  vtable-in-exe
+    stack=36BC2028  CMapProvince  vptr=00DDD310  vtable-in-exe
+    stack=4C897738  CBuildUnitView  vptr=00DF2A14  vtable-in-exe
+    ated  va=4C897700  (heap)
+    stack=03B7B3E8  CCurrentGameState  vptr=00DEAE84  vtable-in-exe
+    build_navy_label  va=4D09E2E0  (heap)
+    unit_folder_20  va=018FD288  (heap)
+    stack=500B87A8  CMilitaryView  vptr=00DEC924  vtable-in-exe
+    stack=2F4DE870  CEU3Gui  vptr=00DE8A44  vtable-in-exe
+    stack=4EB6D0E0  CInGameIdler  vptr=00DEA34C  vtable-in-exe
+    HalT  va=7FFEA000  (heap)
+    HalT  va=018FD4AC  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0

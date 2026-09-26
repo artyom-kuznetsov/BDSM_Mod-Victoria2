@@ -1265,6 +1265,27 @@ country_event = { # MCL # MONTHLY CLEANUP
 				remove_province_modifier = colonial_railway_nerf_2_pmod
 				add_province_modifier = { name = colonial_railway_nerf_3_pmod duration = -1 }
 			}
+			any_owned = {
+				limit = {
+					is_colonial = no
+					OR = {
+						has_province_modifier = colonial_railway_nerf_1_pmod
+						has_province_modifier = colonial_railway_nerf_2_pmod
+						has_province_modifier = colonial_railway_nerf_3_pmod
+						has_province_modifier = colonial_railway_nerf_4_pmod
+						has_province_modifier = colonial_railway_nerf_5_pmod
+						has_province_modifier = colonial_railway_nerf_6_pmod
+						has_province_modifier = colonial_railway_nerf_7_pmod
+					}
+				}
+				remove_province_modifier = colonial_railway_nerf_1_pmod
+				remove_province_modifier = colonial_railway_nerf_2_pmod
+				remove_province_modifier = colonial_railway_nerf_3_pmod
+				remove_province_modifier = colonial_railway_nerf_4_pmod
+				remove_province_modifier = colonial_railway_nerf_5_pmod
+				remove_province_modifier = colonial_railway_nerf_6_pmod
+				remove_province_modifier = colonial_railway_nerf_7_pmod
+			}
 		}
 		# v4.6 MALARIA
 		any_country = {
