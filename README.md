@@ -45,6 +45,8 @@ Needs to be used with "PATCH_ALLIED_REINFORCE_150" to achieve a total effect of 
 Enables patch for dice rolls in battle.
 #### 6. COMBAT_ROLL_MIN / COMBAT_ROLL_MAX
 Min and Max dice rolls in battle.  
+#### 7. PATCH_COMBAT_LOSS_POPUP_ALL
+Daily casualties in a battle are now visible to all countries, not just the ones participating in the battle.
   
 ### Economic
 #### 1. ENABLE_PRICE_DELTA

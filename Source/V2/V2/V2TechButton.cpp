@@ -37,7 +37,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "4.28"
+#define MOD_VERSION "4.29"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -3799,6 +3799,23 @@ static BytePatch EXE_PATCHES[] =
         { 0xB8, 0xE8, 0x03, 0x00, 0x00 },
         { 0xB8, 0xDC, 0x05, 0x00, 0x00 }, true },
 
+    // Всплывающие цифры потерь над боем (map-text "CombatLoss").
+    // FUN_0059CA40 - посуточное обновление боя (сухопутного и морского,
+    // одна виртуальная функция). После расчёта дня она проверяет, участвует
+    // ли в бою страна, для которой рисуется интерфейс (param_2, метод
+    // vtable+0x58 даёт ссылку на страну, у неё +4 = id): сперва ищет id в
+    // списке участников стороны A (side+0x34..+0x38, записи по 8 байт), если
+    // не нашёл - в списке стороны B (FUN_0042BB00). Только если страна
+    // нашлась в одном из списков, вызывается FUN_00595820 (по разу для
+    // каждой стороны) - она создаёт плавающий текст с потерями дня. То есть
+    // цифры видит только участник боя.
+    // Было: rva 0x19CC5D  je 0x59CCA9 (страна не нашлась ни в A, ни в B ->
+    // перепрыгнуть показ цифр). Стало: два NOP - проваливаемся в показ
+    // всегда, любой стране. Остальной код функции не тронут; показ - чистый
+    // UI (создание текстового объекта на карте, ГСЧ и состояние боя не
+    // трогает; ветка и так зависела от клиента - у каждого свой игрок).
+    { "combat_loss_popup_all", 0, 0x19CC5D, 2, { 0x74, 0x4A }, { 0x90, 0x90 }, true },
+
     // Разрешить строить фабрики в колониальных регионах.
     // Обе функции чек-листа постройки (FUN_004d06a0 и FUN_0052e9f0)
     // независимо инлайнят одну и ту же проверку "state+0x84 > 0" для
@@ -4193,6 +4210,7 @@ static void WriteDefaultSettings(const char* path)
         "PATCH_COMBAT_ROLL=%d\n"
         "COMBAT_ROLL_MIN=%d\n"
         "COMBAT_ROLL_MAX=%d\n"
+        "PATCH_COMBAT_LOSS_POPUP_ALL=%d\n"
         "\n",
         (int)FindExePatchEnabled("always_add_wargoals"),
         (int)FindExePatchEnabled("land_reinforce"),
@@ -4202,7 +4220,8 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.patchAllyOwnerCheck,
         (int)g_settings.patchCombatRoll,
         g_settings.combatRollMin,
-        g_settings.combatRollMax);
+        g_settings.combatRollMax,
+        (int)FindExePatchEnabled("combat_loss_popup_all"));
 
     char extraWhitelistJoined[MAX_EXTRA_WHITELIST * EXTRA_WHITELIST_NAME_MAX] = "";
     for (int w = 0; w < g_extraWhitelistCount; ++w)
