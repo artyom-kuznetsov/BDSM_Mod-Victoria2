@@ -5735,12 +5735,14 @@ country_event = {
 	is_triggered_only = yes
 	## Audax Validator "." Ignore_NEXT
 	option = {
+		# NON COLONIAL STATE SIZE FLAG #
 		any_country = {
 			limit = {
 				OR = {
 					war = no
 					NOT = { year = 1837 }
 				}
+				NOT = { has_country_flag = cheaper_states_cflag }
 			}
 			any_owned = {
 				limit = {
@@ -5786,6 +5788,58 @@ country_event = {
 				add_core = HUG
 			}
 		}
+		# NON COLONIAL CHEAPER STATE SIZE FLAG #
+		any_country = {
+			limit = {
+				OR = {
+					war = no
+					NOT = { year = 1837 }
+				}
+				has_country_flag = cheaper_states_cflag
+			}
+			any_owned = {
+				limit = {
+					state_scope = { NOT = { total_pops = 400000 } is_colonial = no }
+				}
+				add_core = SMA
+				remove_core = MST
+				remove_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { 
+						total_pops = 400000
+						NOT = { total_pops = 800000 } 
+						is_colonial = no
+					}
+				}
+				remove_core = SMA
+				add_core = MST
+				remove_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { total_pops = 800000 NOT = { total_pops = 1200000 } is_colonial = no }
+				}
+				remove_core = SMA
+				remove_core = MST
+				add_core = LRG
+				remove_core = HUG
+			}
+			any_owned = {
+				limit = {
+					state_scope = { total_pops = 1200000 is_colonial = no }
+				}
+				remove_core = SMA
+				remove_core = MST
+				remove_core = LRG
+				add_core = HUG
+			}
+		}
+		
+		# COLONIAL STATE SIZE FLAG #
 		any_country = {
 			limit = {
 				OR = {
