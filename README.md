@@ -96,7 +96,7 @@ Production tab filters will now show all factories in a state with filtered fact
 Production tab filters will show only producing factories of selected good, not both producers and consumers.
 #### 10. PLAYER_BUTTONS
 Buttons located in topbar called "button_fe_player_pause", "button_fe_player_next" and a slider "fe_player_volume_slider"
-will pause, skip and configure 
+will pause, skip and configure music volume.
   
 ### Miscellaneous
 #### 1. PATCH_CONSCIOUSNESS_PLURALITY_GROWTH
