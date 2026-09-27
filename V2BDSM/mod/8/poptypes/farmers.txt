@@ -1305,6 +1305,19 @@ ideologies = {
 				is_accepted_culture = yes
 			}
 		}
+
+		modifier = {
+			factor = 0.8
+			literacy = 0.6
+		}
+		modifier = {
+			factor = 0.7
+			literacy = 0.7
+		}
+		modifier = {
+			factor = 0.5
+			literacy = 0.85
+		}
 	}
 
 	conservative = {
@@ -1404,6 +1417,18 @@ ideologies = {
 		modifier = {
 			factor = 0.9
 			poor_strata_militancy = 9
+		}
+		modifier = {
+			factor = 0.9
+			literacy = 0.6
+		}
+		modifier = {
+			factor = 0.8
+			literacy = 0.7
+		}
+		modifier = {
+			factor = 0.7
+			literacy = 0.85
 		}
 	}
 
@@ -1512,7 +1537,66 @@ ideologies = {
 	}
 
 	communist = {
-		factor = 0
+		factor = 1
+		modifier = {
+			factor = 0.5
+			strata = middle
+		}
+		modifier = {
+			factor = 0.1
+			NOT = { militancy = 6 }
+			NOT = { government = proletarian_dictatorship }
+		}
+		modifier = {
+			factor = 1.5
+			ruling_party_ideology = communist 
+		}
+		modifier = {
+			factor = 1.1
+			state_scope = {
+				NOT = { poor_strata_everyday_needs = 0.5 }
+			}
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 0.1
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 0.2
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 0.3
+		}
+		modifier = {
+			factor = 1.1	
+			social_reform_want = 0.4
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 0.5
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 0.6
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 0.7
+		}
+		modifier = {
+			factor = 1.1	
+			social_reform_want = 0.8
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 0.9
+		}
+		modifier = {
+			factor = 1.1
+			social_reform_want = 1
+		}
 	}
 	liberal = {
 		factor = 1.1
