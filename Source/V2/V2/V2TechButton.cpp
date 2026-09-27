@@ -37,7 +37,7 @@
 // "у кого-то старая DLL" — сравнить эту строку в логах перед сетевой
 // игрой.
 // CLAUDE МЕНЯЙ ВЕРСИЮ ПРИ КАЖДОЙ ПРАВКЕ ФАЙЛА
-#define MOD_VERSION "4.19"
+#define MOD_VERSION "4.28"
 
 // Настройки ниже читаются из v2dll_settings.ini рядом с exe при
 // каждом запуске игры. Если файла ещё нет, он создаётся со
@@ -65,14 +65,11 @@ struct Settings
     // таблицу (каждый - отдельная функция со своим хуком).
     bool patchOccupiedReinforceSplit = true;
     bool patchAllyOwnerCheck         = true;
-    bool patchCivilizeNullCheck      = false;
+    bool patchCivilizeNullCheck      = true;
     bool patchSupplySourceNullCheck  = true;
-    bool patchTechCompareNullCheck   = true;
-    bool patchTechFolderIconNullCheck = true;
-    // 3.27: антикраш identity/tombstone/null-vtable выключены — на 3.23–3.26
-    // OOS 1836-01-11 delta=1 при тех же патчах. Ini не включает обратно.
-    bool patchNullVtableUi           = false;
-    bool patchIdentityTombstone      = false;
+    // Два краша окна технологий на пустом "статусе" (сортировка списка и
+    // иконка папки) - см. InstallTechCompareNullCheck / InstallTechFolderIconNullCheck.
+    bool patchTechNullCheckFixes     = true;
     bool patchGraphPointClamp        = false;
     bool patchFactoryDumpScan        = false;
     bool patchProdListVisibility     = true;
@@ -90,6 +87,13 @@ struct Settings
     // ПРОИЗВОДЯТ выбранный товар (оригинал засчитывал и потребителей
     // сырья) - регионы, где товар только потребляют, не показываются.
     bool filterProducersOnly         = true;
+    // Кнопка "button_fe_player_next" из interface\topbar.gui пропускает
+    // играющий трек (см. SetupPlayerButtons).
+    bool playerButtons            = true;
+    // Выбор песни (FUN_00455290): настоящий случайный выбор вместо
+    // "случайных" чисел из непроинициализированной памяти стека
+    // (см. InstallMusicFairRandom).
+    bool musicFairRandom             = true;
 
     // Взаимоисключающе с priceDelta (ENABLE_PRICE_DELTA) - оба
     // патчат один и тот же адрес. Если включены оба, побеждает этот.
@@ -831,6 +835,914 @@ static bool SetupHideColonialButton(void* view)
     g_hideColonialView = view;
 
     Log("SetupHideColonialButton: подписана");
+    return true;
+}
+
+
+// ---------------------------------------------------------------
+// PLAYER_BUTTONS - кнопки "плеера" в topbar.gui:
+//   button_fe_player_next  - пропускает играющий трек, игра сама включает
+//                            следующий;
+//   button_fe_player_pause - ставит музыку на паузу / снимает с паузы.
+//
+// Музыка. Текущий объект музыки лежит в DAT_0131cb34 (CMusic на
+// DirectShow либо CNullMusic, если звука нет). Автомат состояний -
+// DAT_00f20c3c (0 - остановлено, 1 - играет, 2 - пауза, 3 - нет
+// звука). Каждый кадр внутрибойного цикла (FUN_00654d80) игра делает:
+//     если музыка включена и громкость > 0:
+//         если объект "активен" (слот +0x38: состояние не 0 и не 2)
+//             и трек ещё не закончился (слот +0x2c) - ничего;
+//         иначе - FUN_00455290 выбирает следующую песню из songs.txt
+//             (случайно, с весами и без недавно игравших), затем
+//             Play(имя) (слот +8) и Start (слот +0xC).
+// Поэтому пропуск трека - это обычный Stop (слот +0x10, FUN_009e96b0:
+// останавливает граф, состояние -> 0): на следующем кадре игра
+// увидит "не активен" и сама запустит следующую песню тем же путём,
+// каким делает это по окончании трека. Своего выбора песни мы не
+// делаем и ГСЧ игры не трогаем (выбор идёт локальным MT внутри
+// FUN_00455290), поэтому на синхронизацию мультиплеера это не влияет.
+//
+// Пауза. Родной слот паузы игры (+0x14, FUN_009e9710) для нас не годится:
+// он переводит автомат в состояние 2, а сразу после этого цикл выше
+// видит "не активен" и запускает НОВУЮ песню. Поэтому паузим сам граф
+// DirectShow (IMediaControl, DAT_00f20c4c, слоты Run +0x1C / Pause +0x20 /
+// GetState +0x28), оставляя автомат игры в состоянии 1 ("играет"): пока
+// граф на паузе, событие конца трека не приходит, игра считает, что песня
+// ещё играет, и ничего не запускает. Кнопка - переключатель: по
+// состоянию графа "работает" -> Pause, "на паузе" -> Run. Если игра
+// не в состоянии 1 (пауза между песнями, нет звука) - клик игнорируется.
+//
+// Кнопки. Имён "button_fe_player_*" движок не знает, поэтому
+// подписываем их сами - как кнопки решений и "hide_colonial_states":
+// ищем кнопку по имени в окне topbar, клонируем "склейку"
+// CButtonObserverGlue (берём vftable и владельца у живой склейки topbar,
+// остальные обработчики обнуляем), подставляем свой обработчик клика
+// (+8) и вешаем склейку на Observable кнопки.
+//
+// Когда подписывать. FUN_007129a0 (rva 0x3129A0) при каждом создании
+// окна topbar находит его кнопки по имени и подписывает встроенные
+// склейки (окно хранится в topbar+0x20). Зовётся она из конструктора
+// topbar (call по rva 0x30D090) и виртуально (vftable[0] класса,
+// 0xE113D0 - перезагрузка интерфейса). Подменяем оба места: зовём
+// оригинал, затем подписываем свою кнопку на свежесозданном окне.
+// ---------------------------------------------------------------
+
+static const DWORD RVA_TOPBAR_BUILD       = 0x3129A0;  // FUN_007129a0
+static const DWORD RVA_TOPBAR_BUILD_CALL  = 0x30D090;  // call в конструкторе topbar
+static const DWORD RVA_TOPBAR_BUILD_VSLOT = 0xA113D0;  // vftable[0] класса topbar
+static const int   OFF_TOPBAR_WINDOW = 0x20;           // topbar -> окно из topbar.gui
+static const int   OFF_TOPBAR_GLUE   = 0x218;          // склейка у player_flag (любая живая подойдёт)
+
+static const DWORD RVA_MUSIC_OBJECT_PTR = 0xF1CB34;    // DAT_0131cb34
+static const DWORD RVA_MUSIC_STATE      = 0xB20C3C;    // DAT_00f20c3c
+static const DWORD RVA_MUSIC_MEDIACTL   = 0xB20C4C;    // DAT_00f20c4c: IMediaControl
+static const int   VT_MUSIC_STOP        = 0x10;        // слот 4 - Stop
+static const int   VT_MC_RUN            = 0x1C;        // IMediaControl::Run
+static const int   VT_MC_PAUSE          = 0x20;        // IMediaControl::Pause
+static const int   VT_MC_GETSTATE       = 0x28;        // IMediaControl::GetState(ms, OAFilterState*)
+
+// Обработчик клика по слоту +8 склейки: mov eax,[ecx+8]; test eax,eax;
+// jz ret; mov ecx,[ecx+4]; jmp eax; ret (FUN_00737d00). Если у склейки
+// topbar в этом слоте что-то другое - формат не тот, не подписываем.
+static const unsigned char GLUE_CLICK_STUB[13] =
+    { 0x8B, 0x41, 0x08, 0x85, 0xC0, 0x74, 0x05, 0x8B, 0x49, 0x04, 0xFF, 0xE0, 0xC3 };
+
+static unsigned char g_playerNextGlue[GLUE_SIZE];
+static unsigned char g_playerPauseGlue[GLUE_SIZE];
+static DWORD         g_playerNextLastClick = 0;
+static DWORD         g_playerPauseLastClick = 0;
+
+static void __cdecl OnPlayerNextClicked()
+{
+    // Страховка от двойной подписки (перезагрузка интерфейса на том же
+    // окне): один клик не должен пропускать два трека.
+    DWORD now = GetTickCount();
+    if (now - g_playerNextLastClick < 250)
+        return;
+    g_playerNextLastClick = now;
+
+    __try
+    {
+        void* music = *(void**)(g_base + RVA_MUSIC_OBJECT_PTR);
+        if (!music || SafeIsBadReadPtr(music, 4))
+        {
+            Log("PlayerNext: объекта музыки нет");
+            return;
+        }
+
+        DWORD before = *(DWORD*)(g_base + RVA_MUSIC_STATE);
+        VCall0(music, VT_MUSIC_STOP);
+        DWORD after = *(DWORD*)(g_base + RVA_MUSIC_STATE);
+        Log("PlayerNext: трек пропущен (состояние плеера %u -> %u)", before, after);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("PlayerNext: исключение при остановке трека");
+    }
+}
+
+// Тот же контракт, что у HideColonialThunk: вызывается из слота склейки
+// (ECX = владелец, стековых аргументов нет), сохраняет все регистры.
+__declspec(naked) static void PlayerNextThunk()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        pushad
+        call OnPlayerNextClicked
+        popad
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+// Пауза/продолжение: переключатель по реальному состоянию графа
+// DirectShow (OAFilterState: 0 - остановлен, 1 - пауза, 2 - работает).
+static void __cdecl OnPlayerPauseClicked()
+{
+    DWORD now = GetTickCount();
+    if (now - g_playerPauseLastClick < 250)
+        return;
+    g_playerPauseLastClick = now;
+
+    __try
+    {
+        DWORD gameState = *(DWORD*)(g_base + RVA_MUSIC_STATE);
+        void* ctl = *(void**)(g_base + RVA_MUSIC_MEDIACTL);
+        if (gameState != 1 || !ctl || SafeIsBadReadPtr(ctl, 4))
+        {
+            Log("PlayerPause: игнорируем клик (состояние плеера %u, IMediaControl=%08X)",
+                gameState, (DWORD)(DWORD_PTR)ctl);
+            return;
+        }
+
+        // IMediaControl - COM-интерфейс: методы __stdcall, "this" первым
+        // аргументом на стеке (так же зовёт их и сама игра).
+        typedef LONG(__stdcall* tMcNoArgs)(void* self);
+        typedef LONG(__stdcall* tMcGetState)(void* self, LONG msTimeout, LONG* state);
+        void** mcVt = *(void***)ctl;
+
+        LONG filterState = -1;
+        ((tMcGetState)mcVt[VT_MC_GETSTATE / 4])(ctl, 100, &filterState);
+
+        if (filterState == 2)
+        {
+            LONG hr = ((tMcNoArgs)mcVt[VT_MC_PAUSE / 4])(ctl);
+            Log("PlayerPause: пауза (hr=%08X)", (unsigned)hr);
+        }
+        else if (filterState == 1)
+        {
+            LONG hr = ((tMcNoArgs)mcVt[VT_MC_RUN / 4])(ctl);
+            Log("PlayerPause: продолжение (hr=%08X)", (unsigned)hr);
+        }
+        else
+        {
+            Log("PlayerPause: граф в состоянии %d - ничего не делаем", (int)filterState);
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("PlayerPause: исключение");
+    }
+}
+
+__declspec(naked) static void PlayerPauseThunk()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        pushad
+        call OnPlayerPauseClicked
+        popad
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+// ---------------------------------------------------------------
+// Ползунок громкости музыки "fe_player_volume_slider" в topbar.gui -
+// дубль ползунка "musicvolume_slider" из окна настроек.
+//
+// Громкость музыки игра хранит в объекте настроек (FUN_00475500 отдаёт
+// синглтон DAT_0125b5e0): float 0..100 по смещению +0x88 (мастер +0x80,
+// эффекты +0x84). Каждый кадр функция FUN_009df2b0 считает из них
+//     громкость = музыка*0.01 * (мастер*0.01)
+// и сама передаёт её в CMusic (слот +0x1C), поэтому нам достаточно
+// писать в +0x88 - звук подхватится на следующем кадре.
+//
+// Ползунок -> настройки: на ползунок вешаем "склейку"
+// CScrollbarObserverGlue (vftable 0xE14404 - у окна настроек так
+// подписан ползунок гаммы): слот 1 (обработчик в +8, без аргументов,
+// ECX = владелец) вызывается при смене значения. Владельцем ставим сам
+// ползунок, в обработчике читаем GetValue() и пишем в настройки.
+// Настройки -> ползунок (окно настроек, загрузка): каждый кадр (хук на
+// единственный call FUN_009df2b0, rva 0x285727) сверяем +0x88 с тем, что
+// видели в прошлый раз, и при изменении ставим значение ползунка. Своё
+// же значение не зеркалим (g_volSeen), чтобы не драться с перетаскиванием.
+//
+// Ползунок ищется у окна методом vtable+0x4C (типизированный "найти
+// ползунок по имени"; +0x34 - кнопки). GetValue - слот +0x10 подобъекта
+// +0x54 (float в ST0), SetValue(int значение*1000, 1, 1) - слот +0x1C
+// (так зовёт его окно настроек). Указатель на ползунок живёт, пока жив
+// topbar: чистим его в деструкторе topbar (vftable[1]) и пересоздаём при
+// каждой перестройке окна.
+// ---------------------------------------------------------------
+static const int   VT_FIND_SCROLLBAR = 0x4C;
+static const int   VT_SB_GETVALUE    = 0x10;
+static const int   VT_SB_SETVALUE    = 0x1C;
+static const DWORD RVA_OPTIONS_PTR   = 0xE5B5E0;   // DAT_0125b5e0
+static const int   OFF_OPT_MUSIC_VOLUME = 0x88;
+static const DWORD RVA_SCROLLBAR_GLUE_VTABLE = 0xA14404;  // CScrollbarObserverGlue<CSettingsScreen>
+static const DWORD RVA_FRAME_PUMP      = 0x5DF2B0;  // FUN_009df2b0
+static const DWORD RVA_FRAME_PUMP_CALL = 0x285727;  // единственный call на неё
+static const DWORD RVA_TOPBAR_DTOR     = 0x30D0C0;  // vftable[1] topbar (scalar deleting dtor)
+static const char* const PLAYER_VOLUME_SLIDER = "fe_player_volume_slider";
+
+// mov eax,ecx; mov ecx,[eax+4]; mov eax,[eax+8]; jmp eax - слот 1 склейки.
+static const unsigned char SCROLL_GLUE_CHANGE_STUB[10] =
+    { 0x8B, 0xC1, 0x8B, 0x48, 0x04, 0x8B, 0x40, 0x08, 0xFF, 0xE0 };
+
+static void*         g_volSlider = 0;
+static void*         g_volTopbar = 0;
+static float         g_volSeen = -1000.0f;     // последнее значение настроек, которое мы уже отразили
+static DWORD         g_volLastPoll = 0;
+static LONG          g_volLogCount = 0;        // общий предел строк лога про ползунок
+static LONG          g_volPumpCalls = 0;
+static bool          g_volInternal = false;    // идёт наш собственный SetValue - события игнорируем
+static bool          g_volPushToMenu = false;  // наш ползунок сменил настройки - окну настроек нужно обновить свой
+static unsigned char g_volGlue[GLUE_SIZE];
+
+typedef float(__fastcall* tSbGetValue)(void* self, void* edx);
+typedef void(__fastcall* tSbSetValue)(void* self, void* edx, int value, int a, int b);
+
+static float* OptionsMusicVolumePtr()
+{
+    void* opt = *(void**)(g_base + RVA_OPTIONS_PTR);
+    if (!opt || SafeIsBadReadPtr((char*)opt + OFF_OPT_MUSIC_VOLUME, 4))
+        return 0;
+    return (float*)((char*)opt + OFF_OPT_MUSIC_VOLUME);
+}
+
+static float SliderGetValue(void* slider)
+{
+    void* sub = (unsigned char*)slider + OFF_OBSERVABLE;
+    void** vt = *(void***)sub;
+    return ((tSbGetValue)vt[VT_SB_GETVALUE / 4])(sub, 0);
+}
+
+static void SliderSetValue(void* slider, float v)
+{
+    void* sub = (unsigned char*)slider + OFF_OBSERVABLE;
+    void** vt = *(void***)sub;
+    ((tSbSetValue)vt[VT_SB_SETVALUE / 4])(sub, 0, (int)(v * 1000.0f + 0.5f), 1, 1);
+}
+
+// Наш собственный SetValue: событие смены значения, которое он породит
+// у нашего же обработчика, игнорируем (иначе получим эхо в настройки).
+static void SliderSetInternal(void* slider, float v)
+{
+    g_volInternal = true;
+    SliderSetValue(slider, v);
+    g_volInternal = false;
+}
+
+// Смена значения нашего ползунка (пользователем) -> настройки игры.
+static void __cdecl OnVolumeSliderChanged(void* slider)
+{
+    if (g_volInternal)
+        return;
+
+    __try
+    {
+        float* p = OptionsMusicVolumePtr();
+        if (!slider || !p)
+            return;
+
+        float v = SliderGetValue(slider);
+        if (v < 0.0f) v = 0.0f;
+        if (v > 100.0f) v = 100.0f;
+
+        *p = v;
+        g_volSeen = v;
+        g_volPushToMenu = true;      // окно настроек подхватит при ближайшем Update
+
+        if (InterlockedIncrement(&g_volLogCount) <= 40)
+            Log("PlayerVolume: ползунок topbar -> громкость музыки %.1f", v);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("PlayerVolume: исключение в обработчике ползунка");
+    }
+}
+
+// ECX = владелец склейки = ползунок. Регистры сохраняем.
+__declspec(naked) static void VolumeSliderThunk()
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        pushad
+        push ecx
+        call OnVolumeSliderChanged
+        add esp, 4
+        popad
+        mov esp, ebp
+        pop ebp
+        ret
+    }
+}
+
+static bool SetupVolumeSlider(void* window, void* topbar)
+{
+    g_volSlider = 0;
+    g_volTopbar = 0;
+
+    GStr sName;
+    MakeStr(&sName, g_nameStorage, sizeof(g_nameStorage), PLAYER_VOLUME_SLIDER);
+
+    void* slider = VCall1(window, VT_FIND_SCROLLBAR, &sName);
+    if (!slider)
+    {
+        Log("PlayerVolume: ползунок '%s' не найден в topbar.gui", PLAYER_VOLUME_SLIDER);
+        return false;
+    }
+
+    void** gvt = (void**)(g_base + RVA_SCROLLBAR_GLUE_VTABLE);
+    if (SafeIsBadReadPtr(gvt, 8) || SafeIsBadReadPtr(gvt[1], sizeof(SCROLL_GLUE_CHANGE_STUB)) ||
+        memcmp(gvt[1], SCROLL_GLUE_CHANGE_STUB, sizeof(SCROLL_GLUE_CHANGE_STUB)) != 0)
+    {
+        Log("PlayerVolume: vftable склейки ползунка (rva %06X) не совпал - не подписываем",
+            RVA_SCROLLBAR_GLUE_VTABLE);
+        return false;
+    }
+
+    // Начальное значение - из настроек, ДО подписки (чтобы SetValue не
+    // дёрнул наш же обработчик).
+    float* p = OptionsMusicVolumePtr();
+    float vol = p ? *p : 0.0f;
+    if (p)
+    {
+        g_volSeen = vol;
+        SliderSetInternal(slider, vol);
+    }
+
+    memset(g_volGlue, 0, GLUE_SIZE);
+    *(void**)(g_volGlue + 0x00) = gvt;
+    *(void**)(g_volGlue + 0x04) = slider;
+    *(void**)(g_volGlue + OFF_GLUE_METHOD) = (void*)&VolumeSliderThunk;
+
+    void* observable = (unsigned char*)slider + OFF_OBSERVABLE;
+    VCall1(observable, VT_ADD_OBSERVER, g_volGlue);
+
+    g_volSlider = slider;
+    g_volTopbar = topbar;
+    Log("PlayerVolume: ползунок '%s' подписан (slider=%08X, громкость %.1f)",
+        PLAYER_VOLUME_SLIDER, (DWORD)(DWORD_PTR)slider, vol);
+    return true;
+}
+
+// Настройки игры -> ползунок topbar: если значение в настройках изменилось
+// не нами (окно настроек, загрузка) - ставим его на ползунок.
+static void MirrorOptionsToSlider(const char* who)
+{
+    void* slider = g_volSlider;
+    if (!slider)
+        return;
+
+    float* p = OptionsMusicVolumePtr();
+    if (!p)
+        return;
+
+    float vol = *p;
+    if (vol == g_volSeen)
+        return;
+
+    g_volSeen = vol;
+    SliderSetInternal(slider, vol);
+    if (InterlockedIncrement(&g_volLogCount) <= 40)
+        Log("PlayerVolume: настройки -> ползунок topbar %.1f (%s)", vol, who);
+}
+
+// Зовётся каждый кадр (перед FUN_009df2b0).
+static void __cdecl OnFramePump()
+{
+    LONG calls = InterlockedIncrement(&g_volPumpCalls);
+    void* slider = g_volSlider;
+
+    if (calls == 1 || calls == 300 || calls == 3000)
+        Log("PlayerVolume: покадровый хук жив, вызовов=%d slider=%08X", (int)calls,
+            (DWORD)(DWORD_PTR)slider);
+
+    if (!slider)
+        return;
+
+    DWORD now = GetTickCount();
+    if (now - g_volLastPoll < 100)
+        return;
+    g_volLastPoll = now;
+
+    __try
+    {
+        MirrorOptionsToSlider("кадр");
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_volSlider = 0;
+        g_volTopbar = 0;
+        Log("PlayerVolume: исключение при синхронизации - ползунок отключён");
+    }
+}
+
+// ---------------------------------------------------------------
+// Окно настроек: FUN_0075bb50 (CSettingsScreen, vftable[4]; this+0x328 /
+// +0x32C / +0x330 - ползунки мастера / эффектов / музыки). Копирует значения
+// СВОИХ ползунков в настройки игры, поэтому если окно держит устаревшие
+// значения, оно затирает изменения, сделанные нашим ползунком. Хук:
+//  - перед оригиналом: если громкость меняли ползунком topbar, ставим то же
+//    значение на ползунок музыки в окне настроек (флаг g_volPushToMenu),
+//    тогда оригинал перепишет настройки тем же числом;
+//  - после оригинала: если окно изменило настройки (пользователь двигает
+//    свой ползунок) - отражаем на ползунок topbar.
+// Пролог "push ebp; mov ebp,esp; push ecx; push esi" (5 байт) переносим в
+// трамплин и возвращаемся на "mov esi,ecx" (+5). Сигнатура вызова проверена
+// по дизассемблеру: __thiscall без аргументов, ret без операнда.
+// ---------------------------------------------------------------
+static const DWORD RVA_APPLY_VOLUMES = 0x35BB50;
+static const unsigned char APPLY_VOLUMES_SIG[7] = { 0x55, 0x8B, 0xEC, 0x51, 0x56, 0x8B, 0xF1 };
+static const int OFF_SETTINGS_MUSIC_SLIDER = 0x330;
+
+typedef void(__fastcall* tApplyVolumes)(void* self, void* edx);
+static tApplyVolumes g_applyVolumesOrig = 0;
+static LONG          g_applyVolCalls = 0;
+
+static void __fastcall ApplyVolumesHook(void* self, void* edx)
+{
+    LONG n = InterlockedIncrement(&g_applyVolCalls);
+
+    __try
+    {
+        float* p = OptionsMusicVolumePtr();
+        void* menuSlider = self ? *(void**)((unsigned char*)self + OFF_SETTINGS_MUSIC_SLIDER) : 0;
+        bool haveMenu = menuSlider && !SafeIsBadReadPtr(menuSlider, 0x60);
+
+        if (n <= 3 || n == 100 || n == 1000)
+            Log("SettingsApply: вызов #%d this=%08X настройки=%.1f ползунок окна=%.1f push=%d",
+                (int)n, (DWORD)(DWORD_PTR)self, p ? *p : -1.0f,
+                haveMenu ? SliderGetValue(menuSlider) : -1.0f, (int)g_volPushToMenu);
+
+        if (g_volPushToMenu && haveMenu && p)
+        {
+            SliderSetValue(menuSlider, *p);
+            g_volPushToMenu = false;
+            if (InterlockedIncrement(&g_volLogCount) <= 40)
+                Log("PlayerVolume: ползунок topbar -> ползунок окна настроек %.1f", *p);
+        }
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("SettingsApply: исключение до оригинала");
+    }
+
+    g_applyVolumesOrig(self, edx);
+
+    __try
+    {
+        MirrorOptionsToSlider("окно настроек");
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_volSlider = 0;
+        g_volTopbar = 0;
+        Log("SettingsApply: исключение после оригинала - ползунок topbar отключён");
+    }
+}
+
+// Кнопка OK/Применить окна настроек: FUN_0075c650 вызывает FUN_0075d4b0
+// (call по rva 0x35C67E), которая переписывает ВСЕ настройки из элементов
+// окна, в том числе громкости. Функция берёт "this" из ESI вызывающей
+// (нестандартное соглашение), без стековых аргументов, ret без операнда, -
+// поэтому заглушка зовёт её как есть (регистры не трогаем) и только
+// потом отражает громкость на ползунок topbar.
+static const DWORD RVA_SETTINGS_APPLY      = 0x35D4B0;   // FUN_0075d4b0
+static const DWORD RVA_SETTINGS_APPLY_CALL = 0x35C67E;   // единственный call на неё
+static DWORD g_settingsApplyOrig = 0;
+
+static void __cdecl OnSettingsApplied()
+{
+    __try
+    {
+        MirrorOptionsToSlider("кнопка OK окна настроек");
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        g_volSlider = 0;
+        g_volTopbar = 0;
+        Log("SettingsApply: исключение после OK - ползунок topbar отключён");
+    }
+}
+
+__declspec(naked) static void SettingsApplyThunk()
+{
+    __asm {
+        call dword ptr [g_settingsApplyOrig]
+        pushad
+        call OnSettingsApplied
+        popad
+        ret
+    }
+}
+
+static bool PatchSettingsApplyCall()
+{
+    unsigned char* p = (unsigned char*)(g_base + RVA_SETTINGS_APPLY_CALL);
+    DWORD expectRel = (g_base + RVA_SETTINGS_APPLY) - ((DWORD)(DWORD_PTR)p + 5);
+    if (p[0] != 0xE8 || *(DWORD*)(p + 1) != expectRel)
+    {
+        Log("SettingsApply: call применения настроек не совпал rva %06X (%02X %02X %02X %02X %02X)",
+            RVA_SETTINGS_APPLY_CALL, p[0], p[1], p[2], p[3], p[4]);
+        return false;
+    }
+
+    g_settingsApplyOrig = g_base + RVA_SETTINGS_APPLY;
+
+    DWORD rel = (DWORD)(DWORD_PTR)&SettingsApplyThunk - ((DWORD)(DWORD_PTR)p + 5);
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(p + 1, 4, PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    *(DWORD*)(p + 1) = rel;
+    VirtualProtect(p + 1, 4, oldProtect, &oldProtect);
+    Log("SettingsApply: call применения настроек подменён rva %06X", RVA_SETTINGS_APPLY_CALL);
+    return true;
+}
+
+static bool InstallApplyVolumesHook()
+{
+    unsigned char* fn = (unsigned char*)(g_base + RVA_APPLY_VOLUMES);
+    if (memcmp(fn, APPLY_VOLUMES_SIG, sizeof(APPLY_VOLUMES_SIG)) != 0)
+    {
+        Log("SettingsApply: сигнатура не совпала rva %06X - не патчим", RVA_APPLY_VOLUMES);
+        return false;
+    }
+
+    // Трамплин: перенесённый пролог (5 байт) + jmp на fn+5.
+    unsigned char* tramp = (unsigned char*)VirtualAlloc(0, 32, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+    if (!tramp)
+        return false;
+    memcpy(tramp, fn, 5);
+    tramp[5] = 0xE9;
+    *(DWORD*)(tramp + 6) = (DWORD)(DWORD_PTR)(fn + 5) - ((DWORD)(DWORD_PTR)tramp + 10);
+    g_applyVolumesOrig = (tApplyVolumes)(DWORD_PTR)tramp;
+
+    unsigned char patch[5];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&ApplyVolumesHook - ((DWORD)(DWORD_PTR)fn + 5);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(fn, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(fn, patch, sizeof(patch));
+    VirtualProtect(fn, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("SettingsApply: хук установлен rva %06X", RVA_APPLY_VOLUMES);
+    return true;
+}
+
+static DWORD g_framePumpOrig = 0;
+
+__declspec(naked) static void FramePumpThunk()
+{
+    __asm {
+        pushad
+        call OnFramePump
+        popad
+        jmp dword ptr [g_framePumpOrig]
+    }
+}
+
+typedef void*(__fastcall* tTopbarDtor)(void* self, void* edx, int flags);
+static tTopbarDtor g_topbarDtorOrig = 0;
+
+// vftable[1] topbar: __thiscall(this, flags), ret 4, результат - this.
+static void* __fastcall TopbarDtorHook(void* self, void* edx, int flags)
+{
+    if (self == g_volTopbar)
+    {
+        g_volSlider = 0;
+        g_volTopbar = 0;
+    }
+    return g_topbarDtorOrig(self, edx, flags);
+}
+
+struct PlayerButtonDef
+{
+    const char*    name;
+    void*          thunk;
+    unsigned char* glue;
+};
+
+// Подписывает одну кнопку topbar: клон склейки с обработчиком клика в +8.
+static bool SubscribePlayerButton(void* window, unsigned char* srcGlue, const PlayerButtonDef& def)
+{
+    GStr sButton;
+    MakeStr(&sButton, g_nameStorage, sizeof(g_nameStorage), def.name);
+
+    void* button = VCall1(window, VT_FIND_CHILD, &sButton);
+    if (!button)
+    {
+        Log("Player: кнопка '%s' не найдена в topbar.gui", def.name);
+        return false;
+    }
+
+    // Обработчики оригинальной склейки не копируем - только vftable и
+    // владельца; иначе наведение/правый клик вызвали бы чужие обработчики.
+    void** vt = *(void***)srcGlue;
+    memset(def.glue, 0, GLUE_SIZE);
+    *(void**)(def.glue + 0x00) = vt;
+    *(void**)(def.glue + 0x04) = *(void**)(srcGlue + 4);
+    *(void**)(def.glue + OFF_GLUE_METHOD) = def.thunk;
+
+    void* observable = (unsigned char*)button + OFF_OBSERVABLE;
+    VCall1(observable, VT_ADD_OBSERVER, def.glue);
+
+    Log("Player: кнопка '%s' подписана (button=%08X)", def.name, (DWORD)(DWORD_PTR)button);
+    return true;
+}
+
+static bool SetupPlayerButtons(void* topbar)
+{
+    unsigned char* t = (unsigned char*)topbar;
+    if (!t)
+        return false;
+
+    void* window = *(void**)(t + OFF_TOPBAR_WINDOW);
+    if (!window)
+    {
+        Log("Player: у topbar нет окна");
+        return false;
+    }
+
+    unsigned char* srcGlue = t + OFF_TOPBAR_GLUE;
+    void** vt = *(void***)srcGlue;
+    if (!vt || SafeIsBadReadPtr(vt, 12) ||
+        SafeIsBadReadPtr(vt[2], sizeof(GLUE_CLICK_STUB)) ||
+        memcmp(vt[2], GLUE_CLICK_STUB, sizeof(GLUE_CLICK_STUB)) != 0)
+    {
+        Log("Player: склейка topbar+0x%X не похожа на CButtonObserverGlue - не подписываем",
+            (unsigned)OFF_TOPBAR_GLUE);
+        return false;
+    }
+
+    const PlayerButtonDef defs[] =
+    {
+        { "button_fe_player_next",  (void*)&PlayerNextThunk,  g_playerNextGlue  },
+        { "button_fe_player_pause", (void*)&PlayerPauseThunk, g_playerPauseGlue },
+    };
+
+    int done = 0;
+    for (int i = 0; i < (int)(sizeof(defs) / sizeof(defs[0])); ++i)
+        if (SubscribePlayerButton(window, srcGlue, defs[i]))
+            ++done;
+
+    Log("Player: topbar=%08X подписано кнопок: %d", (DWORD)(DWORD_PTR)topbar, done);
+
+    if (SetupVolumeSlider(window, topbar))
+        ++done;
+    return done > 0;
+}
+
+typedef int(__fastcall* tTopbarBuild)(void* self, void* edx);
+static tTopbarBuild g_topbarBuildOrig = 0;
+
+// __thiscall без стековых аргументов, ret без операнда; результат - в EAX.
+static int __fastcall TopbarBuildHook(void* self, void* edx)
+{
+    int r = g_topbarBuildOrig(self, edx);
+
+    __try
+    {
+        SetupPlayerButtons(self);
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER)
+    {
+        Log("PlayerNext: исключение при подписке кнопки");
+    }
+    return r;
+}
+
+static bool PatchTopbarBuildCall()
+{
+    unsigned char* p = (unsigned char*)(g_base + RVA_TOPBAR_BUILD_CALL);
+    DWORD expectRel = (g_base + RVA_TOPBAR_BUILD) - ((DWORD)(DWORD_PTR)p + 5);
+    if (p[0] != 0xE8 || *(DWORD*)(p + 1) != expectRel)
+    {
+        Log("PlayerNext: call в конструкторе topbar не совпал rva %06X (%02X %02X %02X %02X %02X)",
+            RVA_TOPBAR_BUILD_CALL, p[0], p[1], p[2], p[3], p[4]);
+        return false;
+    }
+
+    DWORD rel = (DWORD)(DWORD_PTR)&TopbarBuildHook - ((DWORD)(DWORD_PTR)p + 5);
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(p + 1, 4, PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    *(DWORD*)(p + 1) = rel;
+    VirtualProtect(p + 1, 4, oldProtect, &oldProtect);
+    Log("PlayerNext: call в конструкторе topbar подменён rva %06X", RVA_TOPBAR_BUILD_CALL);
+    return true;
+}
+
+static bool PatchTopbarBuildVSlot()
+{
+    DWORD* slot = (DWORD*)(g_base + RVA_TOPBAR_BUILD_VSLOT);
+    if (*slot != g_base + RVA_TOPBAR_BUILD)
+    {
+        Log("PlayerNext: vftable[0] topbar не совпал rva %06X (%08X)",
+            RVA_TOPBAR_BUILD_VSLOT, *slot);
+        return false;
+    }
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(slot, 4, PAGE_READWRITE, &oldProtect))
+        return false;
+    *slot = (DWORD)(DWORD_PTR)&TopbarBuildHook;
+    VirtualProtect(slot, 4, oldProtect, &oldProtect);
+    Log("PlayerNext: vftable[0] topbar подменён rva %06X", RVA_TOPBAR_BUILD_VSLOT);
+    return true;
+}
+
+// Деструктор topbar (vftable[1]): чистим указатель на ползунок громкости.
+static bool PatchTopbarDtorVSlot()
+{
+    DWORD* slot = (DWORD*)(g_base + RVA_TOPBAR_BUILD_VSLOT + 4);
+    if (*slot != g_base + RVA_TOPBAR_DTOR)
+    {
+        Log("PlayerVolume: vftable[1] topbar не совпал (%08X)", *slot);
+        return false;
+    }
+
+    g_topbarDtorOrig = (tTopbarDtor)(DWORD_PTR)(g_base + RVA_TOPBAR_DTOR);
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(slot, 4, PAGE_READWRITE, &oldProtect))
+        return false;
+    *slot = (DWORD)(DWORD_PTR)&TopbarDtorHook;
+    VirtualProtect(slot, 4, oldProtect, &oldProtect);
+    Log("PlayerVolume: vftable[1] topbar (деструктор) подменён");
+    return true;
+}
+
+// Единственный call на FUN_009df2b0 (покадровая функция звука) - в нашу
+// заглушку, которая перед оригиналом зовёт OnFramePump.
+static bool PatchFramePumpCall()
+{
+    unsigned char* p = (unsigned char*)(g_base + RVA_FRAME_PUMP_CALL);
+    DWORD expectRel = (g_base + RVA_FRAME_PUMP) - ((DWORD)(DWORD_PTR)p + 5);
+    if (p[0] != 0xE8 || *(DWORD*)(p + 1) != expectRel)
+    {
+        Log("PlayerVolume: call покадровой функции не совпал rva %06X (%02X %02X %02X %02X %02X)",
+            RVA_FRAME_PUMP_CALL, p[0], p[1], p[2], p[3], p[4]);
+        return false;
+    }
+
+    g_framePumpOrig = g_base + RVA_FRAME_PUMP;
+
+    DWORD rel = (DWORD)(DWORD_PTR)&FramePumpThunk - ((DWORD)(DWORD_PTR)p + 5);
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(p + 1, 4, PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    *(DWORD*)(p + 1) = rel;
+    VirtualProtect(p + 1, 4, oldProtect, &oldProtect);
+    Log("PlayerVolume: call покадровой функции подменён rva %06X", RVA_FRAME_PUMP_CALL);
+    return true;
+}
+
+static bool InstallPlayerButtons()
+{
+    g_topbarBuildOrig = (tTopbarBuild)(DWORD_PTR)(g_base + RVA_TOPBAR_BUILD);
+    bool a = PatchTopbarBuildCall();
+    bool b = PatchTopbarBuildVSlot();
+
+    // Ползунок громкости: без хука деструктора topbar указатель на ползунок
+    // мог бы пережить окно, поэтому ставим оба хука или ни одного.
+    if (PatchTopbarDtorVSlot())
+    {
+        PatchFramePumpCall();
+        InstallApplyVolumesHook();
+        PatchSettingsApplyCall();
+    }
+    return a || b;
+}
+
+
+// ---------------------------------------------------------------
+// MUSIC_FAIR_RANDOM - честный случайный выбор следующей песни.
+//
+// FUN_00455290 (rva 0x55290) выбирает песню так: обходит песни из
+// songs.txt по порядку, пропускает шесть последних сыгранных, для
+// каждой остальной берёт "случайное" r и считает
+//     счёт = chance(песни) * r,
+// побеждает наибольший счёт (при равенстве - ПЕРВАЯ по порядку в файле:
+// сравнение "cmp eax,[best]; jle" строгое). Проблемы:
+//  1. Генератор - Mersenne twister в локальном массиве из 624 слов на
+//     стеке, который НИКОГДА не инициализируется (сида нет вообще): перед
+//     первым числом вызывается только шаг "twist" (FUN_009b7700) над тем
+//     мусором, что остался в этом месте стека. В одном и том же месте
+//     кода мусор почти всегда один и тот же, поэтому "случайные" числа
+//     повторяются от вызова к вызову и каждой позиции в списке достаётся
+//     практически постоянный r.
+//  2. r сильно огрублён: ((y % 5) + 5) * 1000, то есть всего 9 значений
+//     1000..9000 - ничьих очень много, а ничья всегда отдаётся раньше
+//     стоящей песне (даже с честным генератором ранние позиции получают
+//     ~60-66% розыгрышей против 50%).
+// Итог: играет устойчивый набор из ~7 песен (6 недавних исключаются, дальше
+// побеждают те же лидеры), остальные не выпадают никогда; перестановка
+// песен в songs.txt просто меняет, кто лидер.
+//
+// Правка: инструкция "imul edi,edi,0x3E8" (rva 0x5534D, edi = r) заменяется
+// прыжком в thunk, который кладёт в EDI свежее случайное число
+// (1..200000)*1000 - без ничьих и не зависящее от мусора в стеке.
+// chance по-прежнему умножается на r (песни с chance<=0 не выбираются, как
+// и раньше), недавние по-прежнему исключаются. Выбор песни локальный
+// и не влияет на состояние игры (мультиплеер не затрагивается).
+//
+// Регистры в точке перехвата: EAX=scope (сразу пушится), EBX=песня,
+// ESI=индекс генератора (сохраняется следом), ECX/EDX свободны, EDI - то,
+// что мы задаём. Вызов C-функции - одним блоком push/pop, результат через
+// глобальную переменную.
+// ---------------------------------------------------------------
+static const DWORD RVA_MUSIC_RND_HOOK = 0x5534D;   // imul edi,edi,0x3E8
+static const unsigned char MUSIC_RND_SIG[6] = { 0x69, 0xFF, 0xE8, 0x03, 0x00, 0x00 };
+static DWORD g_musicRndResume = 0;
+static DWORD g_musicRnd = 0;
+static DWORD g_musicRndState = 0;
+static LONG  g_musicRndCalls = 0;
+
+static DWORD __cdecl MusicFairRandom()
+{
+    if (g_musicRndState == 0)
+    {
+        g_musicRndState = (DWORD)__rdtsc() ^ GetTickCount() ^ (GetCurrentProcessId() << 16);
+        if (g_musicRndState == 0)
+            g_musicRndState = 0x9E3779B9;
+    }
+
+    // splitmix32
+    g_musicRndState += 0x9E3779B9;
+    DWORD z = g_musicRndState;
+    z = (z ^ (z >> 16)) * 0x85EBCA6B;
+    z = (z ^ (z >> 13)) * 0xC2B2AE35;
+    z ^= z >> 16;
+
+    DWORD r = 1 + z % 200000;
+    LONG n = InterlockedIncrement(&g_musicRndCalls);
+    if (n <= 6)
+        Log("MusicFairRandom: вызов #%d r=%u", (int)n, r);
+    return r * 1000;
+}
+
+__declspec(naked) static void MusicRandomThunk()
+{
+    __asm {
+        push eax
+        push ecx
+        push edx
+        call MusicFairRandom
+        mov g_musicRnd, eax
+        pop edx
+        pop ecx
+        pop eax
+        mov edi, g_musicRnd
+        jmp dword ptr [g_musicRndResume]
+    }
+}
+
+static bool InstallMusicFairRandom()
+{
+    unsigned char* hook = (unsigned char*)(g_base + RVA_MUSIC_RND_HOOK);
+
+    // Контекст: mov eax,[ebp+0x10] (8B 45 10) перед, push eax (50) после.
+    if (memcmp(hook, MUSIC_RND_SIG, sizeof(MUSIC_RND_SIG)) != 0 ||
+        hook[-3] != 0x8B || hook[-2] != 0x45 || hook[-1] != 0x10 || hook[6] != 0x50)
+    {
+        Log("MusicFairRandom: сигнатура не совпала rva %06X - не патчим", RVA_MUSIC_RND_HOOK);
+        return false;
+    }
+
+    g_musicRndResume = g_base + RVA_MUSIC_RND_HOOK + 6;
+
+    unsigned char patch[6];
+    patch[0] = 0xE9;
+    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&MusicRandomThunk - ((DWORD)(DWORD_PTR)hook + 5);
+    patch[5] = 0x90;
+
+    DWORD oldProtect = 0;
+    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
+        return false;
+    memcpy(hook, patch, sizeof(patch));
+    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
+
+    Log("MusicFairRandom: установлен rva %06X", RVA_MUSIC_RND_HOOK);
     return true;
 }
 
@@ -3139,10 +4051,7 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "PATCH_ALLY_OWNER_CHECK") == 0)          { g_settings.patchAllyOwnerCheck         = v; return; }
     if (_stricmp(key, "PATCH_CIVILIZE_NULL_CHECK") == 0)       { g_settings.patchCivilizeNullCheck      = v; return; }
     if (_stricmp(key, "PATCH_SUPPLY_SOURCE_NULL_CHECK") == 0)  { g_settings.patchSupplySourceNullCheck  = v; return; }
-    if (_stricmp(key, "PATCH_TECH_COMPARE_NULL_CHECK") == 0)   { g_settings.patchTechCompareNullCheck   = v; return; }
-    if (_stricmp(key, "PATCH_TECH_FOLDER_ICON_NULL_CHECK") == 0) { g_settings.patchTechFolderIconNullCheck = v; return; }
-    if (_stricmp(key, "PATCH_NULL_VTABLE_UI") == 0)            { g_settings.patchNullVtableUi           = v; return; }
-    if (_stricmp(key, "PATCH_IDENTITY_TOMBSTONE") == 0)         { g_settings.patchIdentityTombstone      = v; return; }
+    if (_stricmp(key, "PATCH_TECH_NULL_CHECK_FIXES") == 0)     { g_settings.patchTechNullCheckFixes     = v; return; }
     if (_stricmp(key, "PATCH_GRAPH_POINT_CLAMP") == 0)         { g_settings.patchGraphPointClamp        = v; return; }
     if (_stricmp(key, "PATCH_FACTORY_DUMP_SCAN") == 0)         { g_settings.patchFactoryDumpScan        = v; return; }
     if (_stricmp(key, "PATCH_PROD_LIST_VISIBILITY") == 0)      { g_settings.patchProdListVisibility     = v; return; }
@@ -3209,6 +4118,8 @@ static void ApplySetting(const char* key, const char* value)
     if (_stricmp(key, "HIDE_RAW_GOODS_FILTER") == 0)            { g_settings.hideRawGoodsFilter          = v; return; }
     if (_stricmp(key, "FILTER_SHOW_ALL_FACTORIES_IN_STATE") == 0) { g_settings.filterShowAllInState      = v; return; }
     if (_stricmp(key, "FILTER_PRODUCERS_ONLY") == 0)            { g_settings.filterProducersOnly         = v; return; }
+    if (_stricmp(key, "PLAYER_BUTTONS") == 0)               { g_settings.playerButtons            = v; return; }
+    if (_stricmp(key, "MUSIC_FAIR_RANDOM") == 0)                { g_settings.musicFairRandom             = v; return; }
 
     if (_stricmp(key, "COMBAT_ROLL_MIN") == 0) { g_settings.combatRollMin = atoi(value); return; }
     if (_stricmp(key, "COMBAT_ROLL_MAX") == 0) { g_settings.combatRollMax = atoi(value); return; }
@@ -3272,6 +4183,7 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.localModConfig);
 
     fprintf(f,
+        "; Military\n"
         "PATCH_ALWAYS_ADD_WARGOALS=%d\n"
         "PATCH_LAND_REINFORCE=%d\n"
         "PATCH_NAVAL_REINFORCE=%d\n"
@@ -3301,6 +4213,7 @@ static void WriteDefaultSettings(const char* path)
     }
 
     fprintf(f,
+        "; Economic\n"
         "ENABLE_PRICE_DELTA=%d\n"
         "PATCH_EXPONENTIAL_PRICE_DELTA=%d\n"
         "PATCH_MAX_RELATIVE_PRICE=%d\n"
@@ -3332,6 +4245,7 @@ static void WriteDefaultSettings(const char* path)
         extraWhitelistJoined);
 
     fprintf(f,
+        "; UI\n"
         "ENABLE_BUTTONS=%d\n"
         "ENABLE_DECISION_FILTER=%d\n"
         "ENABLE_POP_DISPLAY=%d\n"
@@ -3341,6 +4255,7 @@ static void WriteDefaultSettings(const char* path)
         "HIDE_RAW_GOODS_FILTER=%d\n"
         "FILTER_SHOW_ALL_FACTORIES_IN_STATE=%d\n"
         "FILTER_PRODUCERS_ONLY=%d\n"
+        "PLAYER_BUTTONS=%d\n"
         "\n",
         (int)g_settings.buttons,
         (int)g_settings.decisionFilter,
@@ -3350,42 +4265,33 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.patchHideNoSupplyFactories,
         (int)g_settings.hideRawGoodsFilter,
         (int)g_settings.filterShowAllInState,
-        (int)g_settings.filterProducersOnly);
+        (int)g_settings.filterProducersOnly,
+        (int)g_settings.playerButtons);
 
     fprintf(f,
+        "; Miscellaneous\n"
         "PATCH_CONSCIOUSNESS_PLURALITY_GROWTH=%d\n"
         "PATCH_CIVILIZE_NULL_CHECK=%d\n"
-        "PATCH_SUPPLY_SOURCE_NULL_CHECK=%d\n"
-        "PATCH_TECH_COMPARE_NULL_CHECK=%d\n"
-        "PATCH_TECH_FOLDER_ICON_NULL_CHECK=%d\n"
-        "PATCH_NULL_VTABLE_UI=%d\n"
-        "PATCH_IDENTITY_TOMBSTONE=%d\n"
         "PATCH_GRAPH_POINT_CLAMP=%d\n"
         "PATCH_CHECKSUM_DRIFT_FIX=%d\n"
         "PATCH_ALLOW_UNCIV_TECH_RESEARCH=%d\n"
         "PATCH_ARISTOCRAT_INCOME_SHARE=%d\n"
+        "MUSIC_FAIR_RANDOM=%d\n"
+        "PATCH_TECH_NULL_CHECK_FIXES=%d\n"
+        "PATCH_SUPPLY_SOURCE_NULL_CHECK=%d\n"
         "\n",
         (int)FindExePatchEnabled("consciousness_plurality_growth"),
         (int)g_settings.patchCivilizeNullCheck,
-        (int)g_settings.patchSupplySourceNullCheck,
-        (int)g_settings.patchTechCompareNullCheck,
-        (int)g_settings.patchTechFolderIconNullCheck,
-        (int)g_settings.patchNullVtableUi,
-        (int)g_settings.patchIdentityTombstone,
         (int)g_settings.patchGraphPointClamp,
         (int)FindExePatchEnabled("checksum_drift_fix"),
         (int)FindExePatchEnabled("allow_unciv_tech_research"),
-        (int)FindExePatchEnabled("aristocrat_income_share_patch_1"));
+        (int)FindExePatchEnabled("aristocrat_income_share_patch_1"),
+        (int)g_settings.musicFairRandom,
+        (int)g_settings.patchTechNullCheckFixes,
+        (int)g_settings.patchSupplySourceNullCheck);
 
     fprintf(f,
-        "ENABLE_LOG=%d\n"
-        "PATCH_FACTORY_DUMP_SCAN=%d\n"
-        "PATCH_CHECKSUM_DIAGNOSTIC=%d\n"
-        "ENABLE_OOS_LOG=%d\n"
-        "ENABLE_CRASH_LOG=%d\n"
-        "ENABLE_CRASH_DUMP=%d\n"
-        "HIDE_NO_SUPPLY_DRY_RUN=%d\n"
-        "\n"
+        "; Stability\n"
         "PATCH_FPU_FORTRESS=%d\n"
         "PATCH_D3D_FPU_PRESERVE=%d\n"
         "PATCH_HEAP_LFH=%d\n"
@@ -3408,14 +4314,8 @@ static void WriteDefaultSettings(const char* path)
         "PATCH_SKIP_CHK_WIN=%d\n"
         "PATCH_CAM_STILL=%d\n"
         "FIX_SFX_MIXER_LAG=%d\n"
-        "FIX_ARMY_WINDOW_LAG=%d\n",
-        (int)g_settings.log,
-        (int)g_settings.patchFactoryDumpScan,
-        (int)g_settings.patchChecksumDiagnostic,
-        (int)g_settings.enableOosLog,
-        (int)g_settings.enableCrashLog,
-        (int)g_settings.enableCrashDump,
-        (int)g_settings.hideNoSupplyDryRun,
+        "FIX_ARMY_WINDOW_LAG=%d\n"
+        "\n",
         (int)g_settings.patchFpuFortress,
         (int)g_settings.patchD3dFpuPreserve,
         (int)g_settings.patchHeapLfh,
@@ -3439,6 +4339,23 @@ static void WriteDefaultSettings(const char* path)
         (int)g_settings.patchCamStill,
         (int)g_settings.fixSfxMixerLag,
         (int)g_settings.patchFixArmyWindowLag);
+
+    fprintf(f,
+        "; Diagnostics\n"
+        "ENABLE_LOG=%d\n"
+        "PATCH_FACTORY_DUMP_SCAN=%d\n"
+        "PATCH_CHECKSUM_DIAGNOSTIC=%d\n"
+        "ENABLE_OOS_LOG=%d\n"
+        "ENABLE_CRASH_LOG=%d\n"
+        "ENABLE_CRASH_DUMP=%d\n"
+        "HIDE_NO_SUPPLY_DRY_RUN=%d\n",
+        (int)g_settings.log,
+        (int)g_settings.patchFactoryDumpScan,
+        (int)g_settings.patchChecksumDiagnostic,
+        (int)g_settings.enableOosLog,
+        (int)g_settings.enableCrashLog,
+        (int)g_settings.enableCrashDump,
+        (int)g_settings.hideNoSupplyDryRun);
 
     fclose(f);
 }
@@ -4397,155 +5314,11 @@ static bool InstallTechFolderIconNullCheck()
 
 
 // ---------------------------------------------------------------
-// Краш UI-строки после OOS-диалога (0xc0000005, fault rva 0x4A8E0B).
-//
-// FUN_008A8DC0 подбирает текстовое поле: несколько fallback'ов
-// (объект+0x14, потом +0x18, индекс через session+0xACC). На первом
-// уже есть проверка «указатель == 0 → следующий fallback», но нет
-// проверки vtable. После разборки OOS-диалога объект ещё жив, а
-// vtable уже NULL → mov eax,[edx+0x20] читает 0x20 и падает.
-// lua51 на стеке не было: это ванильный exe, не наш хук.
-//
-// Патч только UI: если vtable или слот +0x20 нулевые — тот же
-// штатный переход на следующий fallback (rva 0x4A8E31), что и при
-// пустом указателе / ложном virtual-call. Симуляция и checksum
-// не затрагиваются, MP-безопасно.
-//
-// Сигнатура 16 байт с уникальным je +0x2B: голые 8B 11 8B 42 20 FF D0
-// встречаются в exe десятки раз.
+// Диагностика OOS: даты первого расхождения и число дней с первого
+// "настоящего" OOS - для строк SYNC/OOS в Logs\v2dll_oos.log и для
+// краш-лога.
 // ---------------------------------------------------------------
-
-static const DWORD RVA_NULL_VTABLE_UI_SIG    = 0x4A8E00;
-static const DWORD RVA_NULL_VTABLE_UI_HOOK   = 0x4A8E09;
-static const DWORD RVA_NULL_VTABLE_UI_NORMAL = 0x4A8E10;  // test al,al
-static const DWORD RVA_NULL_VTABLE_UI_SKIP   = 0x4A8E31;  // next fallback
-
-static const unsigned char NULL_VTABLE_UI_SIG[16] =
-{
-    0x83, 0x78, 0x14, 0x00,             // cmp dword [eax+0x14], 0
-    0x74, 0x2B,                         // je  rva 0x4A8E31
-    0x8B, 0x48, 0x14,                   // mov ecx, [eax+0x14]
-    0x8B, 0x11,                         // mov edx, [ecx]
-    0x8B, 0x42, 0x20,                   // mov eax, [edx+0x20]
-    0xFF, 0xD0                          // call eax
-};
-
-static bool InstallNullVtableUi()
-{
-    unsigned char* sig = (unsigned char*)(g_base + RVA_NULL_VTABLE_UI_SIG);
-    unsigned char* hook = (unsigned char*)(g_base + RVA_NULL_VTABLE_UI_HOOK);
-
-    if (memcmp(sig, NULL_VTABLE_UI_SIG, sizeof(NULL_VTABLE_UI_SIG)) != 0)
-    {
-        Log("NullVtableUi: сигнатура не совпала - не патчим");
-        return false;
-    }
-
-    unsigned char* cave = (unsigned char*)VirtualAlloc(
-        0, 48, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-    if (!cave)
-        return false;
-
-    int n = 0;
-    cave[n++] = 0x8B; cave[n++] = 0x11;                 // mov edx,[ecx]
-    cave[n++] = 0x85; cave[n++] = 0xD2;                 // test edx,edx
-    int jzVt = n;
-    cave[n++] = 0x74; cave[n++] = 0x00;                 // jz skip
-    cave[n++] = 0x8B; cave[n++] = 0x42; cave[n++] = 0x20; // mov eax,[edx+0x20]
-    cave[n++] = 0x85; cave[n++] = 0xC0;                 // test eax,eax
-    int jzFn = n;
-    cave[n++] = 0x74; cave[n++] = 0x00;                 // jz skip
-    cave[n++] = 0xFF; cave[n++] = 0xD0;                 // call eax
-    cave[n++] = 0xE9;                                   // jmp test al,al
-    *(DWORD*)(cave + n) = (g_base + RVA_NULL_VTABLE_UI_NORMAL) - (DWORD)(cave + n + 4);
-    n += 4;
-
-    int skipAt = n;
-    cave[jzVt + 1] = (unsigned char)(skipAt - (jzVt + 2));
-    cave[jzFn + 1] = (unsigned char)(skipAt - (jzFn + 2));
-
-    cave[n++] = 0xE9;
-    *(DWORD*)(cave + n) = (g_base + RVA_NULL_VTABLE_UI_SKIP) - (DWORD)(cave + n + 4);
-    n += 4;
-
-    unsigned char patch[7];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-    patch[6] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("NullVtableUi: установлен на rva %06X, пещера %08X",
-        RVA_NULL_VTABLE_UI_HOOK, (DWORD)(DWORD_PTR)cave);
-    return true;
-}
-
-
-// ---------------------------------------------------------------
-// Второй UI-краш после OOS (хост, 2.98): ACCESS_VIOLATION на
-// rva 0x1D0F09 / FUN_005D0EB0. Один caller (FUN_005DF4B0 rva
-// 0x1DF56B) — цикл identity/localised-string через session+0xACC.
-// На стеке краша: "identity" "synchronous" "MONARCHTITLE"/"TITLE".
-// Это отрисовка подписи, не симуляция.
-//
-// esi жив, но [esi] — не vtable exe, а висячий heap (B1EB3650).
-// FUN_005AB7F0 (кэш identity в this+0x3C) вернул этот указатель,
-// caller сразу делает mov esi,eax и зовёт виртуальные методы.
-// Штатный выход xor al,al; ret 4 (rva 0x1D0F3F) — тот же,
-// что при [esi+0x40] < 1. Caller делает test al / jz next item.
-//
-// Причина, которую можно закрыть из DLL: не кормить identity
-// мёртвым узлом и не оставлять его в кэше +0x3C. Сам пул
-// (кто освободил узел, пока армия ещё держит id) — граф
-// объектов движка, его из прокси не чинят без риска MP.
-// ---------------------------------------------------------------
-
-static const DWORD RVA_IDENT_VT_SIG    = 0x1D0EFF;
-static const DWORD RVA_IDENT_VT_HOOK   = 0x1D0F07;
-static const DWORD RVA_IDENT_VT_RESUME = 0x1D0F14;  // test al,al
-static const DWORD RVA_IDENT_VT_SKIP   = 0x1D0F3E;  // xor al,al; epilogue
-
-static const unsigned char IDENT_VT_SIG[16] =
-{
-    0x8B, 0x46, 0x40,                   // mov eax, [esi+0x40]
-    0x83, 0xF8, 0x01,                   // cmp eax, 1
-    0x7C, 0x37,                         // jl  rva 0x1D0F3F
-    0x8B, 0x06,                         // mov eax, [esi]
-    0x8B, 0x90, 0x88, 0x00, 0x00, 0x00  // mov edx, [eax+0x88]
-};
-
-static DWORD g_identVtResume = 0;
-static DWORD g_identVtSkip = 0;
-static DWORD g_identLookupResume = 0;
-static DWORD g_identLookupSkip = 0;
-
-// Диагностика OOS→UAF (3.02): только счётчики, симуляцию не трогают.
-// Хост часто не видит DIFF (oos_hits=0) — тогда first_real остаётся "-"
-// и days_real=-1, а ident_skip на SYNC-строках всё равно растёт.
-static LONG g_identSkipVt = 0;
-static LONG g_identSkipLookup = 0;
-static LONG g_identSkipSlot84 = 0;
-static LONG g_identSkipE4 = 0;
-static LONG g_identSkipFn = 0;
-static LONG g_identSkipFn2 = 0;
-static LONG g_identSkipFn3 = 0;
-static LONG g_identSkipStr = 0;
-static LONG g_identSkipW74 = 0;
-static LONG g_identSkipList = 0;
-static LONG g_identSkipHash = 0;
-static LONG g_identSkipParent = 0;
-static LONG g_identTombstone = 0;
-static LONG g_identTombstoneDup = 0;
-static LONG g_identSkipLogged = 0;
-static char g_lastIdentSkipLine[192] = "-";
 static int  g_lastDateRaw = 0;
-static char g_lastDateBuf[32] = "-";
 static int  g_firstOosRaw = 0;
 static char g_firstOosBuf[32] = "-";
 static int  g_firstRealOosRaw = 0;
@@ -4566,1489 +5339,12 @@ static void RememberSessionClock(int raw, const char* buf)
     if (!raw || !buf || !buf[0])
         return;
     g_lastDateRaw = raw;
-    strcpy_s(g_lastDateBuf, buf);
 }
 
-static LONG IdentSkipTotal()
+static void FormatOosDiag(char* buf, size_t cap)
 {
-    return g_identSkipVt + g_identSkipLookup + g_identSkipSlot84 +
-        g_identSkipE4 + g_identSkipFn + g_identSkipFn2 + g_identSkipFn3 +
-        g_identSkipStr + g_identSkipW74 + g_identSkipList +
-        g_identSkipHash + g_identSkipParent;
-}
-
-static void FormatIdentDiag(char* buf, size_t cap)
-{
-    sprintf_s(buf, cap,
-        "ident_skip vt=%d lookup=%d slot84=%d e4=%d fn=%d fn2=%d fn3=%d str=%d w74=%d l4c=%d hash=%d par=%d tomb=%d/%d first_oos=%s first_real=%s days_real=%d last_skip=%s",
-        (int)g_identSkipVt, (int)g_identSkipLookup, (int)g_identSkipSlot84,
-        (int)g_identSkipE4, (int)g_identSkipFn, (int)g_identSkipFn2,
-        (int)g_identSkipFn3, (int)g_identSkipStr, (int)g_identSkipW74,
-        (int)g_identSkipList, (int)g_identSkipHash, (int)g_identSkipParent,
-        (int)g_identTombstone, (int)g_identTombstoneDup,
-        g_firstOosBuf, g_firstRealOosBuf,
-        DaysSinceFirstRealOos(), g_lastIdentSkipLine);
-}
-
-static void __stdcall IdentNoteSkip(int site, void* self)
-{
-    LONG* counter = &g_identSkipVt;
-    const char* siteName = "vtable";
-    if (site == 1)
-    {
-        counter = &g_identSkipLookup;
-        siteName = "lookup";
-    }
-    else if (site == 2)
-    {
-        counter = &g_identSkipSlot84;
-        siteName = "slot84";
-    }
-    else if (site == 3)
-    {
-        counter = &g_identSkipE4;
-        siteName = "fieldE4";
-    }
-    else if (site == 4)
-    {
-        counter = &g_identSkipFn;
-        siteName = "fnD1BB0";
-    }
-    else if (site == 6)
-    {
-        counter = &g_identSkipFn2;
-        siteName = "fnD4420";
-    }
-    else if (site == 7)
-    {
-        counter = &g_identSkipFn3;
-        siteName = "fn113D50";
-    }
-    else if (site == 5)
-    {
-        counter = &g_identSkipStr;
-        siteName = "strClear";
-    }
-    else if (site == 8)
-    {
-        counter = &g_identSkipW74;
-        siteName = "fn1CB230";
-    }
-    else if (site == 9)
-    {
-        counter = &g_identSkipList;
-        siteName = "list4C";
-    }
-    else if (site == 10)
-    {
-        counter = &g_identSkipHash;
-        siteName = "hash";
-    }
-    else if (site == 11)
-    {
-        counter = &g_identSkipParent;
-        siteName = "fnD5BC0";
-    }
-    InterlockedIncrement(counter);
-    LONG total = IdentSkipTotal();
-
-    DWORD vptr = 0;
-    DWORD id40 = 0;
-    __try
-    {
-        vptr = *(DWORD*)self;
-        id40 = *(DWORD*)((char*)self + 0x40);
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        vptr = 0;
-        id40 = 0;
-    }
-
-    _snprintf_s(g_lastIdentSkipLine, sizeof(g_lastIdentSkipLine), _TRUNCATE,
-        "n=%d site=%s date=%s self=%08X vptr=%08X id40=%08X",
-        (int)total, siteName, g_lastDateBuf,
-        (unsigned)(DWORD_PTR)self, vptr, id40);
-
-    if (total > 20 && (total % 50) != 0)
-        return;
-    if (!g_settings.enableOosLog)
-        return;
-
-    LogOosFile("IDENT skip %s days_real=%d first_real=%s",
-        g_lastIdentSkipLine, DaysSinceFirstRealOos(), g_firstRealOosBuf);
-}
-
-static int __stdcall IdentVtableOk(void* self)
-{
-    if (!self)
-        return 0;
-    DWORD vptr = 0;
-    DWORD fn = 0;
-    __try
-    {
-        vptr = *(DWORD*)self;
-        if (!vptr)
-            return 0;
-        // Живой C++-объект Vic2: vtable в образе exe (.rdata).
-        // Куча / освобождённый буфер строки сюда не попадает — это и было
-        // B1EB3650 на хосте (первый dword = висячий heap, не vtable).
-        if (!g_base || vptr < g_base || vptr >= g_base + g_imageSize)
-            return 0;
-        fn = *(DWORD*)(vptr + 0x88);
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return 0;
-    }
-    return fn ? 1 : 0;
-}
-
-// this / элемент списка: куча, не образ exe и не vtable. Stub tombstone
-// отсекает IdentVtableOk (vptr в DLL).
-static int __stdcall IdentHeapThisOk(void* p)
-{
-    if (!p)
-        return 0;
-    DWORD a = (DWORD)(DWORD_PTR)p;
-    if (g_base && a >= g_base && a < g_base + g_imageSize)
-        return 0;
-    return IdentVtableOk(p);
-}
-
-static int __stdcall IdentVtableCheck(void* self, int site)
-{
-    if (IdentVtableOk(self))
-        return 1;
-    if (self)
-        IdentNoteSkip(site, self);
-    return 0;
-}
-
-__declspec(naked) static void IdentVtableCave()
-{
-    __asm {
-        push 0
-        push esi
-        call IdentVtableCheck
-        test eax, eax
-        jz skip
-        mov eax, dword ptr [esi]
-        mov edx, dword ptr [eax + 0x88]
-        push edi
-        mov ecx, esi
-        call edx
-        jmp dword ptr [g_identVtResume]
-    skip:
-        jmp dword ptr [g_identVtSkip]
-    }
-}
-
-static const DWORD RVA_IDENT_LOOKUP_SIG    = 0x1DF532;
-static const DWORD RVA_IDENT_LOOKUP_RESUME = 0x1DF537;  // mov [esp+0x10], 0
-static const DWORD RVA_IDENT_LOOKUP_SKIP   = 0x1DF581;  // pop edi; al=1; ret
-
-static const unsigned char IDENT_LOOKUP_SIG[13] =
-{
-    0x8B, 0xF0,                         // mov esi, eax
-    0xC1, 0xFB, 0x02,                   // sar ebx, 2
-    0xC7, 0x44, 0x24, 0x10, 0x00, 0x00, 0x00, 0x00
-};
-
-__declspec(naked) static void IdentLookupCave()
-{
-    __asm {
-        mov esi, eax
-        sar ebx, 2
-        push 1
-        push esi
-        call IdentVtableCheck
-        test eax, eax
-        jz bad
-        jmp dword ptr [g_identLookupResume]
-    bad:
-        mov dword ptr [edi + 0x3C], 0
-        xor esi, esi
-        jmp dword ptr [g_identLookupSkip]
-    }
-}
-
-static bool InstallIdentityLookupGuard()
-{
-    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_LOOKUP_SIG);
-    unsigned char* hook = sig;
-
-    if (memcmp(sig, IDENT_LOOKUP_SIG, sizeof(IDENT_LOOKUP_SIG)) != 0)
-    {
-        Log("IdentityLookupGuard: сигнатура не совпала - не патчим");
-        return false;
-    }
-
-    g_identLookupResume = g_base + RVA_IDENT_LOOKUP_RESUME;
-    g_identLookupSkip = g_base + RVA_IDENT_LOOKUP_SKIP;
-
-    unsigned char patch[5];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentLookupCave - ((DWORD)hook + 5);
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityLookupGuard: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_LOOKUP_SIG, (DWORD)(DWORD_PTR)&IdentLookupCave);
-    return true;
-}
-
-static bool InstallIdentityNullVtable()
-{
-    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_VT_SIG);
-    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_VT_HOOK);
-
-    if (memcmp(sig, IDENT_VT_SIG, sizeof(IDENT_VT_SIG)) != 0)
-    {
-        Log("IdentityNullVtable: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X %02X) - не патчим",
-            sig[0], sig[1], sig[2], sig[3], sig[4], sig[5], sig[6], sig[7]);
-        return false;
-    }
-
-    g_identVtResume = g_base + RVA_IDENT_VT_RESUME;
-    g_identVtSkip = g_base + RVA_IDENT_VT_SKIP;
-
-    unsigned char patch[8];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentVtableCave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-    patch[6] = 0x90;
-    patch[7] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityNullVtable: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_VT_HOOK, (DWORD)(DWORD_PTR)&IdentVtableCave);
-    return true;
-}
-
-// Тот же мёртвый identity, другой слот vtable (+0x84).
-// Хост 3.02, 1914-06-23: lookup уже skip'нул 44384B90, через 31 мс
-// FUN_005B9670 всё равно сделал mov eax,[vtable+0x84] и упал.
-// Нет прямых E8 — виртуальный метод. Штатный отказ: xor eax,eax; ret 12
-// (как setnz после неуспешного call).
-static const DWORD RVA_IDENT_84_SIG = 0x1B9670;
-static const unsigned char IDENT_84_SIG[16] =
-{
-    0x55, 0x8B, 0xEC, 0x8B, 0x4D, 0x08, 0x8B, 0x01,
-    0x8B, 0x55, 0x10, 0x8B, 0x80, 0x84, 0x00, 0x00
-};
-
-__declspec(naked) static void IdentSlot84Cave()
-{
-    __asm {
-        push ebp
-        mov ebp, esp
-        push 2
-        push dword ptr [ebp + 8]
-        call IdentVtableCheck
-        test eax, eax
-        jz fail
-        mov ecx, dword ptr [ebp + 8]
-        mov eax, dword ptr [ecx]
-        mov edx, dword ptr [ebp + 0x10]
-        mov eax, dword ptr [eax + 0x84]
-        push edx
-        call eax
-        test al, al
-        setnz al
-        pop ebp
-        ret 12
-    fail:
-        xor eax, eax
-        pop ebp
-        ret 12
-    }
-}
-
-static bool InstallIdentitySlot84()
-{
-    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_84_SIG);
-    unsigned char* hook = sig;
-
-    if (memcmp(sig, IDENT_84_SIG, sizeof(IDENT_84_SIG)) != 0)
-    {
-        Log("IdentitySlot84: сигнатура не совпала - не патчим");
-        return false;
-    }
-
-    unsigned char patch[5];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentSlot84Cave - ((DWORD)hook + 5);
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentitySlot84: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_84_SIG, (DWORD)(DWORD_PTR)&IdentSlot84Cave);
-    return true;
-}
-
-// Клиент 3.03, 1914-06-23: lookup+slot84 уже skip'нули esi=43610990,
-// через 58 мс FUN_005D1BB0 всё равно делает
-//   mov ecx, [esi+0xE4] ; cmp [eax], [ecx]
-// На мёртвом узле +0xE4 — мелкое целое (00001D6F), не указатель.
-// Штатный «не совпало» — xorps xmm0 (rva 0x1D1CD5), но дальше
-// функция всё равно пишет [esi+0xF8]/[+0x100]/[+0xE4] и зовёт
-// аллокатор. На мёртвом this это куча без лога (клиент 3.05:
-// fieldE4 skip, crash.log пуст). Прыгаем на эпилог SEH
-// (rva 0x1D1E49, ret 8) — тот же выход, что jz после пустого
-// списка в хвосте функции.
-//
-// 3.04 на запуске: IdentVtableCheck оставляет eax=1, resume
-// `mov edx,[eax]` читает 00000001. Живой this (CNavy) сюда тоже
-// заходит — eax ДО вызова надо сохранить.
-static const DWORD RVA_IDENT_E4_SIG    = 0x1D1CC9;
-static const DWORD RVA_IDENT_E4_HOOK   = 0x1D1CC9;
-static const DWORD RVA_IDENT_E4_RESUME = 0x1D1CCF;  // mov edx,[eax]
-static const DWORD RVA_IDENT_E4_SKIP   = 0x1D1E49;  // mov ecx,[ebp-0xC]; pop edi/esi; ret 8
-static const unsigned char IDENT_E4_EPI[8] =
-{
-    0x8B, 0x4D, 0xF4, 0x5F, 0x5E, 0x64, 0x89, 0x0D
-};
-
-static const unsigned char IDENT_E4_SIG[12] =
-{
-    0x8B, 0x8E, 0xE4, 0x00, 0x00, 0x00, // mov ecx, [esi+0xE4]
-    0x8B, 0x10,                         // mov edx, [eax]
-    0x3B, 0x11,                         // cmp edx, [ecx]
-    0x74, 0x3E
-};
-
-static DWORD g_identE4Resume = 0;
-static DWORD g_identE4Skip = 0;
-
-__declspec(naked) static void IdentFieldE4Cave()
-{
-    __asm {
-        push eax
-        push 3
-        push esi
-        call IdentVtableCheck
-        test eax, eax
-        jz skip
-        pop eax
-        mov ecx, dword ptr [esi + 0xE4]
-        jmp dword ptr [g_identE4Resume]
-    skip:
-        pop eax
-        jmp dword ptr [g_identE4Skip]
-    }
-}
-
-static bool InstallIdentityFieldE4()
-{
-    unsigned char* sig = (unsigned char*)(g_base + RVA_IDENT_E4_SIG);
-    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_E4_HOOK);
-
-    if (memcmp(sig, IDENT_E4_SIG, sizeof(IDENT_E4_SIG)) != 0)
-    {
-        Log("IdentityFieldE4: сигнатура не совпала - не патчим");
-        return false;
-    }
-
-    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_E4_SKIP);
-    if (memcmp(epi, IDENT_E4_EPI, sizeof(IDENT_E4_EPI)) != 0)
-    {
-        Log("IdentityFieldE4: эпилог rva %06X не совпал - не патчим", RVA_IDENT_E4_SKIP);
-        return false;
-    }
-
-    g_identE4Resume = g_base + RVA_IDENT_E4_RESUME;
-    g_identE4Skip = g_base + RVA_IDENT_E4_SKIP;
-
-    unsigned char patch[6];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFieldE4Cave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityFieldE4: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_E4_HOOK, (DWORD)(DWORD_PTR)&IdentFieldE4Cave);
-    return true;
-}
-
-// Клиент 3.07, 1914-07-21: fieldE4 skip 40 раз, краш всё равно в
-// FUN_005A63F0 (rva 0x5A63F7) — очистка «строки» по [esi+0xE4].
-// Хук fieldE4 стоит только на cmp; путь `[esi+0xEC]==0` делает
-// xorps и всё равно `lea edi,[esi+0xE4]; call 5A63F0`.
-// Охрана всего FUN_005D1BB0 сразу после mov esi,ecx.
-// 3.08: хук стоял на 1D1BCC (push esi) — сигнатура не совпала, пролог
-// не встал, клиент дошёл до [vtable+0x70] в FUN_005D4420.
-// Верно: 1D1BCD = mov esi,ecx; mov ecx,[esi+0x74]. Эпилог ждёт
-// push edi — его ещё нет, поэтому перед jmp кладём.
-static const DWORD RVA_IDENT_D1_HOOK   = 0x1D1BCD;
-static const DWORD RVA_IDENT_D1_RESUME = 0x1D1BD2;  // xor ebx, ebx
-static const unsigned char IDENT_D1_SIG[5] =
-{
-    0x8B, 0xF1,       // mov esi, ecx
-    0x8B, 0x4E, 0x74  // mov ecx, [esi+0x74]
-};
-
-static DWORD g_identD1Resume = 0;
-static DWORD g_identD1Skip = 0;
-
-__declspec(naked) static void IdentFnD1Cave()
-{
-    __asm {
-        mov esi, ecx
-        push eax
-        push 4
-        push esi
-        call IdentVtableCheck
-        test eax, eax
-        jz bad
-        pop eax
-        mov ecx, dword ptr [esi + 0x74]
-        jmp dword ptr [g_identD1Resume]
-    bad:
-        pop eax
-        push edi
-        jmp dword ptr [g_identD1Skip]
-    }
-}
-
-static bool InstallIdentityFnD1BB0()
-{
-    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_D1_HOOK);
-    if (memcmp(hook, IDENT_D1_SIG, sizeof(IDENT_D1_SIG)) != 0)
-    {
-        Log("IdentityFnD1BB0: сигнатура не совпала (%02X %02X %02X %02X %02X) - не патчим",
-            hook[0], hook[1], hook[2], hook[3], hook[4]);
-        return false;
-    }
-
-    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_E4_SKIP);
-    if (memcmp(epi, IDENT_E4_EPI, sizeof(IDENT_E4_EPI)) != 0)
-    {
-        Log("IdentityFnD1BB0: эпилог не совпал - не патчим");
-        return false;
-    }
-
-    g_identD1Resume = g_base + RVA_IDENT_D1_RESUME;
-    g_identD1Skip = g_base + RVA_IDENT_E4_SKIP;
-
-    unsigned char patch[5];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFnD1Cave - ((DWORD)hook + 5);
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityFnD1BB0: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_D1_HOOK, (DWORD)(DWORD_PTR)&IdentFnD1Cave);
-    return true;
-}
-
-// Клиент 3.08, 1914-07-23: пролог 5D1BB0 не встал, дошли до
-// FUN_005D4420 rva 0x1D4445: mov edx,[esi]; mov edx,[edx+0x70].
-// Два caller'а (1D20C5 из 1D1FC0 и 1D384E). this уже в esi.
-// Хук после push ebp / mov ebp,esp, на mov eax,[esi+0xDC].
-// Skip: leave; ret — push ebx/edi ещё не было.
-static const DWORD RVA_IDENT_D4420_HOOK   = 0x1D4423;
-static const DWORD RVA_IDENT_D4420_RESUME = 0x1D4429;  // sub esp, 0x18
-static const unsigned char IDENT_D4420_SIG[6] =
-{
-    0x8B, 0x86, 0xDC, 0x00, 0x00, 0x00  // mov eax, [esi+0xDC]
-};
-
-static DWORD g_identD4420Resume = 0;
-
-__declspec(naked) static void IdentFnD4420Cave()
-{
-    __asm {
-        push 6
-        push esi
-        call IdentVtableCheck
-        test eax, eax
-        jz skip
-        mov eax, dword ptr [esi + 0xDC]
-        jmp dword ptr [g_identD4420Resume]
-    skip:
-        mov esp, ebp
-        pop ebp
-        ret
-    }
-}
-
-static bool InstallIdentityFnD4420()
-{
-    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_D4420_HOOK);
-    if (memcmp(hook, IDENT_D4420_SIG, sizeof(IDENT_D4420_SIG)) != 0)
-    {
-        Log("IdentityFnD4420: сигнатура не совпала (%02X %02X %02X %02X %02X %02X) - не патчим",
-            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5]);
-        return false;
-    }
-
-    g_identD4420Resume = g_base + RVA_IDENT_D4420_RESUME;
-
-    unsigned char patch[6];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFnD4420Cave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityFnD4420: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_D4420_HOOK, (DWORD)(DWORD_PTR)&IdentFnD4420Cave);
-    return true;
-}
-
-static int __stdcall IdentPtrReadable(void* p, int n)
-{
-    if (!p || n <= 0)
-        return 0;
-    __try
-    {
-        volatile unsigned char sum = 0;
-        unsigned char* b = (unsigned char*)p;
-        sum = (unsigned char)(sum ^ b[0]);
-        sum = (unsigned char)(sum ^ b[n - 1]);
-        (void)sum;
-        return 1;
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return 0;
-    }
-}
-
-// Клиент 3.09, 1914-08-18: пролог 5D1BB0 и 5D4420 стояли, lookup
-// уже skip'нул тот же узел 4598FAD0 (1914-08-04). Через 14 дней
-// FUN rva 0x113D50: eax=контейнер, ebx=[eax] identity,
-// mov edx,[ebx]; mov eax,[edx+0x38] — vptr=B5BDF9FE вне exe.
-// Четыре caller'а (719AC, 1E1D27, 2559C1, 426A10). Штатный выход
-// пустого списка: pop edi; pop esi; mov al,1; pop ebx; leave; ret
-// (rva 0x113D8B). На хуке edi ещё не push — без pop edi.
-static const DWORD RVA_IDENT_113D_HOOK   = 0x113D5C;
-static const DWORD RVA_IDENT_113D_RESUME = 0x113D63;  // push edi
-static const unsigned char IDENT_113D_SIG[7] =
-{
-    0x8B, 0x18,             // mov ebx, [eax]
-    0x8B, 0x13,             // mov edx, [ebx]
-    0x8B, 0x42, 0x38        // mov eax, [edx+0x38]
-};
-
-static DWORD g_ident113DResume = 0;
-
-__declspec(naked) static void IdentFn113DCave()
-{
-    __asm {
-        test eax, eax
-        jz skip
-        push eax
-        push 4
-        push eax
-        call IdentPtrReadable
-        test eax, eax
-        pop eax
-        jz skip
-        mov ebx, dword ptr [eax]
-        push 7
-        push ebx
-        call IdentVtableCheck
-        test eax, eax
-        jz skip
-        mov edx, dword ptr [ebx]
-        mov eax, dword ptr [edx + 0x38]
-        jmp dword ptr [g_ident113DResume]
-    skip:
-        pop esi
-        mov al, 1
-        pop ebx
-        mov esp, ebp
-        pop ebp
-        ret
-    }
-}
-
-static bool InstallIdentityFn113D50()
-{
-    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_113D_HOOK);
-    if (memcmp(hook, IDENT_113D_SIG, sizeof(IDENT_113D_SIG)) != 0)
-    {
-        Log("IdentityFn113D50: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X) - не патчим",
-            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5], hook[6]);
-        return false;
-    }
-
-    g_ident113DResume = g_base + RVA_IDENT_113D_RESUME;
-
-    unsigned char patch[7];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFn113DCave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-    patch[6] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityFn113D50: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_113D_HOOK, (DWORD)(DWORD_PTR)&IdentFn113DCave);
-    return true;
-}
-
-// Клиент 3.10, 1914-07-28: lookup/fnD1BB0 уже skip'нули мёртвый edi,
-// FUN rva 0x1CB230 всё равно сделала mov [ebx+0x74],0. ebx оказался
-// vtable CPop в образе exe (запись в .rdata → AV). this в EDI,
-// arg0 = контейнер. 14 caller'ов, все stdcall ret 4, возврат не
-// проверяют. Skip = эпилог без записи (отказ), не al=1.
-static const DWORD RVA_IDENT_1CB_HOOK   = 0x1CB230;
-static const DWORD RVA_IDENT_1CB_RESUME = 0x1CB237;  // push ebx
-static const unsigned char IDENT_1CB_SIG[12] =
-{
-    0x55, 0x8B, 0xEC, 0x51, 0x8B, 0x47, 0x38,
-    0x53, 0x8B, 0x5D, 0x08, 0x56
-};
-
-static DWORD g_ident1CBResume = 0;
-static void* g_identStubVtable[80];
-static unsigned char g_identSentinel[0x200];
-static DWORD g_identVtables[64];
-static int g_nIdentVtables = 0;
-
-static int __stdcall IdentWritableObj(void* p)
-{
-    if (!p)
-        return 0;
-    DWORD a = (DWORD)(DWORD_PTR)p;
-    if (g_base && a >= g_base && a < g_base + g_imageSize)
-        return 0;
-    if (p >= (void*)&g_identStubVtable[0] && p < (void*)&g_identStubVtable[80])
-        return 0;
-    if (p >= (void*)g_identSentinel && p < (void*)(g_identSentinel + sizeof(g_identSentinel)))
-        return 0;
-    return IdentPtrReadable((char*)p + 0x74, 4);
-}
-
-__declspec(naked) static void IdentFn1CBCave()
-{
-    __asm {
-        push ebp
-        mov ebp, esp
-        push ecx
-        push 8
-        push edi
-        call IdentVtableCheck
-        test eax, eax
-        jz fail
-        push dword ptr [ebp + 8]
-        call IdentWritableObj
-        test eax, eax
-        jnz ok
-        push dword ptr [ebp + 8]
-        push 8
-        call IdentNoteSkip
-        jmp fail
-    ok:
-        mov eax, dword ptr [edi + 0x38]
-        jmp dword ptr [g_ident1CBResume]
-    fail:
-        pop ecx
-        pop ebp
-        ret 4
-    }
-}
-
-static bool InstallIdentityFn1CB230()
-{
-    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_1CB_HOOK);
-    if (memcmp(hook, IDENT_1CB_SIG, sizeof(IDENT_1CB_SIG)) != 0)
-    {
-        Log("IdentityFn1CB230: сигнатура не совпала (%02X %02X %02X %02X %02X %02X %02X) - не патчим",
-            hook[0], hook[1], hook[2], hook[3], hook[4], hook[5], hook[6]);
-        return false;
-    }
-
-    g_ident1CBResume = g_base + RVA_IDENT_1CB_RESUME;
-
-    unsigned char patch[7];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFn1CBCave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-    patch[6] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityFn1CB230: установлен на rva %06X -> dll %08X",
-        RVA_IDENT_1CB_HOOK, (DWORD)(DWORD_PTR)&IdentFn1CBCave);
-    return true;
-}
-
-// Клиент 3.12, 1914-07-15: lookup уже skip'нул 7C933FD8, FUN rva 0x1D1890
-// обошла список this+0x4C: mov ecx,[esi]; mov esi,[esi+8]; call себя.
-// esi=CE000008 — мёртвая нода. 11 caller'ов, thiscall без аргументов.
-// Skip this = ret до SEH (отказ). Битая нода = esi=0, как пустой список,
-// дальше функция чистит живой this. Не al=1.
-static const DWORD RVA_IDENT_D1890_HOOK   = 0x1D1890;
-static const DWORD RVA_IDENT_D1890_RESUME = 0x1D1896;  // mov eax, fs:[0]
-static const DWORD RVA_IDENT_D1890_BODY   = 0x1D18B5;  // mov ebx, ecx; unique
-static const DWORD RVA_IDENT_D1890_LOOP   = 0x1D18D0;
-static const DWORD RVA_IDENT_D1890_CALL   = 0x1D18D5;  // call self
-static const DWORD RVA_IDENT_D1890_CMP    = 0x1D18DA;  // cmp esi, edi
-static const unsigned char IDENT_D1890_HEAD[6] =
-{
-    0x55, 0x8B, 0xEC, 0x83, 0xE4, 0xF8
-};
-static const unsigned char IDENT_D1890_BODY[8] =
-{
-    0x8B, 0xD9, 0x8B, 0x73, 0x4C, 0x57, 0x33, 0xFF
-};
-static const unsigned char IDENT_D1890_LOOP[5] =
-{
-    0x8B, 0x0E, 0x8B, 0x76, 0x08
-};
-
-static DWORD g_identD1890Resume = 0;
-static DWORD g_identD1890Call = 0;
-static DWORD g_identD1890Cmp = 0;
-
-static int __stdcall IdentListNodeOk(void* node)
-{
-    if (!IdentPtrReadable(node, 12))
-        return 0;
-    void* child = 0;
-    __try
-    {
-        child = *(void**)node;
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return 0;
-    }
-    return IdentHeapThisOk(child);
-}
-
-__declspec(naked) static void IdentFnD1890Cave()
-{
-    __asm {
-        push ecx
-        push ecx
-        call IdentHeapThisOk
-        test eax, eax
-        pop ecx
-        jz fail
-        push ebp
-        mov ebp, esp
-        and esp, -8
-        jmp dword ptr [g_identD1890Resume]
-    fail:
-        push ecx
-        push 9
-        call IdentNoteSkip
-        xor eax, eax
-        ret
-    }
-}
-
-__declspec(naked) static void IdentFnD1890LoopCave()
-{
-    __asm {
-        push esi
-        call IdentListNodeOk
-        test eax, eax
-        jz bad
-        mov ecx, dword ptr [esi]
-        mov esi, dword ptr [esi + 8]
-        jmp dword ptr [g_identD1890Call]
-    bad:
-        push esi
-        push 9
-        call IdentNoteSkip
-        xor esi, esi
-        jmp dword ptr [g_identD1890Cmp]
-    }
-}
-
-static bool InstallIdentityFnD1890()
-{
-    unsigned char* head = (unsigned char*)(g_base + RVA_IDENT_D1890_HOOK);
-    unsigned char* body = (unsigned char*)(g_base + RVA_IDENT_D1890_BODY);
-    unsigned char* loop = (unsigned char*)(g_base + RVA_IDENT_D1890_LOOP);
-    if (memcmp(head, IDENT_D1890_HEAD, sizeof(IDENT_D1890_HEAD)) != 0 ||
-        memcmp(body, IDENT_D1890_BODY, sizeof(IDENT_D1890_BODY)) != 0 ||
-        memcmp(loop, IDENT_D1890_LOOP, sizeof(IDENT_D1890_LOOP)) != 0)
-    {
-        Log("IdentityFnD1890: сигнатура не совпала - не патчим");
-        return false;
-    }
-
-    g_identD1890Resume = g_base + RVA_IDENT_D1890_RESUME;
-    g_identD1890Call = g_base + RVA_IDENT_D1890_CALL;
-    g_identD1890Cmp = g_base + RVA_IDENT_D1890_CMP;
-
-    unsigned char patchHead[6];
-    patchHead[0] = 0xE9;
-    *(DWORD*)(patchHead + 1) = (DWORD)(DWORD_PTR)&IdentFnD1890Cave - ((DWORD)head + 5);
-    patchHead[5] = 0x90;
-
-    unsigned char patchLoop[5];
-    patchLoop[0] = 0xE9;
-    *(DWORD*)(patchLoop + 1) = (DWORD)(DWORD_PTR)&IdentFnD1890LoopCave - ((DWORD)loop + 5);
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(head, sizeof(patchHead), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(head, patchHead, sizeof(patchHead));
-    VirtualProtect(head, sizeof(patchHead), oldProtect, &oldProtect);
-
-    if (!VirtualProtect(loop, sizeof(patchLoop), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(loop, patchLoop, sizeof(patchLoop));
-    VirtualProtect(loop, sizeof(patchLoop), oldProtect, &oldProtect);
-
-    Log("IdentityFnD1890: установлен на rva %06X + loop %06X -> dll %08X",
-        RVA_IDENT_D1890_HOOK, RVA_IDENT_D1890_LOOP, (DWORD)(DWORD_PTR)&IdentFnD1890Cave);
-    return true;
-}
-
-// Tombstone: CSubUnit / CRegiment / CShip / CWing делят scalar deleting
-// dtor rva 0x471B0. Краши 3.07–3.10: после HeapFree первые 8 байт — куча,
-// по +0x08 остаётся vtable CRegiment (0x9F8884). Тело dtor (списки армии,
-// checksum) оставляем; HeapFree не зовём; vptr → заглушка в DLL.
-// Тот же трюк для CArmy (0x1C6180) и CNavy (0x1D7600).
-// 3.11: повторный delete снова гонял тело → C0000374. 3.12: если vptr
-// уже stub — сразу ret. Poison после первого тела даже при flags&1==0.
-static const DWORD RVA_TOMB_SUB_HOOK = 0x0471B0;
-static const DWORD RVA_TOMB_SUB_DTOR = 0x1BE2B0;
-static const DWORD RVA_TOMB_ARMY_HOOK = 0x1C6180;
-static const DWORD RVA_TOMB_ARMY_DTOR = 0x1C61B0;
-static const DWORD RVA_TOMB_NAVY_HOOK = 0x1D7600;
-static const DWORD RVA_TOMB_NAVY_DTOR = 0x1D7630;
-
-static const unsigned char TOMB_SUB_SIG[17] =
-{
-    0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1, 0xE8, 0xF5, 0x70, 0x17, 0x00,
-    0xF6, 0x45, 0x08, 0x01, 0x74, 0x09
-};
-static const unsigned char TOMB_ARMY_SIG[22] =
-{
-    0x55, 0x8B, 0xEC, 0x56, 0x8B, 0xF1, 0xE8, 0x25, 0x00, 0x00, 0x00,
-    0xF6, 0x45, 0x08, 0x01, 0x74, 0x09, 0x56, 0xE8, 0x84, 0x87, 0x4E
-};
-static const unsigned char TOMB_NAVY_SIG[22] =
-{
-    0x55, 0x8B, 0xEC, 0x57, 0x8B, 0xF9, 0xE8, 0x25, 0x00, 0x00, 0x00,
-    0xF6, 0x45, 0x08, 0x01, 0x74, 0x09, 0x57, 0xE8, 0x04, 0x73, 0x4D
-};
-
-static DWORD g_tombSubDtor = 0;
-static DWORD g_tombArmyDtor = 0;
-static DWORD g_tombNavyDtor = 0;
-
-__declspec(naked) static void IdentStubRet0()
-{
-    __asm {
-        xor eax, eax
-        ret
-    }
-}
-
-__declspec(naked) static void IdentStubDtor()
-{
-    __asm {
-        mov eax, ecx
-        ret 4
-    }
-}
-
-static void IdentInitStubAndSentinel()
-{
-    for (int i = 0; i < 80; ++i)
-        g_identStubVtable[i] = (void*)&IdentStubRet0;
-    g_identStubVtable[0] = (void*)&IdentStubDtor;
-    memset(g_identSentinel, 0, sizeof(g_identSentinel));
-    *(void**)g_identSentinel = g_identStubVtable;
-}
-
-static DWORD IdentFindCString(const char* s)
-{
-    if (!g_base || !s)
-        return 0;
-    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)(DWORD_PTR)g_base;
-    if (dos->e_magic != IMAGE_DOS_SIGNATURE)
-        return 0;
-    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(DWORD_PTR)(g_base + dos->e_lfanew);
-    if (nt->Signature != IMAGE_NT_SIGNATURE)
-        return 0;
-    IMAGE_SECTION_HEADER* sec = IMAGE_FIRST_SECTION(nt);
-    size_t n = strlen(s);
-    for (unsigned i = 0; i < nt->FileHeader.NumberOfSections; i++)
-    {
-        DWORD p = g_base + sec[i].VirtualAddress;
-        DWORD sz = sec[i].Misc.VirtualSize;
-        if (sz < n)
-            continue;
-        DWORD end = p + sz - (DWORD)n;
-        for (; p < end; p++)
-        {
-            if (*(const char*)(DWORD_PTR)p == s[0] &&
-                memcmp((const void*)(DWORD_PTR)p, s, n) == 0)
-                return p;
-        }
-    }
-    return 0;
-}
-
-static void IdentAddVtable(DWORD vt, const char* name)
-{
-    if (!vt)
-        return;
-    for (int i = 0; i < g_nIdentVtables; i++)
-    {
-        if (g_identVtables[i] == vt)
-            return;
-    }
-    if (g_nIdentVtables >= (int)(sizeof(g_identVtables) / sizeof(g_identVtables[0])))
-    {
-        Log("IdentityVtable: %s = %08X (таблица полна)", name, vt);
-        return;
-    }
-    g_identVtables[g_nIdentVtables++] = vt;
-    Log("IdentityVtable: %s = %08X", name, vt);
-}
-
-static void IdentCollectUnitVtables()
-{
-    g_nIdentVtables = 0;
-    static const char* names[] = {
-        ".?AVCSubUnit@@",
-        ".?AVCRegiment@@",
-        ".?AVCShip@@",
-        ".?AVCWing@@",
-        ".?AVCArmy@@",
-        ".?AVCNavy@@",
-        ".?AVCUnit@@",
-        ".?AVCLeader@@",
-        ".?AVCSelectable@@",
-        ".?AVCFortressCombatant@@",
-        ".?AVCNullLeader@@",
-        ".?AVCCombatant@@",
-        0
-    };
-
-    IMAGE_DOS_HEADER* dos = (IMAGE_DOS_HEADER*)(DWORD_PTR)g_base;
-    if (!dos || dos->e_magic != IMAGE_DOS_SIGNATURE)
-        return;
-    IMAGE_NT_HEADERS32* nt = (IMAGE_NT_HEADERS32*)(DWORD_PTR)(g_base + dos->e_lfanew);
-    if (nt->Signature != IMAGE_NT_SIGNATURE)
-        return;
-    IMAGE_SECTION_HEADER* sec = IMAGE_FIRST_SECTION(nt);
-    DWORD r0 = 0, r1 = 0;
-    for (unsigned i = 0; i < nt->FileHeader.NumberOfSections; i++)
-    {
-        if (memcmp(sec[i].Name, ".rdata", 6) == 0)
-        {
-            r0 = g_base + sec[i].VirtualAddress;
-            r1 = r0 + sec[i].Misc.VirtualSize;
-            break;
-        }
-    }
-    if (!r0 || r1 <= r0)
-        return;
-
-    for (int ni = 0; names[ni]; ni++)
-    {
-        DWORD nameVa = IdentFindCString(names[ni]);
-        if (!nameVa)
-        {
-            Log("IdentityVtable: %s не найден", names[ni]);
-            continue;
-        }
-        DWORD td = nameVa - 8;
-        int found = 0;
-        for (DWORD q = r0; q + 16 < r1; q += 4)
-        {
-            if (*(DWORD*)(DWORD_PTR)(q + 12) != td)
-                continue;
-            for (DWORD p = r0; p + 4 < r1; p += 4)
-            {
-                if (*(DWORD*)(DWORD_PTR)p == q)
-                {
-                    IdentAddVtable(p + 4, names[ni]);
-                    found = 1;
-                }
-            }
-        }
-        if (!found)
-            Log("IdentityVtable: %s vtable не найден", names[ni]);
-    }
-}
-
-static int __stdcall IdentIsLiveUnit(void* p)
-{
-    if (!p)
-        return 0;
-    DWORD a = (DWORD)(DWORD_PTR)p;
-    if (g_base && a >= g_base && a < g_base + g_imageSize)
-        return 0;
-    if (p == (void*)g_identSentinel)
-        return 0;
-    DWORD vptr = 0;
-    __try
-    {
-        vptr = *(DWORD*)p;
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return 0;
-    }
-    if (!vptr || vptr == (DWORD)(DWORD_PTR)g_identStubVtable)
-        return 0;
-    for (int i = 0; i < g_nIdentVtables; i++)
-    {
-        if (g_identVtables[i] == vptr)
-            return 1;
-    }
-    return 0;
-}
-
-static void* __stdcall IdentHashFilter(void* obj)
-{
-    if (!obj)
-        return 0;
-    if (IdentIsLiveUnit(obj))
-        return obj;
-    IdentNoteSkip(10, obj);
-    return g_identSentinel;
-}
-
-static const DWORD RVA_IDENT_HASH_EPI = 0x1AB829;
-static const unsigned char IDENT_HASH_EPI[9] =
-{
-    0x83, 0xC0, 0xF8, 0x89, 0x06, 0x8B, 0xE5, 0x5D, 0xC3
-};
-
-__declspec(naked) static void IdentHashFilterCave()
-{
-    __asm {
-        add eax, -8
-        push eax
-        call IdentHashFilter
-        mov dword ptr [esi], eax
-        mov esp, ebp
-        pop ebp
-        ret
-    }
-}
-
-static bool InstallIdentityHashFilter()
-{
-    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_HASH_EPI);
-    if (memcmp(epi, IDENT_HASH_EPI, sizeof(IDENT_HASH_EPI)) != 0)
-    {
-        Log("IdentityHashFilter: эпилог не совпал - не патчим");
-        return false;
-    }
-
-    unsigned char patch[9];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentHashFilterCave - ((DWORD)epi + 5);
-    patch[5] = 0x90;
-    patch[6] = 0x90;
-    patch[7] = 0x90;
-    patch[8] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(epi, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(epi, patch, sizeof(patch));
-    VirtualProtect(epi, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityHashFilter: FUN_005AB7F0 эпилог rva %06X -> sentinel", RVA_IDENT_HASH_EPI);
-    return true;
-}
-
-static const DWORD RVA_IDENT_PAR_HOOK   = 0x1D5BCC;
-static const DWORD RVA_IDENT_PAR_RESUME = 0x1D5BD3;
-static const DWORD RVA_IDENT_PAR_EPI    = 0x1D5E20;
-static const unsigned char IDENT_PAR_SIG[16] =
-{
-    0x55, 0x8B, 0xEC, 0x83, 0xEC, 0x08, 0x53, 0x8B,
-    0x5D, 0x08, 0x56, 0x57, 0x8B, 0xF8, 0xB0, 0x01
-};
-static const unsigned char IDENT_PAR_EPI[9] =
-{
-    0x5F, 0x5E, 0x5B, 0x8B, 0xE5, 0x5D, 0xC2, 0x04, 0x00
-};
-
-static DWORD g_identParResume = 0;
-static DWORD g_identParEpi = 0;
-
-static int __stdcall IdentParentPairOk(void* ident, void* container)
-{
-    if (!IdentIsLiveUnit(ident))
-        return 0;
-    if (!IdentWritableObj(container))
-        return 0;
-    return 1;
-}
-
-__declspec(naked) static void IdentFnD5BC0Cave()
-{
-    __asm {
-        mov edi, eax
-        push ebx
-        push edi
-        call IdentParentPairOk
-        test eax, eax
-        jz fail
-        mov al, 1
-        mov byte ptr [ebx + 0x48], al
-        jmp dword ptr [g_identParResume]
-    fail:
-        push edi
-        push 11
-        call IdentNoteSkip
-        xor eax, eax
-        jmp dword ptr [g_identParEpi]
-    }
-}
-
-static bool InstallIdentityFnD5BC0()
-{
-    unsigned char* head = (unsigned char*)(g_base + 0x1D5BC0);
-    unsigned char* hook = (unsigned char*)(g_base + RVA_IDENT_PAR_HOOK);
-    unsigned char* epi = (unsigned char*)(g_base + RVA_IDENT_PAR_EPI);
-    if (memcmp(head, IDENT_PAR_SIG, sizeof(IDENT_PAR_SIG)) != 0 ||
-        memcmp(epi, IDENT_PAR_EPI, sizeof(IDENT_PAR_EPI)) != 0)
-    {
-        Log("IdentityFnD5BC0: сигнатура не совпала - не патчим");
-        return false;
-    }
-
-    g_identParResume = g_base + RVA_IDENT_PAR_RESUME;
-    g_identParEpi = g_base + RVA_IDENT_PAR_EPI;
-
-    unsigned char patch[7];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&IdentFnD5BC0Cave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-    patch[6] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("IdentityFnD5BC0: родитель 1CB230/1DADD0 rva %06X -> dll %08X",
-        RVA_IDENT_PAR_HOOK, (DWORD)(DWORD_PTR)&IdentFnD5BC0Cave);
-    return true;
-}
-
-static void __stdcall IdentTombstoneNote(void* self)
-{
-    LONG n = InterlockedIncrement(&g_identTombstone);
-    if (n > 20 && (n % 50) != 0)
-        return;
-    if (!g_settings.enableOosLog)
-        return;
-    DWORD vptr = 0;
-    __try
-    {
-        vptr = *(DWORD*)self;
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        vptr = 0;
-    }
-    LogOosFile("IDENT tombstone n=%d date=%s self=%08X vptr=%08X",
-        (int)n, g_lastDateBuf, (unsigned)(DWORD_PTR)self, vptr);
-}
-
-static int __stdcall IdentAlreadyTombstoned(void* self)
-{
-    if (!self)
-        return 1;
-    DWORD vptr = 0;
-    __try
-    {
-        vptr = *(DWORD*)self;
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-        return 1;
-    }
-    if (vptr != (DWORD)(DWORD_PTR)g_identStubVtable)
-        return 0;
-    LONG n = InterlockedIncrement(&g_identTombstoneDup);
-    if (n > 20 && (n % 50) != 0)
-        return 1;
-    if (!g_settings.enableOosLog)
-        return 1;
-    LogOosFile("IDENT tombstone-dup n=%d date=%s self=%08X",
-        (int)n, g_lastDateBuf, (unsigned)(DWORD_PTR)self);
-    return 1;
-}
-
-static void __stdcall IdentTombAfterDtor(void* self, unsigned flags)
-{
-    if (flags & 1)
-        IdentTombstoneNote(self);
-    __try
-    {
-        DWORD* d = (DWORD*)self;
-        d[0x38 / 4] = 0;
-        d[0x3C / 4] = 0;
-        d[0x4C / 4] = 0;
-        d[0x74 / 4] = 0;
-        d[0xE4 / 4] = 0;
-        *(void**)self = g_identStubVtable;
-    }
-    __except (EXCEPTION_EXECUTE_HANDLER)
-    {
-    }
-}
-
-static bool PatchJmp6(unsigned char* hook, void* cave)
-{
-    unsigned char patch[6];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)cave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-    return true;
-}
-
-__declspec(naked) static void IdentTombSubCave()
-{
-    __asm {
-        push ebp
-        mov ebp, esp
-        push esi
-        mov esi, ecx
-        push esi
-        call IdentAlreadyTombstoned
-        test eax, eax
-        jnz already
-        mov ecx, esi
-        call dword ptr [g_tombSubDtor]
-        push dword ptr [ebp + 8]
-        push esi
-        call IdentTombAfterDtor
-    already:
-        mov eax, esi
-        pop esi
-        pop ebp
-        ret 4
-    }
-}
-
-__declspec(naked) static void IdentTombArmyCave()
-{
-    __asm {
-        push ebp
-        mov ebp, esp
-        push esi
-        mov esi, ecx
-        push esi
-        call IdentAlreadyTombstoned
-        test eax, eax
-        jnz already
-        mov ecx, esi
-        call dword ptr [g_tombArmyDtor]
-        push dword ptr [ebp + 8]
-        push esi
-        call IdentTombAfterDtor
-    already:
-        mov eax, esi
-        pop esi
-        pop ebp
-        ret 4
-    }
-}
-
-__declspec(naked) static void IdentTombNavyCave()
-{
-    __asm {
-        push ebp
-        mov ebp, esp
-        push edi
-        mov edi, ecx
-        push edi
-        call IdentAlreadyTombstoned
-        test eax, eax
-        jnz already
-        mov ecx, edi
-        call dword ptr [g_tombNavyDtor]
-        push dword ptr [ebp + 8]
-        push edi
-        call IdentTombAfterDtor
-    already:
-        mov eax, edi
-        pop edi
-        pop ebp
-        ret 4
-    }
-}
-
-static bool InstallIdentityTombstone()
-{
-    IdentInitStubAndSentinel();
-
-    int ok = 0;
-    unsigned char* sub = (unsigned char*)(g_base + RVA_TOMB_SUB_HOOK);
-    if (memcmp(sub, TOMB_SUB_SIG, sizeof(TOMB_SUB_SIG)) == 0)
-    {
-        g_tombSubDtor = g_base + RVA_TOMB_SUB_DTOR;
-        if (PatchJmp6(sub, (void*)&IdentTombSubCave))
-        {
-            Log("IdentityTombstone: CSubUnit/CRegiment/CShip rva %06X", RVA_TOMB_SUB_HOOK);
-            ++ok;
-        }
-    }
-    else
-    {
-        Log("IdentityTombstone: CSubUnit сигнатура не совпала - не патчим");
-    }
-
-    unsigned char* army = (unsigned char*)(g_base + RVA_TOMB_ARMY_HOOK);
-    if (memcmp(army, TOMB_ARMY_SIG, sizeof(TOMB_ARMY_SIG)) == 0)
-    {
-        g_tombArmyDtor = g_base + RVA_TOMB_ARMY_DTOR;
-        if (PatchJmp6(army, (void*)&IdentTombArmyCave))
-        {
-            Log("IdentityTombstone: CArmy rva %06X", RVA_TOMB_ARMY_HOOK);
-            ++ok;
-        }
-    }
-    else
-    {
-        Log("IdentityTombstone: CArmy сигнатура не совпала - не патчим");
-    }
-
-    unsigned char* navy = (unsigned char*)(g_base + RVA_TOMB_NAVY_HOOK);
-    if (memcmp(navy, TOMB_NAVY_SIG, sizeof(TOMB_NAVY_SIG)) == 0)
-    {
-        g_tombNavyDtor = g_base + RVA_TOMB_NAVY_DTOR;
-        if (PatchJmp6(navy, (void*)&IdentTombNavyCave))
-        {
-            Log("IdentityTombstone: CNavy rva %06X", RVA_TOMB_NAVY_HOOK);
-            ++ok;
-        }
-    }
-    else
-    {
-        Log("IdentityTombstone: CNavy сигнатура не совпала - не патчим");
-    }
-
-    return ok > 0;
-}
-
-// std::string/buffer dtor: mov eax,[edi]; mov esi,[eax+8]; free.
-// Клиент 3.07: edi жив, [edi]=EDE8F0C3 не страница. Пустой путь —
-// mov [edi],0 ... ret (rva 0x5A640A), без push esi.
-static const DWORD RVA_STR_CLR_HOOK  = 0x5A63F0;
-static const DWORD RVA_STR_CLR_CONT  = 0x5A63F6;  // push esi
-static const DWORD RVA_STR_CLR_EMPTY = 0x5A640A;  // mov [edi],0
-static const unsigned char STR_CLR_SIG[6] =
-{
-    0x8B, 0x07, 0x85, 0xC0, 0x74, 0x14
-};
-
-static DWORD g_strClrCont = 0;
-static DWORD g_strClrEmpty = 0;
-
-__declspec(naked) static void StrClearCave()
-{
-    __asm {
-        push 12
-        push edi
-        call IdentPtrReadable
-        test eax, eax
-        jz ret_only
-        mov eax, dword ptr [edi]
-        test eax, eax
-        jz empty
-        push 12
-        push eax
-        call IdentPtrReadable
-        test eax, eax
-        jz badbuf
-        mov eax, dword ptr [edi]
-        jmp dword ptr [g_strClrCont]
-    badbuf:
-        push edi
-        push 5
-        call IdentNoteSkip
-    empty:
-        jmp dword ptr [g_strClrEmpty]
-    ret_only:
-        ret
-    }
-}
-
-static bool InstallStringClearGuard()
-{
-    unsigned char* hook = (unsigned char*)(g_base + RVA_STR_CLR_HOOK);
-    if (memcmp(hook, STR_CLR_SIG, sizeof(STR_CLR_SIG)) != 0)
-    {
-        Log("StringClearGuard: сигнатура не совпала - не патчим");
-        return false;
-    }
-
-    g_strClrCont = g_base + RVA_STR_CLR_CONT;
-    g_strClrEmpty = g_base + RVA_STR_CLR_EMPTY;
-
-    unsigned char patch[6];
-    patch[0] = 0xE9;
-    *(DWORD*)(patch + 1) = (DWORD)(DWORD_PTR)&StrClearCave - ((DWORD)hook + 5);
-    patch[5] = 0x90;
-
-    DWORD oldProtect = 0;
-    if (!VirtualProtect(hook, sizeof(patch), PAGE_EXECUTE_READWRITE, &oldProtect))
-        return false;
-    memcpy(hook, patch, sizeof(patch));
-    VirtualProtect(hook, sizeof(patch), oldProtect, &oldProtect);
-
-    Log("StringClearGuard: установлен на rva %06X -> dll %08X",
-        RVA_STR_CLR_HOOK, (DWORD)(DWORD_PTR)&StrClearCave);
-    return true;
+    sprintf_s(buf, cap, "first_oos=%s first_real=%s days_real=%d",
+        g_firstOosBuf, g_firstRealOosBuf, DaysSinceFirstRealOos());
 }
 
 
@@ -7317,14 +6613,11 @@ static int CopyVecU32(void* vecObj, unsigned* out, int cap, int* outCount)
     return 1;
 }
 
-static void LogIdentDayTail()
+static void LogOosDayTail()
 {
-    LONG total = IdentSkipTotal();
-    LONG delta = total - g_identSkipLogged;
-    g_identSkipLogged = total;
-    char diag[320];
-    FormatIdentDiag(diag, sizeof(diag));
-    LogOosFile("  %s today_delta=%d", diag, (int)delta);
+    char diag[160];
+    FormatOosDiag(diag, sizeof(diag));
+    LogOosFile("  %s", diag);
 }
 
 static void NoteOosMilestones(int isDiff, int realDiff, int raw, const char* buf)
@@ -7657,7 +6950,7 @@ static void __cdecl ReportOos(void* a0, void* a1)
             g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, auxL, auxR, recN, recXor);
         RememberChecksum("SYNC n=%d date=%s sum=%u/%u rec=%d xor=%08X",
             g_syncHits, dateOk ? dateBuf : "?", sumL, sumR, recN, recXor);
-        LogIdentDayTail();
+        LogOosDayTail();
         return;
     }
 
@@ -7687,7 +6980,7 @@ static void __cdecl ReportOos(void* a0, void* a1)
         (unsigned)(DWORD_PTR)a0, (unsigned)(DWORD_PTR)a1,
         cw, mxcsr);
     LogOosFile("  %s", summary);
-    LogIdentDayTail();
+    LogOosDayTail();
     {
         int recN = -1;
         unsigned recXor = 0;
@@ -7843,7 +7136,7 @@ static bool InstallOosWatch()
 
     Log("OosWatch: FUN_00682EC0 rva %06X chk= + Logs\\v2dll_oos.log", RVA_OOS_REPORT);
     if (g_settings.enableOosLog)
-        LogOosFile("armed dll=%s (SYNC/OOS, ident_skip, days since first real OOS)", MOD_VERSION);
+        LogOosFile("armed dll=%s (SYNC/OOS, days since first real OOS)", MOD_VERSION);
     return true;
 }
 
@@ -13609,9 +12902,10 @@ static bool InstallMpClientSleep()
 static bool Install()
 {
     LoadSettings();
-    g_settings.patchNullVtableUi = false;
-    g_settings.patchIdentityTombstone = false;
-    g_settings.patchCivilizeNullCheck = false;
+    // Нужен всегда: PATCH_BUILD_FACTORY_*_UNCIVILIZED разрешают нецивилизованной стране
+    // строить любые фабрики, а on_civilize (FUN_00542370, rva 14248B) падает на
+    // постройке без слота (краш у тестера при цивилизации страны, 1842 г.).
+    g_settings.patchCivilizeNullCheck = true;
     // 3.57 skip 2859C0 из 282EC0 глушил дневной тик (POP/войны/газеты).
     g_settings.patchSkipChkWin = false;
     g_settings.patchCamStill = false;
@@ -13644,7 +12938,7 @@ static bool Install()
     Log("localModConfig=%d fixSfxMixerLag=%d patchFixArmyWindowLag=%d enableCrashDump=%d",
         (int)g_settings.localModConfig, (int)g_settings.fixSfxMixerLag,
         (int)g_settings.patchFixArmyWindowLag, (int)g_settings.enableCrashDump);
-    Log("CrashGuards: выключены (identity/tombstone/null-vtable/civilize)");
+    Log("CivilizeNullCheck: включён принудительно");
     Log("ChkWinSkip: принудительно выкл (2859C0 = дневной тик, не GUI)");
     Log("CamStill: принудительно выкл (3.59: idle-шторм, FPS хуже)");
     if (g_settings.patchD3dNoVsync)
@@ -13711,40 +13005,11 @@ static bool Install()
     if (g_settings.patchSupplySourceNullCheck)
         InstallSupplySourceNullCheck();
 
-    if (g_settings.patchTechCompareNullCheck)
-        InstallTechCompareNullCheck();
-
-    if (g_settings.patchTechFolderIconNullCheck)
-        InstallTechFolderIconNullCheck();
-
-    if (g_settings.patchNullVtableUi)
+    if (g_settings.patchTechNullCheckFixes)
     {
-        InstallNullVtableUi();
-        InstallIdentityNullVtable();
-        InstallIdentityLookupGuard();
-        InstallIdentitySlot84();
-        InstallIdentityFieldE4();
-        InstallIdentityFnD1BB0();
-        InstallIdentityFnD4420();
-        InstallIdentityFn113D50();
-        InstallIdentityFn1CB230();
-        InstallIdentityFnD1890();
-        IdentInitStubAndSentinel();
-        IdentCollectUnitVtables();
-        if (g_nIdentVtables > 0)
-        {
-            InstallIdentityHashFilter();
-            InstallIdentityFnD5BC0();
-        }
-        else
-        {
-            Log("IdentityHashFilter: нет unit vtable - hash/parent не патчим");
-        }
-        InstallStringClearGuard();
+        InstallTechCompareNullCheck();
+        InstallTechFolderIconNullCheck();
     }
-
-    if (g_settings.patchIdentityTombstone)
-        InstallIdentityTombstone();
 
     if (g_settings.patchGraphPointClamp)
         InstallGraphPointClamp();
@@ -13785,6 +13050,15 @@ static bool Install()
 
     if (g_settings.filterShowAllInState || g_settings.filterProducersOnly)
         InstallFilterShowAllInState();
+
+    // PLAYER_BUTTONS: кнопка button_fe_player_next в topbar пропускает
+    // играющий трек (см. SetupPlayerButtons).
+    if (g_settings.playerButtons)
+        InstallPlayerButtons();
+
+    // MUSIC_FAIR_RANDOM: честный случайный выбор песни (см. InstallMusicFairRandom).
+    if (g_settings.musicFairRandom)
+        InstallMusicFairRandom();
 
     if (g_settings.patchProdTypeGate)
         InstallProdTypeGateHook();
@@ -14243,41 +13517,7 @@ static void CrashScanPtrFields(HANDLE h, DWORD obj, DWORD* seen, int* nseen)
 static void CrashWriteKnownSite(HANDLE h, DWORD rva)
 {
     const char* msg = 0;
-    if (rva >= 0x4A8E00 && rva <= 0x4A8E40)
-        msg = "NullVtableUi string fallback (rva 4A8E0B, patched 2.98)";
-    else if (rva >= 0x1D0F00 && rva <= 0x1D0F3F)
-        msg = "FUN_005D0EB0 identity node, virtual [vtable+0x88] (patched 2.99/3.03)";
-    else if (rva >= 0x1D1CC0 && rva <= 0x1D1CE0)
-        msg = "FUN_005D1BB0 identity [esi+0xE4] cmp (patched 3.04, eax-save 3.05, epilogue-skip 3.06)";
-    else if (rva >= 0x1D1BB0 && rva <= 0x1D1BD8)
-        msg = "FUN_005D1BB0 prologue (guard 3.08/3.09)";
-    else if (rva >= 0x1D4420 && rva <= 0x1D4540)
-        msg = "FUN_005D4420 identity [vtable+0x70] (patched 3.09)";
-    else if (rva >= 0x113D50 && rva <= 0x113E20)
-        msg = "FUN 0x113D50 identity [vtable+0x38] (patched 3.10)";
-    else if (rva >= 0x1CB230 && rva <= 0x1CB2C0)
-        msg = "FUN 0x1CB230 write [ebx+0x74] (fail-guard 3.12)";
-    else if (rva >= 0x1D1890 && rva <= 0x1D18E0)
-        msg = "FUN 0x1D1890 list this+0x4C (fail-guard 3.13)";
-    else if (rva >= 0x1D5BC0 && rva <= 0x1D5E28)
-        msg = "FUN 0x1D5BC0 parent of 1CB230/1DADD0 (fail-guard 3.14)";
-    else if (rva >= 0x1DADD0 && rva <= 0x1DAE20)
-        msg = "FUN 0x1DADD0 list compare [edi] (parent 3.14)";
-    else if (rva >= 0x1AB7F0 && rva <= 0x1AB838)
-        msg = "FUN_005AB7F0 identity hash (sentinel 3.14)";
-    else if (rva >= 0x0471B0 && rva <= 0x0471D0)
-        msg = "CSubUnit scalar deleting dtor (tombstone 3.11/3.12)";
-    else if (rva >= 0x1C6180 && rva <= 0x1C61B0)
-        msg = "CArmy scalar deleting dtor (tombstone 3.11/3.12)";
-    else if (rva >= 0x1D7600 && rva <= 0x1D7630)
-        msg = "CNavy scalar deleting dtor (tombstone 3.11/3.12)";
-    else if (rva >= 0x5A63F0 && rva <= 0x5A6418)
-        msg = "FUN_005A63F0 string/buffer clear [edi] (patched 3.08)";
-    else if (rva >= 0x1B9670 && rva <= 0x1B968C)
-        msg = "FUN_005B9670 identity [vtable+0x84] (patched 3.03)";
-    else if (rva >= 0x1DF4B0 && rva <= 0x1DF590)
-        msg = "FUN_005DF4B0 identity lookup / CMoveCommand+0x38 (guard 3.00)";
-    else if (rva >= 0x282EC0 && rva <= 0x283200)
+    if (rva >= 0x282EC0 && rva <= 0x283200)
         msg = "FUN_00682EC0 daily MP checksum / OOS dialog";
     if (msg)
         CrashPrintf(h, "  known_site: %s\n", msg);
@@ -14661,9 +13901,9 @@ static void ReportCrash(PEXCEPTION_POINTERS ep)
         CrashPrintf(h, "  oos_hits=%d sync_hits=%d last=%s\n",
             g_oosHits, g_syncHits, g_lastChecksumLine);
         {
-            char ident[320];
-            FormatIdentDiag(ident, sizeof(ident));
-            CrashPrintf(h, "  %s\n", ident);
+            char oosDiag[160];
+            FormatOosDiag(oosDiag, sizeof(oosDiag));
+            CrashPrintf(h, "  %s\n", oosDiag);
         }
 
         EXCEPTION_RECORD* rec = ep ? ep->ExceptionRecord : 0;

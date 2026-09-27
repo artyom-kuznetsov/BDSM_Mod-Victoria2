@@ -94,18 +94,27 @@ Hides filter buttons (in production tab) for goods that name starts with "raw_"
 Production tab filters will now show all factories in a state with filtered factory.
 #### 9. FILTER_PRODUCERS_ONLY
 Production tab filters will show only producing factories of selected good, not both producers and consumers.
+#### 10. PLAYER_BUTTONS
+Buttons located in topbar called "button_fe_player_pause", "button_fe_player_next" and a slider "fe_player_volume_slider"
+will pause, skip and configure 
   
 ### Miscellaneous
 #### 1. PATCH_CONSCIOUSNESS_PLURALITY_GROWTH
 Removes plurality growth from average consciousness. In-game tooltip says otherwise though. So this patch removes this tooltip too (hi tgc)
 #### 2. PATCH_CIVILIZE_NULL_CHECK
-Fixes a crash when a country that has factories civilizes. Idk if it's really required I use AI to make all of this lol
+Fixes a crash when a country that has factories civilizes.
 #### 3. PATCH_GRAPH_POINT_CLAMP
 Prevents the game from crashing from overflow I talked about in Economic №2 (doesn't prevent it from happening though).
 #### 4. PATCH_ALLOW_UNCIV_TECH_RESEARCH
 Allows non-ai uncivs to research tech. (made by maxioten).
 #### 5. PATCH_ARISTOCRAT_INCOME_SHARE
 Doubles aristocrat income share from RGO (made by vesper).
+#### 6. MUSIC_FAIR_RANDOM
+Music will be selected randomly (while following triggers written in songs.txt), unlimiting amount of music tracks in a mod.
+#### 7. PATCH_TECH_NULL_CHECK_FIXES
+Fixes miscellaneous crashes when opening tech tab.
+#### 8. PATCH_SUPPLY_SOURCE_NULL_CHECK
+Prevents game from crashing in miscellaneous scenarios with "limit_by_local_supply = yes" factories.
   
 ### Stability and Performance
 #### 1. PATCH_FPU_FORTRESS / PATCH_D3D_FPU_PRESERVE
