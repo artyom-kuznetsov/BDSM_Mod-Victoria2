@@ -1024,8 +1024,8 @@ add_to_sphere = {
 	good_relation_militancy_factor = 1
 
 	can_use = {
-		NOT = { is_our_vassal = THIS }
-		this = { is_greater_power = yes }
+		NOT = { is_our_vassal = THIS trade_policy_rgroup = isolationism_ref }
+		this = { is_greater_power = yes NOT = { trade_policy_rgroup = isolationism_ref } }
 		is_greater_power = no
 		is_independant = yes
 		part_of_sphere = no
@@ -1105,7 +1105,7 @@ take_from_sphere = {
 
 	can_use = {
 		NOT = { is_our_vassal = THIS }
-		this = { is_greater_power = yes }
+		this = { is_greater_power = yes NOT = { trade_policy_rgroup = isolationism_ref } }
 		is_greater_power = yes
 	}
 
