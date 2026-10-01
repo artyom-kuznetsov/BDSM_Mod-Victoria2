@@ -107,12 +107,12 @@ economy = {
 	CAPITALIST_BUILD_FACTORY_STATE_EMPLOYMENT_PERCENT = 0.85, -- Capis don't build factories if less than this percent is employed in existing factories
 	GOODS_FOCUS_SWAP_CHANCE = 0, -- Percent increased chance that artisan wants to change goods independantly of how well he is doing presently
 	NUM_CLOSED_FACTORIES_PER_STATE_LASSIEZ_FAIRE = 1, -- Number of closed factories allowed per state under Lassiez Faire
-	MIN_NUM_FACTORIES_PER_STATE_BEFORE_DELETING_LASSIEZ_FAIRE = 2, -- Min number of factories per state before starting to delete under Lassiez Faire
+	MIN_NUM_FACTORIES_PER_STATE_BEFORE_DELETING_LASSIEZ_FAIRE = 1, -- Min number of factories per state before starting to delete under Lassiez Faire
 	BANKRUPCY_DURATION = 2, -- Years til a bancrupcy clears all loans
 	SECOND_RANK_BASE_SHARE_FACTOR = 1,
 	CIV_BASE_SHARE_FACTOR = 1,
 	UNCIV_BASE_SHARE_FACTOR = 1,
-	FACTORY_PAYCHECKS_LEFTOVER_FACTOR = 0.8, -- % of how much we pay to the pops and capitalists, from the leftovers.
+	FACTORY_PAYCHECKS_LEFTOVER_FACTOR = 1.0, -- % of how much we pay to the pops and capitalists, from the leftovers.
 	MAX_FACTORY_MONEY_SAVE = 5000,	-- how much money is stored maximum in a factory. Поднято x10 (было 1000) вслед за патчем max_relative_price (потолок цены поднят x10, с 10x до 100x базовой) - иначе "7*Costs > Budget" из-за подорожавшего сырья пробивает старый бюджет намного чаще, и фабрика уходит в неограниченный убыток (вынужденная минимальная зарплата платится даже в минус, без пола).
 	SMALL_DEBT_LIMIT = 10000,
 	FACTORY_UPGRADE_EMPLOYEE_FACTOR = 0.8, -- determines how close to the employee limit we need to be before "upgrade all" will upgrade/expand a given factory (1 = 100%).
@@ -676,7 +676,7 @@ pops = {
 	
 	MIL_HIT_FROM_CONQUEST = 4, -- how much militancy grows in a province if taken without being core.
 	LUXURY_CON_CHANGE = 0.1, -- con boost from over-buying luxuary goods
-	INVENTION_IMPACT_ON_DEMAND = 0.004, -- how much each invention in a country increases demand for a product in percent
+	INVENTION_IMPACT_ON_DEMAND = 0, -- how much each invention in a country increases demand for a product in percent
 	ARTISAN_SUPPRESSED_COLONIAL_GOODS_CATEGORY = 0, -- Goods category index not produced in colonies
 	ISSUE_MOVEMENT_JOIN_LIMIT = 8,
 	ISSUE_MOVEMENT_LEAVE_LIMIT = 7,
