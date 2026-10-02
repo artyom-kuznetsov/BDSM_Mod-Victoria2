@@ -72,6 +72,10 @@ political_decisions = {
 		potential = {
 			tag = PER
 			NOT = { has_country_flag = raid_on_afghan_flag }
+			OR = {
+				ai = no
+				nationalism_n_imperialism = 1
+			}
 			
 		}
 		
@@ -118,6 +122,10 @@ political_decisions = {
 			NOT = { has_country_flag = raid_on_panjab_flag }
 			
 			1209 = { OR = { owned_by = THIS owner = { vassal_of = THIS } } }
+			OR = {
+				ai = no
+				nationalism_n_imperialism = 1
+			}
 		}
 		
 		allow = {
@@ -161,6 +169,10 @@ political_decisions = {
 		potential = {
 			tag = PER
 			NOT = { has_country_flag = eastern_heritage_flag }
+			OR = {
+				ai = no
+				pan_nationalism_tech = 1
+			}
 			
 		}
 		
@@ -185,7 +197,7 @@ political_decisions = {
 		potential = {
 			tag = PER
 			NOT = { has_country_flag = lost_legacy_flag }
-			
+			ai = no
 		}
 		
 		allow = {
@@ -214,7 +226,7 @@ political_decisions = {
 			tag = PER
 			owns = 1121
 			NOT = { has_country_flag = renovate_tehran_flag }
-			
+			ai = no
 		}
 		
 		allow = {

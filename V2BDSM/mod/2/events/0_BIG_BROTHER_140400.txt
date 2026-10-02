@@ -823,6 +823,9 @@ country_event = { # MCL # MONTHLY CLEANUP
 				}
 			}
 			overlord = {
+				limit = {
+					NOT = { has_country_flag = has_opium_cflag }
+				}
 				set_country_flag = has_opium_cflag
 			}
 		}
@@ -2078,10 +2081,7 @@ country_event = { # YEARLY CLEANUP YCL
 		
 		any_country = {
 			limit = {
-				OR = {
-					ai = no
-					tag = EIC
-				}
+				ai = no
 				year = 1841
 			}
 			any_pop = {

@@ -462,6 +462,7 @@ country_event = {
 		activate_technology = state_n_government
 		activate_technology = phenomenalism
 		activate_technology = functionalism
+		activate_technology = colonial_offices_tech
 		social_reform = acceptable_schools
 	}
 }
@@ -485,6 +486,7 @@ country_event = {
 		activate_technology = nationalism_n_imperialism
 		activate_technology = experimental_psychology
 		activate_technology = biologism
+		activate_technology = pan_nationalism_tech
 		social_reform = acceptable_schools
 	}
 }
@@ -575,6 +577,9 @@ country_event = {
 		name = "noloc"
 		activate_technology = medicine
 		activate_technology = early_railroad
+		activate_technology = practical_steam_engine
+		activate_technology = mechanical_production
+		activate_technology = clean_coal
 	}
 }
 
@@ -739,6 +744,7 @@ country_event = {
 			ai = no
 		}
 		vassal_of = ENG
+		primary_culture = anglo_canadian
 		war = no
 	}
 	
@@ -817,7 +823,7 @@ country_event = {
 	
 	option = {
 		name = "noloc"
-		overlord = { any_owned = { limit = { is_core = HND } secede_province = THIS } }
+		overlord = { any_owned = { limit = { OR = { is_core = HND is_core = BHU is_core = NEP } } secede_province = THIS } }
 	}
 }
 
