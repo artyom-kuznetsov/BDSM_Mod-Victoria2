@@ -806,7 +806,11 @@ country_event = {
 		overlord = {
 			tag = ENG
 			any_owned_province = {
-				is_core = HND
+				OR = {
+					is_core = HND
+					is_core = BHU
+					is_core = NEP
+				}
 			}
 		}
 	}
