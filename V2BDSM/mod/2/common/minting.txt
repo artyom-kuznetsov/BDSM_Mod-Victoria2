@@ -1,0 +1,15 @@
+# Minting - daily income every country gets (read by V2DLL, ENABLE_MINTING).
+# Added to the treasury once per day, shown in the budget window as "minting_inc",
+# included in total income (budget window, topbar chart, tooltips).
+#
+# formula - evaluated per country, result is pounds per day.
+# Variables:
+#   industry_score     industrial score of the country (same as industrial_score in scripts)
+#   total_population   country population (the number the game stores for the country)
+#   any other name     a country variable declared in the game (set_variable = { which = NAME ... }),
+#                      e.g. economic_thought_level; its value, or 0 if the country does not have it
+# Operators: + - * /   parentheses, decimal numbers (use a dot: 0.01)
+#
+# Every player in a multiplayer game must have the same formula, otherwise OOS.
+
+formula = 1 * industry_score * monetary_system_level * 1.5

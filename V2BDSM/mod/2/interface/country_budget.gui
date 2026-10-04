@@ -121,17 +121,17 @@ guiTypes = {
 		
 		instantTextBoxType = { 
 			name = "diplomatic_desc"
-			position = { x = 610 y = 523 }
+			position = { x = 670 y = 523 }
 			font = "cgothic_18_bold"
 			text = "DIPLOMATIC_BALANCE_DESC"
 			maxWidth = 300
 			maxHeight = 32	
-			format = centre
+			format = right
 		}
 		
 		guiButtonType = {
 			name = "FE_BUDGET_DIPLO_BDSM"
-			position = { x = 648 y = 537 }			
+			position = { x = 577 y = 567 }			
 			quadTextureSprite = "GFX_standard_button220"
 			buttonText = "FE_BUDGET_DIPLO_BDSM"
 			buttonFont = "cgothic_22_black"
@@ -229,23 +229,23 @@ guiTypes = {
 		}		
 		
 		instantTextBoxType = { 
-			name = "gold_desc"
-			position = { x = 80 y = 305 }
+			name = "gold_inc"
+			position = { x = 70 y = 300 }
 			font = "cgothic_22_black"
-			text = "GOLD"	
-			maxWidth = 170
+			text = "10p"	
+			maxWidth = 60
 			maxHeight = 32	
 			format = left
 		}		
 		
 		instantTextBoxType = { 
-			name = "gold_inc"
-			position = { x = 420 y = 305 }
+			name = "minting_inc"
+			position = { x = 70 y = 330 }
 			font = "cgothic_22_black"
-			text = "10p"	
+			text = "minting_inc"	
 			maxWidth = 60
 			maxHeight = 32	
-			format = centre
+			format = left
 		}		
 		
 		instantTextBoxType = { 
@@ -613,8 +613,18 @@ guiTypes = {
 		}
 		
 		instantTextBoxType = { 
+			name = "naval_base_expense"
+			position = { x = 769 y = 542 }
+			font = "cgothic_22_black"
+			text = "naval_base_expense"	
+			maxWidth = 160
+			maxHeight = 32	
+			format = centre
+		}
+		
+		instantTextBoxType = { 
 			name = "balance_desc"
-			position = { x = 580 y = 590 }
+			position = { x = 580 y = 600 }
 			font = "cgothic_22_black"
 			text = "BUDGET_DAILY_BALANCE"	
 			maxWidth = 300
@@ -1306,7 +1316,14 @@ guiTypes = {
 		iconType = {
 			name = "icon_3"
 			spriteType = "GFX_budget_gold_icon"
-			position = { x= 38 y = 300 }
+			position = { x= 36 y = 328 }
+			Orientation = "UPPER_LEFT"
+		}
+		
+		iconType = {
+			name = "icon_4"
+			spriteType = "GFX_movement_size_icon"
+			position = { x= 40 y = 300 }
 			Orientation = "UPPER_LEFT"
 		}
 		
