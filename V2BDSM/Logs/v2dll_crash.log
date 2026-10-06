@@ -55,3 +55,59 @@
     stack=302E5D00  CPluralityTrigger  vptr=01142688  vtable-in-exe
     alian  va=01B3DA04  (heap)
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-06 20:02:59.080 dll=4.98 pid=15772 tid=33444 ========
+  fpu_cw=0109001F mxcsr=00009FE5
+  oos_hits=0 sync_hits=0 last=none
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=0087A82B  v2game.exe+0x16A82B
+  av_read addr=00000008
+  params n=2 p0=00000000 p1=00000008
+  eax=00000000 ebx=3D8E2360 ecx=00000000 edx=30529F80 esi=301946E8 edi=2EBD598C
+  ebp=005F9B68 esp=005F9558 eip=0087A82B eflags=00010206
+  eip=0087A82B  v2game.exe+0x16A82B
+  code_eip-8 74 16 8B 8E 80 00 00 00  8B 51 08 8B 83 98 00 00
+  pointed:
+  eax=00000000
+  ebx=3D8E2360 01110A84 0000018D 34DA34F8 34DA35C0 34DA35C0 00000000 00000000 00000000
+  ecx=00000000
+  edx=30529F80 5F006C6C 746E6573 0000000A 0000000F 3D207265 30586490 61740909 66655F78
+  esi=301946E8 0110DBFC 0000018D 6C6C756E 0113CE00 0000018D 00000000 00000004 0000000F
+  edi=2EBD598C 65706170 696D5F72 69006C6C 6E69646C 676F0067 64000079 6C66635F 69006761
+  esp=005F9558 005F9D1C 2EBD5760 00000000 00000000 00000AD4 65706100 696D5F72 00006C6C
+  stack:
+    [0]=0087A82B  v2game.exe+0x16A82B
+    [1]=00CB2B27  v2game.exe+0x5A2B27
+    [2]=008724ED  v2game.exe+0x1624ED
+    [3]=00CB2B27  v2game.exe+0x5A2B27
+    [4]=0088989E  v2game.exe+0x17989E
+    [5]=0094DE09  v2game.exe+0x23DE09
+    [6]=00946A8D  v2game.exe+0x236A8D
+    [7]=00C8DF8B  v2game.exe+0x57DF8B
+    [8]=00DC0F3E  v2game.exe+0x6B0F3E
+    [9]=757DFCC9  KERNEL32.DLL+0x1FCC9
+    [10]=770B82AE  ntdll.dll+0x682AE
+    [11]=770B827E  ntdll.dll+0x6827E
+    [12]=00000000
+  source:
+  known_site: none (new rva 16A82B — смотреть keys/objects)
+  source_objects:
+    esi=301946E8  CProductionType  vptr=0110DBFC  vtable-in-exe
+    edi=2EBD598C  vptr=65706170  vtable-outside-exe
+    ebx=3D8E2360  CTechnology  vptr=01110A84  vtable-in-exe
+    edx=30529F80  vptr=5F006C6C  vtable-outside-exe
+    esi+40=00000000 esi+44=00000000 (часто id/тип identity)
+  source_keys:
+    _CHANCE  va=0113CE00  near=_CHANCE ( G* W)  ( RX W)  W :   - line  ' for MTTH in file  meantim
+    stack=3D8002B8  CRulingPartyIdeologyTrigger  vptr=011404D8  vtable-in-exe
+    stack=3D7E7880  CMTTHModifier  vptr=0113CE78  vtable-in-exe
+    paper_mill  va=2EBD598C  (heap)
+    paper_mill  va=36CFA240  (heap)
+    stack=3D8E2344  CAndTrigger  vptr=01109994  vtable-in-exe
+    stack=3D7FFCA0  CNotTrigger  vptr=0113FBA8  vtable-in-exe
+    stack=3D7E77C0  CTechnologyTrigger  vptr=01140580  vtable-in-exe
+    aper_mill  va=2EBD598D  (heap)
+    stack=3D8E26F0  CAdditiveMTTH  vptr=0113CEE8  vtable-in-exe
+    nassau_william_sr  va=3D82DFEC  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0

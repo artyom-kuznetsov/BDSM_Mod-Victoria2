@@ -259,7 +259,6 @@ cement_template = {
 
 consec_template = {
 	efficiency = {
-		cotton = 0.5	# 1
 	}
 	
 	owner =
@@ -770,13 +769,31 @@ luxury_furniture_factory = {
 construction_goods_factory = {       
 	template = consec_template	#1
 	input_goods = {           
-		steel = 0.5				#8
+		steel = 0.44			#7
 		cement = 0.625			#10
 		glass = 1.5				#6
-		timber = 2				#8	#33
+		timber = 2				#8	#32
 	} 
 	output_goods = construction_goods 
 	value = 4					#40
+	bonus = {
+		trigger = { 
+			OR = {
+				has_building = steel_factory 
+				has_building = glass_factory 
+			}
+		}
+		value = 0.075
+	}
+	bonus = {
+		trigger = { 
+			OR = {
+				has_building = timber_factory 
+				has_building = cement_factory 
+			}
+		}
+		value = 0.075
+	}
 }
 
 cement_factory = {       
