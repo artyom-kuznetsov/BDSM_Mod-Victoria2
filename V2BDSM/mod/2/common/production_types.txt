@@ -257,6 +257,34 @@ cement_template = {
 	workforce = 10000
 }
 
+consec_template = {
+	efficiency = {
+		cotton = 0.5	# 1
+	}
+	
+	owner =
+	{
+		poptype = capitalists 
+		effect = output
+		effect_multiplier = 10
+	}
+	
+	employees = {	
+		{ 
+			poptype = craftsmen
+			effect = throughput
+			amount = 0.99
+		}
+		{ 
+			poptype = capitalists
+			effect = throughput
+			amount = 0.01
+		}
+	}
+	type = factory
+	workforce = 10000
+}
+
 factory_template = {
 	efficiency = { #1.2 saved
 		cement = 0.3125			#5
@@ -574,25 +602,6 @@ small_arms_factory = {
 	}
 }
 
-ammunition_factory = {       
-	template = factory_template	#8
-	input_goods = {      
-		sulphur = 1.9			#9.5
-		steel = 0.781			#12.5	total input+maint = 30
-	}
-	output_goods = ammunition 
-	value = 4					#40
-	bonus = {
-		trigger = {
-			has_building = sulphur_factory
-		}
-		value = 0.1
-	}
-	bonus = {
-		trigger = { has_building = steel_factory }
-		value = 0.05
-	}
-}
 
 ############# COMMON FACTORIES
 steel_factory = {       
@@ -758,6 +767,18 @@ luxury_furniture_factory = {
 }
 
 ############# CHEAP FACTORIES
+construction_goods_factory = {       
+	template = consec_template	#1
+	input_goods = {           
+		steel = 0.5				#8
+		cement = 0.625			#10
+		glass = 1.5				#6
+		timber = 2				#8	#33
+	} 
+	output_goods = construction_goods 
+	value = 4					#40
+}
+
 cement_factory = {       
 	template = cement_template	#6
 	input_goods = {           

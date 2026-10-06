@@ -1,0 +1,57 @@
+
+======== CRASH 2026-10-06 18:58:33.760 dll=4.98 pid=15940 tid=32592 ========
+  fpu_cw=0109001F mxcsr=00009FE5
+  oos_hits=0 sync_hits=0 last=none
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=007E1999  v2game.exe+0xD1999
+  av_read addr=0000011C
+  params n=2 p0=00000000 p1=0000011C
+  eax=2F4D02A0 ebx=00000000 ecx=3F33A798 edx=00000038 esi=2F86D288 edi=3F33A760
+  ebp=01B3D584 esp=01B3D408 eip=007E1999 eflags=00010202
+  eip=007E1999  v2game.exe+0xD1999
+  code_eip-8 46 18 8B 98 2C 01 00 00  8B 83 1C 01 00 00 2B 83
+  pointed:
+  eax=2F4D02A0 0110DAF0 0000018D 00000000 300B0290 010ED998 3DDE1650 0000270F 00000D45
+  [eax+14]=3DDE1650 01110A84 0000018D 3440B408 3440B4CC 3440B4CC 00000000 00000000 00000000
+  [eax+18]=0000270F unreadable
+  ebx=00000000
+  ecx=3F33A798 B3020F10 88071900 00000000 00000000 00000000 00000000 00000000 00000000
+  edx=00000038 unreadable
+  esi=2F86D288 0110E1F8 00000000 0110E21C 0000018D 00000000 300B0290 2F4D02A0 30555550
+  edi=3F33A760 00000000 00000000 00000000 00000000 00000000 00000000 00000000 0000270F
+  esp=01B3D408 2F878854 3EF60388 00000220 00000000 00000000 00000000 3F33A760 3F33A798
+  stack:
+    [0]=007E1999  v2game.exe+0xD1999
+    [1]=008320BC  v2game.exe+0x1220BC
+    [2]=00848054  v2game.exe+0x138054
+    [3]=0094709F  v2game.exe+0x23709F
+    [4]=00C8DF8B  v2game.exe+0x57DF8B
+    [5]=00DC0F3E  v2game.exe+0x6B0F3E
+    [6]=757DFCC9  KERNEL32.DLL+0x1FCC9
+    [7]=770B82AE  ntdll.dll+0x682AE
+    [8]=770B827E  ntdll.dll+0x6827E
+    [9]=00000000
+  source:
+  known_site: none (new rva 0D1999 — смотреть keys/objects)
+  source_objects:
+    eax=2F4D02A0  CNullBuilding  vptr=0110DAF0  vtable-in-exe
+    ecx=3F33A798  vptr=B3020F10  vtable-outside-exe
+    esi=2F86D288  CStateBuilding  vptr=0110E1F8  vtable-in-exe
+    edi=3F33A760  vptr=00000000  null-vtable
+    edx=00000038  vptr=00000000  unreadable
+    esi+40=00000000 esi+44=00000000 (часто id/тип identity)
+  source_keys:
+    stack=3065C8B8  CHasBuildingTrigger  vptr=01140938  vtable-in-exe
+    stack=52AA50D0  CStateEmployment  vptr=0110D3EC  vtable-in-exe
+    stack=306EA538  CProductionType  vptr=0110DBFC  vtable-in-exe
+    stack=387AAA68  CCountry  vptr=0110FACC  vtable-in-exe
+    stack=30555550  CState  vptr=0110D78C  vtable-in-exe
+    stack=0560D398  CEU3Application  vptr=0111845C  vtable-in-exe
+    stack=387B90B8  CCountry  vptr=0110FACC  vtable-in-exe
+    stack=3054EB10  CState  vptr=0110D78C  vtable-in-exe
+    stack=36911C98  CMapProvince  vptr=0110D310  vtable-in-exe
+    stack=30552030  CState  vptr=0110D78C  vtable-in-exe
+    stack=302E5D00  CPluralityTrigger  vptr=01142688  vtable-in-exe
+    alian  va=01B3DA04  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0

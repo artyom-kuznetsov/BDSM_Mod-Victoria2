@@ -308,6 +308,24 @@ cement_inv = {
 		activate_building = cement_factory
 	}
 }
+construction_goods_factory_inv = {
+	limit = { water_wheel_power = 1 }
+	news = no
+	chance = {
+		base = 25
+		modifier = {
+			factor = 5
+			economic_system_rgroup = laissez_faire_ref
+		}
+		modifier = {
+			factor = 5
+			ruling_party_ideology = liberal
+		}
+	}
+	effect = {
+		activate_building = construction_goods_factory
+	}
+}
 regular_clothes_production = {
 	limit = { industrial_revolution = 1 }
 	news = no
@@ -659,9 +677,6 @@ industrialized_armament_industry = {
 			small_arms = 0.05
 		}
 		factory_goods_output = {
-			ammunition = 0.05
-		}
-		factory_goods_output = {
 			artillery = 0.05
 		}
 	}
@@ -778,23 +793,6 @@ steel_inv = {
 	}
 	effect = {
 		activate_building = steel_factory
-	}
-}
-ammunition_production = {
-	limit = { mechanized_mining = 1 NOT = { has_country_flag = invent_factories_blocked_cflag } }
-	chance = {
-		base = 10
-		modifier = {
-			factor = 5
-			invention = whitney_n_colts_standardized_small_arms
-		}
-		modifier = {
-			factor = 5
-			army_professionalism = 1
-		}
-	}
-	effect = {
-		activate_building = ammunition_factory 
 	}
 }
 small_arms_production = {
@@ -1585,9 +1583,6 @@ smokeless_powder = {
 		}
 	}
 	effect = {
-		factory_goods_output = {
-			ammunition = 0.05
-		}
 		factory_goods_output = {
 			artillery = 0.05
 		}
