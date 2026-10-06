@@ -882,7 +882,7 @@ associative_psychology_inv = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.05
+		education_efficiency = 0.03
 	}
 }
 mop_inv = {
@@ -926,7 +926,7 @@ i_empiricism = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.05
+		education_efficiency = 0.04
 	}
 }
 #experimental_psychology
@@ -947,7 +947,7 @@ i_analytic_philosophy = {
 	effect = {
 		shared_prestige = 15
 		permanent_prestige = 1.5
-		education_efficiency = 0.05
+		education_efficiency = 0.04
 	}
 }
 modern_logics = {
@@ -967,24 +967,6 @@ modern_logics = {
 	effect = {
 		shared_prestige = 30
 		permanent_prestige = 3
-	}
-}
-logical_positivism = {
-	limit = { biologism = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			impressionism = 1
-		}
-		modifier = {
-			factor = 2
-			biologism = 1
-		}
-	}
-	effect = {
-		education_efficiency = 0.05
 	}
 }
 #psychoanalysis
@@ -1018,7 +1000,7 @@ hermeneutics = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.05
+		education_efficiency = 0.04
 	}
 }
 #behaviorism
@@ -1033,7 +1015,7 @@ existentialism = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.05
+		education_efficiency = 0.04
 	}
 }
 nihilism_and_the_will = {
@@ -1069,6 +1051,7 @@ quantum_theory = {
 	effect = {
 		shared_prestige = 50
 		permanent_prestige = 5
+		education_efficiency = 0.04
 	}
 }
 #positivism
@@ -1122,6 +1105,24 @@ meta_irony = {
 	}
 }
 
+logical_positivism = {
+	limit = { biologism = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			impressionism = 1
+		}
+		modifier = {
+			factor = 2
+			biologism = 1
+		}
+	}
+	effect = {
+		education_efficiency = 0.05
+	}
+}
 #biologism
 darwinism = {
 	limit = { biologism = 1 }
@@ -1134,7 +1135,7 @@ darwinism = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.1
+		education_efficiency = 0.05
 	}
 }
 social_darwinism = {
@@ -1164,22 +1165,6 @@ sociology = {
 		modifier = {
 			factor = 2
 			scientific_management = 1
-		}
-	}
-	effect = { education_efficiency = 0.05 }
-}
-social_psychology = {
-	limit = { social_science = 1 }
-	news = no
-	chance = {
-		base = 2
-		modifier = {
-			factor = 2
-			experimental_psychology = 1
-		}
-		modifier = {
-			factor = 2
-			behaviorism = 1
 		}
 	}
 	effect = { education_efficiency = 0.05 }
@@ -1238,6 +1223,22 @@ the_revolt_of_the_masses = {
 		war_exhaustion = -0.25
 	}
 	core_pop_consciousness_modifier = 0.01
+}
+social_psychology = {
+	limit = { social_alienation = 1 }
+	news = no
+	chance = {
+		base = 2
+		modifier = {
+			factor = 2
+			experimental_psychology = 1
+		}
+		modifier = {
+			factor = 2
+			behaviorism = 1
+		}
+	}
+	effect = { education_efficiency = 0.05 }
 }
 #critical_theory
 postcolonialism = {
@@ -1639,7 +1640,6 @@ mass_advertising = {
 		}
 	}
 	effect = {
-		education_efficiency = 0.05
 		suppression_points_modifier = -0.05
 	}
 }
