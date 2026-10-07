@@ -21,3 +21,11 @@ factory_unprofitable_close_days = 60
 #                      e.g. economic_thought_level; its value, or 0 if the country does not have it
 # Operators: + - * /   parentheses, decimal numbers (use a dot: 0.01)
 minting_formula = industry_score + industry_score * monetary_system_level * 0.25
+
+# --- AI factory expansion (PATCH_AI_EXPAND_STAFFING in v2dll_settings.ini) ---
+# An AI country expands an existing factory only if at least this percent of the factory's
+# jobs are filled with workers (employees / (workforce * level)). The vanilla AI only looks at
+# the unemployed share of the whole state and builds the most profitable factory type up to
+# huge levels with almost no workers. Capitalists already need about 90 percent in vanilla.
+# 0 = no limit (vanilla AI behaviour).
+ai_factory_expand_min_staffing = 90
