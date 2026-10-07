@@ -1130,6 +1130,7 @@ tank_exploits = {
 	effect = {
 		tank = {
 			attack = 10
+			defence = 10
 			siege = 1				
 		}	
 	}
@@ -1220,6 +1221,7 @@ light_tank = {
 		tank = {
 			attack = 3
 			defence = 3
+			support = 0.5
 			supply_consumption = 0.5
 			maximum_speed = 2
 		}
@@ -1243,7 +1245,7 @@ medium_tank = {
 			attack = 9
 			defence = 9
 			siege = 1
-			supply_consumption = 1
+			supply_consumption = 0.25
 		}
 	}
 }
@@ -1263,7 +1265,8 @@ armoured_cars = {
 	effect = {
 		tank = {
 			maximum_speed = 2
-			supply_consumption = 0.5
+			support = 0.5
+			supply_consumption = 0.1
 		}
 	}
 }
