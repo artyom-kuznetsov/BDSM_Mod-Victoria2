@@ -1,0 +1,23 @@
+# V2DLL settings tied to this mod's game data. Created automatically, edit freely.
+# Every player in a multiplayer game must have identical values here, otherwise OOS.
+# '#' starts a comment.
+
+# --- Factories (PATCH_FACTORY_AUTO_CLOSE_UNPROFITABLE in v2dll_settings.ini) ---
+# A factory that is NOT subsidized and has been unprofitable (sales below the cost of its
+# input goods) for this many days in a row is closed automatically, as if closed by hand.
+# The money stored in the factory is paid out to the capitalists of its state.
+# 0 = never close automatically.
+factory_unprofitable_close_days = 60
+
+# --- Minting (ENABLE_MINTING in v2dll_settings.ini) ---
+# Daily income every country gets. Added to the treasury once per day, shown in the budget
+# window as "minting_inc", included in total income (budget window, topbar chart, tooltips).
+#
+# minting_formula - evaluated per country, result is pounds per day. Empty = minting is off.
+# Variables:
+#   industry_score     industrial score of the country (same as industrial_score in scripts)
+#   total_population   country population (the number the game stores for the country)
+#   any other name     a country variable declared in the game (set_variable = { which = NAME ... }),
+#                      e.g. economic_thought_level; its value, or 0 if the country does not have it
+# Operators: + - * /   parentheses, decimal numbers (use a dot: 0.01)
+minting_formula = industry_score + industry_score * monetary_system_level * 0.25
