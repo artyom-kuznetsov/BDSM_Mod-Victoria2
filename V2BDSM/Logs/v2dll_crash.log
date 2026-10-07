@@ -111,3 +111,60 @@
     stack=3D8E26F0  CAdditiveMTTH  vptr=0113CEE8  vtable-in-exe
     nassau_william_sr  va=3D82DFEC  (heap)
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-08 00:26:17.131 dll=5.25 pid=25456 tid=17488 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=00EBCA6D  v2game.exe+0xFCA6D
+  av_read addr=00000008
+  params n=2 p0=00000000 p1=00000008
+  eax=00000001 ebx=376DB618 ecx=2FB3DE40 edx=0166B8A5 esi=00000000 edi=00C6C950
+  ebp=00C6C128 esp=00C6B960 eip=00EBCA6D eflags=00010206
+  eip=00EBCA6D  v2game.exe+0xFCA6D
+  code_eip-8 1C 8B 11 8B 42 04 FF D0  8B 46 08 8B 93 A0 12 00
+  pointed:
+  eax=00000001 unreadable
+  ebx=376DB618 017BFACC 0000018D 00000000 00000000 00000000 37632F00 00000000 00564943
+  ecx=2FB3DE40 017F7C3C 77B8F570 00000001 00000003 756D007B 6974696E 63006E6F 00650000
+  edx=0166B8A5 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  esi=00000000
+  edi=00C6C950 017F8524 00000000 00000000 00000000 77096500 00000001 00000020 2FB3DE40
+  esp=00C6B960 00C6C2DC 00C6C950 00000000 00C6CB7C 756D6D61 6974696E 77006E6F 0000003C
+  stack:
+    [0]=00EBCA6D  v2game.exe+0xFCA6D
+    [1]=01362B27  v2game.exe+0x5A2B27
+    [2]=01042534  v2game.exe+0x282534
+    [3]=01362B27  v2game.exe+0x5A2B27
+    [4]=0103F63B  v2game.exe+0x27F63B
+    [5]=0103F3ED  v2game.exe+0x27F3ED
+    [6]=0112F8B8  v2game.exe+0x36F8B8
+    [7]=011180C1  v2game.exe+0x3580C1
+    [8]=0111555B  v2game.exe+0x35555B
+    [9]=0139F966  v2game.exe+0x5DF966
+    [10]=0133E0CD  v2game.exe+0x57E0CD
+    [11]=01470F3E  v2game.exe+0x6B0F3E
+    [12]=757DFCC9  KERNEL32.DLL+0x1FCC9
+    [13]=770B82AE  ntdll.dll+0x682AE
+    [14]=770B827E  ntdll.dll+0x6827E
+    [15]=00000000
+  source:
+  known_site: none (new rva 0FCA6D — смотреть keys/objects)
+  source_objects:
+    eax=00000001  vptr=00000000  unreadable
+    ecx=2FB3DE40  vptr=017F7C3C  vtable-in-exe
+    edi=00C6C950  vptr=017F8524  vtable-in-exe
+    ebx=376DB618  CCountry  vptr=017BFACC  vtable-in-exe
+    edx=0166B8A5  vptr=00000000  null-vtable
+  source_keys:
+    Mrmy_schools  va=00C6BBA7  (heap)
+    128rrik_VSHUFPDZ128rrikz_VSHUFPSZ128rri_VSHUFPS  va=6C616E6F  (heap)
+    stack=37425710  CMapProvince  vptr=017BD310  vtable-in-exe
+    stack=3E552F80  CPartyLoyalty  vptr=017F6AB8  vtable-in-exe
+    stack=309D4210  CPopType  vptr=017F65F8  vtable-in-exe
+    stack=7814F450  CPop  vptr=017F6428  vtable-in-exe
+    stack=0501EAA8  CNullPopType  vptr=017F6618  vtable-in-exe
+    stack=051071D8  CNullCulture  vptr=017C003C  vtable-in-exe
+    stack=05107DC0  CNullReligion  vptr=017C0368  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0

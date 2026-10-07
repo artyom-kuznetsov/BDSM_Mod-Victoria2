@@ -7,16 +7,18 @@ dragoon = {
 	unit_type = infantry
 	
 	#Avatar
-	sprite_override = Cavalry
-	sprite_mount = GenericMount
-	sprite_mount_attach_node = Saddle_Node
+	# Model: <graphical culture>Dragoon (GermanMotor), see interface/avatars_dragoon.gfx (gen_dragoon_actors.py).
+	# The old cavalry look (rider + horse) - uncomment these three lines and the Dragoon actors are no longer used:
+	#sprite_override = Cavalry
+	#sprite_mount = GenericMount
+	#sprite_mount_attach_node = Saddle_Node
 	floating_flag = yes
 	
 	#Core Abilities
 	priority = 35
 	max_strength = 3
 	default_organisation = 30
-	maximum_speed = 6.00
+	maximum_speed = 9.00
 	weighted_value = 6.0
 
 
@@ -29,8 +31,9 @@ dragoon = {
 	
 	supply_consumption = 1.0
 	supply_cost = {
-		small_arms = 0.3 	# 3
-		canned_food = 0.2 	# 2
+		small_arms = 0.3 		# 3
+		canned_food = 0.2 		# 2
+		automobiles = 0.05 		# 2	# TOTAL 6
 	}
 	
 
