@@ -40,3 +40,10 @@ ai_factory_expand_min_staffing = 90
 # so that the factory can still buy all its input goods.
 # Fractions are allowed (use a dot). 0 = off (the game's own minimum wage only).
 factory_min_wage_per_10000 = 7
+
+# --- AI naval bases (PATCH_AI_NAVAL_BASE_LIMIT in v2dll_settings.ini) ---
+# In how many provinces of one state an AI country may have a naval base. Once a state has
+# that many provinces with a naval base (built or being built), the AI does not start a base
+# in another province of the state. Upgrading a base the AI already has is not limited. The
+# player and the capitalists are not affected. 0 = no limit (vanilla AI behaviour).
+ai_naval_base_max_provinces_per_state = 1

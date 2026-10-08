@@ -212,7 +212,7 @@ country_event = {
 		}
 		
 	}
-	# КОРСАР ХУЕСОС СЪЕБИ С ФАЙЛА САМ ПРИДУМАЙ КАК СДЕЛАТЬ
+	# КОРСНР ХУЕСОС СЪЕБИ С ФНЙЛН СНМ ПРИДУМНЙ КНК СДЕЛНТЬ
 	option = {
 		name = "Exchange_EvtOptRequest"
 		random_owned = {
@@ -306,37 +306,6 @@ country_event = {
 				owner = { has_country_modifier = guns_request_cooldown_modifier }
 			}
 			CUSTOM_TOOLTIP_GUNS_REQUEST_COOLDOWN = { }
-		}
-	}
-	option = {
-		name = "Exchange_EvtOptRequestAmmo"
-		
-		random_owned = {
-			limit = {
-				owner = { NOT = { has_country_modifier = ammo_request_cooldown_modifier } }
-			}
-			owner = {
-				any_country = {
-					limit = {
-						ai = no
-						NOT = { 
-							has_country_flag = exchange_disallow_flag
-						}
-					}
-					country_event = 57069 # GRANT AMMO EVENT
-				}
-				add_country_modifier = { 
-					name = ammo_request_cooldown_modifier 
-					duration = 30 
-				}
-				CUSTOM_TOOLTIP_C_57052 = { }
-			}
-		}
-		random_owned = {
-			limit = {
-				owner = { has_country_modifier = guns_request_cooldown_modifier }
-			}
-			CUSTOM_TOOLTIP_AMMO_REQUEST_COOLDOWN = { }
 		}
 	}
 	option = {

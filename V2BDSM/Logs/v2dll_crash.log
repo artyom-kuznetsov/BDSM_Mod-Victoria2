@@ -227,3 +227,50 @@
     HalT  va=7FFE4000  (heap)
     stack=47FFF028  CPop  vptr=01216428  vtable-in-exe
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-08 16:42:22.384 dll=5.33 pid=9612 tid=22288 ========
+  fpu_cw=0109001F mxcsr=00009FFD
+  oos_hits=0 sync_hits=1694 last=SYNC n=1694 date=1896-10-02 00:00 sum=10933412/10933412 rec=1 xor=80001100
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=0095D01F  v2game.exe+0x17D01F
+  av_read addr=00000058
+  params n=2 p0=00000000 p1=00000058
+  eax=00000000 ebx=0000048D ecx=4C8F1E58 edx=48C9DF68 esi=0000002F edi=00000000
+  ebp=01CFD6D0 esp=01CFD6B0 eip=0095D01F eflags=00010246
+  eip=0095D01F  v2game.exe+0x17D01F
+  code_eip-8 85 C0 75 EA EB 02 8B FA  8B 57 58 8B 47 5C 89 54
+  pointed:
+  eax=00000000
+  ebx=0000048D unreadable
+  ecx=4C8F1E58 011E0CB4 0000018D 6E756100 00006863 00063B30 00000000 00000000 0000000F
+  edx=48C9DF68 011DD78C 0000018D 0000002F 0000048F 00000001 00000000 00000000 00000000
+  esi=0000002F unreadable
+  edi=00000000
+  esp=01CFD6B0 000455A0 835568E0 48DCB718 00E8EEF3 26A42FA0 00000000 83556928 01CFD8DC
+  stack:
+    [0]=0095D01F  v2game.exe+0x17D01F
+    [1]=00D8FC3D  v2game.exe+0x5AFC3D
+    [2]=00A350D9  v2game.exe+0x2550D9
+    [3]=61895F99  lua51.dll+0x15F99
+    [4]=00DBF966  v2game.exe+0x5DF966
+    [5]=00D5E0CD  v2game.exe+0x57E0CD
+    [6]=00E90F3E  v2game.exe+0x6B0F3E
+    [7]=76ACFCC9  KERNEL32.DLL+0x1FCC9
+    [8]=77A382AE  ntdll.dll+0x682AE
+    [9]=77A3827E  ntdll.dll+0x6827E
+    [10]=00000000
+  source:
+  known_site: none (new rva 17D01F — смотреть keys/objects)
+  source_objects:
+    ecx=4C8F1E58  CDestroyStateBuildingCommand  vptr=011E0CB4  vtable-in-exe
+    esi=0000002F  vptr=00000000  unreadable
+    ebx=0000048D  vptr=00000000  unreadable
+    edx=48C9DF68  CState  vptr=011DD78C  vtable-in-exe
+  source_keys:
+    stack=0BC82418  CEU3Application  vptr=011E845C  vtable-in-exe
+    stack=4D2540B0  CInGameIdler  vptr=011EA34C  vtable-in-exe
+    HalT  va=7FFE4000  (heap)
+    PROVINCE_CHANGE_CONTROLLER  va=7EA1E720  (heap)
+    stack=04FEE838  CEU3DirectSound  vptr=011E8564  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
