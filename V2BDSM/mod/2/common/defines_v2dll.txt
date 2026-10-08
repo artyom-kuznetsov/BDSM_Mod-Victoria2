@@ -29,3 +29,14 @@ minting_formula = industry_score + industry_score * monetary_system_level * 0.25
 # huge levels with almost no workers. Capitalists already need about 90 percent in vanilla.
 # 0 = no limit (vanilla AI behaviour).
 ai_factory_expand_min_staffing = 90
+
+# --- Factory minimum wage (PATCH_FACTORY_MIN_WAGE in v2dll_settings.ini) ---
+# Every day a factory pays its workers at least this many pounds per 10000 workers (owners and
+# slaves are not counted), whether or not the factory is profitable. The wage is paid only out of
+# the money the factory has (its budget): if the factory has less, it pays what it has, and its
+# balance never goes below zero. Where the profit allows a higher wage, the game's own logic
+# (the 'leftover' share and the minimum_wage reform) applies as usual: the larger of the two is
+# paid. For a subsidized factory the wage floor is added to its subsidy (the state pays it),
+# so that the factory can still buy all its input goods.
+# Fractions are allowed (use a dot). 0 = off (the game's own minimum wage only).
+factory_min_wage_per_10000 = 7

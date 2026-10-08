@@ -168,3 +168,62 @@
     stack=051071D8  CNullCulture  vptr=017C003C  vtable-in-exe
     stack=05107DC0  CNullReligion  vptr=017C0368  vtable-in-exe
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-08 13:39:21.266 dll=5.26 pid=1996 tid=20540 ========
+  fpu_cw=0109001F mxcsr=00009FF9
+  oos_hits=0 sync_hits=43 last=SYNC n=43 date=1867-12-16 00:00 sum=161490/161490 rec=1 xor=00000000
+  first_oos=- first_real=- days_real=-1
+  code=C0000094 (INTEGER_DIVIDE_BY_ZERO)
+  fault=00EA02EB  v2game.exe+0x6C02EB
+  eax=00000000 ebx=4BA038D0 ecx=00000000 edx=00000000 esi=00000000 edi=00000001
+  ebp=01CFBD64 esp=01CFBC88 eip=00EA02EB eflags=00010246
+  eip=00EA02EB  v2game.exe+0x6C02EB
+  code_eip-8 24 18 8B 44 24 14 33 D2  F7 F1 8B D8 8B 44 24 10
+  pointed:
+  eax=00000000
+  ebx=4BA038D0 011DE1F8 00000000 011DE21C 0000018D 00000000 27B364A8 27051F10 44B7C850
+  ecx=00000000
+  edx=00000000
+  esi=00000000
+  edi=00000001 unreadable
+  esp=01CFBC88 4BA038D0 00000000 00000000 00863466 00218000 00000000 00000000 00000000
+  stack:
+    [0]=00EA02EB  v2game.exe+0x6C02EB
+    [1]=00864602  v2game.exe+0x84602
+    [2]=00869C50  v2game.exe+0x89C50
+    [3]=00A65F83  v2game.exe+0x285F83
+    [4]=6190A65E  lua51.dll+0x1A65E
+    [5]=00A63AB6  v2game.exe+0x283AB6
+    [6]=61900900  lua51.dll+0x10900
+    [7]=00B0ECFF  v2game.exe+0x32ECFF
+    [8]=00A350D9  v2game.exe+0x2550D9
+    [9]=61905D59  lua51.dll+0x15D59
+    [10]=00DBF966  v2game.exe+0x5DF966
+    [11]=00D5E0CD  v2game.exe+0x57E0CD
+    [12]=00E90F3E  v2game.exe+0x6B0F3E
+    [13]=76ACFCC9  KERNEL32.DLL+0x1FCC9
+    [14]=77A382AE  ntdll.dll+0x682AE
+    [15]=77A3827E  ntdll.dll+0x6827E
+    [16]=00000000
+  source:
+  known_site: none (new rva 6C02EB — смотреть keys/objects)
+  source_objects:
+    edi=00000001  vptr=00000000  unreadable
+    ebx=4BA038D0  CStateBuilding  vptr=011DE1F8  vtable-in-exe
+  source_keys:
+    stack=3328C010  CWorldMarket  vptr=011DBDF8  vtable-in-exe
+    stack=300C87D0  CCountry  vptr=011DFACC  vtable-in-exe
+    stack=0242B3E8  CCurrentGameState  vptr=011EAE84  vtable-in-exe
+    stack=3328C734  CGoodsPool  vptr=011DBDDC  vtable-in-exe
+    stack=27F988D0  CTechnologyStatus  vptr=011E0BC0  vtable-in-exe
+    stack=44B7C850  CState  vptr=011DD78C  vtable-in-exe
+    stack=2F6E79A0  CCountry  vptr=011DFACC  vtable-in-exe
+    stack=424F8550  CGoodsPool  vptr=011DBDDC  vtable-in-exe
+    stack=27E6C5B0  CGoodsPool  vptr=011DBDDC  vtable-in-exe
+    stack=27E6C608  CGoodsPool  vptr=011DBDDC  vtable-in-exe
+    stack=424FF9E0  CGoodsPool  vptr=011DBDDC  vtable-in-exe
+    stack=337D6A30  CCountry  vptr=011DFACC  vtable-in-exe
+    stack=4250E1F0  CGoodsPool  vptr=011DBDDC  vtable-in-exe
+    HalT  va=7FFE4000  (heap)
+    stack=47FFF028  CPop  vptr=01216428  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
