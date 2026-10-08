@@ -47,3 +47,11 @@ factory_min_wage_per_10000 = 7
 # in another province of the state. Upgrading a base the AI already has is not limited. The
 # player and the capitalists are not affected. 0 = no limit (vanilla AI behaviour).
 ai_naval_base_max_provinces_per_state = 1
+
+# --- Needs income (PATCH_NEEDS_INCOME in v2dll_settings.ini) ---
+# Every day a POP receives needs_income_per_10000 pounds per 10000 population when its
+# stored luxury-needs fraction is strictly below needs_income_luxury_threshold percent.
+# The money is added to the POP directly and is not charged to the state treasury.
+# Fractions are allowed (use a dot). 0 = no needs income.
+needs_income_per_10000 = 5
+needs_income_luxury_threshold = 90
