@@ -16296,3 +16296,575 @@
 [21620] Player: topbar=269C8370 подписано кнопок: 2
 [21620] PlayerVolume: ползунок 'fe_player_volume_slider' подписан (slider=2F742FB0, громкость 0.0)
 [21620] Minting: время мира 59883360 -> 60654264, кэш ставок сброшен (загрузка/новая игра)
+[29776] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_hint.txt (memory dump выключен: ENABLE_CRASH_DUMP=0)
+[29776] LoadSettingsFrom: читаю 'v2dll_settings.ini'
+[29776] ---- Install ---- версия 5.48 pid=29776 tid=30556
+[29776] base = 007E0000
+[29776] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[29776] localModConfig=0 fixSfxMixerLag=1 patchFixArmyWindowLag=1 enableCrashDump=0
+[29776] CivilizeNullCheck: включён принудительно
+[29776] ChkWinSkip: принудительно выкл (2859C0 = дневной тик, не GUI)
+[29776] CamStill: принудительно выкл (3.59: idle-шторм, FPS хуже)
+[29776] Timer: timeBeginPeriod(1) = 0
+[29776] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[29776] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[29776] CPU: priority ABOVE_NORMAL
+[29776] CPU: power throttling off
+[29776] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[29776] FPU: CreateThread exe перехвачен
+[29776] FPU: GetTickCount - отложенный патч TBB/D3D
+[29776] FPU: пин на главном цикле rva 5DF550
+[29776] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[29776] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[29776] D3D9: Direct3DCreate9 перехвачен
+[29776] TBB: _beginthreadex перехвачен
+[29776] TBB: кап снят (ENGINE_WORKER_THREADS=0), initialize не трогаем
+[29776] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
+[29776] PopQuantize: FUN_00485E40, keep_bits=12
+[29776] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[29776] WFSO: WaitForSingleObject exe перехвачен (16-50мс -> 1, INFINITE не трогаем)
+[29776] patch CTechnologyView: слот 11 = 1
+[29776] patch CBudgetView: слот 10 = 1
+[29776] patch CProductionView: слот 10 = 1
+[29776] patch CPoliticsView: слот 10 = 1
+[29776] patch CDecision: слот 6 = 1
+[29776] Patch 'always_add_wargoals': применён на rva 138AFF
+[29776] Patch 'land_reinforce': применён на rva 1C8C9B
+[29776] Patch 'naval_reinforce': применён на rva 1C8B1C
+[29776] Patch 'max_relative_price': применён на rva A45C28
+[29776] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[29776] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[29776] Patch 'combat_loss_popup_all': применён на rva 19CC5D
+[29776] Patch 'budget_total_income_tariffs_1': применён на rva 2010CC
+[29776] Patch 'budget_total_income_tariffs_2': применён на rva 2010D6
+[29776] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[29776] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[29776] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[29776] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[29776] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[29776] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[29776] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[29776] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[29776] OccupiedReinforceSplit: occupied=100.0%, пещера 037D0000
+[29776] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 037E0000, ok=1
+[29776] FleetPassengerTooltip: установлен (vtable rva A16BD0 слот 12) = 1
+[29776] FleetCapture: установлен (rva 38F559)
+[29776] CivilizeNullCheck: установлен на rva 14248B, пещера 037F0000
+[29776] SupplySourceNullCheck: установлен на rva 0D15EB, пещера 03800000
+[29776] TechCompareNullCheck: установлен на rva 3A918A, пещера 03810000
+[29776] TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 03820000
+[29776] ProdListVisibilityHook: установлен
+[29776] HideRawGoodsFilter: установлен rva 2F1C30
+[29776] GoodsFilterPos2(наблюдение): установлен rva 2F1EC0
+[29776] FilterShowAll(вкладка 0): call предиката подменён rva 2F41F7
+[29776] FilterShowAll(вкладка 1): call предиката подменён rva 2F7471
+[29776] PlayerNext: call в конструкторе topbar подменён rva 30D090
+[29776] PlayerNext: vftable[0] topbar подменён rva A113D0
+[29776] PlayerVolume: vftable[1] topbar (деструктор) подменён
+[29776] PlayerVolume: call покадровой функции подменён rva 285727
+[29776] SettingsApply: хук установлен rva 35BB50
+[29776] SettingsApply: call применения настроек подменён rva 35C67E
+[29776] MusicFairRandom: установлен rva 05534D
+[29776] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (22241 байт)
+[29776] ParseProductionTypes: разобрано 66 типов производства (шаблонов пропущено: 63)
+[29776] ProdTypeGateHook: установлен
+[29776] LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+[29776] LoadProvinceGoods: готово, 2708 провинций с trade_goods
+[29776] HideNoSupplyFactoriesHook: установлен
+[29776] defines_v2dll: прочитан 'mod/2\common\defines_v2dll.txt' (factory_unprofitable_close_days=60, ai_factory_expand_min_staffing=90, minting_formula задана)
+[29776] FactoryClose(закрытие): установлен rva 0F5750
+[29776] FactoryClose(счётчик): установлен rva 0F50C0
+[29776] FactoryClose(встроенный счётчик): установлен rva 0834C6
+[29776] FactoryClose(финансы): установлен rva 0F4B30
+[29776] FactoryClose: установлен (выплата при закрытии=1, остановка по счётчику=1/1, автозакрытие=1, порог 60 дн.)
+[29776] AiExpand(кандидат): установлен rva 457614
+[29776] AiExpand: установлен (порог занятости 90%, 0 = выкл; ai_factory_expand_min_staffing в common\defines_v2dll.txt)
+[29776] FactoryMinWage: установлен rva 0F4F6F
+[29776] FactoryMinWage(цель субсидии): установлен rva 0F4C0E
+[29776] FactoryMinWage: установлен, цель субсидии установлена (минимум 9.000 в день на 10000 работников, 0 = выкл; factory_min_wage_per_10000 в common\defines_v2dll.txt)
+[29776] DestroyCmdNullCheck: установлен rva 17D01F
+[29776] NeedsHonestUi.purchase: установлен rva 085960
+[29776] NeedsHonestUi.popstep: установлен rva 085390
+[29776] NeedsHonestUi.tipLife: установлен rva 55CEF8
+[29776] NeedsHonestUi.tipEveryday: установлен rva 55D488
+[29776] NeedsHonestUi.tipLuxury: установлен rva 55DA18
+[29776] NeedsHonestUi.popWindow: установлен rva 5820B8
+[29776] NeedsHonestUi.popList: установлен rva 3BB105
+[29776] FactoryPriorityByRule: установлен rva 08155B
+[29776] EventMusic: no se pudo cargar eventmusic.dll (error 126)
+[29776] PriceDelta: 25 сотых процента, множитель 163
+[29776] VersionLabel: 'V2 v3.04 + V2DLL v5.48' (len=22), пещера 03850000
+[29776] Minting: 'monetary_system_level' - переменная страны (0, если не задана)
+[29776] Minting: формула 'industry_score + industry_score * monetary_system_level * 0.25' из 'mod/2\common\defines_v2dll.txt' (7 узлов); пример без переменных страны: industry_score=1000, total_population=4000000 -> 1000.00
+[29776] CountryDaily: call подменён rva 109F74
+[29776] Minting income(факт): установлен rva 12B510
+[29776] Minting income(расчёт): установлен rva 12B769
+[29776] Minting подсказка(запомнить): установлен rva 12A135
+[29776] Minting подсказка(строка): установлен rva 12B0A3
+[29776] Окно бюджета: подсказка над textbox'ами: установлен rva 20A0B8
+[29776] Minting: установлен (income факт=1 расчёт=1, подсказка=1, minting_inc=1, подсказка minting_inc=1)
+[29776] GoodsConsumption: чтение goods_consumption установлено (слот 4 двух vftable CBuilding)
+[29776] GoodsConsumption закупка (рынок): установлен rva 08466B
+[29776] GoodsConsumption расходы(факт): установлен rva 12B5E1
+[29776] GoodsConsumption расходы(расчёт): установлен rva 12B354
+[29776] GoodsConsumption график панели: установлен rva 30E859
+[29776] GoodsConsumption текст панели: установлен rva 30F3A4
+[29776] GoodsConsumption карточка товара: установлен rva 079C07
+[29776] GoodsConsumption: установлен (закупка=1 расходы факт=1 расчёт=1 график=1 текст=1, строка бюджета=1, подсказка=1, карточка товара=1, спрос рынка=1)
+[29776] PhysfsOpenRead: установлен (rva 721F40; ally-embark, GoodsIcons)
+[29776] GoodsIcons: установлен (ENABLE_GOODS_ICONS; ключ icon = "<папка>" в common\goods.txt)
+[29776] CombatRoll: диапазон 0..4 (модуль=5)
+[29776] OosWatch: FUN_00682EC0 rva 282EC0 chk= + Logs\v2dll_oos.log
+[29776] ClipboardPaste: hilo independiente iniciado (Ctrl+V)
+[29776] IdleSkipNested: PATCH_SKIP_NESTED_IDLE=0 FIX_ARMY_WINDOW_LAG=1 PATCH_SKIP_CHK_WIN=0 PATCH_CAM_STILL=0
+[29776] Install: done
+[29776] DllMain: attach, Install = 1
+[29776] ClipboardPaste: hook de teclado activo (Ctrl+V), sin espera de sondeo
+[29776] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[29776] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[29776] GoodsIcons: goods.txt разобран: товаров 64, с иконкой 63, вырезаемых ключей icon 63
+[29776] GoodsIcons: resources.dds: кадр 28x23, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[29776] GoodsIcons: resources_big.dds: кадр 35x29, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[29776] GoodsIcons: resources_small.dds: кадр 20x16, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[29776] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 1870
+[29776] GoodsConsumption: здание 'naval_base': 4 товаров в goods_consumption
+[29776] GoodsConsumption:   cement = 0.500
+[29776] GoodsConsumption:   steel = 1.000
+[29776] GoodsConsumption:   glass = 1.000
+[29776] GoodsConsumption:   timber = 1.000
+[29776] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 3740
+[29776] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[29776] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[29776] Player: кнопка 'button_fe_player_next' подписана (button=4B82A1E8)
+[29776] Player: кнопка 'button_fe_player_pause' подписана (button=4B828898)
+[29776] Player: topbar=267CC878 подписано кнопок: 2
+[29776] PlayerVolume: ползунок 'fe_player_volume_slider' подписан (slider=2F551DE8, громкость 0.0)
+[8808] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_hint.txt (memory dump выключен: ENABLE_CRASH_DUMP=0)
+[8808] LoadSettingsFrom: читаю 'v2dll_settings.ini'
+[8808] ---- Install ---- версия 5.48 pid=8808 tid=30740
+[8808] base = 007E0000
+[8808] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[8808] localModConfig=0 fixSfxMixerLag=1 patchFixArmyWindowLag=1 enableCrashDump=0
+[8808] CivilizeNullCheck: включён принудительно
+[8808] ChkWinSkip: принудительно выкл (2859C0 = дневной тик, не GUI)
+[8808] CamStill: принудительно выкл (3.59: idle-шторм, FPS хуже)
+[8808] Timer: timeBeginPeriod(1) = 0
+[8808] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[8808] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[8808] CPU: priority ABOVE_NORMAL
+[8808] CPU: power throttling off
+[8808] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[8808] FPU: CreateThread exe перехвачен
+[8808] FPU: GetTickCount - отложенный патч TBB/D3D
+[8808] FPU: пин на главном цикле rva 5DF550
+[8808] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[8808] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[8808] D3D9: Direct3DCreate9 перехвачен
+[8808] TBB: _beginthreadex перехвачен
+[8808] TBB: кап снят (ENGINE_WORKER_THREADS=0), initialize не трогаем
+[8808] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
+[8808] PopQuantize: FUN_00485E40, keep_bits=12
+[8808] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[8808] WFSO: WaitForSingleObject exe перехвачен (16-50мс -> 1, INFINITE не трогаем)
+[8808] patch CTechnologyView: слот 11 = 1
+[8808] patch CBudgetView: слот 10 = 1
+[8808] patch CProductionView: слот 10 = 1
+[8808] patch CPoliticsView: слот 10 = 1
+[8808] patch CDecision: слот 6 = 1
+[8808] Patch 'always_add_wargoals': применён на rva 138AFF
+[8808] Patch 'land_reinforce': применён на rva 1C8C9B
+[8808] Patch 'naval_reinforce': применён на rva 1C8B1C
+[8808] Patch 'max_relative_price': применён на rva A45C28
+[8808] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[8808] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[8808] Patch 'combat_loss_popup_all': применён на rva 19CC5D
+[8808] Patch 'budget_total_income_tariffs_1': применён на rva 2010CC
+[8808] Patch 'budget_total_income_tariffs_2': применён на rva 2010D6
+[8808] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[8808] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[8808] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[8808] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[8808] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[8808] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[8808] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[8808] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[8808] OccupiedReinforceSplit: occupied=100.0%, пещера 019E0000
+[8808] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01DF0000, ok=1
+[8808] FleetPassengerTooltip: установлен (vtable rva A16BD0 слот 12) = 1
+[8808] FleetCapture: установлен (rva 38F559)
+[8808] CivilizeNullCheck: установлен на rva 14248B, пещера 01E00000
+[8808] SupplySourceNullCheck: установлен на rva 0D15EB, пещера 01E10000
+[8808] TechCompareNullCheck: установлен на rva 3A918A, пещера 01E20000
+[8808] TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 01E30000
+[8808] ProdListVisibilityHook: установлен
+[8808] HideRawGoodsFilter: установлен rva 2F1C30
+[8808] GoodsFilterPos2(наблюдение): установлен rva 2F1EC0
+[8808] FilterShowAll(вкладка 0): call предиката подменён rva 2F41F7
+[8808] FilterShowAll(вкладка 1): call предиката подменён rva 2F7471
+[8808] PlayerNext: call в конструкторе topbar подменён rva 30D090
+[8808] PlayerNext: vftable[0] topbar подменён rva A113D0
+[8808] PlayerVolume: vftable[1] topbar (деструктор) подменён
+[8808] PlayerVolume: call покадровой функции подменён rva 285727
+[8808] SettingsApply: хук установлен rva 35BB50
+[8808] SettingsApply: call применения настроек подменён rva 35C67E
+[8808] MusicFairRandom: установлен rva 05534D
+[8808] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (22241 байт)
+[8808] ParseProductionTypes: разобрано 66 типов производства (шаблонов пропущено: 63)
+[8808] ProdTypeGateHook: установлен
+[8808] LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+[8808] LoadProvinceGoods: готово, 2708 провинций с trade_goods
+[8808] HideNoSupplyFactoriesHook: установлен
+[8808] defines_v2dll: прочитан 'mod/2\common\defines_v2dll.txt' (factory_unprofitable_close_days=60, ai_factory_expand_min_staffing=90, minting_formula задана)
+[8808] FactoryClose(закрытие): установлен rva 0F5750
+[8808] FactoryClose(счётчик): установлен rva 0F50C0
+[8808] FactoryClose(встроенный счётчик): установлен rva 0834C6
+[8808] FactoryClose(финансы): установлен rva 0F4B30
+[8808] FactoryClose: установлен (выплата при закрытии=1, остановка по счётчику=1/1, автозакрытие=1, порог 60 дн.)
+[8808] AiExpand(кандидат): установлен rva 457614
+[8808] AiExpand: установлен (порог занятости 90%, 0 = выкл; ai_factory_expand_min_staffing в common\defines_v2dll.txt)
+[8808] FactoryMinWage: установлен rva 0F4F6F
+[8808] FactoryMinWage(цель субсидии): установлен rva 0F4C0E
+[8808] FactoryMinWage: установлен, цель субсидии установлена (минимум 9.000 в день на 10000 работников, 0 = выкл; factory_min_wage_per_10000 в common\defines_v2dll.txt)
+[8808] DestroyCmdNullCheck: установлен rva 17D01F
+[8808] NeedsHonestUi.purchase: установлен rva 085960
+[8808] NeedsHonestUi.popstep: установлен rva 085390
+[8808] NeedsHonestUi.tipLife: установлен rva 55CEF8
+[8808] NeedsHonestUi.tipEveryday: установлен rva 55D488
+[8808] NeedsHonestUi.tipLuxury: установлен rva 55DA18
+[8808] NeedsHonestUi.popWindow: установлен rva 5820B8
+[8808] NeedsHonestUi.popList: установлен rva 3BB105
+[8808] FactoryPriorityByRule: установлен rva 08155B
+[8808] EventMusic: no se pudo cargar eventmusic.dll (error 126)
+[8808] PriceDelta: 25 сотых процента, множитель 163
+[8808] VersionLabel: 'V2 v3.04 + V2DLL v5.48' (len=22), пещера 01E60000
+[8808] Minting: 'monetary_system_level' - переменная страны (0, если не задана)
+[8808] Minting: формула 'industry_score + industry_score * monetary_system_level * 0.25' из 'mod/2\common\defines_v2dll.txt' (7 узлов); пример без переменных страны: industry_score=1000, total_population=4000000 -> 1000.00
+[8808] CountryDaily: call подменён rva 109F74
+[8808] Minting income(факт): установлен rva 12B510
+[8808] Minting income(расчёт): установлен rva 12B769
+[8808] Minting подсказка(запомнить): установлен rva 12A135
+[8808] Minting подсказка(строка): установлен rva 12B0A3
+[8808] Окно бюджета: подсказка над textbox'ами: установлен rva 20A0B8
+[8808] Minting: установлен (income факт=1 расчёт=1, подсказка=1, minting_inc=1, подсказка minting_inc=1)
+[8808] GoodsConsumption: чтение goods_consumption установлено (слот 4 двух vftable CBuilding)
+[8808] GoodsConsumption закупка (рынок): установлен rva 08466B
+[8808] GoodsConsumption расходы(факт): установлен rva 12B5E1
+[8808] GoodsConsumption расходы(расчёт): установлен rva 12B354
+[8808] GoodsConsumption график панели: установлен rva 30E859
+[8808] GoodsConsumption текст панели: установлен rva 30F3A4
+[8808] GoodsConsumption карточка товара: установлен rva 079C07
+[8808] GoodsConsumption: установлен (закупка=1 расходы факт=1 расчёт=1 график=1 текст=1, строка бюджета=1, подсказка=1, карточка товара=1, спрос рынка=1)
+[8808] PhysfsOpenRead: установлен (rva 721F40; ally-embark, GoodsIcons)
+[8808] GoodsIcons: установлен (ENABLE_GOODS_ICONS; ключ icon = "<папка>" в common\goods.txt)
+[8808] CombatRoll: диапазон 0..4 (модуль=5)
+[8808] OosWatch: FUN_00682EC0 rva 282EC0 chk= + Logs\v2dll_oos.log
+[8808] ClipboardPaste: hilo independiente iniciado (Ctrl+V)
+[8808] IdleSkipNested: PATCH_SKIP_NESTED_IDLE=0 FIX_ARMY_WINDOW_LAG=1 PATCH_SKIP_CHK_WIN=0 PATCH_CAM_STILL=0
+[8808] Install: done
+[8808] DllMain: attach, Install = 1
+[8808] ClipboardPaste: hook de teclado activo (Ctrl+V), sin espera de sondeo
+[8808] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[8808] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[8808] GoodsIcons: goods.txt разобран: товаров 64, с иконкой 63, вырезаемых ключей icon 63
+[8808] GoodsIcons: resources.dds: кадр 28x23, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[8808] GoodsIcons: resources_big.dds: кадр 35x29, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[8808] GoodsIcons: resources_small.dds: кадр 20x16, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[8808] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 1870
+[8808] GoodsConsumption: здание 'naval_base': 4 товаров в goods_consumption
+[8808] GoodsConsumption:   cement = 0.500
+[8808] GoodsConsumption:   steel = 1.000
+[8808] GoodsConsumption:   glass = 1.000
+[8808] GoodsConsumption:   timber = 1.000
+[8808] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 3740
+[8808] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[8808] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[8808] Player: кнопка 'button_fe_player_next' подписана (button=7D8B14D0)
+[8808] Player: кнопка 'button_fe_player_pause' подписана (button=7D8AE230)
+[8808] Player: topbar=267C0B08 подписано кнопок: 2
+[8808] PlayerVolume: ползунок 'fe_player_volume_slider' подписан (slider=2F2E9330, громкость 0.0)
+[8516] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_hint.txt (memory dump выключен: ENABLE_CRASH_DUMP=0)
+[8516] LoadSettingsFrom: читаю 'v2dll_settings.ini'
+[8516] ---- Install ---- версия 5.48 pid=8516 tid=24000
+[8516] base = 007E0000
+[8516] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[8516] localModConfig=0 fixSfxMixerLag=1 patchFixArmyWindowLag=1 enableCrashDump=0
+[8516] CivilizeNullCheck: включён принудительно
+[8516] ChkWinSkip: принудительно выкл (2859C0 = дневной тик, не GUI)
+[8516] CamStill: принудительно выкл (3.59: idle-шторм, FPS хуже)
+[8516] Timer: timeBeginPeriod(1) = 0
+[8516] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[8516] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[8516] CPU: priority ABOVE_NORMAL
+[8516] CPU: power throttling off
+[8516] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[8516] FPU: CreateThread exe перехвачен
+[8516] FPU: GetTickCount - отложенный патч TBB/D3D
+[8516] FPU: пин на главном цикле rva 5DF550
+[8516] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[8516] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[8516] D3D9: Direct3DCreate9 перехвачен
+[8516] TBB: _beginthreadex перехвачен
+[8516] TBB: кап снят (ENGINE_WORKER_THREADS=0), initialize не трогаем
+[8516] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
+[8516] PopQuantize: FUN_00485E40, keep_bits=12
+[8516] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[8516] WFSO: WaitForSingleObject exe перехвачен (16-50мс -> 1, INFINITE не трогаем)
+[8516] patch CTechnologyView: слот 11 = 1
+[8516] patch CBudgetView: слот 10 = 1
+[8516] patch CProductionView: слот 10 = 1
+[8516] patch CPoliticsView: слот 10 = 1
+[8516] patch CDecision: слот 6 = 1
+[8516] Patch 'always_add_wargoals': применён на rva 138AFF
+[8516] Patch 'land_reinforce': применён на rva 1C8C9B
+[8516] Patch 'naval_reinforce': применён на rva 1C8B1C
+[8516] Patch 'max_relative_price': применён на rva A45C28
+[8516] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[8516] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[8516] Patch 'combat_loss_popup_all': применён на rva 19CC5D
+[8516] Patch 'budget_total_income_tariffs_1': применён на rva 2010CC
+[8516] Patch 'budget_total_income_tariffs_2': применён на rva 2010D6
+[8516] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[8516] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[8516] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[8516] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[8516] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[8516] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[8516] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[8516] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[8516] OccupiedReinforceSplit: occupied=100.0%, пещера 03940000
+[8516] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 03950000, ok=1
+[8516] FleetPassengerTooltip: установлен (vtable rva A16BD0 слот 12) = 1
+[8516] FleetCapture: установлен (rva 38F559)
+[8516] CivilizeNullCheck: установлен на rva 14248B, пещера 03960000
+[8516] SupplySourceNullCheck: установлен на rva 0D15EB, пещера 03970000
+[8516] TechCompareNullCheck: установлен на rva 3A918A, пещера 03980000
+[8516] TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 03990000
+[8516] ProdListVisibilityHook: установлен
+[8516] HideRawGoodsFilter: установлен rva 2F1C30
+[8516] GoodsFilterPos2(наблюдение): установлен rva 2F1EC0
+[8516] FilterShowAll(вкладка 0): call предиката подменён rva 2F41F7
+[8516] FilterShowAll(вкладка 1): call предиката подменён rva 2F7471
+[8516] PlayerNext: call в конструкторе topbar подменён rva 30D090
+[8516] PlayerNext: vftable[0] topbar подменён rva A113D0
+[8516] PlayerVolume: vftable[1] topbar (деструктор) подменён
+[8516] PlayerVolume: call покадровой функции подменён rva 285727
+[8516] SettingsApply: хук установлен rva 35BB50
+[8516] SettingsApply: call применения настроек подменён rva 35C67E
+[8516] MusicFairRandom: установлен rva 05534D
+[8516] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (22241 байт)
+[8516] ParseProductionTypes: разобрано 66 типов производства (шаблонов пропущено: 63)
+[8516] ProdTypeGateHook: установлен
+[8516] LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+[8516] LoadProvinceGoods: готово, 2708 провинций с trade_goods
+[8516] HideNoSupplyFactoriesHook: установлен
+[8516] defines_v2dll: прочитан 'mod/2\common\defines_v2dll.txt' (factory_unprofitable_close_days=60, ai_factory_expand_min_staffing=90, minting_formula задана)
+[8516] FactoryClose(закрытие): установлен rva 0F5750
+[8516] FactoryClose(счётчик): установлен rva 0F50C0
+[8516] FactoryClose(встроенный счётчик): установлен rva 0834C6
+[8516] FactoryClose(финансы): установлен rva 0F4B30
+[8516] FactoryClose: установлен (выплата при закрытии=1, остановка по счётчику=1/1, автозакрытие=1, порог 60 дн.)
+[8516] AiExpand(кандидат): установлен rva 457614
+[8516] AiExpand: установлен (порог занятости 90%, 0 = выкл; ai_factory_expand_min_staffing в common\defines_v2dll.txt)
+[8516] FactoryMinWage: установлен rva 0F4F6F
+[8516] FactoryMinWage(цель субсидии): установлен rva 0F4C0E
+[8516] FactoryMinWage: установлен, цель субсидии установлена (минимум 9.000 в день на 10000 работников, 0 = выкл; factory_min_wage_per_10000 в common\defines_v2dll.txt)
+[8516] DestroyCmdNullCheck: установлен rva 17D01F
+[8516] NeedsHonestUi.purchase: установлен rva 085960
+[8516] NeedsHonestUi.popstep: установлен rva 085390
+[8516] NeedsHonestUi.tipLife: установлен rva 55CEF8
+[8516] NeedsHonestUi.tipEveryday: установлен rva 55D488
+[8516] NeedsHonestUi.tipLuxury: установлен rva 55DA18
+[8516] NeedsHonestUi.popWindow: установлен rva 5820B8
+[8516] NeedsHonestUi.popList: установлен rva 3BB105
+[8516] FactoryPriorityByRule: установлен rva 08155B
+[8516] EventMusic: no se pudo cargar eventmusic.dll (error 126)
+[8516] PriceDelta: 25 сотых процента, множитель 163
+[8516] VersionLabel: 'V2 v3.04 + V2DLL v5.48' (len=22), пещера 039C0000
+[8516] Minting: 'monetary_system_level' - переменная страны (0, если не задана)
+[8516] Minting: формула 'industry_score + industry_score * monetary_system_level * 0.25' из 'mod/2\common\defines_v2dll.txt' (7 узлов); пример без переменных страны: industry_score=1000, total_population=4000000 -> 1000.00
+[8516] CountryDaily: call подменён rva 109F74
+[8516] Minting income(факт): установлен rva 12B510
+[8516] Minting income(расчёт): установлен rva 12B769
+[8516] Minting подсказка(запомнить): установлен rva 12A135
+[8516] Minting подсказка(строка): установлен rva 12B0A3
+[8516] Окно бюджета: подсказка над textbox'ами: установлен rva 20A0B8
+[8516] Minting: установлен (income факт=1 расчёт=1, подсказка=1, minting_inc=1, подсказка minting_inc=1)
+[8516] GoodsConsumption: чтение goods_consumption установлено (слот 4 двух vftable CBuilding)
+[8516] GoodsConsumption закупка (рынок): установлен rva 08466B
+[8516] GoodsConsumption расходы(факт): установлен rva 12B5E1
+[8516] GoodsConsumption расходы(расчёт): установлен rva 12B354
+[8516] GoodsConsumption график панели: установлен rva 30E859
+[8516] GoodsConsumption текст панели: установлен rva 30F3A4
+[8516] GoodsConsumption карточка товара: установлен rva 079C07
+[8516] GoodsConsumption: установлен (закупка=1 расходы факт=1 расчёт=1 график=1 текст=1, строка бюджета=1, подсказка=1, карточка товара=1, спрос рынка=1)
+[8516] PhysfsOpenRead: установлен (rva 721F40; ally-embark, GoodsIcons)
+[8516] GoodsIcons: установлен (ENABLE_GOODS_ICONS; ключ icon = "<папка>" в common\goods.txt)
+[8516] CombatRoll: диапазон 0..4 (модуль=5)
+[8516] OosWatch: FUN_00682EC0 rva 282EC0 chk= + Logs\v2dll_oos.log
+[8516] ClipboardPaste: hilo independiente iniciado (Ctrl+V)
+[8516] IdleSkipNested: PATCH_SKIP_NESTED_IDLE=0 FIX_ARMY_WINDOW_LAG=1 PATCH_SKIP_CHK_WIN=0 PATCH_CAM_STILL=0
+[8516] Install: done
+[8516] DllMain: attach, Install = 1
+[8516] ClipboardPaste: hook de teclado activo (Ctrl+V), sin espera de sondeo
+[8516] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[8516] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[8516] GoodsIcons: goods.txt разобран: товаров 64, с иконкой 63, вырезаемых ключей icon 63
+[8516] GoodsIcons: resources.dds: кадр 28x23, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[8516] GoodsIcons: resources_big.dds: кадр 35x29, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[8516] GoodsIcons: resources_small.dds: кадр 20x16, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[8516] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 1870
+[8516] GoodsConsumption: здание 'naval_base': 4 товаров в goods_consumption
+[8516] GoodsConsumption:   cement = 0.500
+[8516] GoodsConsumption:   steel = 1.000
+[8516] GoodsConsumption:   glass = 1.000
+[8516] GoodsConsumption:   timber = 1.000
+[8516] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 3740
+[8516] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[8516] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[8516] Player: кнопка 'button_fe_player_next' подписана (button=734534F8)
+[8516] Player: кнопка 'button_fe_player_pause' подписана (button=73453390)
+[8516] Player: topbar=26907F28 подписано кнопок: 2
+[8516] PlayerVolume: ползунок 'fe_player_volume_slider' подписан (slider=2F651B90, громкость 0.0)
+[16336] CrashWatch: Logs\v2dll_crash.log + v2dll_crash_hint.txt (memory dump выключен: ENABLE_CRASH_DUMP=0)
+[16336] LoadSettingsFrom: читаю 'v2dll_settings.ini'
+[16336] ---- Install ---- версия 5.48 pid=16336 tid=26264
+[16336] base = 007E0000
+[16336] logs = Logs\ (v2dll.log, v2dll_oos.log, v2dll_crash.log)
+[16336] localModConfig=0 fixSfxMixerLag=1 patchFixArmyWindowLag=1 enableCrashDump=0
+[16336] CivilizeNullCheck: включён принудительно
+[16336] ChkWinSkip: принудительно выкл (2859C0 = дневной тик, не GUI)
+[16336] CamStill: принудительно выкл (3.59: idle-шторм, FPS хуже)
+[16336] Timer: timeBeginPeriod(1) = 0
+[16336] Timer: NtSetTimerResolution(1ms) status=00000000 cur=9989
+[16336] Select: ws2_32.select перехвачен (микшер 68B47D >2мс -> 1мс, timeval копия)
+[16336] CPU: priority ABOVE_NORMAL
+[16336] CPU: power throttling off
+[16336] Heap: LFH включён на 2 из 2 куч (LAA exe=1)
+[16336] FPU: CreateThread exe перехвачен
+[16336] FPU: GetTickCount - отложенный патч TBB/D3D
+[16336] FPU: пин на главном цикле rva 5DF550
+[16336] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF2D5
+[16336] MainLoopSleep0: Sleep(100) -> Sleep(1) rva 5DF684
+[16336] D3D9: Direct3DCreate9 перехвачен
+[16336] TBB: _beginthreadex перехвачен
+[16336] TBB: кап снят (ENGINE_WORKER_THREADS=0), initialize не трогаем
+[16336] Engine: FPU=1 D3D=1 LFH=1 threadPin=1 tbbCap=0 sleep0=1 noVsync=0 prio=1
+[16336] PopQuantize: FUN_00485E40, keep_bits=12
+[16336] MpClientSleep: pump Sleep(40) -> Sleep(1) rva 71DD2C
+[16336] WFSO: WaitForSingleObject exe перехвачен (16-50мс -> 1, INFINITE не трогаем)
+[16336] patch CTechnologyView: слот 11 = 1
+[16336] patch CBudgetView: слот 10 = 1
+[16336] patch CProductionView: слот 10 = 1
+[16336] patch CPoliticsView: слот 10 = 1
+[16336] patch CDecision: слот 6 = 1
+[16336] Patch 'always_add_wargoals': применён на rva 138AFF
+[16336] Patch 'land_reinforce': применён на rva 1C8C9B
+[16336] Patch 'naval_reinforce': применён на rva 1C8B1C
+[16336] Patch 'max_relative_price': применён на rva A45C28
+[16336] Patch 'consciousness_plurality_growth': применён на rva 10C5DE
+[16336] Patch 'allied_reinforce_150': применён на rva 1D74BE
+[16336] Patch 'combat_loss_popup_all': применён на rva 19CC5D
+[16336] Patch 'budget_total_income_tariffs_1': применён на rva 2010CC
+[16336] Patch 'budget_total_income_tariffs_2': применён на rva 2010D6
+[16336] Patch 'build_factory_ignore_colonial_1': применён на rva 0D0C57
+[16336] Patch 'build_factory_ignore_colonial_2': применён на rva 12FA4E
+[16336] Patch 'build_factory_button_enable_ignore_colonial': применён на rva 12E977
+[16336] Patch 'local_supply_factory_ignore_colonial': применён на rva 0D0E9D
+[16336] Patch 'build_factory_ignore_uncivilized_button': применён на rva 12E96E
+[16336] Patch 'build_factory_checklist_uncivilized_own': применён на rva 12EA67
+[16336] Patch 'build_factory_checklist_uncivilized_other': применён на rva 12F0D4
+[16336] Patch 'build_factory_ignore_uncivilized_can_build': применён на rva 12CA3E
+[16336] OccupiedReinforceSplit: occupied=100.0%, пещера 01EB0000
+[16336] AllyOwnerCheck: owned-by-ally=150%, occupied-by-ally=100.0%, пещера 01FD0000, ok=1
+[16336] FleetPassengerTooltip: установлен (vtable rva A16BD0 слот 12) = 1
+[16336] FleetCapture: установлен (rva 38F559)
+[16336] CivilizeNullCheck: установлен на rva 14248B, пещера 01FE0000
+[16336] SupplySourceNullCheck: установлен на rva 0D15EB, пещера 01FF0000
+[16336] TechCompareNullCheck: установлен на rva 3A918A, пещера 02000000
+[16336] TechFolderIconNullCheck: установлен на rva 3ADE98, пещера 02010000
+[16336] ProdListVisibilityHook: установлен
+[16336] HideRawGoodsFilter: установлен rva 2F1C30
+[16336] GoodsFilterPos2(наблюдение): установлен rva 2F1EC0
+[16336] FilterShowAll(вкладка 0): call предиката подменён rva 2F41F7
+[16336] FilterShowAll(вкладка 1): call предиката подменён rva 2F7471
+[16336] PlayerNext: call в конструкторе topbar подменён rva 30D090
+[16336] PlayerNext: vftable[0] topbar подменён rva A113D0
+[16336] PlayerVolume: vftable[1] topbar (деструктор) подменён
+[16336] PlayerVolume: call покадровой функции подменён rva 285727
+[16336] SettingsApply: хук установлен rva 35BB50
+[16336] SettingsApply: call применения настроек подменён rva 35C67E
+[16336] MusicFairRandom: установлен rva 05534D
+[16336] LoadProductionTypeLimits: читаю 'I:\Vic2_Dev\V2BDSM\mod\2\common\production_types.txt' (22241 байт)
+[16336] ParseProductionTypes: разобрано 66 типов производства (шаблонов пропущено: 63)
+[16336] ProdTypeGateHook: установлен
+[16336] LoadProvinceGoods: ванильная history\provinces не найдена (I:\Vic2_Dev\V2BDSM\history\provinces)
+[16336] LoadProvinceGoods: готово, 2708 провинций с trade_goods
+[16336] HideNoSupplyFactoriesHook: установлен
+[16336] defines_v2dll: прочитан 'mod/2\common\defines_v2dll.txt' (factory_unprofitable_close_days=60, ai_factory_expand_min_staffing=90, minting_formula задана)
+[16336] FactoryClose(закрытие): установлен rva 0F5750
+[16336] FactoryClose(счётчик): установлен rva 0F50C0
+[16336] FactoryClose(встроенный счётчик): установлен rva 0834C6
+[16336] FactoryClose(финансы): установлен rva 0F4B30
+[16336] FactoryClose: установлен (выплата при закрытии=1, остановка по счётчику=1/1, автозакрытие=1, порог 60 дн.)
+[16336] AiExpand(кандидат): установлен rva 457614
+[16336] AiExpand: установлен (порог занятости 90%, 0 = выкл; ai_factory_expand_min_staffing в common\defines_v2dll.txt)
+[16336] FactoryMinWage: установлен rva 0F4F6F
+[16336] FactoryMinWage(цель субсидии): установлен rva 0F4C0E
+[16336] FactoryMinWage: установлен, цель субсидии установлена (минимум 9.000 в день на 10000 работников, 0 = выкл; factory_min_wage_per_10000 в common\defines_v2dll.txt)
+[16336] DestroyCmdNullCheck: установлен rva 17D01F
+[16336] NeedsHonestUi.purchase: установлен rva 085960
+[16336] NeedsHonestUi.popstep: установлен rva 085390
+[16336] NeedsHonestUi.tipLife: установлен rva 55CEF8
+[16336] NeedsHonestUi.tipEveryday: установлен rva 55D488
+[16336] NeedsHonestUi.tipLuxury: установлен rva 55DA18
+[16336] NeedsHonestUi.popWindow: установлен rva 5820B8
+[16336] NeedsHonestUi.popList: установлен rva 3BB105
+[16336] FactoryPriorityByRule: установлен rva 08155B
+[16336] EventMusic: no se pudo cargar eventmusic.dll (error 126)
+[16336] PriceDelta: 25 сотых процента, множитель 163
+[16336] VersionLabel: 'V2 v3.04 + V2DLL v5.48' (len=22), пещера 024D0000
+[16336] Minting: 'monetary_system_level' - переменная страны (0, если не задана)
+[16336] Minting: формула 'industry_score + industry_score * monetary_system_level * 0.25' из 'mod/2\common\defines_v2dll.txt' (7 узлов); пример без переменных страны: industry_score=1000, total_population=4000000 -> 1000.00
+[16336] CountryDaily: call подменён rva 109F74
+[16336] Minting income(факт): установлен rva 12B510
+[16336] Minting income(расчёт): установлен rva 12B769
+[16336] Minting подсказка(запомнить): установлен rva 12A135
+[16336] Minting подсказка(строка): установлен rva 12B0A3
+[16336] Окно бюджета: подсказка над textbox'ами: установлен rva 20A0B8
+[16336] Minting: установлен (income факт=1 расчёт=1, подсказка=1, minting_inc=1, подсказка minting_inc=1)
+[16336] GoodsConsumption: чтение goods_consumption установлено (слот 4 двух vftable CBuilding)
+[16336] GoodsConsumption закупка (рынок): установлен rva 08466B
+[16336] GoodsConsumption расходы(факт): установлен rva 12B5E1
+[16336] GoodsConsumption расходы(расчёт): установлен rva 12B354
+[16336] GoodsConsumption график панели: установлен rva 30E859
+[16336] GoodsConsumption текст панели: установлен rva 30F3A4
+[16336] GoodsConsumption карточка товара: установлен rva 079C07
+[16336] GoodsConsumption: установлен (закупка=1 расходы факт=1 расчёт=1 график=1 текст=1, строка бюджета=1, подсказка=1, карточка товара=1, спрос рынка=1)
+[16336] PhysfsOpenRead: установлен (rva 721F40; ally-embark, GoodsIcons)
+[16336] GoodsIcons: установлен (ENABLE_GOODS_ICONS; ключ icon = "<папка>" в common\goods.txt)
+[16336] CombatRoll: диапазон 0..4 (модуль=5)
+[16336] OosWatch: FUN_00682EC0 rva 282EC0 chk= + Logs\v2dll_oos.log
+[16336] ClipboardPaste: hilo independiente iniciado (Ctrl+V)
+[16336] IdleSkipNested: PATCH_SKIP_NESTED_IDLE=0 FIX_ARMY_WINDOW_LAG=1 PATCH_SKIP_CHK_WIN=0 PATCH_CAM_STILL=0
+[16336] Install: done
+[16336] DllMain: attach, Install = 1
+[16336] ClipboardPaste: hook de teclado activo (Ctrl+V), sin espera de sondeo
+[16336] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=80000000
+[16336] D3D9: Present перехвачен, FPU_PRESERVE=1 noVsync=0 interval=00000001
+[16336] GoodsIcons: goods.txt разобран: товаров 64, с иконкой 63, вырезаемых ключей icon 63
+[16336] GoodsIcons: resources.dds: кадр 28x23, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[16336] GoodsIcons: resources_big.dds: кадр 35x29, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[16336] GoodsIcons: resources_small.dds: кадр 20x16, кадров 66 - подставлено иконок 63, не подставлено 0 (goods.txt открывался движком 0 раз, вырезано байт 0)
+[16336] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 1870
+[16336] GoodsConsumption: здание 'naval_base': 4 товаров в goods_consumption
+[16336] GoodsConsumption:   cement = 0.500
+[16336] GoodsConsumption:   steel = 1.000
+[16336] GoodsConsumption:   glass = 1.000
+[16336] GoodsConsumption:   timber = 1.000
+[16336] GoodsIcons: движок прочитал goods.txt, вырезано байт ключей icon (всего): 3740
+[16336] Setup[CTechnologyView]: 'FE_ACADEMIES_BDSM' подписана
+[16336] Setup[CTechnologyView]: 'FE_RPROJECTS_BDSM' подписана
+[16336] Player: кнопка 'button_fe_player_next' подписана (button=734733E8)
+[16336] Player: кнопка 'button_fe_player_pause' подписана (button=73473280)
+[16336] Player: topbar=269DEDC0 подписано кнопок: 2
+[16336] PlayerVolume: ползунок 'fe_player_volume_slider' подписан (slider=2F7A65D8, громкость 0.0)

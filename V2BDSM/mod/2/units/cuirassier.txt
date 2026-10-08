@@ -2,9 +2,9 @@ cuirassier = {
 	icon = 13
 	
 	type = land
-	sprite = Infantry
+	sprite = Dragoon
 	active = no
-	unit_type = infantry
+	unit_type = support
 	floating_flag = no
 	
 	
@@ -17,25 +17,29 @@ cuirassier = {
 
 
 	#Building Costs
-	build_time = 40
+	build_time = 90
 	build_cost = {
-		small_arms = 20
-		canned_food = 20
+		artillery = 10
+		canned_food = 10
+		automobiles = 2
+		oil = 1
 	}
 	
 	supply_consumption = 1.0
 	supply_cost = {
-		small_arms = 0.3	# 3
-		canned_food = 0.15 	# 1.5 TOTAL 4.5
+		artillery = 0.65 	# 6.5
+		canned_food = 0.1 	# 1
+		automobiles = 0.025	# 1
+		oil = 0.04 			# 1		# TOTAL 9.5
 	}
 	
 
 	#Land Abilties
 	reconnaissance = 0
-	attack = 6
-	defence = 5
-	discipline = 1.0
-	support = 0.0
-	maneuver = 2
+	attack = 3
+	defence = 2.5
+	discipline = 0.8
+	support = 1.5
+	maneuver = 3
 	
 }

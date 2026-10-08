@@ -86,9 +86,6 @@ field_fortifications = {
 		dragoon = {
 			defence = 2
 		}
-		cuirassier = {
-			defence = 2
-		}
 		hussar = {
 			defence = 2
 		}
@@ -119,9 +116,6 @@ elastic_defense_system = {
 			defence = 1
 		}
 		dragoon = {
-			defence = 1
-		}
-		cuirassier = {
 			defence = 1
 		}
 		hussar = {
@@ -156,9 +150,6 @@ flexible_counterattacks = {
 		dragoon = {
 			attack = 1
 		}
-		cuirassier = {
-			attack = 1.5
-		}
 		hussar = {
 			attack = 1
 		}
@@ -191,9 +182,6 @@ trench_systems = {
 		dragoon = {
 			defence = 3
 		}
-		cuirassier = {
-			defence = 3.5
-		}
 		hussar = {
 			defence = 3
 		}
@@ -216,11 +204,10 @@ stormtrooper_training = {
 		}
 	}
 	effect = {
-		cuirassier = {
-			attack = 5
-			defence = 1
-		}
 		artillery = {
+			siege = 1				
+		}
+		cuirassier = {
 			siege = 1				
 		}
 		infantry = {
@@ -267,10 +254,6 @@ firepower_vs_mobility = {
 			attack = 1.5
 			defence = 1.5
 		}
-		cuirassier = {
-			attack = 1.75
-			defence = 1.75
-		}
 		hussar = {
 			attack = 1
 			defence = 1
@@ -305,10 +288,6 @@ human_wave_vs_spearhead = {
 		dragoon = {
 			attack = 3
 			defence = 3
-		}
-		cuirassier = {
-			attack = 3.5
-			defence = 3.5
 		}
 		hussar = {
 			attack = 2
@@ -419,10 +398,6 @@ breech_loaded_rifle_armament = {
 			attack = 2.25
 			supply_consumption = 0.1
 		}
-		cuirassier = {
-			attack = 2.5
-			supply_consumption = 0.1
-		}
 		hussar = {
 			attack = 2
 			supply_consumption = 0.1
@@ -454,10 +429,6 @@ machine_gun_armament = {
 			defence = 3.5
 			supply_consumption = 0.15
 		}
-		cuirassier = {
-			defence = 3.75
-			supply_consumption = 0.15
-		}
 		irregular = {
 			defence = 2.8
 			supply_consumption = 0.15
@@ -483,10 +454,6 @@ bolt_action_rifle_armament = {
 		}
 		dragoon = {
 			attack = 3.5
-			supply_consumption = 0.2
-		}
-		cuirassier = {
-			attack = 4
 			supply_consumption = 0.2
 		}
 		hussar = {
@@ -600,11 +567,6 @@ interwar_infantry = {
 			defence = 1.5
 			supply_consumption = 0.5
 		}
-		cuirassier = {
-			attack = 3.5
-			defence = 2
-			supply_consumption = 0.5
-		}
 		engineer = {
 			siege = 1
 		}
@@ -670,6 +632,11 @@ synchronized_heavy_support = {
 			defence = 0.5
 			support = 0.25
 		}
+		cuirassier = {
+			attack = 0.5
+			defence = 0.5
+			support = 0.25
+		}
 		engineer = {
 			attack = 0.5
 			defence = 0.75
@@ -697,6 +664,12 @@ flexible_firepower = {
 	}
 	effect = {
 		artillery = {
+			attack = 0.5
+			defence = 0.5
+			support = 0.25
+			supply_consumption = 0.1
+		}
+		cuirassier = {
 			attack = 0.5
 			defence = 0.5
 			support = 0.25
@@ -744,6 +717,12 @@ ammunition_area_effect_calculations = {
 			support = 0.25
 			supply_consumption = 0.1
 		}
+		cuirassier = {
+			attack = 0.5
+			defence = 0.5
+			support = 0.25
+			supply_consumption = 0.1
+		}
 		engineer = {
 			attack = 0.5
 			defence = 0.5
@@ -772,6 +751,12 @@ low_echelon_fire_support = {
 	}
 	effect = {
 		artillery = {
+			attack = 0.5
+			defence = 0.5
+			support = 0.25
+			supply_consumption = 0.15
+		}
+		cuirassier = {
 			attack = 0.5
 			defence = 0.5
 			support = 0.25
@@ -806,6 +791,12 @@ counter_battery_fire = {
 			support = 0.5
 			supply_consumption = 0.2
 		}
+		cuirassier = {
+			attack = 0.5
+			defence = 0.5
+			support = 0.5
+			supply_consumption = 0.2
+		}
 		engineer = {
 			attack = 0.5
 			defence = 0.75
@@ -835,6 +826,12 @@ creeping_barrage = {
 			support = 0.5
 			supply_consumption = 0.25
 		}
+		cuirassier = {
+			attack = 0.5
+			defence = 0.5
+			support = 0.5
+			supply_consumption = 0.25
+		}
 		engineer = {
 			attack = 0.5
 			defence = 0.5
@@ -859,6 +856,12 @@ grand_battle_plan_vs_superior_firepower = {
 	}
 	effect = {
 		artillery = {
+			attack = 0.5
+			defence = 0.5
+			support = 0.5
+			supply_consumption = 0.3
+		}
+		cuirassier = {
 			attack = 0.5
 			defence = 0.5
 			support = 0.5
@@ -975,6 +978,20 @@ motorized_infantry = {
 	}
 	effect = {
 		activate_unit = dragoon
+	}
+}
+
+motorized_artillery = {
+	limit = { military_logistics = 1 }
+	chance = {
+		base = 25
+		modifier = {
+			factor = -25
+			NOT = { invention = daimlers_automobile }
+		}
+	}
+	effect = {
+		activate_unit = cuirassier
 	}
 }
 
@@ -1178,7 +1195,7 @@ early_interwar_bombers = {
 	}
 	effect = {
 		plane = {
-			attack = 3
+			attack = 5
 			support = 1
 		}
 	}
@@ -1205,6 +1222,9 @@ early_interwar_fighters = {
 			defence = 2
 		}
 		dragoon = {
+			maximum_speed = 1
+		}
+		cuirassier = {
 			maximum_speed = 1
 		}
 	}
@@ -1288,7 +1308,7 @@ late_interwar_bombers = {
 	}
 	effect = {
 		plane = {
-			attack = 3
+			attack = 5
 			support = 0.5
 			supply_consumption = 1
 		}
