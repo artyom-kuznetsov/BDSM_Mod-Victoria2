@@ -1686,6 +1686,14 @@ country_event = { # MCL # MONTHLY CLEANUP
 			}
 			set_country_flag = has_rev_n_counterrev_flag
 		}
+		any_country = { #
+			limit = {
+				exists = yes
+				mass_culture_n_the_avant_garde = 1
+				NOT = { has_country_flag = mass_culture_n_the_avant_garde_cflag }
+			}
+			set_country_flag = mass_culture_n_the_avant_garde_cflag
+		}
 		any_country = { # ���� �������������
 			limit = {
 				exists = yes
