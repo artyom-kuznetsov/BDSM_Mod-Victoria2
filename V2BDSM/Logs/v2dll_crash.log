@@ -274,3 +274,58 @@
     PROVINCE_CHANGE_CONTROLLER  va=7EA1E720  (heap)
     stack=04FEE838  CEU3DirectSound  vptr=011E8564  vtable-in-exe
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-09 14:00:16.806 dll=5.48 pid=14888 tid=31848 ========
+  fpu_cw=0109001F mxcsr=00009FE9
+  oos_hits=0 sync_hits=0 last=none
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=00D896F2  v2game.exe+0x3E96F2
+  av_read addr=259EF007
+  params n=2 p0=00000000 p1=259EF007
+  eax=00000000 ebx=259ECEA0 ecx=00000000 edx=00000019 esi=27F7F160 edi=259EEFA0
+  ebp=00199344 esp=00199300 eip=00D896F2 eflags=00010206
+  eip=00D896F2  v2game.exe+0x3E96F2
+  code_eip-8 24 18 8B 54 24 10 03 FB  8A 44 97 03 6A 00 56 84
+  pointed:
+  eax=00000000
+  ebx=259ECEA0 FF000000 FF000000 FF000000 FF000000 FF000000 FF000000 FF000000 FF000000
+  ecx=00000000
+  edx=00000019 unreadable
+  esi=27F7F160 60398184 00000001 00000000 27F7F160 254D3408 00000000 00000000 00000000
+  edi=259EEFA0 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  esp=00199300 013BA0F4 2C87C428 04726840 404A0000 00000019 27F85A80 00000100 259ECEA0
+  stack:
+    [0]=00D896F2  v2game.exe+0x3E96F2
+    [1]=00FC05E7  v2game.exe+0x6205E7
+    [2]=00F3A3D5  v2game.exe+0x59A3D5
+    [3]=00F3A45F  v2game.exe+0x59A45F
+    [4]=00F3A45F  v2game.exe+0x59A45F
+    [5]=00F3A45F  v2game.exe+0x59A45F
+    [6]=00F39C60  v2game.exe+0x599C60
+    [7]=00BF96B6  v2game.exe+0x2596B6
+    [8]=608AA174  lua51.dll+0x1A174
+    [9]=00BF62CC  v2game.exe+0x2562CC
+    [10]=608A6039  lua51.dll+0x16039
+    [11]=00F7F966  v2game.exe+0x5DF966
+    [12]=00F1E0CD  v2game.exe+0x57E0CD
+    [13]=01050F3E  v2game.exe+0x6B0F3E
+    [14]=76ACFCC9  KERNEL32.DLL+0x1FCC9
+    [15]=77A382AE  ntdll.dll+0x682AE
+    [16]=77A3827E  ntdll.dll+0x6827E
+    [17]=00000000
+  source:
+  known_site: none (new rva 3E96F2 — смотреть keys/objects)
+  source_objects:
+    esi=27F7F160  vptr=60398184  vtable-outside-exe
+    edi=259EEFA0  vptr=00000000  null-vtable
+    ebx=259ECEA0  vptr=FF000000  vtable-outside-exe
+    edx=00000019  vptr=00000000  unreadable
+    esi+40=00000000 esi+44=00000000 (часто id/тип identity)
+  source_keys:
+    stack=2C87C428  CShieldObject  vptr=013BBC0C  vtable-in-exe
+    stack=04726840  CMaskedSpriteType  vptr=013BA0F4  vtable-in-exe
+    stack=0B88DF90  CEU3Graphics  vptr=013B9B8C  vtable-in-exe
+    stack=4B127B38  CInGameIdler  vptr=013AA34C  vtable-in-exe
+    CreateAllocation  va=6DEA5E54  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
