@@ -329,3 +329,70 @@
     stack=4B127B38  CInGameIdler  vptr=013AA34C  vtable-in-exe
     CreateAllocation  va=6DEA5E54  (heap)
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-09 17:40:29.197 dll=5.52 pid=22816 tid=30452 ========
+  fpu_cw=0109001F mxcsr=00009FF9
+  oos_hits=0 sync_hits=3 last=SYNC n=3 date=1924-01-03 00:00 sum=2732/2732 rec=1 xor=00000000
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=245C8900  +0x608900
+  av_write addr=245C8900
+  params n=2 p0=00000008 p1=245C8900
+  eax=00C4E91B ebx=0000000F ecx=47C30330 edx=245C8900 esi=69C7E670 edi=FFFFFFFD
+  ebp=01BCBFC0 esp=01BCBFA0 eip=245C8900 eflags=00010206
+  eip=245C8900  +0x608900
+  code_eip-8 EE 04 35 3F 78 DD A6 B9  F7 04 35 BF 00 00 80 BF
+  pointed:
+  eax=00C4E91B 5618508B 0B6AD2FF 3AC5BC68 244C8D01 2444C71C 00000F30 245C8900 245C882C
+  [eax+14]=00000F30 unreadable
+  [eax+18]=245C8900 BF3504F7 BF800000 3F3504EE B9A43CD2 BF3504F7 BF800000 3F774848 B9E2084D
+  ebx=0000000F unreadable
+  ecx=47C30330 44615750 00000000 4ADA2AD8 4F76ED00 17356879 88041A00 4A8BC348 47C30288
+  edx=245C8900 BF3504F7 BF800000 3F3504EE B9A43CD2 BF3504F7 BF800000 3F774848 B9E2084D
+  esi=69C7E670 013A2294 0000018D 4A982410 4A982560 00000004 00004800 00000201 44BF8310
+  edi=FFFFFFFD unreadable
+  esp=01BCBFA0 00C4E921 69C7E670 6045FD2A 47C30330 69C7E670 00000000 FFFFFFFF 42C00000
+  stack:
+    [0]=245C8900  +0x608900
+    [1]=6045FE1C  lua51.dll+0xFE1C
+    [2]=00B3ACD9  v2game.exe+0x19ACD9
+    [3]=00B3CBA5  v2game.exe+0x19CBA5
+    [4]=00B55241  v2game.exe+0x1B5241
+    [5]=00C25F9B  v2game.exe+0x285F9B
+    [6]=6046B1BE  lua51.dll+0x1B1BE
+    [7]=00C23AB6  v2game.exe+0x283AB6
+    [8]=60461480  lua51.dll+0x11480
+    [9]=00CCECFF  v2game.exe+0x32ECFF
+    [10]=00BF50D9  v2game.exe+0x2550D9
+    [11]=604668D9  lua51.dll+0x168D9
+    [12]=00F7F966  v2game.exe+0x5DF966
+    [13]=00F1E0CD  v2game.exe+0x57E0CD
+    [14]=01050F3E  v2game.exe+0x6B0F3E
+    [15]=76ACFCC9  KERNEL32.DLL+0x1FCC9
+    [16]=77A382AE  ntdll.dll+0x682AE
+    [17]=77A3827E  ntdll.dll+0x6827E
+    [18]=00000000
+  source:
+  source_objects:
+    eax=00C4E91B  vptr=5618508B  vtable-outside-exe
+    ecx=47C30330  vptr=44615750  vtable-outside-exe
+    esi=69C7E670  CLandCombatant  vptr=013A2294  vtable-in-exe
+    edi=FFFFFFFD  vptr=00000000  unreadable
+    ebx=0000000F  vptr=00000000  unreadable
+    edx=245C8900  vptr=BF3504F7  vtable-outside-exe
+    esi+40=00000201 esi+44=33DFF0F0 (часто id/тип identity)
+  source_keys:
+    haaD  va=4ADA2AD8  (heap)
+    dice  va=4A982410  (heap)
+    crossing  va=4A982560  (heap)
+    PWaD  va=47C30330  (heap)
+    stack=69C7F660  CLandCombatant  vptr=013A2294  vtable-in-exe
+    stack=44BF8310  CLandCombat  vptr=013A2354  vtable-in-exe
+    stack=2DB1FC90  CMapProvince  vptr=0139D310  vtable-in-exe
+    stack=4BFC0130  CInGameIdler  vptr=013AA34C  vtable-in-exe
+    stack=041AD3B0  CCurrentGameState  vptr=013AAE84  vtable-in-exe
+    stack=041ADE64  CCombatManager  vptr=013A2554  vtable-in-exe
+    ValidRelativeSecurityDescriptor  va=76CD8907  (heap)
+    rd_sp_smem_desc_a  va=5D2CF5FB  (heap)
+    stack=492AD2D0  CGoodsPool  vptr=0139BDDC  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
