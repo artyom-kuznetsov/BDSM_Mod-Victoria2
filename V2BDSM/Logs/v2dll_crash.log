@@ -452,3 +452,180 @@
     stack=04A9F8F8  CNullCulture  vptr=013A003C  vtable-in-exe
     stack=049F1E68  CNullReligion  vptr=013A0368  vtable-in-exe
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-10 13:47:56.810 dll=5.53 pid=22448 tid=2488 ========
+  fpu_cw=0109001F mxcsr=00009FE1
+  oos_hits=0 sync_hits=0 last=none
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=009CCA6D  v2game.exe+0xFCA6D
+  av_read addr=00000008
+  params n=2 p0=00000000 p1=00000008
+  eax=00000001 ebx=2E844010 ecx=2707DA20 edx=01255952 esi=00000000 edi=01CFC990
+  ebp=01CFC168 esp=01CFB9A0 eip=009CCA6D eflags=00010206
+  eip=009CCA6D  v2game.exe+0xFCA6D
+  code_eip-8 1C 8B 11 8B 42 04 FF D0  8B 46 08 8B 93 A0 12 00
+  pointed:
+  eax=00000001 unreadable
+  ebx=2E844010 012CFACC 0000018D 00000000 00000000 00000000 6E656464 6365745F 00564943
+  ecx=2707DA20 01307C3C 6304DD58 00000001 00000003 756D007B 6974696E 63006E6F 00650000
+  edx=01255952 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+  esi=00000000
+  edi=01CFC990 01308524 00000000 00000000 00000000 77286500 00000001 00000020 2707DA20
+  esp=01CFB9A0 01CFC31C 01CFC990 00000000 01CFCBBC 756D6D61 6974696E 2C006E6F 2F5CB490
+  stack:
+    [0]=009CCA6D  v2game.exe+0xFCA6D
+    [1]=00E72B27  v2game.exe+0x5A2B27
+    [2]=00B52534  v2game.exe+0x282534
+    [3]=00E72B27  v2game.exe+0x5A2B27
+    [4]=00B4F63B  v2game.exe+0x27F63B
+    [5]=00B4F3ED  v2game.exe+0x27F3ED
+    [6]=00C3F8B8  v2game.exe+0x36F8B8
+    [7]=00C280C1  v2game.exe+0x3580C1
+    [8]=00C2555B  v2game.exe+0x35555B
+    [9]=00EAF966  v2game.exe+0x5DF966
+    [10]=00E4E0CD  v2game.exe+0x57E0CD
+    [11]=00F80F3E  v2game.exe+0x6B0F3E
+    [12]=76F0FCC9  KERNEL32.DLL+0x1FCC9
+    [13]=772A82AE  ntdll.dll+0x682AE
+    [14]=772A827E  ntdll.dll+0x6827E
+    [15]=00000000
+  source:
+  known_site: none (new rva 0FCA6D — смотреть keys/objects)
+  source_objects:
+    eax=00000001  vptr=00000000  unreadable
+    ecx=2707DA20  vptr=01307C3C  vtable-in-exe
+    edi=01CFC990  vptr=01308524  vtable-in-exe
+    ebx=2E844010  CCountry  vptr=012CFACC  vtable-in-exe
+    edx=01255952  vptr=00000000  null-vtable
+  source_keys:
+    emic  va=45968F00  (heap)
+    olic  va=01CFBB78  (heap)
+    traditionalism_ref  va=45968E00  (heap)
+    stack=2F449810  CMapProvince  vptr=012CD310  vtable-in-exe
+    schools  va=01CFBBEC  (heap)
+    artillery  va=45969100  (heap)
+    stack=0414EDE8  CGoods  vptr=012D0080  vtable-in-exe
+    stack=2C0C4D40  CProvinceRGO  vptr=012CD3D0  vtable-in-exe
+    stack=27F90468  CPopType  vptr=013065F8  vtable-in-exe
+    stack=46DB84A0  CPop  vptr=01306428  vtable-in-exe
+    stack=04E21478  CNullPopType  vptr=01306618  vtable-in-exe
+    stack=04DEFB60  CNullCulture  vptr=012D003C  vtable-in-exe
+    stack=04ECFF00  CNullReligion  vptr=012D0368  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-10 13:49:16.657 dll=5.53 pid=22852 tid=24356 ========
+  fpu_cw=0109001F mxcsr=00009FF9
+  oos_hits=0 sync_hits=8 last=SYNC n=8 date=1836-01-08 00:00 sum=42785/42785 rec=1 xor=00000000
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=652404A0  lua51.dll+0x104A0
+  av_read addr=0000006C
+  params n=2 p0=00000000 p1=0000006C
+  eax=00000000 ebx=469F3918 ecx=01CFC458 edx=00000000 esi=01CFC458 edi=00000000
+  ebp=01CFC41C esp=01CFC410 eip=652404A0 eflags=00010246
+  eip=652404A0  lua51.dll+0x104A0
+  code_eip-8 8B 75 08 57 33 FF 33 C0  39 74 82 6C 8D 0C 82 74
+  pointed:
+  eax=00000000
+  ebx=469F3918 012C8884 0000018D 00000028 00000467 31393A01 203A5D00 74696E55 2D312720
+  ecx=01CFC458 74D0D7E0 00000010 74D0E308 00000000 00495254 00000000 00000287 00000000
+  edx=00000000
+  esi=01CFC458 74D0D7E0 00000010 74D0E308 00000000 00495254 00000000 00000287 00000000
+  edi=00000000
+  esp=01CFC410 00000000 00000287 469F3918 01CFC478 6524052E 01CFC458 01CFC478 000000C8
+  stack:
+    [0]=652404A0  lua51.dll+0x104A0
+    [1]=6524052E  lua51.dll+0x1052E
+    [2]=00A6AD68  v2game.exe+0x19AD68
+    [3]=00A6CBA5  v2game.exe+0x19CBA5
+    [4]=00A85241  v2game.exe+0x1B5241
+    [5]=00B55F9B  v2game.exe+0x285F9B
+    [6]=6524B8CE  lua51.dll+0x1B8CE
+    [7]=00B53AB6  v2game.exe+0x283AB6
+    [8]=65241B90  lua51.dll+0x11B90
+    [9]=00BFECFF  v2game.exe+0x32ECFF
+    [10]=00B250D9  v2game.exe+0x2550D9
+    [11]=65246FE9  lua51.dll+0x16FE9
+    [12]=00EAF966  v2game.exe+0x5DF966
+    [13]=00E4E0CD  v2game.exe+0x57E0CD
+    [14]=00F80F3E  v2game.exe+0x6B0F3E
+    [15]=76F0FCC9  KERNEL32.DLL+0x1FCC9
+    [16]=772A82AE  ntdll.dll+0x682AE
+    [17]=772A827E  ntdll.dll+0x6827E
+    [18]=00000000
+  source:
+  source_objects:
+    ecx=01CFC458  vptr=74D0D7E0  vtable-outside-exe
+    ebx=469F3918  CRegiment  vptr=012C8884  vtable-in-exe
+    esi+40=4928FA18 esi+44=00000001 (часто id/тип identity)
+  source_keys:
+    stack=74D0D7E0  CLandCombatant  vptr=012D2294  vtable-in-exe
+    stack=74D0E308  CLandCombatant  vptr=012D2294  vtable-in-exe
+    stack=4928FA18  CLandCombat  vptr=012D2354  vtable-in-exe
+    stack=45447AB8  CSiegeCombat  vptr=012D2434  vtable-in-exe
+    stack=4C0DE128  CInGameIdler  vptr=012DA34C  vtable-in-exe
+    stack=0408B3E8  CCurrentGameState  vptr=012DAE84  vtable-in-exe
+    stack=0408BE9C  CCombatManager  vptr=012D2554  vtable-in-exe
+    ationalism  va=45BBE831  (heap)
+    acro_expansion__tcgen05_guardrails_datapath_ali  va=5D219ADB  (heap)
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-10 22:34:09.698 dll=5.56 pid=27348 tid=7468 ========
+  fpu_cw=0109001F mxcsr=00009FF1
+  oos_hits=0 sync_hits=8 last=SYNC n=8 date=1836-01-08 00:00 sum=42981/42981 rec=1 xor=00000000
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=6907EF63  lua51.dll+0xEF63
+  av_read addr=00000084
+  params n=2 p0=00000000 p1=00000084
+  eax=7D305B90 ebx=000003E8 ecx=00000010 edx=00000010 esi=00000001 edi=7D305B90
+  ebp=0175C174 esp=0175C168 eip=6907EF63 eflags=00010203
+  eip=6907EF63  lua51.dll+0xEF63
+  code_eip-8 0C 46 89 35 D0 D3 0D 69  8B 41 74 85 C0 74 08 8B
+  pointed:
+  eax=7D305B90 00D22294 0000018D 7E8B5A18 7E8B58C8 00000002 00000000 00000000 7E8B59E0
+  [eax+14]=00000000
+  [eax+18]=00000000
+  ebx=000003E8 unreadable
+  ecx=00000010 unreadable
+  edx=00000010 unreadable
+  esi=00000001 unreadable
+  edi=7D305B90 00D22294 0000018D 7E8B5A18 7E8B58C8 00000002 00000000 00000000 7E8B59E0
+  esp=0175C168 000003E8 00000010 7D305B90 0175C1DC 6907EFAA 7D305B90 00000010 00000010
+  stack:
+    [0]=6907EF63  lua51.dll+0xEF63
+    [1]=6907EFAA  lua51.dll+0xEFAA
+    [2]=004BCBA5  v2game.exe+0x19CBA5
+    [3]=004D5241  v2game.exe+0x1B5241
+    [4]=005A5F9B  v2game.exe+0x285F9B
+    [5]=6908A55E  lua51.dll+0x1A55E
+    [6]=005A3AB6  v2game.exe+0x283AB6
+    [7]=69080800  lua51.dll+0x10800
+    [8]=0064ECFF  v2game.exe+0x32ECFF
+    [9]=005750D9  v2game.exe+0x2550D9
+    [10]=69085C69  lua51.dll+0x15C69
+    [11]=008FF966  v2game.exe+0x5DF966
+    [12]=0089E0CD  v2game.exe+0x57E0CD
+    [13]=009D0F3E  v2game.exe+0x6B0F3E
+    [14]=76F0FCC9  KERNEL32.DLL+0x1FCC9
+    [15]=772A82AE  ntdll.dll+0x682AE
+    [16]=772A827E  ntdll.dll+0x6827E
+    [17]=00000000
+  source:
+  source_objects:
+    eax=7D305B90  CLandCombatant  vptr=00D22294  vtable-in-exe
+    ecx=00000010  vptr=00000000  unreadable
+    esi=00000001  vptr=00000000  unreadable
+    ebx=000003E8  vptr=00000000  unreadable
+  source_keys:
+    dice  va=7E8B5A18  (heap)
+    leader  va=7E8B58C8  (heap)
+    stack=7D3059F8  CLandCombatant  vptr=00D22294  vtable-in-exe
+    stack=2C6C05D0  CRegiment  vptr=00D18884  vtable-in-exe
+    stack=7E8B59E0  CLandCombat  vptr=00D22354  vtable-in-exe
+    stack=7E8929A0  CSiegeCombat  vptr=00D22434  vtable-in-exe
+    stack=4C1DC0B0  CInGameIdler  vptr=00D2A34C  vtable-in-exe
+    stack=04817FE0  CCurrentGameState  vptr=00D2AE84  vtable-in-exe
+    stack=04818A94  CCombatManager  vptr=00D22554  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
