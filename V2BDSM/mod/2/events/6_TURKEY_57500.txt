@@ -764,6 +764,10 @@ country_event = { # BYZANTINES
 			} 
 		}
 		IRQ = { all_core = { add_core = THIS } }
+		any_pop = {
+			literacy = 0.1
+		}
+		social_reform = closed_borders
 	}
 }
 
@@ -863,7 +867,7 @@ province_event = {
 		name = "tur_assimilate_EvtOptA"
 		assimilate = yes
 		any_pop = { literacy = 0.1 }
-		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 90 } }
+		owner = { add_country_modifier = { name = TUR_assimilation_cooldown_modifier duration = 60 } }
 		remove_province_modifier = TUR_prov_assimilatABLE_prov_modifier
 		add_province_modifier = { name = TUR_prov_assimilatED_prov_modifier duration = -1 }
 		META_1 = {
