@@ -629,3 +629,51 @@
     stack=04817FE0  CCurrentGameState  vptr=00D2AE84  vtable-in-exe
     stack=04818A94  CCombatManager  vptr=00D22554  vtable-in-exe
   dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
+
+======== CRASH 2026-10-11 14:25:26.414 dll=5.59 pid=21252 tid=23772 ========
+  fpu_cw=0109001F mxcsr=00009FF9
+  oos_hits=0 sync_hits=49 last=SYNC n=49 date=1836-02-18 00:00 sum=179066/179066 rec=1 xor=00000000
+  first_oos=- first_real=- days_real=-1
+  code=C0000005 (ACCESS_VIOLATION)
+  fault=0029DE24  v2game.exe+0x17DE24
+  av_read addr=000000D8
+  params n=2 p0=00000000 p1=000000D8
+  eax=00000000 ebx=00000000 ecx=334B2FA8 edx=00001271 esi=46037F80 edi=00000001
+  ebp=0155D940 esp=0155D8C8 eip=0029DE24 eflags=00010246
+  eip=0029DE24  v2game.exe+0x17DE24
+  code_eip-8 EB 06 8B D9 89 4C 24 20  8B 8B D8 00 00 00 8B 01
+  pointed:
+  eax=00000000
+  ebx=00000000
+  ecx=334B2FA8 00B22FCC 64656300 00B23070 0000018D 00001271 00000002 00000001 53239800
+  edx=00001271 unreadable
+  esi=46037F80 00B20D34 0000018D 61676E69 735F656D 69737365 F3006E6F 0000000E 0000000F
+  edi=00000001 unreadable
+  esp=0155D8C8 000020C9 34ECEAEC 48085FE0 00930000 334B2FA8 00007EB8 00000064 00000000
+  stack:
+    [0]=0029DE24  v2game.exe+0x17DE24
+    [1]=006CFD32  v2game.exe+0x5AFD32
+    [2]=003750D9  v2game.exe+0x2550D9
+    [3]=699656E9  lua51.dll+0x156E9
+    [4]=006FF966  v2game.exe+0x5DF966
+    [5]=0069E0CD  v2game.exe+0x57E0CD
+    [6]=007D0F3E  v2game.exe+0x6B0F3E
+    [7]=76F0FCC9  KERNEL32.DLL+0x1FCC9
+    [8]=772A82AE  ntdll.dll+0x682AE
+    [9]=772A827E  ntdll.dll+0x6827E
+    [10]=00000000
+  source:
+  known_site: none (new rva 17DE24 — смотреть keys/objects)
+  source_objects:
+    ecx=334B2FA8  CNavy  vptr=00B22FCC  vtable-in-exe
+    esi=46037F80  CCreateUnitCommand  vptr=00B20D34  vtable-in-exe
+    edi=00000001  vptr=00000000  unreadable
+    edx=00001271  vptr=00000000  unreadable
+    esi+40=0000006A esi+44=00000AA3 (часто id/тип identity)
+  source_keys:
+    stack=2E78B610  CMapProvince  vptr=00B1D310  vtable-in-exe
+    stack=047F0C98  CEU3Application  vptr=00B2845C  vtable-in-exe
+    stack=46C9B010  CInGameIdler  vptr=00B2A34C  vtable-in-exe
+    HalT  va=7FFE4000  (heap)
+    stack=0507C8A0  CEU3DirectSound  vptr=00B28564  vtable-in-exe
+  dump=(disabled: ENABLE_CRASH_DUMP=0) type=00000000 size=0
