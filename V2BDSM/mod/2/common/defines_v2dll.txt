@@ -47,3 +47,14 @@ factory_min_wage_per_10000 = 9
 # in another province of the state. Upgrading a base the AI already has is not limited. The
 # player and the capitalists are not affected. 0 = no limit (vanilla AI behaviour).
 ai_naval_base_max_provinces_per_state = 1
+
+# --- Pop salary bonus (POP_SALARY_ADDITIONAL_MULTIPLIER in v2dll_settings.ini) ---
+# Every income a pop receives (factory wages, RGO and artisan income, owners' profit share,
+# budget payouts to clergy/bureaucrats/soldiers) is increased by this many percent AFTER the
+# income tax is taken, so the pops keep the extra money to spend. The extra money is created
+# out of nothing: the employer, the factory and the treasury do not pay it, taxes are
+# not charged on it. A formula like minting_formula (same variables and operators), evaluated
+# per country once per game month, so it can differ by country and change during the game.
+# The national modifier pop_income_modifier (technologies, inventions, events, ...; 0.1 = +10)
+# is added to the result. Result in percent, 0..1000 (negative = 0). 0 = no formula bonus.
+pop_salary_additional_multiplier = 0
