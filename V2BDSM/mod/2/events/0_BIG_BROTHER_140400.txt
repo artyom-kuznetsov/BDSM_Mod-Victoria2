@@ -138,6 +138,21 @@ country_event = { # MCL # MONTHLY CLEANUP
 			random_owned = {
 				limit = {
 					owner = {
+						invention = multitude_of_financial_instruments
+						NOT = { has_country_flag = multitude_of_financial_instruments_invented }
+					}
+				}
+				owner = {
+					set_country_flag = multitude_of_financial_instruments_invented
+					set_variable = {
+						which = financial_institutions_level
+						value = 1
+					}
+				}
+			}
+			random_owned = {
+				limit = {
+					owner = {
 						invention = capital_for_investors
 						NOT = { has_country_flag = capital_for_investors_invented }
 					}
