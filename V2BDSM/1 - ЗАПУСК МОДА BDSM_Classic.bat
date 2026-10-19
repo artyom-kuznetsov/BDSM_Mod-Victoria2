@@ -1,1 +1,1 @@
-start v2game.exe -mod=mod/2.mod
+start v2game.exe -mod=mod/2.mod -mod=mod/tgcx_army_universal.mod

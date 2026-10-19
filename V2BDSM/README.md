@@ -29,3 +29,4 @@ Assets/ideas from the following mods were used in this mod:
 - The Third Age
 - Bob's Cartography
 - Age of Enlightenment
+- Army Template and Conform Universal
