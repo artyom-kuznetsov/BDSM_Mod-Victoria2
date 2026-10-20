@@ -58,3 +58,10 @@ ai_naval_base_max_provinces_per_state = 1
 # The national modifier pop_income_modifier (technologies, inventions, events, ...; 0.1 = +10)
 # is added to the result. Result in percent, 0..1000 (negative = 0). 0 = no formula bonus.
 pop_salary_additional_multiplier = 0
+
+# --- Goods excluded from the percentual price step (TRADE_PRICE_DELTA_PERCENTUAL in v2dll_settings.ini) ---
+# Names of goods (as in common/goods.txt), separated by spaces or commas, whose price keeps the
+# vanilla step (a fixed 0.01 per day) instead of the percentual one. Works only while the
+# percentual (or exponential) price step patch is on. Unknown names are written to v2dll.log.
+# Empty = every good uses the percentual step.
+price_delta_exempt_goods = construction_goods
