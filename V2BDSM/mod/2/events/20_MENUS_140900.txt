@@ -213,6 +213,11 @@ country_event = {	# HOST OPTIONS
 	}
 	
 	option = {
+		name = "HostOptions_EvtOptEconomic_Measures"
+		country_event = { id = 140909 days = 0 }
+	}
+	
+	option = {
 		name = "HostOptions_EvtOptHostNoMore"
 		clr_country_flag = is_host_flag
 		clr_global_flag = host_determined_flag
@@ -1848,5 +1853,73 @@ country_event = {
 				CUSTOM_TOOLTIP_NO_EXPEDITION = { }
 			}
 		}
+	}
+}
+
+country_event = {
+	id = 140909
+	title = "Economic_Measures_EvtName"
+	desc = "Economic_Measures_EvtDesc"
+	picture = "SouthPole1"
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = "rproj_Menu_EvtOptStepBack"
+		country_event = { id = 140900 days = 0 }
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptCancel"
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptWBK"
+		CUSTOM_TOOLTIP_WBK = { }
+		random_owned = {
+			limit = {
+				owner = { has_global_flag = WBK_enabled_gflag }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_ENABLED = { }
+				clr_global_flag = WBK_enabled_gflag
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { has_global_flag = WBK_enabled_gflag } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_DISABLED = { }
+				WBK = { country_event = 140425 }
+				set_global_flag = WBK_enabled_gflag
+			}
+		}
+		country_event = { id = 140909 days = 0 }
+	}
+	
+	option = {
+		name = "Expedition_Menu_EvtOptSalaryBuff"
+		CUSTOM_TOOLTIP_SalaryBuff = { }
+		random_owned = {
+			limit = {
+				owner = { has_global_flag = SalaryBuff_enabled_gflag }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_ENABLED = { }
+				clr_global_flag = SalaryBuff_enabled_gflag
+			}
+		}
+		random_owned = {
+			limit = {
+				owner = { NOT = { has_global_flag = SalaryBuff_enabled_gflag } }
+			}
+			owner = {
+				CUSTOM_TOOLTIP_OPTION_DISABLED = { }
+				set_global_flag = SalaryBuff_enabled_gflag
+			}
+		}
+		country_event = { id = 140909 days = 0 }
 	}
 }

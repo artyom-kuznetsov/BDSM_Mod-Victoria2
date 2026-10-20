@@ -6103,3 +6103,21 @@ country_event = {
 		annex_to = FROM
 	}
 }
+
+# MONEY
+country_event = {
+	id = 140425
+	title = "noloc"
+	desc = "noloc"
+
+	is_triggered_only = yes
+	
+	option = {
+		any_pop = {
+			money = 2000000
+		}
+		random_owned = { limit = { owner = { has_global_flag = WBK_enabled_gflag } }
+			owner = { country_event = { id = 140425 days = 30 } }
+		}
+	}
+}
