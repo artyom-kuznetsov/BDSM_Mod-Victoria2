@@ -1863,6 +1863,8 @@ country_event = {
 	picture = "SouthPole1"
 
 	is_triggered_only = yes
+	
+	allow_multiple_instances = yes
 
 
 	option = {
@@ -1902,22 +1904,42 @@ country_event = {
 	option = {
 		name = "Expedition_Menu_EvtOptSalaryBuff"
 		CUSTOM_TOOLTIP_SalaryBuff = { }
+		set_country_flag = effect_apply_flag
+		random_owned = {
+			limit = { 
+				owner = { 
+					has_global_flag = SalaryBuff_enabled_gflag 
+				} 
+			} 
+			owner = { CUSTOM_TOOLTIP_OPTION_ENABLED = { } }
+		}
+		random_owned = {
+			limit = { 
+				owner = { 
+					NOT = { has_global_flag = SalaryBuff_enabled_gflag } 
+				} 
+			} 
+			owner = { CUSTOM_TOOLTIP_OPTION_DISABLED = { } }
+		}
 		random_owned = {
 			limit = {
-				owner = { has_global_flag = SalaryBuff_enabled_gflag }
+				owner = { 
+					has_global_flag = SalaryBuff_enabled_gflag 
+					has_country_flag = effect_apply_flag
+				}
 			}
 			owner = {
-				CUSTOM_TOOLTIP_OPTION_ENABLED = { }
 				clr_global_flag = SalaryBuff_enabled_gflag
+				clr_country_flag = effect_apply_flag
 			}
 		}
 		random_owned = {
 			limit = {
-				owner = { NOT = { has_global_flag = SalaryBuff_enabled_gflag } }
+				owner = { has_country_flag = effect_apply_flag  NOT = { has_global_flag = SalaryBuff_enabled_gflag } }
 			}
 			owner = {
-				CUSTOM_TOOLTIP_OPTION_DISABLED = { }
 				set_global_flag = SalaryBuff_enabled_gflag
+				clr_country_flag = effect_apply_flag
 			}
 		}
 		country_event = { id = 140909 days = 0 }

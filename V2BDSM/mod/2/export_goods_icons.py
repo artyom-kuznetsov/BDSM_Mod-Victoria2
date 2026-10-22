@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Выгрузка иконок товаров из атласов в отдельные папки + ключи icon в common/goods.txt
-(для V2DLL >= 5.21, опция ENABLE_GOODS_ICONS).
+(для CreatineCore >= 5.21, опция ENABLE_GOODS_ICONS).
 
 Что делает:
   * читает gfx/interface/resources.dds, resources_big.dds, resources_small.dds (число кадров -

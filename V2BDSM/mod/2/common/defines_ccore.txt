@@ -1,15 +1,15 @@
-# V2DLL settings tied to this mod's game data. Created automatically, edit freely.
+# CreatineCore settings tied to this mod's game data. Created automatically, edit freely.
 # Every player in a multiplayer game must have identical values here, otherwise OOS.
 # '#' starts a comment.
 
-# --- Factories (PATCH_FACTORY_AUTO_CLOSE_UNPROFITABLE in v2dll_settings.ini) ---
+# --- Factories (PATCH_FACTORY_AUTO_CLOSE_UNPROFITABLE in creatinecore_settings.ini) ---
 # A factory that is NOT subsidized and has been unprofitable (sales below the cost of its
 # input goods) for this many days in a row is closed automatically, as if closed by hand.
 # The money stored in the factory is paid out to the capitalists of its state.
 # 0 = never close automatically.
 factory_unprofitable_close_days = 60
 
-# --- Minting (ENABLE_MINTING in v2dll_settings.ini) ---
+# --- Minting (ENABLE_MINTING in creatinecore_settings.ini) ---
 # Daily income every country gets. Added to the treasury once per day, shown in the budget
 # window as "minting_inc", included in total income (budget window, topbar chart, tooltips).
 #
@@ -22,7 +22,7 @@ factory_unprofitable_close_days = 60
 # Operators: + - * /   parentheses, decimal numbers (use a dot: 0.01)
 minting_formula = industry_score + industry_score * monetary_system_level * 0.25
 
-# --- AI factory expansion (PATCH_AI_EXPAND_STAFFING in v2dll_settings.ini) ---
+# --- AI factory expansion (PATCH_AI_EXPAND_STAFFING in creatinecore_settings.ini) ---
 # An AI country expands an existing factory only if at least this percent of the factory's
 # jobs are filled with workers (employees / (workforce * level)). The vanilla AI only looks at
 # the unemployed share of the whole state and builds the most profitable factory type up to
@@ -30,7 +30,7 @@ minting_formula = industry_score + industry_score * monetary_system_level * 0.25
 # 0 = no limit (vanilla AI behaviour).
 ai_factory_expand_min_staffing = 90
 
-# --- Factory minimum wage (PATCH_FACTORY_MIN_WAGE in v2dll_settings.ini) ---
+# --- Factory minimum wage (PATCH_FACTORY_MIN_WAGE in creatinecore_settings.ini) ---
 # Every day a factory pays its workers at least this many pounds per 10000 workers (owners and
 # slaves are not counted), whether or not the factory is profitable. The wage is paid only out of
 # the money the factory has (its budget): if the factory has less, it pays what it has, and its
@@ -39,16 +39,16 @@ ai_factory_expand_min_staffing = 90
 # paid. For a subsidized factory the wage floor is added to its subsidy (the state pays it),
 # so that the factory can still buy all its input goods.
 # Fractions are allowed (use a dot). 0 = off (the game's own minimum wage only).
-factory_min_wage_per_10000 = 9
+factory_min_wage_per_10000 = 7
 
-# --- AI naval bases (PATCH_AI_NAVAL_BASE_LIMIT in v2dll_settings.ini) ---
+# --- AI naval bases (PATCH_AI_NAVAL_BASE_LIMIT in creatinecore_settings.ini) ---
 # In how many provinces of one state an AI country may have a naval base. Once a state has
 # that many provinces with a naval base (built or being built), the AI does not start a base
 # in another province of the state. Upgrading a base the AI already has is not limited. The
 # player and the capitalists are not affected. 0 = no limit (vanilla AI behaviour).
 ai_naval_base_max_provinces_per_state = 1
 
-# --- Pop salary bonus (POP_SALARY_ADDITIONAL_MULTIPLIER in v2dll_settings.ini) ---
+# --- Pop salary bonus (POP_SALARY_ADDITIONAL_MULTIPLIER in creatinecore_settings.ini) ---
 # Every income a pop receives (factory wages, RGO and artisan income, owners' profit share,
 # budget payouts to clergy/bureaucrats/soldiers) is increased by this many percent AFTER the
 # income tax is taken, so the pops keep the extra money to spend. The extra money is created
@@ -59,7 +59,7 @@ ai_naval_base_max_provinces_per_state = 1
 # is added to the result. Result in percent, 0..1000 (negative = 0). 0 = no formula bonus.
 pop_salary_additional_multiplier = 0
 
-# --- Goods excluded from the percentual price step (TRADE_PRICE_DELTA_PERCENTUAL in v2dll_settings.ini) ---
+# --- Goods excluded from the percentual price step (TRADE_PRICE_DELTA_PERCENTUAL in creatinecore_settings.ini) ---
 # Names of goods (as in common/goods.txt), separated by spaces or commas, whose price keeps the
 # vanilla step (a fixed 0.01 per day) instead of the percentual one. Works only while the
 # percentual (or exponential) price step patch is on. Unknown names are written to v2dll.log.
