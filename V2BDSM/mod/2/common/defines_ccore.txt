@@ -65,3 +65,13 @@ pop_salary_additional_multiplier = 0
 # percentual (or exponential) price step patch is on. Unknown names are written to v2dll.log.
 # Empty = every good uses the percentual step.
 price_delta_exempt_goods = construction_goods
+
+# --- Deleting closed factories (FACTORY_DELETE_CLOSED in creatinecore_settings.ini) ---
+# Where the national rule delete_factory_if_no_input = yes applies (and for AI countries), a
+# factory that has been closed for this many days in a row is deleted. The game itself never
+# deletes closed factories. The usual deletion limits still apply: the state must be fully
+# under its owner's control, must have more factories than
+# MIN_NUM_FACTORIES_PER_STATE_BEFORE_DELETING_LASSIEZ_FAIRE (defines.lua), and the first
+# NUM_CLOSED_FACTORIES_PER_STATE_LASSIEZ_FAIRE such factories of a state are kept.
+# 0 = closed factories are never deleted (vanilla).
+factory_closed_delete_days = 90
