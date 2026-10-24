@@ -57,18 +57,67 @@ rail_focus =
 }
 
 promotion_focus = {
-	promote_exploitation = {
-		local_rgo_throughput = 0.15
-		pop_consciousness_modifier = -0.05
-		pop_militancy_modifier = 0.05
+	promote_aristocrats =
+	{
+		aristocrats = 0.10 #20% more likeley to become artisans
+		icon = 5
+		outliner_show_as_percent = yes
+	}
+
+	promote_bureaucrats =
+	{
+		bureaucrats = 0.10 #20% more likeley to become this type
+		icon = 7
+		outliner_show_as_percent = yes
+	}
+
+	promote_capitalists =
+	{
+		capitalists = 0.02 #2%
+		icon = 8
+		outliner_show_as_percent = yes
+		limit = { 
+			civilized = yes
+		}
+
+	}
+	
+	promote_clergymen =
+	{
+		clergymen = 0.10 #20% more likeley to become this type
+		icon = 9
+		outliner_show_as_percent = yes
+	}
+
+	promote_craftsmen =
+	{
+		craftsmen = 0.10 #20% more likeley to become this type
+		icon = 11
+		outliner_show_as_percent = yes
+		limit = { 
+			civilized = yes
+		}
+	}
+
+	promote_farmers =
+	{
+		farmers = 0.10 #20% more likeley to become this type
 		icon = 12
 		outliner_show_as_percent = yes
-		limit = {
-			OR = {
-				debt_law = serfdom
-				debt_law = peonage
-			}
-		}
+	}
+	
+	promote_officers =
+	{
+		officers = 0.10 #20% more likeley to become this type
+		icon = 14
+		outliner_show_as_percent = yes
+	}
+
+	promote_soldiers =
+	{
+		soldiers = 0.10 #20% more likeley to become this type
+		icon = 15
+		outliner_show_as_percent = yes
 	}
 }
 
