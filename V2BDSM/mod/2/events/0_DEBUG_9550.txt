@@ -825,3 +825,45 @@ country_event = { # Block emigration
 
 }
 
+country_event = { # Province Flag Check
+    id = 9589
+    title = "noloc"
+    desc = "noloc"
+	
+	is_triggered_only = yes
+
+    option = {
+        name = "noloc"
+		726 = { set_province_flag = provflag_test }
+    }
+
+    option = {
+        name = "noloc"
+		if = {
+			limit = {
+				726 = {
+					has_province_flag = provflag_test
+				}
+			}
+			money = 500
+		}
+    }
+    option = {
+        name = "noloc"
+		THIS = {
+			limit = {
+				726 = { has_province_flag = provflag_test }
+			}
+			money = 500
+		}
+    }
+	
+    option = {
+        name = "noloc"
+		META_1 = {
+			clr_province_flag = provflag_test
+		}
+    }
+
+}
+
