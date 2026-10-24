@@ -75,6 +75,15 @@ political_decisions = {
 			PER = { add_country_modifier = { name = non_western_country_cmodifier duration = 7300 } }
 			TKG = { add_country_modifier = { name = non_western_country_cmodifier duration = 7300 } leadership = 60 }
 			
+			any_country = {
+				limit = {
+					NOT = { 
+						economic_system_rgroup = planned_economy_ref
+						economic_system_rgroup = traditionalism_ref
+					}
+				}
+				social_reform = yes_pop_construction
+			}
 			
 			### ANNEX VASSAL INITIAL COOLDOWN
 			any_country = {
